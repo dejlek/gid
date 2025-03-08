@@ -33,7 +33,7 @@ import vte.types;
 class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,7 +59,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)cPtr, x, y);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_check_match_at(cast(VteTerminal*)cPtr, x, y, cast(int*)&tag);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -150,7 +150,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
     selection.
   
-    Deprecated:     Use [vte.terminal.Terminal.copyClipboardFormat] with [vte.types.Format.text]
+    Deprecated:     Use [vte.terminal.Terminal.copyClipboardFormat] with [vte.types.Format.Text]
         instead.
   */
   void copyClipboard()
@@ -164,7 +164,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     
     For all formats, the selection data (see #GtkSelectionData) will include the
     text targets (see [gtk.target_list.TargetList.addTextTargets] and
-    gtk_selection_data_targets_includes_text()). For [vte.types.Format.html],
+    gtk_selection_data_targets_includes_text()). For [vte.types.Format.Html],
     the selection will also include the "text/html" target, which when requested,
     returns the HTML data in UTF-16 with a U+FEFF BYTE ORDER MARK character at
     the start.
@@ -348,7 +348,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GdkRGBA _color;
     vte_terminal_get_color_background_for_draw(cast(VteTerminal*)cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /** */
@@ -364,7 +364,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GMenuModel* _cretval;
     _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_encoding(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -498,7 +498,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(PangoFontDescription)* _cretval;
     _cretval = vte_terminal_get_font(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -507,7 +507,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = vte_terminal_get_font_options(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -574,7 +574,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     VtePty* _cretval;
     _cretval = vte_terminal_get_pty(cast(VteTerminal*)cPtr);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
     return _retval;
   }
 
@@ -662,7 +662,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_format(cast(VteTerminal*)cPtr, format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -681,13 +681,13 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
   /**
       Gets the currently selected text in the format specified by format.
-    Since 0.72, this function also supports [vte.types.Format.html] format.
+    Since 0.72, this function also supports [vte.types.Format.Html] format.
     Params:
       format =       the #VteFormat to use
     Returns:     a newly allocated string containing the selected text, or null if there is no selection or the format is not supported
@@ -696,7 +696,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)cPtr, format);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -711,7 +711,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)cPtr, format, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -720,7 +720,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_window_title(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -736,7 +736,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     const(char)* _cretval;
     _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -789,7 +789,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   int matchAddRegex(vte.regex.Regex regex, uint flags)
   {
     int _retval;
-    _retval = vte_terminal_match_add_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.dup) : null, flags);
+    _retval = vte_terminal_match_add_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -815,7 +815,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     char* _cretval;
     _cretval = vte_terminal_match_check(cast(VteTerminal*)cPtr, column, row, cast(int*)&tag);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -852,7 +852,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchSetCursor(int tag, gdk.cursor.Cursor cursor = null)
   {
-    vte_terminal_match_set_cursor(cast(VteTerminal*)cPtr, tag, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null);
+    vte_terminal_match_set_cursor(cast(VteTerminal*)cPtr, tag, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -864,7 +864,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchSetCursorName(int tag, string cursorName)
   {
-    const(char)* _cursorName = cursorName.toCString(No.alloc);
+    const(char)* _cursorName = cursorName.toCString(No.Alloc);
     vte_terminal_match_set_cursor_name(cast(VteTerminal*)cPtr, tag, _cursorName);
   }
 
@@ -898,7 +898,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void pasteText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     vte_terminal_paste_text(cast(VteTerminal*)cPtr, _text);
   }
 
@@ -917,10 +917,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -967,7 +967,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     VteRegex* _cretval;
     _cretval = vte_terminal_search_get_regex(cast(VteTerminal*)cPtr);
-    auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -990,7 +990,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void searchSetRegex(vte.regex.Regex regex, uint flags)
   {
-    vte_terminal_search_set_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.dup) : null, flags);
+    vte_terminal_search_set_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
   }
 
   /**
@@ -1132,7 +1132,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorBackground(gdk.rgba.RGBA background)
   {
-    vte_terminal_set_color_background(cast(VteTerminal*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.dup) : null);
+    vte_terminal_set_color_background(cast(VteTerminal*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1143,7 +1143,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorBold(gdk.rgba.RGBA bold = null)
   {
-    vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(const(GdkRGBA)*)bold.cPtr(No.dup) : null);
+    vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(const(GdkRGBA)*)bold.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1155,7 +1155,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorCursor(gdk.rgba.RGBA cursorBackground = null)
   {
-    vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground.cPtr(No.dup) : null);
+    vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1167,7 +1167,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorCursorForeground(gdk.rgba.RGBA cursorForeground = null)
   {
-    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground.cPtr(No.dup) : null);
+    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1177,7 +1177,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorForeground(gdk.rgba.RGBA foreground)
   {
-    vte_terminal_set_color_foreground(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.dup) : null);
+    vte_terminal_set_color_foreground(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1190,7 +1190,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorHighlight(gdk.rgba.RGBA highlightBackground = null)
   {
-    vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground.cPtr(No.dup) : null);
+    vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1203,7 +1203,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground = null)
   {
-    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground.cPtr(No.dup) : null);
+    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1231,7 +1231,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     foreach (obj; palette)
       _tmppalette ~= *cast(GdkRGBA*)obj.cPtr;
     const(GdkRGBA)* _palette = _tmppalette.ptr;
-    vte_terminal_set_colors(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.dup) : null, background ? cast(const(GdkRGBA)*)background.cPtr(No.dup) : null, _palette, _paletteSize);
+    vte_terminal_set_colors(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null, _palette, _paletteSize);
   }
 
   /**
@@ -1245,7 +1245,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setContextMenu(gtk.widget.Widget menu = null)
   {
-    vte_terminal_set_context_menu(cast(VteTerminal*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.dup) : null);
+    vte_terminal_set_context_menu(cast(VteTerminal*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1256,11 +1256,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setContextMenuModel(gio.menu_model.MenuModel model = null)
   {
-    vte_terminal_set_context_menu_model(cast(VteTerminal*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
+    vte_terminal_set_context_menu_model(cast(VteTerminal*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
-      Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.system]
+      Sets whether or not the cursor will blink. Using [vte.types.CursorBlinkMode.System]
     will use the #GtkSettings::gtk-cursor-blink setting.
     Params:
       mode =       the #VteCursorBlinkMode to use
@@ -1363,7 +1363,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool setEncoding(string codeset = null)
   {
     bool _retval;
-    const(char)* _codeset = codeset.toCString(No.alloc);
+    const(char)* _codeset = codeset.toCString(No.Alloc);
     GError *_err;
     _retval = vte_terminal_set_encoding(cast(VteTerminal*)cPtr, _codeset, &_err);
     if (_err)
@@ -1382,22 +1382,22 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setFont(pango.font_description.FontDescription fontDesc = null)
   {
-    vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.dup) : null);
+    vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
       Sets the terminal's font options to options.
     
     Note that on GTK4, the terminal by default uses font options
-    with [cairo.types.HintMetrics.on] set; to override that, use this
+    with [cairo.types.HintMetrics.On] set; to override that, use this
     function to set a #cairo_font_options_t that has
-    [cairo.types.HintMetrics.off] set.
+    [cairo.types.HintMetrics.Off] set.
     Params:
       fontOptions =       the font options, or null
   */
   override void setFontOptions(cairo.font_options.FontOptions fontOptions = null)
   {
-    vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions.cPtr(No.dup) : null);
+    vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1443,7 +1443,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setPty(vte.pty.Pty pty = null)
   {
-    vte_terminal_set_pty(cast(VteTerminal*)cPtr, pty ? cast(VtePty*)pty.cPtr(No.dup) : null);
+    vte_terminal_set_pty(cast(VteTerminal*)cPtr, pty ? cast(VtePty*)pty.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1563,7 +1563,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setWordCharExceptions(string exceptions)
   {
-    const(char)* _exceptions = exceptions.toCString(No.alloc);
+    const(char)* _exceptions = exceptions.toCString(No.Alloc);
     vte_terminal_set_word_char_exceptions(cast(VteTerminal*)cPtr, _exceptions);
   }
 
@@ -1571,7 +1571,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       Sets the horizontal alignment of terminal within its allocation.
     
     Note: `VTE_ALIGN_START_FILL` is not supported, and will be treated
-      like [vte.types.Align.start].
+      like [vte.types.Align.Start].
     Params:
       align_ =       alignment value from #VteAlign
   */
@@ -1606,7 +1606,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   /**
       Sets the vertical fillment of terminal within its allocation.
     Note that yfill is only supported with yalign set to
-    [vte.types.Align.start], and is ignored for all other yalign values.
+    [vte.types.Align.Start], and is ignored for all other yalign values.
     Params:
       fill =       fillment value from #VteFill
   */
@@ -1649,27 +1649,27 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _workingDirectory = workingDirectory.toCString(No.alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.alloc);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.alloc);
+      _tmpenvv ~= s.toCString(No.Alloc);
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1722,22 +1722,22 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
     bool _retval;
-    const(char)* _workingDirectory = workingDirectory.toCString(No.alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     char*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.alloc);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     char** _argv = _tmpargv.ptr;
 
     char*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.alloc);
+      _tmpenvv ~= s.toCString(No.Alloc);
     _tmpenvv ~= null;
     char** _envv = _tmpenvv.ptr;
 
     auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
     GError *_err;
-    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1818,20 +1818,20 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _workingDirectory = workingDirectory.toCString(No.alloc);
+    const(char)* _workingDirectory = workingDirectory.toCString(No.Alloc);
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.alloc);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
     const(char)*[] _tmpenvv;
     foreach (s; envv)
-      _tmpenvv ~= s.toCString(No.alloc);
+      _tmpenvv ~= s.toCString(No.Alloc);
     _tmpenvv ~= null;
     const(char*)* _envv = _tmpenvv.ptr;
 
@@ -1848,7 +1848,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1887,7 +1887,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     
     If cancellable is not null, then the operation can be cancelled by triggering
     the cancellable object from another thread. If the operation was cancelled,
-    the error [gio.types.IOErrorEnum.cancelled] will be returned in error.
+    the error [gio.types.IOErrorEnum.Cancelled] will be returned in error.
     
     This is a synchronous operation and will make the widget (and input
     processing) during the write operation, which may take a long time
@@ -1902,7 +1902,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1926,10 +1926,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to Bell signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBell(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBell(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BellCallbackDlg) || is(T : BellCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1966,10 +1966,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to CharSizeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCharSizeChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCharSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CharSizeChangedCallbackDlg) || is(T : CharSizeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2005,10 +2005,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to ChildExited signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildExited(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChildExited(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChildExitedCallbackDlg) || is(T : ChildExitedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2044,10 +2044,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to Commit signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCommit(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCommit(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CommitCallbackDlg) || is(T : CommitCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2082,10 +2082,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to ContentsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectContentsChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectContentsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ContentsChangedCallbackDlg) || is(T : ContentsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2117,10 +2117,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2152,10 +2152,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to CurrentDirectoryUriChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCurrentDirectoryUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CurrentDirectoryUriChangedCallbackDlg) || is(T : CurrentDirectoryUriChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2187,10 +2187,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to CurrentFileUriChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCurrentFileUriChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCurrentFileUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CurrentFileUriChangedCallbackDlg) || is(T : CurrentFileUriChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2223,10 +2223,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to CursorMoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCursorMoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCursorMoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CursorMovedCallbackDlg) || is(T : CursorMovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2258,10 +2258,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to DecreaseFontSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDecreaseFontSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDecreaseFontSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DecreaseFontSizeCallbackDlg) || is(T : DecreaseFontSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2293,10 +2293,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to DeiconifyWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeiconifyWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeiconifyWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeiconifyWindowCallbackDlg) || is(T : DeiconifyWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2330,10 +2330,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to EncodingChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEncodingChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEncodingChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EncodingChangedCallbackDlg) || is(T : EncodingChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2367,10 +2367,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to Eof signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEof(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEof(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EofCallbackDlg) || is(T : EofCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2410,10 +2410,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to HyperlinkHoverUriChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectHyperlinkHoverUriChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : HyperlinkHoverUriChangedCallbackDlg) || is(T : HyperlinkHoverUriChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2440,10 +2440,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to IconTitleChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIconTitleChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIconTitleChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IconTitleChangedCallbackDlg) || is(T : IconTitleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2475,10 +2475,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to IconifyWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIconifyWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIconifyWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IconifyWindowCallbackDlg) || is(T : IconifyWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2510,10 +2510,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to IncreaseFontSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIncreaseFontSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIncreaseFontSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IncreaseFontSizeCallbackDlg) || is(T : IncreaseFontSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2545,10 +2545,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to LowerWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLowerWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLowerWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LowerWindowCallbackDlg) || is(T : LowerWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2580,10 +2580,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to MaximizeWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMaximizeWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMaximizeWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MaximizeWindowCallbackDlg) || is(T : MaximizeWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2617,10 +2617,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to MoveWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveWindowCallbackDlg) || is(T : MoveWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2654,10 +2654,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to PasteClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2689,10 +2689,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to RaiseWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRaiseWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRaiseWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RaiseWindowCallbackDlg) || is(T : RaiseWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2724,10 +2724,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to RefreshWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRefreshWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRefreshWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RefreshWindowCallbackDlg) || is(T : RefreshWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2761,10 +2761,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to ResizeWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResizeWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResizeWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResizeWindowCallbackDlg) || is(T : ResizeWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2798,10 +2798,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to RestoreWindow signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRestoreWindow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRestoreWindow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RestoreWindowCallbackDlg) || is(T : RestoreWindowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2833,10 +2833,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2880,10 +2880,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to SetupContextMenu signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSetupContextMenu(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSetupContextMenu(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SetupContextMenuCallbackDlg) || is(T : SetupContextMenuCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2916,10 +2916,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to WindowTitleChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWindowTitleChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWindowTitleChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WindowTitleChangedCallbackDlg) || is(T : WindowTitleChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

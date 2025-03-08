@@ -36,7 +36,7 @@ import gobject.object;
 class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,8 +69,8 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkTexture* _cretval;
-    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.take);
+    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,10 +93,10 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, &_err);
+    _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,10 +119,10 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -144,12 +144,12 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   static gdk.texture.Texture newFromFilename(string path)
   {
     GdkTexture* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -174,9 +174,9 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   static gdk.texture.Texture newFromResource(string resourcePath)
   {
     GdkTexture* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
-    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   bool saveToPng(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _retval = gdk_texture_save_to_png(cast(GdkTexture*)cPtr, _filename);
     return _retval;
   }
@@ -263,7 +263,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_png_bytes(cast(GdkTexture*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   bool saveToTiff(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _retval = gdk_texture_save_to_tiff(cast(GdkTexture*)cPtr, _filename);
     return _retval;
   }
@@ -302,7 +302,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
   {
     GBytes* _cretval;
     _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -42,8 +42,8 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.tabList] role
-  and uses the [gtk.types.AccessibleRole.tab] for its buttons.
+  [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.TabList] role
+  and uses the [gtk.types.AccessibleRole.Tab] for its buttons.
   
   # Orientable
   
@@ -54,7 +54,7 @@ import gtk.widget;
 class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,7 +80,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_stack_switcher_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -91,7 +91,7 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkStack* _cretval;
     _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,6 +102,6 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setStack(gtk.stack.Stack stack = null)
   {
-    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.dup) : null);
+    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
   }
 }

@@ -12,7 +12,7 @@ import glib.error;
 class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowBinaryArrayBuilder* _cretval;
     _cretval = garrow_binary_array_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -73,7 +73,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.dup) : null, &_err);
+    _retval = garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

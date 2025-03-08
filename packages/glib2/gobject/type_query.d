@@ -14,7 +14,7 @@ class TypeQuery
 {
   GTypeQuery cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.TypeQuery");
@@ -42,13 +42,13 @@ class TypeQuery
 
   @property string typeName()
   {
-    return (cast(GTypeQuery*)cPtr).typeName.fromCString(No.free);
+    return (cast(GTypeQuery*)cPtr).typeName.fromCString(No.Free);
   }
 
   @property void typeName(string propval)
   {
     safeFree(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
-    (cast(GTypeQuery*)cPtr).typeName = propval.toCString(Yes.alloc);
+    (cast(GTypeQuery*)cPtr).typeName = propval.toCString(Yes.Alloc);
   }
 
   @property uint classSize()

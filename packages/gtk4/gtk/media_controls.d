@@ -24,7 +24,7 @@ import gtk.widget;
 class MediaControls : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class MediaControls : gtk.widget.Widget
   this(gtk.media_stream.MediaStream stream = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class MediaControls : gtk.widget.Widget
   {
     GtkMediaStream* _cretval;
     _cretval = gtk_media_controls_get_media_stream(cast(GtkMediaControls*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -72,6 +72,6 @@ class MediaControls : gtk.widget.Widget
   */
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
-    gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.dup) : null);
+    gtk_media_controls_set_media_stream(cast(GtkMediaControls*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
   }
 }

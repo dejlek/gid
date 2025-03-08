@@ -177,7 +177,7 @@ import rsvg.types;
 class Handle : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -220,7 +220,7 @@ class Handle : gobject.object.ObjectG
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -244,7 +244,7 @@ class Handle : gobject.object.ObjectG
     _cretval = rsvg_handle_new_from_data(_data, _dataLen, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -260,12 +260,12 @@ class Handle : gobject.object.ObjectG
   static rsvg.handle.Handle newFromFile(string filename)
   {
     RsvgHandle* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _cretval = rsvg_handle_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class Handle : gobject.object.ObjectG
     
     If cancellable is not `NULL`, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned in error.
     Params:
       file =       a [gio.file.File]
@@ -290,10 +290,10 @@ class Handle : gobject.object.ObjectG
   {
     RsvgHandle* _cretval;
     GError *_err;
-    _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = rsvg_handle_new_from_gfile_sync(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Handle : gobject.object.ObjectG
     
     If cancellable is not `NULL`, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned in error.
     Params:
       inputStream =       a [gio.input_stream.InputStream]
@@ -319,10 +319,10 @@ class Handle : gobject.object.ObjectG
   {
     RsvgHandle* _cretval;
     GError *_err;
-    _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream.cPtr(No.dup) : null, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = rsvg_handle_new_from_stream_sync(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class Handle : gobject.object.ObjectG
   {
     RsvgHandle* _cretval;
     _cretval = rsvg_handle_new_with_flags(flags);
-    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(rsvg.handle.Handle)(cast(RsvgHandle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class Handle : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_base_uri(cast(RsvgHandle*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class Handle : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_desc(cast(RsvgHandle*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class Handle : gobject.object.ObjectG
   bool getDimensionsSub(out rsvg.types.DimensionData dimensionData, string id = null)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _retval = rsvg_handle_get_dimensions_sub(cast(RsvgHandle*)cPtr, &dimensionData, _id);
     return _retval;
   }
@@ -482,7 +482,7 @@ class Handle : gobject.object.ObjectG
   bool getGeometryForElement(string id, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
     _retval = rsvg_handle_get_geometry_for_element(cast(RsvgHandle*)cPtr, _id, &outInkRect, &outLogicalRect, &_err);
     if (_err)
@@ -532,7 +532,7 @@ class Handle : gobject.object.ObjectG
   bool getGeometryForLayer(string id, rsvg.types.Rectangle viewport, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
     _retval = rsvg_handle_get_geometry_for_layer(cast(RsvgHandle*)cPtr, _id, &viewport, &outInkRect, &outLogicalRect, &_err);
     if (_err)
@@ -668,7 +668,7 @@ class Handle : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_metadata(cast(RsvgHandle*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -689,7 +689,7 @@ class Handle : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -722,9 +722,9 @@ class Handle : gobject.object.ObjectG
   gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null)
   {
     PixbufC* _cretval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = rsvg_handle_get_pixbuf_sub(cast(RsvgHandle*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -752,7 +752,7 @@ class Handle : gobject.object.ObjectG
   bool getPositionSub(out rsvg.types.PositionData positionData, string id = null)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _retval = rsvg_handle_get_position_sub(cast(RsvgHandle*)cPtr, &positionData, _id);
     return _retval;
   }
@@ -762,7 +762,7 @@ class Handle : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = rsvg_handle_get_title(cast(RsvgHandle*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -781,7 +781,7 @@ class Handle : gobject.object.ObjectG
   bool hasSub(string id)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _retval = rsvg_handle_has_sub(cast(RsvgHandle*)cPtr, _id);
     return _retval;
   }
@@ -808,7 +808,7 @@ class Handle : gobject.object.ObjectG
     
     If cancellable is not `NULL`, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     Params:
       stream =       a [gio.input_stream.InputStream]
@@ -820,7 +820,7 @@ class Handle : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = rsvg_handle_read_stream_sync(cast(RsvgHandle*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = rsvg_handle_read_stream_sync(cast(RsvgHandle*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -865,7 +865,7 @@ class Handle : gobject.object.ObjectG
     pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
     
     Note that cr must be a Cairo context that is not in an error state, that is,
-    `[cairo.context.Context.status]` must return [cairo.types.Status.success] for it.  Cairo can set a
+    `[cairo.context.Context.status]` must return [cairo.types.Status.Success] for it.  Cairo can set a
     context to be in an error state in various situations, for example, if it was
     passed an invalid matrix or if it was created for an invalid surface.
     Params:
@@ -879,7 +879,7 @@ class Handle : gobject.object.ObjectG
   bool renderCairo(cairo.context.Context cr)
   {
     bool _retval;
-    _retval = rsvg_handle_render_cairo(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
+    _retval = rsvg_handle_render_cairo(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -926,7 +926,7 @@ class Handle : gobject.object.ObjectG
     pixels, so you should call [rsvg.handle.Handle.setDpi] beforehand.
     
     Note that cr must be a Cairo context that is not in an error state, that is,
-    `[cairo.context.Context.status]` must return [cairo.types.Status.success] for it.  Cairo can set a
+    `[cairo.context.Context.status]` must return [cairo.types.Status.Success] for it.  Cairo can set a
     context to be in an error state in various situations, for example, if it was
     passed an invalid matrix or if it was created for an invalid surface.
     
@@ -947,8 +947,8 @@ class Handle : gobject.object.ObjectG
   bool renderCairoSub(cairo.context.Context cr, string id = null)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
-    _retval = rsvg_handle_render_cairo_sub(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, _id);
+    const(char)* _id = id.toCString(No.Alloc);
+    _retval = rsvg_handle_render_cairo_sub(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -958,7 +958,7 @@ class Handle : gobject.object.ObjectG
     The viewport gives the position and size at which the whole SVG document will be
     rendered.  The document is scaled proportionally to fit into this viewport.
     
-    The cr must be in a [cairo.types.Status.success] state, or this function will not
+    The cr must be in a [cairo.types.Status.Success] state, or this function will not
     render anything, and instead will return an error.
     Params:
       cr =       A Cairo context
@@ -975,7 +975,7 @@ class Handle : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = rsvg_handle_render_document(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, &viewport, &_err);
+    _retval = rsvg_handle_render_document(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, &viewport, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1016,9 +1016,9 @@ class Handle : gobject.object.ObjectG
   bool renderElement(cairo.context.Context cr, string id, rsvg.types.Rectangle elementViewport)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_render_element(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, _id, &elementViewport, &_err);
+    _retval = rsvg_handle_render_element(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _id, &elementViewport, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1062,9 +1062,9 @@ class Handle : gobject.object.ObjectG
   bool renderLayer(cairo.context.Context cr, string id, rsvg.types.Rectangle viewport)
   {
     bool _retval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     GError *_err;
-    _retval = rsvg_handle_render_layer(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, _id, &viewport, &_err);
+    _retval = rsvg_handle_render_layer(cast(RsvgHandle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _id, &viewport, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1080,7 +1080,7 @@ class Handle : gobject.object.ObjectG
   */
   void setBaseGfile(gio.file.File baseFile)
   {
-    rsvg_handle_set_base_gfile(cast(RsvgHandle*)cPtr, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.dup) : null);
+    rsvg_handle_set_base_gfile(cast(RsvgHandle*)cPtr, baseFile ? cast(GFile*)(cast(ObjectG)baseFile).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1093,7 +1093,7 @@ class Handle : gobject.object.ObjectG
   */
   void setBaseUri(string baseUri)
   {
-    const(char)* _baseUri = baseUri.toCString(No.alloc);
+    const(char)* _baseUri = baseUri.toCString(No.Alloc);
     rsvg_handle_set_base_uri(cast(RsvgHandle*)cPtr, _baseUri);
   }
 

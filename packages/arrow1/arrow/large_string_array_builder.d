@@ -11,7 +11,7 @@ import glib.error;
 class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,14 +32,14 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   {
     GArrowLargeStringArrayBuilder* _cretval;
     _cretval = garrow_large_string_array_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool appendString(string value)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
     _retval = garrow_large_string_array_builder_append_string(cast(GArrowLargeStringArrayBuilder*)cPtr, _value, &_err);
     if (_err)
@@ -51,7 +51,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   bool appendStringLen(string value, long length)
   {
     bool _retval;
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
     _retval = garrow_large_string_array_builder_append_string_len(cast(GArrowLargeStringArrayBuilder*)cPtr, _value, length, &_err);
     if (_err)
@@ -79,7 +79,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
 
     char*[] _tmpvalues;
     foreach (s; values)
-      _tmpvalues ~= s.toCString(No.alloc);
+      _tmpvalues ~= s.toCString(No.Alloc);
     const(char*)* _values = _tmpvalues.ptr;
 
     long _isValidsLength;

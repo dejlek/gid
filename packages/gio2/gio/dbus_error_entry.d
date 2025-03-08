@@ -12,7 +12,7 @@ class DBusErrorEntry
 {
   GDBusErrorEntry cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.DBusErrorEntry");
@@ -40,12 +40,12 @@ class DBusErrorEntry
 
   @property string dbusErrorName()
   {
-    return (cast(GDBusErrorEntry*)cPtr).dbusErrorName.fromCString(No.free);
+    return (cast(GDBusErrorEntry*)cPtr).dbusErrorName.fromCString(No.Free);
   }
 
   @property void dbusErrorName(string propval)
   {
     safeFree(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
-    (cast(GDBusErrorEntry*)cPtr).dbusErrorName = propval.toCString(Yes.alloc);
+    (cast(GDBusErrorEntry*)cPtr).dbusErrorName = propval.toCString(Yes.Alloc);
   }
 }

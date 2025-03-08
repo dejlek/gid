@@ -22,7 +22,7 @@ import gtk.types;
 class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,8 +55,8 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   this(gio.list_model.ListModel model, uint offset, uint size)
   {
     GtkSliceListModel* _cretval;
-    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, offset, size);
-    this(_cretval, Yes.take);
+    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, offset, size);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   {
     GListModel* _cretval;
     _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**

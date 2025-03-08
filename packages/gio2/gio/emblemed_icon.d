@@ -20,7 +20,7 @@ import gobject.object;
 class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,8 +48,8 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
     GIcon* _cretval;
-    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   */
   void addEmblem(gio.emblem.Emblem emblem)
   {
-    g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)cPtr, emblem ? cast(GEmblem*)emblem.cPtr(No.dup) : null);
+    g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)cPtr, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
   }
 
   /**
@@ -91,7 +91,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
   {
     GIcon* _cretval;
     _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 }

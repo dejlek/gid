@@ -16,7 +16,7 @@ import gobject.object;
 class StreamDecoder : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class StreamDecoder : gobject.object.ObjectG
   this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
   {
     GArrowStreamDecoder* _cretval;
-    _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener.cPtr(No.dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -54,7 +54,7 @@ class StreamDecoder : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)cPtr, buffer ? cast(GArrowBuffer*)buffer.cPtr(No.dup) : null, &_err);
+    _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)cPtr, buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -74,7 +74,7 @@ class StreamDecoder : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, &_err);
+    _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -151,7 +151,7 @@ class StreamDecoder : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 

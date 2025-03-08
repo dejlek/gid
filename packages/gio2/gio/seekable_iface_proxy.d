@@ -7,7 +7,7 @@ import gio.seekable_mixin;
 /// Proxy object for Gio.Seekable interface when a GObject has no applicable D binding
 class SeekableIfaceProxy : IfaceProxy, gio.seekable.Seekable
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

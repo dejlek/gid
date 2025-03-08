@@ -28,7 +28,7 @@ import gobject.object;
   for the synchronization being implemented, the clock will process a frame and
   emit signals for each phase that has been requested. (See the signals of the
   [gdk.frame_clock.FrameClock] class for documentation of the phases.
-  [gdk.types.FrameClockPhase.update] and the [gdk.frame_clock.FrameClock.update] signal
+  [gdk.types.FrameClockPhase.Update] and the [gdk.frame_clock.FrameClock.update] signal
   are most interesting for application writers, and are used to update the
   animations, using the frame time given by [gdk.frame_clock.FrameClock.getFrameTime].
   
@@ -46,7 +46,7 @@ import gobject.object;
 class FrameClock : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -67,7 +67,7 @@ class FrameClock : gobject.object.ObjectG
     
     Until a matching call to [gdk.frame_clock.FrameClock.endUpdating] is made,
     the frame clock will continually request a new frame with the
-    [gdk.types.FrameClockPhase.update] phase. This function may be called multiple
+    [gdk.types.FrameClockPhase.Update] phase. This function may be called multiple
     times and frames will be requested until [gdk.frame_clock.FrameClock.endUpdating]
     is called the same number of times.
   */
@@ -97,7 +97,7 @@ class FrameClock : gobject.object.ObjectG
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)cPtr);
-    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class FrameClock : gobject.object.ObjectG
   {
     GdkFrameTimings* _cretval;
     _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)cPtr, frameCounter);
-    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class FrameClock : gobject.object.ObjectG
     [gdk.frame_clock.FrameClock.requestPhase] will be combined together
     and only one frame processed. If you are displaying animated
     content and want to continually request the
-    [gdk.types.FrameClockPhase.update] phase for a period of time,
+    [gdk.types.FrameClockPhase.Update] phase for a period of time,
     you should use [gdk.frame_clock.FrameClock.beginUpdating] instead,
     since this allows GTK to adjust system parameters to get maximally
     smooth animations.
@@ -247,10 +247,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to AfterPaint signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAfterPaint(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAfterPaint(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AfterPaintCallbackDlg) || is(T : AfterPaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -284,10 +284,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to BeforePaint signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBeforePaint(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBeforePaint(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BeforePaintCallbackDlg) || is(T : BeforePaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -322,10 +322,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to FlushEvents signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFlushEvents(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFlushEvents(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FlushEventsCallbackDlg) || is(T : FlushEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -361,10 +361,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to Layout signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLayout(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LayoutCallbackDlg) || is(T : LayoutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -402,10 +402,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to Paint signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPaint(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPaint(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PaintCallbackDlg) || is(T : PaintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -440,10 +440,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to ResumeEvents signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResumeEvents(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResumeEvents(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResumeEventsCallbackDlg) || is(T : ResumeEventsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -481,10 +481,10 @@ class FrameClock : gobject.object.ObjectG
     Connect to Update signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUpdate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUpdate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UpdateCallbackDlg) || is(T : UpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

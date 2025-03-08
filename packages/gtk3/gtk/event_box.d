@@ -18,7 +18,7 @@ import gtk.types;
 class EventBox : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class EventBox : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_event_box_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -92,11 +92,11 @@ class EventBox : gtk.bin.Bin
     window. The default is to use visible windows.
     
     In an invisible window event box, the window that the
-    event box creates is a [gdk.types.WindowWindowClass.inputOnly] window, which
+    event box creates is a [gdk.types.WindowWindowClass.InputOnly] window, which
     means that it is invisible and only serves to receive
     events.
     
-    A visible window event box creates a visible ([gdk.types.WindowWindowClass.inputOutput])
+    A visible window event box creates a visible ([gdk.types.WindowWindowClass.InputOutput])
     window that acts as the parent window for all the widgets
     contained in the event box.
     

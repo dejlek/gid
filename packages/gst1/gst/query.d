@@ -44,15 +44,15 @@ class Query : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstQuery.sizeof), Yes.take);
+    super(safeMalloc(GstQuery.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -94,8 +94,8 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newAcceptCaps(gst.caps.Caps caps)
   {
     GstQuery* _cretval;
-    _cretval = gst_query_new_accept_caps(caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_query_new_accept_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -111,8 +111,8 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newAllocation(gst.caps.Caps caps, bool needPool)
   {
     GstQuery* _cretval;
-    _cretval = gst_query_new_allocation(caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, needPool);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_query_new_allocation(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, needPool);
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_bitrate();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_buffering(format);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -175,8 +175,8 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newCaps(gst.caps.Caps filter)
   {
     GstQuery* _cretval;
-    _cretval = gst_query_new_caps(filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_query_new_caps(filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -191,9 +191,9 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newContext(string contextType)
   {
     GstQuery* _cretval;
-    const(char)* _contextType = contextType.toCString(No.alloc);
+    const(char)* _contextType = contextType.toCString(No.Alloc);
     _cretval = gst_query_new_context(_contextType);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_convert(srcFormat, value, destFormat);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -230,8 +230,8 @@ class Query : gobject.boxed.Boxed
   static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure = null)
   {
     GstQuery* _cretval;
-    _cretval = gst_query_new_custom(type, structure ? cast(GstStructure*)structure.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_query_new_custom(type, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_drain();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_duration(format);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_formats();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_latency();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_position(format);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_scheduling();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_seeking(format);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -362,7 +362,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_segment(format);
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_selectable();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class Query : gobject.boxed.Boxed
   {
     GstQuery* _cretval;
     _cretval = gst_query_new_uri();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class Query : gobject.boxed.Boxed
   */
   void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
   {
-    gst_query_add_allocation_meta(cast(GstQuery*)cPtr, api, params ? cast(const(GstStructure)*)params.cPtr(No.dup) : null);
+    gst_query_add_allocation_meta(cast(GstQuery*)cPtr, api, params ? cast(const(GstStructure)*)params.cPtr(No.Dup) : null);
   }
 
   /**
@@ -415,7 +415,7 @@ class Query : gobject.boxed.Boxed
   */
   void addAllocationParam(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
-    gst_query_add_allocation_param(cast(GstQuery*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.dup) : null);
+    gst_query_add_allocation_param(cast(GstQuery*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null);
   }
 
   /**
@@ -428,7 +428,7 @@ class Query : gobject.boxed.Boxed
   */
   void addAllocationPool(gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
   {
-    gst_query_add_allocation_pool(cast(GstQuery*)cPtr, pool ? cast(GstBufferPool*)pool.cPtr(No.dup) : null, size, minBuffers, maxBuffers);
+    gst_query_add_allocation_pool(cast(GstQuery*)cPtr, pool ? cast(GstBufferPool*)pool.cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
 
   /**
@@ -547,7 +547,7 @@ class Query : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_query_get_structure(cast(GstQuery*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -596,7 +596,7 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_query_parse_accept_caps(cast(GstQuery*)cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.take);
+    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -624,7 +624,7 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_query_parse_allocation(cast(GstQuery*)cPtr, &_caps, cast(bool*)&needPool);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.take);
+    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -690,7 +690,7 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _filter;
     gst_query_parse_caps(cast(GstQuery*)cPtr, &_filter);
-    filter = new gst.caps.Caps(cast(void*)_filter, No.take);
+    filter = new gst.caps.Caps(cast(void*)_filter, No.Take);
   }
 
   /**
@@ -703,7 +703,7 @@ class Query : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_query_parse_caps_result(cast(GstQuery*)cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.take);
+    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -716,7 +716,7 @@ class Query : gobject.boxed.Boxed
   {
     GstContext* _context;
     gst_query_parse_context(cast(GstQuery*)cPtr, &_context);
-    context = new gst.context.Context(cast(void*)_context, No.take);
+    context = new gst.context.Context(cast(void*)_context, No.Take);
   }
 
   /**
@@ -730,7 +730,7 @@ class Query : gobject.boxed.Boxed
     bool _retval;
     char* _contextType;
     _retval = gst_query_parse_context_type(cast(GstQuery*)cPtr, &_contextType);
-    contextType = _contextType.fromCString(No.free);
+    contextType = _contextType.fromCString(No.Free);
     return _retval;
   }
 
@@ -799,7 +799,7 @@ class Query : gobject.boxed.Boxed
     gobject.types.GType _retval;
     const(GstStructure)* _params;
     _retval = gst_query_parse_nth_allocation_meta(cast(GstQuery*)cPtr, index, &_params);
-    params = new gst.structure.Structure(cast(void*)_params, No.take);
+    params = new gst.structure.Structure(cast(void*)_params, No.Take);
     return _retval;
   }
 
@@ -816,8 +816,8 @@ class Query : gobject.boxed.Boxed
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_query_parse_nth_allocation_param(cast(GstQuery*)cPtr, index, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -835,7 +835,7 @@ class Query : gobject.boxed.Boxed
   {
     GstBufferPool* _pool;
     gst_query_parse_nth_allocation_pool(cast(GstQuery*)cPtr, index, &_pool, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
-    pool = new gst.buffer_pool.BufferPool(cast(void*)_pool, Yes.take);
+    pool = new gst.buffer_pool.BufferPool(cast(void*)_pool, Yes.Take);
   }
 
   /**
@@ -963,7 +963,7 @@ class Query : gobject.boxed.Boxed
   {
     char* _uri;
     gst_query_parse_uri(cast(GstQuery*)cPtr, &_uri);
-    uri = _uri.fromCString(Yes.free);
+    uri = _uri.fromCString(Yes.Free);
   }
 
   /**
@@ -978,7 +978,7 @@ class Query : gobject.boxed.Boxed
   {
     char* _uri;
     gst_query_parse_uri_redirection(cast(GstQuery*)cPtr, &_uri);
-    uri = _uri.fromCString(Yes.free);
+    uri = _uri.fromCString(Yes.Free);
   }
 
   /**
@@ -1093,7 +1093,7 @@ class Query : gobject.boxed.Boxed
   */
   void setCapsResult(gst.caps.Caps caps = null)
   {
-    gst_query_set_caps_result(cast(GstQuery*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    gst_query_set_caps_result(cast(GstQuery*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1103,7 +1103,7 @@ class Query : gobject.boxed.Boxed
   */
   void setContext(gst.context.Context context = null)
   {
-    gst_query_set_context(cast(GstQuery*)cPtr, context ? cast(GstContext*)context.cPtr(No.dup) : null);
+    gst_query_set_context(cast(GstQuery*)cPtr, context ? cast(GstContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1169,7 +1169,7 @@ class Query : gobject.boxed.Boxed
   */
   void setNthAllocationParam(uint index, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
-    gst_query_set_nth_allocation_param(cast(GstQuery*)cPtr, index, allocator ? cast(GstAllocator*)allocator.cPtr(No.dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.dup) : null);
+    gst_query_set_nth_allocation_param(cast(GstQuery*)cPtr, index, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1183,7 +1183,7 @@ class Query : gobject.boxed.Boxed
   */
   void setNthAllocationPool(uint index, gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
   {
-    gst_query_set_nth_allocation_pool(cast(GstQuery*)cPtr, index, pool ? cast(GstBufferPool*)pool.cPtr(No.dup) : null, size, minBuffers, maxBuffers);
+    gst_query_set_nth_allocation_pool(cast(GstQuery*)cPtr, index, pool ? cast(GstBufferPool*)pool.cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
 
   /**
@@ -1264,7 +1264,7 @@ class Query : gobject.boxed.Boxed
   */
   void setUri(string uri = null)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     gst_query_set_uri(cast(GstQuery*)cPtr, _uri);
   }
 
@@ -1275,7 +1275,7 @@ class Query : gobject.boxed.Boxed
   */
   void setUriRedirection(string uri = null)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     gst_query_set_uri_redirection(cast(GstQuery*)cPtr, _uri);
   }
 
@@ -1301,7 +1301,7 @@ class Query : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_query_writable_structure(cast(GstQuery*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

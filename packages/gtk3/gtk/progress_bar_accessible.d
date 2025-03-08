@@ -14,7 +14,7 @@ import gtk.widget_accessible;
 class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

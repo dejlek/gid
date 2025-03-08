@@ -59,12 +59,12 @@ import gst.types;
 class Segment : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -201,7 +201,7 @@ class Segment : gobject.boxed.Boxed
   {
     GstSegment* _cretval;
     _cretval = gst_segment_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -245,7 +245,7 @@ class Segment : gobject.boxed.Boxed
   {
     GstSegment* _cretval;
     _cretval = gst_segment_copy(cast(const(GstSegment)*)cPtr);
-    auto _retval = _cretval ? new gst.segment.Segment(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.segment.Segment(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Segment : gobject.boxed.Boxed
   */
   void copyInto(gst.segment.Segment dest)
   {
-    gst_segment_copy_into(cast(const(GstSegment)*)cPtr, dest ? cast(GstSegment*)dest.cPtr(No.dup) : null);
+    gst_segment_copy_into(cast(const(GstSegment)*)cPtr, dest ? cast(GstSegment*)dest.cPtr(No.Dup) : null);
   }
 
   /**
@@ -329,7 +329,7 @@ class Segment : gobject.boxed.Boxed
   bool isEqual(gst.segment.Segment s1)
   {
     bool _retval;
-    _retval = gst_segment_is_equal(cast(const(GstSegment)*)cPtr, s1 ? cast(const(GstSegment)*)s1.cPtr(No.dup) : null);
+    _retval = gst_segment_is_equal(cast(const(GstSegment)*)cPtr, s1 ? cast(const(GstSegment)*)s1.cPtr(No.Dup) : null);
     return _retval;
   }
 

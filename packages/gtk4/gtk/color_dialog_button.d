@@ -39,7 +39,7 @@ import gtk.widget;
 class ColorDialogButton : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,8 +68,8 @@ class ColorDialogButton : gtk.widget.Widget
   this(gtk.color_dialog.ColorDialog dialog = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(Yes.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_color_dialog_button_new(dialog ? cast(GtkColorDialog*)dialog.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -80,7 +80,7 @@ class ColorDialogButton : gtk.widget.Widget
   {
     GtkColorDialog* _cretval;
     _cretval = gtk_color_dialog_button_get_dialog(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.color_dialog.ColorDialog)(cast(GtkColorDialog*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.color_dialog.ColorDialog)(cast(GtkColorDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class ColorDialogButton : gtk.widget.Widget
   {
     const(GdkRGBA)* _cretval;
     _cretval = gtk_color_dialog_button_get_rgba(cast(GtkColorDialogButton*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class ColorDialogButton : gtk.widget.Widget
   */
   void setDialog(gtk.color_dialog.ColorDialog dialog)
   {
-    gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)cPtr, dialog ? cast(GtkColorDialog*)dialog.cPtr(No.dup) : null);
+    gtk_color_dialog_button_set_dialog(cast(GtkColorDialogButton*)cPtr, dialog ? cast(GtkColorDialog*)dialog.cPtr(No.Dup) : null);
   }
 
   /**
@@ -119,7 +119,7 @@ class ColorDialogButton : gtk.widget.Widget
   */
   void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
+    gtk_color_dialog_button_set_rgba(cast(GtkColorDialogButton*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -142,10 +142,10 @@ class ColorDialogButton : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

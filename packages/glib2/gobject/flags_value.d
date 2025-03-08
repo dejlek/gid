@@ -13,7 +13,7 @@ class FlagsValue
 {
   GFlagsValue cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.FlagsValue");
@@ -41,23 +41,23 @@ class FlagsValue
 
   @property string valueName()
   {
-    return (cast(GFlagsValue*)cPtr).valueName.fromCString(No.free);
+    return (cast(GFlagsValue*)cPtr).valueName.fromCString(No.Free);
   }
 
   @property void valueName(string propval)
   {
     safeFree(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
-    (cast(GFlagsValue*)cPtr).valueName = propval.toCString(Yes.alloc);
+    (cast(GFlagsValue*)cPtr).valueName = propval.toCString(Yes.Alloc);
   }
 
   @property string valueNick()
   {
-    return (cast(GFlagsValue*)cPtr).valueNick.fromCString(No.free);
+    return (cast(GFlagsValue*)cPtr).valueNick.fromCString(No.Free);
   }
 
   @property void valueNick(string propval)
   {
     safeFree(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
-    (cast(GFlagsValue*)cPtr).valueNick = propval.toCString(Yes.alloc);
+    (cast(GFlagsValue*)cPtr).valueNick = propval.toCString(Yes.Alloc);
   }
 }

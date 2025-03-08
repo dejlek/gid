@@ -12,7 +12,7 @@ import glib.error;
 class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
   this(arrow.time64_data_type.Time64DataType dataType)
   {
     GArrowTime64ArrayBuilder* _cretval;
-    _cretval = garrow_time64_array_builder_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_time64_array_builder_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */

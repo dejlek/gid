@@ -19,7 +19,7 @@ import json.types;
 class Generator : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class Generator : gobject.object.ObjectG
   {
     JsonGenerator* _cretval;
     _cretval = json_generator_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -92,7 +92,7 @@ class Generator : gobject.object.ObjectG
   {
     JsonNode* _cretval;
     _cretval = json_generator_get_root(cast(JsonGenerator*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Generator : gobject.object.ObjectG
   */
   void setRoot(json.node.Node node)
   {
-    json_generator_set_root(cast(JsonGenerator*)cPtr, node ? cast(JsonNode*)node.cPtr(No.dup) : null);
+    json_generator_set_root(cast(JsonGenerator*)cPtr, node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ class Generator : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = json_generator_to_data(cast(JsonGenerator*)cPtr, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class Generator : gobject.object.ObjectG
   bool toFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = json_generator_to_file(cast(JsonGenerator*)cPtr, _filename, &_err);
     if (_err)
@@ -192,8 +192,8 @@ class Generator : gobject.object.ObjectG
   glib.string_.String toGstring(glib.string_.String string_)
   {
     GString* _cretval;
-    _cretval = json_generator_to_gstring(cast(JsonGenerator*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.take) : null;
+    _cretval = json_generator_to_gstring(cast(JsonGenerator*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Generator : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = json_generator_to_stream(cast(JsonGenerator*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = json_generator_to_stream(cast(JsonGenerator*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

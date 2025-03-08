@@ -26,7 +26,7 @@ import gobject.object;
 class TlsConnection : gio.iostream.IOStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class TlsConnection : gio.iostream.IOStream
   bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.dup) : null, errors);
+    _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     char* _cretval;
     _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     GTlsDatabase* _cretval;
     _cretval = g_tls_connection_get_database(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     GTlsInteraction* _cretval;
     _cretval = g_tls_connection_get_interaction(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     const(char)* _cretval;
     _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     GTlsCertificate* _cretval;
     _cretval = g_tls_connection_get_peer_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class TlsConnection : gio.iostream.IOStream
 
   /**
       Returns the current TLS protocol version, which may be
-    [gio.types.TlsProtocolVersion.unknown] if the connection has not handshaked, or
+    [gio.types.TlsProtocolVersion.Unknown] if the connection has not handshaked, or
     has been closed, or if the TLS backend has implemented a protocol version
     that is not a recognized #GTlsProtocolVersion.
     Returns:     The current TLS protocol version
@@ -183,7 +183,7 @@ class TlsConnection : gio.iostream.IOStream
   /**
       Gets conn rehandshaking mode. See
     [gio.tls_connection.TlsConnection.setRehandshakeMode] for details.
-    Returns:     [gio.types.TlsRehandshakeMode.safely]
+    Returns:     [gio.types.TlsRehandshakeMode.Safely]
   
     Deprecated:     Changing the rehandshake mode is no longer
         required for compatibility. Also, rehandshaking has been removed
@@ -265,7 +265,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake(cast(GTlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_tls_connection_handshake(cast(GTlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -286,12 +286,12 @@ class TlsConnection : gio.iostream.IOStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_connection_handshake_async(cast(GTlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_tls_connection_handshake_async(cast(GTlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -306,7 +306,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake_finish(cast(GTlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_tls_connection_handshake_finish(cast(GTlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -331,7 +331,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.alloc);
+      _tmpprotocols ~= s.toCString(No.Alloc);
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
     g_tls_connection_set_advertised_protocols(cast(GTlsConnection*)cPtr, _protocols);
@@ -344,7 +344,7 @@ class TlsConnection : gio.iostream.IOStream
     time.
     
     For a #GTlsClientConnection, this is optional. If a handshake fails
-    with [gio.types.TlsError.certificateRequired], that means that the server
+    with [gio.types.TlsError.CertificateRequired], that means that the server
     requires a certificate, and if you try connecting again, you should
     call this method first. You can call
     [gio.tls_client_connection.TlsClientConnection.getAcceptedCas] on the failed connection
@@ -361,7 +361,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
-    g_tls_connection_set_certificate(cast(GTlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null);
+    g_tls_connection_set_certificate(cast(GTlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
 
   /**
@@ -369,7 +369,7 @@ class TlsConnection : gio.iostream.IOStream
     This is set to the default database by default. See
     [gio.tls_backend.TlsBackend.getDefaultDatabase]. If set to null, then
     peer certificate validation will always set the
-    [gio.types.TlsCertificateFlags.unknownCa] error (meaning
+    [gio.types.TlsCertificateFlags.UnknownCa] error (meaning
     #GTlsConnection::accept-certificate will always be emitted on
     client-side connections, unless that bit is not set in
     #GTlsClientConnection:validation-flags).
@@ -381,7 +381,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    g_tls_connection_set_database(cast(GTlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.dup) : null);
+    g_tls_connection_set_database(cast(GTlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
 
   /**
@@ -396,7 +396,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
-    g_tls_connection_set_interaction(cast(GTlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null);
+    g_tls_connection_set_interaction(cast(GTlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
 
   /**
@@ -421,7 +421,7 @@ class TlsConnection : gio.iostream.IOStream
     before the connection is closed. If this is true (the default),
     then conn will expect to receive a TLS close notification from its
     peer before the connection is closed, and will return a
-    [gio.types.TlsError.eof] error if the connection is closed without proper
+    [gio.types.TlsError.Eof] error if the connection is closed without proper
     notification (since this may indicate a network error, or
     man-in-the-middle attack).
     
@@ -456,7 +456,7 @@ class TlsConnection : gio.iostream.IOStream
       Sets whether conn uses the system certificate database to verify
     peer certificates. This is true by default. If set to false, then
     peer certificate validation will always set the
-    [gio.types.TlsCertificateFlags.unknownCa] error (meaning
+    [gio.types.TlsCertificateFlags.UnknownCa] error (meaning
     #GTlsConnection::accept-certificate will always be emitted on
     client-side connections, unless that bit is not set in
     #GTlsClientConnection:validation-flags).
@@ -481,14 +481,14 @@ class TlsConnection : gio.iostream.IOStream
     #GTlsClientConnection:validation_flags. If you would like the
     certificate to be accepted despite errors, return true from the
     signal handler. Otherwise, if no handler accepts the certificate,
-    the handshake will fail with [gio.types.TlsError.badCertificate].
+    the handshake will fail with [gio.types.TlsError.BadCertificate].
     
     GLib guarantees that if certificate verification fails, this signal
     will be emitted with at least one error will be set in errors, but
     it does not guarantee that all possible errors will be set.
     Accordingly, you may not safely decide to ignore any particular
     type of error. For example, it would be incorrect to ignore
-    [gio.types.TlsCertificateFlags.expired] if you want to allow expired
+    [gio.types.TlsCertificateFlags.Expired] if you want to allow expired
     certificates, because this could potentially be the only error flag
     set even if other problems exist with the certificate.
     
@@ -505,7 +505,7 @@ class TlsConnection : gio.iostream.IOStream
     let the user decide whether or not to accept the certificate, you
     would have to return false from the signal handler on the first
     attempt, and then after the connection attempt returns a
-    [gio.types.TlsError.badCertificate], you can interact with the user, and
+    [gio.types.TlsError.BadCertificate], you can interact with the user, and
     if the user decides to accept the certificate, remember that fact,
     create a new connection, and return true from the signal handler
     the next time.
@@ -534,10 +534,10 @@ class TlsConnection : gio.iostream.IOStream
     Connect to AcceptCertificate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAcceptCertificate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

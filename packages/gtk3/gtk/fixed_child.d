@@ -12,7 +12,7 @@ class FixedChild
 {
   GtkFixedChild cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.FixedChild");
@@ -30,7 +30,7 @@ class FixedChild
 
   @property gtk.widget.Widget widget()
   {
-    return ObjectG.getDObject!(gtk.widget.Widget)((cast(GtkFixedChild*)cPtr).widget, No.take);
+    return ObjectG.getDObject!(gtk.widget.Widget)((cast(GtkFixedChild*)cPtr).widget, No.Take);
   }
 
   @property int x()

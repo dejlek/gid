@@ -7,7 +7,7 @@ import atk.image_mixin;
 /// Proxy object for Atk.Image interface when a GObject has no applicable D binding
 class ImageIfaceProxy : IfaceProxy, atk.image.Image
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

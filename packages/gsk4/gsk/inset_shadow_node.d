@@ -14,7 +14,7 @@ import gsk.types;
 class InsetShadowNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.InsetShadowNode");
@@ -37,8 +37,8 @@ class InsetShadowNode : gsk.render_node.RenderNode
   this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null, dx, dy, spread, blurRadius);
-    this(_cretval, Yes.take);
+    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_inset_shadow_node_get_color(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

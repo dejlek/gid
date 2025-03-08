@@ -72,7 +72,7 @@ import soup.types;
 class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -104,7 +104,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
   {
     SoupLogger* _cretval;
     _cretval = soup_logger_new(level);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -139,9 +139,9 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
     extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData)
     {
       auto _dlg = cast(soup.types.LoggerPrinter*)userData;
-      string _data = data.fromCString(No.free);
+      string _data = data.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.take), level, direction, _data);
+      (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
     }
     auto _printerCB = printer ? &_printerCallback : null;
 
@@ -167,7 +167,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -196,7 +196,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.take));
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), ObjectG.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;

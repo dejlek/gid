@@ -20,7 +20,7 @@ class NetControlMessageMeta
 {
   GstNetControlMessageMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstNet.NetControlMessageMeta");
@@ -43,7 +43,7 @@ class NetControlMessageMeta
 
   @property gio.socket_control_message.SocketControlMessage message()
   {
-    return ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)((cast(GstNetControlMessageMeta*)cPtr).message, No.take);
+    return ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)((cast(GstNetControlMessageMeta*)cPtr).message, No.Take);
   }
 
   /** */

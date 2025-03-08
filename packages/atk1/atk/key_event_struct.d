@@ -12,7 +12,7 @@ class KeyEventStruct
 {
   AtkKeyEventStruct cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Atk.KeyEventStruct");
@@ -70,13 +70,13 @@ class KeyEventStruct
 
   @property string string_()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).string_.fromCString(No.free);
+    return (cast(AtkKeyEventStruct*)cPtr).string_.fromCString(No.Free);
   }
 
   @property void string_(string propval)
   {
     safeFree(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
-    (cast(AtkKeyEventStruct*)cPtr).string_ = propval.toCString(Yes.alloc);
+    (cast(AtkKeyEventStruct*)cPtr).string_ = propval.toCString(Yes.Alloc);
   }
 
   @property ushort keycode()

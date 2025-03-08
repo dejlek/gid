@@ -18,12 +18,12 @@ import gstaudio.types;
 class AudioInfo : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -103,7 +103,7 @@ class AudioInfo : gobject.boxed.Boxed
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_info_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -115,8 +115,8 @@ class AudioInfo : gobject.boxed.Boxed
   static gstaudio.audio_info.AudioInfo newFromCaps(gst.caps.Caps caps)
   {
     GstAudioInfo* _cretval;
-    _cretval = gst_audio_info_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_audio_info_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class AudioInfo : gobject.boxed.Boxed
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_info_copy(cast(const(GstAudioInfo)*)cPtr);
-    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class AudioInfo : gobject.boxed.Boxed
   bool isEqual(gstaudio.audio_info.AudioInfo other)
   {
     bool _retval;
-    _retval = gst_audio_info_is_equal(cast(const(GstAudioInfo)*)cPtr, other ? cast(const(GstAudioInfo)*)other.cPtr(No.dup) : null);
+    _retval = gst_audio_info_is_equal(cast(const(GstAudioInfo)*)cPtr, other ? cast(const(GstAudioInfo)*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class AudioInfo : gobject.boxed.Boxed
   {
     GstCaps* _cretval;
     _cretval = gst_audio_info_to_caps(cast(const(GstAudioInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -205,8 +205,8 @@ class AudioInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GstAudioInfo _info;
-    _retval = gst_audio_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
-    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.take);
+    _retval = gst_audio_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 
@@ -219,6 +219,6 @@ class AudioInfo : gobject.boxed.Boxed
   {
     GstAudioInfo _info;
     gst_audio_info_init(&_info);
-    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.take);
+    info = new gstaudio.audio_info.AudioInfo(cast(void*)&_info, No.Take);
   }
 }

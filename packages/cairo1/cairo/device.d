@@ -19,12 +19,12 @@ import gobject.boxed;
 class Device : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -44,7 +44,7 @@ class Device : gobject.boxed.Boxed
       Acquires the device for the current thread. This function will block
     until no other thread has acquired the device.
     
-    If the return value is [cairo.types.Status.success], you successfully acquired the
+    If the return value is [cairo.types.Status.Success], you successfully acquired the
     device. From now on your thread owns the device and no other thread will be
     able to acquire it until a matching call to [cairo.device.Device.release]. It is
     allowed to recursively acquire the device multiple times from the same
@@ -59,7 +59,7 @@ class Device : gobject.boxed.Boxed
     must not have a device acquired when calling them. These functions are
     marked in the documentation.
     </para></note>
-    Returns:     [cairo.types.Status.success] on success or an error code if
+    Returns:     [cairo.types.Status.Success] on success or an error code if
                     the device is in an error state and could not be
                     acquired. After a successful call to [cairo.device.Device.acquire],
                     a matching call to [cairo.device.Device.release] is required.
@@ -77,7 +77,7 @@ class Device : gobject.boxed.Boxed
     external resources. All surfaces, fonts and other objects created
     for this device will be finished, too.
     Further operations on the device will not affect the device but
-    will instead trigger a [cairo.types.Status.deviceFinished] error.
+    will instead trigger a [cairo.types.Status.DeviceFinished] error.
     
     When the last call to [cairo.device.Device.destroy] decreases the
     reference count to zero, cairo will call [cairo.device.Device.finish] if
@@ -242,7 +242,7 @@ class Device : gobject.boxed.Boxed
   /**
       Checks whether an error has previously occurred for this
     device.
-    Returns:     [cairo.types.Status.success] on success or an error code if
+    Returns:     [cairo.types.Status.Success] on success or an error code if
                     the device is in an error state.
   */
   cairo.types.Status status()

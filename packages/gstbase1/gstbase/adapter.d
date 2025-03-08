@@ -65,7 +65,7 @@ import gstbase.types;
   An element using #GstAdapter in its sink pad chain function should ensure that
   when the FLUSH_STOP event is received, that any queued data is cleared using
   [gstbase.adapter.Adapter.clear]. Data should also be cleared or processed on EOS and
-  when changing state from [gst.types.State.paused] to [gst.types.State.ready].
+  when changing state from [gst.types.State.Paused] to [gst.types.State.Ready].
   
   Also check the GST_BUFFER_FLAG_DISCONT flag on the buffer. Some elements might
   need to clear the adapter after a discontinuity.
@@ -114,7 +114,7 @@ import gstbase.types;
 class Adapter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -138,7 +138,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstAdapter* _cretval;
     _cretval = gst_adapter_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -190,16 +190,16 @@ class Adapter : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = gst_adapter_copy_bytes(cast(GstAdapter*)cPtr, offset, size);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
   /**
       Get the distance in bytes since the last buffer with the
-    [gst.types.BufferFlags.discont] flag.
+    [gst.types.BufferFlags.Discont] flag.
     
     The distance will be reset to 0 for all buffers with
-    [gst.types.BufferFlags.discont] on them, and then calculated for all other
+    [gst.types.BufferFlags.Discont] on them, and then calculated for all other
     following buffers based on their size.
     Returns:     The offset. Can be `GST_BUFFER_OFFSET_NONE`.
   */
@@ -254,7 +254,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_get_buffer(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_get_buffer_fast(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBufferList* _cretval;
     _cretval = gst_adapter_get_buffer_list(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -532,7 +532,7 @@ class Adapter : gobject.object.ObjectG
   */
   void push(gst.buffer.Buffer buf)
   {
-    gst_adapter_push(cast(GstAdapter*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(Yes.dup) : null);
+    gst_adapter_push(cast(GstAdapter*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -549,7 +549,7 @@ class Adapter : gobject.object.ObjectG
     unset.
     
     Since 1.6 this will also copy over all GstMeta of the input buffers except
-    for meta with the [gst.types.MetaFlags.pooled] flag or with the "memory" tag.
+    for meta with the [gst.types.MetaFlags.Pooled] flag or with the "memory" tag.
     
     Caller owns a reference to the returned buffer. gst_buffer_unref() after
     usage.
@@ -565,7 +565,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_take_buffer(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -584,7 +584,7 @@ class Adapter : gobject.object.ObjectG
     unset.
     
     This will also copy over all GstMeta of the input buffers except
-    for meta with the [gst.types.MetaFlags.pooled] flag or with the "memory" tag.
+    for meta with the [gst.types.MetaFlags.Pooled] flag or with the "memory" tag.
     
     This function can return buffer up to the return value of
     [gstbase.adapter.Adapter.available] without making copies if possible.
@@ -603,7 +603,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBuffer* _cretval;
     _cretval = gst_adapter_take_buffer_fast(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Adapter : gobject.object.ObjectG
   {
     GstBufferList* _cretval;
     _cretval = gst_adapter_take_buffer_list(cast(GstAdapter*)cPtr, nbytes);
-    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

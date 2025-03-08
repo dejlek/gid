@@ -17,7 +17,7 @@ class GLSyncMeta
 {
   GstGLSyncMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstGL.GLSyncMeta");
@@ -40,7 +40,7 @@ class GLSyncMeta
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLSyncMeta*)cPtr).context, No.take);
+    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLSyncMeta*)cPtr).context, No.Take);
   }
 
   alias SetSyncFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);
@@ -113,7 +113,7 @@ class GLSyncMeta
   */
   void setSyncPoint(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_set_sync_point(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    gst_gl_sync_meta_set_sync_point(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,7 +124,7 @@ class GLSyncMeta
   */
   void wait(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_wait(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    gst_gl_sync_meta_wait(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class GLSyncMeta
   */
   void waitCpu(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_wait_cpu(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    gst_gl_sync_meta_wait_cpu(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /** */

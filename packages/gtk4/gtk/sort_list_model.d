@@ -42,7 +42,7 @@ import gtk.types;
 class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,8 +71,8 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   this(gio.list_model.ListModel model = null, gtk.sorter.Sorter sorter = null)
   {
     GtkSortListModel* _cretval;
-    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -96,7 +96,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GListModel* _cretval;
     _cretval = gtk_sort_list_model_get_model(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_section_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   {
     GtkSorter* _cretval;
     _cretval = gtk_sort_list_model_get_sorter(cast(GtkSortListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_sort_list_model_set_model(cast(GtkSortListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -196,7 +196,7 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   */
   void setSectionSorter(gtk.sorter.Sorter sorter = null)
   {
-    gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.dup) : null);
+    gtk_sort_list_model_set_section_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -206,6 +206,6 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
   */
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
-    gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.dup) : null);
+    gtk_sort_list_model_set_sorter(cast(GtkSortListModel*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
 }

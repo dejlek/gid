@@ -45,12 +45,12 @@ import gobject.boxed;
 class PopupLayout : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -88,8 +88,8 @@ class PopupLayout : gobject.boxed.Boxed
   this(gdk.rectangle.Rectangle anchorRect, gdk.types.Gravity rectAnchor, gdk.types.Gravity surfaceAnchor)
   {
     GdkPopupLayout* _cretval;
-    _cretval = gdk_popup_layout_new(anchorRect ? cast(const(GdkRectangle)*)anchorRect.cPtr(No.dup) : null, rectAnchor, surfaceAnchor);
-    this(_cretval, Yes.take);
+    _cretval = gdk_popup_layout_new(anchorRect ? cast(const(GdkRectangle)*)anchorRect.cPtr(No.Dup) : null, rectAnchor, surfaceAnchor);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -100,7 +100,7 @@ class PopupLayout : gobject.boxed.Boxed
   {
     GdkPopupLayout* _cretval;
     _cretval = gdk_popup_layout_copy(cast(GdkPopupLayout*)cPtr);
-    auto _retval = _cretval ? new gdk.popup_layout.PopupLayout(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.popup_layout.PopupLayout(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class PopupLayout : gobject.boxed.Boxed
   bool equal(gdk.popup_layout.PopupLayout other)
   {
     bool _retval;
-    _retval = gdk_popup_layout_equal(cast(GdkPopupLayout*)cPtr, other ? cast(GdkPopupLayout*)other.cPtr(No.dup) : null);
+    _retval = gdk_popup_layout_equal(cast(GdkPopupLayout*)cPtr, other ? cast(GdkPopupLayout*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class PopupLayout : gobject.boxed.Boxed
   {
     const(GdkRectangle)* _cretval;
     _cretval = gdk_popup_layout_get_anchor_rect(cast(GdkPopupLayout*)cPtr);
-    auto _retval = _cretval ? new gdk.rectangle.Rectangle(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.rectangle.Rectangle(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -195,8 +195,8 @@ class PopupLayout : gobject.boxed.Boxed
     
     The set anchor_hints determines how surface will be moved
     if the anchor points cause it to move off-screen. For example,
-    [gdk.types.AnchorHints.flipX] will replace [gdk.types.Gravity.northWest] with
-    [gdk.types.Gravity.northEast] and vice versa if surface extends
+    [gdk.types.AnchorHints.FlipX] will replace [gdk.types.Gravity.NorthWest] with
+    [gdk.types.Gravity.NorthEast] and vice versa if surface extends
     beyond the left or right edges of the monitor.
     Params:
       anchorHints =       the new [gdk.types.AnchorHints]
@@ -213,7 +213,7 @@ class PopupLayout : gobject.boxed.Boxed
   */
   void setAnchorRect(gdk.rectangle.Rectangle anchorRect)
   {
-    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)cPtr, anchorRect ? cast(const(GdkRectangle)*)anchorRect.cPtr(No.dup) : null);
+    gdk_popup_layout_set_anchor_rect(cast(GdkPopupLayout*)cPtr, anchorRect ? cast(const(GdkRectangle)*)anchorRect.cPtr(No.Dup) : null);
   }
 
   /**

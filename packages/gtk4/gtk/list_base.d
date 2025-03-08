@@ -22,7 +22,7 @@ import gtk.widget;
 class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

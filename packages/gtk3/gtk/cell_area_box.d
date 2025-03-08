@@ -21,9 +21,9 @@ import gtk.types;
   refers to adding cell renderers with reference to a particular position
   in a #GtkCellAreaBox. There are two reference positions: the
   start and the end of the box.
-  When the #GtkCellAreaBox is oriented in the [gtk.types.Orientation.vertical]
+  When the #GtkCellAreaBox is oriented in the [gtk.types.Orientation.Vertical]
   orientation, the start is defined as the top of the box and the end is
-  defined as the bottom. In the [gtk.types.Orientation.horizontal] orientation
+  defined as the bottom. In the [gtk.types.Orientation.Horizontal] orientation
   start is defined as the left side and the end is defined as the right
   side.
   
@@ -35,7 +35,7 @@ import gtk.types;
 class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,7 +61,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_box_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   void packEnd(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.dup) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**
@@ -106,7 +106,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   void packStart(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.dup) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**

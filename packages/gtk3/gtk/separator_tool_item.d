@@ -30,7 +30,7 @@ import gtk.types;
 class SeparatorToolItem : gtk.tool_item.ToolItem
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   {
     GtkToolItem* _cretval;
     _cretval = gtk_separator_tool_item_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**

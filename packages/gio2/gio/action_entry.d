@@ -21,7 +21,7 @@ class ActionEntry
 {
   GActionEntry cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gio.ActionEntry");
@@ -39,13 +39,13 @@ class ActionEntry
 
   @property string name()
   {
-    return (cast(GActionEntry*)cPtr).name.fromCString(No.free);
+    return (cast(GActionEntry*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GActionEntry*)cPtr).name);
-    (cast(GActionEntry*)cPtr).name = propval.toCString(Yes.alloc);
+    (cast(GActionEntry*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   alias ActivateFuncType = extern(C) void function(GSimpleAction* action, VariantC* parameter, void* userData);
@@ -57,24 +57,24 @@ class ActionEntry
 
   @property string parameterType()
   {
-    return (cast(GActionEntry*)cPtr).parameterType.fromCString(No.free);
+    return (cast(GActionEntry*)cPtr).parameterType.fromCString(No.Free);
   }
 
   @property void parameterType(string propval)
   {
     safeFree(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
-    (cast(GActionEntry*)cPtr).parameterType = propval.toCString(Yes.alloc);
+    (cast(GActionEntry*)cPtr).parameterType = propval.toCString(Yes.Alloc);
   }
 
   @property string state()
   {
-    return (cast(GActionEntry*)cPtr).state.fromCString(No.free);
+    return (cast(GActionEntry*)cPtr).state.fromCString(No.Free);
   }
 
   @property void state(string propval)
   {
     safeFree(cast(void*)(cast(GActionEntry*)cPtr).state);
-    (cast(GActionEntry*)cPtr).state = propval.toCString(Yes.alloc);
+    (cast(GActionEntry*)cPtr).state = propval.toCString(Yes.Alloc);
   }
 
   alias ChangeStateFuncType = extern(C) void function(GSimpleAction* action, VariantC* value, void* userData);

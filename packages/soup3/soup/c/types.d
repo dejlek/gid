@@ -12,12 +12,12 @@ enum SoupCacheType
   /**
       a single-user cache
   */
-  singleUser = 0,
+  SingleUser = 0,
 
   /**
       a shared cache
   */
-  shared_ = 1,
+  Shared = 1,
 }
 
 /**
@@ -28,22 +28,22 @@ enum SoupCacheability : uint
   /**
       The message should be cached
   */
-  cacheable = 1,
+  Cacheable = 1,
 
   /**
       The message shouldn't be cached
   */
-  uncacheable = 2,
+  Uncacheable = 2,
 
   /**
       The messages cache should be invalidated
   */
-  invalidates = 4,
+  Invalidates = 4,
 
   /**
       The messages cache should be updated
   */
-  validates = 8,
+  Validates = 8,
 }
 
 /**
@@ -55,12 +55,12 @@ enum SoupCookieJarAcceptPolicy
   /**
       accept all cookies unconditionally.
   */
-  always = 0,
+  Always = 0,
 
   /**
       reject all cookies unconditionally.
   */
-  never = 1,
+  Never = 1,
 
   /**
       accept all cookies set by the main
@@ -75,7 +75,7 @@ enum SoupCookieJarAcceptPolicy
       message when this policy is in effect, cookies will be assumed to be third
       party by default.
   */
-  noThirdParty = 2,
+  NoThirdParty = 2,
 
   /**
       accept all cookies set by
@@ -92,7 +92,7 @@ enum SoupCookieJarAcceptPolicy
       message when this policy is in effect, cookies will be assumed to be third
       party by default.
   */
-  grandfatheredThirdParty = 3,
+  GrandfatheredThirdParty = 3,
 }
 
 /**
@@ -109,13 +109,13 @@ enum SoupDateFormat
       RFC 1123 format, used by the HTTP "Date" header. Eg
       "Sun, 06 Nov 1994 08:49:37 GMT".
   */
-  http = 1,
+  Http = 1,
 
   /**
       The format for the "Expires" timestamp in the
       Netscape cookie specification. Eg, "Sun, 06-Nov-1994 08:49:37 GMT".
   */
-  cookie = 2,
+  Cookie = 2,
 }
 
 /**
@@ -126,35 +126,35 @@ enum SoupEncoding
   /**
       unknown / error
   */
-  unrecognized = 0,
+  Unrecognized = 0,
 
   /**
       no body is present (which is not the same as a
       0-length body, and only occurs in certain places)
   */
-  none = 1,
+  None = 1,
 
   /**
       Content-Length encoding
   */
-  contentLength = 2,
+  ContentLength = 2,
 
   /**
       Response body ends when the connection is closed
   */
-  eof = 3,
+  Eof = 3,
 
   /**
       chunked encoding (currently only supported
       for response)
   */
-  chunked = 4,
+  Chunked = 4,
 
   /**
       multipart/byteranges (Reserved for future
       use: NOT CURRENTLY IMPLEMENTED)
   */
-  byteranges = 5,
+  Byteranges = 5,
 }
 
 /**
@@ -165,12 +165,12 @@ enum SoupExpectation : uint
   /**
       any unrecognized expectation
   */
-  unrecognized = 1,
+  Unrecognized = 1,
 
   /**
       "100-continue"
   */
-  continue_ = 2,
+  Continue = 2,
 }
 
 /**
@@ -181,17 +181,17 @@ enum SoupHTTPVersion
   /**
       HTTP 1.0 (RFC 1945)
   */
-  http10 = 0,
+  Http10 = 0,
 
   /**
       HTTP 1.1 (RFC 2616)
   */
-  http11 = 1,
+  Http11 = 1,
 
   /**
       HTTP 2.0 (RFC 7540)
   */
-  http20 = 2,
+  Http20 = 2,
 }
 
 /**
@@ -202,23 +202,23 @@ enum SoupLoggerLogLevel
   /**
       No logging
   */
-  none = 0,
+  None = 0,
 
   /**
       Log the Request-Line or Status-Line and
       the Soup-Debug pseudo-headers
   */
-  minimal = 1,
+  Minimal = 1,
 
   /**
       Log the full request/response headers
   */
-  headers = 2,
+  Headers = 2,
 
   /**
       Log the full headers and request/response bodies
   */
-  body_ = 3,
+  Body = 3,
 }
 
 /**
@@ -231,20 +231,20 @@ enum SoupMemoryUse
       constant; libsoup can use the passed-in buffer directly and not
       need to worry about it being modified or freed.
   */
-  static_ = 0,
+  Static = 0,
 
   /**
       The caller has allocated the memory and libsoup
       will assume ownership of it and free it with `func@GLib.free`.
   */
-  take = 1,
+  Take = 1,
 
   /**
       The passed-in data belongs to the caller and
       libsoup will copy it into new memory leaving the caller free
       to reuse the original memory.
   */
-  copy = 2,
+  Copy = 2,
 }
 
 /**
@@ -257,7 +257,7 @@ enum SoupMessageFlags : uint
       The session should not follow redirect
       (3xx) responses received by this message.
   */
-  noRedirect = 2,
+  NoRedirect = 2,
 
   /**
       Requests that the message should be
@@ -266,7 +266,7 @@ enum SoupMessageFlags : uint
       `property@Message:method`s behave this way by default, unless
       #SOUP_MESSAGE_IDEMPOTENT is set.
   */
-  newConnection = 4,
+  NewConnection = 4,
 
   /**
       The message is considered idempotent,
@@ -274,7 +274,7 @@ enum SoupMessageFlags : uint
       idle connections, instead of always requiring a new one, unless
       #SOUP_MESSAGE_NEW_CONNECTION is set.
   */
-  idempotent = 8,
+  Idempotent = 8,
 
   /**
       The `class@AuthManager` should not use
@@ -285,12 +285,12 @@ enum SoupMessageFlags : uint
       be emitted, if you want to disable authentication for a message use
       [soup.message.Message.disableFeature] passing #SOUP_TYPE_AUTH_MANAGER instead.
   */
-  doNotUseAuthCache = 16,
+  DoNotUseAuthCache = 16,
 
   /**
       Metrics will be collected for this message.
   */
-  collectMetrics = 32,
+  CollectMetrics = 32,
 }
 
 /**
@@ -302,17 +302,17 @@ enum SoupMessageHeadersType
   /**
       request headers
   */
-  request = 0,
+  Request = 0,
 
   /**
       response headers
   */
-  response = 1,
+  Response = 1,
 
   /**
       multipart body part headers
   */
-  multipart = 2,
+  Multipart = 2,
 }
 
 /**
@@ -325,33 +325,33 @@ enum SoupMessagePriority
       The lowest priority, the messages
       with this priority will be the last ones to be attended.
   */
-  veryLow = 0,
+  VeryLow = 0,
 
   /**
       Use this for low priority messages, a
       #SoupMessage with the default priority will be processed first.
   */
-  low = 1,
+  Low = 1,
 
   /**
       The default priotity, this is the
       priority assigned to the #SoupMessage by default.
   */
-  normal = 2,
+  Normal = 2,
 
   /**
       High priority, a #SoupMessage with
       this priority will be processed before the ones with the default
       priority.
   */
-  high = 3,
+  High = 3,
 
   /**
       The highest priority, use this
       for very urgent #SoupMessage as they will be the first ones to be
       attended.
   */
-  veryHigh = 4,
+  VeryHigh = 4,
 }
 
 /**
@@ -362,23 +362,23 @@ enum SoupSameSitePolicy
   /**
       The cookie is exposed with both cross-site and same-site requests
   */
-  none = 0,
+  None = 0,
 
   /**
       The cookie is withheld on cross-site requests but exposed on cross-site navigations
   */
-  lax = 1,
+  Lax = 1,
 
   /**
       The cookie is only exposed for same-site requests
   */
-  strict = 2,
+  Strict = 2,
 }
 
 /**
     Options to pass to [soup.server.Server.listen], etc.
   
-  [soup.types.ServerListenOptions.ipv4Only] and [soup.types.ServerListenOptions.ipv6Only]
+  [soup.types.ServerListenOptions.Ipv4Only] and [soup.types.ServerListenOptions.Ipv6Only]
   only make sense with [soup.server.Server.listenAll] and
   [soup.server.Server.listenLocal], not plain [soup.server.Server.listen] (which
   simply listens on whatever kind of socket you give it). And you
@@ -390,17 +390,17 @@ enum SoupServerListenOptions : uint
       Listen for https connections rather
       than plain http.
   */
-  https = 1,
+  Https = 1,
 
   /**
       Only listen on IPv4 interfaces.
   */
-  ipv4Only = 2,
+  Ipv4Only = 2,
 
   /**
       Only listen on IPv6 interfaces.
   */
-  ipv6Only = 4,
+  Ipv6Only = 4,
 }
 
 /**
@@ -412,43 +412,43 @@ enum SoupSessionError
       the server's response could not
       be parsed
   */
-  parsing = 0,
+  Parsing = 0,
 
   /**
       the server's response was in an
       unsupported format
   */
-  encoding = 1,
+  Encoding = 1,
 
   /**
       the message has been redirected
       too many times
   */
-  tooManyRedirects = 2,
+  TooManyRedirects = 2,
 
   /**
       the message has been restarted
       too many times
   */
-  tooManyRestarts = 3,
+  TooManyRestarts = 3,
 
   /**
       failed to redirect message because
       Location header was missing or empty in response
   */
-  redirectNoLocation = 4,
+  RedirectNoLocation = 4,
 
   /**
       failed to redirect message because
       Location header contains an invalid URI
   */
-  redirectBadUri = 5,
+  RedirectBadUri = 5,
 
   /**
       the message is already in the
       session queue. Messages can only be reused after unqueued.
   */
-  messageAlreadyInQueue = 6,
+  MessageAlreadyInQueue = 6,
 }
 
 /**
@@ -465,285 +465,285 @@ enum SoupStatus
       No status available. (Eg, the message has not
     been sent yet)
   */
-  none = 0,
+  None = 0,
 
   /**
       100 Continue (HTTP)
   */
-  continue_ = 100,
+  Continue = 100,
 
   /**
       101 Switching Protocols (HTTP)
   */
-  switchingProtocols = 101,
+  SwitchingProtocols = 101,
 
   /**
       102 Processing (WebDAV)
   */
-  processing = 102,
+  Processing = 102,
 
   /**
       200 Success (HTTP). Also used by many lower-level
     soup routines to indicate success.
   */
-  ok = 200,
+  Ok = 200,
 
   /**
       201 Created (HTTP)
   */
-  created = 201,
+  Created = 201,
 
   /**
       202 Accepted (HTTP)
   */
-  accepted = 202,
+  Accepted = 202,
 
   /**
       203 Non-Authoritative Information
     (HTTP)
   */
-  nonAuthoritative = 203,
+  NonAuthoritative = 203,
 
   /**
       204 No Content (HTTP)
   */
-  noContent = 204,
+  NoContent = 204,
 
   /**
       205 Reset Content (HTTP)
   */
-  resetContent = 205,
+  ResetContent = 205,
 
   /**
       206 Partial Content (HTTP)
   */
-  partialContent = 206,
+  PartialContent = 206,
 
   /**
       207 Multi-Status (WebDAV)
   */
-  multiStatus = 207,
+  MultiStatus = 207,
 
   /**
       300 Multiple Choices (HTTP)
   */
-  multipleChoices = 300,
+  MultipleChoices = 300,
 
   /**
       301 Moved Permanently (HTTP)
   */
-  movedPermanently = 301,
+  MovedPermanently = 301,
 
   /**
       302 Found (HTTP)
   */
-  found = 302,
+  Found = 302,
 
   /**
       302 Moved Temporarily (old name,
     RFC 2068)
   */
-  movedTemporarily = 302,
+  MovedTemporarily = 302,
 
   /**
       303 See Other (HTTP)
   */
-  seeOther = 303,
+  SeeOther = 303,
 
   /**
       304 Not Modified (HTTP)
   */
-  notModified = 304,
+  NotModified = 304,
 
   /**
       305 Use Proxy (HTTP)
   */
-  useProxy = 305,
+  UseProxy = 305,
 
   /**
       306 [Unused] (HTTP)
   */
-  notAppearingInThisProtocol = 306,
+  NotAppearingInThisProtocol = 306,
 
   /**
       307 Temporary Redirect (HTTP)
   */
-  temporaryRedirect = 307,
+  TemporaryRedirect = 307,
 
   /**
       308 Permanent Redirect (HTTP)
   */
-  permanentRedirect = 308,
+  PermanentRedirect = 308,
 
   /**
       400 Bad Request (HTTP)
   */
-  badRequest = 400,
+  BadRequest = 400,
 
   /**
       401 Unauthorized (HTTP)
   */
-  unauthorized = 401,
+  Unauthorized = 401,
 
   /**
       402 Payment Required (HTTP)
   */
-  paymentRequired = 402,
+  PaymentRequired = 402,
 
   /**
       403 Forbidden (HTTP)
   */
-  forbidden = 403,
+  Forbidden = 403,
 
   /**
       404 Not Found (HTTP)
   */
-  notFound = 404,
+  NotFound = 404,
 
   /**
       405 Method Not Allowed (HTTP)
   */
-  methodNotAllowed = 405,
+  MethodNotAllowed = 405,
 
   /**
       406 Not Acceptable (HTTP)
   */
-  notAcceptable = 406,
+  NotAcceptable = 406,
 
   /**
       407 Proxy Authentication
     Required (HTTP)
   */
-  proxyAuthenticationRequired = 407,
+  ProxyAuthenticationRequired = 407,
 
   /**
       shorter alias for
-    [soup.types.Status.proxyAuthenticationRequired]
+    [soup.types.Status.ProxyAuthenticationRequired]
   */
-  proxyUnauthorized = 407,
+  ProxyUnauthorized = 407,
 
   /**
       408 Request Timeout (HTTP)
   */
-  requestTimeout = 408,
+  RequestTimeout = 408,
 
   /**
       409 Conflict (HTTP)
   */
-  conflict = 409,
+  Conflict = 409,
 
   /**
       410 Gone (HTTP)
   */
-  gone = 410,
+  Gone = 410,
 
   /**
       411 Length Required (HTTP)
   */
-  lengthRequired = 411,
+  LengthRequired = 411,
 
   /**
       412 Precondition Failed (HTTP)
   */
-  preconditionFailed = 412,
+  PreconditionFailed = 412,
 
   /**
       413 Request Entity Too Large
     (HTTP)
   */
-  requestEntityTooLarge = 413,
+  RequestEntityTooLarge = 413,
 
   /**
       414 Request-URI Too Long (HTTP)
   */
-  requestUriTooLong = 414,
+  RequestUriTooLong = 414,
 
   /**
       415 Unsupported Media Type
     (HTTP)
   */
-  unsupportedMediaType = 415,
+  UnsupportedMediaType = 415,
 
   /**
       416 Requested Range
     Not Satisfiable (HTTP)
   */
-  requestedRangeNotSatisfiable = 416,
+  RequestedRangeNotSatisfiable = 416,
 
   /**
       shorter alias for
-    [soup.types.Status.requestedRangeNotSatisfiable]
+    [soup.types.Status.RequestedRangeNotSatisfiable]
   */
-  invalidRange = 416,
+  InvalidRange = 416,
 
   /**
       417 Expectation Failed (HTTP)
   */
-  expectationFailed = 417,
+  ExpectationFailed = 417,
 
   /**
       421 Misdirected Request
   */
-  misdirectedRequest = 421,
+  MisdirectedRequest = 421,
 
   /**
       422 Unprocessable Entity
     (WebDAV)
   */
-  unprocessableEntity = 422,
+  UnprocessableEntity = 422,
 
   /**
       423 Locked (WebDAV)
   */
-  locked = 423,
+  Locked = 423,
 
   /**
       424 Failed Dependency (WebDAV)
   */
-  failedDependency = 424,
+  FailedDependency = 424,
 
   /**
       500 Internal Server Error
     (HTTP)
   */
-  internalServerError = 500,
+  InternalServerError = 500,
 
   /**
       501 Not Implemented (HTTP)
   */
-  notImplemented = 501,
+  NotImplemented = 501,
 
   /**
       502 Bad Gateway (HTTP)
   */
-  badGateway = 502,
+  BadGateway = 502,
 
   /**
       503 Service Unavailable (HTTP)
   */
-  serviceUnavailable = 503,
+  ServiceUnavailable = 503,
 
   /**
       504 Gateway Timeout (HTTP)
   */
-  gatewayTimeout = 504,
+  GatewayTimeout = 504,
 
   /**
       505 HTTP Version Not
     Supported (HTTP)
   */
-  httpVersionNotSupported = 505,
+  HttpVersionNotSupported = 505,
 
   /**
       507 Insufficient Storage
     (WebDAV)
   */
-  insufficientStorage = 507,
+  InsufficientStorage = 507,
 
   /**
       510 Not Extended (RFC 2774)
   */
-  notExtended = 510,
+  NotExtended = 510,
 }
 
 /**
@@ -755,33 +755,33 @@ enum SoupTLDError
       A hostname was syntactically
       invalid.
   */
-  invalidHostname = 0,
+  InvalidHostname = 0,
 
   /**
       The passed-in "hostname" was
       actually an IP address (and thus has no base domain or
       public suffix).
   */
-  isIpAddress = 1,
+  IsIpAddress = 1,
 
   /**
       The passed-in hostname
       did not have enough components. Eg, calling
       `func@tld_get_base_domain` on <literal>"co.uk"</literal>.
   */
-  notEnoughDomains = 2,
+  NotEnoughDomains = 2,
 
   /**
       The passed-in hostname has
       no recognized public suffix.
   */
-  noBaseDomain = 3,
+  NoBaseDomain = 3,
 
   /**
       The Public Suffix List was not
       available.
   */
-  noPslData = 4,
+  NoPslData = 4,
 }
 
 /**
@@ -793,52 +793,52 @@ enum SoupURIComponent
   /**
       no component
   */
-  none = 0,
+  None = 0,
 
   /**
       the URI scheme component
   */
-  scheme = 1,
+  Scheme = 1,
 
   /**
       the URI user component
   */
-  user = 2,
+  User = 2,
 
   /**
       the URI password component
   */
-  password = 3,
+  Password = 3,
 
   /**
       the URI authentication parameters component
   */
-  authParams = 4,
+  AuthParams = 4,
 
   /**
       the URI host component
   */
-  host = 5,
+  Host = 5,
 
   /**
       the URI port component
   */
-  port = 6,
+  Port = 6,
 
   /**
       the URI path component
   */
-  path = 7,
+  Path = 7,
 
   /**
       the URI query component
   */
-  query = 8,
+  Query = 8,
 
   /**
       the URI fragment component
   */
-  fragment = 9,
+  Fragment = 9,
 }
 
 /**
@@ -853,72 +853,72 @@ enum SoupWebsocketCloseCode
   /**
       a normal, non-error close
   */
-  normal = 1000,
+  Normal = 1000,
 
   /**
       the client/server is going away
   */
-  goingAway = 1001,
+  GoingAway = 1001,
 
   /**
       a protocol error occurred
   */
-  protocolError = 1002,
+  ProtocolError = 1002,
 
   /**
       the endpoint received data
       of a type that it does not support.
   */
-  unsupportedData = 1003,
+  UnsupportedData = 1003,
 
   /**
       reserved value indicating that
       no close code was present; must not be sent.
   */
-  noStatus = 1005,
+  NoStatus = 1005,
 
   /**
       reserved value indicating that
       the connection was closed abnormally; must not be sent.
   */
-  abnormal = 1006,
+  Abnormal = 1006,
 
   /**
       the endpoint received data that
       was invalid (eg, non-UTF-8 data in a text message).
   */
-  badData = 1007,
+  BadData = 1007,
 
   /**
       generic error code
       indicating some sort of policy violation.
   */
-  policyViolation = 1008,
+  PolicyViolation = 1008,
 
   /**
       the endpoint received a message
       that is too big to process.
   */
-  tooBig = 1009,
+  TooBig = 1009,
 
   /**
       the client is closing the
       connection because the server failed to negotiate a required
       extension.
   */
-  noExtension = 1010,
+  NoExtension = 1010,
 
   /**
       the server is closing the
       connection because it was unable to fulfill the request.
   */
-  serverError = 1011,
+  ServerError = 1011,
 
   /**
       reserved value indicating that
       the TLS handshake failed; must not be sent.
   */
-  tlsHandshake = 1015,
+  TlsHandshake = 1015,
 }
 
 /**
@@ -929,17 +929,17 @@ enum SoupWebsocketConnectionType
   /**
       unknown/invalid connection
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       a client-side connection
   */
-  client = 1,
+  Client = 1,
 
   /**
       a server-side connection
   */
-  server = 2,
+  Server = 2,
 }
 
 /**
@@ -950,12 +950,12 @@ enum SoupWebsocketDataType
   /**
       UTF-8 text
   */
-  text = 1,
+  Text = 1,
 
   /**
       binary data
   */
-  binary = 2,
+  Binary = 2,
 }
 
 /**
@@ -966,25 +966,25 @@ enum SoupWebsocketError
   /**
       a generic error
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       attempted to handshake with a
       server that does not appear to understand WebSockets.
   */
-  notWebsocket = 1,
+  NotWebsocket = 1,
 
   /**
       the WebSocket handshake failed
       because some detail was invalid (eg, incorrect accept key).
   */
-  badHandshake = 2,
+  BadHandshake = 2,
 
   /**
       the WebSocket handshake failed
       because the "Origin" header was not an allowed value.
   */
-  badOrigin = 3,
+  BadOrigin = 3,
 }
 
 /**
@@ -995,18 +995,18 @@ enum SoupWebsocketState
   /**
       the connection is ready to send messages
   */
-  open = 1,
+  Open = 1,
 
   /**
       the connection is in the process of
       closing down; messages may be received, but not sent
   */
-  closing = 2,
+  Closing = 2,
 
   /**
       the connection is completely closed down
   */
-  closed = 3,
+  Closed = 3,
 }
 
 /**
@@ -1558,7 +1558,7 @@ struct SoupLoggerClass
   [soup.message.Message.newFromUri], set up its fields appropriately, and send it.
   
   `property@Message:status-code` will normally be a `enum@Status` value, eg,
-  [soup.types.Status.ok], though of course it might actually be an unknown status
+  [soup.types.Status.Ok], though of course it might actually be an unknown status
   code. `property@Message:reason-phrase` is the actual text returned from the
   server, which may or may not correspond to the "standard" description of
   @status_code. At any rate, it is almost certainly not localized, and not very
@@ -1634,7 +1634,7 @@ struct SoupMessageHeadersIter
   network or the disk cache.
   
   Metrics are not collected by default for a `class@Message`, you need to add the
-  flag [soup.types.MessageFlags.collectMetrics] to enable the feature.
+  flag [soup.types.MessageFlags.CollectMetrics] to enable the feature.
   
   Temporal metrics are expressed as a monotonic time and always start with a
   fetch start event and finish with response end. All other events are optional.
@@ -1737,7 +1737,7 @@ struct SoupRange
   Once the headers have been read, #SoupServer will check if there is
   a `class@AuthDomain` `(qv)` covering the Request-URI; if so, and if the
   message does not contain suitable authorization, then the
-  `class@AuthDomain` will set a status of [soup.types.Status.unauthorized] on
+  `class@AuthDomain` will set a status of [soup.types.Status.Unauthorized] on
   the message.
   
   After checking for authorization, #SoupServer will look for "early"
@@ -1751,12 +1751,12 @@ struct SoupRange
   #SoupServer will skip the remaining steps and return the response.
   If the request headers contain `Expect:
   100-continue` and no status code has been set,
-  #SoupServer will return a [soup.types.Status.continue_] status before
+  #SoupServer will return a [soup.types.Status.Continue] status before
   continuing.)
   
   The server will then read in the response body (if present). At
   this point, if there are no handlers at all defined for the
-  Request-URI, then the server will return [soup.types.Status.notFound] to
+  Request-URI, then the server will return [soup.types.Status.NotFound] to
   the client.
   
   Otherwise (assuming no previous step assigned a status to the
@@ -1767,12 +1767,12 @@ struct SoupRange
   Then, if the path has a WebSocket handler registered (and has
   not yet been assigned a status), #SoupServer will attempt to
   validate the WebSocket handshake, filling in the response and
-  setting a status of [soup.types.Status.switchingProtocols] or
-  [soup.types.Status.badRequest] accordingly.
+  setting a status of [soup.types.Status.SwitchingProtocols] or
+  [soup.types.Status.BadRequest] accordingly.
   
   If the message still has no status code at this point (and has not
   been paused with [soup.server_message.ServerMessage.pause]), then it will be
-  given a status of [soup.types.Status.internalServerError] (because at
+  given a status of [soup.types.Status.InternalServerError] (because at
   least one handler ran, but returned without assigning a status).
   
   Finally, the server will emit `signal@Server::request-finished` (or

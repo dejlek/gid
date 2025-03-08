@@ -29,7 +29,7 @@ import gtk.window;
 class PrintDialog : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPrintDialog* _cretval;
     _cretval = gtk_print_dialog_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_accept_label(cast(GtkPrintDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_dialog_get_page_setup(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_dialog_get_print_settings(cast(GtkPrintDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_dialog_get_title(cast(GtkPrintDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -140,12 +140,12 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_print_dialog_print(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_print_dialog_print(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -170,12 +170,12 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_print_dialog_print_file(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.dup) : null, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_print_dialog_print_file(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, setup ? cast(GtkPrintSetup*)setup.cPtr(No.Dup) : null, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -189,7 +189,7 @@ class PrintDialog : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = gtk_print_dialog_print_file_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -216,10 +216,10 @@ class PrintDialog : gobject.object.ObjectG
   {
     GOutputStream* _cretval;
     GError *_err;
-    _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = gtk_print_dialog_print_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class PrintDialog : gobject.object.ObjectG
   */
   void setAcceptLabel(string acceptLabel)
   {
-    const(char)* _acceptLabel = acceptLabel.toCString(No.alloc);
+    const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     gtk_print_dialog_set_accept_label(cast(GtkPrintDialog*)cPtr, _acceptLabel);
   }
 
@@ -255,7 +255,7 @@ class PrintDialog : gobject.object.ObjectG
   */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
-    gtk_print_dialog_set_page_setup(cast(GtkPrintDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.dup) : null);
+    gtk_print_dialog_set_page_setup(cast(GtkPrintDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -265,7 +265,7 @@ class PrintDialog : gobject.object.ObjectG
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
   {
-    gtk_print_dialog_set_print_settings(cast(GtkPrintDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.dup) : null);
+    gtk_print_dialog_set_print_settings(cast(GtkPrintDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
 
   /**
@@ -275,7 +275,7 @@ class PrintDialog : gobject.object.ObjectG
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_print_dialog_set_title(cast(GtkPrintDialog*)cPtr, _title);
   }
 
@@ -305,12 +305,12 @@ class PrintDialog : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_print_dialog_setup(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_print_dialog_setup(cast(GtkPrintDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -328,10 +328,10 @@ class PrintDialog : gobject.object.ObjectG
   {
     GtkPrintSetup* _cretval;
     GError *_err;
-    _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = gtk_print_dialog_setup_finish(cast(GtkPrintDialog*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.print_setup.PrintSetup(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

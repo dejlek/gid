@@ -16,7 +16,7 @@ import gtk.types;
 class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,8 +44,8 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkSelectionFilterModel* _cretval;
-    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -72,6 +72,6 @@ class SelectionFilterModel : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

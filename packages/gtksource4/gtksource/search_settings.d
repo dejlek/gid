@@ -10,7 +10,7 @@ import gtksource.types;
 class SearchSettings : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class SearchSettings : gobject.object.ObjectG
   {
     GtkSourceSearchSettings* _cretval;
     _cretval = gtk_source_search_settings_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -72,7 +72,7 @@ class SearchSettings : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class SearchSettings : gobject.object.ObjectG
   */
   void setSearchText(string searchText = null)
   {
-    const(char)* _searchText = searchText.toCString(No.alloc);
+    const(char)* _searchText = searchText.toCString(No.Alloc);
     gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)cPtr, _searchText);
   }
 

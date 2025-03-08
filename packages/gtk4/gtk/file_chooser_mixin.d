@@ -79,17 +79,17 @@ template FileChooserT()
   */
   override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null)
   {
-    const(char)* _id = id.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     char*[] _tmpoptions;
     foreach (s; options)
-      _tmpoptions ~= s.toCString(No.alloc);
+      _tmpoptions ~= s.toCString(No.Alloc);
     _tmpoptions ~= null;
     const(char*)* _options = _tmpoptions.ptr;
 
     char*[] _tmpoptionLabels;
     foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString(No.alloc);
+      _tmpoptionLabels ~= s.toCString(No.Alloc);
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
     gtk_file_chooser_add_choice(cast(GtkFileChooser*)cPtr, _id, _label, _options, _optionLabels);
@@ -110,7 +110,7 @@ template FileChooserT()
   */
   override void addFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
+    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -127,7 +127,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -158,9 +158,9 @@ template FileChooserT()
   override string getChoice(string id)
   {
     const(char)* _cretval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)cPtr, _id);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_files(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ template FileChooserT()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_filters(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ template FileChooserT()
   {
     GListModel* _cretval;
     _cretval = gtk_file_chooser_get_shortcut_folders(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ template FileChooserT()
   */
   override void removeChoice(string id)
   {
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)cPtr, _id);
   }
 
@@ -339,7 +339,7 @@ template FileChooserT()
   */
   override void removeFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
+    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -355,7 +355,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, folder ? cast(GFile*)(cast(ObjectG)folder).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -367,8 +367,8 @@ template FileChooserT()
     The user interface is adapted to suit the selected action.
     
     For example, an option to create a new folder might be shown
-    if the action is [gtk.types.FileChooserAction.save] but not if the
-    action is [gtk.types.FileChooserAction.open].
+    if the action is [gtk.types.FileChooserAction.Save] but not if the
+    action is [gtk.types.FileChooserAction.Open].
     Params:
       action =       the action that the file selector is performing
   
@@ -392,8 +392,8 @@ template FileChooserT()
   */
   override void setChoice(string id, string option)
   {
-    const(char)* _id = id.toCString(No.alloc);
-    const(char)* _option = option.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _option = option.toCString(No.Alloc);
     gtk_file_chooser_set_choice(cast(GtkFileChooser*)cPtr, _id, _option);
   }
 
@@ -401,7 +401,7 @@ template FileChooserT()
       Sets whether file chooser will offer to create new folders.
     
     This is only relevant if the action is not set to be
-    [gtk.types.FileChooserAction.open].
+    [gtk.types.FileChooserAction.Open].
     Params:
       createFolders =       true if the Create Folder button should be displayed
   
@@ -425,7 +425,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -452,7 +452,7 @@ template FileChooserT()
   */
   override void setCurrentName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)cPtr, _name);
   }
 
@@ -460,7 +460,7 @@ template FileChooserT()
       Sets file as the current filename for the file chooser.
     
     This includes changing to the file’s parent folder and actually selecting
-    the file in list. If the chooser is in [gtk.types.FileChooserAction.save] mode,
+    the file in list. If the chooser is in [gtk.types.FileChooserAction.Save] mode,
     the file’s base name will also appear in the dialog’s file name entry.
     
     If the file name isn’t in the current folder of chooser, then the current
@@ -509,7 +509,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -532,15 +532,15 @@ template FileChooserT()
   */
   override void setFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
+    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
       Sets whether multiple files can be selected in the file chooser.
     
     This is only relevant if the action is set to be
-    [gtk.types.FileChooserAction.open] or
-    [gtk.types.FileChooserAction.selectFolder].
+    [gtk.types.FileChooserAction.Open] or
+    [gtk.types.FileChooserAction.SelectFolder].
     Params:
       selectMultiple =       true if multiple files can be selected.
   

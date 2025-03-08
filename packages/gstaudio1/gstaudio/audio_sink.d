@@ -36,7 +36,7 @@ import gstaudio.types;
 class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

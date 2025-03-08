@@ -28,12 +28,12 @@ import gtk.types;
 class SymbolicColor : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -64,8 +64,8 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newAlpha(gtk.symbolic_color.SymbolicColor color, double factor)
   {
     GtkSymbolicColor* _cretval;
-    _cretval = gtk_symbolic_color_new_alpha(color ? cast(GtkSymbolicColor*)color.cPtr(No.dup) : null, factor);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_symbolic_color_new_alpha(color ? cast(GtkSymbolicColor*)color.cPtr(No.Dup) : null, factor);
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -80,8 +80,8 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newLiteral(gdk.rgba.RGBA color)
   {
     GtkSymbolicColor* _cretval;
-    _cretval = gtk_symbolic_color_new_literal(color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_symbolic_color_new_literal(color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -100,8 +100,8 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newMix(gtk.symbolic_color.SymbolicColor color1, gtk.symbolic_color.SymbolicColor color2, double factor)
   {
     GtkSymbolicColor* _cretval;
-    _cretval = gtk_symbolic_color_new_mix(color1 ? cast(GtkSymbolicColor*)color1.cPtr(No.dup) : null, color2 ? cast(GtkSymbolicColor*)color2.cPtr(No.dup) : null, factor);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_symbolic_color_new_mix(color1 ? cast(GtkSymbolicColor*)color1.cPtr(No.Dup) : null, color2 ? cast(GtkSymbolicColor*)color2.cPtr(No.Dup) : null, factor);
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -118,9 +118,9 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newName(string name)
   {
     GtkSymbolicColor* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_symbolic_color_new_name(_name);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -139,8 +139,8 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newShade(gtk.symbolic_color.SymbolicColor color, double factor)
   {
     GtkSymbolicColor* _cretval;
-    _cretval = gtk_symbolic_color_new_shade(color ? cast(GtkSymbolicColor*)color.cPtr(No.dup) : null, factor);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_symbolic_color_new_shade(color ? cast(GtkSymbolicColor*)color.cPtr(No.Dup) : null, factor);
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -161,9 +161,9 @@ class SymbolicColor : gobject.boxed.Boxed
   static gtk.symbolic_color.SymbolicColor newWin32(string themeClass, int id)
   {
     GtkSymbolicColor* _cretval;
-    const(char)* _themeClass = themeClass.toCString(No.alloc);
+    const(char)* _themeClass = themeClass.toCString(No.Alloc);
     _cretval = gtk_symbolic_color_new_win32(_themeClass, id);
-    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -188,8 +188,8 @@ class SymbolicColor : gobject.boxed.Boxed
   {
     bool _retval;
     GdkRGBA _resolvedColor;
-    _retval = gtk_symbolic_color_resolve(cast(GtkSymbolicColor*)cPtr, props ? cast(GtkStyleProperties*)props.cPtr(No.dup) : null, &_resolvedColor);
-    resolvedColor = new gdk.rgba.RGBA(cast(void*)&_resolvedColor, No.take);
+    _retval = gtk_symbolic_color_resolve(cast(GtkSymbolicColor*)cPtr, props ? cast(GtkStyleProperties*)props.cPtr(No.Dup) : null, &_resolvedColor);
+    resolvedColor = new gdk.rgba.RGBA(cast(void*)&_resolvedColor, No.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class SymbolicColor : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_symbolic_color_to_string(cast(GtkSymbolicColor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

@@ -18,12 +18,12 @@ import gtk.types;
 class CssSection : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -52,8 +52,8 @@ class CssSection : gobject.boxed.Boxed
   this(gio.file.File file, gtk.types.CssLocation start, gtk.types.CssLocation end)
   {
     GtkCssSection* _cretval;
-    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &start, &end);
-    this(_cretval, Yes.take);
+    _cretval = gtk_css_section_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &start, &end);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class CssSection : gobject.boxed.Boxed
   {
     GFile* _cretval;
     _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class CssSection : gobject.boxed.Boxed
     case are sections of  type `GTK_CSS_SECTION_DOCUMEN`T. Their parent will
     either be `NULL` if they are the original CSS document that was loaded by
     [gtk.css_provider.CssProvider.loadFromFile] or a section of type
-    [gtk.types.CssSectionType.import_] if it was loaded with an `import` rule from
+    [gtk.types.CssSectionType.Import] if it was loaded with an `import` rule from
     a different file.
     Returns:     the parent section
   */
@@ -102,7 +102,7 @@ class CssSection : gobject.boxed.Boxed
   {
     GtkCssSection* _cretval;
     _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class CssSection : gobject.boxed.Boxed
   */
   void print(glib.string_.String string_)
   {
-    gtk_css_section_print(cast(const(GtkCssSection)*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
+    gtk_css_section_print(cast(const(GtkCssSection)*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -143,7 +143,7 @@ class CssSection : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_css_section_to_string(cast(const(GtkCssSection)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

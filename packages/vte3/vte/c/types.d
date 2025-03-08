@@ -17,17 +17,17 @@ enum VteAlign
   /**
       align to left/top
   */
-  start = 0,
+  Start = 0,
 
   /**
       align to centre
   */
-  center = 1,
+  Center = 1,
 
   /**
       align to right/bottom
   */
-  end = 2,
+  End = 2,
 }
 
 /**
@@ -39,17 +39,17 @@ enum VteCursorBlinkMode
   /**
       Follow GTK+ settings for cursor blinking.
   */
-  system = 0,
+  System = 0,
 
   /**
       Cursor blinks.
   */
-  on = 1,
+  On = 1,
 
   /**
       Cursor does not blink.
   */
-  off = 2,
+  Off = 2,
 }
 
 /**
@@ -61,18 +61,18 @@ enum VteCursorShape
   /**
       Draw a block cursor.  This is the default.
   */
-  block = 0,
+  Block = 0,
 
   /**
       Draw a vertical bar on the left side of character.
     This is similar to the default cursor for other GTK+ widgets.
   */
-  ibeam = 1,
+  Ibeam = 1,
 
   /**
       Draw a horizontal bar below the character.
   */
-  underline = 2,
+  Underline = 2,
 }
 
 /**
@@ -85,27 +85,27 @@ enum VteEraseBinding
   /**
       For backspace, attempt to determine the right value from the terminal's IO settings.  For delete, use the control sequence.
   */
-  auto_ = 0,
+  Auto = 0,
 
   /**
       Send an ASCII backspace character (0x08).
   */
-  asciiBackspace = 1,
+  AsciiBackspace = 1,
 
   /**
       Send an ASCII delete character (0x7F).
   */
-  asciiDelete = 2,
+  AsciiDelete = 2,
 
   /**
       Send the "@@7" control sequence.
   */
-  deleteSequence = 3,
+  DeleteSequence = 3,
 
   /**
       Send terminal's "erase" setting.
   */
-  tty = 4,
+  Tty = 4,
 }
 
 /**
@@ -116,27 +116,27 @@ enum VteFeatureFlags : uint
   /**
       whether VTE was built with bidirectional text support
   */
-  flagBidi = 1,
+  FlagBidi = 1,
 
   /**
       whether VTE was built with ICU support
   */
-  flagIcu = 2,
+  FlagIcu = 2,
 
   /**
       whether VTE was built with systemd support
   */
-  flagSystemd = 4,
+  FlagSystemd = 4,
 
   /**
       whether VTE was built with SIXEL support
   */
-  flagSixel = 8,
+  FlagSixel = 8,
 
   /**
       mask of all feature flags
   */
-  flagsMask = -1,
+  FlagsMask = -1,
 }
 
 /**
@@ -148,12 +148,12 @@ enum VteFormat
   /**
       Export as plain text
   */
-  text = 1,
+  Text = 1,
 
   /**
       Export as HTML formatted text
   */
-  html = 2,
+  Html = 2,
 }
 
 /** */
@@ -162,12 +162,12 @@ enum VtePtyError
   /**
       Obsolete. Deprecated: 0.42
   */
-  ptyHelperFailed = 0,
+  PtyHelperFailed = 0,
 
   /**
       failure when using PTY98 to allocate the PTY
   */
-  pty98Failed = 1,
+  Pty98Failed = 1,
 }
 
 /** */
@@ -176,44 +176,44 @@ enum VtePtyFlags : uint
   /**
       Unused. Deprecated: 0.38
   */
-  noLastlog = 1,
+  NoLastlog = 1,
 
   /**
       Unused. Deprecated: 0.38
   */
-  noUtmp = 2,
+  NoUtmp = 2,
 
   /**
       Unused. Deprecated: 0.38
   */
-  noWtmp = 4,
+  NoWtmp = 4,
 
   /**
       Unused. Deprecated: 0.38
   */
-  noHelper = 8,
+  NoHelper = 8,
 
   /**
       Unused. Deprecated: 0.38
   */
-  noFallback = 16,
+  NoFallback = 16,
 
   /**
       Do not start a new session for the child in
       [vte.pty.Pty.childSetup]. See man:setsid(2) for more information. Since: 0.58
   */
-  noSession = 32,
+  NoSession = 32,
 
   /**
       Do not set the PTY as the controlling TTY for the child
       in [vte.pty.Pty.childSetup]. See man:tty_ioctl(4) for more information. Since: 0.58
   */
-  noCtty = 64,
+  NoCtty = 64,
 
   /**
       the default flags
   */
-  default_ = 0,
+  Default = 0,
 }
 
 /**
@@ -226,13 +226,13 @@ enum VteRegexError
       The PCRE2 library was built without
       Unicode support which is required for VTE
   */
-  incompatible = 2147483646,
+  Incompatible = 2147483646,
 
   /**
       Regexes are not supported because VTE was
       built without PCRE2 support
   */
-  notSupported = 2147483647,
+  NotSupported = 2147483647,
 }
 
 /**
@@ -244,22 +244,22 @@ enum VteTextBlinkMode
   /**
       Do not blink the text.
   */
-  never = 0,
+  Never = 0,
 
   /**
       Allow blinking text only if the terminal is focused.
   */
-  focused = 1,
+  Focused = 1,
 
   /**
       Allow blinking text only if the terminal is unfocused.
   */
-  unfocused = 2,
+  Unfocused = 2,
 
   /**
       Allow blinking text. This is the default.
   */
-  always = 3,
+  Always = 3,
 }
 
 /**
@@ -271,7 +271,7 @@ enum VteWriteFlags
   /**
       Write contents as UTF-8 text.  This is the default.
   */
-  default_ = 0,
+  Default = 0,
 }
 
 /** */

@@ -24,7 +24,7 @@ import gobject.object;
 class DrawingContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,7 +55,7 @@ class DrawingContext : gobject.object.ObjectG
   {
     cairo_t* _cretval;
     _cretval = gdk_drawing_context_get_cairo_context(cast(GdkDrawingContext*)cPtr);
-    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class DrawingContext : gobject.object.ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_drawing_context_get_clip(cast(GdkDrawingContext*)cPtr);
-    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class DrawingContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

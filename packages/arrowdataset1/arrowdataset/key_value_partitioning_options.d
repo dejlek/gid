@@ -10,7 +10,7 @@ import gobject.object;
 class KeyValuePartitioningOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class KeyValuePartitioningOptions : gobject.object.ObjectG
   {
     GADatasetKeyValuePartitioningOptions* _cretval;
     _cretval = gadataset_key_value_partitioning_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

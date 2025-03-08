@@ -12,7 +12,7 @@ class Node
 {
   GNode cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Node");
@@ -93,7 +93,7 @@ class Node
     {
       auto _dlg = cast(glib.types.NodeForeachFunc*)data;
 
-      (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.take) : null);
+      (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -210,7 +210,7 @@ class Node
     {
       auto _dlg = cast(glib.types.NodeTraverseFunc*)data;
 
-      bool _retval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.take) : null);
+      bool _retval = (*_dlg)(node ? new glib.node.Node(cast(void*)node, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;

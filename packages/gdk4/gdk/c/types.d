@@ -13,12 +13,12 @@ public import cairo.c.types;
   These hints determine how the surface should be positioned in the case that
   the surface would fall off-screen if placed in its ideal position.
   
-  For example, [gdk.types.AnchorHints.flipX] will replace [gdk.types.Gravity.northWest] with
-  [gdk.types.Gravity.northEast] and vice versa if the surface extends beyond the left
+  For example, [gdk.types.AnchorHints.FlipX] will replace [gdk.types.Gravity.NorthWest] with
+  [gdk.types.Gravity.NorthEast] and vice versa if the surface extends beyond the left
   or right edges of the monitor.
   
-  If [gdk.types.AnchorHints.slideX] is set, the surface can be shifted horizontally to fit
-  on-screen. If [gdk.types.AnchorHints.resizeX] is set, the surface can be shrunken
+  If [gdk.types.AnchorHints.SlideX] is set, the surface can be shifted horizontally to fit
+  on-screen. If [gdk.types.AnchorHints.ResizeX] is set, the surface can be shrunken
   horizontally to fit.
   
   In general, when multiple flags are set, flipping should take precedence over
@@ -29,47 +29,47 @@ enum GdkAnchorHints : uint
   /**
       allow flipping anchors horizontally
   */
-  flipX = 1,
+  FlipX = 1,
 
   /**
       allow flipping anchors vertically
   */
-  flipY = 2,
+  FlipY = 2,
 
   /**
       allow sliding surface horizontally
   */
-  slideX = 4,
+  SlideX = 4,
 
   /**
       allow sliding surface vertically
   */
-  slideY = 8,
+  SlideY = 8,
 
   /**
       allow resizing surface horizontally
   */
-  resizeX = 16,
+  ResizeX = 16,
 
   /**
       allow resizing surface vertically
   */
-  resizeY = 32,
+  ResizeY = 32,
 
   /**
       allow flipping anchors on both axes
   */
-  flip = 3,
+  Flip = 3,
 
   /**
       allow sliding surface on both axes
   */
-  slide = 12,
+  Slide = 12,
 
   /**
       allow resizing surface on both axes
   */
-  resize = 48,
+  Resize = 48,
 }
 
 /**
@@ -80,57 +80,57 @@ enum GdkAxisFlags : uint
   /**
       X axis is present
   */
-  x = 2,
+  X = 2,
 
   /**
       Y axis is present
   */
-  y = 4,
+  Y = 4,
 
   /**
       Scroll X delta axis is present
   */
-  deltaX = 8,
+  DeltaX = 8,
 
   /**
       Scroll Y delta axis is present
   */
-  deltaY = 16,
+  DeltaY = 16,
 
   /**
       Pressure axis is present
   */
-  pressure = 32,
+  Pressure = 32,
 
   /**
       X tilt axis is present
   */
-  xtilt = 64,
+  Xtilt = 64,
 
   /**
       Y tilt axis is present
   */
-  ytilt = 128,
+  Ytilt = 128,
 
   /**
       Wheel axis is present
   */
-  wheel = 256,
+  Wheel = 256,
 
   /**
       Distance axis is present
   */
-  distance = 512,
+  Distance = 512,
 
   /**
       Z-axis rotation is present
   */
-  rotation = 1024,
+  Rotation = 1024,
 
   /**
       Slider axis is present
   */
-  slider = 2048,
+  Slider = 2048,
 }
 
 /**
@@ -145,67 +145,67 @@ enum GdkAxisUse
   /**
       the axis is ignored.
   */
-  ignore = 0,
+  Ignore = 0,
 
   /**
       the axis is used as the x axis.
   */
-  x = 1,
+  X = 1,
 
   /**
       the axis is used as the y axis.
   */
-  y = 2,
+  Y = 2,
 
   /**
       the axis is used as the scroll x delta
   */
-  deltaX = 3,
+  DeltaX = 3,
 
   /**
       the axis is used as the scroll y delta
   */
-  deltaY = 4,
+  DeltaY = 4,
 
   /**
       the axis is used for pressure information.
   */
-  pressure = 5,
+  Pressure = 5,
 
   /**
       the axis is used for x tilt information.
   */
-  xtilt = 6,
+  Xtilt = 6,
 
   /**
       the axis is used for y tilt information.
   */
-  ytilt = 7,
+  Ytilt = 7,
 
   /**
       the axis is used for wheel information.
   */
-  wheel = 8,
+  Wheel = 8,
 
   /**
       the axis is used for pen/tablet distance information
   */
-  distance = 9,
+  Distance = 9,
 
   /**
       the axis is used for pen rotation information
   */
-  rotation = 10,
+  Rotation = 10,
 
   /**
       the axis is used for pen slider information
   */
-  slider = 11,
+  Slider = 11,
 
   /**
       a constant equal to the numerically highest axis value.
   */
-  last = 12,
+  Last = 12,
 }
 
 /**
@@ -216,52 +216,52 @@ enum GdkCrossingMode
   /**
       crossing because of pointer motion.
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       crossing because a grab is activated.
   */
-  grab = 1,
+  Grab = 1,
 
   /**
       crossing because a grab is deactivated.
   */
-  ungrab = 2,
+  Ungrab = 2,
 
   /**
       crossing because a GTK grab is activated.
   */
-  gtkGrab = 3,
+  GtkGrab = 3,
 
   /**
       crossing because a GTK grab is deactivated.
   */
-  gtkUngrab = 4,
+  GtkUngrab = 4,
 
   /**
       crossing because a GTK widget changed
       state (e.g. sensitivity).
   */
-  stateChanged = 5,
+  StateChanged = 5,
 
   /**
       crossing because a touch sequence has begun,
       this event is synthetic as the pointer might have not left the surface.
   */
-  touchBegin = 6,
+  TouchBegin = 6,
 
   /**
       crossing because a touch sequence has ended,
       this event is synthetic as the pointer might have not left the surface.
   */
-  touchEnd = 7,
+  TouchEnd = 7,
 
   /**
       crossing because of a device switch (i.e.
       a mouse taking control of the pointer after a touch device), this event
       is synthetic as the pointer didn’t leave the surface.
   */
-  deviceSwitch = 8,
+  DeviceSwitch = 8,
 }
 
 /**
@@ -272,17 +272,17 @@ enum GdkDevicePadFeature
   /**
       a button
   */
-  button = 0,
+  Button = 0,
 
   /**
       a ring-shaped interactive area
   */
-  ring = 1,
+  Ring = 1,
 
   /**
       a straight interactive area
   */
-  strip = 2,
+  Strip = 2,
 }
 
 /**
@@ -294,42 +294,42 @@ enum GdkDeviceToolType
   /**
       Tool is of an unknown type.
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       Tool is a standard tablet stylus.
   */
-  pen = 1,
+  Pen = 1,
 
   /**
       Tool is standard tablet eraser.
   */
-  eraser = 2,
+  Eraser = 2,
 
   /**
       Tool is a brush stylus.
   */
-  brush = 3,
+  Brush = 3,
 
   /**
       Tool is a pencil stylus.
   */
-  pencil = 4,
+  Pencil = 4,
 
   /**
       Tool is an airbrush stylus.
   */
-  airbrush = 5,
+  Airbrush = 5,
 
   /**
       Tool is a mouse.
   */
-  mouse = 6,
+  Mouse = 6,
 
   /**
       Tool is a lens cursor.
   */
-  lens = 7,
+  Lens = 7,
 }
 
 /**
@@ -341,18 +341,18 @@ enum GdkDmabufError
       Dmabuf support is not available, because the OS
       is not Linux, or it was explicitly disabled at compile- or runtime
   */
-  notAvailable = 0,
+  NotAvailable = 0,
 
   /**
       The requested format is not supported
   */
-  unsupportedFormat = 1,
+  UnsupportedFormat = 1,
 
   /**
       GTK failed to create the resource for other
       reasons
   */
-  creationFailed = 2,
+  CreationFailed = 2,
 }
 
 /**
@@ -364,25 +364,25 @@ enum GdkDragAction : uint
   /**
       Copy the data.
   */
-  copy = 1,
+  Copy = 1,
 
   /**
       Move the data, i.e. first copy it, then delete
       it from the source using the DELETE target of the X selection protocol.
   */
-  move = 2,
+  Move = 2,
 
   /**
       Add a link to the data. Note that this is only
       useful if source and destination agree on what it means, and is not
       supported on all platforms.
   */
-  link = 4,
+  Link = 4,
 
   /**
       Ask the user what to do with the data.
   */
-  ask = 8,
+  Ask = 8,
 }
 
 /**
@@ -393,17 +393,17 @@ enum GdkDragCancelReason
   /**
       There is no suitable drop target.
   */
-  noTarget = 0,
+  NoTarget = 0,
 
   /**
       Drag cancelled by the user
   */
-  userCancelled = 1,
+  UserCancelled = 1,
 
   /**
       Unspecified error.
   */
-  error = 2,
+  Error = 2,
 }
 
 /**
@@ -416,158 +416,158 @@ enum GdkEventType
       hidden or destroyed, usually when the user clicks on a special icon in the
       title bar.
   */
-  delete_ = 0,
+  Delete = 0,
 
   /**
       the pointer (usually a mouse) has moved.
   */
-  motionNotify = 1,
+  MotionNotify = 1,
 
   /**
       a mouse button has been pressed.
   */
-  buttonPress = 2,
+  ButtonPress = 2,
 
   /**
       a mouse button has been released.
   */
-  buttonRelease = 3,
+  ButtonRelease = 3,
 
   /**
       a key has been pressed.
   */
-  keyPress = 4,
+  KeyPress = 4,
 
   /**
       a key has been released.
   */
-  keyRelease = 5,
+  KeyRelease = 5,
 
   /**
       the pointer has entered the surface.
   */
-  enterNotify = 6,
+  EnterNotify = 6,
 
   /**
       the pointer has left the surface.
   */
-  leaveNotify = 7,
+  LeaveNotify = 7,
 
   /**
       the keyboard focus has entered or left the surface.
   */
-  focusChange = 8,
+  FocusChange = 8,
 
   /**
       an input device has moved into contact with a sensing
       surface (e.g. a touchscreen or graphics tablet).
   */
-  proximityIn = 9,
+  ProximityIn = 9,
 
   /**
       an input device has moved out of contact with a sensing
       surface.
   */
-  proximityOut = 10,
+  ProximityOut = 10,
 
   /**
       the mouse has entered the surface while a drag is in progress.
   */
-  dragEnter = 11,
+  DragEnter = 11,
 
   /**
       the mouse has left the surface while a drag is in progress.
   */
-  dragLeave = 12,
+  DragLeave = 12,
 
   /**
       the mouse has moved in the surface while a drag is in
       progress.
   */
-  dragMotion = 13,
+  DragMotion = 13,
 
   /**
       a drop operation onto the surface has started.
   */
-  dropStart = 14,
+  DropStart = 14,
 
   /**
       the scroll wheel was turned
   */
-  scroll = 15,
+  Scroll = 15,
 
   /**
       a pointer or keyboard grab was broken.
   */
-  grabBroken = 16,
+  GrabBroken = 16,
 
   /**
       A new touch event sequence has just started.
   */
-  touchBegin = 17,
+  TouchBegin = 17,
 
   /**
       A touch event sequence has been updated.
   */
-  touchUpdate = 18,
+  TouchUpdate = 18,
 
   /**
       A touch event sequence has finished.
   */
-  touchEnd = 19,
+  TouchEnd = 19,
 
   /**
       A touch event sequence has been canceled.
   */
-  touchCancel = 20,
+  TouchCancel = 20,
 
   /**
       A touchpad swipe gesture event, the current state
       is determined by its phase field.
   */
-  touchpadSwipe = 21,
+  TouchpadSwipe = 21,
 
   /**
       A touchpad pinch gesture event, the current state
       is determined by its phase field.
   */
-  touchpadPinch = 22,
+  TouchpadPinch = 22,
 
   /**
       A tablet pad button press event.
   */
-  padButtonPress = 23,
+  PadButtonPress = 23,
 
   /**
       A tablet pad button release event.
   */
-  padButtonRelease = 24,
+  PadButtonRelease = 24,
 
   /**
       A tablet pad axis event from a "ring".
   */
-  padRing = 25,
+  PadRing = 25,
 
   /**
       A tablet pad axis event from a "strip".
   */
-  padStrip = 26,
+  PadStrip = 26,
 
   /**
       A tablet pad group mode change.
   */
-  padGroupMode = 27,
+  PadGroupMode = 27,
 
   /**
       A touchpad hold gesture event, the current state is determined by its phase
     field.
   */
-  touchpadHold = 28,
+  TouchpadHold = 28,
 
   /**
       marks the end of the GdkEventType enumeration.
   */
-  eventLast = 29,
+  EventLast = 29,
 }
 
 /**
@@ -580,42 +580,42 @@ enum GdkFrameClockPhase : uint
   /**
       no phase
   */
-  none = 0,
+  None = 0,
 
   /**
       corresponds to GdkFrameClock::flush-events. Should not be handled by applications.
   */
-  flushEvents = 1,
+  FlushEvents = 1,
 
   /**
       corresponds to GdkFrameClock::before-paint. Should not be handled by applications.
   */
-  beforePaint = 2,
+  BeforePaint = 2,
 
   /**
       corresponds to GdkFrameClock::update.
   */
-  update = 4,
+  Update = 4,
 
   /**
       corresponds to GdkFrameClock::layout. Should not be handled by applications.
   */
-  layout = 8,
+  Layout = 8,
 
   /**
       corresponds to GdkFrameClock::paint.
   */
-  paint = 16,
+  Paint = 16,
 
   /**
       corresponds to GdkFrameClock::resume-events. Should not be handled by applications.
   */
-  resumeEvents = 32,
+  ResumeEvents = 32,
 
   /**
       corresponds to GdkFrameClock::after-paint. Should not be handled by applications.
   */
-  afterPaint = 64,
+  AfterPaint = 64,
 }
 
 /**
@@ -626,12 +626,12 @@ enum GdkFullscreenMode
   /**
       Fullscreen on current monitor only.
   */
-  currentMonitor = 0,
+  CurrentMonitor = 0,
 
   /**
       Span across all monitors when fullscreen.
   */
-  allMonitors = 1,
+  AllMonitors = 1,
 }
 
 /**
@@ -642,12 +642,12 @@ enum GdkGLAPI : uint
   /**
       The OpenGL API
   */
-  gl = 1,
+  Gl = 1,
 
   /**
       The OpenGL ES API
   */
-  gles = 2,
+  Gles = 2,
 }
 
 /**
@@ -658,27 +658,27 @@ enum GdkGLError
   /**
       OpenGL support is not available
   */
-  notAvailable = 0,
+  NotAvailable = 0,
 
   /**
       The requested visual format is not supported
   */
-  unsupportedFormat = 1,
+  UnsupportedFormat = 1,
 
   /**
       The requested profile is not supported
   */
-  unsupportedProfile = 2,
+  UnsupportedProfile = 2,
 
   /**
       The shader compilation failed
   */
-  compilationFailed = 3,
+  CompilationFailed = 3,
 
   /**
       The shader linking failed
   */
-  linkFailed = 4,
+  LinkFailed = 4,
 }
 
 /**
@@ -689,53 +689,53 @@ enum GdkGravity
   /**
       the reference point is at the top left corner.
   */
-  northWest = 1,
+  NorthWest = 1,
 
   /**
       the reference point is in the middle of the top edge.
   */
-  north = 2,
+  North = 2,
 
   /**
       the reference point is at the top right corner.
   */
-  northEast = 3,
+  NorthEast = 3,
 
   /**
       the reference point is at the middle of the left edge.
   */
-  west = 4,
+  West = 4,
 
   /**
       the reference point is at the center of the surface.
   */
-  center = 5,
+  Center = 5,
 
   /**
       the reference point is at the middle of the right edge.
   */
-  east = 6,
+  East = 6,
 
   /**
       the reference point is at the lower left corner.
   */
-  southWest = 7,
+  SouthWest = 7,
 
   /**
       the reference point is at the middle of the lower edge.
   */
-  south = 8,
+  South = 8,
 
   /**
       the reference point is at the lower right corner.
   */
-  southEast = 9,
+  SouthEast = 9,
 
   /**
       the reference point is at the top left corner of the
      surface itself, ignoring window manager decorations.
   */
-  static_ = 10,
+  Static = 10,
 }
 
 /**
@@ -747,40 +747,40 @@ enum GdkInputSource
       the device is a mouse. (This will be reported for the core
       pointer, even if it is something else, such as a trackball.)
   */
-  mouse = 0,
+  Mouse = 0,
 
   /**
       the device is a stylus of a graphics tablet or similar device.
   */
-  pen = 1,
+  Pen = 1,
 
   /**
       the device is a keyboard.
   */
-  keyboard = 2,
+  Keyboard = 2,
 
   /**
       the device is a direct-input touch device, such
       as a touchscreen or tablet
   */
-  touchscreen = 3,
+  Touchscreen = 3,
 
   /**
       the device is an indirect touch device, such
       as a touchpad
   */
-  touchpad = 4,
+  Touchpad = 4,
 
   /**
       the device is a trackpoint
   */
-  trackpoint = 5,
+  Trackpoint = 5,
 
   /**
       the device is a "pad", a collection of buttons,
       rings and strips found in drawing tablets
   */
-  tabletPad = 6,
+  TabletPad = 6,
 }
 
 /**
@@ -793,27 +793,27 @@ enum GdkKeyMatch
   /**
       The key event does not match
   */
-  none = 0,
+  None = 0,
 
   /**
       The key event matches if keyboard state
       (specifically, the currently active group) is ignored
   */
-  partial = 1,
+  Partial = 1,
 
   /**
       The key event matches
   */
-  exact = 2,
+  Exact = 2,
 }
 
 /**
     [gdk.types.MemoryFormat] describes formats that image data can have in memory.
   
   It describes formats by listing the contents of the memory passed to it.
-  So [gdk.types.MemoryFormat.a8r8g8b8] will be 1 byte (8 bits) of alpha, followed by a
+  So [gdk.types.MemoryFormat.A8r8g8b8] will be 1 byte (8 bits) of alpha, followed by a
   byte each of red, green and blue. It is not endian-dependent, so
-  [cairo.types.Format.argb32] is represented by different `GdkMemoryFormats`
+  [cairo.types.Format.Argb32] is represented by different `GdkMemoryFormats`
   on architectures with different endiannesses.
   
   Its naming is modelled after
@@ -826,181 +826,181 @@ enum GdkMemoryFormat
       4 bytes; for blue, green, red, alpha.
       The color values are premultiplied with the alpha value.
   */
-  b8g8r8a8Premultiplied = 0,
+  B8g8r8a8Premultiplied = 0,
 
   /**
       4 bytes; for alpha, red, green, blue.
       The color values are premultiplied with the alpha value.
   */
-  a8r8g8b8Premultiplied = 1,
+  A8r8g8b8Premultiplied = 1,
 
   /**
       4 bytes; for red, green, blue, alpha
       The color values are premultiplied with the alpha value.
   */
-  r8g8b8a8Premultiplied = 2,
+  R8g8b8a8Premultiplied = 2,
 
   /**
       4 bytes; for blue, green, red, alpha.
   */
-  b8g8r8a8 = 3,
+  B8g8r8a8 = 3,
 
   /**
       4 bytes; for alpha, red, green, blue.
   */
-  a8r8g8b8 = 4,
+  A8r8g8b8 = 4,
 
   /**
       4 bytes; for red, green, blue, alpha.
   */
-  r8g8b8a8 = 5,
+  R8g8b8a8 = 5,
 
   /**
       4 bytes; for alpha, blue, green, red.
   */
-  a8b8g8r8 = 6,
+  A8b8g8r8 = 6,
 
   /**
       3 bytes; for red, green, blue. The data is opaque.
   */
-  r8g8b8 = 7,
+  R8g8b8 = 7,
 
   /**
       3 bytes; for blue, green, red. The data is opaque.
   */
-  b8g8r8 = 8,
+  B8g8r8 = 8,
 
   /**
       3 guint16 values; for red, green, blue.
   */
-  r16g16b16 = 9,
+  R16g16b16 = 9,
 
   /**
       4 guint16 values; for red, green, blue, alpha. The color values are
     premultiplied with the alpha value.
   */
-  r16g16b16a16Premultiplied = 10,
+  R16g16b16a16Premultiplied = 10,
 
   /**
       4 guint16 values; for red, green, blue, alpha.
   */
-  r16g16b16a16 = 11,
+  R16g16b16a16 = 11,
 
   /**
       3 half-float values; for red, green, blue. The data is opaque.
   */
-  r16g16b16Float = 12,
+  R16g16b16Float = 12,
 
   /**
       4 half-float values; for red, green, blue and alpha. The color values are
     premultiplied with the alpha value.
   */
-  r16g16b16a16FloatPremultiplied = 13,
+  R16g16b16a16FloatPremultiplied = 13,
 
   /**
       4 half-float values; for red, green, blue and alpha.
   */
-  r16g16b16a16Float = 14,
+  R16g16b16a16Float = 14,
 
   /**
       3 float values; for red, green, blue.
   */
-  r32g32b32Float = 15,
+  R32g32b32Float = 15,
 
   /**
       4 float values; for red, green, blue and alpha. The color values are
     premultiplied with the alpha value.
   */
-  r32g32b32a32FloatPremultiplied = 16,
+  R32g32b32a32FloatPremultiplied = 16,
 
   /**
       4 float values; for red, green, blue and alpha.
   */
-  r32g32b32a32Float = 17,
+  R32g32b32a32Float = 17,
 
   /**
       2 bytes; for grayscale, alpha. The color values are premultiplied with the
     alpha value.
   */
-  g8a8Premultiplied = 18,
+  G8a8Premultiplied = 18,
 
   /**
       2 bytes; for grayscale, alpha.
   */
-  g8a8 = 19,
+  G8a8 = 19,
 
   /**
       One byte; for grayscale. The data is opaque.
   */
-  g8 = 20,
+  G8 = 20,
 
   /**
       2 guint16 values; for grayscale, alpha. The color values are premultiplied
     with the alpha value.
   */
-  g16a16Premultiplied = 21,
+  G16a16Premultiplied = 21,
 
   /**
       2 guint16 values; for grayscale, alpha.
   */
-  g16a16 = 22,
+  G16a16 = 22,
 
   /**
       One guint16 value; for grayscale. The data is opaque.
   */
-  g16 = 23,
+  G16 = 23,
 
   /**
       One byte; for alpha.
   */
-  a8 = 24,
+  A8 = 24,
 
   /**
       One guint16 value; for alpha.
   */
-  a16 = 25,
+  A16 = 25,
 
   /**
       One half-float value; for alpha.
   */
-  a16Float = 26,
+  A16Float = 26,
 
   /**
       One float value; for alpha.
   */
-  a32Float = 27,
+  A32Float = 27,
 
   /**
       4 bytes; for alpha, blue, green, red, The color values are premultiplied with
     the alpha value.
   */
-  a8b8g8r8Premultiplied = 28,
+  A8b8g8r8Premultiplied = 28,
 
   /**
       4 bytes; for blue, green, red, unused.
   */
-  b8g8r8x8 = 29,
+  B8g8r8x8 = 29,
 
   /**
       4 bytes; for unused, red, green, blue.
   */
-  x8r8g8b8 = 30,
+  X8r8g8b8 = 30,
 
   /**
       4 bytes; for red, green, blue, unused.
   */
-  r8g8b8x8 = 31,
+  R8g8b8x8 = 31,
 
   /**
       4 bytes; for unused, blue, green, red.
   */
-  x8b8g8r8 = 32,
+  X8b8g8r8 = 32,
 
   /**
       The number of formats. This value will change as
       more formats get added, so do not rely on its concrete integer.
   */
-  nFormats = 33,
+  NFormats = 33,
 }
 
 /**
@@ -1012,77 +1012,77 @@ enum GdkMemoryFormat
   
   Note that GDK may add internal values to events which include values outside
   of this enumeration. Your code should preserve and ignore them.  You can use
-  [gdk.types.ModifierType.modifierMask] to remove all private values.
+  [gdk.types.ModifierType.ModifierMask] to remove all private values.
 */
 enum GdkModifierType : uint
 {
   /**
       No modifier.
   */
-  noModifierMask = 0,
+  NoModifierMask = 0,
 
   /**
       the Shift key.
   */
-  shiftMask = 1,
+  ShiftMask = 1,
 
   /**
       a Lock key (depending on the modifier mapping of the
      X server this may either be CapsLock or ShiftLock).
   */
-  lockMask = 2,
+  LockMask = 2,
 
   /**
       the Control key.
   */
-  controlMask = 4,
+  ControlMask = 4,
 
   /**
       the fourth modifier key (it depends on the modifier
      mapping of the X server which key is interpreted as this modifier, but
      normally it is the Alt key).
   */
-  altMask = 8,
+  AltMask = 8,
 
   /**
       the first mouse button.
   */
-  button1Mask = 256,
+  Button1Mask = 256,
 
   /**
       the second mouse button.
   */
-  button2Mask = 512,
+  Button2Mask = 512,
 
   /**
       the third mouse button.
   */
-  button3Mask = 1024,
+  Button3Mask = 1024,
 
   /**
       the fourth mouse button.
   */
-  button4Mask = 2048,
+  Button4Mask = 2048,
 
   /**
       the fifth mouse button.
   */
-  button5Mask = 4096,
+  Button5Mask = 4096,
 
   /**
       the Super modifier
   */
-  superMask = 67108864,
+  SuperMask = 67108864,
 
   /**
       the Hyper modifier
   */
-  hyperMask = 134217728,
+  HyperMask = 134217728,
 
   /**
       the Meta modifier
   */
-  metaMask = 268435456,
+  MetaMask = 268435456,
 }
 
 /**
@@ -1097,25 +1097,25 @@ enum GdkNotifyType
       the surface is entered from an ancestor or
       left towards an ancestor.
   */
-  ancestor = 0,
+  Ancestor = 0,
 
   /**
       the pointer moves between an ancestor and an
       inferior of the surface.
   */
-  virtual = 1,
+  Virtual = 1,
 
   /**
       the surface is entered from an inferior or
       left towards an inferior.
   */
-  inferior = 2,
+  Inferior = 2,
 
   /**
       the surface is entered from or left towards
       a surface which is neither an ancestor nor an inferior.
   */
-  nonlinear = 3,
+  Nonlinear = 3,
 
   /**
       the pointer moves between two surfaces
@@ -1123,12 +1123,12 @@ enum GdkNotifyType
       the ancestor chain between one of these surfaces and their least
       common ancestor.
   */
-  nonlinearVirtual = 4,
+  NonlinearVirtual = 4,
 
   /**
       an unknown type of enter/leave event occurred.
   */
-  unknown = 5,
+  Unknown = 5,
 }
 
 /**
@@ -1143,14 +1143,14 @@ enum GdkPaintableFlags : uint
       The `signal@Gdk.Paintable::invalidate-size` signal will never be
       emitted.
   */
-  size = 1,
+  Size = 1,
 
   /**
       The content is immutable.
       The `signal@Gdk.Paintable::invalidate-contents` signal will never be
       emitted.
   */
-  contents = 2,
+  Contents = 2,
 }
 
 /**
@@ -1161,39 +1161,39 @@ enum GdkScrollDirection
   /**
       the surface is scrolled up.
   */
-  up = 0,
+  Up = 0,
 
   /**
       the surface is scrolled down.
   */
-  down = 1,
+  Down = 1,
 
   /**
       the surface is scrolled to the left.
   */
-  left = 2,
+  Left = 2,
 
   /**
       the surface is scrolled to the right.
   */
-  right = 3,
+  Right = 3,
 
   /**
       the scrolling is determined by the delta values
       in scroll events. See [gdk.scroll_event.ScrollEvent.getDeltas]
   */
-  smooth = 4,
+  Smooth = 4,
 }
 
 /**
     Specifies the unit of scroll deltas.
   
-  When you get [gdk.types.ScrollUnit.wheel], a delta of 1.0 means 1 wheel detent
+  When you get [gdk.types.ScrollUnit.Wheel], a delta of 1.0 means 1 wheel detent
   click in the south direction, 2.0 means 2 wheel detent clicks in the south
   direction... This is the same logic for negative values but in the north
   direction.
   
-  If you get [gdk.types.ScrollUnit.surface], are managing a scrollable view and get a
+  If you get [gdk.types.ScrollUnit.Surface], are managing a scrollable view and get a
   value of 123, you have to scroll 123 surface logical pixels right if it's
   @delta_x or down if it's @delta_y. This is the same logic for negative values
   but you have to scroll left instead of right if it's @delta_x and up instead
@@ -1208,13 +1208,13 @@ enum GdkScrollUnit
   /**
       The delta is in number of wheel clicks.
   */
-  wheel = 0,
+  Wheel = 0,
 
   /**
       The delta is in surface pixels to scroll directly
       on screen.
   */
-  surface = 1,
+  Surface = 1,
 }
 
 /**
@@ -1225,42 +1225,42 @@ enum GdkSeatCapabilities : uint
   /**
       No input capabilities
   */
-  none = 0,
+  None = 0,
 
   /**
       The seat has a pointer (e.g. mouse)
   */
-  pointer = 1,
+  Pointer = 1,
 
   /**
       The seat has touchscreen(s) attached
   */
-  touch = 2,
+  Touch = 2,
 
   /**
       The seat has drawing tablet(s) attached
   */
-  tabletStylus = 4,
+  TabletStylus = 4,
 
   /**
       The seat has keyboard(s) attached
   */
-  keyboard = 8,
+  Keyboard = 8,
 
   /**
       The seat has drawing tablet pad(s) attached
   */
-  tabletPad = 16,
+  TabletPad = 16,
 
   /**
       The union of all pointing capabilities
   */
-  allPointing = 7,
+  AllPointing = 7,
 
   /**
       The union of all capabilities
   */
-  all = 31,
+  All = 31,
 }
 
 /**
@@ -1272,32 +1272,32 @@ enum GdkSubpixelLayout
   /**
       The layout is not known
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       Not organized in this way
   */
-  none = 1,
+  None = 1,
 
   /**
       The layout is horizontal, the order is RGB
   */
-  horizontalRgb = 2,
+  HorizontalRgb = 2,
 
   /**
       The layout is horizontal, the order is BGR
   */
-  horizontalBgr = 3,
+  HorizontalBgr = 3,
 
   /**
       The layout is vertical, the order is RGB
   */
-  verticalRgb = 4,
+  VerticalRgb = 4,
 
   /**
       The layout is vertical, the order is BGR
   */
-  verticalBgr = 5,
+  VerticalBgr = 5,
 }
 
 /**
@@ -1308,42 +1308,42 @@ enum GdkSurfaceEdge
   /**
       the top left corner.
   */
-  northWest = 0,
+  NorthWest = 0,
 
   /**
       the top edge.
   */
-  north = 1,
+  North = 1,
 
   /**
       the top right corner.
   */
-  northEast = 2,
+  NorthEast = 2,
 
   /**
       the left edge.
   */
-  west = 3,
+  West = 3,
 
   /**
       the right edge.
   */
-  east = 4,
+  East = 4,
 
   /**
       the lower left corner.
   */
-  southWest = 5,
+  SouthWest = 5,
 
   /**
       the lower edge.
   */
-  south = 6,
+  South = 6,
 
   /**
       the lower right corner.
   */
-  southEast = 7,
+  SouthEast = 7,
 }
 
 /**
@@ -1354,43 +1354,43 @@ enum GdkTextureError
   /**
       Not enough memory to handle this image
   */
-  tooLarge = 0,
+  TooLarge = 0,
 
   /**
       The image data appears corrupted
   */
-  corruptImage = 1,
+  CorruptImage = 1,
 
   /**
       The image contains features
       that cannot be loaded
   */
-  unsupportedContent = 2,
+  UnsupportedContent = 2,
 
   /**
       The image format is not supported
   */
-  unsupportedFormat = 3,
+  UnsupportedFormat = 3,
 }
 
 /** */
 enum GdkTitlebarGesture
 {
   /** */
-  doubleClick = 1,
+  DoubleClick = 1,
 
   /** */
-  rightClick = 2,
+  RightClick = 2,
 
   /** */
-  middleClick = 3,
+  MiddleClick = 3,
 }
 
 /**
     Specifies the state of a toplevel surface.
   
   On platforms that support information about individual edges, the
-  [gdk.types.ToplevelState.tiled] state will be set whenever any of the individual
+  [gdk.types.ToplevelState.Tiled] state will be set whenever any of the individual
   tiled states is set. On platforms that lack that support, the tiled state
   will give an indication of tiledness without any of the per-edge states
   being set.
@@ -1400,98 +1400,98 @@ enum GdkToplevelState : uint
   /**
       the surface is minimized
   */
-  minimized = 1,
+  Minimized = 1,
 
   /**
       the surface is maximized
   */
-  maximized = 2,
+  Maximized = 2,
 
   /**
       the surface is sticky
   */
-  sticky = 4,
+  Sticky = 4,
 
   /**
       the surface is maximized without decorations
   */
-  fullscreen = 8,
+  Fullscreen = 8,
 
   /**
       the surface is kept above other surfaces
   */
-  above = 16,
+  Above = 16,
 
   /**
       the surface is kept below other surfaces
   */
-  below = 32,
+  Below = 32,
 
   /**
       the surface is presented as focused (with active decorations)
   */
-  focused = 64,
+  Focused = 64,
 
   /**
       the surface is in a tiled state
   */
-  tiled = 128,
+  Tiled = 128,
 
   /**
       whether the top edge is tiled
   */
-  topTiled = 256,
+  TopTiled = 256,
 
   /**
       whether the top edge is resizable
   */
-  topResizable = 512,
+  TopResizable = 512,
 
   /**
       whether the right edge is tiled
   */
-  rightTiled = 1024,
+  RightTiled = 1024,
 
   /**
       whether the right edge is resizable
   */
-  rightResizable = 2048,
+  RightResizable = 2048,
 
   /**
       whether the bottom edge is tiled
   */
-  bottomTiled = 4096,
+  BottomTiled = 4096,
 
   /**
       whether the bottom edge is resizable
   */
-  bottomResizable = 8192,
+  BottomResizable = 8192,
 
   /**
       whether the left edge is tiled
   */
-  leftTiled = 16384,
+  LeftTiled = 16384,
 
   /**
       whether the left edge is resizable
   */
-  leftResizable = 32768,
+  LeftResizable = 32768,
 
   /**
       the surface is not visible to the user
   */
-  suspended = 65536,
+  Suspended = 65536,
 }
 
 /**
     Specifies the current state of a touchpad gesture.
   
   All gestures are guaranteed to begin with an event with phase
-  [gdk.types.TouchpadGesturePhase.begin], followed by 0 or several events
-  with phase [gdk.types.TouchpadGesturePhase.update].
+  [gdk.types.TouchpadGesturePhase.Begin], followed by 0 or several events
+  with phase [gdk.types.TouchpadGesturePhase.Update].
   
   A finished gesture may have 2 possible outcomes, an event with phase
-  [gdk.types.TouchpadGesturePhase.end] will be emitted when the gesture is
+  [gdk.types.TouchpadGesturePhase.End] will be emitted when the gesture is
   considered successful, this should be used as the hint to perform any
   permanent changes.
   
@@ -1499,7 +1499,7 @@ enum GdkToplevelState : uint
   or the compositor, or due to the gesture recognition layers hinting the
   gesture did not finish resolutely (eg. a 3rd finger being added during
   a pinch gesture). In these cases, the last event will report the phase
-  [gdk.types.TouchpadGesturePhase.cancel], this should be used as a hint
+  [gdk.types.TouchpadGesturePhase.Cancel], this should be used as a hint
   to undo any visible/permanent changes that were done throughout the
   progress of the gesture.
 */
@@ -1508,24 +1508,24 @@ enum GdkTouchpadGesturePhase
   /**
       The gesture has begun.
   */
-  begin = 0,
+  Begin = 0,
 
   /**
       The gesture has been updated.
   */
-  update = 1,
+  Update = 1,
 
   /**
       The gesture was finished, changes
       should be permanently applied.
   */
-  end = 2,
+  End = 2,
 
   /**
       The gesture was cancelled, all
       changes should be undone.
   */
-  cancel = 3,
+  Cancel = 3,
 }
 
 /**
@@ -1537,12 +1537,12 @@ enum GdkVulkanError
       Vulkan is not supported on this backend or has not been
       compiled in.
   */
-  unsupported = 0,
+  Unsupported = 0,
 
   /**
       Vulkan support is not available on this Surface
   */
-  notAvailable = 1,
+  NotAvailable = 1,
 }
 
 /**
@@ -1796,7 +1796,7 @@ struct GdkDevice;
 
 /**
     [gdk.device_pad.DevicePad] is an interface implemented by devices of type
-  [gdk.types.InputSource.tabletPad]
+  [gdk.types.InputSource.TabletPad]
   
   It allows querying the features provided by the pad device.
   
@@ -1811,7 +1811,7 @@ struct GdkDevice;
   (current) for each given group, different groups may have different
   current modes. The number of available modes in a group can be found
   out through [gdk.device_pad.DevicePad.getGroupNModes], and the current mode
-  for a given group will be notified through events of type [gdk.types.EventType.padGroupMode].
+  for a given group will be notified through events of type [gdk.types.EventType.PadGroupMode].
 */
 struct GdkDevicePad;
 
@@ -2041,8 +2041,8 @@ struct GdkDrawContext;
     The [gdk.drop.Drop] object represents the target of an ongoing DND operation.
   
   Possible drop sites get informed about the status of the ongoing drag
-  operation with events of type [gdk.types.EventType.dragEnter], [gdk.types.EventType.dragLeave],
-  [gdk.types.EventType.dragMotion] and [gdk.types.EventType.dropStart]. The [gdk.drop.Drop] object can be obtained
+  operation with events of type [gdk.types.EventType.DragEnter], [gdk.types.EventType.DragLeave],
+  [gdk.types.EventType.DragMotion] and [gdk.types.EventType.DropStart]. The [gdk.drop.Drop] object can be obtained
   from these [gdk.event.Event] types using [gdk.dndevent.DNDEvent.getDrop].
   
   The actual data transfer is initiated from the target side via an async
@@ -2101,7 +2101,7 @@ struct GdkFocusEvent;
   for the synchronization being implemented, the clock will process a frame and
   emit signals for each phase that has been requested. (See the signals of the
   [gdk.frame_clock.FrameClock] class for documentation of the phases.
-  [gdk.types.FrameClockPhase.update] and the [gdk.frame_clock.FrameClock.update] signal
+  [gdk.types.FrameClockPhase.Update] and the [gdk.frame_clock.FrameClock.update] signal
   are most interesting for application writers, and are used to update the
   animations, using the frame time given by [gdk.frame_clock.FrameClock.getFrameTime].
   
@@ -2314,7 +2314,7 @@ struct GdkPadEvent;
   a different output with the same snapshot. Once that happens, it will call
   [gdk.paintable.Paintable.invalidateContents] which will emit the
   `signal@Gdk.Paintable::invalidate-contents` signal. If a paintable is known
-  to never change its contents, it will set the [gdk.types.PaintableFlags.contents]
+  to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
   flag. If a consumer cannot deal with changing contents, it may call
   [gdk.paintable.Paintable.getCurrentImage] which will return a static
   paintable and use that.
@@ -2326,7 +2326,7 @@ struct GdkPadEvent;
   by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
   `signal@Gdk.Paintable::invalidate-size` signal. And just like for contents,
   if a paintable is known to never change its size, it will set the
-  [gdk.types.PaintableFlags.size] flag.
+  [gdk.types.PaintableFlags.Size] flag.
   
   Besides API for applications, there are some functions that are only
   useful for implementing subclasses and should not be used by applications:
@@ -2362,8 +2362,8 @@ struct GdkPaintableInterface
 
   /**
       return a [gdk.paintable.Paintable] that does not change over
-      time. This means the [gdk.types.PaintableFlags.size] and
-      [gdk.types.PaintableFlags.contents] flag are set.
+      time. This means the [gdk.types.PaintableFlags.Size] and
+      [gdk.types.PaintableFlags.Contents] flag are set.
   */
   extern(C) GdkPaintable* function(GdkPaintable* paintable) getCurrentImage;
 

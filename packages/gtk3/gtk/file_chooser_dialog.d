@@ -176,7 +176,7 @@ import gtk.types;
 class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

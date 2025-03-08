@@ -62,7 +62,7 @@ import gtksource.view;
 class VimIMContext : gtk.imcontext.IMContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,7 +83,7 @@ class VimIMContext : gtk.imcontext.IMContext
   {
     GtkIMContext* _cretval;
     _cretval = gtk_source_vim_im_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class VimIMContext : gtk.imcontext.IMContext
   */
   void executeCommand(string command)
   {
-    const(char)* _command = command.toCString(No.alloc);
+    const(char)* _command = command.toCString(No.Alloc);
     gtk_source_vim_im_context_execute_command(cast(GtkSourceVimIMContext*)cPtr, _command);
   }
 
@@ -107,7 +107,7 @@ class VimIMContext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class VimIMContext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -147,10 +147,10 @@ class VimIMContext : gtk.imcontext.IMContext
     Connect to Edit signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEdit(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEdit(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EditCallbackDlg) || is(T : EditCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -190,10 +190,10 @@ class VimIMContext : gtk.imcontext.IMContext
     Connect to ExecuteCommand signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectExecuteCommand(T)(T callback, Flag!"after" after = No.after)
+  ulong connectExecuteCommand(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ExecuteCommandCallbackDlg) || is(T : ExecuteCommandCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -231,10 +231,10 @@ class VimIMContext : gtk.imcontext.IMContext
     Connect to FormatText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFormatText(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFormatText(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FormatTextCallbackDlg) || is(T : FormatTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -273,10 +273,10 @@ class VimIMContext : gtk.imcontext.IMContext
     Connect to Write signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWrite(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWrite(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WriteCallbackDlg) || is(T : WriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

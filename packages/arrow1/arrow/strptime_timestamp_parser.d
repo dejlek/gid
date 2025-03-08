@@ -10,7 +10,7 @@ import gid.gid;
 class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,9 +30,9 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   this(string format)
   {
     GArrowStrptimeTimestampParser* _cretval;
-    const(char)* _format = format.toCString(No.alloc);
+    const(char)* _format = format.toCString(No.Alloc);
     _cretval = garrow_strptime_timestamp_parser_new(_format);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -40,7 +40,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
   {
     const(char)* _cretval;
     _cretval = garrow_strptime_timestamp_parser_get_format(cast(GArrowStrptimeTimestampParser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

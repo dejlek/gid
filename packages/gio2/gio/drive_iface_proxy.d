@@ -7,7 +7,7 @@ import gio.drive_mixin;
 /// Proxy object for Gio.Drive interface when a GObject has no applicable D binding
 class DriveIfaceProxy : IfaceProxy, gio.drive.Drive
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

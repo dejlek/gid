@@ -12,17 +12,17 @@ enum GstTagDemuxResult
   /**
       cannot parse tag, just skip it
   */
-  brokenTag = 0,
+  BrokenTag = 0,
 
   /**
       call again with less or more data
   */
-  again = 1,
+  Again = 1,
 
   /**
       parsed tag successfully
   */
-  ok = 2,
+  Ok = 2,
 }
 
 /**
@@ -36,102 +36,102 @@ enum GstTagImageType
          tell functions such as [gsttag.global.tagImageDataToImageSample] that no
          image type should be set.
   */
-  none = -1,
+  None = -1,
 
   /**
       Undefined/other image type
   */
-  undefined = 0,
+  Undefined = 0,
 
   /**
       Cover (front)
   */
-  frontCover = 1,
+  FrontCover = 1,
 
   /**
       Cover (back)
   */
-  backCover = 2,
+  BackCover = 2,
 
   /**
       Leaflet page
   */
-  leafletPage = 3,
+  LeafletPage = 3,
 
   /**
       Medium (e.g. label side of CD)
   */
-  medium = 4,
+  Medium = 4,
 
   /**
       Lead artist/lead performer/soloist
   */
-  leadArtist = 5,
+  LeadArtist = 5,
 
   /**
       Artist/performer
   */
-  artist = 6,
+  Artist = 6,
 
   /**
       Conductor
   */
-  conductor = 7,
+  Conductor = 7,
 
   /**
       Band/orchestra
   */
-  bandOrchestra = 8,
+  BandOrchestra = 8,
 
   /**
       Composer
   */
-  composer = 9,
+  Composer = 9,
 
   /**
       Lyricist/text writer
   */
-  lyricist = 10,
+  Lyricist = 10,
 
   /**
       Recording location
   */
-  recordingLocation = 11,
+  RecordingLocation = 11,
 
   /**
       During recording
   */
-  duringRecording = 12,
+  DuringRecording = 12,
 
   /**
       During performance
   */
-  duringPerformance = 13,
+  DuringPerformance = 13,
 
   /**
       Movie/video screen capture
   */
-  videoCapture = 14,
+  VideoCapture = 14,
 
   /**
       A fish as funny as the ID3v2 spec
   */
-  fish = 15,
+  Fish = 15,
 
   /**
       Illustration
   */
-  illustration = 16,
+  Illustration = 16,
 
   /**
       Band/artist logotype
   */
-  bandArtistLogo = 17,
+  BandArtistLogo = 17,
 
   /**
       Publisher/studio logotype
   */
-  publisherStudioLogo = 18,
+  PublisherStudioLogo = 18,
 }
 
 /**
@@ -143,57 +143,57 @@ enum GstTagLicenseFlags : uint
       making multiple copies
         is allowed
   */
-  permitsReproduction = 1,
+  PermitsReproduction = 1,
 
   /**
       distribution, public display
         and public performance are allowed
   */
-  permitsDistribution = 2,
+  PermitsDistribution = 2,
 
   /**
       distribution of derivative
         works is allowed
   */
-  permitsDerivativeWorks = 4,
+  PermitsDerivativeWorks = 4,
 
   /**
       commercial derivatives are allowed,
         but only non-commercial distribution is allowed
   */
-  permitsSharing = 8,
+  PermitsSharing = 8,
 
   /**
       copyright and license notices
         must be kept intact
   */
-  requiresNotice = 256,
+  RequiresNotice = 256,
 
   /**
       credit must be given to
         copyright holder and/or author
   */
-  requiresAttribution = 512,
+  RequiresAttribution = 512,
 
   /**
       derivative works must be
         licensed under the same terms or compatible terms as the original work
   */
-  requiresShareAlike = 1024,
+  RequiresShareAlike = 1024,
 
   /**
       source code (the preferred
         form for making modifications) must be provided when exercising some
         rights granted by the license
   */
-  requiresSourceCode = 2048,
+  RequiresSourceCode = 2048,
 
   /**
       derivative and combined works
         must be licensed under specified terms, similar to those of the original
         work
   */
-  requiresCopyleft = 4096,
+  RequiresCopyleft = 4096,
 
   /**
       derivative works must be
@@ -201,31 +201,31 @@ enum GstTagLicenseFlags : uint
         the original work; combinations with the work may be licensed under
         different terms
   */
-  requiresLesserCopyleft = 8192,
+  RequiresLesserCopyleft = 8192,
 
   /**
       exercising rights for
         commercial purposes is prohibited
   */
-  prohibitsCommercialUse = 65536,
+  ProhibitsCommercialUse = 65536,
 
   /**
       use in a
         non-developing country is prohibited
   */
-  prohibitsHighIncomeNationUse = 131072,
+  ProhibitsHighIncomeNationUse = 131072,
 
   /**
       this license was created
         by the Creative Commons project
   */
-  creativeCommonsLicense = 16777216,
+  CreativeCommonsLicense = 16777216,
 
   /**
       this license was
         created by the Free Software Foundation (FSF)
   */
-  freeSoftwareFoundationLicense = 33554432,
+  FreeSoftwareFoundationLicense = 33554432,
 }
 
 /**

@@ -37,12 +37,12 @@ import gobject.boxed;
 class TimeZone : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -75,9 +75,9 @@ class TimeZone : gobject.boxed.Boxed
   this(string identifier = null)
   {
     GTimeZone* _cretval;
-    const(char)* _identifier = identifier.toCString(No.alloc);
+    const(char)* _identifier = identifier.toCString(No.Alloc);
     _cretval = g_time_zone_new(_identifier);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -154,9 +154,9 @@ class TimeZone : gobject.boxed.Boxed
   static glib.time_zone.TimeZone newIdentifier(string identifier = null)
   {
     GTimeZone* _cretval;
-    const(char)* _identifier = identifier.toCString(No.alloc);
+    const(char)* _identifier = identifier.toCString(No.Alloc);
     _cretval = g_time_zone_new_identifier(_identifier);
-    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class TimeZone : gobject.boxed.Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_local();
-    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class TimeZone : gobject.boxed.Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_offset(seconds);
-    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class TimeZone : gobject.boxed.Boxed
   {
     GTimeZone* _cretval;
     _cretval = g_time_zone_new_utc();
-    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.time_zone.TimeZone(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class TimeZone : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)cPtr, interval);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class TimeZone : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_time_zone_get_identifier(cast(GTimeZone*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

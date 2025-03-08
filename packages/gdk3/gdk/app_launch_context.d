@@ -35,7 +35,7 @@ import gobject.object;
 class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,7 +61,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   {
     GdkAppLaunchContext* _cretval;
     _cretval = gdk_app_launch_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -91,7 +91,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setDisplay(gdk.display.Display display)
   {
-    gdk_app_launch_context_set_display(cast(GdkAppLaunchContext*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
+    gdk_app_launch_context_set_display(cast(GdkAppLaunchContext*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,7 +124,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIconName(string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)cPtr, _iconName);
   }
 
@@ -143,7 +143,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gdk_app_launch_context_set_screen(cast(GdkAppLaunchContext*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+    gdk_app_launch_context_set_screen(cast(GdkAppLaunchContext*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 
   /**

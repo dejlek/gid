@@ -27,7 +27,7 @@ import gtk.widget;
 class ListItem : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class ListItem : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class ListItem : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ListItem : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_item_get_child(cast(GtkListItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ListItem : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = gtk_list_item_get_item(cast(GtkListItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class ListItem : gobject.object.ObjectG
   */
   void setAccessibleDescription(string description)
   {
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     gtk_list_item_set_accessible_description(cast(GtkListItem*)cPtr, _description);
   }
 
@@ -179,7 +179,7 @@ class ListItem : gobject.object.ObjectG
   */
   void setAccessibleLabel(string label)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_list_item_set_accessible_label(cast(GtkListItem*)cPtr, _label);
   }
 
@@ -212,7 +212,7 @@ class ListItem : gobject.object.ObjectG
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

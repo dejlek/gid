@@ -26,7 +26,7 @@ import gtk.types;
 class HScrollbar : gtk.scrollbar.Scrollbar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,12 +48,12 @@ class HScrollbar : gtk.scrollbar.Scrollbar
       adjustment =       the #GtkAdjustment to use, or null to create a new adjustment
     Returns:     the new #GtkHScrollbar
   
-    Deprecated:     Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.horizontal] instead
+    Deprecated:     Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.Horizontal] instead
   */
   this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 }

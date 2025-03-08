@@ -41,7 +41,7 @@ template URIHandlerT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -57,7 +57,7 @@ template URIHandlerT()
   {
     char* _cretval;
     _cretval = gst_uri_handler_get_uri(cast(GstURIHandler*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ template URIHandlerT()
   override bool setUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gst_uri_handler_set_uri(cast(GstURIHandler*)cPtr, _uri, &_err);
     if (_err)

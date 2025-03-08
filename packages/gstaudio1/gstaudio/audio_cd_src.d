@@ -57,7 +57,7 @@ import gstbase.push_src;
 class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

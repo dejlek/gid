@@ -85,7 +85,7 @@ import gst.types;
 class Clock : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -127,7 +127,7 @@ class Clock : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_clock_id_get_clock(id);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class Clock : gst.object.ObjectGst
   static bool idUsesClock(gst.types.ClockID id, gst.clock.Clock clock)
   {
     bool _retval;
-    _retval = gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock.cPtr(No.dup) : null);
+    _retval = gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Clock : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.take), time, id);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -394,7 +394,7 @@ class Clock : gst.object.ObjectGst
   {
     GstClock* _cretval;
     _cretval = gst_clock_get_master(cast(GstClock*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class Clock : gst.object.ObjectGst
 
   /**
       Checks if the clock is currently synced, by looking at whether
-    [gst.types.ClockFlags.needsStartupSync] is set.
+    [gst.types.ClockFlags.NeedsStartupSync] is set.
     Returns:     true if the clock is currently synced
   */
   bool isSynced()
@@ -550,7 +550,7 @@ class Clock : gst.object.ObjectGst
   bool setMaster(gst.clock.Clock master = null)
   {
     bool _retval;
-    _retval = gst_clock_set_master(cast(GstClock*)cPtr, master ? cast(GstClock*)master.cPtr(No.dup) : null);
+    _retval = gst_clock_set_master(cast(GstClock*)cPtr, master ? cast(GstClock*)master.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -575,7 +575,7 @@ class Clock : gst.object.ObjectGst
       Sets clock to synced and emits the #GstClock::synced signal, and wakes up any
     thread waiting in [gst.clock.Clock.waitForSync].
     
-    This function must only be called if [gst.types.ClockFlags.needsStartupSync]
+    This function must only be called if [gst.types.ClockFlags.NeedsStartupSync]
     is set on the clock, and is intended to be called by subclasses only.
     Params:
       synced =       if the clock is synced
@@ -660,7 +660,7 @@ class Clock : gst.object.ObjectGst
     
     For asynchronous waiting, the #GstClock::synced signal can be used.
     
-    This returns immediately with true if [gst.types.ClockFlags.needsStartupSync]
+    This returns immediately with true if [gst.types.ClockFlags.NeedsStartupSync]
     is not set on the clock, or if the clock is already synced.
     Params:
       timeout =       timeout for waiting or `GST_CLOCK_TIME_NONE`
@@ -674,7 +674,7 @@ class Clock : gst.object.ObjectGst
   }
 
   /**
-      Signaled on clocks with [gst.types.ClockFlags.needsStartupSync] set once
+      Signaled on clocks with [gst.types.ClockFlags.NeedsStartupSync] set once
     the clock is synchronized, or when it completely lost synchronization.
     This signal will not be emitted on clocks without the flag.
     
@@ -696,10 +696,10 @@ class Clock : gst.object.ObjectGst
     Connect to Synced signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSynced(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSynced(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SyncedCallbackDlg) || is(T : SyncedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

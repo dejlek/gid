@@ -14,7 +14,7 @@ import gstaudio.types;
 class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorPad
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

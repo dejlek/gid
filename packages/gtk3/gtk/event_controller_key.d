@@ -20,7 +20,7 @@ import gtk.widget;
 class EventControllerKey : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,15 +40,15 @@ class EventControllerKey : gtk.event_controller.EventController
   this(gtk.widget.Widget widget)
   {
     GtkEventController* _cretval;
-    _cretval = gtk_event_controller_key_new(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_event_controller_key_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -68,14 +68,14 @@ class EventControllerKey : gtk.event_controller.EventController
   {
     GtkIMContext* _cretval;
     _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   void setImContext(gtk.imcontext.IMContext imContext)
   {
-    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.dup) : null);
+    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
   }
 
   /** */
@@ -88,10 +88,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to FocusIn signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusIn(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFocusIn(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusInCallbackDlg) || is(T : FocusInCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -116,10 +116,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to FocusOut signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusOut(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFocusOut(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusOutCallbackDlg) || is(T : FocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -144,10 +144,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to ImUpdate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectImUpdate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectImUpdate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ImUpdateCallbackDlg) || is(T : ImUpdateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -183,10 +183,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to KeyPressed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyPressed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeyPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyPressedCallbackDlg) || is(T : KeyPressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -226,10 +226,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to KeyReleased signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyReleased(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeyReleased(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyReleasedCallbackDlg) || is(T : KeyReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -257,10 +257,10 @@ class EventControllerKey : gtk.event_controller.EventController
     Connect to Modifiers signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectModifiers(T)(T callback, Flag!"after" after = No.after)
+  ulong connectModifiers(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ModifiersCallbackDlg) || is(T : ModifiersCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -71,7 +71,7 @@ import gtk.widget;
 class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -98,7 +98,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_item_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -110,9 +110,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   static gtk.menu_item.MenuItem newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,9 +129,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   static gtk.menu_item.MenuItem newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_accel_path(cast(GtkMenuItem*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     const(char)* _cretval;
     _cretval = gtk_menu_item_get_label(cast(GtkMenuItem*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_item_get_submenu(cast(GtkMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setAccelPath(string accelPath = null)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_item_set_accel_path(cast(GtkMenuItem*)cPtr, _accelPath);
   }
 
@@ -283,7 +283,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_menu_item_set_label(cast(GtkMenuItem*)cPtr, _label);
   }
 
@@ -328,7 +328,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setSubmenu(gtk.menu.Menu submenu = null)
   {
-    gtk_menu_item_set_submenu(cast(GtkMenuItem*)cPtr, submenu ? cast(GtkWidget*)submenu.cPtr(No.dup) : null);
+    gtk_menu_item_set_submenu(cast(GtkMenuItem*)cPtr, submenu ? cast(GtkWidget*)submenu.cPtr(No.Dup) : null);
   }
 
   /**
@@ -379,10 +379,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -416,10 +416,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to ActivateItem signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateItem(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateItem(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateItemCallbackDlg) || is(T : ActivateItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -444,10 +444,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to Deselect signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeselect(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeselect(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeselectCallbackDlg) || is(T : DeselectCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -472,10 +472,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to Select signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelect(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelect(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectCallbackDlg) || is(T : SelectCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -500,10 +500,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to ToggleSizeAllocate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleSizeAllocate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleSizeAllocate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleSizeAllocateCallbackDlg) || is(T : ToggleSizeAllocateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -529,10 +529,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     Connect to ToggleSizeRequest signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleSizeRequest(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleSizeRequest(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleSizeRequestCallbackDlg) || is(T : ToggleSizeRequestCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

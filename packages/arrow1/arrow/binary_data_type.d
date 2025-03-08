@@ -10,7 +10,7 @@ import gid.gid;
 class BinaryDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class BinaryDataType : arrow.data_type.DataType
   {
     GArrowBinaryDataType* _cretval;
     _cretval = garrow_binary_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

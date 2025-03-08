@@ -15,7 +15,7 @@ import gsk.types;
 class CairoRenderer : gsk.renderer.Renderer
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,6 +46,6 @@ class CairoRenderer : gsk.renderer.Renderer
   {
     GskRenderer* _cretval;
     _cretval = gsk_cairo_renderer_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

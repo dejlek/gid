@@ -62,12 +62,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class WindowControls : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -93,7 +93,7 @@ class WindowControls : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_controls_new(side);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -104,7 +104,7 @@ class WindowControls : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class WindowControls : gtk.widget.Widget
   */
   void setDecorationLayout(string layout = null)
   {
-    const(char)* _layout = layout.toCString(No.alloc);
+    const(char)* _layout = layout.toCString(No.Alloc);
     gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)cPtr, _layout);
   }
 

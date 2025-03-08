@@ -29,7 +29,7 @@ import gtk.types;
 class ToggleToolButton : gtk.tool_button.ToolButton
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   {
     GtkToolItem* _cretval;
     _cretval = gtk_toggle_tool_button_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -71,9 +71,9 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   static gtk.toggle_tool_button.ToggleToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_toggle_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,10 +118,10 @@ class ToggleToolButton : gtk.tool_button.ToolButton
     Connect to Toggled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggled(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

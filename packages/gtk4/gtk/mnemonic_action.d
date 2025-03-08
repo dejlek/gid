@@ -13,7 +13,7 @@ import gtk.types;
 class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_mnemonic_action_get();
-    auto _retval = ObjectG.getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.mnemonic_action.MnemonicAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

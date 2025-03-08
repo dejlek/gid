@@ -37,7 +37,7 @@ import gtk.widget;
 class Style : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,13 +63,13 @@ class Style : gobject.object.ObjectG
   {
     GtkStyle* _cretval;
     _cretval = gtk_style_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   void applyDefaultBackground(cairo.context.Context cr, gdk.window.Window window, gtk.types.StateType stateType, int x, int y, int width, int height)
   {
-    gtk_style_apply_default_background(cast(GtkStyle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, stateType, x, y, width, height);
+    gtk_style_apply_default_background(cast(GtkStyle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, stateType, x, y, width, height);
   }
 
   /**
@@ -82,7 +82,7 @@ class Style : gobject.object.ObjectG
   {
     GtkStyle* _cretval;
     _cretval = gtk_style_copy(cast(GtkStyle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,10 +108,10 @@ class Style : gobject.object.ObjectG
   */
   void getStyleProperty(gobject.types.GType widgetType, string propertyName, out gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
     gtk_style_get_style_property(cast(GtkStyle*)cPtr, widgetType, _propertyName, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -141,10 +141,10 @@ class Style : gobject.object.ObjectG
   bool lookupColor(string colorName, out gdk.color.Color color)
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.alloc);
+    const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkColor _color;
     _retval = gtk_style_lookup_color(cast(GtkStyle*)cPtr, _colorName, &_color);
-    color = new gdk.color.Color(cast(void*)&_color, No.take);
+    color = new gdk.color.Color(cast(void*)&_color, No.Take);
     return _retval;
   }
 
@@ -161,9 +161,9 @@ class Style : gobject.object.ObjectG
   gtk.icon_set.IconSet lookupIconSet(string stockId)
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_style_lookup_icon_set(cast(GtkStyle*)cPtr, _stockId);
-    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -188,9 +188,9 @@ class Style : gobject.object.ObjectG
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
   {
     PixbufC* _cretval;
-    const(char)* _detail = detail.toCString(No.alloc);
-    _cretval = gtk_style_render_icon(cast(GtkStyle*)cPtr, source ? cast(const(GtkIconSource)*)source.cPtr(No.dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    const(char)* _detail = detail.toCString(No.Alloc);
+    _cretval = gtk_style_render_icon(cast(GtkStyle*)cPtr, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Style : gobject.object.ObjectG
   */
   void setBackground(gdk.window.Window window, gtk.types.StateType stateType)
   {
-    gtk_style_set_background(cast(GtkStyle*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, stateType);
+    gtk_style_set_background(cast(GtkStyle*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, stateType);
   }
 
   /**
@@ -228,10 +228,10 @@ class Style : gobject.object.ObjectG
     Connect to Realize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRealize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRealize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RealizeCallbackDlg) || is(T : RealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -266,10 +266,10 @@ class Style : gobject.object.ObjectG
     Connect to Unrealize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnrealize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnrealizeCallbackDlg) || is(T : UnrealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

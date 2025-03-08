@@ -12,7 +12,7 @@ class VideoColorimetry
 {
   GstVideoColorimetry cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoColorimetry");
@@ -78,7 +78,7 @@ class VideoColorimetry
   bool fromString(string color)
   {
     bool _retval;
-    const(char)* _color = color.toCString(No.alloc);
+    const(char)* _color = color.toCString(No.Alloc);
     _retval = gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)cPtr, _color);
     return _retval;
   }
@@ -122,7 +122,7 @@ class VideoColorimetry
   bool matches(string color)
   {
     bool _retval;
-    const(char)* _color = color.toCString(No.alloc);
+    const(char)* _color = color.toCString(No.Alloc);
     _retval = gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)cPtr, _color);
     return _retval;
   }
@@ -136,7 +136,7 @@ class VideoColorimetry
   {
     char* _cretval;
     _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

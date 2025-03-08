@@ -32,7 +32,7 @@ interface TlsBackend
   {
     GTlsBackend* _cretval;
     _cretval = g_tls_backend_get_default();
-    auto _retval = ObjectG.getDObject!(gio.tls_backend.TlsBackend)(cast(GTlsBackend*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_backend.TlsBackend)(cast(GTlsBackend*)_cretval, No.Take);
     return _retval;
   }
 

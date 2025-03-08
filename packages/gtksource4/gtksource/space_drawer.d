@@ -13,7 +13,7 @@ import gtksource.types;
 class SpaceDrawer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class SpaceDrawer : gobject.object.ObjectG
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_space_drawer_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -58,8 +58,8 @@ class SpaceDrawer : gobject.object.ObjectG
   */
   void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
   {
-    const(char)* _key = key.toCString(No.alloc);
-    gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.dup) : null, _key, flags);
+    const(char)* _key = key.toCString(No.Alloc);
+    gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.Dup) : null, _key, flags);
   }
 
   /** */
@@ -83,7 +83,7 @@ class SpaceDrawer : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class SpaceDrawer : gobject.object.ObjectG
   */
   void setMatrix(glib.variant.VariantG matrix = null)
   {
-    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.dup) : null);
+    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(VariantC*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

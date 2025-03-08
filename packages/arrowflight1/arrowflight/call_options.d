@@ -10,7 +10,7 @@ import gobject.object;
 class CallOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class CallOptions : gobject.object.ObjectG
   {
     GAFlightCallOptions* _cretval;
     _cretval = gaflight_call_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -42,8 +42,8 @@ class CallOptions : gobject.object.ObjectG
   */
   void addHeader(string name, string value)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     gaflight_call_options_add_header(cast(GAFlightCallOptions*)cPtr, _name, _value);
   }
 
@@ -65,8 +65,8 @@ class CallOptions : gobject.object.ObjectG
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData)
     {
       auto _dlg = cast(arrowflight.types.HeaderFunc*)userData;
-      string _name = name.fromCString(No.free);
-      string _value = value.fromCString(No.free);
+      string _name = name.fromCString(No.Free);
+      string _value = value.fromCString(No.Free);
 
       (*_dlg)(_name, _value);
     }

@@ -7,7 +7,7 @@ import arrow.writable_mixin;
 /// Proxy object for Arrow.Writable interface when a GObject has no applicable D binding
 class WritableIfaceProxy : IfaceProxy, arrow.writable.Writable
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

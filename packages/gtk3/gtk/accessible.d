@@ -24,7 +24,7 @@ import gtk.widget;
 class Accessible : atk.object.ObjectAtk
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -62,7 +62,7 @@ class Accessible : atk.object.ObjectAtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_accessible_get_widget(cast(GtkAccessible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,6 +78,6 @@ class Accessible : atk.object.ObjectAtk
   */
   void setWidget(gtk.widget.Widget widget = null)
   {
-    gtk_accessible_set_widget(cast(GtkAccessible*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_accessible_set_widget(cast(GtkAccessible*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 }

@@ -11,7 +11,7 @@ import glib.error;
 class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

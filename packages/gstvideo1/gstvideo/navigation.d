@@ -60,7 +60,7 @@ interface Navigation
   static bool eventGetCoordinates(gst.event.Event event, out double x, out double y)
   {
     bool _retval;
-    _retval = gst_navigation_event_get_coordinates(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gst_navigation_event_get_coordinates(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ interface Navigation
   static gstvideo.types.NavigationEventType eventGetType(gst.event.Event event)
   {
     GstNavigationEventType _cretval;
-    _cretval = gst_navigation_event_get_type(event ? cast(GstEvent*)event.cPtr(No.dup) : null);
+    _cretval = gst_navigation_event_get_type(event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
     gstvideo.types.NavigationEventType _retval = cast(gstvideo.types.NavigationEventType)_cretval;
     return _retval;
   }
@@ -89,7 +89,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_command(command);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -104,9 +104,9 @@ interface Navigation
   static gst.event.Event eventNewKeyPress(string key, gstvideo.types.NavigationModifierType state)
   {
     GstEvent* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = gst_navigation_event_new_key_press(_key, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -121,9 +121,9 @@ interface Navigation
   static gst.event.Event eventNewKeyRelease(string key, gstvideo.types.NavigationModifierType state)
   {
     GstEvent* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = gst_navigation_event_new_key_release(_key, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -141,7 +141,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_button_press(button, x, y, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -159,7 +159,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_button_release(button, x, y, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_move(x, y, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -195,7 +195,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_mouse_scroll(x, y, deltaX, deltaY, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -213,7 +213,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_cancel(state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -235,7 +235,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_down(identifier, x, y, pressure, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -252,7 +252,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_frame(state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -273,7 +273,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_motion(identifier, x, y, pressure, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -293,7 +293,7 @@ interface Navigation
   {
     GstEvent* _cretval;
     _cretval = gst_navigation_event_new_touch_up(identifier, x, y, state);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -309,7 +309,7 @@ interface Navigation
   static bool eventParseCommand(gst.event.Event event, out gstvideo.types.NavigationCommand command)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_command(event ? cast(GstEvent*)event.cPtr(No.dup) : null, &command);
+    _retval = gst_navigation_event_parse_command(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, &command);
     return _retval;
   }
 
@@ -329,8 +329,8 @@ interface Navigation
   {
     bool _retval;
     char* _key;
-    _retval = gst_navigation_event_parse_key_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, &_key);
-    key = _key.fromCString(No.free);
+    _retval = gst_navigation_event_parse_key_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, &_key);
+    key = _key.fromCString(No.Free);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ interface Navigation
   static bool eventParseMouseButtonEvent(gst.event.Event event, out int button, out double x, out double y)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_mouse_button_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(int*)&button, cast(double*)&x, cast(double*)&y);
+    _retval = gst_navigation_event_parse_mouse_button_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(int*)&button, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ interface Navigation
   static bool eventParseMouseMoveEvent(gst.event.Event event, out double x, out double y)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_mouse_move_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gst_navigation_event_parse_mouse_move_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ interface Navigation
   static bool eventParseMouseScrollEvent(gst.event.Event event, out double x, out double y, out double deltaX, out double deltaY)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_mouse_scroll_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y, cast(double*)&deltaX, cast(double*)&deltaY);
+    _retval = gst_navigation_event_parse_mouse_scroll_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, cast(double*)&deltaX, cast(double*)&deltaY);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ interface Navigation
   static bool eventParseTouchEvent(gst.event.Event event, out uint identifier, out double x, out double y, out double pressure)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_touch_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y, cast(double*)&pressure);
+    _retval = gst_navigation_event_parse_touch_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y, cast(double*)&pressure);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ interface Navigation
   static bool eventParseTouchUpEvent(gst.event.Event event, out uint identifier, out double x, out double y)
   {
     bool _retval;
-    _retval = gst_navigation_event_parse_touch_up_event(event ? cast(GstEvent*)event.cPtr(No.dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y);
+    _retval = gst_navigation_event_parse_touch_up_event(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(uint*)&identifier, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ interface Navigation
   static bool eventSetCoordinates(gst.event.Event event, double x, double y)
   {
     bool _retval;
-    _retval = gst_navigation_event_set_coordinates(event ? cast(GstEvent*)event.cPtr(No.dup) : null, x, y);
+    _retval = gst_navigation_event_set_coordinates(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, x, y);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ interface Navigation
   static gstvideo.types.NavigationMessageType messageGetType(gst.message.Message message)
   {
     GstNavigationMessageType _cretval;
-    _cretval = gst_navigation_message_get_type(message ? cast(GstMessage*)message.cPtr(No.dup) : null);
+    _cretval = gst_navigation_message_get_type(message ? cast(GstMessage*)message.cPtr(No.Dup) : null);
     gstvideo.types.NavigationMessageType _retval = cast(gstvideo.types.NavigationMessageType)_cretval;
     return _retval;
   }
@@ -486,8 +486,8 @@ interface Navigation
   static gst.message.Message messageNewAnglesChanged(gst.object.ObjectGst src, uint curAngle, uint nAngles)
   {
     GstMessage* _cretval;
-    _cretval = gst_navigation_message_new_angles_changed(src ? cast(GstObject*)src.cPtr(No.dup) : null, curAngle, nAngles);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_navigation_message_new_angles_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null, curAngle, nAngles);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -501,8 +501,8 @@ interface Navigation
   static gst.message.Message messageNewCommandsChanged(gst.object.ObjectGst src)
   {
     GstMessage* _cretval;
-    _cretval = gst_navigation_message_new_commands_changed(src ? cast(GstObject*)src.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_navigation_message_new_commands_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -517,8 +517,8 @@ interface Navigation
   static gst.message.Message messageNewEvent(gst.object.ObjectGst src, gst.event.Event event)
   {
     GstMessage* _cretval;
-    _cretval = gst_navigation_message_new_event(src ? cast(GstObject*)src.cPtr(No.dup) : null, event ? cast(GstEvent*)event.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_navigation_message_new_event(src ? cast(GstObject*)src.cPtr(No.Dup) : null, event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -534,8 +534,8 @@ interface Navigation
   static gst.message.Message messageNewMouseOver(gst.object.ObjectGst src, bool active)
   {
     GstMessage* _cretval;
-    _cretval = gst_navigation_message_new_mouse_over(src ? cast(GstObject*)src.cPtr(No.dup) : null, active);
-    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_navigation_message_new_mouse_over(src ? cast(GstObject*)src.cPtr(No.Dup) : null, active);
+    auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -553,7 +553,7 @@ interface Navigation
   static bool messageParseAnglesChanged(gst.message.Message message, out uint curAngle, out uint nAngles)
   {
     bool _retval;
-    _retval = gst_navigation_message_parse_angles_changed(message ? cast(GstMessage*)message.cPtr(No.dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
+    _retval = gst_navigation_message_parse_angles_changed(message ? cast(GstMessage*)message.cPtr(No.Dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
     return _retval;
   }
 
@@ -571,8 +571,8 @@ interface Navigation
   {
     bool _retval;
     GstEvent* _event;
-    _retval = gst_navigation_message_parse_event(message ? cast(GstMessage*)message.cPtr(No.dup) : null, &_event);
-    event = new gst.event.Event(cast(void*)_event, Yes.take);
+    _retval = gst_navigation_message_parse_event(message ? cast(GstMessage*)message.cPtr(No.Dup) : null, &_event);
+    event = new gst.event.Event(cast(void*)_event, Yes.Take);
     return _retval;
   }
 
@@ -589,7 +589,7 @@ interface Navigation
   static bool messageParseMouseOver(gst.message.Message message, out bool active)
   {
     bool _retval;
-    _retval = gst_navigation_message_parse_mouse_over(message ? cast(GstMessage*)message.cPtr(No.dup) : null, cast(bool*)&active);
+    _retval = gst_navigation_message_parse_mouse_over(message ? cast(GstMessage*)message.cPtr(No.Dup) : null, cast(bool*)&active);
     return _retval;
   }
 
@@ -604,7 +604,7 @@ interface Navigation
   static gstvideo.types.NavigationQueryType queryGetType(gst.query.Query query)
   {
     GstNavigationQueryType _cretval;
-    _cretval = gst_navigation_query_get_type(query ? cast(GstQuery*)query.cPtr(No.dup) : null);
+    _cretval = gst_navigation_query_get_type(query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
     gstvideo.types.NavigationQueryType _retval = cast(gstvideo.types.NavigationQueryType)_cretval;
     return _retval;
   }
@@ -619,7 +619,7 @@ interface Navigation
   {
     GstQuery* _cretval;
     _cretval = gst_navigation_query_new_angles();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -632,7 +632,7 @@ interface Navigation
   {
     GstQuery* _cretval;
     _cretval = gst_navigation_query_new_commands();
-    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -651,7 +651,7 @@ interface Navigation
   static bool queryParseAngles(gst.query.Query query, out uint curAngle, out uint nAngles)
   {
     bool _retval;
-    _retval = gst_navigation_query_parse_angles(query ? cast(GstQuery*)query.cPtr(No.dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
+    _retval = gst_navigation_query_parse_angles(query ? cast(GstQuery*)query.cPtr(No.Dup) : null, cast(uint*)&curAngle, cast(uint*)&nAngles);
     return _retval;
   }
 
@@ -665,7 +665,7 @@ interface Navigation
   static bool queryParseCommandsLength(gst.query.Query query, out uint nCmds)
   {
     bool _retval;
-    _retval = gst_navigation_query_parse_commands_length(query ? cast(GstQuery*)query.cPtr(No.dup) : null, cast(uint*)&nCmds);
+    _retval = gst_navigation_query_parse_commands_length(query ? cast(GstQuery*)query.cPtr(No.Dup) : null, cast(uint*)&nCmds);
     return _retval;
   }
 
@@ -682,7 +682,7 @@ interface Navigation
   static bool queryParseCommandsNth(gst.query.Query query, uint nth, out gstvideo.types.NavigationCommand cmd)
   {
     bool _retval;
-    _retval = gst_navigation_query_parse_commands_nth(query ? cast(GstQuery*)query.cPtr(No.dup) : null, nth, &cmd);
+    _retval = gst_navigation_query_parse_commands_nth(query ? cast(GstQuery*)query.cPtr(No.Dup) : null, nth, &cmd);
     return _retval;
   }
 
@@ -695,7 +695,7 @@ interface Navigation
   */
   static void querySetAngles(gst.query.Query query, uint curAngle, uint nAngles)
   {
-    gst_navigation_query_set_angles(query ? cast(GstQuery*)query.cPtr(No.dup) : null, curAngle, nAngles);
+    gst_navigation_query_set_angles(query ? cast(GstQuery*)query.cPtr(No.Dup) : null, curAngle, nAngles);
   }
 
   /**
@@ -713,7 +713,7 @@ interface Navigation
       _nCmds = cast(int)cmds.length;
 
     auto _cmds = cast(GstNavigationCommand*)cmds.ptr;
-    gst_navigation_query_set_commandsv(query ? cast(GstQuery*)query.cPtr(No.dup) : null, _nCmds, _cmds);
+    gst_navigation_query_set_commandsv(query ? cast(GstQuery*)query.cPtr(No.Dup) : null, _nCmds, _cmds);
   }
 
   /**

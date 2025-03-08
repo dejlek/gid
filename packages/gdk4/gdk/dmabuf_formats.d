@@ -31,12 +31,12 @@ import gobject.boxed;
 class DmabufFormats : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -77,7 +77,7 @@ class DmabufFormats : gobject.boxed.Boxed
   bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2.cPtr(No.dup) : null);
+    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2.cPtr(No.Dup) : null);
     return _retval;
   }
 

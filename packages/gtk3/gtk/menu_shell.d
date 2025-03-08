@@ -47,7 +47,7 @@ import gtk.widget;
 class MenuShell : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,7 +72,7 @@ class MenuShell : gtk.container.Container
   */
   void activateItem(gtk.widget.Widget menuItem, bool forceDeactivate)
   {
-    gtk_menu_shell_activate_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.dup) : null, forceDeactivate);
+    gtk_menu_shell_activate_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null, forceDeactivate);
   }
 
   /**
@@ -83,7 +83,7 @@ class MenuShell : gtk.container.Container
   */
   void append(gtk.menu_item.MenuItem child)
   {
-    gtk_menu_shell_append(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_menu_shell_append(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -129,8 +129,8 @@ class MenuShell : gtk.container.Container
   */
   void bindModel(gio.menu_model.MenuModel model, string actionNamespace, bool withSeparators)
   {
-    const(char)* _actionNamespace = actionNamespace.toCString(No.alloc);
-    gtk_menu_shell_bind_model(cast(GtkMenuShell*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null, _actionNamespace, withSeparators);
+    const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
+    gtk_menu_shell_bind_model(cast(GtkMenuShell*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, _actionNamespace, withSeparators);
   }
 
   /**
@@ -172,7 +172,7 @@ class MenuShell : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_parent_shell(cast(GtkMenuShell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class MenuShell : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_shell_get_selected_item(cast(GtkMenuShell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class MenuShell : gtk.container.Container
   */
   void insert(gtk.widget.Widget child, int position)
   {
-    gtk_menu_shell_insert(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, position);
+    gtk_menu_shell_insert(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -220,7 +220,7 @@ class MenuShell : gtk.container.Container
   */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_menu_shell_prepend(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_menu_shell_prepend(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -246,7 +246,7 @@ class MenuShell : gtk.container.Container
   */
   void selectItem(gtk.widget.Widget menuItem)
   {
-    gtk_menu_shell_select_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.dup) : null);
+    gtk_menu_shell_select_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null);
   }
 
   /**
@@ -304,10 +304,10 @@ class MenuShell : gtk.container.Container
     Connect to ActivateCurrent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateCurrent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateCurrent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCurrentCallbackDlg) || is(T : ActivateCurrentCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -341,10 +341,10 @@ class MenuShell : gtk.container.Container
     Connect to Cancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancel(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -378,10 +378,10 @@ class MenuShell : gtk.container.Container
     Connect to CycleFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCycleFocus(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCycleFocus(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CycleFocusCallbackDlg) || is(T : CycleFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -414,10 +414,10 @@ class MenuShell : gtk.container.Container
     Connect to Deactivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeactivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeactivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeactivateCallbackDlg) || is(T : DeactivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -456,10 +456,10 @@ class MenuShell : gtk.container.Container
     Connect to Insert signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsert(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsert(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertCallbackDlg) || is(T : InsertCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -495,10 +495,10 @@ class MenuShell : gtk.container.Container
     Connect to MoveCurrent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCurrent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveCurrent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCurrentCallbackDlg) || is(T : MoveCurrentCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -534,10 +534,10 @@ class MenuShell : gtk.container.Container
     Connect to MoveSelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveSelected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveSelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveSelectedCallbackDlg) || is(T : MoveSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -573,10 +573,10 @@ class MenuShell : gtk.container.Container
     Connect to SelectionDone signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionDone(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionDone(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionDoneCallbackDlg) || is(T : SelectionDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

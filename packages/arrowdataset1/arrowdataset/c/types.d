@@ -11,12 +11,12 @@ enum GADatasetSegmentEncoding
   /**
       No encoding.
   */
-  none = 0,
+  None = 0,
 
   /**
       Segment values are URL-encoded.
   */
-  uri = 1,
+  Uri = 1,
 }
 
 /** */

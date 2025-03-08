@@ -15,7 +15,7 @@ import gtk.types;
 class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,6 +39,6 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_password_entry_buffer_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

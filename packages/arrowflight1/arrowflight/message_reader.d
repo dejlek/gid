@@ -12,7 +12,7 @@ import gobject.object;
 class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   {
     GAFlightDescriptor* _cretval;
     _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -41,7 +41,7 @@ class PixbufModulePattern
 {
   GdkPixbufModulePattern cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GdkPixbuf.PixbufModulePattern");
@@ -59,24 +59,24 @@ class PixbufModulePattern
 
   @property string prefix()
   {
-    return (cast(GdkPixbufModulePattern*)cPtr).prefix.fromCString(No.free);
+    return (cast(GdkPixbufModulePattern*)cPtr).prefix.fromCString(No.Free);
   }
 
   @property void prefix(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
-    (cast(GdkPixbufModulePattern*)cPtr).prefix = propval.toCString(Yes.alloc);
+    (cast(GdkPixbufModulePattern*)cPtr).prefix = propval.toCString(Yes.Alloc);
   }
 
   @property string mask()
   {
-    return (cast(GdkPixbufModulePattern*)cPtr).mask.fromCString(No.free);
+    return (cast(GdkPixbufModulePattern*)cPtr).mask.fromCString(No.Free);
   }
 
   @property void mask(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
-    (cast(GdkPixbufModulePattern*)cPtr).mask = propval.toCString(Yes.alloc);
+    (cast(GdkPixbufModulePattern*)cPtr).mask = propval.toCString(Yes.Alloc);
   }
 
   @property int relevance()

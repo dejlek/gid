@@ -17,12 +17,12 @@ import gstallocators.types;
   Note that allocating new shared memories has a significant performance cost,
   it is thus recommended to keep a pool of pre-allocated #GstMemory, using
   #GstBufferPool. For that reason, this allocator has the
-  [gst.types.AllocatorFlags.noCopy] flag set.
+  [gst.types.AllocatorFlags.NoCopy] flag set.
 */
 class ShmAllocator : gstallocators.fd_allocator.FdAllocator
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,7 +48,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   {
     GstAllocator* _cretval;
     _cretval = gst_shm_allocator_get();
-    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 

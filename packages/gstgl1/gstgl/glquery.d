@@ -16,7 +16,7 @@ class GLQuery
 {
   GstGLQuery cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstGL.GLQuery");
@@ -51,7 +51,7 @@ class GLQuery
   /** */
   void init_(gstgl.glcontext.GLContext context, gstgl.types.GLQueryType queryType)
   {
-    gst_gl_query_init(cast(GstGLQuery*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null, queryType);
+    gst_gl_query_init(cast(GstGLQuery*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, queryType);
   }
 
   /** */
@@ -92,7 +92,7 @@ class GLQuery
   static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr)
   {
     bool _retval;
-    _retval = gst_gl_query_local_gl_context(element ? cast(GstElement*)element.cPtr(No.dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr.cPtr(No.dup) : null);
+    _retval = gst_gl_query_local_gl_context(element ? cast(GstElement*)element.cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr.cPtr(No.Dup) : null);
     return _retval;
   }
 }

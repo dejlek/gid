@@ -14,7 +14,7 @@ import gobject.object;
 class Dataset : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class Dataset : gobject.object.ObjectG
     _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ class Dataset : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gadataset_dataset_get_type_name(cast(GADatasetDataset*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class Dataset : gobject.object.ObjectG
     _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class Dataset : gobject.object.ObjectG
     _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

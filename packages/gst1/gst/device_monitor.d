@@ -76,7 +76,7 @@ import gst.types;
 class DeviceMonitor : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -100,7 +100,7 @@ class DeviceMonitor : gst.object.ObjectGst
   {
     GstDeviceMonitor* _cretval;
     _cretval = gst_device_monitor_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -124,8 +124,8 @@ class DeviceMonitor : gst.object.ObjectGst
   uint addFilter(string classes = null, gst.caps.Caps caps = null)
   {
     uint _retval;
-    const(char)* _classes = classes.toCString(No.alloc);
-    _retval = gst_device_monitor_add_filter(cast(GstDeviceMonitor*)cPtr, _classes, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    const(char)* _classes = classes.toCString(No.Alloc);
+    _retval = gst_device_monitor_add_filter(cast(GstDeviceMonitor*)cPtr, _classes, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class DeviceMonitor : gst.object.ObjectGst
   {
     GstBus* _cretval;
     _cretval = gst_device_monitor_get_bus(cast(GstDeviceMonitor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class DeviceMonitor : gst.object.ObjectGst
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -219,7 +219,7 @@ class DeviceMonitor : gst.object.ObjectGst
 
   /**
       Starts monitoring the devices, one this has succeeded, the
-    [gst.types.MessageType.deviceAdded] and [gst.types.MessageType.deviceRemoved] messages
+    [gst.types.MessageType.DeviceAdded] and [gst.types.MessageType.DeviceRemoved] messages
     will be emitted on the bus when the list of devices changes.
     Returns:     true if the device monitoring could be started, i.e. at least a
           single device provider was started successfully.

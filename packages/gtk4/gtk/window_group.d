@@ -28,7 +28,7 @@ import gtk.window;
 class WindowGroup : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,7 +55,7 @@ class WindowGroup : gobject.object.ObjectG
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_group_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class WindowGroup : gobject.object.ObjectG
   */
   void addWindow(gtk.window.Window window)
   {
-    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
+    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -88,6 +88,6 @@ class WindowGroup : gobject.object.ObjectG
   */
   void removeWindow(gtk.window.Window window)
   {
-    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
+    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 }

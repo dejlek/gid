@@ -16,7 +16,7 @@ import gtk.types;
 class ComboBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.action.Action, atk.selection.Selection
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

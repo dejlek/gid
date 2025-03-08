@@ -21,32 +21,32 @@ import gst.types;
   order until one step succeeds:
   
   1. Check if the element already has a context
-  2. Query downstream with [gst.types.QueryType.context] for the context
-  3. Query upstream with [gst.types.QueryType.context] for the context
-  4. Post a [gst.types.MessageType.needContext] message on the bus with the required
+  2. Query downstream with [gst.types.QueryType.Context] for the context
+  3. Query upstream with [gst.types.QueryType.Context] for the context
+  4. Post a [gst.types.MessageType.NeedContext] message on the bus with the required
      context types and afterwards check if a usable context was set now
-  5. Create a context by itself and post a [gst.types.MessageType.haveContext] message
+  5. Create a context by itself and post a [gst.types.MessageType.HaveContext] message
      on the bus.
   
-  Bins will catch [gst.types.MessageType.needContext] messages and will set any previously
+  Bins will catch [gst.types.MessageType.NeedContext] messages and will set any previously
   known context on the element that asks for it if possible. Otherwise the
   application should provide one if it can.
   
   #GstContext can be persistent.
   A persistent #GstContext is kept in elements when they reach
-  [gst.types.State.null_], non-persistent ones will be removed.
+  [gst.types.State.Null], non-persistent ones will be removed.
   Also, a non-persistent context won't override a previous persistent
   context set to an element.
 */
 class Context : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -72,9 +72,9 @@ class Context : gobject.boxed.Boxed
   this(string contextType, bool persistent)
   {
     GstContext* _cretval;
-    const(char)* _contextType = contextType.toCString(No.alloc);
+    const(char)* _contextType = contextType.toCString(No.Alloc);
     _cretval = gst_context_new(_contextType, persistent);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class Context : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_context_get_context_type(cast(const(GstContext)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Context : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_context_get_structure(cast(const(GstContext)*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Context : gobject.boxed.Boxed
   bool hasContextType(string contextType)
   {
     bool _retval;
-    const(char)* _contextType = contextType.toCString(No.alloc);
+    const(char)* _contextType = contextType.toCString(No.Alloc);
     _retval = gst_context_has_context_type(cast(const(GstContext)*)cPtr, _contextType);
     return _retval;
   }
@@ -139,7 +139,7 @@ class Context : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_context_writable_structure(cast(GstContext*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

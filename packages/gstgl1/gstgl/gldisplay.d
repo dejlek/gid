@@ -40,7 +40,7 @@ import gstgl.types;
 class GLDisplay : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,7 +61,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new_with_type(type);
-    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class GLDisplay : gst.object.ObjectGst
   bool addContext(gstgl.glcontext.GLContext context)
   {
     bool _retval;
-    _retval = gst_gl_display_add_context(cast(GstGLDisplay*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    _retval = gst_gl_display_add_context(cast(GstGLDisplay*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -102,10 +102,10 @@ class GLDisplay : gst.object.ObjectGst
     bool _retval;
     GstGLContext* _pContext;
     GError *_err;
-    _retval = gst_gl_display_create_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.dup) : null, &_pContext, &_err);
+    _retval = gst_gl_display_create_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, &_pContext, &_err);
     if (_err)
       throw new ErrorG(_err);
-    pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.take);
+    pContext = new gstgl.glcontext.GLContext(cast(void*)_pContext, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_create_window(cast(GstGLDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class GLDisplay : gst.object.ObjectGst
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_display_ensure_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.dup) : null, context ? cast(GstGLContext**)context.cPtr(No.dup) : null, &_err);
+    _retval = gst_gl_display_ensure_context(cast(GstGLDisplay*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, context ? cast(GstGLContext**)context.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -176,7 +176,7 @@ class GLDisplay : gst.object.ObjectGst
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_find_window(cast(GstGLDisplay*)cPtr, data, _compareFuncCB);
     _static_compareFunc = null;
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,8 +205,8 @@ class GLDisplay : gst.object.ObjectGst
   gstgl.glcontext.GLContext getGlContextForThread(glib.thread.Thread thread)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)cPtr, thread ? cast(GThread*)thread.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.take);
+    _cretval = gst_gl_display_get_gl_context_for_thread(cast(GstGLDisplay*)cPtr, thread ? cast(GThread*)thread.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -234,14 +234,14 @@ class GLDisplay : gst.object.ObjectGst
   */
   void removeContext(gstgl.glcontext.GLContext context)
   {
-    gst_gl_display_remove_context(cast(GstGLDisplay*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    gst_gl_display_remove_context(cast(GstGLDisplay*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /** */
   bool removeWindow(gstgl.glwindow.GLWindow window)
   {
     bool _retval;
-    _retval = gst_gl_display_remove_window(cast(GstGLDisplay*)cPtr, window ? cast(GstGLWindow*)window.cPtr(No.dup) : null);
+    _retval = gst_gl_display_remove_window(cast(GstGLDisplay*)cPtr, window ? cast(GstGLWindow*)window.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class GLDisplay : gst.object.ObjectGst
     GstGLWindow* _cretval;
     _cretval = gst_gl_display_retrieve_window(cast(GstGLDisplay*)cPtr, data, _compareFuncCB);
     _static_compareFunc = null;
-    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -295,10 +295,10 @@ class GLDisplay : gst.object.ObjectGst
     Connect to CreateContext signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateContext(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateContextCallbackDlg) || is(T : CreateContextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

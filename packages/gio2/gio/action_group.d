@@ -332,10 +332,10 @@ interface ActionGroup
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionAddedCallbackDlg) || is(T : ActionAddedCallbackFunc));
 
   /**
@@ -358,10 +358,10 @@ interface ActionGroup
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionEnabledChangedCallbackDlg) || is(T : ActionEnabledChangedCallbackFunc));
 
   /**
@@ -385,10 +385,10 @@ interface ActionGroup
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionRemovedCallbackDlg) || is(T : ActionRemovedCallbackFunc));
 
   /**
@@ -411,9 +411,9 @@ interface ActionGroup
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionStateChangedCallbackDlg) || is(T : ActionStateChangedCallbackFunc));
   }

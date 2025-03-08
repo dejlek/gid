@@ -18,7 +18,7 @@ import gobject.object;
 class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,13 +47,13 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
   this(string toCharset, string fromCharset)
   {
     GCharsetConverter* _cretval;
-    const(char)* _toCharset = toCharset.toCString(No.alloc);
-    const(char)* _fromCharset = fromCharset.toCString(No.alloc);
+    const(char)* _toCharset = toCharset.toCString(No.Alloc);
+    const(char)* _fromCharset = fromCharset.toCString(No.Alloc);
     GError *_err;
     _cretval = g_charset_converter_new(_toCharset, _fromCharset, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

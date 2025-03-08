@@ -59,9 +59,9 @@ interface DragSurface
     Connect to ComputeSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectComputeSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ComputeSizeCallbackDlg) || is(T : ComputeSizeCallbackFunc));
   }

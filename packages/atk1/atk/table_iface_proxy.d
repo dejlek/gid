@@ -7,7 +7,7 @@ import atk.table_mixin;
 /// Proxy object for Atk.Table interface when a GObject has no applicable D binding
 class TableIfaceProxy : IfaceProxy, atk.table.Table
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

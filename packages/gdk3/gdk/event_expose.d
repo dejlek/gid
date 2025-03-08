@@ -17,7 +17,7 @@ class EventExpose
 {
   GdkEventExpose cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventExpose");
@@ -45,7 +45,7 @@ class EventExpose
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventExpose*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventExpose*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()

@@ -17,7 +17,7 @@ import gtk.types;
 class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,8 +47,8 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   this(gtk.shortcut_trigger.ShortcutTrigger first, gtk.shortcut_trigger.ShortcutTrigger second)
   {
     GtkShortcutTrigger* _cretval;
-    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first.cPtr(Yes.dup) : null, second ? cast(GtkShortcutTrigger*)second.cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first.cPtr(Yes.Dup) : null, second ? cast(GtkShortcutTrigger*)second.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

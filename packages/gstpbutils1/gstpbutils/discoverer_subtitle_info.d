@@ -13,7 +13,7 @@ import gstpbutils.types;
 class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStreamInfo
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
   {
     const(char)* _cretval;
     _cretval = gst_discoverer_subtitle_info_get_language(cast(const(GstDiscovererSubtitleInfo)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

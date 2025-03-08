@@ -10,7 +10,7 @@ import gstvideo.types;
 class VideoBufferPool : gst.buffer_pool.BufferPool
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,6 +35,6 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
   {
     GstBufferPool* _cretval;
     _cretval = gst_video_buffer_pool_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

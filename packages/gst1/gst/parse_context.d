@@ -12,12 +12,12 @@ import gst.types;
 class ParseContext : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,7 +45,7 @@ class ParseContext : gobject.boxed.Boxed
   {
     GstParseContext* _cretval;
     _cretval = gst_parse_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,14 +56,14 @@ class ParseContext : gobject.boxed.Boxed
   {
     GstParseContext* _cretval;
     _cretval = gst_parse_context_copy(cast(const(GstParseContext)*)cPtr);
-    auto _retval = _cretval ? new gst.parse_context.ParseContext(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.parse_context.ParseContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
   /**
       Retrieve missing elements from a previous run of [gst.global.parseLaunchFull]
     or [gst.global.parseLaunchvFull]. Will only return results if an error code
-    of [gst.types.ParseError.noSuchElement] was returned.
+    of [gst.types.ParseError.NoSuchElement] was returned.
     Returns:     a
           null-terminated array of element factory name strings of missing
           elements. Free with [glib.global.strfreev] when no longer needed.
@@ -81,7 +81,7 @@ class ParseContext : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

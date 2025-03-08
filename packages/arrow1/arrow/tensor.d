@@ -12,7 +12,7 @@ import gobject.object;
 class Tensor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,17 +48,17 @@ class Tensor : gobject.object.ObjectG
 
     char*[] _tmpdimensionNames;
     foreach (s; dimensionNames)
-      _tmpdimensionNames ~= s.toCString(No.alloc);
+      _tmpdimensionNames ~= s.toCString(No.Alloc);
     char** _dimensionNames = _tmpdimensionNames.ptr;
-    _cretval = garrow_tensor_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null, data ? cast(GArrowBuffer*)data.cPtr(No.dup) : null, _shape, _nDimensions, _strides, _nStrides, _dimensionNames, _nDimensionNames);
-    this(_cretval, Yes.take);
+    _cretval = garrow_tensor_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, _shape, _nDimensions, _strides, _nStrides, _dimensionNames, _nDimensionNames);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool equal(arrow.tensor.Tensor otherTensor)
   {
     bool _retval;
-    _retval = garrow_tensor_equal(cast(GArrowTensor*)cPtr, otherTensor ? cast(GArrowTensor*)otherTensor.cPtr(No.dup) : null);
+    _retval = garrow_tensor_equal(cast(GArrowTensor*)cPtr, otherTensor ? cast(GArrowTensor*)otherTensor.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class Tensor : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = garrow_tensor_get_buffer(cast(GArrowTensor*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class Tensor : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_tensor_get_dimension_name(cast(GArrowTensor*)cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class Tensor : gobject.object.ObjectG
   {
     GArrowDataType* _cretval;
     _cretval = garrow_tensor_get_value_data_type(cast(GArrowTensor*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 

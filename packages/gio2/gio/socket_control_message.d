@@ -31,7 +31,7 @@ import gobject.object;
 class SocketControlMessage : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class SocketControlMessage : gobject.object.ObjectG
 
     auto _data = cast(void*)data.ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
-    auto _retval = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

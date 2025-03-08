@@ -52,7 +52,7 @@ import gobject.object;
 class DisplayManager : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -84,7 +84,7 @@ class DisplayManager : gobject.object.ObjectG
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
-    auto _retval = ObjectG.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class DisplayManager : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,9 +125,9 @@ class DisplayManager : gobject.object.ObjectG
   gdk.display.Display openDisplay(string name)
   {
     GdkDisplay* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class DisplayManager : gobject.object.ObjectG
   */
   void setDefaultDisplay(gdk.display.Display display)
   {
-    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
+    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
@@ -159,10 +159,10 @@ class DisplayManager : gobject.object.ObjectG
     Connect to DisplayOpened signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDisplayOpened(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDisplayOpened(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DisplayOpenedCallbackDlg) || is(T : DisplayOpenedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

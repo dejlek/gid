@@ -12,7 +12,7 @@ import gstvideo.video_frame;
 class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   {
     GstBuffer* _cretval;
     _cretval = gst_video_aggregator_pad_get_current_buffer(cast(GstVideoAggregatorPad*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

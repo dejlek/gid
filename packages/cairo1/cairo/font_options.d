@@ -27,12 +27,12 @@ import gobject.boxed;
 class FontOptions : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -61,7 +61,7 @@ class FontOptions : gobject.boxed.Boxed
   {
     cairo_font_options_t* _cretval;
     _cretval = cairo_font_options_copy(cast(const(cairo_font_options_t)*)cPtr);
-    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.Bool equal(cairo.font_options.FontOptions other)
   {
     cairo.types.Bool _retval;
-    _retval = cairo_font_options_equal(cast(const(cairo_font_options_t)*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.dup) : null);
+    _retval = cairo_font_options_equal(cast(const(cairo_font_options_t)*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -124,8 +124,8 @@ class FontOptions : gobject.boxed.Boxed
       green =       return location for green component of color
       blue =       return location for blue component of color
       alpha =       return location for alpha component of color
-    Returns:     [cairo.types.Status.success] if a custom palette color is
-      returned, [cairo.types.Status.invalidIndex] if no custom color exists
+    Returns:     [cairo.types.Status.Success] if a custom palette color is
+      returned, [cairo.types.Status.InvalidIndex] if no custom color exists
       for the color index.
   */
   cairo.types.Status getCustomPaletteColor(uint index, out double red, out double green, out double blue, out double alpha)
@@ -189,7 +189,7 @@ class FontOptions : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -212,13 +212,13 @@ class FontOptions : gobject.boxed.Boxed
       Merges non-default options from other into options, replacing
     existing values. This operation can be thought of as somewhat
     similar to compositing other onto options with the operation
-    of [cairo.types.Operator.over].
+    of [cairo.types.Operator.Over].
     Params:
       other =       another #cairo_font_options_t
   */
   void merge(cairo.font_options.FontOptions other)
   {
-    cairo_font_options_merge(cast(cairo_font_options_t*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.dup) : null);
+    cairo_font_options_merge(cast(cairo_font_options_t*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.Dup) : null);
   }
 
   /**
@@ -312,7 +312,7 @@ class FontOptions : gobject.boxed.Boxed
       Sets the subpixel order for the font options object. The subpixel
     order specifies the order of color elements within each pixel on
     the display device when rendering with an antialiasing mode of
-    [cairo.types.Antialias.subpixel]. See the documentation for
+    [cairo.types.Antialias.Subpixel]. See the documentation for
     #cairo_subpixel_order_t for full details.
     Params:
       subpixelOrder =       the new subpixel order
@@ -340,15 +340,15 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setVariations(string variations)
   {
-    const(char)* _variations = variations.toCString(No.alloc);
+    const(char)* _variations = variations.toCString(No.Alloc);
     cairo_font_options_set_variations(cast(cairo_font_options_t*)cPtr, _variations);
   }
 
   /**
       Checks whether an error has previously occurred for this
     font options object
-    Returns:     [cairo.types.Status.success], [cairo.types.Status.noMemory], or
-      [cairo.types.Status.nullPointer].
+    Returns:     [cairo.types.Status.Success], [cairo.types.Status.NoMemory], or
+      [cairo.types.Status.NullPointer].
   */
   cairo.types.Status status()
   {

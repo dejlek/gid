@@ -30,7 +30,7 @@ import gtk.types;
 class AccelGroup : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class AccelGroup : gobject.object.ObjectG
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_accel_group_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,8 +68,8 @@ class AccelGroup : gobject.object.ObjectG
   static gtk.accel_group.AccelGroup fromAccelClosure(gobject.closure.Closure closure)
   {
     GtkAccelGroup* _cretval;
-    _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.take);
+    _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class AccelGroup : gobject.object.ObjectG
   bool activate(glib.types.Quark accelQuark, gobject.object.ObjectG acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)cPtr, accelQuark, acceleratable ? cast(ObjectC*)acceleratable.cPtr(No.dup) : null, accelKey, accelMods);
+    _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)cPtr, accelQuark, acceleratable ? cast(ObjectC*)acceleratable.cPtr(No.Dup) : null, accelKey, accelMods);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class AccelGroup : gobject.object.ObjectG
   */
   void connect(uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags, gobject.closure.Closure closure)
   {
-    gtk_accel_group_connect(cast(GtkAccelGroup*)cPtr, accelKey, accelMods, accelFlags, closure ? cast(GClosure*)closure.cPtr(No.dup) : null);
+    gtk_accel_group_connect(cast(GtkAccelGroup*)cPtr, accelKey, accelMods, accelFlags, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
   }
 
   /**
@@ -132,8 +132,8 @@ class AccelGroup : gobject.object.ObjectG
   */
   void connectByPath(string accelPath, gobject.closure.Closure closure)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
-    gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)cPtr, _accelPath, closure ? cast(GClosure*)closure.cPtr(No.dup) : null);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)cPtr, _accelPath, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class AccelGroup : gobject.object.ObjectG
   bool disconnect(gobject.closure.Closure closure = null)
   {
     bool _retval;
-    _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.dup) : null);
+    _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class AccelGroup : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.AccelGroupFindFunc*)data;
 
-      bool _retval = (*_dlg)(*key, closure ? new gobject.closure.Closure(cast(void*)closure, No.take) : null);
+      bool _retval = (*_dlg)(*key, closure ? new gobject.closure.Closure(cast(void*)closure, No.Take) : null);
       return _retval;
     }
     auto _findFuncCB = findFunc ? &_findFuncCallback : null;
@@ -271,10 +271,10 @@ class AccelGroup : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAccelActivate(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectAccelActivate(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : AccelActivateCallbackDlg) || is(T : AccelActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -320,10 +320,10 @@ class AccelGroup : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAccelChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectAccelChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : AccelChangedCallbackDlg) || is(T : AccelChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

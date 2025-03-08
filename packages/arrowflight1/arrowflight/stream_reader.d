@@ -10,7 +10,7 @@ import gid.gid;
 class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

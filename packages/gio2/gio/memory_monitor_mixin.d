@@ -85,10 +85,10 @@ template MemoryMonitorT()
     Connect to LowMemoryWarning signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLowMemoryWarning(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LowMemoryWarningCallbackDlg) || is(T : LowMemoryWarningCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

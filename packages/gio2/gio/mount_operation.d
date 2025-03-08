@@ -34,7 +34,7 @@ import gobject.object;
 class MountOperation : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class MountOperation : gobject.object.ObjectG
   {
     GMountOperation* _cretval;
     _cretval = g_mount_operation_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class MountOperation : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_domain(cast(GMountOperation*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class MountOperation : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_password(cast(GMountOperation*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class MountOperation : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_mount_operation_get_username(cast(GMountOperation*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class MountOperation : gobject.object.ObjectG
   */
   void setDomain(string domain = null)
   {
-    const(char)* _domain = domain.toCString(No.alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     g_mount_operation_set_domain(cast(GMountOperation*)cPtr, _domain);
   }
 
@@ -236,7 +236,7 @@ class MountOperation : gobject.object.ObjectG
   */
   void setPassword(string password = null)
   {
-    const(char)* _password = password.toCString(No.alloc);
+    const(char)* _password = password.toCString(No.Alloc);
     g_mount_operation_set_password(cast(GMountOperation*)cPtr, _password);
   }
 
@@ -267,7 +267,7 @@ class MountOperation : gobject.object.ObjectG
   */
   void setUsername(string username = null)
   {
-    const(char)* _username = username.toCString(No.alloc);
+    const(char)* _username = username.toCString(No.Alloc);
     g_mount_operation_set_username(cast(GMountOperation*)cPtr, _username);
   }
 
@@ -292,10 +292,10 @@ class MountOperation : gobject.object.ObjectG
     Connect to Aborted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAborted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAborted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AbortedCallbackDlg) || is(T : AbortedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -335,10 +335,10 @@ class MountOperation : gobject.object.ObjectG
     Connect to AskPassword signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAskPassword(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAskPassword(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AskPasswordCallbackDlg) || is(T : AskPasswordCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -381,10 +381,10 @@ class MountOperation : gobject.object.ObjectG
     Connect to AskQuestion signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAskQuestion(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAskQuestion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AskQuestionCallbackDlg) || is(T : AskQuestionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -400,7 +400,7 @@ class MountOperation : gobject.object.ObjectG
         for (; choices[_lenchoices] !is null; _lenchoices++)
         break;
       foreach (i; 0 .. _lenchoices)
-        _choices ~= choices[i].fromCString(No.free);
+        _choices ~= choices[i].fromCString(No.Free);
       _dClosure.dlg(message, _choices, mountOperation);
     }
 
@@ -426,10 +426,10 @@ class MountOperation : gobject.object.ObjectG
     Connect to Reply signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReply(T)(T callback, Flag!"after" after = No.after)
+  ulong connectReply(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReplyCallbackDlg) || is(T : ReplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -483,10 +483,10 @@ class MountOperation : gobject.object.ObjectG
     Connect to ShowUnmountProgress signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowUnmountProgress(T)(T callback, Flag!"after" after = No.after)
+  ulong connectShowUnmountProgress(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ShowUnmountProgressCallbackDlg) || is(T : ShowUnmountProgressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -21,7 +21,7 @@ import gobject.object;
 class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.pollable_input_stream.PollableInputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   this(gio.input_stream.InputStream baseStream, gio.converter.Converter converter)
   {
     GInputStream* _cretval;
-    _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.dup) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(ObjectG)converter).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
   {
     GConverter* _cretval;
     _cretval = g_converter_input_stream_get_converter(cast(GConverterInputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
     return _retval;
   }
 }

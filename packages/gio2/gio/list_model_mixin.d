@@ -97,7 +97,7 @@ template ListModelT()
   T getItem(T)(uint position)
   {
     auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return ObjectG.getDObject!T(gobj, Yes.take);
+    return ObjectG.getDObject!T(gobj, Yes.Take);
   }
 
 
@@ -156,7 +156,7 @@ template ListModelT()
   {
     ObjectC* _cretval;
     _cretval = g_list_model_get_object(cast(GListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -216,10 +216,10 @@ template ListModelT()
     Connect to ItemsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectItemsChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectItemsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ItemsChangedCallbackDlg) || is(T : ItemsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

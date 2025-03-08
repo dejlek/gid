@@ -24,7 +24,7 @@ import pango.types;
 class Renderer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -97,7 +97,7 @@ class Renderer : gobject.object.ObjectG
   */
   void drawGlyph(pango.font.Font font, pango.types.Glyph glyph, double x, double y)
   {
-    pango_renderer_draw_glyph(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.dup) : null, glyph, x, y);
+    pango_renderer_draw_glyph(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyph, x, y);
   }
 
   /**
@@ -129,8 +129,8 @@ class Renderer : gobject.object.ObjectG
   */
   void drawGlyphItem(string text, pango.glyph_item.GlyphItem glyphItem, int x, int y)
   {
-    const(char)* _text = text.toCString(No.alloc);
-    pango_renderer_draw_glyph_item(cast(PangoRenderer*)cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.dup) : null, x, y);
+    const(char)* _text = text.toCString(No.Alloc);
+    pango_renderer_draw_glyph_item(cast(PangoRenderer*)cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -145,7 +145,7 @@ class Renderer : gobject.object.ObjectG
   */
   void drawGlyphs(pango.font.Font font, pango.glyph_string.GlyphString glyphs, int x, int y)
   {
-    pango_renderer_draw_glyphs(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null, x, y);
+    pango_renderer_draw_glyphs(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -162,7 +162,7 @@ class Renderer : gobject.object.ObjectG
   */
   void drawLayout(pango.layout.Layout layout, int x, int y)
   {
-    pango_renderer_draw_layout(cast(PangoRenderer*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null, x, y);
+    pango_renderer_draw_layout(cast(PangoRenderer*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -180,7 +180,7 @@ class Renderer : gobject.object.ObjectG
   */
   void drawLayoutLine(pango.layout_line.LayoutLine line, int x, int y)
   {
-    pango_renderer_draw_layout_line(cast(PangoRenderer*)cPtr, line ? cast(PangoLayoutLine*)line.cPtr(No.dup) : null, x, y);
+    pango_renderer_draw_layout_line(cast(PangoRenderer*)cPtr, line ? cast(PangoLayoutLine*)line.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -247,7 +247,7 @@ class Renderer : gobject.object.ObjectG
   {
     PangoColor* _cretval;
     _cretval = pango_renderer_get_color(cast(PangoRenderer*)cPtr, part);
-    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Renderer : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = pango_renderer_get_layout(cast(PangoRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Renderer : gobject.object.ObjectG
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_renderer_get_layout_line(cast(PangoRenderer*)cPtr);
-    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Renderer : gobject.object.ObjectG
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_renderer_get_matrix(cast(PangoRenderer*)cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class Renderer : gobject.object.ObjectG
   */
   void setColor(pango.types.RenderPart part, pango.color.Color color = null)
   {
-    pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(const(PangoColor)*)color.cPtr(No.dup) : null);
+    pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(const(PangoColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -365,6 +365,6 @@ class Renderer : gobject.object.ObjectG
   */
   void setMatrix(pango.matrix.Matrix matrix = null)
   {
-    pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.dup) : null);
+    pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }
 }

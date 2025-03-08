@@ -23,12 +23,12 @@ import gstaudio.types;
 class AudioConverter : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -60,8 +60,8 @@ class AudioConverter : gobject.boxed.Boxed
   this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config = null)
   {
     GstAudioConverter* _cretval;
-    _cretval = gst_audio_converter_new(flags, inInfo ? cast(GstAudioInfo*)inInfo.cPtr(No.dup) : null, outInfo ? cast(GstAudioInfo*)outInfo.cPtr(No.dup) : null, config ? cast(GstStructure*)config.cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gst_audio_converter_new(flags, inInfo ? cast(GstAudioInfo*)inInfo.cPtr(No.Dup) : null, outInfo ? cast(GstAudioInfo*)outInfo.cPtr(No.Dup) : null, config ? cast(GstStructure*)config.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -104,7 +104,7 @@ class AudioConverter : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_audio_converter_get_config(cast(GstAudioConverter*)cPtr, cast(int*)&inRate, cast(int*)&outRate);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class AudioConverter : gobject.boxed.Boxed
   bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null)
   {
     bool _retval;
-    _retval = gst_audio_converter_update_config(cast(GstAudioConverter*)cPtr, inRate, outRate, config ? cast(GstStructure*)config.cPtr(Yes.dup) : null);
+    _retval = gst_audio_converter_update_config(cast(GstAudioConverter*)cPtr, inRate, outRate, config ? cast(GstStructure*)config.cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

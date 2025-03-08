@@ -15,7 +15,7 @@ class VideoFrame
 {
   GstVideoFrame cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoFrame");
@@ -157,7 +157,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, flags);
+    _retval = gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame);
     return _retval;
   }
@@ -183,7 +183,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, id, flags);
+    _retval = gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, id, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame);
     return _retval;
   }

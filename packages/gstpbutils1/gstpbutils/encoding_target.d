@@ -17,7 +17,7 @@ import gstpbutils.types;
 class EncodingTarget : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,13 +58,13 @@ class EncodingTarget : gobject.object.ObjectG
   this(string name, string category, string description, gstpbutils.encoding_profile.EncodingProfile[] profiles)
   {
     GstEncodingTarget* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _category = category.toCString(No.alloc);
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _category = category.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     auto _profiles = gListFromD!(gstpbutils.encoding_profile.EncodingProfile)(profiles);
     scope(exit) containerFree!(const(GList)*, gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
     _cretval = gst_encoding_target_new(_name, _category, _description, _profiles);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -84,13 +84,13 @@ class EncodingTarget : gobject.object.ObjectG
   static gstpbutils.encoding_target.EncodingTarget load(string name, string category = null)
   {
     GstEncodingTarget* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _category = category.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _category = category.toCString(No.Alloc);
     GError *_err;
     _cretval = gst_encoding_target_load(_name, _category, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,12 +104,12 @@ class EncodingTarget : gobject.object.ObjectG
   static gstpbutils.encoding_target.EncodingTarget loadFromFile(string filepath)
   {
     GstEncodingTarget* _cretval;
-    const(char)* _filepath = filepath.toCString(No.alloc);
+    const(char)* _filepath = filepath.toCString(No.Alloc);
     GError *_err;
     _cretval = gst_encoding_target_load_from_file(_filepath, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class EncodingTarget : gobject.object.ObjectG
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_target_add_profile(cast(GstEncodingTarget*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.dup) : null);
+    _retval = gst_encoding_target_add_profile(cast(GstEncodingTarget*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class EncodingTarget : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_category(cast(GstEncodingTarget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class EncodingTarget : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_description(cast(GstEncodingTarget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class EncodingTarget : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_name(cast(GstEncodingTarget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class EncodingTarget : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gst_encoding_target_get_path(cast(GstEncodingTarget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -171,9 +171,9 @@ class EncodingTarget : gobject.object.ObjectG
   gstpbutils.encoding_profile.EncodingProfile getProfile(string name)
   {
     GstEncodingProfile* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_encoding_target_get_profile(cast(GstEncodingTarget*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class EncodingTarget : gobject.object.ObjectG
   bool saveToFile(string filepath)
   {
     bool _retval;
-    const(char)* _filepath = filepath.toCString(No.alloc);
+    const(char)* _filepath = filepath.toCString(No.Alloc);
     GError *_err;
     _retval = gst_encoding_target_save_to_file(cast(GstEncodingTarget*)cPtr, _filepath, &_err);
     if (_err)

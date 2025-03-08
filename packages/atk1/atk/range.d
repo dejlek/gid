@@ -18,12 +18,12 @@ import gobject.boxed;
 class Range : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -50,9 +50,9 @@ class Range : gobject.boxed.Boxed
   this(double lowerLimit, double upperLimit, string description)
   {
     AtkRange* _cretval;
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     _cretval = atk_range_new(lowerLimit, upperLimit, _description);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class Range : gobject.boxed.Boxed
   {
     AtkRange* _cretval;
     _cretval = atk_range_copy(cast(AtkRange*)cPtr);
-    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class Range : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = atk_range_get_description(cast(AtkRange*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

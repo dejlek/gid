@@ -44,7 +44,7 @@ template ColorBalanceT()
   override int getValue(gstvideo.color_balance_channel.ColorBalanceChannel channel)
   {
     int _retval;
-    _retval = gst_color_balance_get_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.dup) : null);
+    _retval = gst_color_balance_get_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ template ColorBalanceT()
   */
   override void setValue(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
   {
-    gst_color_balance_set_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.dup) : null, value);
+    gst_color_balance_set_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null, value);
   }
 
   /**
@@ -90,7 +90,7 @@ template ColorBalanceT()
   */
   override void valueChanged(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
   {
-    gst_color_balance_value_changed(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.dup) : null, value);
+    gst_color_balance_value_changed(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null, value);
   }
 
   /**
@@ -112,10 +112,10 @@ template ColorBalanceT()
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

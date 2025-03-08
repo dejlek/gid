@@ -19,12 +19,12 @@ import gstbase.types;
 class BaseParseFrame : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -96,8 +96,8 @@ class BaseParseFrame : gobject.boxed.Boxed
   this(gst.buffer.Buffer buffer, gstbase.types.BaseParseFrameFlags flags, int overhead)
   {
     GstBaseParseFrame* _cretval;
-    _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, flags, overhead);
-    this(_cretval, Yes.take);
+    _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, overhead);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -108,7 +108,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   {
     GstBaseParseFrame* _cretval;
     _cretval = gst_base_parse_frame_copy(cast(GstBaseParseFrame*)cPtr);
-    auto _retval = _cretval ? new gstbase.base_parse_frame.BaseParseFrame(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstbase.base_parse_frame.BaseParseFrame(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

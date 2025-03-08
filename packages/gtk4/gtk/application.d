@@ -88,7 +88,7 @@ import gtk.window;
 class Application : gio.application.Application
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -131,9 +131,9 @@ class Application : gio.application.Application
   this(string applicationId, gio.types.ApplicationFlags flags)
   {
     GtkApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString(No.alloc);
+    const(char)* _applicationId = applicationId.toCString(No.Alloc);
     _cretval = gtk_application_new(_applicationId, flags);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -157,7 +157,7 @@ class Application : gio.application.Application
   */
   void addWindow(gtk.window.Window window)
   {
-    gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
+    gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class Application : gio.application.Application
   string[] getAccelsForAction(string detailedActionName)
   {
     char** _cretval;
-    const(char)* _detailedActionName = detailedActionName.toCString(No.alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     _cretval = gtk_application_get_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName);
     string[] _retval;
 
@@ -182,7 +182,7 @@ class Application : gio.application.Application
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -212,7 +212,7 @@ class Application : gio.application.Application
   string[] getActionsForAccel(string accel)
   {
     char** _cretval;
-    const(char)* _accel = accel.toCString(No.alloc);
+    const(char)* _accel = accel.toCString(No.Alloc);
     _cretval = gtk_application_get_actions_for_accel(cast(GtkApplication*)cPtr, _accel);
     string[] _retval;
 
@@ -223,7 +223,7 @@ class Application : gio.application.Application
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -241,7 +241,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -258,9 +258,9 @@ class Application : gio.application.Application
   gio.menu.Menu getMenuById(string id)
   {
     GMenu* _cretval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Application : gio.application.Application
   {
     GMenuModel* _cretval;
     _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class Application : gio.application.Application
   {
     GtkWindow* _cretval;
     _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -352,8 +352,8 @@ class Application : gio.application.Application
   uint inhibit(gtk.window.Window window, gtk.types.ApplicationInhibitFlags flags, string reason = null)
   {
     uint _retval;
-    const(char)* _reason = reason.toCString(No.alloc);
-    _retval = gtk_application_inhibit(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null, flags, _reason);
+    const(char)* _reason = reason.toCString(No.Alloc);
+    _retval = gtk_application_inhibit(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, flags, _reason);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class Application : gio.application.Application
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -395,7 +395,7 @@ class Application : gio.application.Application
   */
   void removeWindow(gtk.window.Window window)
   {
-    gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.dup) : null);
+    gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -418,10 +418,10 @@ class Application : gio.application.Application
   */
   void setAccelsForAction(string detailedActionName, string[] accels)
   {
-    const(char)* _detailedActionName = detailedActionName.toCString(No.alloc);
+    const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
     char*[] _tmpaccels;
     foreach (s; accels)
-      _tmpaccels ~= s.toCString(No.alloc);
+      _tmpaccels ~= s.toCString(No.Alloc);
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
     gtk_application_set_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName, _accels);
@@ -451,7 +451,7 @@ class Application : gio.application.Application
   */
   void setMenubar(gio.menu_model.MenuModel menubar = null)
   {
-    gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.dup) : null);
+    gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
   }
 
   /**
@@ -473,7 +473,7 @@ class Application : gio.application.Application
     
     This signal is only emitted if `propertyGtk.Application:register-session`
     is `TRUE`. Applications can connect to this signal and call
-    [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.logout]
+    [gtk.application.Application.inhibit] with [gtk.types.ApplicationInhibitFlags.Logout]
     to delay the end of the session until state has been saved.
   
     ## Parameters
@@ -490,10 +490,10 @@ class Application : gio.application.Application
     Connect to QueryEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryEndCallbackDlg) || is(T : QueryEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -527,10 +527,10 @@ class Application : gio.application.Application
     Connect to WindowAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWindowAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWindowAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WindowAddedCallbackDlg) || is(T : WindowAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -567,10 +567,10 @@ class Application : gio.application.Application
     Connect to WindowRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWindowRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWindowRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WindowRemovedCallbackDlg) || is(T : WindowRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

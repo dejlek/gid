@@ -19,7 +19,7 @@ import gobject.object;
 class SimpleAction : gobject.object.ObjectG, gio.action.Action
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,9 +51,9 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   this(string name, glib.variant_type.VariantType parameterType = null)
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = g_simple_action_new(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = g_simple_action_new(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,9 +73,9 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   static gio.simple_action.SimpleAction newStateful(string name, glib.variant_type.VariantType parameterType, glib.variant.VariantG state)
   {
     GSimpleAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.dup) : null, state ? cast(VariantC*)state.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   */
   void setState(glib.variant.VariantG value)
   {
-    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.dup) : null);
+    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,7 +124,7 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
   */
   void setStateHint(glib.variant.VariantG stateHint = null)
   {
-    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(No.dup) : null);
+    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(VariantC*)stateHint.cPtr(No.Dup) : null);
   }
 
   /**
@@ -158,10 +158,10 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -227,10 +227,10 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
     Connect to ChangeState signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeState(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChangeState(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeStateCallbackDlg) || is(T : ChangeStateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

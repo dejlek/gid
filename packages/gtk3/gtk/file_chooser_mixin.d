@@ -159,17 +159,17 @@ template FileChooserT()
   */
   override void addChoice(string id, string label, string[] options = null, string[] optionLabels = null)
   {
-    const(char)* _id = id.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     char*[] _tmpoptions;
     foreach (s; options)
-      _tmpoptions ~= s.toCString(No.alloc);
+      _tmpoptions ~= s.toCString(No.Alloc);
     _tmpoptions ~= null;
     const(char*)* _options = _tmpoptions.ptr;
 
     char*[] _tmpoptionLabels;
     foreach (s; optionLabels)
-      _tmpoptionLabels ~= s.toCString(No.alloc);
+      _tmpoptionLabels ~= s.toCString(No.Alloc);
     _tmpoptionLabels ~= null;
     const(char*)* _optionLabels = _tmpoptionLabels.ptr;
     gtk_file_chooser_add_choice(cast(GtkFileChooser*)cPtr, _id, _label, _options, _optionLabels);
@@ -187,7 +187,7 @@ template FileChooserT()
   */
   override void addFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(Yes.dup) : null);
+    gtk_file_chooser_add_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -203,7 +203,7 @@ template FileChooserT()
   override bool addShortcutFolder(string folder)
   {
     bool _retval;
-    const(char)* _folder = folder.toCString(No.alloc);
+    const(char)* _folder = folder.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_file_chooser_add_shortcut_folder(cast(GtkFileChooser*)cPtr, _folder, &_err);
     if (_err)
@@ -224,7 +224,7 @@ template FileChooserT()
   override bool addShortcutFolderUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_file_chooser_add_shortcut_folder_uri(cast(GtkFileChooser*)cPtr, _uri, &_err);
     if (_err)
@@ -254,9 +254,9 @@ template FileChooserT()
   override string getChoice(string id)
   {
     const(char)* _cretval;
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     _cretval = gtk_file_chooser_get_choice(cast(GtkFileChooser*)cPtr, _id);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ template FileChooserT()
     Note that this is the folder that the file chooser is currently displaying
     (e.g. "/home/username/Documents"), which is not the same
     as the currently-selected folder if the chooser is in
-    [gtk.types.FileChooserAction.selectFolder] mode
+    [gtk.types.FileChooserAction.SelectFolder] mode
     (e.g. "/home/username/Documents/selected-folder/".  To get the
     currently-selected folder in that mode, use [gtk.file_chooser.FileChooser.getUri] as the
     usual way to get the selection.
@@ -294,7 +294,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_folder(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_current_folder_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ template FileChooserT()
     Note that this is the folder that the file chooser is currently displaying
     (e.g. "file:///home/username/Documents"), which is not the same
     as the currently-selected folder if the chooser is in
-    [gtk.types.FileChooserAction.selectFolder] mode
+    [gtk.types.FileChooserAction.SelectFolder] mode
     (e.g. "file:///home/username/Documents/selected-folder/".  To get the
     currently-selected folder in that mode, use [gtk.file_chooser.FileChooser.getUri] as the
     usual way to get the selection.
@@ -332,7 +332,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_folder_uri(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_current_name(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ template FileChooserT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_get_extra_widget(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -418,7 +418,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_filename(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -464,7 +464,7 @@ template FileChooserT()
   {
     GtkFileFilter* _cretval;
     _cretval = gtk_file_chooser_get_filter(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ template FileChooserT()
   {
     GFile* _cretval;
     _cretval = gtk_file_chooser_get_preview_file(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -505,7 +505,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_preview_filename(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_preview_uri(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -532,7 +532,7 @@ template FileChooserT()
   {
     GtkWidget* _cretval;
     _cretval = gtk_file_chooser_get_preview_widget(cast(GtkFileChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -589,7 +589,7 @@ template FileChooserT()
   {
     char* _cretval;
     _cretval = gtk_file_chooser_get_uri(cast(GtkFileChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -675,7 +675,7 @@ template FileChooserT()
   */
   override void removeChoice(string id)
   {
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     gtk_file_chooser_remove_choice(cast(GtkFileChooser*)cPtr, _id);
   }
 
@@ -686,7 +686,7 @@ template FileChooserT()
   */
   override void removeFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
+    gtk_file_chooser_remove_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -701,7 +701,7 @@ template FileChooserT()
   override bool removeShortcutFolder(string folder)
   {
     bool _retval;
-    const(char)* _folder = folder.toCString(No.alloc);
+    const(char)* _folder = folder.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_file_chooser_remove_shortcut_folder(cast(GtkFileChooser*)cPtr, _folder, &_err);
     if (_err)
@@ -721,7 +721,7 @@ template FileChooserT()
   override bool removeShortcutFolderUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_file_chooser_remove_shortcut_folder_uri(cast(GtkFileChooser*)cPtr, _uri, &_err);
     if (_err)
@@ -748,7 +748,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_select_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_select_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -767,7 +767,7 @@ template FileChooserT()
   override bool selectFilename(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _retval = gtk_file_chooser_select_filename(cast(GtkFileChooser*)cPtr, _filename);
     return _retval;
   }
@@ -783,7 +783,7 @@ template FileChooserT()
   override bool selectUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_file_chooser_select_uri(cast(GtkFileChooser*)cPtr, _uri);
     return _retval;
   }
@@ -792,8 +792,8 @@ template FileChooserT()
       Sets the type of operation that the chooser is performing; the
     user interface is adapted to suit the selected action. For example,
     an option to create a new folder might be shown if the action is
-    [gtk.types.FileChooserAction.save] but not if the action is
-    [gtk.types.FileChooserAction.open].
+    [gtk.types.FileChooserAction.Save] but not if the action is
+    [gtk.types.FileChooserAction.Open].
     Params:
       action =       the action that the file selector is performing
   */
@@ -812,15 +812,15 @@ template FileChooserT()
   */
   override void setChoice(string id, string option)
   {
-    const(char)* _id = id.toCString(No.alloc);
-    const(char)* _option = option.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
+    const(char)* _option = option.toCString(No.Alloc);
     gtk_file_chooser_set_choice(cast(GtkFileChooser*)cPtr, _id, _option);
   }
 
   /**
       Sets whether file choser will offer to create new folders.
     This is only relevant if the action is not set to be
-    [gtk.types.FileChooserAction.open].
+    [gtk.types.FileChooserAction.Open].
     Params:
       createFolders =       true if the Create Folder button should be displayed
   */
@@ -844,7 +844,7 @@ template FileChooserT()
   override bool setCurrentFolder(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _retval = gtk_file_chooser_set_current_folder(cast(GtkFileChooser*)cPtr, _filename);
     return _retval;
   }
@@ -861,7 +861,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_set_current_folder_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -883,7 +883,7 @@ template FileChooserT()
   override bool setCurrentFolderUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_file_chooser_set_current_folder_uri(cast(GtkFileChooser*)cPtr, _uri);
     return _retval;
   }
@@ -904,12 +904,12 @@ template FileChooserT()
   */
   override void setCurrentName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_file_chooser_set_current_name(cast(GtkFileChooser*)cPtr, _name);
   }
 
   /**
-      Sets whether a file chooser in [gtk.types.FileChooserAction.save] mode will present
+      Sets whether a file chooser in [gtk.types.FileChooserAction.Save] mode will present
     a confirmation dialog if the user types a file name that already exists.  This
     is false by default.
     
@@ -935,13 +935,13 @@ template FileChooserT()
   */
   override void setExtraWidget(gtk.widget.Widget extraWidget)
   {
-    gtk_file_chooser_set_extra_widget(cast(GtkFileChooser*)cPtr, extraWidget ? cast(GtkWidget*)extraWidget.cPtr(No.dup) : null);
+    gtk_file_chooser_set_extra_widget(cast(GtkFileChooser*)cPtr, extraWidget ? cast(GtkWidget*)extraWidget.cPtr(No.Dup) : null);
   }
 
   /**
       Sets file as the current filename for the file chooser, by changing
     to the file’s parent folder and actually selecting the file in list.  If
-    the chooser is in [gtk.types.FileChooserAction.save] mode, the file’s base name
+    the chooser is in [gtk.types.FileChooserAction.Save] mode, the file’s base name
     will also appear in the dialog’s file name entry.
     
     If the file name isn’t in the current folder of chooser, then the current
@@ -980,7 +980,7 @@ template FileChooserT()
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_file_chooser_set_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -990,7 +990,7 @@ template FileChooserT()
       Sets filename as the current filename for the file chooser, by changing to
     the file’s parent folder and actually selecting the file in list; all other
     files will be unselected.  If the chooser is in
-    [gtk.types.FileChooserAction.save] mode, the file’s base name will also appear in
+    [gtk.types.FileChooserAction.Save] mode, the file’s base name will also appear in
     the dialog’s file name entry.
     
     Note that the file must exist, or nothing will be done except
@@ -1026,7 +1026,7 @@ template FileChooserT()
   override bool setFilename(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _retval = gtk_file_chooser_set_filename(cast(GtkFileChooser*)cPtr, _filename);
     return _retval;
   }
@@ -1043,7 +1043,7 @@ template FileChooserT()
   */
   override void setFilter(gtk.file_filter.FileFilter filter)
   {
-    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.dup) : null);
+    gtk_file_chooser_set_filter(cast(GtkFileChooser*)cPtr, filter ? cast(GtkFileFilter*)filter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1086,7 +1086,7 @@ template FileChooserT()
   */
   override void setPreviewWidget(gtk.widget.Widget previewWidget)
   {
-    gtk_file_chooser_set_preview_widget(cast(GtkFileChooser*)cPtr, previewWidget ? cast(GtkWidget*)previewWidget.cPtr(No.dup) : null);
+    gtk_file_chooser_set_preview_widget(cast(GtkFileChooser*)cPtr, previewWidget ? cast(GtkWidget*)previewWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1106,8 +1106,8 @@ template FileChooserT()
 
   /**
       Sets whether multiple files can be selected in the file selector.  This is
-    only relevant if the action is set to be [gtk.types.FileChooserAction.open] or
-    [gtk.types.FileChooserAction.selectFolder].
+    only relevant if the action is set to be [gtk.types.FileChooserAction.Open] or
+    [gtk.types.FileChooserAction.SelectFolder].
     Params:
       selectMultiple =       true if multiple files can be selected.
   */
@@ -1129,7 +1129,7 @@ template FileChooserT()
   /**
       Sets the file referred to by uri as the current file for the file chooser,
     by changing to the URI’s parent folder and actually selecting the URI in the
-    list.  If the chooser is [gtk.types.FileChooserAction.save] mode, the URI’s base
+    list.  If the chooser is [gtk.types.FileChooserAction.Save] mode, the URI’s base
     name will also appear in the dialog’s file name entry.
     
     Note that the URI must exist, or nothing will be done except for the
@@ -1166,7 +1166,7 @@ template FileChooserT()
   override bool setUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_file_chooser_set_uri(cast(GtkFileChooser*)cPtr, _uri);
     return _retval;
   }
@@ -1202,7 +1202,7 @@ template FileChooserT()
   */
   override void unselectFile(gio.file.File file)
   {
-    gtk_file_chooser_unselect_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
+    gtk_file_chooser_unselect_file(cast(GtkFileChooser*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1214,7 +1214,7 @@ template FileChooserT()
   */
   override void unselectFilename(string filename)
   {
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_file_chooser_unselect_filename(cast(GtkFileChooser*)cPtr, _filename);
   }
 
@@ -1227,7 +1227,7 @@ template FileChooserT()
   */
   override void unselectUri(string uri)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     gtk_file_chooser_unselect_uri(cast(GtkFileChooser*)cPtr, _uri);
   }
 
@@ -1235,7 +1235,7 @@ template FileChooserT()
       This signal gets emitted whenever it is appropriate to present a
     confirmation dialog when the user has selected a file name that
     already exists.  The signal only gets emitted when the file
-    chooser is in [gtk.types.FileChooserAction.save] mode.
+    chooser is in [gtk.types.FileChooserAction.Save] mode.
     
     Most applications just need to turn on the
     #GtkFileChooser:do-overwrite-confirmation property (or call the
@@ -1249,12 +1249,12 @@ template FileChooserT()
     #GtkFileChooserConfirmation value, which indicates the action to
     take.  If the handler determines that the user wants to select a
     different filename, it should return
-    [gtk.types.FileChooserConfirmation.selectAgain].  If it determines
+    [gtk.types.FileChooserConfirmation.SelectAgain].  If it determines
     that the user is satisfied with his choice of file name, it
-    should return [gtk.types.FileChooserConfirmation.acceptFilename].
+    should return [gtk.types.FileChooserConfirmation.AcceptFilename].
     On the other hand, if it determines that the stock confirmation
     dialog should be used, it should return
-    [gtk.types.FileChooserConfirmation.confirm]. The following example
+    [gtk.types.FileChooserConfirmation.Confirm]. The following example
     illustrates this.
     
     ## Custom confirmation ## {#gtkfilechooser-confirmation}
@@ -1307,10 +1307,10 @@ template FileChooserT()
     Connect to ConfirmOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectConfirmOverwrite(T)(T callback, Flag!"after" after = No.after)
+  ulong connectConfirmOverwrite(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ConfirmOverwriteCallbackDlg) || is(T : ConfirmOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1356,10 +1356,10 @@ template FileChooserT()
     Connect to CurrentFolderChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCurrentFolderChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCurrentFolderChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CurrentFolderChangedCallbackDlg) || is(T : CurrentFolderChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1401,10 +1401,10 @@ template FileChooserT()
     Connect to FileActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFileActivated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFileActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FileActivatedCallbackDlg) || is(T : FileActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1449,10 +1449,10 @@ template FileChooserT()
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1505,10 +1505,10 @@ template FileChooserT()
     Connect to UpdatePreview signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUpdatePreview(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUpdatePreview(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UpdatePreviewCallbackDlg) || is(T : UpdatePreviewCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -17,7 +17,7 @@ class BindingEntry
 {
   GtkBindingEntry cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.BindingEntry");
@@ -132,7 +132,7 @@ class BindingEntry
   static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc)
   {
     GTokenType _cretval;
-    const(char)* _signalDesc = signalDesc.toCString(No.alloc);
+    const(char)* _signalDesc = signalDesc.toCString(No.Alloc);
     _cretval = gtk_binding_entry_add_signal_from_string(bindingSet ? cast(GtkBindingSet*)bindingSet.cPtr : null, _signalDesc);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;

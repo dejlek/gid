@@ -18,7 +18,7 @@ import gtk.types;
 class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.selection.Selection, atk.table.Table, gtk.cell_accessible_parent.CellAccessibleParent
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

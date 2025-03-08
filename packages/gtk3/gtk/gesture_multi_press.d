@@ -24,7 +24,7 @@ import gtk.widget;
 class GestureMultiPress : gtk.gesture_single.GestureSingle
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,8 +50,8 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_multi_press_new(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_gesture_multi_press_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,7 +68,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     bool _retval;
     GdkRectangle _rect;
     _retval = gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   */
   void setArea(gdk.rectangle.Rectangle rect = null)
   {
-    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null);
+    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
   }
 
   /**
@@ -110,10 +110,10 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     Connect to Pressed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPressed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -154,10 +154,10 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     Connect to Released signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReleased(T)(T callback, Flag!"after" after = No.after)
+  ulong connectReleased(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReleasedCallbackDlg) || is(T : ReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -193,10 +193,10 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     Connect to Stopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStopped(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStopped(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StoppedCallbackDlg) || is(T : StoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

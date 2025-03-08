@@ -13,7 +13,7 @@ import gtk.types;
 class NothingAction : gtk.shortcut_action.ShortcutAction
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
   {
     GtkShortcutAction* _cretval;
     _cretval = gtk_nothing_action_get();
-    auto _retval = ObjectG.getDObject!(gtk.nothing_action.NothingAction)(cast(GtkShortcutAction*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.nothing_action.NothingAction)(cast(GtkShortcutAction*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -44,8 +44,8 @@ interface Native
   static gtk.native.Native getForSurface(gdk.surface.Surface surface)
   {
     GtkNative* _cretval;
-    _cretval = gtk_native_get_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.native.Native)(cast(GtkNative*)_cretval, No.take);
+    _cretval = gtk_native_get_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.native.Native)(cast(GtkNative*)_cretval, No.Take);
     return _retval;
   }
 

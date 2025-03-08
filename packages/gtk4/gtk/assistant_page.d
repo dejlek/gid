@@ -15,7 +15,7 @@ import gtk.widget;
 class AssistantPage : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class AssistantPage : gobject.object.ObjectG
   {
     GtkWidget* _cretval;
     _cretval = gtk_assistant_page_get_child(cast(GtkAssistantPage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

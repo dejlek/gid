@@ -18,7 +18,7 @@ import gobject.object;
 class SeekableInputStream : arrow.input_stream.InputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,7 +61,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     _cretval = garrow_seekable_input_stream_peek(cast(GArrowSeekableInputStream*)cPtr, nBytes, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     _cretval = garrow_seekable_input_stream_read_at(cast(GArrowSeekableInputStream*)cPtr, position, nBytes, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class SeekableInputStream : arrow.input_stream.InputStream
     _cretval = garrow_seekable_input_stream_read_at_bytes(cast(GArrowSeekableInputStream*)cPtr, position, nBytes, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -13,7 +13,7 @@ import gobject.object;
   
   It may be wrapped in a
   [[gio.unix_fdmessage.UnixFDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
-  [gio.socket.Socket] in the [gio.types.SocketFamily.unix] family by using
+  [gio.socket.Socket] in the [gio.types.SocketFamily.Unix] family by using
   [gio.socket.Socket.sendMessage] and received using
   [gio.socket.Socket.receiveMessage].
   
@@ -26,7 +26,7 @@ import gobject.object;
 class UnixFDList : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class UnixFDList : gobject.object.ObjectG
   {
     GUnixFDList* _cretval;
     _cretval = g_unix_fd_list_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -75,7 +75,7 @@ class UnixFDList : gobject.object.ObjectG
 
     auto _fds = cast(const(int)*)fds.ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
-    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;
   }
 

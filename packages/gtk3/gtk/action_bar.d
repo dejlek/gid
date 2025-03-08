@@ -29,7 +29,7 @@ import gtk.widget;
 class ActionBar : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class ActionBar : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class ActionBar : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class ActionBar : gtk.bin.Bin
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -87,7 +87,7 @@ class ActionBar : gtk.bin.Bin
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -97,6 +97,6 @@ class ActionBar : gtk.bin.Bin
   */
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
-    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.dup) : null);
+    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
   }
 }

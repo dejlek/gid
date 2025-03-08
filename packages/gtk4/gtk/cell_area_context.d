@@ -26,7 +26,7 @@ import gtk.types;
 class CellAreaContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -102,7 +102,7 @@ class CellAreaContext : gobject.object.ObjectG
   {
     GtkCellArea* _cretval;
     _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 

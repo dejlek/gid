@@ -50,7 +50,7 @@ interface Preset
   {
     const(char)* _cretval;
     _cretval = gst_preset_get_app_dir();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ interface Preset
   static bool setAppDir(string appDir)
   {
     bool _retval;
-    const(char)* _appDir = appDir.toCString(No.alloc);
+    const(char)* _appDir = appDir.toCString(No.Alloc);
     _retval = gst_preset_set_app_dir(_appDir);
     return _retval;
   }

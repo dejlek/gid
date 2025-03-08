@@ -13,7 +13,7 @@ class TypeValueTable
 {
   GTypeValueTable cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.TypeValueTable");
@@ -71,13 +71,13 @@ class TypeValueTable
 
   @property string collectFormat()
   {
-    return (cast(GTypeValueTable*)cPtr).collectFormat.fromCString(No.free);
+    return (cast(GTypeValueTable*)cPtr).collectFormat.fromCString(No.Free);
   }
 
   @property void collectFormat(string propval)
   {
     safeFree(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
-    (cast(GTypeValueTable*)cPtr).collectFormat = propval.toCString(Yes.alloc);
+    (cast(GTypeValueTable*)cPtr).collectFormat = propval.toCString(Yes.Alloc);
   }
 
   @property GTypeValueCollectFunc collectValue()
@@ -92,13 +92,13 @@ class TypeValueTable
 
   @property string lcopyFormat()
   {
-    return (cast(GTypeValueTable*)cPtr).lcopyFormat.fromCString(No.free);
+    return (cast(GTypeValueTable*)cPtr).lcopyFormat.fromCString(No.Free);
   }
 
   @property void lcopyFormat(string propval)
   {
     safeFree(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
-    (cast(GTypeValueTable*)cPtr).lcopyFormat = propval.toCString(Yes.alloc);
+    (cast(GTypeValueTable*)cPtr).lcopyFormat = propval.toCString(Yes.Alloc);
   }
 
   @property GTypeValueLCopyFunc lcopyValue()

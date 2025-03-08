@@ -11,7 +11,7 @@ import glib.error;
 class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowBooleanArrayBuilder* _cretval;
     _cretval = garrow_boolean_array_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

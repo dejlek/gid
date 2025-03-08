@@ -7,7 +7,7 @@ import gtk.cell_editable_mixin;
 /// Proxy object for Gtk.CellEditable interface when a GObject has no applicable D binding
 class CellEditableIfaceProxy : IfaceProxy, gtk.cell_editable.CellEditable
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

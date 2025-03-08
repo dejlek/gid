@@ -16,12 +16,12 @@ import gtk.types;
 class ExpressionWatch : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -50,7 +50,7 @@ class ExpressionWatch : gobject.boxed.Boxed
   bool evaluate(gobject.value.Value value)
   {
     bool _retval;
-    _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)cPtr, value ? cast(GValue*)value.cPtr(No.dup) : null);
+    _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 

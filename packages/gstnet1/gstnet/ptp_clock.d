@@ -32,7 +32,7 @@ import gstnet.types;
 class PtpClock : gst.system_clock.SystemClock
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,8 +68,8 @@ class PtpClock : gst.system_clock.SystemClock
   this(string name, uint domain)
   {
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ptp_clock_new(_name, domain);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

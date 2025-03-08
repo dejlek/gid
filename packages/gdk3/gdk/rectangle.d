@@ -15,15 +15,15 @@ class Rectangle : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkRectangle.sizeof), Yes.take);
+    super(safeMalloc(GdkRectangle.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -88,7 +88,7 @@ class Rectangle : gobject.boxed.Boxed
   bool equal(gdk.rectangle.Rectangle rect2)
   {
     bool _retval;
-    _retval = gdk_rectangle_equal(cast(const(GdkRectangle)*)cPtr, rect2 ? cast(const(GdkRectangle)*)rect2.cPtr(No.dup) : null);
+    _retval = gdk_rectangle_equal(cast(const(GdkRectangle)*)cPtr, rect2 ? cast(const(GdkRectangle)*)rect2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -109,8 +109,8 @@ class Rectangle : gobject.boxed.Boxed
   {
     bool _retval;
     GdkRectangle _dest;
-    _retval = gdk_rectangle_intersect(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.take);
+    _retval = gdk_rectangle_intersect(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Rectangle : gobject.boxed.Boxed
   void union_(gdk.rectangle.Rectangle src2, out gdk.rectangle.Rectangle dest)
   {
     GdkRectangle _dest;
-    gdk_rectangle_union(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.dup) : null, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.take);
+    gdk_rectangle_union(cast(const(GdkRectangle)*)cPtr, src2 ? cast(const(GdkRectangle)*)src2.cPtr(No.Dup) : null, &_dest);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 }

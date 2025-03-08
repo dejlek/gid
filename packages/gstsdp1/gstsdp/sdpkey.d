@@ -13,7 +13,7 @@ class SDPKey
 {
   GstSDPKey cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPKey");
@@ -31,23 +31,23 @@ class SDPKey
 
   @property string type()
   {
-    return (cast(GstSDPKey*)cPtr).type.fromCString(No.free);
+    return (cast(GstSDPKey*)cPtr).type.fromCString(No.Free);
   }
 
   @property void type(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPKey*)cPtr).type);
-    (cast(GstSDPKey*)cPtr).type = propval.toCString(Yes.alloc);
+    (cast(GstSDPKey*)cPtr).type = propval.toCString(Yes.Alloc);
   }
 
   @property string data()
   {
-    return (cast(GstSDPKey*)cPtr).data.fromCString(No.free);
+    return (cast(GstSDPKey*)cPtr).data.fromCString(No.Free);
   }
 
   @property void data(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPKey*)cPtr).data);
-    (cast(GstSDPKey*)cPtr).data = propval.toCString(Yes.alloc);
+    (cast(GstSDPKey*)cPtr).data = propval.toCString(Yes.Alloc);
   }
 }

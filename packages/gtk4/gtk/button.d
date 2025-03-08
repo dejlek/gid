@@ -46,12 +46,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.button.Button] uses the [gtk.types.AccessibleRole.button] role.
+  [gtk.button.Button] uses the [gtk.types.AccessibleRole.Button] role.
 */
 class Button : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -79,7 +79,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,9 +95,9 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.button.Button newFromIconName(string iconName)
   {
     GtkWidget* _cretval;
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,9 +110,9 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.button.Button newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,9 +132,9 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.button.Button newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_get_child(cast(GtkButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_icon_name(cast(GtkButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -273,7 +273,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_button_set_icon_name(cast(GtkButton*)cPtr, _iconName);
   }
 
@@ -286,7 +286,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_button_set_label(cast(GtkButton*)cPtr, _label);
   }
 
@@ -326,10 +326,10 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -361,10 +361,10 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     Connect to Clicked signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClicked(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

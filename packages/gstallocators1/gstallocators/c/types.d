@@ -11,25 +11,25 @@ enum GstFdMemoryFlags : uint
   /**
       no flag
   */
-  none = 0,
+  None = 0,
 
   /**
       once the memory is mapped,
            keep it mapped until the memory is destroyed.
   */
-  keepMapped = 1,
+  KeepMapped = 1,
 
   /**
       do a private mapping instead of
            the default shared mapping.
   */
-  mapPrivate = 2,
+  MapPrivate = 2,
 
   /**
       don't close the file descriptor when
            the memory is freed. Since: 1.10
   */
-  dontClose = 4,
+  DontClose = 4,
 }
 
 /**
@@ -111,7 +111,7 @@ struct GstPhysMemoryAllocatorInterface
   Note that allocating new shared memories has a significant performance cost,
   it is thus recommended to keep a pool of pre-allocated #GstMemory, using
   #GstBufferPool. For that reason, this allocator has the
-  [gst.types.AllocatorFlags.noCopy] flag set.
+  [gst.types.AllocatorFlags.NoCopy] flag set.
 */
 struct GstShmAllocator;
 

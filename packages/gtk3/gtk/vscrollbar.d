@@ -26,7 +26,7 @@ import gtk.types;
 class VScrollbar : gtk.scrollbar.Scrollbar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,12 +48,12 @@ class VScrollbar : gtk.scrollbar.Scrollbar
       adjustment =       the #GtkAdjustment to use, or null to create a new adjustment
     Returns:     the new #GtkVScrollbar
   
-    Deprecated:     Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.vertical] instead
+    Deprecated:     Use [gtk.scrollbar.Scrollbar.new_] with [gtk.types.Orientation.Vertical] instead
   */
   this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 }

@@ -59,12 +59,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.frame.Frame] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.frame.Frame] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class Frame : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -91,9 +91,9 @@ class Frame : gtk.widget.Widget
   this(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_frame_new(_label);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -104,7 +104,7 @@ class Frame : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_child(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class Frame : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Frame : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Frame : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -166,7 +166,7 @@ class Frame : gtk.widget.Widget
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
   }
 
@@ -194,6 +194,6 @@ class Frame : gtk.widget.Widget
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.dup) : null);
+    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 }

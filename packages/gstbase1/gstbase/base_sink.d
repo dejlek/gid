@@ -43,7 +43,7 @@ import gstbase.types;
   ```
   
   #GstBaseSink will handle the prerolling correctly. This means that it will
-  return [gst.types.StateChangeReturn.async] from a state change to PAUSED until the first
+  return [gst.types.StateChangeReturn.Async] from a state change to PAUSED until the first
   buffer arrives in this element. The base class will call the
   #GstBaseSinkClass::preroll vmethod with this preroll buffer and will then
   commit the state change to the next asynchronously pending state.
@@ -70,14 +70,14 @@ import gstbase.types;
   element receives EOS in PAUSED, preroll completes, the event is queued and an
   EOS message is posted when going to PLAYING.
   
-  #GstBaseSink will internally use the [gst.types.EventType.segment] events to schedule
+  #GstBaseSink will internally use the [gst.types.EventType.Segment] events to schedule
   synchronisation and clipping of buffers. Buffers that fall completely outside
   of the current segment are dropped. Buffers that fall partially in the
   segment are rendered (and prerolled). Subclasses should do any subbuffer
   clipping themselves when needed.
   
   #GstBaseSink will by default report the current playback position in
-  [gst.types.Format.time] based on the current clock time and segment information.
+  [gst.types.Format.Time] based on the current clock time and segment information.
   If no clock has been set on the element, the query will be forwarded
   upstream.
   
@@ -128,7 +128,7 @@ import gstbase.types;
 class BaseSink : gst.element.Element
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -153,13 +153,13 @@ class BaseSink : gst.element.Element
     This function should be called with the PREROLL_LOCK held.
     Params:
       obj =       the mini object that caused the preroll
-    Returns:     [gst.types.FlowReturn.ok] if the preroll completed and processing can
+    Returns:     [gst.types.FlowReturn.Ok] if the preroll completed and processing can
       continue. Any other return value should be returned from the render vmethod.
   */
   gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)cPtr, obj ? cast(GstMiniObject*)obj.cPtr(No.dup) : null);
+    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)cPtr, obj ? cast(GstMiniObject*)obj.cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class BaseSink : gst.element.Element
   {
     GstSample* _cretval;
     _cretval = gst_base_sink_get_last_sample(cast(GstBaseSink*)cPtr);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class BaseSink : gst.element.Element
   {
     GstStructure* _cretval;
     _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -563,9 +563,9 @@ class BaseSink : gst.element.Element
       This function will block until time is reached. It is usually called by
     subclasses that use their own internal synchronisation.
     
-    If time is not valid, no synchronisation is done and [gst.types.ClockReturn.badtime] is
+    If time is not valid, no synchronisation is done and [gst.types.ClockReturn.Badtime] is
     returned. Likewise, if synchronisation is disabled in the element or there
-    is no clock, no synchronisation is done and [gst.types.ClockReturn.badtime] is returned.
+    is no clock, no synchronisation is done and [gst.types.ClockReturn.Badtime] is returned.
     
     This function should only be called with the PREROLL_LOCK held, like when
     receiving an EOS event in the #GstBaseSinkClass::event vmethod or when
@@ -598,16 +598,16 @@ class BaseSink : gst.element.Element
     the #GstBaseSinkClass::unlock method and cause the
     #GstBaseSinkClass::render method to immediately call this function.
     In this case, the subclass must be prepared to continue rendering where it
-    left off if this function returns [gst.types.FlowReturn.ok].
+    left off if this function returns [gst.types.FlowReturn.Ok].
     
     This function will block until a state change to PLAYING happens (in which
-    case this function returns [gst.types.FlowReturn.ok]) or the processing must be stopped due
+    case this function returns [gst.types.FlowReturn.Ok]) or the processing must be stopped due
     to a state change to READY or a FLUSH event (in which case this function
-    returns [gst.types.FlowReturn.flushing]).
+    returns [gst.types.FlowReturn.Flushing]).
     
     This function should only be called with the PREROLL_LOCK held, like in the
     render function.
-    Returns:     [gst.types.FlowReturn.ok] if the preroll completed and processing can
+    Returns:     [gst.types.FlowReturn.Ok] if the preroll completed and processing can
       continue. Any other return value should be returned from the render vmethod.
   */
   gst.types.FlowReturn waitPreroll()

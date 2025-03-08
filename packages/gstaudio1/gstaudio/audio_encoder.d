@@ -120,7 +120,7 @@ import gstaudio.types;
 class AudioEncoder : gst.element.Element, gst.preset.Preset
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -149,7 +149,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   {
     GstBuffer* _cretval;
     _cretval = gst_audio_encoder_allocate_output_buffer(cast(GstAudioEncoder*)cPtr, size);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn finishFrame(gst.buffer.Buffer buffer, int samples)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_audio_encoder_finish_frame(cast(GstAudioEncoder*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null, samples);
+    _cretval = gst_audio_encoder_finish_frame(cast(GstAudioEncoder*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null, samples);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -193,8 +193,8 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_audio_encoder_get_allocator(cast(GstAudioEncoder*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
 
   /** */
@@ -202,7 +202,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   {
     GstAudioInfo* _cretval;
     _cretval = gst_audio_encoder_get_audio_info(cast(GstAudioEncoder*)cPtr);
-    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gstaudio.audio_info.AudioInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_audio_encoder_merge_tags(cast(GstAudioEncoder*)cPtr, tags ? cast(const(GstTagList)*)tags.cPtr(No.dup) : null, mode);
+    gst_audio_encoder_merge_tags(cast(GstAudioEncoder*)cPtr, tags ? cast(const(GstTagList)*)tags.cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -367,8 +367,8 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_audio_encoder_proxy_getcaps(cast(GstAudioEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_audio_encoder_proxy_getcaps(cast(GstAudioEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   */
   void setAllocationCaps(gst.caps.Caps allocationCaps = null)
   {
-    gst_audio_encoder_set_allocation_caps(cast(GstAudioEncoder*)cPtr, allocationCaps ? cast(GstCaps*)allocationCaps.cPtr(No.dup) : null);
+    gst_audio_encoder_set_allocation_caps(cast(GstAudioEncoder*)cPtr, allocationCaps ? cast(GstCaps*)allocationCaps.cPtr(No.Dup) : null);
   }
 
   /**
@@ -516,7 +516,7 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
   bool setOutputFormat(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_audio_encoder_set_output_format(cast(GstAudioEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    _retval = gst_audio_encoder_set_output_format(cast(GstAudioEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 

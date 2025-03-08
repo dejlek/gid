@@ -61,15 +61,15 @@ class Closure : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GClosure.sizeof), Yes.take);
+    super(safeMalloc(GClosure.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -127,8 +127,8 @@ class Closure : gobject.boxed.Boxed
   static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectG object)
   {
     GClosure* _cretval;
-    _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.take) : null;
+    _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class Closure : gobject.boxed.Boxed
   {
     GClosure* _cretval;
     _cretval = g_closure_new_simple(sizeofClosure, data);
-    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Closure : gobject.boxed.Boxed
       _tmpparamValues ~= *cast(GValue*)obj.cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
     g_closure_invoke(cast(GClosure*)cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
-    returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.take);
+    returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.Take);
   }
 
   /**

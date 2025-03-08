@@ -25,7 +25,7 @@ import gtk.types;
 class StringFilter : gtk.filter.Filter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,8 +53,8 @@ class StringFilter : gtk.filter.Filter
   this(gtk.expression.Expression expression = null)
   {
     GtkStringFilter* _cretval;
-    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class StringFilter : gtk.filter.Filter
   {
     GtkExpression* _cretval;
     _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)cPtr);
-    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class StringFilter : gtk.filter.Filter
   {
     const(char)* _cretval;
     _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.dup) : null);
+    gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
   }
 
   /**
@@ -146,7 +146,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setSearch(string search = null)
   {
-    const(char)* _search = search.toCString(No.alloc);
+    const(char)* _search = search.toCString(No.Alloc);
     gtk_string_filter_set_search(cast(GtkStringFilter*)cPtr, _search);
   }
 }

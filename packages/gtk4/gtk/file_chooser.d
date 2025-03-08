@@ -266,8 +266,8 @@ interface FileChooser
     The user interface is adapted to suit the selected action.
     
     For example, an option to create a new folder might be shown
-    if the action is [gtk.types.FileChooserAction.save] but not if the
-    action is [gtk.types.FileChooserAction.open].
+    if the action is [gtk.types.FileChooserAction.Save] but not if the
+    action is [gtk.types.FileChooserAction.Open].
     Params:
       action =       the action that the file selector is performing
   
@@ -292,7 +292,7 @@ interface FileChooser
       Sets whether file chooser will offer to create new folders.
     
     This is only relevant if the action is not set to be
-    [gtk.types.FileChooserAction.open].
+    [gtk.types.FileChooserAction.Open].
     Params:
       createFolders =       true if the Create Folder button should be displayed
   
@@ -336,7 +336,7 @@ interface FileChooser
       Sets file as the current filename for the file chooser.
     
     This includes changing to the file’s parent folder and actually selecting
-    the file in list. If the chooser is in [gtk.types.FileChooserAction.save] mode,
+    the file in list. If the chooser is in [gtk.types.FileChooserAction.Save] mode,
     the file’s base name will also appear in the dialog’s file name entry.
     
     If the file name isn’t in the current folder of chooser, then the current
@@ -404,8 +404,8 @@ interface FileChooser
       Sets whether multiple files can be selected in the file chooser.
     
     This is only relevant if the action is set to be
-    [gtk.types.FileChooserAction.open] or
-    [gtk.types.FileChooserAction.selectFolder].
+    [gtk.types.FileChooserAction.Open] or
+    [gtk.types.FileChooserAction.SelectFolder].
     Params:
       selectMultiple =       true if multiple files can be selected.
   

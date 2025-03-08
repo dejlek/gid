@@ -12,19 +12,19 @@ enum SecretBackendFlags
   /**
       no flags for initializing the #SecretBackend
   */
-  none = 0,
+  None = 0,
 
   /**
       establish a session for transfer of secrets
       while initializing the #SecretBackend
   */
-  openSession = 2,
+  OpenSession = 2,
 
   /**
       load collections while initializing the
       #SecretBackend
   */
-  loadCollections = 4,
+  LoadCollections = 4,
 }
 
 /**
@@ -35,7 +35,7 @@ enum SecretCollectionCreateFlags : uint
   /**
       no flags
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -46,12 +46,12 @@ enum SecretCollectionFlags : uint
   /**
       no flags
   */
-  none = 0,
+  None = 0,
 
   /**
       items have or should be loaded
   */
-  loadItems = 2,
+  LoadItems = 2,
 }
 
 /**
@@ -66,53 +66,53 @@ enum SecretError
       received an invalid data or message from the Secret
       Service
   */
-  protocol = 1,
+  Protocol = 1,
 
   /**
       the item or collection is locked and the operation
       cannot be performed
   */
-  isLocked = 2,
+  IsLocked = 2,
 
   /**
       no such item or collection found in the Secret
       Service
   */
-  noSuchObject = 3,
+  NoSuchObject = 3,
 
   /**
       a relevant item or collection already exists
   */
-  alreadyExists = 4,
+  AlreadyExists = 4,
 
   /**
       the file format is not valid
   */
-  invalidFileFormat = 5,
+  InvalidFileFormat = 5,
 
   /**
       the xdg:schema attribute of the table does
     not match the schema name
   */
-  mismatchedSchema = 6,
+  MismatchedSchema = 6,
 
   /**
       attribute contained in table not found
     in corresponding schema
   */
-  noMatchingAttribute = 7,
+  NoMatchingAttribute = 7,
 
   /**
       attribute could not be parsed according to its type
     reported in the table's schema
   */
-  wrongType = 8,
+  WrongType = 8,
 
   /**
       attribute list passed to secret_attributes_validate
     has no elements to validate
   */
-  emptyTable = 9,
+  EmptyTable = 9,
 }
 
 /**
@@ -123,12 +123,12 @@ enum SecretItemCreateFlags : uint
   /**
       no flags
   */
-  none = 0,
+  None = 0,
 
   /**
       replace an item with the same attributes.
   */
-  replace = 2,
+  Replace = 2,
 }
 
 /**
@@ -139,12 +139,12 @@ enum SecretItemFlags : uint
   /**
       no flags
   */
-  none = 0,
+  None = 0,
 
   /**
       a secret has been (or should be) loaded for #SecretItem
   */
-  loadSecret = 2,
+  LoadSecret = 2,
 }
 
 /**
@@ -159,17 +159,17 @@ enum SecretSchemaAttributeType
   /**
       a utf-8 string attribute
   */
-  string_ = 0,
+  String = 0,
 
   /**
       an integer attribute, stored as a decimal
   */
-  integer = 1,
+  Integer = 1,
 
   /**
       a boolean attribute, stored as 'true' or 'false'
   */
-  boolean = 2,
+  Boolean = 2,
 }
 
 /**
@@ -180,13 +180,13 @@ enum SecretSchemaFlags : uint
   /**
       no flags for the schema
   */
-  none = 0,
+  None = 0,
 
   /**
       don't match the schema name when looking up or
       removing passwords
   */
-  dontMatchName = 2,
+  DontMatchName = 2,
 }
 
 /**
@@ -253,13 +253,13 @@ enum SecretSchemaType
   /**
       Personal passwords
   */
-  note = 0,
+  Note = 0,
 
   /**
       Network passwords from older
        libgnome-keyring storage
   */
-  compatNetwork = 1,
+  CompatNetwork = 1,
 }
 
 /**
@@ -270,22 +270,22 @@ enum SecretSearchFlags : uint
   /**
       no flags
   */
-  none = 0,
+  None = 0,
 
   /**
       all the items matching the search will be returned, instead of just the first one
   */
-  all = 2,
+  All = 2,
 
   /**
       unlock locked items while searching
   */
-  unlock = 4,
+  Unlock = 4,
 
   /**
       while searching load secrets for items that are not locked
   */
-  loadSecrets = 8,
+  LoadSecrets = 8,
 }
 
 /**
@@ -297,19 +297,19 @@ enum SecretServiceFlags : uint
   /**
       no flags for initializing the #SecretService
   */
-  none = 0,
+  None = 0,
 
   /**
       establish a session for transfer of secrets
       while initializing the #SecretService
   */
-  openSession = 2,
+  OpenSession = 2,
 
   /**
       load collections while initializing the
       #SecretService
   */
-  loadCollections = 4,
+  LoadCollections = 4,
 }
 
 /**
@@ -539,7 +539,7 @@ struct SecretRetrievableInterface
   schema is automatically stored as an attribute on the item.
   
   Normally when looking up passwords only those with matching schema names are
-  returned. If the schema @flags contain the [secret.types.SchemaFlags.dontMatchName] flag,
+  returned. If the schema @flags contain the [secret.types.SchemaFlags.DontMatchName] flag,
   then lookups will not check that the schema name matches that on the item, only
   the schema's attributes are matched. This is useful when you are looking up
   items that are not stored by the libsecret library. Other libraries such as
@@ -644,7 +644,7 @@ struct SecretSchemaAttribute
   
   In order to securely transfer secrets to the Sercret Service, a session
   is established. This session can be established while initializing a
-  #SecretService object by passing the [secret.types.ServiceFlags.openSession] flag
+  #SecretService object by passing the [secret.types.ServiceFlags.OpenSession] flag
   to the [secret.service.Service.get] or [secret.service.Service.open] functions. In order to
   establish a session on an already existing #SecretService, use the
   [secret.service.Service.ensureSession] function.
@@ -654,7 +654,7 @@ struct SecretSchemaAttribute
   Multiple collections can exist in the Secret Service, each of which contains
   secret items. In order to instantiate `class@Collection` objects which
   represent those collections while initializing a #SecretService then pass
-  the [secret.types.ServiceFlags.loadCollections] flag to the [secret.service.Service.get] or
+  the [secret.types.ServiceFlags.LoadCollections] flag to the [secret.service.Service.get] or
   [secret.service.Service.open] functions. In order to establish a session on an already
   existing #SecretService, use the [secret.service.Service.loadCollections] function.
   To access the list of collections use [secret.service.Service.getCollections].

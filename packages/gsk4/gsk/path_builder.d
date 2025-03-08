@@ -57,12 +57,12 @@ import pango.layout;
 class PathBuilder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -89,7 +89,7 @@ class PathBuilder : gobject.boxed.Boxed
   {
     GskPathBuilder* _cretval;
     _cretval = gsk_path_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -102,7 +102,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addCairoPath(cairo.path.Path path)
   {
-    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.dup) : null);
+    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -117,7 +117,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addCircle(graphene.point.Point center, float radius)
   {
-    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(const(graphene_point_t)*)center.cPtr(No.dup) : null, radius);
+    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(const(graphene_point_t)*)center.cPtr(No.Dup) : null, radius);
   }
 
   /**
@@ -127,7 +127,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addLayout(pango.layout.Layout layout)
   {
-    gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+    gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
   }
 
   /**
@@ -137,7 +137,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addPath(gsk.path.Path path)
   {
-    gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.dup) : null);
+    gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,7 +152,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addRect(graphene.rect.Rect rect)
   {
-    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.dup) : null);
+    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null);
   }
 
   /**
@@ -162,7 +162,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addReversePath(gsk.path.Path path)
   {
-    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.dup) : null);
+    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -194,7 +194,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addSegment(gsk.path.Path path, gsk.path_point.PathPoint start, gsk.path_point.PathPoint end)
   {
-    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.dup) : null, start ? cast(const(GskPathPoint)*)start.cPtr(No.dup) : null, end ? cast(const(GskPathPoint)*)end.cPtr(No.dup) : null);
+    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, start ? cast(const(GskPathPoint)*)start.cPtr(No.Dup) : null, end ? cast(const(GskPathPoint)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -305,7 +305,7 @@ class PathBuilder : gobject.boxed.Boxed
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -565,7 +565,7 @@ class PathBuilder : gobject.boxed.Boxed
   {
     GskPath* _cretval;
     _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)cPtr);
-    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

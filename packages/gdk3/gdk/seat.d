@@ -20,7 +20,7 @@ import gobject.object;
 class Seat : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class Seat : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,10 +109,10 @@ class Seat : gobject.object.ObjectG
     or the window becomes hidden. This overrides any previous grab on the
     seat by this client.
     
-    As a rule of thumb, if a grab is desired over [gdk.types.SeatCapabilities.pointer],
-    all other "pointing" capabilities (eg. [gdk.types.SeatCapabilities.touch]) should
+    As a rule of thumb, if a grab is desired over [gdk.types.SeatCapabilities.Pointer],
+    all other "pointing" capabilities (eg. [gdk.types.SeatCapabilities.Touch]) should
     be grabbed too, so the user is able to interact with all of those while
-    the grab holds, you should thus use [gdk.types.SeatCapabilities.allPointing] most
+    the grab holds, you should thus use [gdk.types.SeatCapabilities.AllPointing] most
     commonly.
     
     Grabs are used for operations which need complete control over the
@@ -146,7 +146,7 @@ class Seat : gobject.object.ObjectG
       prepareFunc =       function to
                        prepare the window to be grabbed, it can be null if window is
                        visible before this call.
-    Returns:     [gdk.types.GrabStatus.success] if the grab was successful.
+    Returns:     [gdk.types.GrabStatus.Success] if the grab was successful.
   */
   gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.SeatCapabilities capabilities, bool ownerEvents, gdk.cursor.Cursor cursor = null, gdk.event.Event event = null, gdk.types.SeatGrabPrepareFunc prepareFunc = null)
   {
@@ -154,13 +154,13 @@ class Seat : gobject.object.ObjectG
     {
       auto _dlg = cast(gdk.types.SeatGrabPrepareFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gdk.seat.Seat)(cast(void*)seat, No.take), ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.take));
+      (*_dlg)(ObjectG.getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
     }
     auto _prepareFuncCB = prepareFunc ? &_prepareFuncCallback : null;
 
     GdkGrabStatus _cretval;
     auto _prepareFunc = prepareFunc ? cast(void*)&(prepareFunc) : null;
-    _cretval = gdk_seat_grab(cast(GdkSeat*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null, event ? cast(const(GdkEvent)*)event.cPtr : null, _prepareFuncCB, _prepareFunc);
+    _cretval = gdk_seat_grab(cast(GdkSeat*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null, event ? cast(const(GdkEvent)*)event.cPtr : null, _prepareFuncCB, _prepareFunc);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
     return _retval;
   }
@@ -192,10 +192,10 @@ class Seat : gobject.object.ObjectG
     Connect to DeviceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeviceAddedCallbackDlg) || is(T : DeviceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -230,10 +230,10 @@ class Seat : gobject.object.ObjectG
     Connect to DeviceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeviceRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeviceRemovedCallbackDlg) || is(T : DeviceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -272,10 +272,10 @@ class Seat : gobject.object.ObjectG
     Connect to ToolAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToolAddedCallbackDlg) || is(T : ToolAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -310,10 +310,10 @@ class Seat : gobject.object.ObjectG
     Connect to ToolRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToolRemovedCallbackDlg) || is(T : ToolRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -32,13 +32,13 @@ import gobject.object;
   [gio.dbus_auth_observer.DBusAuthObserver] that only accepts connections that have
   successfully authenticated as the same user that is running the
   [gio.dbus_server.DBusServer]. Since GLib 2.68 this can be achieved more simply by passing
-  the [gio.types.DBusServerFlags.authenticationRequireSameUser] flag to the
+  the [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag to the
   server.
 */
 class DBusServer : gobject.object.ObjectG, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -89,13 +89,13 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
     GDBusServer* _cretval;
-    const(char)* _address = address.toCString(No.alloc);
-    const(char)* _guid = guid.toCString(No.alloc);
+    const(char)* _address = address.toCString(No.Alloc);
+    const(char)* _guid = guid.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
   {
     const(char)* _cretval;
     _cretval = g_dbus_server_get_guid(cast(GDBusServer*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
     a typical thing to do when accepting a connection is to listen to
     the #GDBusConnection::closed signal.
     
-    If #GDBusServer:flags contains [gio.types.DBusServerFlags.runInThread]
+    If #GDBusServer:flags contains [gio.types.DBusServerFlags.RunInThread]
     then the signal is emitted in a new thread dedicated to the
     connection. Otherwise the signal is emitted in the
     [thread-default main context][g-main-context-push-thread-default]
@@ -207,10 +207,10 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
     Connect to NewConnection signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNewConnection(T)(T callback, Flag!"after" after = No.after)
+  ulong connectNewConnection(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NewConnectionCallbackDlg) || is(T : NewConnectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

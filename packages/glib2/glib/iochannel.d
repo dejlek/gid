@@ -49,12 +49,12 @@ import gobject.boxed;
 class IOChannel : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -85,13 +85,13 @@ class IOChannel : gobject.boxed.Boxed
   static glib.iochannel.IOChannel newFile(string filename, string mode)
   {
     GIOChannel* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
-    const(char)* _mode = mode.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _mode = mode.toCString(No.Alloc);
     GError *_err;
     _cretval = g_io_channel_new_file(_filename, _mode, &_err);
     if (_err)
       throw new IOChannelException(_err);
-    auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     GIOChannel* _cretval;
     _cretval = g_io_channel_unix_new(fd);
-    auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.iochannel.IOChannel(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class IOChannel : gobject.boxed.Boxed
   /**
       This function returns a #GIOCondition depending on whether there
     is data to be read/space to write data in the internal buffers in
-    the #GIOChannel. Only the flags [glib.types.IOCondition.in_] and [glib.types.IOCondition.out_] may be set.
+    the #GIOChannel. Only the flags [glib.types.IOCondition.In] and [glib.types.IOCondition.Out] may be set.
     Returns:     A #GIOCondition
   */
   glib.types.IOCondition getBufferCondition()
@@ -220,7 +220,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_encoding(cast(GIOChannel*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_io_channel_get_line_term(cast(GIOChannel*)cPtr, cast(int*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class IOChannel : gobject.boxed.Boxed
     if (_err)
       throw new IOChannelException(_err);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
-    strReturn = _strReturn.fromCString(Yes.free);
+    strReturn = _strReturn.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class IOChannel : gobject.boxed.Boxed
   {
     GIOStatus _cretval;
     GError *_err;
-    _cretval = g_io_channel_read_line_string(cast(GIOChannel*)cPtr, buffer ? cast(GString*)buffer.cPtr(No.dup) : null, cast(size_t*)&terminatorPos, &_err);
+    _cretval = g_io_channel_read_line_string(cast(GIOChannel*)cPtr, buffer ? cast(GString*)buffer.cPtr(No.Dup) : null, cast(size_t*)&terminatorPos, &_err);
     if (_err)
       throw new IOChannelException(_err);
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
@@ -546,7 +546,7 @@ class IOChannel : gobject.boxed.Boxed
   glib.types.IOStatus setEncoding(string encoding = null)
   {
     GIOStatus _cretval;
-    const(char)* _encoding = encoding.toCString(No.alloc);
+    const(char)* _encoding = encoding.toCString(No.Alloc);
     GError *_err;
     _cretval = g_io_channel_set_encoding(cast(GIOChannel*)cPtr, _encoding, &_err);
     if (_err)
@@ -637,7 +637,7 @@ class IOChannel : gobject.boxed.Boxed
   glib.types.IOError write(string buf, size_t count, out size_t bytesWritten)
   {
     GIOError _cretval;
-    const(char)* _buf = buf.toCString(No.alloc);
+    const(char)* _buf = buf.toCString(No.Alloc);
     _cretval = g_io_channel_write(cast(GIOChannel*)cPtr, _buf, count, cast(size_t*)&bytesWritten);
     glib.types.IOError _retval = cast(glib.types.IOError)_cretval;
     return _retval;

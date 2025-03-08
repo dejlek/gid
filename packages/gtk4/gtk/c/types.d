@@ -15,17 +15,17 @@ alias GtkAllocation = GdkRectangle;
 enum GtkAccessibleAnnouncementPriority
 {
   /** */
-  low = 0,
+  Low = 0,
 
   /** */
-  medium = 1,
+  Medium = 1,
 
   /** */
-  high = 2,
+  High = 2,
 }
 
 /**
-    The possible values for the [gtk.types.AccessibleProperty.autocomplete]
+    The possible values for the [gtk.types.AccessibleProperty.Autocomplete]
   accessible property.
 */
 enum GtkAccessibleAutocomplete
@@ -33,21 +33,21 @@ enum GtkAccessibleAutocomplete
   /**
       Automatic suggestions are not displayed.
   */
-  none = 0,
+  None = 0,
 
   /**
       When a user is providing input, text
        suggesting one way to complete the provided input may be dynamically
        inserted after the caret.
   */
-  inline = 1,
+  Inline = 1,
 
   /**
       When a user is providing input, an element
        containing a collection of values that could complete the provided input
        may be displayed.
   */
-  list = 2,
+  List = 2,
 
   /**
       When a user is providing input, an element
@@ -56,15 +56,15 @@ enum GtkAccessibleAutocomplete
        selected, and the text needed to complete the automatically selected value
        appears after the caret in the input.
   */
-  both = 3,
+  Both = 3,
 }
 
 /**
-    The possible values for the [gtk.types.AccessibleState.invalid]
+    The possible values for the [gtk.types.AccessibleState.Invalid]
   accessible state.
   
-  Note that the [gtk.types.AccessibleInvalidState.false_] and
-  [gtk.types.AccessibleInvalidState.true_] have the same values
+  Note that the [gtk.types.AccessibleInvalidState.False] and
+  [gtk.types.AccessibleInvalidState.True] have the same values
   as false and true.
 */
 enum GtkAccessibleInvalidState
@@ -72,22 +72,22 @@ enum GtkAccessibleInvalidState
   /**
       There are no detected errors in the value
   */
-  false_ = 0,
+  False = 0,
 
   /**
       The value entered by the user has failed validation
   */
-  true_ = 1,
+  True = 1,
 
   /**
       A grammatical error was detected
   */
-  grammar = 2,
+  Grammar = 2,
 
   /**
       A spelling error was detected
   */
-  spelling = 3,
+  Spelling = 3,
 }
 
 /**
@@ -99,17 +99,17 @@ enum GtkAccessiblePlatformState
   /**
       whether the accessible can be focused
   */
-  focusable = 0,
+  Focusable = 0,
 
   /**
       whether the accessible has focus
   */
-  focused = 1,
+  Focused = 1,
 
   /**
       whether the accessible is active
   */
-  active = 2,
+  Active = 2,
 }
 
 /**
@@ -123,65 +123,65 @@ enum GtkAccessibleProperty
        value for a combobox, searchbox, or textbox and specifies how predictions
        would be presented if they were made. Value type: `enum@AccessibleAutocomplete`
   */
-  autocomplete = 0,
+  Autocomplete = 0,
 
   /**
       Defines a string value that describes
        or annotates the current element. Value type: string
   */
-  description = 1,
+  Description = 1,
 
   /**
       Indicates the availability and type of
        interactive popup element, such as menu or dialog, that can be triggered
        by an element.
   */
-  hasPopup = 2,
+  HasPopup = 2,
 
   /**
       Indicates keyboard shortcuts that an
        author has implemented to activate or give focus to an element. Value type:
        string
   */
-  keyShortcuts = 3,
+  KeyShortcuts = 3,
 
   /**
       Defines a string value that labels the current
        element. Value type: string
   */
-  label = 4,
+  Label = 4,
 
   /**
       Defines the hierarchical level of an element
        within a structure. Value type: integer
   */
-  level = 5,
+  Level = 5,
 
   /**
       Indicates whether an element is modal when
        displayed. Value type: boolean
   */
-  modal = 6,
+  Modal = 6,
 
   /**
       Indicates whether a text box accepts
        multiple lines of input or only a single line. Value type: boolean
   */
-  multiLine = 7,
+  MultiLine = 7,
 
   /**
       Indicates that the user may select
        more than one item from the current selectable descendants. Value type:
        boolean
   */
-  multiSelectable = 8,
+  MultiSelectable = 8,
 
   /**
       Indicates whether the element's
        orientation is horizontal, vertical, or unknown/ambiguous. Value type:
        `enum@Orientation`
   */
-  orientation = 9,
+  Orientation = 9,
 
   /**
       Defines a short hint (a word or short
@@ -189,55 +189,55 @@ enum GtkAccessibleProperty
        value. A hint could be a sample value or a brief description of the expected
        format. Value type: string
   */
-  placeholder = 10,
+  Placeholder = 10,
 
   /**
       Indicates that the element is not editable,
        but is otherwise operable. Value type: boolean
   */
-  readOnly = 11,
+  ReadOnly = 11,
 
   /**
       Indicates that user input is required on
        the element before a form may be submitted. Value type: boolean
   */
-  required = 12,
+  Required = 12,
 
   /**
       Defines a human-readable,
        author-localized description for the role of an element. Value type: string
   */
-  roleDescription = 13,
+  RoleDescription = 13,
 
   /**
       Indicates if items in a table or grid are
        sorted in ascending or descending order. Value type: `enum@AccessibleSort`
   */
-  sort = 14,
+  Sort = 14,
 
   /**
       Defines the maximum allowed value for a
        range widget. Value type: double
   */
-  valueMax = 15,
+  ValueMax = 15,
 
   /**
       Defines the minimum allowed value for a
        range widget. Value type: double
   */
-  valueMin = 16,
+  ValueMin = 16,
 
   /**
       Defines the current value for a range widget.
        Value type: double
   */
-  valueNow = 17,
+  ValueNow = 17,
 
   /**
       Defines the human readable text alternative
        of aria-valuenow for a range widget. Value type: string
   */
-  valueText = 18,
+  ValueText = 18,
 }
 
 /**
@@ -253,56 +253,56 @@ enum GtkAccessibleRelation
        element when focus is on a composite widget, combobox, textbox, group,
        or application. Value type: reference
   */
-  activeDescendant = 0,
+  ActiveDescendant = 0,
 
   /**
       Defines the total number of columns
        in a table, grid, or treegrid. Value type: integer
   */
-  colCount = 1,
+  ColCount = 1,
 
   /**
       Defines an element's column index or
        position with respect to the total number of columns within a table,
        grid, or treegrid. Value type: integer
   */
-  colIndex = 2,
+  ColIndex = 2,
 
   /**
       Defines a human readable text
-      alternative of [gtk.types.AccessibleRelation.colIndex]. Value type: string
+      alternative of [gtk.types.AccessibleRelation.ColIndex]. Value type: string
   */
-  colIndexText = 3,
+  ColIndexText = 3,
 
   /**
       Defines the number of columns spanned
       by a cell or gridcell within a table, grid, or treegrid. Value type: integer
   */
-  colSpan = 4,
+  ColSpan = 4,
 
   /**
       Identifies the element (or elements) whose
        contents or presence are controlled by the current element. Value type: reference
   */
-  controls = 5,
+  Controls = 5,
 
   /**
       Identifies the element (or elements)
        that describes the object. Value type: reference
   */
-  describedBy = 6,
+  DescribedBy = 6,
 
   /**
       Identifies the element (or elements) that
        provide additional information related to the object. Value type: reference
   */
-  details = 7,
+  Details = 7,
 
   /**
       Identifies the element that provides
        an error message for an object. Value type: reference
   */
-  errorMessage = 8,
+  ErrorMessage = 8,
 
   /**
       Identifies the next element (or elements)
@@ -310,13 +310,13 @@ enum GtkAccessibleRelation
        allows assistive technology to override the general default of reading in
        document source order. Value type: reference
   */
-  flowTo = 9,
+  FlowTo = 9,
 
   /**
       Identifies the element (or elements)
        that labels the current element. Value type: reference
   */
-  labelledBy = 10,
+  LabelledBy = 10,
 
   /**
       Identifies an element (or elements) in order
@@ -324,44 +324,44 @@ enum GtkAccessibleRelation
        between elements where the widget hierarchy cannot be used to represent
        the relationship. Value type: reference
   */
-  owns = 11,
+  Owns = 11,
 
   /**
       Defines an element's number or position
        in the current set of listitems or treeitems. Value type: integer
   */
-  posInSet = 12,
+  PosInSet = 12,
 
   /**
       Defines the total number of rows in a table,
        grid, or treegrid. Value type: integer
   */
-  rowCount = 13,
+  RowCount = 13,
 
   /**
       Defines an element's row index or position
        with respect to the total number of rows within a table, grid, or treegrid.
        Value type: integer
   */
-  rowIndex = 14,
+  RowIndex = 14,
 
   /**
       Defines a human readable text
        alternative of aria-rowindex. Value type: string
   */
-  rowIndexText = 15,
+  RowIndexText = 15,
 
   /**
       Defines the number of rows spanned by a
        cell or gridcell within a table, grid, or treegrid. Value type: integer
   */
-  rowSpan = 16,
+  RowSpan = 16,
 
   /**
       Defines the number of items in the current
        set of listitems or treeitems. Value type: integer
   */
-  setSize = 17,
+  SetSize = 17,
 }
 
 /**
@@ -376,458 +376,458 @@ enum GtkAccessibleRole
       An element with important, and usually
       time-sensitive, information
   */
-  alert = 0,
+  Alert = 0,
 
   /**
       A type of dialog that contains an
       alert message
   */
-  alertDialog = 1,
+  AlertDialog = 1,
 
   /**
       Unused
   */
-  banner = 2,
+  Banner = 2,
 
   /**
       An input element that allows for
       user-triggered actions when clicked or pressed
   */
-  button = 3,
+  Button = 3,
 
   /**
       Unused
   */
-  caption = 4,
+  Caption = 4,
 
   /**
       Unused
   */
-  cell = 5,
+  Cell = 5,
 
   /**
       A checkable input element that has
       three possible values: `true`, `false`, or `mixed`
   */
-  checkbox = 6,
+  Checkbox = 6,
 
   /**
       A header in a columned list.
   */
-  columnHeader = 7,
+  ColumnHeader = 7,
 
   /**
       An input that controls another element,
       such as a list or a grid, that can dynamically pop up to help the user
       set the value of the input
   */
-  comboBox = 8,
+  ComboBox = 8,
 
   /**
       Abstract role.
   */
-  command = 9,
+  Command = 9,
 
   /**
       Abstract role.
   */
-  composite = 10,
+  Composite = 10,
 
   /**
       A dialog is a window that is designed to interrupt
       the current processing of an application in order to prompt the user to enter
       information or require a response.
   */
-  dialog = 11,
+  Dialog = 11,
 
   /**
       Content that assistive technology users may want to
       browse in a reading mode.
   */
-  document = 12,
+  Document = 12,
 
   /**
       Unused
   */
-  feed = 13,
+  Feed = 13,
 
   /**
       Unused
   */
-  form = 14,
+  Form = 14,
 
   /**
       A nameless container that has no semantic meaning
       of its own. This is the role that GTK uses by default for widgets.
   */
-  generic = 15,
+  Generic = 15,
 
   /**
       A grid of items.
   */
-  grid = 16,
+  Grid = 16,
 
   /**
       An item in a grid or tree grid.
   */
-  gridCell = 17,
+  GridCell = 17,
 
   /**
       An element that groups multiple related widgets. GTK uses
       this role for various containers, like [gtk.header_bar.HeaderBar] or [gtk.notebook.Notebook].
   */
-  group = 18,
+  Group = 18,
 
   /**
       Unused
   */
-  heading = 19,
+  Heading = 19,
 
   /**
       An image.
   */
-  img = 20,
+  Img = 20,
 
   /**
       Abstract role.
   */
-  input = 21,
+  Input = 21,
 
   /**
       A visible name or caption for a user interface component.
   */
-  label = 22,
+  Label = 22,
 
   /**
       Abstract role.
   */
-  landmark = 23,
+  Landmark = 23,
 
   /**
       Unused
   */
-  legend = 24,
+  Legend = 24,
 
   /**
       A clickable link.
   */
-  link = 25,
+  Link = 25,
 
   /**
       A list of items.
   */
-  list = 26,
+  List = 26,
 
   /**
       Unused.
   */
-  listBox = 27,
+  ListBox = 27,
 
   /**
       An item in a list.
   */
-  listItem = 28,
+  ListItem = 28,
 
   /**
       Unused
   */
-  log = 29,
+  Log = 29,
 
   /**
       Unused
   */
-  main = 30,
+  Main = 30,
 
   /**
       Unused
   */
-  marquee = 31,
+  Marquee = 31,
 
   /**
       Unused
   */
-  math = 32,
+  Math = 32,
 
   /**
       An element that represents a value within a known range.
   */
-  meter = 33,
+  Meter = 33,
 
   /**
       A menu.
   */
-  menu = 34,
+  Menu = 34,
 
   /**
       A menubar.
   */
-  menuBar = 35,
+  MenuBar = 35,
 
   /**
       An item in a menu.
   */
-  menuItem = 36,
+  MenuItem = 36,
 
   /**
       A check item in a menu.
   */
-  menuItemCheckbox = 37,
+  MenuItemCheckbox = 37,
 
   /**
       A radio item in a menu.
   */
-  menuItemRadio = 38,
+  MenuItemRadio = 38,
 
   /**
       Unused
   */
-  navigation = 39,
+  Navigation = 39,
 
   /**
       An element that is not represented to accessibility technologies.
       This role is synonymous to @GTK_ACCESSIBLE_ROLE_PRESENTATION.
   */
-  none = 40,
+  None = 40,
 
   /**
       Unused
   */
-  note = 41,
+  Note = 41,
 
   /**
       Unused
   */
-  option = 42,
+  Option = 42,
 
   /**
       An element that is not represented to accessibility technologies.
       This role is synonymous to @GTK_ACCESSIBLE_ROLE_NONE.
   */
-  presentation = 43,
+  Presentation = 43,
 
   /**
       An element that displays the progress
       status for tasks that take a long time.
   */
-  progressBar = 44,
+  ProgressBar = 44,
 
   /**
       A checkable input in a group of radio roles,
       only one of which can be checked at a time.
   */
-  radio = 45,
+  Radio = 45,
 
   /**
       Unused
   */
-  radioGroup = 46,
+  RadioGroup = 46,
 
   /**
       Abstract role.
   */
-  range = 47,
+  Range = 47,
 
   /**
       Unused
   */
-  region = 48,
+  Region = 48,
 
   /**
       A row in a columned list.
   */
-  row = 49,
+  Row = 49,
 
   /**
       Unused
   */
-  rowGroup = 50,
+  RowGroup = 50,
 
   /**
       Unused
   */
-  rowHeader = 51,
+  RowHeader = 51,
 
   /**
       A graphical object that controls the scrolling
       of content within a viewing area, regardless of whether the content is fully
       displayed within the viewing area.
   */
-  scrollbar = 52,
+  Scrollbar = 52,
 
   /**
       Unused
   */
-  search = 53,
+  Search = 53,
 
   /**
       A type of textbox intended for specifying
       search criteria.
   */
-  searchBox = 54,
+  SearchBox = 54,
 
   /**
       Abstract role.
   */
-  section = 55,
+  Section = 55,
 
   /**
       Abstract role.
   */
-  sectionHead = 56,
+  SectionHead = 56,
 
   /**
       Abstract role.
   */
-  select = 57,
+  Select = 57,
 
   /**
       A divider that separates and distinguishes
       sections of content or groups of menuitems.
   */
-  separator = 58,
+  Separator = 58,
 
   /**
       A user input where the user selects a value
       from within a given range.
   */
-  slider = 59,
+  Slider = 59,
 
   /**
       A form of range that expects the user to
       select from among discrete choices.
   */
-  spinButton = 60,
+  SpinButton = 60,
 
   /**
       Unused
   */
-  status = 61,
+  Status = 61,
 
   /**
       Abstract role.
   */
-  structure = 62,
+  Structure = 62,
 
   /**
       A type of checkbox that represents on/off values,
       as opposed to checked/unchecked values.
   */
-  switch_ = 63,
+  Switch = 63,
 
   /**
       An item in a list of tab used for switching pages.
   */
-  tab = 64,
+  Tab = 64,
 
   /**
       Unused
   */
-  table = 65,
+  Table = 65,
 
   /**
       A list of tabs for switching pages.
   */
-  tabList = 66,
+  TabList = 66,
 
   /**
       A page in a notebook or stack.
   */
-  tabPanel = 67,
+  TabPanel = 67,
 
   /**
       A type of input that allows free-form text
       as its value.
   */
-  textBox = 68,
+  TextBox = 68,
 
   /**
       Unused
   */
-  time = 69,
+  Time = 69,
 
   /**
       Unused
   */
-  timer = 70,
+  Timer = 70,
 
   /**
       Unused
   */
-  toolbar = 71,
+  Toolbar = 71,
 
   /**
       Unused
   */
-  tooltip = 72,
+  Tooltip = 72,
 
   /**
       Unused
   */
-  tree = 73,
+  Tree = 73,
 
   /**
       A treeview-like, columned list.
   */
-  treeGrid = 74,
+  TreeGrid = 74,
 
   /**
       Unused
   */
-  treeItem = 75,
+  TreeItem = 75,
 
   /**
       Abstract role for interactive components of a
       graphical user interface
   */
-  widget = 76,
+  Widget = 76,
 
   /**
       Abstract role for windows.
   */
-  window = 77,
+  Window = 77,
 
   /**
       A type of push button which stays pressed until depressed by a second
     activation.
   */
-  toggleButton = 78,
+  ToggleButton = 78,
 
   /**
       A toplevel element of a graphical user interface.
     
     This is the role that GTK uses by default for windows.
   */
-  application = 79,
+  Application = 79,
 
   /**
       A paragraph of content.
   */
-  paragraph = 80,
+  Paragraph = 80,
 
   /**
       A section of content that is quoted from another source.
   */
-  blockQuote = 81,
+  BlockQuote = 81,
 
   /**
       A section of a page that consists of a composition that forms an independent
     part of a document, page, or site.
   */
-  article = 82,
+  Article = 82,
 
   /**
       A comment contains content expressing reaction to other content.
   */
-  comment = 83,
+  Comment = 83,
 
   /**
       A virtual terminal.
   */
-  terminal = 84,
+  Terminal = 84,
 }
 
 /**
-    The possible values for the [gtk.types.AccessibleProperty.sort]
+    The possible values for the [gtk.types.AccessibleProperty.Sort]
   accessible property.
 */
 enum GtkAccessibleSort
@@ -835,23 +835,23 @@ enum GtkAccessibleSort
   /**
       There is no defined sort applied to the column.
   */
-  none = 0,
+  None = 0,
 
   /**
       Items are sorted in ascending order by this column.
   */
-  ascending = 1,
+  Ascending = 1,
 
   /**
       Items are sorted in descending order by this column.
   */
-  descending = 2,
+  Descending = 2,
 
   /**
       A sort algorithm other than ascending or
        descending has been applied.
   */
-  other = 3,
+  Other = 3,
 }
 
 /**
@@ -862,61 +862,61 @@ enum GtkAccessibleState
   /**
       A “busy” state. This state has boolean values
   */
-  busy = 0,
+  Busy = 0,
 
   /**
       A “checked” state; indicates the current
       state of a `class@CheckButton`. Value type: `enum@AccessibleTristate`
   */
-  checked = 1,
+  Checked = 1,
 
   /**
       A “disabled” state; corresponds to the
       `property@Widget:sensitive` property. It indicates a UI element
       that is perceivable, but not editable or operable. Value type: boolean
   */
-  disabled = 2,
+  Disabled = 2,
 
   /**
       An “expanded” state; corresponds to the
       `property@Expander:expanded` property. Value type: boolean
       or undefined
   */
-  expanded = 3,
+  Expanded = 3,
 
   /**
       A “hidden” state; corresponds to the
       `property@Widget:visible` property. You can use this state
       explicitly on UI elements that should not be exposed to an assistive
       technology. Value type: boolean
-      See also: [gtk.types.AccessibleState.disabled]
+      See also: [gtk.types.AccessibleState.Disabled]
   */
-  hidden = 4,
+  Hidden = 4,
 
   /**
       An “invalid” state; set when a widget
       is showing an error. Value type: `enum@AccessibleInvalidState`
   */
-  invalid = 5,
+  Invalid = 5,
 
   /**
       A “pressed” state; indicates the current
       state of a `class@ToggleButton`. Value type: `enum@AccessibleTristate`
       enumeration
   */
-  pressed = 6,
+  Pressed = 6,
 
   /**
       A “selected” state; set when a widget
       is selected. Value type: boolean or undefined
   */
-  selected = 7,
+  Selected = 7,
 
   /**
       Indicates that a widget with the GTK_ACCESSIBLE_ROLE_LINK has been visited.
     Value type: boolean.
   */
-  visited = 8,
+  Visited = 8,
 }
 
 /**
@@ -928,13 +928,13 @@ enum GtkAccessibleTextContentChange
       contents change as the result of
       an insert operation
   */
-  insert = 0,
+  Insert = 0,
 
   /**
       contents change as the result of
       a remove operation
   */
-  remove = 1,
+  Remove = 1,
 }
 
 /**
@@ -947,43 +947,43 @@ enum GtkAccessibleTextGranularity
       Use the boundary between
       characters (including non-printing characters)
   */
-  character = 0,
+  Character = 0,
 
   /**
       Use the boundary between words,
       starting from the beginning of the current word and ending at the
       beginning of the next word
   */
-  word = 1,
+  Word = 1,
 
   /**
       Use the boundary between
       sentences, starting from the beginning of the current sentence and
       ending at the beginning of the next sentence
   */
-  sentence = 2,
+  Sentence = 2,
 
   /**
       Use the boundary between lines,
       starting from the beginning of the current line and ending at the
       beginning of the next line
   */
-  line = 3,
+  Line = 3,
 
   /**
       Use the boundary between
       paragraphs, starting from the beginning of the current paragraph and
       ending at the beginning of the next paragraph
   */
-  paragraph = 4,
+  Paragraph = 4,
 }
 
 /**
-    The possible values for the [gtk.types.AccessibleState.pressed]
+    The possible values for the [gtk.types.AccessibleState.Pressed]
   accessible state.
   
-  Note that the [gtk.types.AccessibleTristate.false_] and
-  [gtk.types.AccessibleTristate.true_] have the same values
+  Note that the [gtk.types.AccessibleTristate.False] and
+  [gtk.types.AccessibleTristate.True] have the same values
   as false and true.
 */
 enum GtkAccessibleTristate
@@ -991,17 +991,17 @@ enum GtkAccessibleTristate
   /**
       The state is `false`
   */
-  false_ = 0,
+  False = 0,
 
   /**
       The state is `true`
   */
-  true_ = 1,
+  True = 1,
 
   /**
       The state is `mixed`
   */
-  mixed = 2,
+  Mixed = 2,
 }
 
 /**
@@ -1014,12 +1014,12 @@ enum GtkAccessibleTristate
   could be scaled and stretched, it could be centered, or it could be
   positioned to one side of the space.
   
-  Note that in horizontal context [gtk.types.Align.start] and [gtk.types.Align.end]
+  Note that in horizontal context [gtk.types.Align.Start] and [gtk.types.Align.End]
   are interpreted relative to text direction.
   
   Baseline support is optional for containers and widgets, and is only available
-  for vertical alignment. `GTK_ALIGN_BASELINE_CENTER and [gtk.types.Align.baselineFill]
-  are treated similar to [gtk.types.Align.center] and [gtk.types.Align.fill], except that it
+  for vertical alignment. `GTK_ALIGN_BASELINE_CENTER and [gtk.types.Align.BaselineFill]
+  are treated similar to [gtk.types.Align.Center] and [gtk.types.Align.Fill], except that it
   positions the widget to line up the baselines, where that is supported.
 */
 enum GtkAlign
@@ -1028,39 +1028,39 @@ enum GtkAlign
       stretch to fill all space if possible, center if
       no meaningful way to stretch
   */
-  fill = 0,
+  Fill = 0,
 
   /**
       snap to left or top side, leaving space on right or bottom
   */
-  start = 1,
+  Start = 1,
 
   /**
       snap to right or bottom side, leaving space on left or top
   */
-  end = 2,
+  End = 2,
 
   /**
       center natural width of widget inside the allocation
   */
-  center = 3,
+  Center = 3,
 
   /**
-      a different name for [gtk.types.Align.baseline].
+      a different name for [gtk.types.Align.Baseline].
   */
-  baselineFill = 4,
+  BaselineFill = 4,
 
   /**
       align the widget according to the baseline.
   
-    Deprecated:     Use [gtk.types.Align.baselineFill] instead
+    Deprecated:     Use [gtk.types.Align.BaselineFill] instead
   */
-  baseline = 4,
+  Baseline = 4,
 
   /**
       stretch to fill all space, but align the baseline.
   */
-  baselineCenter = 5,
+  BaselineCenter = 5,
 }
 
 /**
@@ -1074,24 +1074,24 @@ enum GtkApplicationInhibitFlags : uint
       Inhibit ending the user session
       by logging out or by shutting down the computer
   */
-  logout = 1,
+  Logout = 1,
 
   /**
       Inhibit user switching
   */
-  switch_ = 2,
+  Switch = 2,
 
   /**
       Inhibit suspending the
       session or computer
   */
-  suspend = 4,
+  Suspend = 4,
 
   /**
       Inhibit the session being
       marked as idle (and possibly locked)
   */
-  idle = 8,
+  Idle = 8,
 }
 
 /**
@@ -1102,27 +1102,27 @@ enum GtkArrowType
   /**
       Represents an upward pointing arrow.
   */
-  up = 0,
+  Up = 0,
 
   /**
       Represents a downward pointing arrow.
   */
-  down = 1,
+  Down = 1,
 
   /**
       Represents a left pointing arrow.
   */
-  left = 2,
+  Left = 2,
 
   /**
       Represents a right pointing arrow.
   */
-  right = 3,
+  Right = 3,
 
   /**
       No arrow.
   */
-  none = 4,
+  None = 4,
 }
 
 /**
@@ -1131,8 +1131,8 @@ enum GtkArrowType
   The role is used to handle buttons sensitivity and visibility.
   
   Note that an assistant needs to end its page flow with a page of type
-  [gtk.types.AssistantPageType.confirm], [gtk.types.AssistantPageType.summary] or
-  [gtk.types.AssistantPageType.progress] to be correct.
+  [gtk.types.AssistantPageType.Confirm], [gtk.types.AssistantPageType.Summary] or
+  [gtk.types.AssistantPageType.Progress] to be correct.
   
   The Cancel button will only be shown if the page isn’t “committed”.
   See [gtk.assistant.Assistant.commit] for details.
@@ -1143,40 +1143,40 @@ enum GtkAssistantPageType
       The page has regular contents. Both the
      Back and forward buttons will be shown.
   */
-  content = 0,
+  Content = 0,
 
   /**
       The page contains an introduction to the
      assistant task. Only the Forward button will be shown if there is a
       next page.
   */
-  intro = 1,
+  Intro = 1,
 
   /**
       The page lets the user confirm or deny the
      changes. The Back and Apply buttons will be shown.
   */
-  confirm = 2,
+  Confirm = 2,
 
   /**
       The page informs the user of the changes
      done. Only the Close button will be shown.
   */
-  summary = 3,
+  Summary = 3,
 
   /**
       Used for tasks that take a long time to
      complete, blocks the assistant until the page is marked as complete.
       Only the back button will be shown.
   */
-  progress = 4,
+  Progress = 4,
 
   /**
       Used for when other page types are not
      appropriate. No buttons will be shown, and the application must
      add its own buttons through [gtk.assistant.Assistant.addActionWidget].
   */
-  custom = 5,
+  Custom = 5,
 }
 
 /**
@@ -1194,17 +1194,17 @@ enum GtkBaselinePosition
   /**
       Align the baseline at the top
   */
-  top = 0,
+  Top = 0,
 
   /**
       Center the baseline
   */
-  center = 1,
+  Center = 1,
 
   /**
       Align the baseline at the bottom
   */
-  bottom = 2,
+  Bottom = 2,
 }
 
 /**
@@ -1215,52 +1215,52 @@ enum GtkBorderStyle
   /**
       No visible border
   */
-  none = 0,
+  None = 0,
 
   /**
-      Same as [gtk.types.BorderStyle.none]
+      Same as [gtk.types.BorderStyle.None]
   */
-  hidden = 1,
+  Hidden = 1,
 
   /**
       A single line segment
   */
-  solid = 2,
+  Solid = 2,
 
   /**
       Looks as if the content is sunken into the canvas
   */
-  inset = 3,
+  Inset = 3,
 
   /**
       Looks as if the content is coming out of the canvas
   */
-  outset = 4,
+  Outset = 4,
 
   /**
       A series of round dots
   */
-  dotted = 5,
+  Dotted = 5,
 
   /**
       A series of square-ended dashes
   */
-  dashed = 6,
+  Dashed = 6,
 
   /**
       Two parallel lines with some space between them
   */
-  double_ = 7,
+  Double = 7,
 
   /**
       Looks as if it were carved in the canvas
   */
-  groove = 8,
+  Groove = 8,
 
   /**
       Looks as if it were coming out of the canvas
   */
-  ridge = 9,
+  Ridge = 9,
 }
 
 /**
@@ -1268,7 +1268,7 @@ enum GtkBorderStyle
   
   New values may be added in the future for new features, so external
   implementations of [gtk.builder_scope.BuilderScope] should test the flags
-  for unknown values and raise a [gtk.types.BuilderError.invalidAttribute] error
+  for unknown values and raise a [gtk.types.BuilderError.InvalidAttribute] error
   when they encounter one.
 */
 enum GtkBuilderClosureFlags : uint
@@ -1277,7 +1277,7 @@ enum GtkBuilderClosureFlags : uint
       The closure should be created swapped. See
       [gobject.cclosure.CClosure.newSwap] for details.
   */
-  swapped = 1,
+  Swapped = 1,
 }
 
 /**
@@ -1290,97 +1290,97 @@ enum GtkBuilderError
       A type-func attribute didn’t name
      a function that returns a [gobject.types.TYPE_FLAG_RESERVED_ID_BIT].
   */
-  invalidTypeFunction = 0,
+  InvalidTypeFunction = 0,
 
   /**
       The input contained a tag that [gtk.builder.Builder]
      can’t handle.
   */
-  unhandledTag = 1,
+  UnhandledTag = 1,
 
   /**
       An attribute that is required by
      [gtk.builder.Builder] was missing.
   */
-  missingAttribute = 2,
+  MissingAttribute = 2,
 
   /**
       [gtk.builder.Builder] found an attribute that
      it doesn’t understand.
   */
-  invalidAttribute = 3,
+  InvalidAttribute = 3,
 
   /**
       [gtk.builder.Builder] found a tag that
      it doesn’t understand.
   */
-  invalidTag = 4,
+  InvalidTag = 4,
 
   /**
       A required property value was
      missing.
   */
-  missingPropertyValue = 5,
+  MissingPropertyValue = 5,
 
   /**
       [gtk.builder.Builder] couldn’t parse
      some attribute value.
   */
-  invalidValue = 6,
+  InvalidValue = 6,
 
   /**
       The input file requires a newer version
      of GTK.
   */
-  versionMismatch = 7,
+  VersionMismatch = 7,
 
   /**
       An object id occurred twice.
   */
-  duplicateId = 8,
+  DuplicateId = 8,
 
   /**
       A specified object type is of the same type or
      derived from the type of the composite class being extended with builder XML.
   */
-  objectTypeRefused = 9,
+  ObjectTypeRefused = 9,
 
   /**
       The wrong type was specified in a composite class’s template XML
   */
-  templateMismatch = 10,
+  TemplateMismatch = 10,
 
   /**
       The specified property is unknown for the object class.
   */
-  invalidProperty = 11,
+  InvalidProperty = 11,
 
   /**
       The specified signal is unknown for the object class.
   */
-  invalidSignal = 12,
+  InvalidSignal = 12,
 
   /**
       An object id is unknown.
   */
-  invalidId = 13,
+  InvalidId = 13,
 
   /**
       A function could not be found. This often happens
       when symbols are set to be kept private. Compiling code with -rdynamic or using the
       `gmodule-export-2.0` pkgconfig module can fix this problem.
   */
-  invalidFunction = 14,
+  InvalidFunction = 14,
 }
 
 /**
     Prebuilt sets of buttons for [gtk.dialog.Dialog].
   
   If none of these choices are appropriate, simply use
-  [gtk.types.ButtonsType.none] and call [gtk.dialog.Dialog.addButtons].
+  [gtk.types.ButtonsType.None] and call [gtk.dialog.Dialog.addButtons].
   
-  > Please note that [gtk.types.ButtonsType.ok], [gtk.types.ButtonsType.yesNo]
-  > and [gtk.types.ButtonsType.okCancel] are discouraged by the
+  > Please note that [gtk.types.ButtonsType.Ok], [gtk.types.ButtonsType.YesNo]
+  > and [gtk.types.ButtonsType.OkCancel] are discouraged by the
   > [GNOME Human Interface Guidelines](http://library.gnome.org/devel/hig-book/stable/).
 */
 enum GtkButtonsType
@@ -1388,32 +1388,32 @@ enum GtkButtonsType
   /**
       no buttons at all
   */
-  none = 0,
+  None = 0,
 
   /**
       an OK button
   */
-  ok = 1,
+  Ok = 1,
 
   /**
       a Close button
   */
-  close = 2,
+  Close = 2,
 
   /**
       a Cancel button
   */
-  cancel = 3,
+  Cancel = 3,
 
   /**
       Yes and No buttons
   */
-  yesNo = 4,
+  YesNo = 4,
 
   /**
       OK and Cancel buttons
   */
-  okCancel = 5,
+  OkCancel = 5,
 }
 
 /**
@@ -1424,12 +1424,12 @@ enum GtkCellRendererAccelMode
   /**
       GTK accelerators mode
   */
-  gtk = 0,
+  Gtk = 0,
 
   /**
       Other accelerator mode
   */
-  other = 1,
+  Other = 1,
 }
 
 /**
@@ -1443,17 +1443,17 @@ enum GtkCellRendererMode
      row being drawn can’t be selected -- just that a particular element of
      it cannot be individually modified.
   */
-  inert = 0,
+  Inert = 0,
 
   /**
       The cell can be clicked.
   */
-  activatable = 1,
+  Activatable = 1,
 
   /**
       The cell can be edited or otherwise modified.
   */
-  editable = 2,
+  Editable = 2,
 }
 
 /**
@@ -1465,37 +1465,37 @@ enum GtkCellRendererState : uint
       The cell is currently selected, and
      probably has a selection colored background to render to.
   */
-  selected = 1,
+  Selected = 1,
 
   /**
       The mouse is hovering over the cell.
   */
-  prelit = 2,
+  Prelit = 2,
 
   /**
       The cell is drawn in an insensitive manner
   */
-  insensitive = 4,
+  Insensitive = 4,
 
   /**
       The cell is in a sorted row
   */
-  sorted = 8,
+  Sorted = 8,
 
   /**
       The cell is in the focus row.
   */
-  focused = 16,
+  Focused = 16,
 
   /**
       The cell is in a row that can be expanded
   */
-  expandable = 32,
+  Expandable = 32,
 
   /**
       The cell is in a row that is expanded
   */
-  expanded = 64,
+  Expanded = 64,
 }
 
 /**
@@ -1510,17 +1510,17 @@ enum GtkCollation
   /**
       Don't do any collation
   */
-  none = 0,
+  None = 0,
 
   /**
       Use `func@GLib.utf8_collate_key`
   */
-  unicode = 1,
+  Unicode = 1,
 
   /**
       Use `func@GLib.utf8_collate_key_for_filename`
   */
-  filename = 2,
+  Filename = 2,
 }
 
 /**
@@ -1532,70 +1532,70 @@ enum GtkConstraintAttribute
       No attribute, used for constant
       relations
   */
-  none = 0,
+  None = 0,
 
   /**
       The left edge of a widget, regardless of
       text direction
   */
-  left = 1,
+  Left = 1,
 
   /**
       The right edge of a widget, regardless
       of text direction
   */
-  right = 2,
+  Right = 2,
 
   /**
       The top edge of a widget
   */
-  top = 3,
+  Top = 3,
 
   /**
       The bottom edge of a widget
   */
-  bottom = 4,
+  Bottom = 4,
 
   /**
       The leading edge of a widget, depending
-      on text direction; equivalent to [gtk.types.ConstraintAttribute.left] for LTR
-      languages, and [gtk.types.ConstraintAttribute.right] for RTL ones
+      on text direction; equivalent to [gtk.types.ConstraintAttribute.Left] for LTR
+      languages, and [gtk.types.ConstraintAttribute.Right] for RTL ones
   */
-  start = 5,
+  Start = 5,
 
   /**
       The trailing edge of a widget, depending
-      on text direction; equivalent to [gtk.types.ConstraintAttribute.right] for LTR
-      languages, and [gtk.types.ConstraintAttribute.left] for RTL ones
+      on text direction; equivalent to [gtk.types.ConstraintAttribute.Right] for LTR
+      languages, and [gtk.types.ConstraintAttribute.Left] for RTL ones
   */
-  end = 6,
+  End = 6,
 
   /**
       The width of a widget
   */
-  width = 7,
+  Width = 7,
 
   /**
       The height of a widget
   */
-  height = 8,
+  Height = 8,
 
   /**
       The center of a widget, on the
       horizontal axis
   */
-  centerX = 9,
+  CenterX = 9,
 
   /**
       The center of a widget, on the
       vertical axis
   */
-  centerY = 10,
+  CenterY = 10,
 
   /**
       The baseline of a widget
   */
-  baseline = 11,
+  Baseline = 11,
 }
 
 /**
@@ -1606,17 +1606,17 @@ enum GtkConstraintRelation
   /**
       Less than, or equal
   */
-  le = -1,
+  Le = -1,
 
   /**
       Equal
   */
-  eq = 0,
+  Eq = 0,
 
   /**
       Greater than, or equal
   */
-  ge = 1,
+  Ge = 1,
 }
 
 /**
@@ -1630,22 +1630,22 @@ enum GtkConstraintStrength
   /**
       The constraint is required towards solving the layout
   */
-  required = 1001001000,
+  Required = 1001001000,
 
   /**
       A strong constraint
   */
-  strong = 1000000000,
+  Strong = 1000000000,
 
   /**
       A medium constraint
   */
-  medium = 1000,
+  Medium = 1000,
 
   /**
       A weak constraint
   */
-  weak = 1,
+  Weak = 1,
 }
 
 /**
@@ -1656,32 +1656,32 @@ enum GtkConstraintVflParserError
   /**
       Invalid or unknown symbol
   */
-  symbol = 0,
+  Symbol = 0,
 
   /**
       Invalid or unknown attribute
   */
-  attribute = 1,
+  Attribute = 1,
 
   /**
       Invalid or unknown view
   */
-  view = 2,
+  View = 2,
 
   /**
       Invalid or unknown metric
   */
-  metric = 3,
+  Metric = 3,
 
   /**
       Invalid or unknown priority
   */
-  priority = 4,
+  Priority = 4,
 
   /**
       Invalid or unknown relation
   */
-  relation = 5,
+  Relation = 5,
 }
 
 /**
@@ -1695,7 +1695,7 @@ enum GtkContentFit
       content will appear as stretched if its aspect ratio is different
       from the allocation aspect ratio.
   */
-  fill = 0,
+  Fill = 0,
 
   /**
       Scale the content to fit the allocation,
@@ -1703,7 +1703,7 @@ enum GtkContentFit
       content will appear as letterboxed if its aspect ratio is different
       from the allocation aspect ratio.
   */
-  contain = 1,
+  Contain = 1,
 
   /**
       Cover the entire allocation, while taking
@@ -1711,13 +1711,13 @@ enum GtkContentFit
       will appear as clipped if its aspect ratio is different from the
       allocation aspect ratio.
   */
-  cover = 2,
+  Cover = 2,
 
   /**
       The content is scaled down to fit the
       allocation, if needed, otherwise its original size is used.
   */
-  scaleDown = 3,
+  ScaleDown = 3,
 }
 
 /**
@@ -1732,25 +1732,25 @@ enum GtkCornerType
       Place the scrollbars on the right and bottom of the
       widget (default behaviour).
   */
-  topLeft = 0,
+  TopLeft = 0,
 
   /**
       Place the scrollbars on the top and right of the
       widget.
   */
-  bottomLeft = 1,
+  BottomLeft = 1,
 
   /**
       Place the scrollbars on the left and bottom of the
       widget.
   */
-  topRight = 2,
+  TopRight = 2,
 
   /**
       Place the scrollbars on the top and left of the
       widget.
   */
-  bottomRight = 3,
+  BottomRight = 3,
 }
 
 /**
@@ -1764,27 +1764,27 @@ enum GtkCssParserError
   /**
       Unknown failure.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       The given text does not form valid syntax
   */
-  syntax = 1,
+  Syntax = 1,
 
   /**
       Failed to import a resource
   */
-  import_ = 2,
+  Import = 2,
 
   /**
       The given name has not been defined
   */
-  name = 3,
+  Name = 3,
 
   /**
       The given value is not correct
   */
-  unknownValue = 4,
+  UnknownValue = 4,
 }
 
 /**
@@ -1799,18 +1799,18 @@ enum GtkCssParserWarning
       The given construct is
       deprecated and will be removed in a future version
   */
-  deprecated_ = 0,
+  Deprecated = 0,
 
   /**
       A syntax construct was used
       that should be avoided
   */
-  syntax = 1,
+  Syntax = 1,
 
   /**
       A feature is not implemented
   */
-  unimplemented = 2,
+  Unimplemented = 2,
 }
 
 /**
@@ -1825,97 +1825,97 @@ enum GtkDebugFlags : uint
   /**
       Information about GtkTextView
   */
-  text = 1,
+  Text = 1,
 
   /**
       Information about GtkTreeView
   */
-  tree = 2,
+  Tree = 2,
 
   /**
       Information about keyboard shortcuts
   */
-  keybindings = 4,
+  Keybindings = 4,
 
   /**
       Information about modules and extensions
   */
-  modules = 8,
+  Modules = 8,
 
   /**
       Information about size allocation
   */
-  geometry = 16,
+  Geometry = 16,
 
   /**
       Information about icon themes
   */
-  icontheme = 32,
+  Icontheme = 32,
 
   /**
       Information about printing
   */
-  printing = 64,
+  Printing = 64,
 
   /**
       Trace GtkBuilder operation
   */
-  builder = 128,
+  Builder = 128,
 
   /**
       Information about size requests
   */
-  sizeRequest = 256,
+  SizeRequest = 256,
 
   /**
       Disable the style property cache
   */
-  noCssCache = 512,
+  NoCssCache = 512,
 
   /**
       Open the GTK inspector
   */
-  interactive = 1024,
+  Interactive = 1024,
 
   /**
       Information about actions and menu models
   */
-  actions = 4096,
+  Actions = 4096,
 
   /**
       Information from layout managers
   */
-  layout = 8192,
+  Layout = 8192,
 
   /**
       Include debug render nodes in the generated snapshots
   */
-  snapshot = 16384,
+  Snapshot = 16384,
 
   /**
       Information from the constraints solver
   */
-  constraints = 32768,
+  Constraints = 32768,
 
   /**
       Log unused GtkBuilder objects
   */
-  builderObjects = 65536,
+  BuilderObjects = 65536,
 
   /**
       Information about accessibility state changes
   */
-  a11y = 131072,
+  A11y = 131072,
 
   /**
       Information about icon fallback.
   */
-  iconfallback = 262144,
+  Iconfallback = 262144,
 
   /**
       Inverts the default text-direction.
   */
-  invertTextDir = 524288,
+  InvertTextDir = 524288,
 }
 
 /**
@@ -1926,18 +1926,18 @@ enum GtkDeleteType
   /**
       Delete characters.
   */
-  chars = 0,
+  Chars = 0,
 
   /**
       Delete only the portion of the word to the
       left/right of cursor if we’re in the middle of a word.
   */
-  wordEnds = 1,
+  WordEnds = 1,
 
   /**
       Delete words.
   */
-  words = 2,
+  Words = 2,
 
   /**
       Delete display-lines. Display-lines
@@ -1945,29 +1945,29 @@ enum GtkDeleteType
       breaks. As opposed to paragraphs, which are defined by line
       breaks in the input.
   */
-  displayLines = 3,
+  DisplayLines = 3,
 
   /**
       Delete only the portion of the
       display-line to the left/right of cursor.
   */
-  displayLineEnds = 4,
+  DisplayLineEnds = 4,
 
   /**
       Delete to the end of the
       paragraph. Like C-k in Emacs (or its reverse).
   */
-  paragraphEnds = 5,
+  ParagraphEnds = 5,
 
   /**
       Delete entire line. Like C-k in pico.
   */
-  paragraphs = 6,
+  Paragraphs = 6,
 
   /**
       Delete only whitespace. Like M-\ in Emacs.
   */
-  whitespace = 7,
+  Whitespace = 7,
 }
 
 /**
@@ -1980,19 +1980,19 @@ enum GtkDialogError
       Generic error condition for when
       an operation fails and no more specific code is applicable
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       The async function call was cancelled
       via its [gio.cancellable.Cancellable]
   */
-  cancelled = 1,
+  Cancelled = 1,
 
   /**
       The operation was cancelled
       by the user (via a Cancel or Close button)
   */
-  dismissed = 2,
+  Dismissed = 2,
 }
 
 /**
@@ -2003,18 +2003,18 @@ enum GtkDialogFlags : uint
   /**
       Make the constructed dialog modal
   */
-  modal = 1,
+  Modal = 1,
 
   /**
       Destroy the dialog when its parent is destroyed
   */
-  destroyWithParent = 2,
+  DestroyWithParent = 2,
 
   /**
       Create dialog with actions in header
       bar instead of action area
   */
-  useHeaderBar = 4,
+  UseHeaderBar = 4,
 }
 
 /**
@@ -2025,32 +2025,32 @@ enum GtkDirectionType
   /**
       Move forward.
   */
-  tabForward = 0,
+  TabForward = 0,
 
   /**
       Move backward.
   */
-  tabBackward = 1,
+  TabBackward = 1,
 
   /**
       Move up.
   */
-  up = 2,
+  Up = 2,
 
   /**
       Move down.
   */
-  down = 3,
+  Down = 3,
 
   /**
       Move left.
   */
-  left = 4,
+  Left = 4,
 
   /**
       Move right.
   */
-  right = 5,
+  Right = 5,
 }
 
 /**
@@ -2064,47 +2064,47 @@ enum GtkEditableProperties
   /**
       the property id for [gtk.editable.Editable.utf8]
   */
-  propText = 0,
+  PropText = 0,
 
   /**
       the property id for `property@Gtk.Editable:cursor-position`
   */
-  propCursorPosition = 1,
+  PropCursorPosition = 1,
 
   /**
       the property id for `property@Gtk.Editable:selection-bound`
   */
-  propSelectionBound = 2,
+  PropSelectionBound = 2,
 
   /**
       the property id for [gtk.editable.Editable.gboolean]
   */
-  propEditable = 3,
+  PropEditable = 3,
 
   /**
       the property id for `property@Gtk.Editable:width-chars`
   */
-  propWidthChars = 4,
+  PropWidthChars = 4,
 
   /**
       the property id for `property@Gtk.Editable:max-width-chars`
   */
-  propMaxWidthChars = 5,
+  PropMaxWidthChars = 5,
 
   /**
       the property id for [gtk.editable.Editable.gfloat]
   */
-  propXalign = 6,
+  PropXalign = 6,
 
   /**
       the property id for `property@Gtk.Editable:enable-undo`
   */
-  propEnableUndo = 7,
+  PropEnableUndo = 7,
 
   /**
       the number of properties
   */
-  numProperties = 8,
+  NumProperties = 8,
 }
 
 /**
@@ -2115,12 +2115,12 @@ enum GtkEntryIconPosition
   /**
       At the beginning of the entry (depending on the text direction).
   */
-  primary = 0,
+  Primary = 0,
 
   /**
       At the end of the entry (depending on the text direction).
   */
-  secondary = 1,
+  Secondary = 1,
 }
 
 /**
@@ -2131,32 +2131,32 @@ enum GtkEventControllerScrollFlags : uint
   /**
       Don't emit scroll.
   */
-  none = 0,
+  None = 0,
 
   /**
       Emit scroll with vertical deltas.
   */
-  vertical = 1,
+  Vertical = 1,
 
   /**
       Emit scroll with horizontal deltas.
   */
-  horizontal = 2,
+  Horizontal = 2,
 
   /**
       Only emit deltas that are multiples of 1.
   */
-  discrete = 4,
+  Discrete = 4,
 
   /**
       Emit ::decelerate after continuous scroll finishes.
   */
-  kinetic = 8,
+  Kinetic = 8,
 
   /**
       Emit scroll on both axes.
   */
-  bothAxes = 3,
+  BothAxes = 3,
 }
 
 /**
@@ -2167,17 +2167,17 @@ enum GtkEventSequenceState
   /**
       The sequence is handled, but not grabbed.
   */
-  none = 0,
+  None = 0,
 
   /**
       The sequence is handled and grabbed.
   */
-  claimed = 1,
+  Claimed = 1,
 
   /**
       The sequence is denied.
   */
-  denied = 2,
+  Denied = 2,
 }
 
 /**
@@ -2190,21 +2190,21 @@ enum GtkFileChooserAction
       Indicates open mode.  The file chooser
      will only let the user pick an existing file.
   */
-  open = 0,
+  Open = 0,
 
   /**
       Indicates save mode.  The file chooser
      will let the user pick an existing file, or type in a new
      filename.
   */
-  save = 1,
+  Save = 1,
 
   /**
       Indicates an Open mode for
      selecting folders.  The file chooser will let the user pick an
      existing folder.
   */
-  selectFolder = 2,
+  SelectFolder = 2,
 }
 
 /**
@@ -2216,24 +2216,24 @@ enum GtkFileChooserError
   /**
       Indicates that a file does not exist.
   */
-  nonexistent = 0,
+  Nonexistent = 0,
 
   /**
       Indicates a malformed filename.
   */
-  badFilename = 1,
+  BadFilename = 1,
 
   /**
       Indicates a duplicate path (e.g. when
      adding a bookmark).
   */
-  alreadyExists = 2,
+  AlreadyExists = 2,
 
   /**
       Indicates an incomplete hostname
      (e.g. "http://foo" without a slash after that).
   */
-  incompleteHostname = 3,
+  IncompleteHostname = 3,
 }
 
 /**
@@ -2241,7 +2241,7 @@ enum GtkFileChooserError
   using the filter to optimize refiltering items.
   
   If you are writing an implementation and are not sure which
-  value to pass, [gtk.types.FilterChange.different] is always a correct
+  value to pass, [gtk.types.FilterChange.Different] is always a correct
   choice.
 */
 enum GtkFilterChange
@@ -2250,28 +2250,28 @@ enum GtkFilterChange
       The filter change cannot be
       described with any of the other enumeration values.
   */
-  different = 0,
+  Different = 0,
 
   /**
       The filter is less strict than
       it was before: All items that it used to return true for
       still return true, others now may, too.
   */
-  lessStrict = 1,
+  LessStrict = 1,
 
   /**
       The filter is more strict than
       it was before: All items that it used to return false for
       still return false, others now may, too.
   */
-  moreStrict = 2,
+  MoreStrict = 2,
 }
 
 /**
     Describes the known strictness of a filter.
   
   Note that for filters where the strictness is not known,
-  [gtk.types.FilterMatch.some] is always an acceptable value,
+  [gtk.types.FilterMatch.Some] is always an acceptable value,
   even if a filter does match all or no items.
 */
 enum GtkFilterMatch
@@ -2280,19 +2280,19 @@ enum GtkFilterMatch
       The filter matches some items,
       [gtk.filter.Filter.match] may return true or false
   */
-  some = 0,
+  Some = 0,
 
   /**
       The filter does not match any item,
       [gtk.filter.Filter.match] will always return false.
   */
-  none = 1,
+  None = 1,
 
   /**
       The filter matches all items,
       [gtk.filter.Filter.match] will alays return true.
   */
-  all = 2,
+  All = 2,
 }
 
 /**
@@ -2307,27 +2307,27 @@ enum GtkFontChooserLevel : uint
   /**
       Allow selecting a font family
   */
-  family = 0,
+  Family = 0,
 
   /**
       Allow selecting a specific font face
   */
-  style = 1,
+  Style = 1,
 
   /**
       Allow selecting a specific font size
   */
-  size = 2,
+  Size = 2,
 
   /**
       Allow changing OpenType font variation axes
   */
-  variations = 4,
+  Variations = 4,
 
   /**
       Allow selecting specific OpenType font features
   */
-  features = 8,
+  Features = 8,
 }
 
 /**
@@ -2342,22 +2342,22 @@ enum GtkFontLevel
   /**
       Select a font family
   */
-  family = 0,
+  Family = 0,
 
   /**
       Select a font face (i.e. a family and a style)
   */
-  face = 1,
+  Face = 1,
 
   /**
       Select a font (i.e. a face with a size, and possibly font variations)
   */
-  font = 2,
+  Font = 2,
 
   /**
       Select a font and font features
   */
-  features = 3,
+  Features = 3,
 }
 
 /**
@@ -2368,12 +2368,12 @@ enum GtkGraphicsOffloadEnabled
   /**
       Graphics offloading is enabled.
   */
-  enabled = 0,
+  Enabled = 0,
 
   /**
       Graphics offloading is disabled.
   */
-  disabled = 1,
+  Disabled = 1,
 }
 
 /**
@@ -2385,19 +2385,19 @@ enum GtkIconLookupFlags : uint
       Try to always load regular icons, even
       when symbolic icon names are given
   */
-  forceRegular = 1,
+  ForceRegular = 1,
 
   /**
       Try to always load symbolic icons, even
       when regular icon names are given
   */
-  forceSymbolic = 2,
+  ForceSymbolic = 2,
 
   /**
       Starts loading the texture in the background
       so it is ready when later needed.
   */
-  preload = 4,
+  Preload = 4,
 }
 
 /**
@@ -2416,17 +2416,17 @@ enum GtkIconSize
   /**
       Keep the size of the parent element
   */
-  inherit = 0,
+  Inherit = 0,
 
   /**
       Size similar to text size
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       Large size, for example in an icon view
   */
-  large = 2,
+  Large = 2,
 }
 
 /**
@@ -2437,12 +2437,12 @@ enum GtkIconThemeError
   /**
       The icon specified does not exist in the theme
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       An unspecified error occurred.
   */
-  failed = 1,
+  Failed = 1,
 }
 
 /**
@@ -2453,32 +2453,32 @@ enum GtkIconViewDropPosition
   /**
       no drop possible
   */
-  noDrop = 0,
+  NoDrop = 0,
 
   /**
       dropped item replaces the item
   */
-  dropInto = 1,
+  DropInto = 1,
 
   /**
       dropped item is inserted to the left
   */
-  dropLeft = 2,
+  DropLeft = 2,
 
   /**
       dropped item is inserted to the right
   */
-  dropRight = 3,
+  DropRight = 3,
 
   /**
       dropped item is inserted above
   */
-  dropAbove = 4,
+  DropAbove = 4,
 
   /**
       dropped item is inserted below
   */
-  dropBelow = 5,
+  DropBelow = 5,
 }
 
 /**
@@ -2486,7 +2486,7 @@ enum GtkIconViewDropPosition
   
   If you want to get the image from the widget, you can only get the
   currently-stored representation; for instance, if the [gtk.image.Image.getStorageType]
-  returns [gtk.types.ImageType.paintable], then you can call [gtk.image.Image.getPaintable].
+  returns [gtk.types.ImageType.Paintable], then you can call [gtk.image.Image.getPaintable].
   
   For empty images, you can request any storage type (call any of the "get"
   functions), but they will all return null values.
@@ -2496,22 +2496,22 @@ enum GtkImageType
   /**
       there is no image displayed by the widget
   */
-  empty = 0,
+  Empty = 0,
 
   /**
       the widget contains a named icon
   */
-  iconName = 1,
+  IconName = 1,
 
   /**
       the widget contains a [gio.icon.Icon]
   */
-  gicon = 2,
+  Gicon = 2,
 
   /**
       the widget contains a [gdk.paintable.Paintable]
   */
-  paintable = 3,
+  Paintable = 3,
 }
 
 /**
@@ -2522,7 +2522,7 @@ enum GtkImageType
   to the `enum@InputPurpose` of the entry.
   
   Some common sense is expected when using these flags - mixing
-  [gtk.types.InputHints.lowercase] with any of the uppercase hints makes no sense.
+  [gtk.types.InputHints.Lowercase] with any of the uppercase hints makes no sense.
   
   This enumeration may be extended in the future; input methods should
   ignore unknown values.
@@ -2532,71 +2532,71 @@ enum GtkInputHints : uint
   /**
       No special behaviour suggested
   */
-  none = 0,
+  None = 0,
 
   /**
       Suggest checking for typos
   */
-  spellcheck = 1,
+  Spellcheck = 1,
 
   /**
       Suggest not checking for typos
   */
-  noSpellcheck = 2,
+  NoSpellcheck = 2,
 
   /**
       Suggest word completion
   */
-  wordCompletion = 4,
+  WordCompletion = 4,
 
   /**
       Suggest to convert all text to lowercase
   */
-  lowercase = 8,
+  Lowercase = 8,
 
   /**
       Suggest to capitalize all text
   */
-  uppercaseChars = 16,
+  UppercaseChars = 16,
 
   /**
       Suggest to capitalize the first
       character of each word
   */
-  uppercaseWords = 32,
+  UppercaseWords = 32,
 
   /**
       Suggest to capitalize the
       first word of each sentence
   */
-  uppercaseSentences = 64,
+  UppercaseSentences = 64,
 
   /**
       Suggest to not show an onscreen keyboard
       (e.g for a calculator that already has all the keys).
   */
-  inhibitOsk = 128,
+  InhibitOsk = 128,
 
   /**
       The text is vertical
   */
-  verticalWriting = 256,
+  VerticalWriting = 256,
 
   /**
       Suggest offering Emoji support
   */
-  emoji = 512,
+  Emoji = 512,
 
   /**
       Suggest not offering Emoji support
   */
-  noEmoji = 1024,
+  NoEmoji = 1024,
 
   /**
       Request that the input method should not
        update personalized data (like typing history)
   */
-  private_ = 2048,
+  Private = 2048,
 }
 
 /**
@@ -2612,8 +2612,8 @@ enum GtkInputHints : uint
   application is expected to validate the entry contents, even if
   it specified a purpose.
   
-  The difference between [gtk.types.InputPurpose.digits] and
-  [gtk.types.InputPurpose.number] is that the former accepts only digits
+  The difference between [gtk.types.InputPurpose.Digits] and
+  [gtk.types.InputPurpose.Number] is that the former accepts only digits
   while the latter also some punctuation (like commas or points, plus,
   minus) and “e” or “E” as in 3.14E+000.
   
@@ -2625,57 +2625,57 @@ enum GtkInputPurpose
   /**
       Allow any character
   */
-  freeForm = 0,
+  FreeForm = 0,
 
   /**
       Allow only alphabetic characters
   */
-  alpha = 1,
+  Alpha = 1,
 
   /**
       Allow only digits
   */
-  digits = 2,
+  Digits = 2,
 
   /**
       Edited field expects numbers
   */
-  number = 3,
+  Number = 3,
 
   /**
       Edited field expects phone number
   */
-  phone = 4,
+  Phone = 4,
 
   /**
       Edited field expects URL
   */
-  url = 5,
+  Url = 5,
 
   /**
       Edited field expects email address
   */
-  email = 6,
+  Email = 6,
 
   /**
       Edited field expects the name of a person
   */
-  name = 7,
+  Name = 7,
 
   /**
-      Like [gtk.types.InputPurpose.freeForm], but characters are hidden
+      Like [gtk.types.InputPurpose.FreeForm], but characters are hidden
   */
-  password = 8,
+  Password = 8,
 
   /**
-      Like [gtk.types.InputPurpose.digits], but characters are hidden
+      Like [gtk.types.InputPurpose.Digits], but characters are hidden
   */
-  pin = 9,
+  Pin = 9,
 
   /**
       Allow any character, in addition to control codes
   */
-  terminal = 10,
+  Terminal = 10,
 }
 
 /**
@@ -2687,22 +2687,22 @@ enum GtkInscriptionOverflow
   /**
       Clip the remaining text
   */
-  clip = 0,
+  Clip = 0,
 
   /**
       Omit characters at the start of the text
   */
-  ellipsizeStart = 1,
+  EllipsizeStart = 1,
 
   /**
       Omit characters at the middle of the text
   */
-  ellipsizeMiddle = 2,
+  EllipsizeMiddle = 2,
 
   /**
       Omit characters at the end of the text
   */
-  ellipsizeEnd = 3,
+  EllipsizeEnd = 3,
 }
 
 /**
@@ -2713,22 +2713,22 @@ enum GtkJustification
   /**
       The text is placed at the left edge of the label.
   */
-  left = 0,
+  Left = 0,
 
   /**
       The text is placed at the right edge of the label.
   */
-  right = 1,
+  Right = 1,
 
   /**
       The text is placed in the center of the label.
   */
-  center = 2,
+  Center = 2,
 
   /**
       The text is placed is distributed across the label.
   */
-  fill = 3,
+  Fill = 3,
 }
 
 /**
@@ -2742,12 +2742,12 @@ enum GtkLevelBarMode
   /**
       the bar has a continuous mode
   */
-  continuous = 0,
+  Continuous = 0,
 
   /**
       the bar has a discrete mode
   */
-  discrete = 1,
+  Discrete = 1,
 }
 
 /**
@@ -2760,93 +2760,93 @@ enum GtkLicense
   /**
       No license specified
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       A license text is going to be specified by the
       developer
   */
-  custom = 1,
+  Custom = 1,
 
   /**
       The GNU General Public License, version 2.0 or later
   */
-  gpl20 = 2,
+  Gpl20 = 2,
 
   /**
       The GNU General Public License, version 3.0 or later
   */
-  gpl30 = 3,
+  Gpl30 = 3,
 
   /**
       The GNU Lesser General Public License, version 2.1 or later
   */
-  lgpl21 = 4,
+  Lgpl21 = 4,
 
   /**
       The GNU Lesser General Public License, version 3.0 or later
   */
-  lgpl30 = 5,
+  Lgpl30 = 5,
 
   /**
       The BSD standard license
   */
-  bsd = 6,
+  Bsd = 6,
 
   /**
       The MIT/X11 standard license
   */
-  mitX11 = 7,
+  MitX11 = 7,
 
   /**
       The Artistic License, version 2.0
   */
-  artistic = 8,
+  Artistic = 8,
 
   /**
       The GNU General Public License, version 2.0 only
   */
-  gpl20Only = 9,
+  Gpl20Only = 9,
 
   /**
       The GNU General Public License, version 3.0 only
   */
-  gpl30Only = 10,
+  Gpl30Only = 10,
 
   /**
       The GNU Lesser General Public License, version 2.1 only
   */
-  lgpl21Only = 11,
+  Lgpl21Only = 11,
 
   /**
       The GNU Lesser General Public License, version 3.0 only
   */
-  lgpl30Only = 12,
+  Lgpl30Only = 12,
 
   /**
       The GNU Affero General Public License, version 3.0 or later
   */
-  agpl30 = 13,
+  Agpl30 = 13,
 
   /**
       The GNU Affero General Public License, version 3.0 only
   */
-  agpl30Only = 14,
+  Agpl30Only = 14,
 
   /**
       The 3-clause BSD licence
   */
-  bsd3 = 15,
+  Bsd3 = 15,
 
   /**
       The Apache License, version 2.0
   */
-  apache20 = 16,
+  Apache20 = 16,
 
   /**
       The Mozilla Public License, version 2.0
   */
-  mpl20 = 17,
+  Mpl20 = 17,
 
   /**
       Zero-Clause BSD license
@@ -2863,23 +2863,23 @@ enum GtkListScrollFlags : uint
   /**
       Don't do anything extra
   */
-  none = 0,
+  None = 0,
 
   /**
       Focus the target item
   */
-  focus = 1,
+  Focus = 1,
 
   /**
       Select the target item and
       unselect all other items.
   */
-  select = 2,
+  Select = 2,
 }
 
 /**
-    Used to configure the focus behavior in the [gtk.types.DirectionType.tabForward]
-  and [gtk.types.DirectionType.tabBackward] direction, like the <kbd>Tab</kbd> key
+    Used to configure the focus behavior in the [gtk.types.DirectionType.TabForward]
+  and [gtk.types.DirectionType.TabBackward] direction, like the <kbd>Tab</kbd> key
   in a [gtk.list_view.ListView].
 */
 enum GtkListTabBehavior
@@ -2887,23 +2887,23 @@ enum GtkListTabBehavior
   /**
       Cycle through all focusable items of the list
   */
-  all = 0,
+  All = 0,
 
   /**
       Cycle through a single list element, then move
       focus out of the list. Moving focus between items needs to be
       done with the arrow keys.
   */
-  item = 1,
+  Item = 1,
 
   /**
       Cycle only through a single cell, then
       move focus out of the list. Moving focus between cells needs to
       be done with the arrow keys. This is only relevant for
       cell-based widgets like #GtkColumnView, otherwise it behaves
-      like [gtk.types.ListTabBehavior.item].
+      like [gtk.types.ListTabBehavior.Item].
   */
-  cell = 2,
+  Cell = 2,
 }
 
 /**
@@ -2914,27 +2914,27 @@ enum GtkMessageType
   /**
       Informational message
   */
-  info = 0,
+  Info = 0,
 
   /**
       Non-fatal warning message
   */
-  warning = 1,
+  Warning = 1,
 
   /**
       Question requiring a choice
   */
-  question = 2,
+  Question = 2,
 
   /**
       Fatal error message
   */
-  error = 3,
+  Error = 3,
 
   /**
       None of the above
   */
-  other = 4,
+  Other = 4,
 }
 
 /**
@@ -2946,52 +2946,52 @@ enum GtkMovementStep
   /**
       Move forward or back by graphemes
   */
-  logicalPositions = 0,
+  LogicalPositions = 0,
 
   /**
       Move left or right by graphemes
   */
-  visualPositions = 1,
+  VisualPositions = 1,
 
   /**
       Move forward or back by words
   */
-  words = 2,
+  Words = 2,
 
   /**
       Move up or down lines (wrapped lines)
   */
-  displayLines = 3,
+  DisplayLines = 3,
 
   /**
       Move to either end of a line
   */
-  displayLineEnds = 4,
+  DisplayLineEnds = 4,
 
   /**
       Move up or down paragraphs (newline-ended lines)
   */
-  paragraphs = 5,
+  Paragraphs = 5,
 
   /**
       Move to either end of a paragraph
   */
-  paragraphEnds = 6,
+  ParagraphEnds = 6,
 
   /**
       Move by pages
   */
-  pages = 7,
+  Pages = 7,
 
   /**
       Move to ends of the buffer
   */
-  bufferEnds = 8,
+  BufferEnds = 8,
 
   /**
       Move horizontally by pages
   */
-  horizontalPages = 9,
+  HorizontalPages = 9,
 }
 
 /**
@@ -3004,23 +3004,23 @@ enum GtkNaturalWrapMode
 {
   /**
       Inherit the minimum size request.
-      In particular, this should be used with [pango.types.WrapMode.char_].
+      In particular, this should be used with [pango.types.WrapMode.Char].
   */
-  inherit = 0,
+  Inherit = 0,
 
   /**
       Try not to wrap the text. This mode is the
       closest to GTK3's behavior but can lead to a wide label leaving
       lots of empty space below the text.
   */
-  none = 1,
+  None = 1,
 
   /**
       Attempt to wrap at word boundaries. This
-      is useful in particular when using [pango.types.WrapMode.wordChar] as the
+      is useful in particular when using [pango.types.WrapMode.WordChar] as the
       wrap mode.
   */
-  word = 2,
+  Word = 2,
 }
 
 /**
@@ -3031,12 +3031,12 @@ enum GtkNotebookTab
   /**
       the first tab in the notebook
   */
-  first = 0,
+  First = 0,
 
   /**
       the last tab in the notebook
   */
-  last = 1,
+  Last = 1,
 }
 
 /**
@@ -3048,42 +3048,42 @@ enum GtkNumberUpLayout
   /**
       ![](layout-lrtb.png)
   */
-  lrtb = 0,
+  Lrtb = 0,
 
   /**
       ![](layout-lrbt.png)
   */
-  lrbt = 1,
+  Lrbt = 1,
 
   /**
       ![](layout-rltb.png)
   */
-  rltb = 2,
+  Rltb = 2,
 
   /**
       ![](layout-rlbt.png)
   */
-  rlbt = 3,
+  Rlbt = 3,
 
   /**
       ![](layout-tblr.png)
   */
-  tblr = 4,
+  Tblr = 4,
 
   /**
       ![](layout-tbrl.png)
   */
-  tbrl = 5,
+  Tbrl = 5,
 
   /**
       ![](layout-btlr.png)
   */
-  btlr = 6,
+  Btlr = 6,
 
   /**
       ![](layout-btrl.png)
   */
-  btrl = 7,
+  Btrl = 7,
 }
 
 /**
@@ -3099,17 +3099,17 @@ enum GtkOrdering
   /**
       the first value is smaller than the second
   */
-  smaller = -1,
+  Smaller = -1,
 
   /**
       the two values are equal
   */
-  equal = 0,
+  Equal = 0,
 
   /**
       the first value is larger than the second
   */
-  larger = 1,
+  Larger = 1,
 }
 
 /**
@@ -3122,12 +3122,12 @@ enum GtkOrientation
   /**
       The element is in horizontal orientation.
   */
-  horizontal = 0,
+  Horizontal = 0,
 
   /**
       The element is in vertical orientation.
   */
-  vertical = 1,
+  Vertical = 1,
 }
 
 /**
@@ -3143,13 +3143,13 @@ enum GtkOverflow
       No change is applied. Content is drawn at the specified
       position.
   */
-  visible = 0,
+  Visible = 0,
 
   /**
       Content is clipped to the bounds of the area. Content
       outside the area is not drawn and cannot be interacted with.
   */
-  hidden = 1,
+  Hidden = 1,
 }
 
 /**
@@ -3162,12 +3162,12 @@ enum GtkPackType
   /**
       The child is packed into the start of the widget
   */
-  start = 0,
+  Start = 0,
 
   /**
       The child is packed into the end of the widget
   */
-  end = 1,
+  End = 1,
 }
 
 /**
@@ -3178,17 +3178,17 @@ enum GtkPadActionType
   /**
       Action is triggered by a pad button
   */
-  button = 0,
+  Button = 0,
 
   /**
       Action is triggered by a pad ring
   */
-  ring = 1,
+  Ring = 1,
 
   /**
       Action is triggered by a pad strip
   */
-  strip = 2,
+  Strip = 2,
 }
 
 /**
@@ -3199,22 +3199,22 @@ enum GtkPageOrientation
   /**
       Portrait mode.
   */
-  portrait = 0,
+  Portrait = 0,
 
   /**
       Landscape mode.
   */
-  landscape = 1,
+  Landscape = 1,
 
   /**
       Reverse portrait mode.
   */
-  reversePortrait = 2,
+  ReversePortrait = 2,
 
   /**
       Reverse landscape mode.
   */
-  reverseLandscape = 3,
+  ReverseLandscape = 3,
 }
 
 /**
@@ -3225,17 +3225,17 @@ enum GtkPageSet
   /**
       All pages.
   */
-  all = 0,
+  All = 0,
 
   /**
       Even pages.
   */
-  even = 1,
+  Even = 1,
 
   /**
       Odd pages.
   */
-  odd = 2,
+  Odd = 2,
 }
 
 /**
@@ -3246,22 +3246,22 @@ enum GtkPanDirection
   /**
       panned towards the left
   */
-  left = 0,
+  Left = 0,
 
   /**
       panned towards the right
   */
-  right = 1,
+  Right = 1,
 
   /**
       panned upwards
   */
-  up = 2,
+  Up = 2,
 
   /**
       panned downwards
   */
-  down = 3,
+  Down = 3,
 }
 
 /**
@@ -3272,17 +3272,17 @@ enum GtkPickFlags : uint
   /**
       The default behavior, include widgets that are receiving events
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Include widgets that are insensitive
   */
-  insensitive = 1,
+  Insensitive = 1,
 
   /**
       Include widgets that are marked as non-targetable. See `property@Widget:can-target`
   */
-  nonTargetable = 2,
+  NonTargetable = 2,
 }
 
 /**
@@ -3295,26 +3295,26 @@ enum GtkPolicyType
       The scrollbar is always visible. The view size is
       independent of the content.
   */
-  always = 0,
+  Always = 0,
 
   /**
       The scrollbar will appear and disappear as necessary.
       For example, when all of a [gtk.tree_view.TreeView] can not be seen.
   */
-  automatic = 1,
+  Automatic = 1,
 
   /**
       The scrollbar should never appear. In this mode the
       content determines the size.
   */
-  never = 2,
+  Never = 2,
 
   /**
       Don't show a scrollbar, but don't force the
       size to follow the content. This can be used e.g. to make multiple
       scrolled windows share a scrollbar.
   */
-  external = 3,
+  External = 3,
 }
 
 /**
@@ -3326,13 +3326,13 @@ enum GtkPopoverMenuFlags : uint
   /**
       Submenus are presented as sliding submenus that replace the main menu.
   */
-  sliding = 0,
+  Sliding = 0,
 
   /**
       Submenus are presented as traditional, nested
       popovers.
   */
-  nested = 1,
+  Nested = 1,
 }
 
 /**
@@ -3346,29 +3346,29 @@ enum GtkPositionType
   /**
       The feature is at the left edge.
   */
-  left = 0,
+  Left = 0,
 
   /**
       The feature is at the right edge.
   */
-  right = 1,
+  Right = 1,
 
   /**
       The feature is at the top edge.
   */
-  top = 2,
+  Top = 2,
 
   /**
       The feature is at the bottom edge.
   */
-  bottom = 3,
+  Bottom = 3,
 }
 
 /**
     Specifies which features the print dialog should offer.
   
-  If neither [gtk.types.PrintCapabilities.generatePdf] nor
-  [gtk.types.PrintCapabilities.generatePs] is specified, GTK assumes that all
+  If neither [gtk.types.PrintCapabilities.GeneratePdf] nor
+  [gtk.types.PrintCapabilities.GeneratePs] is specified, GTK assumes that all
   formats are supported.
 */
 enum GtkPrintCapabilities : uint
@@ -3376,56 +3376,56 @@ enum GtkPrintCapabilities : uint
   /**
       Print dialog will offer printing even/odd pages.
   */
-  pageSet = 1,
+  PageSet = 1,
 
   /**
       Print dialog will allow to print multiple copies.
   */
-  copies = 2,
+  Copies = 2,
 
   /**
       Print dialog will allow to collate multiple copies.
   */
-  collate = 4,
+  Collate = 4,
 
   /**
       Print dialog will allow to print pages in reverse order.
   */
-  reverse = 8,
+  Reverse = 8,
 
   /**
       Print dialog will allow to scale the output.
   */
-  scale = 16,
+  Scale = 16,
 
   /**
       The program will send the document to
       the printer in PDF format
   */
-  generatePdf = 32,
+  GeneratePdf = 32,
 
   /**
       The program will send the document to
       the printer in Postscript format
   */
-  generatePs = 64,
+  GeneratePs = 64,
 
   /**
       Print dialog will offer a preview
   */
-  preview = 128,
+  Preview = 128,
 
   /**
       Print dialog will offer printing multiple
       pages per sheet
   */
-  numberUp = 256,
+  NumberUp = 256,
 
   /**
       Print dialog will allow to rearrange
       pages when printing multiple pages per sheet
   */
-  numberUpLayout = 512,
+  NumberUpLayout = 512,
 }
 
 /**
@@ -3436,17 +3436,17 @@ enum GtkPrintDuplex
   /**
       No duplex.
   */
-  simplex = 0,
+  Simplex = 0,
 
   /**
       Horizontal duplex.
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       Vertical duplex.
   */
-  vertical = 2,
+  Vertical = 2,
 }
 
 /**
@@ -3458,23 +3458,23 @@ enum GtkPrintError
   /**
       An unspecified error occurred.
   */
-  general = 0,
+  General = 0,
 
   /**
       An internal error occurred.
   */
-  internalError = 1,
+  InternalError = 1,
 
   /**
       A memory allocation failed.
   */
-  nomem = 2,
+  Nomem = 2,
 
   /**
       An error occurred while loading a page setup
       or paper size from a key file.
   */
-  invalidFile = 3,
+  InvalidFile = 3,
 }
 
 /**
@@ -3487,24 +3487,24 @@ enum GtkPrintOperationAction
   /**
       Show the print dialog.
   */
-  printDialog = 0,
+  PrintDialog = 0,
 
   /**
       Start to print without showing
       the print dialog, based on the current print settings.
   */
-  print = 1,
+  Print = 1,
 
   /**
       Show the print preview.
   */
-  preview = 2,
+  Preview = 2,
 
   /**
       Export to a file. This requires
       the export-filename property to be set.
   */
-  export_ = 3,
+  Export = 3,
 }
 
 /**
@@ -3517,24 +3517,24 @@ enum GtkPrintOperationResult
   /**
       An error has occurred.
   */
-  error = 0,
+  Error = 0,
 
   /**
       The print settings should be stored.
   */
-  apply = 1,
+  Apply = 1,
 
   /**
       The print operation has been canceled,
       the print settings should not be stored.
   */
-  cancel = 2,
+  Cancel = 2,
 
   /**
       The print operation is not complete
       yet. This value will only be returned when running asynchronously.
   */
-  inProgress = 3,
+  InProgress = 3,
 }
 
 /**
@@ -3545,22 +3545,22 @@ enum GtkPrintPages
   /**
       All pages.
   */
-  all = 0,
+  All = 0,
 
   /**
       Current page.
   */
-  current = 1,
+  Current = 1,
 
   /**
       Range of pages.
   */
-  ranges = 2,
+  Ranges = 2,
 
   /**
       Selected pages.
   */
-  selection = 3,
+  Selection = 3,
 }
 
 /**
@@ -3571,22 +3571,22 @@ enum GtkPrintQuality
   /**
       Low quality.
   */
-  low = 0,
+  Low = 0,
 
   /**
       Normal quality.
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       High quality.
   */
-  high = 2,
+  High = 2,
 
   /**
       Draft quality.
   */
-  draft = 3,
+  Draft = 3,
 }
 
 /**
@@ -3599,52 +3599,52 @@ enum GtkPrintStatus
       The printing has not started yet; this
       status is set initially, and while the print dialog is shown.
   */
-  initial = 0,
+  Initial = 0,
 
   /**
       This status is set while the begin-print
       signal is emitted and during pagination.
   */
-  preparing = 1,
+  Preparing = 1,
 
   /**
       This status is set while the
       pages are being rendered.
   */
-  generatingData = 2,
+  GeneratingData = 2,
 
   /**
       The print job is being sent off to the
       printer.
   */
-  sendingData = 3,
+  SendingData = 3,
 
   /**
       The print job has been sent to the printer,
       but is not printed for some reason, e.g. the printer may be stopped.
   */
-  pending = 4,
+  Pending = 4,
 
   /**
       Some problem has occurred during
       printing, e.g. a paper jam.
   */
-  pendingIssue = 5,
+  PendingIssue = 5,
 
   /**
       The printer is processing the print job.
   */
-  printing = 6,
+  Printing = 6,
 
   /**
       The printing has been completed successfully.
   */
-  finished = 7,
+  Finished = 7,
 
   /**
       The printing has been aborted.
   */
-  finishedAborted = 8,
+  FinishedAborted = 8,
 }
 
 /**
@@ -3657,14 +3657,14 @@ enum GtkPropagationLimit
       Events are handled regardless of what their
       target is.
   */
-  none = 0,
+  None = 0,
 
   /**
       Events are only handled if their target
       is in the same `iface@Native` as the event controllers widget. Note
       that some event types have two targets (origin and destination).
   */
-  sameNative = 1,
+  SameNative = 1,
 }
 
 /**
@@ -3675,7 +3675,7 @@ enum GtkPropagationPhase
   /**
       Events are not delivered.
   */
-  none = 0,
+  None = 0,
 
   /**
       Events are delivered in the capture phase. The
@@ -3683,21 +3683,21 @@ enum GtkPropagationPhase
       to the event widget. This option should only be used on containers that
       might possibly handle events before their children do.
   */
-  capture = 1,
+  Capture = 1,
 
   /**
       Events are delivered in the bubble phase. The bubble
       phase happens after the capture phase, and before the default handlers
       are run. This phase runs from the event widget, up to the toplevel.
   */
-  bubble = 2,
+  Bubble = 2,
 
   /**
       Events are delivered in the default widget event handlers,
       note that widget implementations must chain up on button, motion, touch and
       grab broken handlers for controllers in this phase to be run.
   */
-  target = 3,
+  Target = 3,
 }
 
 /**
@@ -3709,41 +3709,41 @@ enum GtkRecentManagerError
       the URI specified does not exists in
       the recently used resources list.
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       the URI specified is not valid.
   */
-  invalidUri = 1,
+  InvalidUri = 1,
 
   /**
       the supplied string is not
       UTF-8 encoded.
   */
-  invalidEncoding = 2,
+  InvalidEncoding = 2,
 
   /**
       no application has registered
       the specified item.
   */
-  notRegistered = 3,
+  NotRegistered = 3,
 
   /**
       failure while reading the recently used
       resources file.
   */
-  read = 4,
+  Read = 4,
 
   /**
       failure while writing the recently used
       resources file.
   */
-  write = 5,
+  Write = 5,
 
   /**
       unspecified error.
   */
-  unknown = 6,
+  Unknown = 6,
 }
 
 /**
@@ -3758,57 +3758,57 @@ enum GtkResponseType
       Returned if an action widget has no response id,
       or if the dialog gets programmatically hidden or destroyed
   */
-  none = -1,
+  None = -1,
 
   /**
       Generic response id, not used by GTK dialogs
   */
-  reject = -2,
+  Reject = -2,
 
   /**
       Generic response id, not used by GTK dialogs
   */
-  accept = -3,
+  Accept = -3,
 
   /**
       Returned if the dialog is deleted
   */
-  deleteEvent = -4,
+  DeleteEvent = -4,
 
   /**
       Returned by OK buttons in GTK dialogs
   */
-  ok = -5,
+  Ok = -5,
 
   /**
       Returned by Cancel buttons in GTK dialogs
   */
-  cancel = -6,
+  Cancel = -6,
 
   /**
       Returned by Close buttons in GTK dialogs
   */
-  close = -7,
+  Close = -7,
 
   /**
       Returned by Yes buttons in GTK dialogs
   */
-  yes = -8,
+  Yes = -8,
 
   /**
       Returned by No buttons in GTK dialogs
   */
-  no = -9,
+  No = -9,
 
   /**
       Returned by Apply buttons in GTK dialogs
   */
-  apply = -10,
+  Apply = -10,
 
   /**
       Returned by Help buttons in GTK dialogs
   */
-  help = -11,
+  Help = -11,
 }
 
 /**
@@ -3820,52 +3820,52 @@ enum GtkRevealerTransitionType
   /**
       No transition
   */
-  none = 0,
+  None = 0,
 
   /**
       Fade in
   */
-  crossfade = 1,
+  Crossfade = 1,
 
   /**
       Slide in from the left
   */
-  slideRight = 2,
+  SlideRight = 2,
 
   /**
       Slide in from the right
   */
-  slideLeft = 3,
+  SlideLeft = 3,
 
   /**
       Slide in from the bottom
   */
-  slideUp = 4,
+  SlideUp = 4,
 
   /**
       Slide in from the top
   */
-  slideDown = 5,
+  SlideDown = 5,
 
   /**
       Floop in from the left
   */
-  swingRight = 6,
+  SwingRight = 6,
 
   /**
       Floop in from the right
   */
-  swingLeft = 7,
+  SwingLeft = 7,
 
   /**
       Floop in from the bottom
   */
-  swingUp = 8,
+  SwingUp = 8,
 
   /**
       Floop in from the top
   */
-  swingDown = 9,
+  SwingDown = 9,
 }
 
 /**
@@ -3876,32 +3876,32 @@ enum GtkScrollStep
   /**
       Scroll in steps.
   */
-  steps = 0,
+  Steps = 0,
 
   /**
       Scroll by pages.
   */
-  pages = 1,
+  Pages = 1,
 
   /**
       Scroll to ends.
   */
-  ends = 2,
+  Ends = 2,
 
   /**
       Scroll in horizontal steps.
   */
-  horizontalSteps = 3,
+  HorizontalSteps = 3,
 
   /**
       Scroll by horizontal pages.
   */
-  horizontalPages = 4,
+  HorizontalPages = 4,
 
   /**
       Scroll to the horizontal ends.
   */
-  horizontalEnds = 5,
+  HorizontalEnds = 5,
 }
 
 /**
@@ -3912,82 +3912,82 @@ enum GtkScrollType
   /**
       No scrolling.
   */
-  none = 0,
+  None = 0,
 
   /**
       Jump to new location.
   */
-  jump = 1,
+  Jump = 1,
 
   /**
       Step backward.
   */
-  stepBackward = 2,
+  StepBackward = 2,
 
   /**
       Step forward.
   */
-  stepForward = 3,
+  StepForward = 3,
 
   /**
       Page backward.
   */
-  pageBackward = 4,
+  PageBackward = 4,
 
   /**
       Page forward.
   */
-  pageForward = 5,
+  PageForward = 5,
 
   /**
       Step up.
   */
-  stepUp = 6,
+  StepUp = 6,
 
   /**
       Step down.
   */
-  stepDown = 7,
+  StepDown = 7,
 
   /**
       Page up.
   */
-  pageUp = 8,
+  PageUp = 8,
 
   /**
       Page down.
   */
-  pageDown = 9,
+  PageDown = 9,
 
   /**
       Step to the left.
   */
-  stepLeft = 10,
+  StepLeft = 10,
 
   /**
       Step to the right.
   */
-  stepRight = 11,
+  StepRight = 11,
 
   /**
       Page to the left.
   */
-  pageLeft = 12,
+  PageLeft = 12,
 
   /**
       Page to the right.
   */
-  pageRight = 13,
+  PageRight = 13,
 
   /**
       Scroll to start.
   */
-  start = 14,
+  Start = 14,
 
   /**
       Scroll to end.
   */
-  end = 15,
+  End = 15,
 }
 
 /**
@@ -3999,12 +3999,12 @@ enum GtkScrollablePolicy
   /**
       Scrollable adjustments are based on the minimum size
   */
-  minimum = 0,
+  Minimum = 0,
 
   /**
       Scrollable adjustments are based on the natural size
   */
-  natural = 1,
+  Natural = 1,
 }
 
 /**
@@ -4015,22 +4015,22 @@ enum GtkSelectionMode
   /**
       No selection is possible.
   */
-  none = 0,
+  None = 0,
 
   /**
       Zero or one element may be selected.
   */
-  single = 1,
+  Single = 1,
 
   /**
       Exactly one element is selected.
       In some circumstances, such as initially or during a search
       operation, it’s possible for no element to be selected with
-      [gtk.types.SelectionMode.browse]. What is really enforced is that the user
+      [gtk.types.SelectionMode.Browse]. What is really enforced is that the user
       can’t deselect a currently selected element except by selecting
       another element.
   */
-  browse = 2,
+  Browse = 2,
 
   /**
       Any number of elements may be selected.
@@ -4038,7 +4038,7 @@ enum GtkSelectionMode
       key to select between the focus and the child pointed to.
       Some widgets may also allow Click-drag to select a range of elements.
   */
-  multiple = 3,
+  Multiple = 3,
 }
 
 /**
@@ -4051,17 +4051,17 @@ enum GtkSensitivityType
       The control is made insensitive if no
       action can be triggered
   */
-  auto_ = 0,
+  Auto = 0,
 
   /**
       The control is always sensitive
   */
-  on = 1,
+  On = 1,
 
   /**
       The control is always insensitive
   */
-  off = 2,
+  Off = 2,
 }
 
 /**
@@ -4076,7 +4076,7 @@ enum GtkShortcutActionFlags : uint
       action that can be activated. If this flag is not set,
       a future activation may select a different action.
   */
-  exclusive = 1,
+  Exclusive = 1,
 }
 
 /**
@@ -4089,19 +4089,19 @@ enum GtkShortcutScope
       Shortcuts are handled inside
       the widget the controller belongs to.
   */
-  local = 0,
+  Local = 0,
 
   /**
       Shortcuts are handled by
       the first ancestor that is a `iface@ShortcutManager`
   */
-  managed = 1,
+  Managed = 1,
 
   /**
       Shortcuts are handled by
       the root widget.
   */
-  global = 2,
+  Global = 2,
 }
 
 /**
@@ -4115,53 +4115,53 @@ enum GtkShortcutType
       The shortcut is a keyboard accelerator. The GtkShortcutsShortcut:accelerator
       property will be used.
   */
-  accelerator = 0,
+  Accelerator = 0,
 
   /**
       The shortcut is a pinch gesture. GTK provides an icon and subtitle.
   */
-  gesturePinch = 1,
+  GesturePinch = 1,
 
   /**
       The shortcut is a stretch gesture. GTK provides an icon and subtitle.
   */
-  gestureStretch = 2,
+  GestureStretch = 2,
 
   /**
       The shortcut is a clockwise rotation gesture. GTK provides an icon and subtitle.
   */
-  gestureRotateClockwise = 3,
+  GestureRotateClockwise = 3,
 
   /**
       The shortcut is a counterclockwise rotation gesture. GTK provides an icon and subtitle.
   */
-  gestureRotateCounterclockwise = 4,
+  GestureRotateCounterclockwise = 4,
 
   /**
       The shortcut is a two-finger swipe gesture. GTK provides an icon and subtitle.
   */
-  gestureTwoFingerSwipeLeft = 5,
+  GestureTwoFingerSwipeLeft = 5,
 
   /**
       The shortcut is a two-finger swipe gesture. GTK provides an icon and subtitle.
   */
-  gestureTwoFingerSwipeRight = 6,
+  GestureTwoFingerSwipeRight = 6,
 
   /**
       The shortcut is a gesture. The GtkShortcutsShortcut:icon property will be
       used.
   */
-  gesture = 7,
+  Gesture = 7,
 
   /**
       The shortcut is a swipe gesture. GTK provides an icon and subtitle.
   */
-  gestureSwipeLeft = 8,
+  GestureSwipeLeft = 8,
 
   /**
       The shortcut is a swipe gesture. GTK provides an icon and subtitle.
   */
-  gestureSwipeRight = 9,
+  GestureSwipeRight = 9,
 }
 
 /**
@@ -4173,22 +4173,22 @@ enum GtkSizeGroupMode
   /**
       group has no effect
   */
-  none = 0,
+  None = 0,
 
   /**
       group affects horizontal requisition
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       group affects vertical requisition
   */
-  vertical = 2,
+  Vertical = 2,
 
   /**
       group affects both horizontal and vertical requisition
   */
-  both = 3,
+  Both = 3,
 }
 
 /**
@@ -4200,17 +4200,17 @@ enum GtkSizeRequestMode
   /**
       Prefer height-for-width geometry management
   */
-  heightForWidth = 0,
+  HeightForWidth = 0,
 
   /**
       Prefer width-for-height geometry management
   */
-  widthForHeight = 1,
+  WidthForHeight = 1,
 
   /**
       Don’t trade height-for-width or width-for-height
   */
-  constantSize = 2,
+  ConstantSize = 2,
 }
 
 /**
@@ -4221,12 +4221,12 @@ enum GtkSortType
   /**
       Sorting is in ascending order.
   */
-  ascending = 0,
+  Ascending = 0,
 
   /**
       Sorting is in descending order.
   */
-  descending = 1,
+  Descending = 1,
 }
 
 /**
@@ -4239,26 +4239,26 @@ enum GtkSorterChange
       The sorter change cannot be described
       by any of the other enumeration values
   */
-  different = 0,
+  Different = 0,
 
   /**
       The sort order was inverted. Comparisons
-      that returned [gtk.types.Ordering.smaller] now return [gtk.types.Ordering.larger]
+      that returned [gtk.types.Ordering.Smaller] now return [gtk.types.Ordering.Larger]
       and vice versa. Other comparisons return the same values as before.
   */
-  inverted = 1,
+  Inverted = 1,
 
   /**
       The sorter is less strict: Comparisons
-      may now return [gtk.types.Ordering.equal] that did not do so before.
+      may now return [gtk.types.Ordering.Equal] that did not do so before.
   */
-  lessStrict = 2,
+  LessStrict = 2,
 
   /**
       The sorter is more strict: Comparisons
-      that did return [gtk.types.Ordering.equal] may not do so anymore.
+      that did return [gtk.types.Ordering.Equal] may not do so anymore.
   */
-  moreStrict = 3,
+  MoreStrict = 3,
 }
 
 /**
@@ -4269,20 +4269,20 @@ enum GtkSorterOrder
   /**
       A partial order. Any [gtk.types.Ordering] is possible.
   */
-  partial = 0,
+  Partial = 0,
 
   /**
       No order, all elements are considered equal.
-      [gtk.sorter.Sorter.compare] will only return [gtk.types.Ordering.equal].
+      [gtk.sorter.Sorter.compare] will only return [gtk.types.Ordering.Equal].
   */
-  none = 1,
+  None = 1,
 
   /**
       A total order. [gtk.sorter.Sorter.compare] will only
-      return [gtk.types.Ordering.equal] if an item is compared with itself. Two
+      return [gtk.types.Ordering.Equal] if an item is compared with itself. Two
       different items will never cause this value to be returned.
   */
-  total = 2,
+  Total = 2,
 }
 
 /**
@@ -4297,14 +4297,14 @@ enum GtkSpinButtonUpdatePolicy
       When refreshing your [gtk.spin_button.SpinButton], the value is
       always displayed
   */
-  always = 0,
+  Always = 0,
 
   /**
       When refreshing your [gtk.spin_button.SpinButton], the value is
       only displayed if it is valid within the bounds of the spin button's
       adjustment
   */
-  ifValid = 1,
+  IfValid = 1,
 }
 
 /**
@@ -4316,37 +4316,37 @@ enum GtkSpinType
   /**
       Increment by the adjustments step increment.
   */
-  stepForward = 0,
+  StepForward = 0,
 
   /**
       Decrement by the adjustments step increment.
   */
-  stepBackward = 1,
+  StepBackward = 1,
 
   /**
       Increment by the adjustments page increment.
   */
-  pageForward = 2,
+  PageForward = 2,
 
   /**
       Decrement by the adjustments page increment.
   */
-  pageBackward = 3,
+  PageBackward = 3,
 
   /**
       Go to the adjustments lower bound.
   */
-  home = 4,
+  Home = 4,
 
   /**
       Go to the adjustments upper bound.
   */
-  end = 5,
+  End = 5,
 
   /**
       Change by a specified amount.
   */
-  userDefined = 6,
+  UserDefined = 6,
 }
 
 /**
@@ -4359,117 +4359,117 @@ enum GtkStackTransitionType
   /**
       No transition
   */
-  none = 0,
+  None = 0,
 
   /**
       A cross-fade
   */
-  crossfade = 1,
+  Crossfade = 1,
 
   /**
       Slide from left to right
   */
-  slideRight = 2,
+  SlideRight = 2,
 
   /**
       Slide from right to left
   */
-  slideLeft = 3,
+  SlideLeft = 3,
 
   /**
       Slide from bottom up
   */
-  slideUp = 4,
+  SlideUp = 4,
 
   /**
       Slide from top down
   */
-  slideDown = 5,
+  SlideDown = 5,
 
   /**
       Slide from left or right according to the children order
   */
-  slideLeftRight = 6,
+  SlideLeftRight = 6,
 
   /**
       Slide from top down or bottom up according to the order
   */
-  slideUpDown = 7,
+  SlideUpDown = 7,
 
   /**
       Cover the old page by sliding up
   */
-  overUp = 8,
+  OverUp = 8,
 
   /**
       Cover the old page by sliding down
   */
-  overDown = 9,
+  OverDown = 9,
 
   /**
       Cover the old page by sliding to the left
   */
-  overLeft = 10,
+  OverLeft = 10,
 
   /**
       Cover the old page by sliding to the right
   */
-  overRight = 11,
+  OverRight = 11,
 
   /**
       Uncover the new page by sliding up
   */
-  underUp = 12,
+  UnderUp = 12,
 
   /**
       Uncover the new page by sliding down
   */
-  underDown = 13,
+  UnderDown = 13,
 
   /**
       Uncover the new page by sliding to the left
   */
-  underLeft = 14,
+  UnderLeft = 14,
 
   /**
       Uncover the new page by sliding to the right
   */
-  underRight = 15,
+  UnderRight = 15,
 
   /**
       Cover the old page sliding up or uncover the new page sliding down, according to order
   */
-  overUpDown = 16,
+  OverUpDown = 16,
 
   /**
       Cover the old page sliding down or uncover the new page sliding up, according to order
   */
-  overDownUp = 17,
+  OverDownUp = 17,
 
   /**
       Cover the old page sliding left or uncover the new page sliding right, according to order
   */
-  overLeftRight = 18,
+  OverLeftRight = 18,
 
   /**
       Cover the old page sliding right or uncover the new page sliding left, according to order
   */
-  overRightLeft = 19,
+  OverRightLeft = 19,
 
   /**
       Pretend the pages are sides of a cube and rotate that cube to the left
   */
-  rotateLeft = 20,
+  RotateLeft = 20,
 
   /**
       Pretend the pages are sides of a cube and rotate that cube to the right
   */
-  rotateRight = 21,
+  RotateRight = 21,
 
   /**
       Pretend the pages are sides of a cube and rotate that cube to the left or right according to the children order
   */
-  rotateLeftRight = 22,
+  RotateLeftRight = 22,
 }
 
 /**
@@ -4484,82 +4484,82 @@ enum GtkStateFlags : uint
   /**
       State during normal operation
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       Widget is active
   */
-  active = 1,
+  Active = 1,
 
   /**
       Widget has a mouse pointer over it
   */
-  prelight = 2,
+  Prelight = 2,
 
   /**
       Widget is selected
   */
-  selected = 4,
+  Selected = 4,
 
   /**
       Widget is insensitive
   */
-  insensitive = 8,
+  Insensitive = 8,
 
   /**
       Widget is inconsistent
   */
-  inconsistent = 16,
+  Inconsistent = 16,
 
   /**
       Widget has the keyboard focus
   */
-  focused = 32,
+  Focused = 32,
 
   /**
       Widget is in a background toplevel window
   */
-  backdrop = 64,
+  Backdrop = 64,
 
   /**
       Widget is in left-to-right text direction
   */
-  dirLtr = 128,
+  DirLtr = 128,
 
   /**
       Widget is in right-to-left text direction
   */
-  dirRtl = 256,
+  DirRtl = 256,
 
   /**
       Widget is a link
   */
-  link = 512,
+  Link = 512,
 
   /**
       The location the widget points to has already been visited
   */
-  visited = 1024,
+  Visited = 1024,
 
   /**
       Widget is checked
   */
-  checked = 2048,
+  Checked = 2048,
 
   /**
       Widget is highlighted as a drop target for DND
   */
-  dropActive = 4096,
+  DropActive = 4096,
 
   /**
       Widget has the visible focus
   */
-  focusVisible = 8192,
+  FocusVisible = 8192,
 
   /**
       Widget contains the keyboard focus
   */
-  focusWithin = 16384,
+  FocusWithin = 16384,
 }
 
 /**
@@ -4571,19 +4571,19 @@ enum GtkStringFilterMatchMode
       The search string and
       text must match exactly.
   */
-  exact = 0,
+  Exact = 0,
 
   /**
       The search string
       must be contained as a substring inside the text.
   */
-  substring = 1,
+  Substring = 1,
 
   /**
       The text must begin
       with the search string.
   */
-  prefix = 2,
+  Prefix = 2,
 }
 
 /**
@@ -4596,25 +4596,25 @@ enum GtkStyleContextPrintFlags : uint
   /**
       Default value.
   */
-  none = 0,
+  None = 0,
 
   /**
       Print the entire tree of
       CSS nodes starting at the style context's node
   */
-  recurse = 1,
+  Recurse = 1,
 
   /**
       Show the values of the
       CSS properties for each node
   */
-  showStyle = 2,
+  ShowStyle = 2,
 
   /**
       Show information about
       what changes affect the styles
   */
-  showChange = 4,
+  ShowChange = 4,
 }
 
 /**
@@ -4628,22 +4628,22 @@ enum GtkSymbolicColor
   /**
       The default foreground color
   */
-  foreground = 0,
+  Foreground = 0,
 
   /**
       Indication color for errors
   */
-  error = 1,
+  Error = 1,
 
   /**
       Indication color for warnings
   */
-  warning = 2,
+  Warning = 2,
 
   /**
       Indication color for success
   */
-  success = 3,
+  Success = 3,
 }
 
 /**
@@ -4662,12 +4662,12 @@ enum GtkSystemSetting
   /**
       the `property@Gtk.Settings:gtk-xft-dpi` setting has changed
   */
-  dpi = 0,
+  Dpi = 0,
 
   /**
       The `property@Gtk.Settings:gtk-font-name` setting has changed
   */
-  fontName = 1,
+  FontName = 1,
 
   /**
       The font configuration has changed in a way that
@@ -4678,18 +4678,18 @@ enum GtkSystemSetting
       `property@Gtk.Settings:gtk-xft-rgba` or
       `property@Gtk.Settings:gtk-fontconfig-timestamp` settings
   */
-  fontConfig = 2,
+  FontConfig = 2,
 
   /**
       The display has changed
   */
-  display = 3,
+  Display = 3,
 
   /**
       The icon theme has changed in a way that requires
       icons to be looked up again
   */
-  iconTheme = 4,
+  IconTheme = 4,
 }
 
 /**
@@ -4700,17 +4700,17 @@ enum GtkTextDirection
   /**
       No direction.
   */
-  none = 0,
+  None = 0,
 
   /**
       Left to right text direction.
   */
-  ltr = 1,
+  Ltr = 1,
 
   /**
       Right to left text direction.
   */
-  rtl = 2,
+  Rtl = 2,
 }
 
 /**
@@ -4723,19 +4723,19 @@ enum GtkTextExtendSelection
       Selects the current word. It is triggered by
       a double-click for example.
   */
-  word = 0,
+  Word = 0,
 
   /**
       Selects the current line. It is triggered by
       a triple-click for example.
   */
-  line = 1,
+  Line = 1,
 }
 
 /**
     Flags affecting how a search is done.
   
-  If neither [gtk.types.TextSearchFlags.visibleOnly] nor [gtk.types.TextSearchFlags.textOnly] are
+  If neither [gtk.types.TextSearchFlags.VisibleOnly] nor [gtk.types.TextSearchFlags.TextOnly] are
   enabled, the match must be exact; the special 0xFFFC character will match
   embedded paintables or child widgets.
 */
@@ -4745,19 +4745,19 @@ enum GtkTextSearchFlags : uint
       Search only visible data. A search match may
     have invisible text interspersed.
   */
-  visibleOnly = 1,
+  VisibleOnly = 1,
 
   /**
       Search only text. A match may have paintables or
     child widgets mixed inside the matched range.
   */
-  textOnly = 2,
+  TextOnly = 2,
 
   /**
       The text will be matched regardless of
     what case it is in.
   */
-  caseInsensitive = 4,
+  CaseInsensitive = 4,
 }
 
 /**
@@ -4769,12 +4769,12 @@ enum GtkTextViewLayer
   /**
       The layer rendered below the text (but above the background).
   */
-  belowText = 0,
+  BelowText = 0,
 
   /**
       The layer rendered above the text.
   */
-  aboveText = 1,
+  AboveText = 1,
 }
 
 /**
@@ -4785,32 +4785,32 @@ enum GtkTextWindowType
   /**
       Window that floats over scrolling areas.
   */
-  widget = 1,
+  Widget = 1,
 
   /**
       Scrollable text window.
   */
-  text = 2,
+  Text = 2,
 
   /**
       Left side border window.
   */
-  left = 3,
+  Left = 3,
 
   /**
       Right side border window.
   */
-  right = 4,
+  Right = 4,
 
   /**
       Top border window.
   */
-  top = 5,
+  Top = 5,
 
   /**
       Bottom border window.
   */
-  bottom = 6,
+  Bottom = 6,
 }
 
 /**
@@ -4818,7 +4818,7 @@ enum GtkTextWindowType
   
   They are returned by [gtk.tree_model.TreeModel.getFlags], and must be
   static for the lifetime of the object. A more complete description
-  of [gtk.types.TreeModelFlags.itersPersist] can be found in the overview of
+  of [gtk.types.TreeModelFlags.ItersPersist] can be found in the overview of
   this section.
 */
 enum GtkTreeModelFlags : uint
@@ -4827,18 +4827,18 @@ enum GtkTreeModelFlags : uint
       iterators survive all signals
       emitted by the tree
   */
-  itersPersist = 1,
+  ItersPersist = 1,
 
   /**
       the model is a list only, and never
       has children
   */
-  listOnly = 2,
+  ListOnly = 2,
 }
 
 /**
     The sizing method the column uses to determine its width.  Please note
-  that [gtk.types.TreeViewColumnSizing.autosize] are inefficient for large views, and
+  that [gtk.types.TreeViewColumnSizing.Autosize] are inefficient for large views, and
   can make columns appear choppy.
 */
 enum GtkTreeViewColumnSizing
@@ -4846,17 +4846,17 @@ enum GtkTreeViewColumnSizing
   /**
       Columns only get bigger in reaction to changes in the model
   */
-  growOnly = 0,
+  GrowOnly = 0,
 
   /**
       Columns resize to be the optimal size every time the model changes.
   */
-  autosize = 1,
+  Autosize = 1,
 
   /**
       Columns are a fixed numbers of pixels wide.
   */
-  fixed = 2,
+  Fixed = 2,
 }
 
 /**
@@ -4867,22 +4867,22 @@ enum GtkTreeViewDropPosition
   /**
       dropped row is inserted before
   */
-  before = 0,
+  Before = 0,
 
   /**
       dropped row is inserted after
   */
-  after = 1,
+  After = 1,
 
   /**
       dropped row becomes a child or is inserted before
   */
-  intoOrBefore = 2,
+  IntoOrBefore = 2,
 
   /**
       dropped row becomes a child or is inserted after
   */
-  intoOrAfter = 3,
+  IntoOrAfter = 3,
 }
 
 /**
@@ -4893,22 +4893,22 @@ enum GtkTreeViewGridLines
   /**
       No grid lines.
   */
-  none = 0,
+  None = 0,
 
   /**
       Horizontal grid lines.
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       Vertical grid lines.
   */
-  vertical = 2,
+  Vertical = 2,
 
   /**
       Horizontal and vertical grid lines.
   */
-  both = 3,
+  Both = 3,
 }
 
 /**
@@ -4919,22 +4919,22 @@ enum GtkUnit
   /**
       No units.
   */
-  none = 0,
+  None = 0,
 
   /**
       Dimensions in points.
   */
-  points = 1,
+  Points = 1,
 
   /**
       Dimensions in inches.
   */
-  inch = 2,
+  Inch = 2,
 
   /**
       Dimensions in millimeters
   */
-  mm = 3,
+  Mm = 3,
 }
 
 /**
@@ -4945,25 +4945,25 @@ enum GtkWrapMode
   /**
       do not wrap lines; just make the text area wider
   */
-  none = 0,
+  None = 0,
 
   /**
       wrap text, breaking lines anywhere the cursor can
       appear (between characters, usually - if you want to be technical,
       between graphemes, see [pango.global.getLogAttrs])
   */
-  char_ = 1,
+  Char = 1,
 
   /**
       wrap text, breaking lines in between words
   */
-  word = 2,
+  Word = 2,
 
   /**
       wrap text, breaking lines in between words, or if
       that is not enough, also between graphemes
   */
-  wordChar = 3,
+  WordChar = 3,
 }
 
 /**
@@ -5047,7 +5047,7 @@ struct GtkAboutDialog;
   
   The attributes are updated every time a UI element's state changes in
   a way that should be reflected by assistive technologies. For instance,
-  if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.hidden]
+  if a [gtk.widget.Widget] visibility changes, the [gtk.types.AccessibleState.Hidden]
   state will also change to reflect the [gtk.widget.Widget.gboolean] property.
   
   Every accessible implementation is part of a tree of accessible objects.
@@ -5110,11 +5110,11 @@ struct GtkAccessibleList;
   roles:
   
   $(LIST
-    * [gtk.types.AccessibleRole.meter]
-    * [gtk.types.AccessibleRole.progressBar]
-    * [gtk.types.AccessibleRole.scrollbar]
-    * [gtk.types.AccessibleRole.slider]
-    * [gtk.types.AccessibleRole.spinButton]
+    * [gtk.types.AccessibleRole.Meter]
+    * [gtk.types.AccessibleRole.ProgressBar]
+    * [gtk.types.AccessibleRole.Scrollbar]
+    * [gtk.types.AccessibleRole.Slider]
+    * [gtk.types.AccessibleRole.SpinButton]
   )
     
   If that is not the case, a warning will be issued at run time.
@@ -5123,10 +5123,10 @@ struct GtkAccessibleList;
   correct values for the following properties:
   
   $(LIST
-    * [gtk.types.AccessibleProperty.valueMax]
-    * [gtk.types.AccessibleProperty.valueMin]
-    * [gtk.types.AccessibleProperty.valueNow]
-    * [gtk.types.AccessibleProperty.valueText]
+    * [gtk.types.AccessibleProperty.ValueMax]
+    * [gtk.types.AccessibleProperty.ValueMin]
+    * [gtk.types.AccessibleProperty.ValueNow]
+    * [gtk.types.AccessibleProperty.ValueText]
   )
 */
 struct GtkAccessibleRange;
@@ -5699,9 +5699,9 @@ struct GtkApplicationWindowClass
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.aspect_frame.AspectFrame] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.aspect_frame.AspectFrame] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.aspect_frame.AspectFrame] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.aspect_frame.AspectFrame] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkAspectFrame;
 
@@ -5720,7 +5720,7 @@ struct GtkAspectFrame;
   page statuses.
   
   If you have a case that doesn’t quite fit in [gtk.assistant.Assistant]s way of
-  handling buttons, you can use the [gtk.types.AssistantPageType.custom] page
+  handling buttons, you can use the [gtk.types.AssistantPageType.Custom] page
   type and handle buttons yourself.
   
   [gtk.assistant.Assistant] maintains a [gtk.assistant_page.AssistantPage] object for each added
@@ -5897,9 +5897,9 @@ struct GtkBorder
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.box.Box] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.box.Box] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.box.Box] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.box.Box] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkBox
 {
@@ -6589,7 +6589,7 @@ struct GtkBuilderScopeInterface
   
   # Accessibility
   
-  [gtk.button.Button] uses the [gtk.types.AccessibleRole.button] role.
+  [gtk.button.Button] uses the [gtk.types.AccessibleRole.Button] role.
 */
 struct GtkButton
 {
@@ -6911,7 +6911,7 @@ struct GtkCallbackActionClass;
   
   The [gtk.cell_area.CellArea] drives keyboard focus from cell to cell in a way
   similar to [gtk.widget.Widget]. For layouting widgets that support giving
-  focus to cells it’s important to remember to pass [gtk.types.CellRendererState.focused]
+  focus to cells it’s important to remember to pass [gtk.types.CellRendererState.Focused]
   to the area functions for the row that has focus and to tell the
   area to paint the focus at render time.
   
@@ -7024,9 +7024,9 @@ struct GtkCellArea
   refers to adding cell renderers with reference to a particular position
   in a [gtk.cell_area_box.CellAreaBox]. There are two reference positions: the
   start and the end of the box.
-  When the [gtk.cell_area_box.CellAreaBox] is oriented in the [gtk.types.Orientation.vertical]
+  When the [gtk.cell_area_box.CellAreaBox] is oriented in the [gtk.types.Orientation.Vertical]
   orientation, the start is defined as the top of the box and the end is
-  defined as the bottom. In the [gtk.types.Orientation.horizontal] orientation
+  defined as the bottom. In the [gtk.types.Orientation.Horizontal] orientation
   start is defined as the left side and the end is defined as the right
   side.
   
@@ -7105,8 +7105,8 @@ struct GtkCellAreaClass
 
   /**
       This allows an area to tell its layouting widget whether
-      it prefers to be allocated in [gtk.types.SizeRequestMode.heightForWidth] or
-      [gtk.types.SizeRequestMode.widthForHeight] mode.
+      it prefers to be allocated in [gtk.types.SizeRequestMode.HeightForWidth] or
+      [gtk.types.SizeRequestMode.WidthForHeight] mode.
   */
   extern(C) GtkSizeRequestMode function(GtkCellArea* area) getRequestMode;
 
@@ -7136,7 +7136,7 @@ struct GtkCellAreaClass
       Calculates the minimum and natural height of the
       areas cells with the current attributes applied. Essentially this is
       the same as `GtkCellAreaClass.get_preferred_width()` only for areas
-      that are being requested as [gtk.types.SizeRequestMode.widthForHeight].
+      that are being requested as [gtk.types.SizeRequestMode.WidthForHeight].
   */
   extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int* minimumHeight, int* naturalHeight) getPreferredHeight;
 
@@ -7144,7 +7144,7 @@ struct GtkCellAreaClass
       Calculates the minimum and natural width
       for the area if the passed @context would be allocated the given
       height. The same as `GtkCellAreaClass.get_preferred_height_for_width()`
-      only for handling requests in the [gtk.types.SizeRequestMode.widthForHeight]
+      only for handling requests in the [gtk.types.SizeRequestMode.WidthForHeight]
       mode.
   */
   extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) getPreferredWidthForHeight;
@@ -7697,7 +7697,7 @@ struct GtkCellRendererSpinner;
   style information provided by its properties. The text will be ellipsized if it is
   too long and the `GtkCellRendererText:ellipsize` property allows it.
   
-  If the `GtkCellRenderer:mode` is [gtk.types.CellRendererMode.editable],
+  If the `GtkCellRenderer:mode` is [gtk.types.CellRendererMode.Editable],
   the [gtk.cell_renderer_text.CellRendererText] allows to edit its text using an entry.
 
   Deprecated:     List views use widgets to display their contents.
@@ -7793,9 +7793,9 @@ struct GtkCellView;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.center_box.CenterBox] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.center_box.CenterBox] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.center_box.CenterBox] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkCenterBox;
 
@@ -7877,7 +7877,7 @@ struct GtkCenterLayoutClass
   
   # Accessibility
   
-  [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.checkbox] role.
+  [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.Checkbox] role.
 */
 struct GtkCheckButton
 {
@@ -8137,10 +8137,10 @@ struct GtkColorDialogClass
   
   # Accessibility
   
-  [gtk.column_view.ColumnView] uses the [gtk.types.AccessibleRole.treeGrid] role, header title
-  widgets are using the [gtk.types.AccessibleRole.columnHeader] role. The row widgets
-  are using the [gtk.types.AccessibleRole.row] role, and individual cells are using
-  the [gtk.types.AccessibleRole.gridCell] role
+  [gtk.column_view.ColumnView] uses the [gtk.types.AccessibleRole.TreeGrid] role, header title
+  widgets are using the [gtk.types.AccessibleRole.ColumnHeader] role. The row widgets
+  are using the [gtk.types.AccessibleRole.Row] role, and individual cells are using
+  the [gtk.types.AccessibleRole.GridCell] role
 */
 struct GtkColumnView;
 
@@ -8303,7 +8303,7 @@ struct GtkColumnViewSorterClass
   
   ## Accessibility
   
-  [gtk.combo_box.ComboBox] uses the [gtk.types.AccessibleRole.comboBox] role.
+  [gtk.combo_box.ComboBox] uses the [gtk.types.AccessibleRole.ComboBox] role.
 
   Deprecated:     Use [gtk.drop_down.DropDown] instead
 */
@@ -8794,7 +8794,7 @@ struct GtkCustomSorterClass
   
   `GtkDialogs` uses some heuristics to decide whether to add a close
   button to the window decorations. If any of the action buttons use
-  the response ID [gtk.types.ResponseType.close] or [gtk.types.ResponseType.cancel], the
+  the response ID [gtk.types.ResponseType.Close] or [gtk.types.ResponseType.Cancel], the
   close button is omitted.
   
   Clicking a button that was added as an action widget will emit the
@@ -8804,7 +8804,7 @@ struct GtkCustomSorterClass
   IDs in the [gtk.types.ResponseType] enumeration (these all have values
   less than zero). If a dialog receives a delete event, the
   [gtk.dialog.Dialog.response] signal will be emitted with the
-  [gtk.types.ResponseType.deleteEvent] response ID.
+  [gtk.types.ResponseType.DeleteEvent] response ID.
   
   Dialogs are created with a call to [gtk.dialog.Dialog.new_] or
   [gtk.dialog.Dialog.newWithButtons]. The latter is recommended; it allows
@@ -8813,7 +8813,7 @@ struct GtkCustomSorterClass
   A “modal” dialog (that is, one which freezes the rest of the application
   from user input), can be created by calling [gtk.window.Window.setModal]
   on the dialog. When using [gtk.dialog.Dialog.newWithButtons], you can also
-  pass the [gtk.types.DialogFlags.modal] flag to make a dialog modal.
+  pass the [gtk.types.DialogFlags.Modal] flag to make a dialog modal.
   
   For the simple dialog in the following example, a [gtk.message_dialog.MessageDialog]
   would save some effort. But you’d need to create the dialog contents manually
@@ -8892,7 +8892,7 @@ struct GtkCustomSorterClass
   
   # Accessibility
   
-  [gtk.dialog.Dialog] uses the [gtk.types.AccessibleRole.dialog] role.
+  [gtk.dialog.Dialog] uses the [gtk.types.AccessibleRole.Dialog] role.
 
   Deprecated:     Use [gtk.window.Window] instead
 */
@@ -9053,7 +9053,7 @@ struct GtkDragIconClass
   can be used to obtain updates about the status of the operation,
   but it is not normally necessary to connect to any signals,
   except for one case: when the supported actions include
-  [gdk.types.DragAction.move], you need to listen for the
+  [gdk.types.DragAction.Move], you need to listen for the
   `signal@Gtk.DragSource::drag-end` signal and delete the
   data after it has been transferred.
 */
@@ -9234,7 +9234,7 @@ struct GtkDropControllerMotionClass;
   
   ## Accessibility
   
-  [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.comboBox] role.
+  [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.ComboBox] role.
 */
 struct GtkDropDown;
 
@@ -9314,7 +9314,7 @@ struct GtkDropDownClass
   
   While a pointer is dragged over the drop target's widget and the drop
   has not been rejected, that widget will receive the
-  [gtk.types.StateFlags.dropActive] state, which can be used to style the widget.
+  [gtk.types.StateFlags.DropActive] state, which can be used to style the widget.
   
   If you are not interested in receiving the drop, but just want to update
   UI state during a Drag-and-Drop operation (e.g. switching tabs), you can
@@ -9355,7 +9355,7 @@ struct GtkDropTarget;
   [gdk.drop.Drop.finish].
   
   Between the ::drag-enter and ::drag-leave signals the widget is a
-  current drop target, and will receive the [gtk.types.StateFlags.dropActive]
+  current drop target, and will receive the [gtk.types.StateFlags.DropActive]
   state, which can be used by themes to style the widget as a drop target.
 */
 struct GtkDropTargetAsync;
@@ -9693,7 +9693,7 @@ struct GtkEmojiChooserClass;
   
   # Accessibility
   
-  [gtk.entry.Entry] uses the [gtk.types.AccessibleRole.textBox] role.
+  [gtk.entry.Entry] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 struct GtkEntry
 {
@@ -9926,18 +9926,18 @@ struct GtkEventControllerMotionClass;
   conditions of the widget changed).
   
   The controller can be set up to emit motion for either/both vertical
-  and horizontal scroll events through [gtk.types.EventControllerScrollFlags.vertical],
-  [gtk.types.EventControllerScrollFlags.horizontal] and [gtk.types.EventControllerScrollFlags.bothAxes].
+  and horizontal scroll events through [gtk.types.EventControllerScrollFlags.Vertical],
+  [gtk.types.EventControllerScrollFlags.Horizontal] and [gtk.types.EventControllerScrollFlags.BothAxes].
   If any axis is disabled, the respective [gtk.event_controller_scroll.EventControllerScroll.scroll]
   delta will be 0. Vertical scroll events will be translated to horizontal
   motion for the devices incapable of horizontal scrolling.
   
   The event controller can also be forced to emit discrete events on all
-  devices through [gtk.types.EventControllerScrollFlags.discrete]. This can be used
+  devices through [gtk.types.EventControllerScrollFlags.Discrete]. This can be used
   to implement discrete actions triggered through scroll events (e.g.
   switching across combobox options).
   
-  The [gtk.types.EventControllerScrollFlags.kinetic] flag toggles the emission of the
+  The [gtk.types.EventControllerScrollFlags.Kinetic] flag toggles the emission of the
   [gtk.event_controller_scroll.EventControllerScroll.decelerate] signal, emitted at the end
   of scrolling with two X/Y velocity arguments that are consistent with the
   motion that was received.
@@ -10049,7 +10049,7 @@ struct GtkEveryFilterClass;
   
   # Accessibility
   
-  [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.button] role.
+  [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.Button] role.
 */
 struct GtkExpander;
 
@@ -10375,16 +10375,16 @@ struct GtkFileChooser;
   There are various cases in which you may need to use a [gtk.file_chooser_dialog.FileChooserDialog]:
   
   $(LIST
-    * To select a file for opening, use [gtk.types.FileChooserAction.open].
+    * To select a file for opening, use [gtk.types.FileChooserAction.Open].
     
-    * To save a file for the first time, use [gtk.types.FileChooserAction.save],
+    * To save a file for the first time, use [gtk.types.FileChooserAction.Save],
       and suggest a name such as “Untitled” with
       [gtk.file_chooser.FileChooser.setCurrentName].
     
-    * To save a file under a different name, use [gtk.types.FileChooserAction.save],
+    * To save a file under a different name, use [gtk.types.FileChooserAction.Save],
       and set the existing file with [gtk.file_chooser.FileChooser.setFile].
     
-    * To choose a folder instead of a filem use [gtk.types.FileChooserAction.selectFolder].
+    * To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
   )
     
   In general, you should only cause the file chooser to show a specific
@@ -10395,8 +10395,8 @@ struct GtkFileChooser;
   ## Response Codes
   
   [gtk.file_chooser_dialog.FileChooserDialog] inherits from [gtk.dialog.Dialog], so buttons that
-  go in its action area have response codes such as [gtk.types.ResponseType.accept] and
-  [gtk.types.ResponseType.cancel]. For example, you could call
+  go in its action area have response codes such as [gtk.types.ResponseType.Accept] and
+  [gtk.types.ResponseType.Cancel]. For example, you could call
   [gtk.file_chooser_dialog.FileChooserDialog.new_] as follows:
   
   ```c
@@ -10421,10 +10421,10 @@ struct GtkFileChooser;
   will have one of the following response codes:
   
   $(LIST
-    * [gtk.types.ResponseType.accept]
-    * [gtk.types.ResponseType.ok]
-    * [gtk.types.ResponseType.yes]
-    * [gtk.types.ResponseType.apply]
+    * [gtk.types.ResponseType.Accept]
+    * [gtk.types.ResponseType.Ok]
+    * [gtk.types.ResponseType.Yes]
+    * [gtk.types.ResponseType.Apply]
   )
     
   This is because [gtk.file_chooser_dialog.FileChooserDialog] must intercept responses and switch
@@ -10553,9 +10553,9 @@ struct GtkFileChooserDialog;
   ## Response Codes
   
   [gtk.file_chooser_native.FileChooserNative] inherits from [gtk.native_dialog.NativeDialog],
-  which means it will return [gtk.types.ResponseType.accept] if the user accepted,
-  and [gtk.types.ResponseType.cancel] if he pressed cancel. It can also return
-  [gtk.types.ResponseType.deleteEvent] if the window was unexpectedly closed.
+  which means it will return [gtk.types.ResponseType.Accept] if the user accepted,
+  and [gtk.types.ResponseType.Cancel] if he pressed cancel. It can also return
+  [gtk.types.ResponseType.DeleteEvent] if the window was unexpectedly closed.
   
   ## Differences from [gtk.file_chooser_dialog.FileChooserDialog]
   
@@ -10974,8 +10974,8 @@ struct GtkFlattenListModelClass
   
   # Accessibility
   
-  [gtk.flow_box.FlowBox] uses the [gtk.types.AccessibleRole.grid] role, and [gtk.flow_box_child.FlowBoxChild]
-  uses the [gtk.types.AccessibleRole.gridCell] role.
+  [gtk.flow_box.FlowBox] uses the [gtk.types.AccessibleRole.Grid] role, and [gtk.flow_box_child.FlowBoxChild]
+  uses the [gtk.types.AccessibleRole.GridCell] role.
 */
 struct GtkFlowBox;
 
@@ -11213,7 +11213,7 @@ struct GtkFontDialogClass
   
   # Accessibility
   
-  [gtk.frame.Frame] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.frame.Frame] uses the [gtk.types.AccessibleRole.Group] role.
 */
 struct GtkFrame
 {
@@ -11431,20 +11431,20 @@ struct GtkGLAreaClass
   [gtk.gesture.Gesture.setState] on one will effectively propagate
   the state throughout the group.
   
-  By default, all sequences start out in the [gtk.types.EventSequenceState.none] state,
+  By default, all sequences start out in the [gtk.types.EventSequenceState.None] state,
   sequences in this state trigger the gesture event handler, but event
   propagation will continue unstopped by gestures.
   
-  If a sequence enters into the [gtk.types.EventSequenceState.denied] state, the gesture
+  If a sequence enters into the [gtk.types.EventSequenceState.Denied] state, the gesture
   group will effectively ignore the sequence, letting events go unstopped
   through the gesture, but the "slot" will still remain occupied while
   the touch is active.
   
-  If a sequence enters in the [gtk.types.EventSequenceState.claimed] state, the gesture
+  If a sequence enters in the [gtk.types.EventSequenceState.Claimed] state, the gesture
   group will grab all interaction on the sequence, by:
   
   $(LIST
-    * Setting the same sequence to [gtk.types.EventSequenceState.denied] on every other
+    * Setting the same sequence to [gtk.types.EventSequenceState.Denied] on every other
       gesture group within the widget, and every gesture on parent widgets
       in the propagation chain.
     * Emitting [gtk.gesture.Gesture.cancel] on every gesture in widgets
@@ -11452,10 +11452,10 @@ struct GtkGLAreaClass
     * Stopping event propagation after the gesture group handles the event.
   )
     
-  Note: if a sequence is set early to [gtk.types.EventSequenceState.claimed] on
-  [gdk.types.EventType.touchBegin]/[gdk.types.EventType.buttonPress] (so those events are captured before
-  reaching the event widget, this implies [gtk.types.PropagationPhase.capture]), one similar
-  event will be emulated if the sequence changes to [gtk.types.EventSequenceState.denied].
+  Note: if a sequence is set early to [gtk.types.EventSequenceState.Claimed] on
+  [gdk.types.EventType.TouchBegin]/[gdk.types.EventType.ButtonPress] (so those events are captured before
+  reaching the event widget, this implies [gtk.types.PropagationPhase.Capture]), one similar
+  event will be emulated if the sequence changes to [gtk.types.EventSequenceState.Denied].
   This way event coherence is preserved before event propagation is unstopped
   again.
   
@@ -11470,8 +11470,8 @@ struct GtkGLAreaClass
   do to enable this support are:
   
   $(LIST
-    * If the gesture has [gtk.types.PropagationPhase.none], ensuring events of type
-      [gdk.types.EventType.touchpadSwipe] and [gdk.types.EventType.touchpadPinch] are handled by the [gtk.gesture.Gesture]
+    * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
+      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the [gtk.gesture.Gesture]
   )
 */
 struct GtkGesture;
@@ -11757,9 +11757,9 @@ struct GtkGraphicsOffloadClass
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.grid.Grid] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.grid.Grid] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.grid.Grid] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.grid.Grid] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkGrid
 {
@@ -11850,8 +11850,8 @@ struct GtkGridLayoutClass
   
   # Accessibility
   
-  [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.grid] role, and the items
-  use the [gtk.types.AccessibleRole.gridCell] role.
+  [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.Grid] role, and the items
+  use the [gtk.types.AccessibleRole.GridCell] role.
 */
 struct GtkGridView;
 
@@ -11929,7 +11929,7 @@ struct GtkGridViewClass;
   
   # Accessibility
   
-  [gtk.header_bar.HeaderBar] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.header_bar.HeaderBar] uses the [gtk.types.AccessibleRole.Group] role.
 */
 struct GtkHeaderBar;
 
@@ -12341,7 +12341,7 @@ struct GtkIconView;
   
   ## Accessibility
   
-  [gtk.image.Image] uses the [gtk.types.AccessibleRole.img] role.
+  [gtk.image.Image] uses the [gtk.types.AccessibleRole.Img] role.
 */
 struct GtkImage;
 
@@ -12514,7 +12514,7 @@ struct GtkKeyvalTriggerClass;
   
   ## Accessibility
   
-  [gtk.label.Label] uses the [gtk.types.AccessibleRole.label] role.
+  [gtk.label.Label] uses the [gtk.types.AccessibleRole.Label] role.
   
   ## Mnemonics
   
@@ -12837,7 +12837,7 @@ struct GtkLayoutManagerClass
   [gtk.level_bar.LevelBar.setMaxValue]. The value will be always drawn in
   proportion to the admissible interval, i.e. a value of 15 with a specified
   interval between 10 and 20 is equivalent to a value of 0.5 with an interval
-  between 0 and 1. When [gtk.types.LevelBarMode.discrete] is used, the bar level
+  between 0 and 1. When [gtk.types.LevelBarMode.Discrete] is used, the bar level
   is rendered as a finite number of separated blocks instead of a single one.
   The number of blocks that will be rendered is equal to the number of units
   specified by the admissible interval.
@@ -12876,7 +12876,7 @@ struct GtkLayoutManagerClass
   
   # Accessibility
   
-  [gtk.level_bar.LevelBar] uses the [gtk.types.AccessibleRole.meter] role.
+  [gtk.level_bar.LevelBar] uses the [gtk.types.AccessibleRole.Meter] role.
 */
 struct GtkLevelBar;
 
@@ -12906,7 +12906,7 @@ struct GtkLevelBar;
   
   # Accessibility
   
-  [gtk.link_button.LinkButton] uses the [gtk.types.AccessibleRole.link] role.
+  [gtk.link_button.LinkButton] uses the [gtk.types.AccessibleRole.Link] role.
 */
 struct GtkLinkButton;
 
@@ -12970,8 +12970,8 @@ struct GtkListBaseClass;
   
   # Accessibility
   
-  [gtk.list_box.ListBox] uses the [gtk.types.AccessibleRole.list] role and [gtk.list_box_row.ListBoxRow] uses
-  the [gtk.types.AccessibleRole.listItem] role.
+  [gtk.list_box.ListBox] uses the [gtk.types.AccessibleRole.List] role and [gtk.list_box_row.ListBoxRow] uses
+  the [gtk.types.AccessibleRole.ListItem] role.
 */
 struct GtkListBox;
 
@@ -13171,7 +13171,7 @@ struct GtkListItemFactoryClass;
   Internally, the [gtk.list_store.ListStore] was originally implemented with a linked list
   with a tail pointer.  As a result, it was fast at data insertion and deletion,
   and not fast at random data access.  The [gtk.list_store.ListStore] sets the
-  [gtk.types.TreeModelFlags.itersPersist] flag, which means that [gtk.tree_iter.TreeIter]s can be
+  [gtk.types.TreeModelFlags.ItersPersist] flag, which means that [gtk.tree_iter.TreeIter]s can be
   cached while the row exists.  Thus, if access to a particular row is needed
   often and your code is expected to run on older versions of GTK, it is worth
   keeping the iter around.
@@ -13354,8 +13354,8 @@ struct GtkListStorePrivate;
   
   # Accessibility
   
-  [gtk.list_view.ListView] uses the [gtk.types.AccessibleRole.list] role, and the list
-  items use the [gtk.types.AccessibleRole.listItem] role.
+  [gtk.list_view.ListView] uses the [gtk.types.AccessibleRole.List] role, and the list
+  items use the [gtk.types.AccessibleRole.ListItem] role.
 */
 struct GtkListView;
 
@@ -13596,7 +13596,7 @@ struct GtkMediaStreamClass
   
   For menus, the [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
   properties of the menu are also taken into account. For example, when the
-  direction is [gtk.types.ArrowType.down] and the horizontal alignment is [gtk.types.Align.start],
+  direction is [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start],
   the menu will be positioned below the button, with the starting edge
   (depending on the text direction) of the menu aligned with the starting
   edge of the button. If there is not enough space below the button, the
@@ -13638,7 +13638,7 @@ struct GtkMediaStreamClass
   
   # Accessibility
   
-  [gtk.menu_button.MenuButton] uses the [gtk.types.AccessibleRole.button] role.
+  [gtk.menu_button.MenuButton] uses the [gtk.types.AccessibleRole.Button] role.
 */
 struct GtkMenuButton;
 
@@ -13651,7 +13651,7 @@ struct GtkMenuButton;
   [gtk.message_dialog.MessageDialog] from [gtk.dialog.Dialog] without too much effort, but
   [gtk.message_dialog.MessageDialog] saves typing.
   
-  The easiest way to do a modal message dialog is to use the [gtk.types.DialogFlags.modal]
+  The easiest way to do a modal message dialog is to use the [gtk.types.DialogFlags.Modal]
   flag, which will call [gtk.window.Window.setModal] internally. The dialog will
   prevent interaction with the parent window until it's hidden or destroyed.
   You can use the [gtk.dialog.Dialog.response] signal to know when the user
@@ -13676,7 +13676,7 @@ struct GtkMenuButton;
   ```
   
   You might do a non-modal [gtk.message_dialog.MessageDialog] simply by omitting the
-  [gtk.types.DialogFlags.modal] flag:
+  [gtk.types.DialogFlags.Modal] flag:
   
   ```c
   GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
@@ -14018,10 +14018,10 @@ struct GtkNoSelectionClass
   [gtk.notebook.Notebook] uses the following roles:
   
    $(LIST
-      * [gtk.types.AccessibleRole.group] for the notebook widget
-      * [gtk.types.AccessibleRole.tabList] for the list of tabs
-      * [gtk.types.AccessibleRole.tab] role for each tab
-      * [gtk.types.AccessibleRole.tabPanel] for each page
+      * [gtk.types.AccessibleRole.Group] for the notebook widget
+      * [gtk.types.AccessibleRole.TabList] for the list of tabs
+      * [gtk.types.AccessibleRole.Tab] role for each tab
+      * [gtk.types.AccessibleRole.TabPanel] for each page
    )
 */
 struct GtkNotebook;
@@ -14089,10 +14089,10 @@ struct GtkOrientableIface
   
   The position of each overlay widget is determined by its
   [gtk.widget.Widget.Align] and [gtk.widget.Widget.Align]
-  properties. E.g. a widget with both alignments set to [gtk.types.Align.start]
+  properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
   will be placed at the top left corner of the [gtk.overlay.Overlay] container,
-  whereas an overlay with halign set to [gtk.types.Align.center] and valign set
-  to [gtk.types.Align.end] will be placed a the bottom edge of the [gtk.overlay.Overlay],
+  whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
+  to [gtk.types.Align.End] will be placed a the bottom edge of the [gtk.overlay.Overlay],
   horizontally centered. The position can be adjusted by setting the margin
   properties of the child to non-zero values.
   
@@ -14193,7 +14193,7 @@ struct GtkPadActionEntry
   semantic meaning.
   
   Buttons and sensors are not constrained to triggering a single action,
-  some [gdk.types.InputSource.tabletPad] devices feature multiple "modes". All these
+  some [gdk.types.InputSource.TabletPad] devices feature multiple "modes". All these
   input elements have one current mode, which may determine the final action
   being triggered.
   
@@ -14442,7 +14442,7 @@ struct GtkParamSpecExpression
   
   # Accessibility
   
-  [gtk.password_entry.PasswordEntry] uses the [gtk.types.AccessibleRole.textBox] role.
+  [gtk.password_entry.PasswordEntry] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 struct GtkPasswordEntry;
 
@@ -14510,7 +14510,7 @@ struct GtkPasswordEntryClass;
   
   ## Accessibility
   
-  [gtk.picture.Picture] uses the [gtk.types.AccessibleRole.img] role.
+  [gtk.picture.Picture] uses the [gtk.types.AccessibleRole.Img] role.
 */
 struct GtkPicture;
 
@@ -14734,10 +14734,10 @@ struct GtkPopoverClass
   
   # Accessibility
   
-  [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.menu] role, and its
-  items use the [gtk.types.AccessibleRole.menuItem],
-  [gtk.types.AccessibleRole.menuItemCheckbox] or
-  [gtk.types.AccessibleRole.menuItemRadio] roles, depending on the
+  [gtk.popover_menu.PopoverMenu] uses the [gtk.types.AccessibleRole.Menu] role, and its
+  items use the [gtk.types.AccessibleRole.MenuItem],
+  [gtk.types.AccessibleRole.MenuItemCheckbox] or
+  [gtk.types.AccessibleRole.MenuItemRadio] roles, depending on the
   action they are connected to.
 */
 struct GtkPopoverMenu;
@@ -14769,9 +14769,9 @@ struct GtkPopoverMenu;
   
   # Accessibility
   
-  [gtk.popover_menu_bar.PopoverMenuBar] uses the [gtk.types.AccessibleRole.menuBar] role,
-  the menu items use the [gtk.types.AccessibleRole.menuItem] role and
-  the menus use the [gtk.types.AccessibleRole.menu] role.
+  [gtk.popover_menu_bar.PopoverMenuBar] uses the [gtk.types.AccessibleRole.MenuBar] role,
+  the menu items use the [gtk.types.AccessibleRole.MenuItem] role and
+  the menus use the [gtk.types.AccessibleRole.Menu] role.
 */
 struct GtkPopoverMenuBar;
 
@@ -15138,9 +15138,9 @@ struct GtkPrintSetup;
   [gtk.print_unix_dialog.PrintUnixDialog] uses the following response values:
   
   $(LIST
-    * [gtk.types.ResponseType.ok]: for the “Print” button
-    * [gtk.types.ResponseType.apply]: for the “Preview” button
-    * [gtk.types.ResponseType.cancel]: for the “Cancel” button
+    * [gtk.types.ResponseType.Ok]: for the “Print” button
+    * [gtk.types.ResponseType.Apply]: for the “Preview” button
+    * [gtk.types.ResponseType.Cancel]: for the “Cancel” button
   )
     
   # GtkPrintUnixDialog as GtkBuildable
@@ -15241,7 +15241,7 @@ struct GtkPrinter;
   
   # Accessibility
   
-  [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.progressBar] role.
+  [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.ProgressBar] role.
 */
 struct GtkProgressBar;
 
@@ -15501,7 +15501,7 @@ struct GtkRequisition
   
   # Accessibility
   
-  [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.Group] role.
   
   The child of [gtk.revealer.Revealer], if set, is always available in the accessibility
   tree, regardless of the state of the revealer widget.
@@ -15608,7 +15608,7 @@ struct GtkRootInterface;
   
   # Accessibility
   
-  [gtk.scale.Scale] uses the [gtk.types.AccessibleRole.slider] role.
+  [gtk.scale.Scale] uses the [gtk.types.AccessibleRole.Slider] role.
 */
 struct GtkScale
 {
@@ -15761,7 +15761,7 @@ struct GtkScrollableInterface
   
   # Accessibility
   
-  [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.scrollbar] role.
+  [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.Scrollbar] role.
 */
 struct GtkScrollbar;
 
@@ -15782,8 +15782,8 @@ struct GtkScrollbar;
   If [gtk.scrolled_window.ScrolledWindow.setChild] has added a [gtk.viewport.Viewport] for you,
   it will be automatically removed when you unset the child.
   Unless `property@Gtk.ScrolledWindow:hscrollbar-policy` and
-  `property@Gtk.ScrolledWindow:vscrollbar-policy` are [gtk.types.PolicyType.never] or
-  [gtk.types.PolicyType.external], [gtk.scrolled_window.ScrolledWindow] adds internal [gtk.scrollbar.Scrollbar] widgets
+  `property@Gtk.ScrolledWindow:vscrollbar-policy` are [gtk.types.PolicyType.Never] or
+  [gtk.types.PolicyType.External], [gtk.scrolled_window.ScrolledWindow] adds internal [gtk.scrollbar.Scrollbar] widgets
   around its child. The scroll position of the child, and if applicable the
   scrollbars, is controlled by the [gtk.scrolled_window.ScrolledWindow.Adjustment]
   and [gtk.scrolled_window.ScrolledWindow.Adjustment] that are associated with the
@@ -15831,9 +15831,9 @@ struct GtkScrollbar;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.scrolled_window.ScrolledWindow] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.scrolled_window.ScrolledWindow] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.scrolled_window.ScrolledWindow] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkScrolledWindow;
 
@@ -15881,7 +15881,7 @@ struct GtkScrolledWindow;
   
   # Accessibility
   
-  [gtk.search_bar.SearchBar] uses the [gtk.types.AccessibleRole.search] role.
+  [gtk.search_bar.SearchBar] uses the [gtk.types.AccessibleRole.Search] role.
 */
 struct GtkSearchBar;
 
@@ -15929,7 +15929,7 @@ struct GtkSearchBar;
   
   ## Accessibility
   
-  [gtk.search_entry.SearchEntry] uses the [gtk.types.AccessibleRole.searchBox] role.
+  [gtk.search_entry.SearchEntry] uses the [gtk.types.AccessibleRole.SearchBox] role.
 */
 struct GtkSearchEntry;
 
@@ -16116,7 +16116,7 @@ struct GtkSelectionModelInterface
   
   # Accessibility
   
-  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.separator] role.
+  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.Separator] role.
 */
 struct GtkSeparator;
 
@@ -16283,7 +16283,7 @@ struct GtkShortcutLabelClass;
   [gtk.window.Window] and [gtk.popover.Popover].
   
   Every widget that implements [gtk.shortcut_manager.ShortcutManager] will be used as a
-  [gtk.types.ShortcutScope.managed].
+  [gtk.types.ShortcutScope.Managed].
 */
 struct GtkShortcutManager;
 
@@ -16551,16 +16551,16 @@ struct GtkSingleSelectionClass
   Widgets can be part of multiple size groups; GTK will compute the
   horizontal size of a widget from the horizontal requisition of all
   widgets that can be reached from the widget by a chain of size groups
-  of type [gtk.types.SizeGroupMode.horizontal] or [gtk.types.SizeGroupMode.both], and the
+  of type [gtk.types.SizeGroupMode.Horizontal] or [gtk.types.SizeGroupMode.Both], and the
   vertical size from the vertical requisition of all widgets that can be
   reached from the widget by a chain of size groups of type
-  [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both].
+  [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both].
   
   Note that only non-contextual sizes of every widget are ever consulted
   by size groups (since size groups have no knowledge of what size a widget
   will be allocated in one dimension, it cannot derive how much height
   a widget will receive for a given width). When grouping widgets that
-  trade height for width in mode [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both]:
+  trade height for width in mode [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both]:
   the height for the minimum width will be the requested height for all
   widgets in the group. The same is of course true when horizontally grouping
   width for height widgets.
@@ -16712,7 +16712,7 @@ struct GtkSorterClass
 
   /**
       Get the `GtkSorderOrder` that applies to the current sorter.
-      If unimplemented, it returns [gtk.types.SorterOrder.partial].
+      If unimplemented, it returns [gtk.types.SorterOrder.Partial].
   */
   extern(C) GtkSorterOrder function(GtkSorter* self) getOrder;
 
@@ -16853,7 +16853,7 @@ struct GtkSorterClass
   
   # Accessibility
   
-  [gtk.spin_button.SpinButton] uses the [gtk.types.AccessibleRole.spinButton] role.
+  [gtk.spin_button.SpinButton] uses the [gtk.types.AccessibleRole.SpinButton] role.
 */
 struct GtkSpinButton;
 
@@ -16922,7 +16922,7 @@ struct GtkSpinner;
   
   # Accessibility
   
-  [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.tabPanel] for the stack
+  [gtk.stack.Stack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack
   pages, which are the accessible parent objects of the child widgets.
 */
 struct GtkStack;
@@ -16977,8 +16977,8 @@ struct GtkStackSidebar;
   
   # Accessibility
   
-  [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.tabList] role
-  and uses the [gtk.types.AccessibleRole.tab] for its buttons.
+  [gtk.stack_switcher.StackSwitcher] uses the [gtk.types.AccessibleRole.TabList] role
+  and uses the [gtk.types.AccessibleRole.Tab] for its buttons.
   
   # Orientable
   
@@ -17244,7 +17244,7 @@ struct GtkStyleProvider;
   
   # Accessibility
   
-  [gtk.switch_.Switch] uses the [gtk.types.AccessibleRole.switch_] role.
+  [gtk.switch_.Switch] uses the [gtk.types.AccessibleRole.Switch] role.
 */
 struct GtkSwitch;
 
@@ -17341,7 +17341,7 @@ struct GtkSymbolicPaintableInterface
   
   # Accessibility
   
-  [gtk.text.Text] uses the [gtk.types.AccessibleRole.none] role, which causes it to be
+  [gtk.text.Text] uses the [gtk.types.AccessibleRole.None] role, which causes it to be
   skipped for accessibility. This is because [gtk.text.Text] is expected to be used
   as a delegate for a [gtk.editable.Editable] implementation that will be represented
   to accessibility.
@@ -17715,7 +17715,7 @@ struct GtkTextTagTable;
   
   ## Accessibility
   
-  [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.textBox] role.
+  [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 struct GtkTextView
 {
@@ -17799,7 +17799,7 @@ struct GtkTextViewClass
       The snapshot_layer vfunc is called before and after the text
       view is drawing its own text. Applications can override this vfunc
       in a subclass to draw customized content underneath or above the
-      text. In the [gtk.types.TextViewLayer.belowText] and [gtk.types.TextViewLayer.aboveText]
+      text. In the [gtk.types.TextViewLayer.BelowText] and [gtk.types.TextViewLayer.AboveText]
       layers the drawing is done in the buffer coordinate space.
   */
   extern(C) void function(GtkTextView* textView, GtkTextViewLayer layer, GtkSnapshot* snapshot) snapshotLayer;
@@ -17854,7 +17854,7 @@ struct GtkTextViewPrivate;
   
   ## Accessibility
   
-  [gtk.toggle_button.ToggleButton] uses the [gtk.types.AccessibleRole.toggleButton] role.
+  [gtk.toggle_button.ToggleButton] uses the [gtk.types.AccessibleRole.ToggleButton] role.
   
   ## Creating two [gtk.toggle_button.ToggleButton] widgets.
   
@@ -18062,10 +18062,10 @@ struct GtkTreeDragSourceIface
   
   ## Accessibility
   
-  Until GTK 4.10, [gtk.tree_expander.TreeExpander] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.tree_expander.TreeExpander] used the [gtk.types.AccessibleRole.Group] role.
   
-  Since GTK 4.12, [gtk.tree_expander.TreeExpander] uses the [gtk.types.AccessibleRole.button] role.
-  Toggling it will change the [gtk.types.AccessibleState.expanded] state.
+  Since GTK 4.12, [gtk.tree_expander.TreeExpander] uses the [gtk.types.AccessibleRole.Button] role.
+  Toggling it will change the [gtk.types.AccessibleState.Expanded] state.
 */
 struct GtkTreeExpander;
 
@@ -18236,7 +18236,7 @@ struct GtkTreeListRowSorterClass
   Although generally uninteresting, as one always has to allow for
   the case where iterators do not persist beyond a signal, some very
   important performance enhancements were made in the sort model.
-  As a result, the [gtk.types.TreeModelFlags.itersPersist] flag was added to
+  As a result, the [gtk.types.TreeModelFlags.ItersPersist] flag was added to
   indicate this behavior.
   
   To help show some common operation of a model, some examples are
@@ -19096,9 +19096,9 @@ struct GtkVideoClass
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.viewport.Viewport] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.viewport.Viewport] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.viewport.Viewport] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.viewport.Viewport] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkViewport;
 
@@ -19147,7 +19147,7 @@ struct GtkVolumeButton
   or its child widgets, the `vfunc@Gtk.Widget.get_request_mode` virtual
   function must be implemented as well and return the widget's preferred
   request mode. The default implementation of this virtual function
-  returns [gtk.types.SizeRequestMode.constantSize], which means that the widget will
+  returns [gtk.types.SizeRequestMode.ConstantSize], which means that the widget will
   only ever get -1 passed as the for_size value to its
   `vfunc@Gtk.Widget.measure` implementation.
   
@@ -19156,17 +19156,17 @@ struct GtkVolumeButton
   for their minimum sizes it is generally done in two initial passes
   in the [gtk.types.SizeRequestMode] chosen by the toplevel.
   
-  For example, when queried in the normal [gtk.types.SizeRequestMode.heightForWidth] mode:
+  For example, when queried in the normal [gtk.types.SizeRequestMode.HeightForWidth] mode:
   
   First, the default minimum and natural width for each widget
   in the interface will be computed using [gtk.widget.Widget.measure] with an
-  orientation of [gtk.types.Orientation.horizontal] and a for_size of -1.
+  orientation of [gtk.types.Orientation.Horizontal] and a for_size of -1.
   Because the preferred widths for each widget depend on the preferred
   widths of their children, this information propagates up the hierarchy,
   and finally a minimum and natural width is determined for the entire
   toplevel. Next, the toplevel will use the minimum width to query for the
   minimum height contextual to that width using [gtk.widget.Widget.measure] with an
-  orientation of [gtk.types.Orientation.vertical] and a for_size of the just computed
+  orientation of [gtk.types.Orientation.Vertical] and a for_size of the just computed
   width. This will also be a highly recursive operation. The minimum height
   for the minimum width is normally used to set the minimum size constraint
   on the toplevel.
@@ -19192,13 +19192,13 @@ struct GtkVolumeButton
   
   For instance, a [gtk.label.Label] that does height-for-width word wrapping
   will not expect to have `vfunc@Gtk.Widget.measure` with an orientation of
-  [gtk.types.Orientation.vertical] called because that call is specific to a
+  [gtk.types.Orientation.Vertical] called because that call is specific to a
   width-for-height request. In this case the label must return the height
   required for its own minimum possible width. By following this rule any
   widget that handles height-for-width or width-for-height requests will
   always be allocated at least enough space to fit its own content.
   
-  Here are some examples of how a [gtk.types.SizeRequestMode.heightForWidth] widget
+  Here are some examples of how a [gtk.types.SizeRequestMode.HeightForWidth] widget
   generally deals with width-for-height requests:
   
   ```c
@@ -19272,7 +19272,7 @@ struct GtkVolumeButton
   both a minimum and natural size.
   
   If a widget ends up baseline aligned it will be allocated all the space in
-  the parent as if it was [gtk.types.Align.fill], but the selected baseline can be
+  the parent as if it was [gtk.types.Align.Fill], but the selected baseline can be
   found via [gtk.widget.Widget.getBaseline]. If the baseline has a
   value other than -1 you need to align the widget such that the baseline
   appears at the position.
@@ -19607,12 +19607,12 @@ struct GtkWidgetClass
       Called to get the request mode, if the widget
       does not have a layout manager.
       This allows a widget to tell its parent container whether
-      it prefers to be allocated in [gtk.types.SizeRequestMode.heightForWidth] or
-      [gtk.types.SizeRequestMode.widthForHeight] mode.
-      [gtk.types.SizeRequestMode.heightForWidth] means the widget prefers to have
+      it prefers to be allocated in [gtk.types.SizeRequestMode.HeightForWidth] or
+      [gtk.types.SizeRequestMode.WidthForHeight] mode.
+      [gtk.types.SizeRequestMode.HeightForWidth] means the widget prefers to have
       `GtkWidgetClass.measure()` called first to get the default width (passing
       a for_size of -1), then again to get the height for said default width.
-      [gtk.types.SizeRequestMode.constantSize] disables any height-for-width or
+      [gtk.types.SizeRequestMode.ConstantSize] disables any height-for-width or
       width-for-height geometry management for said widget and is the
       default return.
       It’s important to note that any widget
@@ -19790,9 +19790,9 @@ struct GtkWidgetPrivate;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.window] role.
+  Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.Window] role.
   
-  Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.application] role.
+  Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.Application] role.
   
   # Actions
   
@@ -19899,7 +19899,7 @@ struct GtkWindowClass
   
   # Accessibility
   
-  [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.Group] role.
 */
 struct GtkWindowControls;
 
@@ -19971,9 +19971,9 @@ struct GtkWindowGroupPrivate;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 struct GtkWindowHandle;
 

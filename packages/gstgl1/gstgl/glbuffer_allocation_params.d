@@ -13,12 +13,12 @@ import gstgl.types;
 class GLBufferAllocationParams : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -63,7 +63,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage)
   {
     GstGLBufferAllocationParams* _cretval;
-    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocSize, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, glTarget, glUsage);
-    this(_cretval, Yes.take);
+    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocSize, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, glTarget, glUsage);
+    this(_cretval, Yes.Take);
   }
 }

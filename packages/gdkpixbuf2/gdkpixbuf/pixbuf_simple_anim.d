@@ -13,7 +13,7 @@ import gid.gid;
 class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   {
     GdkPixbufSimpleAnim* _cretval;
     _cretval = gdk_pixbuf_simple_anim_new(width, height, rate);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -53,7 +53,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   */
   void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**

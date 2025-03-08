@@ -64,7 +64,7 @@ import gobject.object;
 class PixbufLoader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -88,7 +88,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     GdkPixbufLoader* _cretval;
     _cretval = gdk_pixbuf_loader_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -114,12 +114,12 @@ class PixbufLoader : gobject.object.ObjectG
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithMimeType(string mimeType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,12 +145,12 @@ class PixbufLoader : gobject.object.ObjectG
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithType(string imageType)
   {
     GdkPixbufLoader* _cretval;
-    const(char)* _imageType = imageType.toCString(No.alloc);
+    const(char)* _imageType = imageType.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     GdkPixbufAnimation* _cretval;
     _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     GdkPixbufFormat* _cretval;
     _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class PixbufLoader : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.dup) : null, &_err);
+    _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -322,10 +322,10 @@ class PixbufLoader : gobject.object.ObjectG
     Connect to AreaPrepared signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAreaPrepared(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAreaPrepared(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AreaPreparedCallbackDlg) || is(T : AreaPreparedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -368,10 +368,10 @@ class PixbufLoader : gobject.object.ObjectG
     Connect to AreaUpdated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAreaUpdated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAreaUpdated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AreaUpdatedCallbackDlg) || is(T : AreaUpdatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -411,10 +411,10 @@ class PixbufLoader : gobject.object.ObjectG
     Connect to Closed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -454,10 +454,10 @@ class PixbufLoader : gobject.object.ObjectG
     Connect to SizePrepared signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSizePrepared(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSizePrepared(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SizePreparedCallbackDlg) || is(T : SizePreparedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

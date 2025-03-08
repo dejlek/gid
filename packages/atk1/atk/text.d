@@ -372,10 +372,10 @@ interface Text
     Connect to TextAttributesChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextAttributesChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextAttributesChangedCallbackDlg) || is(T : TextAttributesChangedCallbackFunc));
 
   /**
@@ -398,10 +398,10 @@ interface Text
     Connect to TextCaretMoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextCaretMoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextCaretMovedCallbackDlg) || is(T : TextCaretMovedCallbackFunc));
 
   /**
@@ -431,10 +431,10 @@ interface Text
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextChangedCallbackDlg) || is(T : TextChangedCallbackFunc));
 
   /**
@@ -461,10 +461,10 @@ interface Text
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextInsertCallbackDlg) || is(T : TextInsertCallbackFunc));
 
   /**
@@ -491,10 +491,10 @@ interface Text
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextRemoveCallbackDlg) || is(T : TextRemoveCallbackFunc));
 
   /**
@@ -515,9 +515,9 @@ interface Text
     Connect to TextSelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextSelectionChangedCallbackDlg) || is(T : TextSelectionChangedCallbackFunc));
   }

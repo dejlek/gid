@@ -36,7 +36,7 @@ import gtk.types;
 class ShortcutsGroup : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,6 +63,6 @@ class ShortcutsGroup : gtk.box.Box
   */
   void addShortcut(gtk.shortcuts_shortcut.ShortcutsShortcut shortcut)
   {
-    gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut.cPtr(No.dup) : null);
+    gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut.cPtr(No.Dup) : null);
   }
 }

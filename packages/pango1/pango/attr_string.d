@@ -14,7 +14,7 @@ class AttrString
 {
   PangoAttrString cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrString");
@@ -37,12 +37,12 @@ class AttrString
 
   @property string value()
   {
-    return (cast(PangoAttrString*)cPtr).value.fromCString(No.free);
+    return (cast(PangoAttrString*)cPtr).value.fromCString(No.Free);
   }
 
   @property void value(string propval)
   {
     safeFree(cast(void*)(cast(PangoAttrString*)cPtr).value);
-    (cast(PangoAttrString*)cPtr).value = propval.toCString(Yes.alloc);
+    (cast(PangoAttrString*)cPtr).value = propval.toCString(Yes.Alloc);
   }
 }

@@ -56,7 +56,7 @@ import gtk.widget;
 class GraphicsOffload : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,8 +81,8 @@ class GraphicsOffload : gtk.widget.Widget
   this(gtk.widget.Widget child = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class GraphicsOffload : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class GraphicsOffload : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

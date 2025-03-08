@@ -7,7 +7,7 @@ import gio.socket_connectable_mixin;
 /// Proxy object for Gio.SocketConnectable interface when a GObject has no applicable D binding
 class SocketConnectableIfaceProxy : IfaceProxy, gio.socket_connectable.SocketConnectable
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

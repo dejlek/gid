@@ -25,7 +25,7 @@ class RTCPBuffer
 {
   GstRTCPBuffer cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtp.RTCPBuffer");
@@ -119,7 +119,7 @@ class RTCPBuffer
   static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp.cPtr : null);
+    _retval = gst_rtcp_buffer_map(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, rtcp ? cast(GstRTCPBuffer*)rtcp.cPtr : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class RTCPBuffer
   {
     GstBuffer* _cretval;
     _cretval = gst_rtcp_buffer_new(mtu);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class RTCPBuffer
 
     auto _data = cast(const(void)*)data.ptr;
     _cretval = gst_rtcp_buffer_new_copy_data(_data, _len);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class RTCPBuffer
 
     auto _data = cast(void*)data.ptr;
     _cretval = gst_rtcp_buffer_new_take_data(_data, _len);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class RTCPBuffer
   static bool validate(gst.buffer.Buffer buffer)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_validate(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
+    _retval = gst_rtcp_buffer_validate(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class RTCPBuffer
   static bool validateReduced(gst.buffer.Buffer buffer)
   {
     bool _retval;
-    _retval = gst_rtcp_buffer_validate_reduced(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null);
+    _retval = gst_rtcp_buffer_validate_reduced(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
     return _retval;
   }
 }

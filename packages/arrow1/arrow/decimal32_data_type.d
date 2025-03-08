@@ -11,7 +11,7 @@ import glib.error;
 class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class Decimal32DataType : arrow.decimal_data_type.DecimalDataType
     _cretval = garrow_decimal32_data_type_new(precision, scale, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

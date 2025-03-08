@@ -133,16 +133,16 @@ import gtk.types;
   There are various cases in which you may need to use a [gtk.file_chooser_dialog.FileChooserDialog]:
   
   $(LIST
-    * To select a file for opening, use [gtk.types.FileChooserAction.open].
+    * To select a file for opening, use [gtk.types.FileChooserAction.Open].
     
-    * To save a file for the first time, use [gtk.types.FileChooserAction.save],
+    * To save a file for the first time, use [gtk.types.FileChooserAction.Save],
       and suggest a name such as “Untitled” with
       [gtk.file_chooser.FileChooser.setCurrentName].
     
-    * To save a file under a different name, use [gtk.types.FileChooserAction.save],
+    * To save a file under a different name, use [gtk.types.FileChooserAction.Save],
       and set the existing file with [gtk.file_chooser.FileChooser.setFile].
     
-    * To choose a folder instead of a filem use [gtk.types.FileChooserAction.selectFolder].
+    * To choose a folder instead of a filem use [gtk.types.FileChooserAction.SelectFolder].
   )
     
   In general, you should only cause the file chooser to show a specific
@@ -153,8 +153,8 @@ import gtk.types;
   ## Response Codes
   
   [gtk.file_chooser_dialog.FileChooserDialog] inherits from [gtk.dialog.Dialog], so buttons that
-  go in its action area have response codes such as [gtk.types.ResponseType.accept] and
-  [gtk.types.ResponseType.cancel]. For example, you could call
+  go in its action area have response codes such as [gtk.types.ResponseType.Accept] and
+  [gtk.types.ResponseType.Cancel]. For example, you could call
   [gtk.file_chooser_dialog.FileChooserDialog.new_] as follows:
   
   ```c
@@ -179,10 +179,10 @@ import gtk.types;
   will have one of the following response codes:
   
   $(LIST
-    * [gtk.types.ResponseType.accept]
-    * [gtk.types.ResponseType.ok]
-    * [gtk.types.ResponseType.yes]
-    * [gtk.types.ResponseType.apply]
+    * [gtk.types.ResponseType.Accept]
+    * [gtk.types.ResponseType.Ok]
+    * [gtk.types.ResponseType.Yes]
+    * [gtk.types.ResponseType.Apply]
   )
     
   This is because [gtk.file_chooser_dialog.FileChooserDialog] must intercept responses and switch
@@ -203,7 +203,7 @@ import gtk.types;
 class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

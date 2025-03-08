@@ -65,15 +65,15 @@ class Event : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstEvent.sizeof), Yes.take);
+    super(safeMalloc(GstEvent.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -140,7 +140,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_buffer_size(format, minsize, maxsize, async);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -155,8 +155,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newCaps(gst.caps.Caps caps)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_caps(caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -180,8 +180,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newCustom(gst.types.EventType type, gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_eos();
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_flush_start();
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_flush_stop(resetTime);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -272,14 +272,14 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_gap(timestamp, duration);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
   /**
       Create a new instant-rate-change event. This event is sent by seek
     handlers (e.g. demuxers) when receiving a seek with the
-    [gst.types.SeekFlags.instantRateChange] and signals to downstream elements that
+    [gst.types.SeekFlags.InstantRateChange] and signals to downstream elements that
     the playback rate in the existing segment should be immediately multiplied
     by the rate_multiplier factor.
     
@@ -295,7 +295,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_instant_rate_change(rateMultiplier, newFlags);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_instant_rate_sync_time(rateMultiplier, runningTime, upstreamRunningTime);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_latency(latency);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -357,8 +357,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newNavigation(gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -405,10 +405,10 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newProtection(string systemId, gst.buffer.Buffer data, string origin)
   {
     GstEvent* _cretval;
-    const(char)* _systemId = systemId.toCString(No.alloc);
-    const(char)* _origin = origin.toCString(No.alloc);
-    _cretval = gst_event_new_protection(_systemId, data ? cast(GstBuffer*)data.cPtr(No.dup) : null, _origin);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    const(char)* _systemId = systemId.toCString(No.Alloc);
+    const(char)* _origin = origin.toCString(No.Alloc);
+    _cretval = gst_event_new_protection(_systemId, data ? cast(GstBuffer*)data.cPtr(No.Dup) : null, _origin);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -466,7 +466,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_qos(type, proportion, diff, timestamp);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_reconfigure();
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_seek(rate, format, flags, startType, start, stopType, stop);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -574,8 +574,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newSegment(gst.segment.Segment segment)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_segment(segment ? cast(const(GstSegment)*)segment.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_segment(segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_segment_done(format, position);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -617,7 +617,7 @@ class Event : gobject.boxed.Boxed
     auto _streams = gListFromD!(string)(streams);
     scope(exit) containerFree!(GList*, string, GidOwnership.None)(_streams);
     _cretval = gst_event_new_select_streams(_streams);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -635,9 +635,9 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newSinkMessage(string name, gst.message.Message msg)
   {
     GstEvent* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = gst_event_new_sink_message(_name, msg ? cast(GstMessage*)msg.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gst_event_new_sink_message(_name, msg ? cast(GstMessage*)msg.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -667,7 +667,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_step(format, amount, rate, flush, intermediate);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -687,8 +687,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newStreamCollection(gst.stream_collection.StreamCollection collection)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_stream_collection(collection ? cast(GstStreamCollection*)collection.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_stream_collection(collection ? cast(GstStreamCollection*)collection.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -710,7 +710,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     _cretval = gst_event_new_stream_group_done(groupId);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -743,9 +743,9 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newStreamStart(string streamId)
   {
     GstEvent* _cretval;
-    const(char)* _streamId = streamId.toCString(No.alloc);
+    const(char)* _streamId = streamId.toCString(No.Alloc);
     _cretval = gst_event_new_stream_start(_streamId);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -765,8 +765,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newTag(gst.tag_list.TagList taglist)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_tag(taglist ? cast(GstTagList*)taglist.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_tag(taglist ? cast(GstTagList*)taglist.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -781,8 +781,8 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newToc(gst.toc.Toc toc, bool updated)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_toc(toc ? cast(GstToc*)toc.cPtr(No.dup) : null, updated);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_event_new_toc(toc ? cast(GstToc*)toc.cPtr(No.Dup) : null, updated);
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -797,9 +797,9 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newTocSelect(string uid)
   {
     GstEvent* _cretval;
-    const(char)* _uid = uid.toCString(No.alloc);
+    const(char)* _uid = uid.toCString(No.Alloc);
     _cretval = gst_event_new_toc_select(_uid);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -811,7 +811,7 @@ class Event : gobject.boxed.Boxed
   */
   void copySegment(gst.segment.Segment segment)
   {
-    gst_event_copy_segment(cast(GstEvent*)cPtr, segment ? cast(GstSegment*)segment.cPtr(No.dup) : null);
+    gst_event_copy_segment(cast(GstEvent*)cPtr, segment ? cast(GstSegment*)segment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -871,7 +871,7 @@ class Event : gobject.boxed.Boxed
   {
     const(GstStructure)* _cretval;
     _cretval = gst_event_get_structure(cast(GstEvent*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -885,7 +885,7 @@ class Event : gobject.boxed.Boxed
   bool hasName(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gst_event_has_name(cast(GstEvent*)cPtr, _name);
     return _retval;
   }
@@ -927,7 +927,7 @@ class Event : gobject.boxed.Boxed
   {
     GstCaps* _caps;
     gst_event_parse_caps(cast(GstEvent*)cPtr, &_caps);
-    caps = new gst.caps.Caps(cast(void*)_caps, No.take);
+    caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
   /**
@@ -1029,9 +1029,9 @@ class Event : gobject.boxed.Boxed
     GstBuffer* _data;
     char* _origin;
     gst_event_parse_protection(cast(GstEvent*)cPtr, &_systemId, &_data, &_origin);
-    systemId = _systemId.fromCString(No.free);
-    data = new gst.buffer.Buffer(cast(void*)_data, No.take);
-    origin = _origin.fromCString(No.free);
+    systemId = _systemId.fromCString(No.Free);
+    data = new gst.buffer.Buffer(cast(void*)_data, No.Take);
+    origin = _origin.fromCString(No.Free);
   }
 
   /**
@@ -1088,7 +1088,7 @@ class Event : gobject.boxed.Boxed
   {
     const(GstSegment)* _segment;
     gst_event_parse_segment(cast(GstEvent*)cPtr, &_segment);
-    segment = new gst.segment.Segment(cast(void*)_segment, No.take);
+    segment = new gst.segment.Segment(cast(void*)_segment, No.Take);
   }
 
   /**
@@ -1123,7 +1123,7 @@ class Event : gobject.boxed.Boxed
   {
     GstMessage* _msg;
     gst_event_parse_sink_message(cast(GstEvent*)cPtr, &_msg);
-    msg = new gst.message.Message(cast(void*)_msg, Yes.take);
+    msg = new gst.message.Message(cast(void*)_msg, Yes.Take);
   }
 
   /**
@@ -1150,7 +1150,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStream* _stream;
     gst_event_parse_stream(cast(GstEvent*)cPtr, &_stream);
-    stream = new gst.stream.Stream(cast(void*)_stream, Yes.take);
+    stream = new gst.stream.Stream(cast(void*)_stream, Yes.Take);
   }
 
   /**
@@ -1162,7 +1162,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStreamCollection* _collection;
     gst_event_parse_stream_collection(cast(GstEvent*)cPtr, &_collection);
-    collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.take);
+    collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
   }
 
   /** */
@@ -1194,7 +1194,7 @@ class Event : gobject.boxed.Boxed
   {
     char* _streamId;
     gst_event_parse_stream_start(cast(GstEvent*)cPtr, &_streamId);
-    streamId = _streamId.fromCString(No.free);
+    streamId = _streamId.fromCString(No.Free);
   }
 
   /**
@@ -1209,7 +1209,7 @@ class Event : gobject.boxed.Boxed
   {
     GstTagList* _taglist;
     gst_event_parse_tag(cast(GstEvent*)cPtr, &_taglist);
-    taglist = new gst.tag_list.TagList(cast(void*)_taglist, No.take);
+    taglist = new gst.tag_list.TagList(cast(void*)_taglist, No.Take);
   }
 
   /**
@@ -1222,7 +1222,7 @@ class Event : gobject.boxed.Boxed
   {
     GstToc* _toc;
     gst_event_parse_toc(cast(GstEvent*)cPtr, &_toc, cast(bool*)&updated);
-    toc = new gst.toc.Toc(cast(void*)_toc, Yes.take);
+    toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
   }
 
   /**
@@ -1234,7 +1234,7 @@ class Event : gobject.boxed.Boxed
   {
     char* _uid;
     gst_event_parse_toc_select(cast(GstEvent*)cPtr, &_uid);
-    uid = _uid.fromCString(Yes.free);
+    uid = _uid.fromCString(Yes.Free);
   }
 
   /**
@@ -1312,7 +1312,7 @@ class Event : gobject.boxed.Boxed
   */
   void setStream(gst.stream.Stream stream)
   {
-    gst_event_set_stream(cast(GstEvent*)cPtr, stream ? cast(GstStream*)stream.cPtr(No.dup) : null);
+    gst_event_set_stream(cast(GstEvent*)cPtr, stream ? cast(GstStream*)stream.cPtr(No.Dup) : null);
   }
 
   /** */
@@ -1335,7 +1335,7 @@ class Event : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_event_writable_structure(cast(GstEvent*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

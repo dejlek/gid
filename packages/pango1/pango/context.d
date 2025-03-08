@@ -27,7 +27,7 @@ import pango.types;
 class Context : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -62,7 +62,7 @@ class Context : gobject.object.ObjectG
   {
     PangoContext* _cretval;
     _cretval = pango_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -116,7 +116,7 @@ class Context : gobject.object.ObjectG
   {
     PangoFontDescription* _cretval;
     _cretval = pango_context_get_font_description(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class Context : gobject.object.ObjectG
   {
     PangoFontMap* _cretval;
     _cretval = pango_context_get_font_map(cast(PangoContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class Context : gobject.object.ObjectG
       Retrieves the gravity for the context.
     
     This is similar to [pango.context.Context.getBaseGravity],
-    except for when the base gravity is [pango.types.Gravity.auto_] for
+    except for when the base gravity is [pango.types.Gravity.Auto] for
     which `funcPango.Gravity.get_for_matrix` is used to return the
     gravity from the current context matrix.
     Returns:     the resolved gravity for the context.
@@ -173,7 +173,7 @@ class Context : gobject.object.ObjectG
   {
     PangoLanguage* _cretval;
     _cretval = pango_context_get_language(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Context : gobject.object.ObjectG
   {
     const(PangoMatrix)* _cretval;
     _cretval = pango_context_get_matrix(cast(PangoContext*)cPtr);
-    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -221,8 +221,8 @@ class Context : gobject.object.ObjectG
   pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null)
   {
     PangoFontMetrics* _cretval;
-    _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.take) : null;
+    _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Context : gobject.object.ObjectG
     pango_context_list_families(cast(PangoContext*)cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.take);
+      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     safeFree(cast(void*)_families);
   }
 
@@ -289,8 +289,8 @@ class Context : gobject.object.ObjectG
   pango.font.Font loadFont(pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
-    _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.take);
+    _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -306,8 +306,8 @@ class Context : gobject.object.ObjectG
   pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
-    _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.take);
+    _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -315,10 +315,10 @@ class Context : gobject.object.ObjectG
       Sets the base direction for the context.
     
     The base direction is used in applying the Unicode bidirectional
-    algorithm; if the direction is [pango.types.Direction.ltr] or
-    [pango.types.Direction.rtl], then the value will be used as the paragraph
+    algorithm; if the direction is [pango.types.Direction.Ltr] or
+    [pango.types.Direction.Rtl], then the value will be used as the paragraph
     direction in the Unicode bidirectional algorithm. A value of
-    [pango.types.Direction.weakLtr] or [pango.types.Direction.weakRtl] is used only
+    [pango.types.Direction.WeakLtr] or [pango.types.Direction.WeakRtl] is used only
     for paragraphs that do not contain any strong characters themselves.
     Params:
       direction =       the new base direction
@@ -347,7 +347,7 @@ class Context : gobject.object.ObjectG
   */
   void setFontDescription(pango.font_description.FontDescription desc = null)
   {
-    pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null);
+    pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -362,7 +362,7 @@ class Context : gobject.object.ObjectG
   */
   void setFontMap(pango.font_map.FontMap fontMap = null)
   {
-    pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.dup) : null);
+    pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
 
   /**
@@ -370,8 +370,8 @@ class Context : gobject.object.ObjectG
     
     The gravity hint is used in laying vertical text out, and
     is only relevant if gravity of the context as returned by
-    [pango.context.Context.getGravity] is set to [pango.types.Gravity.east]
-    or [pango.types.Gravity.west].
+    [pango.context.Context.getGravity] is set to [pango.types.Gravity.East]
+    or [pango.types.Gravity.West].
     Params:
       hint =       the new gravity hint
   */
@@ -390,7 +390,7 @@ class Context : gobject.object.ObjectG
   */
   void setLanguage(pango.language.Language language = null)
   {
-    pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
+    pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
   }
 
   /**
@@ -408,7 +408,7 @@ class Context : gobject.object.ObjectG
   */
   void setMatrix(pango.matrix.Matrix matrix = null)
   {
-    pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.dup) : null);
+    pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
   }
 
   /**

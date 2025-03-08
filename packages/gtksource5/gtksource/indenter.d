@@ -25,7 +25,7 @@ import gtksource.view;
   `vfunc@Indenter.is_trigger` is called upon key-press to
   determine of the key press should trigger an indentation.  The default
   implementation of the interface checks to see if the key was
-  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.shiftMask] set.
+  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
   
   `vfunc@Indenter.indent` is called after text has been
   inserted into `class@Buffer` when
@@ -79,7 +79,7 @@ interface Indenter
     
     The default implementation of this virtual method will check to see
     if keyval is [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] and state does
-    not have [gdk.types.ModifierType.shiftMask] set. This is to allow the user to avoid
+    not have [gdk.types.ModifierType.ShiftMask] set. This is to allow the user to avoid
     indentation when Shift+Return is pressed. Other indenters may want
     to copy this behavior to provide a consistent experience to users.
     Params:

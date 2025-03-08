@@ -15,7 +15,7 @@ import gsk.types;
 class StrokeNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.StrokeNode");
@@ -37,8 +37,8 @@ class StrokeNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.stroke.Stroke stroke)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.dup) : null, path ? cast(GskPath*)path.cPtr(No.dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -49,7 +49,7 @@ class StrokeNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_stroke_node_get_child(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class StrokeNode : gsk.render_node.RenderNode
   {
     GskPath* _cretval;
     _cretval = gsk_stroke_node_get_path(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class StrokeNode : gsk.render_node.RenderNode
   {
     const(GskStroke)* _cretval;
     _cretval = gsk_stroke_node_get_stroke(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

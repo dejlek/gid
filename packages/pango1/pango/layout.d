@@ -57,7 +57,7 @@ import pango.types;
 class Layout : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,8 +83,8 @@ class Layout : gobject.object.ObjectG
   this(pango.context.Context context)
   {
     PangoLayout* _cretval;
-    _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = pango_layout_new(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -105,10 +105,10 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     GError *_err;
-    _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context.cPtr(No.dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, flags, &_err);
+    _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, flags, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayout* _cretval;
     _cretval = pango_layout_copy(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoAttrList* _cretval;
     _cretval = pango_layout_get_attributes(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoContext* _cretval;
     _cretval = pango_layout_get_context(cast(PangoLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class Layout : gobject.object.ObjectG
   {
     const(PangoFontDescription)* _cretval;
     _cretval = pango_layout_get_font_description(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayoutIter* _cretval;
     _cretval = pango_layout_get_iter(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -455,7 +455,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoLayoutLine* _cretval;
     _cretval = pango_layout_get_line_readonly(cast(PangoLayout*)cPtr, line);
-    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -665,7 +665,7 @@ class Layout : gobject.object.ObjectG
   {
     PangoTabArray* _cretval;
     _cretval = pango_layout_get_tabs(cast(PangoLayout*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -679,7 +679,7 @@ class Layout : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = pango_layout_get_text(cast(PangoLayout*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -688,7 +688,7 @@ class Layout : gobject.object.ObjectG
     
     This function can be used to determine if there are any fonts
     available to render all characters in a certain string, or when
-    used in combination with [pango.types.AttrType.fallback], to check if a
+    used in combination with [pango.types.AttrType.Fallback], to check if a
     certain font supports all the characters in the string.
     Returns:     The number of unknown glyphs in layout
   */
@@ -765,7 +765,7 @@ class Layout : gobject.object.ObjectG
       Queries whether the layout had to ellipsize any paragraphs.
     
     This returns true if the ellipsization mode for layout
-    is not [pango.types.EllipsizeMode.none], a positive width is set on layout,
+    is not [pango.types.EllipsizeMode.None], a positive width is set on layout,
     and there are paragraphs exceeding that width that have to be
     ellipsized.
     Returns:     true if any paragraphs had to be ellipsized,
@@ -782,7 +782,7 @@ class Layout : gobject.object.ObjectG
       Queries whether the layout had to wrap any paragraphs.
     
     This returns true if a positive width is set on layout,
-    ellipsization mode of layout is set to [pango.types.EllipsizeMode.none],
+    ellipsization mode of layout is set to [pango.types.EllipsizeMode.None],
     and there are paragraphs exceeding the layout width that have
     to be wrapped.
     Returns:     true if any paragraphs had to be wrapped, false
@@ -854,7 +854,7 @@ class Layout : gobject.object.ObjectG
   {
     GBytes* _cretval;
     _cretval = pango_layout_serialize(cast(PangoLayout*)cPtr, flags);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -862,7 +862,7 @@ class Layout : gobject.object.ObjectG
       Sets the alignment for the layout: how partial lines are
     positioned within the horizontal space available.
     
-    The default alignment is [pango.types.Alignment.left].
+    The default alignment is [pango.types.Alignment.Left].
     Params:
       alignment =       the alignment
   */
@@ -880,7 +880,7 @@ class Layout : gobject.object.ObjectG
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
+    pango_layout_set_attributes(cast(PangoLayout*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -899,7 +899,7 @@ class Layout : gobject.object.ObjectG
     
     When the auto-computed direction of a paragraph differs from the
     base direction of the context, the interpretation of
-    [pango.types.Alignment.left] and [pango.types.Alignment.right] are swapped.
+    [pango.types.Alignment.Left] and [pango.types.Alignment.Right] are swapped.
     Params:
       autoDir =       if true, compute the bidirectional base direction
           from the layout's contents
@@ -922,7 +922,7 @@ class Layout : gobject.object.ObjectG
     each paragraph is ellipsized separately or the entire layout
     is ellipsized as a whole depends on the set height of the layout.
     
-    The default value is [pango.types.EllipsizeMode.none].
+    The default value is [pango.types.EllipsizeMode.None].
     
     See [pango.layout.Layout.setHeight] for details.
     Params:
@@ -944,7 +944,7 @@ class Layout : gobject.object.ObjectG
   */
   void setFontDescription(pango.font_description.FontDescription desc = null)
   {
-    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null);
+    pango_layout_set_font_description(cast(PangoLayout*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -969,9 +969,9 @@ class Layout : gobject.object.ObjectG
     if your code relies on this behavior.
     
     Height setting only has effect if a positive width is set on
-    layout and ellipsization mode of layout is not [pango.types.EllipsizeMode.none].
+    layout and ellipsization mode of layout is not [pango.types.EllipsizeMode.None].
     The behavior is undefined if a height other than -1 is set and
-    ellipsization mode is set to [pango.types.EllipsizeMode.none], and may change in the
+    ellipsization mode is set to [pango.types.EllipsizeMode.None], and may change in the
     future.
     Params:
       height =       the desired height of the layout in Pango units if positive,
@@ -990,7 +990,7 @@ class Layout : gobject.object.ObjectG
     lines will be indented by the absolute value of indent.
     
     The indent setting is ignored if layout alignment is set to
-    [pango.types.Alignment.center].
+    [pango.types.Alignment.Center].
     
     The default value is 0.
     Params:
@@ -1100,7 +1100,7 @@ class Layout : gobject.object.ObjectG
     If accel_marker is nonzero, the given character will mark the
     character following it as an accelerator. For example, accel_marker
     might be an ampersand or underscore. All characters marked
-    as an accelerator will receive a [pango.types.Underline.low] attribute,
+    as an accelerator will receive a [pango.types.Underline.Low] attribute,
     and the first character so marked will be returned in accel_char.
     Two accel_marker characters following each other produce a single
     literal accel_marker character.
@@ -1175,13 +1175,13 @@ class Layout : gobject.object.ObjectG
     Note that tabs and justification conflict with each other:
     Justification will move content away from its tab-aligned
     positions. The same is true for alignments other than
-    [pango.types.Alignment.left].
+    [pango.types.Alignment.Left].
     Params:
       tabs =       a [pango.tab_array.TabArray]
   */
   void setTabs(pango.tab_array.TabArray tabs = null)
   {
-    pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.dup) : null);
+    pango_layout_set_tabs(cast(PangoLayout*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1229,7 +1229,7 @@ class Layout : gobject.object.ObjectG
     with [pango.layout.Layout.setWidth]. To turn off wrapping,
     set the width to -1.
     
-    The default value is [pango.types.WrapMode.word].
+    The default value is [pango.types.WrapMode.Word].
     Params:
       wrap =       the wrap mode
   */
@@ -1256,7 +1256,7 @@ class Layout : gobject.object.ObjectG
   bool writeToFile(pango.types.LayoutSerializeFlags flags, string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = pango_layout_write_to_file(cast(PangoLayout*)cPtr, flags, _filename, &_err);
     if (_err)

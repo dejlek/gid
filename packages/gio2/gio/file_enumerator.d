@@ -42,7 +42,7 @@ import gobject.object;
 class FileEnumerator : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class FileEnumerator : gobject.object.ObjectG
 
   /**
       Releases all resources used by this enumerator, making the
-    enumerator return [gio.types.IOErrorEnum.closed] on all calls.
+    enumerator return [gio.types.IOErrorEnum.Closed] on all calls.
     
     This will be automatically called when the last reference
     is dropped, but you might want to call this function to make
@@ -73,7 +73,7 @@ class FileEnumerator : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_enumerator_close(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -84,7 +84,7 @@ class FileEnumerator : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned in
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned in
     [gio.file_enumerator.FileEnumerator.closeFinish].
     Params:
       ioPriority =       the [I/O priority][io-priority] of the request
@@ -99,24 +99,24 @@ class FileEnumerator : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_enumerator_close_async(cast(GFileEnumerator*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_enumerator_close_async(cast(GFileEnumerator*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
       Finishes closing a file enumerator, started from [gio.file_enumerator.FileEnumerator.closeAsync].
     
     If the file enumerator was already closed when [gio.file_enumerator.FileEnumerator.closeAsync]
-    was called, then this function will report [gio.types.IOErrorEnum.closed] in error, and
+    was called, then this function will report [gio.types.IOErrorEnum.Closed] in error, and
     return false. If the file enumerator had pending operation when the close
-    operation was started, then this function will report [gio.types.IOErrorEnum.pending], and
+    operation was started, then this function will report [gio.types.IOErrorEnum.Pending], and
     return false.  If cancellable was not null, then the operation may have been
     cancelled by triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be set, and false will be
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set, and false will be
     returned.
     Params:
       result =       a #GAsyncResult.
@@ -126,7 +126,7 @@ class FileEnumerator : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -154,8 +154,8 @@ class FileEnumerator : gobject.object.ObjectG
   gio.file.File getChild(gio.file_info.FileInfo info)
   {
     GFile* _cretval;
-    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class FileEnumerator : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = g_file_enumerator_get_container(cast(GFileEnumerator*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,11 +244,11 @@ class FileEnumerator : gobject.object.ObjectG
     GFileInfo* _outInfo;
     GFile* _outChild;
     GError *_err;
-    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.take);
-    outChild = ObjectG.getDObject!(gio.file.File)(_outChild, No.take);
+    outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.Take);
+    outChild = ObjectG.getDObject!(gio.file.File)(_outChild, No.Take);
     return _retval;
   }
 
@@ -274,10 +274,10 @@ class FileEnumerator : gobject.object.ObjectG
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class FileEnumerator : gobject.object.ObjectG
     than num_files items.
     
     If a request is cancelled the callback will be called with
-    [gio.types.IOErrorEnum.cancelled].
+    [gio.types.IOErrorEnum.Cancelled].
     
     This leads to the following pseudo-code usage:
     ```
@@ -341,7 +341,7 @@ class FileEnumerator : gobject.object.ObjectG
     ```
     
     During an async request no other sync and async calls are allowed, and will
-    result in [gio.types.IOErrorEnum.pending] errors.
+    result in [gio.types.IOErrorEnum.Pending] errors.
     
     Any outstanding I/O request with higher priority (lower numerical value) will
     be executed before an outstanding request with lower priority. Default
@@ -360,12 +360,12 @@ class FileEnumerator : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_enumerator_next_files_async(cast(GFileEnumerator*)cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_enumerator_next_files_async(cast(GFileEnumerator*)cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -380,7 +380,7 @@ class FileEnumerator : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);

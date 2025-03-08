@@ -25,7 +25,7 @@ import gst.types;
 class Stream : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,9 +55,9 @@ class Stream : gst.object.ObjectGst
   this(string streamId, gst.caps.Caps caps, gst.types.StreamType type, gst.types.StreamFlags flags)
   {
     GstStream* _cretval;
-    const(char)* _streamId = streamId.toCString(No.alloc);
-    _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, type, flags);
-    this(_cretval, Yes.take);
+    const(char)* _streamId = streamId.toCString(No.Alloc);
+    _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, type, flags);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,7 +68,7 @@ class Stream : gst.object.ObjectGst
   {
     GstCaps* _cretval;
     _cretval = gst_stream_get_caps(cast(GstStream*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Stream : gst.object.ObjectGst
   {
     const(char)* _cretval;
     _cretval = gst_stream_get_stream_id(cast(GstStream*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class Stream : gst.object.ObjectGst
   {
     GstTagList* _cretval;
     _cretval = gst_stream_get_tags(cast(GstStream*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class Stream : gst.object.ObjectGst
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_stream_set_caps(cast(GstStream*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    gst_stream_set_caps(cast(GstStream*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
   }
 
   /**
@@ -158,6 +158,6 @@ class Stream : gst.object.ObjectGst
   */
   void setTags(gst.tag_list.TagList tags = null)
   {
-    gst_stream_set_tags(cast(GstStream*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.dup) : null);
+    gst_stream_set_tags(cast(GstStream*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null);
   }
 }

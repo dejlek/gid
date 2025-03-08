@@ -26,7 +26,7 @@ import gtk.types;
 class IconInfo : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,8 +52,8 @@ class IconInfo : gobject.object.ObjectG
   static gtk.icon_info.IconInfo newForPixbuf(gtk.icon_theme.IconTheme iconTheme, gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkIconInfo* _cretval;
-    _cretval = gtk_icon_info_new_for_pixbuf(iconTheme ? cast(GtkIconTheme*)iconTheme.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.take);
+    _cretval = gtk_icon_info_new_for_pixbuf(iconTheme ? cast(GtkIconTheme*)iconTheme.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.icon_info.IconInfo)(cast(GtkIconInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class IconInfo : gobject.object.ObjectG
 
   /**
       Gets the built-in image for this icon, if any. To allow GTK+ to use
-    built in icon images, you must pass the [gtk.types.IconLookupFlags.useBuiltin]
+    built in icon images, you must pass the [gtk.types.IconLookupFlags.UseBuiltin]
     to [gtk.icon_theme.IconTheme.lookupIcon].
     Returns:     the built-in image pixbuf, or null.
           No extra reference is added to the returned pixbuf, so if
@@ -131,7 +131,7 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gtk_icon_info_get_builtin_pixbuf(cast(GtkIconInfo*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class IconInfo : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_display_name(cast(GtkIconInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -164,12 +164,12 @@ class IconInfo : gobject.object.ObjectG
     bool _retval;
     GdkRectangle _rectangle;
     _retval = gtk_icon_info_get_embedded_rect(cast(GtkIconInfo*)cPtr, &_rectangle);
-    rectangle = new gdk.rectangle.Rectangle(cast(void*)&_rectangle, No.take);
+    rectangle = new gdk.rectangle.Rectangle(cast(void*)&_rectangle, No.Take);
     return _retval;
   }
 
   /**
-      Gets the filename for the icon. If the [gtk.types.IconLookupFlags.useBuiltin]
+      Gets the filename for the icon. If the [gtk.types.IconLookupFlags.UseBuiltin]
     flag was passed to [gtk.icon_theme.IconTheme.lookupIcon], there may be no
     filename if a builtin icon is returned; in this case, you should
     use [gtk.icon_info.IconInfo.getBuiltinPixbuf].
@@ -182,7 +182,7 @@ class IconInfo : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_icon_info_get_filename(cast(GtkIconInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class IconInfo : gobject.object.ObjectG
     will avoid scaling icons that it considers sufficiently close to the
     requested size or for which the source image would have to be scaled
     up too far. (This maintains sharpness.). This behaviour can be changed
-    by passing the [gtk.types.IconLookupFlags.forceSize] flag when obtaining
+    by passing the [gtk.types.IconLookupFlags.ForceSize] flag when obtaining
     the #GtkIconInfo. If this flag has been specified, the pixbuf
     returned by this function will be scaled to the exact size.
     Returns:     the rendered icon; this may be a newly
@@ -223,7 +223,7 @@ class IconInfo : gobject.object.ObjectG
     _cretval = gtk_icon_info_load_icon(cast(GtkIconInfo*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -245,12 +245,12 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_icon_info_load_icon_async(cast(GtkIconInfo*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_icon_info_load_icon_async(cast(GtkIconInfo*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -266,10 +266,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_icon_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = gtk_icon_info_load_icon_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class IconInfo : gobject.object.ObjectG
     will avoid scaling icons that it considers sufficiently close to the
     requested size or for which the source image would have to be scaled
     up too far. (This maintains sharpness.). This behaviour can be changed
-    by passing the [gtk.types.IconLookupFlags.forceSize] flag when obtaining
+    by passing the [gtk.types.IconLookupFlags.ForceSize] flag when obtaining
     the #GtkIconInfo. If this flag has been specified, the pixbuf
     returned by this function will be scaled to the exact size.
     Params:
@@ -296,10 +296,10 @@ class IconInfo : gobject.object.ObjectG
   {
     cairo_surface_t* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_surface(cast(GtkIconInfo*)cPtr, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.dup) : null, &_err);
+    _cretval = gtk_icon_info_load_surface(cast(GtkIconInfo*)cPtr, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -337,10 +337,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)cPtr, fg ? cast(const(GdkRGBA)*)fg.cPtr(No.dup) : null, successColor ? cast(const(GdkRGBA)*)successColor.cPtr(No.dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor.cPtr(No.dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor.cPtr(No.dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic(cast(GtkIconInfo*)cPtr, fg ? cast(const(GdkRGBA)*)fg.cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor.cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor.cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor.cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -370,12 +370,12 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_icon_info_load_symbolic_async(cast(GtkIconInfo*)cPtr, fg ? cast(const(GdkRGBA)*)fg.cPtr(No.dup) : null, successColor ? cast(const(GdkRGBA)*)successColor.cPtr(No.dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor.cPtr(No.dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_icon_info_load_symbolic_async(cast(GtkIconInfo*)cPtr, fg ? cast(const(GdkRGBA)*)fg.cPtr(No.Dup) : null, successColor ? cast(const(GdkRGBA)*)successColor.cPtr(No.Dup) : null, warningColor ? cast(const(GdkRGBA)*)warningColor.cPtr(No.Dup) : null, errorColor ? cast(const(GdkRGBA)*)errorColor.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -394,10 +394,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -423,10 +423,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_context(cast(GtkIconInfo*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_context(cast(GtkIconInfo*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -450,12 +450,12 @@ class IconInfo : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_icon_info_load_symbolic_for_context_async(cast(GtkIconInfo*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gtk_icon_info_load_symbolic_for_context_async(cast(GtkIconInfo*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -474,10 +474,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_context_finish(cast(GtkIconInfo*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, cast(bool*)&wasSymbolic, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -503,10 +503,10 @@ class IconInfo : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     GError *_err;
-    _cretval = gtk_icon_info_load_symbolic_for_style(cast(GtkIconInfo*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.dup) : null, state, cast(bool*)&wasSymbolic, &_err);
+    _cretval = gtk_icon_info_load_symbolic_for_style(cast(GtkIconInfo*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, state, cast(bool*)&wasSymbolic, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 

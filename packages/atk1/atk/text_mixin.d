@@ -71,7 +71,7 @@ template TextT()
         break;
       _retval = new atk.text_range.TextRange[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new atk.text_range.TextRange(cast(void*)_cretval[i], Yes.take);
+        _retval[i] = new atk.text_range.TextRange(cast(void*)_cretval[i], Yes.Take);
     }
     return _retval;
   }
@@ -198,7 +198,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_selection(cast(AtkText*)cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_string_at_offset(cast(AtkText*)cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text(cast(AtkText*)cPtr, startOffset, endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_after_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_at_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ template TextT()
   {
     char* _cretval;
     _cretval = atk_text_get_text_before_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -479,10 +479,10 @@ template TextT()
     Connect to TextAttributesChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextAttributesChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextAttributesChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextAttributesChangedCallbackDlg) || is(T : TextAttributesChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -517,10 +517,10 @@ template TextT()
     Connect to TextCaretMoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextCaretMoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextCaretMoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextCaretMovedCallbackDlg) || is(T : TextCaretMovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -563,10 +563,10 @@ template TextT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextChangedCallbackDlg) || is(T : TextChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -607,10 +607,10 @@ template TextT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextInsert(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextInsertCallbackDlg) || is(T : TextInsertCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -652,10 +652,10 @@ template TextT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectTextRemove(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : TextRemoveCallbackDlg) || is(T : TextRemoveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -691,10 +691,10 @@ template TextT()
     Connect to TextSelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextSelectionChangedCallbackDlg) || is(T : TextSelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

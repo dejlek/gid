@@ -107,7 +107,7 @@ import pango.tab_array;
 class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Editable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -134,7 +134,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -146,8 +146,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   static gtk.entry.Entry newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.entry.Entry)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PangoAttrList* _cretval;
     _cretval = gtk_entry_get_attributes(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkEntryBuffer* _cretval;
     _cretval = gtk_entry_get_buffer(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_get_completion(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_entry_get_cursor_hadjustment(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GdkRectangle _iconArea;
     gtk_entry_get_icon_area(cast(GtkEntry*)cPtr, iconPos, &_iconArea);
-    iconArea = new gdk.rectangle.Rectangle(cast(void*)&_iconArea, No.take);
+    iconArea = new gdk.rectangle.Rectangle(cast(void*)&_iconArea, No.Take);
   }
 
   /**
@@ -319,7 +319,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GIcon* _cretval;
     _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_icon_name(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PixbufC* _cretval;
     _cretval = gtk_entry_get_icon_pixbuf(cast(GtkEntry*)cPtr, iconPos);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -387,14 +387,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_icon_stock(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /**
       Gets the type of representation being used by the icon
     to store image data. If the icon has no image data,
-    the return value will be [gtk.types.ImageType.empty].
+    the return value will be [gtk.types.ImageType.Empty].
     Params:
       iconPos =       Icon position
     Returns:     image representation being used
@@ -419,7 +419,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     char* _cretval;
     _cretval = gtk_entry_get_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(GtkBorder)* _cretval;
     _cretval = gtk_entry_get_inner_border(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PangoLayout* _cretval;
     _cretval = gtk_entry_get_layout(cast(GtkEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -592,7 +592,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_placeholder_text(cast(GtkEntry*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -628,7 +628,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     PangoTabArray* _cretval;
     _cretval = gtk_entry_get_tabs(cast(GtkEntry*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -647,7 +647,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     const(char)* _cretval;
     _cretval = gtk_entry_get_text(cast(GtkEntry*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -665,7 +665,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   {
     GdkRectangle _textArea;
     gtk_entry_get_text_area(cast(GtkEntry*)cPtr, &_textArea);
-    textArea = new gdk.rectangle.Rectangle(cast(void*)&_textArea, No.take);
+    textArea = new gdk.rectangle.Rectangle(cast(void*)&_textArea, No.Take);
   }
 
   /**
@@ -820,7 +820,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setAttributes(pango.attr_list.AttrList attrs)
   {
-    gtk_entry_set_attributes(cast(GtkEntry*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
+    gtk_entry_set_attributes(cast(GtkEntry*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -831,7 +831,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
-    gtk_entry_set_buffer(cast(GtkEntry*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.dup) : null);
+    gtk_entry_set_buffer(cast(GtkEntry*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -844,7 +844,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setCompletion(gtk.entry_completion.EntryCompletion completion = null)
   {
-    gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.dup) : null);
+    gtk_entry_set_completion(cast(GtkEntry*)cPtr, completion ? cast(GtkEntryCompletion*)completion.cPtr(No.Dup) : null);
   }
 
   /**
@@ -861,7 +861,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setCursorHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_entry_set_cursor_hadjustment(cast(GtkEntry*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_entry_set_cursor_hadjustment(cast(GtkEntry*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -906,7 +906,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconDragSource(gtk.types.EntryIconPosition iconPos, gtk.target_list.TargetList targetList, gdk.types.DragAction actions)
   {
-    gtk_entry_set_icon_drag_source(cast(GtkEntry*)cPtr, iconPos, targetList ? cast(GtkTargetList*)targetList.cPtr(No.dup) : null, actions);
+    gtk_entry_set_icon_drag_source(cast(GtkEntry*)cPtr, iconPos, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -922,7 +922,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
   {
-    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)cPtr, iconPos, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -939,7 +939,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)cPtr, iconPos, _iconName);
   }
 
@@ -953,7 +953,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromPixbuf(gtk.types.EntryIconPosition iconPos, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_entry_set_icon_from_pixbuf(cast(GtkEntry*)cPtr, iconPos, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gtk_entry_set_icon_from_pixbuf(cast(GtkEntry*)cPtr, iconPos, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -969,7 +969,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromStock(gtk.types.EntryIconPosition iconPos, string stockId = null)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_entry_set_icon_from_stock(cast(GtkEntry*)cPtr, iconPos, _stockId);
   }
 
@@ -1000,7 +1000,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)cPtr, iconPos, _tooltip);
   }
 
@@ -1024,7 +1024,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)cPtr, iconPos, _tooltip);
   }
 
@@ -1046,7 +1046,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setInnerBorder(gtk.border.Border border = null)
   {
-    gtk_entry_set_inner_border(cast(GtkEntry*)cPtr, border ? cast(const(GtkBorder)*)border.cPtr(No.dup) : null);
+    gtk_entry_set_inner_border(cast(GtkEntry*)cPtr, border ? cast(const(GtkBorder)*)border.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1141,7 +1141,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setPlaceholderText(string text = null)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_placeholder_text(cast(GtkEntry*)cPtr, _text);
   }
 
@@ -1176,7 +1176,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setTabs(pango.tab_array.TabArray tabs)
   {
-    gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.dup) : null);
+    gtk_entry_set_tabs(cast(GtkEntry*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1189,7 +1189,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_set_text(cast(GtkEntry*)cPtr, _text);
   }
 
@@ -1204,7 +1204,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     [gtk.entry.Entry.setInvisibleChar].
     
     Note that you probably want to set #GtkEntry:input-purpose
-    to [gtk.types.InputPurpose.password] or [gtk.types.InputPurpose.pin] to
+    to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
     inform input methods about the purpose of this entry,
     in addition to setting visibility to false.
     Params:
@@ -1281,10 +1281,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1321,10 +1321,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to Backspace signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBackspace(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1361,10 +1361,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1401,10 +1401,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to CutClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCutClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1424,7 +1424,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     [keybinding signal][GtkBindingSignal]
     which gets emitted when the user initiates a text deletion.
     
-    If the type is [gtk.types.DeleteType.chars], GTK+ deletes the selection
+    If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
     if there is one, otherwise it deletes the requested number
     of characters.
     
@@ -1448,10 +1448,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to DeleteFromCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteFromCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1488,10 +1488,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to IconPress signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIconPress(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIconPress(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IconPressCallbackDlg) || is(T : IconPressCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1528,10 +1528,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to IconRelease signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIconRelease(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIconRelease(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IconReleaseCallbackDlg) || is(T : IconReleaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1571,10 +1571,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to InsertAtCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertAtCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1611,10 +1611,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to InsertEmoji signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertEmoji(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1667,10 +1667,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1711,10 +1711,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to PasteClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1758,10 +1758,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to PopulatePopup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1797,10 +1797,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to PreeditChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1837,10 +1837,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     Connect to ToggleOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleOverwrite(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

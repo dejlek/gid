@@ -15,7 +15,7 @@ class WindowAttr
 {
   GdkWindowAttr cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.WindowAttr");
@@ -33,13 +33,13 @@ class WindowAttr
 
   @property string title()
   {
-    return (cast(GdkWindowAttr*)cPtr).title.fromCString(No.free);
+    return (cast(GdkWindowAttr*)cPtr).title.fromCString(No.Free);
   }
 
   @property void title(string propval)
   {
     safeFree(cast(void*)(cast(GdkWindowAttr*)cPtr).title);
-    (cast(GdkWindowAttr*)cPtr).title = propval.toCString(Yes.alloc);
+    (cast(GdkWindowAttr*)cPtr).title = propval.toCString(Yes.Alloc);
   }
 
   @property int eventMask()
@@ -104,7 +104,7 @@ class WindowAttr
 
   @property gdk.visual.Visual visual()
   {
-    return ObjectG.getDObject!(gdk.visual.Visual)((cast(GdkWindowAttr*)cPtr).visual, No.take);
+    return ObjectG.getDObject!(gdk.visual.Visual)((cast(GdkWindowAttr*)cPtr).visual, No.Take);
   }
 
   @property gdk.types.WindowType windowType()
@@ -119,29 +119,29 @@ class WindowAttr
 
   @property gdk.cursor.Cursor cursor()
   {
-    return ObjectG.getDObject!(gdk.cursor.Cursor)((cast(GdkWindowAttr*)cPtr).cursor, No.take);
+    return ObjectG.getDObject!(gdk.cursor.Cursor)((cast(GdkWindowAttr*)cPtr).cursor, No.Take);
   }
 
   @property string wmclassName()
   {
-    return (cast(GdkWindowAttr*)cPtr).wmclassName.fromCString(No.free);
+    return (cast(GdkWindowAttr*)cPtr).wmclassName.fromCString(No.Free);
   }
 
   @property void wmclassName(string propval)
   {
     safeFree(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassName);
-    (cast(GdkWindowAttr*)cPtr).wmclassName = propval.toCString(Yes.alloc);
+    (cast(GdkWindowAttr*)cPtr).wmclassName = propval.toCString(Yes.Alloc);
   }
 
   @property string wmclassClass()
   {
-    return (cast(GdkWindowAttr*)cPtr).wmclassClass.fromCString(No.free);
+    return (cast(GdkWindowAttr*)cPtr).wmclassClass.fromCString(No.Free);
   }
 
   @property void wmclassClass(string propval)
   {
     safeFree(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassClass);
-    (cast(GdkWindowAttr*)cPtr).wmclassClass = propval.toCString(Yes.alloc);
+    (cast(GdkWindowAttr*)cPtr).wmclassClass = propval.toCString(Yes.Alloc);
   }
 
   @property bool overrideRedirect()

@@ -39,7 +39,7 @@ template AppChooserT()
   {
     GAppInfo* _cretval;
     _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ template AppChooserT()
   {
     char* _cretval;
     _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

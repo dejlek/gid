@@ -10,12 +10,12 @@ enum GtkSourceBackgroundPatternType
   /**
       no pattern
   */
-  none = 0,
+  None = 0,
 
   /**
       grid pattern
   */
-  grid = 1,
+  Grid = 1,
 }
 
 /** */
@@ -24,23 +24,23 @@ enum GtkSourceBracketMatchType
   /**
       there is no bracket to match.
   */
-  none = 0,
+  None = 0,
 
   /**
       matching a bracket
      failed because the maximum range was reached.
   */
-  outOfRange = 1,
+  OutOfRange = 1,
 
   /**
       a matching bracket was not found.
   */
-  notFound = 2,
+  NotFound = 2,
 
   /**
       a matching bracket was found.
   */
-  found = 3,
+  Found = 3,
 }
 
 /** */
@@ -49,22 +49,22 @@ enum GtkSourceChangeCaseType
   /**
       change case to lowercase.
   */
-  lower = 0,
+  Lower = 0,
 
   /**
       change case to uppercase.
   */
-  upper = 1,
+  Upper = 1,
 
   /**
       toggle case of each character.
   */
-  toggle = 2,
+  Toggle = 2,
 
   /**
       capitalize each word.
   */
-  title = 3,
+  Title = 3,
 }
 
 /** */
@@ -73,21 +73,21 @@ enum GtkSourceCompletionActivation : uint
   /**
       None.
   */
-  none = 0,
+  None = 0,
 
   /**
       Interactive activation. By
     default, it occurs on each insertion in the #GtkTextBuffer. This can be
     blocked temporarily with [gtksource.completion.Completion.blockInteractive].
   */
-  interactive = 1,
+  Interactive = 1,
 
   /**
       User requested activation.
     By default, it occurs when the user presses
     <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
   */
-  userRequested = 2,
+  UserRequested = 2,
 }
 
 /**
@@ -100,13 +100,13 @@ enum GtkSourceCompletionError
       The #GtkSourceCompletionProvider
     is already bound to the #GtkSourceCompletion object.
   */
-  alreadyBound = 0,
+  AlreadyBound = 0,
 
   /**
       The #GtkSourceCompletionProvider is
     not bound to the #GtkSourceCompletion object.
   */
-  notBound = 1,
+  NotBound = 1,
 }
 
 /** */
@@ -115,12 +115,12 @@ enum GtkSourceCompressionType
   /**
       plain text.
   */
-  none = 0,
+  None = 0,
 
   /**
       gzip compression.
   */
-  gzip = 1,
+  Gzip = 1,
 }
 
 /**
@@ -131,19 +131,19 @@ enum GtkSourceFileLoaderError
   /**
       The file is too big.
   */
-  tooBig = 0,
+  TooBig = 0,
 
   /**
       It is not
     possible to detect the encoding automatically.
   */
-  encodingAutoDetectionFailed = 1,
+  EncodingAutoDetectionFailed = 1,
 
   /**
       There was an encoding
     conversion error and it was needed to use a fallback character.
   */
-  conversionFallback = 2,
+  ConversionFallback = 2,
 }
 
 /**
@@ -155,13 +155,13 @@ enum GtkSourceFileSaverError
       The buffer contains invalid
       characters.
   */
-  invalidChars = 0,
+  InvalidChars = 0,
 
   /**
       The file is externally
       modified.
   */
-  externallyModified = 1,
+  ExternallyModified = 1,
 }
 
 /**
@@ -172,22 +172,22 @@ enum GtkSourceFileSaverFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       Ignore invalid characters.
   */
-  ignoreInvalidChars = 1,
+  IgnoreInvalidChars = 1,
 
   /**
       Save file despite external modifications.
   */
-  ignoreModificationTime = 2,
+  IgnoreModificationTime = 2,
 
   /**
       Create a backup before saving the file.
   */
-  createBackup = 4,
+  CreateBackup = 4,
 }
 
 /**
@@ -199,17 +199,17 @@ enum GtkSourceGutterRendererAlignmentMode
   /**
       The full cell.
   */
-  cell = 0,
+  Cell = 0,
 
   /**
       The first line.
   */
-  first = 1,
+  First = 1,
 
   /**
       The last line.
   */
-  last = 2,
+  Last = 2,
 }
 
 /** */
@@ -218,25 +218,25 @@ enum GtkSourceGutterRendererState : uint
   /**
       normal state
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       area in the renderer represents the
     line on which the insert cursor is currently positioned
   */
-  cursor = 1,
+  Cursor = 1,
 
   /**
       the mouse pointer is currently
     over the activatable area of the renderer
   */
-  prelit = 2,
+  Prelit = 2,
 
   /**
       area in the renderer represents
     a line in the buffer which contains part of the selection
   */
-  selected = 4,
+  Selected = 4,
 }
 
 /** */
@@ -245,18 +245,18 @@ enum GtkSourceNewlineType
   /**
       line feed, used on UNIX.
   */
-  lf = 0,
+  Lf = 0,
 
   /**
       carriage return, used on Mac.
   */
-  cr = 1,
+  Cr = 1,
 
   /**
       carriage return followed by a line feed, used
       on Windows.
   */
-  crLf = 2,
+  CrLf = 2,
 }
 
 /** */
@@ -265,27 +265,27 @@ enum GtkSourceSmartHomeEndType
   /**
       smart-home-end disabled.
   */
-  disabled = 0,
+  Disabled = 0,
 
   /**
       move to the first/last
     non-whitespace character on the first press of the HOME/END keys and
     to the beginning/end of the line on the second press.
   */
-  before = 1,
+  Before = 1,
 
   /**
       move to the beginning/end of the
     line on the first press of the HOME/END keys and to the first/last
     non-whitespace character on the second press.
   */
-  after = 2,
+  After = 2,
 
   /**
       always move to the first/last
     non-whitespace character when the HOME/END keys are pressed.
   */
-  always = 3,
+  Always = 3,
 }
 
 /** */
@@ -294,57 +294,57 @@ enum GtkSourceSortFlags : uint
   /**
       no flags specified
   */
-  none = 0,
+  None = 0,
 
   /**
       case sensitive sort
   */
-  caseSensitive = 1,
+  CaseSensitive = 1,
 
   /**
       sort in reverse order
   */
-  reverseOrder = 2,
+  ReverseOrder = 2,
 
   /**
       remove duplicates
   */
-  removeDuplicates = 4,
+  RemoveDuplicates = 4,
 }
 
 /**
     #GtkSourceSpaceLocationFlags contains flags for white space locations.
   
   If a line contains only white spaces (no text), the white spaces match both
-  [gtksource.types.SpaceLocationFlags.leading] and [gtksource.types.SpaceLocationFlags.trailing].
+  [gtksource.types.SpaceLocationFlags.Leading] and [gtksource.types.SpaceLocationFlags.Trailing].
 */
 enum GtkSourceSpaceLocationFlags : uint
 {
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       Leading white spaces on a line, i.e. the
       indentation.
   */
-  leading = 1,
+  Leading = 1,
 
   /**
       White spaces inside a line of text.
   */
-  insideText = 2,
+  InsideText = 2,
 
   /**
       Trailing white spaces on a line.
   */
-  trailing = 4,
+  Trailing = 4,
 
   /**
       White spaces anywhere.
   */
-  all = 7,
+  All = 7,
 }
 
 /**
@@ -355,34 +355,34 @@ enum GtkSourceSpaceTypeFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       Space character.
   */
-  space = 1,
+  Space = 1,
 
   /**
       Tab character.
   */
-  tab = 2,
+  Tab = 2,
 
   /**
       Line break character. If the
       #GtkSourceBuffer:implicit-trailing-newline property is true,
       #GtkSourceSpaceDrawer also draws a line break at the end of the buffer.
   */
-  newline = 4,
+  Newline = 4,
 
   /**
       Non-breaking space character.
   */
-  nbsp = 8,
+  Nbsp = 8,
 
   /**
       All white spaces.
   */
-  all = 15,
+  All = 15,
 }
 
 /** */
@@ -392,13 +392,13 @@ enum GtkSourceViewGutterPosition
       the gutter position of the lines
     renderer
   */
-  lines = -30,
+  Lines = -30,
 
   /**
       the gutter position of the marks
     renderer
   */
-  marks = -20,
+  Marks = -20,
 }
 
 /** */

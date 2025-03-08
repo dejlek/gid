@@ -84,15 +84,15 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.column_view.ColumnView] uses the [gtk.types.AccessibleRole.treeGrid] role, header title
-  widgets are using the [gtk.types.AccessibleRole.columnHeader] role. The row widgets
-  are using the [gtk.types.AccessibleRole.row] role, and individual cells are using
-  the [gtk.types.AccessibleRole.gridCell] role
+  [gtk.column_view.ColumnView] uses the [gtk.types.AccessibleRole.TreeGrid] role, header title
+  widgets are using the [gtk.types.AccessibleRole.ColumnHeader] role. The row widgets
+  are using the [gtk.types.AccessibleRole.Row] role, and individual cells are using
+  the [gtk.types.AccessibleRole.GridCell] role
 */
 class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -122,8 +122,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -134,7 +134,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void appendColumn(gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.dup) : null);
+    gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GListModel* _cretval;
     _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_column_view_get_model(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(No.dup) : null);
+    gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -309,7 +309,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void removeColumn(gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.dup) : null);
+    gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
   }
 
   /**
@@ -328,7 +328,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.dup) : null);
+    gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -352,7 +352,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
+    gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -364,7 +364,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -390,7 +390,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setRowFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
+    gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -455,7 +455,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction)
   {
-    gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.dup) : null, direction);
+    gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, direction);
   }
 
   /**
@@ -481,10 +481,10 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

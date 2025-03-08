@@ -11,33 +11,33 @@ enum GstGLAPI : uint
   /**
       no API
   */
-  none = 0,
+  None = 0,
 
   /**
       Desktop OpenGL up to and including 3.1.  The
                        compatibility profile when the OpenGL version is >= 3.2
   */
-  opengl = 1,
+  Opengl = 1,
 
   /**
       Desktop OpenGL >= 3.2 core profile
   */
-  opengl3 = 2,
+  Opengl3 = 2,
 
   /**
       OpenGL ES 1.x
   */
-  gles1 = 32768,
+  Gles1 = 32768,
 
   /**
       OpenGL ES 2.x and 3.x
   */
-  gles2 = 65536,
+  Gles2 = 65536,
 
   /**
       Any OpenGL API
   */
-  any = 4294967295,
+  Any = 4294967295,
 }
 
 /** */
@@ -46,18 +46,18 @@ enum GstGLBaseMemoryError
   /**
       generic failure
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       the implementation is too old and doesn't
                                         implement enough features
   */
-  oldLibs = 1,
+  OldLibs = 1,
 
   /**
       a resource could not be found
   */
-  resourceUnavailable = 2,
+  ResourceUnavailable = 2,
 }
 
 /** */
@@ -67,13 +67,13 @@ enum GstGLBaseMemoryTransfer : uint
       the texture needs downloading
                                                 to the data pointer
   */
-  download = 1048576,
+  Download = 1048576,
 
   /**
       the data pointer needs uploading
                                                 to the texture
   */
-  upload = 2097152,
+  Upload = 2097152,
 }
 
 /** */
@@ -82,17 +82,17 @@ enum GstGLConfigCaveat
   /**
       none
   */
-  none = 0,
+  None = 0,
 
   /**
       slow
   */
-  slow = 1,
+  Slow = 1,
 
   /**
       non-conformant
   */
-  nonConformant = 2,
+  NonConformant = 2,
 }
 
 /** */
@@ -101,22 +101,22 @@ enum GstGLConfigSurfaceType : uint
   /**
       none
   */
-  none = 0,
+  None = 0,
 
   /**
       window
   */
-  window = 1,
+  Window = 1,
 
   /**
       pbuffer
   */
-  pbuffer = 2,
+  Pbuffer = 2,
 
   /**
       pixmap
   */
-  pixmap = 4,
+  Pixmap = 4,
 }
 
 /**
@@ -127,32 +127,32 @@ enum GstGLContextError
   /**
       Failed for an unspecified reason
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       The configuration requested is not correct
   */
-  wrongConfig = 1,
+  WrongConfig = 1,
 
   /**
       The OpenGL API requested is not correct
   */
-  wrongApi = 2,
+  WrongApi = 2,
 
   /**
       The OpenGL libraries are too old
   */
-  oldLibs = 3,
+  OldLibs = 3,
 
   /**
       glXCreateContext (or similar) failed
   */
-  createContext = 4,
+  CreateContext = 4,
 
   /**
       A resource is not available
   */
-  resourceUnavailable = 5,
+  ResourceUnavailable = 5,
 }
 
 /** */
@@ -161,78 +161,78 @@ enum GstGLDisplayType : uint
   /**
       no display type
   */
-  none = 0,
+  None = 0,
 
   /**
       X11 display
   */
-  x11 = 1,
+  X11 = 1,
 
   /**
       Wayland display
   */
-  wayland = 2,
+  Wayland = 2,
 
   /**
       Cocoa display
   */
-  cocoa = 4,
+  Cocoa = 4,
 
   /**
       Win32 display
   */
-  win32 = 8,
+  Win32 = 8,
 
   /**
       Dispmanx display
   */
-  dispmanx = 16,
+  Dispmanx = 16,
 
   /**
       EGL display
   */
-  egl = 32,
+  Egl = 32,
 
   /**
       Vivante Framebuffer display
   */
-  vivFb = 64,
+  VivFb = 64,
 
   /**
       Mesa3D GBM display
   */
-  gbm = 128,
+  Gbm = 128,
 
   /**
       EGLDevice display.
   */
-  eglDevice = 256,
+  EglDevice = 256,
 
   /**
       EAGL display.
   */
-  eagl = 512,
+  Eagl = 512,
 
   /**
       WinRT display.
   */
-  winrt = 1024,
+  Winrt = 1024,
 
   /**
       Android display.
   */
-  android = 2048,
+  Android = 2048,
 
   /**
       Mesa3D surfaceless display using the EGL_PLATFORM_SURFACELESS_MESA
     extension.
   */
-  eglSurfaceless = 4096,
+  EglSurfaceless = 4096,
 
   /**
       any display type
   */
-  any = 4294967295,
+  Any = 4294967295,
 }
 
 /** */
@@ -242,102 +242,102 @@ enum GstGLFormat
       Single component replicated across R, G, and B textures
                        components
   */
-  luminance = 6409,
+  Luminance = 6409,
 
   /**
       Single component stored in the A texture component
   */
-  alpha = 6406,
+  Alpha = 6406,
 
   /**
       Combination of #GST_GL_LUMINANCE and #GST_GL_ALPHA
   */
-  luminanceAlpha = 6410,
+  LuminanceAlpha = 6410,
 
   /**
       Single component stored in the R texture component
   */
-  red = 6403,
+  Red = 6403,
 
   /**
       Single 8-bit component stored in the R texture component
   */
-  r8 = 33321,
+  R8 = 33321,
 
   /**
       Two components stored in the R and G texture components
   */
-  rg = 33319,
+  Rg = 33319,
 
   /**
       Two 8-bit components stored in the R and G texture components
   */
-  rg8 = 33323,
+  Rg8 = 33323,
 
   /**
       Three components stored in the R, G, and B texture components
   */
-  rgb = 6407,
+  Rgb = 6407,
 
   /**
       Three 8-bit components stored in the R, G, and B
                   texture components
   */
-  rgb8 = 32849,
+  Rgb8 = 32849,
 
   /**
       Three components of bit depth 5, 6 and 5 stored in the R, G,
                     and B texture components respectively.
   */
-  rgb565 = 36194,
+  Rgb565 = 36194,
 
   /**
       Three 16-bit components stored in the R, G, and B
                   texture components
   */
-  rgb16 = 32852,
+  Rgb16 = 32852,
 
   /**
       Four components stored in the R, G, B, and A texture
                   components respectively.
   */
-  rgba = 6408,
+  Rgba = 6408,
 
   /**
       Four 8-bit components stored in the R, G, B, and A texture
                    components respectively.
   */
-  rgba8 = 32856,
+  Rgba8 = 32856,
 
   /**
       Four 16-bit components stored in the R, G, B, and A texture
                    components respectively.
   */
-  rgba16 = 32859,
+  Rgba16 = 32859,
 
   /**
       A single 16-bit component for depth information.
   */
-  depthComponent16 = 33189,
+  DepthComponent16 = 33189,
 
   /**
       A 24-bit component for depth information and
                               a 8-bit component for stencil informat.
   */
-  depth24Stencil8 = 35056,
+  Depth24Stencil8 = 35056,
 
   /** */
-  rgb10A2 = 32857,
+  Rgb10A2 = 32857,
 
   /**
       Single 16-bit component stored in the R texture component
   */
-  r16 = 33322,
+  R16 = 33322,
 
   /**
       Two 16-bit components stored in the R and G texture components
   */
-  rg16 = 33324,
+  Rg16 = 33324,
 }
 
 /** */
@@ -346,38 +346,38 @@ enum GstGLPlatform : uint
   /**
       no platform
   */
-  none = 0,
+  None = 0,
 
   /**
       the EGL platform used primarily with the X11, wayland
                          and android window systems as well as on embedded Linux
   */
-  egl = 1,
+  Egl = 1,
 
   /**
       the GLX platform used primarily with the X11 window system
   */
-  glx = 2,
+  Glx = 2,
 
   /**
       the WGL platform used primarily on Windows
   */
-  wgl = 4,
+  Wgl = 4,
 
   /**
       the CGL platform used primarily on OS X
   */
-  cgl = 8,
+  Cgl = 8,
 
   /**
       the EAGL platform used primarily on iOS
   */
-  eagl = 16,
+  Eagl = 16,
 
   /**
       any OpenGL platform
   */
-  any = 4294967295,
+  Any = 4294967295,
 }
 
 /** */
@@ -386,17 +386,17 @@ enum GstGLQueryType
   /**
       no query
   */
-  none = 0,
+  None = 0,
 
   /**
       query the time elapsed
   */
-  timeElapsed = 1,
+  TimeElapsed = 1,
 
   /**
       query the current time
   */
-  timestamp = 2,
+  Timestamp = 2,
 }
 
 /**
@@ -407,17 +407,17 @@ enum GstGLSLError
   /**
       Compilation error occurred
   */
-  compile = 0,
+  Compile = 0,
 
   /**
       Link error occurred
   */
-  link = 1,
+  Link = 1,
 
   /**
       General program error occurred
   */
-  program = 2,
+  Program = 2,
 }
 
 /**
@@ -428,27 +428,27 @@ enum GstGLSLProfile : uint
   /**
       no profile supported/available
   */
-  none = 0,
+  None = 0,
 
   /**
       OpenGL|ES profile
   */
-  es = 1,
+  Es = 1,
 
   /**
       OpenGL core profile
   */
-  core = 2,
+  Core = 2,
 
   /**
       OpenGL compatibility profile
   */
-  compatibility = 4,
+  Compatibility = 4,
 
   /**
       any OpenGL/OpenGL|ES profile
   */
-  any = 4294967295,
+  Any = 4294967295,
 }
 
 /**
@@ -459,7 +459,7 @@ enum GstGLSLVersion
   /**
       no version
   */
-  none = 0,
+  None = 0,
 
   /**
       version 100 (only valid for ES)
@@ -550,17 +550,17 @@ enum GstGLStereoDownmix
   /**
       Dubois optimised Green-Magenta anaglyph
   */
-  greenMagentaDubois = 0,
+  GreenMagentaDubois = 0,
 
   /**
       Dubois optimised Red-Cyan anaglyph
   */
-  redCyanDubois = 1,
+  RedCyanDubois = 1,
 
   /**
       Dubois optimised Amber-Blue anaglyph
   */
-  amberBlueDubois = 2,
+  AmberBlueDubois = 2,
 }
 
 /**
@@ -575,7 +575,7 @@ enum GstGLTextureTarget
   /**
       no texture target
   */
-  none = 0,
+  None = 0,
 
   /**
       2D texture target (`GL_TEXTURE_2D`)
@@ -586,13 +586,13 @@ enum GstGLTextureTarget
       rectangle texture target
         (`GL_TEXTURE_RECTANGLE`)
   */
-  rectangle = 2,
+  Rectangle = 2,
 
   /**
       external oes texture target
         (`GL_TEXTURE_EXTERNAL_OES`)
   */
-  externalOes = 3,
+  ExternalOes = 3,
 }
 
 /** */
@@ -601,27 +601,27 @@ enum GstGLUploadReturn
   /**
       No further processing required
   */
-  done = 1,
+  Done = 1,
 
   /**
       An unspecified error occurred
   */
-  error = -1,
+  Error = -1,
 
   /**
       The configuration is unsupported.
   */
-  unsupported = -2,
+  Unsupported = -2,
 
   /**
       This element requires a reconfiguration.
   */
-  reconfigure = -3,
+  Reconfigure = -3,
 
   /**
       private return value.
   */
-  unsharedGlContext = -100,
+  UnsharedGlContext = -100,
 }
 
 /** */
@@ -630,17 +630,17 @@ enum GstGLWindowError
   /**
       failed for a unspecified reason
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       the implementation is too old
   */
-  oldLibs = 1,
+  OldLibs = 1,
 
   /**
       no such resource was found
   */
-  resourceUnavailable = 2,
+  ResourceUnavailable = 2,
 }
 
 /** */

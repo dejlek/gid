@@ -13,12 +13,12 @@ import gobject.boxed;
 class Rand : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -46,7 +46,7 @@ class Rand : gobject.boxed.Boxed
   {
     GRand* _cretval;
     _cretval = g_rand_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class Rand : gobject.boxed.Boxed
   {
     GRand* _cretval;
     _cretval = g_rand_new_with_seed(seed);
-    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class Rand : gobject.boxed.Boxed
 
     auto _seed = cast(const(uint)*)seed.ptr;
     _cretval = g_rand_new_with_seed_array(_seed, _seedLength);
-    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class Rand : gobject.boxed.Boxed
   {
     GRand* _cretval;
     _cretval = g_rand_copy(cast(GRand*)cPtr);
-    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

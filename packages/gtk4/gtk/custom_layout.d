@@ -19,7 +19,7 @@ import gtk.widget;
 class CustomLayout : gtk.layout_manager.LayoutManager
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,7 +44,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     Params:
       requestMode =       a function to retrieve
           the [gtk.types.SizeRequestMode] of the widget using the layout; the
-          default request mode is [gtk.types.SizeRequestMode.constantSize]
+          default request mode is [gtk.types.SizeRequestMode.ConstantSize]
       measure =       a function to measure the widget using the layout manager
       allocate =       a function to allocate the children of the widget using
           the layout manager
@@ -58,7 +58,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     {
       gtk.types.SizeRequestMode _dretval;
 
-      _dretval = _static_requestMode(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take));
+      _dretval = _static_requestMode(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
       auto _retval = cast(GtkSizeRequestMode)_dretval;
 
       return _retval;
@@ -70,7 +70,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
     extern(C) void _measureCallback(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline)
     {
-      _static_measure(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+      _static_measure(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
     }
     auto _measureCB = measure ? &_measureCallback : null;
 
@@ -79,7 +79,7 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
     extern(C) void _allocateCallback(GtkWidget* widget, int width, int height, int baseline)
     {
-      _static_allocate(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take), width, height, baseline);
+      _static_allocate(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
     }
     auto _allocateCB = allocate ? &_allocateCallback : null;
 
@@ -89,6 +89,6 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     _static_requestMode = null;
     _static_measure = null;
     _static_allocate = null;
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

@@ -17,7 +17,7 @@ class RTSPWatch
   GstRTSPWatch* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtsp.RTSPWatch");
@@ -41,7 +41,7 @@ class RTSPWatch
   uint attach(glib.main_context.MainContext context = null)
   {
     uint _retval;
-    _retval = gst_rtsp_watch_attach(cast(GstRTSPWatch*)cPtr, context ? cast(GMainContext*)context.cPtr(No.dup) : null);
+    _retval = gst_rtsp_watch_attach(cast(GstRTSPWatch*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class RTSPWatch
   gstrtsp.types.RTSPResult sendMessage(gstrtsp.rtspmessage.RTSPMessage message, out uint id)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_watch_send_message(cast(GstRTSPWatch*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.dup) : null, cast(uint*)&id);
+    _cretval = gst_rtsp_watch_send_message(cast(GstRTSPWatch*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -147,18 +147,18 @@ class RTSPWatch
     or watch is set to flushing.
     
     If timeout is null this function can block forever. If timeout
-    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.etimeout]
+    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
     after the timeout expired.
     
     The typically use of this function is when gst_rtsp_watch_write_data
-    returns [gstrtsp.types.RTSPResult.enomem]. The caller then calls this function to wait for
+    returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
     free space in the backlog queue and try again.
     Params:
       timeout =       a GTimeVal timeout
-    Returns:     [gstrtsp.types.RTSPResult.ok] when if there is room in queue.
-               [gstrtsp.types.RTSPResult.etimeout] when timeout was reached.
-               [gstrtsp.types.RTSPResult.eintr] when watch is flushing
-               [gstrtsp.types.RTSPResult.einval] when called with invalid parameters.
+    Returns:     [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
+               [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
+               [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
+               [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
   gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout)
   {
@@ -173,18 +173,18 @@ class RTSPWatch
     or watch is set to flushing.
     
     If timeout is 0 this function can block forever. If timeout
-    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.etimeout]
+    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
     after the timeout expired.
     
     The typically use of this function is when gst_rtsp_watch_write_data
-    returns [gstrtsp.types.RTSPResult.enomem]. The caller then calls this function to wait for
+    returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
     free space in the backlog queue and try again.
     Params:
       timeout =       a timeout in microseconds
-    Returns:     [gstrtsp.types.RTSPResult.ok] when if there is room in queue.
-               [gstrtsp.types.RTSPResult.etimeout] when timeout was reached.
-               [gstrtsp.types.RTSPResult.eintr] when watch is flushing
-               [gstrtsp.types.RTSPResult.einval] when called with invalid parameters.
+    Returns:     [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
+               [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
+               [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
+               [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
   gstrtsp.types.RTSPResult waitBacklogUsec(long timeout)
   {

@@ -11,7 +11,7 @@ import gid.gid;
 class SparseUnionDataType : arrow.union_data_type.UnionDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,6 +39,6 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
 
     auto _typeCodes = cast(byte*)typeCodes.ptr;
     _cretval = garrow_sparse_union_data_type_new(_fields, _typeCodes, _nTypeCodes);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

@@ -58,12 +58,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.search_bar.SearchBar] uses the [gtk.types.AccessibleRole.search] role.
+  [gtk.search_bar.SearchBar] uses the [gtk.types.AccessibleRole.Search] role.
 */
 class SearchBar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -90,7 +90,7 @@ class SearchBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -105,7 +105,7 @@ class SearchBar : gtk.widget.Widget
   */
   void connectEntry(gtk.editable.Editable entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.dup) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(ObjectG)entry).cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,7 +116,7 @@ class SearchBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class SearchBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class SearchBar : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -182,7 +182,7 @@ class SearchBar : gtk.widget.Widget
   */
   void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
-    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**

@@ -13,7 +13,7 @@ import gobject.object;
 class Decimal256Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class Decimal256Scalar : arrow.scalar.Scalar
   this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {
     GArrowDecimal256Scalar* _cretval;
-    _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.dup) : null, value ? cast(GArrowDecimal256*)value.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowDecimal256*)value.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -42,7 +42,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
   {
     GArrowDecimal256* _cretval;
     _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
     return _retval;
   }
 }

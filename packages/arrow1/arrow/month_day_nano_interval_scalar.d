@@ -12,7 +12,7 @@ import gobject.object;
 class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   this(arrow.month_day_nano.MonthDayNano value)
   {
     GArrowMonthDayNanoIntervalScalar* _cretval;
-    _cretval = garrow_month_day_nano_interval_scalar_new(value ? cast(GArrowMonthDayNano*)value.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_month_day_nano_interval_scalar_new(value ? cast(GArrowMonthDayNano*)value.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
     return _retval;
   }
 }

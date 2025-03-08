@@ -30,15 +30,15 @@ class Attribute : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoAttribute.sizeof), Yes.take);
+    super(safeMalloc(PangoAttribute.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -219,7 +219,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttribute* _cretval;
     _cretval = pango_attribute_copy(cast(const(PangoAttribute)*)cPtr);
-    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Attribute : gobject.boxed.Boxed
   bool equal(pango.attribute.Attribute attr2)
   {
     bool _retval;
-    _retval = pango_attribute_equal(cast(const(PangoAttribute)*)cPtr, attr2 ? cast(const(PangoAttribute)*)attr2.cPtr(No.dup) : null);
+    _retval = pango_attribute_equal(cast(const(PangoAttribute)*)cPtr, attr2 ? cast(const(PangoAttribute)*)attr2.cPtr(No.Dup) : null);
     return _retval;
   }
 }

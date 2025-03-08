@@ -25,12 +25,12 @@ import soup.types;
 class Multipart : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -60,9 +60,9 @@ class Multipart : gobject.boxed.Boxed
   this(string mimeType)
   {
     SoupMultipart* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _cretval = soup_multipart_new(_mimeType);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -76,8 +76,8 @@ class Multipart : gobject.boxed.Boxed
   static soup.multipart.Multipart newFromMessage(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
   {
     SoupMultipart* _cretval;
-    _cretval = soup_multipart_new_from_message(headers ? cast(SoupMessageHeaders*)headers.cPtr(No.dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new soup.multipart.Multipart(cast(void*)_cretval, Yes.take) : null;
+    _cretval = soup_multipart_new_from_message(headers ? cast(SoupMessageHeaders*)headers.cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new soup.multipart.Multipart(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -93,10 +93,10 @@ class Multipart : gobject.boxed.Boxed
   */
   void appendFormFile(string controlName, string filename, string contentType, glib.bytes.Bytes body_)
   {
-    const(char)* _controlName = controlName.toCString(No.alloc);
-    const(char)* _filename = filename.toCString(No.alloc);
-    const(char)* _contentType = contentType.toCString(No.alloc);
-    soup_multipart_append_form_file(cast(SoupMultipart*)cPtr, _controlName, _filename, _contentType, body_ ? cast(GBytes*)body_.cPtr(No.dup) : null);
+    const(char)* _controlName = controlName.toCString(No.Alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
+    soup_multipart_append_form_file(cast(SoupMultipart*)cPtr, _controlName, _filename, _contentType, body_ ? cast(GBytes*)body_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -109,8 +109,8 @@ class Multipart : gobject.boxed.Boxed
   */
   void appendFormString(string controlName, string data)
   {
-    const(char)* _controlName = controlName.toCString(No.alloc);
-    const(char)* _data = data.toCString(No.alloc);
+    const(char)* _controlName = controlName.toCString(No.Alloc);
+    const(char)* _data = data.toCString(No.Alloc);
     soup_multipart_append_form_string(cast(SoupMultipart*)cPtr, _controlName, _data);
   }
 
@@ -126,7 +126,7 @@ class Multipart : gobject.boxed.Boxed
   */
   void appendPart(soup.message_headers.MessageHeaders headers, glib.bytes.Bytes body_)
   {
-    soup_multipart_append_part(cast(SoupMultipart*)cPtr, headers ? cast(SoupMessageHeaders*)headers.cPtr(No.dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.dup) : null);
+    soup_multipart_append_part(cast(SoupMultipart*)cPtr, headers ? cast(SoupMessageHeaders*)headers.cPtr(No.Dup) : null, body_ ? cast(GBytes*)body_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -157,8 +157,8 @@ class Multipart : gobject.boxed.Boxed
     SoupMessageHeaders* _headers;
     GBytes* _body_;
     _retval = soup_multipart_get_part(cast(SoupMultipart*)cPtr, part, &_headers, &_body_);
-    headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.take);
-    body_ = new glib.bytes.Bytes(cast(void*)_body_, No.take);
+    headers = new soup.message_headers.MessageHeaders(cast(void*)_headers, No.Take);
+    body_ = new glib.bytes.Bytes(cast(void*)_body_, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Multipart : gobject.boxed.Boxed
   void toMessage(soup.message_headers.MessageHeaders destHeaders, out glib.bytes.Bytes destBody)
   {
     GBytes* _destBody;
-    soup_multipart_to_message(cast(SoupMultipart*)cPtr, destHeaders ? cast(SoupMessageHeaders*)destHeaders.cPtr(No.dup) : null, &_destBody);
-    destBody = new glib.bytes.Bytes(cast(void*)_destBody, Yes.take);
+    soup_multipart_to_message(cast(SoupMultipart*)cPtr, destHeaders ? cast(SoupMessageHeaders*)destHeaders.cPtr(No.Dup) : null, &_destBody);
+    destBody = new glib.bytes.Bytes(cast(void*)_destBody, Yes.Take);
   }
 }

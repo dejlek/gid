@@ -15,42 +15,42 @@ enum GArrowCompressionType
   /**
       Not compressed.
   */
-  uncompressed = 0,
+  Uncompressed = 0,
 
   /**
       Snappy compression.
   */
-  snappy = 1,
+  Snappy = 1,
 
   /**
       gzip compression.
   */
-  gzip = 2,
+  Gzip = 2,
 
   /**
       Brotli compression.
   */
-  brotli = 3,
+  Brotli = 3,
 
   /**
       Zstandard compression.
   */
-  zstd = 4,
+  Zstd = 4,
 
   /**
       LZ4 compression.
   */
-  lz4 = 5,
+  Lz4 = 5,
 
   /**
       LZO compression.
   */
-  lzo = 6,
+  Lzo = 6,
 
   /**
       bzip2 compression.
   */
-  bz2 = 7,
+  Bz2 = 7,
 }
 
 /**
@@ -61,17 +61,17 @@ enum GArrowCountMode
   /**
       Only non-null values will be counted.
   */
-  onlyValid = 0,
+  OnlyValid = 0,
 
   /**
       Only null values will be counted.
   */
-  onlyNull = 1,
+  OnlyNull = 1,
 
   /**
       All will be counted.
   */
-  all = 2,
+  All = 2,
 }
 
 /**
@@ -84,75 +84,75 @@ enum GArrowError
   /**
       Out of memory error.
   */
-  outOfMemory = 1,
+  OutOfMemory = 1,
 
   /**
       Key error.
   */
-  key = 2,
+  Key = 2,
 
   /**
       Type error.
   */
-  type = 3,
+  Type = 3,
 
   /**
       Invalid value error.
   */
-  invalid = 4,
+  Invalid = 4,
 
   /**
       IO error.
   */
-  io = 5,
+  Io = 5,
 
   /**
       Capacity error.
   */
-  capacity = 6,
+  Capacity = 6,
 
   /**
       Index error.
   */
-  index = 7,
+  Index = 7,
 
   /**
       Unknown error.
   */
-  unknown = 9,
+  Unknown = 9,
 
   /**
       The feature is not implemented.
   */
-  notImplemented = 10,
+  NotImplemented = 10,
 
   /**
       Serialization error.
   */
-  serialization = 11,
+  Serialization = 11,
 
   /**
       Error generating code for expression evaluation
       in Gandiva.
   */
-  codeGeneration = 40,
+  CodeGeneration = 40,
 
   /**
       Validation errors in expression given for code
     generation.
   */
-  expressionValidation = 41,
+  ExpressionValidation = 41,
 
   /**
       Execution error while evaluating the expression against a
     record batch.
   */
-  execution = 42,
+  Execution = 42,
 
   /**
       Item already exists error.
   */
-  alreadyExists = 45,
+  AlreadyExists = 45,
 }
 
 /**
@@ -163,17 +163,17 @@ enum GArrowFileMode
   /**
       For read.
   */
-  read = 0,
+  Read = 0,
 
   /**
       For write.
   */
-  write = 1,
+  Write = 1,
 
   /**
       For read-write.
   */
-  readwrite = 2,
+  Readwrite = 2,
 }
 
 /**
@@ -184,22 +184,22 @@ enum GArrowFileType
   /**
       Entry is not found
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       Entry exists but its type is unknown
   */
-  unknown = 1,
+  Unknown = 1,
 
   /**
       Entry is a regular file
   */
-  file = 2,
+  File = 2,
 
   /**
       Entry is a directory
   */
-  dir = 3,
+  Dir = 3,
 }
 
 /**
@@ -211,12 +211,12 @@ enum GArrowFilterNullSelectionBehavior
   /**
       Filtered value will be removed in the output.
   */
-  drop = 0,
+  Drop = 0,
 
   /**
       Filtered value will be null in the output.
   */
-  emitNull = 1,
+  EmitNull = 1,
 }
 
 /**
@@ -229,19 +229,19 @@ enum GArrowIntervalType
   /**
       A number of months.
   */
-  month = 0,
+  Month = 0,
 
   /**
       A number of days and
       milliseconds (fraction of day).
   */
-  dayTime = 1,
+  DayTime = 1,
 
   /**
       A number of months, days and
       nanoseconds between two dates.
   */
-  monthDayNano = 2,
+  MonthDayNano = 2,
 }
 
 /**
@@ -252,17 +252,17 @@ enum GArrowJSONReadUnexpectedFieldBehavior
   /**
       Ignore other fields.
   */
-  ignore = 0,
+  Ignore = 0,
 
   /**
       Return error.
   */
-  error = 1,
+  Error = 1,
 
   /**
       Infer a type.
   */
-  inferType = 2,
+  InferType = 2,
 }
 
 /**
@@ -271,28 +271,28 @@ enum GArrowJSONReadUnexpectedFieldBehavior
 enum GArrowJoinType
 {
   /** */
-  leftSemi = 0,
+  LeftSemi = 0,
 
   /** */
-  rightSemi = 1,
+  RightSemi = 1,
 
   /** */
-  leftAnti = 2,
+  LeftAnti = 2,
 
   /** */
-  rightAnti = 3,
+  RightAnti = 3,
 
   /** */
-  inner = 4,
+  Inner = 4,
 
   /** */
-  leftOuter = 5,
+  LeftOuter = 5,
 
   /** */
-  rightOuter = 6,
+  RightOuter = 6,
 
   /** */
-  fullOuter = 7,
+  FullOuter = 7,
 }
 
 /**
@@ -304,17 +304,17 @@ enum GArrowMetadataVersion
   /**
       Version 1.
   */
-  v1 = 0,
+  V1 = 0,
 
   /**
       Version 2.
   */
-  v2 = 1,
+  V2 = 1,
 
   /**
       Version 3.
   */
-  v3 = 2,
+  V3 = 2,
 }
 
 /**
@@ -326,13 +326,13 @@ enum GArrowNullPlacement
       Place nulls and NaNs before any non-null values.
       NaNs will come after nulls.
   */
-  atStart = 0,
+  AtStart = 0,
 
   /**
       Place nulls and NaNs after any non-null values.
       NaNs will come before nulls.
   */
-  atEnd = 1,
+  AtEnd = 1,
 }
 
 /**
@@ -344,43 +344,43 @@ enum GArrowQuantileInterpolation
   /**
       Linear.
   */
-  linear = 0,
+  Linear = 0,
 
   /**
       Lower.
   */
-  lower = 1,
+  Lower = 1,
 
   /**
       Higher.
   */
-  higher = 2,
+  Higher = 2,
 
   /**
       Nearest.
   */
-  nearest = 3,
+  Nearest = 3,
 
   /**
       Midpoint.
   */
-  midpoint = 4,
+  Midpoint = 4,
 }
 
 /** */
 enum GArrowRankTiebreaker
 {
   /** */
-  min = 0,
+  Min = 0,
 
   /** */
-  max = 1,
+  Max = 1,
 
   /** */
-  first = 2,
+  First = 2,
 
   /** */
-  dense = 3,
+  Dense = 3,
 }
 
 /**
@@ -389,10 +389,10 @@ enum GArrowRankTiebreaker
 enum GArrowRoundMode
 {
   /** */
-  down = 0,
+  Down = 0,
 
   /** */
-  up = 1,
+  Up = 1,
 
   /**
       Get the integral part without fractional digits (aka "trunc")
@@ -416,28 +416,28 @@ enum GArrowRoundMode
     @GARROW_ROUND_HALF_TO_ODD,
       Round ties to nearest odd integer
   */
-  towardsZero = 2,
+  TowardsZero = 2,
 
   /** */
-  towardsInfinity = 3,
+  TowardsInfinity = 3,
 
   /** */
-  halfDown = 4,
+  HalfDown = 4,
 
   /** */
-  halfUp = 5,
+  HalfUp = 5,
 
   /** */
-  halfTowardsZero = 6,
+  HalfTowardsZero = 6,
 
   /** */
-  halfTowardsInfinity = 7,
+  HalfTowardsInfinity = 7,
 
   /** */
-  halfToEven = 8,
+  HalfToEven = 8,
 
   /** */
-  halfToOdd = 9,
+  HalfToOdd = 9,
 }
 
 /**
@@ -448,37 +448,37 @@ enum GArrowS3LogLevel
   /**
       Off.
   */
-  off = 0,
+  Off = 0,
 
   /**
       Fatal. This is the default.
   */
-  fatal = 1,
+  Fatal = 1,
 
   /**
       Error.
   */
-  error = 2,
+  Error = 2,
 
   /**
       Warn.
   */
-  warn = 3,
+  Warn = 3,
 
   /**
       Info.
   */
-  info = 4,
+  Info = 4,
 
   /**
       Debug.
   */
-  debug_ = 5,
+  Debug = 5,
 
   /**
       Trace.
   */
-  trace = 6,
+  Trace = 6,
 }
 
 /**
@@ -489,12 +489,12 @@ enum GArrowSortOrder
   /**
       Sort in ascending order.
   */
-  ascending = 0,
+  Ascending = 0,
 
   /**
       Sort in descending order.
   */
-  descending = 1,
+  Descending = 1,
 }
 
 /**
@@ -505,22 +505,22 @@ enum GArrowTimeUnit
   /**
       Second.
   */
-  second = 0,
+  Second = 0,
 
   /**
       Millisecond.
   */
-  milli = 1,
+  Milli = 1,
 
   /**
       Microsecond.
   */
-  micro = 2,
+  Micro = 2,
 
   /**
       Nanosecond.
   */
-  nano = 3,
+  Nano = 3,
 }
 
 /**
@@ -531,226 +531,226 @@ enum GArrowType
   /**
       A degenerate NULL type represented as 0 bytes/bits.
   */
-  na = 0,
+  Na = 0,
 
   /**
       A boolean value represented as 1-bit.
   */
-  boolean = 1,
+  Boolean = 1,
 
   /**
       Little-endian 8-bit unsigned integer.
   */
-  uint8 = 2,
+  Uint8 = 2,
 
   /**
       Little-endian 8-bit signed integer.
   */
-  int8 = 3,
+  Int8 = 3,
 
   /**
       Little-endian 16-bit unsigned integer.
   */
-  uint16 = 4,
+  Uint16 = 4,
 
   /**
       Little-endian 16-bit signed integer.
   */
-  int16 = 5,
+  Int16 = 5,
 
   /**
       Little-endian 32-bit unsigned integer.
   */
-  uint32 = 6,
+  Uint32 = 6,
 
   /**
       Little-endian 32-bit signed integer.
   */
-  int32 = 7,
+  Int32 = 7,
 
   /**
       Little-endian 64-bit unsigned integer.
   */
-  uint64 = 8,
+  Uint64 = 8,
 
   /**
       Little-endian 64-bit signed integer.
   */
-  int64 = 9,
+  Int64 = 9,
 
   /**
       2-byte floating point value.
   */
-  halfFloat = 10,
+  HalfFloat = 10,
 
   /**
       4-byte floating point value.
   */
-  float_ = 11,
+  Float = 11,
 
   /**
       8-byte floating point value.
   */
-  double_ = 12,
+  Double = 12,
 
   /**
       UTF-8 variable-length string.
   */
-  string_ = 13,
+  String = 13,
 
   /**
       Variable-length bytes (no guarantee of UTF-8-ness).
   */
-  binary = 14,
+  Binary = 14,
 
   /**
       Fixed-size binary. Each value occupies
       the same number of bytes.
   */
-  fixedSizeBinary = 15,
+  FixedSizeBinary = 15,
 
   /**
       int32 days since the UNIX epoch.
   */
-  date32 = 16,
+  Date32 = 16,
 
   /**
       int64 milliseconds since the UNIX epoch.
   */
-  date64 = 17,
+  Date64 = 17,
 
   /**
       Exact timestamp encoded with int64 since UNIX epoch.
       Default unit millisecond.
   */
-  timestamp = 18,
+  Timestamp = 18,
 
   /**
       Exact time encoded with int32, supporting seconds or milliseconds
   */
-  time32 = 19,
+  Time32 = 19,
 
   /**
       Exact time encoded with int64, supporting micro- or nanoseconds
   */
-  time64 = 20,
+  Time64 = 20,
 
   /**
       YEAR_MONTH interval in SQL style.
   */
-  monthInterval = 21,
+  MonthInterval = 21,
 
   /**
       DAY_TIME interval in SQL style.
   */
-  dayTimeInterval = 22,
+  DayTimeInterval = 22,
 
   /**
       Precision- and scale-based decimal
       type with 128-bit. Storage type depends on the parameters.
   */
-  decimal128 = 23,
+  Decimal128 = 23,
 
   /**
       Precision- and scale-based decimal
       type with 256-bit. Storage type depends on the parameters.
   */
-  decimal256 = 24,
+  Decimal256 = 24,
 
   /**
       A list of some logical data type.
   */
-  list = 25,
+  List = 25,
 
   /**
       Struct of logical types.
   */
-  struct_ = 26,
+  Struct = 26,
 
   /**
       Sparse unions of logical types.
   */
-  sparseUnion = 27,
+  SparseUnion = 27,
 
   /**
       Dense unions of logical types.
   */
-  denseUnion = 28,
+  DenseUnion = 28,
 
   /**
       Dictionary aka Category type.
   */
-  dictionary = 29,
+  Dictionary = 29,
 
   /**
       A repeated struct logical type.
   */
-  map = 30,
+  Map = 30,
 
   /**
       Custom data type, implemented by user.
   */
-  extension = 31,
+  Extension = 31,
 
   /**
       Fixed size list of some logical type.
   */
-  fixedSizeList = 32,
+  FixedSizeList = 32,
 
   /**
       Measure of elapsed time in either seconds,
       milliseconds, microseconds or nanoseconds.
   */
-  duration = 33,
+  Duration = 33,
 
   /**
       64bit offsets UTF-8 variable-length string.
   */
-  largeString = 34,
+  LargeString = 34,
 
   /**
       64bit offsets Variable-length bytes (no guarantee of
     UTF-8-ness).
   */
-  largeBinary = 35,
+  LargeBinary = 35,
 
   /**
       A list of some logical data type with 64-bit offsets.
   */
-  largeList = 36,
+  LargeList = 36,
 
   /**
       MONTH_DAY_NANO interval in SQL style.
   */
-  monthDayNanoInterval = 37,
+  MonthDayNanoInterval = 37,
 
   /**
       Run-end encoded data.
   */
-  runEndEncoded = 38,
+  RunEndEncoded = 38,
 
   /**
       String (UTF8) view type with 4-byte prefix and inline small
       string optimization.
   */
-  stringView = 39,
+  StringView = 39,
 
   /**
       Bytes view type with 4-byte prefix and inline small string
       optimization.
   */
-  binaryView = 40,
+  BinaryView = 40,
 
   /**
       Precision- and scale-based decimal
   */
-  decimal32 = 43,
+  Decimal32 = 43,
 
   /**
       Precision- and scale-based decimal
       type with 64-bit. Storage type depends on the parameters.
   */
-  decimal64 = 44,
+  Decimal64 = 44,
 }
 
 /**
@@ -761,24 +761,24 @@ enum GArrowUTF8NormalizeForm
   /**
       Normalization Form Canonical Composition.
   */
-  nfc = 0,
+  Nfc = 0,
 
   /**
       Normalization Form Compatibility
       Composition.
   */
-  nfkc = 1,
+  Nfkc = 1,
 
   /**
       Normalization Form Canonical Decomposition.
   */
-  nfd = 2,
+  Nfd = 2,
 
   /**
       Normalization Form Compatibility
       Decomposition.
   */
-  nfkd = 3,
+  Nfkd = 3,
 }
 
 /** */

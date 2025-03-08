@@ -150,12 +150,12 @@ interface AsyncInitable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_async_initable_newv_async(objectType, nParameters, parameters ? cast(GParameter*)parameters.cPtr : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_async_initable_newv_async(objectType, nParameters, parameters ? cast(GParameter*)parameters.cPtr : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -174,9 +174,9 @@ interface AsyncInitable
     Implementations may also support cancellation. If cancellable is not
     null, then initialization can be cancelled by triggering the cancellable
     object from another thread. If the operation was cancelled, the error
-    [gio.types.IOErrorEnum.cancelled] will be returned. If cancellable is not null, and
+    [gio.types.IOErrorEnum.Cancelled] will be returned. If cancellable is not null, and
     the object doesn't support cancellable initialization, the error
-    [gio.types.IOErrorEnum.notSupported] will be returned.
+    [gio.types.IOErrorEnum.NotSupported] will be returned.
     
     As with #GInitable, if the object is not initialized, or initialization
     returns with an error, then all operations on the object except

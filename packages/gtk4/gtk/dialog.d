@@ -46,7 +46,7 @@ import gtk.window;
   
   `GtkDialogs` uses some heuristics to decide whether to add a close
   button to the window decorations. If any of the action buttons use
-  the response ID [gtk.types.ResponseType.close] or [gtk.types.ResponseType.cancel], the
+  the response ID [gtk.types.ResponseType.Close] or [gtk.types.ResponseType.Cancel], the
   close button is omitted.
   
   Clicking a button that was added as an action widget will emit the
@@ -56,7 +56,7 @@ import gtk.window;
   IDs in the [gtk.types.ResponseType] enumeration (these all have values
   less than zero). If a dialog receives a delete event, the
   [gtk.dialog.Dialog.response] signal will be emitted with the
-  [gtk.types.ResponseType.deleteEvent] response ID.
+  [gtk.types.ResponseType.DeleteEvent] response ID.
   
   Dialogs are created with a call to [gtk.dialog.Dialog.new_] or
   [gtk.dialog.Dialog.newWithButtons]. The latter is recommended; it allows
@@ -65,7 +65,7 @@ import gtk.window;
   A “modal” dialog (that is, one which freezes the rest of the application
   from user input), can be created by calling [gtk.window.Window.setModal]
   on the dialog. When using [gtk.dialog.Dialog.newWithButtons], you can also
-  pass the [gtk.types.DialogFlags.modal] flag to make a dialog modal.
+  pass the [gtk.types.DialogFlags.Modal] flag to make a dialog modal.
   
   For the simple dialog in the following example, a [gtk.message_dialog.MessageDialog]
   would save some effort. But you’d need to create the dialog contents manually
@@ -144,14 +144,14 @@ import gtk.window;
   
   # Accessibility
   
-  [gtk.dialog.Dialog] uses the [gtk.types.AccessibleRole.dialog] role.
+  [gtk.dialog.Dialog] uses the [gtk.types.AccessibleRole.Dialog] role.
 
   Deprecated:     Use [gtk.window.Window] instead
 */
 class Dialog : gtk.window.Window
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -181,7 +181,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -202,7 +202,7 @@ class Dialog : gtk.window.Window
   */
   void addActionWidget(gtk.widget.Widget child, int responseId)
   {
-    gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, responseId);
+    gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -222,9 +222,9 @@ class Dialog : gtk.window.Window
   gtk.widget.Widget addButton(string buttonText, int responseId)
   {
     GtkWidget* _cretval;
-    const(char)* _buttonText = buttonText.toCString(No.alloc);
+    const(char)* _buttonText = buttonText.toCString(No.Alloc);
     _cretval = gtk_dialog_add_button(cast(GtkDialog*)cPtr, _buttonText, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class Dialog : gtk.window.Window
     of a dialog.
     Params:
       widget =       a widget in the action area of dialog
-    Returns:     the response id of widget, or [gtk.types.ResponseType.none]
+    Returns:     the response id of widget, or [gtk.types.ResponseType.None]
        if widget doesn’t have a response id set.
   
     Deprecated:     Use [gtk.window.Window] instead
@@ -272,7 +272,7 @@ class Dialog : gtk.window.Window
   int getResponseForWidget(gtk.widget.Widget widget)
   {
     int _retval;
-    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)cPtr, responseId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -361,10 +361,10 @@ class Dialog : gtk.window.Window
     Connect to Close signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClose(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -384,7 +384,7 @@ class Dialog : gtk.window.Window
     
     The signal is also emitted when the dialog receives a
     delete event, and when [gtk.dialog.Dialog.response] is called.
-    On a delete event, the response ID is [gtk.types.ResponseType.deleteEvent].
+    On a delete event, the response ID is [gtk.types.ResponseType.DeleteEvent].
     Otherwise, it depends on which action widget was clicked.
   
     ## Parameters
@@ -404,10 +404,10 @@ class Dialog : gtk.window.Window
     Connect to Response signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResponse(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResponse(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResponseCallbackDlg) || is(T : ResponseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

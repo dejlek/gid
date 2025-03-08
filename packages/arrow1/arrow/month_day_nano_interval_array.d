@@ -13,7 +13,7 @@ import gobject.object;
 class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowMonthDayNanoIntervalArray* _cretval;
-    _cretval = garrow_month_day_nano_interval_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
-    this(_cretval, Yes.take);
+    _cretval = garrow_month_day_nano_interval_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -42,7 +42,7 @@ class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
   {
     GArrowMonthDayNano* _cretval;
     _cretval = garrow_month_day_nano_interval_array_get_value(cast(GArrowMonthDayNanoIntervalArray*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, Yes.Take);
     return _retval;
   }
 

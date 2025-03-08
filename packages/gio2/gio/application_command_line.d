@@ -183,7 +183,7 @@ import gobject.object;
 class ApplicationCommandLine : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -213,9 +213,9 @@ class ApplicationCommandLine : gobject.object.ObjectG
   gio.file.File createFileForArg(string arg)
   {
     GFile* _cretval;
-    const(char)* _arg = arg.toCString(No.alloc);
+    const(char)* _arg = arg.toCString(No.Alloc);
     _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)cPtr, _arg);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -286,7 +286,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
     The strings may contain non-utf8 data.
     
     The remote application usually does not send an environment.  Use
-    [gio.types.ApplicationFlags.sendEnvironment] to affect that.  Even with this flag
+    [gio.types.ApplicationFlags.SendEnvironment] to affect that.  Even with this flag
     set it is possible that the environment is still not available (due
     to invocation messages from other applications).
     
@@ -321,7 +321,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -368,7 +368,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   {
     GVariantDict* _cretval;
     _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new glib.variant_dict.VariantDict(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant_dict.VariantDict(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -411,7 +411,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   {
     GInputStream* _cretval;
     _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
     contain non-utf8 data.
     
     The remote application usually does not send an environment.  Use
-    [gio.types.ApplicationFlags.sendEnvironment] to affect that.  Even with this flag
+    [gio.types.ApplicationFlags.SendEnvironment] to affect that.  Even with this flag
     set it is possible that the environment is still not available (due
     to invocation messages from other applications).
     
@@ -434,9 +434,9 @@ class ApplicationCommandLine : gobject.object.ObjectG
   string getenv(string name)
   {
     const(char)* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   */
   void printLiteral(string message)
   {
-    const(char)* _message = message.toCString(No.alloc);
+    const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_print_literal(cast(GApplicationCommandLine*)cPtr, _message);
   }
 
@@ -466,7 +466,7 @@ class ApplicationCommandLine : gobject.object.ObjectG
   */
   void printerrLiteral(string message)
   {
-    const(char)* _message = message.toCString(No.alloc);
+    const(char)* _message = message.toCString(No.Alloc);
     g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)cPtr, _message);
   }
 

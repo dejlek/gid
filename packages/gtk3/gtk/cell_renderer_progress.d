@@ -17,7 +17,7 @@ import gtk.types;
 class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,6 +43,6 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_progress_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

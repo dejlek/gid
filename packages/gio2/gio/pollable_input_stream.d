@@ -67,7 +67,7 @@ interface PollableInputStream
     after this returns true would still block. To guarantee
     non-blocking behavior, you should always use
     [gio.pollable_input_stream.PollableInputStream.readNonblocking], which will return a
-    [gio.types.IOErrorEnum.wouldBlock] error rather than blocking.
+    [gio.types.IOErrorEnum.WouldBlock] error rather than blocking.
     
     The behaviour of this method is undefined if
     [gio.pollable_input_stream.PollableInputStream.canPoll] returns false for stream.
@@ -81,7 +81,7 @@ interface PollableInputStream
   /**
       Attempts to read up to count bytes from stream into buffer, as
     with [gio.input_stream.InputStream.read]. If stream is not currently readable,
-    this will immediately return [gio.types.IOErrorEnum.wouldBlock], and you can
+    this will immediately return [gio.types.IOErrorEnum.WouldBlock], and you can
     use [gio.pollable_input_stream.PollableInputStream.createSource] to create a #GSource
     that will be triggered when stream is readable.
     
@@ -98,7 +98,7 @@ interface PollableInputStream
             buffer to read data into (which should be at least count bytes long).
       cancellable =       a #GCancellable, or null
     Returns:     the number of bytes read, or -1 on error (including
-        [gio.types.IOErrorEnum.wouldBlock]).
+        [gio.types.IOErrorEnum.WouldBlock]).
   */
   ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 }

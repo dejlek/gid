@@ -43,9 +43,9 @@ import gtk.window;
   [gtk.print_unix_dialog.PrintUnixDialog] uses the following response values:
   
   $(LIST
-    * [gtk.types.ResponseType.ok]: for the “Print” button
-    * [gtk.types.ResponseType.apply]: for the “Preview” button
-    * [gtk.types.ResponseType.cancel]: for the “Cancel” button
+    * [gtk.types.ResponseType.Ok]: for the “Print” button
+    * [gtk.types.ResponseType.Apply]: for the “Preview” button
+    * [gtk.types.ResponseType.Cancel]: for the “Cancel” button
   )
     
   # GtkPrintUnixDialog as GtkBuildable
@@ -88,7 +88,7 @@ import gtk.window;
 class PrintUnixDialog : gtk.dialog.Dialog
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -114,9 +114,9 @@ class PrintUnixDialog : gtk.dialog.Dialog
   this(string title = null, gtk.window.Window parent = null)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.alloc);
-    _cretval = gtk_print_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_print_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -127,7 +127,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   void addCustomTab(gtk.widget.Widget child, gtk.widget.Widget tabLabel)
   {
-    gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.dup) : null);
+    gtk_print_unix_dialog_add_custom_tab(cast(GtkPrintUnixDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
   }
 
   /**
@@ -183,7 +183,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_unix_dialog_get_page_setup(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_unix_dialog_get_selected_printer(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_unix_dialog_get_settings(cast(GtkPrintUnixDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
     supports.
     
     For instance, if you can handle scaling the output then you pass
-    [gtk.types.PrintCapabilities.scale]. If you don’t pass that, then the dialog
+    [gtk.types.PrintCapabilities.Scale]. If you don’t pass that, then the dialog
     will only let you select the scale if the printing system automatically
     handles scaling.
     Params:
@@ -295,7 +295,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
-    gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.dup) : null);
+    gtk_print_unix_dialog_set_page_setup(cast(GtkPrintUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -309,7 +309,7 @@ class PrintUnixDialog : gtk.dialog.Dialog
   */
   void setSettings(gtk.print_settings.PrintSettings settings = null)
   {
-    gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(No.dup) : null);
+    gtk_print_unix_dialog_set_settings(cast(GtkPrintUnixDialog*)cPtr, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
   }
 
   /**

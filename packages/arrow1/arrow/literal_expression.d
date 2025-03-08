@@ -11,7 +11,7 @@ import gid.gid;
 class LiteralExpression : arrow.expression.Expression
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class LiteralExpression : arrow.expression.Expression
   this(arrow.datum.Datum datum)
   {
     GArrowLiteralExpression* _cretval;
-    _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

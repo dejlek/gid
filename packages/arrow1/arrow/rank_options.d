@@ -11,7 +11,7 @@ import gid.gid;
 class RankOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   {
     GArrowRankOptions* _cretval;
     _cretval = garrow_rank_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -42,7 +42,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   */
   void addSortKey(arrow.sort_key.SortKey sortKey)
   {
-    garrow_rank_options_add_sort_key(cast(GArrowRankOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.dup) : null);
+    garrow_rank_options_add_sort_key(cast(GArrowRankOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.Dup) : null);
   }
 
   alias equal = arrow.function_options.FunctionOptions.equal;
@@ -51,7 +51,7 @@ class RankOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.rank_options.RankOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_rank_options_equal(cast(GArrowRankOptions*)cPtr, otherOptions ? cast(GArrowRankOptions*)otherOptions.cPtr(No.dup) : null);
+    _retval = garrow_rank_options_equal(cast(GArrowRankOptions*)cPtr, otherOptions ? cast(GArrowRankOptions*)otherOptions.cPtr(No.Dup) : null);
     return _retval;
   }
 

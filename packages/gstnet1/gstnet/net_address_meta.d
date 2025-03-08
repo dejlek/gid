@@ -18,7 +18,7 @@ class NetAddressMeta
 {
   GstNetAddressMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstNet.NetAddressMeta");
@@ -41,7 +41,7 @@ class NetAddressMeta
 
   @property gio.socket_address.SocketAddress addr()
   {
-    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GstNetAddressMeta*)cPtr).addr, No.take);
+    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GstNetAddressMeta*)cPtr).addr, No.Take);
   }
 
   /** */

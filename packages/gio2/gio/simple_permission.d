@@ -17,7 +17,7 @@ import gio.types;
 class SimplePermission : gio.permission.Permission
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,6 +44,6 @@ class SimplePermission : gio.permission.Permission
   {
     GPermission* _cretval;
     _cretval = g_simple_permission_new(allowed);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

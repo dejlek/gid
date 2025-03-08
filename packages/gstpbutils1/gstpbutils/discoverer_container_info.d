@@ -13,7 +13,7 @@ import gstpbutils.types;
 class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStreamInfo
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   {
     const(GstTagList)* _cretval;
     _cretval = gst_discoverer_container_info_get_tags(cast(const(GstDiscovererContainerInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

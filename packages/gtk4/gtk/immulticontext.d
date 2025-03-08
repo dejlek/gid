@@ -17,7 +17,7 @@ import gtk.types;
 class IMMulticontext : gtk.imcontext.IMContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   {
     GtkIMContext* _cretval;
     _cretval = gtk_im_multicontext_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,7 +52,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   {
     const(char)* _cretval;
     _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   */
   void setContextId(string contextId = null)
   {
-    const(char)* _contextId = contextId.toCString(No.alloc);
+    const(char)* _contextId = contextId.toCString(No.Alloc);
     gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)cPtr, _contextId);
   }
 }

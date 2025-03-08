@@ -35,52 +35,52 @@ enum GstAudioVisualizerShader
   /**
       no shading
   */
-  none = 0,
+  None = 0,
 
   /**
       plain fading
   */
-  fade = 1,
+  Fade = 1,
 
   /**
       fade and move up
   */
-  fadeAndMoveUp = 2,
+  FadeAndMoveUp = 2,
 
   /**
       fade and move down
   */
-  fadeAndMoveDown = 3,
+  FadeAndMoveDown = 3,
 
   /**
       fade and move left
   */
-  fadeAndMoveLeft = 4,
+  FadeAndMoveLeft = 4,
 
   /**
       fade and move right
   */
-  fadeAndMoveRight = 5,
+  FadeAndMoveRight = 5,
 
   /**
       fade and move horizontally out
   */
-  fadeAndMoveHorizOut = 6,
+  FadeAndMoveHorizOut = 6,
 
   /**
       fade and move horizontally in
   */
-  fadeAndMoveHorizIn = 7,
+  FadeAndMoveHorizIn = 7,
 
   /**
       fade and move vertically out
   */
-  fadeAndMoveVertOut = 8,
+  FadeAndMoveVertOut = 8,
 
   /**
       fade and move vertically in
   */
-  fadeAndMoveVertIn = 9,
+  FadeAndMoveVertIn = 9,
 }
 
 /**
@@ -91,32 +91,32 @@ enum GstDiscovererResult
   /**
       The discovery was successful
   */
-  ok = 0,
+  Ok = 0,
 
   /**
       the URI is invalid
   */
-  uriInvalid = 1,
+  UriInvalid = 1,
 
   /**
       an error happened and the GError is set
   */
-  error = 2,
+  Error = 2,
 
   /**
       the discovery timed-out
   */
-  timeout = 3,
+  Timeout = 3,
 
   /**
       the discoverer was already discovering a file
   */
-  busy = 4,
+  Busy = 4,
 
   /**
       Some plugins are missing for full discovery
   */
-  missingPlugins = 5,
+  MissingPlugins = 5,
 }
 
 /**
@@ -129,28 +129,28 @@ enum GstDiscovererSerializeFlags : uint
       Serialize only basic information, excluding
     caps, tags and miscellaneous information
   */
-  basic = 0,
+  Basic = 0,
 
   /**
       Serialize the caps for each stream
   */
-  caps = 1,
+  Caps = 1,
 
   /**
       Serialize the tags for each stream
   */
-  tags = 2,
+  Tags = 2,
 
   /**
       Serialize miscellaneous information for each stream
   */
-  misc = 4,
+  Misc = 4,
 
   /**
       Serialize all the available info, including
     caps, tags and miscellaneous information
   */
-  all = 7,
+  All = 7,
 }
 
 /**
@@ -167,7 +167,7 @@ enum GstInstallPluginsReturn
       all of the requested plugins could be
         installed
   */
-  success = 0,
+  Success = 0,
 
   /**
       no appropriate installation candidate for
@@ -175,61 +175,61 @@ enum GstInstallPluginsReturn
         has been installed. Return #GST_INSTALL_PLUGINS_PARTIAL_SUCCESS if
         some (but not all) of the requested plugins could be installed.
   */
-  notFound = 1,
+  NotFound = 1,
 
   /**
       an error occurred during the installation. If
         this happens, the  user has already seen an error message and another
         one should not be displayed
   */
-  error = 2,
+  Error = 2,
 
   /**
       some of the requested plugins could
         be installed, but not all
   */
-  partialSuccess = 3,
+  PartialSuccess = 3,
 
   /**
       the user has aborted the installation
   */
-  userAbort = 4,
+  UserAbort = 4,
 
   /**
       the installer had an unclean exit code
         (ie. death by signal)
   */
-  crashed = 100,
+  Crashed = 100,
 
   /**
       the helper returned an invalid status code
   */
-  invalid = 101,
+  Invalid = 101,
 
   /**
       returned by [gstpbutils.global.installPluginsAsync] to
         indicate that everything went fine so far and the provided callback
         will be called with the result of the installation later
   */
-  startedOk = 200,
+  StartedOk = 200,
 
   /**
       some internal failure has
         occurred when trying to start the installer
   */
-  internalFailure = 201,
+  InternalFailure = 201,
 
   /**
       the helper script to call the
         actual installer is not installed
   */
-  helperMissing = 202,
+  HelperMissing = 202,
 
   /**
       a previously-started plugin
         installation is still in progress, try again later
   */
-  installInProgress = 203,
+  InstallInProgress = 203,
 }
 
 /**
@@ -241,48 +241,48 @@ enum GstPbUtilsCapsDescriptionFlags : uint
   /**
       Caps describe a container format.
   */
-  container = 1,
+  Container = 1,
 
   /**
       Caps describe an audio format, or a
         container format that can store audio.
   */
-  audio = 2,
+  Audio = 2,
 
   /**
       Caps describe an video format, or a
         container format that can store video.
   */
-  video = 4,
+  Video = 4,
 
   /**
       Caps describe an image format, or a
         container format that can store image.
   */
-  image = 8,
+  Image = 8,
 
   /**
       Caps describe an subtitle format, or a
         container format that can store subtitles.
   */
-  subtitle = 16,
+  Subtitle = 16,
 
   /**
       Container format is a tags container.
   */
-  tag = 32,
+  Tag = 32,
 
   /**
       Container format can store any kind of
         stream type.
   */
-  generic = 64,
+  Generic = 64,
 
   /**
       Caps describe a metadata format, or a container format that can store
     metadata.
   */
-  metadata = 128,
+  Metadata = 128,
 }
 
 /**

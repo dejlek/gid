@@ -14,7 +14,7 @@ class EventCrossing
 {
   GdkEventCrossing cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventCrossing");
@@ -42,7 +42,7 @@ class EventCrossing
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()
@@ -57,7 +57,7 @@ class EventCrossing
 
   @property gdk.window.Window subwindow()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).subwindow, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).subwindow, No.Take);
   }
 
   @property uint time()

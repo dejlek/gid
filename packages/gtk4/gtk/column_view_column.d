@@ -27,7 +27,7 @@ import gtk.types;
 class ColumnViewColumn : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,9 +63,9 @@ class ColumnViewColumn : gobject.object.ObjectG
   this(string title = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkColumnViewColumn* _cretval;
-    const(char)* _title = title.toCString(No.alloc);
-    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkColumnView* _cretval;
     _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GMenuModel* _cretval;
     _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     GtkSorter* _cretval;
     _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
+    gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -234,7 +234,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   */
   void setHeaderMenu(gio.menu_model.MenuModel menu = null)
   {
-    gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)cPtr, menu ? cast(GMenuModel*)menu.cPtr(No.dup) : null);
+    gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)cPtr, menu ? cast(GMenuModel*)menu.cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   */
   void setId(string id = null)
   {
-    const(char)* _id = id.toCString(No.alloc);
+    const(char)* _id = id.toCString(No.Alloc);
     gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)cPtr, _id);
   }
 
@@ -279,7 +279,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   */
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
-    gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.dup) : null);
+    gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -293,7 +293,7 @@ class ColumnViewColumn : gobject.object.ObjectG
   */
   void setTitle(string title = null)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)cPtr, _title);
   }
 

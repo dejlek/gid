@@ -28,7 +28,7 @@ import gst.types;
 class GhostPad : gst.proxy_pad.ProxyPad
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,9 +58,9 @@ class GhostPad : gst.proxy_pad.ProxyPad
   this(string name, gst.pad.Pad target)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = gst_ghost_pad_new(_name, target ? cast(GstPad*)target.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gst_ghost_pad_new(_name, target ? cast(GstPad*)target.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -78,9 +78,9 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newFromTemplate(string name, gst.pad.Pad target, gst.pad_template.PadTemplate templ)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = gst_ghost_pad_new_from_template(_name, target ? cast(GstPad*)target.cPtr(No.dup) : null, templ ? cast(GstPadTemplate*)templ.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gst_ghost_pad_new_from_template(_name, target ? cast(GstPad*)target.cPtr(No.Dup) : null, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,9 +99,9 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newNoTarget(string name, gst.types.PadDirection dir)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_ghost_pad_new_no_target(_name, dir);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -117,9 +117,9 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static gst.ghost_pad.GhostPad newNoTargetFromTemplate(string name, gst.pad_template.PadTemplate templ)
   {
     GstPad* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = gst_ghost_pad_new_no_target_from_template(_name, templ ? cast(GstPadTemplate*)templ.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gst_ghost_pad_new_no_target_from_template(_name, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gst.ghost_pad.GhostPad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, mode, active);
+    _retval = gst_ghost_pad_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, mode, active);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.dup) : null, parent ? cast(GstObject*)parent.cPtr(No.dup) : null, mode, active);
+    _retval = gst_ghost_pad_internal_activate_mode_default(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, mode, active);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   {
     GstPad* _cretval;
     _cretval = gst_ghost_pad_get_target(cast(GstGhostPad*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class GhostPad : gst.proxy_pad.ProxyPad
   bool setTarget(gst.pad.Pad newtarget = null)
   {
     bool _retval;
-    _retval = gst_ghost_pad_set_target(cast(GstGhostPad*)cPtr, newtarget ? cast(GstPad*)newtarget.cPtr(No.dup) : null);
+    _retval = gst_ghost_pad_set_target(cast(GstGhostPad*)cPtr, newtarget ? cast(GstPad*)newtarget.cPtr(No.Dup) : null);
     return _retval;
   }
 }

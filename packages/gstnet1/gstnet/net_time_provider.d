@@ -23,7 +23,7 @@ import gstnet.types;
 class NetTimeProvider : gst.object.ObjectGst, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,8 +53,8 @@ class NetTimeProvider : gst.object.ObjectGst, gio.initable.Initable
   this(gst.clock.Clock clock, string address, int port)
   {
     GstNetTimeProvider* _cretval;
-    const(char)* _address = address.toCString(No.alloc);
-    _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock.cPtr(No.dup) : null, _address, port);
-    this(_cretval, Yes.take);
+    const(char)* _address = address.toCString(No.Alloc);
+    _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock.cPtr(No.Dup) : null, _address, port);
+    this(_cretval, Yes.Take);
   }
 }

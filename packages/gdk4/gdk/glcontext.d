@@ -64,7 +64,7 @@ import gobject.object;
 class GLContext : gdk.draw_context.DrawContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -99,7 +99,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     GdkSurface* _cretval;
     _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool isShared(gdk.glcontext.GLContext other)
   {
     bool _retval;
-    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(No.dup) : null);
+    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 

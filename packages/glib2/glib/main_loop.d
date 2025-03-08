@@ -14,12 +14,12 @@ import gobject.boxed;
 class MainLoop : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -48,8 +48,8 @@ class MainLoop : gobject.boxed.Boxed
   this(glib.main_context.MainContext context, bool isRunning)
   {
     GMainLoop* _cretval;
-    _cretval = g_main_loop_new(context ? cast(GMainContext*)context.cPtr(No.dup) : null, isRunning);
-    this(_cretval, Yes.take);
+    _cretval = g_main_loop_new(context ? cast(GMainContext*)context.cPtr(No.Dup) : null, isRunning);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class MainLoop : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_loop_get_context(cast(GMainLoop*)cPtr);
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

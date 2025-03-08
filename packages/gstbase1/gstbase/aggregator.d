@@ -87,7 +87,7 @@ import gstbase.types;
 class Aggregator : gst.element.Element
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -114,7 +114,7 @@ class Aggregator : gst.element.Element
   gst.types.FlowReturn finishBuffer(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_aggregator_finish_buffer(cast(GstAggregator*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
+    _cretval = gst_aggregator_finish_buffer(cast(GstAggregator*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -130,7 +130,7 @@ class Aggregator : gst.element.Element
   gst.types.FlowReturn finishBufferList(gst.buffer_list.BufferList bufferlist)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_aggregator_finish_buffer_list(cast(GstAggregator*)cPtr, bufferlist ? cast(GstBufferList*)bufferlist.cPtr(Yes.dup) : null);
+    _cretval = gst_aggregator_finish_buffer_list(cast(GstAggregator*)cPtr, bufferlist ? cast(GstBufferList*)bufferlist.cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -151,8 +151,8 @@ class Aggregator : gst.element.Element
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_aggregator_get_allocator(cast(GstAggregator*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /** */
@@ -160,13 +160,13 @@ class Aggregator : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_aggregator_get_buffer_pool(cast(GstAggregator*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
       Subclasses may use the return value to inform whether they should return
-    [gst.types.FlowReturn.eos] from their aggregate implementation.
+    [gst.types.FlowReturn.Eos] from their aggregate implementation.
     Returns:     whether live status was forced on self.
   */
   bool getForceLive()
@@ -227,8 +227,8 @@ class Aggregator : gst.element.Element
   gst.sample.Sample peekNextSample(gstbase.aggregator_pad.AggregatorPad pad)
   {
     GstSample* _cretval;
-    _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)cPtr, pad ? cast(GstAggregatorPad*)pad.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)cPtr, pad ? cast(GstAggregatorPad*)pad.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class Aggregator : gst.element.Element
   */
   void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null)
   {
-    gst_aggregator_selected_samples(cast(GstAggregator*)cPtr, pts, dts, duration, info ? cast(GstStructure*)info.cPtr(No.dup) : null);
+    gst_aggregator_selected_samples(cast(GstAggregator*)cPtr, pts, dts, duration, info ? cast(GstStructure*)info.cPtr(No.Dup) : null);
   }
 
   /**
@@ -301,7 +301,7 @@ class Aggregator : gst.element.Element
   */
   void setSrcCaps(gst.caps.Caps caps)
   {
-    gst_aggregator_set_src_caps(cast(GstAggregator*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    gst_aggregator_set_src_caps(cast(GstAggregator*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
   }
 
   /**
@@ -332,7 +332,7 @@ class Aggregator : gst.element.Element
   */
   void updateSegment(gst.segment.Segment segment)
   {
-    gst_aggregator_update_segment(cast(GstAggregator*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.dup) : null);
+    gst_aggregator_update_segment(cast(GstAggregator*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -359,10 +359,10 @@ class Aggregator : gst.element.Element
     Connect to SamplesSelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSamplesSelected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSamplesSelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SamplesSelectedCallbackDlg) || is(T : SamplesSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -10,7 +10,7 @@ import gid.gid;
 class ScalarAggregateOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
   {
     GArrowScalarAggregateOptions* _cretval;
     _cretval = garrow_scalar_aggregate_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

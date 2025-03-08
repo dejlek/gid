@@ -18,7 +18,7 @@ import gid.gid;
 class CairoContext : gdk.draw_context.DrawContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class CairoContext : gdk.draw_context.DrawContext
   {
     cairo_t* _cretval;
     _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)cPtr);
-    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

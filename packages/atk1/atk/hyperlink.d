@@ -23,7 +23,7 @@ import gobject.object;
 class Hyperlink : gobject.object.ObjectG, atk.action.Action
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -79,7 +79,7 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
   {
     AtkObject* _cretval;
     _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
   {
     char* _cretval;
     _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -169,10 +169,10 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
     Connect to LinkActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLinkActivated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLinkActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LinkActivatedCallbackDlg) || is(T : LinkActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

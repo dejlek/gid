@@ -11,7 +11,7 @@ import gid.gid;
 class RecordBatchDatum : arrow.datum.Datum
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class RecordBatchDatum : arrow.datum.Datum
   this(arrow.record_batch.RecordBatch value)
   {
     GArrowRecordBatchDatum* _cretval;
-    _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

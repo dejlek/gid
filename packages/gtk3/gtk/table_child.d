@@ -12,7 +12,7 @@ class TableChild
 {
   GtkTableChild cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.TableChild");
@@ -30,7 +30,7 @@ class TableChild
 
   @property gtk.widget.Widget widget()
   {
-    return ObjectG.getDObject!(gtk.widget.Widget)((cast(GtkTableChild*)cPtr).widget, No.take);
+    return ObjectG.getDObject!(gtk.widget.Widget)((cast(GtkTableChild*)cPtr).widget, No.Take);
   }
 
   @property ushort leftAttach()

@@ -29,9 +29,9 @@ template DBusObjectT()
   override gio.dbus_interface.DBusInterface getInterface(string interfaceName)
   {
     GDBusInterface* _cretval;
-    const(char)* _interfaceName = interfaceName.toCString(No.alloc);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_get_interface(cast(GDBusObject*)cPtr, _interfaceName);
-    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ template DBusObjectT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -79,10 +79,10 @@ template DBusObjectT()
     Connect to InterfaceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -116,10 +116,10 @@ template DBusObjectT()
     Connect to InterfaceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -20,7 +20,7 @@ import gtk.widget;
 class FlowBoxChild : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class FlowBoxChild : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class FlowBoxChild : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class FlowBoxChild : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -146,10 +146,10 @@ class FlowBoxChild : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -31,12 +31,12 @@ import gtk.types;
 class Gradient : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -68,7 +68,7 @@ class Gradient : gobject.boxed.Boxed
   {
     GtkGradient* _cretval;
     _cretval = gtk_gradient_new_linear(x0, y0, x1, y1);
-    auto _retval = _cretval ? new gtk.gradient.Gradient(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.gradient.Gradient(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class Gradient : gobject.boxed.Boxed
   {
     GtkGradient* _cretval;
     _cretval = gtk_gradient_new_radial(x0, y0, radius0, x1, y1, radius1);
-    auto _retval = _cretval ? new gtk.gradient.Gradient(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.gradient.Gradient(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class Gradient : gobject.boxed.Boxed
   */
   void addColorStop(double offset, gtk.symbolic_color.SymbolicColor color)
   {
-    gtk_gradient_add_color_stop(cast(GtkGradient*)cPtr, offset, color ? cast(GtkSymbolicColor*)color.cPtr(No.dup) : null);
+    gtk_gradient_add_color_stop(cast(GtkGradient*)cPtr, offset, color ? cast(GtkSymbolicColor*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -125,8 +125,8 @@ class Gradient : gobject.boxed.Boxed
   {
     bool _retval;
     cairo_pattern_t* _resolvedGradient;
-    _retval = gtk_gradient_resolve(cast(GtkGradient*)cPtr, props ? cast(GtkStyleProperties*)props.cPtr(No.dup) : null, &_resolvedGradient);
-    resolvedGradient = new cairo.pattern.Pattern(cast(void*)_resolvedGradient, Yes.take);
+    _retval = gtk_gradient_resolve(cast(GtkGradient*)cPtr, props ? cast(GtkStyleProperties*)props.cPtr(No.Dup) : null, &_resolvedGradient);
+    resolvedGradient = new cairo.pattern.Pattern(cast(void*)_resolvedGradient, Yes.Take);
     return _retval;
   }
 
@@ -134,8 +134,8 @@ class Gradient : gobject.boxed.Boxed
   cairo.pattern.Pattern resolveForContext(gtk.style_context.StyleContext context)
   {
     cairo_pattern_t* _cretval;
-    _cretval = gtk_gradient_resolve_for_context(cast(GtkGradient*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_gradient_resolve_for_context(cast(GtkGradient*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class Gradient : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gtk_gradient_to_string(cast(GtkGradient*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

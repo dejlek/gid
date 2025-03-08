@@ -143,37 +143,37 @@ alias GIConv = void*;
 enum GAsciiType : uint
 {
   /** */
-  alnum = 1,
+  Alnum = 1,
 
   /** */
-  alpha = 2,
+  Alpha = 2,
 
   /** */
-  cntrl = 4,
+  Cntrl = 4,
 
   /** */
-  digit = 8,
+  Digit = 8,
 
   /** */
-  graph = 16,
+  Graph = 16,
 
   /** */
-  lower = 32,
+  Lower = 32,
 
   /** */
-  print = 64,
+  Print = 64,
 
   /** */
-  punct = 128,
+  Punct = 128,
 
   /** */
-  space = 256,
+  Space = 256,
 
   /** */
-  upper = 512,
+  Upper = 512,
 
   /** */
-  xdigit = 1024,
+  Xdigit = 1024,
 }
 
 /**
@@ -184,44 +184,44 @@ enum GBookmarkFileError
   /**
       URI was ill-formed
   */
-  invalidUri = 0,
+  InvalidUri = 0,
 
   /**
       a requested field was not found
   */
-  invalidValue = 1,
+  InvalidValue = 1,
 
   /**
       a requested application did
         not register a bookmark
   */
-  appNotRegistered = 2,
+  AppNotRegistered = 2,
 
   /**
       a requested URI was not found
   */
-  uriNotFound = 3,
+  UriNotFound = 3,
 
   /**
       document was ill formed
   */
-  read = 4,
+  Read = 4,
 
   /**
       the text being parsed was
         in an unknown encoding
   */
-  unknownEncoding = 5,
+  UnknownEncoding = 5,
 
   /**
       an error occurred while writing
   */
-  write = 6,
+  Write = 6,
 
   /**
       requested file was not found
   */
-  fileNotFound = 7,
+  FileNotFound = 7,
 }
 
 /**
@@ -236,27 +236,27 @@ enum GChecksumType
   /**
       Use the MD5 hashing algorithm
   */
-  md5 = 0,
+  Md5 = 0,
 
   /**
       Use the SHA-1 hashing algorithm
   */
-  sha1 = 1,
+  Sha1 = 1,
 
   /**
       Use the SHA-256 hashing algorithm
   */
-  sha256 = 2,
+  Sha256 = 2,
 
   /**
       Use the SHA-512 hashing algorithm (Since: 2.36)
   */
-  sha512 = 3,
+  Sha512 = 3,
 
   /**
       Use the SHA-384 hashing algorithm (Since: 2.51)
   */
-  sha384 = 4,
+  Sha384 = 4,
 }
 
 /**
@@ -268,46 +268,46 @@ enum GConvertError
       Conversion between the requested character
         sets is not supported.
   */
-  noConversion = 0,
+  NoConversion = 0,
 
   /**
       Invalid byte sequence in conversion input;
        or the character sequence could not be represented in the target
        character set.
   */
-  illegalSequence = 1,
+  IllegalSequence = 1,
 
   /**
       Conversion failed for some reason.
   */
-  failed = 2,
+  Failed = 2,
 
   /**
       Partial character sequence at end of input.
   */
-  partialInput = 3,
+  PartialInput = 3,
 
   /**
       URI is invalid.
   */
-  badUri = 4,
+  BadUri = 4,
 
   /**
       Pathname is not an absolute path.
   */
-  notAbsolutePath = 5,
+  NotAbsolutePath = 5,
 
   /**
       No memory available. Since: 2.40
   */
-  noMemory = 6,
+  NoMemory = 6,
 
   /**
       An embedded NUL character is present in
         conversion output where a NUL-terminated string is expected.
         Since: 2.56
   */
-  embeddedNul = 7,
+  EmbeddedNul = 7,
 }
 
 /**
@@ -319,17 +319,17 @@ enum GDateDMY
   /**
       a day
   */
-  day = 0,
+  Day = 0,
 
   /**
       a month
   */
-  month = 1,
+  Month = 1,
 
   /**
       a year
   */
-  year = 2,
+  Year = 2,
 }
 
 /**
@@ -341,67 +341,67 @@ enum GDateMonth
   /**
       invalid value
   */
-  badMonth = 0,
+  BadMonth = 0,
 
   /**
       January
   */
-  january = 1,
+  January = 1,
 
   /**
       February
   */
-  february = 2,
+  February = 2,
 
   /**
       March
   */
-  march = 3,
+  March = 3,
 
   /**
       April
   */
-  april = 4,
+  April = 4,
 
   /**
       May
   */
-  may = 5,
+  May = 5,
 
   /**
       June
   */
-  june = 6,
+  June = 6,
 
   /**
       July
   */
-  july = 7,
+  July = 7,
 
   /**
       August
   */
-  august = 8,
+  August = 8,
 
   /**
       September
   */
-  september = 9,
+  September = 9,
 
   /**
       October
   */
-  october = 10,
+  October = 10,
 
   /**
       November
   */
-  november = 11,
+  November = 11,
 
   /**
       December
   */
-  december = 12,
+  December = 12,
 }
 
 /**
@@ -413,42 +413,42 @@ enum GDateWeekday
   /**
       invalid value
   */
-  badWeekday = 0,
+  BadWeekday = 0,
 
   /**
       Monday
   */
-  monday = 1,
+  Monday = 1,
 
   /**
       Tuesday
   */
-  tuesday = 2,
+  Tuesday = 2,
 
   /**
       Wednesday
   */
-  wednesday = 3,
+  Wednesday = 3,
 
   /**
       Thursday
   */
-  thursday = 4,
+  Thursday = 4,
 
   /**
       Friday
   */
-  friday = 5,
+  Friday = 5,
 
   /**
       Saturday
   */
-  saturday = 6,
+  Saturday = 6,
 
   /**
       Sunday
   */
-  sunday = 7,
+  Sunday = 7,
 }
 
 /**
@@ -460,42 +460,42 @@ enum GErrorType
   /**
       unknown error
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       unexpected end of file
   */
-  unexpEof = 1,
+  UnexpEof = 1,
 
   /**
       unterminated string constant
   */
-  unexpEofInString = 2,
+  UnexpEofInString = 2,
 
   /**
       unterminated comment
   */
-  unexpEofInComment = 3,
+  UnexpEofInComment = 3,
 
   /**
       non-digit character in a number
   */
-  nonDigitInConst = 4,
+  NonDigitInConst = 4,
 
   /**
       digit beyond radix in a number
   */
-  digitRadix = 5,
+  DigitRadix = 5,
 
   /**
       non-decimal floating point number
   */
-  floatRadix = 6,
+  FloatRadix = 6,
 
   /**
       malformed floating point number
   */
-  floatMalformed = 7,
+  FloatMalformed = 7,
 }
 
 /**
@@ -519,37 +519,37 @@ enum GFileError
         the file (or other resource) or processes with special privileges
         can perform the operation.
   */
-  exist = 0,
+  Exist = 0,
 
   /**
       File is a directory; you cannot open a directory
         for writing, or create or remove hard links to it.
   */
-  isdir = 1,
+  Isdir = 1,
 
   /**
       Permission denied; the file permissions do not
         allow the attempted operation.
   */
-  acces = 2,
+  Acces = 2,
 
   /**
       Filename too long.
   */
-  nametoolong = 3,
+  Nametoolong = 3,
 
   /**
       No such file or directory. This is a "file
         doesn't exist" error for ordinary files that are referenced in
         contexts where they are expected to already exist.
   */
-  noent = 4,
+  Noent = 4,
 
   /**
       A file that isn't a directory was specified when
         a directory is required.
   */
-  notdir = 5,
+  Notdir = 5,
 
   /**
       No such device or address. The system tried to
@@ -558,77 +558,77 @@ enum GFileError
         installed incorrectly, or that the physical device is missing or
         not correctly attached to the computer.
   */
-  nxio = 6,
+  Nxio = 6,
 
   /**
       The underlying file system of the specified file
         does not support memory mapping.
   */
-  nodev = 7,
+  Nodev = 7,
 
   /**
       The directory containing the new link can't be
         modified because it's on a read-only file system.
   */
-  rofs = 8,
+  Rofs = 8,
 
   /**
       Text file busy.
   */
-  txtbsy = 9,
+  Txtbsy = 9,
 
   /**
       You passed in a pointer to bad memory.
         (GLib won't reliably return this, don't pass in pointers to bad
         memory.)
   */
-  fault = 10,
+  Fault = 10,
 
   /**
       Too many levels of symbolic links were encountered
         in looking up a file name. This often indicates a cycle of symbolic
         links.
   */
-  loop = 11,
+  Loop = 11,
 
   /**
       No space left on device; write operation on a
         file failed because the disk is full.
   */
-  nospc = 12,
+  Nospc = 12,
 
   /**
       No memory available. The system cannot allocate
         more virtual memory because its capacity is full.
   */
-  nomem = 13,
+  Nomem = 13,
 
   /**
       The current process has too many files open and
         can't open any more. Duplicate descriptors do count toward this
         limit.
   */
-  mfile = 14,
+  Mfile = 14,
 
   /**
       There are too many distinct file openings in the
         entire system.
   */
-  nfile = 15,
+  Nfile = 15,
 
   /**
       Bad file descriptor; for example, I/O on a
         descriptor that has been closed or reading from a descriptor open
         only for writing (or vice versa).
   */
-  badf = 16,
+  Badf = 16,
 
   /**
       Invalid argument. This is used to indicate
         various kinds of problems with passing the wrong argument to a
         library function.
   */
-  inval = 17,
+  Inval = 17,
 
   /**
       Broken pipe; there is no process reading from the
@@ -638,40 +638,40 @@ enum GFileError
         program will never actually see this code unless it has handled
         or blocked 'SIGPIPE'.
   */
-  pipe = 18,
+  Pipe = 18,
 
   /**
       Resource temporarily unavailable; the call might
         work if you try again later.
   */
-  again = 19,
+  Again = 19,
 
   /**
       Interrupted function call; an asynchronous signal
         occurred and prevented completion of the call. When this
         happens, you should try the call again.
   */
-  intr = 20,
+  Intr = 20,
 
   /**
       Input/output error; usually used for physical read
        or write errors. i.e. the disk or other physical device hardware
        is returning errors.
   */
-  io = 21,
+  Io = 21,
 
   /**
       Operation not permitted; only the owner of the
        file (or other resource) or processes with special privileges can
        perform the operation.
   */
-  perm = 22,
+  Perm = 22,
 
   /**
       Function not implemented; this indicates that
        the system is missing some functionality.
   */
-  nosys = 23,
+  Nosys = 23,
 
   /**
       Does not correspond to a UNIX error code; this
@@ -679,7 +679,7 @@ enum GFileError
        in all #GError error code enumerations. Returned if no specific
        code applies.
   */
-  failed = 24,
+  Failed = 24,
 }
 
 /**
@@ -692,7 +692,7 @@ enum GFileSetContentsFlags : uint
       No guarantees about file consistency or durability.
       The most dangerous setting, which is slightly faster than other settings.
   */
-  none = 0,
+  None = 0,
 
   /**
       Guarantee file consistency: after a crash,
@@ -701,7 +701,7 @@ enum GFileSetContentsFlags : uint
       on the file and use of an atomic `rename()` of the new version of the file
       over the old.
   */
-  consistent = 1,
+  Consistent = 1,
 
   /**
       Guarantee file durability: after a crash, the
@@ -710,7 +710,7 @@ enum GFileSetContentsFlags : uint
       the effects of `G_FILE_SET_CONTENTS_CONSISTENT` plus an `fsync()` on the
       directory containing the file after calling `rename()`.
   */
-  durable = 2,
+  Durable = 2,
 
   /**
       Only apply consistency and durability
@@ -718,7 +718,7 @@ enum GFileSetContentsFlags : uint
       if the file doesn’t currently exist, but may result in a corrupted version
       of the new file if the system crashes while writing it.
   */
-  onlyExisting = 4,
+  OnlyExisting = 4,
 }
 
 /**
@@ -731,28 +731,28 @@ enum GFileTest : uint
         (not a directory). Note that this test will also return true
         if the tested file is a symlink to a regular file.
   */
-  isRegular = 1,
+  IsRegular = 1,
 
   /**
       true if the file is a symlink.
   */
-  isSymlink = 2,
+  IsSymlink = 2,
 
   /**
       true if the file is a directory.
   */
-  isDir = 4,
+  IsDir = 4,
 
   /**
       true if the file is executable.
   */
-  isExecutable = 8,
+  IsExecutable = 8,
 
   /**
       true if the file exists. It may or may not
         be a regular file.
   */
-  exists = 16,
+  Exists = 16,
 }
 
 /**
@@ -763,13 +763,13 @@ enum GFormatSizeFlags : uint
   /**
       behave the same as [glib.global.formatSize]
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       include the exact number of bytes as part
         of the returned string.  For example, "45.6 kB (45,612 bytes)".
   */
-  longFormat = 1,
+  LongFormat = 1,
 
   /**
       use IEC (base 1024) units with "KiB"-style
@@ -777,27 +777,27 @@ enum GFormatSizeFlags : uint
         a strong "power of 2" basis, like RAM sizes or RAID stripe sizes.
         Network and storage sizes should be reported in the normal SI units.
   */
-  iecUnits = 2,
+  IecUnits = 2,
 
   /**
       set the size as a quantity in bits, rather than
         bytes, and return units in bits. For example, ‘Mbit’ rather than ‘MB’.
   */
-  bits = 4,
+  Bits = 4,
 
   /**
       return only value, without unit; this should
         not be used together with @G_FORMAT_SIZE_LONG_FORMAT
         nor @G_FORMAT_SIZE_ONLY_UNIT. Since: 2.74
   */
-  onlyValue = 8,
+  OnlyValue = 8,
 
   /**
       return only unit, without value; this should
         not be used together with @G_FORMAT_SIZE_LONG_FORMAT
         nor @G_FORMAT_SIZE_ONLY_VALUE. Since: 2.74
   */
-  onlyUnit = 16,
+  OnlyUnit = 16,
 }
 
 /**
@@ -808,18 +808,18 @@ enum GHookFlagMask : uint
   /**
       set if the hook has not been destroyed
   */
-  active = 1,
+  Active = 1,
 
   /**
       set if the hook is currently being run
   */
-  inCall = 2,
+  InCall = 2,
 
   /**
       A mask covering all bits reserved for
       hook flags; see `G_HOOK_FLAG_USER_SHIFT`
   */
-  mask = 15,
+  Mask = 15,
 }
 
 /**
@@ -830,47 +830,47 @@ enum GIOChannelError
   /**
       File too large.
   */
-  fbig = 0,
+  Fbig = 0,
 
   /**
       Invalid argument.
   */
-  inval = 1,
+  Inval = 1,
 
   /**
       IO error.
   */
-  io = 2,
+  Io = 2,
 
   /**
       File is a directory.
   */
-  isdir = 3,
+  Isdir = 3,
 
   /**
       No space left on device.
   */
-  nospc = 4,
+  Nospc = 4,
 
   /**
       No such device or address.
   */
-  nxio = 5,
+  Nxio = 5,
 
   /**
       Value too large for defined datatype.
   */
-  overflow = 6,
+  Overflow = 6,
 
   /**
       Broken pipe.
   */
-  pipe = 7,
+  Pipe = 7,
 
   /**
       Some other error.
   */
-  failed = 8,
+  Failed = 8,
 }
 
 /**
@@ -882,33 +882,33 @@ enum GIOCondition : uint
   /**
       There is data to read.
   */
-  in_ = 1,
+  In = 1,
 
   /**
       Data can be written (without blocking).
   */
-  out_ = 4,
+  Out = 4,
 
   /**
       There is urgent data to read.
   */
-  pri = 2,
+  Pri = 2,
 
   /**
       Error condition.
   */
-  err = 8,
+  Err = 8,
 
   /**
       Hung up (the connection has been broken, usually for
                pipes and sockets).
   */
-  hup = 16,
+  Hup = 16,
 
   /**
       Invalid request. The file descriptor is not open.
   */
-  nval = 32,
+  Nval = 32,
 }
 
 /**
@@ -920,22 +920,22 @@ enum GIOError
   /**
       no error
   */
-  none = 0,
+  None = 0,
 
   /**
       an EAGAIN error occurred
   */
-  again = 1,
+  Again = 1,
 
   /**
       an EINVAL error occurred
   */
-  inval = 2,
+  Inval = 2,
 
   /**
       another error occurred
   */
-  unknown = 3,
+  Unknown = 3,
 }
 
 /**
@@ -948,63 +948,63 @@ enum GIOFlags : uint
   /**
       no special flags set. Since: 2.74
   */
-  none = 0,
+  None = 0,
 
   /**
       turns on append mode, corresponds to `O_APPEND`
         (see the documentation of the UNIX open() syscall)
   */
-  append = 1,
+  Append = 1,
 
   /**
       turns on nonblocking mode, corresponds to
         `O_NONBLOCK`/`O_NDELAY` (see the documentation of the UNIX open()
         syscall)
   */
-  nonblock = 2,
+  Nonblock = 2,
 
   /**
       indicates that the io channel is readable.
         This flag cannot be changed.
   */
-  isReadable = 4,
+  IsReadable = 4,
 
   /**
       indicates that the io channel is writable.
         This flag cannot be changed.
   */
-  isWritable = 8,
+  IsWritable = 8,
 
   /**
       a misspelled version of @G_IO_FLAG_IS_WRITABLE
         that existed before the spelling was fixed in GLib 2.30. It is kept
         here for compatibility reasons. Deprecated since 2.30
   */
-  isWriteable = 8,
+  IsWriteable = 8,
 
   /**
       indicates that the io channel is seekable,
         i.e. that [glib.iochannel.IOChannel.seekPosition] can be used on it.
         This flag cannot be changed.
   */
-  isSeekable = 16,
+  IsSeekable = 16,
 
   /**
       the mask that specifies all the valid flags.
   */
-  mask = 31,
+  Mask = 31,
 
   /**
       the mask of the flags that are returned from
         [glib.iochannel.IOChannel.getFlags]
   */
-  getMask = 31,
+  GetMask = 31,
 
   /**
       the mask of the flags that the user can modify
         with [glib.iochannel.IOChannel.setFlags]
   */
-  setMask = 3,
+  SetMask = 3,
 }
 
 /**
@@ -1015,22 +1015,22 @@ enum GIOStatus
   /**
       An error occurred.
   */
-  error = 0,
+  Error = 0,
 
   /**
       Success.
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       End of file.
   */
-  eof = 2,
+  Eof = 2,
 
   /**
       Resource temporarily unavailable.
   */
-  again = 3,
+  Again = 3,
 }
 
 /**
@@ -1042,32 +1042,32 @@ enum GKeyFileError
       the text being parsed was in
       an unknown encoding
   */
-  unknownEncoding = 0,
+  UnknownEncoding = 0,
 
   /**
       document was ill-formed
   */
-  parse = 1,
+  Parse = 1,
 
   /**
       the file was not found
   */
-  notFound = 2,
+  NotFound = 2,
 
   /**
       a requested key was not found
   */
-  keyNotFound = 3,
+  KeyNotFound = 3,
 
   /**
       a requested group was not found
   */
-  groupNotFound = 4,
+  GroupNotFound = 4,
 
   /**
       a value could not be parsed
   */
-  invalidValue = 5,
+  InvalidValue = 5,
 }
 
 /**
@@ -1078,7 +1078,7 @@ enum GKeyFileFlags : uint
   /**
       No flags, default behaviour
   */
-  none = 0,
+  None = 0,
 
   /**
       Use this flag if you plan to write the
@@ -1086,7 +1086,7 @@ enum GKeyFileFlags : uint
       otherwise all comments will be lost when the key file is
       written back.
   */
-  keepComments = 1,
+  KeepComments = 1,
 
   /**
       Use this flag if you plan to write the
@@ -1094,7 +1094,7 @@ enum GKeyFileFlags : uint
       otherwise only the translations for the current language will be
       written back.
   */
-  keepTranslations = 2,
+  KeepTranslations = 2,
 }
 
 /**
@@ -1108,50 +1108,50 @@ enum GLogLevelFlags : uint
   /**
       internal flag
   */
-  flagRecursion = 1,
+  FlagRecursion = 1,
 
   /**
       internal flag
   */
-  flagFatal = 2,
+  FlagFatal = 2,
 
   /**
       log level for errors, see `func@GLib.error`.
       This level is also used for messages produced by `func@GLib.assert`.
   */
-  levelError = 4,
+  LevelError = 4,
 
   /**
       log level for critical warning messages, see
       `func@GLib.critical`. This level is also used for messages produced by
       `func@GLib.return_if_fail` and `func@GLib.return_val_if_fail`.
   */
-  levelCritical = 8,
+  LevelCritical = 8,
 
   /**
       log level for warnings, see `func@GLib.warning`
   */
-  levelWarning = 16,
+  LevelWarning = 16,
 
   /**
       log level for messages, see `func@GLib.message`
   */
-  levelMessage = 32,
+  LevelMessage = 32,
 
   /**
       log level for informational messages, see `func@GLib.info`
   */
-  levelInfo = 64,
+  LevelInfo = 64,
 
   /**
       log level for debug messages, see `func@GLib.debug`
   */
-  levelDebug = 128,
+  LevelDebug = 128,
 
   /**
       a mask including all log levels
   */
-  levelMask = -4,
+  LevelMask = -4,
 }
 
 /**
@@ -1167,12 +1167,12 @@ enum GLogWriterOutput
   /**
       Log writer has handled the log entry.
   */
-  handled = 1,
+  Handled = 1,
 
   /**
       Log writer could not handle the log entry.
   */
-  unhandled = 0,
+  Unhandled = 0,
 }
 
 /**
@@ -1184,7 +1184,7 @@ enum GMainContextFlags : uint
   /**
       Default behaviour.
   */
-  none = 0,
+  None = 0,
 
   /**
       Assume that polling for events will
@@ -1192,7 +1192,7 @@ enum GMainContextFlags : uint
     `g_main_context_{prepare,query,check,dispatch}` to integrate GMainContext in
     other event loops.
   */
-  ownerlessPolling = 1,
+  OwnerlessPolling = 1,
 }
 
 /**
@@ -1209,7 +1209,7 @@ enum GMarkupCollectType : uint
       used to terminate the list of attributes
         to collect
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       collect the string pointer directly from
@@ -1217,14 +1217,14 @@ enum GMarkupCollectType : uint
         char **). If `G_MARKUP_COLLECT_OPTIONAL` is specified and the
         attribute isn't present then the pointer will be set to null
   */
-  string_ = 1,
+  String = 1,
 
   /**
       as with `G_MARKUP_COLLECT_STRING`, but
         expects a parameter of type (char **) and [glib.global.strdup]s the
         returned pointer. The pointer must be freed with [glib.global.gfree]
   */
-  strdup = 2,
+  Strdup = 2,
 
   /**
       expects a parameter of type (gboolean *)
@@ -1233,7 +1233,7 @@ enum GMarkupCollectType : uint
         (case-insensitive) "false", "f", "no", "n", "0" and "true", "t",
         "yes", "y", "1"
   */
-  boolean = 3,
+  Boolean = 3,
 
   /**
       as with `G_MARKUP_COLLECT_BOOLEAN`, but
@@ -1241,14 +1241,14 @@ enum GMarkupCollectType : uint
         equal to neither false nor true G_MARKUP_COLLECT_OPTIONAL is
         implied
   */
-  tristate = 4,
+  Tristate = 4,
 
   /**
       can be bitwise ORed with the other fields.
         If present, allows the attribute not to appear. A default value
         is set depending on what value type is used
   */
-  optional = 65536,
+  Optional = 65536,
 }
 
 /**
@@ -1259,41 +1259,41 @@ enum GMarkupError
   /**
       text being parsed was not valid UTF-8
   */
-  badUtf8 = 0,
+  BadUtf8 = 0,
 
   /**
       document contained nothing, or only whitespace
   */
-  empty = 1,
+  Empty = 1,
 
   /**
       document was ill-formed
   */
-  parse = 2,
+  Parse = 2,
 
   /**
       error should be set by #GMarkupParser
         functions; element wasn't known
   */
-  unknownElement = 3,
+  UnknownElement = 3,
 
   /**
       error should be set by #GMarkupParser
         functions; attribute wasn't known
   */
-  unknownAttribute = 4,
+  UnknownAttribute = 4,
 
   /**
       error should be set by #GMarkupParser
         functions; content was invalid
   */
-  invalidContent = 5,
+  InvalidContent = 5,
 
   /**
       error should be set by #GMarkupParser
         functions; a required attribute was missing
   */
-  missingAttribute = 6,
+  MissingAttribute = 6,
 }
 
 /**
@@ -1304,12 +1304,12 @@ enum GMarkupParseFlags : uint
   /**
       No special behaviour. Since: 2.74
   */
-  defaultFlags = 0,
+  DefaultFlags = 0,
 
   /**
       flag you should not use
   */
-  doNotUseThisUnsupportedFlag = 1,
+  DoNotUseThisUnsupportedFlag = 1,
 
   /**
       When this flag is set, CDATA marked
@@ -1318,7 +1318,7 @@ enum GMarkupParseFlags : uint
         `<![CDATA[` and `]]>`) is
         passed to the @text function. This flag was added in GLib 2.12
   */
-  treatCdataAsText = 2,
+  TreatCdataAsText = 2,
 
   /**
       Normally errors caught by GMarkup
@@ -1327,7 +1327,7 @@ enum GMarkupParseFlags : uint
         location information is also prefixed to errors generated by the
         #GMarkupParser implementation functions
   */
-  prefixErrorPosition = 4,
+  PrefixErrorPosition = 4,
 
   /**
       Ignore (don't report) qualified
@@ -1335,7 +1335,7 @@ enum GMarkupParseFlags : uint
         attribute or tag is one that contains ':' in its name (ie: is in
         another namespace).  Since: 2.40.
   */
-  ignoreQualified = 8,
+  IgnoreQualified = 8,
 }
 
 /**
@@ -1351,48 +1351,48 @@ enum GNormalizeMode
       standardize differences that do not affect the
         text content, such as the above-mentioned accent representation
   */
-  default_ = 0,
+  Default = 0,
 
   /**
-      another name for [glib.types.NormalizeMode.default_]
+      another name for [glib.types.NormalizeMode.Default]
   */
-  nfd = 0,
+  Nfd = 0,
 
   /**
-      like [glib.types.NormalizeMode.default_], but with
+      like [glib.types.NormalizeMode.Default], but with
         composed forms rather than a maximally decomposed form
   */
-  defaultCompose = 1,
+  DefaultCompose = 1,
 
   /**
-      another name for [glib.types.NormalizeMode.defaultCompose]
+      another name for [glib.types.NormalizeMode.DefaultCompose]
   */
-  nfc = 1,
+  Nfc = 1,
 
   /**
-      beyond [glib.types.NormalizeMode.default_] also standardize the
+      beyond [glib.types.NormalizeMode.Default] also standardize the
         "compatibility" characters in Unicode, such as SUPERSCRIPT THREE
         to the standard forms (in this case DIGIT THREE). Formatting
         information may be lost but for most text operations such
         characters should be considered the same
   */
-  all = 2,
+  All = 2,
 
   /**
-      another name for [glib.types.NormalizeMode.all]
+      another name for [glib.types.NormalizeMode.All]
   */
-  nfkd = 2,
+  Nfkd = 2,
 
   /**
-      like [glib.types.NormalizeMode.all], but with composed
+      like [glib.types.NormalizeMode.All], but with composed
         forms rather than a maximally decomposed form
   */
-  allCompose = 3,
+  AllCompose = 3,
 
   /**
-      another name for [glib.types.NormalizeMode.allCompose]
+      another name for [glib.types.NormalizeMode.AllCompose]
   */
-  nfkc = 3,
+  Nfkc = 3,
 }
 
 /**
@@ -1403,12 +1403,12 @@ enum GNumberParserError
   /**
       string was not a valid number
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       string was a number, but out of bounds
   */
-  outOfBounds = 1,
+  OutOfBounds = 1,
 }
 
 /**
@@ -1420,17 +1420,17 @@ enum GOnceStatus
   /**
       the function has not been called yet.
   */
-  notcalled = 0,
+  Notcalled = 0,
 
   /**
       the function call is currently in progress.
   */
-  progress = 1,
+  Progress = 1,
 
   /**
       the function has been called.
   */
-  ready = 2,
+  Ready = 2,
 }
 
 /**
@@ -1444,48 +1444,48 @@ enum GOptionArg
   /**
       No extra argument. This is useful for simple flags or booleans.
   */
-  none = 0,
+  None = 0,
 
   /**
       The option takes a UTF-8 string argument.
   */
-  string_ = 1,
+  String = 1,
 
   /**
       The option takes an integer argument.
   */
-  int_ = 2,
+  Int = 2,
 
   /**
       The option provides a callback (of type
         #GOptionArgFunc) to parse the extra argument.
   */
-  callback = 3,
+  Callback = 3,
 
   /**
       The option takes a filename as argument, which will
            be in the GLib filename encoding rather than UTF-8.
   */
-  filename = 4,
+  Filename = 4,
 
   /**
       The option takes a string argument, multiple
         uses of the option are collected into an array of strings.
   */
-  stringArray = 5,
+  StringArray = 5,
 
   /**
       The option takes a filename as argument,
         multiple uses of the option are collected into an array of strings.
   */
-  filenameArray = 6,
+  FilenameArray = 6,
 
   /**
       The option takes a double argument. The argument
         can be formatted either for the user's locale or for the "C" locale.
         Since 2.12
   */
-  double_ = 7,
+  Double = 7,
 
   /**
       The option takes a 64-bit integer. Like
@@ -1493,7 +1493,7 @@ enum GOptionArg
         decimal base, or in hexadecimal (when prefixed with `0x`, for
         example, `0xffffffff`). Since 2.12
   */
-  int64 = 8,
+  Int64 = 8,
 }
 
 /**
@@ -1506,17 +1506,17 @@ enum GOptionError
      This error will only be reported, if the parser hasn't been instructed
      to ignore unknown options, see [glib.option_context.OptionContext.setIgnoreUnknownOptions].
   */
-  unknownOption = 0,
+  UnknownOption = 0,
 
   /**
       A value couldn't be parsed.
   */
-  badValue = 1,
+  BadValue = 1,
 
   /**
       A #GOptionArgFunc callback failed.
   */
-  failed = 2,
+  Failed = 2,
 }
 
 /**
@@ -1527,39 +1527,39 @@ enum GOptionFlags : uint
   /**
       No flags. Since: 2.42.
   */
-  none = 0,
+  None = 0,
 
   /**
       The option doesn't appear in `--help` output.
   */
-  hidden = 1,
+  Hidden = 1,
 
   /**
       The option appears in the main section of the
         `--help` output, even if it is defined in a group.
   */
-  inMain = 2,
+  InMain = 2,
 
   /**
       For options of the `G_OPTION_ARG_NONE` kind, this
         flag indicates that the sense of the option is reversed. i.e. false will
         be stored into the argument rather than true.
   */
-  reverse = 4,
+  Reverse = 4,
 
   /**
       For options of the `G_OPTION_ARG_CALLBACK` kind,
         this flag indicates that the callback does not take any argument
         (like a `G_OPTION_ARG_NONE` option). Since 2.8
   */
-  noArg = 8,
+  NoArg = 8,
 
   /**
       For options of the `G_OPTION_ARG_CALLBACK`
         kind, this flag indicates that the argument should be passed to the
         callback in the GLib filename encoding rather than UTF-8. Since 2.8
   */
-  filename = 16,
+  Filename = 16,
 
   /**
       For options of the `G_OPTION_ARG_CALLBACK`
@@ -1567,7 +1567,7 @@ enum GOptionFlags : uint
         If no argument is given then data of [glib.types.OptionParseFunc] will be
         set to NULL. Since 2.8
   */
-  optionalArg = 32,
+  OptionalArg = 32,
 
   /**
       This flag turns off the automatic conflict
@@ -1577,7 +1577,7 @@ enum GOptionFlags : uint
         It is not safe to use this option, unless all option groups are under
         your direct control. Since 2.8.
   */
-  noalias = 64,
+  Noalias = 64,
 }
 
 /**
@@ -1588,14 +1588,14 @@ enum GRegexCompileFlags : uint
   /**
       No special options set. Since: 2.74
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Letters in the pattern match both upper- and
         lowercase letters. This option can be changed within a pattern
         by a "(?i)" option setting.
   */
-  caseless = 1,
+  Caseless = 1,
 
   /**
       By default, GRegex treats the strings as consisting
@@ -1610,14 +1610,14 @@ enum GRegexCompileFlags : uint
         and end. This can be changed within a pattern by a "(?m)" option
         setting.
   */
-  multiline = 2,
+  Multiline = 2,
 
   /**
       A dot metacharacter (".") in the pattern matches all
         characters, including newlines. Without it, newlines are excluded.
         This option can be changed within a pattern by a ("?s") option setting.
   */
-  dotall = 4,
+  Dotall = 4,
 
   /**
       Whitespace data characters in the pattern are
@@ -1627,7 +1627,7 @@ enum GRegexCompileFlags : uint
         the next newline character, inclusive, are also ignored. This can
         be changed within a pattern by a "(?x)" option setting.
   */
-  extended = 8,
+  Extended = 8,
 
   /**
       The pattern is forced to be "anchored", that is,
@@ -1636,7 +1636,7 @@ enum GRegexCompileFlags : uint
         appropriate constructs in the pattern itself such as the "^"
         metacharacter.
   */
-  anchored = 16,
+  Anchored = 16,
 
   /**
       A dollar metacharacter ("$") in the pattern
@@ -1645,20 +1645,20 @@ enum GRegexCompileFlags : uint
         it is a newline (but not before any other newlines). This option
         is ignored if `G_REGEX_MULTILINE` is set.
   */
-  dollarEndonly = 32,
+  DollarEndonly = 32,
 
   /**
       Inverts the "greediness" of the quantifiers so that
         they are not greedy by default, but become greedy if followed by "?".
         It can also be set by a "(?U)" option setting within the pattern.
   */
-  ungreedy = 512,
+  Ungreedy = 512,
 
   /**
       Usually strings must be valid UTF-8 strings, using this
         flag they are considered as a raw sequence of bytes.
   */
-  raw = 2048,
+  Raw = 2048,
 
   /**
       Disables the use of numbered capturing
@@ -1667,7 +1667,7 @@ enum GRegexCompileFlags : uint
         parentheses can still be used for capturing (and they acquire numbers
         in the usual way).
   */
-  noAutoCapture = 4096,
+  NoAutoCapture = 4096,
 
   /**
       Since 2.74 and the port to pcre2, requests JIT
@@ -1678,13 +1678,13 @@ enum GRegexCompileFlags : uint
         compiled pattern is used for matching many times. Before 2.74 this
         option used the built-in non-JIT optimizations in pcre1.
   */
-  optimize = 8192,
+  Optimize = 8192,
 
   /**
       Limits an unanchored pattern to match before (or at) the
         first newline. Since: 2.34
   */
-  firstline = 262144,
+  Firstline = 262144,
 
   /**
       Names used to identify capturing subpatterns need not
@@ -1692,49 +1692,49 @@ enum GRegexCompileFlags : uint
         is known that only one instance of the named subpattern can ever be
         matched.
   */
-  dupnames = 524288,
+  Dupnames = 524288,
 
   /**
       Usually any newline character or character sequence is
         recognized. If this option is set, the only recognized newline character
         is '\r'.
   */
-  newlineCr = 1048576,
+  NewlineCr = 1048576,
 
   /**
       Usually any newline character or character sequence is
         recognized. If this option is set, the only recognized newline character
         is '\n'.
   */
-  newlineLf = 2097152,
+  NewlineLf = 2097152,
 
   /**
       Usually any newline character or character sequence is
         recognized. If this option is set, the only recognized newline character
         sequence is '\r\n'.
   */
-  newlineCrlf = 3145728,
+  NewlineCrlf = 3145728,
 
   /**
       Usually any newline character or character sequence
         is recognized. If this option is set, the only recognized newline character
         sequences are '\r', '\n', and '\r\n'. Since: 2.34
   */
-  newlineAnycrlf = 5242880,
+  NewlineAnycrlf = 5242880,
 
   /**
       Usually any newline character or character sequence
         is recognised. If this option is set, then "\R" only recognizes the newline
        characters '\r', '\n' and '\r\n'. Since: 2.34
   */
-  bsrAnycrlf = 8388608,
+  BsrAnycrlf = 8388608,
 
   /**
       Changes behaviour so that it is compatible with
         JavaScript rather than PCRE. Since GLib 2.74 this is no longer supported,
         as libpcre2 does not support it. Since: 2.34 Deprecated: 2.74
   */
-  javascriptCompat = 33554432,
+  JavascriptCompat = 33554432,
 }
 
 /**
@@ -1745,330 +1745,330 @@ enum GRegexError
   /**
       Compilation of the regular expression failed.
   */
-  compile = 0,
+  Compile = 0,
 
   /**
       Optimization of the regular expression failed.
   */
-  optimize = 1,
+  Optimize = 1,
 
   /**
       Replacement failed due to an ill-formed replacement
         string.
   */
-  replace = 2,
+  Replace = 2,
 
   /**
       The match process failed.
   */
-  match = 3,
+  Match = 3,
 
   /**
       Internal error of the regular expression engine.
         Since 2.16
   */
-  internal = 4,
+  Internal = 4,
 
   /**
       "\\" at end of pattern. Since 2.16
   */
-  strayBackslash = 101,
+  StrayBackslash = 101,
 
   /**
       "\\c" at end of pattern. Since 2.16
   */
-  missingControlChar = 102,
+  MissingControlChar = 102,
 
   /**
       Unrecognized character follows "\\".
         Since 2.16
   */
-  unrecognizedEscape = 103,
+  UnrecognizedEscape = 103,
 
   /**
       Numbers out of order in "{}"
         quantifier. Since 2.16
   */
-  quantifiersOutOfOrder = 104,
+  QuantifiersOutOfOrder = 104,
 
   /**
       Number too big in "{}" quantifier.
         Since 2.16
   */
-  quantifierTooBig = 105,
+  QuantifierTooBig = 105,
 
   /**
       Missing terminating "]" for
         character class. Since 2.16
   */
-  unterminatedCharacterClass = 106,
+  UnterminatedCharacterClass = 106,
 
   /**
       Invalid escape sequence
         in character class. Since 2.16
   */
-  invalidEscapeInCharacterClass = 107,
+  InvalidEscapeInCharacterClass = 107,
 
   /**
       Range out of order in character class.
         Since 2.16
   */
-  rangeOutOfOrder = 108,
+  RangeOutOfOrder = 108,
 
   /**
       Nothing to repeat. Since 2.16
   */
-  nothingToRepeat = 109,
+  NothingToRepeat = 109,
 
   /**
       Unrecognized character after "(?",
         "(?<" or "(?P". Since 2.16
   */
-  unrecognizedCharacter = 112,
+  UnrecognizedCharacter = 112,
 
   /**
       POSIX named classes are
         supported only within a class. Since 2.16
   */
-  posixNamedClassOutsideClass = 113,
+  PosixNamedClassOutsideClass = 113,
 
   /**
       Missing terminating ")" or ")"
         without opening "(". Since 2.16
   */
-  unmatchedParenthesis = 114,
+  UnmatchedParenthesis = 114,
 
   /**
       Reference to non-existent
         subpattern. Since 2.16
   */
-  inexistentSubpatternReference = 115,
+  InexistentSubpatternReference = 115,
 
   /**
       Missing terminating ")" after comment.
         Since 2.16
   */
-  unterminatedComment = 118,
+  UnterminatedComment = 118,
 
   /**
       Regular expression too large.
         Since 2.16
   */
-  expressionTooLarge = 120,
+  ExpressionTooLarge = 120,
 
   /**
       Failed to get memory. Since 2.16
   */
-  memoryError = 121,
+  MemoryError = 121,
 
   /**
       Lookbehind assertion is not
         fixed length. Since 2.16
   */
-  variableLengthLookbehind = 125,
+  VariableLengthLookbehind = 125,
 
   /**
       Malformed number or name after "(?(".
         Since 2.16
   */
-  malformedCondition = 126,
+  MalformedCondition = 126,
 
   /**
       Conditional group contains
         more than two branches. Since 2.16
   */
-  tooManyConditionalBranches = 127,
+  TooManyConditionalBranches = 127,
 
   /**
       Assertion expected after "(?(".
         Since 2.16
   */
-  assertionExpected = 128,
+  AssertionExpected = 128,
 
   /**
       Unknown POSIX class name.
         Since 2.16
   */
-  unknownPosixClassName = 130,
+  UnknownPosixClassName = 130,
 
   /**
       POSIX collating
         elements are not supported. Since 2.16
   */
-  posixCollatingElementsNotSupported = 131,
+  PosixCollatingElementsNotSupported = 131,
 
   /**
       Character value in "\\x{...}" sequence
         is too large. Since 2.16
   */
-  hexCodeTooLarge = 134,
+  HexCodeTooLarge = 134,
 
   /**
       Invalid condition "(?(0)". Since 2.16
   */
-  invalidCondition = 135,
+  InvalidCondition = 135,
 
   /**
       \\C not allowed in
         lookbehind assertion. Since 2.16
   */
-  singleByteMatchInLookbehind = 136,
+  SingleByteMatchInLookbehind = 136,
 
   /**
       Recursive call could loop indefinitely.
         Since 2.16
   */
-  infiniteLoop = 140,
+  InfiniteLoop = 140,
 
   /**
       Missing terminator
         in subpattern name. Since 2.16
   */
-  missingSubpatternNameTerminator = 142,
+  MissingSubpatternNameTerminator = 142,
 
   /**
       Two named subpatterns have
         the same name. Since 2.16
   */
-  duplicateSubpatternName = 143,
+  DuplicateSubpatternName = 143,
 
   /**
       Malformed "\\P" or "\\p" sequence.
         Since 2.16
   */
-  malformedProperty = 146,
+  MalformedProperty = 146,
 
   /**
       Unknown property name after "\\P" or
         "\\p". Since 2.16
   */
-  unknownProperty = 147,
+  UnknownProperty = 147,
 
   /**
       Subpattern name is too long
         (maximum 32 characters). Since 2.16
   */
-  subpatternNameTooLong = 148,
+  SubpatternNameTooLong = 148,
 
   /**
       Too many named subpatterns (maximum
         10,000). Since 2.16
   */
-  tooManySubpatterns = 149,
+  TooManySubpatterns = 149,
 
   /**
       Octal value is greater than "\\377".
         Since 2.16
   */
-  invalidOctalValue = 151,
+  InvalidOctalValue = 151,
 
   /**
       "DEFINE" group contains more
         than one branch. Since 2.16
   */
-  tooManyBranchesInDefine = 154,
+  TooManyBranchesInDefine = 154,
 
   /**
       Repeating a "DEFINE" group is not allowed.
         This error is never raised. Since: 2.16 Deprecated: 2.34
   */
-  defineRepetion = 155,
+  DefineRepetion = 155,
 
   /**
       Inconsistent newline options.
         Since 2.16
   */
-  inconsistentNewlineOptions = 156,
+  InconsistentNewlineOptions = 156,
 
   /**
       "\\g" is not followed by a braced,
          angle-bracketed, or quoted name or number, or by a plain number. Since: 2.16
   */
-  missingBackReference = 157,
+  MissingBackReference = 157,
 
   /**
       relative reference must not be zero. Since: 2.34
   */
-  invalidRelativeReference = 158,
+  InvalidRelativeReference = 158,
 
   /**
       the backtracing
         control verb used does not allow an argument. Since: 2.34
   */
-  backtrackingControlVerbArgumentForbidden = 159,
+  BacktrackingControlVerbArgumentForbidden = 159,
 
   /**
       unknown backtracing
         control verb. Since: 2.34
   */
-  unknownBacktrackingControlVerb = 160,
+  UnknownBacktrackingControlVerb = 160,
 
   /**
       number is too big in escape sequence. Since: 2.34
   */
-  numberTooBig = 161,
+  NumberTooBig = 161,
 
   /**
       Missing subpattern name. Since: 2.34
   */
-  missingSubpatternName = 162,
+  MissingSubpatternName = 162,
 
   /**
       Missing digit. Since 2.34
   */
-  missingDigit = 163,
+  MissingDigit = 163,
 
   /**
       In JavaScript compatibility mode,
         "[" is an invalid data character. Since: 2.34
   */
-  invalidDataCharacter = 164,
+  InvalidDataCharacter = 164,
 
   /**
       different names for subpatterns of the
         same number are not allowed. Since: 2.34
   */
-  extraSubpatternName = 165,
+  ExtraSubpatternName = 165,
 
   /**
       the backtracing control
         verb requires an argument. Since: 2.34
   */
-  backtrackingControlVerbArgumentRequired = 166,
+  BacktrackingControlVerbArgumentRequired = 166,
 
   /**
       "\\c" must be followed by an ASCII
         character. Since: 2.34
   */
-  invalidControlChar = 168,
+  InvalidControlChar = 168,
 
   /**
       "\\k" is not followed by a braced, angle-bracketed, or
         quoted name. Since: 2.34
   */
-  missingName = 169,
+  MissingName = 169,
 
   /**
       "\\N" is not supported in a class. Since: 2.34
   */
-  notSupportedInClass = 171,
+  NotSupportedInClass = 171,
 
   /**
       too many forward references. Since: 2.34
   */
-  tooManyForwardReferences = 172,
+  TooManyForwardReferences = 172,
 
   /**
       the name is too long in "(*MARK)", "(*PRUNE)",
         "(*SKIP)", or "(*THEN)". Since: 2.34
   */
-  nameTooLong = 175,
+  NameTooLong = 175,
 
   /**
       the character value in the \\u sequence is
         too large. Since: 2.34
   */
-  characterValueTooLarge = 176,
+  CharacterValueTooLarge = 176,
 }
 
 /**
@@ -2079,7 +2079,7 @@ enum GRegexMatchFlags : uint
   /**
       No special options set. Since: 2.74
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       The pattern is forced to be "anchored", that is,
@@ -2088,7 +2088,7 @@ enum GRegexMatchFlags : uint
         appropriate constructs in the pattern itself such as the "^"
         metacharacter.
   */
-  anchored = 16,
+  Anchored = 16,
 
   /**
       Specifies that first character of the string is
@@ -2098,7 +2098,7 @@ enum GRegexMatchFlags : uint
         only the behaviour of the circumflex metacharacter, it does not
         affect "\A".
   */
-  notbol = 128,
+  Notbol = 128,
 
   /**
       Specifies that the end of the subject string is
@@ -2108,7 +2108,7 @@ enum GRegexMatchFlags : uint
         dollar never to match. This option affects only the behaviour of
         the dollar metacharacter, it does not affect "\Z" or "\z".
   */
-  noteol = 256,
+  Noteol = 256,
 
   /**
       An empty string is not considered to be a valid
@@ -2120,31 +2120,31 @@ enum GRegexMatchFlags : uint
         valid, so GRegex searches further into the string for occurrences
         of "a" or "b".
   */
-  notempty = 1024,
+  Notempty = 1024,
 
   /**
       Turns on the partial matching feature, for more
         documentation on partial matching see [glib.match_info.MatchInfo.isPartialMatch].
   */
-  partial = 32768,
+  Partial = 32768,
 
   /**
       Overrides the newline definition set when
         creating a new #GRegex, setting the '\r' character as line terminator.
   */
-  newlineCr = 1048576,
+  NewlineCr = 1048576,
 
   /**
       Overrides the newline definition set when
         creating a new #GRegex, setting the '\n' character as line terminator.
   */
-  newlineLf = 2097152,
+  NewlineLf = 2097152,
 
   /**
       Overrides the newline definition set when
         creating a new #GRegex, setting the '\r\n' characters sequence as line terminator.
   */
-  newlineCrlf = 3145728,
+  NewlineCrlf = 3145728,
 
   /**
       Overrides the newline definition set when
@@ -2154,21 +2154,21 @@ enum GRegexMatchFlags : uint
         U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
         U+2029 PARAGRAPH SEPARATOR.
   */
-  newlineAny = 4194304,
+  NewlineAny = 4194304,
 
   /**
       Overrides the newline definition set when
         creating a new #GRegex; any '\r', '\n', or '\r\n' character sequence
         is recognized as a newline. Since: 2.34
   */
-  newlineAnycrlf = 5242880,
+  NewlineAnycrlf = 5242880,
 
   /**
       Overrides the newline definition for "\R" set when
         creating a new #GRegex; only '\r', '\n', or '\r\n' character sequences
         are recognized as a newline by "\R". Since: 2.34
   */
-  bsrAnycrlf = 8388608,
+  BsrAnycrlf = 8388608,
 
   /**
       Overrides the newline definition for "\R" set when
@@ -2178,12 +2178,12 @@ enum GRegexMatchFlags : uint
         U+0085 NEXT LINE (NEL), U+2028 LINE SEPARATOR and
         U+2029 PARAGRAPH SEPARATOR. Since: 2.34
   */
-  bsrAny = 16777216,
+  BsrAny = 16777216,
 
   /**
       An alias for `G_REGEX_MATCH_PARTIAL`. Since: 2.34
   */
-  partialSoft = 32768,
+  PartialSoft = 32768,
 
   /**
       Turns on the partial matching feature. In contrast to
@@ -2191,14 +2191,14 @@ enum GRegexMatchFlags : uint
         is found, without continuing to search for a possible complete match. See
         [glib.match_info.MatchInfo.isPartialMatch] for more information. Since: 2.34
   */
-  partialHard = 134217728,
+  PartialHard = 134217728,
 
   /**
       Like `G_REGEX_MATCH_NOTEMPTY`, but only applied to
         the start of the matched string. For anchored
         patterns this can only happen for pattern containing "\K". Since: 2.34
   */
-  notemptyAtstart = 268435456,
+  NotemptyAtstart = 268435456,
 }
 
 /**
@@ -2210,17 +2210,17 @@ enum GSeekType
   /**
       the current position in the file.
   */
-  cur = 0,
+  Cur = 0,
 
   /**
       the start of the file.
   */
-  set = 1,
+  Set = 1,
 
   /**
       the end of the file.
   */
-  end = 2,
+  End = 2,
 }
 
 /**
@@ -2231,39 +2231,39 @@ enum GShellError
   /**
       Mismatched or otherwise mangled quoting.
   */
-  badQuoting = 0,
+  BadQuoting = 0,
 
   /**
       String to be parsed was empty.
   */
-  emptyString = 1,
+  EmptyString = 1,
 
   /**
       Some other error.
   */
-  failed = 2,
+  Failed = 2,
 }
 
 /** */
 enum GSliceConfig
 {
   /** */
-  alwaysMalloc = 1,
+  AlwaysMalloc = 1,
 
   /** */
-  bypassMagazines = 2,
+  BypassMagazines = 2,
 
   /** */
-  workingSetMsecs = 3,
+  WorkingSetMsecs = 3,
 
   /** */
-  colorIncrement = 4,
+  ColorIncrement = 4,
 
   /** */
-  chunkSizes = 5,
+  ChunkSizes = 5,
 
   /** */
-  contentionCounter = 6,
+  ContentionCounter = 6,
 }
 
 /**
@@ -2274,32 +2274,32 @@ enum GSpawnError
   /**
       Fork failed due to lack of memory.
   */
-  fork = 0,
+  Fork = 0,
 
   /**
       Read or select on pipes failed.
   */
-  read = 1,
+  Read = 1,
 
   /**
       Changing to working directory failed.
   */
-  chdir = 2,
+  Chdir = 2,
 
   /**
       execv() returned `EACCES`
   */
-  acces = 3,
+  Acces = 3,
 
   /**
       execv() returned `EPERM`
   */
-  perm = 4,
+  Perm = 4,
 
   /**
       execv() returned `E2BIG`
   */
-  tooBig = 5,
+  TooBig = 5,
 
   /**
       deprecated alias for `G_SPAWN_ERROR_TOO_BIG` (deprecated since GLib 2.32)
@@ -2309,73 +2309,73 @@ enum GSpawnError
   /**
       execv() returned `ENOEXEC`
   */
-  noexec = 6,
+  Noexec = 6,
 
   /**
       execv() returned `ENAMETOOLONG`
   */
-  nametoolong = 7,
+  Nametoolong = 7,
 
   /**
       execv() returned `ENOENT`
   */
-  noent = 8,
+  Noent = 8,
 
   /**
       execv() returned `ENOMEM`
   */
-  nomem = 9,
+  Nomem = 9,
 
   /**
       execv() returned `ENOTDIR`
   */
-  notdir = 10,
+  Notdir = 10,
 
   /**
       execv() returned `ELOOP`
   */
-  loop = 11,
+  Loop = 11,
 
   /**
       execv() returned `ETXTBUSY`
   */
-  txtbusy = 12,
+  Txtbusy = 12,
 
   /**
       execv() returned `EIO`
   */
-  io = 13,
+  Io = 13,
 
   /**
       execv() returned `ENFILE`
   */
-  nfile = 14,
+  Nfile = 14,
 
   /**
       execv() returned `EMFILE`
   */
-  mfile = 15,
+  Mfile = 15,
 
   /**
       execv() returned `EINVAL`
   */
-  inval = 16,
+  Inval = 16,
 
   /**
       execv() returned `EISDIR`
   */
-  isdir = 17,
+  Isdir = 17,
 
   /**
       execv() returned `ELIBBAD`
   */
-  libbad = 18,
+  Libbad = 18,
 
   /**
       Some other fatal failure,
       `error->message` should explain.
   */
-  failed = 19,
+  Failed = 19,
 }
 
 /**
@@ -2386,44 +2386,44 @@ enum GSpawnFlags : uint
   /**
       no flags, default behaviour
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       the parent's open file descriptors will
         be inherited by the child; otherwise all descriptors except stdin,
         stdout and stderr will be closed before calling exec() in the child.
   */
-  leaveDescriptorsOpen = 1,
+  LeaveDescriptorsOpen = 1,
 
   /**
       the child will not be automatically reaped;
         you must use [glib.global.childWatchAdd] yourself (or call waitpid() or handle
         `SIGCHLD` yourself), or the child will become a zombie.
   */
-  doNotReapChild = 2,
+  DoNotReapChild = 2,
 
   /**
       `argv[0]` need not be an absolute path, it will be
         looked for in the user's `PATH`.
   */
-  searchPath = 4,
+  SearchPath = 4,
 
   /**
       the child's standard output will be discarded,
         instead of going to the same location as the parent's standard output.
   */
-  stdoutToDevNull = 8,
+  StdoutToDevNull = 8,
 
   /**
       the child's standard error will be discarded.
   */
-  stderrToDevNull = 16,
+  StderrToDevNull = 16,
 
   /**
       the child will inherit the parent's standard
         input (by default, the child's standard input is attached to `/dev/null`).
   */
-  childInheritsStdin = 32,
+  ChildInheritsStdin = 32,
 
   /**
       the first element of `argv` is the file to
@@ -2431,35 +2431,35 @@ enum GSpawnFlags : uint
         to pass to the file. Normally [glib.global.spawnAsyncWithPipes] uses `argv[0]`
         as the file to execute, and passes all of `argv` to the child.
   */
-  fileAndArgvZero = 64,
+  FileAndArgvZero = 64,
 
   /**
       if `argv[0]` is not an absolute path,
         it will be looked for in the `PATH` from the passed child environment.
         Since: 2.34
   */
-  searchPathFromEnvp = 128,
+  SearchPathFromEnvp = 128,
 
   /**
       create all pipes with the `O_CLOEXEC` flag set.
         Since: 2.40
   */
-  cloexecPipes = 256,
+  CloexecPipes = 256,
 
   /**
       The child will inherit the parent's standard output.
   */
-  childInheritsStdout = 512,
+  ChildInheritsStdout = 512,
 
   /**
       The child will inherit the parent's standard error.
   */
-  childInheritsStderr = 1024,
+  ChildInheritsStderr = 1024,
 
   /**
       The child's standard input is attached to `/dev/null`.
   */
-  stdinFromDevNull = 2048,
+  StdinFromDevNull = 2048,
 }
 
 /**
@@ -2485,68 +2485,68 @@ enum GTestFileType
   /**
       a file that was included in the distribution tarball
   */
-  dist = 0,
+  Dist = 0,
 
   /**
       a file that was built on the compiling machine
   */
-  built = 1,
+  Built = 1,
 }
 
 /** */
 enum GTestLogType
 {
   /** */
-  none = 0,
+  None = 0,
 
   /** */
-  error = 1,
+  Error = 1,
 
   /** */
-  startBinary = 2,
+  StartBinary = 2,
 
   /** */
-  listCase = 3,
+  ListCase = 3,
 
   /** */
-  skipCase = 4,
+  SkipCase = 4,
 
   /** */
-  startCase = 5,
+  StartCase = 5,
 
   /** */
-  stopCase = 6,
+  StopCase = 6,
 
   /** */
-  minResult = 7,
+  MinResult = 7,
 
   /** */
-  maxResult = 8,
+  MaxResult = 8,
 
   /** */
-  message = 9,
+  Message = 9,
 
   /** */
-  startSuite = 10,
+  StartSuite = 10,
 
   /** */
-  stopSuite = 11,
+  StopSuite = 11,
 }
 
 /** */
 enum GTestResult
 {
   /** */
-  success = 0,
+  Success = 0,
 
   /** */
-  skipped = 1,
+  Skipped = 1,
 
   /** */
-  failure = 2,
+  Failure = 2,
 
   /** */
-  incomplete = 3,
+  Incomplete = 3,
 }
 
 /**
@@ -2560,14 +2560,14 @@ enum GTestSubprocessFlags : uint
   /**
       Default behaviour. Since: 2.74
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       If this flag is given, the child
         process will inherit the parent's stdin. Otherwise, the child's
         stdin is redirected to `/dev/null`.
   */
-  inheritStdin = 1,
+  InheritStdin = 1,
 
   /**
       If this flag is given, the child
@@ -2575,7 +2575,7 @@ enum GTestSubprocessFlags : uint
         stdout will not be visible, but it will be captured to allow
         later tests with g_test_trap_assert_stdout().
   */
-  inheritStdout = 2,
+  InheritStdout = 2,
 
   /**
       If this flag is given, the child
@@ -2583,7 +2583,7 @@ enum GTestSubprocessFlags : uint
         stderr will not be visible, but it will be captured to allow
         later tests with g_test_trap_assert_stderr().
   */
-  inheritStderr = 4,
+  InheritStderr = 4,
 }
 
 /**
@@ -2599,7 +2599,7 @@ enum GTestTrapFlags : uint
   /**
       Default behaviour. Since: 2.74
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Redirect stdout of the test child to
@@ -2607,7 +2607,7 @@ enum GTestTrapFlags : uint
         runs. The actual output is still captured though to allow later
         tests with g_test_trap_assert_stdout().
   */
-  silenceStdout = 128,
+  SilenceStdout = 128,
 
   /**
       Redirect stderr of the test child to
@@ -2615,14 +2615,14 @@ enum GTestTrapFlags : uint
         runs. The actual output is still captured though to allow later
         tests with g_test_trap_assert_stderr().
   */
-  silenceStderr = 256,
+  SilenceStderr = 256,
 
   /**
       If this flag is given, stdin of the
         child process is shared with stdin of its parent process.
         It is redirected to `/dev/null` otherwise.
   */
-  inheritStdin = 512,
+  InheritStdin = 512,
 }
 
 /**
@@ -2634,7 +2634,7 @@ enum GThreadError
       a thread couldn't be created due to resource
                            shortage. Try again later.
   */
-  threadErrorAgain = 0,
+  ThreadErrorAgain = 0,
 }
 
 /**
@@ -2647,22 +2647,22 @@ enum GThreadPriority
   /**
       a priority lower than normal
   */
-  low = 0,
+  Low = 0,
 
   /**
       the default priority
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       a priority higher than normal
   */
-  high = 2,
+  High = 2,
 
   /**
       the highest priority
   */
-  urgent = 3,
+  Urgent = 3,
 }
 
 /**
@@ -2680,17 +2680,17 @@ enum GTimeType
   /**
       the time is in local standard time
   */
-  standard = 0,
+  Standard = 0,
 
   /**
       the time is in local daylight time
   */
-  daylight = 1,
+  Daylight = 1,
 
   /**
       the time is in UTC
   */
-  universal = 2,
+  Universal = 2,
 }
 
 /**
@@ -2702,117 +2702,117 @@ enum GTokenType
   /**
       the end of the file
   */
-  eof = 0,
+  Eof = 0,
 
   /**
       a '(' character
   */
-  leftParen = 40,
+  LeftParen = 40,
 
   /**
       a ')' character
   */
-  rightParen = 41,
+  RightParen = 41,
 
   /**
       a '{' character
   */
-  leftCurly = 123,
+  LeftCurly = 123,
 
   /**
       a '}' character
   */
-  rightCurly = 125,
+  RightCurly = 125,
 
   /**
       a '[' character
   */
-  leftBrace = 91,
+  LeftBrace = 91,
 
   /**
       a ']' character
   */
-  rightBrace = 93,
+  RightBrace = 93,
 
   /**
       a '=' character
   */
-  equalSign = 61,
+  EqualSign = 61,
 
   /**
       a ',' character
   */
-  comma = 44,
+  Comma = 44,
 
   /**
       not a token
   */
-  none = 256,
+  None = 256,
 
   /**
       an error occurred
   */
-  error = 257,
+  Error = 257,
 
   /**
       a character
   */
-  char_ = 258,
+  Char = 258,
 
   /**
       a binary integer
   */
-  binary = 259,
+  Binary = 259,
 
   /**
       an octal integer
   */
-  octal = 260,
+  Octal = 260,
 
   /**
       an integer
   */
-  int_ = 261,
+  Int = 261,
 
   /**
       a hex integer
   */
-  hex = 262,
+  Hex = 262,
 
   /**
       a floating point number
   */
-  float_ = 263,
+  Float = 263,
 
   /**
       a string
   */
-  string_ = 264,
+  String = 264,
 
   /**
       a symbol
   */
-  symbol = 265,
+  Symbol = 265,
 
   /**
       an identifier
   */
-  identifier = 266,
+  Identifier = 266,
 
   /**
       a null identifier
   */
-  identifierNull = 267,
+  IdentifierNull = 267,
 
   /**
       one line comment
   */
-  commentSingle = 268,
+  CommentSingle = 268,
 
   /**
       multi line comment
   */
-  commentMulti = 269,
+  CommentMulti = 269,
 }
 
 /**
@@ -2826,34 +2826,34 @@ enum GTraverseFlags : uint
                         been introduced in 2.6, for older version use
                         `G_TRAVERSE_LEAFS`.
   */
-  leaves = 1,
+  Leaves = 1,
 
   /**
       only non-leaf nodes should be visited. This
                             name has been introduced in 2.6, for older
                             version use `G_TRAVERSE_NON_LEAFS`.
   */
-  nonLeaves = 2,
+  NonLeaves = 2,
 
   /**
       all nodes should be visited.
   */
-  all = 3,
+  All = 3,
 
   /**
       a mask of all traverse flags.
   */
-  mask = 3,
+  Mask = 3,
 
   /**
       identical to `G_TRAVERSE_LEAVES`.
   */
-  leafs = 1,
+  Leafs = 1,
 
   /**
       identical to `G_TRAVERSE_NON_LEAVES`.
   */
-  nonLeafs = 2,
+  NonLeafs = 2,
 }
 
 /**
@@ -2879,17 +2879,17 @@ enum GTraverseType
                  want the output sorted according to the compare
                  function.
   */
-  inOrder = 0,
+  InOrder = 0,
 
   /**
       visits a node, then its children.
   */
-  preOrder = 1,
+  PreOrder = 1,
 
   /**
       visits the node's children, then the node itself.
   */
-  postOrder = 2,
+  PostOrder = 2,
 
   /**
       is not implemented for
@@ -2899,14 +2899,14 @@ enum GTraverseType
                  its grandchildren, and so on. Note that this is less
                  efficient than the other orders.
   */
-  levelOrder = 3,
+  LevelOrder = 3,
 }
 
 /**
     These are the possible line break classifications.
   
   Since new Unicode versions may add new types here, applications should be ready
-  to handle unknown values. They may be regarded as [glib.types.UnicodeBreakType.unknown].
+  to handle unknown values. They may be regarded as [glib.types.UnicodeBreakType.Unknown].
   
   See [Unicode Line Breaking Algorithm](https://www.unicode.org/reports/tr14/).
 */
@@ -2915,222 +2915,222 @@ enum GUnicodeBreakType
   /**
       Mandatory Break (BK)
   */
-  mandatory = 0,
+  Mandatory = 0,
 
   /**
       Carriage Return (CR)
   */
-  carriageReturn = 1,
+  CarriageReturn = 1,
 
   /**
       Line Feed (LF)
   */
-  lineFeed = 2,
+  LineFeed = 2,
 
   /**
       Attached Characters and Combining Marks (CM)
   */
-  combiningMark = 3,
+  CombiningMark = 3,
 
   /**
       Surrogates (SG)
   */
-  surrogate = 4,
+  Surrogate = 4,
 
   /**
       Zero Width Space (ZW)
   */
-  zeroWidthSpace = 5,
+  ZeroWidthSpace = 5,
 
   /**
       Inseparable (IN)
   */
-  inseparable = 6,
+  Inseparable = 6,
 
   /**
       Non-breaking ("Glue") (GL)
   */
-  nonBreakingGlue = 7,
+  NonBreakingGlue = 7,
 
   /**
       Contingent Break Opportunity (CB)
   */
-  contingent = 8,
+  Contingent = 8,
 
   /**
       Space (SP)
   */
-  space = 9,
+  Space = 9,
 
   /**
       Break Opportunity After (BA)
   */
-  after = 10,
+  After = 10,
 
   /**
       Break Opportunity Before (BB)
   */
-  before = 11,
+  Before = 11,
 
   /**
       Break Opportunity Before and After (B2)
   */
-  beforeAndAfter = 12,
+  BeforeAndAfter = 12,
 
   /**
       Hyphen (HY)
   */
-  hyphen = 13,
+  Hyphen = 13,
 
   /**
       Nonstarter (NS)
   */
-  nonStarter = 14,
+  NonStarter = 14,
 
   /**
       Opening Punctuation (OP)
   */
-  openPunctuation = 15,
+  OpenPunctuation = 15,
 
   /**
       Closing Punctuation (CL)
   */
-  closePunctuation = 16,
+  ClosePunctuation = 16,
 
   /**
       Ambiguous Quotation (QU)
   */
-  quotation = 17,
+  Quotation = 17,
 
   /**
       Exclamation/Interrogation (EX)
   */
-  exclamation = 18,
+  Exclamation = 18,
 
   /**
       Ideographic (ID)
   */
-  ideographic = 19,
+  Ideographic = 19,
 
   /**
       Numeric (NU)
   */
-  numeric = 20,
+  Numeric = 20,
 
   /**
       Infix Separator (Numeric) (IS)
   */
-  infixSeparator = 21,
+  InfixSeparator = 21,
 
   /**
       Symbols Allowing Break After (SY)
   */
-  symbol = 22,
+  Symbol = 22,
 
   /**
       Ordinary Alphabetic and Symbol Characters (AL)
   */
-  alphabetic = 23,
+  Alphabetic = 23,
 
   /**
       Prefix (Numeric) (PR)
   */
-  prefix = 24,
+  Prefix = 24,
 
   /**
       Postfix (Numeric) (PO)
   */
-  postfix = 25,
+  Postfix = 25,
 
   /**
       Complex Content Dependent (South East Asian) (SA)
   */
-  complexContext = 26,
+  ComplexContext = 26,
 
   /**
       Ambiguous (Alphabetic or Ideographic) (AI)
   */
-  ambiguous = 27,
+  Ambiguous = 27,
 
   /**
       Unknown (XX)
   */
-  unknown = 28,
+  Unknown = 28,
 
   /**
       Next Line (NL)
   */
-  nextLine = 29,
+  NextLine = 29,
 
   /**
       Word Joiner (WJ)
   */
-  wordJoiner = 30,
+  WordJoiner = 30,
 
   /**
       Hangul L Jamo (JL)
   */
-  hangulLJamo = 31,
+  HangulLJamo = 31,
 
   /**
       Hangul V Jamo (JV)
   */
-  hangulVJamo = 32,
+  HangulVJamo = 32,
 
   /**
       Hangul T Jamo (JT)
   */
-  hangulTJamo = 33,
+  HangulTJamo = 33,
 
   /**
       Hangul LV Syllable (H2)
   */
-  hangulLvSyllable = 34,
+  HangulLvSyllable = 34,
 
   /**
       Hangul LVT Syllable (H3)
   */
-  hangulLvtSyllable = 35,
+  HangulLvtSyllable = 35,
 
   /**
-      Closing Parenthesis (CP). Since 2.28. Deprecated: 2.70: Use [glib.types.UnicodeBreakType.closeParenthesis] instead.
+      Closing Parenthesis (CP). Since 2.28. Deprecated: 2.70: Use [glib.types.UnicodeBreakType.CloseParenthesis] instead.
   */
-  closeParanthesis = 36,
+  CloseParanthesis = 36,
 
   /**
       Closing Parenthesis (CP). Since 2.70
   */
-  closeParenthesis = 36,
+  CloseParenthesis = 36,
 
   /**
       Conditional Japanese Starter (CJ). Since: 2.32
   */
-  conditionalJapaneseStarter = 37,
+  ConditionalJapaneseStarter = 37,
 
   /**
       Hebrew Letter (HL). Since: 2.32
   */
-  hebrewLetter = 38,
+  HebrewLetter = 38,
 
   /**
       Regional Indicator (RI). Since: 2.36
   */
-  regionalIndicator = 39,
+  RegionalIndicator = 39,
 
   /**
       Emoji Base (EB). Since: 2.50
   */
-  emojiBase = 40,
+  EmojiBase = 40,
 
   /**
       Emoji Modifier (EM). Since: 2.50
   */
-  emojiModifier = 41,
+  EmojiModifier = 41,
 
   /**
       Zero Width Joiner (ZWJ). Since: 2.50
   */
-  zeroWidthJoiner = 42,
+  ZeroWidthJoiner = 42,
 
   /**
       Aksara (AK). Since: 2.80
@@ -3139,19 +3139,19 @@ enum GUnicodeBreakType
     @G_UNICODE_BREAK_VIRAMA_FINAL (VF). Since: 2.80
     @G_UNICODE_BREAK_VIRAMA (VI). Since: 2.80
   */
-  aksara = 43,
+  Aksara = 43,
 
   /** */
-  aksaraPreBase = 44,
+  AksaraPreBase = 44,
 
   /** */
-  aksaraStart = 45,
+  AksaraStart = 45,
 
   /** */
-  viramaFinal = 46,
+  ViramaFinal = 46,
 
   /** */
-  virama = 47,
+  Virama = 47,
 }
 
 /**
@@ -3169,833 +3169,833 @@ enum GUnicodeScript
   /**
       a value never returned from [glib.global.unicharGetScript]
   */
-  invalidCode = -1,
+  InvalidCode = -1,
 
   /**
       a character used by multiple different scripts
   */
-  common = 0,
+  Common = 0,
 
   /**
       a mark glyph that takes its script from the
                                   base glyph to which it is attached
   */
-  inherited = 1,
+  Inherited = 1,
 
   /**
       Arabic
   */
-  arabic = 2,
+  Arabic = 2,
 
   /**
       Armenian
   */
-  armenian = 3,
+  Armenian = 3,
 
   /**
       Bengali
   */
-  bengali = 4,
+  Bengali = 4,
 
   /**
       Bopomofo
   */
-  bopomofo = 5,
+  Bopomofo = 5,
 
   /**
       Cherokee
   */
-  cherokee = 6,
+  Cherokee = 6,
 
   /**
       Coptic
   */
-  coptic = 7,
+  Coptic = 7,
 
   /**
       Cyrillic
   */
-  cyrillic = 8,
+  Cyrillic = 8,
 
   /**
       Deseret
   */
-  deseret = 9,
+  Deseret = 9,
 
   /**
       Devanagari
   */
-  devanagari = 10,
+  Devanagari = 10,
 
   /**
       Ethiopic
   */
-  ethiopic = 11,
+  Ethiopic = 11,
 
   /**
       Georgian
   */
-  georgian = 12,
+  Georgian = 12,
 
   /**
       Gothic
   */
-  gothic = 13,
+  Gothic = 13,
 
   /**
       Greek
   */
-  greek = 14,
+  Greek = 14,
 
   /**
       Gujarati
   */
-  gujarati = 15,
+  Gujarati = 15,
 
   /**
       Gurmukhi
   */
-  gurmukhi = 16,
+  Gurmukhi = 16,
 
   /**
       Han
   */
-  han = 17,
+  Han = 17,
 
   /**
       Hangul
   */
-  hangul = 18,
+  Hangul = 18,
 
   /**
       Hebrew
   */
-  hebrew = 19,
+  Hebrew = 19,
 
   /**
       Hiragana
   */
-  hiragana = 20,
+  Hiragana = 20,
 
   /**
       Kannada
   */
-  kannada = 21,
+  Kannada = 21,
 
   /**
       Katakana
   */
-  katakana = 22,
+  Katakana = 22,
 
   /**
       Khmer
   */
-  khmer = 23,
+  Khmer = 23,
 
   /**
       Lao
   */
-  lao = 24,
+  Lao = 24,
 
   /**
       Latin
   */
-  latin = 25,
+  Latin = 25,
 
   /**
       Malayalam
   */
-  malayalam = 26,
+  Malayalam = 26,
 
   /**
       Mongolian
   */
-  mongolian = 27,
+  Mongolian = 27,
 
   /**
       Myanmar
   */
-  myanmar = 28,
+  Myanmar = 28,
 
   /**
       Ogham
   */
-  ogham = 29,
+  Ogham = 29,
 
   /**
       Old Italic
   */
-  oldItalic = 30,
+  OldItalic = 30,
 
   /**
       Oriya
   */
-  oriya = 31,
+  Oriya = 31,
 
   /**
       Runic
   */
-  runic = 32,
+  Runic = 32,
 
   /**
       Sinhala
   */
-  sinhala = 33,
+  Sinhala = 33,
 
   /**
       Syriac
   */
-  syriac = 34,
+  Syriac = 34,
 
   /**
       Tamil
   */
-  tamil = 35,
+  Tamil = 35,
 
   /**
       Telugu
   */
-  telugu = 36,
+  Telugu = 36,
 
   /**
       Thaana
   */
-  thaana = 37,
+  Thaana = 37,
 
   /**
       Thai
   */
-  thai = 38,
+  Thai = 38,
 
   /**
       Tibetan
   */
-  tibetan = 39,
+  Tibetan = 39,
 
   /**
       Canadian Aboriginal
   */
-  canadianAboriginal = 40,
+  CanadianAboriginal = 40,
 
   /**
       Yi
   */
-  yi = 41,
+  Yi = 41,
 
   /**
       Tagalog
   */
-  tagalog = 42,
+  Tagalog = 42,
 
   /**
       Hanunoo
   */
-  hanunoo = 43,
+  Hanunoo = 43,
 
   /**
       Buhid
   */
-  buhid = 44,
+  Buhid = 44,
 
   /**
       Tagbanwa
   */
-  tagbanwa = 45,
+  Tagbanwa = 45,
 
   /**
       Braille
   */
-  braille = 46,
+  Braille = 46,
 
   /**
       Cypriot
   */
-  cypriot = 47,
+  Cypriot = 47,
 
   /**
       Limbu
   */
-  limbu = 48,
+  Limbu = 48,
 
   /**
       Osmanya
   */
-  osmanya = 49,
+  Osmanya = 49,
 
   /**
       Shavian
   */
-  shavian = 50,
+  Shavian = 50,
 
   /**
       Linear B
   */
-  linearB = 51,
+  LinearB = 51,
 
   /**
       Tai Le
   */
-  taiLe = 52,
+  TaiLe = 52,
 
   /**
       Ugaritic
   */
-  ugaritic = 53,
+  Ugaritic = 53,
 
   /**
       New Tai Lue
   */
-  newTaiLue = 54,
+  NewTaiLue = 54,
 
   /**
       Buginese
   */
-  buginese = 55,
+  Buginese = 55,
 
   /**
       Glagolitic
   */
-  glagolitic = 56,
+  Glagolitic = 56,
 
   /**
       Tifinagh
   */
-  tifinagh = 57,
+  Tifinagh = 57,
 
   /**
       Syloti Nagri
   */
-  sylotiNagri = 58,
+  SylotiNagri = 58,
 
   /**
       Old Persian
   */
-  oldPersian = 59,
+  OldPersian = 59,
 
   /**
       Kharoshthi
   */
-  kharoshthi = 60,
+  Kharoshthi = 60,
 
   /**
       an unassigned code point
   */
-  unknown = 61,
+  Unknown = 61,
 
   /**
       Balinese
   */
-  balinese = 62,
+  Balinese = 62,
 
   /**
       Cuneiform
   */
-  cuneiform = 63,
+  Cuneiform = 63,
 
   /**
       Phoenician
   */
-  phoenician = 64,
+  Phoenician = 64,
 
   /**
       Phags-pa
   */
-  phagsPa = 65,
+  PhagsPa = 65,
 
   /**
       N'Ko
   */
-  nko = 66,
+  Nko = 66,
 
   /**
       Kayah Li. Since 2.16.3
   */
-  kayahLi = 67,
+  KayahLi = 67,
 
   /**
       Lepcha. Since 2.16.3
   */
-  lepcha = 68,
+  Lepcha = 68,
 
   /**
       Rejang. Since 2.16.3
   */
-  rejang = 69,
+  Rejang = 69,
 
   /**
       Sundanese. Since 2.16.3
   */
-  sundanese = 70,
+  Sundanese = 70,
 
   /**
       Saurashtra. Since 2.16.3
   */
-  saurashtra = 71,
+  Saurashtra = 71,
 
   /**
       Cham. Since 2.16.3
   */
-  cham = 72,
+  Cham = 72,
 
   /**
       Ol Chiki. Since 2.16.3
   */
-  olChiki = 73,
+  OlChiki = 73,
 
   /**
       Vai. Since 2.16.3
   */
-  vai = 74,
+  Vai = 74,
 
   /**
       Carian. Since 2.16.3
   */
-  carian = 75,
+  Carian = 75,
 
   /**
       Lycian. Since 2.16.3
   */
-  lycian = 76,
+  Lycian = 76,
 
   /**
       Lydian. Since 2.16.3
   */
-  lydian = 77,
+  Lydian = 77,
 
   /**
       Avestan. Since 2.26
   */
-  avestan = 78,
+  Avestan = 78,
 
   /**
       Bamum. Since 2.26
   */
-  bamum = 79,
+  Bamum = 79,
 
   /**
       Egyptian Hieroglpyhs. Since 2.26
   */
-  egyptianHieroglyphs = 80,
+  EgyptianHieroglyphs = 80,
 
   /**
       Imperial Aramaic. Since 2.26
   */
-  imperialAramaic = 81,
+  ImperialAramaic = 81,
 
   /**
       Inscriptional Pahlavi. Since 2.26
   */
-  inscriptionalPahlavi = 82,
+  InscriptionalPahlavi = 82,
 
   /**
       Inscriptional Parthian. Since 2.26
   */
-  inscriptionalParthian = 83,
+  InscriptionalParthian = 83,
 
   /**
       Javanese. Since 2.26
   */
-  javanese = 84,
+  Javanese = 84,
 
   /**
       Kaithi. Since 2.26
   */
-  kaithi = 85,
+  Kaithi = 85,
 
   /**
       Lisu. Since 2.26
   */
-  lisu = 86,
+  Lisu = 86,
 
   /**
       Meetei Mayek. Since 2.26
   */
-  meeteiMayek = 87,
+  MeeteiMayek = 87,
 
   /**
       Old South Arabian. Since 2.26
   */
-  oldSouthArabian = 88,
+  OldSouthArabian = 88,
 
   /**
       Old Turkic. Since 2.28
   */
-  oldTurkic = 89,
+  OldTurkic = 89,
 
   /**
       Samaritan. Since 2.26
   */
-  samaritan = 90,
+  Samaritan = 90,
 
   /**
       Tai Tham. Since 2.26
   */
-  taiTham = 91,
+  TaiTham = 91,
 
   /**
       Tai Viet. Since 2.26
   */
-  taiViet = 92,
+  TaiViet = 92,
 
   /**
       Batak. Since 2.28
   */
-  batak = 93,
+  Batak = 93,
 
   /**
       Brahmi. Since 2.28
   */
-  brahmi = 94,
+  Brahmi = 94,
 
   /**
       Mandaic. Since 2.28
   */
-  mandaic = 95,
+  Mandaic = 95,
 
   /**
       Chakma. Since: 2.32
   */
-  chakma = 96,
+  Chakma = 96,
 
   /**
       Meroitic Cursive. Since: 2.32
   */
-  meroiticCursive = 97,
+  MeroiticCursive = 97,
 
   /**
       Meroitic Hieroglyphs. Since: 2.32
   */
-  meroiticHieroglyphs = 98,
+  MeroiticHieroglyphs = 98,
 
   /**
       Miao. Since: 2.32
   */
-  miao = 99,
+  Miao = 99,
 
   /**
       Sharada. Since: 2.32
   */
-  sharada = 100,
+  Sharada = 100,
 
   /**
       Sora Sompeng. Since: 2.32
   */
-  soraSompeng = 101,
+  SoraSompeng = 101,
 
   /**
       Takri. Since: 2.32
   */
-  takri = 102,
+  Takri = 102,
 
   /**
       Bassa. Since: 2.42
   */
-  bassaVah = 103,
+  BassaVah = 103,
 
   /**
       Caucasian Albanian. Since: 2.42
   */
-  caucasianAlbanian = 104,
+  CaucasianAlbanian = 104,
 
   /**
       Duployan. Since: 2.42
   */
-  duployan = 105,
+  Duployan = 105,
 
   /**
       Elbasan. Since: 2.42
   */
-  elbasan = 106,
+  Elbasan = 106,
 
   /**
       Grantha. Since: 2.42
   */
-  grantha = 107,
+  Grantha = 107,
 
   /**
       Kjohki. Since: 2.42
   */
-  khojki = 108,
+  Khojki = 108,
 
   /**
       Khudawadi, Sindhi. Since: 2.42
   */
-  khudawadi = 109,
+  Khudawadi = 109,
 
   /**
       Linear A. Since: 2.42
   */
-  linearA = 110,
+  LinearA = 110,
 
   /**
       Mahajani. Since: 2.42
   */
-  mahajani = 111,
+  Mahajani = 111,
 
   /**
       Manichaean. Since: 2.42
   */
-  manichaean = 112,
+  Manichaean = 112,
 
   /**
       Mende Kikakui. Since: 2.42
   */
-  mendeKikakui = 113,
+  MendeKikakui = 113,
 
   /**
       Modi. Since: 2.42
   */
-  modi = 114,
+  Modi = 114,
 
   /**
       Mro. Since: 2.42
   */
-  mro = 115,
+  Mro = 115,
 
   /**
       Nabataean. Since: 2.42
   */
-  nabataean = 116,
+  Nabataean = 116,
 
   /**
       Old North Arabian. Since: 2.42
   */
-  oldNorthArabian = 117,
+  OldNorthArabian = 117,
 
   /**
       Old Permic. Since: 2.42
   */
-  oldPermic = 118,
+  OldPermic = 118,
 
   /**
       Pahawh Hmong. Since: 2.42
   */
-  pahawhHmong = 119,
+  PahawhHmong = 119,
 
   /**
       Palmyrene. Since: 2.42
   */
-  palmyrene = 120,
+  Palmyrene = 120,
 
   /**
       Pau Cin Hau. Since: 2.42
   */
-  pauCinHau = 121,
+  PauCinHau = 121,
 
   /**
       Psalter Pahlavi. Since: 2.42
   */
-  psalterPahlavi = 122,
+  PsalterPahlavi = 122,
 
   /**
       Siddham. Since: 2.42
   */
-  siddham = 123,
+  Siddham = 123,
 
   /**
       Tirhuta. Since: 2.42
   */
-  tirhuta = 124,
+  Tirhuta = 124,
 
   /**
       Warang Citi. Since: 2.42
   */
-  warangCiti = 125,
+  WarangCiti = 125,
 
   /**
       Ahom. Since: 2.48
   */
-  ahom = 126,
+  Ahom = 126,
 
   /**
       Anatolian Hieroglyphs. Since: 2.48
   */
-  anatolianHieroglyphs = 127,
+  AnatolianHieroglyphs = 127,
 
   /**
       Hatran. Since: 2.48
   */
-  hatran = 128,
+  Hatran = 128,
 
   /**
       Multani. Since: 2.48
   */
-  multani = 129,
+  Multani = 129,
 
   /**
       Old Hungarian. Since: 2.48
   */
-  oldHungarian = 130,
+  OldHungarian = 130,
 
   /**
       Signwriting. Since: 2.48
   */
-  signwriting = 131,
+  Signwriting = 131,
 
   /**
       Adlam. Since: 2.50
   */
-  adlam = 132,
+  Adlam = 132,
 
   /**
       Bhaiksuki. Since: 2.50
   */
-  bhaiksuki = 133,
+  Bhaiksuki = 133,
 
   /**
       Marchen. Since: 2.50
   */
-  marchen = 134,
+  Marchen = 134,
 
   /**
       Newa. Since: 2.50
   */
-  newa = 135,
+  Newa = 135,
 
   /**
       Osage. Since: 2.50
   */
-  osage = 136,
+  Osage = 136,
 
   /**
       Tangut. Since: 2.50
   */
-  tangut = 137,
+  Tangut = 137,
 
   /**
       Masaram Gondi. Since: 2.54
   */
-  masaramGondi = 138,
+  MasaramGondi = 138,
 
   /**
       Nushu. Since: 2.54
   */
-  nushu = 139,
+  Nushu = 139,
 
   /**
       Soyombo. Since: 2.54
   */
-  soyombo = 140,
+  Soyombo = 140,
 
   /**
       Zanabazar Square. Since: 2.54
   */
-  zanabazarSquare = 141,
+  ZanabazarSquare = 141,
 
   /**
       Dogra. Since: 2.58
   */
-  dogra = 142,
+  Dogra = 142,
 
   /**
       Gunjala Gondi. Since: 2.58
   */
-  gunjalaGondi = 143,
+  GunjalaGondi = 143,
 
   /**
       Hanifi Rohingya. Since: 2.58
   */
-  hanifiRohingya = 144,
+  HanifiRohingya = 144,
 
   /**
       Makasar. Since: 2.58
   */
-  makasar = 145,
+  Makasar = 145,
 
   /**
       Medefaidrin. Since: 2.58
   */
-  medefaidrin = 146,
+  Medefaidrin = 146,
 
   /**
       Old Sogdian. Since: 2.58
   */
-  oldSogdian = 147,
+  OldSogdian = 147,
 
   /**
       Sogdian. Since: 2.58
   */
-  sogdian = 148,
+  Sogdian = 148,
 
   /**
       Elym. Since: 2.62
   */
-  elymaic = 149,
+  Elymaic = 149,
 
   /**
       Nand. Since: 2.62
   */
-  nandinagari = 150,
+  Nandinagari = 150,
 
   /**
       Rohg. Since: 2.62
   */
-  nyiakengPuachueHmong = 151,
+  NyiakengPuachueHmong = 151,
 
   /**
       Wcho. Since: 2.62
   */
-  wancho = 152,
+  Wancho = 152,
 
   /**
       Chorasmian. Since: 2.66
   */
-  chorasmian = 153,
+  Chorasmian = 153,
 
   /**
       Dives Akuru. Since: 2.66
   */
-  divesAkuru = 154,
+  DivesAkuru = 154,
 
   /**
       Khitan small script. Since: 2.66
   */
-  khitanSmallScript = 155,
+  KhitanSmallScript = 155,
 
   /**
       Yezidi. Since: 2.66
   */
-  yezidi = 156,
+  Yezidi = 156,
 
   /**
       Cypro-Minoan. Since: 2.72
   */
-  cyproMinoan = 157,
+  CyproMinoan = 157,
 
   /**
       Old Uyghur. Since: 2.72
   */
-  oldUyghur = 158,
+  OldUyghur = 158,
 
   /**
       Tangsa. Since: 2.72
   */
-  tangsa = 159,
+  Tangsa = 159,
 
   /**
       Toto. Since: 2.72
   */
-  toto = 160,
+  Toto = 160,
 
   /**
       Vithkuqi. Since: 2.72
   */
-  vithkuqi = 161,
+  Vithkuqi = 161,
 
   /**
       Mathematical notation. Since: 2.72
   */
-  math = 162,
+  Math = 162,
 
   /**
       Kawi. Since 2.74
   */
-  kawi = 163,
+  Kawi = 163,
 
   /**
       Nag Mundari. Since 2.74
   */
-  nagMundari = 164,
+  NagMundari = 164,
 }
 
 /**
@@ -4008,152 +4008,152 @@ enum GUnicodeType
   /**
       General category "Other, Control" (Cc)
   */
-  control = 0,
+  Control = 0,
 
   /**
       General category "Other, Format" (Cf)
   */
-  format = 1,
+  Format = 1,
 
   /**
       General category "Other, Not Assigned" (Cn)
   */
-  unassigned = 2,
+  Unassigned = 2,
 
   /**
       General category "Other, Private Use" (Co)
   */
-  privateUse = 3,
+  PrivateUse = 3,
 
   /**
       General category "Other, Surrogate" (Cs)
   */
-  surrogate = 4,
+  Surrogate = 4,
 
   /**
       General category "Letter, Lowercase" (Ll)
   */
-  lowercaseLetter = 5,
+  LowercaseLetter = 5,
 
   /**
       General category "Letter, Modifier" (Lm)
   */
-  modifierLetter = 6,
+  ModifierLetter = 6,
 
   /**
       General category "Letter, Other" (Lo)
   */
-  otherLetter = 7,
+  OtherLetter = 7,
 
   /**
       General category "Letter, Titlecase" (Lt)
   */
-  titlecaseLetter = 8,
+  TitlecaseLetter = 8,
 
   /**
       General category "Letter, Uppercase" (Lu)
   */
-  uppercaseLetter = 9,
+  UppercaseLetter = 9,
 
   /**
       General category "Mark, Spacing" (Mc)
   */
-  spacingMark = 10,
+  SpacingMark = 10,
 
   /**
       General category "Mark, Enclosing" (Me)
   */
-  enclosingMark = 11,
+  EnclosingMark = 11,
 
   /**
       General category "Mark, Nonspacing" (Mn)
   */
-  nonSpacingMark = 12,
+  NonSpacingMark = 12,
 
   /**
       General category "Number, Decimal Digit" (Nd)
   */
-  decimalNumber = 13,
+  DecimalNumber = 13,
 
   /**
       General category "Number, Letter" (Nl)
   */
-  letterNumber = 14,
+  LetterNumber = 14,
 
   /**
       General category "Number, Other" (No)
   */
-  otherNumber = 15,
+  OtherNumber = 15,
 
   /**
       General category "Punctuation, Connector" (Pc)
   */
-  connectPunctuation = 16,
+  ConnectPunctuation = 16,
 
   /**
       General category "Punctuation, Dash" (Pd)
   */
-  dashPunctuation = 17,
+  DashPunctuation = 17,
 
   /**
       General category "Punctuation, Close" (Pe)
   */
-  closePunctuation = 18,
+  ClosePunctuation = 18,
 
   /**
       General category "Punctuation, Final quote" (Pf)
   */
-  finalPunctuation = 19,
+  FinalPunctuation = 19,
 
   /**
       General category "Punctuation, Initial quote" (Pi)
   */
-  initialPunctuation = 20,
+  InitialPunctuation = 20,
 
   /**
       General category "Punctuation, Other" (Po)
   */
-  otherPunctuation = 21,
+  OtherPunctuation = 21,
 
   /**
       General category "Punctuation, Open" (Ps)
   */
-  openPunctuation = 22,
+  OpenPunctuation = 22,
 
   /**
       General category "Symbol, Currency" (Sc)
   */
-  currencySymbol = 23,
+  CurrencySymbol = 23,
 
   /**
       General category "Symbol, Modifier" (Sk)
   */
-  modifierSymbol = 24,
+  ModifierSymbol = 24,
 
   /**
       General category "Symbol, Math" (Sm)
   */
-  mathSymbol = 25,
+  MathSymbol = 25,
 
   /**
       General category "Symbol, Other" (So)
   */
-  otherSymbol = 26,
+  OtherSymbol = 26,
 
   /**
       General category "Separator, Line" (Zl)
   */
-  lineSeparator = 27,
+  LineSeparator = 27,
 
   /**
       General category "Separator, Paragraph" (Zp)
   */
-  paragraphSeparator = 28,
+  ParagraphSeparator = 28,
 
   /**
       General category "Separator, Space" (Zs)
   */
-  spaceSeparator = 29,
+  SpaceSeparator = 29,
 }
 
 /**
@@ -4164,12 +4164,12 @@ enum GUnixPipeEnd
   /**
       The readable file descriptor 0
   */
-  read = 0,
+  Read = 0,
 
   /**
       The writable file descriptor 1
   */
-  write = 1,
+  Write = 1,
 }
 
 /**
@@ -4181,52 +4181,52 @@ enum GUriError
       Generic error if no more specific error is available.
         See the error message for details.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       The scheme of a URI could not be parsed.
   */
-  badScheme = 1,
+  BadScheme = 1,
 
   /**
       The user/userinfo of a URI could not be parsed.
   */
-  badUser = 2,
+  BadUser = 2,
 
   /**
       The password of a URI could not be parsed.
   */
-  badPassword = 3,
+  BadPassword = 3,
 
   /**
       The authentication parameters of a URI could not be parsed.
   */
-  badAuthParams = 4,
+  BadAuthParams = 4,
 
   /**
       The host of a URI could not be parsed.
   */
-  badHost = 5,
+  BadHost = 5,
 
   /**
       The port of a URI could not be parsed.
   */
-  badPort = 6,
+  BadPort = 6,
 
   /**
       The path of a URI could not be parsed.
   */
-  badPath = 7,
+  BadPath = 7,
 
   /**
       The query of a URI could not be parsed.
   */
-  badQuery = 8,
+  BadQuery = 8,
 
   /**
       The fragment of a URI could not be parsed.
   */
-  badFragment = 9,
+  BadFragment = 9,
 }
 
 /**
@@ -4242,7 +4242,7 @@ enum GUriFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Parse the URI more relaxedly than the
@@ -4251,20 +4251,20 @@ enum GUriFlags : uint
         sources. This is also needed for some obscure URI schemes where `;`
         separates the host from the path. Don’t use this flag unless you need to.
   */
-  parseRelaxed = 1,
+  ParseRelaxed = 1,
 
   /**
       The userinfo field may contain a password,
         which will be separated from the username by `:`.
   */
-  hasPassword = 2,
+  HasPassword = 2,
 
   /**
       The userinfo may contain additional
         authentication-related parameters, which will be separated from
         the username and/or password by `;`.
   */
-  hasAuthParams = 4,
+  HasAuthParams = 4,
 
   /**
       When parsing a URI, this indicates that `%`-encoded
@@ -4274,31 +4274,31 @@ enum GUriFlags : uint
         that you have already `%`-encoded the components, and so #GUri
         should not do any encoding itself.
   */
-  encoded = 8,
+  Encoded = 8,
 
   /**
       The host component should not be assumed to be a
         DNS hostname or IP address (for example, for `smb` URIs with NetBIOS
         hostnames).
   */
-  nonDns = 16,
+  NonDns = 16,
 
   /**
       Same as `G_URI_FLAGS_ENCODED`, for the query
         field only.
   */
-  encodedQuery = 32,
+  EncodedQuery = 32,
 
   /**
       Same as `G_URI_FLAGS_ENCODED`, for the path only.
   */
-  encodedPath = 64,
+  EncodedPath = 64,
 
   /**
       Same as `G_URI_FLAGS_ENCODED`, for the
         fragment only.
   */
-  encodedFragment = 128,
+  EncodedFragment = 128,
 
   /**
       A scheme-based normalization will be applied.
@@ -4306,7 +4306,7 @@ enum GUriFlags : uint
         omitted port to `80`; and when building a URI, changing empty path to `/`
         and default port `80`). This only supports a subset of known schemes. (Since: 2.68)
   */
-  schemeNormalize = 256,
+  SchemeNormalize = 256,
 }
 
 /**
@@ -4320,32 +4320,32 @@ enum GUriHideFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Hide the userinfo.
   */
-  userinfo = 1,
+  Userinfo = 1,
 
   /**
       Hide the password.
   */
-  password = 2,
+  Password = 2,
 
   /**
       Hide the auth_params.
   */
-  authParams = 4,
+  AuthParams = 4,
 
   /**
       Hide the query.
   */
-  query = 8,
+  Query = 8,
 
   /**
       Hide the fragment.
   */
-  fragment = 16,
+  Fragment = 16,
 }
 
 /**
@@ -4357,23 +4357,23 @@ enum GUriParamsFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Parameter names are case insensitive.
   */
-  caseInsensitive = 1,
+  CaseInsensitive = 1,
 
   /**
       Replace `+` with space character. Only useful for
         URLs on the web, using the `https` or `http` schemas.
   */
-  wwwForm = 2,
+  WwwForm = 2,
 
   /**
       See `G_URI_FLAGS_PARSE_RELAXED`.
   */
-  parseRelaxed = 4,
+  ParseRelaxed = 4,
 }
 
 /**
@@ -4390,47 +4390,47 @@ enum GUserDirectory
   /**
       the user's Desktop directory
   */
-  directoryDesktop = 0,
+  DirectoryDesktop = 0,
 
   /**
       the user's Documents directory
   */
-  directoryDocuments = 1,
+  DirectoryDocuments = 1,
 
   /**
       the user's Downloads directory
   */
-  directoryDownload = 2,
+  DirectoryDownload = 2,
 
   /**
       the user's Music directory
   */
-  directoryMusic = 3,
+  DirectoryMusic = 3,
 
   /**
       the user's Pictures directory
   */
-  directoryPictures = 4,
+  DirectoryPictures = 4,
 
   /**
       the user's shared directory
   */
-  directoryPublicShare = 5,
+  DirectoryPublicShare = 5,
 
   /**
       the user's Templates directory
   */
-  directoryTemplates = 6,
+  DirectoryTemplates = 6,
 
   /**
       the user's Movies directory
   */
-  directoryVideos = 7,
+  DirectoryVideos = 7,
 
   /**
       the number of enum values
   */
-  nDirectories = 8,
+  NDirectories = 8,
 }
 
 /**
@@ -4441,94 +4441,94 @@ enum GVariantClass
   /**
       The #GVariant is a boolean.
   */
-  boolean = 98,
+  Boolean = 98,
 
   /**
       The #GVariant is a byte.
   */
-  byte_ = 121,
+  Byte = 121,
 
   /**
       The #GVariant is a signed 16 bit integer.
   */
-  int16 = 110,
+  Int16 = 110,
 
   /**
       The #GVariant is an unsigned 16 bit integer.
   */
-  uint16 = 113,
+  Uint16 = 113,
 
   /**
       The #GVariant is a signed 32 bit integer.
   */
-  int32 = 105,
+  Int32 = 105,
 
   /**
       The #GVariant is an unsigned 32 bit integer.
   */
-  uint32 = 117,
+  Uint32 = 117,
 
   /**
       The #GVariant is a signed 64 bit integer.
   */
-  int64 = 120,
+  Int64 = 120,
 
   /**
       The #GVariant is an unsigned 64 bit integer.
   */
-  uint64 = 116,
+  Uint64 = 116,
 
   /**
       The #GVariant is a file handle index.
   */
-  handle = 104,
+  Handle = 104,
 
   /**
       The #GVariant is a double precision floating
                              point value.
   */
-  double_ = 100,
+  Double = 100,
 
   /**
       The #GVariant is a normal string.
   */
-  string_ = 115,
+  String = 115,
 
   /**
       The #GVariant is a D-Bus object path
                                   string.
   */
-  objectPath = 111,
+  ObjectPath = 111,
 
   /**
       The #GVariant is a D-Bus signature string.
   */
-  signature = 103,
+  Signature = 103,
 
   /**
       The #GVariant is a variant.
   */
-  variant = 118,
+  Variant = 118,
 
   /**
       The #GVariant is a maybe-typed value.
   */
-  maybe = 109,
+  Maybe = 109,
 
   /**
       The #GVariant is an array.
   */
-  array = 97,
+  Array = 97,
 
   /**
       The #GVariant is a tuple.
   */
-  tuple = 40,
+  Tuple = 40,
 
   /**
       The #GVariant is a dictionary entry.
   */
-  dictEntry = 123,
+  DictEntry = 123,
 }
 
 /**
@@ -4539,97 +4539,97 @@ enum GVariantParseError
   /**
       generic error (unused)
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       a non-basic #GVariantType was given where a basic type was expected
   */
-  basicTypeExpected = 1,
+  BasicTypeExpected = 1,
 
   /**
       cannot infer the #GVariantType
   */
-  cannotInferType = 2,
+  CannotInferType = 2,
 
   /**
       an indefinite #GVariantType was given where a definite type was expected
   */
-  definiteTypeExpected = 3,
+  DefiniteTypeExpected = 3,
 
   /**
       extra data after parsing finished
   */
-  inputNotAtEnd = 4,
+  InputNotAtEnd = 4,
 
   /**
       invalid character in number or unicode escape
   */
-  invalidCharacter = 5,
+  InvalidCharacter = 5,
 
   /**
       not a valid #GVariant format string
   */
-  invalidFormatString = 6,
+  InvalidFormatString = 6,
 
   /**
       not a valid object path
   */
-  invalidObjectPath = 7,
+  InvalidObjectPath = 7,
 
   /**
       not a valid type signature
   */
-  invalidSignature = 8,
+  InvalidSignature = 8,
 
   /**
       not a valid #GVariant type string
   */
-  invalidTypeString = 9,
+  InvalidTypeString = 9,
 
   /**
       could not find a common type for array entries
   */
-  noCommonType = 10,
+  NoCommonType = 10,
 
   /**
       the numerical value is out of range of the given type
   */
-  numberOutOfRange = 11,
+  NumberOutOfRange = 11,
 
   /**
       the numerical value is out of range for any type
   */
-  numberTooBig = 12,
+  NumberTooBig = 12,
 
   /**
       cannot parse as variant of the specified type
   */
-  typeError = 13,
+  TypeError = 13,
 
   /**
       an unexpected token was encountered
   */
-  unexpectedToken = 14,
+  UnexpectedToken = 14,
 
   /**
       an unknown keyword was encountered
   */
-  unknownKeyword = 15,
+  UnknownKeyword = 15,
 
   /**
       unterminated string constant
   */
-  unterminatedStringConstant = 16,
+  UnterminatedStringConstant = 16,
 
   /**
       no value given
   */
-  valueExpected = 17,
+  ValueExpected = 17,
 
   /**
       variant was too deeply nested; #GVariant is only guaranteed to handle nesting up to 64 levels (Since: 2.64)
   */
-  recursion = 18,
+  Recursion = 18,
 }
 
 /** */
@@ -5905,8 +5905,8 @@ struct GPollFD
   /**
       a bitwise combination from #GIOCondition, specifying which
         events should be polled for. Typically for reading from a file
-        descriptor you would use [glib.types.IOCondition.in_] | [glib.types.IOCondition.hup] | [glib.types.IOCondition.err], and
-        for writing you would use [glib.types.IOCondition.out_] | [glib.types.IOCondition.err].
+        descriptor you would use [glib.types.IOCondition.In] | [glib.types.IOCondition.Hup] | [glib.types.IOCondition.Err], and
+        for writing you would use [glib.types.IOCondition.Out] | [glib.types.IOCondition.Err].
   */
   ushort events;
 

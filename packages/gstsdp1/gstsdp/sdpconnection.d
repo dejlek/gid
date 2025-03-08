@@ -12,7 +12,7 @@ class SDPConnection
 {
   GstSDPConnection cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPConnection");
@@ -30,35 +30,35 @@ class SDPConnection
 
   @property string nettype()
   {
-    return (cast(GstSDPConnection*)cPtr).nettype.fromCString(No.free);
+    return (cast(GstSDPConnection*)cPtr).nettype.fromCString(No.Free);
   }
 
   @property void nettype(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
-    (cast(GstSDPConnection*)cPtr).nettype = propval.toCString(Yes.alloc);
+    (cast(GstSDPConnection*)cPtr).nettype = propval.toCString(Yes.Alloc);
   }
 
   @property string addrtype()
   {
-    return (cast(GstSDPConnection*)cPtr).addrtype.fromCString(No.free);
+    return (cast(GstSDPConnection*)cPtr).addrtype.fromCString(No.Free);
   }
 
   @property void addrtype(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
-    (cast(GstSDPConnection*)cPtr).addrtype = propval.toCString(Yes.alloc);
+    (cast(GstSDPConnection*)cPtr).addrtype = propval.toCString(Yes.Alloc);
   }
 
   @property string address()
   {
-    return (cast(GstSDPConnection*)cPtr).address.fromCString(No.free);
+    return (cast(GstSDPConnection*)cPtr).address.fromCString(No.Free);
   }
 
   @property void address(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).address);
-    (cast(GstSDPConnection*)cPtr).address = propval.toCString(Yes.alloc);
+    (cast(GstSDPConnection*)cPtr).address = propval.toCString(Yes.Alloc);
   }
 
   @property uint ttl()
@@ -107,9 +107,9 @@ class SDPConnection
   gstsdp.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
   {
     GstSDPResult _cretval;
-    const(char)* _nettype = nettype.toCString(No.alloc);
-    const(char)* _addrtype = addrtype.toCString(No.alloc);
-    const(char)* _address = address.toCString(No.alloc);
+    const(char)* _nettype = nettype.toCString(No.Alloc);
+    const(char)* _addrtype = addrtype.toCString(No.Alloc);
+    const(char)* _address = address.toCString(No.Alloc);
     _cretval = gst_sdp_connection_set(cast(GstSDPConnection*)cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

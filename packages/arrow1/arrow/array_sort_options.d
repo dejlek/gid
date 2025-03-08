@@ -10,7 +10,7 @@ import gid.gid;
 class ArraySortOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   {
     GArrowArraySortOptions* _cretval;
     _cretval = garrow_array_sort_options_new(order);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   alias equal = arrow.function_options.FunctionOptions.equal;
@@ -40,7 +40,7 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.array_sort_options.ArraySortOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions.cPtr(No.dup) : null);
+    _retval = garrow_array_sort_options_equal(cast(GArrowArraySortOptions*)cPtr, otherOptions ? cast(GArrowArraySortOptions*)otherOptions.cPtr(No.Dup) : null);
     return _retval;
   }
 }

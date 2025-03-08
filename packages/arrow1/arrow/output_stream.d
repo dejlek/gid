@@ -18,7 +18,7 @@ import gobject.object;
 class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Writable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
   {
     long _retval;
     GError *_err;
-    _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.dup) : null, &_err);
+    _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -64,7 +64,7 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
   {
     long _retval;
     GError *_err;
-    _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)cPtr, tensor ? cast(GArrowTensor*)tensor.cPtr(No.dup) : null, &_err);
+    _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)cPtr, tensor ? cast(GArrowTensor*)tensor.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

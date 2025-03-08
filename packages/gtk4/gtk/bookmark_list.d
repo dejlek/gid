@@ -21,7 +21,7 @@ import gtk.types;
 class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,10 +49,10 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   this(string filename = null, string attributes = null)
   {
     GtkBookmarkList* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     _cretval = gtk_bookmark_list_new(_filename, _attributes);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
   */
   void setAttributes(string attributes = null)
   {
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)cPtr, _attributes);
   }
 

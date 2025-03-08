@@ -130,7 +130,7 @@ import gobject.object;
 class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugController, gio.initable.Initable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -167,10 +167,10 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
   {
     GDebugControllerDBus* _cretval;
     GError *_err;
-    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -231,10 +231,10 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
     Connect to Authorize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAuthorize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAuthorize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AuthorizeCallbackDlg) || is(T : AuthorizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

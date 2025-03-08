@@ -25,7 +25,7 @@ import gtk.types;
 class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,12 +59,12 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_recent_action_new(_name, _label, _tooltip, _stockId);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,12 +85,12 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   static gtk.recent_action.RecentAction newForManager(string name, string label = null, string tooltip = null, string stockId = null, gtk.recent_manager.RecentManager manager = null)
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
-    const(char)* _stockId = stockId.toCString(No.alloc);
-    _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -10,7 +10,7 @@ import gid.gid;
 class QuantileOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   {
     GArrowQuantileOptions* _cretval;
     _cretval = garrow_quantile_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

@@ -37,43 +37,43 @@ enum cairo_antialias_t
       Use the default antialiasing for
       the subsystem and target device, since 1.0
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Use a bilevel alpha mask, since 1.0
   */
-  none = 1,
+  None = 1,
 
   /**
       Perform single-color antialiasing (using
      shades of gray for black text on a white background, for example), since 1.0
   */
-  gray = 2,
+  Gray = 2,
 
   /**
       Perform antialiasing by taking
      advantage of the order of subpixel elements on devices
      such as LCD panels, since 1.0
   */
-  subpixel = 3,
+  Subpixel = 3,
 
   /**
       Hint that the backend should perform some
     antialiasing but prefer speed over quality, since 1.12
   */
-  fast = 4,
+  Fast = 4,
 
   /**
       The backend should balance quality against
     performance, since 1.12
   */
-  good = 5,
+  Good = 5,
 
   /**
       Hint that the backend should render at the highest
     quality, sacrificing speed if necessary, since 1.12
   */
-  best = 6,
+  Best = 6,
 }
 
 /**
@@ -88,20 +88,20 @@ enum cairo_color_mode_t
       Use the default color mode for
     font backend and target device, since 1.18.
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Disable rendering color glyphs. Glyphs are
     always rendered as outline glyphs, since 1.18.
   */
-  noColor = 1,
+  NoColor = 1,
 
   /**
       Enable rendering color glyphs. If the font
     contains a color presentation for a glyph, and when supported by
     the font backend, the glyph will be rendered in color, since 1.18.
   */
-  color = 2,
+  Color = 2,
 }
 
 /**
@@ -118,17 +118,17 @@ enum cairo_content_t
   /**
       The surface will hold color content only. (Since 1.0)
   */
-  color = 4096,
+  Color = 4096,
 
   /**
       The surface will hold alpha content only. (Since 1.0)
   */
-  alpha = 8192,
+  Alpha = 8192,
 
   /**
       The surface will hold color and alpha content. (Since 1.0)
   */
-  colorAlpha = 12288,
+  ColorAlpha = 12288,
 }
 
 /**
@@ -154,32 +154,32 @@ enum cairo_device_type_t
   /**
       The device is of type Direct Render Manager, since 1.10
   */
-  drm = 0,
+  Drm = 0,
 
   /**
       The device is of type OpenGL, since 1.10
   */
-  gl = 1,
+  Gl = 1,
 
   /**
       The device is of type script, since 1.10
   */
-  script = 2,
+  Script = 2,
 
   /**
       The device is of type xcb, since 1.10
   */
-  xcb = 3,
+  Xcb = 3,
 
   /**
       The device is of type xlib, since 1.10
   */
-  xlib = 4,
+  Xlib = 4,
 
   /**
       The device is of type XML, since 1.10
   */
-  xml = 5,
+  Xml = 5,
 }
 
 /**
@@ -197,27 +197,27 @@ enum cairo_dither_t
   /**
       No dithering.
   */
-  none = 0,
+  None = 0,
 
   /**
       Default choice at cairo compile time. Currently NONE.
   */
-  default_ = 1,
+  Default = 1,
 
   /**
       Fastest dithering algorithm supported by the backend
   */
-  fast = 2,
+  Fast = 2,
 
   /**
       An algorithm with smoother dithering than FAST
   */
-  good = 3,
+  Good = 3,
 
   /**
       Best algorithm available in the backend
   */
-  best = 4,
+  Best = 4,
 }
 
 /**
@@ -228,8 +228,8 @@ enum cairo_dither_t
   
   Mesh patterns are not affected by the extend mode.
   
-  The default extend mode is [cairo.types.Extend.none] for surface patterns
-  and [cairo.types.Extend.pad] for gradient patterns.
+  The default extend mode is [cairo.types.Extend.None] for surface patterns
+  and [cairo.types.Extend.Pad] for gradient patterns.
   
   New entries may be added in future versions.
 */
@@ -239,25 +239,25 @@ enum cairo_extend_t
       pixels outside of the source pattern
       are fully transparent (Since 1.0)
   */
-  none = 0,
+  None = 0,
 
   /**
       the pattern is tiled by repeating (Since 1.0)
   */
-  repeat = 1,
+  Repeat = 1,
 
   /**
       the pattern is tiled by reflecting
       at the edges (Since 1.0; but only implemented for surface patterns since 1.6)
   */
-  reflect = 2,
+  Reflect = 2,
 
   /**
       pixels outside of the pattern copy
       the closest pixel from the source (Since 1.2; but only
       implemented for surface patterns since 1.6)
   */
-  pad = 3,
+  Pad = 3,
 }
 
 /**
@@ -270,7 +270,7 @@ enum cairo_extend_t
   (Note that filling is not actually implemented in this way. This
   is just a description of the rule that is applied.)
   
-  The default fill rule is [cairo.types.FillRule.winding].
+  The default fill rule is [cairo.types.FillRule.Winding].
   
   New entries may be added in future versions.
 */
@@ -283,7 +283,7 @@ enum cairo_fill_rule_t
     from the perspective of looking along the ray from the starting
     point.) If the total count is non-zero, the point will be filled. (Since 1.0)
   */
-  winding = 0,
+  Winding = 0,
 
   /**
       Counts the total number of
@@ -291,7 +291,7 @@ enum cairo_fill_rule_t
     the total number of intersections is odd, the point will be
     filled. (Since 1.0)
   */
-  evenOdd = 1,
+  EvenOdd = 1,
 }
 
 /**
@@ -304,37 +304,37 @@ enum cairo_filter_t
 {
   /**
       A high-performance filter, with quality similar
-        to [cairo.types.Filter.nearest] (Since 1.0)
+        to [cairo.types.Filter.Nearest] (Since 1.0)
   */
-  fast = 0,
+  Fast = 0,
 
   /**
       A reasonable-performance filter, with quality
-        similar to [cairo.types.Filter.bilinear] (Since 1.0)
+        similar to [cairo.types.Filter.Bilinear] (Since 1.0)
   */
-  good = 1,
+  Good = 1,
 
   /**
       The highest-quality available, performance may
         not be suitable for interactive use. (Since 1.0)
   */
-  best = 2,
+  Best = 2,
 
   /**
       Nearest-neighbor filtering (Since 1.0)
   */
-  nearest = 3,
+  Nearest = 3,
 
   /**
       Linear interpolation in two dimensions (Since 1.0)
   */
-  bilinear = 4,
+  Bilinear = 4,
 
   /**
       This filter value is currently
         unimplemented, and should not be used in current code. (Since 1.0)
   */
-  gaussian = 5,
+  Gaussian = 5,
 }
 
 /**
@@ -345,17 +345,17 @@ enum cairo_font_slant_t
   /**
       Upright font style, since 1.0
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       Italic font style, since 1.0
   */
-  italic = 1,
+  Italic = 1,
 
   /**
       Oblique font style, since 1.0
   */
-  oblique = 2,
+  Oblique = 2,
 }
 
 /**
@@ -392,28 +392,28 @@ enum cairo_font_type_t
   /**
       The font was created using cairo's toy font api (Since: 1.2)
   */
-  toy = 0,
+  Toy = 0,
 
   /**
       The font is of type FreeType (Since: 1.2)
   */
-  ft = 1,
+  Ft = 1,
 
   /**
       The font is of type Win32 (Since: 1.2)
   */
-  win32 = 2,
+  Win32 = 2,
 
   /**
       The font is of type Quartz (Since: 1.6, in 1.2 and
     1.4 it was named CAIRO_FONT_TYPE_ATSUI)
   */
-  quartz = 3,
+  Quartz = 3,
 
   /**
       The font was create using cairo's user font api (Since: 1.8)
   */
-  user = 4,
+  User = 4,
 }
 
 /**
@@ -424,12 +424,12 @@ enum cairo_font_weight_t
   /**
       Normal font weight, since 1.0
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       Bold font weight, since 1.0
   */
-  bold = 1,
+  Bold = 1,
 }
 
 /**
@@ -443,7 +443,7 @@ enum cairo_format_t
   /**
       no such format exists or is supported.
   */
-  invalid = -1,
+  Invalid = -1,
 
   /**
       each pixel is a 32-bit quantity, with
@@ -452,20 +452,20 @@ enum cairo_format_t
       alpha is used. (That is, 50% transparent red is 0x80800000,
       not 0x80ff0000.) (Since 1.0)
   */
-  argb32 = 0,
+  Argb32 = 0,
 
   /**
       each pixel is a 32-bit quantity, with
       the upper 8 bits unused. Red, Green, and Blue are stored
       in the remaining 24 bits in that order. (Since 1.0)
   */
-  rgb24 = 1,
+  Rgb24 = 1,
 
   /**
       each pixel is a 8-bit quantity holding
       an alpha value. (Since 1.0)
   */
-  a8 = 2,
+  A8 = 2,
 
   /**
       each pixel is a 1-bit quantity holding
@@ -475,14 +475,14 @@ enum cairo_format_t
       first pixel is in the uppermost bit, on a little-endian
       machine the first pixel is in the least-significant bit. (Since 1.0)
   */
-  a1 = 3,
+  A1 = 3,
 
   /**
       each pixel is a 16-bit quantity
       with red in the upper 5 bits, then green in the middle
       6 bits, and blue in the lower 5 bits. (Since 1.2)
   */
-  rgb16565 = 4,
+  Rgb16565 = 4,
 }
 
 /**
@@ -498,17 +498,17 @@ enum cairo_hint_metrics_t
       Hint metrics in the default
      manner for the font backend and target device, since 1.0
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Do not hint font metrics, since 1.0
   */
-  off = 1,
+  Off = 1,
 
   /**
       Hint font metrics, since 1.0
   */
-  on = 2,
+  On = 2,
 }
 
 /**
@@ -527,60 +527,60 @@ enum cairo_hint_style_t
       Use the default hint style for
       font backend and target device, since 1.0
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Do not hint outlines, since 1.0
   */
-  none = 1,
+  None = 1,
 
   /**
       Hint outlines slightly to improve
       contrast while retaining good fidelity to the original
       shapes, since 1.0
   */
-  slight = 2,
+  Slight = 2,
 
   /**
       Hint outlines with medium strength
       giving a compromise between fidelity to the original shapes
       and contrast, since 1.0
   */
-  medium = 3,
+  Medium = 3,
 
   /**
       Hint outlines to maximize contrast, since 1.0
   */
-  full = 4,
+  Full = 4,
 }
 
 /**
     Specifies how to render the endpoints of the path when stroking.
   
-  The default line cap style is [cairo.types.LineCap.butt].
+  The default line cap style is [cairo.types.LineCap.Butt].
 */
 enum cairo_line_cap_t
 {
   /**
       start(stop) the line exactly at the start(end) point (Since 1.0)
   */
-  butt = 0,
+  Butt = 0,
 
   /**
       use a round ending, the center of the circle is the end point (Since 1.0)
   */
-  round = 1,
+  Round = 1,
 
   /**
       use squared ending, the center of the square is the end point (Since 1.0)
   */
-  square = 2,
+  Square = 2,
 }
 
 /**
     Specifies how to render the junction of two lines when stroking.
   
-  The default line join style is [cairo.types.LineJoin.miter].
+  The default line join style is [cairo.types.LineJoin.Miter].
 */
 enum cairo_line_join_t
 {
@@ -588,26 +588,26 @@ enum cairo_line_join_t
       use a sharp (angled) corner, see
     [cairo.context.Context.setMiterLimit] (Since 1.0)
   */
-  miter = 0,
+  Miter = 0,
 
   /**
       use a rounded join, the center of the circle is the
     joint point (Since 1.0)
   */
-  round = 1,
+  Round = 1,
 
   /**
       use a cut-off join, the join is cut off at half
     the line width from the joint point (Since 1.0)
   */
-  bevel = 2,
+  Bevel = 2,
 }
 
 /**
     #cairo_operator_t is used to set the compositing operator for all cairo
   drawing operations.
   
-  The default operator is [cairo.types.Operator.over].
+  The default operator is [cairo.types.Operator.Over].
   
   The operators marked as <firstterm>unbounded</firstterm> modify their
   destination even outside of the mask layer (that is, their effect is not
@@ -627,161 +627,161 @@ enum cairo_operator_t
   /**
       clear destination layer (bounded) (Since 1.0)
   */
-  clear = 0,
+  Clear = 0,
 
   /**
       replace destination layer (bounded) (Since 1.0)
   */
-  source = 1,
+  Source = 1,
 
   /**
       draw source layer on top of destination layer
     (bounded) (Since 1.0)
   */
-  over = 2,
+  Over = 2,
 
   /**
       draw source where there was destination content
     (unbounded) (Since 1.0)
   */
-  in_ = 3,
+  In = 3,
 
   /**
       draw source where there was no destination
     content (unbounded) (Since 1.0)
   */
-  out_ = 4,
+  Out = 4,
 
   /**
       draw source on top of destination content and
     only there (Since 1.0)
   */
-  atop = 5,
+  Atop = 5,
 
   /**
       ignore the source (Since 1.0)
   */
-  dest = 6,
+  Dest = 6,
 
   /**
       draw destination on top of source (Since 1.0)
   */
-  destOver = 7,
+  DestOver = 7,
 
   /**
       leave destination only where there was
     source content (unbounded) (Since 1.0)
   */
-  destIn = 8,
+  DestIn = 8,
 
   /**
       leave destination only where there was no
     source content (Since 1.0)
   */
-  destOut = 9,
+  DestOut = 9,
 
   /**
       leave destination on top of source content
     and only there (unbounded) (Since 1.0)
   */
-  destAtop = 10,
+  DestAtop = 10,
 
   /**
       source and destination are shown where there is only
     one of them (Since 1.0)
   */
-  xor = 11,
+  Xor = 11,
 
   /**
       source and destination layers are accumulated (Since 1.0)
   */
-  add = 12,
+  Add = 12,
 
   /**
       like over, but assuming source and dest are
     disjoint geometries (Since 1.0)
   */
-  saturate = 13,
+  Saturate = 13,
 
   /**
       source and destination layers are multiplied.
     This causes the result to be at least as dark as the darker inputs. (Since 1.10)
   */
-  multiply = 14,
+  Multiply = 14,
 
   /**
       source and destination are complemented and
     multiplied. This causes the result to be at least as light as the lighter
     inputs. (Since 1.10)
   */
-  screen = 15,
+  Screen = 15,
 
   /**
       multiplies or screens, depending on the
     lightness of the destination color. (Since 1.10)
   */
-  overlay = 16,
+  Overlay = 16,
 
   /**
       replaces the destination with the source if it
     is darker, otherwise keeps the source. (Since 1.10)
   */
-  darken = 17,
+  Darken = 17,
 
   /**
       replaces the destination with the source if it
     is lighter, otherwise keeps the source. (Since 1.10)
   */
-  lighten = 18,
+  Lighten = 18,
 
   /**
       brightens the destination color to reflect
     the source color. (Since 1.10)
   */
-  colorDodge = 19,
+  ColorDodge = 19,
 
   /**
       darkens the destination color to reflect
     the source color. (Since 1.10)
   */
-  colorBurn = 20,
+  ColorBurn = 20,
 
   /**
       Multiplies or screens, dependent on source
     color. (Since 1.10)
   */
-  hardLight = 21,
+  HardLight = 21,
 
   /**
       Darkens or lightens, dependent on source
     color. (Since 1.10)
   */
-  softLight = 22,
+  SoftLight = 22,
 
   /**
       Takes the difference of the source and
     destination color. (Since 1.10)
   */
-  difference = 23,
+  Difference = 23,
 
   /**
       Produces an effect similar to difference, but
     with lower contrast. (Since 1.10)
   */
-  exclusion = 24,
+  Exclusion = 24,
 
   /**
       Creates a color with the hue of the source
     and the saturation and luminosity of the target. (Since 1.10)
   */
-  hslHue = 25,
+  HslHue = 25,
 
   /**
       Creates a color with the saturation
     of the source and the hue and luminosity of the target. Painting with
     this mode onto a gray area produces no change. (Since 1.10)
   */
-  hslSaturation = 26,
+  HslSaturation = 26,
 
   /**
       Creates a color with the hue and saturation
@@ -789,14 +789,14 @@ enum cairo_operator_t
     levels of the target and is useful for coloring monochrome images or
     tinting color images. (Since 1.10)
   */
-  hslColor = 27,
+  HslColor = 27,
 
   /**
       Creates a color with the luminosity of
     the source and the hue and saturation of the target. This produces an
     inverse effect to @CAIRO_OPERATOR_HSL_COLOR. (Since 1.10)
   */
-  hslLuminosity = 28,
+  HslLuminosity = 28,
 }
 
 /**
@@ -809,22 +809,22 @@ enum cairo_path_data_type_t
   /**
       A move-to operation, since 1.0
   */
-  moveTo = 0,
+  MoveTo = 0,
 
   /**
       A line-to operation, since 1.0
   */
-  lineTo = 1,
+  LineTo = 1,
 
   /**
       A curve-to operation, since 1.0
   */
-  curveTo = 2,
+  CurveTo = 2,
 
   /**
       A close-path operation, since 1.0
   */
-  closePath = 3,
+  ClosePath = 3,
 }
 
 /**
@@ -854,27 +854,27 @@ enum cairo_pattern_type_t
       The pattern is a solid (uniform)
     color. It may be opaque or translucent, since 1.2.
   */
-  solid = 0,
+  Solid = 0,
 
   /**
       The pattern is a based on a surface (an image), since 1.2.
   */
-  surface = 1,
+  Surface = 1,
 
   /**
       The pattern is a linear gradient, since 1.2.
   */
-  linear = 2,
+  Linear = 2,
 
   /**
       The pattern is a radial gradient, since 1.2.
   */
-  radial = 3,
+  Radial = 3,
 
   /**
       The pattern is a mesh, since 1.12.
   */
-  mesh = 4,
+  Mesh = 4,
 }
 
 /**
@@ -886,37 +886,37 @@ enum cairo_pdf_metadata_t
   /**
       The document title (Since 1.16)
   */
-  title = 0,
+  Title = 0,
 
   /**
       The document author (Since 1.16)
   */
-  author = 1,
+  Author = 1,
 
   /**
       The document subject (Since 1.16)
   */
-  subject = 2,
+  Subject = 2,
 
   /**
       The document keywords (Since 1.16)
   */
-  keywords = 3,
+  Keywords = 3,
 
   /**
       The document creator (Since 1.16)
   */
-  creator = 4,
+  Creator = 4,
 
   /**
       The document creation date (Since 1.16)
   */
-  createDate = 5,
+  CreateDate = 5,
 
   /**
       The document modification date (Since 1.16)
   */
-  modDate = 6,
+  ModDate = 6,
 }
 
 /**
@@ -930,17 +930,17 @@ enum cairo_pdf_outline_flags_t
   /**
       The outline item defaults to open in the PDF viewer (Since 1.16)
   */
-  open = 1,
+  Open = 1,
 
   /**
       The outline item is displayed by the viewer in bold text (Since 1.16)
   */
-  bold = 2,
+  Bold = 2,
 
   /**
       The outline item is displayed by the viewer in italic text (Since 1.16)
   */
-  italic = 4,
+  Italic = 4,
 }
 
 /**
@@ -996,18 +996,18 @@ enum cairo_region_overlap_t
   /**
       The contents are entirely inside the region. (Since 1.10)
   */
-  in_ = 0,
+  In = 0,
 
   /**
       The contents are entirely outside the region. (Since 1.10)
   */
-  out_ = 1,
+  Out = 1,
 
   /**
       The contents are partially inside and
         partially outside the region. (Since 1.10)
   */
-  part = 2,
+  Part = 2,
 }
 
 /**
@@ -1018,12 +1018,12 @@ enum cairo_script_mode_t
   /**
       the output will be in readable text (default). (Since 1.12)
   */
-  ascii = 0,
+  Ascii = 0,
 
   /**
       the output will use byte codes. (Since 1.12)
   */
-  binary = 1,
+  Binary = 1,
 }
 
 /**
@@ -1040,182 +1040,182 @@ enum cairo_status_t
   /**
       no error has occurred (Since 1.0)
   */
-  success = 0,
+  Success = 0,
 
   /**
       out of memory (Since 1.0)
   */
-  noMemory = 1,
+  NoMemory = 1,
 
   /**
       [cairo.context.Context.restore] called without matching [cairo.context.Context.save] (Since 1.0)
   */
-  invalidRestore = 2,
+  InvalidRestore = 2,
 
   /**
       no saved group to pop, i.e. [cairo.context.Context.popGroup] without matching [cairo.context.Context.pushGroup] (Since 1.0)
   */
-  invalidPopGroup = 3,
+  InvalidPopGroup = 3,
 
   /**
       no current point defined (Since 1.0)
   */
-  noCurrentPoint = 4,
+  NoCurrentPoint = 4,
 
   /**
       invalid matrix (not invertible) (Since 1.0)
   */
-  invalidMatrix = 5,
+  InvalidMatrix = 5,
 
   /**
       invalid value for an input #cairo_status_t (Since 1.0)
   */
-  invalidStatus = 6,
+  InvalidStatus = 6,
 
   /**
       null pointer (Since 1.0)
   */
-  nullPointer = 7,
+  NullPointer = 7,
 
   /**
       input string not valid UTF-8 (Since 1.0)
   */
-  invalidString = 8,
+  InvalidString = 8,
 
   /**
       input path data not valid (Since 1.0)
   */
-  invalidPathData = 9,
+  InvalidPathData = 9,
 
   /**
       error while reading from input stream (Since 1.0)
   */
-  readError = 10,
+  ReadError = 10,
 
   /**
       error while writing to output stream (Since 1.0)
   */
-  writeError = 11,
+  WriteError = 11,
 
   /**
       target surface has been finished (Since 1.0)
   */
-  surfaceFinished = 12,
+  SurfaceFinished = 12,
 
   /**
       the surface type is not appropriate for the operation (Since 1.0)
   */
-  surfaceTypeMismatch = 13,
+  SurfaceTypeMismatch = 13,
 
   /**
       the pattern type is not appropriate for the operation (Since 1.0)
   */
-  patternTypeMismatch = 14,
+  PatternTypeMismatch = 14,
 
   /**
       invalid value for an input #cairo_content_t (Since 1.0)
   */
-  invalidContent = 15,
+  InvalidContent = 15,
 
   /**
       invalid value for an input #cairo_format_t (Since 1.0)
   */
-  invalidFormat = 16,
+  InvalidFormat = 16,
 
   /**
       invalid value for an input Visual* (Since 1.0)
   */
-  invalidVisual = 17,
+  InvalidVisual = 17,
 
   /**
       file not found (Since 1.0)
   */
-  fileNotFound = 18,
+  FileNotFound = 18,
 
   /**
       invalid value for a dash setting (Since 1.0)
   */
-  invalidDash = 19,
+  InvalidDash = 19,
 
   /**
       invalid value for a DSC comment (Since 1.2)
   */
-  invalidDscComment = 20,
+  InvalidDscComment = 20,
 
   /**
       invalid index passed to getter (Since 1.4)
   */
-  invalidIndex = 21,
+  InvalidIndex = 21,
 
   /**
       clip region not representable in desired format (Since 1.4)
   */
-  clipNotRepresentable = 22,
+  ClipNotRepresentable = 22,
 
   /**
       error creating or writing to a temporary file (Since 1.6)
   */
-  tempFileError = 23,
+  TempFileError = 23,
 
   /**
       invalid value for stride (Since 1.6)
   */
-  invalidStride = 24,
+  InvalidStride = 24,
 
   /**
       the font type is not appropriate for the operation (Since 1.8)
   */
-  fontTypeMismatch = 25,
+  FontTypeMismatch = 25,
 
   /**
       the user-font is immutable (Since 1.8)
   */
-  userFontImmutable = 26,
+  UserFontImmutable = 26,
 
   /**
       error occurred in a user-font callback function (Since 1.8)
   */
-  userFontError = 27,
+  UserFontError = 27,
 
   /**
       negative number used where it is not allowed (Since 1.8)
   */
-  negativeCount = 28,
+  NegativeCount = 28,
 
   /**
       input clusters do not represent the accompanying text and glyph array (Since 1.8)
   */
-  invalidClusters = 29,
+  InvalidClusters = 29,
 
   /**
       invalid value for an input #cairo_font_slant_t (Since 1.8)
   */
-  invalidSlant = 30,
+  InvalidSlant = 30,
 
   /**
       invalid value for an input #cairo_font_weight_t (Since 1.8)
   */
-  invalidWeight = 31,
+  InvalidWeight = 31,
 
   /**
       invalid value (typically too big) for the size of the input (surface, pattern, etc.) (Since 1.10)
   */
-  invalidSize = 32,
+  InvalidSize = 32,
 
   /**
       user-font method not implemented (Since 1.10)
   */
-  userFontNotImplemented = 33,
+  UserFontNotImplemented = 33,
 
   /**
       the device type is not appropriate for the operation (Since 1.10)
   */
-  deviceTypeMismatch = 34,
+  DeviceTypeMismatch = 34,
 
   /**
       an operation to the device caused an unspecified error (Since 1.10)
   */
-  deviceError = 35,
+  DeviceError = 35,
 
   /**
       a mesh pattern
@@ -1223,28 +1223,28 @@ enum cairo_status_t
       [cairo.global.meshPatternBeginPatch]/[cairo.global.meshPatternEndPatch]
       pair (Since 1.12)
   */
-  invalidMeshConstruction = 36,
+  InvalidMeshConstruction = 36,
 
   /**
       target device has been finished (Since 1.12)
   */
-  deviceFinished = 37,
+  DeviceFinished = 37,
 
   /**
       `CAIRO_MIME_TYPE_JBIG2_GLOBAL_ID` has been used on at least one image
       but no image provided `CAIRO_MIME_TYPE_JBIG2_GLOBAL` (Since 1.14)
   */
-  jbig2GlobalMissing = 38,
+  Jbig2GlobalMissing = 38,
 
   /**
       error occurred in libpng while reading from or writing to a PNG file (Since 1.16)
   */
-  pngError = 39,
+  PngError = 39,
 
   /**
       error occurred in libfreetype (Since 1.16)
   */
-  freetypeError = 40,
+  FreetypeError = 40,
 
   /**
       this is a special value indicating the number of
@@ -1252,18 +1252,18 @@ enum cairo_status_t
       that the version of cairo at run-time may have additional status values
       defined than the value of this symbol at compile-time. (Since 1.10)
   */
-  lastStatus = 45,
+  LastStatus = 45,
 
   /**
       error occurred in the Windows Graphics Device Interface (Since 1.16)
   */
-  win32GdiError = 41,
+  Win32GdiError = 41,
 }
 
 /**
     The subpixel order specifies the order of color elements within
   each pixel on the display device when rendering with an
-  antialiasing mode of [cairo.types.Antialias.subpixel].
+  antialiasing mode of [cairo.types.Antialias.Subpixel].
 */
 enum cairo_subpixel_order_t
 {
@@ -1271,31 +1271,31 @@ enum cairo_subpixel_order_t
       Use the default subpixel order for
       for the target device, since 1.0
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Subpixel elements are arranged horizontally
       with red at the left, since 1.0
   */
-  rgb = 1,
+  Rgb = 1,
 
   /**
       Subpixel elements are arranged horizontally
       with blue at the left, since 1.0
   */
-  bgr = 2,
+  Bgr = 2,
 
   /**
       Subpixel elements are arranged vertically
       with red at the top, since 1.0
   */
-  vrgb = 3,
+  Vrgb = 3,
 
   /**
       Subpixel elements are arranged vertically
       with blue at the top, since 1.0
   */
-  vbgr = 4,
+  Vbgr = 4,
 }
 
 /**
@@ -1306,12 +1306,12 @@ enum cairo_surface_observer_mode_t
   /**
       no recording is done
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       operations are recorded
   */
-  recordOperations = 1,
+  RecordOperations = 1,
 }
 
 /**
@@ -1342,126 +1342,126 @@ enum cairo_surface_type_t
   /**
       The surface is of type image, since 1.2
   */
-  image = 0,
+  Image = 0,
 
   /**
       The surface is of type pdf, since 1.2
   */
-  pdf = 1,
+  Pdf = 1,
 
   /**
       The surface is of type ps, since 1.2
   */
-  ps = 2,
+  Ps = 2,
 
   /**
       The surface is of type xlib, since 1.2
   */
-  xlib = 3,
+  Xlib = 3,
 
   /**
       The surface is of type xcb, since 1.2
   */
-  xcb = 4,
+  Xcb = 4,
 
   /**
       The surface is of type glitz, since 1.2, deprecated 1.18
       (glitz support have been removed, this surface type will never be set by cairo)
   */
-  glitz = 5,
+  Glitz = 5,
 
   /**
       The surface is of type quartz, since 1.2
   */
-  quartz = 6,
+  Quartz = 6,
 
   /**
       The surface is of type win32, since 1.2
   */
-  win32 = 7,
+  Win32 = 7,
 
   /**
       The surface is of type beos, since 1.2, deprecated 1.18
       (beos support have been removed, this surface type will never be set by cairo)
   */
-  beos = 8,
+  Beos = 8,
 
   /**
       The surface is of type directfb, since 1.2, deprecated 1.18
       (directfb support have been removed, this surface type will never be set by cairo)
   */
-  directfb = 9,
+  Directfb = 9,
 
   /**
       The surface is of type svg, since 1.2
   */
-  svg = 10,
+  Svg = 10,
 
   /**
       The surface is of type os2, since 1.4, deprecated 1.18
       (os2 support have been removed, this surface type will never be set by cairo)
   */
-  os2 = 11,
+  Os2 = 11,
 
   /**
       The surface is a win32 printing surface, since 1.6
   */
-  win32Printing = 12,
+  Win32Printing = 12,
 
   /**
       The surface is of type quartz_image, since 1.6
   */
-  quartzImage = 13,
+  QuartzImage = 13,
 
   /**
       The surface is of type script, since 1.10
   */
-  script = 14,
+  Script = 14,
 
   /**
       The surface is of type Qt, since 1.10, deprecated 1.18
       (Ot support have been removed, this surface type will never be set by cairo)
   */
-  qt = 15,
+  Qt = 15,
 
   /**
       The surface is of type recording, since 1.10
   */
-  recording = 16,
+  Recording = 16,
 
   /**
       The surface is a OpenVG surface, since 1.10, deprecated 1.18
       (OpenVG support have been removed, this surface type will never be set by cairo)
   */
-  vg = 17,
+  Vg = 17,
 
   /**
       The surface is of type OpenGL, since 1.10, deprecated 1.18
       (OpenGL support have been removed, this surface type will never be set by cairo)
   */
-  gl = 18,
+  Gl = 18,
 
   /**
       The surface is of type Direct Render Manager, since 1.10, deprecated 1.18
       (DRM support have been removed, this surface type will never be set by cairo)
   */
-  drm = 19,
+  Drm = 19,
 
   /**
       The surface is of type 'tee' (a multiplexing surface), since 1.10
   */
-  tee = 20,
+  Tee = 20,
 
   /**
       The surface is of type XML (for debugging), since 1.10
   */
-  xml = 21,
+  Xml = 21,
 
   /**
       The surface is of type Skia, since 1.10, deprecated 1.18
       (Skia support have been removed, this surface type will never be set by cairo)
   */
-  skia = 22,
+  Skia = 22,
 }
 
 /**
@@ -1482,53 +1482,53 @@ enum cairo_svg_unit_t
       If used in the root element for the initial coordinate systems it
       corresponds to pixels. (Since 1.16)
   */
-  user = 0,
+  User = 0,
 
   /**
       The size of the element's font. (Since 1.16)
   */
-  em = 1,
+  Em = 1,
 
   /**
       The x-height of the element’s font. (Since 1.16)
   */
-  ex = 2,
+  Ex = 2,
 
   /**
       Pixels (1px = 1/96th of 1in). (Since 1.16)
   */
-  px = 3,
+  Px = 3,
 
   /**
       Inches (1in = 2.54cm = 96px). (Since 1.16)
   */
-  in_ = 4,
+  In = 4,
 
   /**
       Centimeters (1cm = 96px/2.54). (Since 1.16)
   */
-  cm = 5,
+  Cm = 5,
 
   /**
       Millimeters (1mm = 1/10th of 1cm). (Since 1.16)
   */
-  mm = 6,
+  Mm = 6,
 
   /**
       Points (1pt = 1/72th of 1in). (Since 1.16)
   */
-  pt = 7,
+  Pt = 7,
 
   /**
       Picas (1pc = 1/6th of 1in). (Since 1.16)
   */
-  pc = 8,
+  Pc = 8,
 
   /**
       Percent, a value that is some fraction of another
       reference value. (Since 1.16)
   */
-  percent = 9,
+  Percent = 9,
 }
 
 /**
@@ -1557,7 +1557,7 @@ enum cairo_text_cluster_flags_t
       The clusters in the cluster array
     map to glyphs in the glyph array from end to start. (Since 1.8)
   */
-  backward = 1,
+  Backward = 1,
 }
 
 /**
@@ -1810,10 +1810,10 @@ struct cairo_path_t
   where the number of points for each element type is as follows:
   
   <programlisting>
-      [cairo.types.PathDataType.moveTo]:     1 point
-      [cairo.types.PathDataType.lineTo]:     1 point
-      [cairo.types.PathDataType.curveTo]:    3 points
-      [cairo.types.PathDataType.closePath]:  0 points
+      [cairo.types.PathDataType.MoveTo]:     1 point
+      [cairo.types.PathDataType.LineTo]:     1 point
+      [cairo.types.PathDataType.CurveTo]:    3 points
+      [cairo.types.PathDataType.ClosePath]:  0 points
   </programlisting>
   
   The semantics and ordering of the coordinate values are consistent

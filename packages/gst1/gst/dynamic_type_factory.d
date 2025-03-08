@@ -31,7 +31,7 @@ import gst.types;
 class DynamicTypeFactory : gst.plugin_feature.PluginFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
   static gobject.types.GType load(string factoryname)
   {
     gobject.types.GType _retval;
-    const(char)* _factoryname = factoryname.toCString(No.alloc);
+    const(char)* _factoryname = factoryname.toCString(No.Alloc);
     _retval = gst_dynamic_type_factory_load(_factoryname);
     return _retval;
   }

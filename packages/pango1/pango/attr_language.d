@@ -15,7 +15,7 @@ class AttrLanguage
 {
   PangoAttrLanguage cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrLanguage");
@@ -52,8 +52,8 @@ class AttrLanguage
   static pango.attribute.Attribute new_(pango.language.Language language)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
+    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

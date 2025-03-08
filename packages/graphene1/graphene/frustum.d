@@ -22,15 +22,15 @@ class Frustum : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_frustum_t.sizeof), Yes.take);
+    super(safeMalloc(graphene_frustum_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -58,7 +58,7 @@ class Frustum : gobject.boxed.Boxed
   {
     graphene_frustum_t* _cretval;
     _cretval = graphene_frustum_alloc();
-    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Frustum : gobject.boxed.Boxed
   bool containsPoint(graphene.point3_d.Point3D point)
   {
     bool _retval;
-    _retval = graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.dup) : null);
+    _retval = graphene_frustum_contains_point(cast(const(graphene_frustum_t)*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class Frustum : gobject.boxed.Boxed
   bool equal(graphene.frustum.Frustum b)
   {
     bool _retval;
-    _retval = graphene_frustum_equal(cast(const(graphene_frustum_t)*)cPtr, b ? cast(const(graphene_frustum_t)*)b.cPtr(No.dup) : null);
+    _retval = graphene_frustum_equal(cast(const(graphene_frustum_t)*)cPtr, b ? cast(const(graphene_frustum_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class Frustum : gobject.boxed.Boxed
     graphene_frustum_get_planes(cast(const(graphene_frustum_t)*)cPtr, _planes.ptr);
     planes.length = 6;
     foreach (i; 0 .. 6)
-      planes[i] = new graphene.plane.Plane(cast(void*)&_planes[i], No.take);
+      planes[i] = new graphene.plane.Plane(cast(void*)&_planes[i], No.Take);
   }
 
   /**
@@ -120,8 +120,8 @@ class Frustum : gobject.boxed.Boxed
   graphene.frustum.Frustum init_(graphene.plane.Plane p0, graphene.plane.Plane p1, graphene.plane.Plane p2, graphene.plane.Plane p3, graphene.plane.Plane p4, graphene.plane.Plane p5)
   {
     graphene_frustum_t* _cretval;
-    _cretval = graphene_frustum_init(cast(graphene_frustum_t*)cPtr, p0 ? cast(const(graphene_plane_t)*)p0.cPtr(No.dup) : null, p1 ? cast(const(graphene_plane_t)*)p1.cPtr(No.dup) : null, p2 ? cast(const(graphene_plane_t)*)p2.cPtr(No.dup) : null, p3 ? cast(const(graphene_plane_t)*)p3.cPtr(No.dup) : null, p4 ? cast(const(graphene_plane_t)*)p4.cPtr(No.dup) : null, p5 ? cast(const(graphene_plane_t)*)p5.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_frustum_init(cast(graphene_frustum_t*)cPtr, p0 ? cast(const(graphene_plane_t)*)p0.cPtr(No.Dup) : null, p1 ? cast(const(graphene_plane_t)*)p1.cPtr(No.Dup) : null, p2 ? cast(const(graphene_plane_t)*)p2.cPtr(No.Dup) : null, p3 ? cast(const(graphene_plane_t)*)p3.cPtr(No.Dup) : null, p4 ? cast(const(graphene_plane_t)*)p4.cPtr(No.Dup) : null, p5 ? cast(const(graphene_plane_t)*)p5.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -135,8 +135,8 @@ class Frustum : gobject.boxed.Boxed
   graphene.frustum.Frustum initFromFrustum(graphene.frustum.Frustum src)
   {
     graphene_frustum_t* _cretval;
-    _cretval = graphene_frustum_init_from_frustum(cast(graphene_frustum_t*)cPtr, src ? cast(const(graphene_frustum_t)*)src.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_frustum_init_from_frustum(cast(graphene_frustum_t*)cPtr, src ? cast(const(graphene_frustum_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -149,8 +149,8 @@ class Frustum : gobject.boxed.Boxed
   graphene.frustum.Frustum initFromMatrix(graphene.matrix.Matrix matrix)
   {
     graphene_frustum_t* _cretval;
-    _cretval = graphene_frustum_init_from_matrix(cast(graphene_frustum_t*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_frustum_init_from_matrix(cast(graphene_frustum_t*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.frustum.Frustum(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Frustum : gobject.boxed.Boxed
   bool intersectsBox(graphene.box.Box box)
   {
     bool _retval;
-    _retval = graphene_frustum_intersects_box(cast(const(graphene_frustum_t)*)cPtr, box ? cast(const(graphene_box_t)*)box.cPtr(No.dup) : null);
+    _retval = graphene_frustum_intersects_box(cast(const(graphene_frustum_t)*)cPtr, box ? cast(const(graphene_box_t)*)box.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class Frustum : gobject.boxed.Boxed
   bool intersectsSphere(graphene.sphere.Sphere sphere)
   {
     bool _retval;
-    _retval = graphene_frustum_intersects_sphere(cast(const(graphene_frustum_t)*)cPtr, sphere ? cast(const(graphene_sphere_t)*)sphere.cPtr(No.dup) : null);
+    _retval = graphene_frustum_intersects_sphere(cast(const(graphene_frustum_t)*)cPtr, sphere ? cast(const(graphene_sphere_t)*)sphere.cPtr(No.Dup) : null);
     return _retval;
   }
 }

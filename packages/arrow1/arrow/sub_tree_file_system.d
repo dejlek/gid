@@ -10,7 +10,7 @@ import gid.gid;
 class SubTreeFileSystem : arrow.file_system.FileSystem
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,8 +30,8 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
   this(string basePath, arrow.file_system.FileSystem baseFileSystem)
   {
     GArrowSubTreeFileSystem* _cretval;
-    const(char)* _basePath = basePath.toCString(No.alloc);
-    _cretval = garrow_sub_tree_file_system_new(_basePath, baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    const(char)* _basePath = basePath.toCString(No.Alloc);
+    _cretval = garrow_sub_tree_file_system_new(_basePath, baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

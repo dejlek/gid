@@ -19,7 +19,7 @@ import pango.types;
 class Fontset : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class Fontset : gobject.object.ObjectG
     {
       auto _dlg = cast(pango.types.FontsetForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.take), ObjectG.getDObject!(pango.font.Font)(cast(void*)font, No.take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(pango.fontset.Fontset)(cast(void*)fontset, No.Take), ObjectG.getDObject!(pango.font.Font)(cast(void*)font, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -69,7 +69,7 @@ class Fontset : gobject.object.ObjectG
   {
     PangoFont* _cretval;
     _cretval = pango_fontset_get_font(cast(PangoFontset*)cPtr, wc);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Fontset : gobject.object.ObjectG
   {
     PangoFontMetrics* _cretval;
     _cretval = pango_fontset_get_metrics(cast(PangoFontset*)cPtr);
-    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

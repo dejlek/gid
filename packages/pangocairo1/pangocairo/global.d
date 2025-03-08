@@ -31,8 +31,8 @@ import pangocairo.types;
 cairo.font_options.FontOptions contextGetFontOptions(pango.context.Context context)
 {
   const(cairo_font_options_t)* _cretval;
-  _cretval = pango_cairo_context_get_font_options(context ? cast(PangoContext*)context.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.take) : null;
+  _cretval = pango_cairo_context_get_font_options(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -48,7 +48,7 @@ cairo.font_options.FontOptions contextGetFontOptions(pango.context.Context conte
 double contextGetResolution(pango.context.Context context)
 {
   double _retval;
-  _retval = pango_cairo_context_get_resolution(context ? cast(PangoContext*)context.cPtr(No.dup) : null);
+  _retval = pango_cairo_context_get_resolution(context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -64,7 +64,7 @@ double contextGetResolution(pango.context.Context context)
 */
 void contextSetFontOptions(pango.context.Context context, cairo.font_options.FontOptions options = null)
 {
-  pango_cairo_context_set_font_options(context ? cast(PangoContext*)context.cPtr(No.dup) : null, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.dup) : null);
+  pango_cairo_context_set_font_options(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
 }
 
 /**
@@ -81,18 +81,18 @@ void contextSetFontOptions(pango.context.Context context, cairo.font_options.Fon
 */
 void contextSetResolution(pango.context.Context context, double dpi)
 {
-  pango_cairo_context_set_resolution(context ? cast(PangoContext*)context.cPtr(No.dup) : null, dpi);
+  pango_cairo_context_set_resolution(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, dpi);
 }
 
 /**
     Sets callback function for context to use for rendering attributes
-  of type [pango.types.AttrType.shape].
+  of type [pango.types.AttrType.Shape].
   
   See [pangocairo.types.ShapeRendererFunc] for details.
   Params:
     context =       a [pango.context.Context], from a pangocairo font map
     func =       Callback function for rendering attributes of
-        type [pango.types.AttrType.shape], or null to disable shape rendering.
+        type [pango.types.AttrType.Shape], or null to disable shape rendering.
 */
 void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.ShapeRendererFunc func = null)
 {
@@ -100,13 +100,13 @@ void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.Sha
   {
     auto _dlg = cast(pangocairo.types.ShapeRendererFunc*)data;
 
-    (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.take) : null, doPath);
+    (*_dlg)(cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, attr ? new pango.attr_shape.AttrShape(cast(void*)attr, No.Take) : null, doPath);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  pango_cairo_context_set_shape_renderer(context ? cast(PangoContext*)context.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  pango_cairo_context_set_shape_renderer(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -127,8 +127,8 @@ void contextSetShapeRenderer(pango.context.Context context, pangocairo.types.Sha
 pango.context.Context createContext(cairo.context.Context cr)
 {
   PangoContext* _cretval;
-  _cretval = pango_cairo_create_context(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
+  _cretval = pango_cairo_create_context(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -152,8 +152,8 @@ pango.context.Context createContext(cairo.context.Context cr)
 pango.layout.Layout createLayout(cairo.context.Context cr)
 {
   PangoLayout* _cretval;
-  _cretval = pango_cairo_create_layout(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.take);
+  _cretval = pango_cairo_create_layout(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -173,7 +173,7 @@ pango.layout.Layout createLayout(cairo.context.Context cr)
 */
 void errorUnderlinePath(cairo.context.Context cr, double x, double y, double width, double height)
 {
-  pango_cairo_error_underline_path(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  pango_cairo_error_underline_path(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -189,7 +189,7 @@ void errorUnderlinePath(cairo.context.Context cr, double x, double y, double wid
 */
 void glyphStringPath(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs)
 {
-  pango_cairo_glyph_string_path(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, font ? cast(PangoFont*)font.cPtr(No.dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null);
+  pango_cairo_glyph_string_path(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -204,7 +204,7 @@ void glyphStringPath(cairo.context.Context cr, pango.font.Font font, pango.glyph
 */
 void layoutLinePath(cairo.context.Context cr, pango.layout_line.LayoutLine line)
 {
-  pango_cairo_layout_line_path(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, line ? cast(PangoLayoutLine*)line.cPtr(No.dup) : null);
+  pango_cairo_layout_line_path(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, line ? cast(PangoLayoutLine*)line.cPtr(No.Dup) : null);
 }
 
 /**
@@ -219,7 +219,7 @@ void layoutLinePath(cairo.context.Context cr, pango.layout_line.LayoutLine line)
 */
 void layoutPath(cairo.context.Context cr, pango.layout.Layout layout)
 {
-  pango_cairo_layout_path(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+  pango_cairo_layout_path(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
 }
 
 /**
@@ -239,7 +239,7 @@ void layoutPath(cairo.context.Context cr, pango.layout.Layout layout)
 */
 void showErrorUnderline(cairo.context.Context cr, double x, double y, double width, double height)
 {
-  pango_cairo_show_error_underline(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  pango_cairo_show_error_underline(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -261,8 +261,8 @@ void showErrorUnderline(cairo.context.Context cr, double x, double y, double wid
 */
 void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.GlyphItem glyphItem)
 {
-  const(char)* _text = text.toCString(No.alloc);
-  pango_cairo_show_glyph_item(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.dup) : null);
+  const(char)* _text = text.toCString(No.Alloc);
+  pango_cairo_show_glyph_item(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null);
 }
 
 /**
@@ -277,7 +277,7 @@ void showGlyphItem(cairo.context.Context cr, string text, pango.glyph_item.Glyph
 */
 void showGlyphString(cairo.context.Context cr, pango.font.Font font, pango.glyph_string.GlyphString glyphs)
 {
-  pango_cairo_show_glyph_string(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, font ? cast(PangoFont*)font.cPtr(No.dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null);
+  pango_cairo_show_glyph_string(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -291,7 +291,7 @@ void showGlyphString(cairo.context.Context cr, pango.font.Font font, pango.glyph
 */
 void showLayout(cairo.context.Context cr, pango.layout.Layout layout)
 {
-  pango_cairo_show_layout(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+  pango_cairo_show_layout(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
 }
 
 /**
@@ -305,7 +305,7 @@ void showLayout(cairo.context.Context cr, pango.layout.Layout layout)
 */
 void showLayoutLine(cairo.context.Context cr, pango.layout_line.LayoutLine line)
 {
-  pango_cairo_show_layout_line(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, line ? cast(PangoLayoutLine*)line.cPtr(No.dup) : null);
+  pango_cairo_show_layout_line(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, line ? cast(PangoLayoutLine*)line.cPtr(No.Dup) : null);
 }
 
 /**
@@ -321,7 +321,7 @@ void showLayoutLine(cairo.context.Context cr, pango.layout_line.LayoutLine line)
 */
 void updateContext(cairo.context.Context cr, pango.context.Context context)
 {
-  pango_cairo_update_context(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, context ? cast(PangoContext*)context.cPtr(No.dup) : null);
+  pango_cairo_update_context(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, context ? cast(PangoContext*)context.cPtr(No.Dup) : null);
 }
 
 /**
@@ -334,5 +334,5 @@ void updateContext(cairo.context.Context cr, pango.context.Context context)
 */
 void updateLayout(cairo.context.Context cr, pango.layout.Layout layout)
 {
-  pango_cairo_update_layout(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+  pango_cairo_update_layout(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
 }

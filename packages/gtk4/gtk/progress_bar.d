@@ -63,12 +63,12 @@ import pango.types;
   
   # Accessibility
   
-  [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.progressBar] role.
+  [gtk.progress_bar.ProgressBar] uses the [gtk.types.AccessibleRole.ProgressBar] role.
 */
 class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -95,7 +95,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_progress_bar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -171,7 +171,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     const(char)* _cretval;
     _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setText(string text = null)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)cPtr, _text);
   }
 }

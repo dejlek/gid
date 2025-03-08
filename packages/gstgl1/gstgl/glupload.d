@@ -19,7 +19,7 @@ import gstgl.types;
 class GLUpload : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -39,8 +39,8 @@ class GLUpload : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context)
   {
     GstGLUpload* _cretval;
-    _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -48,7 +48,7 @@ class GLUpload : gst.object.ObjectGst
   {
     GstCaps* _cretval;
     _cretval = gst_gl_upload_get_input_template_caps();
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -63,8 +63,8 @@ class GLUpload : gst.object.ObjectGst
   gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_upload_fixate_caps(cast(GstGLUpload*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, othercaps ? cast(GstCaps*)othercaps.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_upload_fixate_caps(cast(GstGLUpload*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -74,8 +74,8 @@ class GLUpload : gst.object.ObjectGst
     GstCaps* _inCaps;
     GstCaps* _outCaps;
     gst_gl_upload_get_caps(cast(GstGLUpload*)cPtr, &_inCaps, &_outCaps);
-    inCaps = new gst.caps.Caps(cast(void*)_inCaps, Yes.take);
-    outCaps = new gst.caps.Caps(cast(void*)_outCaps, Yes.take);
+    inCaps = new gst.caps.Caps(cast(void*)_inCaps, Yes.Take);
+    outCaps = new gst.caps.Caps(cast(void*)_outCaps, Yes.Take);
   }
 
   /**
@@ -90,9 +90,9 @@ class GLUpload : gst.object.ObjectGst
   {
     GstGLUploadReturn _cretval;
     GstBuffer* _outbufPtr;
-    _cretval = gst_gl_upload_perform_with_buffer(cast(GstGLUpload*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, &_outbufPtr);
+    _cretval = gst_gl_upload_perform_with_buffer(cast(GstGLUpload*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, &_outbufPtr);
     gstgl.types.GLUploadReturn _retval = cast(gstgl.types.GLUploadReturn)_cretval;
-    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.take);
+    outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class GLUpload : gst.object.ObjectGst
   */
   void proposeAllocation(gst.query.Query decideQuery, gst.query.Query query)
   {
-    gst_gl_upload_propose_allocation(cast(GstGLUpload*)cPtr, decideQuery ? cast(GstQuery*)decideQuery.cPtr(No.dup) : null, query ? cast(GstQuery*)query.cPtr(No.dup) : null);
+    gst_gl_upload_propose_allocation(cast(GstGLUpload*)cPtr, decideQuery ? cast(GstQuery*)decideQuery.cPtr(No.Dup) : null, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
   }
 
   /**
@@ -117,22 +117,22 @@ class GLUpload : gst.object.ObjectGst
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_upload_set_caps(cast(GstGLUpload*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.dup) : null);
+    _retval = gst_gl_upload_set_caps(cast(GstGLUpload*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.Dup) : null);
     return _retval;
   }
 
   /** */
   void setContext(gstgl.glcontext.GLContext context)
   {
-    gst_gl_upload_set_context(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
+    gst_gl_upload_set_context(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
   }
 
   /** */
   gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

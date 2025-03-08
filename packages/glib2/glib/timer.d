@@ -17,7 +17,7 @@ class Timer
   GTimer* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.Timer");
@@ -137,6 +137,6 @@ class Timer
   {
     GTimer* _cretval;
     _cretval = g_timer_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

@@ -43,31 +43,31 @@ interface Converter
     
     A full conversion loop involves calling this method repeatedly, each time
     giving it new input and space output space. When there is no more input
-    data after the data in inbuf, the flag [gio.types.ConverterFlags.inputAtEnd] must be set.
-    The loop will be (unless some error happens) returning [gio.types.ConverterResult.converted]
+    data after the data in inbuf, the flag [gio.types.ConverterFlags.InputAtEnd] must be set.
+    The loop will be (unless some error happens) returning [gio.types.ConverterResult.Converted]
     each time until all data is consumed and all output is produced, then
-    [gio.types.ConverterResult.finished] is returned instead. Note, that [gio.types.ConverterResult.finished]
-    may be returned even if [gio.types.ConverterFlags.inputAtEnd] is not set, for instance
+    [gio.types.ConverterResult.Finished] is returned instead. Note, that [gio.types.ConverterResult.Finished]
+    may be returned even if [gio.types.ConverterFlags.InputAtEnd] is not set, for instance
     in a decompression converter where the end of data is detectable from the
     data (and there might even be other data after the end of the compressed data).
     
     When some data has successfully been converted bytes_read and is set to
     the number of bytes read from inbuf, and bytes_written is set to indicate
     how many bytes was written to outbuf. If there are more data to output
-    or consume (i.e. unless the [gio.types.ConverterFlags.inputAtEnd] is specified) then
-    [gio.types.ConverterResult.converted] is returned, and if no more data is to be output
-    then [gio.types.ConverterResult.finished] is returned.
+    or consume (i.e. unless the [gio.types.ConverterFlags.InputAtEnd] is specified) then
+    [gio.types.ConverterResult.Converted] is returned, and if no more data is to be output
+    then [gio.types.ConverterResult.Finished] is returned.
     
-    On error [gio.types.ConverterResult.error] is returned and error is set accordingly.
+    On error [gio.types.ConverterResult.Error] is returned and error is set accordingly.
     Some errors need special handling:
     
-    [gio.types.IOErrorEnum.noSpace] is returned if there is not enough space
+    [gio.types.IOErrorEnum.NoSpace] is returned if there is not enough space
     to write the resulting converted data, the application should
     call the function again with a larger outbuf to continue.
     
-    [gio.types.IOErrorEnum.partialInput] is returned if there is not enough
+    [gio.types.IOErrorEnum.PartialInput] is returned if there is not enough
     input to fully determine what the conversion should produce,
-    and the [gio.types.ConverterFlags.inputAtEnd] flag is not set. This happens for
+    and the [gio.types.ConverterFlags.InputAtEnd] flag is not set. This happens for
     example with an incomplete multibyte sequence when converting text,
     or when a regexp matches up to the end of the input (and may match
     further input). It may also happen when inbuf_size is zero and
@@ -76,23 +76,23 @@ interface Converter
     When this happens the application should read more input and then
     call the function again. If further input shows that there is no
     more data call the function again with the same data but with
-    the [gio.types.ConverterFlags.inputAtEnd] flag set. This may cause the conversion
+    the [gio.types.ConverterFlags.InputAtEnd] flag set. This may cause the conversion
     to finish as e.g. in the regexp match case (or, to fail again with
-    [gio.types.IOErrorEnum.partialInput] in e.g. a charset conversion where the
+    [gio.types.IOErrorEnum.PartialInput] in e.g. a charset conversion where the
     input is actually partial).
     
-    After [gio.converter.Converter.convert] has returned [gio.types.ConverterResult.finished] the
+    After [gio.converter.Converter.convert] has returned [gio.types.ConverterResult.Finished] the
     converter object is in an invalid state where its not allowed
     to call [gio.converter.Converter.convert] anymore. At this time you can only
     free the object or call [gio.converter.Converter.reset] to reset it to the
     initial state.
     
-    If the flag [gio.types.ConverterFlags.flush] is set then conversion is modified
+    If the flag [gio.types.ConverterFlags.Flush] is set then conversion is modified
     to try to write out all internal state to the output. The application
     has to call the function multiple times with the flag set, and when
     the available input has been consumed and all internal state has
-    been produced then [gio.types.ConverterResult.flushed] (or [gio.types.ConverterResult.finished] if
-    really at the end) is returned instead of [gio.types.ConverterResult.converted].
+    been produced then [gio.types.ConverterResult.Flushed] (or [gio.types.ConverterResult.Finished] if
+    really at the end) is returned instead of [gio.types.ConverterResult.Converted].
     This is somewhat similar to what happens at the end of the input stream,
     but done in the middle of the data.
     
@@ -109,7 +109,7 @@ interface Converter
     Flushing is not always possible (like if a charset converter flushes
     at a partial multibyte sequence). Converters are supposed to try
     to produce as much output as possible and then return an error
-    (typically [gio.types.IOErrorEnum.partialInput]).
+    (typically [gio.types.IOErrorEnum.PartialInput]).
     Params:
       inbuf =       the buffer
                 containing the data to convert.
@@ -120,7 +120,7 @@ interface Converter
            from inbuf on success
       bytesWritten =       will be set to the number of bytes
            written to outbuf on success
-    Returns:     a #GConverterResult, [gio.types.ConverterResult.error] on error.
+    Returns:     a #GConverterResult, [gio.types.ConverterResult.Error] on error.
   */
   gio.types.ConverterResult convert(ubyte[] inbuf, ubyte[] outbuf, gio.types.ConverterFlags flags, out size_t bytesRead, out size_t bytesWritten);
 

@@ -60,7 +60,7 @@ import gtk.widget;
 class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -87,7 +87,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkEntryCompletion* _cretval;
     _cretval = gtk_entry_completion_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -101,8 +101,8 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area)
   {
     GtkEntryCompletion* _cretval;
-    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.take);
+    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -129,9 +129,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   string computePrefix(string key)
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     const(char)* _cretval;
     _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkWidget* _cretval;
     _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   */
   void insertActionMarkup(int index, string markup)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_entry_completion_insert_action_markup(cast(GtkEntryCompletion*)cPtr, index, _markup);
   }
 
@@ -295,7 +295,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   */
   void insertActionText(int index, string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_entry_completion_insert_action_text(cast(GtkEntryCompletion*)cPtr, index, _text);
   }
 
@@ -341,9 +341,9 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     extern(C) bool _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData)
     {
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
-      string _key = key.fromCString(No.free);
+      string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -375,7 +375,7 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -448,10 +448,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     Connect to ActionActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionActivated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActionActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActionActivatedCallbackDlg) || is(T : ActionActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -493,10 +493,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     Connect to CursorOnMatch signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCursorOnMatch(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CursorOnMatchCallbackDlg) || is(T : CursorOnMatchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -541,10 +541,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     Connect to InsertPrefix signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertPrefix(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertPrefixCallbackDlg) || is(T : InsertPrefixCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -588,10 +588,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     Connect to MatchSelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMatchSelected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MatchSelectedCallbackDlg) || is(T : MatchSelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -630,10 +630,10 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     Connect to NoMatches signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNoMatches(T)(T callback, Flag!"after" after = No.after)
+  ulong connectNoMatches(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NoMatchesCallbackDlg) || is(T : NoMatchesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

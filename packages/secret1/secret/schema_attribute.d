@@ -14,15 +14,15 @@ class SchemaAttribute : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(SecretSchemaAttribute.sizeof), Yes.take);
+    super(safeMalloc(SecretSchemaAttribute.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -40,13 +40,13 @@ class SchemaAttribute : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(SecretSchemaAttribute*)cPtr).name.fromCString(No.free);
+    return (cast(SecretSchemaAttribute*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
-    (cast(SecretSchemaAttribute*)cPtr).name = propval.toCString(Yes.alloc);
+    (cast(SecretSchemaAttribute*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property secret.types.SchemaAttributeType type()

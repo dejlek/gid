@@ -69,7 +69,7 @@ import gtk.types;
 class AccelMap : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -105,7 +105,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void addEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_add_entry(_accelPath, accelKey, accelMods);
   }
 
@@ -123,7 +123,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void addFilter(string filterPattern)
   {
-    const(char)* _filterPattern = filterPattern.toCString(No.alloc);
+    const(char)* _filterPattern = filterPattern.toCString(No.Alloc);
     gtk_accel_map_add_filter(_filterPattern);
   }
 
@@ -148,7 +148,7 @@ class AccelMap : gobject.object.ObjectG
   static bool changeEntry(string accelPath, uint accelKey, gdk.types.ModifierType accelMods, bool replace)
   {
     bool _retval;
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     _retval = gtk_accel_map_change_entry(_accelPath, accelKey, accelMods, replace);
     return _retval;
   }
@@ -170,7 +170,7 @@ class AccelMap : gobject.object.ObjectG
     extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, bool changed)
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
-      string _accelPath = accelPath.fromCString(No.free);
+      string _accelPath = accelPath.fromCString(No.Free);
 
       (*_dlg)(_accelPath, accelKey, accelMods, changed);
     }
@@ -194,7 +194,7 @@ class AccelMap : gobject.object.ObjectG
     extern(C) void _foreachFuncCallback(void* data, const(char)* accelPath, uint accelKey, GdkModifierType accelMods, bool changed)
     {
       auto _dlg = cast(gtk.types.AccelMapForeach*)data;
-      string _accelPath = accelPath.fromCString(No.free);
+      string _accelPath = accelPath.fromCString(No.Free);
 
       (*_dlg)(_accelPath, accelKey, accelMods, changed);
     }
@@ -213,7 +213,7 @@ class AccelMap : gobject.object.ObjectG
   {
     GtkAccelMap* _cretval;
     _cretval = gtk_accel_map_get();
-    auto _retval = ObjectG.getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void load(string fileName)
   {
-    const(char)* _fileName = fileName.toCString(No.alloc);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     gtk_accel_map_load(_fileName);
   }
 
@@ -274,7 +274,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void lockPath(string accelPath)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_lock_path(_accelPath);
   }
 
@@ -288,7 +288,7 @@ class AccelMap : gobject.object.ObjectG
   static bool lookupEntry(string accelPath, out gtk.types.AccelKey key)
   {
     bool _retval;
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     _retval = gtk_accel_map_lookup_entry(_accelPath, &key);
     return _retval;
   }
@@ -304,7 +304,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void save(string fileName)
   {
-    const(char)* _fileName = fileName.toCString(No.alloc);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     gtk_accel_map_save(_fileName);
   }
 
@@ -328,7 +328,7 @@ class AccelMap : gobject.object.ObjectG
   */
   static void unlockPath(string accelPath)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_accel_map_unlock_path(_accelPath);
   }
 
@@ -356,10 +356,10 @@ class AccelMap : gobject.object.ObjectG
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

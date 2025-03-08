@@ -32,7 +32,7 @@ import gobject.object;
 class PixbufAnimation : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -65,12 +65,12 @@ class PixbufAnimation : gobject.object.ObjectG
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
     GdkPixbufAnimation* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,12 +86,12 @@ class PixbufAnimation : gobject.object.ObjectG
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
     GdkPixbufAnimation* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     GError *_err;
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class PixbufAnimation : gobject.object.ObjectG
     If `NULL` is returned, then error will be set.
     
     The cancellable can be used to abort the operation from another thread.
-    If the operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    If the operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned. Other possible errors are in the `GDK_PIXBUF_ERROR` and
     `G_IO_ERROR` domains.
     
@@ -117,10 +117,10 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
-    _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,10 +135,10 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
-    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.dup) : null, &_err);
+    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(ObjectG)asyncResult).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -163,12 +163,12 @@ class PixbufAnimation : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gdk_pixbuf_animation_new_from_stream_async(stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gdk_pixbuf_animation_new_from_stream_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -225,7 +225,7 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     GdkPixbufAnimationIter* _cretval;
     _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(const(GTimeVal)*)startTime.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class PixbufAnimation : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 

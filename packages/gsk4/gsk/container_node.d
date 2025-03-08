@@ -12,7 +12,7 @@ import gsk.types;
 class ContainerNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ContainerNode");
@@ -40,7 +40,7 @@ class ContainerNode : gsk.render_node.RenderNode
       _tmpchildren ~= obj ? cast(GskRenderNode*)obj.cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
     _cretval = gsk_container_node_new(_children, _nChildren);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -53,7 +53,7 @@ class ContainerNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_container_node_get_child(cast(const(GskRenderNode)*)cPtr, idx);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 

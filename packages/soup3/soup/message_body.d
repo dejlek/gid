@@ -25,12 +25,12 @@ import soup.types;
 class MessageBody : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -67,7 +67,7 @@ class MessageBody : gobject.boxed.Boxed
   {
     SoupMessageBody* _cretval;
     _cretval = soup_message_body_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -77,7 +77,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void appendBytes(glib.bytes.Bytes buffer)
   {
-    soup_message_body_append_bytes(cast(SoupMessageBody*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.dup) : null);
+    soup_message_body_append_bytes(cast(SoupMessageBody*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -103,7 +103,7 @@ class MessageBody : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = soup_message_body_flatten(cast(SoupMessageBody*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class MessageBody : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)cPtr, offset);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void gotChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_got_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.dup) : null);
+    soup_message_body_got_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
   }
 
   /**
@@ -212,6 +212,6 @@ class MessageBody : gobject.boxed.Boxed
   */
   void wroteChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_wrote_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.dup) : null);
+    soup_message_body_wrote_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
   }
 }

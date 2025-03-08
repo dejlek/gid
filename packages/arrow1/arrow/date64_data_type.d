@@ -10,7 +10,7 @@ import gid.gid;
 class Date64DataType : arrow.temporal_data_type.TemporalDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
   {
     GArrowDate64DataType* _cretval;
     _cretval = garrow_date64_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

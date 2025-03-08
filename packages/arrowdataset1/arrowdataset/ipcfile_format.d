@@ -10,7 +10,7 @@ import gid.gid;
 class IPCFileFormat : arrowdataset.file_format.FileFormat
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
   {
     GADatasetIPCFileFormat* _cretval;
     _cretval = gadataset_ipc_file_format_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

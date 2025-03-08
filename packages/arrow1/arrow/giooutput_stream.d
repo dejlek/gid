@@ -16,7 +16,7 @@ import gobject.object;
 class GIOOutputStream : arrow.output_stream.OutputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   this(gio.output_stream.OutputStream gioOutputStream)
   {
     GArrowGIOOutputStream* _cretval;
-    _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -45,7 +45,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   {
     GOutputStream* _cretval;
     _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -62,7 +62,7 @@ import gst.types;
 class TypeFindFactory : gst.plugin_feature.PluginFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -116,7 +116,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   {
     GstCaps* _cretval;
     _cretval = gst_type_find_factory_get_caps(cast(GstTypeFindFactory*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }

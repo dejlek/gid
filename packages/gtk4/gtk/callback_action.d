@@ -15,7 +15,7 @@ import gtk.widget;
 class CallbackAction : gtk.shortcut_action.ShortcutAction
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,7 +44,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     {
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take), args ? new glib.variant.VariantG(cast(void*)args, No.take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.VariantG(cast(void*)args, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -53,6 +53,6 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     _cretval = gtk_callback_action_new(_callbackCB, _callback, _callbackDestroyCB);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

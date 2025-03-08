@@ -32,7 +32,7 @@ import gobject.object;
 class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
   {
     char* _cretval;
     _cretval = g_file_output_stream_get_etag(cast(GFileOutputStream*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -70,17 +70,17 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
     version of this function, see [gio.file_output_stream.FileOutputStream.queryInfoAsync].
     While the stream is blocked, the stream will set the pending flag
     internally, and any other operations on the stream will fail with
-    [gio.types.IOErrorEnum.pending].
+    [gio.types.IOErrorEnum.Pending].
     
     Can fail if the stream was already closed (with error being set to
-    [gio.types.IOErrorEnum.closed]), the stream has pending operations (with error being
-    set to [gio.types.IOErrorEnum.pending]), or if querying info is not supported for
-    the stream's interface (with error being set to [gio.types.IOErrorEnum.notSupported]). In
+    [gio.types.IOErrorEnum.Closed]), the stream has pending operations (with error being
+    set to [gio.types.IOErrorEnum.Pending]), or if querying info is not supported for
+    the stream's interface (with error being set to [gio.types.IOErrorEnum.NotSupported]). In
     all cases of failure, null will be returned.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be set, and null will
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set, and null will
     be returned.
     Params:
       attributes =       a file attribute query string.
@@ -90,12 +90,12 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_output_stream_query_info(cast(GFileOutputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_output_stream_query_info(cast(GFileOutputStream*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,13 +120,13 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_output_stream_query_info_async(cast(GFileOutputStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_output_stream_query_info_async(cast(GFileOutputStream*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -140,10 +140,10 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_output_stream_query_info_finish(cast(GFileOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_output_stream_query_info_finish(cast(GFileOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

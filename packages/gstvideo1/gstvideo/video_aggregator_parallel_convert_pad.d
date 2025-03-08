@@ -14,7 +14,7 @@ import gstvideo.video_aggregator_convert_pad;
 class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.VideoAggregatorConvertPad
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

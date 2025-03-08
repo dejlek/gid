@@ -80,7 +80,7 @@ import gtk.types;
 class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.CellLayout
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -107,7 +107,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -119,8 +119,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_combo_box_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,8 +135,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithAreaAndEntry(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_area_and_entry(area ? cast(GtkCellArea*)area.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_combo_box_new_with_area_and_entry(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,8 +161,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,8 +176,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     bool _retval;
     GtkTreeIter _iter;
     _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)cPtr, &_iter);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -249,10 +249,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   /**
       Returns whether the combo box sets the dropdown button
     sensitive or not when there are no items in the model.
-    Returns:     [gtk.types.SensitivityType.on] if the dropdown button
-         is sensitive when the model is empty, [gtk.types.SensitivityType.off]
+    Returns:     [gtk.types.SensitivityType.On] if the dropdown button
+         is sensitive when the model is empty, [gtk.types.SensitivityType.Off]
          if the button is always insensitive or
-         [gtk.types.SensitivityType.auto_] if it is only sensitive as long as
+         [gtk.types.SensitivityType.Auto] if it is only sensitive as long as
          the model has one item to be selected.
   */
   gtk.types.SensitivityType getButtonSensitivity()
@@ -333,7 +333,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     AtkObject* _cretval;
     _cretval = gtk_combo_box_get_popup_accessible(cast(GtkComboBox*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     const(char)* _cretval;
     _cretval = gtk_combo_box_get_title(cast(GtkComboBox*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void popupForDevice(gdk.device.Device device)
   {
-    gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
 
   /**
@@ -466,7 +466,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   bool setActiveId(string activeId = null)
   {
     bool _retval;
-    const(char)* _activeId = activeId.toCString(No.alloc);
+    const(char)* _activeId = activeId.toCString(No.Alloc);
     _retval = gtk_combo_box_set_active_id(cast(GtkComboBox*)cPtr, _activeId);
     return _retval;
   }
@@ -479,7 +479,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.dup) : null);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -495,8 +495,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
 
   /**
       Sets whether the dropdown button of the combo box should be
-    always sensitive ([gtk.types.SensitivityType.on]), never sensitive ([gtk.types.SensitivityType.off])
-    or only if there is at least one item to display ([gtk.types.SensitivityType.auto_]).
+    always sensitive ([gtk.types.SensitivityType.On]), never sensitive ([gtk.types.SensitivityType.Off])
+    or only if there is at least one item to display ([gtk.types.SensitivityType.Auto]).
     Params:
       sensitivity =       specify the sensitivity of the dropdown button
   */
@@ -573,7 +573,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -600,7 +600,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     {
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.take) : null);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -629,7 +629,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_combo_box_set_title(cast(GtkComboBox*)cPtr, _title);
   }
 
@@ -667,10 +667,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -736,10 +736,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     Connect to FormatEntryText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFormatEntryText(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FormatEntryTextCallbackDlg) || is(T : FormatEntryTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -776,10 +776,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     Connect to MoveActive signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveActive(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveActive(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveActiveCallbackDlg) || is(T : MoveActiveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -817,10 +817,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     Connect to Popdown signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopdown(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -858,10 +858,10 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     Connect to Popup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

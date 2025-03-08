@@ -86,14 +86,14 @@ import gtk.types;
   can be used to obtain updates about the status of the operation,
   but it is not normally necessary to connect to any signals,
   except for one case: when the supported actions include
-  [gdk.types.DragAction.move], you need to listen for the
+  [gdk.types.DragAction.Move], you need to listen for the
   `signal@Gtk.DragSource::drag-end` signal and delete the
   data after it has been transferred.
 */
 class DragSource : gtk.gesture_single.GestureSingle
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -117,7 +117,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   {
     GtkDragSource* _cretval;
     _cretval = gtk_drag_source_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -148,7 +148,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   {
     GdkContentProvider* _cretval;
     _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   {
     GdkDrag* _cretval;
     _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class DragSource : gtk.gesture_single.GestureSingle
       Sets the actions on the [gtk.drag_source.DragSource].
     
     During a DND operation, the actions are offered to potential
-    drop targets. If actions include [gdk.types.DragAction.move], you need
+    drop targets. If actions include [gdk.types.DragAction.Move], you need
     to listen to the `signalGtk.DragSource::drag-end` signal and
     handle delete_data being true.
     
@@ -199,7 +199,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setContent(gdk.content_provider.ContentProvider content = null)
   {
-    gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.dup) : null);
+    gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,7 +220,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.dup) : null, hotX, hotY);
+    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**
@@ -244,10 +244,10 @@ class DragSource : gtk.gesture_single.GestureSingle
     Connect to DragBegin signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragBegin(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragBeginCallbackDlg) || is(T : DragBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -287,10 +287,10 @@ class DragSource : gtk.gesture_single.GestureSingle
     Connect to DragCancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragCancel(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragCancel(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragCancelCallbackDlg) || is(T : DragCancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -319,7 +319,7 @@ class DragSource : gtk.gesture_single.GestureSingle
     ## Parameters
     $(LIST
       * $(B drag)       the [gdk.drag.Drag] object
-      * $(B deleteData)       true if the drag was performing [gdk.types.DragAction.move],
+      * $(B deleteData)       true if the drag was performing [gdk.types.DragAction.Move],
            and the data should be deleted
       * $(B dragSource) the instance the signal is connected to
     )
@@ -333,10 +333,10 @@ class DragSource : gtk.gesture_single.GestureSingle
     Connect to DragEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragEndCallbackDlg) || is(T : DragEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -378,10 +378,10 @@ class DragSource : gtk.gesture_single.GestureSingle
     Connect to Prepare signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPrepare(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPrepare(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PrepareCallbackDlg) || is(T : PrepareCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

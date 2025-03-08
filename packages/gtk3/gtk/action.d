@@ -69,7 +69,7 @@ import gtk.widget;
 class Action : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -108,12 +108,12 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   this(string name, string label = null, string tooltip = null, string stockId = null)
   {
     GtkAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_action_new(_name, _label, _tooltip, _stockId);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -179,7 +179,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_icon(cast(GtkAction*)cPtr, iconSize);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_menu_item(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     _cretval = gtk_action_create_tool_item(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GClosure* _cretval;
     _cretval = gtk_action_get_accel_closure(cast(GtkAction*)cPtr);
-    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_accel_path(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GIcon* _cretval;
     _cretval = gtk_action_get_gicon(cast(GtkAction*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_icon_name(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_label(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -364,7 +364,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_name(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_short_label(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_stock_id(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -439,7 +439,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     _cretval = gtk_action_get_tooltip(cast(GtkAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
-    gtk_action_set_accel_group(cast(GtkAction*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
+    gtk_action_set_accel_group(cast(GtkAction*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -547,7 +547,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setAccelPath(string accelPath)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_action_set_accel_path(cast(GtkAction*)cPtr, _accelPath);
   }
 
@@ -579,7 +579,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setGicon(gio.icon.Icon icon)
   {
-    gtk_action_set_gicon(cast(GtkAction*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gtk_action_set_gicon(cast(GtkAction*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -593,7 +593,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_action_set_icon_name(cast(GtkAction*)cPtr, _iconName);
   }
 
@@ -623,7 +623,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_action_set_label(cast(GtkAction*)cPtr, _label);
   }
 
@@ -653,7 +653,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setShortLabel(string shortLabel)
   {
-    const(char)* _shortLabel = shortLabel.toCString(No.alloc);
+    const(char)* _shortLabel = shortLabel.toCString(No.Alloc);
     gtk_action_set_short_label(cast(GtkAction*)cPtr, _shortLabel);
   }
 
@@ -667,7 +667,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setStockId(string stockId)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_action_set_stock_id(cast(GtkAction*)cPtr, _stockId);
   }
 
@@ -681,7 +681,7 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void setTooltip(string tooltip)
   {
-    const(char)* _tooltip = tooltip.toCString(No.alloc);
+    const(char)* _tooltip = tooltip.toCString(No.Alloc);
     gtk_action_set_tooltip(cast(GtkAction*)cPtr, _tooltip);
   }
 
@@ -757,10 +757,10 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

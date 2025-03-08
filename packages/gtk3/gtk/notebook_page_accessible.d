@@ -14,7 +14,7 @@ import gtk.widget;
 class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,8 +36,8 @@ class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
   this(gtk.notebook_accessible.NotebookAccessible notebook, gtk.widget.Widget child)
   {
     AtkObject* _cretval;
-    _cretval = gtk_notebook_page_accessible_new(notebook ? cast(GtkNotebookAccessible*)notebook.cPtr(No.dup) : null, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_notebook_page_accessible_new(notebook ? cast(GtkNotebookAccessible*)notebook.cPtr(No.Dup) : null, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */

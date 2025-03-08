@@ -40,10 +40,10 @@ interface TlsServerConnection
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_tls_server_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null, &_err);
+    _cretval = g_tls_server_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_server_connection.TlsServerConnection)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

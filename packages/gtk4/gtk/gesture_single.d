@@ -26,7 +26,7 @@ import gtk.types;
 class GestureSingle : gtk.gesture.Gesture
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -78,7 +78,7 @@ class GestureSingle : gtk.gesture.Gesture
   {
     GdkEventSequence* _cretval;
     _cretval = gtk_gesture_single_get_current_sequence(cast(GtkGestureSingle*)cPtr);
-    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class GestureSingle : gtk.gesture.Gesture
       Sets whether to handle only touch events.
     
     If touch_only is true, gesture will only handle events of type
-    [gdk.types.EventType.touchBegin], [gdk.types.EventType.touchUpdate] or [gdk.types.EventType.touchEnd]. If false,
+    [gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate] or [gdk.types.EventType.TouchEnd]. If false,
     mouse events will be handled too.
     Params:
       touchOnly =       whether gesture handles only touch events

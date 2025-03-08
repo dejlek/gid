@@ -11,18 +11,18 @@ enum GstMIKEYCacheType
   /**
       The envelope key MUST NOT be cached
   */
-  none = 0,
+  None = 0,
 
   /**
       The envelope key MUST be cached
   */
-  always = 1,
+  Always = 1,
 
   /**
       The envelope key MUST be cached, but only
                               to be used for the specific CSB.
   */
-  forCsb = 2,
+  ForCsb = 2,
 }
 
 /**
@@ -33,22 +33,22 @@ enum GstMIKEYEncAlg
   /**
       no encryption
   */
-  null_ = 0,
+  Null = 0,
 
   /**
       AES-CM using a 128-bit key
   */
-  aesCm128 = 1,
+  AesCm128 = 1,
 
   /**
       AES Key Wrap using a 128-bit key
   */
-  aesKw128 = 2,
+  AesKw128 = 2,
 
   /**
       AES-GCM using a 128-bit key (Since: 1.16)
   */
-  aesGcm128 = 6,
+  AesGcm128 = 6,
 }
 
 /**
@@ -59,17 +59,17 @@ enum GstMIKEYKVType
   /**
       No specific usage rule
   */
-  null_ = 0,
+  Null = 0,
 
   /**
       The key is associated with the SPI/MKI
   */
-  spi = 1,
+  Spi = 1,
 
   /**
       The key has a start and expiration time
   */
-  interval = 2,
+  Interval = 2,
 }
 
 /**
@@ -80,12 +80,12 @@ enum GstMIKEYKeyDataType
   /**
       a TEK Generation Key
   */
-  tgk = 0,
+  Tgk = 0,
 
   /**
       Traffic-Encrypting Key
   */
-  tek = 2,
+  Tek = 2,
 }
 
 /**
@@ -96,12 +96,12 @@ enum GstMIKEYMacAlg
   /**
       no authentication
   */
-  null_ = 0,
+  Null = 0,
 
   /**
       HMAC-SHA-1-160
   */
-  hmacSha1160 = 1,
+  HmacSha1160 = 1,
 }
 
 /**
@@ -113,7 +113,7 @@ enum GstMIKEYMapType
   /**
       SRTP
   */
-  mikeyMapTypeSrtp = 0,
+  MikeyMapTypeSrtp = 0,
 }
 
 /**
@@ -124,7 +124,7 @@ enum GstMIKEYPRFFunc
   /**
       MIKEY-1 PRF function
   */
-  mikeyPrfMikey1 = 0,
+  MikeyPrfMikey1 = 0,
 }
 
 /**
@@ -135,77 +135,77 @@ enum GstMIKEYPayloadType
   /**
       Last payload
   */
-  last = 0,
+  Last = 0,
 
   /**
       Key data transport payload
   */
-  kemac = 1,
+  Kemac = 1,
 
   /**
       Envelope data payload
   */
-  pke = 2,
+  Pke = 2,
 
   /**
       DH data payload
   */
-  dh = 3,
+  Dh = 3,
 
   /**
       Signature payload
   */
-  sign = 4,
+  Sign = 4,
 
   /**
       Timestamp payload
   */
-  t = 5,
+  T = 5,
 
   /**
       ID payload
   */
-  id = 6,
+  Id = 6,
 
   /**
       Certificate Payload
   */
-  cert = 7,
+  Cert = 7,
 
   /**
       Cert hash payload
   */
-  chash = 8,
+  Chash = 8,
 
   /**
       Verification message payload
   */
-  v = 9,
+  V = 9,
 
   /**
       Security Policy payload
   */
-  sp = 10,
+  Sp = 10,
 
   /**
       RAND payload
   */
-  rand = 11,
+  Rand = 11,
 
   /**
       Error payload
   */
-  err = 12,
+  Err = 12,
 
   /**
       Key data sub-payload
   */
-  keyData = 20,
+  KeyData = 20,
 
   /**
       General Extension Payload
   */
-  genExt = 21,
+  GenExt = 21,
 }
 
 /**
@@ -216,7 +216,7 @@ enum GstMIKEYSecProto
   /**
       SRTP
   */
-  mikeySecProtoSrtp = 0,
+  MikeySecProtoSrtp = 0,
 }
 
 /**
@@ -227,72 +227,72 @@ enum GstMIKEYSecSRTP
   /**
       Encryption algorithm
   */
-  encAlg = 0,
+  EncAlg = 0,
 
   /**
       Session Encr. key length
   */
-  encKeyLen = 1,
+  EncKeyLen = 1,
 
   /**
       Authentication algorithm
   */
-  authAlg = 2,
+  AuthAlg = 2,
 
   /**
       Session Auth. key length
   */
-  authKeyLen = 3,
+  AuthKeyLen = 3,
 
   /**
       Session Salt key length
   */
-  saltKeyLen = 4,
+  SaltKeyLen = 4,
 
   /**
       SRTP Pseudo Random Function
   */
-  prf = 5,
+  Prf = 5,
 
   /**
       Key derivation rate
   */
-  keyDerivRate = 6,
+  KeyDerivRate = 6,
 
   /**
       SRTP encryption off/on, 0 if off, 1 if on
   */
-  srtpEnc = 7,
+  SrtpEnc = 7,
 
   /**
       SRTCP encryption off/on, 0 if off, 1 if on
   */
-  srtcpEnc = 8,
+  SrtcpEnc = 8,
 
   /**
       sender's FEC order
   */
-  fecOrder = 9,
+  FecOrder = 9,
 
   /**
       SRTP authentication off/on, 0 if off, 1 if on
   */
-  srtpAuth = 10,
+  SrtpAuth = 10,
 
   /**
       Authentication tag length
   */
-  authTagLen = 11,
+  AuthTagLen = 11,
 
   /**
       SRTP prefix length
   */
-  srtpPrefixLen = 12,
+  SrtpPrefixLen = 12,
 
   /**
       AEAD authentication tag length (Since: 1.16)
   */
-  aeadAuthTagLen = 20,
+  AeadAuthTagLen = 20,
 }
 
 /**
@@ -303,17 +303,17 @@ enum GstMIKEYTSType
   /**
       an NTP time in UTC timezone
   */
-  ntpUtc = 0,
+  NtpUtc = 0,
 
   /**
       an NTP time
   */
-  ntp = 1,
+  Ntp = 1,
 
   /**
       a counter
   */
-  counter = 2,
+  Counter = 2,
 }
 
 /**
@@ -324,42 +324,42 @@ enum GstMIKEYType
   /**
       Invalid type
   */
-  invalid = -1,
+  Invalid = -1,
 
   /**
       Initiator's pre-shared key message
   */
-  pskInit = 0,
+  PskInit = 0,
 
   /**
       Verification message of a Pre-shared key message
   */
-  pskVerify = 1,
+  PskVerify = 1,
 
   /**
       Initiator's public-key transport message
   */
-  pkInit = 2,
+  PkInit = 2,
 
   /**
       Verification message of a public-key message
   */
-  pkVerify = 3,
+  PkVerify = 3,
 
   /**
       Initiator's DH exchange message
   */
-  dhInit = 4,
+  DhInit = 4,
 
   /**
       Responder's DH exchange message
   */
-  dhResp = 5,
+  DhResp = 5,
 
   /**
       Error message
   */
-  error = 6,
+  Error = 6,
 }
 
 /**
@@ -370,12 +370,12 @@ enum GstSDPResult
   /**
       A successful return value
   */
-  ok = 0,
+  Ok = 0,
 
   /**
       a function was given invalid parameters
   */
-  einval = -1,
+  Einval = -1,
 }
 
 /** */

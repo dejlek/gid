@@ -29,15 +29,15 @@ import gtksource.view;
   The gutter works very much the same way as cells rendered in a [gtk.tree_view.TreeView].
   The concept is similar, with the exception that the gutter does not have an
   underlying [gtk.tree_model.TreeModel]. The builtin line number renderer is at position
-  [gtksource.types.ViewGutterPosition.lines] (-30) and the marks renderer is at
-  [gtksource.types.ViewGutterPosition.marks] (-20). The gutter sorts the renderers
+  [gtksource.types.ViewGutterPosition.Lines] (-30) and the marks renderer is at
+  [gtksource.types.ViewGutterPosition.Marks] (-20). The gutter sorts the renderers
   in ascending order, from left to right. So the marks are displayed on the
   right of the line numbers.
 */
 class Gutter : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class Gutter : gtk.widget.Widget
   {
     GtkSourceView* _cretval;
     _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -74,14 +74,14 @@ class Gutter : gtk.widget.Widget
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
-    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null, position);
+    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
     return _retval;
   }
 
   /** */
   void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
-    gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null);
+    gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -92,6 +92,6 @@ class Gutter : gtk.widget.Widget
   */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
-    gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.dup) : null, position);
+    gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
   }
 }

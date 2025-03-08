@@ -21,7 +21,7 @@ import gobject.object;
 class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyResolver
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,14 +54,14 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
   static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null)
   {
     GProxyResolver* _cretval;
-    const(char)* _defaultProxy = defaultProxy.toCString(No.alloc);
+    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(No.alloc);
+      _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
-    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
   */
   void setDefaultProxy(string defaultProxy = null)
   {
-    const(char)* _defaultProxy = defaultProxy.toCString(No.alloc);
+    const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)cPtr, _defaultProxy);
   }
 
@@ -95,7 +95,7 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
   {
     char*[] _tmpignoreHosts;
     foreach (s; ignoreHosts)
-      _tmpignoreHosts ~= s.toCString(No.alloc);
+      _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)cPtr, _ignoreHosts);
@@ -116,8 +116,8 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
   */
   void setUriProxy(string uriScheme, string proxy)
   {
-    const(char)* _uriScheme = uriScheme.toCString(No.alloc);
-    const(char)* _proxy = proxy.toCString(No.alloc);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
+    const(char)* _proxy = proxy.toCString(No.Alloc);
     g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)cPtr, _uriScheme, _proxy);
   }
 }

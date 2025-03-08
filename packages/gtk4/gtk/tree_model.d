@@ -84,7 +84,7 @@ import gtk.types;
   Although generally uninteresting, as one always has to allow for
   the case where iterators do not persist beyond a signal, some very
   important performance enhancements were made in the sort model.
-  As a result, the [gtk.types.TreeModelFlags.itersPersist] flag was added to
+  As a result, the [gtk.types.TreeModelFlags.ItersPersist] flag was added to
   indicate this behavior.
   
   To help show some common operation of a model, some examples are
@@ -551,10 +551,10 @@ interface TreeModel
     Connect to RowChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowChangedCallbackDlg) || is(T : RowChangedCallbackFunc));
 
   /**
@@ -582,10 +582,10 @@ interface TreeModel
     Connect to RowDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowDeleted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc));
 
   /**
@@ -608,10 +608,10 @@ interface TreeModel
     Connect to RowHasChildToggled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowHasChildToggled(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowHasChildToggledCallbackDlg) || is(T : RowHasChildToggledCallbackFunc));
 
   /**
@@ -638,9 +638,9 @@ interface TreeModel
     Connect to RowInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowInserted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc));
   }

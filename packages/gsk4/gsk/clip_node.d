@@ -13,7 +13,7 @@ import gsk.types;
 class ClipNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ClipNode");
@@ -32,8 +32,8 @@ class ClipNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.dup) : null, clip ? cast(const(graphene_rect_t)*)clip.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(const(graphene_rect_t)*)clip.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -44,7 +44,7 @@ class ClipNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_clip_node_get_child(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class ClipNode : gsk.render_node.RenderNode
   {
     const(graphene_rect_t)* _cretval;
     _cretval = gsk_clip_node_get_clip(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

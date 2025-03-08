@@ -15,7 +15,7 @@ import glib.error;
 class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,11 +35,11 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
   this(string path)
   {
     GArrowMemoryMappedInputStream* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _cretval = garrow_memory_mapped_input_stream_new(_path, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

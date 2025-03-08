@@ -16,7 +16,7 @@ import gtk.types;
 class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.component.Component, atk.table_cell.TableCell
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

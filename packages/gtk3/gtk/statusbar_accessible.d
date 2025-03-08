@@ -12,7 +12,7 @@ import gtk.types;
 class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

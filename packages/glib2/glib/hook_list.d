@@ -13,7 +13,7 @@ class HookList
 {
   GHookList cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.HookList");
@@ -133,7 +133,7 @@ class HookList
     {
       auto _dlg = cast(glib.types.HookMarshaller*)marshalData;
 
-      (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.take) : null);
+      (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
@@ -156,7 +156,7 @@ class HookList
     {
       auto _dlg = cast(glib.types.HookCheckMarshaller*)marshalData;
 
-      bool _retval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.take) : null);
+      bool _retval = (*_dlg)(hook ? new glib.hook.Hook(cast(void*)hook, No.Take) : null);
       return _retval;
     }
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;

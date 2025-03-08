@@ -34,11 +34,11 @@ template LoadableIconT()
     GInputStream* _cretval;
     char* _type;
     GError *_err;
-    _cretval = g_loadable_icon_load(cast(GLoadableIcon*)cPtr, size, &_type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_loadable_icon_load(cast(GLoadableIcon*)cPtr, size, &_type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
-    type = _type.fromCString(Yes.free);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    type = _type.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -59,12 +59,12 @@ template LoadableIconT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_loadable_icon_load_async(cast(GLoadableIcon*)cPtr, size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_loadable_icon_load_async(cast(GLoadableIcon*)cPtr, size, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -80,11 +80,11 @@ template LoadableIconT()
     GInputStream* _cretval;
     char* _type;
     GError *_err;
-    _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_type, &_err);
+    _cretval = g_loadable_icon_load_finish(cast(GLoadableIcon*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_type, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.take);
-    type = _type.fromCString(Yes.free);
+    auto _retval = ObjectG.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    type = _type.fromCString(Yes.Free);
     return _retval;
   }
 }

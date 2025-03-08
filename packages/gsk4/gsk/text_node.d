@@ -17,7 +17,7 @@ import pango.glyph_string;
 class TextNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.TextNode");
@@ -40,8 +40,8 @@ class TextNode : gsk.render_node.RenderNode
   this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font.cPtr(No.dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.dup) : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null, offset ? cast(const(graphene_point_t)*)offset.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, offset ? cast(const(graphene_point_t)*)offset.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,7 +52,7 @@ class TextNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_text_node_get_color(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class TextNode : gsk.render_node.RenderNode
   {
     PangoFont* _cretval;
     _cretval = gsk_text_node_get_font(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class TextNode : gsk.render_node.RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_text_node_get_offset(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -57,7 +57,7 @@ import pango.types;
 class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,7 +83,7 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_progress_bar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -156,7 +156,7 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     const(char)* _cretval;
     _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setText(string text = null)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_progress_bar_set_text(cast(GtkProgressBar*)cPtr, _text);
   }
 }

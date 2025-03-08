@@ -10,7 +10,7 @@ import gid.gid;
 class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowFixedSizeBinaryDataType* _cretval;
     _cretval = garrow_fixed_size_binary_data_type_new(byteWidth);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

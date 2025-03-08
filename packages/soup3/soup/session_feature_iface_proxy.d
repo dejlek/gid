@@ -7,7 +7,7 @@ import soup.session_feature_mixin;
 /// Proxy object for Soup.SessionFeature interface when a GObject has no applicable D binding
 class SessionFeatureIfaceProxy : IfaceProxy, soup.session_feature.SessionFeature
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

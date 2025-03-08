@@ -41,15 +41,15 @@ class MiniObject : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstMiniObject.sizeof), Yes.take);
+    super(safeMalloc(GstMiniObject.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -149,7 +149,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void addParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_add_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.dup) : null);
+    gst_mini_object_add_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void removeParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_remove_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.dup) : null);
+    gst_mini_object_remove_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -282,7 +282,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
   {
     bool _retval;
-    _retval = gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata.cPtr(No.dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.dup) : null);
+    _retval = gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata.cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
   {
     bool _retval;
-    _retval = gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata.cPtr(No.dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.dup) : null);
+    _retval = gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata.cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.Dup) : null);
     return _retval;
   }
 }

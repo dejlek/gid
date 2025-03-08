@@ -82,10 +82,10 @@ interface UndoManager
     Connect to CanRedoChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCanRedoChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCanRedoChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CanRedoChangedCallbackDlg) || is(T : CanRedoChangedCallbackFunc));
 
   /**
@@ -105,9 +105,9 @@ interface UndoManager
     Connect to CanUndoChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCanUndoChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CanUndoChangedCallbackDlg) || is(T : CanUndoChangedCallbackFunc));
   }

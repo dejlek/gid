@@ -123,12 +123,12 @@ import gst.types;
 class Structure : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -170,11 +170,11 @@ class Structure : gobject.boxed.Boxed
   static gst.structure.Structure fromString(string string_, out string end)
   {
     GstStructure* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     char* _end;
     _cretval = gst_structure_from_string(_string_, &_end);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
-    end = _end.fromCString(No.free);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    end = _end.fromCString(No.Free);
     return _retval;
   }
 
@@ -191,9 +191,9 @@ class Structure : gobject.boxed.Boxed
   static gst.structure.Structure newEmpty(string name)
   {
     GstStructure* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_structure_new_empty(_name);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -217,9 +217,9 @@ class Structure : gobject.boxed.Boxed
   static gst.structure.Structure newFromString(string string_)
   {
     GstStructure* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gst_structure_new_from_string(_string_);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Structure : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_structure_new_id_empty(quark);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Structure : gobject.boxed.Boxed
   bool canIntersect(gst.structure.Structure struct2)
   {
     bool _retval;
-    _retval = gst_structure_can_intersect(cast(const(GstStructure)*)cPtr, struct2 ? cast(const(GstStructure)*)struct2.cPtr(No.dup) : null);
+    _retval = gst_structure_can_intersect(cast(const(GstStructure)*)cPtr, struct2 ? cast(const(GstStructure)*)struct2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class Structure : gobject.boxed.Boxed
   {
     GstStructure* _cretval;
     _cretval = gst_structure_copy(cast(const(GstStructure)*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Structure : gobject.boxed.Boxed
     {
       auto _dlg = cast(gst.types.StructureFilterMapFunc*)userData;
 
-      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.take) : null);
+      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -309,7 +309,7 @@ class Structure : gobject.boxed.Boxed
   bool fixateField(string fieldName)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
     _retval = gst_structure_fixate_field(cast(GstStructure*)cPtr, _fieldName);
     return _retval;
   }
@@ -325,7 +325,7 @@ class Structure : gobject.boxed.Boxed
   bool fixateFieldBoolean(string fieldName, bool target)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
     _retval = gst_structure_fixate_field_boolean(cast(GstStructure*)cPtr, _fieldName, target);
     return _retval;
   }
@@ -341,7 +341,7 @@ class Structure : gobject.boxed.Boxed
   bool fixateFieldNearestDouble(string fieldName, double target)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
     _retval = gst_structure_fixate_field_nearest_double(cast(GstStructure*)cPtr, _fieldName, target);
     return _retval;
   }
@@ -359,7 +359,7 @@ class Structure : gobject.boxed.Boxed
   bool fixateFieldNearestFraction(string fieldName, int targetNumerator, int targetDenominator)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
     _retval = gst_structure_fixate_field_nearest_fraction(cast(GstStructure*)cPtr, _fieldName, targetNumerator, targetDenominator);
     return _retval;
   }
@@ -375,7 +375,7 @@ class Structure : gobject.boxed.Boxed
   bool fixateFieldNearestInt(string fieldName, int target)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
     _retval = gst_structure_fixate_field_nearest_int(cast(GstStructure*)cPtr, _fieldName, target);
     return _retval;
   }
@@ -391,8 +391,8 @@ class Structure : gobject.boxed.Boxed
   bool fixateFieldString(string fieldName, string target)
   {
     bool _retval;
-    const(char)* _fieldName = fieldName.toCString(No.alloc);
-    const(char)* _target = target.toCString(No.alloc);
+    const(char)* _fieldName = fieldName.toCString(No.Alloc);
+    const(char)* _target = target.toCString(No.Alloc);
     _retval = gst_structure_fixate_field_string(cast(GstStructure*)cPtr, _fieldName, _target);
     return _retval;
   }
@@ -412,7 +412,7 @@ class Structure : gobject.boxed.Boxed
     {
       auto _dlg = cast(gst.types.StructureForeachFunc*)userData;
 
-      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.take) : null);
+      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -438,10 +438,10 @@ class Structure : gobject.boxed.Boxed
   bool getArray(string fieldname, out gobject.value_array.ValueArray array)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     GValueArray* _array;
     _retval = gst_structure_get_array(cast(GstStructure*)cPtr, _fieldname, &_array);
-    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.take);
+    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
     return _retval;
   }
 
@@ -459,7 +459,7 @@ class Structure : gobject.boxed.Boxed
   bool getBoolean(string fieldname, out bool value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_boolean(cast(const(GstStructure)*)cPtr, _fieldname, cast(bool*)&value);
     return _retval;
   }
@@ -478,7 +478,7 @@ class Structure : gobject.boxed.Boxed
   bool getClockTime(string fieldname, out gst.types.ClockTime value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_clock_time(cast(const(GstStructure)*)cPtr, _fieldname, cast(GstClockTime*)&value);
     return _retval;
   }
@@ -502,10 +502,10 @@ class Structure : gobject.boxed.Boxed
   bool getDate(string fieldname, out glib.date.Date value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     GDate* _value;
     _retval = gst_structure_get_date(cast(const(GstStructure)*)cPtr, _fieldname, &_value);
-    value = new glib.date.Date(cast(void*)_value, Yes.take);
+    value = new glib.date.Date(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -528,10 +528,10 @@ class Structure : gobject.boxed.Boxed
   bool getDateTime(string fieldname, out gst.date_time.DateTime value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     GstDateTime* _value;
     _retval = gst_structure_get_date_time(cast(const(GstStructure)*)cPtr, _fieldname, &_value);
-    value = new gst.date_time.DateTime(cast(void*)_value, Yes.take);
+    value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class Structure : gobject.boxed.Boxed
   bool getDouble(string fieldname, out double value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_double(cast(const(GstStructure)*)cPtr, _fieldname, cast(double*)&value);
     return _retval;
   }
@@ -569,7 +569,7 @@ class Structure : gobject.boxed.Boxed
   bool getEnum(string fieldname, gobject.types.GType enumtype, out int value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_enum(cast(const(GstStructure)*)cPtr, _fieldname, enumtype, cast(int*)&value);
     return _retval;
   }
@@ -585,7 +585,7 @@ class Structure : gobject.boxed.Boxed
   gobject.types.GType getFieldType(string fieldname)
   {
     gobject.types.GType _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_field_type(cast(const(GstStructure)*)cPtr, _fieldname);
     return _retval;
   }
@@ -605,7 +605,7 @@ class Structure : gobject.boxed.Boxed
   bool getFlags(string fieldname, gobject.types.GType flagsType, out uint value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_flags(cast(const(GstStructure)*)cPtr, _fieldname, flagsType, cast(uint*)&value);
     return _retval;
   }
@@ -624,7 +624,7 @@ class Structure : gobject.boxed.Boxed
   bool getFlagset(string fieldname, out uint valueFlags, out uint valueMask)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_flagset(cast(const(GstStructure)*)cPtr, _fieldname, cast(uint*)&valueFlags, cast(uint*)&valueMask);
     return _retval;
   }
@@ -644,7 +644,7 @@ class Structure : gobject.boxed.Boxed
   bool getFraction(string fieldname, out int valueNumerator, out int valueDenominator)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_fraction(cast(const(GstStructure)*)cPtr, _fieldname, cast(int*)&valueNumerator, cast(int*)&valueDenominator);
     return _retval;
   }
@@ -663,7 +663,7 @@ class Structure : gobject.boxed.Boxed
   bool getInt(string fieldname, out int value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_int(cast(const(GstStructure)*)cPtr, _fieldname, cast(int*)&value);
     return _retval;
   }
@@ -682,7 +682,7 @@ class Structure : gobject.boxed.Boxed
   bool getInt64(string fieldname, out long value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_int64(cast(const(GstStructure)*)cPtr, _fieldname, cast(long*)&value);
     return _retval;
   }
@@ -702,10 +702,10 @@ class Structure : gobject.boxed.Boxed
   bool getList(string fieldname, out gobject.value_array.ValueArray array)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     GValueArray* _array;
     _retval = gst_structure_get_list(cast(GstStructure*)cPtr, _fieldname, &_array);
-    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.take);
+    array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
     return _retval;
   }
 
@@ -717,7 +717,7 @@ class Structure : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_structure_get_name(cast(const(GstStructure)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -747,9 +747,9 @@ class Structure : gobject.boxed.Boxed
   string getString(string fieldname)
   {
     const(char)* _cretval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _cretval = gst_structure_get_string(cast(const(GstStructure)*)cPtr, _fieldname);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -767,7 +767,7 @@ class Structure : gobject.boxed.Boxed
   bool getUint(string fieldname, out uint value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_uint(cast(const(GstStructure)*)cPtr, _fieldname, cast(uint*)&value);
     return _retval;
   }
@@ -786,7 +786,7 @@ class Structure : gobject.boxed.Boxed
   bool getUint64(string fieldname, out ulong value)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_get_uint64(cast(const(GstStructure)*)cPtr, _fieldname, cast(ulong*)&value);
     return _retval;
   }
@@ -801,9 +801,9 @@ class Structure : gobject.boxed.Boxed
   gobject.value.Value getValue(string fieldname)
   {
     const(GValue)* _cretval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _cretval = gst_structure_get_value(cast(const(GstStructure)*)cPtr, _fieldname);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -816,7 +816,7 @@ class Structure : gobject.boxed.Boxed
   bool hasField(string fieldname)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_has_field(cast(const(GstStructure)*)cPtr, _fieldname);
     return _retval;
   }
@@ -831,7 +831,7 @@ class Structure : gobject.boxed.Boxed
   bool hasFieldTyped(string fieldname, gobject.types.GType type)
   {
     bool _retval;
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     _retval = gst_structure_has_field_typed(cast(const(GstStructure)*)cPtr, _fieldname, type);
     return _retval;
   }
@@ -845,7 +845,7 @@ class Structure : gobject.boxed.Boxed
   bool hasName(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gst_structure_has_name(cast(const(GstStructure)*)cPtr, _name);
     return _retval;
   }
@@ -861,7 +861,7 @@ class Structure : gobject.boxed.Boxed
   {
     const(GValue)* _cretval;
     _cretval = gst_structure_id_get_value(cast(const(GstStructure)*)cPtr, field);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -902,7 +902,7 @@ class Structure : gobject.boxed.Boxed
   */
   void idSetValue(glib.types.Quark field, gobject.value.Value value)
   {
-    gst_structure_id_set_value(cast(GstStructure*)cPtr, field, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    gst_structure_id_set_value(cast(GstStructure*)cPtr, field, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -915,7 +915,7 @@ class Structure : gobject.boxed.Boxed
   */
   void idTakeValue(glib.types.Quark field, gobject.value.Value value)
   {
-    gst_structure_id_take_value(cast(GstStructure*)cPtr, field, value ? cast(GValue*)value.cPtr(Yes.dup) : null);
+    gst_structure_id_take_value(cast(GstStructure*)cPtr, field, value ? cast(GValue*)value.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -927,8 +927,8 @@ class Structure : gobject.boxed.Boxed
   gst.structure.Structure intersect(gst.structure.Structure struct2)
   {
     GstStructure* _cretval;
-    _cretval = gst_structure_intersect(cast(const(GstStructure)*)cPtr, struct2 ? cast(const(GstStructure)*)struct2.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_structure_intersect(cast(const(GstStructure)*)cPtr, struct2 ? cast(const(GstStructure)*)struct2.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -941,7 +941,7 @@ class Structure : gobject.boxed.Boxed
   bool isEqual(gst.structure.Structure structure2)
   {
     bool _retval;
-    _retval = gst_structure_is_equal(cast(const(GstStructure)*)cPtr, structure2 ? cast(const(GstStructure)*)structure2.cPtr(No.dup) : null);
+    _retval = gst_structure_is_equal(cast(const(GstStructure)*)cPtr, structure2 ? cast(const(GstStructure)*)structure2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -956,7 +956,7 @@ class Structure : gobject.boxed.Boxed
   bool isSubset(gst.structure.Structure superset)
   {
     bool _retval;
-    _retval = gst_structure_is_subset(cast(const(GstStructure)*)cPtr, superset ? cast(const(GstStructure)*)superset.cPtr(No.dup) : null);
+    _retval = gst_structure_is_subset(cast(const(GstStructure)*)cPtr, superset ? cast(const(GstStructure)*)superset.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -975,7 +975,7 @@ class Structure : gobject.boxed.Boxed
     {
       auto _dlg = cast(gst.types.StructureMapFunc*)userData;
 
-      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.take) : null);
+      bool _retval = (*_dlg)(fieldId, value ? new gobject.value.Value(cast(void*)value, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -1007,7 +1007,7 @@ class Structure : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_structure_nth_field_name(cast(const(GstStructure)*)cPtr, index);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1027,7 +1027,7 @@ class Structure : gobject.boxed.Boxed
   */
   void removeField(string fieldname)
   {
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
     gst_structure_remove_field(cast(GstStructure*)cPtr, _fieldname);
   }
 
@@ -1039,7 +1039,7 @@ class Structure : gobject.boxed.Boxed
     GStreamer prior to 1.20 unless #GST_SERIALIZE_FLAG_BACKWARD_COMPAT is passed
     as flag.
     
-    [gst.types.SerializeFlags.strict] flags is not allowed because it would make this
+    [gst.types.SerializeFlags.Strict] flags is not allowed because it would make this
     function nullable which is an API break for bindings.
     Use [gst.structure.Structure.serializeFull] instead.
     
@@ -1055,13 +1055,13 @@ class Structure : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_structure_serialize(cast(const(GstStructure)*)cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
   /**
       Alias for [gst.structure.Structure.serialize] but with nullable annotation because it
-    can return null when [gst.types.SerializeFlags.strict] flag is set.
+    can return null when [gst.types.SerializeFlags.Strict] flag is set.
     Params:
       flags =       The flags to use to serialize structure
     Returns:     a pointer to string allocated by [glib.global.gmalloc].
@@ -1071,7 +1071,7 @@ class Structure : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_structure_serialize_full(cast(const(GstStructure)*)cPtr, flags);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1086,8 +1086,8 @@ class Structure : gobject.boxed.Boxed
   */
   void setArray(string fieldname, gobject.value_array.ValueArray array)
   {
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
-    gst_structure_set_array(cast(GstStructure*)cPtr, _fieldname, array ? cast(const(GValueArray)*)array.cPtr(No.dup) : null);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
+    gst_structure_set_array(cast(GstStructure*)cPtr, _fieldname, array ? cast(const(GValueArray)*)array.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1101,8 +1101,8 @@ class Structure : gobject.boxed.Boxed
   */
   void setList(string fieldname, gobject.value_array.ValueArray array)
   {
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
-    gst_structure_set_list(cast(GstStructure*)cPtr, _fieldname, array ? cast(const(GValueArray)*)array.cPtr(No.dup) : null);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
+    gst_structure_set_list(cast(GstStructure*)cPtr, _fieldname, array ? cast(const(GValueArray)*)array.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1114,7 +1114,7 @@ class Structure : gobject.boxed.Boxed
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gst_structure_set_name(cast(GstStructure*)cPtr, _name);
   }
 
@@ -1128,8 +1128,8 @@ class Structure : gobject.boxed.Boxed
   */
   void setValue(string fieldname, gobject.value.Value value)
   {
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
-    gst_structure_set_value(cast(GstStructure*)cPtr, _fieldname, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
+    gst_structure_set_value(cast(GstStructure*)cPtr, _fieldname, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1142,8 +1142,8 @@ class Structure : gobject.boxed.Boxed
   */
   void takeValue(string fieldname, gobject.value.Value value)
   {
-    const(char)* _fieldname = fieldname.toCString(No.alloc);
-    gst_structure_take_value(cast(GstStructure*)cPtr, _fieldname, value ? cast(GValue*)value.cPtr(Yes.dup) : null);
+    const(char)* _fieldname = fieldname.toCString(No.Alloc);
+    gst_structure_take_value(cast(GstStructure*)cPtr, _fieldname, value ? cast(GValue*)value.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -1166,7 +1166,7 @@ class Structure : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gst_structure_to_string(cast(const(GstStructure)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1188,7 +1188,7 @@ class Structure : gobject.boxed.Boxed
   static bool take(gst.structure.Structure oldstrPtr = null, gst.structure.Structure newstr = null)
   {
     bool _retval;
-    _retval = gst_structure_take(oldstrPtr ? cast(GstStructure**)oldstrPtr.cPtr(No.dup) : null, newstr ? cast(GstStructure*)newstr.cPtr(Yes.dup) : null);
+    _retval = gst_structure_take(oldstrPtr ? cast(GstStructure**)oldstrPtr.cPtr(No.Dup) : null, newstr ? cast(GstStructure*)newstr.cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

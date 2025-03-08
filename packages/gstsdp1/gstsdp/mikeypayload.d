@@ -12,12 +12,12 @@ import gstsdp.types;
 class MIKEYPayload : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -63,7 +63,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   {
     GstMIKEYPayload* _cretval;
     _cretval = gst_mikey_payload_new(type);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -75,7 +75,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   bool kemacAddSub(gstsdp.mikeypayload.MIKEYPayload newpay)
   {
     bool _retval;
-    _retval = gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)cPtr, newpay ? cast(GstMIKEYPayload*)newpay.cPtr(Yes.dup) : null);
+    _retval = gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)cPtr, newpay ? cast(GstMIKEYPayload*)newpay.cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class MIKEYPayload : gobject.boxed.Boxed
   {
     const(GstMIKEYPayload)* _cretval;
     _cretval = gst_mikey_payload_kemac_get_sub(cast(const(GstMIKEYPayload)*)cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gstsdp.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

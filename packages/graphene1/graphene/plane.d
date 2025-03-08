@@ -21,15 +21,15 @@ class Plane : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_plane_t.sizeof), Yes.take);
+    super(safeMalloc(graphene_plane_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -57,7 +57,7 @@ class Plane : gobject.boxed.Boxed
   {
     graphene_plane_t* _cretval;
     _cretval = graphene_plane_alloc();
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class Plane : gobject.boxed.Boxed
   float distance(graphene.point3_d.Point3D point)
   {
     float _retval;
-    _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.dup) : null);
+    _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class Plane : gobject.boxed.Boxed
   bool equal(graphene.plane.Plane b)
   {
     bool _retval;
-    _retval = graphene_plane_equal(cast(const(graphene_plane_t)*)cPtr, b ? cast(const(graphene_plane_t)*)b.cPtr(No.dup) : null);
+    _retval = graphene_plane_equal(cast(const(graphene_plane_t)*)cPtr, b ? cast(const(graphene_plane_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Plane : gobject.boxed.Boxed
   {
     graphene_vec3_t _normal;
     graphene_plane_get_normal(cast(const(graphene_plane_t)*)cPtr, &_normal);
-    normal = new graphene.vec3.Vec3(cast(void*)&_normal, No.take);
+    normal = new graphene.vec3.Vec3(cast(void*)&_normal, No.Take);
   }
 
   /**
@@ -126,8 +126,8 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane init_(graphene.vec3.Vec3 normal, float constant)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init(cast(graphene_plane_t*)cPtr, normal ? cast(const(graphene_vec3_t)*)normal.cPtr(No.dup) : null, constant);
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_plane_init(cast(graphene_plane_t*)cPtr, normal ? cast(const(graphene_vec3_t)*)normal.cPtr(No.Dup) : null, constant);
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -141,8 +141,8 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromPlane(graphene.plane.Plane src)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)cPtr, src ? cast(const(graphene_plane_t)*)src.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)cPtr, src ? cast(const(graphene_plane_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -157,8 +157,8 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromPoint(graphene.vec3.Vec3 normal, graphene.point3_d.Point3D point)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)cPtr, normal ? cast(const(graphene_vec3_t)*)normal.cPtr(No.dup) : null, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)cPtr, normal ? cast(const(graphene_vec3_t)*)normal.cPtr(No.Dup) : null, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -177,8 +177,8 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromPoints(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)cPtr, a ? cast(const(graphene_point3d_t)*)a.cPtr(No.dup) : null, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.dup) : null, c ? cast(const(graphene_point3d_t)*)c.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)cPtr, a ? cast(const(graphene_point3d_t)*)a.cPtr(No.Dup) : null, b ? cast(const(graphene_point3d_t)*)b.cPtr(No.Dup) : null, c ? cast(const(graphene_point3d_t)*)c.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -193,8 +193,8 @@ class Plane : gobject.boxed.Boxed
   graphene.plane.Plane initFromVec4(graphene.vec4.Vec4 src)
   {
     graphene_plane_t* _cretval;
-    _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)cPtr, src ? cast(const(graphene_vec4_t)*)src.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)cPtr, src ? cast(const(graphene_vec4_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.plane.Plane(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Plane : gobject.boxed.Boxed
   {
     graphene_plane_t _res;
     graphene_plane_negate(cast(const(graphene_plane_t)*)cPtr, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.take);
+    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -221,7 +221,7 @@ class Plane : gobject.boxed.Boxed
   {
     graphene_plane_t _res;
     graphene_plane_normalize(cast(const(graphene_plane_t)*)cPtr, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.take);
+    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -241,7 +241,7 @@ class Plane : gobject.boxed.Boxed
   void transform(graphene.matrix.Matrix matrix, graphene.matrix.Matrix normalMatrix, out graphene.plane.Plane res)
   {
     graphene_plane_t _res;
-    graphene_plane_transform(cast(const(graphene_plane_t)*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix.cPtr(No.dup) : null, &_res);
-    res = new graphene.plane.Plane(cast(void*)&_res, No.take);
+    graphene_plane_transform(cast(const(graphene_plane_t)*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.Dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix.cPtr(No.Dup) : null, &_res);
+    res = new graphene.plane.Plane(cast(void*)&_res, No.Take);
   }
 }

@@ -14,7 +14,7 @@ import gtk.types;
 class PropertyExpression : gtk.expression.Expression
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.PropertyExpression");
@@ -44,9 +44,9 @@ class PropertyExpression : gtk.expression.Expression
   this(gobject.types.GType thisType, gtk.expression.Expression expression, string propertyName)
   {
     GtkExpression* _cretval;
-    const(char)* _propertyName = propertyName.toCString(No.alloc);
-    _cretval = gtk_property_expression_new(thisType, expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null, _propertyName);
-    this(_cretval, Yes.take);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    _cretval = gtk_property_expression_new(thisType, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null, _propertyName);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,8 +68,8 @@ class PropertyExpression : gtk.expression.Expression
   static gtk.property_expression.PropertyExpression newForPspec(gtk.expression.Expression expression, gobject.param_spec.ParamSpec pspec)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_property_expression_new_for_pspec(expression ? cast(GtkExpression*)expression.cPtr(Yes.dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gtk.property_expression.PropertyExpression(cast(GtkExpression*)_cretval, Yes.take) : null;
+    _cretval = gtk_property_expression_new_for_pspec(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gtk.property_expression.PropertyExpression(cast(GtkExpression*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class PropertyExpression : gtk.expression.Expression
   {
     GtkExpression* _cretval;
     _cretval = gtk_property_expression_get_expression(cast(GtkExpression*)cPtr);
-    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class PropertyExpression : gtk.expression.Expression
   {
     GParamSpec* _cretval;
     _cretval = gtk_property_expression_get_pspec(cast(GtkExpression*)cPtr);
-    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 }

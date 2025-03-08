@@ -12,7 +12,7 @@ import parquet.types;
 class FileMetadata : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class FileMetadata : gobject.object.ObjectG
   bool equal(parquet.file_metadata.FileMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata.cPtr(No.dup) : null);
+    _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class FileMetadata : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class FileMetadata : gobject.object.ObjectG
     _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)cPtr, index, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 

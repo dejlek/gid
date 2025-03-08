@@ -12,7 +12,7 @@ import gobject.object;
 class LargeListDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class LargeListDataType : arrow.data_type.DataType
   this(arrow.field.Field field)
   {
     GArrowLargeListDataType* _cretval;
-    _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class LargeListDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 }

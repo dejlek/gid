@@ -26,7 +26,7 @@ import gtksource.types;
 class Snippet : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,10 +52,10 @@ class Snippet : gobject.object.ObjectG
   this(string trigger = null, string languageId = null)
   {
     GtkSourceSnippet* _cretval;
-    const(char)* _trigger = trigger.toCString(No.alloc);
-    const(char)* _languageId = languageId.toCString(No.alloc);
+    const(char)* _trigger = trigger.toCString(No.Alloc);
+    const(char)* _languageId = languageId.toCString(No.Alloc);
     _cretval = gtk_source_snippet_new(_trigger, _languageId);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,12 +69,12 @@ class Snippet : gobject.object.ObjectG
   static gtksource.snippet.Snippet newParsed(string text)
   {
     GtkSourceSnippet* _cretval;
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_source_snippet_new_parsed(_text, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class Snippet : gobject.object.ObjectG
   */
   void addChunk(gtksource.snippet_chunk.SnippetChunk chunk)
   {
-    gtk_source_snippet_add_chunk(cast(GtkSourceSnippet*)cPtr, chunk ? cast(GtkSourceSnippetChunk*)chunk.cPtr(No.dup) : null);
+    gtk_source_snippet_add_chunk(cast(GtkSourceSnippet*)cPtr, chunk ? cast(GtkSourceSnippetChunk*)chunk.cPtr(No.Dup) : null);
   }
 
   /**
@@ -98,7 +98,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippet* _cretval;
     _cretval = gtk_source_snippet_copy(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_get_context(cast(GtkSourceSnippet*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class Snippet : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_description(cast(GtkSourceSnippet*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class Snippet : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_language_id(cast(GtkSourceSnippet*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Snippet : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_name(cast(GtkSourceSnippet*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Snippet : gobject.object.ObjectG
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_get_nth_chunk(cast(GtkSourceSnippet*)cPtr, nth);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class Snippet : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_get_trigger(cast(GtkSourceSnippet*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Snippet : gobject.object.ObjectG
   */
   void setDescription(string description)
   {
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     gtk_source_snippet_set_description(cast(GtkSourceSnippet*)cPtr, _description);
   }
 
@@ -228,7 +228,7 @@ class Snippet : gobject.object.ObjectG
   */
   void setLanguageId(string languageId)
   {
-    const(char)* _languageId = languageId.toCString(No.alloc);
+    const(char)* _languageId = languageId.toCString(No.Alloc);
     gtk_source_snippet_set_language_id(cast(GtkSourceSnippet*)cPtr, _languageId);
   }
 
@@ -239,7 +239,7 @@ class Snippet : gobject.object.ObjectG
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_source_snippet_set_name(cast(GtkSourceSnippet*)cPtr, _name);
   }
 
@@ -250,7 +250,7 @@ class Snippet : gobject.object.ObjectG
   */
   void setTrigger(string trigger)
   {
-    const(char)* _trigger = trigger.toCString(No.alloc);
+    const(char)* _trigger = trigger.toCString(No.Alloc);
     gtk_source_snippet_set_trigger(cast(GtkSourceSnippet*)cPtr, _trigger);
   }
 }

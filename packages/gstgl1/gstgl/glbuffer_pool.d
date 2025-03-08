@@ -21,7 +21,7 @@ import gstgl.types;
 class GLBufferPool : gst.buffer_pool.BufferPool
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,8 +41,8 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   this(gstgl.glcontext.GLContext context)
   {
     GstBufferPool* _cretval;
-    _cretval = gst_gl_buffer_pool_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gst_gl_buffer_pool_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   {
     GstGLAllocationParams* _cretval;
     _cretval = gst_gl_buffer_pool_get_gl_allocation_params(cast(GstGLBufferPool*)cPtr);
-    auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

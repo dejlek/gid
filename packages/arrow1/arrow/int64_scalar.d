@@ -10,7 +10,7 @@ import gid.gid;
 class Int64Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class Int64Scalar : arrow.scalar.Scalar
   {
     GArrowInt64Scalar* _cretval;
     _cretval = garrow_int64_scalar_new(value);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

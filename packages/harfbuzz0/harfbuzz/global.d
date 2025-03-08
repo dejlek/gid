@@ -41,7 +41,7 @@ import harfbuzz.variation;
 harfbuzz.types.OtNameId aatLayoutFeatureTypeGetNameId(harfbuzz.face.Face face, harfbuzz.types.AatLayoutFeatureType featureType)
 {
   harfbuzz.types.OtNameId _retval;
-  _retval = hb_aat_layout_feature_type_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, featureType);
+  _retval = hb_aat_layout_feature_type_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, featureType);
   return _retval;
 }
 
@@ -63,7 +63,7 @@ uint aatLayoutFeatureTypeGetSelectorInfos(harfbuzz.face.Face face, harfbuzz.type
 {
   uint _retval;
   uint _selectorCount;
-  _retval = hb_aat_layout_feature_type_get_selector_infos(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, featureType, startOffset, &_selectorCount, selectors.ptr, cast(uint*)&defaultIndex);
+  _retval = hb_aat_layout_feature_type_get_selector_infos(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, featureType, startOffset, &_selectorCount, selectors.ptr, cast(uint*)&defaultIndex);
   return _retval;
 }
 
@@ -79,7 +79,7 @@ uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref har
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_aat_layout_get_feature_types(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, startOffset, &_featureCount, features.ptr);
+  _retval = hb_aat_layout_get_feature_types(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_featureCount, features.ptr);
   return _retval;
 }
 
@@ -95,7 +95,7 @@ uint aatLayoutGetFeatureTypes(harfbuzz.face.Face face, uint startOffset, ref har
 harfbuzz.types.Bool aatLayoutHasPositioning(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_aat_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_aat_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -111,7 +111,7 @@ harfbuzz.types.Bool aatLayoutHasPositioning(harfbuzz.face.Face face)
 harfbuzz.types.Bool aatLayoutHasSubstitution(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_aat_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_aat_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -125,7 +125,7 @@ harfbuzz.types.Bool aatLayoutHasSubstitution(harfbuzz.face.Face face)
 harfbuzz.types.Bool aatLayoutHasTracking(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_aat_layout_has_tracking(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_aat_layout_has_tracking(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -138,8 +138,8 @@ harfbuzz.types.Bool aatLayoutHasTracking(harfbuzz.face.Face face)
 harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_blob_copy_writable_or_fail(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_blob_copy_writable_or_fail(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -154,9 +154,9 @@ harfbuzz.blob.Blob blobCopyWritableOrFail(harfbuzz.blob.Blob blob)
 harfbuzz.blob.Blob blobCreateFromFile(string fileName)
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(No.alloc);
+  const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = hb_blob_create_from_file(_fileName);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -171,9 +171,9 @@ harfbuzz.blob.Blob blobCreateFromFile(string fileName)
 harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName)
 {
   hb_blob_t* _cretval;
-  const(char)* _fileName = fileName.toCString(No.alloc);
+  const(char)* _fileName = fileName.toCString(No.Alloc);
   _cretval = hb_blob_create_from_file_or_fail(_fileName);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -196,8 +196,8 @@ harfbuzz.blob.Blob blobCreateFromFileOrFail(string fileName)
 harfbuzz.blob.Blob blobCreateSubBlob(harfbuzz.blob.Blob parent, uint offset, uint length)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_blob_create_sub_blob(parent ? cast(hb_blob_t*)parent.cPtr(No.dup) : null, offset, length);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_blob_create_sub_blob(parent ? cast(hb_blob_t*)parent.cPtr(No.Dup) : null, offset, length);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -211,7 +211,7 @@ string blobGetData(harfbuzz.blob.Blob blob)
 {
   const(char)* _cretval;
   uint _cretlength;
-  _cretval = hb_blob_get_data(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_blob_get_data(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, &_cretlength);
   string _retval;
 
   if (_cretval)
@@ -236,7 +236,7 @@ string blobGetDataWritable(harfbuzz.blob.Blob blob)
 {
   char* _cretval;
   uint _cretlength;
-  _cretval = hb_blob_get_data_writable(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_blob_get_data_writable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, &_cretlength);
   string _retval;
 
   if (_cretval)
@@ -256,7 +256,7 @@ harfbuzz.blob.Blob blobGetEmpty()
 {
   hb_blob_t* _cretval;
   _cretval = hb_blob_get_empty();
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -269,7 +269,7 @@ harfbuzz.blob.Blob blobGetEmpty()
 uint blobGetLength(harfbuzz.blob.Blob blob)
 {
   uint _retval;
-  _retval = hb_blob_get_length(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
+  _retval = hb_blob_get_length(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -282,7 +282,7 @@ uint blobGetLength(harfbuzz.blob.Blob blob)
 harfbuzz.types.Bool blobIsImmutable(harfbuzz.blob.Blob blob)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_blob_is_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
+  _retval = hb_blob_is_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -293,7 +293,7 @@ harfbuzz.types.Bool blobIsImmutable(harfbuzz.blob.Blob blob)
 */
 void blobMakeImmutable(harfbuzz.blob.Blob blob)
 {
-  hb_blob_make_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
+  hb_blob_make_immutable(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
 }
 
 /**
@@ -312,7 +312,7 @@ void blobMakeImmutable(harfbuzz.blob.Blob blob)
 */
 void bufferAdd(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint codepoint, uint cluster)
 {
-  hb_buffer_add(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, codepoint, cluster);
+  hb_buffer_add(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, codepoint, cluster);
 }
 
 /**
@@ -344,7 +344,7 @@ void bufferAddCodepoints(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(hb_codepoint_t)*)text.ptr;
-  hb_buffer_add_codepoints(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_codepoints(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -367,7 +367,7 @@ void bufferAddLatin1(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffse
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ubyte)*)text.ptr;
-  hb_buffer_add_latin1(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_latin1(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -389,7 +389,7 @@ void bufferAddUtf16(harfbuzz.buffer.Buffer buffer, ushort[] text, uint itemOffse
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ushort)*)text.ptr;
-  hb_buffer_add_utf16(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf16(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -411,7 +411,7 @@ void bufferAddUtf32(harfbuzz.buffer.Buffer buffer, uint[] text, uint itemOffset,
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(uint)*)text.ptr;
-  hb_buffer_add_utf32(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf32(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -434,7 +434,7 @@ void bufferAddUtf8(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset,
     _textLength = cast(int)text.length;
 
   auto _text = cast(const(ubyte)*)text.ptr;
-  hb_buffer_add_utf8(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _text, _textLength, itemOffset, itemLength);
+  hb_buffer_add_utf8(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _text, _textLength, itemOffset, itemLength);
 }
 
 /**
@@ -446,7 +446,7 @@ void bufferAddUtf8(harfbuzz.buffer.Buffer buffer, ubyte[] text, uint itemOffset,
 harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_buffer_allocation_successful(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_allocation_successful(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -460,7 +460,7 @@ harfbuzz.types.Bool bufferAllocationSuccessful(harfbuzz.buffer.Buffer buffer)
 */
 void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, uint start, uint end)
 {
-  hb_buffer_append(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, source ? cast(const(hb_buffer_t)*)source.cPtr(No.dup) : null, start, end);
+  hb_buffer_append(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, source ? cast(const(hb_buffer_t)*)source.cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -471,7 +471,7 @@ void bufferAppend(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer source, 
 */
 void bufferClearContents(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_clear_contents(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_clear_contents(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -486,7 +486,7 @@ harfbuzz.buffer.Buffer bufferCreate()
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_create();
-  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -500,8 +500,8 @@ harfbuzz.buffer.Buffer bufferCreate()
 harfbuzz.buffer.Buffer bufferCreateSimilar(harfbuzz.buffer.Buffer src)
 {
   hb_buffer_t* _cretval;
-  _cretval = hb_buffer_create_similar(src ? cast(const(hb_buffer_t)*)src.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_buffer_create_similar(src ? cast(const(hb_buffer_t)*)src.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -527,8 +527,8 @@ harfbuzz.types.Bool bufferDeserializeGlyphs(harfbuzz.buffer.Buffer buffer, strin
 
   auto _buf = cast(const(char)*)buf.ptr;
   char* _endPtr;
-  _retval = hb_buffer_deserialize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _buf, _bufLen, &_endPtr, font ? cast(hb_font_t*)font.cPtr(No.dup) : null, format);
-  endPtr = _endPtr.fromCString(Yes.free);
+  _retval = hb_buffer_deserialize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, format);
+  endPtr = _endPtr.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -553,8 +553,8 @@ harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, stri
 
   auto _buf = cast(const(char)*)buf.ptr;
   char* _endPtr;
-  _retval = hb_buffer_deserialize_unicode(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _buf, _bufLen, &_endPtr, format);
-  endPtr = _endPtr.fromCString(Yes.free);
+  _retval = hb_buffer_deserialize_unicode(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _buf, _bufLen, &_endPtr, format);
+  endPtr = _endPtr.fromCString(Yes.Free);
   return _retval;
 }
 
@@ -572,7 +572,7 @@ harfbuzz.types.Bool bufferDeserializeUnicode(harfbuzz.buffer.Buffer buffer, stri
 harfbuzz.types.BufferDiffFlags bufferDiff(harfbuzz.buffer.Buffer buffer, harfbuzz.buffer.Buffer reference, harfbuzz.types.Codepoint dottedcircleGlyph, uint positionFuzz)
 {
   hb_buffer_diff_flags_t _cretval;
-  _cretval = hb_buffer_diff(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, reference ? cast(hb_buffer_t*)reference.cPtr(No.dup) : null, dottedcircleGlyph, positionFuzz);
+  _cretval = hb_buffer_diff(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, reference ? cast(hb_buffer_t*)reference.cPtr(No.Dup) : null, dottedcircleGlyph, positionFuzz);
   harfbuzz.types.BufferDiffFlags _retval = cast(harfbuzz.types.BufferDiffFlags)_cretval;
   return _retval;
 }
@@ -588,7 +588,7 @@ harfbuzz.types.BufferDiffFlags bufferDiff(harfbuzz.buffer.Buffer buffer, harfbuz
 harfbuzz.types.BufferClusterLevel bufferGetClusterLevel(harfbuzz.buffer.Buffer buffer)
 {
   hb_buffer_cluster_level_t _cretval;
-  _cretval = hb_buffer_get_cluster_level(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _cretval = hb_buffer_get_cluster_level(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   harfbuzz.types.BufferClusterLevel _retval = cast(harfbuzz.types.BufferClusterLevel)_cretval;
   return _retval;
 }
@@ -603,7 +603,7 @@ harfbuzz.types.BufferClusterLevel bufferGetClusterLevel(harfbuzz.buffer.Buffer b
 harfbuzz.types.BufferContentType bufferGetContentType(harfbuzz.buffer.Buffer buffer)
 {
   hb_buffer_content_type_t _cretval;
-  _cretval = hb_buffer_get_content_type(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _cretval = hb_buffer_get_content_type(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   harfbuzz.types.BufferContentType _retval = cast(harfbuzz.types.BufferContentType)_cretval;
   return _retval;
 }
@@ -617,7 +617,7 @@ harfbuzz.types.BufferContentType bufferGetContentType(harfbuzz.buffer.Buffer buf
 harfbuzz.types.Direction bufferGetDirection(harfbuzz.buffer.Buffer buffer)
 {
   hb_direction_t _cretval;
-  _cretval = hb_buffer_get_direction(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _cretval = hb_buffer_get_direction(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   harfbuzz.types.Direction _retval = cast(harfbuzz.types.Direction)_cretval;
   return _retval;
 }
@@ -630,7 +630,7 @@ harfbuzz.buffer.Buffer bufferGetEmpty()
 {
   hb_buffer_t* _cretval;
   _cretval = hb_buffer_get_empty();
-  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -643,7 +643,7 @@ harfbuzz.buffer.Buffer bufferGetEmpty()
 harfbuzz.types.BufferFlags bufferGetFlags(harfbuzz.buffer.Buffer buffer)
 {
   hb_buffer_flags_t _cretval;
-  _cretval = hb_buffer_get_flags(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _cretval = hb_buffer_get_flags(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   harfbuzz.types.BufferFlags _retval = cast(harfbuzz.types.BufferFlags)_cretval;
   return _retval;
 }
@@ -660,14 +660,14 @@ harfbuzz.glyph_info.GlyphInfo[] bufferGetGlyphInfos(harfbuzz.buffer.Buffer buffe
 {
   hb_glyph_info_t* _cretval;
   uint _cretlength;
-  _cretval = hb_buffer_get_glyph_infos(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_buffer_get_glyph_infos(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_cretlength);
   harfbuzz.glyph_info.GlyphInfo[] _retval;
 
   if (_cretval)
   {
     _retval = new harfbuzz.glyph_info.GlyphInfo[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new harfbuzz.glyph_info.GlyphInfo(cast(void*)&_cretval[i], No.take);
+      _retval[i] = new harfbuzz.glyph_info.GlyphInfo(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
 }
@@ -689,14 +689,14 @@ harfbuzz.glyph_position.GlyphPosition[] bufferGetGlyphPositions(harfbuzz.buffer.
 {
   hb_glyph_position_t* _cretval;
   uint _cretlength;
-  _cretval = hb_buffer_get_glyph_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_buffer_get_glyph_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, &_cretlength);
   harfbuzz.glyph_position.GlyphPosition[] _retval;
 
   if (_cretval)
   {
     _retval = new harfbuzz.glyph_position.GlyphPosition[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new harfbuzz.glyph_position.GlyphPosition(cast(void*)&_cretval[i], No.take);
+      _retval[i] = new harfbuzz.glyph_position.GlyphPosition(cast(void*)&_cretval[i], No.Take);
   }
   return _retval;
 }
@@ -710,7 +710,7 @@ harfbuzz.glyph_position.GlyphPosition[] bufferGetGlyphPositions(harfbuzz.buffer.
 harfbuzz.types.Codepoint bufferGetInvisibleGlyph(harfbuzz.buffer.Buffer buffer)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_buffer_get_invisible_glyph(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_get_invisible_glyph(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -722,7 +722,7 @@ harfbuzz.types.Codepoint bufferGetInvisibleGlyph(harfbuzz.buffer.Buffer buffer)
 */
 harfbuzz.types.Language bufferGetLanguage(harfbuzz.buffer.Buffer buffer)
 {
-  auto _retval = hb_buffer_get_language(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  auto _retval = hb_buffer_get_language(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -736,7 +736,7 @@ harfbuzz.types.Language bufferGetLanguage(harfbuzz.buffer.Buffer buffer)
 uint bufferGetLength(harfbuzz.buffer.Buffer buffer)
 {
   uint _retval;
-  _retval = hb_buffer_get_length(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_get_length(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -749,7 +749,7 @@ uint bufferGetLength(harfbuzz.buffer.Buffer buffer)
 harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_buffer_get_not_found_glyph(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_get_not_found_glyph(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -763,7 +763,7 @@ harfbuzz.types.Codepoint bufferGetNotFoundGlyph(harfbuzz.buffer.Buffer buffer)
 harfbuzz.types.Codepoint bufferGetReplacementCodepoint(harfbuzz.buffer.Buffer buffer)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_buffer_get_replacement_codepoint(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_get_replacement_codepoint(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -776,7 +776,7 @@ harfbuzz.types.Codepoint bufferGetReplacementCodepoint(harfbuzz.buffer.Buffer bu
 harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer)
 {
   hb_script_t _cretval;
-  _cretval = hb_buffer_get_script(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
+  _cretval = hb_buffer_get_script(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
   harfbuzz.types.Script _retval = cast(harfbuzz.types.Script)_cretval;
   return _retval;
 }
@@ -790,8 +790,8 @@ harfbuzz.types.Script bufferGetScript(harfbuzz.buffer.Buffer buffer)
 void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segment_properties.SegmentProperties props)
 {
   hb_segment_properties_t _props;
-  hb_buffer_get_segment_properties(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null, &_props);
-  props = new harfbuzz.segment_properties.SegmentProperties(cast(void*)&_props, No.take);
+  hb_buffer_get_segment_properties(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null, &_props);
+  props = new harfbuzz.segment_properties.SegmentProperties(cast(void*)&_props, No.Take);
 }
 
 /**
@@ -803,8 +803,8 @@ void bufferGetSegmentProperties(harfbuzz.buffer.Buffer buffer, out harfbuzz.segm
 harfbuzz.unicode_funcs.UnicodeFuncs bufferGetUnicodeFuncs(harfbuzz.buffer.Buffer buffer)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_buffer_get_unicode_funcs(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_buffer_get_unicode_funcs(buffer ? cast(const(hb_buffer_t)*)buffer.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -835,7 +835,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs bufferGetUnicodeFuncs(harfbuzz.buffer.Buffer
 */
 void bufferGuessSegmentProperties(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_guess_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_guess_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -849,7 +849,7 @@ void bufferGuessSegmentProperties(harfbuzz.buffer.Buffer buffer)
 harfbuzz.types.Bool bufferHasPositions(harfbuzz.buffer.Buffer buffer)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_buffer_has_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  _retval = hb_buffer_has_positions(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -863,7 +863,7 @@ harfbuzz.types.Bool bufferHasPositions(harfbuzz.buffer.Buffer buffer)
 */
 void bufferNormalizeGlyphs(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_normalize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_normalize_glyphs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -876,7 +876,7 @@ void bufferNormalizeGlyphs(harfbuzz.buffer.Buffer buffer)
 harfbuzz.types.Bool bufferPreAllocate(harfbuzz.buffer.Buffer buffer, uint size)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_buffer_pre_allocate(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, size);
+  _retval = hb_buffer_pre_allocate(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, size);
   return _retval;
 }
 
@@ -888,7 +888,7 @@ harfbuzz.types.Bool bufferPreAllocate(harfbuzz.buffer.Buffer buffer, uint size)
 */
 void bufferReset(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_reset(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_reset(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -898,7 +898,7 @@ void bufferReset(harfbuzz.buffer.Buffer buffer)
 */
 void bufferReverse(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_reverse(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_reverse(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -910,7 +910,7 @@ void bufferReverse(harfbuzz.buffer.Buffer buffer)
 */
 void bufferReverseClusters(harfbuzz.buffer.Buffer buffer)
 {
-  hb_buffer_reverse_clusters(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null);
+  hb_buffer_reverse_clusters(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null);
 }
 
 /**
@@ -922,7 +922,7 @@ void bufferReverseClusters(harfbuzz.buffer.Buffer buffer)
 */
 void bufferReverseRange(harfbuzz.buffer.Buffer buffer, uint start, uint end)
 {
-  hb_buffer_reverse_range(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, start, end);
+  hb_buffer_reverse_range(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -957,7 +957,7 @@ string bufferSerializeFormatToString(harfbuzz.types.BufferSerializeFormat format
 {
   const(char)* _cretval;
   _cretval = hb_buffer_serialize_format_to_string(format);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -978,7 +978,7 @@ string[] bufferSerializeListFormats()
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.free);
+      _retval[i] = _cretval[i].fromCString(No.Free);
   }
   return _retval;
 }
@@ -993,7 +993,7 @@ string[] bufferSerializeListFormats()
 */
 void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferClusterLevel clusterLevel)
 {
-  hb_buffer_set_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, clusterLevel);
+  hb_buffer_set_cluster_level(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, clusterLevel);
 }
 
 /**
@@ -1005,7 +1005,7 @@ void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferC
   
   $(LIST
     * A newly created buffer starts with content type
-      [harfbuzz.types.BufferContentType.invalid]. Calling [harfbuzz.global.bufferReset],
+      [harfbuzz.types.BufferContentType.Invalid]. Calling [harfbuzz.global.bufferReset],
       [harfbuzz.global.bufferClearContents], as well as calling [harfbuzz.global.bufferSetLength]
       with an argument of zero all set the buffer content type to invalid
       as well.
@@ -1014,14 +1014,14 @@ void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferC
       [harfbuzz.global.bufferAddUtf32], [harfbuzz.global.bufferAddCodepoints] and
       [harfbuzz.global.bufferAddLatin1] expect that buffer is either empty and
       have a content type of invalid, or that buffer content type is
-      [harfbuzz.types.BufferContentType.unicode], and they also set the content
+      [harfbuzz.types.BufferContentType.Unicode], and they also set the content
       type to Unicode if they added anything to an empty buffer.
     
     * Finally [harfbuzz.global.shape] and [harfbuzz.global.shapeFull] expect that the buffer
       is either empty and have content type of invalid, or that buffer
-      content type is [harfbuzz.types.BufferContentType.unicode], and upon
+      content type is [harfbuzz.types.BufferContentType.Unicode], and upon
       success they set the buffer content type to
-      [harfbuzz.types.BufferContentType.glyphs].
+      [harfbuzz.types.BufferContentType.Glyphs].
   )
     
   The above transitions are designed such that one can use a buffer
@@ -1033,7 +1033,7 @@ void bufferSetClusterLevel(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferC
 */
 void bufferSetContentType(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferContentType contentType)
 {
-  hb_buffer_set_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, contentType);
+  hb_buffer_set_content_type(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, contentType);
 }
 
 /**
@@ -1050,7 +1050,7 @@ void bufferSetContentType(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferCo
 */
 void bufferSetDirection(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Direction direction)
 {
-  hb_buffer_set_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, direction);
+  hb_buffer_set_direction(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, direction);
 }
 
 /**
@@ -1061,7 +1061,7 @@ void bufferSetDirection(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Direction 
 */
 void bufferSetFlags(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferFlags flags)
 {
-  hb_buffer_set_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, flags);
+  hb_buffer_set_flags(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1075,7 +1075,7 @@ void bufferSetFlags(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferFlags fl
 */
 void bufferSetInvisibleGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint invisible)
 {
-  hb_buffer_set_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, invisible);
+  hb_buffer_set_invisible_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, invisible);
 }
 
 /**
@@ -1094,7 +1094,7 @@ void bufferSetInvisibleGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codep
 */
 void bufferSetLanguage(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Language language)
 {
-  hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, language);
+  hb_buffer_set_language(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, language);
 }
 
 /**
@@ -1108,7 +1108,7 @@ void bufferSetLanguage(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Language la
 harfbuzz.types.Bool bufferSetLength(harfbuzz.buffer.Buffer buffer, uint length)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_buffer_set_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, length);
+  _retval = hb_buffer_set_length(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, length);
   return _retval;
 }
 
@@ -1123,16 +1123,16 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
   extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData)
   {
     auto _dlg = cast(harfbuzz.types.BufferMessageFunc*)userData;
-    string _message = message.fromCString(No.free);
+    string _message = message.fromCString(No.Free);
 
-    hb_bool_t _retval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, _message);
+    hb_bool_t _retval = (*_dlg)(buffer ? new harfbuzz.buffer.Buffer(cast(void*)buffer, No.Take) : null, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, _message);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_buffer_set_message_func(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1147,7 +1147,7 @@ void bufferSetMessageFunc(harfbuzz.buffer.Buffer buffer, harfbuzz.types.BufferMe
 */
 void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint notFound)
 {
-  hb_buffer_set_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, notFound);
+  hb_buffer_set_not_found_glyph(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, notFound);
 }
 
 /**
@@ -1161,7 +1161,7 @@ void bufferSetNotFoundGlyph(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepo
 */
 void bufferSetReplacementCodepoint(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Codepoint replacement)
 {
-  hb_buffer_set_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, replacement);
+  hb_buffer_set_replacement_codepoint(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, replacement);
 }
 
 /**
@@ -1180,7 +1180,7 @@ void bufferSetReplacementCodepoint(harfbuzz.buffer.Buffer buffer, harfbuzz.types
 */
 void bufferSetScript(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Script script)
 {
-  hb_buffer_set_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, script);
+  hb_buffer_set_script(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, script);
 }
 
 /**
@@ -1193,7 +1193,7 @@ void bufferSetScript(harfbuzz.buffer.Buffer buffer, harfbuzz.types.Script script
 */
 void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_properties.SegmentProperties props)
 {
-  hb_buffer_set_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.dup) : null);
+  hb_buffer_set_segment_properties(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1205,7 +1205,7 @@ void bufferSetSegmentProperties(harfbuzz.buffer.Buffer buffer, harfbuzz.segment_
 */
 void bufferSetUnicodeFuncs(harfbuzz.buffer.Buffer buffer, harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncs)
 {
-  hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs.cPtr(No.dup) : null);
+  hb_buffer_set_unicode_funcs(buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, unicodeFuncs ? cast(hb_unicode_funcs_t*)unicodeFuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1278,10 +1278,10 @@ uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start,
   uint _count;
   hb_color_stop_t[] _colorStops;
   _colorStops.length = _count;
-  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.dup) : null, start, &_count, _colorStops.ptr);
+  _retval = hb_color_line_get_color_stops(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, start, &_count, _colorStops.ptr);
   colorStops.length = _count;
   foreach (i; 0 .. _count)
-    colorStops[i] = new harfbuzz.color_stop.ColorStop(cast(void*)&_colorStops[i], No.take);
+    colorStops[i] = new harfbuzz.color_stop.ColorStop(cast(void*)&_colorStops[i], No.Take);
   return _retval;
 }
 
@@ -1294,7 +1294,7 @@ uint colorLineGetColorStops(harfbuzz.color_line.ColorLine colorLine, uint start,
 harfbuzz.types.PaintExtend colorLineGetExtend(harfbuzz.color_line.ColorLine colorLine)
 {
   hb_paint_extend_t _cretval;
-  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.dup) : null);
+  _cretval = hb_color_line_get_extend(colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null);
   harfbuzz.types.PaintExtend _retval = cast(harfbuzz.types.PaintExtend)_cretval;
   return _retval;
 }
@@ -1333,7 +1333,7 @@ string directionToString(harfbuzz.types.Direction direction)
 {
   const(char)* _cretval;
   _cretval = hb_direction_to_string(direction);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -1346,7 +1346,7 @@ string directionToString(harfbuzz.types.Direction direction)
 */
 void drawClosePath(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st)
 {
-  hb_draw_close_path(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.dup) : null);
+  hb_draw_close_path(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1364,7 +1364,7 @@ void drawClosePath(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuz
 */
 void drawCubicTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY)
 {
-  hb_draw_cubic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.dup) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+  hb_draw_cubic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, control1X, control1Y, control2X, control2Y, toX, toY);
 }
 
 /**
@@ -1379,7 +1379,7 @@ harfbuzz.draw_funcs.DrawFuncs drawFuncsCreate()
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_create();
-  auto _retval = _cretval ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1391,7 +1391,7 @@ harfbuzz.draw_funcs.DrawFuncs drawFuncsGetEmpty()
 {
   hb_draw_funcs_t* _cretval;
   _cretval = hb_draw_funcs_get_empty();
-  auto _retval = _cretval ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1404,7 +1404,7 @@ harfbuzz.draw_funcs.DrawFuncs drawFuncsGetEmpty()
 harfbuzz.types.Bool drawFuncsIsImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_draw_funcs_is_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null);
+  _retval = hb_draw_funcs_is_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1415,7 +1415,7 @@ harfbuzz.types.Bool drawFuncsIsImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
 */
 void drawFuncsMakeImmutable(harfbuzz.draw_funcs.DrawFuncs dfuncs)
 {
-  hb_draw_funcs_make_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null);
+  hb_draw_funcs_make_immutable(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1430,13 +1430,13 @@ void drawFuncsSetClosePathFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.ty
   {
     auto _dlg = cast(harfbuzz.types.DrawClosePathFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.take) : null);
+    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_draw_funcs_set_close_path_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1451,13 +1451,13 @@ void drawFuncsSetCubicToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.type
   {
     auto _dlg = cast(harfbuzz.types.DrawCubicToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
+    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, control1X, control1Y, control2X, control2Y, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_draw_funcs_set_cubic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1472,13 +1472,13 @@ void drawFuncsSetLineToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
   {
     auto _dlg = cast(harfbuzz.types.DrawLineToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.take) : null, toX, toY);
+    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_draw_funcs_set_line_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1493,13 +1493,13 @@ void drawFuncsSetMoveToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.types
   {
     auto _dlg = cast(harfbuzz.types.DrawMoveToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.take) : null, toX, toY);
+    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_draw_funcs_set_move_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1514,13 +1514,13 @@ void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.
   {
     auto _dlg = cast(harfbuzz.types.DrawQuadraticToFunc*)userData;
 
-    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.take) : null, controlX, controlY, toX, toY);
+    (*_dlg)(dfuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)dfuncs, No.Take) : null, drawData, st ? new harfbuzz.draw_state.DrawState(cast(void*)st, No.Take) : null, controlX, controlY, toX, toY);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_draw_funcs_set_quadratic_to_func(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -1534,7 +1534,7 @@ void drawFuncsSetQuadraticToFunc(harfbuzz.draw_funcs.DrawFuncs dfuncs, harfbuzz.
 */
 void drawLineTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY)
 {
-  hb_draw_line_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.dup) : null, toX, toY);
+  hb_draw_line_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, toX, toY);
 }
 
 /**
@@ -1548,7 +1548,7 @@ void drawLineTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.d
 */
 void drawMoveTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY)
 {
-  hb_draw_move_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.dup) : null, toX, toY);
+  hb_draw_move_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, toX, toY);
 }
 
 /**
@@ -1564,7 +1564,7 @@ void drawMoveTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.d
 */
 void drawQuadraticTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float controlX, float controlY, float toX, float toY)
 {
-  hb_draw_quadratic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.dup) : null, controlX, controlY, toX, toY);
+  hb_draw_quadratic_to(dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData, st ? cast(hb_draw_state_t*)st.cPtr(No.Dup) : null, controlX, controlY, toX, toY);
 }
 
 /**
@@ -1579,7 +1579,7 @@ void drawQuadraticTo(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfb
 harfbuzz.types.Bool faceBuilderAddTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag, harfbuzz.blob.Blob blob)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_face_builder_add_table(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tag, blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
+  _retval = hb_face_builder_add_table(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tag, blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1593,7 +1593,7 @@ harfbuzz.face.Face faceBuilderCreate()
 {
   hb_face_t* _cretval;
   _cretval = hb_face_builder_create();
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1609,7 +1609,7 @@ harfbuzz.face.Face faceBuilderCreate()
 void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags)
 {
   auto _tags = cast(const(hb_tag_t)*)(tags ~ hb_tag_t.init).ptr;
-  hb_face_builder_sort_tables(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, _tags);
+  hb_face_builder_sort_tables(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, _tags);
 }
 
 /**
@@ -1621,7 +1621,7 @@ void faceBuilderSortTables(harfbuzz.face.Face face, harfbuzz.types.Tag[] tags)
 uint faceCount(harfbuzz.blob.Blob blob)
 {
   uint _retval;
-  _retval = hb_face_count(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null);
+  _retval = hb_face_count(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1648,8 +1648,8 @@ uint faceCount(harfbuzz.blob.Blob blob)
 harfbuzz.face.Face faceCreate(harfbuzz.blob.Blob blob, uint index)
 {
   hb_face_t* _cretval;
-  _cretval = hb_face_create(blob ? cast(hb_blob_t*)blob.cPtr(No.dup) : null, index);
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_face_create(blob ? cast(hb_blob_t*)blob.cPtr(No.Dup) : null, index);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1672,8 +1672,8 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
     harfbuzz.blob.Blob _dretval;
     auto _dlg = cast(harfbuzz.types.ReferenceTableFunc*)userData;
 
-    _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.take) : null, tag);
-    hb_blob_t* _retval = cast(hb_blob_t*)_dretval.cPtr(Yes.dup);
+    _dretval = (*_dlg)(face ? new harfbuzz.face.Face(cast(void*)face, No.Take) : null, tag);
+    hb_blob_t* _retval = cast(hb_blob_t*)_dretval.cPtr(Yes.Dup);
 
     return _retval;
   }
@@ -1683,7 +1683,7 @@ harfbuzz.face.Face faceCreateForTables(harfbuzz.types.ReferenceTableFunc referen
   auto _referenceTableFunc = referenceTableFunc ? freezeDelegate(cast(void*)&referenceTableFunc) : null;
   GDestroyNotify _referenceTableFuncDestroyCB = referenceTableFunc ? &thawDelegate : null;
   _cretval = hb_face_create_for_tables(_referenceTableFuncCB, _referenceTableFunc, _referenceTableFuncDestroyCB);
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1695,7 +1695,7 @@ harfbuzz.face.Face faceGetEmpty()
 {
   hb_face_t* _cretval;
   _cretval = hb_face_get_empty();
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1708,7 +1708,7 @@ harfbuzz.face.Face faceGetEmpty()
 uint faceGetGlyphCount(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_face_get_glyph_count(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null);
+  _retval = hb_face_get_glyph_count(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1723,7 +1723,7 @@ uint faceGetGlyphCount(harfbuzz.face.Face face)
 uint faceGetIndex(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_face_get_index(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null);
+  _retval = hb_face_get_index(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1740,7 +1740,7 @@ uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.ty
 {
   uint _retval;
   uint _tableCount;
-  _retval = hb_face_get_table_tags(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null, startOffset, &_tableCount, tableTags.ptr);
+  _retval = hb_face_get_table_tags(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null, startOffset, &_tableCount, tableTags.ptr);
   return _retval;
 }
 
@@ -1756,7 +1756,7 @@ uint faceGetTableTags(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.ty
 uint faceGetUpem(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_face_get_upem(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null);
+  _retval = hb_face_get_upem(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1769,7 +1769,7 @@ uint faceGetUpem(harfbuzz.face.Face face)
 harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_face_is_immutable(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null);
+  _retval = hb_face_is_immutable(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1780,7 +1780,7 @@ harfbuzz.types.Bool faceIsImmutable(harfbuzz.face.Face face)
 */
 void faceMakeImmutable(harfbuzz.face.Face face)
 {
-  hb_face_make_immutable(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  hb_face_make_immutable(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1794,8 +1794,8 @@ void faceMakeImmutable(harfbuzz.face.Face face)
 harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_face_reference_blob(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_face_reference_blob(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1810,8 +1810,8 @@ harfbuzz.blob.Blob faceReferenceBlob(harfbuzz.face.Face face)
 harfbuzz.blob.Blob faceReferenceTable(harfbuzz.face.Face face, harfbuzz.types.Tag tag)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_face_reference_table(face ? cast(const(hb_face_t)*)face.cPtr(No.dup) : null, tag);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_face_reference_table(face ? cast(const(hb_face_t)*)face.cPtr(No.Dup) : null, tag);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1825,7 +1825,7 @@ harfbuzz.blob.Blob faceReferenceTable(harfbuzz.face.Face face, harfbuzz.types.Ta
 */
 void faceSetGlyphCount(harfbuzz.face.Face face, uint glyphCount)
 {
-  hb_face_set_glyph_count(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyphCount);
+  hb_face_set_glyph_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyphCount);
 }
 
 /**
@@ -1840,7 +1840,7 @@ void faceSetGlyphCount(harfbuzz.face.Face face, uint glyphCount)
 */
 void faceSetIndex(harfbuzz.face.Face face, uint index)
 {
-  hb_face_set_index(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, index);
+  hb_face_set_index(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, index);
 }
 
 /**
@@ -1853,7 +1853,7 @@ void faceSetIndex(harfbuzz.face.Face face, uint index)
 */
 void faceSetUpem(harfbuzz.face.Face face, uint upem)
 {
-  hb_face_set_upem(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, upem);
+  hb_face_set_upem(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, upem);
 }
 
 /**
@@ -1909,7 +1909,7 @@ harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature 
   auto _str = cast(const(ubyte)*)str.ptr;
   hb_feature_t _feature;
   _retval = hb_feature_from_string(_str, _len, &_feature);
-  feature = new harfbuzz.feature.Feature(cast(void*)&_feature, No.take);
+  feature = new harfbuzz.feature.Feature(cast(void*)&_feature, No.Take);
   return _retval;
 }
 
@@ -1930,7 +1930,7 @@ harfbuzz.types.Bool featureFromString(ubyte[] str, out harfbuzz.feature.Feature 
 */
 void fontAddGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y)
 {
-  hb_font_add_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_add_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -1942,7 +1942,7 @@ void fontAddGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Code
 */
 void fontChanged(harfbuzz.font.Font font)
 {
-  hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1961,8 +1961,8 @@ void fontChanged(harfbuzz.font.Font font)
 harfbuzz.font.Font fontCreate(harfbuzz.face.Face face)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_create(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_font_create(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1976,8 +1976,8 @@ harfbuzz.font.Font fontCreate(harfbuzz.face.Face face)
 harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_create_sub_font(parent ? cast(hb_font_t*)parent.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_font_create_sub_font(parent ? cast(hb_font_t*)parent.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -1994,7 +1994,7 @@ harfbuzz.font.Font fontCreateSubFont(harfbuzz.font.Font parent)
 */
 void fontDrawGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null)
 {
-  hb_font_draw_glyph(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData);
+  hb_font_draw_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData);
 }
 
 /**
@@ -2005,7 +2005,7 @@ harfbuzz.font_funcs.FontFuncs fontFuncsCreate()
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_create();
-  auto _retval = _cretval ? new harfbuzz.font_funcs.FontFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.font_funcs.FontFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2017,7 +2017,7 @@ harfbuzz.font_funcs.FontFuncs fontFuncsGetEmpty()
 {
   hb_font_funcs_t* _cretval;
   _cretval = hb_font_funcs_get_empty();
-  auto _retval = _cretval ? new harfbuzz.font_funcs.FontFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.font_funcs.FontFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2030,7 +2030,7 @@ harfbuzz.font_funcs.FontFuncs fontFuncsGetEmpty()
 harfbuzz.types.Bool fontFuncsIsImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_funcs_is_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null);
+  _retval = hb_font_funcs_is_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2041,7 +2041,7 @@ harfbuzz.types.Bool fontFuncsIsImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
 */
 void fontFuncsMakeImmutable(harfbuzz.font_funcs.FontFuncs ffuncs)
 {
-  hb_font_funcs_make_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null);
+  hb_font_funcs_make_immutable(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2056,13 +2056,13 @@ void fontFuncsSetDrawGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
   {
     auto _dlg = cast(harfbuzz.types.FontDrawGlyphFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.take) : null, drawData);
+    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_draw_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2077,14 +2077,14 @@ void fontFuncsSetFontHExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetFontHExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_font_h_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2099,14 +2099,14 @@ void fontFuncsSetFontVExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetFontVExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, *extents);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_font_v_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2121,14 +2121,14 @@ void fontFuncsSetGlyphContourPointFunc(harfbuzz.font_funcs.FontFuncs ffuncs, har
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphContourPointFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, pointIndex, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, pointIndex, *x, *y);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_contour_point_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2143,14 +2143,14 @@ void fontFuncsSetGlyphExtentsFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphExtentsFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, *extents);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *extents);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_extents_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2168,14 +2168,14 @@ void fontFuncsSetGlyphFromNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
     _name.length = len;
     _name[0 .. len] = name[0 .. len];
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, _name, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, _name, *glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_from_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2191,14 +2191,14 @@ void fontFuncsSetGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.types.
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, unicode, variationSelector, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2213,14 +2213,14 @@ void fontFuncsSetGlyphHAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph);
+    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_h_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2235,14 +2235,14 @@ void fontFuncsSetGlyphHKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, firstGlyph, secondGlyph);
+    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_h_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2257,14 +2257,14 @@ void fontFuncsSetGlyphHOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphHOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_h_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2280,9 +2280,9 @@ void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
     auto _dlg = cast(harfbuzz.types.FontGetGlyphNameFunc*)userData;
     char[] _name;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, _name);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, _name);
     size = cast(uint)_name.length;
-    name = arrayDtoC!(char, Yes.alloc, No.zeroTerm)(_name);
+    name = arrayDtoC!(char, Yes.Alloc, No.ZeroTerm)(_name);
 
     return _retval;
   }
@@ -2290,7 +2290,7 @@ void fontFuncsSetGlyphNameFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.ty
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_name_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2308,13 +2308,13 @@ void fontFuncsSetGlyphShapeFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphShapeFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.take) : null, drawData);
+    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, drawFuncs ? new harfbuzz.draw_funcs.DrawFuncs(cast(void*)drawFuncs, No.Take) : null, drawData);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_shape_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2329,14 +2329,14 @@ void fontFuncsSetGlyphVAdvanceFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVAdvanceFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph);
+    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_v_advance_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2351,14 +2351,14 @@ void fontFuncsSetGlyphVKerningFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVKerningFunc*)userData;
 
-    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, firstGlyph, secondGlyph);
+    hb_position_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, firstGlyph, secondGlyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_v_kerning_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2373,14 +2373,14 @@ void fontFuncsSetGlyphVOriginFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetGlyphVOriginFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, *x, *y);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, *x, *y);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_glyph_v_origin_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2395,14 +2395,14 @@ void fontFuncsSetNominalGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.FontGetNominalGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, unicode, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, *glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_nominal_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2417,13 +2417,13 @@ void fontFuncsSetPaintGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbuzz.t
   {
     auto _dlg = cast(harfbuzz.types.FontPaintGlyphFunc*)userData;
 
-    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.take) : null, paintData, paletteIndex, foreground);
+    (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, glyph, paintFuncs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)paintFuncs, No.Take) : null, paintData, paletteIndex, foreground);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_paint_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2438,14 +2438,14 @@ void fontFuncsSetVariationGlyphFunc(harfbuzz.font_funcs.FontFuncs ffuncs, harfbu
   {
     auto _dlg = cast(harfbuzz.types.FontGetVariationGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null, fontData, unicode, variationSelector, *glyph);
+    hb_bool_t _retval = (*_dlg)(font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null, fontData, unicode, variationSelector, *glyph);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_font_funcs_set_variation_glyph_func(ffuncs ? cast(hb_font_funcs_t*)ffuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -2456,7 +2456,7 @@ harfbuzz.font.Font fontGetEmpty()
 {
   hb_font_t* _cretval;
   _cretval = hb_font_get_empty();
-  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2473,7 +2473,7 @@ harfbuzz.font.Font fontGetEmpty()
 */
 void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Direction direction, out harfbuzz.types.FontExtents extents)
 {
-  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, direction, &extents);
+  hb_font_get_extents_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, &extents);
 }
 
 /**
@@ -2485,8 +2485,8 @@ void fontGetExtentsForDirection(harfbuzz.font.Font font, harfbuzz.types.Directio
 harfbuzz.face.Face fontGetFace(harfbuzz.font.Font font)
 {
   hb_face_t* _cretval;
-  _cretval = hb_font_get_face(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, No.take) : null;
+  _cretval = hb_font_get_face(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2506,7 +2506,7 @@ harfbuzz.face.Face fontGetFace(harfbuzz.font.Font font)
 harfbuzz.types.Bool fontGetGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2525,7 +2525,7 @@ harfbuzz.types.Bool fontGetGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoi
 */
 void fontGetGlyphAdvanceForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
-  hb_font_get_glyph_advance_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_advance_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2542,7 +2542,7 @@ void fontGetGlyphAdvanceForDirection(harfbuzz.font.Font font, harfbuzz.types.Cod
 harfbuzz.types.Bool fontGetGlyphContourPoint(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_contour_point(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, pointIndex, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_contour_point(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pointIndex, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2565,7 +2565,7 @@ harfbuzz.types.Bool fontGetGlyphContourPoint(harfbuzz.font.Font font, harfbuzz.t
 harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, uint pointIndex, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_contour_point_for_origin(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, pointIndex, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_contour_point_for_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pointIndex, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2581,7 +2581,7 @@ harfbuzz.types.Bool fontGetGlyphContourPointForOrigin(harfbuzz.font.Font font, h
 harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.GlyphExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, &extents);
+  _retval = hb_font_get_glyph_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, &extents);
   return _retval;
 }
 
@@ -2602,7 +2602,7 @@ harfbuzz.types.Bool fontGetGlyphExtents(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.types.Bool fontGetGlyphExtentsForOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.GlyphExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, &extents);
+  _retval = hb_font_get_glyph_extents_for_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, &extents);
   return _retval;
 }
 
@@ -2624,7 +2624,7 @@ harfbuzz.types.Bool fontGetGlyphFromName(harfbuzz.font.Font font, string name, o
     _len = cast(int)name.length;
 
   auto _name = cast(const(char)*)name.ptr;
-  _retval = hb_font_get_glyph_from_name(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, _name, _len, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_glyph_from_name(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _name, _len, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2639,7 +2639,7 @@ harfbuzz.types.Bool fontGetGlyphFromName(harfbuzz.font.Font font, string name, o
 harfbuzz.types.Position fontGetGlyphHAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_font_get_glyph_h_advance(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph);
+  _retval = hb_font_get_glyph_h_advance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -2658,7 +2658,7 @@ harfbuzz.types.Position fontGetGlyphHAdvance(harfbuzz.font.Font font, harfbuzz.t
 harfbuzz.types.Position fontGetGlyphHKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint leftGlyph, harfbuzz.types.Codepoint rightGlyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_font_get_glyph_h_kerning(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, leftGlyph, rightGlyph);
+  _retval = hb_font_get_glyph_h_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, leftGlyph, rightGlyph);
   return _retval;
 }
 
@@ -2675,7 +2675,7 @@ harfbuzz.types.Position fontGetGlyphHKerning(harfbuzz.font.Font font, harfbuzz.t
 harfbuzz.types.Bool fontGetGlyphHOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_h_origin(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_h_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2694,7 +2694,7 @@ harfbuzz.types.Bool fontGetGlyphHOrigin(harfbuzz.font.Font font, harfbuzz.types.
 */
 void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint firstGlyph, harfbuzz.types.Codepoint secondGlyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
-  hb_font_get_glyph_kerning_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, firstGlyph, secondGlyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_kerning_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, firstGlyph, secondGlyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2712,7 +2712,7 @@ void fontGetGlyphKerningForDirection(harfbuzz.font.Font font, harfbuzz.types.Cod
 */
 void fontGetGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
-  hb_font_get_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_get_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -2729,7 +2729,7 @@ void fontGetGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Code
 */
 void fontGetGlyphShape(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData = null)
 {
-  hb_font_get_glyph_shape(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.dup) : null, drawData);
+  hb_font_get_glyph_shape(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, dfuncs ? cast(hb_draw_funcs_t*)dfuncs.cPtr(No.Dup) : null, drawData);
 }
 
 /**
@@ -2743,7 +2743,7 @@ void fontGetGlyphShape(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, 
 harfbuzz.types.Position fontGetGlyphVAdvance(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_font_get_glyph_v_advance(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph);
+  _retval = hb_font_get_glyph_v_advance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -2762,7 +2762,7 @@ harfbuzz.types.Position fontGetGlyphVAdvance(harfbuzz.font.Font font, harfbuzz.t
 harfbuzz.types.Position fontGetGlyphVKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint topGlyph, harfbuzz.types.Codepoint bottomGlyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_font_get_glyph_v_kerning(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, topGlyph, bottomGlyph);
+  _retval = hb_font_get_glyph_v_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, topGlyph, bottomGlyph);
   return _retval;
 }
 
@@ -2779,7 +2779,7 @@ harfbuzz.types.Position fontGetGlyphVKerning(harfbuzz.font.Font font, harfbuzz.t
 harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_glyph_v_origin(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  _retval = hb_font_get_glyph_v_origin(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
   return _retval;
 }
 
@@ -2794,7 +2794,7 @@ harfbuzz.types.Bool fontGetGlyphVOrigin(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, &extents);
+  _retval = hb_font_get_h_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &extents);
   return _retval;
 }
 
@@ -2814,7 +2814,7 @@ harfbuzz.types.Bool fontGetHExtents(harfbuzz.font.Font font, out harfbuzz.types.
 harfbuzz.types.Bool fontGetNominalGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, out harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_nominal_glyph(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, unicode, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_nominal_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -2827,8 +2827,8 @@ harfbuzz.types.Bool fontGetNominalGlyph(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.font.Font fontGetParent(harfbuzz.font.Font font)
 {
   hb_font_t* _cretval;
-  _cretval = hb_font_get_parent(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, No.take) : null;
+  _cretval = hb_font_get_parent(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -2841,7 +2841,7 @@ harfbuzz.font.Font fontGetParent(harfbuzz.font.Font font)
 */
 void fontGetPpem(harfbuzz.font.Font font, out uint xPpem, out uint yPpem)
 {
-  hb_font_get_ppem(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, cast(uint*)&xPpem, cast(uint*)&yPpem);
+  hb_font_get_ppem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(uint*)&xPpem, cast(uint*)&yPpem);
 }
 
 /**
@@ -2854,7 +2854,7 @@ void fontGetPpem(harfbuzz.font.Font font, out uint xPpem, out uint yPpem)
 float fontGetPtem(harfbuzz.font.Font font)
 {
   float _retval;
-  _retval = hb_font_get_ptem(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_font_get_ptem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2867,7 +2867,7 @@ float fontGetPtem(harfbuzz.font.Font font)
 */
 void fontGetScale(harfbuzz.font.Font font, out int xScale, out int yScale)
 {
-  hb_font_get_scale(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, cast(int*)&xScale, cast(int*)&yScale);
+  hb_font_get_scale(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(int*)&xScale, cast(int*)&yScale);
 }
 
 /**
@@ -2881,7 +2881,7 @@ void fontGetScale(harfbuzz.font.Font font, out int xScale, out int yScale)
 uint fontGetSerial(harfbuzz.font.Font font)
 {
   uint _retval;
-  _retval = hb_font_get_serial(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_font_get_serial(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2895,7 +2895,7 @@ uint fontGetSerial(harfbuzz.font.Font font)
 */
 void fontGetSyntheticBold(harfbuzz.font.Font font, out float xEmbolden, out float yEmbolden, out harfbuzz.types.Bool inPlace)
 {
-  hb_font_get_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, cast(float*)&xEmbolden, cast(float*)&yEmbolden, cast(hb_bool_t*)&inPlace);
+  hb_font_get_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, cast(float*)&xEmbolden, cast(float*)&yEmbolden, cast(hb_bool_t*)&inPlace);
 }
 
 /**
@@ -2907,7 +2907,7 @@ void fontGetSyntheticBold(harfbuzz.font.Font font, out float xEmbolden, out floa
 float fontGetSyntheticSlant(harfbuzz.font.Font font)
 {
   float _retval;
-  _retval = hb_font_get_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_font_get_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2922,7 +2922,7 @@ float fontGetSyntheticSlant(harfbuzz.font.Font font)
 harfbuzz.types.Bool fontGetVExtents(harfbuzz.font.Font font, out harfbuzz.types.FontExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, &extents);
+  _retval = hb_font_get_v_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &extents);
   return _retval;
 }
 
@@ -2944,7 +2944,7 @@ float[] fontGetVarCoordsDesign(harfbuzz.font.Font font)
 {
   const(float)* _cretval;
   uint _cretlength;
-  _cretval = hb_font_get_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_font_get_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &_cretlength);
   float[] _retval;
 
   if (_cretval)
@@ -2971,7 +2971,7 @@ int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
 {
   const(int)* _cretval;
   uint _cretlength;
-  _cretval = hb_font_get_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, &_cretlength);
+  _cretval = hb_font_get_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, &_cretlength);
   int[] _retval;
 
   if (_cretval)
@@ -2990,7 +2990,7 @@ int[] fontGetVarCoordsNormalized(harfbuzz.font.Font font)
 uint fontGetVarNamedInstance(harfbuzz.font.Font font)
 {
   uint _retval;
-  _retval = hb_font_get_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_font_get_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3008,7 +3008,7 @@ uint fontGetVarNamedInstance(harfbuzz.font.Font font)
 harfbuzz.types.Bool fontGetVariationGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_get_variation_glyph(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_get_variation_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, unicode, variationSelector, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -3031,7 +3031,7 @@ harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out 
     _len = cast(int)s.length;
 
   auto _s = cast(const(ubyte)*)s.ptr;
-  _retval = hb_font_glyph_from_string(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, _s, _len, cast(hb_codepoint_t*)&glyph);
+  _retval = hb_font_glyph_from_string(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _s, _len, cast(hb_codepoint_t*)&glyph);
   return _retval;
 }
 
@@ -3044,7 +3044,7 @@ harfbuzz.types.Bool fontGlyphFromString(harfbuzz.font.Font font, ubyte[] s, out 
 harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_font_is_immutable(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_font_is_immutable(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3055,7 +3055,7 @@ harfbuzz.types.Bool fontIsImmutable(harfbuzz.font.Font font)
 */
 void fontMakeImmutable(harfbuzz.font.Font font)
 {
-  hb_font_make_immutable(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_font_make_immutable(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3078,7 +3078,7 @@ void fontMakeImmutable(harfbuzz.font.Font font)
 */
 void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs pfuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground)
 {
-  hb_font_paint_glyph(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs.cPtr(No.dup) : null, paintData, paletteIndex, foreground);
+  hb_font_paint_glyph(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, pfuncs ? cast(hb_paint_funcs_t*)pfuncs.cPtr(No.Dup) : null, paintData, paletteIndex, foreground);
 }
 
 /**
@@ -3089,7 +3089,7 @@ void fontPaintGlyph(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, har
 */
 void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face)
 {
-  hb_font_set_face(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  hb_font_set_face(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3100,7 +3100,7 @@ void fontSetFace(harfbuzz.font.Font font, harfbuzz.face.Face face)
 */
 void fontSetParent(harfbuzz.font.Font font, harfbuzz.font.Font parent)
 {
-  hb_font_set_parent(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, parent ? cast(hb_font_t*)parent.cPtr(No.dup) : null);
+  hb_font_set_parent(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, parent ? cast(hb_font_t*)parent.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3116,7 +3116,7 @@ void fontSetParent(harfbuzz.font.Font font, harfbuzz.font.Font parent)
 */
 void fontSetPpem(harfbuzz.font.Font font, uint xPpem, uint yPpem)
 {
-  hb_font_set_ppem(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, xPpem, yPpem);
+  hb_font_set_ppem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xPpem, yPpem);
 }
 
 /**
@@ -3130,7 +3130,7 @@ void fontSetPpem(harfbuzz.font.Font font, uint xPpem, uint yPpem)
 */
 void fontSetPtem(harfbuzz.font.Font font, float ptem)
 {
-  hb_font_set_ptem(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, ptem);
+  hb_font_set_ptem(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, ptem);
 }
 
 /**
@@ -3167,7 +3167,7 @@ void fontSetPtem(harfbuzz.font.Font font, float ptem)
 */
 void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale)
 {
-  hb_font_set_scale(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, xScale, yScale);
+  hb_font_set_scale(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xScale, yScale);
 }
 
 /**
@@ -3194,7 +3194,7 @@ void fontSetScale(harfbuzz.font.Font font, int xScale, int yScale)
 */
 void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbolden, harfbuzz.types.Bool inPlace)
 {
-  hb_font_set_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, xEmbolden, yEmbolden, inPlace);
+  hb_font_set_synthetic_bold(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, xEmbolden, yEmbolden, inPlace);
 }
 
 /**
@@ -3216,7 +3216,7 @@ void fontSetSyntheticBold(harfbuzz.font.Font font, float xEmbolden, float yEmbol
 */
 void fontSetSyntheticSlant(harfbuzz.font.Font font, float slant)
 {
-  hb_font_set_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, slant);
+  hb_font_set_synthetic_slant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, slant);
 }
 
 /**
@@ -3237,7 +3237,7 @@ void fontSetVarCoordsDesign(harfbuzz.font.Font font, float[] coords)
     _coordsLength = cast(uint)coords.length;
 
   auto _coords = cast(const(float)*)coords.ptr;
-  hb_font_set_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, _coords, _coordsLength);
+  hb_font_set_var_coords_design(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _coords, _coordsLength);
 }
 
 /**
@@ -3260,7 +3260,7 @@ void fontSetVarCoordsNormalized(harfbuzz.font.Font font, int[] coords)
     _coordsLength = cast(uint)coords.length;
 
   auto _coords = cast(const(int)*)coords.ptr;
-  hb_font_set_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, _coords, _coordsLength);
+  hb_font_set_var_coords_normalized(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, _coords, _coordsLength);
 }
 
 /**
@@ -3271,7 +3271,7 @@ void fontSetVarCoordsNormalized(harfbuzz.font.Font font, int[] coords)
 */
 void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex)
 {
-  hb_font_set_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, instanceIndex);
+  hb_font_set_var_named_instance(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, instanceIndex);
 }
 
 /**
@@ -3287,7 +3287,7 @@ void fontSetVarNamedInstance(harfbuzz.font.Font font, uint instanceIndex)
 */
 void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float value)
 {
-  hb_font_set_variation(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, tag, value);
+  hb_font_set_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, tag, value);
 }
 
 /**
@@ -3307,7 +3307,7 @@ void fontSetVariation(harfbuzz.font.Font font, harfbuzz.types.Tag tag, float val
 */
 void fontSubtractGlyphOriginForDirection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.Direction direction, ref harfbuzz.types.Position x, ref harfbuzz.types.Position y)
 {
-  hb_font_subtract_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
+  hb_font_subtract_glyph_origin_for_direction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, cast(hb_position_t*)&x, cast(hb_position_t*)&y);
 }
 
 /**
@@ -3333,7 +3333,7 @@ harfbuzz.face.Face ftFaceCreateCached(freetype2.types.Face ftFace)
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_cached(ftFace);
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3359,7 +3359,7 @@ harfbuzz.face.Face ftFaceCreateReferenced(freetype2.types.Face ftFace)
 {
   hb_face_t* _cretval;
   _cretval = hb_ft_face_create_referenced(ftFace);
-  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.face.Face(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3372,7 +3372,7 @@ harfbuzz.face.Face ftFaceCreateReferenced(freetype2.types.Face ftFace)
 */
 void ftFontChanged(harfbuzz.font.Font font)
 {
-  hb_ft_font_changed(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_ft_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3396,7 +3396,7 @@ harfbuzz.font.Font ftFontCreateReferenced(freetype2.types.Face ftFace)
 {
   hb_font_t* _cretval;
   _cretval = hb_ft_font_create_referenced(ftFace);
-  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.font.Font(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3415,7 +3415,7 @@ harfbuzz.font.Font ftFontCreateReferenced(freetype2.types.Face ftFace)
 int ftFontGetLoadFlags(harfbuzz.font.Font font)
 {
   int _retval;
-  _retval = hb_ft_font_get_load_flags(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_ft_font_get_load_flags(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3444,7 +3444,7 @@ int ftFontGetLoadFlags(harfbuzz.font.Font font)
 */
 void ftFontSetFuncs(harfbuzz.font.Font font)
 {
-  hb_ft_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_ft_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3461,7 +3461,7 @@ void ftFontSetFuncs(harfbuzz.font.Font font)
 */
 void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags)
 {
-  hb_ft_font_set_load_flags(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, loadFlags);
+  hb_ft_font_set_load_flags(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, loadFlags);
 }
 
 /**
@@ -3477,7 +3477,7 @@ void ftFontSetLoadFlags(harfbuzz.font.Font font, int loadFlags)
 harfbuzz.types.Bool ftHbFontChanged(harfbuzz.font.Font font)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_ft_hb_font_changed(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3491,8 +3491,8 @@ harfbuzz.types.Bool ftHbFontChanged(harfbuzz.font.Font font)
 harfbuzz.blob.Blob glibBlobCreate(glib.bytes.Bytes gbytes)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_glib_blob_create(gbytes ? cast(GBytes*)gbytes.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_glib_blob_create(gbytes ? cast(GBytes*)gbytes.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3505,7 +3505,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs glibGetUnicodeFuncs()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_glib_get_unicode_funcs();
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -3548,7 +3548,7 @@ harfbuzz.types.Script glibScriptToScript(glib.types.UnicodeScript script)
 harfbuzz.types.GlyphFlags glyphInfoGetGlyphFlags(harfbuzz.glyph_info.GlyphInfo info)
 {
   hb_glyph_flags_t _cretval;
-  _cretval = hb_glyph_info_get_glyph_flags(info ? cast(const(hb_glyph_info_t)*)info.cPtr(No.dup) : null);
+  _cretval = hb_glyph_info_get_glyph_flags(info ? cast(const(hb_glyph_info_t)*)info.cPtr(No.Dup) : null);
   harfbuzz.types.GlyphFlags _retval = cast(harfbuzz.types.GlyphFlags)_cretval;
   return _retval;
 }
@@ -3617,7 +3617,7 @@ string languageToString(harfbuzz.types.Language language)
 {
   const(char)* _cretval;
   _cretval = hb_language_to_string(language);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -3630,7 +3630,7 @@ string languageToString(harfbuzz.types.Language language)
 harfbuzz.types.Bool mapAllocationSuccessful(harfbuzz.map.Map map)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_map_allocation_successful(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null);
+  _retval = hb_map_allocation_successful(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3641,7 +3641,7 @@ harfbuzz.types.Bool mapAllocationSuccessful(harfbuzz.map.Map map)
 */
 void mapClear(harfbuzz.map.Map map)
 {
-  hb_map_clear(map ? cast(hb_map_t*)map.cPtr(No.dup) : null);
+  hb_map_clear(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3653,8 +3653,8 @@ void mapClear(harfbuzz.map.Map map)
 harfbuzz.map.Map mapCopy(harfbuzz.map.Map map)
 {
   hb_map_t* _cretval;
-  _cretval = hb_map_copy(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_map_copy(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3666,7 +3666,7 @@ harfbuzz.map.Map mapCreate()
 {
   hb_map_t* _cretval;
   _cretval = hb_map_create();
-  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3678,7 +3678,7 @@ harfbuzz.map.Map mapCreate()
 */
 void mapDel(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
 {
-  hb_map_del(map ? cast(hb_map_t*)map.cPtr(No.dup) : null, key);
+  hb_map_del(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key);
 }
 
 /**
@@ -3691,7 +3691,7 @@ void mapDel(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
 harfbuzz.types.Codepoint mapGet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_map_get(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, key);
+  _retval = hb_map_get(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, key);
   return _retval;
 }
 
@@ -3703,7 +3703,7 @@ harfbuzz.map.Map mapGetEmpty()
 {
   hb_map_t* _cretval;
   _cretval = hb_map_get_empty();
-  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.map.Map(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3716,7 +3716,7 @@ harfbuzz.map.Map mapGetEmpty()
 uint mapGetPopulation(harfbuzz.map.Map map)
 {
   uint _retval;
-  _retval = hb_map_get_population(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null);
+  _retval = hb_map_get_population(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3730,7 +3730,7 @@ uint mapGetPopulation(harfbuzz.map.Map map)
 harfbuzz.types.Bool mapHas(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_map_has(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, key);
+  _retval = hb_map_has(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, key);
   return _retval;
 }
 
@@ -3743,7 +3743,7 @@ harfbuzz.types.Bool mapHas(harfbuzz.map.Map map, harfbuzz.types.Codepoint key)
 uint mapHash(harfbuzz.map.Map map)
 {
   uint _retval;
-  _retval = hb_map_hash(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null);
+  _retval = hb_map_hash(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3756,7 +3756,7 @@ uint mapHash(harfbuzz.map.Map map)
 harfbuzz.types.Bool mapIsEmpty(harfbuzz.map.Map map)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_map_is_empty(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null);
+  _retval = hb_map_is_empty(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3771,7 +3771,7 @@ harfbuzz.types.Bool mapIsEmpty(harfbuzz.map.Map map)
 harfbuzz.types.Bool mapIsEqual(harfbuzz.map.Map map, harfbuzz.map.Map other)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_map_is_equal(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, other ? cast(const(hb_map_t)*)other.cPtr(No.dup) : null);
+  _retval = hb_map_is_equal(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, other ? cast(const(hb_map_t)*)other.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3783,7 +3783,7 @@ harfbuzz.types.Bool mapIsEqual(harfbuzz.map.Map map, harfbuzz.map.Map other)
 */
 void mapKeys(harfbuzz.map.Map map, harfbuzz.set.Set keys)
 {
-  hb_map_keys(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, keys ? cast(hb_set_t*)keys.cPtr(No.dup) : null);
+  hb_map_keys(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, keys ? cast(hb_set_t*)keys.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3804,7 +3804,7 @@ void mapKeys(harfbuzz.map.Map map, harfbuzz.set.Set keys)
 harfbuzz.types.Bool mapNext(harfbuzz.map.Map map, ref int idx, out harfbuzz.types.Codepoint key, out harfbuzz.types.Codepoint value)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_map_next(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, cast(int*)&idx, cast(hb_codepoint_t*)&key, cast(hb_codepoint_t*)&value);
+  _retval = hb_map_next(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, cast(int*)&idx, cast(hb_codepoint_t*)&key, cast(hb_codepoint_t*)&value);
   return _retval;
 }
 
@@ -3817,7 +3817,7 @@ harfbuzz.types.Bool mapNext(harfbuzz.map.Map map, ref int idx, out harfbuzz.type
 */
 void mapSet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key, harfbuzz.types.Codepoint value)
 {
-  hb_map_set(map ? cast(hb_map_t*)map.cPtr(No.dup) : null, key, value);
+  hb_map_set(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, key, value);
 }
 
 /**
@@ -3828,7 +3828,7 @@ void mapSet(harfbuzz.map.Map map, harfbuzz.types.Codepoint key, harfbuzz.types.C
 */
 void mapUpdate(harfbuzz.map.Map map, harfbuzz.map.Map other)
 {
-  hb_map_update(map ? cast(hb_map_t*)map.cPtr(No.dup) : null, other ? cast(const(hb_map_t)*)other.cPtr(No.dup) : null);
+  hb_map_update(map ? cast(hb_map_t*)map.cPtr(No.Dup) : null, other ? cast(const(hb_map_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3839,7 +3839,7 @@ void mapUpdate(harfbuzz.map.Map map, harfbuzz.map.Map other)
 */
 void mapValues(harfbuzz.map.Map map, harfbuzz.set.Set values)
 {
-  hb_map_values(map ? cast(const(hb_map_t)*)map.cPtr(No.dup) : null, values ? cast(hb_set_t*)values.cPtr(No.dup) : null);
+  hb_map_values(map ? cast(const(hb_map_t)*)map.cPtr(No.Dup) : null, values ? cast(hb_set_t*)values.cPtr(No.Dup) : null);
 }
 
 /**
@@ -3856,7 +3856,7 @@ uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint gly
 {
   uint _retval;
   uint _layerCount;
-  _retval = hb_ot_color_glyph_get_layers(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph, startOffset, &_layerCount, layers.ptr);
+  _retval = hb_ot_color_glyph_get_layers(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph, startOffset, &_layerCount, layers.ptr);
   return _retval;
 }
 
@@ -3871,7 +3871,7 @@ uint otColorGlyphGetLayers(harfbuzz.face.Face face, harfbuzz.types.Codepoint gly
 harfbuzz.types.Bool otColorGlyphHasPaint(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_glyph_has_paint(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph);
+  _retval = hb_ot_color_glyph_has_paint(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -3889,8 +3889,8 @@ harfbuzz.types.Bool otColorGlyphHasPaint(harfbuzz.face.Face face, harfbuzz.types
 harfbuzz.blob.Blob otColorGlyphReferencePng(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_color_glyph_reference_png(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_ot_color_glyph_reference_png(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3906,8 +3906,8 @@ harfbuzz.blob.Blob otColorGlyphReferencePng(harfbuzz.font.Font font, harfbuzz.ty
 harfbuzz.blob.Blob otColorGlyphReferenceSvg(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_color_glyph_reference_svg(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_ot_color_glyph_reference_svg(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -3921,7 +3921,7 @@ harfbuzz.blob.Blob otColorGlyphReferenceSvg(harfbuzz.face.Face face, harfbuzz.ty
 harfbuzz.types.Bool otColorHasLayers(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_has_layers(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_has_layers(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3935,7 +3935,7 @@ harfbuzz.types.Bool otColorHasLayers(harfbuzz.face.Face face)
 harfbuzz.types.Bool otColorHasPaint(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_has_paint(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_has_paint(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3948,7 +3948,7 @@ harfbuzz.types.Bool otColorHasPaint(harfbuzz.face.Face face)
 harfbuzz.types.Bool otColorHasPalettes(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_has_palettes(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_has_palettes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3961,7 +3961,7 @@ harfbuzz.types.Bool otColorHasPalettes(harfbuzz.face.Face face)
 harfbuzz.types.Bool otColorHasPng(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_has_png(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_has_png(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3974,7 +3974,7 @@ harfbuzz.types.Bool otColorHasPng(harfbuzz.face.Face face)
 harfbuzz.types.Bool otColorHasSvg(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_color_has_svg(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_has_svg(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -3992,7 +3992,7 @@ harfbuzz.types.Bool otColorHasSvg(harfbuzz.face.Face face)
 harfbuzz.types.OtNameId otColorPaletteColorGetNameId(harfbuzz.face.Face face, uint colorIndex)
 {
   harfbuzz.types.OtNameId _retval;
-  _retval = hb_ot_color_palette_color_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, colorIndex);
+  _retval = hb_ot_color_palette_color_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, colorIndex);
   return _retval;
 }
 
@@ -4019,7 +4019,7 @@ uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint st
 {
   uint _retval;
   uint _colorCount;
-  _retval = hb_ot_color_palette_get_colors(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, paletteIndex, startOffset, &_colorCount, colors.ptr);
+  _retval = hb_ot_color_palette_get_colors(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex, startOffset, &_colorCount, colors.ptr);
   return _retval;
 }
 
@@ -4032,7 +4032,7 @@ uint otColorPaletteGetColors(harfbuzz.face.Face face, uint paletteIndex, uint st
 uint otColorPaletteGetCount(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_ot_color_palette_get_count(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_color_palette_get_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4046,7 +4046,7 @@ uint otColorPaletteGetCount(harfbuzz.face.Face face)
 harfbuzz.types.OtColorPaletteFlags otColorPaletteGetFlags(harfbuzz.face.Face face, uint paletteIndex)
 {
   hb_ot_color_palette_flags_t _cretval;
-  _cretval = hb_ot_color_palette_get_flags(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, paletteIndex);
+  _cretval = hb_ot_color_palette_get_flags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex);
   harfbuzz.types.OtColorPaletteFlags _retval = cast(harfbuzz.types.OtColorPaletteFlags)_cretval;
   return _retval;
 }
@@ -4066,7 +4066,7 @@ harfbuzz.types.OtColorPaletteFlags otColorPaletteGetFlags(harfbuzz.face.Face fac
 harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint paletteIndex)
 {
   harfbuzz.types.OtNameId _retval;
-  _retval = hb_ot_color_palette_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, paletteIndex);
+  _retval = hb_ot_color_palette_get_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, paletteIndex);
   return _retval;
 }
 
@@ -4077,7 +4077,7 @@ harfbuzz.types.OtNameId otColorPaletteGetNameId(harfbuzz.face.Face face, uint pa
 */
 void otFontSetFuncs(harfbuzz.font.Font font)
 {
-  hb_ot_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_ot_font_set_funcs(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -4097,7 +4097,7 @@ uint otLayoutFeatureGetCharacters(harfbuzz.face.Face face, harfbuzz.types.Tag ta
 {
   uint _retval;
   uint _charCount;
-  _retval = hb_ot_layout_feature_get_characters(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, featureIndex, startOffset, &_charCount, characters.ptr);
+  _retval = hb_ot_layout_feature_get_characters(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_charCount, characters.ptr);
   return _retval;
 }
 
@@ -4117,7 +4117,7 @@ uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag table
 {
   uint _retval;
   uint _lookupCount;
-  _retval = hb_ot_layout_feature_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, featureIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
+  _retval = hb_ot_layout_feature_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
 
@@ -4144,7 +4144,7 @@ uint otLayoutFeatureGetLookups(harfbuzz.face.Face face, harfbuzz.types.Tag table
 harfbuzz.types.Bool otLayoutFeatureGetNameIds(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint featureIndex, out harfbuzz.types.OtNameId labelId, out harfbuzz.types.OtNameId tooltipId, out harfbuzz.types.OtNameId sampleId, out uint numNamedParameters, out harfbuzz.types.OtNameId firstParamId)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_feature_get_name_ids(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, featureIndex, cast(hb_ot_name_id_t*)&labelId, cast(hb_ot_name_id_t*)&tooltipId, cast(hb_ot_name_id_t*)&sampleId, cast(uint*)&numNamedParameters, cast(hb_ot_name_id_t*)&firstParamId);
+  _retval = hb_ot_layout_feature_get_name_ids(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, cast(hb_ot_name_id_t*)&labelId, cast(hb_ot_name_id_t*)&tooltipId, cast(hb_ot_name_id_t*)&sampleId, cast(uint*)&numNamedParameters, cast(hb_ot_name_id_t*)&firstParamId);
   return _retval;
 }
 
@@ -4165,7 +4165,7 @@ uint otLayoutFeatureWithVariationsGetLookups(harfbuzz.face.Face face, harfbuzz.t
 {
   uint _retval;
   uint _lookupCount;
-  _retval = hb_ot_layout_feature_with_variations_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, featureIndex, variationsIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
+  _retval = hb_ot_layout_feature_with_variations_get_lookups(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, featureIndex, variationsIndex, startOffset, &_lookupCount, lookupIndexes.ptr);
   return _retval;
 }
 
@@ -4185,7 +4185,7 @@ uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint g
 {
   uint _retval;
   uint _pointCount;
-  _retval = hb_ot_layout_get_attach_points(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph, startOffset, &_pointCount, pointArray.ptr);
+  _retval = hb_ot_layout_get_attach_points(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph, startOffset, &_pointCount, pointArray.ptr);
   return _retval;
 }
 
@@ -4203,7 +4203,7 @@ uint otLayoutGetAttachPoints(harfbuzz.face.Face face, harfbuzz.types.Codepoint g
 harfbuzz.types.Bool otLayoutGetBaseline(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_baseline(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
+  _retval = hb_ot_layout_get_baseline(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
   return _retval;
 }
 
@@ -4224,7 +4224,7 @@ harfbuzz.types.Bool otLayoutGetBaseline(harfbuzz.font.Font font, harfbuzz.types.
 harfbuzz.types.Bool otLayoutGetBaseline2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
+  _retval = hb_ot_layout_get_baseline2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
   return _retval;
 }
 
@@ -4241,7 +4241,7 @@ harfbuzz.types.Bool otLayoutGetBaseline2(harfbuzz.font.Font font, harfbuzz.types
 */
 void otLayoutGetBaselineWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.Position coord)
 {
-  hb_ot_layout_get_baseline_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
+  hb_ot_layout_get_baseline_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, scriptTag, languageTag, cast(hb_position_t*)&coord);
 }
 
 /**
@@ -4260,7 +4260,7 @@ void otLayoutGetBaselineWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtL
 */
 void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.OtLayoutBaselineTag baselineTag, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.Position coord)
 {
-  hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
+  hb_ot_layout_get_baseline_with_fallback2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, baselineTag, direction, script, language, cast(hb_position_t*)&coord);
 }
 
 /**
@@ -4283,7 +4283,7 @@ void otLayoutGetBaselineWithFallback2(harfbuzz.font.Font font, harfbuzz.types.Ot
 harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Tag scriptTag, harfbuzz.types.Tag languageTag, out harfbuzz.types.FontExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, direction, scriptTag, languageTag, &extents);
+  _retval = hb_ot_layout_get_font_extents(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, scriptTag, languageTag, &extents);
   return _retval;
 }
 
@@ -4310,7 +4310,7 @@ harfbuzz.types.Bool otLayoutGetFontExtents(harfbuzz.font.Font font, harfbuzz.typ
 harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.types.Direction direction, harfbuzz.types.Script script, harfbuzz.types.Language language, out harfbuzz.types.FontExtents extents)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, direction, script, language, &extents);
+  _retval = hb_ot_layout_get_font_extents2(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, script, language, &extents);
   return _retval;
 }
 
@@ -4325,7 +4325,7 @@ harfbuzz.types.Bool otLayoutGetFontExtents2(harfbuzz.font.Font font, harfbuzz.ty
 harfbuzz.types.OtLayoutGlyphClass otLayoutGetGlyphClass(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
 {
   hb_ot_layout_glyph_class_t _cretval;
-  _cretval = hb_ot_layout_get_glyph_class(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph);
+  _cretval = hb_ot_layout_get_glyph_class(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   harfbuzz.types.OtLayoutGlyphClass _retval = cast(harfbuzz.types.OtLayoutGlyphClass)_cretval;
   return _retval;
 }
@@ -4366,7 +4366,7 @@ uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction
 {
   uint _retval;
   uint _caretCount;
-  _retval = hb_ot_layout_get_ligature_carets(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, direction, glyph, startOffset, &_caretCount, caretArray.ptr);
+  _retval = hb_ot_layout_get_ligature_carets(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction, glyph, startOffset, &_caretCount, caretArray.ptr);
   return _retval;
 }
 
@@ -4391,7 +4391,7 @@ uint otLayoutGetLigatureCarets(harfbuzz.font.Font font, harfbuzz.types.Direction
 harfbuzz.types.Bool otLayoutGetSizeParams(harfbuzz.face.Face face, out uint designSize, out uint subfamilyId, out harfbuzz.types.OtNameId subfamilyNameId, out uint rangeStart, out uint rangeEnd)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_get_size_params(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, cast(uint*)&designSize, cast(uint*)&subfamilyId, cast(hb_ot_name_id_t*)&subfamilyNameId, cast(uint*)&rangeStart, cast(uint*)&rangeEnd);
+  _retval = hb_ot_layout_get_size_params(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, cast(uint*)&designSize, cast(uint*)&subfamilyId, cast(hb_ot_name_id_t*)&subfamilyNameId, cast(uint*)&rangeStart, cast(uint*)&rangeEnd);
   return _retval;
 }
 
@@ -4404,7 +4404,7 @@ harfbuzz.types.Bool otLayoutGetSizeParams(harfbuzz.face.Face face, out uint desi
 harfbuzz.types.Bool otLayoutHasGlyphClasses(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_has_glyph_classes(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_layout_has_glyph_classes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4417,7 +4417,7 @@ harfbuzz.types.Bool otLayoutHasGlyphClasses(harfbuzz.face.Face face)
 harfbuzz.types.Bool otLayoutHasPositioning(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_layout_has_positioning(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4430,7 +4430,7 @@ harfbuzz.types.Bool otLayoutHasPositioning(harfbuzz.face.Face face)
 harfbuzz.types.Bool otLayoutHasSubstitution(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_layout_has_substitution(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -4449,7 +4449,7 @@ harfbuzz.types.Bool otLayoutHasSubstitution(harfbuzz.face.Face face)
 harfbuzz.types.Bool otLayoutLanguageFindFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, harfbuzz.types.Tag featureTag, out uint featureIndex)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_language_find_feature(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageIndex, featureTag, cast(uint*)&featureIndex);
+  _retval = hb_ot_layout_language_find_feature(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, featureTag, cast(uint*)&featureIndex);
   return _retval;
 }
 
@@ -4470,7 +4470,7 @@ uint otLayoutLanguageGetFeatureIndexes(harfbuzz.face.Face face, harfbuzz.types.T
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_language_get_feature_indexes(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureIndexes.ptr);
+  _retval = hb_ot_layout_language_get_feature_indexes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureIndexes.ptr);
   return _retval;
 }
 
@@ -4491,7 +4491,7 @@ uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag 
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_language_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureTags.ptr);
+  _retval = hb_ot_layout_language_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
 
@@ -4510,7 +4510,7 @@ uint otLayoutLanguageGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag 
 harfbuzz.types.Bool otLayoutLanguageGetRequiredFeature(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex, out harfbuzz.types.Tag featureTag)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_language_get_required_feature(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex, cast(hb_tag_t*)&featureTag);
+  _retval = hb_ot_layout_language_get_required_feature(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex, cast(hb_tag_t*)&featureTag);
   return _retval;
 }
 
@@ -4528,7 +4528,7 @@ harfbuzz.types.Bool otLayoutLanguageGetRequiredFeature(harfbuzz.face.Face face, 
 harfbuzz.types.Bool otLayoutLanguageGetRequiredFeatureIndex(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, uint languageIndex, out uint featureIndex)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_language_get_required_feature_index(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex);
+  _retval = hb_ot_layout_language_get_required_feature_index(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageIndex, cast(uint*)&featureIndex);
   return _retval;
 }
 
@@ -4547,7 +4547,7 @@ uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex,
 {
   uint _retval;
   uint _alternateCount;
-  _retval = hb_ot_layout_lookup_get_glyph_alternates(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, lookupIndex, glyph, startOffset, &_alternateCount, alternateGlyphs.ptr);
+  _retval = hb_ot_layout_lookup_get_glyph_alternates(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, lookupIndex, glyph, startOffset, &_alternateCount, alternateGlyphs.ptr);
   return _retval;
 }
 
@@ -4564,7 +4564,7 @@ uint otLayoutLookupGetGlyphAlternates(harfbuzz.face.Face face, uint lookupIndex,
 harfbuzz.types.Position otLayoutLookupGetOpticalBound(harfbuzz.font.Font font, uint lookupIndex, harfbuzz.types.Direction direction, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_layout_lookup_get_optical_bound(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, lookupIndex, direction, glyph);
+  _retval = hb_ot_layout_lookup_get_optical_bound(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, lookupIndex, direction, glyph);
   return _retval;
 }
 
@@ -4587,7 +4587,7 @@ harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint 
     _glyphsLength = cast(uint)glyphs.length;
 
   auto _glyphs = cast(const(hb_codepoint_t)*)glyphs.ptr;
-  _retval = hb_ot_layout_lookup_would_substitute(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, lookupIndex, _glyphs, _glyphsLength, zeroContext);
+  _retval = hb_ot_layout_lookup_would_substitute(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, lookupIndex, _glyphs, _glyphsLength, zeroContext);
   return _retval;
 }
 
@@ -4605,7 +4605,7 @@ harfbuzz.types.Bool otLayoutLookupWouldSubstitute(harfbuzz.face.Face face, uint 
 harfbuzz.types.Bool otLayoutScriptFindLanguage(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, uint scriptIndex, harfbuzz.types.Tag languageTag, out uint languageIndex)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_script_find_language(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, languageTag, cast(uint*)&languageIndex);
+  _retval = hb_ot_layout_script_find_language(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, languageTag, cast(uint*)&languageIndex);
   return _retval;
 }
 
@@ -4624,7 +4624,7 @@ uint otLayoutScriptGetLanguageTags(harfbuzz.face.Face face, harfbuzz.types.Tag t
 {
   uint _retval;
   uint _languageCount;
-  _retval = hb_ot_layout_script_get_language_tags(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, startOffset, &_languageCount, languageTags.ptr);
+  _retval = hb_ot_layout_script_get_language_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, startOffset, &_languageCount, languageTags.ptr);
   return _retval;
 }
 
@@ -4651,7 +4651,7 @@ harfbuzz.types.Bool otLayoutScriptSelectLanguage(harfbuzz.face.Face face, harfbu
     _languageCount = cast(uint)languageTags.length;
 
   auto _languageTags = cast(const(hb_tag_t)*)languageTags.ptr;
-  _retval = hb_ot_layout_script_select_language(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex);
+  _retval = hb_ot_layout_script_select_language(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex);
   return _retval;
 }
 
@@ -4680,7 +4680,7 @@ harfbuzz.types.Bool otLayoutScriptSelectLanguage2(harfbuzz.face.Face face, harfb
     _languageCount = cast(uint)languageTags.length;
 
   auto _languageTags = cast(const(hb_tag_t)*)languageTags.ptr;
-  _retval = hb_ot_layout_script_select_language2(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex, cast(hb_tag_t*)&chosenLanguage);
+  _retval = hb_ot_layout_script_select_language2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptIndex, _languageCount, _languageTags, cast(uint*)&languageIndex, cast(hb_tag_t*)&chosenLanguage);
   return _retval;
 }
 
@@ -4702,7 +4702,7 @@ harfbuzz.types.Bool otLayoutTableFindFeatureVariations(harfbuzz.face.Face face, 
     _numCoords = cast(uint)coords.length;
 
   auto _coords = cast(const(int)*)coords.ptr;
-  _retval = hb_ot_layout_table_find_feature_variations(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, _coords, _numCoords, cast(uint*)&variationsIndex);
+  _retval = hb_ot_layout_table_find_feature_variations(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, _coords, _numCoords, cast(uint*)&variationsIndex);
   return _retval;
 }
 
@@ -4719,7 +4719,7 @@ harfbuzz.types.Bool otLayoutTableFindFeatureVariations(harfbuzz.face.Face face, 
 harfbuzz.types.Bool otLayoutTableFindScript(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag, harfbuzz.types.Tag scriptTag, out uint scriptIndex)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_layout_table_find_script(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, scriptTag, cast(uint*)&scriptIndex);
+  _retval = hb_ot_layout_table_find_script(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, scriptTag, cast(uint*)&scriptIndex);
   return _retval;
 }
 
@@ -4738,7 +4738,7 @@ uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tab
 {
   uint _retval;
   uint _featureCount;
-  _retval = hb_ot_layout_table_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, startOffset, &_featureCount, featureTags.ptr);
+  _retval = hb_ot_layout_table_get_feature_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, startOffset, &_featureCount, featureTags.ptr);
   return _retval;
 }
 
@@ -4753,7 +4753,7 @@ uint otLayoutTableGetFeatureTags(harfbuzz.face.Face face, harfbuzz.types.Tag tab
 uint otLayoutTableGetLookupCount(harfbuzz.face.Face face, harfbuzz.types.Tag tableTag)
 {
   uint _retval;
-  _retval = hb_ot_layout_table_get_lookup_count(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag);
+  _retval = hb_ot_layout_table_get_lookup_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag);
   return _retval;
 }
 
@@ -4771,7 +4771,7 @@ uint otLayoutTableGetScriptTags(harfbuzz.face.Face face, harfbuzz.types.Tag tabl
 {
   uint _retval;
   uint _scriptCount;
-  _retval = hb_ot_layout_table_get_script_tags(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, startOffset, &_scriptCount, scriptTags.ptr);
+  _retval = hb_ot_layout_table_get_script_tags(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, startOffset, &_scriptCount, scriptTags.ptr);
   return _retval;
 }
 
@@ -4799,7 +4799,7 @@ harfbuzz.types.Bool otLayoutTableSelectScript(harfbuzz.face.Face face, harfbuzz.
     _scriptCount = cast(uint)scriptTags.length;
 
   auto _scriptTags = cast(const(hb_tag_t)*)scriptTags.ptr;
-  _retval = hb_ot_layout_table_select_script(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, tableTag, _scriptCount, _scriptTags, cast(uint*)&scriptIndex, cast(hb_tag_t*)&chosenScript);
+  _retval = hb_ot_layout_table_select_script(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, tableTag, _scriptCount, _scriptTags, cast(uint*)&scriptIndex, cast(hb_tag_t*)&chosenScript);
   return _retval;
 }
 
@@ -4819,7 +4819,7 @@ harfbuzz.types.Bool otLayoutTableSelectScript(harfbuzz.face.Face face, harfbuzz.
 harfbuzz.types.Position otMathGetConstant(harfbuzz.font.Font font, harfbuzz.types.OtMathConstant constant)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_math_get_constant(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, constant);
+  _retval = hb_ot_math_get_constant(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, constant);
   return _retval;
 }
 
@@ -4848,10 +4848,10 @@ uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
   uint _partsCount;
   hb_ot_math_glyph_part_t[] _parts;
   _parts.length = _partsCount;
-  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, startOffset, &_partsCount, _parts.ptr, cast(hb_position_t*)&italicsCorrection);
+  _retval = hb_ot_math_get_glyph_assembly(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, startOffset, &_partsCount, _parts.ptr, cast(hb_position_t*)&italicsCorrection);
   parts.length = _partsCount;
   foreach (i; 0 .. _partsCount)
-    parts[i] = new harfbuzz.ot_math_glyph_part.OtMathGlyphPart(cast(void*)&_parts[i], No.take);
+    parts[i] = new harfbuzz.ot_math_glyph_part.OtMathGlyphPart(cast(void*)&_parts[i], No.Take);
   return _retval;
 }
 
@@ -4866,7 +4866,7 @@ uint otMathGetGlyphAssembly(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
 harfbuzz.types.Position otMathGetGlyphItalicsCorrection(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_math_get_glyph_italics_correction(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph);
+  _retval = hb_ot_math_get_glyph_italics_correction(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -4888,7 +4888,7 @@ harfbuzz.types.Position otMathGetGlyphItalicsCorrection(harfbuzz.font.Font font,
 harfbuzz.types.Position otMathGetGlyphKerning(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph, harfbuzz.types.OtMathKern kern, harfbuzz.types.Position correctionHeight)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_math_get_glyph_kerning(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, kern, correctionHeight);
+  _retval = hb_ot_math_get_glyph_kerning(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, kern, correctionHeight);
   return _retval;
 }
 
@@ -4919,7 +4919,7 @@ uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
 {
   uint _retval;
   uint _entriesCount;
-  _retval = hb_ot_math_get_glyph_kernings(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, kern, startOffset, &_entriesCount, kernEntries.ptr);
+  _retval = hb_ot_math_get_glyph_kernings(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, kern, startOffset, &_entriesCount, kernEntries.ptr);
   return _retval;
 }
 
@@ -4941,7 +4941,7 @@ uint otMathGetGlyphKernings(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
 harfbuzz.types.Position otMathGetGlyphTopAccentAttachment(harfbuzz.font.Font font, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_math_get_glyph_top_accent_attachment(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph);
+  _retval = hb_ot_math_get_glyph_top_accent_attachment(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -4968,10 +4968,10 @@ uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
   uint _variantsCount;
   hb_ot_math_glyph_variant_t[] _variants;
   _variants.length = _variantsCount;
-  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, glyph, direction, startOffset, &_variantsCount, _variants.ptr);
+  _retval = hb_ot_math_get_glyph_variants(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, glyph, direction, startOffset, &_variantsCount, _variants.ptr);
   variants.length = _variantsCount;
   foreach (i; 0 .. _variantsCount)
-    variants[i] = new harfbuzz.ot_math_glyph_variant.OtMathGlyphVariant(cast(void*)&_variants[i], No.take);
+    variants[i] = new harfbuzz.ot_math_glyph_variant.OtMathGlyphVariant(cast(void*)&_variants[i], No.Take);
   return _retval;
 }
 
@@ -4992,7 +4992,7 @@ uint otMathGetGlyphVariants(harfbuzz.font.Font font, harfbuzz.types.Codepoint gl
 harfbuzz.types.Position otMathGetMinConnectorOverlap(harfbuzz.font.Font font, harfbuzz.types.Direction direction)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_math_get_min_connector_overlap(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, direction);
+  _retval = hb_ot_math_get_min_connector_overlap(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, direction);
   return _retval;
 }
 
@@ -5005,7 +5005,7 @@ harfbuzz.types.Position otMathGetMinConnectorOverlap(harfbuzz.font.Font font, ha
 harfbuzz.types.Bool otMathHasData(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_math_has_data(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_math_has_data(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5019,7 +5019,7 @@ harfbuzz.types.Bool otMathHasData(harfbuzz.face.Face face)
 harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz.types.Codepoint glyph)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_math_is_glyph_extended_shape(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, glyph);
+  _retval = hb_ot_math_is_glyph_extended_shape(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, glyph);
   return _retval;
 }
 
@@ -5033,8 +5033,8 @@ harfbuzz.types.Bool otMathIsGlyphExtendedShape(harfbuzz.face.Face face, harfbuzz
 harfbuzz.blob.Blob otMetaReferenceEntry(harfbuzz.face.Face face, harfbuzz.types.OtMetaTag metaTag)
 {
   hb_blob_t* _cretval;
-  _cretval = hb_ot_meta_reference_entry(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, metaTag);
-  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_ot_meta_reference_entry(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, metaTag);
+  auto _retval = _cretval ? new harfbuzz.blob.Blob(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5049,7 +5049,7 @@ harfbuzz.blob.Blob otMetaReferenceEntry(harfbuzz.face.Face face, harfbuzz.types.
 harfbuzz.types.Bool otMetricsGetPosition(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_metrics_get_position(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, metricsTag, cast(hb_position_t*)&position);
+  _retval = hb_ot_metrics_get_position(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
   return _retval;
 }
 
@@ -5063,7 +5063,7 @@ harfbuzz.types.Bool otMetricsGetPosition(harfbuzz.font.Font font, harfbuzz.types
 */
 void otMetricsGetPositionWithFallback(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag, out harfbuzz.types.Position position)
 {
-  hb_ot_metrics_get_position_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, metricsTag, cast(hb_position_t*)&position);
+  hb_ot_metrics_get_position_with_fallback(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag, cast(hb_position_t*)&position);
 }
 
 /**
@@ -5077,7 +5077,7 @@ void otMetricsGetPositionWithFallback(harfbuzz.font.Font font, harfbuzz.types.Ot
 float otMetricsGetVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
 {
   float _retval;
-  _retval = hb_ot_metrics_get_variation(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, metricsTag);
+  _retval = hb_ot_metrics_get_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -5092,7 +5092,7 @@ float otMetricsGetVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag
 harfbuzz.types.Position otMetricsGetXVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_metrics_get_x_variation(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, metricsTag);
+  _retval = hb_ot_metrics_get_x_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -5107,7 +5107,7 @@ harfbuzz.types.Position otMetricsGetXVariation(harfbuzz.font.Font font, harfbuzz
 harfbuzz.types.Position otMetricsGetYVariation(harfbuzz.font.Font font, harfbuzz.types.OtMetricsTag metricsTag)
 {
   harfbuzz.types.Position _retval;
-  _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, metricsTag);
+  _retval = hb_ot_metrics_get_y_variation(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, metricsTag);
   return _retval;
 }
 
@@ -5213,8 +5213,8 @@ harfbuzz.types.Bool otVarFindAxisInfo(harfbuzz.face.Face face, harfbuzz.types.Ta
 {
   harfbuzz.types.Bool _retval;
   hb_ot_var_axis_info_t _axisInfo;
-  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, axisTag, &_axisInfo);
-  axisInfo = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axisInfo, No.take);
+  _retval = hb_ot_var_find_axis_info(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, axisTag, &_axisInfo);
+  axisInfo = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axisInfo, No.Take);
   return _retval;
 }
 
@@ -5233,7 +5233,7 @@ uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.
 {
   uint _retval;
   uint _axesCount;
-  _retval = hb_ot_var_get_axes(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, startOffset, &_axesCount, axesArray.ptr);
+  _retval = hb_ot_var_get_axes(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_axesCount, axesArray.ptr);
   return _retval;
 }
 
@@ -5246,7 +5246,7 @@ uint otVarGetAxes(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.types.
 uint otVarGetAxisCount(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_ot_var_get_axis_count(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_var_get_axis_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5265,10 +5265,10 @@ uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.o
   uint _axesCount;
   hb_ot_var_axis_info_t[] _axesArray;
   _axesArray.length = _axesCount;
-  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, startOffset, &_axesCount, _axesArray.ptr);
+  _retval = hb_ot_var_get_axis_infos(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, startOffset, &_axesCount, _axesArray.ptr);
   axesArray.length = _axesCount;
   foreach (i; 0 .. _axesCount)
-    axesArray[i] = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axesArray[i], No.take);
+    axesArray[i] = new harfbuzz.ot_var_axis_info.OtVarAxisInfo(cast(void*)&_axesArray[i], No.Take);
   return _retval;
 }
 
@@ -5281,7 +5281,7 @@ uint otVarGetAxisInfos(harfbuzz.face.Face face, uint startOffset, ref harfbuzz.o
 uint otVarGetNamedInstanceCount(harfbuzz.face.Face face)
 {
   uint _retval;
-  _retval = hb_ot_var_get_named_instance_count(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_var_get_named_instance_count(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5294,7 +5294,7 @@ uint otVarGetNamedInstanceCount(harfbuzz.face.Face face)
 harfbuzz.types.Bool otVarHasData(harfbuzz.face.Face face)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_ot_var_has_data(face ? cast(hb_face_t*)face.cPtr(No.dup) : null);
+  _retval = hb_ot_var_has_data(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5311,7 +5311,7 @@ uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceInd
 {
   uint _retval;
   uint _coordsLength;
-  _retval = hb_ot_var_named_instance_get_design_coords(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, instanceIndex, &_coordsLength, coords.ptr);
+  _retval = hb_ot_var_named_instance_get_design_coords(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex, &_coordsLength, coords.ptr);
   return _retval;
 }
 
@@ -5326,7 +5326,7 @@ uint otVarNamedInstanceGetDesignCoords(harfbuzz.face.Face face, uint instanceInd
 harfbuzz.types.OtNameId otVarNamedInstanceGetPostscriptNameId(harfbuzz.face.Face face, uint instanceIndex)
 {
   harfbuzz.types.OtNameId _retval;
-  _retval = hb_ot_var_named_instance_get_postscript_name_id(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, instanceIndex);
+  _retval = hb_ot_var_named_instance_get_postscript_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex);
   return _retval;
 }
 
@@ -5341,7 +5341,7 @@ harfbuzz.types.OtNameId otVarNamedInstanceGetPostscriptNameId(harfbuzz.face.Face
 harfbuzz.types.OtNameId otVarNamedInstanceGetSubfamilyNameId(harfbuzz.face.Face face, uint instanceIndex)
 {
   harfbuzz.types.OtNameId _retval;
-  _retval = hb_ot_var_named_instance_get_subfamily_name_id(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, instanceIndex);
+  _retval = hb_ot_var_named_instance_get_subfamily_name_id(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, instanceIndex);
   return _retval;
 }
 
@@ -5367,7 +5367,7 @@ void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int
     _coordsLength = cast(uint)designCoords.length;
 
   auto _designCoords = cast(const(float)*)designCoords.ptr;
-  hb_ot_var_normalize_coords(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, _coordsLength, _designCoords, cast(int*)&normalizedCoords);
+  hb_ot_var_normalize_coords(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, _coordsLength, _designCoords, cast(int*)&normalizedCoords);
 }
 
 /**
@@ -5380,7 +5380,7 @@ void otVarNormalizeCoords(harfbuzz.face.Face face, float[] designCoords, out int
 */
 void paintColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Bool isForeground, harfbuzz.types.Color color)
 {
-  hb_paint_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, isForeground, color);
+  hb_paint_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, isForeground, color);
 }
 
 /**
@@ -5395,7 +5395,7 @@ void paintColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
 harfbuzz.types.Bool paintColorGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_paint_color_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  _retval = hb_paint_color_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5411,7 +5411,7 @@ harfbuzz.types.Bool paintColorGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void*
 harfbuzz.types.Bool paintCustomPaletteColor(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, uint colorIndex, out harfbuzz.types.Color color)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_paint_custom_palette_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, colorIndex, cast(hb_color_t*)&color);
+  _retval = hb_paint_custom_palette_color(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorIndex, cast(hb_color_t*)&color);
   return _retval;
 }
 
@@ -5428,7 +5428,7 @@ harfbuzz.paint_funcs.PaintFuncs paintFuncsCreate()
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_create();
-  auto _retval = _cretval ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5440,7 +5440,7 @@ harfbuzz.paint_funcs.PaintFuncs paintFuncsGetEmpty()
 {
   hb_paint_funcs_t* _cretval;
   _cretval = hb_paint_funcs_get_empty();
-  auto _retval = _cretval ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -5453,7 +5453,7 @@ harfbuzz.paint_funcs.PaintFuncs paintFuncsGetEmpty()
 harfbuzz.types.Bool paintFuncsIsImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_paint_funcs_is_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null);
+  _retval = hb_paint_funcs_is_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -5467,7 +5467,7 @@ harfbuzz.types.Bool paintFuncsIsImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
 */
 void paintFuncsMakeImmutable(harfbuzz.paint_funcs.PaintFuncs funcs)
 {
-  hb_paint_funcs_make_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null);
+  hb_paint_funcs_make_immutable(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5482,13 +5482,13 @@ void paintFuncsSetColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
   {
     auto _dlg = cast(harfbuzz.types.PaintColorFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, isForeground, color);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, isForeground, color);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5503,14 +5503,14 @@ void paintFuncsSetColorGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz
   {
     auto _dlg = cast(harfbuzz.types.PaintColorGlyphFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null);
+    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_color_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5525,14 +5525,14 @@ void paintFuncsSetCustomPaletteColorFunc(harfbuzz.paint_funcs.PaintFuncs funcs, 
   {
     auto _dlg = cast(harfbuzz.types.PaintCustomPaletteColorFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, colorIndex, *color);
+    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorIndex, *color);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_custom_palette_color_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5547,14 +5547,14 @@ void paintFuncsSetImageFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.type
   {
     auto _dlg = cast(harfbuzz.types.PaintImageFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.take) : null, width, height, format, slant, *extents);
+    hb_bool_t _retval = (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, image ? new harfbuzz.blob.Blob(cast(void*)image, No.Take) : null, width, height, format, slant, *extents);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_image_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5569,13 +5569,13 @@ void paintFuncsSetLinearGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintLinearGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.take) : null, x0, y0, x1, y1, x2, y2);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, x1, y1, x2, y2);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_linear_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5590,13 +5590,13 @@ void paintFuncsSetPopClipFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.ty
   {
     auto _dlg = cast(harfbuzz.types.PaintPopClipFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_pop_clip_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5611,13 +5611,13 @@ void paintFuncsSetPopGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.t
   {
     auto _dlg = cast(harfbuzz.types.PaintPopGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, mode);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, mode);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_pop_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5632,13 +5632,13 @@ void paintFuncsSetPopTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbu
   {
     auto _dlg = cast(harfbuzz.types.PaintPopTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_pop_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5653,13 +5653,13 @@ void paintFuncsSetPushClipGlyphFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipGlyphFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.take) : null);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, glyph, font ? new harfbuzz.font.Font(cast(void*)font, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_push_clip_glyph_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5674,13 +5674,13 @@ void paintFuncsSetPushClipRectangleFunc(harfbuzz.paint_funcs.PaintFuncs funcs, h
   {
     auto _dlg = cast(harfbuzz.types.PaintPushClipRectangleFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, xmin, ymin, xmax, ymax);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xmin, ymin, xmax, ymax);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_push_clip_rectangle_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5695,13 +5695,13 @@ void paintFuncsSetPushGroupFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfbuzz.
   {
     auto _dlg = cast(harfbuzz.types.PaintPushGroupFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_push_group_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5716,13 +5716,13 @@ void paintFuncsSetPushTransformFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   {
     auto _dlg = cast(harfbuzz.types.PaintPushTransformFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, xx, yx, xy, yy, dx, dy);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, xx, yx, xy, yy, dx, dy);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_push_transform_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5737,13 +5737,13 @@ void paintFuncsSetRadialGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harf
   {
     auto _dlg = cast(harfbuzz.types.PaintRadialGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.take) : null, x0, y0, r0, x1, y1, r1);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, r0, x1, y1, r1);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_radial_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5758,13 +5758,13 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
   {
     auto _dlg = cast(harfbuzz.types.PaintSweepGradientFunc*)userData;
 
-    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.take) : null, x0, y0, startAngle, endAngle);
+    (*_dlg)(funcs ? new harfbuzz.paint_funcs.PaintFuncs(cast(void*)funcs, No.Take) : null, paintData, colorLine ? new harfbuzz.color_line.ColorLine(cast(void*)colorLine, No.Take) : null, x0, y0, startAngle, endAngle);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_paint_funcs_set_sweep_gradient_func(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -5781,7 +5781,7 @@ void paintFuncsSetSweepGradientFunc(harfbuzz.paint_funcs.PaintFuncs funcs, harfb
 */
 void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents extents)
 {
-  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, image ? cast(hb_blob_t*)image.cPtr(No.dup) : null, width, height, format, slant, &extents);
+  hb_paint_image(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, image ? cast(hb_blob_t*)image.cPtr(No.Dup) : null, width, height, format, slant, &extents);
 }
 
 /**
@@ -5799,7 +5799,7 @@ void paintImage(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz
 */
 void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2)
 {
-  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.dup) : null, x0, y0, x1, y1, x2, y2);
+  hb_paint_linear_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, x1, y1, x2, y2);
 }
 
 /**
@@ -5810,7 +5810,7 @@ void paintLinearGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
 */
 void paintPopClip(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
 {
-  hb_paint_pop_clip(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData);
+  hb_paint_pop_clip(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5822,7 +5822,7 @@ void paintPopClip(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
 */
 void paintPopGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.PaintCompositeMode mode)
 {
-  hb_paint_pop_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, mode);
+  hb_paint_pop_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, mode);
 }
 
 /**
@@ -5833,7 +5833,7 @@ void paintPopGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfb
 */
 void paintPopTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
 {
-  hb_paint_pop_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData);
+  hb_paint_pop_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5846,7 +5846,7 @@ void paintPopTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = 
 */
 void paintPushClipGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font)
 {
-  hb_paint_push_clip_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.dup) : null);
+  hb_paint_push_clip_glyph(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, glyph, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null);
 }
 
 /**
@@ -5861,7 +5861,7 @@ void paintPushClipGlyph(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
 */
 void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xmin, float ymin, float xmax, float ymax)
 {
-  hb_paint_push_clip_rectangle(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, xmin, ymin, xmax, ymax);
+  hb_paint_push_clip_rectangle(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, xmin, ymin, xmax, ymax);
 }
 
 /**
@@ -5872,7 +5872,7 @@ void paintPushClipRectangle(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintDa
 */
 void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = null)
 {
-  hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData);
+  hb_paint_push_group(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData);
 }
 
 /**
@@ -5889,7 +5889,7 @@ void paintPushGroup(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData = nul
 */
 void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy)
 {
-  hb_paint_push_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, xx, yx, xy, yy, dx, dy);
+  hb_paint_push_transform(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, xx, yx, xy, yy, dx, dy);
 }
 
 /**
@@ -5907,7 +5907,7 @@ void paintPushTransform(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, 
 */
 void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1)
 {
-  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.dup) : null, x0, y0, r0, x1, y1, r1);
+  hb_paint_radial_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, r0, x1, y1, r1);
 }
 
 /**
@@ -5923,7 +5923,7 @@ void paintRadialGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData,
 */
 void paintSweepGradient(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle)
 {
-  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.dup) : null, x0, y0, startAngle, endAngle);
+  hb_paint_sweep_gradient(funcs ? cast(hb_paint_funcs_t*)funcs.cPtr(No.Dup) : null, paintData, colorLine ? cast(hb_color_line_t*)colorLine.cPtr(No.Dup) : null, x0, y0, startAngle, endAngle);
 }
 
 /**
@@ -6004,7 +6004,7 @@ harfbuzz.types.Tag scriptToIso15924Tag(harfbuzz.types.Script script)
 harfbuzz.types.Bool segmentPropertiesEqual(harfbuzz.segment_properties.SegmentProperties a, harfbuzz.segment_properties.SegmentProperties b)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_segment_properties_equal(a ? cast(const(hb_segment_properties_t)*)a.cPtr(No.dup) : null, b ? cast(const(hb_segment_properties_t)*)b.cPtr(No.dup) : null);
+  _retval = hb_segment_properties_equal(a ? cast(const(hb_segment_properties_t)*)a.cPtr(No.Dup) : null, b ? cast(const(hb_segment_properties_t)*)b.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6017,7 +6017,7 @@ harfbuzz.types.Bool segmentPropertiesEqual(harfbuzz.segment_properties.SegmentPr
 uint segmentPropertiesHash(harfbuzz.segment_properties.SegmentProperties p)
 {
   uint _retval;
-  _retval = hb_segment_properties_hash(p ? cast(const(hb_segment_properties_t)*)p.cPtr(No.dup) : null);
+  _retval = hb_segment_properties_hash(p ? cast(const(hb_segment_properties_t)*)p.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6038,7 +6038,7 @@ uint segmentPropertiesHash(harfbuzz.segment_properties.SegmentProperties p)
 */
 void segmentPropertiesOverlay(harfbuzz.segment_properties.SegmentProperties p, harfbuzz.segment_properties.SegmentProperties src)
 {
-  hb_segment_properties_overlay(p ? cast(hb_segment_properties_t*)p.cPtr(No.dup) : null, src ? cast(const(hb_segment_properties_t)*)src.cPtr(No.dup) : null);
+  hb_segment_properties_overlay(p ? cast(hb_segment_properties_t*)p.cPtr(No.Dup) : null, src ? cast(const(hb_segment_properties_t)*)src.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6049,7 +6049,7 @@ void segmentPropertiesOverlay(harfbuzz.segment_properties.SegmentProperties p, h
 */
 void setAdd(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
 {
-  hb_set_add(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, codepoint);
+  hb_set_add(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint);
 }
 
 /**
@@ -6062,7 +6062,7 @@ void setAdd(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
 */
 void setAddRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last)
 {
-  hb_set_add_range(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, first, last);
+  hb_set_add_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, first, last);
 }
 
 /**
@@ -6080,7 +6080,7 @@ void setAddSortedArray(harfbuzz.set.Set set, harfbuzz.types.Codepoint[] sortedCo
     _numCodepoints = cast(uint)sortedCodepoints.length;
 
   auto _sortedCodepoints = cast(const(hb_codepoint_t)*)sortedCodepoints.ptr;
-  hb_set_add_sorted_array(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, _sortedCodepoints, _numCodepoints);
+  hb_set_add_sorted_array(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, _sortedCodepoints, _numCodepoints);
 }
 
 /**
@@ -6092,7 +6092,7 @@ void setAddSortedArray(harfbuzz.set.Set set, harfbuzz.types.Codepoint[] sortedCo
 harfbuzz.types.Bool setAllocationSuccessful(harfbuzz.set.Set set)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_allocation_successful(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_allocation_successful(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6103,7 +6103,7 @@ harfbuzz.types.Bool setAllocationSuccessful(harfbuzz.set.Set set)
 */
 void setClear(harfbuzz.set.Set set)
 {
-  hb_set_clear(set ? cast(hb_set_t*)set.cPtr(No.dup) : null);
+  hb_set_clear(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6115,8 +6115,8 @@ void setClear(harfbuzz.set.Set set)
 harfbuzz.set.Set setCopy(harfbuzz.set.Set set)
 {
   hb_set_t* _cretval;
-  _cretval = hb_set_copy(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_set_copy(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6128,7 +6128,7 @@ harfbuzz.set.Set setCreate()
 {
   hb_set_t* _cretval;
   _cretval = hb_set_create();
-  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6140,7 +6140,7 @@ harfbuzz.set.Set setCreate()
 */
 void setDel(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
 {
-  hb_set_del(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, codepoint);
+  hb_set_del(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, codepoint);
 }
 
 /**
@@ -6156,7 +6156,7 @@ void setDel(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
 */
 void setDelRange(harfbuzz.set.Set set, harfbuzz.types.Codepoint first, harfbuzz.types.Codepoint last)
 {
-  hb_set_del_range(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, first, last);
+  hb_set_del_range(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, first, last);
 }
 
 /**
@@ -6167,7 +6167,7 @@ harfbuzz.set.Set setGetEmpty()
 {
   hb_set_t* _cretval;
   _cretval = hb_set_get_empty();
-  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.set.Set(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6180,7 +6180,7 @@ harfbuzz.set.Set setGetEmpty()
 harfbuzz.types.Codepoint setGetMax(harfbuzz.set.Set set)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_set_get_max(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_get_max(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6193,7 +6193,7 @@ harfbuzz.types.Codepoint setGetMax(harfbuzz.set.Set set)
 harfbuzz.types.Codepoint setGetMin(harfbuzz.set.Set set)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_set_get_min(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_get_min(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6206,7 +6206,7 @@ harfbuzz.types.Codepoint setGetMin(harfbuzz.set.Set set)
 uint setGetPopulation(harfbuzz.set.Set set)
 {
   uint _retval;
-  _retval = hb_set_get_population(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_get_population(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6220,7 +6220,7 @@ uint setGetPopulation(harfbuzz.set.Set set)
 harfbuzz.types.Bool setHas(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_has(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, codepoint);
+  _retval = hb_set_has(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, codepoint);
   return _retval;
 }
 
@@ -6233,7 +6233,7 @@ harfbuzz.types.Bool setHas(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepo
 uint setHash(harfbuzz.set.Set set)
 {
   uint _retval;
-  _retval = hb_set_hash(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_hash(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6245,7 +6245,7 @@ uint setHash(harfbuzz.set.Set set)
 */
 void setIntersect(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
-  hb_set_intersect(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  hb_set_intersect(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6255,7 +6255,7 @@ void setIntersect(harfbuzz.set.Set set, harfbuzz.set.Set other)
 */
 void setInvert(harfbuzz.set.Set set)
 {
-  hb_set_invert(set ? cast(hb_set_t*)set.cPtr(No.dup) : null);
+  hb_set_invert(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6267,7 +6267,7 @@ void setInvert(harfbuzz.set.Set set)
 harfbuzz.types.Bool setIsEmpty(harfbuzz.set.Set set)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_is_empty(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_is_empty(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6282,7 +6282,7 @@ harfbuzz.types.Bool setIsEmpty(harfbuzz.set.Set set)
 harfbuzz.types.Bool setIsEqual(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_is_equal(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  _retval = hb_set_is_equal(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6295,7 +6295,7 @@ harfbuzz.types.Bool setIsEqual(harfbuzz.set.Set set, harfbuzz.set.Set other)
 harfbuzz.types.Bool setIsInverted(harfbuzz.set.Set set)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_is_inverted(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null);
+  _retval = hb_set_is_inverted(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6309,7 +6309,7 @@ harfbuzz.types.Bool setIsInverted(harfbuzz.set.Set set)
 harfbuzz.types.Bool setIsSubset(harfbuzz.set.Set set, harfbuzz.set.Set largerSet)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_is_subset(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, largerSet ? cast(const(hb_set_t)*)largerSet.cPtr(No.dup) : null);
+  _retval = hb_set_is_subset(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, largerSet ? cast(const(hb_set_t)*)largerSet.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6326,7 +6326,7 @@ harfbuzz.types.Bool setIsSubset(harfbuzz.set.Set set, harfbuzz.set.Set largerSet
 harfbuzz.types.Bool setNext(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_next(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, cast(hb_codepoint_t*)&codepoint);
+  _retval = hb_set_next(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
   return _retval;
 }
 
@@ -6349,7 +6349,7 @@ uint setNextMany(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint, harfb
     _size = cast(uint)out_.length;
 
   auto _out_ = cast(hb_codepoint_t*)out_.ptr;
-  _retval = hb_set_next_many(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, codepoint, _out_, _size);
+  _retval = hb_set_next_many(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, codepoint, _out_, _size);
   return _retval;
 }
 
@@ -6368,7 +6368,7 @@ uint setNextMany(harfbuzz.set.Set set, harfbuzz.types.Codepoint codepoint, harfb
 harfbuzz.types.Bool setNextRange(harfbuzz.set.Set set, out harfbuzz.types.Codepoint first, ref harfbuzz.types.Codepoint last)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_next_range(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
+  _retval = hb_set_next_range(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
   return _retval;
 }
 
@@ -6385,7 +6385,7 @@ harfbuzz.types.Bool setNextRange(harfbuzz.set.Set set, out harfbuzz.types.Codepo
 harfbuzz.types.Bool setPrevious(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint codepoint)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_previous(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, cast(hb_codepoint_t*)&codepoint);
+  _retval = hb_set_previous(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&codepoint);
   return _retval;
 }
 
@@ -6404,7 +6404,7 @@ harfbuzz.types.Bool setPrevious(harfbuzz.set.Set set, ref harfbuzz.types.Codepoi
 harfbuzz.types.Bool setPreviousRange(harfbuzz.set.Set set, ref harfbuzz.types.Codepoint first, out harfbuzz.types.Codepoint last)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_set_previous_range(set ? cast(const(hb_set_t)*)set.cPtr(No.dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
+  _retval = hb_set_previous_range(set ? cast(const(hb_set_t)*)set.cPtr(No.Dup) : null, cast(hb_codepoint_t*)&first, cast(hb_codepoint_t*)&last);
   return _retval;
 }
 
@@ -6416,7 +6416,7 @@ harfbuzz.types.Bool setPreviousRange(harfbuzz.set.Set set, ref harfbuzz.types.Co
 */
 void setSet(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
-  hb_set_set(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  hb_set_set(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6427,7 +6427,7 @@ void setSet(harfbuzz.set.Set set, harfbuzz.set.Set other)
 */
 void setSubtract(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
-  hb_set_subtract(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  hb_set_subtract(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6439,7 +6439,7 @@ void setSubtract(harfbuzz.set.Set set, harfbuzz.set.Set other)
 */
 void setSymmetricDifference(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
-  hb_set_symmetric_difference(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  hb_set_symmetric_difference(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6450,7 +6450,7 @@ void setSymmetricDifference(harfbuzz.set.Set set, harfbuzz.set.Set other)
 */
 void setUnion(harfbuzz.set.Set set, harfbuzz.set.Set other)
 {
-  hb_set_union(set ? cast(hb_set_t*)set.cPtr(No.dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.dup) : null);
+  hb_set_union(set ? cast(hb_set_t*)set.cPtr(No.Dup) : null, other ? cast(const(hb_set_t)*)other.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6475,7 +6475,7 @@ void shape(harfbuzz.font.Font font, harfbuzz.buffer.Buffer buffer, harfbuzz.feat
   foreach (obj; features)
     _tmpfeatures ~= *cast(hb_feature_t*)obj.cPtr;
   const(hb_feature_t)* _features = _tmpfeatures.ptr;
-  hb_shape(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _features, _numFeatures);
+  hb_shape(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures);
 }
 
 /**
@@ -6505,10 +6505,10 @@ harfbuzz.types.Bool shapeFull(harfbuzz.font.Font font, harfbuzz.buffer.Buffer bu
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _retval = hb_shape_full(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _features, _numFeatures, _shaperList);
+  _retval = hb_shape_full(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures, _shaperList);
   return _retval;
 }
 
@@ -6554,10 +6554,10 @@ harfbuzz.types.Bool shapeJustify(harfbuzz.font.Font font, harfbuzz.buffer.Buffer
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _retval = hb_shape_justify(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
+  _retval = hb_shape_justify(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures, _shaperList, minTargetAdvance, maxTargetAdvance, cast(float*)&advance, cast(hb_tag_t*)&varTag, cast(float*)&varValue);
   return _retval;
 }
 
@@ -6579,7 +6579,7 @@ string[] shapeListShapers()
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.free);
+      _retval[i] = _cretval[i].fromCString(No.Free);
   }
   return _retval;
 }
@@ -6608,11 +6608,11 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate(harfbuzz.face.Face face, harfbuzz.
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.dup) : null, _userFeatures, _numUserFeatures, _shaperList);
-  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_shape_plan_create(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
+  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6647,11 +6647,11 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreate2(harfbuzz.face.Face face, harfbuzz
   auto _coords = cast(const(int)*)coords.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create2(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
-  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_shape_plan_create2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
+  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6679,11 +6679,11 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached(harfbuzz.face.Face face, har
 
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create_cached(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.dup) : null, _userFeatures, _numUserFeatures, _shaperList);
-  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_shape_plan_create_cached(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _shaperList);
+  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6719,11 +6719,11 @@ harfbuzz.shape_plan.ShapePlan shapePlanCreateCached2(harfbuzz.face.Face face, ha
   auto _coords = cast(const(int)*)coords.ptr;
   char*[] _tmpshaperList;
   foreach (s; shaperList)
-    _tmpshaperList ~= s.toCString(No.alloc);
+    _tmpshaperList ~= s.toCString(No.Alloc);
   _tmpshaperList ~= null;
   const(char*)* _shaperList = _tmpshaperList.ptr;
-  _cretval = hb_shape_plan_create_cached2(face ? cast(hb_face_t*)face.cPtr(No.dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
-  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_shape_plan_create_cached2(face ? cast(hb_face_t*)face.cPtr(No.Dup) : null, props ? cast(const(hb_segment_properties_t)*)props.cPtr(No.Dup) : null, _userFeatures, _numUserFeatures, _coords, _numCoords, _shaperList);
+  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6748,7 +6748,7 @@ harfbuzz.types.Bool shapePlanExecute(harfbuzz.shape_plan.ShapePlan shapePlan, ha
   foreach (obj; features)
     _tmpfeatures ~= *cast(hb_feature_t*)obj.cPtr;
   const(hb_feature_t)* _features = _tmpfeatures.ptr;
-  _retval = hb_shape_plan_execute(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.dup) : null, font ? cast(hb_font_t*)font.cPtr(No.dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.dup) : null, _features, _numFeatures);
+  _retval = hb_shape_plan_execute(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.Dup) : null, font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, buffer ? cast(hb_buffer_t*)buffer.cPtr(No.Dup) : null, _features, _numFeatures);
   return _retval;
 }
 
@@ -6760,7 +6760,7 @@ harfbuzz.shape_plan.ShapePlan shapePlanGetEmpty()
 {
   hb_shape_plan_t* _cretval;
   _cretval = hb_shape_plan_get_empty();
-  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.shape_plan.ShapePlan(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6773,8 +6773,8 @@ harfbuzz.shape_plan.ShapePlan shapePlanGetEmpty()
 string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan)
 {
   const(char)* _cretval;
-  _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+  _cretval = hb_shape_plan_get_shaper(shapePlan ? cast(hb_shape_plan_t*)shapePlan.cPtr(No.Dup) : null);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -6790,7 +6790,7 @@ string shapePlanGetShaper(harfbuzz.shape_plan.ShapePlan shapePlan)
 float styleGetValue(harfbuzz.font.Font font, harfbuzz.types.StyleTag styleTag)
 {
   float _retval;
-  _retval = hb_style_get_value(font ? cast(hb_font_t*)font.cPtr(No.dup) : null, styleTag);
+  _retval = hb_style_get_value(font ? cast(hb_font_t*)font.cPtr(No.Dup) : null, styleTag);
   return _retval;
 }
 
@@ -6826,7 +6826,7 @@ harfbuzz.types.Tag tagFromString(ubyte[] str)
 harfbuzz.types.UnicodeCombiningClass unicodeCombiningClass(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
 {
   hb_unicode_combining_class_t _cretval;
-  _cretval = hb_unicode_combining_class(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, unicode);
+  _cretval = hb_unicode_combining_class(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   harfbuzz.types.UnicodeCombiningClass _retval = cast(harfbuzz.types.UnicodeCombiningClass)_cretval;
   return _retval;
 }
@@ -6847,7 +6847,7 @@ harfbuzz.types.UnicodeCombiningClass unicodeCombiningClass(harfbuzz.unicode_func
 harfbuzz.types.Bool unicodeCompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint a, harfbuzz.types.Codepoint b, out harfbuzz.types.Codepoint ab)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_unicode_compose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, a, b, cast(hb_codepoint_t*)&ab);
+  _retval = hb_unicode_compose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, a, b, cast(hb_codepoint_t*)&ab);
   return _retval;
 }
 
@@ -6866,7 +6866,7 @@ harfbuzz.types.Bool unicodeCompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, h
 harfbuzz.types.Bool unicodeDecompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint ab, out harfbuzz.types.Codepoint a, out harfbuzz.types.Codepoint b)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_unicode_decompose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, ab, cast(hb_codepoint_t*)&a, cast(hb_codepoint_t*)&b);
+  _retval = hb_unicode_decompose(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, ab, cast(hb_codepoint_t*)&a, cast(hb_codepoint_t*)&b);
   return _retval;
 }
 
@@ -6882,7 +6882,7 @@ harfbuzz.types.Bool unicodeDecompose(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs,
 uint unicodeDecomposeCompatibility(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint u, out harfbuzz.types.Codepoint decomposed)
 {
   uint _retval;
-  _retval = hb_unicode_decompose_compatibility(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, u, cast(hb_codepoint_t*)&decomposed);
+  _retval = hb_unicode_decompose_compatibility(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, u, cast(hb_codepoint_t*)&decomposed);
   return _retval;
 }
 
@@ -6896,7 +6896,7 @@ uint unicodeDecomposeCompatibility(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, h
 uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
 {
   uint _retval;
-  _retval = hb_unicode_eastasian_width(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, unicode);
+  _retval = hb_unicode_eastasian_width(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   return _retval;
 }
 
@@ -6909,8 +6909,8 @@ uint unicodeEastasianWidth(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.
 harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsCreate(harfbuzz.unicode_funcs.UnicodeFuncs parent = null)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_unicode_funcs_create(parent ? cast(hb_unicode_funcs_t*)parent.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6923,7 +6923,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetDefault()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_default();
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -6935,7 +6935,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetEmpty()
 {
   hb_unicode_funcs_t* _cretval;
   _cretval = hb_unicode_funcs_get_empty();
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6949,8 +6949,8 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetEmpty()
 harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetParent(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
 {
   hb_unicode_funcs_t* _cretval;
-  _cretval = hb_unicode_funcs_get_parent(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.take) : null;
+  _cretval = hb_unicode_funcs_get_parent(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -6964,7 +6964,7 @@ harfbuzz.unicode_funcs.UnicodeFuncs unicodeFuncsGetParent(harfbuzz.unicode_funcs
 harfbuzz.types.Bool unicodeFuncsIsImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
 {
   harfbuzz.types.Bool _retval;
-  _retval = hb_unicode_funcs_is_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null);
+  _retval = hb_unicode_funcs_is_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -6976,7 +6976,7 @@ harfbuzz.types.Bool unicodeFuncsIsImmutable(harfbuzz.unicode_funcs.UnicodeFuncs 
 */
 void unicodeFuncsMakeImmutable(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs)
 {
-  hb_unicode_funcs_make_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null);
+  hb_unicode_funcs_make_immutable(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null);
 }
 
 /**
@@ -6992,7 +6992,7 @@ void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
     harfbuzz.types.UnicodeCombiningClass _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeCombiningClassFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_unicode_combining_class_t)_dretval;
 
     return _retval;
@@ -7001,7 +7001,7 @@ void unicodeFuncsSetCombiningClassFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_combining_class_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7016,14 +7016,14 @@ void unicodeFuncsSetComposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harf
   {
     auto _dlg = cast(harfbuzz.types.UnicodeComposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, a, b, *ab);
+    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, a, b, *ab);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_compose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7038,14 +7038,14 @@ void unicodeFuncsSetDecomposeFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
   {
     auto _dlg = cast(harfbuzz.types.UnicodeDecomposeFunc*)userData;
 
-    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, ab, *a, *b);
+    hb_bool_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, ab, *a, *b);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_decompose_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7060,14 +7060,14 @@ void unicodeFuncsSetEastasianWidthFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufunc
   {
     auto _dlg = cast(harfbuzz.types.UnicodeEastasianWidthFunc*)userData;
 
-    uint _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, unicode);
+    uint _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_eastasian_width_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7083,7 +7083,7 @@ void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufun
     harfbuzz.types.UnicodeGeneralCategory _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeGeneralCategoryFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_unicode_general_category_t)_dretval;
 
     return _retval;
@@ -7092,7 +7092,7 @@ void unicodeFuncsSetGeneralCategoryFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufun
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_general_category_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7107,14 +7107,14 @@ void unicodeFuncsSetMirroringFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, ha
   {
     auto _dlg = cast(harfbuzz.types.UnicodeMirroringFunc*)userData;
 
-    hb_codepoint_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, unicode);
+    hb_codepoint_t _retval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_mirroring_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7130,7 +7130,7 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
     harfbuzz.types.Script _dretval;
     auto _dlg = cast(harfbuzz.types.UnicodeScriptFunc*)userData;
 
-    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.take) : null, unicode);
+    _dretval = (*_dlg)(ufuncs ? new harfbuzz.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, No.Take) : null, unicode);
     auto _retval = cast(hb_script_t)_dretval;
 
     return _retval;
@@ -7139,7 +7139,7 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
 
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB);
+  hb_unicode_funcs_set_script_func(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
 }
 
 /**
@@ -7153,7 +7153,7 @@ void unicodeFuncsSetScriptFunc(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfb
 harfbuzz.types.UnicodeGeneralCategory unicodeGeneralCategory(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
 {
   hb_unicode_general_category_t _cretval;
-  _cretval = hb_unicode_general_category(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, unicode);
+  _cretval = hb_unicode_general_category(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   harfbuzz.types.UnicodeGeneralCategory _retval = cast(harfbuzz.types.UnicodeGeneralCategory)_cretval;
   return _retval;
 }
@@ -7169,7 +7169,7 @@ harfbuzz.types.UnicodeGeneralCategory unicodeGeneralCategory(harfbuzz.unicode_fu
 harfbuzz.types.Codepoint unicodeMirroring(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
 {
   harfbuzz.types.Codepoint _retval;
-  _retval = hb_unicode_mirroring(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, unicode);
+  _retval = hb_unicode_mirroring(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   return _retval;
 }
 
@@ -7184,7 +7184,7 @@ harfbuzz.types.Codepoint unicodeMirroring(harfbuzz.unicode_funcs.UnicodeFuncs uf
 harfbuzz.types.Script unicodeScript(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode)
 {
   hb_script_t _cretval;
-  _cretval = hb_unicode_script(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.dup) : null, unicode);
+  _cretval = hb_unicode_script(ufuncs ? cast(hb_unicode_funcs_t*)ufuncs.cPtr(No.Dup) : null, unicode);
   harfbuzz.types.Script _retval = cast(harfbuzz.types.Script)_cretval;
   return _retval;
 }

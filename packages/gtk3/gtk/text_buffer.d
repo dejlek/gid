@@ -26,7 +26,7 @@ import gtk.types;
 class TextBuffer : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,8 +51,8 @@ class TextBuffer : gobject.object.ObjectG
   this(gtk.text_tag_table.TextTagTable table = null)
   {
     GtkTextBuffer* _cretval;
-    _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,7 +68,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void addMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.dup) : null);
+    gtk_text_buffer_add_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -80,7 +80,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void addSelectionClipboard(gtk.clipboard.Clipboard clipboard)
   {
-    gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.dup) : null);
+    gtk_text_buffer_add_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -94,7 +94,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void applyTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    gtk_text_buffer_apply_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -107,8 +107,8 @@ class TextBuffer : gobject.object.ObjectG
   */
   void applyTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_apply_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -131,7 +131,7 @@ class TextBuffer : gobject.object.ObjectG
   bool backspace(gtk.text_iter.TextIter iter, bool interactive, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, interactive, defaultEditable);
+    _retval = gtk_text_buffer_backspace(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, interactive, defaultEditable);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void copyClipboard(gtk.clipboard.Clipboard clipboard)
   {
-    gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.dup) : null);
+    gtk_text_buffer_copy_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -182,8 +182,8 @@ class TextBuffer : gobject.object.ObjectG
   gtk.text_child_anchor.TextChildAnchor createChildAnchor(gtk.text_iter.TextIter iter)
   {
     GtkTextChildAnchor* _cretval;
-    _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.take);
+    _cretval = gtk_text_buffer_create_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,9 +214,9 @@ class TextBuffer : gobject.object.ObjectG
   gtk.text_mark.TextMark createMark(string markName, gtk.text_iter.TextIter where, bool leftGravity)
   {
     GtkTextMark* _cretval;
-    const(char)* _markName = markName.toCString(No.alloc);
-    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(const(GtkTextIter)*)where.cPtr(No.dup) : null, leftGravity);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.take);
+    const(char)* _markName = markName.toCString(No.Alloc);
+    _cretval = gtk_text_buffer_create_mark(cast(GtkTextBuffer*)cPtr, _markName, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null, leftGravity);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void cutClipboard(gtk.clipboard.Clipboard clipboard, bool defaultEditable)
   {
-    gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.dup) : null, defaultEditable);
+    gtk_text_buffer_cut_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.Dup) : null, defaultEditable);
   }
 
   /**
@@ -246,7 +246,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void delete_(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_delete(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null);
+    gtk_text_buffer_delete(cast(GtkTextBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -264,7 +264,7 @@ class TextBuffer : gobject.object.ObjectG
   bool deleteInteractive(gtk.text_iter.TextIter startIter, gtk.text_iter.TextIter endIter, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)cPtr, startIter ? cast(GtkTextIter*)startIter.cPtr(No.dup) : null, endIter ? cast(GtkTextIter*)endIter.cPtr(No.dup) : null, defaultEditable);
+    _retval = gtk_text_buffer_delete_interactive(cast(GtkTextBuffer*)cPtr, startIter ? cast(GtkTextIter*)startIter.cPtr(No.Dup) : null, endIter ? cast(GtkTextIter*)endIter.cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void deleteMark(gtk.text_mark.TextMark mark)
   {
-    gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
+    gtk_text_buffer_delete_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
 
   /**
@@ -294,7 +294,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void deleteMarkByName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_text_buffer_delete_mark_by_name(cast(GtkTextBuffer*)cPtr, _name);
   }
 
@@ -338,7 +338,7 @@ class TextBuffer : gobject.object.ObjectG
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _retval = gtk_text_buffer_deserialize(cast(GtkTextBuffer*)cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer.cPtr(No.dup) : null, format ? cast(GdkAtom)format.cPtr : null, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, _data, _length, &_err);
+    _retval = gtk_text_buffer_deserialize(cast(GtkTextBuffer*)cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer.cPtr(No.Dup) : null, format ? cast(GdkAtom)format.cPtr : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _data, _length, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -406,8 +406,8 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextIter _start;
     GtkTextIter _end;
     gtk_text_buffer_get_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
   }
 
   /**
@@ -436,7 +436,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTargetList* _cretval;
     _cretval = gtk_text_buffer_get_copy_target_list(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_end_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -479,7 +479,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_insert(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -492,8 +492,8 @@ class TextBuffer : gobject.object.ObjectG
   void getIterAtChildAnchor(out gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
   {
     GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.dup) : null);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    gtk_text_buffer_get_iter_at_child_anchor(cast(GtkTextBuffer*)cPtr, &_iter, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -507,7 +507,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -529,7 +529,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line_index(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, byteIndex);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -550,7 +550,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_line_offset(cast(GtkTextBuffer*)cPtr, &_iter, lineNumber, charOffset);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -562,8 +562,8 @@ class TextBuffer : gobject.object.ObjectG
   void getIterAtMark(out gtk.text_iter.TextIter iter, gtk.text_mark.TextMark mark)
   {
     GtkTextIter _iter;
-    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)cPtr, &_iter, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    gtk_text_buffer_get_iter_at_mark(cast(GtkTextBuffer*)cPtr, &_iter, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -579,7 +579,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_iter_at_offset(cast(GtkTextBuffer*)cPtr, &_iter, charOffset);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -604,9 +604,9 @@ class TextBuffer : gobject.object.ObjectG
   gtk.text_mark.TextMark getMark(string name)
   {
     GtkTextMark* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_buffer_get_mark(cast(GtkTextBuffer*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTargetList* _cretval;
     _cretval = gtk_text_buffer_get_paste_target_list(cast(GtkTextBuffer*)cPtr);
-    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -658,7 +658,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextMark* _cretval;
     _cretval = gtk_text_buffer_get_selection_bound(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_mark.TextMark)(cast(GtkTextMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -680,8 +680,8 @@ class TextBuffer : gobject.object.ObjectG
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_text_buffer_get_selection_bounds(cast(GtkTextBuffer*)cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -705,8 +705,8 @@ class TextBuffer : gobject.object.ObjectG
   string getSlice(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null, includeHiddenChars);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = gtk_text_buffer_get_slice(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -721,7 +721,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextIter _iter;
     gtk_text_buffer_get_start_iter(cast(GtkTextBuffer*)cPtr, &_iter);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
   /**
@@ -732,7 +732,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     GtkTextTagTable* _cretval;
     _cretval = gtk_text_buffer_get_tag_table(cast(GtkTextBuffer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_tag_table.TextTagTable)(cast(GtkTextTagTable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -753,8 +753,8 @@ class TextBuffer : gobject.object.ObjectG
   string getText(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool includeHiddenChars)
   {
     char* _cretval;
-    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null, includeHiddenChars);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = gtk_text_buffer_get_text(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, includeHiddenChars);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -773,8 +773,8 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insert(gtk.text_iter.TextIter iter, string text, int len)
   {
-    const(char)* _text = text.toCString(No.alloc);
-    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, _text, len);
+    const(char)* _text = text.toCString(No.Alloc);
+    gtk_text_buffer_insert(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len);
   }
 
   /**
@@ -786,7 +786,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertAtCursor(string text, int len)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_text_buffer_insert_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len);
   }
 
@@ -808,7 +808,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertChildAnchor(gtk.text_iter.TextIter iter, gtk.text_child_anchor.TextChildAnchor anchor)
   {
-    gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.dup) : null);
+    gtk_text_buffer_insert_child_anchor(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -830,8 +830,8 @@ class TextBuffer : gobject.object.ObjectG
   bool insertInteractive(gtk.text_iter.TextIter iter, string text, int len, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.alloc);
-    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, _text, len, defaultEditable);
+    const(char)* _text = text.toCString(No.Alloc);
+    _retval = gtk_text_buffer_insert_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _text, len, defaultEditable);
     return _retval;
   }
 
@@ -851,7 +851,7 @@ class TextBuffer : gobject.object.ObjectG
   bool insertInteractiveAtCursor(string text, int len, bool defaultEditable)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     _retval = gtk_text_buffer_insert_interactive_at_cursor(cast(GtkTextBuffer*)cPtr, _text, len, defaultEditable);
     return _retval;
   }
@@ -869,8 +869,8 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertMarkup(gtk.text_iter.TextIter iter, string markup, int len)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
-    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, _markup, len);
+    const(char)* _markup = markup.toCString(No.Alloc);
+    gtk_text_buffer_insert_markup(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _markup, len);
   }
 
   /**
@@ -888,7 +888,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertPixbuf(gtk.text_iter.TextIter iter, gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_text_buffer_insert_pixbuf(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gtk_text_buffer_insert_pixbuf(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -907,7 +907,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void insertRange(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    gtk_text_buffer_insert_range(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -926,7 +926,7 @@ class TextBuffer : gobject.object.ObjectG
   bool insertRangeInteractive(gtk.text_iter.TextIter iter, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, bool defaultEditable)
   {
     bool _retval;
-    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null, defaultEditable);
+    _retval = gtk_text_buffer_insert_range_interactive(cast(GtkTextBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, defaultEditable);
     return _retval;
   }
 
@@ -939,7 +939,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void moveMark(gtk.text_mark.TextMark mark, gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.dup) : null);
+    gtk_text_buffer_move_mark(cast(GtkTextBuffer*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -951,8 +951,8 @@ class TextBuffer : gobject.object.ObjectG
   */
   void moveMarkByName(string name, gtk.text_iter.TextIter where)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(const(GtkTextIter)*)where.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_move_mark_by_name(cast(GtkTextBuffer*)cPtr, _name, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -970,7 +970,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void pasteClipboard(gtk.clipboard.Clipboard clipboard, gtk.text_iter.TextIter overrideLocation, bool defaultEditable)
   {
-    gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.dup) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation.cPtr(No.dup) : null, defaultEditable);
+    gtk_text_buffer_paste_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.Dup) : null, overrideLocation ? cast(GtkTextIter*)overrideLocation.cPtr(No.Dup) : null, defaultEditable);
   }
 
   /**
@@ -986,7 +986,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void placeCursor(gtk.text_iter.TextIter where)
   {
-    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(const(GtkTextIter)*)where.cPtr(No.dup) : null);
+    gtk_text_buffer_place_cursor(cast(GtkTextBuffer*)cPtr, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1007,17 +1007,17 @@ class TextBuffer : gobject.object.ObjectG
       _data.length = length;
       _data[0 .. length] = data[0 .. length];
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.take), ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.take) : null, _data, createTags, _err);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)registerBuffer, No.Take), ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(void*)contentBuffer, No.Take), iter ? new gtk.text_iter.TextIter(cast(void*)iter, No.Take) : null, _data, createTags, _err);
       return _retval;
     }
     auto _function_CB = function_ ? &_function_Callback : null;
 
     GdkAtom _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
     GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
     _cretval = gtk_text_buffer_register_deserialize_format(cast(GtkTextBuffer*)cPtr, _mimeType, _function_CB, _function_, _function_DestroyCB);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1033,9 +1033,9 @@ class TextBuffer : gobject.object.ObjectG
   gdk.atom.Atom registerDeserializeTagset(string tagsetName = null)
   {
     GdkAtom _cretval;
-    const(char)* _tagsetName = tagsetName.toCString(No.alloc);
+    const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
     _cretval = gtk_text_buffer_register_deserialize_tagset(cast(GtkTextBuffer*)cPtr, _tagsetName);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1065,9 +1065,9 @@ class TextBuffer : gobject.object.ObjectG
   gdk.atom.Atom registerSerializeTagset(string tagsetName = null)
   {
     GdkAtom _cretval;
-    const(char)* _tagsetName = tagsetName.toCString(No.alloc);
+    const(char)* _tagsetName = tagsetName.toCString(No.Alloc);
     _cretval = gtk_text_buffer_register_serialize_tagset(cast(GtkTextBuffer*)cPtr, _tagsetName);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1083,7 +1083,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void removeAllTags(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    gtk_text_buffer_remove_all_tags(cast(GtkTextBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1095,7 +1095,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void removeSelectionClipboard(gtk.clipboard.Clipboard clipboard)
   {
-    gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.dup) : null);
+    gtk_text_buffer_remove_selection_clipboard(cast(GtkTextBuffer*)cPtr, clipboard ? cast(GtkClipboard*)clipboard.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1109,7 +1109,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void removeTag(gtk.text_tag.TextTag tag, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    gtk_text_buffer_remove_tag(cast(GtkTextBuffer*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1122,8 +1122,8 @@ class TextBuffer : gobject.object.ObjectG
   */
   void removeTagByName(string name, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_text_buffer_remove_tag_by_name(cast(GtkTextBuffer*)cPtr, _name, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1140,7 +1140,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void selectRange(gtk.text_iter.TextIter ins, gtk.text_iter.TextIter bound)
   {
-    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(const(GtkTextIter)*)ins.cPtr(No.dup) : null, bound ? cast(const(GtkTextIter)*)bound.cPtr(No.dup) : null);
+    gtk_text_buffer_select_range(cast(GtkTextBuffer*)cPtr, ins ? cast(const(GtkTextIter)*)ins.cPtr(No.Dup) : null, bound ? cast(const(GtkTextIter)*)bound.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1162,7 +1162,7 @@ class TextBuffer : gobject.object.ObjectG
   {
     ubyte* _cretval;
     size_t _cretlength;
-    _cretval = gtk_text_buffer_serialize(cast(GtkTextBuffer*)cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer.cPtr(No.dup) : null, format ? cast(GdkAtom)format.cPtr : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.dup) : null, &_cretlength);
+    _cretval = gtk_text_buffer_serialize(cast(GtkTextBuffer*)cPtr, contentBuffer ? cast(GtkTextBuffer*)contentBuffer.cPtr(No.Dup) : null, format ? cast(GdkAtom)format.cPtr : null, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -1195,7 +1195,7 @@ class TextBuffer : gobject.object.ObjectG
   */
   void setText(string text, int len)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_text_buffer_set_text(cast(GtkTextBuffer*)cPtr, _text, len);
   }
 
@@ -1253,10 +1253,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to ApplyTag signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectApplyTag(T)(T callback, Flag!"after" after = No.after)
+  ulong connectApplyTag(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ApplyTagCallbackDlg) || is(T : ApplyTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1300,10 +1300,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to BeginUserAction signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBeginUserAction(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBeginUserAction(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BeginUserActionCallbackDlg) || is(T : BeginUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1336,10 +1336,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1383,10 +1383,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to DeleteRange signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteRange(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeleteRange(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeleteRangeCallbackDlg) || is(T : DeleteRangeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1430,10 +1430,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to EndUserAction signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEndUserAction(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEndUserAction(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EndUserActionCallbackDlg) || is(T : EndUserActionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1476,10 +1476,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to InsertChildAnchor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertChildAnchor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertChildAnchor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertChildAnchorCallbackDlg) || is(T : InsertChildAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1523,10 +1523,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to InsertPixbuf signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertPixbuf(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertPixbuf(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertPixbufCallbackDlg) || is(T : InsertPixbufCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1573,10 +1573,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to InsertText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertText(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertText(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertTextCallbackDlg) || is(T : InsertTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1616,10 +1616,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to MarkDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMarkDeleted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMarkDeleted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MarkDeletedCallbackDlg) || is(T : MarkDeletedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1659,10 +1659,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to MarkSet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMarkSet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMarkSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MarkSetCallbackDlg) || is(T : MarkSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1700,10 +1700,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to ModifiedChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectModifiedChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectModifiedChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ModifiedChangedCallbackDlg) || is(T : ModifiedChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1738,10 +1738,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to PasteDone signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteDone(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPasteDone(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PasteDoneCallbackDlg) || is(T : PasteDoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1785,10 +1785,10 @@ class TextBuffer : gobject.object.ObjectG
     Connect to RemoveTag signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemoveTag(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRemoveTag(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RemoveTagCallbackDlg) || is(T : RemoveTagCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -135,12 +135,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.spin_button.SpinButton] uses the [gtk.types.AccessibleRole.spinButton] role.
+  [gtk.spin_button.SpinButton] uses the [gtk.types.AccessibleRole.SpinButton] role.
 */
 class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.cell_editable.CellEditable, gtk.editable.Editable, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -173,8 +173,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null, climbRate, digits);
-    this(_cretval, No.take);
+    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -201,7 +201,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
-    auto _retval = ObjectG.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
-    gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null, climbRate, digits);
+    gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
   }
 
   /**
@@ -240,7 +240,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -540,10 +540,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -584,10 +584,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     Connect to ChangeValue signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeValue(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChangeValue(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeValueCallbackDlg) || is(T : ChangeValueCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -639,10 +639,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     Connect to Output signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOutput(T)(T callback, Flag!"after" after = No.after)
+  ulong connectOutput(T)(T callback, Flag!"After" after = No.After)
   if (is(T : OutputCallbackDlg) || is(T : OutputCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -678,10 +678,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -714,10 +714,10 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     Connect to Wrapped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWrapped(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WrappedCallbackDlg) || is(T : WrappedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

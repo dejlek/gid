@@ -10,7 +10,7 @@ import gobject.object;
 class FunctionOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,7 +30,7 @@ class FunctionOptions : gobject.object.ObjectG
   bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {
     bool _retval;
-    _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions.cPtr(No.dup) : null);
+    _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -39,7 +39,7 @@ class FunctionOptions : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_function_options_to_string(cast(GArrowFunctionOptions*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

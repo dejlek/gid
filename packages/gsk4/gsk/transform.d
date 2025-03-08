@@ -26,12 +26,12 @@ import gsk.types;
 class Transform : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -52,7 +52,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,7 +64,7 @@ class Transform : gobject.boxed.Boxed
   bool equal(gsk.transform.Transform second = null)
   {
     bool _retval;
-    _retval = gsk_transform_equal(cast(GskTransform*)cPtr, second ? cast(GskTransform*)second.cPtr(No.dup) : null);
+    _retval = gsk_transform_equal(cast(GskTransform*)cPtr, second ? cast(GskTransform*)second.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_invert(cast(GskTransform*)cPtr);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -107,8 +107,8 @@ class Transform : gobject.boxed.Boxed
   gsk.transform.Transform matrix(graphene.matrix.Matrix matrix)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_matrix(cast(GskTransform*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_transform_matrix(cast(GskTransform*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_perspective(cast(GskTransform*)cPtr, depth);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Transform : gobject.boxed.Boxed
   */
   void print(glib.string_.String string_)
   {
-    gsk_transform_print(cast(GskTransform*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
+    gsk_transform_print(cast(GskTransform*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -158,7 +158,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_rotate(cast(GskTransform*)cPtr, angle);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -174,8 +174,8 @@ class Transform : gobject.boxed.Boxed
   gsk.transform.Transform rotate3d(float angle, graphene.vec3.Vec3 axis)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_rotate_3d(cast(GskTransform*)cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_transform_rotate_3d(cast(GskTransform*)cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale(cast(GskTransform*)cPtr, factorX, factorY);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_scale_3d(cast(GskTransform*)cPtr, factorX, factorY, factorZ);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Transform : gobject.boxed.Boxed
   {
     GskTransform* _cretval;
     _cretval = gsk_transform_skew(cast(GskTransform*)cPtr, skewX, skewY);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class Transform : gobject.boxed.Boxed
   {
     graphene_matrix_t _outMatrix;
     gsk_transform_to_matrix(cast(GskTransform*)cPtr, &_outMatrix);
-    outMatrix = new graphene.matrix.Matrix(cast(void*)&_outMatrix, No.take);
+    outMatrix = new graphene.matrix.Matrix(cast(void*)&_outMatrix, No.Take);
   }
 
   /**
@@ -354,7 +354,7 @@ class Transform : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gsk_transform_to_string(cast(GskTransform*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -387,8 +387,8 @@ class Transform : gobject.boxed.Boxed
   gsk.transform.Transform transform(gsk.transform.Transform other = null)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_transform(cast(GskTransform*)cPtr, other ? cast(GskTransform*)other.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_transform_transform(cast(GskTransform*)cPtr, other ? cast(GskTransform*)other.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -404,8 +404,8 @@ class Transform : gobject.boxed.Boxed
   void transformBounds(graphene.rect.Rect rect, out graphene.rect.Rect outRect)
   {
     graphene_rect_t _outRect;
-    gsk_transform_transform_bounds(cast(GskTransform*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.dup) : null, &_outRect);
-    outRect = new graphene.rect.Rect(cast(void*)&_outRect, No.take);
+    gsk_transform_transform_bounds(cast(GskTransform*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null, &_outRect);
+    outRect = new graphene.rect.Rect(cast(void*)&_outRect, No.Take);
   }
 
   /**
@@ -418,8 +418,8 @@ class Transform : gobject.boxed.Boxed
   void transformPoint(graphene.point.Point point, out graphene.point.Point outPoint)
   {
     graphene_point_t _outPoint;
-    gsk_transform_transform_point(cast(GskTransform*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.dup) : null, &_outPoint);
-    outPoint = new graphene.point.Point(cast(void*)&_outPoint, No.take);
+    gsk_transform_transform_point(cast(GskTransform*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null, &_outPoint);
+    outPoint = new graphene.point.Point(cast(void*)&_outPoint, No.Take);
   }
 
   /**
@@ -431,8 +431,8 @@ class Transform : gobject.boxed.Boxed
   gsk.transform.Transform translate(graphene.point.Point point)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_translate(cast(GskTransform*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_transform_translate(cast(GskTransform*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -445,8 +445,8 @@ class Transform : gobject.boxed.Boxed
   gsk.transform.Transform translate3d(graphene.point3_d.Point3D point)
   {
     GskTransform* _cretval;
-    _cretval = gsk_transform_translate_3d(cast(GskTransform*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_transform_translate_3d(cast(GskTransform*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -467,10 +467,10 @@ class Transform : gobject.boxed.Boxed
   static bool parse(string string_, out gsk.transform.Transform outTransform)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     GskTransform* _outTransform;
     _retval = gsk_transform_parse(_string_, &_outTransform);
-    outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.take);
+    outTransform = new gsk.transform.Transform(cast(void*)_outTransform, Yes.Take);
     return _retval;
   }
 }

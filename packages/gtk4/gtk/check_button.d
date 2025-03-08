@@ -73,12 +73,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.checkbox] role.
+  [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.Checkbox] role.
 */
 class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -104,7 +104,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -116,9 +116,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.check_button.CheckButton newWithLabel(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,9 +132,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   static gtk.check_button.CheckButton newWithMnemonic(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_check_button_set_child(cast(GtkCheckButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_check_button_set_child(cast(GtkCheckButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -246,7 +246,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setGroup(gtk.check_button.CheckButton group = null)
   {
-    gtk_check_button_set_group(cast(GtkCheckButton*)cPtr, group ? cast(GtkCheckButton*)group.cPtr(No.dup) : null);
+    gtk_check_button_set_group(cast(GtkCheckButton*)cPtr, group ? cast(GtkCheckButton*)group.cPtr(No.Dup) : null);
   }
 
   /**
@@ -274,7 +274,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_check_button_set_label(cast(GtkCheckButton*)cPtr, _label);
   }
 
@@ -318,10 +318,10 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -354,10 +354,10 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     Connect to Toggled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggled(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -13,22 +13,22 @@ enum GAppInfoCreateFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       Application opens in a terminal window.
   */
-  needsTerminal = 1,
+  NeedsTerminal = 1,
 
   /**
       Application supports URI arguments.
   */
-  supportsUris = 2,
+  SupportsUris = 2,
 
   /**
       Application supports startup notification. Since 2.26
   */
-  supportsStartupNotification = 4,
+  SupportsStartupNotification = 4,
 }
 
 /**
@@ -38,14 +38,14 @@ enum GApplicationFlags : uint
 {
   /**
       Default. Deprecated in 2.74, use
-      [gio.types.ApplicationFlags.defaultFlags] instead
+      [gio.types.ApplicationFlags.DefaultFlags] instead
   */
-  flagsNone = 0,
+  FlagsNone = 0,
 
   /**
       Default flags. Since: 2.74
   */
-  defaultFlags = 0,
+  DefaultFlags = 0,
 
   /**
       Run as a service. In this mode, registration
@@ -53,21 +53,21 @@ enum GApplicationFlags : uint
          will initially wait up to 10 seconds for an initial activation
          message to arrive.
   */
-  isService = 1,
+  IsService = 1,
 
   /**
       Don't try to become the primary instance.
   */
-  isLauncher = 2,
+  IsLauncher = 2,
 
   /**
       This application handles opening files (in
         the primary instance). Note that this flag only affects the default
         implementation of local_command_line(), and has no effect if
-        [gio.types.ApplicationFlags.handlesCommandLine] is given.
+        [gio.types.ApplicationFlags.HandlesCommandLine] is given.
         See [gio.application.Application.run] for details.
   */
-  handlesOpen = 4,
+  HandlesOpen = 4,
 
   /**
       This application handles command line
@@ -75,7 +75,7 @@ enum GApplicationFlags : uint
         the default implementation of local_command_line().
         See [gio.application.Application.run] for details.
   */
-  handlesCommandLine = 8,
+  HandlesCommandLine = 8,
 
   /**
       Send the environment of the
@@ -87,7 +87,7 @@ enum GApplicationFlags : uint
         to the #GApplication::command-line signal handler, via
         [gio.application_command_line.ApplicationCommandLine.getenv].
   */
-  sendEnvironment = 16,
+  SendEnvironment = 16,
 
   /**
       Make no attempts to do any of the typical
@@ -97,27 +97,27 @@ enum GApplicationFlags : uint
         owner already exists.  Everything occurs in the local process.
         Since: 2.30.
   */
-  nonUnique = 32,
+  NonUnique = 32,
 
   /**
       Allow users to override the
         application ID from the command line with `--gapplication-app-id`.
         Since: 2.48
   */
-  canOverrideAppId = 64,
+  CanOverrideAppId = 64,
 
   /**
       Allow another instance to take over
         the bus name. Since: 2.60
   */
-  allowReplacement = 128,
+  AllowReplacement = 128,
 
   /**
       Take over from another instance. This flag is
         usually set by passing `--gapplication-replace` on the commandline.
         Since: 2.60
   */
-  replace = 256,
+  Replace = 256,
 }
 
 /**
@@ -130,32 +130,32 @@ enum GAskPasswordFlags : uint
   /**
       operation requires a password.
   */
-  needPassword = 1,
+  NeedPassword = 1,
 
   /**
       operation requires a username.
   */
-  needUsername = 2,
+  NeedUsername = 2,
 
   /**
       operation requires a domain.
   */
-  needDomain = 4,
+  NeedDomain = 4,
 
   /**
       operation supports saving settings.
   */
-  savingSupported = 8,
+  SavingSupported = 8,
 
   /**
       operation supports anonymous users.
   */
-  anonymousSupported = 16,
+  AnonymousSupported = 16,
 
   /**
       operation takes TCRYPT parameters (Since: 2.58)
   */
-  tcrypt = 32,
+  Tcrypt = 32,
 }
 
 /**
@@ -166,24 +166,24 @@ enum GBusNameOwnerFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Allow another message bus connection to claim the name.
   */
-  allowReplacement = 1,
+  AllowReplacement = 1,
 
   /**
       If another message bus connection owns the name and have
-    specified [gio.types.BusNameOwnerFlags.allowReplacement], then take the name from the other connection.
+    specified [gio.types.BusNameOwnerFlags.AllowReplacement], then take the name from the other connection.
   */
-  replace = 2,
+  Replace = 2,
 
   /**
       If another message bus connection owns the name, immediately
     return an error from [gio.global.busOwnName] rather than entering the waiting queue for that name. (Since 2.54)
   */
-  doNotQueue = 4,
+  DoNotQueue = 4,
 }
 
 /**
@@ -194,14 +194,14 @@ enum GBusNameWatcherFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       If no-one owns the name when
     beginning to watch the name, ask the bus to launch an owner for the
     name.
   */
-  autoStart = 1,
+  AutoStart = 1,
 }
 
 /**
@@ -212,22 +212,22 @@ enum GBusType
   /**
       An alias for the message bus that activated the process, if any.
   */
-  starter = -1,
+  Starter = -1,
 
   /**
       Not a message bus.
   */
-  none = 0,
+  None = 0,
 
   /**
       The system-wide message bus.
   */
-  system = 1,
+  System = 1,
 
   /**
       The login session message bus.
   */
-  session = 2,
+  Session = 2,
 }
 
 /**
@@ -238,17 +238,17 @@ enum GConverterFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       At end of input data
   */
-  inputAtEnd = 1,
+  InputAtEnd = 1,
 
   /**
       Flush data
   */
-  flush = 2,
+  Flush = 2,
 }
 
 /**
@@ -259,22 +259,22 @@ enum GConverterResult
   /**
       There was an error during conversion.
   */
-  error = 0,
+  Error = 0,
 
   /**
       Some data was consumed or produced
   */
-  converted = 1,
+  Converted = 1,
 
   /**
       The conversion is finished
   */
-  finished = 2,
+  Finished = 2,
 
   /**
       Flushing is finished
   */
-  flushed = 3,
+  Flushed = 3,
 }
 
 /**
@@ -285,42 +285,42 @@ enum GCredentialsType
   /**
       Indicates an invalid native credential type.
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       The native credentials type is a `struct ucred`.
   */
-  linuxUcred = 1,
+  LinuxUcred = 1,
 
   /**
       The native credentials type is a `struct cmsgcred`.
   */
-  freebsdCmsgcred = 2,
+  FreebsdCmsgcred = 2,
 
   /**
       The native credentials type is a `struct sockpeercred`. Added in 2.30.
   */
-  openbsdSockpeercred = 3,
+  OpenbsdSockpeercred = 3,
 
   /**
       The native credentials type is a `ucred_t`. Added in 2.40.
   */
-  solarisUcred = 4,
+  SolarisUcred = 4,
 
   /**
       The native credentials type is a `struct unpcbid`. Added in 2.42.
   */
-  netbsdUnpcbid = 5,
+  NetbsdUnpcbid = 5,
 
   /**
       The native credentials type is a `struct xucred`. Added in 2.66.
   */
-  appleXucred = 6,
+  AppleXucred = 6,
 
   /**
       The native credentials type is a PID `DWORD`. Added in 2.72.
   */
-  win32Pid = 7,
+  Win32Pid = 7,
 }
 
 /**
@@ -331,20 +331,20 @@ enum GDBusCallFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       The bus must not launch
     an owner for the destination name in response to this method
     invocation.
   */
-  noAutoStart = 1,
+  NoAutoStart = 1,
 
   /**
       the caller is prepared to
     wait for interactive authorization. Since 2.46.
   */
-  allowInteractiveAuthorization = 2,
+  AllowInteractiveAuthorization = 2,
 }
 
 /**
@@ -355,13 +355,13 @@ enum GDBusCapabilityFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       The connection
     supports exchanging UNIX file descriptors with the remote peer.
   */
-  unixFdPassing = 1,
+  UnixFdPassing = 1,
 }
 
 /**
@@ -372,42 +372,42 @@ enum GDBusConnectionFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Perform authentication against server.
   */
-  authenticationClient = 1,
+  AuthenticationClient = 1,
 
   /**
       Perform authentication against client.
   */
-  authenticationServer = 2,
+  AuthenticationServer = 2,
 
   /**
       When
     authenticating as a server, allow the anonymous authentication
     method.
   */
-  authenticationAllowAnonymous = 4,
+  AuthenticationAllowAnonymous = 4,
 
   /**
       Pass this flag if connecting to a peer that is a
     message bus. This means that the Hello() method will be invoked as part of the connection setup.
   */
-  messageBusConnection = 8,
+  MessageBusConnection = 8,
 
   /**
       If set, processing of D-Bus messages is
     delayed until [gio.dbus_connection.DBusConnection.startMessageProcessing] is called.
   */
-  delayMessageProcessing = 16,
+  DelayMessageProcessing = 16,
 
   /**
       When authenticating
     as a server, require the UID of the peer to be the same as the UID of the server. (Since: 2.68)
   */
-  authenticationRequireSameUser = 32,
+  AuthenticationRequireSameUser = 32,
 
   /**
       When authenticating, try to use
@@ -417,7 +417,7 @@ enum GDBusConnectionFlags : uint
      connections to a server in another user namespace succeed, but causes
      a deadlock when connecting to a GDBus server older than 2.73.3. Since: 2.74
   */
-  crossNamespace = 64,
+  CrossNamespace = 64,
 }
 
 /**
@@ -429,236 +429,236 @@ enum GDBusError
       A generic error; "something went wrong" - see the error message for
     more.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       There was not enough memory to complete an operation.
   */
-  noMemory = 1,
+  NoMemory = 1,
 
   /**
       The bus doesn't know how to launch a service to supply the bus name
     you wanted.
   */
-  serviceUnknown = 2,
+  ServiceUnknown = 2,
 
   /**
       The bus name you referenced doesn't exist (i.e. no application owns
     it).
   */
-  nameHasNoOwner = 3,
+  NameHasNoOwner = 3,
 
   /**
       No reply to a message expecting one, usually means a timeout occurred.
   */
-  noReply = 4,
+  NoReply = 4,
 
   /**
       Something went wrong reading or writing to a socket, for example.
   */
-  ioError = 5,
+  IoError = 5,
 
   /**
       A D-Bus bus address was malformed.
   */
-  badAddress = 6,
+  BadAddress = 6,
 
   /**
       Requested operation isn't supported (like ENOSYS on UNIX).
   */
-  notSupported = 7,
+  NotSupported = 7,
 
   /**
       Some limited resource is exhausted.
   */
-  limitsExceeded = 8,
+  LimitsExceeded = 8,
 
   /**
       Security restrictions don't allow doing what you're trying to do.
   */
-  accessDenied = 9,
+  AccessDenied = 9,
 
   /**
       Authentication didn't work.
   */
-  authFailed = 10,
+  AuthFailed = 10,
 
   /**
       Unable to connect to server (probably caused by ECONNREFUSED on a
     socket).
   */
-  noServer = 11,
+  NoServer = 11,
 
   /**
       Certain timeout errors, possibly ETIMEDOUT on a socket.  Note that
-    [gio.types.DBusError.noReply] is used for message reply timeouts. Warning:
-    this is confusingly-named given that [gio.types.DBusError.timedOut] also
+    [gio.types.DBusError.NoReply] is used for message reply timeouts. Warning:
+    this is confusingly-named given that [gio.types.DBusError.TimedOut] also
     exists. We can't fix it for compatibility reasons so just be
     careful.
   */
-  timeout = 12,
+  Timeout = 12,
 
   /**
       No network access (probably ENETUNREACH on a socket).
   */
-  noNetwork = 13,
+  NoNetwork = 13,
 
   /**
       Can't bind a socket since its address is in use (i.e. EADDRINUSE).
   */
-  addressInUse = 14,
+  AddressInUse = 14,
 
   /**
       The connection is disconnected and you're trying to use it.
   */
-  disconnected = 15,
+  Disconnected = 15,
 
   /**
       Invalid arguments passed to a method call.
   */
-  invalidArgs = 16,
+  InvalidArgs = 16,
 
   /**
       Missing file.
   */
-  fileNotFound = 17,
+  FileNotFound = 17,
 
   /**
       Existing file and the operation you're using does not silently overwrite.
   */
-  fileExists = 18,
+  FileExists = 18,
 
   /**
       Method name you invoked isn't known by the object you invoked it on.
   */
-  unknownMethod = 19,
+  UnknownMethod = 19,
 
   /**
       Certain timeout errors, e.g. while starting a service. Warning: this is
-    confusingly-named given that [gio.types.DBusError.timeout] also exists. We
+    confusingly-named given that [gio.types.DBusError.Timeout] also exists. We
     can't fix it for compatibility reasons so just be careful.
   */
-  timedOut = 20,
+  TimedOut = 20,
 
   /**
       Tried to remove or modify a match rule that didn't exist.
   */
-  matchRuleNotFound = 21,
+  MatchRuleNotFound = 21,
 
   /**
       The match rule isn't syntactically valid.
   */
-  matchRuleInvalid = 22,
+  MatchRuleInvalid = 22,
 
   /**
       While starting a new process, the exec() call failed.
   */
-  spawnExecFailed = 23,
+  SpawnExecFailed = 23,
 
   /**
       While starting a new process, the fork() call failed.
   */
-  spawnForkFailed = 24,
+  SpawnForkFailed = 24,
 
   /**
       While starting a new process, the child exited with a status code.
   */
-  spawnChildExited = 25,
+  SpawnChildExited = 25,
 
   /**
       While starting a new process, the child exited on a signal.
   */
-  spawnChildSignaled = 26,
+  SpawnChildSignaled = 26,
 
   /**
       While starting a new process, something went wrong.
   */
-  spawnFailed = 27,
+  SpawnFailed = 27,
 
   /**
       We failed to setup the environment correctly.
   */
-  spawnSetupFailed = 28,
+  SpawnSetupFailed = 28,
 
   /**
       We failed to setup the config parser correctly.
   */
-  spawnConfigInvalid = 29,
+  SpawnConfigInvalid = 29,
 
   /**
       Bus name was not valid.
   */
-  spawnServiceInvalid = 30,
+  SpawnServiceInvalid = 30,
 
   /**
       Service file not found in system-services directory.
   */
-  spawnServiceNotFound = 31,
+  SpawnServiceNotFound = 31,
 
   /**
       Permissions are incorrect on the setuid helper.
   */
-  spawnPermissionsInvalid = 32,
+  SpawnPermissionsInvalid = 32,
 
   /**
       Service file invalid (Name, User or Exec missing).
   */
-  spawnFileInvalid = 33,
+  SpawnFileInvalid = 33,
 
   /**
       Tried to get a UNIX process ID and it wasn't available.
   */
-  spawnNoMemory = 34,
+  SpawnNoMemory = 34,
 
   /**
       Tried to get a UNIX process ID and it wasn't available.
   */
-  unixProcessIdUnknown = 35,
+  UnixProcessIdUnknown = 35,
 
   /**
       A type signature is not valid.
   */
-  invalidSignature = 36,
+  InvalidSignature = 36,
 
   /**
       A file contains invalid syntax or is otherwise broken.
   */
-  invalidFileContent = 37,
+  InvalidFileContent = 37,
 
   /**
       Asked for SELinux security context and it wasn't available.
   */
-  selinuxSecurityContextUnknown = 38,
+  SelinuxSecurityContextUnknown = 38,
 
   /**
       Asked for ADT audit data and it wasn't available.
   */
-  adtAuditDataUnknown = 39,
+  AdtAuditDataUnknown = 39,
 
   /**
       There's already an object with the requested object path.
   */
-  objectPathInUse = 40,
+  ObjectPathInUse = 40,
 
   /**
       Object you invoked a method on isn't known. Since 2.42
   */
-  unknownObject = 41,
+  UnknownObject = 41,
 
   /**
       Interface you invoked a method on isn't known by the object. Since 2.42
   */
-  unknownInterface = 42,
+  UnknownInterface = 42,
 
   /**
       Property you tried to access isn't known by the object. Since 2.42
   */
-  unknownProperty = 43,
+  UnknownProperty = 43,
 
   /**
       Property you tried to set is read-only. Since 2.42
   */
-  propertyReadOnly = 44,
+  PropertyReadOnly = 44,
 }
 
 /**
@@ -669,7 +669,7 @@ enum GDBusInterfaceSkeletonFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Each method invocation is handled in
@@ -677,7 +677,7 @@ enum GDBusInterfaceSkeletonFlags : uint
       without blocking any other part of the process. It also means that the method implementation must
       use locking to access data structures used by other threads.
   */
-  handleMethodInvocationsInThread = 1,
+  HandleMethodInvocationsInThread = 1,
 }
 
 /**
@@ -688,12 +688,12 @@ enum GDBusMessageByteOrder
   /**
       The byte order is big endian.
   */
-  bigEndian = 66,
+  BigEndian = 66,
 
   /**
       The byte order is little endian.
   */
-  littleEndian = 108,
+  LittleEndian = 108,
 }
 
 /**
@@ -704,25 +704,25 @@ enum GDBusMessageFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       A reply is not expected.
   */
-  noReplyExpected = 1,
+  NoReplyExpected = 1,
 
   /**
       The bus must not launch an
     owner for the destination name in response to this message.
   */
-  noAutoStart = 2,
+  NoAutoStart = 2,
 
   /**
       If set on a method
     call, this flag means that the caller is prepared to wait for interactive
     authorization. Since 2.46.
   */
-  allowInteractiveAuthorization = 4,
+  AllowInteractiveAuthorization = 4,
 }
 
 /**
@@ -733,52 +733,52 @@ enum GDBusMessageHeaderField
   /**
       Not a valid header field.
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       The object path.
   */
-  path = 1,
+  Path = 1,
 
   /**
       The interface name.
   */
-  interface_ = 2,
+  Interface = 2,
 
   /**
       The method or signal name.
   */
-  member = 3,
+  Member = 3,
 
   /**
       The name of the error that occurred.
   */
-  errorName = 4,
+  ErrorName = 4,
 
   /**
       The serial number the message is a reply to.
   */
-  replySerial = 5,
+  ReplySerial = 5,
 
   /**
       The name the message is intended for.
   */
-  destination = 6,
+  Destination = 6,
 
   /**
       Unique name of the sender of the message (filled in by the bus).
   */
-  sender = 7,
+  Sender = 7,
 
   /**
       The signature of the message body.
   */
-  signature = 8,
+  Signature = 8,
 
   /**
       The number of UNIX file descriptors that accompany the message.
   */
-  numUnixFds = 9,
+  NumUnixFds = 9,
 }
 
 /**
@@ -789,27 +789,27 @@ enum GDBusMessageType
   /**
       Message is of invalid type.
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       Method call.
   */
-  methodCall = 1,
+  MethodCall = 1,
 
   /**
       Method reply.
   */
-  methodReturn = 2,
+  MethodReturn = 2,
 
   /**
       Error reply.
   */
-  error = 3,
+  Error = 3,
 
   /**
       Signal emission.
   */
-  signal = 4,
+  Signal = 4,
 }
 
 /**
@@ -820,7 +820,7 @@ enum GDBusObjectManagerClientFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       If not set and the
@@ -828,7 +828,7 @@ enum GDBusObjectManagerClientFlags : uint
       an owner for the name if no-one owns the name. This flag can only
       be used in managers for well-known names.
   */
-  doNotAutoStart = 1,
+  DoNotAutoStart = 1,
 }
 
 /**
@@ -839,17 +839,17 @@ enum GDBusPropertyInfoFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Property is readable.
   */
-  readable = 1,
+  Readable = 1,
 
   /**
       Property is writable.
   */
-  writable = 2,
+  Writable = 2,
 }
 
 /**
@@ -860,44 +860,44 @@ enum GDBusProxyFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Don't load properties.
   */
-  doNotLoadProperties = 1,
+  DoNotLoadProperties = 1,
 
   /**
       Don't connect to signals on the remote object.
   */
-  doNotConnectSignals = 2,
+  DoNotConnectSignals = 2,
 
   /**
       If the proxy is for a well-known name,
     do not ask the bus to launch an owner during proxy initialization or a method call.
     This flag is only meaningful in proxies for well-known names.
   */
-  doNotAutoStart = 4,
+  DoNotAutoStart = 4,
 
   /**
       If set, the property value for any __invalidated property__ will be (asynchronously) retrieved upon receiving the [`PropertiesChanged`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties) D-Bus signal and the property will not cause emission of the #GDBusProxy::g-properties-changed signal. When the value is received the #GDBusProxy::g-properties-changed signal is emitted for the property along with the retrieved value. Since 2.32.
   */
-  getInvalidatedProperties = 8,
+  GetInvalidatedProperties = 8,
 
   /**
       If the proxy is for a well-known name,
     do not ask the bus to launch an owner during proxy initialization, but allow it to be
     autostarted by a method call. This flag is only meaningful in proxies for well-known names,
-    and only if [gio.types.DBusProxyFlags.doNotAutoStart] is not also specified.
+    and only if [gio.types.DBusProxyFlags.DoNotAutoStart] is not also specified.
   */
-  doNotAutoStartAtConstruction = 16,
+  DoNotAutoStartAtConstruction = 16,
 
   /**
       Don't actually send the AddMatch D-Bus
        call for this signal subscription. This gives you more control
        over which match rules you add (but you must add them manually). (Since: 2.72)
   */
-  noMatchRule = 32,
+  NoMatchRule = 32,
 }
 
 /**
@@ -908,14 +908,14 @@ enum GDBusSendMessageFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Do not automatically
     assign a serial number from the #GDBusConnection object when
     sending a message.
   */
-  preserveSerial = 1,
+  PreserveSerial = 1,
 }
 
 /**
@@ -926,26 +926,26 @@ enum GDBusServerFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       All #GDBusServer::new-connection
     signals will run in separated dedicated threads (see signal for
     details).
   */
-  runInThread = 1,
+  RunInThread = 1,
 
   /**
       Allow the anonymous
     authentication method.
   */
-  authenticationAllowAnonymous = 2,
+  AuthenticationAllowAnonymous = 2,
 
   /**
       Require the UID of the
     peer to be the same as the UID of the server when authenticating. (Since: 2.68)
   */
-  authenticationRequireSameUser = 4,
+  AuthenticationRequireSameUser = 4,
 }
 
 /**
@@ -956,27 +956,27 @@ enum GDBusSignalFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Don't actually send the AddMatch
     D-Bus call for this signal subscription.  This gives you more control
     over which match rules you add (but you must add them manually).
   */
-  noMatchRule = 1,
+  NoMatchRule = 1,
 
   /**
       Match first arguments that
     contain a bus or interface name with the given namespace.
   */
-  matchArg0Namespace = 2,
+  MatchArg0Namespace = 2,
 
   /**
       Match first arguments that
     contain an object path that is either equivalent to the given path,
     or one of the paths is a subpath of the other.
   */
-  matchArg0Path = 4,
+  MatchArg0Path = 4,
 }
 
 /**
@@ -987,14 +987,14 @@ enum GDBusSubtreeFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Method calls to objects not in the enumerated range
                                                           will still be dispatched. This is useful if you want
                                                           to dynamically spawn objects in the subtree.
   */
-  dispatchToUnenumeratedNodes = 1,
+  DispatchToUnenumeratedNodes = 1,
 }
 
 /**
@@ -1006,17 +1006,17 @@ enum GDataStreamByteOrder
   /**
       Selects Big Endian byte order.
   */
-  bigEndian = 0,
+  BigEndian = 0,
 
   /**
       Selects Little Endian byte order.
   */
-  littleEndian = 1,
+  LittleEndian = 1,
 
   /**
       Selects endianness based on host machine's architecture.
   */
-  hostEndian = 2,
+  HostEndian = 2,
 }
 
 /**
@@ -1027,22 +1027,22 @@ enum GDataStreamNewlineType
   /**
       Selects "LF" line endings, common on most modern UNIX platforms.
   */
-  lf = 0,
+  Lf = 0,
 
   /**
       Selects "CR" line endings.
   */
-  cr = 1,
+  Cr = 1,
 
   /**
       Selects "CR, LF" line ending, common on Microsoft Windows.
   */
-  crLf = 2,
+  CrLf = 2,
 
   /**
       Automatically try to handle any line ending type.
   */
-  any = 3,
+  Any = 3,
 }
 
 /**
@@ -1053,7 +1053,7 @@ enum GDriveStartFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -1065,34 +1065,34 @@ enum GDriveStartStopType
       Unknown or drive doesn't support
        start/stop.
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       The stop method will physically
        shut down the drive and e.g. power down the port the drive is
        attached to.
   */
-  shutdown = 1,
+  Shutdown = 1,
 
   /**
       The start/stop methods are used
        for connecting/disconnect to the drive over the network.
   */
-  network = 2,
+  Network = 2,
 
   /**
       The start/stop methods will
        assemble/disassemble a virtual drive from several physical
        drives.
   */
-  multidisk = 3,
+  Multidisk = 3,
 
   /**
       The start/stop methods will
        unlock/lock the disk (for example using the ATA <quote>SECURITY
        UNLOCK DEVICE</quote> command)
   */
-  password = 4,
+  Password = 4,
 }
 
 /**
@@ -1104,22 +1104,22 @@ enum GEmblemOrigin
   /**
       Emblem of unknown origin
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       Emblem adds device-specific information
   */
-  device = 1,
+  Device = 1,
 
   /**
       Emblem depicts live metadata, such as "readonly"
   */
-  livemetadata = 2,
+  Livemetadata = 2,
 
   /**
       Emblem comes from a user-defined tag, e.g. set by nautilus (in the future)
   */
-  tag = 3,
+  Tag = 3,
 }
 
 /**
@@ -1130,17 +1130,17 @@ enum GFileAttributeInfoFlags : uint
   /**
       no flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       copy the attribute values when the file is copied.
   */
-  copyWithFile = 1,
+  CopyWithFile = 1,
 
   /**
       copy the attribute values when the file is moved.
   */
-  copyWhenMoved = 2,
+  CopyWhenMoved = 2,
 }
 
 /**
@@ -1151,17 +1151,17 @@ enum GFileAttributeStatus
   /**
       Attribute value is unset (empty).
   */
-  unset = 0,
+  Unset = 0,
 
   /**
       Attribute value is set.
   */
-  set = 1,
+  Set = 1,
 
   /**
       Indicates an error in setting the value.
   */
-  errorSetting = 2,
+  ErrorSetting = 2,
 }
 
 /**
@@ -1172,52 +1172,52 @@ enum GFileAttributeType
   /**
       indicates an invalid or uninitialized type.
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       a null terminated UTF8 string.
   */
-  string_ = 1,
+  String = 1,
 
   /**
       a zero terminated string of non-zero bytes.
   */
-  byteString = 2,
+  ByteString = 2,
 
   /**
       a boolean value.
   */
-  boolean = 3,
+  Boolean = 3,
 
   /**
       an unsigned 4-byte/32-bit integer.
   */
-  uint32 = 4,
+  Uint32 = 4,
 
   /**
       a signed 4-byte/32-bit integer.
   */
-  int32 = 5,
+  Int32 = 5,
 
   /**
       an unsigned 8-byte/64-bit integer.
   */
-  uint64 = 6,
+  Uint64 = 6,
 
   /**
       a signed 8-byte/64-bit integer.
   */
-  int64 = 7,
+  Int64 = 7,
 
   /**
       a #GObject.
   */
-  object = 8,
+  Object = 8,
 
   /**
       a null terminated char **. Since 2.22
   */
-  stringv = 9,
+  Stringv = 9,
 }
 
 /**
@@ -1228,43 +1228,43 @@ enum GFileCopyFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Overwrite any existing files
   */
-  overwrite = 1,
+  Overwrite = 1,
 
   /**
       Make a backup of any existing files.
   */
-  backup = 2,
+  Backup = 2,
 
   /**
       Don't follow symlinks.
   */
-  nofollowSymlinks = 4,
+  NofollowSymlinks = 4,
 
   /**
       Copy all file metadata instead of just default set used for copy (see #GFileInfo).
   */
-  allMetadata = 8,
+  AllMetadata = 8,
 
   /**
       Don't use copy and delete fallback if native move not supported.
   */
-  noFallbackForMove = 16,
+  NoFallbackForMove = 16,
 
   /**
       Leaves target file with default perms, instead of setting the source file perms.
   */
-  targetDefaultPerms = 32,
+  TargetDefaultPerms = 32,
 
   /**
       Use default modification
         timestamps instead of copying them from the source file. Since 2.80
   */
-  targetDefaultModifiedTime = 64,
+  TargetDefaultModifiedTime = 64,
 }
 
 /**
@@ -1275,13 +1275,13 @@ enum GFileCreateFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Create a file that can only be
        accessed by the current user.
   */
-  private_ = 1,
+  Private = 1,
 
   /**
       Replace the destination
@@ -1295,7 +1295,7 @@ enum GFileCreateFlags : uint
        [gio.file.File.replace] and its variants, including [gio.file.File.replaceContents].
        Since 2.20
   */
-  replaceDestination = 2,
+  ReplaceDestination = 2,
 }
 
 /**
@@ -1306,14 +1306,14 @@ enum GFileMeasureFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Report any error encountered
       while traversing the directory tree.  Normally errors are only
       reported for the toplevel file.
   */
-  reportAnyError = 2,
+  ReportAnyError = 2,
 
   /**
       Tally usage based on apparent file
@@ -1324,13 +1324,13 @@ enum GFileMeasureFlags : uint
       ignore the sizes of file types other than regular files and links, as the
       sizes of other file types are not specified in a standard way.
   */
-  apparentSize = 4,
+  ApparentSize = 4,
 
   /**
       Do not cross mount point boundaries.
       Compare with `du -x`.
   */
-  noXdev = 8,
+  NoXdev = 8,
 }
 
 /**
@@ -1341,64 +1341,64 @@ enum GFileMonitorEvent
   /**
       a file changed.
   */
-  changed = 0,
+  Changed = 0,
 
   /**
       a hint that this was probably the last change in a set of changes.
   */
-  changesDoneHint = 1,
+  ChangesDoneHint = 1,
 
   /**
       a file was deleted.
   */
-  deleted = 2,
+  Deleted = 2,
 
   /**
       a file was created.
   */
-  created = 3,
+  Created = 3,
 
   /**
       a file attribute was changed.
   */
-  attributeChanged = 4,
+  AttributeChanged = 4,
 
   /**
       the file location will soon be unmounted.
   */
-  preUnmount = 5,
+  PreUnmount = 5,
 
   /**
       the file location was unmounted.
   */
-  unmounted = 6,
+  Unmounted = 6,
 
   /**
       the file was moved -- only sent if the
-      (deprecated) [gio.types.FileMonitorFlags.sendMoved] flag is set
+      (deprecated) [gio.types.FileMonitorFlags.SendMoved] flag is set
   */
-  moved = 7,
+  Moved = 7,
 
   /**
       the file was renamed within the
-      current directory -- only sent if the [gio.types.FileMonitorFlags.watchMoves]
+      current directory -- only sent if the [gio.types.FileMonitorFlags.WatchMoves]
       flag is set.  Since: 2.46.
   */
-  renamed = 8,
+  Renamed = 8,
 
   /**
       the file was moved into the
       monitored directory from another location -- only sent if the
-      [gio.types.FileMonitorFlags.watchMoves] flag is set.  Since: 2.46.
+      [gio.types.FileMonitorFlags.WatchMoves] flag is set.  Since: 2.46.
   */
-  movedIn = 9,
+  MovedIn = 9,
 
   /**
       the file was moved out of the
       monitored directory to another location -- only sent if the
-      [gio.types.FileMonitorFlags.watchMoves] flag is set.  Since: 2.46
+      [gio.types.FileMonitorFlags.WatchMoves] flag is set.  Since: 2.46
   */
-  movedOut = 10,
+  MovedOut = 10,
 }
 
 /**
@@ -1409,12 +1409,12 @@ enum GFileMonitorFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Watch for mount events.
   */
-  watchMounts = 1,
+  WatchMounts = 1,
 
   /**
       Pair DELETED and CREATED events caused
@@ -1422,23 +1422,23 @@ enum GFileMonitorFlags : uint
       event instead (NB: not supported on all backends; the default
       behaviour -without specifying this flag- is to send single DELETED
       and CREATED events).  Deprecated since 2.46: use
-      [gio.types.FileMonitorFlags.watchMoves] instead.
+      [gio.types.FileMonitorFlags.WatchMoves] instead.
   */
-  sendMoved = 2,
+  SendMoved = 2,
 
   /**
       Watch for changes to the file made
       via another hard link. Since 2.36.
   */
-  watchHardLinks = 4,
+  WatchHardLinks = 4,
 
   /**
       Watch for rename operations on a
-      monitored directory.  This causes [gio.types.FileMonitorEvent.renamed],
-      [gio.types.FileMonitorEvent.movedIn] and [gio.types.FileMonitorEvent.movedOut]
+      monitored directory.  This causes [gio.types.FileMonitorEvent.Renamed],
+      [gio.types.FileMonitorEvent.MovedIn] and [gio.types.FileMonitorEvent.MovedOut]
       events to be emitted when possible.  Since: 2.46.
   */
-  watchMoves = 8,
+  WatchMoves = 8,
 }
 
 /**
@@ -1449,64 +1449,64 @@ enum GFileQueryInfoFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Don't follow symlinks.
   */
-  nofollowSymlinks = 1,
+  NofollowSymlinks = 1,
 }
 
 /**
     Indicates the file's on-disk type.
   
-  On Windows systems a file will never have [gio.types.FileType.symbolicLink] type;
+  On Windows systems a file will never have [gio.types.FileType.SymbolicLink] type;
   use #GFileInfo and `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK` to determine
   whether a file is a symlink or not. This is due to the fact that NTFS does
   not have a single filesystem object type for symbolic links - it has
   files that symlink to files, and directories that symlink to directories.
   #GFileType enumeration cannot precisely represent this important distinction,
   which is why all Windows symlinks will continue to be reported as
-  [gio.types.FileType.regular] or [gio.types.FileType.directory].
+  [gio.types.FileType.Regular] or [gio.types.FileType.Directory].
 */
 enum GFileType
 {
   /**
       File's type is unknown.
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       File handle represents a regular file.
   */
-  regular = 1,
+  Regular = 1,
 
   /**
       File handle represents a directory.
   */
-  directory = 2,
+  Directory = 2,
 
   /**
       File handle represents a symbolic link
        (Unix systems).
   */
-  symbolicLink = 3,
+  SymbolicLink = 3,
 
   /**
       File is a "special" file, such as a socket, fifo,
        block device, or character device.
   */
-  special = 4,
+  Special = 4,
 
   /**
       File is a shortcut (Windows systems).
   */
-  shortcut = 5,
+  Shortcut = 5,
 
   /**
       File is a mountable location.
   */
-  mountable = 6,
+  Mountable = 6,
 }
 
 /**
@@ -1519,17 +1519,17 @@ enum GFilesystemPreviewType
   /**
       Only preview files if user has explicitly requested it.
   */
-  ifAlways = 0,
+  IfAlways = 0,
 
   /**
       Preview files if user has requested preview of "local" files.
   */
-  ifLocal = 1,
+  IfLocal = 1,
 
   /**
       Never preview files.
   */
-  never = 2,
+  Never = 2,
 }
 
 /**
@@ -1537,7 +1537,7 @@ enum GFilesystemPreviewType
   
   Note that this domain may be extended in future GLib releases. In
   general, new error codes either only apply to new APIs, or else
-  replace [gio.types.IOErrorEnum.failed] in cases that were not explicitly
+  replace [gio.types.IOErrorEnum.Failed] in cases that were not explicitly
   distinguished before. You should therefore avoid writing code like
   ```c
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_FAILED))
@@ -1547,10 +1547,10 @@ enum GFilesystemPreviewType
     }
   ```
   but should instead treat all unrecognized error codes the same as
-  [gio.types.IOErrorEnum.failed].
+  [gio.types.IOErrorEnum.Failed].
   
   See also #GPollableReturn for a cheaper way of returning
-  [gio.types.IOErrorEnum.wouldBlock] to callers without allocating a #GError.
+  [gio.types.IOErrorEnum.WouldBlock] to callers without allocating a #GError.
 */
 enum GIOErrorEnum
 {
@@ -1558,185 +1558,185 @@ enum GIOErrorEnum
       Generic error condition for when an operation fails
         and no more specific #GIOErrorEnum value is defined.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       File not found.
   */
-  notFound = 1,
+  NotFound = 1,
 
   /**
       File already exists.
   */
-  exists = 2,
+  Exists = 2,
 
   /**
       File is a directory.
   */
-  isDirectory = 3,
+  IsDirectory = 3,
 
   /**
       File is not a directory.
   */
-  notDirectory = 4,
+  NotDirectory = 4,
 
   /**
       File is a directory that isn't empty.
   */
-  notEmpty = 5,
+  NotEmpty = 5,
 
   /**
       File is not a regular file.
   */
-  notRegularFile = 6,
+  NotRegularFile = 6,
 
   /**
       File is not a symbolic link.
   */
-  notSymbolicLink = 7,
+  NotSymbolicLink = 7,
 
   /**
       File cannot be mounted.
   */
-  notMountableFile = 8,
+  NotMountableFile = 8,
 
   /**
       Filename is too many characters.
   */
-  filenameTooLong = 9,
+  FilenameTooLong = 9,
 
   /**
       Filename is invalid or contains invalid characters.
   */
-  invalidFilename = 10,
+  InvalidFilename = 10,
 
   /**
       File contains too many symbolic links.
   */
-  tooManyLinks = 11,
+  TooManyLinks = 11,
 
   /**
       No space left on drive.
   */
-  noSpace = 12,
+  NoSpace = 12,
 
   /**
       Invalid argument.
   */
-  invalidArgument = 13,
+  InvalidArgument = 13,
 
   /**
       Permission denied.
   */
-  permissionDenied = 14,
+  PermissionDenied = 14,
 
   /**
       Operation (or one of its parameters) not supported
   */
-  notSupported = 15,
+  NotSupported = 15,
 
   /**
       File isn't mounted.
   */
-  notMounted = 16,
+  NotMounted = 16,
 
   /**
       File is already mounted.
   */
-  alreadyMounted = 17,
+  AlreadyMounted = 17,
 
   /**
       File was closed.
   */
-  closed = 18,
+  Closed = 18,
 
   /**
       Operation was cancelled. See #GCancellable.
   */
-  cancelled = 19,
+  Cancelled = 19,
 
   /**
       Operations are still pending.
   */
-  pending = 20,
+  Pending = 20,
 
   /**
       File is read only.
   */
-  readOnly = 21,
+  ReadOnly = 21,
 
   /**
       Backup couldn't be created.
   */
-  cantCreateBackup = 22,
+  CantCreateBackup = 22,
 
   /**
       File's Entity Tag was incorrect.
   */
-  wrongEtag = 23,
+  WrongEtag = 23,
 
   /**
       Operation timed out.
   */
-  timedOut = 24,
+  TimedOut = 24,
 
   /**
       Operation would be recursive.
   */
-  wouldRecurse = 25,
+  WouldRecurse = 25,
 
   /**
       File is busy.
   */
-  busy = 26,
+  Busy = 26,
 
   /**
       Operation would block.
   */
-  wouldBlock = 27,
+  WouldBlock = 27,
 
   /**
       Host couldn't be found (remote operations).
   */
-  hostNotFound = 28,
+  HostNotFound = 28,
 
   /**
       Operation would merge files.
   */
-  wouldMerge = 29,
+  WouldMerge = 29,
 
   /**
       Operation failed and a helper program has
         already interacted with the user. Do not display any error dialog.
   */
-  failedHandled = 30,
+  FailedHandled = 30,
 
   /**
       The current process has too many files
         open and can't open any more. Duplicate descriptors do count toward
         this limit. Since 2.20
   */
-  tooManyOpenFiles = 31,
+  TooManyOpenFiles = 31,
 
   /**
       The object has not been initialized. Since 2.22
   */
-  notInitialized = 32,
+  NotInitialized = 32,
 
   /**
       The requested address is already in use. Since 2.22
   */
-  addressInUse = 33,
+  AddressInUse = 33,
 
   /**
       Need more input to finish operation. Since 2.24
   */
-  partialInput = 34,
+  PartialInput = 34,
 
   /**
       The input data was invalid. Since 2.24
   */
-  invalidData = 35,
+  InvalidData = 35,
 
   /**
       A remote object generated an error that
@@ -1745,77 +1745,77 @@ enum GIOErrorEnum
         error name and [gio.global.dbusErrorStripRemoteError] to fix up the
         message so it matches what was received on the wire. Since 2.26.
   */
-  dbusError = 36,
+  DbusError = 36,
 
   /**
       Host unreachable. Since 2.26
   */
-  hostUnreachable = 37,
+  HostUnreachable = 37,
 
   /**
       Network unreachable. Since 2.26
   */
-  networkUnreachable = 38,
+  NetworkUnreachable = 38,
 
   /**
       Connection refused. Since 2.26
   */
-  connectionRefused = 39,
+  ConnectionRefused = 39,
 
   /**
       Connection to proxy server failed. Since 2.26
   */
-  proxyFailed = 40,
+  ProxyFailed = 40,
 
   /**
       Proxy authentication failed. Since 2.26
   */
-  proxyAuthFailed = 41,
+  ProxyAuthFailed = 41,
 
   /**
       Proxy server needs authentication. Since 2.26
   */
-  proxyNeedAuth = 42,
+  ProxyNeedAuth = 42,
 
   /**
       Proxy connection is not allowed by ruleset.
         Since 2.26
   */
-  proxyNotAllowed = 43,
+  ProxyNotAllowed = 43,
 
   /**
       Broken pipe. Since 2.36
   */
-  brokenPipe = 44,
+  BrokenPipe = 44,
 
   /**
       Connection closed by peer. Note that this
-        is the same code as [gio.types.IOErrorEnum.brokenPipe]; before 2.44 some
-        "connection closed" errors returned [gio.types.IOErrorEnum.brokenPipe], but others
-        returned [gio.types.IOErrorEnum.failed]. Now they should all return the same
+        is the same code as [gio.types.IOErrorEnum.BrokenPipe]; before 2.44 some
+        "connection closed" errors returned [gio.types.IOErrorEnum.BrokenPipe], but others
+        returned [gio.types.IOErrorEnum.Failed]. Now they should all return the same
         value, which has this more logical name. Since 2.44.
   */
-  connectionClosed = 44,
+  ConnectionClosed = 44,
 
   /**
       Transport endpoint is not connected. Since 2.44
   */
-  notConnected = 45,
+  NotConnected = 45,
 
   /**
       Message too large. Since 2.48.
   */
-  messageTooLarge = 46,
+  MessageTooLarge = 46,
 
   /**
       No such device found. Since 2.74
   */
-  noSuchDevice = 47,
+  NoSuchDevice = 47,
 
   /**
       Destination address unset. Since 2.80
   */
-  destinationUnset = 48,
+  DestinationUnset = 48,
 }
 
 /**
@@ -1826,14 +1826,14 @@ enum GIOModuleScopeFlags
   /**
       No module scan flags
   */
-  none = 0,
+  None = 0,
 
   /**
       When using this scope to load or
         scan modules, automatically block a modules which has the same base
         basename as previously loaded module.
   */
-  blockDuplicates = 1,
+  BlockDuplicates = 1,
 }
 
 /**
@@ -1844,25 +1844,25 @@ enum GIOStreamSpliceFlags : uint
   /**
       Do not close either stream.
   */
-  none = 0,
+  None = 0,
 
   /**
       Close the first stream after
         the splice.
   */
-  closeStream1 = 1,
+  CloseStream1 = 1,
 
   /**
       Close the second stream after
         the splice.
   */
-  closeStream2 = 2,
+  CloseStream2 = 2,
 
   /**
       Wait for both splice operations to finish
         before calling the callback.
   */
-  waitForBoth = 4,
+  WaitForBoth = 4,
 }
 
 /**
@@ -1882,7 +1882,7 @@ enum GMemoryMonitorWarningLevel
       should free up unneeded resources (for example, in-memory caches) so they can
       be used elsewhere.
   */
-  low = 50,
+  Low = 50,
 
   /**
       Same as @G_MEMORY_MONITOR_WARNING_LEVEL_LOW
@@ -1890,13 +1890,13 @@ enum GMemoryMonitorWarningLevel
       up unneeded resources. If your process does not need to stay running, it is a
       good time for it to quit.
   */
-  medium = 100,
+  Medium = 100,
 
   /**
       The system will soon start terminating
       processes to reclaim memory, including background processes.
   */
-  critical = 255,
+  Critical = 255,
 }
 
 /**
@@ -1907,7 +1907,7 @@ enum GMountMountFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -1920,19 +1920,19 @@ enum GMountOperationResult
       The request was fulfilled and the
         user specified data is now available
   */
-  handled = 0,
+  Handled = 0,
 
   /**
       The user requested the mount operation
         to be aborted
   */
-  aborted = 1,
+  Aborted = 1,
 
   /**
       The request was unhandled (i.e. not
         implemented)
   */
-  unhandled = 2,
+  Unhandled = 2,
 }
 
 /**
@@ -1943,13 +1943,13 @@ enum GMountUnmountFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       Unmount even if there are outstanding
      file operations on the mount.
   */
-  force = 1,
+  Force = 1,
 }
 
 /**
@@ -1962,26 +1962,26 @@ enum GNetworkConnectivity
       route to the Internet; it may or may not be connected to a local
       network.
   */
-  local = 1,
+  Local = 1,
 
   /**
       The host is connected to a network, but
       does not appear to be able to reach the full Internet, perhaps
       due to upstream network problems.
   */
-  limited = 2,
+  Limited = 2,
 
   /**
       The host is behind a captive portal and
       cannot reach the full Internet.
   */
-  portal = 3,
+  Portal = 3,
 
   /**
       The host is connected to a network, and
       appears to be able to reach the full Internet.
   */
-  full = 4,
+  Full = 4,
 }
 
 /**
@@ -1994,28 +1994,28 @@ enum GNotificationPriority
       majority of notifications (for example email messages, software updates,
       completed download/sync operations)
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       for notifications that do not require
       immediate attention - typically used for contextual background
       information, such as contact birthdays or local weather
   */
-  low = 1,
+  Low = 1,
 
   /**
       for events that require more attention,
       usually because responses are time-sensitive (for example chat and SMS
       messages or alarms)
   */
-  high = 2,
+  High = 2,
 
   /**
       for urgent notifications, or notifications
       that require a response in a short space of time (for example phone calls
       or emergency warnings)
   */
-  urgent = 3,
+  Urgent = 3,
 }
 
 /**
@@ -2026,19 +2026,19 @@ enum GOutputStreamSpliceFlags : uint
   /**
       Do not close either stream.
   */
-  none = 0,
+  None = 0,
 
   /**
       Close the source stream after
         the splice.
   */
-  closeSource = 1,
+  CloseSource = 1,
 
   /**
       Close the target stream after
         the splice.
   */
-  closeTarget = 2,
+  CloseTarget = 2,
 }
 
 /**
@@ -2052,17 +2052,17 @@ enum GPasswordSave
   /**
       never save a password.
   */
-  never = 0,
+  Never = 0,
 
   /**
       save a password for the session.
   */
-  forSession = 1,
+  ForSession = 1,
 
   /**
       save a password permanently.
   */
-  permanently = 2,
+  Permanently = 2,
 }
 
 /**
@@ -2071,9 +2071,9 @@ enum GPasswordSave
   
   This enum exists to be able to return errors to callers without having to
   allocate a #GError. Allocating #GErrors can be quite expensive for
-  regularly happening errors like [gio.types.IOErrorEnum.wouldBlock].
+  regularly happening errors like [gio.types.IOErrorEnum.WouldBlock].
   
-  In case of [gio.types.PollableReturn.failed] a #GError should be set for the
+  In case of [gio.types.PollableReturn.Failed] a #GError should be set for the
   operation to give details about the error that happened.
 */
 enum GPollableReturn
@@ -2081,17 +2081,17 @@ enum GPollableReturn
   /**
       Generic error condition for when an operation fails.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       The operation was successfully finished.
   */
-  ok = 1,
+  Ok = 1,
 
   /**
       The operation would block.
   */
-  wouldBlock = -27,
+  WouldBlock = -27,
 }
 
 /**
@@ -2104,18 +2104,18 @@ enum GResolverError
       the requested name/address/service was not
         found
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       the requested information could not
         be looked up due to a network error or similar problem
   */
-  temporaryFailure = 1,
+  TemporaryFailure = 1,
 
   /**
       unknown error
   */
-  internal = 2,
+  Internal = 2,
 }
 
 /**
@@ -2126,17 +2126,17 @@ enum GResolverNameLookupFlags : uint
   /**
       default behavior (same as [gio.resolver.Resolver.lookupByName])
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       only resolve ipv4 addresses
   */
-  ipv4Only = 1,
+  Ipv4Only = 1,
 
   /**
       only resolve ipv6 addresses
   */
-  ipv6Only = 2,
+  Ipv6Only = 2,
 }
 
 /**
@@ -2145,15 +2145,15 @@ enum GResolverNameLookupFlags : uint
   as lists of #GVariant tuples. Each record type has different values in
   the variant tuples returned.
   
-  [gio.types.ResolverRecordType.srv] records are returned as variants with the signature
+  [gio.types.ResolverRecordType.Srv] records are returned as variants with the signature
   `(qqqs)`, containing a [glib.types.MAXUINT16] with the priority, a [glib.types.MAXUINT16] with the
   weight, a [glib.types.MAXUINT16] with the port, and a string of the hostname.
   
-  [gio.types.ResolverRecordType.mx] records are returned as variants with the signature
+  [gio.types.ResolverRecordType.Mx] records are returned as variants with the signature
   `(qs)`, representing a [glib.types.MAXUINT16] with the preference, and a string containing
   the mail exchanger hostname.
   
-  [gio.types.ResolverRecordType.txt] records are returned as variants with the signature
+  [gio.types.ResolverRecordType.Txt] records are returned as variants with the signature
   `(as)`, representing an array of the strings in the text record. Note: Most TXT
   records only contain a single string, but
   [RFC 1035](https://tools.ietf.org/html/rfc1035#section-3.3.14) does allow a
@@ -2162,13 +2162,13 @@ enum GResolverNameLookupFlags : uint
   strings if they are present, as with
   [RFC 7208](https://tools.ietf.org/html/rfc7208#section-3.3).
   
-  [gio.types.ResolverRecordType.soa] records are returned as variants with the signature
+  [gio.types.ResolverRecordType.Soa] records are returned as variants with the signature
   `(ssuuuuu)`, representing a string containing the primary name server, a
   string containing the administrator, the serial as a [pango.types.uint], the refresh
   interval as a [pango.types.uint], the retry interval as a [pango.types.uint], the expire timeout
   as a [pango.types.uint], and the TTL as a [pango.types.uint].
   
-  [gio.types.ResolverRecordType.ns] records are returned as variants with the signature
+  [gio.types.ResolverRecordType.Ns] records are returned as variants with the signature
   `(s)`, representing a string of the hostname of the name server.
 */
 enum GResolverRecordType
@@ -2176,27 +2176,27 @@ enum GResolverRecordType
   /**
       look up DNS SRV records for a domain
   */
-  srv = 1,
+  Srv = 1,
 
   /**
       look up DNS MX records for a domain
   */
-  mx = 2,
+  Mx = 2,
 
   /**
       look up DNS TXT records for a name
   */
-  txt = 3,
+  Txt = 3,
 
   /**
       look up DNS SOA records for a zone
   */
-  soa = 4,
+  Soa = 4,
 
   /**
       look up DNS NS records for a domain
   */
-  ns = 5,
+  Ns = 5,
 }
 
 /**
@@ -2208,12 +2208,12 @@ enum GResourceError
   /**
       no file was found at the requested path
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       unknown error
   */
-  internal = 1,
+  Internal = 1,
 }
 
 /**
@@ -2225,12 +2225,12 @@ enum GResourceFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 
   /**
       The file is compressed.
   */
-  compressed = 1,
+  Compressed = 1,
 }
 
 /**
@@ -2241,7 +2241,7 @@ enum GResourceLookupFlags : uint
   /**
       No flags set.
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -2254,37 +2254,37 @@ enum GSettingsBindFlags : uint
   /**
       Equivalent to `G_SETTINGS_BIND_GET|G_SETTINGS_BIND_SET`
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Update the #GObject property when the setting changes.
         It is an error to use this flag if the property is not writable.
   */
-  get = 1,
+  Get = 1,
 
   /**
       Update the setting when the #GObject property changes.
         It is an error to use this flag if the property is not readable.
   */
-  set = 2,
+  Set = 2,
 
   /**
       Do not try to bind a "sensitivity" property to the writability of the setting
   */
-  noSensitivity = 4,
+  NoSensitivity = 4,
 
   /**
-      When set in addition to [gio.types.SettingsBindFlags.get], set the #GObject property
+      When set in addition to [gio.types.SettingsBindFlags.Get], set the #GObject property
         value initially from the setting, but do not listen for changes of the setting
   */
-  getNoChanges = 8,
+  GetNoChanges = 8,
 
   /**
       When passed to [gio.settings.Settings.bind], uses a pair of mapping functions that invert
         the boolean value when mapping between the setting and the property.  The setting and property must both
         be booleans.  You cannot pass this flag to [gio.settings.Settings.bindWithMapping].
   */
-  invertBoolean = 16,
+  InvertBoolean = 16,
 }
 
 /**
@@ -2298,54 +2298,54 @@ enum GSocketClientEvent
   /**
       The client is doing a DNS lookup.
   */
-  resolving = 0,
+  Resolving = 0,
 
   /**
       The client has completed a DNS lookup.
   */
-  resolved = 1,
+  Resolved = 1,
 
   /**
       The client is connecting to a remote
       host (either a proxy or the destination server).
   */
-  connecting = 2,
+  Connecting = 2,
 
   /**
       The client has connected to a remote
       host.
   */
-  connected = 3,
+  Connected = 3,
 
   /**
       The client is negotiating
       with a proxy to connect to the destination server.
   */
-  proxyNegotiating = 4,
+  ProxyNegotiating = 4,
 
   /**
       The client has negotiated
       with the proxy server.
   */
-  proxyNegotiated = 5,
+  ProxyNegotiated = 5,
 
   /**
       The client is performing a
       TLS handshake.
   */
-  tlsHandshaking = 6,
+  TlsHandshaking = 6,
 
   /**
       The client has performed a
       TLS handshake.
   */
-  tlsHandshaked = 7,
+  TlsHandshaked = 7,
 
   /**
       The client is done with a particular
       #GSocketConnectable.
   */
-  complete = 8,
+  Complete = 8,
 }
 
 /**
@@ -2358,22 +2358,22 @@ enum GSocketFamily
   /**
       no address family
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       the UNIX domain family
   */
-  unix = 1,
+  Unix = 1,
 
   /**
       the IPv4 family
   */
-  ipv4 = 2,
+  Ipv4 = 2,
 
   /**
       the IPv6 family
   */
-  ipv6 = 10,
+  Ipv6 = 10,
 }
 
 /**
@@ -2387,24 +2387,24 @@ enum GSocketListenerEvent
   /**
       The listener is about to bind a socket.
   */
-  binding = 0,
+  Binding = 0,
 
   /**
       The listener has bound a socket.
   */
-  bound = 1,
+  Bound = 1,
 
   /**
       The listener is about to start
        listening on this socket.
   */
-  listening = 2,
+  Listening = 2,
 
   /**
       The listener is now listening on
       this socket.
   */
-  listened = 3,
+  Listened = 3,
 }
 
 /**
@@ -2419,24 +2419,24 @@ enum GSocketMsgFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       Request to send/receive out of band data.
   */
-  oob = 1,
+  Oob = 1,
 
   /**
       Read data from the socket without removing it from
         the queue.
   */
-  peek = 2,
+  Peek = 2,
 
   /**
       Don't use a gateway to send out the packet,
         only send to hosts on directly connected networks.
   */
-  dontroute = 4,
+  Dontroute = 4,
 }
 
 /**
@@ -2453,27 +2453,27 @@ enum GSocketProtocol
   /**
       The protocol type is unknown
   */
-  unknown = -1,
+  Unknown = -1,
 
   /**
       The default protocol for the family/type
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       TCP over IP
   */
-  tcp = 6,
+  Tcp = 6,
 
   /**
       UDP over IP
   */
-  udp = 17,
+  Udp = 17,
 
   /**
       SCTP over IP
   */
-  sctp = 132,
+  Sctp = 132,
 }
 
 /**
@@ -2485,24 +2485,24 @@ enum GSocketType
   /**
       Type unknown or wrong
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       Reliable connection-based byte streams (e.g. TCP).
   */
-  stream = 1,
+  Stream = 1,
 
   /**
       Connectionless, unreliable datagram passing.
         (e.g. UDP)
   */
-  datagram = 2,
+  Datagram = 2,
 
   /**
       Reliable connection-based passing of datagrams
         of fixed maximum length (e.g. SCTP).
   */
-  seqpacket = 3,
+  Seqpacket = 3,
 }
 
 /**
@@ -2513,61 +2513,61 @@ enum GSocketType
   corresponding descriptor from the calling process.
   
   Note that it is a programmer error to mix 'incompatible' flags.  For
-  example, you may not request both [gio.types.SubprocessFlags.stdoutPipe] and
-  [gio.types.SubprocessFlags.stdoutSilence].
+  example, you may not request both [gio.types.SubprocessFlags.StdoutPipe] and
+  [gio.types.SubprocessFlags.StdoutSilence].
 */
 enum GSubprocessFlags : uint
 {
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 
   /**
       create a pipe for the stdin of the
       spawned process that can be accessed with
       [gio.subprocess.Subprocess.getStdinPipe].
   */
-  stdinPipe = 1,
+  StdinPipe = 1,
 
   /**
       stdin is inherited from the
       calling process.
   */
-  stdinInherit = 2,
+  StdinInherit = 2,
 
   /**
       create a pipe for the stdout of the
       spawned process that can be accessed with
       [gio.subprocess.Subprocess.getStdoutPipe].
   */
-  stdoutPipe = 4,
+  StdoutPipe = 4,
 
   /**
       silence the stdout of the spawned
       process (ie: redirect to `/dev/null`).
   */
-  stdoutSilence = 8,
+  StdoutSilence = 8,
 
   /**
       create a pipe for the stderr of the
       spawned process that can be accessed with
       [gio.subprocess.Subprocess.getStderrPipe].
   */
-  stderrPipe = 16,
+  StderrPipe = 16,
 
   /**
       silence the stderr of the spawned
       process (ie: redirect to `/dev/null`).
   */
-  stderrSilence = 32,
+  StderrSilence = 32,
 
   /**
       merge the stderr of the spawned
       process with whatever the stdout happens to be.  This is a good way
       of directing both streams to a common log file, for example.
   */
-  stderrMerge = 64,
+  StderrMerge = 64,
 
   /**
       spawned processes will inherit the
@@ -2575,14 +2575,14 @@ enum GSubprocessFlags : uint
       been explicitly marked as close-on-exec.  This flag has no effect
       over the "standard" file descriptors (stdin, stdout, stderr).
   */
-  inheritFds = 128,
+  InheritFds = 128,
 
   /**
       if path searching is
       needed when spawning the subprocess, use the `PATH` in the launcher
       environment. (Since: 2.72)
   */
-  searchPathFromEnvp = 256,
+  SearchPathFromEnvp = 256,
 }
 
 /**
@@ -2593,7 +2593,7 @@ enum GTestDBusFlags : uint
   /**
       No flags.
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -2604,17 +2604,17 @@ enum GTlsAuthenticationMode
   /**
       client authentication not required
   */
-  none = 0,
+  None = 0,
 
   /**
       client authentication is requested
   */
-  requested = 1,
+  Requested = 1,
 
   /**
       client authentication is required
   */
-  required = 2,
+  Required = 2,
 }
 
 /**
@@ -2626,7 +2626,7 @@ enum GTlsAuthenticationMode
   flag will be set, but it does not guarantee that all possible flags
   will be set. Accordingly, you may not safely decide to ignore any
   particular type of error. For example, it would be incorrect to mask
-  [gio.types.TlsCertificateFlags.expired] if you want to allow expired certificates,
+  [gio.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
   because this could potentially be the only error flag set even if
   other problems exist with the certificate.
 */
@@ -2635,54 +2635,54 @@ enum GTlsCertificateFlags : uint
   /**
       No flags set. Since: 2.74
   */
-  noFlags = 0,
+  NoFlags = 0,
 
   /**
       The signing certificate authority is
       not known.
   */
-  unknownCa = 1,
+  UnknownCa = 1,
 
   /**
       The certificate does not match the
       expected identity of the site that it was retrieved from.
   */
-  badIdentity = 2,
+  BadIdentity = 2,
 
   /**
       The certificate's activation time
       is still in the future
   */
-  notActivated = 4,
+  NotActivated = 4,
 
   /**
       The certificate has expired
   */
-  expired = 8,
+  Expired = 8,
 
   /**
       The certificate has been revoked
       according to the #GTlsConnection's certificate revocation list.
   */
-  revoked = 16,
+  Revoked = 16,
 
   /**
       The certificate's algorithm is
       considered insecure.
   */
-  insecure = 32,
+  Insecure = 32,
 
   /**
       Some other error occurred validating
       the certificate
   */
-  genericError = 64,
+  GenericError = 64,
 
   /**
       the combination of all of the above
       flags
   */
-  validateAll = 127,
+  ValidateAll = 127,
 }
 
 /**
@@ -2695,7 +2695,7 @@ enum GTlsCertificateRequestFlags
   /**
       No flags
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -2709,14 +2709,14 @@ enum GTlsChannelBindingError
        retrieval facility or specific binding type is not implemented in the
        TLS backend.
   */
-  notImplemented = 0,
+  NotImplemented = 0,
 
   /**
       The handshake is not yet
        complete on the connection which is a strong requirement for any existing
        binding type.
   */
-  invalidState = 1,
+  InvalidState = 1,
 
   /**
       Handshake is complete but
@@ -2724,7 +2724,7 @@ enum GTlsChannelBindingError
        implementation failed to provide the binding data. For example, some
        implementations do not provide a peer certificate for resumed connections.
   */
-  notAvailable = 2,
+  NotAvailable = 2,
 
   /**
       Binding type is not supported
@@ -2732,13 +2732,13 @@ enum GTlsChannelBindingError
        `tls-server-end-point` binding data for a certificate which has no hash
        function or uses multiple hash functions.
   */
-  notSupported = 3,
+  NotSupported = 3,
 
   /**
       Any other backend error
        preventing binding data retrieval.
   */
-  generalError = 4,
+  GeneralError = 4,
 }
 
 /**
@@ -2753,19 +2753,19 @@ enum GTlsChannelBindingType
       [`tls-unique`](https://tools.ietf.org/html/rfc5929#section-3) binding
        type
   */
-  unique = 0,
+  Unique = 0,
 
   /**
       [`tls-server-end-point`](https://tools.ietf.org/html/rfc5929#section-4)
        binding type
   */
-  serverEndPoint = 1,
+  ServerEndPoint = 1,
 
   /**
       [`tls-exporter`](https://www.rfc-editor.org/rfc/rfc9266.html) binding
        type. Since: 2.74
   */
-  exporter = 2,
+  Exporter = 2,
 }
 
 /**
@@ -2778,13 +2778,13 @@ enum GTlsDatabaseLookupFlags
   /**
       No lookup flags
   */
-  none = 0,
+  None = 0,
 
   /**
       Restrict lookup to certificates that have
         a private key.
   */
-  keypair = 1,
+  Keypair = 1,
 }
 
 /**
@@ -2795,7 +2795,7 @@ enum GTlsDatabaseVerifyFlags : uint
   /**
       No verification flags
   */
-  none = 0,
+  None = 0,
 }
 
 /**
@@ -2807,57 +2807,57 @@ enum GTlsError
   /**
       No TLS provider is available
   */
-  unavailable = 0,
+  Unavailable = 0,
 
   /**
       Miscellaneous TLS error
   */
-  misc = 1,
+  Misc = 1,
 
   /**
       The certificate presented could not
       be parsed or failed validation.
   */
-  badCertificate = 2,
+  BadCertificate = 2,
 
   /**
       The TLS handshake failed because the
       peer does not seem to be a TLS server.
   */
-  notTls = 3,
+  NotTls = 3,
 
   /**
       The TLS handshake failed because the
       peer's certificate was not acceptable.
   */
-  handshake = 4,
+  Handshake = 4,
 
   /**
       The TLS handshake failed because
       the server requested a client-side certificate, but none was
       provided. See [gio.tls_connection.TlsConnection.setCertificate].
   */
-  certificateRequired = 5,
+  CertificateRequired = 5,
 
   /**
       The TLS connection was closed without proper
       notice, which may indicate an attack. See
       [gio.tls_connection.TlsConnection.setRequireCloseNotify].
   */
-  eof = 6,
+  Eof = 6,
 
   /**
       The TLS handshake failed
       because the client sent the fallback SCSV, indicating a protocol
       downgrade attack. Since: 2.60
   */
-  inappropriateFallback = 7,
+  InappropriateFallback = 7,
 
   /**
       The certificate failed
       to load because a password was incorrect. Since: 2.72
   */
-  badCertificatePassword = 8,
+  BadCertificatePassword = 8,
 }
 
 /**
@@ -2870,19 +2870,19 @@ enum GTlsInteractionResult
       The interaction was unhandled (i.e. not
         implemented).
   */
-  unhandled = 0,
+  Unhandled = 0,
 
   /**
       The interaction completed, and resulting data
         is available.
   */
-  handled = 1,
+  Handled = 1,
 
   /**
       The interaction has failed, or was cancelled.
         and the operation should be aborted.
   */
-  failed = 2,
+  Failed = 2,
 }
 
 /**
@@ -2893,42 +2893,42 @@ enum GTlsPasswordFlags : uint
   /**
       No flags
   */
-  none = 0,
+  None = 0,
 
   /**
       The password was wrong, and the user should retry.
   */
-  retry = 2,
+  Retry = 2,
 
   /**
       Hint to the user that the password has been
        wrong many times, and the user may not have many chances left.
   */
-  manyTries = 4,
+  ManyTries = 4,
 
   /**
       Hint to the user that this is the last try to get
        this password right.
   */
-  finalTry = 8,
+  FinalTry = 8,
 
   /**
       For PKCS #11, the user PIN is required.
        Since: 2.70.
   */
-  pkcs11User = 16,
+  Pkcs11User = 16,
 
   /**
       For PKCS #11, the security officer
        PIN is required. Since: 2.70.
   */
-  pkcs11SecurityOfficer = 32,
+  Pkcs11SecurityOfficer = 32,
 
   /**
       For PKCS #11, the context-specific
        PIN is required. Since: 2.70.
   */
-  pkcs11ContextSpecific = 64,
+  Pkcs11ContextSpecific = 64,
 }
 
 /**
@@ -2937,7 +2937,7 @@ enum GTlsPasswordFlags : uint
   to ensure newer known protocol versions compare greater than older
   known versions. Any known DTLS protocol version will compare greater
   than any SSL or TLS protocol version. The protocol version may be
-  [gio.types.TlsProtocolVersion.unknown] if the TLS backend supports a newer
+  [gio.types.TlsProtocolVersion.Unknown] if the TLS backend supports a newer
   protocol version that GLib does not yet know about. This means that
   it's possible for an unknown DTLS protocol version to compare less
   than the TLS protocol versions.
@@ -2947,42 +2947,42 @@ enum GTlsProtocolVersion
   /**
       No protocol version or unknown protocol version
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       SSL 3.0, which is insecure and should not be used
   */
-  ssl30 = 1,
+  Ssl30 = 1,
 
   /**
       TLS 1.0, which is insecure and should not be used
   */
-  tls10 = 2,
+  Tls10 = 2,
 
   /**
       TLS 1.1, which is insecure and should not be used
   */
-  tls11 = 3,
+  Tls11 = 3,
 
   /**
       TLS 1.2, defined by [RFC 5246](https://datatracker.ietf.org/doc/html/rfc5246)
   */
-  tls12 = 4,
+  Tls12 = 4,
 
   /**
       TLS 1.3, defined by [RFC 8446](https://datatracker.ietf.org/doc/html/rfc8446)
   */
-  tls13 = 5,
+  Tls13 = 5,
 
   /**
       DTLS 1.0, which is insecure and should not be used
   */
-  dtls10 = 201,
+  Dtls10 = 201,
 
   /**
       DTLS 1.2, defined by [RFC 6347](https://datatracker.ietf.org/doc/html/rfc6347)
   */
-  dtls12 = 202,
+  Dtls12 = 202,
 }
 
 /**
@@ -2998,61 +2998,61 @@ enum GTlsRehandshakeMode
   /**
       Never allow rehandshaking
   */
-  never = 0,
+  Never = 0,
 
   /**
       Allow safe rehandshaking only
   */
-  safely = 1,
+  Safely = 1,
 
   /**
       Allow unsafe rehandshaking
   */
-  unsafely = 2,
+  Unsafely = 2,
 }
 
 /**
     The type of name used by a #GUnixSocketAddress.
-  [gio.types.UnixSocketAddressType.path] indicates a traditional unix domain
-  socket bound to a filesystem path. [gio.types.UnixSocketAddressType.anonymous]
+  [gio.types.UnixSocketAddressType.Path] indicates a traditional unix domain
+  socket bound to a filesystem path. [gio.types.UnixSocketAddressType.Anonymous]
   indicates a socket not bound to any name (eg, a client-side socket,
   or a socket created with socketpair()).
   
   For abstract sockets, there are two incompatible ways of naming
   them; the man pages suggest using the entire `struct sockaddr_un`
   as the name, padding the unused parts of the `sun_path` field with
-  zeroes; this corresponds to [gio.types.UnixSocketAddressType.abstractPadded].
+  zeroes; this corresponds to [gio.types.UnixSocketAddressType.AbstractPadded].
   However, many programs instead just use a portion of `sun_path`, and
   pass an appropriate smaller length to bind() or connect(). This is
-  [gio.types.UnixSocketAddressType.abstract_].
+  [gio.types.UnixSocketAddressType.Abstract].
 */
 enum GUnixSocketAddressType
 {
   /**
       invalid
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       anonymous
   */
-  anonymous = 1,
+  Anonymous = 1,
 
   /**
       a filesystem path
   */
-  path = 2,
+  Path = 2,
 
   /**
       an abstract name
   */
-  abstract_ = 3,
+  Abstract = 3,
 
   /**
       an abstract name, 0-padded
       to the full length of a unix socket name
   */
-  abstractPadded = 4,
+  AbstractPadded = 4,
 }
 
 /**
@@ -3064,17 +3064,17 @@ enum GZlibCompressorFormat
   /**
       deflate compression with zlib header
   */
-  zlib = 0,
+  Zlib = 0,
 
   /**
       gzip file format
   */
-  gzip = 1,
+  Gzip = 1,
 
   /**
       deflate compression with no header
   */
-  raw = 2,
+  Raw = 2,
 }
 
 /**
@@ -3776,7 +3776,7 @@ struct GAppLaunchContextPrivate;
   `cwd`), and optionally the environment (ie the set of environment
   variables and their values) of the calling process (key `environ`).
   The environment is only added to the platform data if the
-  [gio.types.ApplicationFlags.sendEnvironment] flag is set. [gio.application.Application] subclasses
+  [gio.types.ApplicationFlags.SendEnvironment] flag is set. [gio.application.Application] subclasses
   can add their own platform data by overriding the
   `vfunc@Gio.Application.add_platform_data` virtual function. For instance,
   [gtk.application.Application] adds startup notification data in this way.
@@ -4328,7 +4328,7 @@ struct GAsyncInitableIface
   
   The callback for an asynchronous operation is called only once, and is
   always called, even in the case of a cancelled operation. On cancellation
-  the result is a [gio.types.IOErrorEnum.cancelled] error.
+  the result is a [gio.types.IOErrorEnum.Cancelled] error.
   
   ## I/O Priority
   
@@ -4664,25 +4664,25 @@ struct GConverterOutputStreamPrivate;
   
   On Linux, the native credential type is a `struct ucred` - see the
   [`unix(7)` man page](man:unix(7)) for details. This corresponds to
-  [gio.types.CredentialsType.linuxUcred].
+  [gio.types.CredentialsType.LinuxUcred].
   
   On Apple operating systems (including iOS, tvOS, and macOS), the native credential
-  type is a `struct xucred`. This corresponds to [gio.types.CredentialsType.appleXucred].
+  type is a `struct xucred`. This corresponds to [gio.types.CredentialsType.AppleXucred].
   
   On FreeBSD, Debian GNU/kFreeBSD, and GNU/Hurd, the native credential type is a
-  `struct cmsgcred`. This corresponds to [gio.types.CredentialsType.freebsdCmsgcred].
+  `struct cmsgcred`. This corresponds to [gio.types.CredentialsType.FreebsdCmsgcred].
   
   On NetBSD, the native credential type is a `struct unpcbid`.
-  This corresponds to [gio.types.CredentialsType.netbsdUnpcbid].
+  This corresponds to [gio.types.CredentialsType.NetbsdUnpcbid].
   
   On OpenBSD, the native credential type is a `struct sockpeercred`.
-  This corresponds to [gio.types.CredentialsType.openbsdSockpeercred].
+  This corresponds to [gio.types.CredentialsType.OpenbsdSockpeercred].
   
   On Solaris (including OpenSolaris and its derivatives), the native credential type
-  is a `ucred_t`. This corresponds to [gio.types.CredentialsType.solarisUcred].
+  is a `ucred_t`. This corresponds to [gio.types.CredentialsType.SolarisUcred].
   
   Since GLib 2.72, on Windows, the native credentials may contain the PID of a
-  process. This corresponds to [gio.types.CredentialsType.win32Pid].
+  process. This corresponds to [gio.types.CredentialsType.Win32Pid].
 */
 struct GCredentials;
 
@@ -4791,7 +4791,7 @@ struct GDBusArgInfo
   anonymous connections using the `ANONYMOUS` mechanism). If you only
   want to allow D-Bus connections from processes owned by the same uid
   as the server, since GLib 2.68, you should use the
-  [gio.types.DBusServerFlags.authenticationRequireSameUser] flag. It’s equivalent
+  [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag. It’s equivalent
   to the following signal handler:
   
   ```c
@@ -5246,7 +5246,7 @@ struct GDBusObjectManager;
   If the name for a [gio.dbus_object_manager_client.DBusObjectManagerClient] is not owned by anyone at
   object construction time, the default behavior is to request the
   message bus to launch an owner for the name. This behavior can be
-  disabled using the [gio.types.DBusObjectManagerClientFlags.doNotAutoStart]
+  disabled using the [gio.types.DBusObjectManagerClientFlags.DoNotAutoStart]
   flag. It’s also worth noting that this only works if the name of
   interest is activatable in the first place. E.g. in some cases it
   is not possible to launch an owner for the requested name. In this
@@ -5568,7 +5568,7 @@ struct GDBusPropertyInfo
   and claimed by another. However, if no name owner currently exists,
   then calls will be sent to the well-known name which may result in
   the message bus launching an owner (unless
-  [gio.types.DBusProxyFlags.doNotAutoStart] is set).
+  [gio.types.DBusProxyFlags.DoNotAutoStart] is set).
   
   If the proxy is for a stateless D-Bus service, where the name owner may
   be started and stopped between calls, the
@@ -5648,7 +5648,7 @@ struct GDBusProxyPrivate;
   [gio.dbus_auth_observer.DBusAuthObserver] that only accepts connections that have
   successfully authenticated as the same user that is running the
   [gio.dbus_server.DBusServer]. Since GLib 2.68 this can be achieved more simply by passing
-  the [gio.types.DBusServerFlags.authenticationRequireSameUser] flag to the
+  the [gio.types.DBusServerFlags.AuthenticationRequireSameUser] flag to the
   server.
 */
 struct GDBusServer;
@@ -5802,21 +5802,21 @@ struct GDataOutputStreamPrivate;
   for blocking behaviour, zero for non-blocking behaviour, or positive for
   timeout behaviour. A blocking operation blocks until finished or there is an
   error. A non-blocking operation will return immediately with a
-  [gio.types.IOErrorEnum.wouldBlock] error if it cannot make progress. A timeout operation
+  [gio.types.IOErrorEnum.WouldBlock] error if it cannot make progress. A timeout operation
   will block until the operation is complete or the timeout expires; if the
   timeout expires it will return what progress it made, or
-  [gio.types.IOErrorEnum.timedOut] if no progress was made. To know when a call would
+  [gio.types.IOErrorEnum.TimedOut] if no progress was made. To know when a call would
   successfully run you can call [gio.datagram_based.DatagramBased.conditionCheck] or
   [gio.datagram_based.DatagramBased.conditionWait]. You can also use
   [gio.datagram_based.DatagramBased.createSource] and attach it to a [glib.main_context.MainContext]
   to get callbacks when I/O is possible.
   
   When running a non-blocking operation applications should always be able to
-  handle getting a [gio.types.IOErrorEnum.wouldBlock] error even when some other function
+  handle getting a [gio.types.IOErrorEnum.WouldBlock] error even when some other function
   said that I/O was possible. This can easily happen in case of a race
   condition in the application, but it can also happen for other reasons. For
   instance, on Windows a socket is always seen as writable until a write
-  returns [gio.types.IOErrorEnum.wouldBlock].
+  returns [gio.types.IOErrorEnum.WouldBlock].
   
   As with [gio.socket.Socket], [gio.datagram_based.DatagramBased]s can be either connection oriented (for
   example, SCTP) or connectionless (for example, UDP). [gio.datagram_based.DatagramBased]s must be
@@ -6323,7 +6323,7 @@ struct GDtlsClientConnectionInterface
   set the peer address on their base [gio.datagram_based.DatagramBased] if it is a
   [gio.socket.Socket] — it is up to the caller to do that if they wish. If they
   do not, and [gio.socket.Socket.close] is called on the base socket, the
-  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.notConnected] error on
+  [gio.dtls_connection.DtlsConnection] will not raise a [gio.types.IOErrorEnum.NotConnected] error on
   further I/O.
 */
 struct GDtlsConnection;
@@ -7756,7 +7756,7 @@ struct GIOSchedulerJob;
   way around, so keeping the substreams alive will not keep the [gio.iostream.IOStream]
   object alive. If the [gio.iostream.IOStream] object is freed it will be closed, thus
   closing the substreams, so even if the substreams stay alive they will
-  always return [gio.types.IOErrorEnum.closed] for all operations.
+  always return [gio.types.IOErrorEnum.Closed] for all operations.
   
   To close a stream use [gio.iostream.IOStream.close] which will close the common
   stream object and also the individual substreams. You can also close
@@ -9476,7 +9476,7 @@ struct GPollableInputStreamInterface
 
   /**
       Does a non-blocking read or returns
-      [gio.types.IOErrorEnum.wouldBlock]
+      [gio.types.IOErrorEnum.WouldBlock]
   */
   extern(C) ptrdiff_t function(GPollableInputStream* stream, void* buffer, size_t count, GError** _err) readNonblocking;
 }
@@ -9510,7 +9510,7 @@ struct GPollableOutputStream;
   [gio.pollable_output_stream.PollableOutputStream.writeNonblocking] for each vector, and converts
   its return value and error (if set) to a #GPollableReturn. You should
   override this where possible to avoid having to allocate a #GError to return
-  [gio.types.IOErrorEnum.wouldBlock].
+  [gio.types.IOErrorEnum.WouldBlock].
 */
 struct GPollableOutputStreamInterface
 {
@@ -9536,13 +9536,13 @@ struct GPollableOutputStreamInterface
 
   /**
       Does a non-blocking write or returns
-      [gio.types.IOErrorEnum.wouldBlock]
+      [gio.types.IOErrorEnum.WouldBlock]
   */
   extern(C) ptrdiff_t function(GPollableOutputStream* stream, void* buffer, size_t count, GError** _err) writeNonblocking;
 
   /**
       Does a vectored non-blocking write, or returns
-      [gio.types.PollableReturn.wouldBlock]
+      [gio.types.PollableReturn.WouldBlock]
   */
   extern(C) GPollableReturn function(GPollableOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GError** _err) writevNonblocking;
 }
@@ -10373,7 +10373,7 @@ struct GSeekableIface
   looks for a boolean property with the name `sensitivity` and
   automatically binds it to the writability of the bound setting.
   If this ‘magic’ gets in the way, it can be suppressed with the
-  [gio.types.SettingsBindFlags.noSensitivity] flag.
+  [gio.types.SettingsBindFlags.NoSensitivity] flag.
   
   ## Relocatable schemas
   
@@ -10986,7 +10986,7 @@ struct GSimpleProxyResolverPrivate;
   in blocking mode all operations (which don’t take an explicit blocking
   parameter) block until the requested operation
   is finished or there is an error. In non-blocking mode all calls that
-  would block return immediately with a [gio.types.IOErrorEnum.wouldBlock] error.
+  would block return immediately with a [gio.types.IOErrorEnum.WouldBlock] error.
   To know when a call would successfully run you can call
   [gio.socket.Socket.conditionCheck], or [gio.socket.Socket.conditionWait].
   You can also use [gio.socket.Socket.createSource] and attach it to a
@@ -10995,11 +10995,11 @@ struct GSimpleProxyResolverPrivate;
   blocking mode is emulated in [gio.socket.Socket].
   
   When working in non-blocking mode applications should always be able to
-  handle getting a [gio.types.IOErrorEnum.wouldBlock] error even when some other
+  handle getting a [gio.types.IOErrorEnum.WouldBlock] error even when some other
   function said that I/O was possible. This can easily happen in case
   of a race condition in the application, but it can also happen for other
   reasons. For instance, on Windows a socket is always seen as writable
-  until a write returns [gio.types.IOErrorEnum.wouldBlock].
+  until a write returns [gio.types.IOErrorEnum.WouldBlock].
   
   [gio.socket.Socket]s can be either connection oriented or datagram based.
   For connection oriented types you must first establish a connection by
@@ -11022,7 +11022,7 @@ struct GSimpleProxyResolverPrivate;
   ## Nagle’s algorithm
   
   Since GLib 2.80, [gio.socket.Socket] will automatically set the `TCP_NODELAY` option on
-  all [gio.types.SocketType.stream] sockets. This disables
+  all [gio.types.SocketType.Stream] sockets. This disables
   [Nagle’s algorithm](https://en.wikipedia.org/wiki/Nagle`27s_algorithm`) as it
   typically does more harm than good on modern networks.
   
@@ -11642,7 +11642,7 @@ struct GStaticResource
   in the child process, avoiding dangling-FD issues that are caused by
   a simple `fork()`/`exec()`.  The only open file descriptors in the
   spawned process are ones that were explicitly specified by the
-  [gio.subprocess.Subprocess] API (unless [gio.types.SubprocessFlags.inheritFds] was
+  [gio.subprocess.Subprocess] API (unless [gio.types.SubprocessFlags.InheritFds] was
   specified).
   
   [gio.subprocess.Subprocess] will quickly reap all child processes as they exit,
@@ -11655,7 +11655,7 @@ struct GStaticResource
   typical shell behaviour of searching the `PATH` for executables that do
   not contain a directory separator in their name. By default, the `PATH`
   of the current process is used.  You can specify
-  [gio.types.SubprocessFlags.searchPathFromEnvp] to use the `PATH` of the
+  [gio.types.SubprocessFlags.SearchPathFromEnvp] to use the `PATH` of the
   launcher environment instead.
   
   [gio.subprocess.Subprocess] attempts to have a very simple API for most uses (ie:
@@ -12772,7 +12772,7 @@ struct GTlsFileDatabaseInterface
   Derived classes can choose to implement whichever interactions methods they’d
   like to support by overriding those virtual methods in their class
   initialization function. Any interactions not implemented will return
-  [gio.types.TlsInteractionResult.unhandled]. If a derived class implements an async method,
+  [gio.types.TlsInteractionResult.Unhandled]. If a derived class implements an async method,
   it must also implement the corresponding finish method.
 */
 struct GTlsInteraction
@@ -12797,8 +12797,8 @@ struct GTlsInteraction
   and the asynchronous methods to display modeless dialogs.
   
   If the user cancels an interaction, then the result should be
-  [gio.types.TlsInteractionResult.failed] and the error should be set with a domain of
-  `G_IO_ERROR` and code of [gio.types.IOErrorEnum.cancelled].
+  [gio.types.TlsInteractionResult.Failed] and the error should be set with a domain of
+  `G_IO_ERROR` and code of [gio.types.IOErrorEnum.Cancelled].
 */
 struct GTlsInteractionClass
 {
@@ -12807,7 +12807,7 @@ struct GTlsInteractionClass
 
   /**
       ask for a password synchronously. If the implementation
-        returns [gio.types.TlsInteractionResult.handled], then the password argument should
+        returns [gio.types.TlsInteractionResult.Handled], then the password argument should
         have been filled in by using [gio.tls_password.TlsPassword.setValue] or a similar
         function.
   */
@@ -12820,7 +12820,7 @@ struct GTlsInteractionClass
 
   /**
       complete operation to ask for a password asynchronously.
-        If the implementation returns [gio.types.TlsInteractionResult.handled], then the
+        If the implementation returns [gio.types.TlsInteractionResult.Handled], then the
         password argument of the async method should have been filled in by using
         [gio.tls_password.TlsPassword.setValue] or a similar function.
   */
@@ -12828,7 +12828,7 @@ struct GTlsInteractionClass
 
   /**
       ask for a certificate synchronously. If the
-        implementation returns [gio.types.TlsInteractionResult.handled], then the connection
+        implementation returns [gio.types.TlsInteractionResult.Handled], then the connection
         argument should have been filled in by using
         [gio.tls_connection.TlsConnection.setCertificate].
   */
@@ -12841,7 +12841,7 @@ struct GTlsInteractionClass
 
   /**
       complete operation to ask for a certificate
-        asynchronously. If the implementation returns [gio.types.TlsInteractionResult.handled],
+        asynchronously. If the implementation returns [gio.types.TlsInteractionResult.Handled],
         then the connection argument of the async method should have been
         filled in by using [gio.tls_connection.TlsConnection.setCertificate].
   */
@@ -12952,7 +12952,7 @@ struct GUnixConnectionPrivate;
     This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
   instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
   using [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in
-  the [gio.types.SocketFamily.unix] family).
+  the [gio.types.SocketFamily.Unix] family).
   
   For an easier way to send and receive credentials over
   stream-oriented UNIX sockets, see
@@ -13002,7 +13002,7 @@ struct GUnixCredentialsMessagePrivate;
   
   It may be wrapped in a
   [[gio.unix_fdmessage.UnixFDMessage]](../gio-unix/class.UnixFDMessage.html) and sent over a
-  [gio.socket.Socket] in the [gio.types.SocketFamily.unix] family by using
+  [gio.socket.Socket] in the [gio.types.SocketFamily.Unix] family by using
   [gio.socket.Socket.sendMessage] and received using
   [gio.socket.Socket.receiveMessage].
   
@@ -13050,7 +13050,7 @@ struct GUnixFDListPrivate;
     This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
   It may be sent using [gio.socket.Socket.sendMessage] and received using
   [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in the
-  [gio.types.SocketFamily.unix] family). The file descriptors are copied
+  [gio.types.SocketFamily.Unix] family). The file descriptors are copied
   between processes by the kernel.
   
   For an easier way to send and receive file descriptors over
@@ -13205,7 +13205,7 @@ struct GUnixOutputStreamPrivate;
   visible in the filesystem and not affected by the filesystem
   permissions, visibility, etc. Currently this is only supported
   under Linux. If you attempt to use abstract sockets on other
-  systems, function calls may return [gio.types.IOErrorEnum.notSupported]
+  systems, function calls may return [gio.types.IOErrorEnum.NotSupported]
   errors. You can use [gio.unix_socket_address.UnixSocketAddress.abstractNamesSupported]
   to see if abstract names are supported.
   

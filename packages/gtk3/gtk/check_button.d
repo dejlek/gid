@@ -47,7 +47,7 @@ import gtk.types;
 class CheckButton : gtk.toggle_button.ToggleButton
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,7 +71,7 @@ class CheckButton : gtk.toggle_button.ToggleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_check_button_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -83,9 +83,9 @@ class CheckButton : gtk.toggle_button.ToggleButton
   static gtk.check_button.CheckButton newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,9 +101,9 @@ class CheckButton : gtk.toggle_button.ToggleButton
   static gtk.check_button.CheckButton newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

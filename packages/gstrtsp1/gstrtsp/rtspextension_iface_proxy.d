@@ -7,7 +7,7 @@ import gstrtsp.rtspextension_mixin;
 /// Proxy object for GstRtsp.RTSPExtension interface when a GObject has no applicable D binding
 class RTSPExtensionIfaceProxy : IfaceProxy, gstrtsp.rtspextension.RTSPExtension
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

@@ -19,7 +19,7 @@ import gtk.types;
 class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,8 +47,8 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
   this(gio.list_model.ListModel model = null)
   {
     GtkFlattenListModel* _cretval;
-    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
   {
     GListModel* _cretval;
     _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)cPtr, position);
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,6 +84,6 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 }

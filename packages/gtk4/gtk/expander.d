@@ -106,12 +106,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.button] role.
+  [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.Button] role.
 */
 class Expander : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -136,9 +136,9 @@ class Expander : gtk.widget.Widget
   this(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new(_label);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -158,9 +158,9 @@ class Expander : gtk.widget.Widget
   static gtk.expander.Expander newWithMnemonic(string label = null)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Expander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_child(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class Expander : gtk.widget.Widget
   {
     const(char)* _cretval;
     _cretval = gtk_expander_get_label(cast(GtkExpander*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class Expander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Expander : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_expander_set_child(cast(GtkExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -287,7 +287,7 @@ class Expander : gtk.widget.Widget
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_expander_set_label(cast(GtkExpander*)cPtr, _label);
   }
 
@@ -301,7 +301,7 @@ class Expander : gtk.widget.Widget
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.dup) : null);
+    gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -352,10 +352,10 @@ class Expander : gtk.widget.Widget
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

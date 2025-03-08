@@ -24,7 +24,7 @@ import pango.types;
 class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -73,7 +73,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   {
     PangoContext* _cretval;
     _cretval = pango_font_map_create_context(cast(PangoFontMap*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,9 +86,9 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   pango.font_family.FontFamily getFamily(string name)
   {
     PangoFontFamily* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_map_get_family(cast(PangoFontMap*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     pango_font_map_list_families(cast(PangoFontMap*)cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.take);
+      families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     safeFree(cast(void*)_families);
   }
 
@@ -148,8 +148,8 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   pango.font.Font loadFont(pango.context.Context context, pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
-    _cretval = pango_font_map_load_font(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.take);
+    _cretval = pango_font_map_load_font(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,8 +166,8 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   pango.fontset.Fontset loadFontset(pango.context.Context context, pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
-    _cretval = pango_font_map_load_fontset(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.take);
+    _cretval = pango_font_map_load_fontset(cast(PangoFontMap*)cPtr, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -186,9 +186,9 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
   pango.font.Font reloadFont(pango.font.Font font, double scale, pango.context.Context context = null, string variations = null)
   {
     PangoFont* _cretval;
-    const(char)* _variations = variations.toCString(No.alloc);
-    _cretval = pango_font_map_reload_font(cast(PangoFontMap*)cPtr, font ? cast(PangoFont*)font.cPtr(No.dup) : null, scale, context ? cast(PangoContext*)context.cPtr(No.dup) : null, _variations);
-    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.take);
+    const(char)* _variations = variations.toCString(No.Alloc);
+    _cretval = pango_font_map_reload_font(cast(PangoFontMap*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, scale, context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _variations);
+    auto _retval = ObjectG.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -34,7 +34,7 @@ import gtk.widget;
 class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,8 +61,8 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
   this(gtk.widget.Widget widget = null)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,6 +84,6 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
   */
   void setWidget(gtk.widget.Widget widget = null)
   {
-    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 }

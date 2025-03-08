@@ -34,10 +34,10 @@ template DBusObjectManagerT()
   override gio.dbus_interface.DBusInterface getInterface(string objectPath, string interfaceName)
   {
     GDBusInterface* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
-    const(char)* _interfaceName = interfaceName.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)cPtr, _objectPath, _interfaceName);
-    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,9 +51,9 @@ template DBusObjectManagerT()
   override gio.dbus_object.DBusObject getObject(string objectPath)
   {
     GDBusObject* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)cPtr, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ template DBusObjectManagerT()
   {
     const(char)* _cretval;
     _cretval = g_dbus_object_manager_get_object_path(cast(GDBusObjectManager*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -106,10 +106,10 @@ template DBusObjectManagerT()
     Connect to InterfaceAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInterfaceAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InterfaceAddedCallbackDlg) || is(T : InterfaceAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -148,10 +148,10 @@ template DBusObjectManagerT()
     Connect to InterfaceRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInterfaceRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInterfaceRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InterfaceRemovedCallbackDlg) || is(T : InterfaceRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -186,10 +186,10 @@ template DBusObjectManagerT()
     Connect to ObjectAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectObjectAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ObjectAddedCallbackDlg) || is(T : ObjectAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -223,10 +223,10 @@ template DBusObjectManagerT()
     Connect to ObjectRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectObjectRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ObjectRemovedCallbackDlg) || is(T : ObjectRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

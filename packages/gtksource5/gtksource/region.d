@@ -56,7 +56,7 @@ import gtksource.types;
 class Region : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -76,8 +76,8 @@ class Region : gobject.object.ObjectG
   this(gtk.text_buffer.TextBuffer buffer)
   {
     GtkSourceRegion* _cretval;
-    _cretval = gtk_source_region_new(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_source_region_new(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class Region : gobject.object.ObjectG
   */
   void addRegion(gtksource.region.Region regionToAdd = null)
   {
-    gtk_source_region_add_region(cast(GtkSourceRegion*)cPtr, regionToAdd ? cast(GtkSourceRegion*)regionToAdd.cPtr(No.dup) : null);
+    gtk_source_region_add_region(cast(GtkSourceRegion*)cPtr, regionToAdd ? cast(GtkSourceRegion*)regionToAdd.cPtr(No.Dup) : null);
   }
 
   /**
@@ -100,7 +100,7 @@ class Region : gobject.object.ObjectG
   */
   void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_add_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.dup) : null);
+    gtk_source_region_add_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
   }
 
   /**
@@ -119,8 +119,8 @@ class Region : gobject.object.ObjectG
     GtkTextIter _start;
     GtkTextIter _end;
     _retval = gtk_source_region_get_bounds(cast(GtkSourceRegion*)cPtr, &_start, &_end);
-    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.take);
-    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.take);
+    start = new gtk.text_iter.TextIter(cast(void*)&_start, No.Take);
+    end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Region : gobject.object.ObjectG
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_source_region_get_buffer(cast(GtkSourceRegion*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class Region : gobject.object.ObjectG
   gtksource.region.Region intersectRegion(gtksource.region.Region region2 = null)
   {
     GtkSourceRegion* _cretval;
-    _cretval = gtk_source_region_intersect_region(cast(GtkSourceRegion*)cPtr, region2 ? cast(GtkSourceRegion*)region2.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.take);
+    _cretval = gtk_source_region_intersect_region(cast(GtkSourceRegion*)cPtr, region2 ? cast(GtkSourceRegion*)region2.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -178,8 +178,8 @@ class Region : gobject.object.ObjectG
   gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
     GtkSourceRegion* _cretval;
-    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.take);
+    _cretval = gtk_source_region_intersect_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.region.Region)(cast(GtkSourceRegion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Region : gobject.object.ObjectG
   */
   void subtractRegion(gtksource.region.Region regionToSubtract = null)
   {
-    gtk_source_region_subtract_region(cast(GtkSourceRegion*)cPtr, regionToSubtract ? cast(GtkSourceRegion*)regionToSubtract.cPtr(No.dup) : null);
+    gtk_source_region_subtract_region(cast(GtkSourceRegion*)cPtr, regionToSubtract ? cast(GtkSourceRegion*)regionToSubtract.cPtr(No.Dup) : null);
   }
 
   /**
@@ -217,7 +217,7 @@ class Region : gobject.object.ObjectG
   */
   void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
-    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.dup) : null);
+    gtk_source_region_subtract_subregion(cast(GtkSourceRegion*)cPtr, Start ? cast(const(GtkTextIter)*)Start.cPtr(No.Dup) : null, End ? cast(const(GtkTextIter)*)End.cPtr(No.Dup) : null);
   }
 
   /**
@@ -232,7 +232,7 @@ class Region : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_source_region_to_string(cast(GtkSourceRegion*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

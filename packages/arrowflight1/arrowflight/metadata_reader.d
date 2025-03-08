@@ -12,7 +12,7 @@ import gobject.object;
 class MetadataReader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,7 +36,7 @@ class MetadataReader : gobject.object.ObjectG
     _cretval = gaflight_metadata_reader_read(cast(GAFlightMetadataReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

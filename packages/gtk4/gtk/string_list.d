@@ -42,7 +42,7 @@ import gtk.types;
 class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,11 +72,11 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
     GtkStringList* _cretval;
     char*[] _tmpstrings;
     foreach (s; strings)
-      _tmpstrings ~= s.toCString(No.alloc);
+      _tmpstrings ~= s.toCString(No.Alloc);
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_string_list_new(_strings);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -89,7 +89,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
   */
   void append(string string_)
   {
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     gtk_string_list_append(cast(GtkStringList*)cPtr, _string_);
   }
 
@@ -108,7 +108,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
   {
     const(char)* _cretval;
     _cretval = gtk_string_list_get_string(cast(GtkStringList*)cPtr, position);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
   {
     char*[] _tmpadditions;
     foreach (s; additions)
-      _tmpadditions ~= s.toCString(No.alloc);
+      _tmpadditions ~= s.toCString(No.Alloc);
     _tmpadditions ~= null;
     const(char*)* _additions = _tmpadditions.ptr;
     gtk_string_list_splice(cast(GtkStringList*)cPtr, position, nRemovals, _additions);
@@ -168,7 +168,7 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
   */
   void take(string string_)
   {
-    char* _string_ = string_.toCString(Yes.alloc);
+    char* _string_ = string_.toCString(Yes.Alloc);
     gtk_string_list_take(cast(GtkStringList*)cPtr, _string_);
   }
 }

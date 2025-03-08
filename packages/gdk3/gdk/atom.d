@@ -14,7 +14,7 @@ class Atom
   GdkAtom cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.Atom");
@@ -39,7 +39,7 @@ class Atom
   {
     char* _cretval;
     _cretval = gdk_atom_name(cast(GdkAtom)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -56,9 +56,9 @@ class Atom
   static gdk.atom.Atom intern(string atomName, bool onlyIfExists)
   {
     GdkAtom _cretval;
-    const(char)* _atomName = atomName.toCString(No.alloc);
+    const(char)* _atomName = atomName.toCString(No.Alloc);
     _cretval = gdk_atom_intern(_atomName, onlyIfExists);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -80,9 +80,9 @@ class Atom
   static gdk.atom.Atom internStaticString(string atomName)
   {
     GdkAtom _cretval;
-    const(char)* _atomName = atomName.toCString(No.alloc);
+    const(char)* _atomName = atomName.toCString(No.Alloc);
     _cretval = gdk_atom_intern_static_string(_atomName);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 }

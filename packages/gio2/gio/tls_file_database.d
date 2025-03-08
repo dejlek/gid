@@ -35,12 +35,12 @@ interface TlsFileDatabase
   static gio.tls_file_database.TlsFileDatabase new_(string anchors)
   {
     GTlsDatabase* _cretval;
-    const(char)* _anchors = anchors.toCString(No.alloc);
+    const(char)* _anchors = anchors.toCString(No.Alloc);
     GError *_err;
     _cretval = g_tls_file_database_new(_anchors, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 }

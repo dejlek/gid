@@ -31,7 +31,7 @@ interface VideoOrientation
   static bool fromTag(gst.tag_list.TagList taglist, out gstvideo.types.VideoOrientationMethod method)
   {
     bool _retval;
-    _retval = gst_video_orientation_from_tag(taglist ? cast(GstTagList*)taglist.cPtr(No.dup) : null, &method);
+    _retval = gst_video_orientation_from_tag(taglist ? cast(GstTagList*)taglist.cPtr(No.Dup) : null, &method);
     return _retval;
   }
 

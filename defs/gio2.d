@@ -67,7 +67,7 @@
   T getItem(T)(uint position)
   {
     auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(ObjectG)this).cPtr, position);
-    return ObjectG.getDObject!T(gobj, Yes.take);
+    return ObjectG.getDObject!T(gobj, Yes.Take);
   }
 
 //# Disable ListStore.findWithEqualFuncFull with unnecessary additional user_data

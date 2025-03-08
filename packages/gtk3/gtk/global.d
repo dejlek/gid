@@ -61,7 +61,7 @@ import pango.types;
 bool accelGroupsActivate(gobject.object.ObjectG object, uint accelKey, gdk.types.ModifierType accelMods)
 {
   bool _retval;
-  _retval = gtk_accel_groups_activate(object ? cast(ObjectC*)object.cPtr(No.dup) : null, accelKey, accelMods);
+  _retval = gtk_accel_groups_activate(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, accelKey, accelMods);
   return _retval;
 }
 
@@ -75,7 +75,7 @@ bool accelGroupsActivate(gobject.object.ObjectG object, uint accelKey, gdk.types
 gtk.accel_group.AccelGroup[] accelGroupsFromObject(gobject.object.ObjectG object)
 {
   GSList* _cretval;
-  _cretval = gtk_accel_groups_from_object(object ? cast(ObjectC*)object.cPtr(No.dup) : null);
+  _cretval = gtk_accel_groups_from_object(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
   auto _retval = gSListToD!(gtk.accel_group.AccelGroup, GidOwnership.None)(cast(GSList*)_cretval);
   return _retval;
 }
@@ -107,7 +107,7 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
 {
   char* _cretval;
   _cretval = gtk_accelerator_get_label(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -129,8 +129,8 @@ string acceleratorGetLabel(uint acceleratorKey, gdk.types.ModifierType accelerat
 string acceleratorGetLabelWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods)
 {
   char* _cretval;
-  _cretval = gtk_accelerator_get_label_with_keycode(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = gtk_accelerator_get_label_with_keycode(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -150,7 +150,7 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
 {
   char* _cretval;
   _cretval = gtk_accelerator_name(acceleratorKey, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -170,8 +170,8 @@ string acceleratorName(uint acceleratorKey, gdk.types.ModifierType acceleratorMo
 string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorKey, uint keycode, gdk.types.ModifierType acceleratorMods)
 {
   char* _cretval;
-  _cretval = gtk_accelerator_name_with_keycode(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, acceleratorKey, keycode, acceleratorMods);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = gtk_accelerator_name_with_keycode(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, acceleratorKey, keycode, acceleratorMods);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -197,7 +197,7 @@ string acceleratorNameWithKeycode(gdk.display.Display display, uint acceleratorK
 */
 void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods)
 {
-  const(char)* _accelerator = accelerator.toCString(No.alloc);
+  const(char)* _accelerator = accelerator.toCString(No.Alloc);
   gtk_accelerator_parse(_accelerator, cast(uint*)&acceleratorKey, &acceleratorMods);
 }
 
@@ -259,7 +259,7 @@ bool acceleratorValid(uint keyval, gdk.types.ModifierType modifiers)
 bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
 {
   bool _retval;
-  _retval = gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+  _retval = gtk_alternative_dialog_button_order(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -275,7 +275,7 @@ bool alternativeDialogButtonOrder(gdk.screen.Screen screen = null)
 bool bindingsActivate(gobject.object.ObjectG object, uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_bindings_activate(object ? cast(ObjectC*)object.cPtr(No.dup) : null, keyval, modifiers);
+  _retval = gtk_bindings_activate(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, keyval, modifiers);
   return _retval;
 }
 
@@ -290,7 +290,7 @@ bool bindingsActivate(gobject.object.ObjectG object, uint keyval, gdk.types.Modi
 bool bindingsActivateEvent(gobject.object.ObjectG object, gdk.event_key.EventKey event)
 {
   bool _retval;
-  _retval = gtk_bindings_activate_event(object ? cast(ObjectC*)object.cPtr(No.dup) : null, event ? cast(GdkEventKey*)event.cPtr : null);
+  _retval = gtk_bindings_activate_event(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, event ? cast(GdkEventKey*)event.cPtr : null);
   return _retval;
 }
 
@@ -313,7 +313,7 @@ bool bindingsActivateEvent(gobject.object.ObjectG object, gdk.event_key.EventKey
 bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window)
 {
   bool _retval;
-  _retval = gtk_cairo_should_draw_window(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+  _retval = gtk_cairo_should_draw_window(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -334,7 +334,7 @@ bool cairoShouldDrawWindow(cairo.context.Context cr, gdk.window.Window window)
 */
 void cairoTransformToWindow(cairo.context.Context cr, gtk.widget.Widget widget, gdk.window.Window window)
 {
-  gtk_cairo_transform_to_window(cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+  gtk_cairo_transform_to_window(cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
 }
 
 /**
@@ -373,7 +373,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
 {
   const(char)* _cretval;
   _cretval = gtk_check_version(requiredMajor, requiredMinor, requiredMicro);
-  string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }
 
@@ -389,7 +389,7 @@ string checkVersion(uint requiredMajor, uint requiredMinor, uint requiredMicro)
 */
 void deviceGrabAdd(gtk.widget.Widget widget, gdk.device.Device device, bool blockOthers)
 {
-  gtk_device_grab_add(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, blockOthers);
+  gtk_device_grab_add(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, blockOthers);
 }
 
 /**
@@ -403,7 +403,7 @@ void deviceGrabAdd(gtk.widget.Widget widget, gdk.device.Device device, bool bloc
 */
 void deviceGrabRemove(gtk.widget.Widget widget, gdk.device.Device device)
 {
-  gtk_device_grab_remove(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+  gtk_device_grab_remove(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
 }
 
 /**
@@ -462,7 +462,7 @@ int distributeNaturalAllocation(int extraSpace, uint nRequestedSizes, gtk.types.
 */
 void dragCancel(gdk.drag_context.DragContext context)
 {
-  gtk_drag_cancel(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
+  gtk_drag_cancel(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
 }
 
 /**
@@ -477,7 +477,7 @@ void dragCancel(gdk.drag_context.DragContext context)
 */
 void dragFinish(gdk.drag_context.DragContext context, bool success, bool del, uint time)
 {
-  gtk_drag_finish(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, success, del, time);
+  gtk_drag_finish(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, success, del, time);
 }
 
 /**
@@ -491,8 +491,8 @@ void dragFinish(gdk.drag_context.DragContext context, bool success, bool del, ui
 gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context)
 {
   GtkWidget* _cretval;
-  _cretval = gtk_drag_get_source_widget(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  _cretval = gtk_drag_get_source_widget(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -505,7 +505,7 @@ gtk.widget.Widget dragGetSourceWidget(gdk.drag_context.DragContext context)
 */
 void dragSetIconDefault(gdk.drag_context.DragContext context)
 {
-  gtk_drag_set_icon_default(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null);
+  gtk_drag_set_icon_default(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
 }
 
 /**
@@ -521,7 +521,7 @@ void dragSetIconDefault(gdk.drag_context.DragContext context)
 */
 void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, int hotX, int hotY)
 {
-  gtk_drag_set_icon_gicon(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null, hotX, hotY);
+  gtk_drag_set_icon_gicon(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null, hotX, hotY);
 }
 
 /**
@@ -539,8 +539,8 @@ void dragSetIconGicon(gdk.drag_context.DragContext context, gio.icon.Icon icon, 
 */
 void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int hotX, int hotY)
 {
-  const(char)* _iconName = iconName.toCString(No.alloc);
-  gtk_drag_set_icon_name(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, _iconName, hotX, hotY);
+  const(char)* _iconName = iconName.toCString(No.Alloc);
+  gtk_drag_set_icon_name(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, _iconName, hotX, hotY);
 }
 
 /**
@@ -554,7 +554,7 @@ void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int 
 */
 void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pixbuf pixbuf, int hotX, int hotY)
 {
-  gtk_drag_set_icon_pixbuf(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null, hotX, hotY);
+  gtk_drag_set_icon_pixbuf(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null, hotX, hotY);
 }
 
 /**
@@ -570,8 +570,8 @@ void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pi
 */
 void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int hotX, int hotY)
 {
-  const(char)* _stockId = stockId.toCString(No.alloc);
-  gtk_drag_set_icon_stock(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, _stockId, hotX, hotY);
+  const(char)* _stockId = stockId.toCString(No.Alloc);
+  gtk_drag_set_icon_stock(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, _stockId, hotX, hotY);
 }
 
 /**
@@ -590,7 +590,7 @@ void dragSetIconStock(gdk.drag_context.DragContext context, string stockId, int 
 */
 void dragSetIconSurface(gdk.drag_context.DragContext context, cairo.surface.Surface surface)
 {
-  gtk_drag_set_icon_surface(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null);
+  gtk_drag_set_icon_surface(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
 }
 
 /**
@@ -607,7 +607,7 @@ void dragSetIconSurface(gdk.drag_context.DragContext context, cairo.surface.Surf
 */
 void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget widget, int hotX, int hotY)
 {
-  gtk_drag_set_icon_widget(context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, hotX, hotY);
+  gtk_drag_set_icon_widget(context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, hotX, hotY);
 }
 
 /**
@@ -627,7 +627,7 @@ void dragSetIconWidget(gdk.drag_context.DragContext context, gtk.widget.Widget w
 */
 void drawInsertionCursor(gtk.widget.Widget widget, cairo.context.Context cr, gdk.rectangle.Rectangle location, bool isPrimary, gtk.types.TextDirection direction, bool drawArrow)
 {
-  gtk_draw_insertion_cursor(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, location ? cast(const(GdkRectangle)*)location.cPtr(No.dup) : null, isPrimary, direction, drawArrow);
+  gtk_draw_insertion_cursor(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, location ? cast(const(GdkRectangle)*)location.cPtr(No.Dup) : null, isPrimary, direction, drawArrow);
 }
 
 /**
@@ -708,7 +708,7 @@ gdk.device.Device getCurrentEventDevice()
 {
   GdkDevice* _cretval;
   _cretval = gtk_get_current_event_device();
-  auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
+  auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
   return _retval;
 }
 
@@ -771,7 +771,7 @@ pango.language.Language getDefaultLanguage()
 {
   PangoLanguage* _cretval;
   _cretval = gtk_get_default_language();
-  auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -788,7 +788,7 @@ gtk.widget.Widget getEventWidget(gdk.event.Event event)
 {
   GtkWidget* _cretval;
   _cretval = gtk_get_event_widget(event ? cast(GdkEvent*)event.cPtr : null);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -811,8 +811,8 @@ uint getInterfaceAge()
   reading direction for text and UI.
   
   This function depends on the current locale being set with
-  setlocale() and will default to setting the [gtk.types.TextDirection.ltr]
-  direction otherwise. [gtk.types.TextDirection.none] will never be returned.
+  setlocale() and will default to setting the [gtk.types.TextDirection.Ltr]
+  direction otherwise. [gtk.types.TextDirection.None] will never be returned.
   
   GTK+ sets the default text direction according to the locale
   during [gtk.global.init_], and you should normally use
@@ -906,7 +906,7 @@ glib.option_group.OptionGroup getOptionGroup(bool openDefaultDisplay)
 {
   GOptionGroup* _cretval;
   _cretval = gtk_get_option_group(openDefaultDisplay);
-  auto _retval = _cretval ? new glib.option_group.OptionGroup(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new glib.option_group.OptionGroup(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -919,7 +919,7 @@ gtk.widget.Widget grabGetCurrent()
 {
   GtkWidget* _cretval;
   _cretval = gtk_grab_get_current();
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1069,8 +1069,8 @@ void mainQuit()
 */
 void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, gtk.types.ArrowType arrowType, bool fill, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_arrow(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, arrowType, fill, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_arrow(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, arrowType, fill, x, y, width, height);
 }
 
 /**
@@ -1091,8 +1091,8 @@ void paintArrow(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_box(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_box(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1117,8 +1117,8 @@ void paintBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 */
 void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_box_gap(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_box_gap(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
 }
 
 /**
@@ -1140,8 +1140,8 @@ void paintBoxGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_check(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_check(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1163,8 +1163,8 @@ void paintCheck(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_diamond(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_diamond(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1193,8 +1193,8 @@ void paintDiamond(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, gtk.types.ExpanderStyle expanderStyle)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_expander(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, expanderStyle);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_expander(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, expanderStyle);
 }
 
 /**
@@ -1216,8 +1216,8 @@ void paintExpander(gtk.style.Style style, cairo.context.Context cr, gtk.types.St
 */
 void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_extension(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height, gapSide);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_extension(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide);
 }
 
 /**
@@ -1238,8 +1238,8 @@ void paintExtension(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 */
 void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_flat_box(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_flat_box(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1260,8 +1260,8 @@ void paintFlatBox(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_focus(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_focus(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1283,8 +1283,8 @@ void paintFocus(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_handle(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height, orientation);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_handle(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
 }
 
 /**
@@ -1304,8 +1304,8 @@ void paintHandle(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int x1, int x2, int y)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_hline(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x1, x2, y);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_hline(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x1, x2, y);
 }
 
 /**
@@ -1326,8 +1326,8 @@ void paintHline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 */
 void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, bool useText, gtk.widget.Widget widget, string detail, int x, int y, pango.layout.Layout layout)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_layout(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, useText, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_layout(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, useText, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1349,8 +1349,8 @@ void paintLayout(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_option(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_option(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1372,8 +1372,8 @@ void paintOption(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, gdk.types.WindowEdge edge, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_resize_grip(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, edge, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_resize_grip(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, edge, x, y, width, height);
 }
 
 /**
@@ -1395,8 +1395,8 @@ void paintResizeGrip(gtk.style.Style style, cairo.context.Context cr, gtk.types.
 */
 void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_shadow(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_shadow(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1422,8 +1422,8 @@ void paintShadow(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.PositionType gapSide, int gapX, int gapWidth)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_shadow_gap(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_shadow_gap(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height, gapSide, gapX, gapWidth);
 }
 
 /**
@@ -1446,8 +1446,8 @@ void paintShadowGap(gtk.style.Style style, cairo.context.Context cr, gtk.types.S
 */
 void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height, gtk.types.Orientation orientation)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_slider(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height, orientation);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_slider(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height, orientation);
 }
 
 /**
@@ -1469,8 +1469,8 @@ void paintSlider(gtk.style.Style style, cairo.context.Context cr, gtk.types.Stat
 */
 void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, uint step, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_spinner(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, step, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_spinner(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, step, x, y, width, height);
 }
 
 /**
@@ -1492,8 +1492,8 @@ void paintSpinner(gtk.style.Style style, cairo.context.Context cr, gtk.types.Sta
 */
 void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.types.ShadowType shadowType, gtk.widget.Widget widget, string detail, int x, int y, int width, int height)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_tab(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, x, y, width, height);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_tab(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, shadowType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, x, y, width, height);
 }
 
 /**
@@ -1513,8 +1513,8 @@ void paintTab(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateTy
 */
 void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.StateType stateType, gtk.widget.Widget widget, string detail, int y1, int y2, int x)
 {
-  const(char)* _detail = detail.toCString(No.alloc);
-  gtk_paint_vline(style ? cast(GtkStyle*)style.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _detail, y1, y2, x);
+  const(char)* _detail = detail.toCString(No.Alloc);
+  gtk_paint_vline(style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, stateType, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail, y1, y2, x);
 }
 
 /**
@@ -1535,8 +1535,8 @@ void paintVline(gtk.style.Style style, cairo.context.Context cr, gtk.types.State
 gtk.page_setup.PageSetup printRunPageSetupDialog(gtk.window.Window parent, gtk.page_setup.PageSetup pageSetup, gtk.print_settings.PrintSettings settings)
 {
   GtkPageSetup* _cretval;
-  _cretval = gtk_print_run_page_setup_dialog(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.take);
+  _cretval = gtk_print_run_page_setup_dialog(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1560,12 +1560,12 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
     ptrThawGC(data);
     auto _dlg = cast(gtk.types.PageSetupDoneFunc*)data;
 
-    (*_dlg)(ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.take));
+    (*_dlg)(ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(void*)pageSetup, No.Take));
   }
   auto _doneCbCB = doneCb ? &_doneCbCallback : null;
 
   auto _doneCb = doneCb ? freezeDelegate(cast(void*)&doneCb) : null;
-  gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.dup) : null, _doneCbCB, _doneCb);
+  gtk_print_run_page_setup_dialog_async(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, _doneCbCB, _doneCb);
 }
 
 /**
@@ -1593,7 +1593,7 @@ void printRunPageSetupDialogAsync(gtk.window.Window parent, gtk.page_setup.PageS
 */
 void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event)
 {
-  gtk_propagate_event(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
+  gtk_propagate_event(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
 }
 
 /**
@@ -1607,7 +1607,7 @@ void propagateEvent(gtk.widget.Widget widget, gdk.event.Event event)
 */
 void rcAddDefaultFile(string filename)
 {
-  const(char)* _filename = filename.toCString(No.alloc);
+  const(char)* _filename = filename.toCString(No.Alloc);
   gtk_rc_add_default_file(_filename);
 }
 
@@ -1624,9 +1624,9 @@ void rcAddDefaultFile(string filename)
 string rcFindModuleInPath(string moduleFile)
 {
   char* _cretval;
-  const(char)* _moduleFile = moduleFile.toCString(No.alloc);
+  const(char)* _moduleFile = moduleFile.toCString(No.Alloc);
   _cretval = gtk_rc_find_module_in_path(_moduleFile);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1646,9 +1646,9 @@ string rcFindModuleInPath(string moduleFile)
 string rcFindPixmapInPath(gtk.settings.Settings settings, glib.scanner.Scanner scanner, string pixmapFile)
 {
   char* _cretval;
-  const(char)* _pixmapFile = pixmapFile.toCString(No.alloc);
-  _cretval = gtk_rc_find_pixmap_in_path(settings ? cast(GtkSettings*)settings.cPtr(No.dup) : null, scanner ? cast(GScanner*)scanner.cPtr : null, _pixmapFile);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  const(char)* _pixmapFile = pixmapFile.toCString(No.Alloc);
+  _cretval = gtk_rc_find_pixmap_in_path(settings ? cast(GtkSettings*)settings.cPtr(No.Dup) : null, scanner ? cast(GScanner*)scanner.cPtr : null, _pixmapFile);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1674,7 +1674,7 @@ string[] rcGetDefaultFiles()
       break;
     _retval = new string[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = _cretval[i].fromCString(No.free);
+      _retval[i] = _cretval[i].fromCString(No.Free);
   }
   return _retval;
 }
@@ -1692,7 +1692,7 @@ string rcGetImModuleFile()
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_file();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1711,7 +1711,7 @@ string rcGetImModulePath()
 {
   char* _cretval;
   _cretval = gtk_rc_get_im_module_path();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1727,7 +1727,7 @@ string rcGetModuleDir()
 {
   char* _cretval;
   _cretval = gtk_rc_get_module_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1749,8 +1749,8 @@ string rcGetModuleDir()
 gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
 {
   GtkStyle* _cretval;
-  _cretval = gtk_rc_get_style(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.take);
+  _cretval = gtk_rc_get_style(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1789,10 +1789,10 @@ gtk.style.Style rcGetStyle(gtk.widget.Widget widget)
 gtk.style.Style rcGetStyleByPaths(gtk.settings.Settings settings, string widgetPath, string classPath, gobject.types.GType type)
 {
   GtkStyle* _cretval;
-  const(char)* _widgetPath = widgetPath.toCString(No.alloc);
-  const(char)* _classPath = classPath.toCString(No.alloc);
-  _cretval = gtk_rc_get_style_by_paths(settings ? cast(GtkSettings*)settings.cPtr(No.dup) : null, _widgetPath, _classPath, type);
-  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.take);
+  const(char)* _widgetPath = widgetPath.toCString(No.Alloc);
+  const(char)* _classPath = classPath.toCString(No.Alloc);
+  _cretval = gtk_rc_get_style_by_paths(settings ? cast(GtkSettings*)settings.cPtr(No.Dup) : null, _widgetPath, _classPath, type);
+  auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1808,7 +1808,7 @@ string rcGetThemeDir()
 {
   char* _cretval;
   _cretval = gtk_rc_get_theme_dir();
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -1822,7 +1822,7 @@ string rcGetThemeDir()
 */
 void rcParse(string filename)
 {
-  const(char)* _filename = filename.toCString(No.alloc);
+  const(char)* _filename = filename.toCString(No.Alloc);
   gtk_rc_parse(_filename);
 }
 
@@ -1846,7 +1846,7 @@ uint rcParseColor(glib.scanner.Scanner scanner, out gdk.color.Color color)
   uint _retval;
   GdkColor _color;
   _retval = gtk_rc_parse_color(scanner ? cast(GScanner*)scanner.cPtr : null, &_color);
-  color = new gdk.color.Color(cast(void*)&_color, No.take);
+  color = new gdk.color.Color(cast(void*)&_color, No.Take);
   return _retval;
 }
 
@@ -1868,8 +1868,8 @@ uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, 
 {
   uint _retval;
   GdkColor _color;
-  _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner.cPtr : null, style ? cast(GtkRcStyle*)style.cPtr(No.dup) : null, &_color);
-  color = new gdk.color.Color(cast(void*)&_color, No.take);
+  _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner.cPtr : null, style ? cast(GtkRcStyle*)style.cPtr(No.Dup) : null, &_color);
+  color = new gdk.color.Color(cast(void*)&_color, No.Take);
   return _retval;
 }
 
@@ -1901,7 +1901,7 @@ uint rcParseState(glib.scanner.Scanner scanner, out gtk.types.StateType state)
 */
 void rcParseString(string rcString)
 {
-  const(char)* _rcString = rcString.toCString(No.alloc);
+  const(char)* _rcString = rcString.toCString(No.Alloc);
   gtk_rc_parse_string(_rcString);
 }
 
@@ -1934,7 +1934,7 @@ bool rcReparseAll()
 bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad)
 {
   bool _retval;
-  _retval = gtk_rc_reparse_all_for_settings(settings ? cast(GtkSettings*)settings.cPtr(No.dup) : null, forceLoad);
+  _retval = gtk_rc_reparse_all_for_settings(settings ? cast(GtkSettings*)settings.cPtr(No.Dup) : null, forceLoad);
   return _retval;
 }
 
@@ -1956,7 +1956,7 @@ bool rcReparseAllForSettings(gtk.settings.Settings settings, bool forceLoad)
 */
 void rcResetStyles(gtk.settings.Settings settings)
 {
-  gtk_rc_reset_styles(settings ? cast(GtkSettings*)settings.cPtr(No.dup) : null);
+  gtk_rc_reset_styles(settings ? cast(GtkSettings*)settings.cPtr(No.Dup) : null);
 }
 
 /**
@@ -1972,7 +1972,7 @@ void rcSetDefaultFiles(string[] filenames)
 {
   char*[] _tmpfilenames;
   foreach (s; filenames)
-    _tmpfilenames ~= s.toCString(No.alloc);
+    _tmpfilenames ~= s.toCString(No.Alloc);
   _tmpfilenames ~= null;
   char** _filenames = _tmpfilenames.ptr;
   gtk_rc_set_default_files(_filenames);
@@ -1980,7 +1980,7 @@ void rcSetDefaultFiles(string[] filenames)
 
 /**
     Renders an activity indicator (such as in #GtkSpinner).
-  The state [gtk.types.StateFlags.checked] determines whether there is
+  The state [gtk.types.StateFlags.Checked] determines whether there is
   activity going on.
   Params:
     context =       a #GtkStyleContext
@@ -1992,7 +1992,7 @@ void rcSetDefaultFiles(string[] filenames)
 */
 void renderActivity(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_activity(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_activity(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2011,7 +2011,7 @@ void renderActivity(gtk.style_context.StyleContext context, cairo.context.Contex
 */
 void renderArrow(gtk.style_context.StyleContext context, cairo.context.Context cr, double angle, double x, double y, double size)
 {
-  gtk_render_arrow(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, angle, x, y, size);
+  gtk_render_arrow(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, angle, x, y, size);
 }
 
 /**
@@ -2031,7 +2031,7 @@ void renderArrow(gtk.style_context.StyleContext context, cairo.context.Context c
 */
 void renderBackground(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_background(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_background(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2049,15 +2049,15 @@ void renderBackground(gtk.style_context.StyleContext context, cairo.context.Cont
 void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, double y, double width, double height, out gdk.rectangle.Rectangle outClip)
 {
   GdkRectangle _outClip;
-  gtk_render_background_get_clip(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, x, y, width, height, &_outClip);
-  outClip = new gdk.rectangle.Rectangle(cast(void*)&_outClip, No.take);
+  gtk_render_background_get_clip(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, width, height, &_outClip);
+  outClip = new gdk.rectangle.Rectangle(cast(void*)&_outClip, No.Take);
 }
 
 /**
     Renders a checkmark (as in a #GtkCheckButton).
   
-  The [gtk.types.StateFlags.checked] state determines whether the check is
-  on or off, and [gtk.types.StateFlags.inconsistent] determines whether it
+  The [gtk.types.StateFlags.Checked] state determines whether the check is
+  on or off, and [gtk.types.StateFlags.Inconsistent] determines whether it
   should be marked as undefined.
   
   Typical checkmark rendering:
@@ -2073,12 +2073,12 @@ void renderBackgroundGetClip(gtk.style_context.StyleContext context, double x, d
 */
 void renderCheck(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_check(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_check(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
     Renders an expander (as used in #GtkTreeView and #GtkExpander) in the area
-  defined by x, y, width, height. The state [gtk.types.StateFlags.checked]
+  defined by x, y, width, height. The state [gtk.types.StateFlags.Checked]
   determines whether the expander is collapsed or expanded.
   
   Typical expander rendering:
@@ -2094,7 +2094,7 @@ void renderCheck(gtk.style_context.StyleContext context, cairo.context.Context c
 */
 void renderExpander(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_expander(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_expander(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2116,7 +2116,7 @@ void renderExpander(gtk.style_context.StyleContext context, cairo.context.Contex
 */
 void renderExtension(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide)
 {
-  gtk_render_extension(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height, gapSide);
+  gtk_render_extension(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height, gapSide);
 }
 
 /**
@@ -2135,7 +2135,7 @@ void renderExtension(gtk.style_context.StyleContext context, cairo.context.Conte
 */
 void renderFocus(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_focus(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_focus(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2155,14 +2155,14 @@ void renderFocus(gtk.style_context.StyleContext context, cairo.context.Context c
 */
 void renderFrame(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_frame(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_frame(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
     Renders a frame around the rectangle defined by (x, y, width, height),
   leaving a gap on one side. xy0_gap and xy1_gap will mean X coordinates
-  for [gtk.types.PositionType.top] and [gtk.types.PositionType.bottom] gap sides, and Y coordinates for
-  [gtk.types.PositionType.left] and [gtk.types.PositionType.right].
+  for [gtk.types.PositionType.Top] and [gtk.types.PositionType.Bottom] gap sides, and Y coordinates for
+  [gtk.types.PositionType.Left] and [gtk.types.PositionType.Right].
   
   Typical rendering of a frame with a gap:
   
@@ -2183,7 +2183,7 @@ void renderFrame(gtk.style_context.StyleContext context, cairo.context.Context c
 */
 void renderFrameGap(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.PositionType gapSide, double xy0Gap, double xy1Gap)
 {
-  gtk_render_frame_gap(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height, gapSide, xy0Gap, xy1Gap);
+  gtk_render_frame_gap(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height, gapSide, xy0Gap, xy1Gap);
 }
 
 /**
@@ -2204,7 +2204,7 @@ void renderFrameGap(gtk.style_context.StyleContext context, cairo.context.Contex
 */
 void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_handle(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_handle(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2225,7 +2225,7 @@ void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context 
 */
 void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double x, double y)
 {
-  gtk_render_icon(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null, x, y);
+  gtk_render_icon(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null, x, y);
 }
 
 /**
@@ -2244,8 +2244,8 @@ void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr
 gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.icon_source.IconSource source, gtk.types.IconSize size)
 {
   PixbufC* _cretval;
-  _cretval = gtk_render_icon_pixbuf(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, source ? cast(const(GtkIconSource)*)source.cPtr(No.dup) : null, size);
-  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+  _cretval = gtk_render_icon_pixbuf(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null, size);
+  auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -2260,7 +2260,7 @@ gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context,
 */
 void renderIconSurface(gtk.style_context.StyleContext context, cairo.context.Context cr, cairo.surface.Surface surface, double x, double y)
 {
-  gtk_render_icon_surface(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, surface ? cast(cairo_surface_t*)surface.cPtr(No.dup) : null, x, y);
+  gtk_render_icon_surface(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
 }
 
 /**
@@ -2276,7 +2276,7 @@ void renderIconSurface(gtk.style_context.StyleContext context, cairo.context.Con
 */
 void renderInsertionCursor(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout, int index, pango.types.Direction direction)
 {
-  gtk_render_insertion_cursor(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null, index, direction);
+  gtk_render_insertion_cursor(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, index, direction);
 }
 
 /**
@@ -2290,7 +2290,7 @@ void renderInsertionCursor(gtk.style_context.StyleContext context, cairo.context
 */
 void renderLayout(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, pango.layout.Layout layout)
 {
-  gtk_render_layout(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.dup) : null);
+  gtk_render_layout(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2305,13 +2305,13 @@ void renderLayout(gtk.style_context.StyleContext context, cairo.context.Context 
 */
 void renderLine(gtk.style_context.StyleContext context, cairo.context.Context cr, double x0, double y0, double x1, double y1)
 {
-  gtk_render_line(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x0, y0, x1, y1);
+  gtk_render_line(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x0, y0, x1, y1);
 }
 
 /**
-    Renders an option mark (as in a #GtkRadioButton), the [gtk.types.StateFlags.checked]
+    Renders an option mark (as in a #GtkRadioButton), the [gtk.types.StateFlags.Checked]
   state will determine whether the option is on or off, and
-  [gtk.types.StateFlags.inconsistent] whether it should be marked as undefined.
+  [gtk.types.StateFlags.Inconsistent] whether it should be marked as undefined.
   
   Typical option mark rendering:
   
@@ -2326,7 +2326,7 @@ void renderLine(gtk.style_context.StyleContext context, cairo.context.Context cr
 */
 void renderOption(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height)
 {
-  gtk_render_option(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height);
+  gtk_render_option(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height);
 }
 
 /**
@@ -2348,7 +2348,7 @@ void renderOption(gtk.style_context.StyleContext context, cairo.context.Context 
 */
 void renderSlider(gtk.style_context.StyleContext context, cairo.context.Context cr, double x, double y, double width, double height, gtk.types.Orientation orientation)
 {
-  gtk_render_slider(context ? cast(GtkStyleContext*)context.cPtr(No.dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, x, y, width, height, orientation);
+  gtk_render_slider(context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, x, y, width, height, orientation);
 }
 
 /**
@@ -2380,7 +2380,7 @@ void rgbToHsv(double r, double g, double b, out double h, out double s, out doub
 */
 void selectionAddTarget(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint info)
 {
-  gtk_selection_add_target(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, info);
+  gtk_selection_add_target(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, info);
 }
 
 /**
@@ -2401,7 +2401,7 @@ void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.
   foreach (obj; targets)
     _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
   const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-  gtk_selection_add_targets(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, _targets, _ntargets);
+  gtk_selection_add_targets(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, _targets, _ntargets);
 }
 
 /**
@@ -2413,7 +2413,7 @@ void selectionAddTargets(gtk.widget.Widget widget, gdk.atom.Atom selection, gtk.
 */
 void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection)
 {
-  gtk_selection_clear_targets(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
+  gtk_selection_clear_targets(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null);
 }
 
 /**
@@ -2432,7 +2432,7 @@ void selectionClearTargets(gtk.widget.Widget widget, gdk.atom.Atom selection)
 bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.atom.Atom target, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_convert(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, time);
+  _retval = gtk_selection_convert(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, target ? cast(GdkAtom)target.cPtr : null, time);
   return _retval;
 }
 
@@ -2448,7 +2448,7 @@ bool selectionConvert(gtk.widget.Widget widget, gdk.atom.Atom selection, gdk.ato
 bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_owner_set(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time);
+  _retval = gtk_selection_owner_set(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time);
   return _retval;
 }
 
@@ -2465,7 +2465,7 @@ bool selectionOwnerSet(gtk.widget.Widget widget, gdk.atom.Atom selection, uint t
 bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget widget, gdk.atom.Atom selection, uint time)
 {
   bool _retval;
-  _retval = gtk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time);
+  _retval = gtk_selection_owner_set_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection.cPtr : null, time);
   return _retval;
 }
 
@@ -2479,7 +2479,7 @@ bool selectionOwnerSetForDisplay(gdk.display.Display display, gtk.widget.Widget 
 */
 void selectionRemoveAll(gtk.widget.Widget widget)
 {
-  gtk_selection_remove_all(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+  gtk_selection_remove_all(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2512,9 +2512,9 @@ void setDebugFlags(uint flags)
 bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
 {
   bool _retval;
-  const(char)* _uri = uri.toCString(No.alloc);
+  const(char)* _uri = uri.toCString(No.Alloc);
   GError *_err;
-  _retval = gtk_show_uri(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null, _uri, timestamp, &_err);
+  _retval = gtk_show_uri(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -2547,9 +2547,9 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
 bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
 {
   bool _retval;
-  const(char)* _uri = uri.toCString(No.alloc);
+  const(char)* _uri = uri.toCString(No.Alloc);
   GError *_err;
-  _retval = gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, _uri, timestamp, &_err);
+  _retval = gtk_show_uri_on_window(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, _uri, timestamp, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -2580,7 +2580,7 @@ string[] stockListIds()
 bool stockLookup(string stockId, out gtk.stock_item.StockItem item)
 {
   bool _retval;
-  const(char)* _stockId = stockId.toCString(No.alloc);
+  const(char)* _stockId = stockId.toCString(No.Alloc);
   GtkStockItem _item;
   _retval = gtk_stock_lookup(_stockId, &_item);
   item = new gtk.stock_item.StockItem(cast(void*)&_item);
@@ -2632,16 +2632,16 @@ void stockSetTranslateFunc(string domain, gtk.types.TranslateFunc func)
   {
     string _dretval;
     auto _dlg = cast(gtk.types.TranslateFunc*)funcData;
-    string _path = path.fromCString(No.free);
+    string _path = path.fromCString(No.Free);
 
     _dretval = (*_dlg)(_path);
-    char* _retval = _dretval.toCString(Yes.alloc);
+    char* _retval = _dretval.toCString(Yes.Alloc);
 
     return _retval;
   }
   auto _funcCB = func ? &_funcCallback : null;
 
-  const(char)* _domain = domain.toCString(No.alloc);
+  const(char)* _domain = domain.toCString(No.Alloc);
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
   gtk_stock_set_translate_func(_domain, _funcCB, _func, _funcDestroyCB);
@@ -2679,14 +2679,14 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
 {
   GtkTargetEntry* _cretval;
   int _cretlength;
-  _cretval = gtk_target_table_new_from_list(list ? cast(GtkTargetList*)list.cPtr(No.dup) : null, &_cretlength);
+  _cretval = gtk_target_table_new_from_list(list ? cast(GtkTargetList*)list.cPtr(No.Dup) : null, &_cretlength);
   gtk.target_entry.TargetEntry[] _retval;
 
   if (_cretval)
   {
     _retval = new gtk.target_entry.TargetEntry[_cretlength];
     foreach (i; 0 .. _cretlength)
-      _retval[i] = new gtk.target_entry.TargetEntry(cast(void*)&_cretval[i], Yes.take);
+      _retval[i] = new gtk.target_entry.TargetEntry(cast(void*)&_cretval[i], Yes.Take);
   }
   return _retval;
 }
@@ -2706,10 +2706,10 @@ gtk.target_entry.TargetEntry[] targetTableNewFromList(gtk.target_list.TargetList
 gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText)
 {
   GtkWidget* _cretval;
-  const(char)* _windowTitle = windowTitle.toCString(No.alloc);
-  const(char)* _dialogText = dialogText.toCString(No.alloc);
+  const(char)* _windowTitle = windowTitle.toCString(No.Alloc);
+  const(char)* _dialogText = dialogText.toCString(No.Alloc);
   _cretval = gtk_test_create_simple_window(_windowTitle, _dialogText);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2729,9 +2729,9 @@ gtk.widget.Widget testCreateSimpleWindow(string windowTitle, string dialogText)
 gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern)
 {
   GtkWidget* _cretval;
-  const(char)* _labelPattern = labelPattern.toCString(No.alloc);
-  _cretval = gtk_test_find_label(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _labelPattern);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
+  _cretval = gtk_test_find_label(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _labelPattern);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2751,8 +2751,8 @@ gtk.widget.Widget testFindLabel(gtk.widget.Widget widget, string labelPattern)
 gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GType widgetType)
 {
   GtkWidget* _cretval;
-  _cretval = gtk_test_find_sibling(baseWidget ? cast(GtkWidget*)baseWidget.cPtr(No.dup) : null, widgetType);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  _cretval = gtk_test_find_sibling(baseWidget ? cast(GtkWidget*)baseWidget.cPtr(No.Dup) : null, widgetType);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2773,9 +2773,9 @@ gtk.widget.Widget testFindSibling(gtk.widget.Widget baseWidget, gobject.types.GT
 gtk.widget.Widget testFindWidget(gtk.widget.Widget widget, string labelPattern, gobject.types.GType widgetType)
 {
   GtkWidget* _cretval;
-  const(char)* _labelPattern = labelPattern.toCString(No.alloc);
-  _cretval = gtk_test_find_widget(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _labelPattern, widgetType);
-  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+  const(char)* _labelPattern = labelPattern.toCString(No.Alloc);
+  _cretval = gtk_test_find_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _labelPattern, widgetType);
+  auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
   return _retval;
 }
 
@@ -2823,7 +2823,7 @@ void testRegisterAllTypes()
 double testSliderGetValue(gtk.widget.Widget widget)
 {
   double _retval;
-  _retval = gtk_test_slider_get_value(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+  _retval = gtk_test_slider_get_value(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2841,7 +2841,7 @@ double testSliderGetValue(gtk.widget.Widget widget)
 */
 void testSliderSetPerc(gtk.widget.Widget widget, double percentage)
 {
-  gtk_test_slider_set_perc(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, percentage);
+  gtk_test_slider_set_perc(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, percentage);
 }
 
 /**
@@ -2859,7 +2859,7 @@ void testSliderSetPerc(gtk.widget.Widget widget, double percentage)
 bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool upwards)
 {
   bool _retval;
-  _retval = gtk_test_spin_button_click(spinner ? cast(GtkSpinButton*)spinner.cPtr(No.dup) : null, button, upwards);
+  _retval = gtk_test_spin_button_click(spinner ? cast(GtkSpinButton*)spinner.cPtr(No.Dup) : null, button, upwards);
   return _retval;
 }
 
@@ -2875,8 +2875,8 @@ bool testSpinButtonClick(gtk.spin_button.SpinButton spinner, uint button, bool u
 string testTextGet(gtk.widget.Widget widget)
 {
   char* _cretval;
-  _cretval = gtk_test_text_get(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = gtk_test_text_get(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -2891,8 +2891,8 @@ string testTextGet(gtk.widget.Widget widget)
 */
 void testTextSet(gtk.widget.Widget widget, string string_)
 {
-  const(char)* _string_ = string_.toCString(No.alloc);
-  gtk_test_text_set(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, _string_);
+  const(char)* _string_ = string_.toCString(No.Alloc);
+  gtk_test_text_set(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _string_);
 }
 
 /**
@@ -2916,7 +2916,7 @@ void testTextSet(gtk.widget.Widget widget, string string_)
 bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_test_widget_click(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, button, modifiers);
+  _retval = gtk_test_widget_click(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, button, modifiers);
   return _retval;
 }
 
@@ -2938,7 +2938,7 @@ bool testWidgetClick(gtk.widget.Widget widget, uint button, gdk.types.ModifierTy
 bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.ModifierType modifiers)
 {
   bool _retval;
-  _retval = gtk_test_widget_send_key(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, keyval, modifiers);
+  _retval = gtk_test_widget_send_key(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, keyval, modifiers);
   return _retval;
 }
 
@@ -2955,7 +2955,7 @@ bool testWidgetSendKey(gtk.widget.Widget widget, uint keyval, gdk.types.Modifier
 */
 void testWidgetWaitForDraw(gtk.widget.Widget widget)
 {
-  gtk_test_widget_wait_for_draw(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+  gtk_test_widget_wait_for_draw(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
 }
 
 /**
@@ -2980,9 +2980,9 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
   bool _retval;
   GtkTreeModel* _treeModel;
   GtkTreePath* _path;
-  _retval = gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.dup) : null, &_treeModel, &_path);
-  treeModel = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.take);
-  path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
+  _retval = gtk_tree_get_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.Dup) : null, &_treeModel, &_path);
+  treeModel = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_treeModel, No.Take);
+  path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   return _retval;
 }
 
@@ -2998,7 +2998,7 @@ bool treeGetRowDragData(gtk.selection_data.SelectionData selectionData, out gtk.
 bool treeSetRowDragData(gtk.selection_data.SelectionData selectionData, gtk.tree_model.TreeModel treeModel, gtk.tree_path.TreePath path)
 {
   bool _retval;
-  _retval = gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.dup) : null, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+  _retval = gtk_tree_set_row_drag_data(selectionData ? cast(GtkSelectionData*)selectionData.cPtr(No.Dup) : null, treeModel ? cast(GtkTreeModel*)(cast(ObjectG)treeModel).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   return _retval;
 }
 

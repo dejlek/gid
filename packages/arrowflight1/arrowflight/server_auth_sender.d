@@ -12,7 +12,7 @@ import gobject.object;
 class ServerAuthSender : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class ServerAuthSender : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_auth_sender_write(cast(GAFlightServerAuthSender*)cPtr, message ? cast(GBytes*)message.cPtr(No.dup) : null, &_err);
+    _retval = gaflight_server_auth_sender_write(cast(GAFlightServerAuthSender*)cPtr, message ? cast(GBytes*)message.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

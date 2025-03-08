@@ -24,12 +24,12 @@ import gobject.boxed;
 class FontFace : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -76,8 +76,8 @@ class FontFace : gobject.boxed.Boxed
   /**
       Checks whether an error has previously occurred for this
     font face
-    Returns:     [cairo.types.Status.success] or another error such as
-        [cairo.types.Status.noMemory].
+    Returns:     [cairo.types.Status.Success] or another error such as
+        [cairo.types.Status.NoMemory].
   */
   cairo.types.Status status()
   {

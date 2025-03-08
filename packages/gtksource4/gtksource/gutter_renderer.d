@@ -20,7 +20,7 @@ import gtksource.types;
 class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
   }
 
   /**
@@ -62,7 +62,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void begin(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null);
+    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -89,7 +89,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void draw(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null, state);
+    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -137,7 +137,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     bool _retval;
     GdkRGBA _color;
     _retval = gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)cPtr, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     GtkTextView* _cretval;
     _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void queryData(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null, state);
+    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -248,7 +248,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.dup) : null);
+    _retval = gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setBackground(gdk.rgba.RGBA color = null)
   {
-    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
+    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -358,10 +358,10 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -401,10 +401,10 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to QueryActivatable signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryActivatable(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryActivatable(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryActivatableCallbackDlg) || is(T : QueryActivatableCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -447,10 +447,10 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to QueryData signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryData(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryData(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryDataCallbackDlg) || is(T : QueryDataCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -492,10 +492,10 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to QueryTooltip signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryTooltip(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipCallbackDlg) || is(T : QueryTooltipCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -537,10 +537,10 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     Connect to QueueDraw signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueueDraw(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueueDraw(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueueDrawCallbackDlg) || is(T : QueueDrawCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

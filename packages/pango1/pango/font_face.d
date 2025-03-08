@@ -15,7 +15,7 @@ import pango.types;
 class FontFace : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class FontFace : gobject.object.ObjectG
   {
     PangoFontDescription* _cretval;
     _cretval = pango_font_face_describe(cast(PangoFontFace*)cPtr);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class FontFace : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class FontFace : gobject.object.ObjectG
   {
     PangoFontFamily* _cretval;
     _cretval = pango_font_face_get_family(cast(PangoFontFace*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 

@@ -21,7 +21,7 @@ import gobject.object;
 class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.remote_action_group.RemoteActionGroup
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,10 +64,10 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
   static gio.dbus_action_group.DBusActionGroup get(gio.dbus_connection.DBusConnection connection, string busName, string objectPath)
   {
     GDBusActionGroup* _cretval;
-    const(char)* _busName = busName.toCString(No.alloc);
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
-    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.dup) : null, _busName, _objectPath);
-    auto _retval = ObjectG.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.take);
+    const(char)* _busName = busName.toCString(No.Alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
+    auto _retval = ObjectG.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -38,7 +38,7 @@ import gtk.widget;
 class Calendar : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -62,7 +62,7 @@ class Calendar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_calendar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -190,8 +190,8 @@ class Calendar : gtk.widget.Widget
       string _dretval;
       auto _dlg = cast(gtk.types.CalendarDetailFunc*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.take), year, month, day);
-      char* _retval = _dretval.toCString(Yes.alloc);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
+      char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }
@@ -262,10 +262,10 @@ class Calendar : gtk.widget.Widget
     Connect to DaySelected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDaySelected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDaySelected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DaySelectedCallbackDlg) || is(T : DaySelectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -297,10 +297,10 @@ class Calendar : gtk.widget.Widget
     Connect to DaySelectedDoubleClick signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDaySelectedDoubleClick(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDaySelectedDoubleClick(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DaySelectedDoubleClickCallbackDlg) || is(T : DaySelectedDoubleClickCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -333,10 +333,10 @@ class Calendar : gtk.widget.Widget
     Connect to MonthChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMonthChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMonthChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MonthChangedCallbackDlg) || is(T : MonthChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -368,10 +368,10 @@ class Calendar : gtk.widget.Widget
     Connect to NextMonth signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNextMonth(T)(T callback, Flag!"after" after = No.after)
+  ulong connectNextMonth(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NextMonthCallbackDlg) || is(T : NextMonthCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -403,10 +403,10 @@ class Calendar : gtk.widget.Widget
     Connect to NextYear signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNextYear(T)(T callback, Flag!"after" after = No.after)
+  ulong connectNextYear(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NextYearCallbackDlg) || is(T : NextYearCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -438,10 +438,10 @@ class Calendar : gtk.widget.Widget
     Connect to PrevMonth signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPrevMonth(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PrevMonthCallbackDlg) || is(T : PrevMonthCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -473,10 +473,10 @@ class Calendar : gtk.widget.Widget
     Connect to PrevYear signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPrevYear(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPrevYear(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PrevYearCallbackDlg) || is(T : PrevYearCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -37,12 +37,12 @@ import gstvideo.video_overlay_rectangle;
 class VideoOverlayComposition : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -72,8 +72,8 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   this(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle = null)
   {
     GstVideoOverlayComposition* _cretval;
-    _cretval = gst_video_overlay_composition_new(rectangle ? cast(GstVideoOverlayRectangle*)rectangle.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gst_video_overlay_composition_new(rectangle ? cast(GstVideoOverlayRectangle*)rectangle.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   */
   void addRectangle(gstvideo.video_overlay_rectangle.VideoOverlayRectangle rectangle)
   {
-    gst_video_overlay_composition_add_rectangle(cast(GstVideoOverlayComposition*)cPtr, rectangle ? cast(GstVideoOverlayRectangle*)rectangle.cPtr(No.dup) : null);
+    gst_video_overlay_composition_add_rectangle(cast(GstVideoOverlayComposition*)cPtr, rectangle ? cast(GstVideoOverlayRectangle*)rectangle.cPtr(No.Dup) : null);
   }
 
   /**
@@ -120,7 +120,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   {
     GstVideoOverlayComposition* _cretval;
     _cretval = gst_video_overlay_composition_copy(cast(GstVideoOverlayComposition*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   {
     GstVideoOverlayRectangle* _cretval;
     _cretval = gst_video_overlay_composition_get_rectangle(cast(GstVideoOverlayComposition*)cPtr, n);
-    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class VideoOverlayComposition : gobject.boxed.Boxed
   {
     GstVideoOverlayComposition* _cretval;
     _cretval = gst_video_overlay_composition_make_writable(cast(GstVideoOverlayComposition*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

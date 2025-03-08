@@ -21,7 +21,7 @@ import soup.types;
 class CookieJarDB : soup.cookie_jar.CookieJar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,8 +53,8 @@ class CookieJarDB : soup.cookie_jar.CookieJar
   this(string filename, bool readOnly)
   {
     SoupCookieJar* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = soup_cookie_jar_db_new(_filename, readOnly);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

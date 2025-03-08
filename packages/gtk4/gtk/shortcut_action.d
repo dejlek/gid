@@ -43,7 +43,7 @@ import gtk.widget;
 class ShortcutAction : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -81,9 +81,9 @@ class ShortcutAction : gobject.object.ObjectG
   static gtk.shortcut_action.ShortcutAction parseString(string string_)
   {
     GtkShortcutAction* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_action_parse_string(_string_);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ShortcutAction : gobject.object.ObjectG
   bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.VariantG args = null)
   {
     bool _retval;
-    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, args ? cast(VariantC*)args.cPtr(No.dup) : null);
+    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(VariantC*)args.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class ShortcutAction : gobject.object.ObjectG
   */
   void print(glib.string_.String string_)
   {
-    gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
+    gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -134,7 +134,7 @@ class ShortcutAction : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

@@ -11,7 +11,7 @@ import gobject.object;
 class DataType : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class DataType : gobject.object.ObjectG
     _cretval = garrow_data_type_import(cAbiSchema, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -43,7 +43,7 @@ class DataType : gobject.object.ObjectG
   bool equal(arrow.data_type.DataType otherDataType)
   {
     bool _retval;
-    _retval = garrow_data_type_equal(cast(GArrowDataType*)cPtr, otherDataType ? cast(GArrowDataType*)otherDataType.cPtr(No.dup) : null);
+    _retval = garrow_data_type_equal(cast(GArrowDataType*)cPtr, otherDataType ? cast(GArrowDataType*)otherDataType.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class DataType : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_data_type_get_name(cast(GArrowDataType*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class DataType : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_data_type_to_string(cast(GArrowDataType*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

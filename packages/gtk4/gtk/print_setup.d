@@ -24,12 +24,12 @@ import gtk.types;
 class PrintSetup : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -56,7 +56,7 @@ class PrintSetup : gobject.boxed.Boxed
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class PrintSetup : gobject.boxed.Boxed
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 }

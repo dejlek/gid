@@ -201,7 +201,7 @@ alias LoggerFilter = soup.types.LoggerLogLevel delegate(soup.logger.Logger logge
     The prototype for a custom printing callback.
   
   level indicates what kind of information is being printed. Eg, it
-  will be [soup.types.LoggerLogLevel.headers] if data is header data.
+  will be [soup.types.LoggerLogLevel.Headers] if data is header data.
   
   direction is either '<', '>', or ' ', and data is the single line
   to print; the printer is expected to add a terminating newline.

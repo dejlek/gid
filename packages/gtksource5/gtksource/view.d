@@ -95,7 +95,7 @@ import gtksource.types;
 class View : gtk.text_view.TextView
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -126,7 +126,7 @@ class View : gtk.text_view.TextView
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_view_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -140,8 +140,8 @@ class View : gtk.text_view.TextView
   static gtksource.view.View newWithBuffer(gtksource.buffer.Buffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceCompletion* _cretval;
     _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class View : gtk.text_view.TextView
   /**
       Returns the `classGutter` object associated with window_type for view.
     
-    Only [gtk.types.TextWindowType.left] and [gtk.types.TextWindowType.right] are supported,
+    Only [gtk.types.TextWindowType.Left] and [gtk.types.TextWindowType.Right] are supported,
     respectively corresponding to the left and right gutter. The line numbers
     and mark category icons are rendered in the left gutter.
     Params:
@@ -212,7 +212,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceGutter* _cretval;
     _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)cPtr, windowType);
-    auto _retval = ObjectG.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceHover* _cretval;
     _cretval = gtk_source_view_get_hover(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.hover.Hover)(cast(GtkSourceHover*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.hover.Hover)(cast(GtkSourceHover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceIndenter* _cretval;
     _cretval = gtk_source_view_get_indenter(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.indenter.Indenter)(cast(GtkSourceIndenter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.indenter.Indenter)(cast(GtkSourceIndenter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,9 +302,9 @@ class View : gtk.text_view.TextView
   gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority)
   {
     GtkSourceMarkAttributes* _cretval;
-    const(char)* _category = category.toCString(No.alloc);
+    const(char)* _category = category.toCString(No.Alloc);
     _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
-    auto _retval = ObjectG.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class View : gtk.text_view.TextView
   {
     GtkSourceSpaceDrawer* _cretval;
     _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class View : gtk.text_view.TextView
   uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class View : gtk.text_view.TextView
   */
   void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_indent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null);
+    gtk_source_view_indent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -441,7 +441,7 @@ class View : gtk.text_view.TextView
   */
   void pushSnippet(gtksource.snippet.Snippet snippet, gtk.text_iter.TextIter location = null)
   {
-    gtk_source_view_push_snippet(cast(GtkSourceView*)cPtr, snippet ? cast(GtkSourceSnippet*)snippet.cPtr(No.dup) : null, location ? cast(GtkTextIter*)location.cPtr(No.dup) : null);
+    gtk_source_view_push_snippet(cast(GtkSourceView*)cPtr, snippet ? cast(GtkSourceSnippet*)snippet.cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location.cPtr(No.Dup) : null);
   }
 
   /**
@@ -552,7 +552,7 @@ class View : gtk.text_view.TextView
   */
   void setIndenter(gtksource.indenter.Indenter indenter = null)
   {
-    gtk_source_view_set_indenter(cast(GtkSourceView*)cPtr, indenter ? cast(GtkSourceIndenter*)(cast(ObjectG)indenter).cPtr(No.dup) : null);
+    gtk_source_view_set_indenter(cast(GtkSourceView*)cPtr, indenter ? cast(GtkSourceIndenter*)(cast(ObjectG)indenter).cPtr(No.Dup) : null);
   }
 
   /**
@@ -577,8 +577,8 @@ class View : gtk.text_view.TextView
   */
   void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority)
   {
-    const(char)* _category = category.toCString(No.alloc);
-    gtk_source_view_set_mark_attributes(cast(GtkSourceView*)cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes.cPtr(No.dup) : null, priority);
+    const(char)* _category = category.toCString(No.Alloc);
+    gtk_source_view_set_mark_attributes(cast(GtkSourceView*)cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes.cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -665,7 +665,7 @@ class View : gtk.text_view.TextView
   */
   void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_unindent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.dup) : null);
+    gtk_source_view_unindent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
   }
 
   /**
@@ -686,10 +686,10 @@ class View : gtk.text_view.TextView
     Connect to ChangeCase signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeCase(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChangeCase(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeCaseCallbackDlg) || is(T : ChangeCaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -723,10 +723,10 @@ class View : gtk.text_view.TextView
     Connect to ChangeNumber signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChangeNumber(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChangeNumber(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangeNumberCallbackDlg) || is(T : ChangeNumberCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -759,10 +759,10 @@ class View : gtk.text_view.TextView
     Connect to JoinLines signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectJoinLines(T)(T callback, Flag!"after" after = No.after)
+  ulong connectJoinLines(T)(T callback, Flag!"After" after = No.After)
   if (is(T : JoinLinesCallbackDlg) || is(T : JoinLinesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -801,10 +801,10 @@ class View : gtk.text_view.TextView
     Connect to LineMarkActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLineMarkActivated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLineMarkActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LineMarkActivatedCallbackDlg) || is(T : LineMarkActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -844,10 +844,10 @@ class View : gtk.text_view.TextView
     Connect to MoveLines signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveLines(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveLines(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveLinesCallbackDlg) || is(T : MoveLinesCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -881,10 +881,10 @@ class View : gtk.text_view.TextView
     Connect to MoveToMatchingBracket signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveToMatchingBracket(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveToMatchingBracket(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveToMatchingBracketCallbackDlg) || is(T : MoveToMatchingBracketCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -921,10 +921,10 @@ class View : gtk.text_view.TextView
     Connect to MoveWords signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveWords(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveWords(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveWordsCallbackDlg) || is(T : MoveWordsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -946,7 +946,7 @@ class View : gtk.text_view.TextView
     <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
     
     This will create a `classCompletionContext` with the activation
-    type as [gtksource.types.CompletionActivation.userRequested].
+    type as [gtksource.types.CompletionActivation.UserRequested].
     
     Applications should not connect to it, but may emit it with
     `funcGObject.signal_emit_by_name` if they need to activate the completion by
@@ -966,10 +966,10 @@ class View : gtk.text_view.TextView
     Connect to ShowCompletion signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowCompletion(T)(T callback, Flag!"after" after = No.after)
+  ulong connectShowCompletion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ShowCompletionCallbackDlg) || is(T : ShowCompletionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1008,10 +1008,10 @@ class View : gtk.text_view.TextView
     Connect to SmartHomeEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSmartHomeEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSmartHomeEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SmartHomeEndCallbackDlg) || is(T : SmartHomeEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

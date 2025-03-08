@@ -12,7 +12,7 @@ import gobject.object;
 class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   this(arrow.data_type.DataType runEndDataType, arrow.data_type.DataType valueDataType)
   {
     GArrowRunEndEncodedDataType* _cretval;
-    _cretval = garrow_run_end_encoded_data_type_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.dup) : null, valueDataType ? cast(GArrowDataType*)valueDataType.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_run_end_encoded_data_type_new(runEndDataType ? cast(GArrowDataType*)runEndDataType.cPtr(No.Dup) : null, valueDataType ? cast(GArrowDataType*)valueDataType.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -41,7 +41,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_run_end_encoded_data_type_get_run_end_data_type(cast(GArrowRunEndEncodedDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowDataType* _cretval;
     _cretval = garrow_run_end_encoded_data_type_get_value_data_type(cast(GArrowRunEndEncodedDataType*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 }

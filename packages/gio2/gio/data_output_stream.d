@@ -18,7 +18,7 @@ import glib.error;
 class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,8 +45,8 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   this(gio.output_stream.OutputStream baseStream)
   {
     GDataOutputStream* _cretval;
-    _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -72,7 +72,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_byte(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_byte(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -89,7 +89,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_int16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -106,7 +106,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_int32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -123,7 +123,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_int64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_int64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -139,9 +139,9 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   bool putString(string str, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     GError *_err;
-    _retval = g_data_output_stream_put_string(cast(GDataOutputStream*)cPtr, _str, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_string(cast(GDataOutputStream*)cPtr, _str, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -158,7 +158,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_uint16(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -175,7 +175,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_uint32(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -192,7 +192,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
   {
     bool _retval;
     GError *_err;
-    _retval = g_data_output_stream_put_uint64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_output_stream_put_uint64(cast(GDataOutputStream*)cPtr, data, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

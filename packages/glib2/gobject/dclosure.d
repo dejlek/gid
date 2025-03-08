@@ -25,7 +25,7 @@ class DClosure : Closure
     auto dgClosure = cast(DGClosure!T*)closure;
     dgClosure.dlg = dlg;
     g_closure_set_marshal(closure, cMarshal);
-    super(closure, Yes.take);
+    super(closure, Yes.Take);
   }
 
   T* cPtr(T)()

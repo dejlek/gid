@@ -37,7 +37,7 @@ import gtk.types;
 class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,8 +64,8 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes)
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_builder_list_item_factory_new_from_bytes(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.take);
+    _cretval = gtk_builder_list_item_factory_new_from_bytes(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,9 +80,9 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath)
   {
     GtkListItemFactory* _cretval;
-    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
-    _cretval = gtk_builder_list_item_factory_new_from_resource(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.dup) : null, _resourcePath);
-    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.take);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
+    _cretval = gtk_builder_list_item_factory_new_from_resource(scope_ ? cast(GtkBuilderScope*)(cast(ObjectG)scope_).cPtr(No.Dup) : null, _resourcePath);
+    auto _retval = ObjectG.getDObject!(gtk.builder_list_item_factory.BuilderListItemFactory)(cast(GtkListItemFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   {
     GBytes* _cretval;
     _cretval = gtk_builder_list_item_factory_get_bytes(cast(GtkBuilderListItemFactory*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   {
     const(char)* _cretval;
     _cretval = gtk_builder_list_item_factory_get_resource(cast(GtkBuilderListItemFactory*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_list_item_factory_get_scope(cast(GtkBuilderListItemFactory*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -22,7 +22,7 @@ import gstvideo.types;
 class VideoAggregator : gstbase.aggregator.Aggregator
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   {
     GstTaskPool* _cretval;
     _cretval = gst_video_aggregator_get_execution_task_pool(cast(GstVideoAggregator*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 }

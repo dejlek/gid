@@ -22,7 +22,7 @@ import gtk.types;
   semantic meaning.
   
   Buttons and sensors are not constrained to triggering a single action,
-  some [gdk.types.InputSource.tabletPad] devices feature multiple "modes". All these
+  some [gdk.types.InputSource.TabletPad] devices feature multiple "modes". All these
   input elements have one current mode, which may determine the final action
   being triggered.
   
@@ -61,7 +61,7 @@ import gtk.types;
 class PadController : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -94,14 +94,14 @@ class PadController : gtk.event_controller.EventController
     a pad controller to any other type of widget will not have an effect.
     Params:
       group =       [gio.action_group.ActionGroup] to trigger actions from
-      pad =       A [gdk.types.InputSource.tabletPad] device, or null to handle all pads
+      pad =       A [gdk.types.InputSource.TabletPad] device, or null to handle all pads
     Returns:     A newly created [gtk.pad_controller.PadController]
   */
   this(gio.action_group.ActionGroup group, gdk.device.Device pad = null)
   {
     GtkPadController* _cretval;
-    _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_pad_controller_new(group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -124,8 +124,8 @@ class PadController : gtk.event_controller.EventController
   */
   void setAction(gtk.types.PadActionType type, int index, int mode, string label, string actionName)
   {
-    const(char)* _label = label.toCString(No.alloc);
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     gtk_pad_controller_set_action(cast(GtkPadController*)cPtr, type, index, mode, _label, _actionName);
   }
 }

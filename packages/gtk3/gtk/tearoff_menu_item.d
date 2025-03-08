@@ -34,7 +34,7 @@ import gtk.types;
 class TearoffMenuItem : gtk.menu_item.MenuItem
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,6 +61,6 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_tearoff_menu_item_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

@@ -14,7 +14,7 @@ import gobject.object;
 class Visual : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best();
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_both(depth, visualType);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_depth(depth);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_type(visualType);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_system();
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class Visual : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_visual_get_screen(cast(GdkVisual*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 

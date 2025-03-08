@@ -11,7 +11,7 @@ import gobject.object;
 class Codec : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class Codec : gobject.object.ObjectG
     _cretval = garrow_codec_new(type, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -60,7 +60,7 @@ class Codec : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = garrow_codec_get_name(cast(GArrowCodec*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

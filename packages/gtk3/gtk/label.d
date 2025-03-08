@@ -199,7 +199,7 @@ import pango.types;
 class Label : gtk.misc.Misc
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -225,9 +225,9 @@ class Label : gtk.misc.Misc
   this(string str = null)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new(_str);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -253,9 +253,9 @@ class Label : gtk.misc.Misc
   static gtk.label.Label newWithMnemonic(string str = null)
   {
     GtkWidget* _cretval;
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new_with_mnemonic(_str);
-    auto _retval = ObjectG.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Label : gtk.misc.Misc
   {
     PangoAttrList* _cretval;
     _cretval = gtk_label_get_attributes(cast(GtkLabel*)cPtr);
-    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_current_uri(cast(GtkLabel*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_label(cast(GtkLabel*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class Label : gtk.misc.Misc
   {
     PangoLayout* _cretval;
     _cretval = gtk_label_get_layout(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class Label : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -506,7 +506,7 @@ class Label : gtk.misc.Misc
   {
     const(char)* _cretval;
     _cretval = gtk_label_get_text(cast(GtkLabel*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Label : gtk.misc.Misc
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.dup) : null);
+    gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -641,7 +641,7 @@ class Label : gtk.misc.Misc
 
   /**
       Sets the alignment of the lines in the text of the label relative to
-    each other. [gtk.types.Justification.left] is the default value when the widget is
+    each other. [gtk.types.Justification.Left] is the default value when the widget is
     first created with [gtk.label.Label.new_]. If you instead want to set the
     alignment of the label as a whole, use [gtk.widget.Widget.setHalign] instead.
     [gtk.label.Label.setJustify] has no effect on labels containing only a
@@ -664,7 +664,7 @@ class Label : gtk.misc.Misc
   */
   void setLabel(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_label(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -688,7 +688,7 @@ class Label : gtk.misc.Misc
 
   /**
       If line wrapping is on (see [gtk.label.Label.setLineWrap]) this controls how
-    the line wrapping is done. The default is [pango.types.WrapMode.word] which means
+    the line wrapping is done. The default is [pango.types.WrapMode.Word] which means
     wrap on word boundaries.
     Params:
       wrapMode =       the line wrapping mode
@@ -743,7 +743,7 @@ class Label : gtk.misc.Misc
   */
   void setMarkup(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -762,7 +762,7 @@ class Label : gtk.misc.Misc
   */
   void setMarkupWithMnemonic(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -796,7 +796,7 @@ class Label : gtk.misc.Misc
   */
   void setMnemonicWidget(gtk.widget.Widget widget = null)
   {
-    gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -809,7 +809,7 @@ class Label : gtk.misc.Misc
   */
   void setPattern(string pattern)
   {
-    const(char)* _pattern = pattern.toCString(No.alloc);
+    const(char)* _pattern = pattern.toCString(No.Alloc);
     gtk_label_set_pattern(cast(GtkLabel*)cPtr, _pattern);
   }
 
@@ -850,7 +850,7 @@ class Label : gtk.misc.Misc
   */
   void setText(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -865,7 +865,7 @@ class Label : gtk.misc.Misc
   */
   void setTextWithMnemonic(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_label_set_text_with_mnemonic(cast(GtkLabel*)cPtr, _str);
   }
 
@@ -956,10 +956,10 @@ class Label : gtk.misc.Misc
     Connect to ActivateCurrentLink signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateCurrentLink(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateCurrentLink(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCurrentLinkCallbackDlg) || is(T : ActivateCurrentLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -995,10 +995,10 @@ class Label : gtk.misc.Misc
     Connect to ActivateLink signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateLink(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateLinkCallbackDlg) || is(T : ActivateLinkCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1037,10 +1037,10 @@ class Label : gtk.misc.Misc
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1093,10 +1093,10 @@ class Label : gtk.misc.Misc
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1137,10 +1137,10 @@ class Label : gtk.misc.Misc
     Connect to PopulatePopup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

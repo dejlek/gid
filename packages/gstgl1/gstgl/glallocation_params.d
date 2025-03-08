@@ -15,15 +15,15 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLAllocationParams.sizeof), Yes.take);
+    super(safeMalloc(GstGLAllocationParams.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -86,7 +86,7 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLAllocationParams*)cPtr).context, No.take);
+    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLAllocationParams*)cPtr).context, No.Take);
   }
 
   @property GDestroyNotify notify()
@@ -104,7 +104,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   {
     GstGLAllocationParams* _cretval;
     _cretval = gst_gl_allocation_params_copy(cast(GstGLAllocationParams*)cPtr);
-    auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   void copyData(gstgl.glallocation_params.GLAllocationParams dest)
   {
-    gst_gl_allocation_params_copy_data(cast(GstGLAllocationParams*)cPtr, dest ? cast(GstGLAllocationParams*)dest.cPtr(No.dup) : null);
+    gst_gl_allocation_params_copy_data(cast(GstGLAllocationParams*)cPtr, dest ? cast(GstGLAllocationParams*)dest.cPtr(No.Dup) : null);
   }
 
   /**

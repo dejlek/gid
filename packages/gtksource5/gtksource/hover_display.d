@@ -25,7 +25,7 @@ import gtksource.types;
 class HoverDisplay : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,24 +44,24 @@ class HoverDisplay : gtk.widget.Widget
   /** */
   void append(gtk.widget.Widget child)
   {
-    gtk_source_hover_display_append(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_source_hover_display_append(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /** */
   override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
   {
-    gtk_source_hover_display_insert_after(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.dup) : null);
+    gtk_source_hover_display_insert_after(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
   /** */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_source_hover_display_prepend(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_source_hover_display_prepend(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /** */
   void remove(gtk.widget.Widget child)
   {
-    gtk_source_hover_display_remove(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_source_hover_display_remove(cast(GtkSourceHoverDisplay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 }

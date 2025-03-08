@@ -26,7 +26,7 @@ class RTSPConnection
   GstRTSPConnection* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtsp.RTSPConnection");
@@ -52,8 +52,8 @@ class RTSPConnection
   */
   void addExtraHttpRequestHeader(string key, string value)
   {
-    const(char)* _key = key.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     gst_rtsp_connection_add_extra_http_request_header(cast(GstRTSPConnection*)cPtr, _key, _value);
   }
 
@@ -132,7 +132,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult connectWithResponse(glib.time_val.TimeVal timeout, gstrtsp.rtspmessage.RTSPMessage response)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_connect_with_response(cast(GstRTSPConnection*)cPtr, timeout ? cast(GTimeVal*)timeout.cPtr : null, response ? cast(GstRTSPMessage*)response.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_connection_connect_with_response(cast(GstRTSPConnection*)cPtr, timeout ? cast(GTimeVal*)timeout.cPtr : null, response ? cast(GstRTSPMessage*)response.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -153,7 +153,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult connectWithResponseUsec(long timeout, gstrtsp.rtspmessage.RTSPMessage response)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_connect_with_response_usec(cast(GstRTSPConnection*)cPtr, timeout, response ? cast(GstRTSPMessage*)response.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_connection_connect_with_response_usec(cast(GstRTSPConnection*)cPtr, timeout, response ? cast(GstRTSPMessage*)response.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -217,7 +217,7 @@ class RTSPConnection
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_ip(cast(const(GstRTSPConnection)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class RTSPConnection
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_read_socket(cast(const(GstRTSPConnection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class RTSPConnection
     _cretval = gst_rtsp_connection_get_tls(cast(GstRTSPConnection*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(GTlsConnection*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(GTlsConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class RTSPConnection
   {
     GTlsDatabase* _cretval;
     _cretval = gst_rtsp_connection_get_tls_database(cast(GstRTSPConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class RTSPConnection
   {
     GTlsInteraction* _cretval;
     _cretval = gst_rtsp_connection_get_tls_interaction(cast(GstRTSPConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class RTSPConnection
     set. Accordingly, you may not safely decide to ignore any particular type
     of error.
     
-    For example, it would be incorrect to ignore [gio.types.TlsCertificateFlags.expired] if
+    For example, it would be incorrect to ignore [gio.types.TlsCertificateFlags.Expired] if
     you want to allow expired certificates, because this could potentially be
     the only error flag set even if other problems exist with the certificate.
     Returns:     the validation flags.
@@ -325,7 +325,7 @@ class RTSPConnection
   {
     const(char)* _cretval;
     _cretval = gst_rtsp_connection_get_tunnelid(cast(const(GstRTSPConnection)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class RTSPConnection
   {
     GstRTSPUrl* _cretval;
     _cretval = gst_rtsp_connection_get_url(cast(const(GstRTSPConnection)*)cPtr);
-    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -351,7 +351,7 @@ class RTSPConnection
   {
     GSocket* _cretval;
     _cretval = gst_rtsp_connection_get_write_socket(cast(const(GstRTSPConnection)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult receive(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_receive(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.dup) : null, timeout ? cast(GTimeVal*)timeout.cPtr : null);
+    _cretval = gst_rtsp_connection_receive(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, timeout ? cast(GTimeVal*)timeout.cPtr : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -518,7 +518,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult receiveUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_receive_usec(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.dup) : null, timeout);
+    _cretval = gst_rtsp_connection_receive_usec(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -549,7 +549,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_send(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.dup) : null, timeout ? cast(GTimeVal*)timeout.cPtr : null);
+    _cretval = gst_rtsp_connection_send(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, timeout ? cast(GTimeVal*)timeout.cPtr : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -622,7 +622,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult sendUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_connection_send_usec(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.dup) : null, timeout);
+    _cretval = gst_rtsp_connection_send_usec(cast(GstRTSPConnection*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -643,7 +643,7 @@ class RTSPConnection
     {
       auto _dlg = cast(gstrtsp.types.RTSPConnectionAcceptCertificateFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.take), ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.take), errors);
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gio.tls_connection.TlsConnection)(cast(void*)conn, No.Take), ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -665,8 +665,8 @@ class RTSPConnection
   gstrtsp.types.RTSPResult setAuth(gstrtsp.types.RTSPAuthMethod method, string user, string pass)
   {
     GstRTSPResult _cretval;
-    const(char)* _user = user.toCString(No.alloc);
-    const(char)* _pass = pass.toCString(No.alloc);
+    const(char)* _user = user.toCString(No.Alloc);
+    const(char)* _pass = pass.toCString(No.Alloc);
     _cretval = gst_rtsp_connection_set_auth(cast(GstRTSPConnection*)cPtr, method, _user, _pass);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -684,8 +684,8 @@ class RTSPConnection
   */
   void setAuthParam(string param, string value)
   {
-    const(char)* _param = param.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _param = param.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     gst_rtsp_connection_set_auth_param(cast(GstRTSPConnection*)cPtr, _param, _value);
   }
 
@@ -732,7 +732,7 @@ class RTSPConnection
   */
   void setIp(string ip)
   {
-    const(char)* _ip = ip.toCString(No.alloc);
+    const(char)* _ip = ip.toCString(No.Alloc);
     gst_rtsp_connection_set_ip(cast(GstRTSPConnection*)cPtr, _ip);
   }
 
@@ -746,7 +746,7 @@ class RTSPConnection
   gstrtsp.types.RTSPResult setProxy(string host, uint port)
   {
     GstRTSPResult _cretval;
-    const(char)* _host = host.toCString(No.alloc);
+    const(char)* _host = host.toCString(No.Alloc);
     _cretval = gst_rtsp_connection_set_proxy(cast(GstRTSPConnection*)cPtr, _host, port);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -788,7 +788,7 @@ class RTSPConnection
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    gst_rtsp_connection_set_tls_database(cast(GstRTSPConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.dup) : null);
+    gst_rtsp_connection_set_tls_database(cast(GstRTSPConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
   }
 
   /**
@@ -800,7 +800,7 @@ class RTSPConnection
   */
   void setTlsInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
-    gst_rtsp_connection_set_tls_interaction(cast(GstRTSPConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.dup) : null);
+    gst_rtsp_connection_set_tls_interaction(cast(GstRTSPConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
   }
 
   /**
@@ -812,7 +812,7 @@ class RTSPConnection
     set. Accordingly, you may not safely decide to ignore any particular type
     of error.
     
-    For example, it would be incorrect to mask [gio.types.TlsCertificateFlags.expired] if
+    For example, it would be incorrect to mask [gio.types.TlsCertificateFlags.Expired] if
     you want to allow expired certificates, because this could potentially be
     the only error flag set even if other problems exist with the certificate.
     Params:
@@ -899,9 +899,9 @@ class RTSPConnection
   {
     GstRTSPResult _cretval;
     GstRTSPConnection* _conn;
-    _cretval = gst_rtsp_connection_accept(socket ? cast(GSocket*)socket.cPtr(No.dup) : null, &_conn, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_connection_accept(socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, &_conn, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.take);
+    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 
@@ -920,9 +920,9 @@ class RTSPConnection
   {
     GstRTSPResult _cretval;
     GstRTSPConnection* _conn;
-    _cretval = gst_rtsp_connection_create(url ? cast(const(GstRTSPUrl)*)url.cPtr(No.dup) : null, &_conn);
+    _cretval = gst_rtsp_connection_create(url ? cast(const(GstRTSPUrl)*)url.cPtr(No.Dup) : null, &_conn);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.take);
+    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 
@@ -941,12 +941,12 @@ class RTSPConnection
   static gstrtsp.types.RTSPResult createFromSocket(gio.socket.Socket socket, string ip, ushort port, string initialBuffer, out gstrtsp.rtspconnection.RTSPConnection conn)
   {
     GstRTSPResult _cretval;
-    const(char)* _ip = ip.toCString(No.alloc);
-    const(char)* _initialBuffer = initialBuffer.toCString(No.alloc);
+    const(char)* _ip = ip.toCString(No.Alloc);
+    const(char)* _initialBuffer = initialBuffer.toCString(No.Alloc);
     GstRTSPConnection* _conn;
-    _cretval = gst_rtsp_connection_create_from_socket(socket ? cast(GSocket*)socket.cPtr(No.dup) : null, _ip, port, _initialBuffer, &_conn);
+    _cretval = gst_rtsp_connection_create_from_socket(socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, _ip, port, _initialBuffer, &_conn);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.take);
+    conn = new gstrtsp.rtspconnection.RTSPConnection(cast(void*)_conn, Yes.Take);
     return _retval;
   }
 }

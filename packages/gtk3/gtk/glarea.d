@@ -118,7 +118,7 @@ import gtk.widget;
 class GLArea : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -142,7 +142,7 @@ class GLArea : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_gl_area_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -178,7 +178,7 @@ class GLArea : gtk.widget.Widget
   {
     GdkGLContext* _cretval;
     _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -401,10 +401,10 @@ class GLArea : gtk.widget.Widget
     Connect to CreateContext signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateContext(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateContextCallbackDlg) || is(T : CreateContextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -444,10 +444,10 @@ class GLArea : gtk.widget.Widget
     Connect to Render signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRender(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRender(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RenderCallbackDlg) || is(T : RenderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -492,10 +492,10 @@ class GLArea : gtk.widget.Widget
     Connect to Resize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResizeCallbackDlg) || is(T : ResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -15,7 +15,7 @@ import gtk.window;
 class MountOperation : gio.mount_operation.MountOperation
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,8 +40,8 @@ class MountOperation : gio.mount_operation.MountOperation
   this(gtk.window.Window parent = null)
   {
     GMountOperation* _cretval;
-    _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -52,7 +52,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GtkWindow* _cretval;
     _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class MountOperation : gio.mount_operation.MountOperation
   {
     GdkScreen* _cretval;
     _cretval = gtk_mount_operation_get_screen(cast(GtkMountOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   void setParent(gtk.window.Window parent = null)
   {
-    gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
+    gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -99,6 +99,6 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_mount_operation_set_screen(cast(GtkMountOperation*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+    gtk_mount_operation_set_screen(cast(GtkMountOperation*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 }

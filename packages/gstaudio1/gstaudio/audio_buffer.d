@@ -23,7 +23,7 @@ class AudioBuffer
 {
   GstAudioBuffer cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstAudio.AudioBuffer");
@@ -85,7 +85,7 @@ class AudioBuffer
     buffer anymore.
     Params:
       buffer =       The buffer to clip.
-      segment =       Segment in [gst.types.Format.time] or [gst.types.Format.default_] to which
+      segment =       Segment in [gst.types.Format.Time] or [gst.types.Format.Default] to which
                   the buffer should be clipped.
       rate =       sample rate.
       bpf =       size of one audio frame in bytes. This is the size of one sample *
@@ -99,8 +99,8 @@ class AudioBuffer
   static gst.buffer.Buffer clip(gst.buffer.Buffer buffer, gst.segment.Segment segment, int rate, int bpf)
   {
     GstBuffer* _cretval;
-    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null, segment ? cast(const(GstSegment)*)segment.cPtr(No.dup) : null, rate, bpf);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null, rate, bpf);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class AudioBuffer
   {
     bool _retval;
     GstAudioBuffer _buffer;
-    _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info.cPtr(No.dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer.cPtr(No.dup) : null, flags);
+    _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info.cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer.cPtr(No.Dup) : null, flags);
     buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer);
     return _retval;
   }
@@ -169,7 +169,7 @@ class AudioBuffer
       _channels = cast(int)to.length;
 
     auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
-    _retval = gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, format, _channels, _from, _to);
+    _retval = gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, format, _channels, _from, _to);
     return _retval;
   }
 
@@ -199,8 +199,8 @@ class AudioBuffer
   static gst.buffer.Buffer truncate(gst.buffer.Buffer buffer, int bpf, size_t trim, size_t samples)
   {
     GstBuffer* _cretval;
-    _cretval = gst_audio_buffer_truncate(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null, bpf, trim, samples);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_audio_buffer_truncate(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null, bpf, trim, samples);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -67,7 +67,7 @@ template ActionGroupT()
   */
   override void actionAdded(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_added(cast(GActionGroup*)cPtr, _actionName);
   }
 
@@ -81,7 +81,7 @@ template ActionGroupT()
   */
   override void actionEnabledChanged(string actionName, bool enabled)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_enabled_changed(cast(GActionGroup*)cPtr, _actionName, enabled);
   }
 
@@ -94,7 +94,7 @@ template ActionGroupT()
   */
   override void actionRemoved(string actionName)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     g_action_group_action_removed(cast(GActionGroup*)cPtr, _actionName);
   }
 
@@ -108,8 +108,8 @@ template ActionGroupT()
   */
   override void actionStateChanged(string actionName, glib.variant.VariantG state)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(VariantC*)state.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_action_state_changed(cast(GActionGroup*)cPtr, _actionName, state ? cast(VariantC*)state.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,8 +152,8 @@ template ActionGroupT()
   */
   override void activateAction(string actionName, glib.variant.VariantG parameter = null)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_activate_action(cast(GActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -174,8 +174,8 @@ template ActionGroupT()
   */
   override void changeActionState(string actionName, glib.variant.VariantG value)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_action_group_change_action_state(cast(GActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -190,7 +190,7 @@ template ActionGroupT()
   override bool getActionEnabled(string actionName)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _retval = g_action_group_get_action_enabled(cast(GActionGroup*)cPtr, _actionName);
     return _retval;
   }
@@ -216,9 +216,9 @@ template ActionGroupT()
   override glib.variant_type.VariantType getActionParameterType(string actionName)
   {
     const(GVariantType)* _cretval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_parameter_type(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -238,9 +238,9 @@ template ActionGroupT()
   override glib.variant.VariantG getActionState(string actionName)
   {
     VariantC* _cretval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -270,9 +270,9 @@ template ActionGroupT()
   override glib.variant.VariantG getActionStateHint(string actionName)
   {
     VariantC* _cretval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state_hint(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -300,9 +300,9 @@ template ActionGroupT()
   override glib.variant_type.VariantType getActionStateType(string actionName)
   {
     const(GVariantType)* _cretval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_action_group_get_action_state_type(cast(GActionGroup*)cPtr, _actionName);
-    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -315,7 +315,7 @@ template ActionGroupT()
   override bool hasAction(string actionName)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _retval = g_action_group_has_action(cast(GActionGroup*)cPtr, _actionName);
     return _retval;
   }
@@ -341,7 +341,7 @@ template ActionGroupT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -386,16 +386,16 @@ template ActionGroupT()
   override bool queryAction(string actionName, out bool enabled, out glib.variant_type.VariantType parameterType, out glib.variant_type.VariantType stateType, out glib.variant.VariantG stateHint, out glib.variant.VariantG state)
   {
     bool _retval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     const(GVariantType)* _parameterType;
     const(GVariantType)* _stateType;
     VariantC* _stateHint;
     VariantC* _state;
     _retval = g_action_group_query_action(cast(GActionGroup*)cPtr, _actionName, cast(bool*)&enabled, &_parameterType, &_stateType, &_stateHint, &_state);
-    parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.take);
-    stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.take);
-    stateHint = new glib.variant.VariantG(cast(void*)_stateHint, Yes.take);
-    state = new glib.variant.VariantG(cast(void*)_state, Yes.take);
+    parameterType = new glib.variant_type.VariantType(cast(void*)_parameterType, No.Take);
+    stateType = new glib.variant_type.VariantType(cast(void*)_stateType, No.Take);
+    stateHint = new glib.variant.VariantG(cast(void*)_stateHint, Yes.Take);
+    state = new glib.variant.VariantG(cast(void*)_state, Yes.Take);
     return _retval;
   }
 
@@ -420,10 +420,10 @@ template ActionGroupT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionAdded(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionAddedCallbackDlg) || is(T : ActionAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -459,10 +459,10 @@ template ActionGroupT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionEnabledChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionEnabledChangedCallbackDlg) || is(T : ActionEnabledChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -500,10 +500,10 @@ template ActionGroupT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionRemoved(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionRemovedCallbackDlg) || is(T : ActionRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -539,10 +539,10 @@ template ActionGroupT()
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectActionStateChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ActionStateChangedCallbackDlg) || is(T : ActionStateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

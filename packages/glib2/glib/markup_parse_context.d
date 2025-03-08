@@ -17,12 +17,12 @@ import gobject.boxed;
 class MarkupParseContext : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -43,7 +43,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     GMarkupParseContext* _cretval;
     GMarkupParseFlags _flags = cast(GMarkupParseFlags)cast(uint)flags;
     _cretval = g_markup_parse_context_new(&parser, _flags, null, null);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
 
@@ -77,7 +77,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   bool parse(string text, ptrdiff_t textLen)
   {
     bool _retval;
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     GError *_err;
     _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)cPtr, _text, textLen, &_err);
     if (_err)

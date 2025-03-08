@@ -26,21 +26,21 @@ import gstbase.types;
       
   The source can be configured to operate in any #GstFormat with the
   [gstbase.base_src.BaseSrc.setFormat] method. The currently set format determines
-  the format of the internal #GstSegment and any [gst.types.EventType.segment]
-  events. The default format for #GstBaseSrc is [gst.types.Format.bytes].
+  the format of the internal #GstSegment and any [gst.types.EventType.Segment]
+  events. The default format for #GstBaseSrc is [gst.types.Format.Bytes].
   
   #GstBaseSrc always supports push mode scheduling. If the following
   conditions are met, it also supports pull mode scheduling:
   
     $(LIST
-        * The format is set to [gst.types.Format.bytes] (default).
+        * The format is set to [gst.types.Format.Bytes] (default).
         * #GstBaseSrcClass::is_seekable returns true.
     )
       
   If all the conditions are met for operating in pull mode, #GstBaseSrc is
   automatically seekable in push mode as well. The following conditions must
   be met to make the element seekable in push mode when the format is not
-  [gst.types.Format.bytes]:
+  [gst.types.Format.Bytes]:
   
   $(LIST
     * #GstBaseSrcClass::is_seekable returns true.
@@ -67,7 +67,7 @@ import gstbase.types;
   #GstBaseSrcClass::create method will not be called in PAUSED but only in
   PLAYING. To signal the pipeline that the element will not produce data, the
   return value from the READY to PAUSED state will be
-  [gst.types.StateChangeReturn.noPreroll].
+  [gst.types.StateChangeReturn.NoPreroll].
   
   A typical live source will timestamp the buffers it creates with the
   current running time of the pipeline. This is one reason why a live source
@@ -127,7 +127,7 @@ import gstbase.types;
   
   An application may send an EOS event to a source element to make it
   perform the EOS logic (send EOS event downstream or post a
-  [gst.types.MessageType.segmentDone] on the bus). This can typically be done
+  [gst.types.MessageType.SegmentDone] on the bus). This can typically be done
   with the [gst.element.Element.sendEvent] function on the element or its parent bin.
   
   After the EOS has been sent to the element, the application should wait for
@@ -137,7 +137,7 @@ import gstbase.types;
 class BaseSrc : gst.element.Element
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -168,8 +168,8 @@ class BaseSrc : gst.element.Element
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_base_src_get_allocator(cast(GstBaseSrc*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -188,7 +188,7 @@ class BaseSrc : gst.element.Element
   {
     GstBufferPool* _cretval;
     _cretval = gst_base_src_get_buffer_pool(cast(GstBaseSrc*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class BaseSrc : gst.element.Element
     The format for the segment must be identical with the current format
     of the source, as configured with [gstbase.base_src.BaseSrc.setFormat].
     
-    The format of src must not be [gst.types.Format.undefined] and the format
+    The format of src must not be [gst.types.Format.Undefined] and the format
     should be configured via [gstbase.base_src.BaseSrc.setFormat] before calling this method.
     Params:
       segment =       a pointer to a #GstSegment
@@ -281,7 +281,7 @@ class BaseSrc : gst.element.Element
   bool newSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = gst_base_src_new_segment(cast(GstBaseSrc*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.dup) : null);
+    _retval = gst_base_src_new_segment(cast(GstBaseSrc*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class BaseSrc : gst.element.Element
     The format for the segment must be identical with the current format
     of the source, as configured with [gstbase.base_src.BaseSrc.setFormat].
     
-    The format of src must not be [gst.types.Format.undefined] and the format
+    The format of src must not be [gst.types.Format.Undefined] and the format
     should be configured via [gstbase.base_src.BaseSrc.setFormat] before calling this method.
     
     This is a variant of [gstbase.base_src.BaseSrc.newSegment] sending the segment right away,
@@ -307,7 +307,7 @@ class BaseSrc : gst.element.Element
   bool pushSegment(gst.segment.Segment segment)
   {
     bool _retval;
-    _retval = gst_base_src_push_segment(cast(GstBaseSrc*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.dup) : null);
+    _retval = gst_base_src_push_segment(cast(GstBaseSrc*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -350,11 +350,11 @@ class BaseSrc : gst.element.Element
     that can't return an authoritative size and only know that they're EOS
     when trying to read more should set this to false.
     
-    When src operates in [gst.types.Format.time], #GstBaseSrc will send an EOS
+    When src operates in [gst.types.Format.Time], #GstBaseSrc will send an EOS
     when a buffer outside of the currently configured segment is pushed if
     automatic_eos is true. Since 1.16, if automatic_eos is false an
     EOS will be pushed only when the #GstBaseSrcClass::create implementation
-    returns [gst.types.FlowReturn.eos].
+    returns [gst.types.FlowReturn.Eos].
     Params:
       automaticEos =       automatic eos
   */
@@ -383,7 +383,7 @@ class BaseSrc : gst.element.Element
   bool setCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_base_src_set_caps(cast(GstBaseSrc*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    _retval = gst_base_src_set_caps(cast(GstBaseSrc*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -418,7 +418,7 @@ class BaseSrc : gst.element.Element
     If a format of GST_FORMAT_BYTES is set, the element will be able to
     operate in pull mode if the #GstBaseSrcClass::is_seekable returns true.
     
-    This function must only be called in states < [gst.types.State.paused].
+    This function must only be called in states < [gst.types.State.Paused].
     Params:
       format =       the format to use
   */
@@ -479,7 +479,7 @@ class BaseSrc : gst.element.Element
     to return larger buffers instead).
     
     Subclasses that use this function from their create function must return
-    [gst.types.FlowReturn.ok] and no buffer from their create virtual method implementation.
+    [gst.types.FlowReturn.Ok] and no buffer from their create virtual method implementation.
     If a buffer is returned after a buffer list has also been submitted via this
     function the behaviour is undefined.
     
@@ -491,7 +491,7 @@ class BaseSrc : gst.element.Element
   */
   void submitBufferList(gst.buffer_list.BufferList bufferList)
   {
-    gst_base_src_submit_buffer_list(cast(GstBaseSrc*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(Yes.dup) : null);
+    gst_base_src_submit_buffer_list(cast(GstBaseSrc*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -500,10 +500,10 @@ class BaseSrc : gst.element.Element
     and call this method before continuing to produce the remaining data.
     
     This function will block until a state change to PLAYING happens (in which
-    case this function returns [gst.types.FlowReturn.ok]) or the processing must be stopped due
+    case this function returns [gst.types.FlowReturn.Ok]) or the processing must be stopped due
     to a state change to READY or a FLUSH event (in which case this function
-    returns [gst.types.FlowReturn.flushing]).
-    Returns:     [gst.types.FlowReturn.ok] if src is PLAYING and processing can
+    returns [gst.types.FlowReturn.Flushing]).
+    Returns:     [gst.types.FlowReturn.Ok] if src is PLAYING and processing can
       continue. Any other return value should be returned from the create vmethod.
   */
   gst.types.FlowReturn waitPlaying()

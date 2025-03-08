@@ -10,7 +10,7 @@ import gid.gid;
 class BooleanScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class BooleanScalar : arrow.scalar.Scalar
   {
     GArrowBooleanScalar* _cretval;
     _cretval = garrow_boolean_scalar_new(value);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

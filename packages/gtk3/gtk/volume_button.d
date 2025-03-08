@@ -24,7 +24,7 @@ import gtk.types;
 class VolumeButton : gtk.scale_button.ScaleButton
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,6 +50,6 @@ class VolumeButton : gtk.scale_button.ScaleButton
   {
     GtkWidget* _cretval;
     _cretval = gtk_volume_button_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

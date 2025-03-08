@@ -28,15 +28,15 @@ class Rect : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_rect_t.sizeof), Yes.take);
+    super(safeMalloc(graphene_rect_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -71,7 +71,7 @@ class Rect : gobject.boxed.Boxed
   bool containsPoint(graphene.point.Point p)
   {
     bool _retval;
-    _retval = graphene_rect_contains_point(cast(const(graphene_rect_t)*)cPtr, p ? cast(const(graphene_point_t)*)p.cPtr(No.dup) : null);
+    _retval = graphene_rect_contains_point(cast(const(graphene_rect_t)*)cPtr, p ? cast(const(graphene_point_t)*)p.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class Rect : gobject.boxed.Boxed
   bool containsRect(graphene.rect.Rect b)
   {
     bool _retval;
-    _retval = graphene_rect_contains_rect(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.dup) : null);
+    _retval = graphene_rect_contains_rect(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Rect : gobject.boxed.Boxed
   bool equal(graphene.rect.Rect b)
   {
     bool _retval;
-    _retval = graphene_rect_equal(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.dup) : null);
+    _retval = graphene_rect_equal(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -111,8 +111,8 @@ class Rect : gobject.boxed.Boxed
   void expand(graphene.point.Point p, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
-    graphene_rect_expand(cast(const(graphene_rect_t)*)cPtr, p ? cast(const(graphene_point_t)*)p.cPtr(No.dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    graphene_rect_expand(cast(const(graphene_rect_t)*)cPtr, p ? cast(const(graphene_point_t)*)p.cPtr(No.Dup) : null, &_res);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -135,7 +135,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_point_t _p;
     graphene_rect_get_bottom_left(cast(const(graphene_rect_t)*)cPtr, &_p);
-    p = new graphene.point.Point(cast(void*)&_p, No.take);
+    p = new graphene.point.Point(cast(void*)&_p, No.Take);
   }
 
   /**
@@ -147,7 +147,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_point_t _p;
     graphene_rect_get_bottom_right(cast(const(graphene_rect_t)*)cPtr, &_p);
-    p = new graphene.point.Point(cast(void*)&_p, No.take);
+    p = new graphene.point.Point(cast(void*)&_p, No.Take);
   }
 
   /**
@@ -159,7 +159,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_point_t _p;
     graphene_rect_get_center(cast(const(graphene_rect_t)*)cPtr, &_p);
-    p = new graphene.point.Point(cast(void*)&_p, No.take);
+    p = new graphene.point.Point(cast(void*)&_p, No.Take);
   }
 
   /**
@@ -182,7 +182,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_point_t _p;
     graphene_rect_get_top_left(cast(const(graphene_rect_t)*)cPtr, &_p);
-    p = new graphene.point.Point(cast(void*)&_p, No.take);
+    p = new graphene.point.Point(cast(void*)&_p, No.Take);
   }
 
   /**
@@ -194,7 +194,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_point_t _p;
     graphene_rect_get_top_right(cast(const(graphene_rect_t)*)cPtr, &_p);
-    p = new graphene.point.Point(cast(void*)&_p, No.take);
+    p = new graphene.point.Point(cast(void*)&_p, No.Take);
   }
 
   /**
@@ -210,7 +210,7 @@ class Rect : gobject.boxed.Boxed
     graphene_rect_get_vertices(cast(const(graphene_rect_t)*)cPtr, _vertices.ptr);
     vertices.length = 4;
     foreach (i; 0 .. 4)
-      vertices[i] = new graphene.vec2.Vec2(cast(void*)&_vertices[i], No.take);
+      vertices[i] = new graphene.vec2.Vec2(cast(void*)&_vertices[i], No.Take);
   }
 
   /**
@@ -264,7 +264,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_init(cast(graphene_rect_t*)cPtr, x, y, width, height);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -280,8 +280,8 @@ class Rect : gobject.boxed.Boxed
   graphene.rect.Rect initFromRect(graphene.rect.Rect src)
   {
     graphene_rect_t* _cretval;
-    _cretval = graphene_rect_init_from_rect(cast(graphene_rect_t*)cPtr, src ? cast(const(graphene_rect_t)*)src.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    _cretval = graphene_rect_init_from_rect(cast(graphene_rect_t*)cPtr, src ? cast(const(graphene_rect_t)*)src.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_inset(cast(graphene_rect_t*)cPtr, dX, dY);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_inset_r(cast(const(graphene_rect_t)*)cPtr, dX, dY, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -352,8 +352,8 @@ class Rect : gobject.boxed.Boxed
   void interpolate(graphene.rect.Rect b, double factor, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
-    graphene_rect_interpolate(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.dup) : null, factor, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    graphene_rect_interpolate(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.Dup) : null, factor, &_res);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -375,8 +375,8 @@ class Rect : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _res;
-    _retval = graphene_rect_intersection(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    _retval = graphene_rect_intersection(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.Dup) : null, &_res);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_normalize(cast(graphene_rect_t*)cPtr);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_normalize_r(cast(const(graphene_rect_t)*)cPtr, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -426,7 +426,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_offset(cast(graphene_rect_t*)cPtr, dX, dY);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_offset_r(cast(const(graphene_rect_t)*)cPtr, dX, dY, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -467,7 +467,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_round(cast(const(graphene_rect_t)*)cPtr, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -500,7 +500,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_round_extents(cast(const(graphene_rect_t)*)cPtr, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -515,7 +515,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_round_to_pixel(cast(graphene_rect_t*)cPtr);
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -532,7 +532,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t _res;
     graphene_rect_scale(cast(const(graphene_rect_t)*)cPtr, sH, sV, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -548,8 +548,8 @@ class Rect : gobject.boxed.Boxed
   void union_(graphene.rect.Rect b, out graphene.rect.Rect res)
   {
     graphene_rect_t _res;
-    graphene_rect_union(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.dup) : null, &_res);
-    res = new graphene.rect.Rect(cast(void*)&_res, No.take);
+    graphene_rect_union(cast(const(graphene_rect_t)*)cPtr, b ? cast(const(graphene_rect_t)*)b.cPtr(No.Dup) : null, &_res);
+    res = new graphene.rect.Rect(cast(void*)&_res, No.Take);
   }
 
   /**
@@ -562,7 +562,7 @@ class Rect : gobject.boxed.Boxed
   {
     graphene_rect_t* _cretval;
     _cretval = graphene_rect_alloc();
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -575,7 +575,7 @@ class Rect : gobject.boxed.Boxed
   {
     const(graphene_rect_t)* _cretval;
     _cretval = graphene_rect_zero();
-    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

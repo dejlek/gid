@@ -137,18 +137,18 @@ template FileT()
     If the file doesn't already exist it is created.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
+    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
     will be made readable only to the current user, to the level that
     is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
     Some file systems don't allow all file names, and may return an
-    [gio.types.IOErrorEnum.invalidFilename] error. If the file is a directory the
-    [gio.types.IOErrorEnum.isDirectory] error will be returned. Other errors are
+    [gio.types.IOErrorEnum.InvalidFilename] error. If the file is a directory the
+    [gio.types.IOErrorEnum.IsDirectory] error will be returned. Other errors are
     possible too, and depend on what kind of filesystem the file is on.
     Params:
       flags =       a set of #GFileCreateFlags
@@ -161,10 +161,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_append_to(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_append_to(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -192,12 +192,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_append_to_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_append_to_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -213,10 +213,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_append_to_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -241,10 +241,10 @@ template FileT()
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_build_attribute_list_for_copy(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -252,20 +252,20 @@ template FileT()
       Copies the file source to the location specified by destination.
     Can not handle recursive copies of directories.
     
-    If the flag [gio.types.FileCopyFlags.overwrite] is specified an already
+    If the flag [gio.types.FileCopyFlags.Overwrite] is specified an already
     existing destination file is overwritten.
     
-    If the flag [gio.types.FileCopyFlags.nofollowSymlinks] is specified then symlinks
+    If the flag [gio.types.FileCopyFlags.NofollowSymlinks] is specified then symlinks
     will be copied as symlinks, otherwise the target of the
     source symlink will be copied.
     
-    If the flag [gio.types.FileCopyFlags.allMetadata] is specified then all the metadata
+    If the flag [gio.types.FileCopyFlags.AllMetadata] is specified then all the metadata
     that is possible to copy is copied, not just the default subset (which,
     for instance, does not include the owner, see #GFileInfo).
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     If progress_callback is not null, then the operation can be monitored
     by setting this to a #GFileProgressCallback function.
@@ -273,19 +273,19 @@ template FileT()
     that this callback will be called after all data has been transferred with
     the total number of bytes copied during the operation.
     
-    If the source file does not exist, then the [gio.types.IOErrorEnum.notFound] error
+    If the source file does not exist, then the [gio.types.IOErrorEnum.NotFound] error
     is returned, independent on the status of the destination.
     
-    If [gio.types.FileCopyFlags.overwrite] is not specified and the target exists, then
-    the error [gio.types.IOErrorEnum.exists] is returned.
+    If [gio.types.FileCopyFlags.Overwrite] is not specified and the target exists, then
+    the error [gio.types.IOErrorEnum.Exists] is returned.
     
-    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.isDirectory]
+    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.IsDirectory]
     error is returned. If trying to overwrite a directory with a directory the
-    [gio.types.IOErrorEnum.wouldMerge] error is returned.
+    [gio.types.IOErrorEnum.WouldMerge] error is returned.
     
     If the source is a directory and the target does not exist, or
-    [gio.types.FileCopyFlags.overwrite] is specified and the target is a file, then the
-    [gio.types.IOErrorEnum.wouldRecurse] error is returned.
+    [gio.types.FileCopyFlags.Overwrite] is specified and the target is a file, then the
+    [gio.types.IOErrorEnum.WouldRecurse] error is returned.
     
     If you are interested in copying the #GFile object itself (not the on-disk
     file), see [gio.file.File.dup].
@@ -311,7 +311,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = g_file_copy(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -354,13 +354,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_copy_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
+    g_file_copy_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
   }
 
   /**
@@ -369,7 +369,7 @@ template FileT()
     Normally only a subset of the file attributes are copied,
     those that are copies in a normal file copy operation
     (which for instance does not include e.g. owner). However
-    if [gio.types.FileCopyFlags.allMetadata] is specified in flags, then
+    if [gio.types.FileCopyFlags.AllMetadata] is specified in flags, then
     all the metadata that is possible to copy is copied. This
     is useful when implementing move by copy + delete source.
     Params:
@@ -384,7 +384,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_copy_attributes(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -400,7 +400,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _retval = g_file_copy_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -411,19 +411,19 @@ template FileT()
     The file must not already exist.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
+    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
     will be made readable only to the current user, to the level
     that is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
     If a file or directory with this name already exists the
-    [gio.types.IOErrorEnum.exists] error will be returned. Some file systems don't
-    allow all file names, and may return an [gio.types.IOErrorEnum.invalidFilename]
-    error, and if the name is to long [gio.types.IOErrorEnum.filenameTooLong] will
+    [gio.types.IOErrorEnum.Exists] error will be returned. Some file systems don't
+    allow all file names, and may return an [gio.types.IOErrorEnum.InvalidFilename]
+    error, and if the name is to long [gio.types.IOErrorEnum.FilenameTooLong] will
     be returned. Other errors are possible too, and depend on what kind
     of filesystem the file is on.
     Params:
@@ -438,10 +438,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_create(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_create(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -470,12 +470,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_create_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_create_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -490,10 +490,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_create_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -502,19 +502,19 @@ template FileT()
     writing to it. The file must not already exist.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
+    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
     will be made readable only to the current user, to the level
     that is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
     If a file or directory with this name already exists, the
-    [gio.types.IOErrorEnum.exists] error will be returned. Some file systems don't
-    allow all file names, and may return an [gio.types.IOErrorEnum.invalidFilename]
-    error, and if the name is too long, [gio.types.IOErrorEnum.filenameTooLong]
+    [gio.types.IOErrorEnum.Exists] error will be returned. Some file systems don't
+    allow all file names, and may return an [gio.types.IOErrorEnum.InvalidFilename]
+    error, and if the name is too long, [gio.types.IOErrorEnum.FilenameTooLong]
     will be returned. Other errors are possible too, and depend on what
     kind of filesystem the file is on.
     
@@ -533,10 +533,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_readwrite(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_create_readwrite(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -565,12 +565,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_create_readwrite_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_create_readwrite_async(cast(GFile*)cPtr, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -585,10 +585,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_create_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -596,7 +596,7 @@ template FileT()
       Deletes a file. If the file is a directory, it will only be
     deleted if it is empty. This has the same semantics as [glib.global.unlink].
     
-    If file doesn’t exist, [gio.types.IOErrorEnum.notFound] will be returned. This allows
+    If file doesn’t exist, [gio.types.IOErrorEnum.NotFound] will be returned. This allows
     for deletion to be implemented avoiding
     [time-of-check to time-of-use races](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use):
     ```
@@ -613,7 +613,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -623,7 +623,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_delete(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -647,12 +647,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_delete_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_delete_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -665,7 +665,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_delete_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -689,7 +689,7 @@ template FileT()
   {
     GFile* _cretval;
     _cretval = g_file_dup(cast(GFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -701,7 +701,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       cancellable =       optional #GCancellable object,
@@ -718,12 +718,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_eject_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_eject_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -741,7 +741,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_eject_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -755,7 +755,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       mountOperation =       a #GMountOperation,
@@ -772,12 +772,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_eject_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_eject_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -792,7 +792,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_eject_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -818,11 +818,11 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
-    be returned. If the file is not a directory, the [gio.types.IOErrorEnum.notDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
+    be returned. If the file is not a directory, the [gio.types.IOErrorEnum.NotDirectory]
     error will be returned. Other errors are possible too.
     Params:
       attributes =       an attribute query string
@@ -835,12 +835,12 @@ template FileT()
   override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileEnumerator* _cretval;
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_enumerate_children(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_enumerate_children(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -871,13 +871,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_enumerate_children_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_enumerate_children_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -893,10 +893,10 @@ template FileT()
   {
     GFileEnumerator* _cretval;
     GError *_err;
-    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_enumerate_children_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_enumerator.FileEnumerator)(cast(GFileEnumerator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -915,7 +915,7 @@ template FileT()
   override bool equal(gio.file.File file2)
   {
     bool _retval;
-    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(ObjectG)file2).cPtr(No.dup) : null);
+    _retval = g_file_equal(cast(GFile*)cPtr, file2 ? cast(GFile*)(cast(ObjectG)file2).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -924,11 +924,11 @@ template FileT()
     
     #GMount is returned only for user interesting locations, see
     #GVolumeMonitor. If the #GFileIface for file does not have a #mount,
-    error will be set to [gio.types.IOErrorEnum.notFound] and null #will be returned.
+    error will be set to [gio.types.IOErrorEnum.NotFound] and null #will be returned.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -940,10 +940,10 @@ template FileT()
   {
     GMount* _cretval;
     GError *_err;
-    _cretval = g_file_find_enclosing_mount(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_find_enclosing_mount(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -970,12 +970,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_find_enclosing_mount_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_find_enclosing_mount_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -990,10 +990,10 @@ template FileT()
   {
     GMount* _cretval;
     GError *_err;
-    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_find_enclosing_mount_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1019,7 +1019,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_basename(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1039,9 +1039,9 @@ template FileT()
   override gio.file.File getChild(string name)
   {
     GFile* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_file_get_child(cast(GFile*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1063,12 +1063,12 @@ template FileT()
   override gio.file.File getChildForDisplayName(string displayName)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(No.alloc);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     GError *_err;
     _cretval = g_file_get_child_for_display_name(cast(GFile*)cPtr, _displayName, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1086,7 +1086,7 @@ template FileT()
   {
     GFile* _cretval;
     _cretval = g_file_get_parent(cast(GFile*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1113,7 +1113,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_parse_name(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1130,7 +1130,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_path(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1148,8 +1148,8 @@ template FileT()
   override string getRelativePath(gio.file.File descendant)
   {
     char* _cretval;
-    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(ObjectG)descendant).cPtr(No.dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = g_file_get_relative_path(cast(GFile*)cPtr, descendant ? cast(GFile*)(cast(ObjectG)descendant).cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1166,7 +1166,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1190,7 +1190,7 @@ template FileT()
   {
     char* _cretval;
     _cretval = g_file_get_uri_scheme(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1208,7 +1208,7 @@ template FileT()
   override bool hasParent(gio.file.File parent = null)
   {
     bool _retval;
-    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(No.dup) : null);
+    _retval = g_file_has_parent(cast(GFile*)cPtr, parent ? cast(GFile*)(cast(ObjectG)parent).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1235,7 +1235,7 @@ template FileT()
   override bool hasPrefix(gio.file.File prefix)
   {
     bool _retval;
-    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(ObjectG)prefix).cPtr(No.dup) : null);
+    _retval = g_file_has_prefix(cast(GFile*)cPtr, prefix ? cast(GFile*)(cast(ObjectG)prefix).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1252,7 +1252,7 @@ template FileT()
   override bool hasUriScheme(string uriScheme)
   {
     bool _retval;
-    const(char)* _uriScheme = uriScheme.toCString(No.alloc);
+    const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     _retval = g_file_has_uri_scheme(cast(GFile*)cPtr, _uriScheme);
     return _retval;
   }
@@ -1317,11 +1317,11 @@ template FileT()
     GBytes* _cretval;
     char* _etagOut;
     GError *_err;
-    _cretval = g_file_load_bytes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_etagOut, &_err);
+    _cretval = g_file_load_bytes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
-    etagOut = _etagOut.fromCString(Yes.free);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1348,12 +1348,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_load_bytes_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_load_bytes_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1377,11 +1377,11 @@ template FileT()
     GBytes* _cretval;
     char* _etagOut;
     GError *_err;
-    _cretval = g_file_load_bytes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_etagOut, &_err);
+    _cretval = g_file_load_bytes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
-    etagOut = _etagOut.fromCString(Yes.free);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1393,7 +1393,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
       contents =       a location to place the contents of the file
@@ -1409,13 +1409,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_contents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.free);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1432,7 +1432,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
       callback =       a #GAsyncReadyCallback to call when the request is satisfied
@@ -1444,12 +1444,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_load_contents_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_load_contents_async(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1473,13 +1473,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.free);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1504,13 +1504,13 @@ template FileT()
     ubyte* _contents;
     char* _etagOut;
     GError *_err;
-    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_contents, &_length, &_etagOut, &_err);
+    _retval = g_file_load_partial_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_contents, &_length, &_etagOut, &_err);
     if (_err)
       throw new ErrorG(_err);
     contents.length = _length;
     contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
     safeFree(cast(void*)_contents);
-    etagOut = _etagOut.fromCString(Yes.free);
+    etagOut = _etagOut.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1519,16 +1519,16 @@ template FileT()
     of the immediate parent directory of the path or URI given by the #GFile.
     To recursively create directories, see [gio.file.File.makeDirectoryWithParents].
     This function will fail if the parent directory does not exist, setting
-    error to [gio.types.IOErrorEnum.notFound]. If the file system doesn't support
+    error to [gio.types.IOErrorEnum.NotFound]. If the file system doesn't support
     creating directories, this function will fail, setting error to
-    [gio.types.IOErrorEnum.notSupported].
+    [gio.types.IOErrorEnum.NotSupported].
     
     For a local #GFile the newly created directory will have the default
     (current) ownership and permissions of the current process.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1538,7 +1538,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_make_directory(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1560,12 +1560,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_make_directory_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_make_directory_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1579,7 +1579,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_make_directory_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1589,8 +1589,8 @@ template FileT()
       Creates a directory and any parent directories that may not
     exist similar to 'mkdir -p'. If the file system does not support
     creating directories, this function will fail, setting error to
-    [gio.types.IOErrorEnum.notSupported]. If the directory itself already exists,
-    this function will fail setting error to [gio.types.IOErrorEnum.exists], unlike
+    [gio.types.IOErrorEnum.NotSupported]. If the directory itself already exists,
+    this function will fail setting error to [gio.types.IOErrorEnum.Exists], unlike
     the similar [glib.global.mkdirWithParents].
     
     For a local #GFile the newly created directories will have the default
@@ -1598,7 +1598,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -1609,7 +1609,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_directory_with_parents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_make_directory_with_parents(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1621,7 +1621,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       symlinkValue =       a string with the path for the target
           of the new symlink
@@ -1632,9 +1632,9 @@ template FileT()
   override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _symlinkValue = symlinkValue.toCString(No.alloc);
+    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_make_symbolic_link(cast(GFile*)cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_make_symbolic_link(cast(GFile*)cPtr, _symlinkValue, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1659,13 +1659,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _symlinkValue = symlinkValue.toCString(No.alloc);
+    const(char)* _symlinkValue = symlinkValue.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_make_symbolic_link_async(cast(GFile*)cPtr, _symlinkValue, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_make_symbolic_link_async(cast(GFile*)cPtr, _symlinkValue, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1679,7 +1679,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_make_symbolic_link_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1694,7 +1694,7 @@ template FileT()
     
     By default, errors are only reported against the toplevel file
     itself.  Errors found while recursing are silently ignored, unless
-    [gio.types.FileMeasureFlags.reportAnyError] is given in flags.
+    [gio.types.FileMeasureFlags.ReportAnyError] is given in flags.
     
     The returned size, disk_usage, is in bytes and should be formatted
     with [glib.global.formatSize] in order to get something reasonable for showing
@@ -1727,7 +1727,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_measure_disk_usage(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = g_file_measure_disk_usage(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1749,7 +1749,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
+    _retval = g_file_measure_disk_usage_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(ulong*)&diskUsage, cast(ulong*)&numDirs, cast(ulong*)&numFiles, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1761,7 +1761,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       flags =       a set of #GFileMonitorFlags
       cancellable =       optional #GCancellable object,
@@ -1774,10 +1774,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_monitor(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1787,10 +1787,10 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     It does not make sense for flags to contain
-    [gio.types.FileMonitorFlags.watchHardLinks], since hard links can not be made to
+    [gio.types.FileMonitorFlags.WatchHardLinks], since hard links can not be made to
     directories.  It is not possible to monitor all the files in a
     directory for changes made via hard links; if you want to do this then
     you must register individual watches with [gio.file.File.monitor].
@@ -1805,10 +1805,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor_directory(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_monitor_directory(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1818,9 +1818,9 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
-    If flags contains [gio.types.FileMonitorFlags.watchHardLinks] then the monitor
+    If flags contains [gio.types.FileMonitorFlags.WatchHardLinks] then the monitor
     will also attempt to report changes made to the file via another
     filename (ie, a hard link). Without this flag, you can only rely on
     changes made through the filename contained in file to be
@@ -1839,10 +1839,10 @@ template FileT()
   {
     GFileMonitor* _cretval;
     GError *_err;
-    _cretval = g_file_monitor_file(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_monitor_file(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_monitor.FileMonitor)(cast(GFileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1856,7 +1856,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       flags =       flags affecting the operation
       mountOperation =       a #GMountOperation
@@ -1873,12 +1873,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_mount_enclosing_volume(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_mount_enclosing_volume(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1893,7 +1893,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_mount_enclosing_volume_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -1906,7 +1906,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -1927,12 +1927,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_mount_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_mount_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1949,10 +1949,10 @@ template FileT()
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_mount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1963,12 +1963,12 @@ template FileT()
     implementation may support moving directories (for instance on moves
     inside the same filesystem), but the fallback code does not.
     
-    If the flag [gio.types.FileCopyFlags.overwrite] is specified an already
+    If the flag [gio.types.FileCopyFlags.Overwrite] is specified an already
     existing destination file is overwritten.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     If progress_callback is not null, then the operation can be monitored
     by setting this to a #GFileProgressCallback function.
@@ -1976,19 +1976,19 @@ template FileT()
     guaranteed that this callback will be called after all data has been
     transferred with the total number of bytes copied during the operation.
     
-    If the source file does not exist, then the [gio.types.IOErrorEnum.notFound]
+    If the source file does not exist, then the [gio.types.IOErrorEnum.NotFound]
     error is returned, independent on the status of the destination.
     
-    If [gio.types.FileCopyFlags.overwrite] is not specified and the target exists,
-    then the error [gio.types.IOErrorEnum.exists] is returned.
+    If [gio.types.FileCopyFlags.Overwrite] is not specified and the target exists,
+    then the error [gio.types.IOErrorEnum.Exists] is returned.
     
-    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.isDirectory]
+    If trying to overwrite a file over a directory, the [gio.types.IOErrorEnum.IsDirectory]
     error is returned. If trying to overwrite a directory with a directory the
-    [gio.types.IOErrorEnum.wouldMerge] error is returned.
+    [gio.types.IOErrorEnum.WouldMerge] error is returned.
     
     If the source is a directory and the target does not exist, or
-    [gio.types.FileCopyFlags.overwrite] is specified and the target is a file, then
-    the [gio.types.IOErrorEnum.wouldRecurse] error may be returned (if the native
+    [gio.types.FileCopyFlags.Overwrite] is specified and the target is a file, then
+    the [gio.types.IOErrorEnum.WouldRecurse] error may be returned (if the native
     move operation isn't available).
     Params:
       destination =       #GFile pointing to the destination location
@@ -2012,7 +2012,7 @@ template FileT()
     bool _retval;
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     GError *_err;
-    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, &_err);
+    _retval = g_file_move(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2053,13 +2053,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? cast(void*)&(progressCallback) : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_move_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
+    g_file_move_async(cast(GFile*)cPtr, destination ? cast(GFile*)(cast(ObjectG)destination).cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _callbackCB, _callback);
   }
 
   /**
@@ -2073,7 +2073,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_move_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2086,11 +2086,11 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
-    be returned. If the file is a directory, the [gio.types.IOErrorEnum.isDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
+    be returned. If the file is a directory, the [gio.types.IOErrorEnum.IsDirectory]
     error will be returned. Other errors are possible too, and depend on
     what kind of filesystem the file is on. Note that in many non-local
     file cases read and write streams are not supported, so make sure you
@@ -2105,10 +2105,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_open_readwrite(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_open_readwrite(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2135,12 +2135,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_open_readwrite_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_open_readwrite_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2155,10 +2155,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_open_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2177,16 +2177,16 @@ template FileT()
   {
     const(char)* _cretval;
     _cretval = g_file_peek_path(cast(GFile*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /**
-      Polls a file of type [gio.types.FileType.mountable].
+      Polls a file of type [gio.types.FileType.Mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -2203,12 +2203,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_poll_mountable(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_poll_mountable(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2225,7 +2225,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_poll_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -2237,7 +2237,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore
     Returns:     a #GAppInfo if the handle was found,
@@ -2248,10 +2248,10 @@ template FileT()
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_default_handler(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_default_handler(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2269,12 +2269,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_query_default_handler_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_query_default_handler_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2289,10 +2289,10 @@ template FileT()
   {
     GAppInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_default_handler_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2312,7 +2312,7 @@ template FileT()
     These can both result in two processes creating the file (with perhaps
     a partially written file as the result). The correct approach is to
     always try to create the file with [gio.file.File.create] which will either
-    atomically create the file or fail with a [gio.types.IOErrorEnum.exists] error.
+    atomically create the file or fail with a [gio.types.IOErrorEnum.Exists] error.
     
     However, in many cases an existence check is useful in a user interface,
     for instance to make a menu item sensitive/insensitive, so that you don't
@@ -2328,7 +2328,7 @@ template FileT()
   override bool queryExists(gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    _retval = g_file_query_exists(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null);
+    _retval = g_file_query_exists(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2342,13 +2342,13 @@ template FileT()
       flags =       a set of #GFileQueryInfoFlags passed to [gio.file.File.queryInfo]
       cancellable =       optional #GCancellable object,
           null to ignore
-    Returns:     The #GFileType of the file and [gio.types.FileType.unknown]
+    Returns:     The #GFileType of the file and [gio.types.FileType.Unknown]
         if the file does not exist
   */
   override gio.types.FileType queryFileType(gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileType _cretval;
-    _cretval = g_file_query_file_type(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null);
+    _cretval = g_file_query_file_type(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
     gio.types.FileType _retval = cast(gio.types.FileType)_cretval;
     return _retval;
   }
@@ -2373,10 +2373,10 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will
+    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will
     be returned. Other errors are possible too, and depend on what
     kind of filesystem the file is on.
     Params:
@@ -2389,12 +2389,12 @@ template FileT()
   override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_query_filesystem_info(cast(GFile*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_filesystem_info(cast(GFile*)cPtr, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2425,13 +2425,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_query_filesystem_info_async(cast(GFile*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_query_filesystem_info_async(cast(GFile*)cPtr, _attributes, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2447,10 +2447,10 @@ template FileT()
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_filesystem_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2472,17 +2472,17 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
     For symlinks, normally the information about the target of the
     symlink is returned, rather than information about the symlink
-    itself. However if you pass [gio.types.FileQueryInfoFlags.nofollowSymlinks]
+    itself. However if you pass [gio.types.FileQueryInfoFlags.NofollowSymlinks]
     in flags the information about the symlink itself will be returned.
     Also, for symlinks that point to non-existing files the information
     about the symlink itself will be returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will be
+    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will be
     returned. Other errors are possible too, and depend on what kind of
     filesystem the file is on.
     Params:
@@ -2496,12 +2496,12 @@ template FileT()
   override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileInfo* _cretval;
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_query_info(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_info(cast(GFile*)cPtr, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2531,13 +2531,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _attributes = attributes.toCString(No.alloc);
+    const(char)* _attributes = attributes.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_query_info_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_query_info_async(cast(GFile*)cPtr, _attributes, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2553,10 +2553,10 @@ template FileT()
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_info_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2570,7 +2570,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -2582,10 +2582,10 @@ template FileT()
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
-    _cretval = g_file_query_settable_attributes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_settable_attributes(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -2596,7 +2596,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -2608,10 +2608,10 @@ template FileT()
   {
     GFileAttributeInfoList* _cretval;
     GError *_err;
-    _cretval = g_file_query_writable_namespaces(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_query_writable_namespaces(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -2621,10 +2621,10 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
-    If the file does not exist, the [gio.types.IOErrorEnum.notFound] error will be
-    returned. If the file is a directory, the [gio.types.IOErrorEnum.isDirectory]
+    If the file does not exist, the [gio.types.IOErrorEnum.NotFound] error will be
+    returned. If the file is a directory, the [gio.types.IOErrorEnum.IsDirectory]
     error will be returned. Other errors are possible too, and depend
     on what kind of filesystem the file is on.
     Params:
@@ -2636,10 +2636,10 @@ template FileT()
   {
     GFileInputStream* _cretval;
     GError *_err;
-    _cretval = g_file_read(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_read(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2666,12 +2666,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_read_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_read_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2686,10 +2686,10 @@ template FileT()
   {
     GFileInputStream* _cretval;
     GError *_err;
-    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_read_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_input_stream.FileInputStream)(cast(GFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2705,18 +2705,18 @@ template FileT()
     the destination when the stream is closed.
     
     By default files created are generally readable by everyone,
-    but if you pass [gio.types.FileCreateFlags.private_] in flags the file
+    but if you pass [gio.types.FileCreateFlags.Private] in flags the file
     will be made readable only to the current user, to the level that
     is supported on the target filesystem.
     
     If cancellable is not null, then the operation can be cancelled
     by triggering the cancellable object from another thread. If the
-    operation was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be
+    operation was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be
     returned.
     
     If you pass in a non-null etag value and file already exists, then
     this value is compared to the current entity tag of the file, and if
-    they differ an [gio.types.IOErrorEnum.wrongEtag] error is returned. This
+    they differ an [gio.types.IOErrorEnum.WrongEtag] error is returned. This
     generally means that the file has been changed since you last read
     it. You can get the new etag from [gio.file_output_stream.FileOutputStream.getEtag]
     after you've finished writing and closed the #GFileOutputStream. When
@@ -2725,15 +2725,15 @@ template FileT()
     
     If make_backup is true, this function will attempt to make a
     backup of the current file before overwriting it. If this fails
-    a [gio.types.IOErrorEnum.cantCreateBackup] error will be returned. If you
+    a [gio.types.IOErrorEnum.CantCreateBackup] error will be returned. If you
     want to replace anyway, try again with make_backup set to false.
     
-    If the file is a directory the [gio.types.IOErrorEnum.isDirectory] error will
+    If the file is a directory the [gio.types.IOErrorEnum.IsDirectory] error will
     be returned, and if the file is some other form of non-regular file
-    then a [gio.types.IOErrorEnum.notRegularFile] error will be returned. Some
+    then a [gio.types.IOErrorEnum.NotRegularFile] error will be returned. Some
     file systems don't allow all file names, and may return an
-    [gio.types.IOErrorEnum.invalidFilename] error, and if the name is to long
-    [gio.types.IOErrorEnum.filenameTooLong] will be returned. Other errors are
+    [gio.types.IOErrorEnum.InvalidFilename] error, and if the name is to long
+    [gio.types.IOErrorEnum.FilenameTooLong] will be returned. Other errors are
     possible too, and depend on what kind of filesystem the file is on.
     Params:
       etag =       an optional [entity tag](#entity-tags)
@@ -2748,12 +2748,12 @@ template FileT()
   override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileOutputStream* _cretval;
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_replace(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_replace(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2785,20 +2785,20 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_replace_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_replace_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
       Replaces the contents of file with contents of length bytes.
     
     If etag is specified (not null), any existing file must have that etag,
-    or the error [gio.types.IOErrorEnum.wrongEtag] will be returned.
+    or the error [gio.types.IOErrorEnum.WrongEtag] will be returned.
     
     If make_backup is true, this function will attempt to make a backup
     of file. Internally, it uses [gio.file.File.replace], so will try to replace the
@@ -2807,7 +2807,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     The returned new_etag can be used to verify that the file hasn't
     changed the next time it is saved over.
@@ -2832,13 +2832,13 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = cast(const(ubyte)*)contents.ptr;
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_replace_contents(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, &_newEtag, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    newEtag = _newEtag.fromCString(Yes.free);
+    newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2853,7 +2853,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     If make_backup is true, this function will attempt to
     make a backup of file.
@@ -2877,7 +2877,7 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2886,9 +2886,9 @@ template FileT()
       _length = cast(size_t)contents.length;
 
     auto _contents = cast(const(ubyte)*)contents.ptr;
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_replace_contents_async(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_replace_contents_async(cast(GFile*)cPtr, _contents, _length, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2915,13 +2915,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_replace_contents_bytes_async(cast(GFile*)cPtr, contents ? cast(GBytes*)contents.cPtr(No.dup) : null, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_replace_contents_bytes_async(cast(GFile*)cPtr, contents ? cast(GBytes*)contents.cPtr(No.Dup) : null, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2940,10 +2940,10 @@ template FileT()
     bool _retval;
     char* _newEtag;
     GError *_err;
-    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_newEtag, &_err);
+    _retval = g_file_replace_contents_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_newEtag, &_err);
     if (_err)
       throw new ErrorG(_err);
-    newEtag = _newEtag.fromCString(Yes.free);
+    newEtag = _newEtag.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2959,10 +2959,10 @@ template FileT()
   {
     GFileOutputStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_replace_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_output_stream.FileOutputStream)(cast(GFileOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2990,12 +2990,12 @@ template FileT()
   override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GFileIOStream* _cretval;
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_replace_readwrite(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_replace_readwrite(cast(GFile*)cPtr, _etag, makeBackup, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3028,13 +3028,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _etag = etag.toCString(No.alloc);
+    const(char)* _etag = etag.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_replace_readwrite_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_replace_readwrite_async(cast(GFile*)cPtr, _etag, makeBackup, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3049,10 +3049,10 @@ template FileT()
   {
     GFileIOStream* _cretval;
     GError *_err;
-    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_replace_readwrite_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file_iostream.FileIOStream)(cast(GFileIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3070,9 +3070,9 @@ template FileT()
   override gio.file.File resolveRelativePath(string relativePath)
   {
     GFile* _cretval;
-    const(char)* _relativePath = relativePath.toCString(No.alloc);
+    const(char)* _relativePath = relativePath.toCString(No.Alloc);
     _cretval = g_file_resolve_relative_path(cast(GFile*)cPtr, _relativePath);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3080,11 +3080,11 @@ template FileT()
       Sets an attribute in the file with attribute name attribute to value_p.
     
     Some attributes can be unset by setting type to
-    [gio.types.FileAttributeType.invalid] and value_p to null.
+    [gio.types.FileAttributeType.Invalid] and value_p to null.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       type =       The type of the attribute
@@ -3098,22 +3098,22 @@ template FileT()
   override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute(cast(GFile*)cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute(cast(GFile*)cPtr, _attribute, type, valueP, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.byteString] to value.
+      Sets attribute of type [gio.types.FileAttributeType.ByteString] to value.
     If attribute is of a different type, this operation will fail,
     returning false.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a string containing the attribute's new value
@@ -3126,22 +3126,22 @@ template FileT()
   override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_byte_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_byte_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.int32] to value.
+      Sets attribute of type [gio.types.FileAttributeType.Int32] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #gint32 containing the attribute's new value
@@ -3154,21 +3154,21 @@ template FileT()
   override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_int32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.int64] to value.
+      Sets attribute of type [gio.types.FileAttributeType.Int64] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint64 containing the attribute's new value
@@ -3180,21 +3180,21 @@ template FileT()
   override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_int64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_int64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.string_] to value.
+      Sets attribute of type [gio.types.FileAttributeType.String] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a string containing the attribute's value
@@ -3206,22 +3206,22 @@ template FileT()
   override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_string(cast(GFile*)cPtr, _attribute, _value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.uint32] to value.
+      Sets attribute of type [gio.types.FileAttributeType.Uint32] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint32 containing the attribute's new value
@@ -3234,21 +3234,21 @@ template FileT()
   override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_uint32(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Sets attribute of type [gio.types.FileAttributeType.uint64] to value.
+      Sets attribute of type [gio.types.FileAttributeType.Uint64] to value.
     If attribute is of a different type, this operation will fail.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       attribute =       a string containing the attribute's name
       value =       a #guint64 containing the attribute's new value
@@ -3261,9 +3261,9 @@ template FileT()
   override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     bool _retval;
-    const(char)* _attribute = attribute.toCString(No.alloc);
+    const(char)* _attribute = attribute.toCString(No.Alloc);
     GError *_err;
-    _retval = g_file_set_attribute_uint64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attribute_uint64(cast(GFile*)cPtr, _attribute, value, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3294,12 +3294,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_set_attributes_async(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_set_attributes_async(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3314,10 +3314,10 @@ template FileT()
     bool _retval;
     GFileInfo* _info;
     GError *_err;
-    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_info, &_err);
+    _retval = g_file_set_attributes_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_info, &_err);
     if (_err)
       throw new ErrorG(_err);
-    info = new gio.file_info.FileInfo(cast(void*)_info, Yes.take);
+    info = new gio.file_info.FileInfo(cast(void*)_info, Yes.Take);
     return _retval;
   }
 
@@ -3328,12 +3328,12 @@ template FileT()
     If there is any error during this operation then error will
     be set to the first error. Error on particular fields are flagged
     by setting the "status" field in the attribute value to
-    [gio.types.FileAttributeStatus.errorSetting], which means you can
+    [gio.types.FileAttributeStatus.ErrorSetting], which means you can
     also detect further errors.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       info =       a #GFileInfo
       flags =       #GFileQueryInfoFlags
@@ -3345,7 +3345,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_set_attributes_from_info(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_set_attributes_from_info(cast(GFile*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3366,7 +3366,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       displayName =       a string
       cancellable =       optional #GCancellable object,
@@ -3378,12 +3378,12 @@ template FileT()
   override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null)
   {
     GFile* _cretval;
-    const(char)* _displayName = displayName.toCString(No.alloc);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_file_set_display_name(cast(GFile*)cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_file_set_display_name(cast(GFile*)cPtr, _displayName, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3411,13 +3411,13 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _displayName = displayName.toCString(No.alloc);
+    const(char)* _displayName = displayName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_set_display_name_async(cast(GFile*)cPtr, _displayName, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_set_display_name_async(cast(GFile*)cPtr, _displayName, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3432,21 +3432,21 @@ template FileT()
   {
     GFile* _cretval;
     GError *_err;
-    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_file_set_display_name_finish(cast(GFile*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
-      Starts a file of type [gio.types.FileType.mountable].
+      Starts a file of type [gio.types.FileType.Mountable].
     Using start_operation, you can request callbacks when, for instance,
     passwords are needed during authentication.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.mountMountableFinish] to get
@@ -3464,12 +3464,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_start_mountable(cast(GFile*)cPtr, flags, startOperation ? cast(GMountOperation*)startOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_start_mountable(cast(GFile*)cPtr, flags, startOperation ? cast(GMountOperation*)startOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3486,18 +3486,18 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_start_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Stops a file of type [gio.types.FileType.mountable].
+      Stops a file of type [gio.types.FileType.Mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.stopMountableFinish] to get
@@ -3518,12 +3518,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_stop_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_stop_mountable(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3540,7 +3540,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_stop_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3564,13 +3564,13 @@ template FileT()
       Sends file to the "Trashcan", if possible. This is similar to
     deleting it, but the user can recover it before emptying the trashcan.
     Not all file systems support trashing, so this call can return the
-    [gio.types.IOErrorEnum.notSupported] error. Since GLib 2.66, the `x-gvfs-notrash` unix
+    [gio.types.IOErrorEnum.NotSupported] error. Since GLib 2.66, the `x-gvfs-notrash` unix
     mount option can be used to disable [gio.file.File.trash] support for certain
-    mounts, the [gio.types.IOErrorEnum.notSupported] error will be returned in that case.
+    mounts, the [gio.types.IOErrorEnum.NotSupported] error will be returned in that case.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object,
           null to ignore
@@ -3580,7 +3580,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_file_trash(cast(GFile*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3602,12 +3602,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_trash_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_trash_async(cast(GFile*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3621,7 +3621,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_trash_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -3632,7 +3632,7 @@ template FileT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.unmountMountableFinish] to get
@@ -3653,12 +3653,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_unmount_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_unmount_mountable(cast(GFile*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3678,18 +3678,18 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_unmount_mountable_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
   }
 
   /**
-      Unmounts a file of type [gio.types.FileType.mountable].
+      Unmounts a file of type [gio.types.FileType.Mountable].
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     
     When the operation is finished, callback will be called.
     You can then call [gio.file.File.unmountMountableFinish] to get
@@ -3710,12 +3710,12 @@ template FileT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_unmount_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_file_unmount_mountable_with_operation(cast(GFile*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -3733,7 +3733,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_file_unmount_mountable_with_operation_finish(cast(GFile*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

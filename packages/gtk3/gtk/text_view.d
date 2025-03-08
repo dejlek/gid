@@ -57,7 +57,7 @@ import pango.tab_array;
 class TextView : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -86,7 +86,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkWidget* _cretval;
     _cretval = gtk_text_view_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -103,8 +103,8 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor)
   {
-    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.dup) : null);
+    gtk_text_view_add_child_at_anchor(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -138,7 +138,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void addChildInWindow(gtk.widget.Widget child, gtk.types.TextWindowType whichWindow, int xpos, int ypos)
   {
-    gtk_text_view_add_child_in_window(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, whichWindow, xpos, ypos);
+    gtk_text_view_add_child_in_window(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, whichWindow, xpos, ypos);
   }
 
   /**
@@ -157,7 +157,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_view_backward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_view_backward_display_line_start(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Note that you can’t convert coordinates for a nonexisting window (see
     [gtk.text_view.TextView.setBorderWindowSize]).
     Params:
-      win =       a #GtkTextWindowType, except [gtk.types.TextWindowType.private_]
+      win =       a #GtkTextWindowType, except [gtk.types.TextWindowType.Private]
       bufferX =       buffer x coordinate
       bufferY =       buffer y coordinate
       windowX =       window x coordinate return location or null
@@ -215,7 +215,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_view_forward_display_line(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_view_forward_display_line_end(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkTextBuffer* _cretval;
     _cretval = gtk_text_view_get_buffer(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -322,9 +322,9 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GdkRectangle _strong;
     GdkRectangle _weak;
-    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, &_strong, &_weak);
-    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.take);
-    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.take);
+    gtk_text_view_get_cursor_locations(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_strong, &_weak);
+    strong = new gdk.rectangle.Rectangle(cast(void*)&_strong, No.Take);
+    weak = new gdk.rectangle.Rectangle(cast(void*)&_weak, No.Take);
   }
 
   /**
@@ -353,7 +353,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_view_get_default_attributes(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? new gtk.text_attributes.TextAttributes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.text_attributes.TextAttributes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_text_view_get_hadjustment(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_location(cast(GtkTextView*)cPtr, &_iter, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     bool _retval;
     GtkTextIter _iter;
     _retval = gtk_text_view_get_iter_at_position(cast(GtkTextView*)cPtr, &_iter, cast(int*)&trailing, x, y);
-    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.take);
+    iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -483,8 +483,8 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
     GdkRectangle _location;
-    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, &_location);
-    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.take);
+    gtk_text_view_get_iter_location(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, &_location);
+    location = new gdk.rectangle.Rectangle(cast(void*)&_location, No.Take);
   }
 
   /**
@@ -527,7 +527,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkTextIter _targetIter;
     gtk_text_view_get_line_at_y(cast(GtkTextView*)cPtr, &_targetIter, y, cast(int*)&lineTop);
-    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.take);
+    targetIter = new gtk.text_iter.TextIter(cast(void*)&_targetIter, No.Take);
   }
 
   /**
@@ -541,7 +541,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
-    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null, cast(int*)&y, cast(int*)&height);
+    gtk_text_view_get_line_yrange(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -628,7 +628,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     PangoTabArray* _cretval;
     _cretval = gtk_text_view_get_tabs(cast(GtkTextView*)cPtr);
-    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -653,7 +653,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_text_view_get_vadjustment(cast(GtkTextView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -668,7 +668,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GdkRectangle _visibleRect;
     gtk_text_view_get_visible_rect(cast(GtkTextView*)cPtr, &_visibleRect);
-    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.take);
+    visibleRect = new gdk.rectangle.Rectangle(cast(void*)&_visibleRect, No.Take);
   }
 
   alias getWindow = gtk.widget.Widget.getWindow;
@@ -688,7 +688,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GdkWindow* _cretval;
     _cretval = gtk_text_view_get_window(cast(GtkTextView*)cPtr, win);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -704,7 +704,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   gtk.types.TextWindowType getWindowType(gdk.window.Window window)
   {
     GtkTextWindowType _cretval;
-    _cretval = gtk_text_view_get_window_type(cast(GtkTextView*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+    _cretval = gtk_text_view_get_window_type(cast(GtkTextView*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
     gtk.types.TextWindowType _retval = cast(gtk.types.TextWindowType)_cretval;
     return _retval;
   }
@@ -772,7 +772,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void moveChild(gtk.widget.Widget child, int xpos, int ypos)
   {
-    gtk_text_view_move_child(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, xpos, ypos);
+    gtk_text_view_move_child(cast(GtkTextView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, xpos, ypos);
   }
 
   /**
@@ -785,7 +785,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
   {
     bool _retval;
-    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
+    _retval = gtk_text_view_move_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -810,7 +810,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
     bool _retval;
-    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, count);
+    _retval = gtk_text_view_move_visually(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, count);
     return _retval;
   }
 
@@ -859,7 +859,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void scrollMarkOnscreen(gtk.text_mark.TextMark mark)
   {
-    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null);
+    gtk_text_view_scroll_mark_onscreen(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null);
   }
 
   /**
@@ -889,7 +889,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
     bool _retval;
-    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null, withinMargin, useAlign, xalign, yalign);
+    _retval = gtk_text_view_scroll_to_iter(cast(GtkTextView*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
     return _retval;
   }
 
@@ -911,7 +911,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
   {
-    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.dup) : null, withinMargin, useAlign, xalign, yalign);
+    gtk_text_view_scroll_to_mark(cast(GtkTextView*)cPtr, mark ? cast(GtkTextMark*)mark.cPtr(No.Dup) : null, withinMargin, useAlign, xalign, yalign);
   }
 
   /**
@@ -930,13 +930,13 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   }
 
   /**
-      Sets the width of [gtk.types.TextWindowType.left] or [gtk.types.TextWindowType.right],
-    or the height of [gtk.types.TextWindowType.top] or [gtk.types.TextWindowType.bottom].
+      Sets the width of [gtk.types.TextWindowType.Left] or [gtk.types.TextWindowType.Right],
+    or the height of [gtk.types.TextWindowType.Top] or [gtk.types.TextWindowType.Bottom].
     Automatically destroys the corresponding window if the size is set
     to 0, and creates the window if the size is set to non-zero.  This
     function can only be used for the “border windows”, and it won’t
-    work with [gtk.types.TextWindowType.widget], [gtk.types.TextWindowType.text], or
-    [gtk.types.TextWindowType.private_].
+    work with [gtk.types.TextWindowType.Widget], [gtk.types.TextWindowType.Text], or
+    [gtk.types.TextWindowType.Private].
     Params:
       type =       window to affect
       size =       width or height of the window
@@ -970,7 +970,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
   {
-    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
+    gtk_text_view_set_buffer(cast(GtkTextView*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1138,7 +1138,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setTabs(pango.tab_array.TabArray tabs)
   {
-    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.dup) : null);
+    gtk_text_view_set_tabs(cast(GtkTextView*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1175,7 +1175,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_view_starts_display_line(cast(GtkTextView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1186,7 +1186,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Note that you can’t convert coordinates for a nonexisting window (see
     [gtk.text_view.TextView.setBorderWindowSize]).
     Params:
-      win =       a #GtkTextWindowType except [gtk.types.TextWindowType.private_]
+      win =       a #GtkTextWindowType except [gtk.types.TextWindowType.Private]
       windowX =       window x coordinate
       windowY =       window y coordinate
       bufferX =       buffer x coordinate return location or null
@@ -1219,10 +1219,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to Backspace signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBackspace(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1259,10 +1259,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to CopyClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCopyClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1299,10 +1299,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to CutClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCutClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1322,7 +1322,7 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     [keybinding signal][GtkBindingSignal]
     which gets emitted when the user initiates a text deletion.
     
-    If the type is [gtk.types.DeleteType.chars], GTK+ deletes the selection
+    If the type is [gtk.types.DeleteType.Chars], GTK+ deletes the selection
     if there is one, otherwise it deletes the requested number
     of characters.
     
@@ -1347,10 +1347,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to DeleteFromCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteFromCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1391,10 +1391,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to ExtendSelection signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectExtendSelection(T)(T callback, Flag!"after" after = No.after)
+  ulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ExtendSelectionCallbackDlg) || is(T : ExtendSelectionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1438,10 +1438,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to InsertAtCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertAtCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1478,10 +1478,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to InsertEmoji signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInsertEmoji(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1536,10 +1536,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1582,10 +1582,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to MoveViewport signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveViewport(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveViewportCallbackDlg) || is(T : MoveViewportCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1625,10 +1625,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to PasteClipboard signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPasteClipboard(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1674,10 +1674,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to PopulatePopup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopulatePopup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1716,10 +1716,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to PreeditChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreeditChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1759,10 +1759,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to SelectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectAll(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1801,10 +1801,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to SetAnchor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSetAnchor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SetAnchorCallbackDlg) || is(T : SetAnchorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1841,10 +1841,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to ToggleCursorVisible signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleCursorVisible(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleCursorVisibleCallbackDlg) || is(T : ToggleCursorVisibleCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1880,10 +1880,10 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     Connect to ToggleOverwrite signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleOverwrite(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

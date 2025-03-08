@@ -14,7 +14,7 @@ import gtk.types;
 class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.window.Window
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

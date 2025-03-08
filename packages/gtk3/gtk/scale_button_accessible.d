@@ -18,7 +18,7 @@ import gtk.types;
 class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.Value
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

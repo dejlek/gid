@@ -11,7 +11,7 @@ import gid.gid;
 class TimestampScalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class TimestampScalar : arrow.scalar.Scalar
   this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
   {
     GArrowTimestampScalar* _cretval;
-    _cretval = garrow_timestamp_scalar_new(dataType ? cast(GArrowTimestampDataType*)dataType.cPtr(No.dup) : null, value);
-    this(_cretval, Yes.take);
+    _cretval = garrow_timestamp_scalar_new(dataType ? cast(GArrowTimestampDataType*)dataType.cPtr(No.Dup) : null, value);
+    this(_cretval, Yes.Take);
   }
 
   /** */

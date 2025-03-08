@@ -65,7 +65,7 @@ import gobject.object;
 class PropertyAction : gobject.object.ObjectG, gio.action.Action
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -102,9 +102,9 @@ class PropertyAction : gobject.object.ObjectG, gio.action.Action
   this(string name, gobject.object.ObjectG object, string propertyName)
   {
     GPropertyAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _propertyName = propertyName.toCString(No.alloc);
-    _cretval = g_property_action_new(_name, object ? cast(ObjectC*)object.cPtr(No.dup) : null, _propertyName);
-    this(_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    _cretval = g_property_action_new(_name, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _propertyName);
+    this(_cretval, Yes.Take);
   }
 }

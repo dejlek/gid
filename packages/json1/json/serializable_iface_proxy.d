@@ -7,7 +7,7 @@ import json.serializable_mixin;
 /// Proxy object for Json.Serializable interface when a GObject has no applicable D binding
 class SerializableIfaceProxy : IfaceProxy, json.serializable.Serializable
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

@@ -58,12 +58,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.scrollbar] role.
+  [gtk.scrollbar.Scrollbar] uses the [gtk.types.AccessibleRole.Scrollbar] role.
 */
 class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -92,8 +92,8 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -104,7 +104,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,6 +115,6 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 }

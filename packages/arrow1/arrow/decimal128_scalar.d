@@ -13,7 +13,7 @@ import gobject.object;
 class Decimal128Scalar : arrow.scalar.Scalar
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class Decimal128Scalar : arrow.scalar.Scalar
   this(arrow.decimal128_data_type.Decimal128DataType dataType, arrow.decimal128.Decimal128 value)
   {
     GArrowDecimal128Scalar* _cretval;
-    _cretval = garrow_decimal128_scalar_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.dup) : null, value ? cast(GArrowDecimal128*)value.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_decimal128_scalar_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowDecimal128*)value.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -42,7 +42,7 @@ class Decimal128Scalar : arrow.scalar.Scalar
   {
     GArrowDecimal128* _cretval;
     _cretval = garrow_decimal128_scalar_get_value(cast(GArrowDecimal128Scalar*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.decimal128.Decimal128)(cast(GArrowDecimal128*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(arrow.decimal128.Decimal128)(cast(GArrowDecimal128*)_cretval, No.Take);
     return _retval;
   }
 }

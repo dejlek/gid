@@ -27,7 +27,7 @@ import gtk.types;
 class PrintJob : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,9 +55,9 @@ class PrintJob : gobject.object.ObjectG
   this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup)
   {
     GtkPrintJob* _cretval;
-    const(char)* _title = title.toCString(No.alloc);
-    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer.cPtr(No.dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    const(char)* _title = title.toCString(No.Alloc);
+    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -158,7 +158,7 @@ class PrintJob : gobject.object.ObjectG
   {
     GtkPrinter* _cretval;
     _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class PrintJob : gobject.object.ObjectG
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class PrintJob : gobject.object.ObjectG
     _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class PrintJob : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class PrintJob : gobject.object.ObjectG
     {
       auto _dlg = cast(gtk.types.PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.take), error ? new glib.error.ErrorG(cast(void*)error, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorG(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -413,7 +413,7 @@ class PrintJob : gobject.object.ObjectG
   bool setSourceFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)cPtr, _filename, &_err);
     if (_err)
@@ -458,10 +458,10 @@ class PrintJob : gobject.object.ObjectG
     Connect to StatusChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStatusChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StatusChangedCallbackDlg) || is(T : StatusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

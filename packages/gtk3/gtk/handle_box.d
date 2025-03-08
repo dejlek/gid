@@ -33,7 +33,7 @@ import gtk.widget;
   instance, if the handlebox is packed at the bottom of a VBox, then
   when the handlebox is detached, the bottom edge of the handlebox's
   allocation will remain fixed as the height of the handlebox shrinks,
-  so the snap edge should be set to [gtk.types.PositionType.bottom].
+  so the snap edge should be set to [gtk.types.PositionType.Bottom].
   
   > #GtkHandleBox has been deprecated. It is very specialized, lacks features
   > to make it useful and most importantly does not fit well into modern
@@ -42,7 +42,7 @@ import gtk.widget;
 class HandleBox : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,7 +68,7 @@ class HandleBox : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_handle_box_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -167,9 +167,9 @@ class HandleBox : gtk.bin.Bin
     
     If the snap edge is not set, then an appropriate value
     will be guessed from the handle position. If the
-    handle position is [gtk.types.PositionType.right] or [gtk.types.PositionType.left],
-    then the snap edge will be [gtk.types.PositionType.top], otherwise
-    it will be [gtk.types.PositionType.left].
+    handle position is [gtk.types.PositionType.Right] or [gtk.types.PositionType.Left],
+    then the snap edge will be [gtk.types.PositionType.Top], otherwise
+    it will be [gtk.types.PositionType.Left].
     Params:
       edge =       the snap edge, or -1 to unset the value; in which
           case GTK+ will try to guess an appropriate value
@@ -205,10 +205,10 @@ class HandleBox : gtk.bin.Bin
     Connect to ChildAttached signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildAttached(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChildAttached(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChildAttachedCallbackDlg) || is(T : ChildAttachedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -247,10 +247,10 @@ class HandleBox : gtk.bin.Bin
     Connect to ChildDetached signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildDetached(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChildDetached(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChildDetachedCallbackDlg) || is(T : ChildDetachedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

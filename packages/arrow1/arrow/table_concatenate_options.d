@@ -10,7 +10,7 @@ import gobject.object;
 class TableConcatenateOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class TableConcatenateOptions : gobject.object.ObjectG
   {
     GArrowTableConcatenateOptions* _cretval;
     _cretval = garrow_table_concatenate_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

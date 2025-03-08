@@ -18,12 +18,12 @@ import gstaudio.types;
 class AudioStreamAlign : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -61,7 +61,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   {
     GstAudioStreamAlign* _cretval;
     _cretval = gst_audio_stream_align_new(rate, alignmentThreshold, discontWait);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -72,7 +72,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   {
     GstAudioStreamAlign* _cretval;
     _cretval = gst_audio_stream_align_copy(cast(const(GstAudioStreamAlign)*)cPtr);
-    auto _retval = _cretval ? new gstaudio.audio_stream_align.AudioStreamAlign(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstaudio.audio_stream_align.AudioStreamAlign(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

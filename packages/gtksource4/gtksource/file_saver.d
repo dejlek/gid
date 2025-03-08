@@ -18,7 +18,7 @@ import gtksource.types;
 class FileSaver : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,8 +48,8 @@ class FileSaver : gobject.object.ObjectG
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
     GtkSourceFileSaver* _cretval;
-    _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,8 +69,8 @@ class FileSaver : gobject.object.ObjectG
   static gtksource.file_saver.FileSaver newWithTarget(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.file.File targetLocation)
   {
     GtkSourceFileSaver* _cretval;
-    _cretval = gtk_source_file_saver_new_with_target(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.dup) : null, targetLocation ? cast(GFile*)(cast(ObjectG)targetLocation).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtksource.file_saver.FileSaver)(cast(GtkSourceFileSaver*)_cretval, Yes.take);
+    _cretval = gtk_source_file_saver_new_with_target(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null, targetLocation ? cast(GFile*)(cast(ObjectG)targetLocation).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtksource.file_saver.FileSaver)(cast(GtkSourceFileSaver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class FileSaver : gobject.object.ObjectG
   {
     GtkSourceBuffer* _cretval;
     _cretval = gtk_source_file_saver_get_buffer(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class FileSaver : gobject.object.ObjectG
   {
     const(GtkSourceEncoding)* _cretval;
     _cretval = gtk_source_file_saver_get_encoding(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class FileSaver : gobject.object.ObjectG
   {
     GtkSourceFile* _cretval;
     _cretval = gtk_source_file_saver_get_file(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class FileSaver : gobject.object.ObjectG
   {
     GFile* _cretval;
     _cretval = gtk_source_file_saver_get_location(cast(GtkSourceFileSaver*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,14 +164,14 @@ class FileSaver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     GDestroyNotify _progressCallbackDestroyCB = progressCallback ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_file_saver_save_async(cast(GtkSourceFileSaver*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
+    gtk_source_file_saver_save_async(cast(GtkSourceFileSaver*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
   }
 
   /**
@@ -191,7 +191,7 @@ class FileSaver : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_file_saver_save_finish(cast(GtkSourceFileSaver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = gtk_source_file_saver_save_finish(cast(GtkSourceFileSaver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -216,7 +216,7 @@ class FileSaver : gobject.object.ObjectG
   */
   void setEncoding(gtksource.encoding.Encoding encoding = null)
   {
-    gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)cPtr, encoding ? cast(const(GtkSourceEncoding)*)encoding.cPtr(No.dup) : null);
+    gtk_source_file_saver_set_encoding(cast(GtkSourceFileSaver*)cPtr, encoding ? cast(const(GtkSourceEncoding)*)encoding.cPtr(No.Dup) : null);
   }
 
   /** */

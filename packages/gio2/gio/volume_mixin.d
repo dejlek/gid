@@ -102,12 +102,12 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_eject(cast(GVolume*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_volume_eject(cast(GVolume*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -123,7 +123,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_volume_eject_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -147,12 +147,12 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_eject_with_operation(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_volume_eject_with_operation(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -166,7 +166,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -191,7 +191,7 @@ template VolumeT()
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -230,7 +230,7 @@ template VolumeT()
   {
     GFile* _cretval;
     _cretval = g_volume_get_activation_root(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ template VolumeT()
   {
     GDrive* _cretval;
     _cretval = g_volume_get_drive(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ template VolumeT()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -275,9 +275,9 @@ template VolumeT()
   override string getIdentifier(string kind)
   {
     char* _cretval;
-    const(char)* _kind = kind.toCString(No.alloc);
+    const(char)* _kind = kind.toCString(No.Alloc);
     _cretval = g_volume_get_identifier(cast(GVolume*)cPtr, _kind);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ template VolumeT()
   {
     GMount* _cretval;
     _cretval = g_volume_get_mount(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_name(cast(GVolume*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ template VolumeT()
   {
     const(char)* _cretval;
     _cretval = g_volume_get_sort_key(cast(GVolume*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ template VolumeT()
   {
     GIcon* _cretval;
     _cretval = g_volume_get_symbolic_icon(cast(GVolume*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -348,7 +348,7 @@ template VolumeT()
   {
     char* _cretval;
     _cretval = g_volume_get_uuid(cast(GVolume*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -369,12 +369,12 @@ template VolumeT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_mount(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_volume_mount(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -393,7 +393,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_mount_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_volume_mount_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -427,10 +427,10 @@ template VolumeT()
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -464,10 +464,10 @@ template VolumeT()
     Connect to Removed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RemovedCallbackDlg) || is(T : RemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

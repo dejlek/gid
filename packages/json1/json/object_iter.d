@@ -23,7 +23,7 @@ class ObjectIter
 {
   JsonObjectIter cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Json.ObjectIter");
@@ -63,7 +63,7 @@ class ObjectIter
   */
   void init_(json.object.ObjectJson object)
   {
-    json_object_iter_init(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.dup) : null);
+    json_object_iter_init(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
   }
 
   /**
@@ -87,7 +87,7 @@ class ObjectIter
   */
   void initOrdered(json.object.ObjectJson object)
   {
-    json_object_iter_init_ordered(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.dup) : null);
+    json_object_iter_init_ordered(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
   }
 
   /**
@@ -120,8 +120,8 @@ class ObjectIter
     char* _memberName;
     JsonNode* _memberNode;
     _retval = json_object_iter_next(cast(JsonObjectIter*)cPtr, &_memberName, &_memberNode);
-    memberName = _memberName.fromCString(No.free);
-    memberNode = new json.node.Node(cast(void*)_memberNode, No.take);
+    memberName = _memberName.fromCString(No.Free);
+    memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class ObjectIter
     char* _memberName;
     JsonNode* _memberNode;
     _retval = json_object_iter_next_ordered(cast(JsonObjectIter*)cPtr, &_memberName, &_memberNode);
-    memberName = _memberName.fromCString(No.free);
-    memberNode = new json.node.Node(cast(void*)_memberNode, No.take);
+    memberName = _memberName.fromCString(No.Free);
+    memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
   }
 }

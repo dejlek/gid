@@ -12,7 +12,7 @@ import gobject.object;
 class ExtensionDataTypeRegistry : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,7 +33,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   {
     GArrowExtensionDataTypeRegistry* _cretval;
     _cretval = garrow_extension_data_type_registry_default();
-    auto _retval = ObjectG.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -41,9 +41,9 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   arrow.extension_data_type.ExtensionDataType lookup(string name)
   {
     GArrowExtensionDataType* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)cPtr, dataType ? cast(GArrowExtensionDataType*)dataType.cPtr(No.dup) : null, &_err);
+    _retval = garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)cPtr, dataType ? cast(GArrowExtensionDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -73,7 +73,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
   bool unregister(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     GError *_err;
     _retval = garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name, &_err);
     if (_err)

@@ -16,7 +16,7 @@ import gsk.types;
 class GLShaderNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.GLShaderNode");
@@ -61,8 +61,8 @@ class GLShaderNode : gsk.render_node.RenderNode
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(GskRenderNode*)obj.cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
-    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader.cPtr(No.dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.dup) : null, args ? cast(GBytes*)args.cPtr(No.dup) : null, _children, _nChildren);
-    this(_cretval, Yes.take);
+    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, args ? cast(GBytes*)args.cPtr(No.Dup) : null, _children, _nChildren);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   {
     GBytes* _cretval;
     _cretval = gsk_gl_shader_node_get_args(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     _cretval = gsk_gl_shader_node_get_child(cast(const(GskRenderNode)*)cPtr, idx);
-    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   {
     GskGLShader* _cretval;
     _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
     return _retval;
   }
 }

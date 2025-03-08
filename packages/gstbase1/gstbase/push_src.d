@@ -30,7 +30,7 @@ import gstbase.types;
 class PushSrc : gstbase.base_src.BaseSrc
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

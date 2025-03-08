@@ -21,7 +21,7 @@ import gobject.object;
 class Client : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,10 +42,10 @@ class Client : gobject.object.ObjectG
   {
     GAFlightClient* _cretval;
     GError *_err;
-    _cretval = gaflight_client_new(location ? cast(GAFlightLocation*)location.cPtr(No.dup) : null, options ? cast(GAFlightClientOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gaflight_client_new(location ? cast(GAFlightLocation*)location.cPtr(No.Dup) : null, options ? cast(GAFlightClientOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,16 +61,16 @@ class Client : gobject.object.ObjectG
   bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
     bool _retval;
-    const(char)* _user = user.toCString(No.alloc);
-    const(char)* _password = password.toCString(No.alloc);
+    const(char)* _user = user.toCString(No.Alloc);
+    const(char)* _password = password.toCString(No.Alloc);
     char* _bearerName;
     char* _bearerValue;
     GError *_err;
-    _retval = gaflight_client_authenticate_basic_token(cast(GAFlightClient*)cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options.cPtr(No.dup) : null, &_bearerName, &_bearerValue, &_err);
+    _retval = gaflight_client_authenticate_basic_token(cast(GAFlightClient*)cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
     if (_err)
       throw new ErrorG(_err);
-    bearerName = _bearerName.fromCString(Yes.free);
-    bearerValue = _bearerValue.fromCString(Yes.free);
+    bearerName = _bearerName.fromCString(Yes.Free);
+    bearerValue = _bearerValue.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -90,10 +90,10 @@ class Client : gobject.object.ObjectG
   {
     GAFlightStreamReader* _cretval;
     GError *_err;
-    _cretval = gaflight_client_do_get(cast(GAFlightClient*)cPtr, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gaflight_client_do_get(cast(GAFlightClient*)cPtr, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowflight.stream_reader.StreamReader)(cast(GAFlightStreamReader*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowflight.stream_reader.StreamReader)(cast(GAFlightStreamReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,10 +116,10 @@ class Client : gobject.object.ObjectG
   {
     GAFlightDoPutResult* _cretval;
     GError *_err;
-    _cretval = gaflight_client_do_put(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gaflight_client_do_put(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowflight.do_put_result.DoPutResult)(cast(GAFlightDoPutResult*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowflight.do_put_result.DoPutResult)(cast(GAFlightDoPutResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,10 +128,10 @@ class Client : gobject.object.ObjectG
   {
     GAFlightInfo* _cretval;
     GError *_err;
-    _cretval = gaflight_client_get_flight_info(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gaflight_client_get_flight_info(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Client : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = gaflight_client_list_flights(cast(GAFlightClient*)cPtr, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gaflight_client_list_flights(cast(GAFlightClient*)cPtr, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);

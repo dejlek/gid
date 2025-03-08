@@ -11,7 +11,7 @@ import soup.types;
   network or the disk cache.
   
   Metrics are not collected by default for a `class@Message`, you need to add the
-  flag [soup.types.MessageFlags.collectMetrics] to enable the feature.
+  flag [soup.types.MessageFlags.CollectMetrics] to enable the feature.
   
   Temporal metrics are expressed as a monotonic time and always start with a
   fetch start event and finish with response end. All other events are optional.
@@ -25,12 +25,12 @@ import soup.types;
 class MessageMetrics : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -54,7 +54,7 @@ class MessageMetrics : gobject.boxed.Boxed
   {
     SoupMessageMetrics* _cretval;
     _cretval = soup_message_metrics_copy(cast(SoupMessageMetrics*)cPtr);
-    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

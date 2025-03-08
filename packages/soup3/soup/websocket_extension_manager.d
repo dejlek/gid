@@ -21,7 +21,7 @@ import soup.types;
 class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

@@ -13,12 +13,12 @@ import gstpbutils.types;
 class InstallPluginsContext : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -43,7 +43,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   {
     GstInstallPluginsContext* _cretval;
     _cretval = gst_install_plugins_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -54,7 +54,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   {
     GstInstallPluginsContext* _cretval;
     _cretval = gst_install_plugins_context_copy(cast(GstInstallPluginsContext*)cPtr);
-    auto _retval = _cretval ? new gstpbutils.install_plugins_context.InstallPluginsContext(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstpbutils.install_plugins_context.InstallPluginsContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setDesktopId(string desktopId)
   {
-    const(char)* _desktopId = desktopId.toCString(No.alloc);
+    const(char)* _desktopId = desktopId.toCString(No.Alloc);
     gst_install_plugins_context_set_desktop_id(cast(GstInstallPluginsContext*)cPtr, _desktopId);
   }
 
@@ -114,7 +114,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setStartupNotificationId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.alloc);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gst_install_plugins_context_set_startup_notification_id(cast(GstInstallPluginsContext*)cPtr, _startupId);
   }
 

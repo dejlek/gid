@@ -11,7 +11,7 @@ import gobject.object;
 class SlowFileSystem : arrow.file_system.FileSystem
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,8 +40,8 @@ class SlowFileSystem : arrow.file_system.FileSystem
   static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency)
   {
     GArrowSlowFileSystem* _cretval;
-    _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.dup) : null, averageLatency);
-    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.take);
+    _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency);
+    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -57,8 +57,8 @@ class SlowFileSystem : arrow.file_system.FileSystem
   static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed)
   {
     GArrowSlowFileSystem* _cretval;
-    _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.dup) : null, averageLatency, seed);
-    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.take);
+    _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency, seed);
+    auto _retval = ObjectG.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 }

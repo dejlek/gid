@@ -22,7 +22,7 @@ class Attribute
 {
   AtkAttribute cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Atk.Attribute");
@@ -40,23 +40,23 @@ class Attribute
 
   @property string name()
   {
-    return (cast(AtkAttribute*)cPtr).name.fromCString(No.free);
+    return (cast(AtkAttribute*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(AtkAttribute*)cPtr).name);
-    (cast(AtkAttribute*)cPtr).name = propval.toCString(Yes.alloc);
+    (cast(AtkAttribute*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property string value()
   {
-    return (cast(AtkAttribute*)cPtr).value.fromCString(No.free);
+    return (cast(AtkAttribute*)cPtr).value.fromCString(No.Free);
   }
 
   @property void value(string propval)
   {
     safeFree(cast(void*)(cast(AtkAttribute*)cPtr).value);
-    (cast(AtkAttribute*)cPtr).value = propval.toCString(Yes.alloc);
+    (cast(AtkAttribute*)cPtr).value = propval.toCString(Yes.Alloc);
   }
 }

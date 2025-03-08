@@ -83,7 +83,7 @@ import gtk.widget;
 class ImageMenuItem : gtk.menu_item.MenuItem
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -109,7 +109,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_menu_item_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -133,9 +133,9 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newFromStock(string stockId, gtk.accel_group.AccelGroup accelGroup = null)
   {
     GtkWidget* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
-    _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.take);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,9 +150,9 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newWithLabel(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_label(_label);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,9 +170,9 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   static gtk.image_menu_item.ImageMenuItem newWithMnemonic(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_mnemonic(_label);
-    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   {
     GtkWidget* _cretval;
     _cretval = gtk_image_menu_item_get_image(cast(GtkImageMenuItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_image_menu_item_set_accel_group(cast(GtkImageMenuItem*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
+    gtk_image_menu_item_set_accel_group(cast(GtkImageMenuItem*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -253,7 +253,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setImage(gtk.widget.Widget image = null)
   {
-    gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.dup) : null);
+    gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
   }
 
   /**

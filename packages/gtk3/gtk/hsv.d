@@ -24,7 +24,7 @@ import gtk.widget;
 class HSV : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,7 +48,7 @@ class HSV : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_hsv_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -143,10 +143,10 @@ class HSV : gtk.widget.Widget
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -171,10 +171,10 @@ class HSV : gtk.widget.Widget
     Connect to Move signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMove(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMove(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCallbackDlg) || is(T : MoveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -8,13 +8,13 @@ import gid.gid;
 import gobject.object;
 
 /**
-    Generated during [gdk.types.InputSource.tabletPad] mode switches in a group.
+    Generated during [gdk.types.InputSource.TabletPad] mode switches in a group.
 */
 class EventPadGroupMode
 {
   GdkEventPadGroupMode cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventPadGroupMode");
@@ -42,7 +42,7 @@ class EventPadGroupMode
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadGroupMode*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadGroupMode*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()

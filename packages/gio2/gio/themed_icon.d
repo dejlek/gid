@@ -22,7 +22,7 @@ import gobject.object;
 class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,9 +49,9 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
   this(string iconname)
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(No.alloc);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new(_iconname);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,10 +69,10 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
     char*[] _tmpiconnames;
     foreach (s; iconnames)
-      _tmpiconnames ~= s.toCString(No.alloc);
+      _tmpiconnames ~= s.toCString(No.Alloc);
     char** _iconnames = _tmpiconnames.ptr;
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
-    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -99,9 +99,9 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
   static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname)
   {
     GIcon* _cretval;
-    const(char)* _iconname = iconname.toCString(No.alloc);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new_with_default_fallbacks(_iconname);
-    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
   */
   void appendName(string iconname)
   {
-    const(char)* _iconname = iconname.toCString(No.alloc);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_append_name(cast(GThemedIcon*)cPtr, _iconname);
   }
 
@@ -136,7 +136,7 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -151,7 +151,7 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
   */
   void prependName(string iconname)
   {
-    const(char)* _iconname = iconname.toCString(No.alloc);
+    const(char)* _iconname = iconname.toCString(No.Alloc);
     g_themed_icon_prepend_name(cast(GThemedIcon*)cPtr, _iconname);
   }
 }

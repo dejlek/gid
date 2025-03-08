@@ -28,7 +28,7 @@ import pango.types;
 class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,9 +56,9 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   this(string label)
   {
     GtkWidget* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_tool_item_group_new(_label);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_drop_item(cast(GtkToolItemGroup*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   int getItemPosition(gtk.tool_item.ToolItem item)
   {
     int _retval;
-    _retval = gtk_tool_item_group_get_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.dup) : null);
+    _retval = gtk_tool_item_group_get_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     const(char)* _cretval;
     _cretval = gtk_tool_item_group_get_label(cast(GtkToolItemGroup*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_group_get_label_widget(cast(GtkToolItemGroup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_group_get_nth_item(cast(GtkToolItemGroup*)cPtr, index);
-    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void insert(gtk.tool_item.ToolItem item, int position)
   {
-    gtk_tool_item_group_insert(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.dup) : null, position);
+    gtk_tool_item_group_insert(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -229,7 +229,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setItemPosition(gtk.tool_item.ToolItem item, int position)
   {
-    gtk_tool_item_group_set_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.dup) : null, position);
+    gtk_tool_item_group_set_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -240,7 +240,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setLabel(string label)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_tool_item_group_set_label(cast(GtkToolItemGroup*)cPtr, _label);
   }
 
@@ -253,6 +253,6 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setLabelWidget(gtk.widget.Widget labelWidget)
   {
-    gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.dup) : null);
+    gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 }

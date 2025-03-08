@@ -15,7 +15,7 @@ import glib.error;
 class FileOutputStream : arrow.output_stream.OutputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,11 +35,11 @@ class FileOutputStream : arrow.output_stream.OutputStream
   this(string path, bool append)
   {
     GArrowFileOutputStream* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _cretval = garrow_file_output_stream_new(_path, append, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

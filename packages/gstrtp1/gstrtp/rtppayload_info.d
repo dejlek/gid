@@ -12,7 +12,7 @@ class RTPPayloadInfo
 {
   GstRTPPayloadInfo cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstRtp.RTPPayloadInfo");
@@ -40,24 +40,24 @@ class RTPPayloadInfo
 
   @property string media()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).media.fromCString(No.free);
+    return (cast(GstRTPPayloadInfo*)cPtr).media.fromCString(No.Free);
   }
 
   @property void media(string propval)
   {
     safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
-    (cast(GstRTPPayloadInfo*)cPtr).media = propval.toCString(Yes.alloc);
+    (cast(GstRTPPayloadInfo*)cPtr).media = propval.toCString(Yes.Alloc);
   }
 
   @property string encodingName()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).encodingName.fromCString(No.free);
+    return (cast(GstRTPPayloadInfo*)cPtr).encodingName.fromCString(No.Free);
   }
 
   @property void encodingName(string propval)
   {
     safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
-    (cast(GstRTPPayloadInfo*)cPtr).encodingName = propval.toCString(Yes.alloc);
+    (cast(GstRTPPayloadInfo*)cPtr).encodingName = propval.toCString(Yes.Alloc);
   }
 
   @property uint clockRate()
@@ -72,13 +72,13 @@ class RTPPayloadInfo
 
   @property string encodingParameters()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).encodingParameters.fromCString(No.free);
+    return (cast(GstRTPPayloadInfo*)cPtr).encodingParameters.fromCString(No.Free);
   }
 
   @property void encodingParameters(string propval)
   {
     safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
-    (cast(GstRTPPayloadInfo*)cPtr).encodingParameters = propval.toCString(Yes.alloc);
+    (cast(GstRTPPayloadInfo*)cPtr).encodingParameters = propval.toCString(Yes.Alloc);
   }
 
   @property uint bitrate()
@@ -105,8 +105,8 @@ class RTPPayloadInfo
   static gstrtp.rtppayload_info.RTPPayloadInfo forName(string media, string encodingName)
   {
     const(GstRTPPayloadInfo)* _cretval;
-    const(char)* _media = media.toCString(No.alloc);
-    const(char)* _encodingName = encodingName.toCString(No.alloc);
+    const(char)* _media = media.toCString(No.Alloc);
+    const(char)* _encodingName = encodingName.toCString(No.Alloc);
     _cretval = gst_rtp_payload_info_for_name(_media, _encodingName);
     auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval) : null;
     return _retval;

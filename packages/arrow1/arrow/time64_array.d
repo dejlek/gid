@@ -12,7 +12,7 @@ import gid.gid;
 class Time64Array : arrow.numeric_array.NumericArray
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,8 +32,8 @@ class Time64Array : arrow.numeric_array.NumericArray
   this(arrow.time64_data_type.Time64DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTime64Array* _cretval;
-    _cretval = garrow_time64_array_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.dup) : null, length, data ? cast(GArrowBuffer*)data.cPtr(No.dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
-    this(_cretval, Yes.take);
+    _cretval = garrow_time64_array_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    this(_cretval, Yes.Take);
   }
 
   /** */

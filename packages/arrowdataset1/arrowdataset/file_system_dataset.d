@@ -13,7 +13,7 @@ import glib.error;
 class FileSystemDataset : arrowdataset.dataset.Dataset
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,7 +34,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner.cPtr(No.dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options.cPtr(No.dup) : null, &_err);
+    _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner.cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

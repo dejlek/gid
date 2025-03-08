@@ -36,10 +36,10 @@ interface DtlsClientConnection
   {
     GDatagramBased* _cretval;
     GError *_err;
-    _cretval = g_dtls_client_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(No.dup) : null, &_err);
+    _cretval = g_dtls_client_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.Dup) : null, serverIdentity ? cast(GSocketConnectable*)(cast(ObjectG)serverIdentity).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dtls_client_connection.DtlsClientConnection)(cast(GDatagramBased*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dtls_client_connection.DtlsClientConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ interface DtlsClientConnection
       Sets conn's expected server identity, which is used both to tell
     servers on virtual hosts which certificate to present, and also
     to let conn know what name to look for in the certificate when
-    performing [gio.types.TlsCertificateFlags.badIdentity] validation, if enabled.
+    performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
     Params:
       identity =       a #GSocketConnectable describing the expected server identity
   */
@@ -76,7 +76,7 @@ interface DtlsClientConnection
   /**
       Sets conn's validation flags, to override the default set of
     checks performed when validating a server certificate. By default,
-    [gio.types.TlsCertificateFlags.validateAll] is used.
+    [gio.types.TlsCertificateFlags.ValidateAll] is used.
     
     This function does not work as originally designed and is impossible
     to use correctly. See #GDtlsClientConnection:validation-flags for more

@@ -39,21 +39,21 @@ enum GBindingFlags : uint
       The default binding; if the source property
       changes, the target property is updated with its value.
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       Bidirectional binding; if either the
       property of the source or the property of the target changes,
       the other is updated.
   */
-  bidirectional = 1,
+  Bidirectional = 1,
 
   /**
       Synchronize the values of the source and
       target properties when creating the binding; the direction of
       the synchronization is always from the source to the target.
   */
-  syncCreate = 2,
+  SyncCreate = 2,
 
   /**
       If the two properties being bound are
@@ -62,7 +62,7 @@ enum GBindingFlags : uint
       boolean properties, and cannot be used when passing custom
       transformation functions to [gobject.object.ObjectG.bindPropertyFull].
   */
-  invertBoolean = 4,
+  InvertBoolean = 4,
 }
 
 /**
@@ -74,20 +74,20 @@ enum GConnectFlags : uint
   /**
       Default behaviour (no special flags). Since: 2.74
   */
-  default_ = 0,
+  Default = 0,
 
   /**
       If set, the handler should be called after the
      default handler of the signal. Normally, the handler is called before
      the default handler.
   */
-  after = 1,
+  After = 1,
 
   /**
       If set, the instance and data should be swapped when
      calling the handler; see g_signal_connect_swapped() for an example.
   */
-  swapped = 2,
+  Swapped = 2,
 }
 
 /**
@@ -101,33 +101,33 @@ enum GParamFlags : uint
   /**
       the parameter is readable
   */
-  readable = 1,
+  Readable = 1,
 
   /**
       the parameter is writable
   */
-  writable = 2,
+  Writable = 2,
 
   /**
       alias for `G_PARAM_READABLE` | `G_PARAM_WRITABLE`
   */
-  readwrite = 3,
+  Readwrite = 3,
 
   /**
       the parameter will be set upon object construction
   */
-  construct = 4,
+  Construct = 4,
 
   /**
       the parameter can only be set upon object construction
   */
-  constructOnly = 8,
+  ConstructOnly = 8,
 
   /**
       upon parameter conversion (see [gobject.global.paramValueConvert])
      strict validation is not required
   */
-  laxValidation = 16,
+  LaxValidation = 16,
 
   /**
       the string used as name when constructing the
@@ -135,12 +135,12 @@ enum GParamFlags : uint
      unmodified for the lifetime of the parameter.
      Since 2.8
   */
-  staticName = 32,
+  StaticName = 32,
 
   /**
       internal
   */
-  private_ = 32,
+  Private = 32,
 
   /**
       the string used as nick when constructing the
@@ -148,7 +148,7 @@ enum GParamFlags : uint
      unmmodified for the lifetime of the parameter.
      Since 2.8
   */
-  staticNick = 64,
+  StaticNick = 64,
 
   /**
       the string used as blurb when constructing the
@@ -156,7 +156,7 @@ enum GParamFlags : uint
      unmodified for the lifetime of the parameter.
      Since 2.8
   */
-  staticBlurb = 128,
+  StaticBlurb = 128,
 
   /**
       calls to [gobject.object.ObjectG.setProperty] for this
@@ -164,7 +164,7 @@ enum GParamFlags : uint
       emitted: the implementation must call [gobject.object.ObjectG.notify] themselves
       in case the property actually changes.  Since: 2.42.
   */
-  explicitNotify = 1073741824,
+  ExplicitNotify = 1073741824,
 
   /**
       the parameter is deprecated and will be removed
@@ -172,7 +172,7 @@ enum GParamFlags : uint
      while running with G_ENABLE_DIAGNOSTIC=1.
      Since 2.26
   */
-  deprecated_ = 2147483648,
+  Deprecated = 2147483648,
 }
 
 /**
@@ -183,30 +183,30 @@ enum GSignalFlags : uint
   /**
       Invoke the object method handler in the first emission stage.
   */
-  runFirst = 1,
+  RunFirst = 1,
 
   /**
       Invoke the object method handler in the third emission stage.
   */
-  runLast = 2,
+  RunLast = 2,
 
   /**
       Invoke the object method handler in the last emission stage.
   */
-  runCleanup = 4,
+  RunCleanup = 4,
 
   /**
       Signals being emitted for an object while currently being in
      emission for this very object will not be emitted recursively,
      but instead cause the first emission to be restarted.
   */
-  noRecurse = 8,
+  NoRecurse = 8,
 
   /**
       This signal supports "::detail" appendices to the signal name
      upon handler connections and emissions.
   */
-  detailed = 16,
+  Detailed = 16,
 
   /**
       Action signals are signals that may freely be emitted on alive
@@ -216,32 +216,32 @@ enum GSignalFlags : uint
      of as object methods which can be called generically by
      third-party code.
   */
-  action = 32,
+  Action = 32,
 
   /**
       No emissions hooks are supported for this signal.
   */
-  noHooks = 64,
+  NoHooks = 64,
 
   /**
       Varargs signal emission will always collect the
       arguments, even if there are no signal handlers connected.  Since 2.30.
   */
-  mustCollect = 128,
+  MustCollect = 128,
 
   /**
       The signal is deprecated and will be removed
       in a future version. A warning will be generated if it is connected while
       running with G_ENABLE_DIAGNOSTIC=1.  Since 2.32.
   */
-  deprecated_ = 256,
+  Deprecated = 256,
 
   /**
       Only used in #GSignalAccumulator accumulator
       functions for the #GSignalInvocationHint::run_type field to mark the first
       call to the accumulator function for a signal emission.  Since 2.68.
   */
-  accumulatorFirstRun = 131072,
+  AccumulatorFirstRun = 131072,
 }
 
 /**
@@ -254,32 +254,32 @@ enum GSignalMatchType : uint
   /**
       The signal id must be equal.
   */
-  id = 1,
+  Id = 1,
 
   /**
       The signal detail must be equal.
   */
-  detail = 2,
+  Detail = 2,
 
   /**
       The closure must be the same.
   */
-  closure = 4,
+  Closure = 4,
 
   /**
       The C closure callback must be the same.
   */
-  func = 8,
+  Func = 8,
 
   /**
       The closure data must be the same.
   */
-  data = 16,
+  Data = 16,
 
   /**
       Only unblocked signals may be matched.
   */
-  unblocked = 32,
+  Unblocked = 32,
 }
 
 /**
@@ -296,27 +296,27 @@ enum GTypeDebugFlags : uint
   /**
       Print no messages
   */
-  none = 0,
+  None = 0,
 
   /**
       Print messages about object bookkeeping
   */
-  objects = 1,
+  Objects = 1,
 
   /**
       Print messages about signal emissions
   */
-  signals = 2,
+  Signals = 2,
 
   /**
       Keep a count of instances of each type
   */
-  instanceCount = 4,
+  InstanceCount = 4,
 
   /**
       Mask covering all debug flags
   */
-  mask = 7,
+  Mask = 7,
 }
 
 /**
@@ -327,33 +327,33 @@ enum GTypeFlags : uint
   /**
       No special flags. Since: 2.74
   */
-  none = 0,
+  None = 0,
 
   /**
       Indicates an abstract type. No instances can be
      created for an abstract type
   */
-  abstract_ = 16,
+  Abstract = 16,
 
   /**
       Indicates an abstract value type, i.e. a type
      that introduces a value table, but can't be used for
      [gobject.value.Value.init_]
   */
-  valueAbstract = 32,
+  ValueAbstract = 32,
 
   /**
       Indicates a final type. A final type is a non-derivable
      leaf node in a deep derivable type hierarchy tree. Since: 2.70
   */
-  final_ = 64,
+  Final = 64,
 
   /**
       The type is deprecated and may be removed in a
      future version. A warning will be emitted if it is instantiated while
      running with `G_ENABLE_DIAGNOSTIC=1`. Since 2.76
   */
-  deprecated_ = 128,
+  Deprecated = 128,
 }
 
 /**
@@ -365,22 +365,22 @@ enum GTypeFundamentalFlags : uint
   /**
       Indicates a classed type
   */
-  classed = 1,
+  Classed = 1,
 
   /**
       Indicates an instantiatable type (implies classed)
   */
-  instantiatable = 2,
+  Instantiatable = 2,
 
   /**
       Indicates a flat derivable type
   */
-  derivable = 4,
+  Derivable = 4,
 
   /**
       Indicates a deep derivable type (implies derivable)
   */
-  deepDerivable = 8,
+  DeepDerivable = 8,
 }
 
 /**

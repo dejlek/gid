@@ -34,7 +34,7 @@ import gobject.object;
 class SettingsBackend : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,7 +64,7 @@ class SettingsBackend : gobject.object.ObjectG
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
-    auto _retval = ObjectG.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class SettingsBackend : gobject.object.ObjectG
   */
   void changed(string key, void* originTag = null)
   {
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_changed(cast(GSettingsBackend*)cPtr, _key, originTag);
   }
 
@@ -130,10 +130,10 @@ class SettingsBackend : gobject.object.ObjectG
   */
   void keysChanged(string path, string[] items, void* originTag = null)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     char*[] _tmpitems;
     foreach (s; items)
-      _tmpitems ~= s.toCString(No.alloc);
+      _tmpitems ~= s.toCString(No.Alloc);
     _tmpitems ~= null;
     const(char*)* _items = _tmpitems.ptr;
     g_settings_backend_keys_changed(cast(GSettingsBackend*)cPtr, _path, _items, originTag);
@@ -167,7 +167,7 @@ class SettingsBackend : gobject.object.ObjectG
   */
   void pathChanged(string path, void* originTag = null)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_changed(cast(GSettingsBackend*)cPtr, _path, originTag);
   }
 
@@ -182,7 +182,7 @@ class SettingsBackend : gobject.object.ObjectG
   */
   void pathWritableChanged(string path)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     g_settings_backend_path_writable_changed(cast(GSettingsBackend*)cPtr, _path);
   }
 
@@ -196,7 +196,7 @@ class SettingsBackend : gobject.object.ObjectG
   */
   void writableChanged(string key)
   {
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)cPtr, _key);
   }
 }

@@ -33,7 +33,7 @@ import gtk.widget;
 class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,8 +63,8 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -75,7 +75,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GdkWindow* _cretval;
     _cretval = gtk_layout_get_bin_window(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_hadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_layout_get_vadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void move(gtk.widget.Widget childWidget, int x, int y)
   {
-    gtk_layout_move(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.dup) : null, x, y);
+    gtk_layout_move(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -154,7 +154,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void put(gtk.widget.Widget childWidget, int x, int y)
   {
-    gtk_layout_put(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.dup) : null, x, y);
+    gtk_layout_put(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -168,7 +168,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_layout_set_hadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_layout_set_hadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -193,6 +193,6 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_layout_set_vadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_layout_set_vadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 }

@@ -11,7 +11,7 @@ class StockItem
 {
   GtkStockItem cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.StockItem");
@@ -29,24 +29,24 @@ class StockItem
 
   @property string stockId()
   {
-    return (cast(GtkStockItem*)cPtr).stockId.fromCString(No.free);
+    return (cast(GtkStockItem*)cPtr).stockId.fromCString(No.Free);
   }
 
   @property void stockId(string propval)
   {
     safeFree(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
-    (cast(GtkStockItem*)cPtr).stockId = propval.toCString(Yes.alloc);
+    (cast(GtkStockItem*)cPtr).stockId = propval.toCString(Yes.Alloc);
   }
 
   @property string label()
   {
-    return (cast(GtkStockItem*)cPtr).label.fromCString(No.free);
+    return (cast(GtkStockItem*)cPtr).label.fromCString(No.Free);
   }
 
   @property void label(string propval)
   {
     safeFree(cast(void*)(cast(GtkStockItem*)cPtr).label);
-    (cast(GtkStockItem*)cPtr).label = propval.toCString(Yes.alloc);
+    (cast(GtkStockItem*)cPtr).label = propval.toCString(Yes.Alloc);
   }
 
   @property gdk.types.ModifierType modifier()
@@ -71,12 +71,12 @@ class StockItem
 
   @property string translationDomain()
   {
-    return (cast(GtkStockItem*)cPtr).translationDomain.fromCString(No.free);
+    return (cast(GtkStockItem*)cPtr).translationDomain.fromCString(No.Free);
   }
 
   @property void translationDomain(string propval)
   {
     safeFree(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
-    (cast(GtkStockItem*)cPtr).translationDomain = propval.toCString(Yes.alloc);
+    (cast(GtkStockItem*)cPtr).translationDomain = propval.toCString(Yes.Alloc);
   }
 }

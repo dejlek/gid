@@ -7,7 +7,7 @@ import gtk.recent_chooser_mixin;
 /// Proxy object for Gtk.RecentChooser interface when a GObject has no applicable D binding
 class RecentChooserIfaceProxy : IfaceProxy, gtk.recent_chooser.RecentChooser
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

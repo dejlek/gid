@@ -37,7 +37,7 @@ template ToplevelT()
   */
   override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -55,7 +55,7 @@ template ToplevelT()
   */
   override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -113,7 +113,7 @@ template ToplevelT()
   */
   override void inhibitSystemShortcuts(gdk.event.Event event = null)
   {
-    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null);
+    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
   }
 
   /**
@@ -159,7 +159,7 @@ template ToplevelT()
   */
   override void present(gdk.toplevel_layout.ToplevelLayout layout)
   {
-    gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(No.dup) : null);
+    gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ template ToplevelT()
   */
   override void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.alloc);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_toplevel_set_startup_id(cast(GdkToplevel*)cPtr, _startupId);
   }
 
@@ -263,7 +263,7 @@ template ToplevelT()
   */
   override void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gdk_toplevel_set_title(cast(GdkToplevel*)cPtr, _title);
   }
 
@@ -282,7 +282,7 @@ template ToplevelT()
   */
   override void setTransientFor(gdk.surface.Surface parent)
   {
-    gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(No.dup) : null);
+    gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -299,7 +299,7 @@ template ToplevelT()
   override bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null);
+    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -353,10 +353,10 @@ template ToplevelT()
     Connect to ComputeSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectComputeSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ComputeSizeCallbackDlg) || is(T : ComputeSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

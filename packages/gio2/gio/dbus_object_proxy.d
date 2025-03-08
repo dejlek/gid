@@ -18,7 +18,7 @@ import gobject.object;
 class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -47,9 +47,9 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
   this(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
     GDBusObjectProxy* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
-    _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection.cPtr(No.dup) : null, _objectPath);
-    this(_cretval, Yes.take);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
+    _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _objectPath);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
   {
     GDBusConnection* _cretval;
     _cretval = g_dbus_object_proxy_get_connection(cast(GDBusObjectProxy*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 }

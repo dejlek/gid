@@ -67,7 +67,7 @@ template RetrievableT()
   {
     char* _cretval;
     _cretval = secret_retrievable_get_label(cast(SecretRetrievable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -103,12 +103,12 @@ template RetrievableT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_retrievable_retrieve_secret(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    secret_retrievable_retrieve_secret(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -122,10 +122,10 @@ template RetrievableT()
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -146,10 +146,10 @@ template RetrievableT()
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

@@ -10,7 +10,7 @@ import gobject.object;
 class Datum : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,7 +30,7 @@ class Datum : gobject.object.ObjectG
   bool equal(arrow.datum.Datum otherDatum)
   {
     bool _retval;
-    _retval = garrow_datum_equal(cast(GArrowDatum*)cPtr, otherDatum ? cast(GArrowDatum*)otherDatum.cPtr(No.dup) : null);
+    _retval = garrow_datum_equal(cast(GArrowDatum*)cPtr, otherDatum ? cast(GArrowDatum*)otherDatum.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class Datum : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = garrow_datum_to_string(cast(GArrowDatum*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

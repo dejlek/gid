@@ -65,15 +65,15 @@ import gtk.widget;
   
   ## Accessibility
   
-  Until GTK 4.10, [gtk.tree_expander.TreeExpander] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.tree_expander.TreeExpander] used the [gtk.types.AccessibleRole.Group] role.
   
-  Since GTK 4.12, [gtk.tree_expander.TreeExpander] uses the [gtk.types.AccessibleRole.button] role.
-  Toggling it will change the [gtk.types.AccessibleState.expanded] state.
+  Since GTK 4.12, [gtk.tree_expander.TreeExpander] uses the [gtk.types.AccessibleRole.Button] role.
+  Toggling it will change the [gtk.types.AccessibleState.Expanded] state.
 */
 class TreeExpander : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -97,7 +97,7 @@ class TreeExpander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -108,7 +108,7 @@ class TreeExpander : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class TreeExpander : gtk.widget.Widget
   {
     ObjectC* _cretval;
     _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class TreeExpander : gtk.widget.Widget
   {
     GtkTreeListRow* _cretval;
     _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class TreeExpander : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -222,6 +222,6 @@ class TreeExpander : gtk.widget.Widget
   */
   void setListRow(gtk.tree_list_row.TreeListRow listRow = null)
   {
-    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.dup) : null);
+    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.Dup) : null);
   }
 }

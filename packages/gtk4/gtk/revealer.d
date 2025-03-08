@@ -31,7 +31,7 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.group] role.
+  [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.Group] role.
   
   The child of [gtk.revealer.Revealer], if set, is always available in the accessibility
   tree, regardless of the state of the revealer widget.
@@ -39,7 +39,7 @@ import gtk.widget;
 class Revealer : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,7 +63,7 @@ class Revealer : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -74,7 +74,7 @@ class Revealer : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_get_child(cast(GtkRevealer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Revealer : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**

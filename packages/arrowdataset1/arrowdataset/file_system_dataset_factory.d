@@ -17,7 +17,7 @@ import gobject.object;
 class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -37,15 +37,15 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   this(arrowdataset.file_format.FileFormat fileFormat)
   {
     GADatasetFileSystemDatasetFactory* _cretval;
-    _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool addPath(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _retval = gadataset_file_system_dataset_factory_add_path(cast(GADatasetFileSystemDatasetFactory*)cPtr, _path, &_err);
     if (_err)
@@ -58,10 +58,10 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   {
     GADatasetFileSystemDataset* _cretval;
     GError *_err;
-    _cretval = gadataset_file_system_dataset_factory_finish(cast(GADatasetFileSystemDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gadataset_file_system_dataset_factory_finish(cast(GADatasetFileSystemDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.file_system_dataset.FileSystemDataset)(cast(GADatasetFileSystemDataset*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.file_system_dataset.FileSystemDataset)(cast(GADatasetFileSystemDataset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_system_dataset_factory_set_file_system(cast(GADatasetFileSystemDatasetFactory*)cPtr, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.dup) : null, &_err);
+    _retval = gadataset_file_system_dataset_factory_set_file_system(cast(GADatasetFileSystemDatasetFactory*)cPtr, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -80,7 +80,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   bool setFileSystemUri(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gadataset_file_system_dataset_factory_set_file_system_uri(cast(GADatasetFileSystemDatasetFactory*)cPtr, _uri, &_err);
     if (_err)

@@ -117,13 +117,13 @@ import gtk.types;
   
   # Accessibility
   
-  [gtk.list_view.ListView] uses the [gtk.types.AccessibleRole.list] role, and the list
-  items use the [gtk.types.AccessibleRole.listItem] role.
+  [gtk.list_view.ListView] uses the [gtk.types.AccessibleRole.List] role, and the list
+  items use the [gtk.types.AccessibleRole.ListItem] role.
 */
 class ListView : gtk.list_base.ListBase
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -157,8 +157,8 @@ class ListView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -180,7 +180,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkListItemFactory* _cretval;
     _cretval = gtk_list_view_get_header_factory(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class ListView : gtk.list_base.ListBase
   {
     GtkSelectionModel* _cretval;
     _cretval = gtk_list_view_get_model(cast(GtkListView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class ListView : gtk.list_base.ListBase
   */
   void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_list_view_scroll_to(cast(GtkListView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.dup) : null);
+    gtk_list_view_scroll_to(cast(GtkListView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -278,7 +278,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_list_view_set_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
+    gtk_list_view_set_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -291,7 +291,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_list_view_set_header_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.dup) : null);
+    gtk_list_view_set_header_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,7 +303,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -361,10 +361,10 @@ class ListView : gtk.list_base.ListBase
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

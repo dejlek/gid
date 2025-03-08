@@ -49,7 +49,7 @@ import gstrtp.types;
 class RTPBaseDepayload : gst.element.Element
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -163,7 +163,7 @@ class RTPBaseDepayload : gst.element.Element
   gst.types.FlowReturn push(gst.buffer.Buffer outBuf)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_depayload_push(cast(GstRTPBaseDepayload*)cPtr, outBuf ? cast(GstBuffer*)outBuf.cPtr(Yes.dup) : null);
+    _cretval = gst_rtp_base_depayload_push(cast(GstRTPBaseDepayload*)cPtr, outBuf ? cast(GstBuffer*)outBuf.cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -178,7 +178,7 @@ class RTPBaseDepayload : gst.element.Element
   gst.types.FlowReturn pushList(gst.buffer_list.BufferList outList)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_depayload_push_list(cast(GstRTPBaseDepayload*)cPtr, outList ? cast(GstBufferList*)outList.cPtr(Yes.dup) : null);
+    _cretval = gst_rtp_base_depayload_push_list(cast(GstRTPBaseDepayload*)cPtr, outList ? cast(GstBufferList*)outList.cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -222,10 +222,10 @@ class RTPBaseDepayload : gst.element.Element
     Connect to AddExtension signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAddExtension(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAddExtension(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AddExtensionCallbackDlg) || is(T : AddExtensionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -258,10 +258,10 @@ class RTPBaseDepayload : gst.element.Element
     Connect to ClearExtensions signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClearExtensions(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClearExtensions(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClearExtensionsCallbackDlg) || is(T : ClearExtensionsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -297,10 +297,10 @@ class RTPBaseDepayload : gst.element.Element
     Connect to RequestExtension signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestExtension(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestExtension(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestExtensionCallbackDlg) || is(T : RequestExtensionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

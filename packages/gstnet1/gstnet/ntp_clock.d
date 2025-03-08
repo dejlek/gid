@@ -11,7 +11,7 @@ import gstnet.types;
 class NtpClock : gstnet.net_client_clock.NetClientClock
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,9 +41,9 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
   this(string name, string remoteAddress, int remotePort, gst.types.ClockTime baseTime)
   {
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _remoteAddress = remoteAddress.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _remoteAddress = remoteAddress.toCString(No.Alloc);
     _cretval = gst_ntp_clock_new(_name, _remoteAddress, remotePort, baseTime);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

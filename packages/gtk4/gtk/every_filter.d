@@ -18,7 +18,7 @@ import gtk.types;
 class EveryFilter : gtk.multi_filter.MultiFilter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,6 +48,6 @@ class EveryFilter : gtk.multi_filter.MultiFilter
   {
     GtkEveryFilter* _cretval;
     _cretval = gtk_every_filter_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

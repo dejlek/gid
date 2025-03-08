@@ -13,7 +13,7 @@ class SDPBandwidth
 {
   GstSDPBandwidth cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPBandwidth");
@@ -31,13 +31,13 @@ class SDPBandwidth
 
   @property string bwtype()
   {
-    return (cast(GstSDPBandwidth*)cPtr).bwtype.fromCString(No.free);
+    return (cast(GstSDPBandwidth*)cPtr).bwtype.fromCString(No.Free);
   }
 
   @property void bwtype(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
-    (cast(GstSDPBandwidth*)cPtr).bwtype = propval.toCString(Yes.alloc);
+    (cast(GstSDPBandwidth*)cPtr).bwtype = propval.toCString(Yes.Alloc);
   }
 
   @property uint bandwidth()
@@ -72,7 +72,7 @@ class SDPBandwidth
   gstsdp.types.SDPResult set(string bwtype, uint bandwidth)
   {
     GstSDPResult _cretval;
-    const(char)* _bwtype = bwtype.toCString(No.alloc);
+    const(char)* _bwtype = bwtype.toCString(No.Alloc);
     _cretval = gst_sdp_bandwidth_set(cast(GstSDPBandwidth*)cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

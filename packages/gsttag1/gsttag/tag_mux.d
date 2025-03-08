@@ -29,7 +29,7 @@ import gsttag.types;
 class TagMux : gst.element.Element, gst.tag_setter.TagSetter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

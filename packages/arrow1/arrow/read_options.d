@@ -10,7 +10,7 @@ import gobject.object;
 class ReadOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ReadOptions : gobject.object.ObjectG
   {
     GArrowReadOptions* _cretval;
     _cretval = garrow_read_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */

@@ -16,12 +16,12 @@ import gobject.boxed;
 class MainContext : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -45,7 +45,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_context_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_context_new_with_flags(flags);
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)cPtr, &funcs, userData);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_id(cast(GMainContext*)cPtr, sourceId);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GSource* _cretval;
     _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)cPtr, userData);
-    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_context_default();
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -496,7 +496,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_context_get_thread_default();
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -514,7 +514,7 @@ class MainContext : gobject.boxed.Boxed
   {
     GMainContext* _cretval;
     _cretval = g_main_context_ref_thread_default();
-    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

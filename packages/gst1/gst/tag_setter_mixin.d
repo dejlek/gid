@@ -22,7 +22,7 @@ public import gst.types;
   [gst.tag_setter.TagSetter.mergeTags] or [gst.tag_setter.TagSetter.addTags]. Also consider
   setting the #GstTagMergeMode that is used for tag events that arrive at the
   tagsetter element (default mode is to keep existing tags).
-  The application should do that before the element goes to [gst.types.State.paused].
+  The application should do that before the element goes to [gst.types.State.Paused].
   
   Elements implementing the #GstTagSetter interface often have to merge
   any tags received from upstream and the tags set by the application via
@@ -62,8 +62,8 @@ template TagSetterT()
   */
   override void addTagValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
   {
-    const(char)* _tag = tag.toCString(No.alloc);
-    gst_tag_setter_add_tag_value(cast(GstTagSetter*)cPtr, mode, _tag, value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
+    const(char)* _tag = tag.toCString(No.Alloc);
+    gst_tag_setter_add_tag_value(cast(GstTagSetter*)cPtr, mode, _tag, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -78,7 +78,7 @@ template TagSetterT()
   {
     const(GstTagList)* _cretval;
     _cretval = gst_tag_setter_get_tag_list(cast(GstTagSetter*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -103,7 +103,7 @@ template TagSetterT()
   */
   override void mergeTags(gst.tag_list.TagList list, gst.types.TagMergeMode mode)
   {
-    gst_tag_setter_merge_tags(cast(GstTagSetter*)cPtr, list ? cast(const(GstTagList)*)list.cPtr(No.dup) : null, mode);
+    gst_tag_setter_merge_tags(cast(GstTagSetter*)cPtr, list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, mode);
   }
 
   /**

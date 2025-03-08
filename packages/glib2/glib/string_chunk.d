@@ -35,7 +35,7 @@ class StringChunk
   GStringChunk* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.StringChunk");
@@ -86,9 +86,9 @@ class StringChunk
   string insert(string string_)
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert(cast(GStringChunk*)cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -114,9 +114,9 @@ class StringChunk
   string insertConst(string string_)
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert_const(cast(GStringChunk*)cPtr, _string_);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -139,9 +139,9 @@ class StringChunk
   string insertLen(string string_, ptrdiff_t len)
   {
     char* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_string_chunk_insert_len(cast(GStringChunk*)cPtr, _string_, len);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

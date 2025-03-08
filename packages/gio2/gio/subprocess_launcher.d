@@ -21,7 +21,7 @@ import gobject.object;
 class SubprocessLauncher : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   {
     GSubprocessLauncher* _cretval;
     _cretval = g_subprocess_launcher_new(flags);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,7 +59,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     [gio.subprocess_launcher.SubprocessLauncher.takeFd], [gio.subprocess_launcher.SubprocessLauncher.takeStderrFd], etc.
     
     After calling this method, any subsequent calls to [gio.subprocess_launcher.SubprocessLauncher.spawn] or [gio.subprocess_launcher.SubprocessLauncher.spawnv] will
-    return [gio.types.IOErrorEnum.closed]. This method is idempotent if
+    return [gio.types.IOErrorEnum.Closed]. This method is idempotent if
     called more than once.
     
     This function is called automatically when the #GSubprocessLauncher
@@ -85,9 +85,9 @@ class SubprocessLauncher : gobject.object.ObjectG
   string getenv(string variable)
   {
     const(char)* _cretval;
-    const(char)* _variable = variable.toCString(No.alloc);
+    const(char)* _variable = variable.toCString(No.Alloc);
     _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)cPtr, _variable);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void setCwd(string cwd)
   {
-    const(char)* _cwd = cwd.toCString(No.alloc);
+    const(char)* _cwd = cwd.toCString(No.Alloc);
     g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)cPtr, _cwd);
   }
 
@@ -133,7 +133,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   {
     char*[] _tmpenv;
     foreach (s; env)
-      _tmpenv ~= s.toCString(No.alloc);
+      _tmpenv ~= s.toCString(No.Alloc);
     _tmpenv ~= null;
     char** _env = _tmpenv.ptr;
     g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)cPtr, _env);
@@ -142,12 +142,12 @@ class SubprocessLauncher : gobject.object.ObjectG
   /**
       Sets the flags on the launcher.
     
-    The default flags are [gio.types.SubprocessFlags.none].
+    The default flags are [gio.types.SubprocessFlags.None].
     
     You may not set flags that specify conflicting options for how to
     handle a particular stdio stream (eg: specifying both
-    [gio.types.SubprocessFlags.stdinPipe] and
-    [gio.types.SubprocessFlags.stdinInherit]).
+    [gio.types.SubprocessFlags.StdinPipe] and
+    [gio.types.SubprocessFlags.StdinInherit]).
     
     You may also not set a flag that conflicts with a previous call to a
     function like [gio.subprocess_launcher.SubprocessLauncher.setStdinFilePath] or
@@ -169,7 +169,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     would be the case if using '2>' at the shell.
     
     If you want to send both stdout and stderr to the same file then use
-    [gio.types.SubprocessFlags.stderrMerge].
+    [gio.types.SubprocessFlags.StderrMerge].
     
     You may not set a stderr file path if a stderr fd is already set or
     if the launcher flags contain any flags directing stderr elsewhere.
@@ -180,7 +180,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void setStderrFilePath(string path = null)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -200,7 +200,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void setStdinFilePath(string path = null)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -221,7 +221,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void setStdoutFilePath(string path = null)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)cPtr, _path);
   }
 
@@ -240,8 +240,8 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void setenv(string variable, string value, bool overwrite)
   {
-    const(char)* _variable = variable.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _variable = variable.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     g_subprocess_launcher_setenv(cast(GSubprocessLauncher*)cPtr, _variable, _value, overwrite);
   }
 
@@ -256,7 +256,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     GSubprocess* _cretval;
     const(char)*[] _tmpargv;
     foreach (s; argv)
-      _tmpargv ~= s.toCString(No.alloc);
+      _tmpargv ~= s.toCString(No.Alloc);
     _tmpargv ~= null;
     const(char*)* _argv = _tmpargv.ptr;
 
@@ -264,7 +264,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)cPtr, _argv, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class SubprocessLauncher : gobject.object.ObjectG
     If fd is -1 then any previously given fd is unset.
     
     Note that if your intention is to have the stdin of the calling
-    process inherited by the child then [gio.types.SubprocessFlags.stdinInherit]
+    process inherited by the child then [gio.types.SubprocessFlags.StdinInherit]
     is a better way to go about doing that.
     
     The passed fd is noted but will not be touched in the current
@@ -380,7 +380,7 @@ class SubprocessLauncher : gobject.object.ObjectG
   */
   void unsetenv(string variable)
   {
-    const(char)* _variable = variable.toCString(No.alloc);
+    const(char)* _variable = variable.toCString(No.Alloc);
     g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)cPtr, _variable);
   }
 }

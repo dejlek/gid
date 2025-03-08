@@ -11,7 +11,7 @@ import gobject.object;
 class ExtensionArray : arrow.array.Array
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,7 +32,7 @@ class ExtensionArray : arrow.array.Array
   {
     GArrowArray* _cretval;
     _cretval = garrow_extension_array_get_storage(cast(GArrowExtensionArray*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

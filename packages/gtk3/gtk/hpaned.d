@@ -23,7 +23,7 @@ import gtk.types;
 class HPaned : gtk.paned.Paned
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,12 +43,12 @@ class HPaned : gtk.paned.Paned
       Create a new #GtkHPaned
     Returns:     the new #GtkHPaned
   
-    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.horizontal] instead
+    Deprecated:     Use [gtk.paned.Paned.new_] with [gtk.types.Orientation.Horizontal] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_hpaned_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

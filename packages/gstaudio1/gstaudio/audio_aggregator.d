@@ -61,7 +61,7 @@ import gstbase.aggregator;
 class AudioAggregator : gstbase.aggregator.Aggregator
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,6 +80,6 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   /** */
   void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps)
   {
-    gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)cPtr, pad ? cast(GstAudioAggregatorPad*)pad.cPtr(No.dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)cPtr, pad ? cast(GstAudioAggregatorPad*)pad.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
   }
 }

@@ -15,12 +15,12 @@ import gobject.boxed;
 class MatchInfo : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -61,12 +61,12 @@ class MatchInfo : gobject.boxed.Boxed
   string expandReferences(string stringToExpand)
   {
     char* _cretval;
-    const(char)* _stringToExpand = stringToExpand.toCString(No.alloc);
+    const(char)* _stringToExpand = stringToExpand.toCString(No.Alloc);
     GError *_err;
     _cretval = g_match_info_expand_references(cast(const(GMatchInfo)*)cPtr, _stringToExpand, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class MatchInfo : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_match_info_fetch(cast(const(GMatchInfo)*)cPtr, matchNum);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class MatchInfo : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -156,9 +156,9 @@ class MatchInfo : gobject.boxed.Boxed
   string fetchNamed(string name)
   {
     char* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_match_info_fetch_named(cast(const(GMatchInfo)*)cPtr, _name);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class MatchInfo : gobject.boxed.Boxed
   bool fetchNamedPos(string name, out int startPos, out int endPos)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_match_info_fetch_named_pos(cast(const(GMatchInfo)*)cPtr, _name, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
@@ -245,7 +245,7 @@ class MatchInfo : gobject.boxed.Boxed
   {
     GRegex* _cretval;
     _cretval = g_match_info_get_regex(cast(const(GMatchInfo)*)cPtr);
-    auto _retval = _cretval ? new glib.regex.Regex(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.regex.Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class MatchInfo : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_match_info_get_string(cast(const(GMatchInfo)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

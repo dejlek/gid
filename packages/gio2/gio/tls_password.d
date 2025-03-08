@@ -14,7 +14,7 @@ import gobject.object;
 class TlsPassword : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,9 +40,9 @@ class TlsPassword : gobject.object.ObjectG
   this(gio.types.TlsPasswordFlags flags, string description)
   {
     GTlsPassword* _cretval;
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     _cretval = g_tls_password_new(flags, _description);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -53,7 +53,7 @@ class TlsPassword : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_description(cast(GTlsPassword*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class TlsPassword : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_tls_password_get_warning(cast(GTlsPassword*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class TlsPassword : gobject.object.ObjectG
   */
   void setDescription(string description)
   {
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     g_tls_password_set_description(cast(GTlsPassword*)cPtr, _description);
   }
 
@@ -189,7 +189,7 @@ class TlsPassword : gobject.object.ObjectG
   */
   void setWarning(string warning)
   {
-    const(char)* _warning = warning.toCString(No.alloc);
+    const(char)* _warning = warning.toCString(No.Alloc);
     g_tls_password_set_warning(cast(GTlsPassword*)cPtr, _warning);
   }
 }

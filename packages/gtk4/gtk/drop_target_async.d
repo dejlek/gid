@@ -43,13 +43,13 @@ import gtk.types;
   [gdk.drop.Drop.finish].
   
   Between the ::drag-enter and ::drag-leave signals the widget is a
-  current drop target, and will receive the [gtk.types.StateFlags.dropActive]
+  current drop target, and will receive the [gtk.types.StateFlags.DropActive]
   state, which can be used by themes to style the widget as a drop target.
 */
 class DropTargetAsync : gtk.event_controller.EventController
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -75,8 +75,8 @@ class DropTargetAsync : gtk.event_controller.EventController
   this(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     GtkDropTargetAsync* _cretval;
-    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(Yes.dup) : null, actions);
-    this(_cretval, Yes.take);
+    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(Yes.Dup) : null, actions);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -101,7 +101,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   {
     GdkContentFormats* _cretval;
     _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   void rejectDrop(gdk.drop.Drop drop)
   {
-    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(No.dup) : null);
+    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   void setFormats(gdk.content_formats.ContentFormats formats = null)
   {
-    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.dup) : null);
+    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
   }
 
   /**
@@ -172,10 +172,10 @@ class DropTargetAsync : gtk.event_controller.EventController
     Connect to Accept signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAccept(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAccept(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AcceptCallbackDlg) || is(T : AcceptCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -216,10 +216,10 @@ class DropTargetAsync : gtk.event_controller.EventController
     Connect to DragEnter signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragEnter(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragEnter(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragEnterCallbackDlg) || is(T : DragEnterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -260,10 +260,10 @@ class DropTargetAsync : gtk.event_controller.EventController
     Connect to DragLeave signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragLeave(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragLeaveCallbackDlg) || is(T : DragLeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -300,10 +300,10 @@ class DropTargetAsync : gtk.event_controller.EventController
     Connect to DragMotion signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragMotion(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragMotionCallbackDlg) || is(T : DragMotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -357,10 +357,10 @@ class DropTargetAsync : gtk.event_controller.EventController
     Connect to Drop signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDrop(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDrop(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DropCallbackDlg) || is(T : DropCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

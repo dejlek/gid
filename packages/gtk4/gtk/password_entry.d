@@ -49,12 +49,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.password_entry.PasswordEntry] uses the [gtk.types.AccessibleRole.textBox] role.
+  [gtk.password_entry.PasswordEntry] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,7 +80,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = gtk_password_entry_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -91,7 +91,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   {
     GMenuModel* _cretval;
     _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
-    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
+    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
   }
 
   /**
@@ -150,10 +150,10 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

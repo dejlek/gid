@@ -112,7 +112,7 @@ template TableCellT()
   {
     AtkObject* _cretval;
     _cretval = atk_table_cell_get_table(cast(AtkTableCell*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 }

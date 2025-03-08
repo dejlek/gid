@@ -12,7 +12,7 @@ import gobject.object;
     This [gio.socket_control_message.SocketControlMessage] contains a [gio.credentials.Credentials]
   instance.  It may be sent using [gio.socket.Socket.sendMessage] and received
   using [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in
-  the [gio.types.SocketFamily.unix] family).
+  the [gio.types.SocketFamily.Unix] family).
   
   For an easier way to send and receive credentials over
   stream-oriented UNIX sockets, see
@@ -32,7 +32,7 @@ import gobject.object;
 class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,7 +56,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   {
     GSocketControlMessage* _cretval;
     _cretval = g_unix_credentials_message_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,8 +68,8 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.take);
+    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   {
     GCredentials* _cretval;
     _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
     return _retval;
   }
 }

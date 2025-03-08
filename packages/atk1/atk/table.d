@@ -338,10 +338,10 @@ interface Table
     Connect to ColumnDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnDeleted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColumnDeletedCallbackDlg) || is(T : ColumnDeletedCallbackFunc));
 
   /**
@@ -364,10 +364,10 @@ interface Table
     Connect to ColumnInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnInserted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColumnInsertedCallbackDlg) || is(T : ColumnInsertedCallbackFunc));
 
   /**
@@ -389,10 +389,10 @@ interface Table
     Connect to ColumnReordered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectColumnReordered(T)(T callback, Flag!"after" after = No.after)
+  ulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ColumnReorderedCallbackDlg) || is(T : ColumnReorderedCallbackFunc));
 
   /**
@@ -414,10 +414,10 @@ interface Table
     Connect to ModelChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectModelChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectModelChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ModelChangedCallbackDlg) || is(T : ModelChangedCallbackFunc));
 
   /**
@@ -440,10 +440,10 @@ interface Table
     Connect to RowDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowDeleted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc));
 
   /**
@@ -466,10 +466,10 @@ interface Table
     Connect to RowInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowInserted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc));
 
   /**
@@ -491,9 +491,9 @@ interface Table
     Connect to RowReordered signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowReordered(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowReordered(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowReorderedCallbackDlg) || is(T : RowReorderedCallbackFunc));
   }

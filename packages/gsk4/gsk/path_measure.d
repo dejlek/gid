@@ -22,12 +22,12 @@ import gsk.types;
 class PathMeasure : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -53,8 +53,8 @@ class PathMeasure : gobject.boxed.Boxed
   this(gsk.path.Path path)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,8 +67,8 @@ class PathMeasure : gobject.boxed.Boxed
   static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(No.dup) : null, tolerance);
-    auto _retval = _cretval ? new gsk.path_measure.PathMeasure(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(No.Dup) : null, tolerance);
+    auto _retval = _cretval ? new gsk.path_measure.PathMeasure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class PathMeasure : gobject.boxed.Boxed
   {
     GskPath* _cretval;
     _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)cPtr);
-    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

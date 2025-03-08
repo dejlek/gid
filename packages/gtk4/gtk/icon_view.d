@@ -58,7 +58,7 @@ import gtk.widget;
 class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.Scrollable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -87,7 +87,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkWidget* _cretval;
     _cretval = gtk_icon_view_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -102,8 +102,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   static gtk.icon_view.IconView newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,8 +118,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,8 +135,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gdk.paintable.Paintable createDragIcon(gtk.tree_path.TreePath path)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.take);
+    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void enableModelDragDest(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.dup) : null, actions);
+    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -168,7 +168,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void enableModelDragSource(gdk.types.ModifierType startButtonMask, gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.dup) : null, actions);
+    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -201,8 +201,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.dup) : null, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
+    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_rect);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
 
@@ -255,8 +255,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)cPtr, &_path, &_cell);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
-    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _path;
     _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)cPtr, dragX, dragY, &_path, &pos);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkTreePath* _path;
     gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)cPtr, &_path, &pos);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   }
 
   /**
@@ -314,8 +314,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
     _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)cPtr, x, y, &_path, &_cell);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
-    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemColumn(gtk.tree_path.TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemRow(gtk.tree_path.TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -429,7 +429,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkTreeModel* _cretval;
     _cretval = gtk_icon_view_get_model(cast(GtkIconView*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     GtkTreePath* _cretval;
     _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)cPtr, x, y);
-    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -604,9 +604,9 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreePath* _path;
     GtkTreeIter _iter;
     _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.take);
-    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.take);
-    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.take);
+    model = ObjectG.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
+    iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
 
@@ -628,8 +628,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
     _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)cPtr, &_startPath, &_endPath);
-    startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.take);
-    endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.take);
+    startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
+    endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
   }
 
@@ -642,7 +642,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void itemActivated(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -657,7 +657,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -686,12 +686,12 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void scrollToPath(gtk.tree_path.TreePath path, bool useAlign, float rowAlign, float colAlign)
   {
-    gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null, useAlign, rowAlign, colAlign);
+    gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
 
   /**
       Selects all the icons. icon_view must has its selection mode set
-    to [gtk.types.SelectionMode.multiple].
+    to [gtk.types.SelectionMode.Multiple].
   
     Deprecated:     Use [gtk.grid_view.GridView] instead
   */
@@ -709,7 +709,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void selectPath(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -726,7 +726,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     {
       auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
@@ -796,7 +796,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setCursor(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, bool startEditing)
   {
-    gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.dup) : null, startEditing);
+    gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, startEditing);
   }
 
   /**
@@ -809,7 +809,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setDragDestItem(gtk.tree_path.TreePath path, gtk.types.IconViewDropPosition pos)
   {
-    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null, pos);
+    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -893,7 +893,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.dup) : null);
+    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(ObjectG)model).cPtr(No.Dup) : null);
   }
 
   /**
@@ -998,7 +998,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell = null)
   {
-    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.dup) : null);
+    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1034,7 +1034,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTooltipItem(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1056,7 +1056,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void unselectPath(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.dup) : null);
+    gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1107,10 +1107,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to ActivateCursorItem signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateCursorItem(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateCursorItem(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCursorItemCallbackDlg) || is(T : ActivateCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1151,10 +1151,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to ItemActivated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectItemActivated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectItemActivated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ItemActivatedCallbackDlg) || is(T : ItemActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1207,10 +1207,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to MoveCursor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveCursor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1255,10 +1255,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to SelectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectAll(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1298,10 +1298,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to SelectCursorItem signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectCursorItem(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectCursorItem(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectCursorItemCallbackDlg) || is(T : SelectCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1334,10 +1334,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1378,10 +1378,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to ToggleCursorItem signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToggleCursorItem(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToggleCursorItem(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToggleCursorItemCallbackDlg) || is(T : ToggleCursorItemCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1420,10 +1420,10 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     Connect to UnselectAll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnselectAll(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

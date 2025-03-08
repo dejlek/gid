@@ -15,7 +15,7 @@ import glib.error;
 class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -59,7 +59,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -78,7 +78,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.dup) : null, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

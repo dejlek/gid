@@ -16,7 +16,7 @@ import gobject.object;
 class FilterOutputStream : gio.output_stream.OutputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class FilterOutputStream : gio.output_stream.OutputStream
   {
     GOutputStream* _cretval;
     _cretval = g_filter_output_stream_get_base_stream(cast(GFilterOutputStream*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 

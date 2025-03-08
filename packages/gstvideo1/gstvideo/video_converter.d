@@ -14,7 +14,7 @@ class VideoConverter
   GstVideoConverter* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoConverter");
@@ -62,7 +62,7 @@ class VideoConverter
   {
     const(GstStructure)* _cretval;
     _cretval = gst_video_converter_get_config(cast(GstVideoConverter*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class VideoConverter
   {
     const(GstVideoInfo)* _cretval;
     _cretval = gst_video_converter_get_in_info(cast(GstVideoConverter*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class VideoConverter
   {
     const(GstVideoInfo)* _cretval;
     _cretval = gst_video_converter_get_out_info(cast(GstVideoConverter*)cPtr);
-    auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class VideoConverter
   bool setConfig(gst.structure.Structure config)
   {
     bool _retval;
-    _retval = gst_video_converter_set_config(cast(GstVideoConverter*)cPtr, config ? cast(GstStructure*)config.cPtr(Yes.dup) : null);
+    _retval = gst_video_converter_set_config(cast(GstVideoConverter*)cPtr, config ? cast(GstStructure*)config.cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

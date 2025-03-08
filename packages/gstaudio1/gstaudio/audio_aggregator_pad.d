@@ -12,7 +12,7 @@ import gstbase.aggregator_pad;
 class AudioAggregatorPad : gstbase.aggregator_pad.AggregatorPad
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

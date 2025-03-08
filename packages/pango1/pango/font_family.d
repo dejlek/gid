@@ -19,7 +19,7 @@ import pango.types;
 class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,9 +49,9 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   pango.font_face.FontFace getFace(string name = null)
   {
     PangoFontFace* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = pango_font_family_get_face(cast(PangoFontFamily*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
   {
     const(char)* _cretval;
     _cretval = pango_font_family_get_name(cast(PangoFontFamily*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     pango_font_family_list_faces(cast(PangoFontFamily*)cPtr, &_faces, &_nFaces);
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
-      faces[i] = ObjectG.getDObject!(pango.font_face.FontFace)(_faces[i], No.take);
+      faces[i] = ObjectG.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
     safeFree(cast(void*)_faces);
   }
 }

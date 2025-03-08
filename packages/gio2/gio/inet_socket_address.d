@@ -20,7 +20,7 @@ import gobject.object;
 class InetSocketAddress : gio.socket_address.SocketAddress
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,8 +46,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   this(gio.inet_address.InetAddress address, ushort port)
   {
     GSocketAddress* _cretval;
-    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(No.dup) : null, port);
-    this(_cretval, Yes.take);
+    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, port);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -64,9 +64,9 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   static gio.inet_socket_address.InetSocketAddress newFromString(string address, uint port)
   {
     GSocketAddress* _cretval;
-    const(char)* _address = address.toCString(No.alloc);
+    const(char)* _address = address.toCString(No.Alloc);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
-    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   {
     GInetAddress* _cretval;
     _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 

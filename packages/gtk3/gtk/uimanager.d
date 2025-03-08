@@ -248,7 +248,7 @@ import gtk.widget;
 class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -274,13 +274,13 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkUIManager* _cretval;
     _cretval = gtk_ui_manager_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
       Adds a UI element to the current contents of manager.
     
-    If type is [gtk.types.UIManagerItemType.auto_], GTK+ inserts a menuitem, toolitem or
+    If type is [gtk.types.UIManagerItemType.Auto], GTK+ inserts a menuitem, toolitem or
     separator if such an element can be inserted at the place determined by
     path. Otherwise type must indicate an element that can be inserted at
     the place determined by path.
@@ -298,9 +298,9 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void addUi(uint mergeId, string path, string name, string action, gtk.types.UIManagerItemType type, bool top)
   {
-    const(char)* _path = path.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _action = action.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _action = action.toCString(No.Alloc);
     gtk_ui_manager_add_ui(cast(GtkUIManager*)cPtr, mergeId, _path, _name, _action, type, top);
   }
 
@@ -316,7 +316,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   uint addUiFromFile(string filename)
   {
     uint _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)cPtr, _filename, &_err);
     if (_err)
@@ -336,7 +336,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   uint addUiFromResource(string resourcePath)
   {
     uint _retval;
-    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)cPtr, _resourcePath, &_err);
     if (_err)
@@ -358,7 +358,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   uint addUiFromString(string buffer, ptrdiff_t length)
   {
     uint _retval;
-    const(char)* _buffer = buffer.toCString(No.alloc);
+    const(char)* _buffer = buffer.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)cPtr, _buffer, length, &_err);
     if (_err)
@@ -396,7 +396,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_ui_manager_get_accel_group(cast(GtkUIManager*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -411,9 +411,9 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   gtk.action.Action getAction(string path)
   {
     GtkAction* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_ui_manager_get_action(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -472,7 +472,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     char* _cretval;
     _cretval = gtk_ui_manager_get_ui(cast(GtkUIManager*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -499,9 +499,9 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   gtk.widget.Widget getWidget(string path)
   {
     GtkWidget* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = gtk_ui_manager_get_widget(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void insertActionGroup(gtk.action_group.ActionGroup actionGroup, int pos)
   {
-    gtk_ui_manager_insert_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.dup) : null, pos);
+    gtk_ui_manager_insert_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -542,7 +542,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void removeActionGroup(gtk.action_group.ActionGroup actionGroup)
   {
-    gtk_ui_manager_remove_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.dup) : null);
+    gtk_ui_manager_remove_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -590,10 +590,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to ActionsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionsChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActionsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActionsChangedCallbackDlg) || is(T : ActionsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -628,10 +628,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to AddWidget signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAddWidget(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAddWidget(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AddWidgetCallbackDlg) || is(T : AddWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -671,10 +671,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to ConnectProxy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectConnectProxy(T)(T callback, Flag!"after" after = No.after)
+  ulong connectConnectProxy(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ConnectProxyCallbackDlg) || is(T : ConnectProxyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -711,10 +711,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to DisconnectProxy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDisconnectProxy(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDisconnectProxy(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DisconnectProxyCallbackDlg) || is(T : DisconnectProxyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -753,10 +753,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to PostActivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPostActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPostActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PostActivateCallbackDlg) || is(T : PostActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -794,10 +794,10 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     Connect to PreActivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPreActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PreActivateCallbackDlg) || is(T : PreActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

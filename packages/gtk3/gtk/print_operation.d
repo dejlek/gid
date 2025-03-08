@@ -81,7 +81,7 @@ import gtk.window;
 class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.PrintOperationPreview
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -107,7 +107,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPrintOperation* _cretval;
     _cretval = gtk_print_operation_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -145,7 +145,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPageSetup* _cretval;
     _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
 
   /**
       Call this when the result of a print operation is
-    [gtk.types.PrintOperationResult.error], either as returned by
+    [gtk.types.PrintOperationResult.Error], either as returned by
     [gtk.print_operation.PrintOperation.run], or in the #GtkPrintOperation::done signal
     handler. The returned #GError will contain more details on what went wrong.
   */
@@ -189,11 +189,11 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
       Returns the number of pages that will be printed.
     
     Note that this value is set during print preparation phase
-    ([gtk.types.PrintStatus.preparing]), so this function should never be
-    called before the data generation phase ([gtk.types.PrintStatus.generatingData]).
+    ([gtk.types.PrintStatus.Preparing]), so this function should never be
+    called before the data generation phase ([gtk.types.PrintStatus.GeneratingData]).
     You can connect to the #GtkPrintOperation::status-changed signal
     and call [gtk.print_operation.PrintOperation.getNPagesToPrint] when
-    print status is [gtk.types.PrintStatus.generatingData].
+    print status is [gtk.types.PrintStatus.GeneratingData].
     This is typically used to track the progress of print operation.
     Returns:     the number of pages that will be printed
   */
@@ -216,7 +216,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPrintSettings* _cretval;
     _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     const(char)* _cretval;
     _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -264,8 +264,8 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
 
   /**
       A convenience function to find out if the print operation
-    is finished, either successfully ([gtk.types.PrintStatus.finished])
-    or unsuccessfully ([gtk.types.PrintStatus.finishedAborted]).
+    is finished, either successfully ([gtk.types.PrintStatus.Finished])
+    or unsuccessfully ([gtk.types.PrintStatus.FinishedAborted]).
     
     Note: when you enable print status tracking the print operation
     can be in a non-finished state even after done has been called, as
@@ -339,11 +339,11 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
       action =       the action to start
       parent =       Transient parent of the dialog
     Returns:     the result of the print operation. A return value of
-        [gtk.types.PrintOperationResult.apply] indicates that the printing was
+        [gtk.types.PrintOperationResult.Apply] indicates that the printing was
         completed successfully. In this case, it is a good idea to obtain
         the used print settings with [gtk.print_operation.PrintOperation.getPrintSettings]
         and store them for reuse with the next print operation. A value of
-        [gtk.types.PrintOperationResult.inProgress] means the operation is running
+        [gtk.types.PrintOperationResult.InProgress] means the operation is running
         asynchronously, and will emit the #GtkPrintOperation::done signal when
         done.
   */
@@ -351,7 +351,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   {
     GtkPrintOperationResult _cretval;
     GError *_err;
-    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, &_err);
+    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     gtk.types.PrintOperationResult _retval = cast(gtk.types.PrintOperationResult)_cretval;
@@ -392,7 +392,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   void setCustomTabLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)cPtr, _label);
   }
 
@@ -407,7 +407,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup = null)
   {
-    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.dup) : null);
+    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -447,7 +447,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   void setExportFilename(string filename)
   {
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)cPtr, _filename);
   }
 
@@ -476,7 +476,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   void setJobName(string jobName)
   {
-    const(char)* _jobName = jobName.toCString(No.alloc);
+    const(char)* _jobName = jobName.toCString(No.Alloc);
     gtk_print_operation_set_job_name(cast(GtkPrintOperation*)cPtr, _jobName);
   }
 
@@ -509,7 +509,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
-    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.dup) : null);
+    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
   }
 
   /**
@@ -599,10 +599,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to BeginPrint signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectBeginPrint(T)(T callback, Flag!"after" after = No.after)
+  ulong connectBeginPrint(T)(T callback, Flag!"After" after = No.After)
   if (is(T : BeginPrintCallbackDlg) || is(T : BeginPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -646,10 +646,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to CreateCustomWidget signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateCustomWidget(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreateCustomWidget(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateCustomWidgetCallbackDlg) || is(T : CreateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -687,10 +687,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to CustomWidgetApply signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCustomWidgetApply(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCustomWidgetApply(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CustomWidgetApplyCallbackDlg) || is(T : CustomWidgetApplyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -711,7 +711,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     everything required for printing.
     
     result gives you information about what happened during the run.
-    If result is [gtk.types.PrintOperationResult.error] then you can call
+    If result is [gtk.types.PrintOperationResult.Error] then you can call
     [gtk.print_operation.PrintOperation.getError] for more information.
     
     If you enabled print status tracking then
@@ -733,10 +733,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to Done signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDone(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDone(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DoneCallbackDlg) || is(T : DoneCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -818,10 +818,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to DrawPage signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDrawPage(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDrawPage(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DrawPageCallbackDlg) || is(T : DrawPageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -858,10 +858,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to EndPrint signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEndPrint(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEndPrint(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EndPrintCallbackDlg) || is(T : EndPrintCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -908,10 +908,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to Paginate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPaginate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPaginate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PaginateCallbackDlg) || is(T : PaginateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -965,10 +965,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to Preview signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPreview(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPreview(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PreviewCallbackDlg) || is(T : PreviewCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1010,10 +1010,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to RequestPageSetup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestPageSetup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestPageSetup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestPageSetupCallbackDlg) || is(T : RequestPageSetupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1051,10 +1051,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to StatusChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStatusChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StatusChangedCallbackDlg) || is(T : StatusChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1091,10 +1091,10 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     Connect to UpdateCustomWidget signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUpdateCustomWidget(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUpdateCustomWidget(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UpdateCustomWidgetCallbackDlg) || is(T : UpdateCustomWidgetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -24,7 +24,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult afterSend(gstrtsp.rtspmessage.RTSPMessage req, gstrtsp.rtspmessage.RTSPMessage resp)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_after_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_after_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -33,7 +33,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult beforeSend(gstrtsp.rtspmessage.RTSPMessage req)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_before_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_before_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -42,7 +42,7 @@ template RTSPExtensionT()
   override bool configureStream(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    _retval = gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ template RTSPExtensionT()
   override bool detectServer(gstrtsp.rtspmessage.RTSPMessage resp)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)cPtr, resp ? cast(GstRTSPMessage*)resp.cPtr(No.dup) : null);
+    _retval = gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)cPtr, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult getTransports(gstrtsp.types.RTSPLowerTrans protocols, string transport)
   {
     GstRTSPResult _cretval;
-    char* _transport = transport.toCString(No.alloc);
+    char* _transport = transport.toCString(No.Alloc);
     _cretval = gst_rtsp_extension_get_transports(cast(GstRTSPExtension*)cPtr, protocols, _transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
@@ -68,7 +68,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult parseSdp(gstsdp.sdpmessage.SDPMessage sdp, gst.structure.Structure s)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)cPtr, sdp ? cast(GstSDPMessage*)sdp.cPtr(No.dup) : null, s ? cast(GstStructure*)s.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)cPtr, sdp ? cast(GstSDPMessage*)sdp.cPtr(No.Dup) : null, s ? cast(GstStructure*)s.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -77,7 +77,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult receiveRequest(gstrtsp.rtspmessage.RTSPMessage req)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_receive_request(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_receive_request(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -86,7 +86,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage req, gstrtsp.rtspmessage.RTSPMessage resp)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -104,7 +104,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult streamSelect(gstrtsp.rtspurl.RTSPUrl url)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_stream_select(cast(GstRTSPExtension*)cPtr, url ? cast(GstRTSPUrl*)url.cPtr(No.dup) : null);
+    _cretval = gst_rtsp_extension_stream_select(cast(GstRTSPExtension*)cPtr, url ? cast(GstRTSPUrl*)url.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -119,10 +119,10 @@ template RTSPExtensionT()
     Connect to Send signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSend(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSend(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SendCallbackDlg) || is(T : SendCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

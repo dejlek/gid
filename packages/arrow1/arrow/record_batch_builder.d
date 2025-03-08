@@ -14,7 +14,7 @@ import gobject.object;
 class RecordBatchBuilder : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,10 +35,10 @@ class RecordBatchBuilder : gobject.object.ObjectG
   {
     GArrowRecordBatchBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_builder_new(schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_record_batch_builder_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -49,7 +49,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
     _cretval = garrow_record_batch_builder_flush(cast(GArrowRecordBatchBuilder*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_record_batch_builder_get_column_builder(cast(GArrowRecordBatchBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
   {
     GArrowArrayBuilder* _cretval;
     _cretval = garrow_record_batch_builder_get_field(cast(GArrowRecordBatchBuilder*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class RecordBatchBuilder : gobject.object.ObjectG
   {
     GArrowSchema* _cretval;
     _cretval = garrow_record_batch_builder_get_schema(cast(GArrowRecordBatchBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 

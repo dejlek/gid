@@ -32,7 +32,7 @@ import soup.types;
 class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -75,6 +75,6 @@ class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
   */
   void useAuth(glib.uri.Uri uri, soup.auth.Auth auth)
   {
-    soup_auth_manager_use_auth(cast(SoupAuthManager*)cPtr, uri ? cast(GUri*)uri.cPtr(No.dup) : null, auth ? cast(SoupAuth*)auth.cPtr(No.dup) : null);
+    soup_auth_manager_use_auth(cast(SoupAuthManager*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth.cPtr(No.Dup) : null);
   }
 }

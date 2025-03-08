@@ -14,7 +14,7 @@ import gsk.types;
 class ColorNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.ColorNode");
@@ -33,8 +33,8 @@ class ColorNode : gsk.render_node.RenderNode
   this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_node_new(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gsk_color_node_new(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -45,7 +45,7 @@ class ColorNode : gsk.render_node.RenderNode
   {
     const(GdkRGBA)* _cretval;
     _cretval = gsk_color_node_get_color(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 }

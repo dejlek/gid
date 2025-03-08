@@ -26,7 +26,7 @@ import gtk.types;
 class ShortcutTrigger : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,9 +68,9 @@ class ShortcutTrigger : gobject.object.ObjectG
   static gtk.shortcut_trigger.ShortcutTrigger parseString(string string_)
   {
     GtkShortcutTrigger* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_trigger_parse_string(_string_);
-    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   int compare(gtk.shortcut_trigger.ShortcutTrigger trigger2)
   {
     int _retval;
-    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.dup) : null);
+    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   bool equal(gtk.shortcut_trigger.ShortcutTrigger trigger2)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.dup) : null);
+    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   */
   void print(glib.string_.String string_)
   {
-    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)cPtr, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
+    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -163,7 +163,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   bool printLabel(gdk.display.Display display, glib.string_.String string_)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null, string_ ? cast(GString*)string_.cPtr(No.dup) : null);
+    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -187,8 +187,8 @@ class ShortcutTrigger : gobject.object.ObjectG
   string toLabel(gdk.display.Display display)
   {
     char* _cretval;
-    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class ShortcutTrigger : gobject.object.ObjectG
   gdk.types.KeyMatch trigger(gdk.event.Event event, bool enableMnemonics)
   {
     GdkKeyMatch _cretval;
-    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.dup) : null, enableMnemonics);
+    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, enableMnemonics);
     gdk.types.KeyMatch _retval = cast(gdk.types.KeyMatch)_cretval;
     return _retval;
   }

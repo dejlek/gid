@@ -13,7 +13,7 @@ import gtk.types;
 class CustomSorter : gtk.sorter.Sorter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,7 +56,7 @@ class CustomSorter : gtk.sorter.Sorter
     GtkCustomSorter* _cretval;
     auto _sortFunc = freezeDelegate(cast(void*)&sortFunc);
     _cretval = gtk_custom_sorter_new(&_sortFuncCallback, _sortFunc, &thawDelegate);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

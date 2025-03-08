@@ -29,7 +29,7 @@ import gtk.types;
 class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,6 +59,6 @@ class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
   {
     GtkBuilderScope* _cretval;
     _cretval = gtk_builder_cscope_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

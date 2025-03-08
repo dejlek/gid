@@ -23,7 +23,7 @@ import gtk.types;
 class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,6 +53,6 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_pixbuf_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

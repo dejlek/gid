@@ -23,7 +23,7 @@ import gtk.types;
 class Adjustment : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -54,7 +54,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_adjustment_new(value, lower, upper, stepIncrement, pageIncrement, pageSize);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -294,10 +294,10 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -329,10 +329,10 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

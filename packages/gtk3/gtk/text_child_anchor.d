@@ -15,7 +15,7 @@ import gtk.widget;
 class TextChildAnchor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class TextChildAnchor : gobject.object.ObjectG
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_child_anchor_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

@@ -18,7 +18,7 @@ import gstaudio.types;
 class AudioClock : gst.system_clock.SystemClock
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,17 +49,17 @@ class AudioClock : gst.system_clock.SystemClock
     {
       auto _dlg = cast(gstaudio.types.AudioClockGetTimeFunc*)userData;
 
-      GstClockTime _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.take));
+      GstClockTime _retval = (*_dlg)(ObjectG.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     GstClock* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _cretval = gst_audio_clock_new(_name, _funcCB, _func, _funcDestroyCB);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

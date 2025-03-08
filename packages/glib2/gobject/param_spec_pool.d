@@ -18,7 +18,7 @@ class ParamSpecPool
   GParamSpecPool* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpecPool");
@@ -41,7 +41,7 @@ class ParamSpecPool
   */
   void insert(gobject.param_spec.ParamSpec pspec, gobject.types.GType ownerType)
   {
-    g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null, ownerType);
+    g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, ownerType);
   }
 
   /**
@@ -64,7 +64,7 @@ class ParamSpecPool
     {
       _retval = new gobject.param_spec.ParamSpec[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = new gobject.param_spec.ParamSpec(cast(void*)_cretval[i], No.take);
+        _retval[i] = new gobject.param_spec.ParamSpec(cast(void*)_cretval[i], No.Take);
     }
     return _retval;
   }
@@ -99,9 +99,9 @@ class ParamSpecPool
   gobject.param_spec.ParamSpec lookup(string paramName, gobject.types.GType ownerType, bool walkAncestors)
   {
     GParamSpec* _cretval;
-    const(char)* _paramName = paramName.toCString(No.alloc);
+    const(char)* _paramName = paramName.toCString(No.Alloc);
     _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)cPtr, _paramName, ownerType, walkAncestors);
-    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class ParamSpecPool
   */
   void remove(gobject.param_spec.ParamSpec pspec)
   {
-    g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.dup) : null);
+    g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
   }
 
   /**
@@ -130,6 +130,6 @@ class ParamSpecPool
   {
     GParamSpecPool* _cretval;
     _cretval = g_param_spec_pool_new(typePrefixing);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

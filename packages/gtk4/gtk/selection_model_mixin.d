@@ -64,7 +64,7 @@ template SelectionModelT()
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)cPtr);
-    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -87,7 +87,7 @@ template SelectionModelT()
   {
     GtkBitset* _cretval;
     _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)cPtr, position, nItems);
-    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -205,7 +205,7 @@ template SelectionModelT()
   override bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask)
   {
     bool _retval;
-    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(No.dup) : null, mask ? cast(GtkBitset*)mask.cPtr(No.dup) : null);
+    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -274,10 +274,10 @@ template SelectionModelT()
     Connect to SelectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionChangedCallbackDlg) || is(T : SelectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

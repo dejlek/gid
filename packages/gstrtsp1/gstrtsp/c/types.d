@@ -14,17 +14,17 @@ enum GstRTSPAuthMethod
   /**
       no authentication
   */
-  none = 0,
+  None = 0,
 
   /**
       basic authentication
   */
-  basic = 1,
+  Basic = 1,
 
   /**
       digest authentication
   */
-  digest = 2,
+  Digest = 2,
 }
 
 /**
@@ -35,12 +35,12 @@ enum GstRTSPEvent : uint
   /**
       connection is readable
   */
-  read = 1,
+  Read = 1,
 
   /**
       connection is writable
   */
-  write = 2,
+  Write = 2,
 }
 
 /**
@@ -51,17 +51,17 @@ enum GstRTSPFamily
   /**
       unknown network family
   */
-  none = 0,
+  None = 0,
 
   /**
       internet
   */
-  inet = 1,
+  Inet = 1,
 
   /**
       internet V6
   */
-  inet6 = 2,
+  Inet6 = 2,
 }
 
 /**
@@ -70,274 +70,274 @@ enum GstRTSPFamily
 enum GstRTSPHeaderField
 {
   /** */
-  invalid = 0,
+  Invalid = 0,
 
   /** */
-  accept = 1,
+  Accept = 1,
 
   /** */
-  acceptEncoding = 2,
+  AcceptEncoding = 2,
 
   /** */
-  acceptLanguage = 3,
+  AcceptLanguage = 3,
 
   /** */
-  allow = 4,
+  Allow = 4,
 
   /** */
-  authorization = 5,
+  Authorization = 5,
 
   /** */
-  bandwidth = 6,
+  Bandwidth = 6,
 
   /** */
-  blocksize = 7,
+  Blocksize = 7,
 
   /** */
-  cacheControl = 8,
+  CacheControl = 8,
 
   /** */
-  conference = 9,
+  Conference = 9,
 
   /** */
-  connection = 10,
+  Connection = 10,
 
   /** */
-  contentBase = 11,
+  ContentBase = 11,
 
   /** */
-  contentEncoding = 12,
+  ContentEncoding = 12,
 
   /** */
-  contentLanguage = 13,
+  ContentLanguage = 13,
 
   /** */
-  contentLength = 14,
+  ContentLength = 14,
 
   /** */
-  contentLocation = 15,
+  ContentLocation = 15,
 
   /** */
-  contentType = 16,
+  ContentType = 16,
 
   /** */
-  cseq = 17,
+  Cseq = 17,
 
   /** */
-  date = 18,
+  Date = 18,
 
   /** */
-  expires = 19,
+  Expires = 19,
 
   /** */
-  from = 20,
+  From = 20,
 
   /** */
-  ifModifiedSince = 21,
+  IfModifiedSince = 21,
 
   /** */
-  lastModified = 22,
+  LastModified = 22,
 
   /** */
-  proxyAuthenticate = 23,
+  ProxyAuthenticate = 23,
 
   /** */
-  proxyRequire = 24,
+  ProxyRequire = 24,
 
   /** */
-  public_ = 25,
+  Public = 25,
 
   /** */
-  range = 26,
+  Range = 26,
 
   /** */
-  referer = 27,
+  Referer = 27,
 
   /** */
-  require = 28,
+  Require = 28,
 
   /** */
-  retryAfter = 29,
+  RetryAfter = 29,
 
   /** */
-  rtpInfo = 30,
+  RtpInfo = 30,
 
   /** */
-  scale = 31,
+  Scale = 31,
 
   /** */
-  session = 32,
+  Session = 32,
 
   /** */
-  server = 33,
+  Server = 33,
 
   /** */
-  speed = 34,
+  Speed = 34,
 
   /** */
-  transport = 35,
+  Transport = 35,
 
   /** */
-  unsupported = 36,
+  Unsupported = 36,
 
   /** */
-  userAgent = 37,
+  UserAgent = 37,
 
   /** */
-  via = 38,
+  Via = 38,
 
   /** */
-  wwwAuthenticate = 39,
+  WwwAuthenticate = 39,
 
   /** */
-  clientChallenge = 40,
+  ClientChallenge = 40,
 
   /** */
-  realChallenge1 = 41,
+  RealChallenge1 = 41,
 
   /** */
-  realChallenge2 = 42,
+  RealChallenge2 = 42,
 
   /** */
-  realChallenge3 = 43,
+  RealChallenge3 = 43,
 
   /** */
-  subscribe = 44,
+  Subscribe = 44,
 
   /** */
-  alert = 45,
+  Alert = 45,
 
   /** */
-  clientId = 46,
+  ClientId = 46,
 
   /** */
-  companyId = 47,
+  CompanyId = 47,
 
   /** */
-  guid = 48,
+  Guid = 48,
 
   /** */
-  regionData = 49,
+  RegionData = 49,
 
   /** */
-  maxAsmWidth = 50,
+  MaxAsmWidth = 50,
 
   /** */
-  language = 51,
+  Language = 51,
 
   /** */
-  playerStartTime = 52,
+  PlayerStartTime = 52,
 
   /** */
-  location = 53,
+  Location = 53,
 
   /** */
-  etag = 54,
+  Etag = 54,
 
   /** */
-  ifMatch = 55,
+  IfMatch = 55,
 
   /** */
-  acceptCharset = 56,
+  AcceptCharset = 56,
 
   /** */
-  supported = 57,
+  Supported = 57,
 
   /** */
-  vary = 58,
+  Vary = 58,
 
   /** */
-  xAccelerateStreaming = 59,
+  XAccelerateStreaming = 59,
 
   /** */
-  xAcceptAuthent = 60,
+  XAcceptAuthent = 60,
 
   /** */
-  xAcceptProxyAuthent = 61,
+  XAcceptProxyAuthent = 61,
 
   /** */
-  xBroadcastId = 62,
+  XBroadcastId = 62,
 
   /** */
-  xBurstStreaming = 63,
+  XBurstStreaming = 63,
 
   /** */
-  xNotice = 64,
+  XNotice = 64,
 
   /** */
-  xPlayerLagTime = 65,
+  XPlayerLagTime = 65,
 
   /** */
-  xPlaylist = 66,
+  XPlaylist = 66,
 
   /** */
-  xPlaylistChangeNotice = 67,
+  XPlaylistChangeNotice = 67,
 
   /** */
-  xPlaylistGenId = 68,
+  XPlaylistGenId = 68,
 
   /** */
-  xPlaylistSeekId = 69,
+  XPlaylistSeekId = 69,
 
   /** */
-  xProxyClientAgent = 70,
+  XProxyClientAgent = 70,
 
   /** */
-  xProxyClientVerb = 71,
+  XProxyClientVerb = 71,
 
   /** */
-  xRecedingPlaylistchange = 72,
+  XRecedingPlaylistchange = 72,
 
   /** */
-  xRtpInfo = 73,
+  XRtpInfo = 73,
 
   /** */
-  xStartupprofile = 74,
+  XStartupprofile = 74,
 
   /** */
-  timestamp = 75,
+  Timestamp = 75,
 
   /** */
-  authenticationInfo = 76,
+  AuthenticationInfo = 76,
 
   /** */
-  host = 77,
+  Host = 77,
 
   /** */
-  pragma_ = 78,
+  Pragma = 78,
 
   /** */
-  xServerIpAddress = 79,
+  XServerIpAddress = 79,
 
   /** */
-  xSessioncookie = 80,
+  XSessioncookie = 80,
 
   /** */
-  rtcpInterval = 81,
+  RtcpInterval = 81,
 
   /** */
-  keymgmt = 82,
+  Keymgmt = 82,
 
   /** */
-  pipelinedRequests = 83,
+  PipelinedRequests = 83,
 
   /** */
-  mediaProperties = 84,
+  MediaProperties = 84,
 
   /** */
-  seekStyle = 85,
+  SeekStyle = 85,
 
   /** */
-  acceptRanges = 86,
+  AcceptRanges = 86,
 
   /** */
-  frames = 87,
+  Frames = 87,
 
   /** */
-  rateControl = 88,
+  RateControl = 88,
 
   /** */
-  last = 89,
+  Last = 89,
 }
 
 /**
@@ -348,32 +348,32 @@ enum GstRTSPLowerTrans : uint
   /**
       invalid transport flag
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       stream data over UDP
   */
-  udp = 1,
+  Udp = 1,
 
   /**
       stream data over UDP multicast
   */
-  udpMcast = 2,
+  UdpMcast = 2,
 
   /**
       stream data over TCP
   */
-  tcp = 4,
+  Tcp = 4,
 
   /**
       stream data tunneled over HTTP.
   */
-  http = 16,
+  Http = 16,
 
   /**
       encrypt TCP and HTTP with TLS
   */
-  tls = 32,
+  Tls = 32,
 }
 
 /**
@@ -384,72 +384,72 @@ enum GstRTSPMethod : uint
   /**
       invalid method
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       the DESCRIBE method
   */
-  describe = 1,
+  Describe = 1,
 
   /**
       the ANNOUNCE method
   */
-  announce = 2,
+  Announce = 2,
 
   /**
       the GET_PARAMETER method
   */
-  getParameter = 4,
+  GetParameter = 4,
 
   /**
       the OPTIONS method
   */
-  options = 8,
+  Options = 8,
 
   /**
       the PAUSE method
   */
-  pause = 16,
+  Pause = 16,
 
   /**
       the PLAY method
   */
-  play = 32,
+  Play = 32,
 
   /**
       the RECORD method
   */
-  record = 64,
+  Record = 64,
 
   /**
       the REDIRECT method
   */
-  redirect = 128,
+  Redirect = 128,
 
   /**
       the SETUP method
   */
-  setup = 256,
+  Setup = 256,
 
   /**
       the SET_PARAMETER method
   */
-  setParameter = 512,
+  SetParameter = 512,
 
   /**
       the TEARDOWN method
   */
-  teardown = 1024,
+  Teardown = 1024,
 
   /**
       the GET method (HTTP).
   */
-  get = 2048,
+  Get = 2048,
 
   /**
       the POST method (HTTP).
   */
-  post = 4096,
+  Post = 4096,
 }
 
 /**
@@ -460,32 +460,32 @@ enum GstRTSPMsgType
   /**
       invalid message type
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       RTSP request message
   */
-  request = 1,
+  Request = 1,
 
   /**
       RTSP response message
   */
-  response = 2,
+  Response = 2,
 
   /**
       HTTP request message.
   */
-  httpRequest = 3,
+  HttpRequest = 3,
 
   /**
       HTTP response message.
   */
-  httpResponse = 4,
+  HttpResponse = 4,
 
   /**
       data message
   */
-  data = 5,
+  Data = 5,
 }
 
 /**
@@ -496,27 +496,27 @@ enum GstRTSPProfile : uint
   /**
       invalid profile
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       the Audio/Visual profile (RFC 3551)
   */
-  avp = 1,
+  Avp = 1,
 
   /**
       the secure Audio/Visual profile (RFC 3711)
   */
-  savp = 2,
+  Savp = 2,
 
   /**
       the Audio/Visual profile with feedback (RFC 4585)
   */
-  avpf = 4,
+  Avpf = 4,
 
   /**
       the secure Audio/Visual profile with feedback (RFC 5124)
   */
-  savpf = 8,
+  Savpf = 8,
 }
 
 /**
@@ -527,27 +527,27 @@ enum GstRTSPRangeUnit
   /**
       SMPTE timecode
   */
-  smpte = 0,
+  Smpte = 0,
 
   /**
       29.97 frames per second
   */
-  smpte30Drop = 1,
+  Smpte30Drop = 1,
 
   /**
       25 frames per second
   */
-  smpte25 = 2,
+  Smpte25 = 2,
 
   /**
       Normal play time
   */
-  npt = 3,
+  Npt = 3,
 
   /**
       Absolute time expressed as ISO 8601 timestamps
   */
-  clock = 4,
+  Clock = 4,
 }
 
 /**
@@ -558,97 +558,97 @@ enum GstRTSPResult
   /**
       no error
   */
-  ok = 0,
+  Ok = 0,
 
   /**
       RTSP request is successful, but was redirected.
   */
-  okRedirect = 1,
+  OkRedirect = 1,
 
   /**
       some unspecified error occurred
   */
-  error = -1,
+  Error = -1,
 
   /**
       invalid arguments were provided to a function
   */
-  einval = -2,
+  Einval = -2,
 
   /**
       an operation was canceled
   */
-  eintr = -3,
+  Eintr = -3,
 
   /**
       no memory was available for the operation
   */
-  enomem = -4,
+  Enomem = -4,
 
   /**
       a host resolve error occurred
   */
-  eresolv = -5,
+  Eresolv = -5,
 
   /**
       function not implemented
   */
-  enotimpl = -6,
+  Enotimpl = -6,
 
   /**
       a system error occurred, errno contains more details
   */
-  esys = -7,
+  Esys = -7,
 
   /**
       a parsing error occurred
   */
-  eparse = -8,
+  Eparse = -8,
 
   /**
       windows networking could not start
   */
-  ewsastart = -9,
+  Ewsastart = -9,
 
   /**
       windows networking stack has wrong version
   */
-  ewsaversion = -10,
+  Ewsaversion = -10,
 
   /**
       end-of-file was reached
   */
-  eeof = -11,
+  Eeof = -11,
 
   /**
       a network problem occurred, h_errno contains more details
   */
-  enet = -12,
+  Enet = -12,
 
   /**
       the host is not an IP host
   */
-  enotip = -13,
+  Enotip = -13,
 
   /**
       a timeout occurred
   */
-  etimeout = -14,
+  Etimeout = -14,
 
   /**
       the tunnel GET request has been performed
   */
-  etget = -15,
+  Etget = -15,
 
   /**
       the tunnel POST request has been performed
   */
-  etpost = -16,
+  Etpost = -16,
 
   /**
       last error
   */
-  elast = -17,
+  Elast = -17,
 }
 
 /**
@@ -659,32 +659,32 @@ enum GstRTSPState
   /**
       invalid state
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       initializing
   */
-  init_ = 1,
+  Init = 1,
 
   /**
       ready for operation
   */
-  ready = 2,
+  Ready = 2,
 
   /**
       seeking in progress
   */
-  seeking = 3,
+  Seeking = 3,
 
   /**
       playing
   */
-  playing = 4,
+  Playing = 4,
 
   /**
       recording
   */
-  recording = 5,
+  Recording = 5,
 }
 
 /**
@@ -693,152 +693,152 @@ enum GstRTSPState
 enum GstRTSPStatusCode
 {
   /** */
-  invalid = 0,
+  Invalid = 0,
 
   /** */
-  continue_ = 100,
+  Continue = 100,
 
   /** */
-  ok = 200,
+  Ok = 200,
 
   /** */
-  created = 201,
+  Created = 201,
 
   /** */
-  lowOnStorage = 250,
+  LowOnStorage = 250,
 
   /** */
-  multipleChoices = 300,
+  MultipleChoices = 300,
 
   /** */
-  movedPermanently = 301,
+  MovedPermanently = 301,
 
   /** */
-  moveTemporarily = 302,
+  MoveTemporarily = 302,
 
   /** */
-  seeOther = 303,
+  SeeOther = 303,
 
   /** */
-  notModified = 304,
+  NotModified = 304,
 
   /** */
-  useProxy = 305,
+  UseProxy = 305,
 
   /**
       RTSP request is temporarily redirected
   */
-  redirectTemporarily = 307,
+  RedirectTemporarily = 307,
 
   /**
       RTSP request is permanently redirected
   */
-  redirectPermanently = 308,
+  RedirectPermanently = 308,
 
   /** */
-  badRequest = 400,
+  BadRequest = 400,
 
   /** */
-  unauthorized = 401,
+  Unauthorized = 401,
 
   /** */
-  paymentRequired = 402,
+  PaymentRequired = 402,
 
   /** */
-  forbidden = 403,
+  Forbidden = 403,
 
   /** */
-  notFound = 404,
+  NotFound = 404,
 
   /** */
-  methodNotAllowed = 405,
+  MethodNotAllowed = 405,
 
   /** */
-  notAcceptable = 406,
+  NotAcceptable = 406,
 
   /** */
-  proxyAuthRequired = 407,
+  ProxyAuthRequired = 407,
 
   /** */
-  requestTimeout = 408,
+  RequestTimeout = 408,
 
   /** */
-  gone = 410,
+  Gone = 410,
 
   /** */
-  lengthRequired = 411,
+  LengthRequired = 411,
 
   /** */
-  preconditionFailed = 412,
+  PreconditionFailed = 412,
 
   /** */
-  requestEntityTooLarge = 413,
+  RequestEntityTooLarge = 413,
 
   /** */
-  requestUriTooLarge = 414,
+  RequestUriTooLarge = 414,
 
   /** */
-  unsupportedMediaType = 415,
+  UnsupportedMediaType = 415,
 
   /** */
-  parameterNotUnderstood = 451,
+  ParameterNotUnderstood = 451,
 
   /** */
-  conferenceNotFound = 452,
+  ConferenceNotFound = 452,
 
   /** */
-  notEnoughBandwidth = 453,
+  NotEnoughBandwidth = 453,
 
   /** */
-  sessionNotFound = 454,
+  SessionNotFound = 454,
 
   /** */
-  methodNotValidInThisState = 455,
+  MethodNotValidInThisState = 455,
 
   /** */
-  headerFieldNotValidForResource = 456,
+  HeaderFieldNotValidForResource = 456,
 
   /** */
-  invalidRange = 457,
+  InvalidRange = 457,
 
   /** */
-  parameterIsReadonly = 458,
+  ParameterIsReadonly = 458,
 
   /** */
-  aggregateOperationNotAllowed = 459,
+  AggregateOperationNotAllowed = 459,
 
   /** */
-  onlyAggregateOperationAllowed = 460,
+  OnlyAggregateOperationAllowed = 460,
 
   /** */
-  unsupportedTransport = 461,
+  UnsupportedTransport = 461,
 
   /** */
-  destinationUnreachable = 462,
+  DestinationUnreachable = 462,
 
   /** */
-  keyManagementFailure = 463,
+  KeyManagementFailure = 463,
 
   /** */
-  internalServerError = 500,
+  InternalServerError = 500,
 
   /** */
-  notImplemented = 501,
+  NotImplemented = 501,
 
   /** */
-  badGateway = 502,
+  BadGateway = 502,
 
   /** */
-  serviceUnavailable = 503,
+  ServiceUnavailable = 503,
 
   /** */
-  gatewayTimeout = 504,
+  GatewayTimeout = 504,
 
   /** */
-  rtspVersionNotSupported = 505,
+  RtspVersionNotSupported = 505,
 
   /** */
-  optionNotSupported = 551,
+  OptionNotSupported = 551,
 }
 
 /**
@@ -849,27 +849,27 @@ enum GstRTSPTimeType
   /**
       seconds
   */
-  seconds = 0,
+  Seconds = 0,
 
   /**
       now
   */
-  now = 1,
+  Now = 1,
 
   /**
       end
   */
-  end = 2,
+  End = 2,
 
   /**
       frames and subframes
   */
-  frames = 3,
+  Frames = 3,
 
   /**
       UTC time
   */
-  utc = 4,
+  Utc = 4,
 }
 
 /**
@@ -880,17 +880,17 @@ enum GstRTSPTransMode : uint
   /**
       invalid tansport mode
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       transfer RTP data
   */
-  rtp = 1,
+  Rtp = 1,
 
   /**
       transfer RDT (RealMedia) data
   */
-  rdt = 2,
+  Rdt = 2,
 }
 
 /**
@@ -901,7 +901,7 @@ enum GstRTSPVersion
   /**
       unknown/invalid version
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       version 1.0

@@ -532,10 +532,10 @@ interface TreeModel
     Connect to RowChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowChangedCallbackDlg) || is(T : RowChangedCallbackFunc));
 
   /**
@@ -563,10 +563,10 @@ interface TreeModel
     Connect to RowDeleted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowDeleted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc));
 
   /**
@@ -589,10 +589,10 @@ interface TreeModel
     Connect to RowHasChildToggled signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowHasChildToggled(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowHasChildToggled(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowHasChildToggledCallbackDlg) || is(T : RowHasChildToggledCallbackFunc));
 
   /**
@@ -619,9 +619,9 @@ interface TreeModel
     Connect to RowInserted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRowInserted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc));
   }

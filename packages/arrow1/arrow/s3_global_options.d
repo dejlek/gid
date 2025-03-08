@@ -10,7 +10,7 @@ import gobject.object;
 class S3GlobalOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class S3GlobalOptions : gobject.object.ObjectG
   {
     GArrowS3GlobalOptions* _cretval;
     _cretval = garrow_s3_global_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

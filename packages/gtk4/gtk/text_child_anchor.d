@@ -16,7 +16,7 @@ import gtk.widget;
 class TextChildAnchor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class TextChildAnchor : gobject.object.ObjectG
   {
     GtkTextChildAnchor* _cretval;
     _cretval = gtk_text_child_anchor_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,9 +60,9 @@ class TextChildAnchor : gobject.object.ObjectG
   static gtk.text_child_anchor.TextChildAnchor newWithReplacement(string character)
   {
     GtkTextChildAnchor* _cretval;
-    const(char)* _character = character.toCString(No.alloc);
+    const(char)* _character = character.toCString(No.Alloc);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
-    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class TextChildAnchor : gobject.object.ObjectG
     {
       _retval = new gtk.widget.Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = ObjectG.getDObject!(gtk.widget.Widget)(_cretval[i], No.take);
+        _retval[i] = ObjectG.getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
     }
     return _retval;
   }

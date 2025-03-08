@@ -20,7 +20,7 @@ import gtk.widget;
 class CenterLayout : gtk.layout_manager.LayoutManager
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,7 +44,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_center_layout_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_center_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_end_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   {
     GtkWidget* _cretval;
     _cretval = gtk_center_layout_get_start_widget(cast(GtkCenterLayout*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   */
   void setCenterWidget(gtk.widget.Widget widget = null)
   {
-    gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_center_layout_set_center_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   */
   void setEndWidget(gtk.widget.Widget widget = null)
   {
-    gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_center_layout_set_end_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -188,6 +188,6 @@ class CenterLayout : gtk.layout_manager.LayoutManager
   */
   void setStartWidget(gtk.widget.Widget widget = null)
   {
-    gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    gtk_center_layout_set_start_widget(cast(GtkCenterLayout*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
   }
 }

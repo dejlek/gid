@@ -27,7 +27,7 @@ import gtk.types;
 class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,7 +55,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_box_layout_new(orientation);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

@@ -46,7 +46,7 @@ import gtk.types;
 class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -74,9 +74,9 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   this(string contentType)
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(No.alloc);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
     _cretval = gtk_app_chooser_button_new(_contentType);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -93,9 +93,9 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   void appendCustomItem(string name, string label, gio.icon.Icon icon)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _label = label.toCString(No.alloc);
-    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _label = label.toCString(No.Alloc);
+    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,7 +116,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   void setActiveCustomItem(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)cPtr, _name);
   }
 
@@ -167,7 +167,7 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
   */
   void setHeading(string heading)
   {
-    const(char)* _heading = heading.toCString(No.alloc);
+    const(char)* _heading = heading.toCString(No.Alloc);
     gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)cPtr, _heading);
   }
 
@@ -214,10 +214,10 @@ class AppChooserButton : gtk.combo_box.ComboBox, gtk.app_chooser.AppChooser
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectCustomItemActivated(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : CustomItemActivatedCallbackDlg) || is(T : CustomItemActivatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

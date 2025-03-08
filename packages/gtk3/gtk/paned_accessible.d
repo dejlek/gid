@@ -14,7 +14,7 @@ import gtk.types;
 class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.Value
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

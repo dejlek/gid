@@ -14,7 +14,7 @@ import gstallocators.types;
 class DRMDumbAllocator : gst.allocator.Allocator
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,9 +42,9 @@ class DRMDumbAllocator : gst.allocator.Allocator
   static gstallocators.drmdumb_allocator.DRMDumbAllocator newWithDevicePath(string drmDevicePath)
   {
     GstAllocator* _cretval;
-    const(char)* _drmDevicePath = drmDevicePath.toCString(No.alloc);
+    const(char)* _drmDevicePath = drmDevicePath.toCString(No.Alloc);
     _cretval = gst_drm_dumb_allocator_new_with_device_path(_drmDevicePath);
-    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   {
     GstAllocator* _cretval;
     _cretval = gst_drm_dumb_allocator_new_with_fd(drmFd);
-    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   {
     GstMemory* _cretval;
     _cretval = gst_drm_dumb_allocator_alloc(cast(GstAllocator*)cPtr, drmFourcc, width, height, cast(uint*)&outPitch);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

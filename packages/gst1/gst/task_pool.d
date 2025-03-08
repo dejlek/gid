@@ -16,7 +16,7 @@ import gst.types;
 class TaskPool : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class TaskPool : gst.object.ObjectGst
   {
     GstTaskPool* _cretval;
     _cretval = gst_task_pool_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**

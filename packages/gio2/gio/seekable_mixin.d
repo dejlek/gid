@@ -65,7 +65,7 @@ template SeekableT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       offset =       a #goffset.
       type =       a #GSeekType.
@@ -78,7 +78,7 @@ template SeekableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_seekable_seek(cast(GSeekable*)cPtr, offset, type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_seekable_seek(cast(GSeekable*)cPtr, offset, type, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -103,7 +103,7 @@ template SeekableT()
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     Params:
@@ -117,7 +117,7 @@ template SeekableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_seekable_truncate(cast(GSeekable*)cPtr, offset, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_seekable_truncate(cast(GSeekable*)cPtr, offset, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

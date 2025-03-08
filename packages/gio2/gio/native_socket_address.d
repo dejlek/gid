@@ -17,7 +17,7 @@ import gio.types;
 class NativeSocketAddress : gio.socket_address.SocketAddress
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,6 +44,6 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
   {
     GSocketAddress* _cretval;
     _cretval = g_native_socket_address_new(native, len);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

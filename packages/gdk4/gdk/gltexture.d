@@ -20,7 +20,7 @@ import glib.types;
 class GLTexture : gdk.texture.Texture
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,8 +68,8 @@ class GLTexture : gdk.texture.Texture
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.dup) : null, id, width, height, _destroyCB, data);
-    this(_cretval, Yes.take);
+    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null, id, width, height, _destroyCB, data);
+    this(_cretval, Yes.Take);
   }
 
   /**

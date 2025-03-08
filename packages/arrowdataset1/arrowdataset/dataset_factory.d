@@ -13,7 +13,7 @@ import gobject.object;
 class DatasetFactory : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,10 +34,10 @@ class DatasetFactory : gobject.object.ObjectG
   {
     GADatasetDataset* _cretval;
     GError *_err;
-    _cretval = gadataset_dataset_factory_finish(cast(GADatasetDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = gadataset_dataset_factory_finish(cast(GADatasetDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrowdataset.dataset.Dataset)(cast(GADatasetDataset*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrowdataset.dataset.Dataset)(cast(GADatasetDataset*)_cretval, Yes.Take);
     return _retval;
   }
 }

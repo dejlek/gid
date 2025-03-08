@@ -15,7 +15,7 @@ import gtk.types;
 class SignalAction : gtk.shortcut_action.ShortcutAction
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,9 +43,9 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   this(string signalName)
   {
     GtkShortcutAction* _cretval;
-    const(char)* _signalName = signalName.toCString(No.alloc);
+    const(char)* _signalName = signalName.toCString(No.Alloc);
     _cretval = gtk_signal_action_new(_signalName);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

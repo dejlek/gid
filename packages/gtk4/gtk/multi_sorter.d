@@ -20,7 +20,7 @@ import gtk.types;
 class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,7 +52,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   {
     GtkMultiSorter* _cretval;
     _cretval = gtk_multi_sorter_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -65,7 +65,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   */
   void append(gtk.sorter.Sorter sorter)
   {
-    gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.dup) : null);
+    gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
   }
 
   /**

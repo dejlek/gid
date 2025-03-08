@@ -33,7 +33,7 @@ import gobject.object;
 class AppLaunchContext : gio.app_launch_context.AppLaunchContext
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,7 +59,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   {
     GdkDisplay* _cretval;
     _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,7 +116,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIconName(string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)cPtr, _iconName);
   }
 

@@ -53,7 +53,7 @@ import gtk.types;
 class StatusIcon : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,7 +80,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GtkStatusIcon* _cretval;
     _cretval = gtk_status_icon_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -98,9 +98,9 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromFile(string filename)
   {
     GtkStatusIcon* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_file(_filename);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -117,8 +117,8 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.take);
+    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -136,9 +136,9 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromIconName(string iconName)
   {
     GtkStatusIcon* _cretval;
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_icon_name(_iconName);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -157,8 +157,8 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.take);
+    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -177,9 +177,9 @@ class StatusIcon : gobject.object.ObjectG
   static gtk.status_icon.StatusIcon newFromStock(string stockId)
   {
     GtkStatusIcon* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData)
   {
-    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu.cPtr(No.dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData.cPtr(No.dup) : null);
+    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData.cPtr(No.Dup) : null);
   }
 
   /**
@@ -240,15 +240,15 @@ class StatusIcon : gobject.object.ObjectG
     GdkScreen* _screen;
     GdkRectangle _area;
     _retval = gtk_status_icon_get_geometry(cast(GtkStatusIcon*)cPtr, &_screen, &_area, &orientation);
-    screen = new gdk.screen.Screen(cast(void*)_screen, No.take);
-    area = new gdk.rectangle.Rectangle(cast(void*)&_area, No.take);
+    screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
+    area = new gdk.rectangle.Rectangle(cast(void*)&_area, No.Take);
     return _retval;
   }
 
   /**
       Retrieves the #GIcon being displayed by the #GtkStatusIcon.
-    The storage type of the status icon must be [gtk.types.ImageType.empty] or
-    [gtk.types.ImageType.gicon] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Gicon] (see [gtk.status_icon.StatusIcon.getStorageType]).
     The caller of this function does not own a reference to the
     returned #GIcon.
     
@@ -263,7 +263,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = gtk_status_icon_get_gicon(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,8 +285,8 @@ class StatusIcon : gobject.object.ObjectG
 
   /**
       Gets the name of the icon being displayed by the #GtkStatusIcon.
-    The storage type of the status icon must be [gtk.types.ImageType.empty] or
-    [gtk.types.ImageType.iconName] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.IconName] (see [gtk.status_icon.StatusIcon.getStorageType]).
     The returned string is owned by the #GtkStatusIcon and should not
     be freed or modified.
     Returns:     name of the displayed icon, or null if the image is empty.
@@ -299,14 +299,14 @@ class StatusIcon : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_icon_name(cast(GtkStatusIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /**
       Gets the #GdkPixbuf being displayed by the #GtkStatusIcon.
-    The storage type of the status icon must be [gtk.types.ImageType.empty] or
-    [gtk.types.ImageType.pixbuf] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Pixbuf] (see [gtk.status_icon.StatusIcon.getStorageType]).
     The caller of this function does not own a reference to the
     returned pixbuf.
     Returns:     the displayed pixbuf,
@@ -320,7 +320,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     PixbufC* _cretval;
     _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_status_icon_get_screen(cast(GtkStatusIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -365,8 +365,8 @@ class StatusIcon : gobject.object.ObjectG
 
   /**
       Gets the id of the stock icon being displayed by the #GtkStatusIcon.
-    The storage type of the status icon must be [gtk.types.ImageType.empty] or
-    [gtk.types.ImageType.stock] (see [gtk.status_icon.StatusIcon.getStorageType]).
+    The storage type of the status icon must be [gtk.types.ImageType.Empty] or
+    [gtk.types.ImageType.Stock] (see [gtk.status_icon.StatusIcon.getStorageType]).
     The returned string is owned by the #GtkStatusIcon and should not
     be freed or modified.
     Returns:     stock id of the displayed stock icon,
@@ -378,14 +378,14 @@ class StatusIcon : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_stock(cast(GtkStatusIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /**
       Gets the type of representation being used by the #GtkStatusIcon
     to store image data. If the #GtkStatusIcon has no image data,
-    the return value will be [gtk.types.ImageType.empty].
+    the return value will be [gtk.types.ImageType.Empty].
     Returns:     the image representation being used
   
     Deprecated:     Use #GNotification and #GtkApplication to
@@ -413,7 +413,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_status_icon_get_title(cast(GtkStatusIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_markup(cast(GtkStatusIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class StatusIcon : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gtk_status_icon_get_tooltip_text(cast(GtkStatusIcon*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -524,7 +524,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromFile(string filename)
   {
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_status_icon_set_from_file(cast(GtkStatusIcon*)cPtr, _filename);
   }
 
@@ -540,7 +540,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromGicon(gio.icon.Icon icon)
   {
-    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -556,7 +556,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_status_icon_set_from_icon_name(cast(GtkStatusIcon*)cPtr, _iconName);
   }
 
@@ -572,7 +572,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -585,7 +585,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setFromStock(string stockId)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_status_icon_set_from_stock(cast(GtkStatusIcon*)cPtr, _stockId);
   }
 
@@ -620,7 +620,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_status_icon_set_name(cast(GtkStatusIcon*)cPtr, _name);
   }
 
@@ -638,7 +638,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_status_icon_set_screen(cast(GtkStatusIcon*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+    gtk_status_icon_set_screen(cast(GtkStatusIcon*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 
   /**
@@ -655,7 +655,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_status_icon_set_title(cast(GtkStatusIcon*)cPtr, _title);
   }
 
@@ -677,7 +677,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setTooltipMarkup(string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)cPtr, _markup);
   }
 
@@ -699,7 +699,7 @@ class StatusIcon : gobject.object.ObjectG
   */
   void setTooltipText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_status_icon_set_tooltip_text(cast(GtkStatusIcon*)cPtr, _text);
   }
 
@@ -738,10 +738,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -781,10 +781,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to ButtonPressEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectButtonPressEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonPressEventCallbackDlg) || is(T : ButtonPressEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -827,10 +827,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to ButtonReleaseEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectButtonReleaseEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonReleaseEventCallbackDlg) || is(T : ButtonReleaseEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -877,10 +877,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to PopupMenu signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopupMenu(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupMenuCallbackDlg) || is(T : PopupMenuCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -935,10 +935,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to QueryTooltip signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryTooltip(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipCallbackDlg) || is(T : QueryTooltipCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -984,10 +984,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to ScrollEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScrollEventCallbackDlg) || is(T : ScrollEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1026,10 +1026,10 @@ class StatusIcon : gobject.object.ObjectG
     Connect to SizeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSizeChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SizeChangedCallbackDlg) || is(T : SizeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

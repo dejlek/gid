@@ -25,7 +25,7 @@ import gst.types;
 class Allocator : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,9 +52,9 @@ class Allocator : gst.object.ObjectGst
   static gst.allocator.Allocator find(string name = null)
   {
     GstAllocator* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_allocator_find(_name);
-    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -66,8 +66,8 @@ class Allocator : gst.object.ObjectGst
   */
   static void register(string name, gst.allocator.Allocator allocator)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator.cPtr(Yes.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -94,8 +94,8 @@ class Allocator : gst.object.ObjectGst
   gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params = null)
   {
     GstMemory* _cretval;
-    _cretval = gst_allocator_alloc(cast(GstAllocator*)cPtr, size, params ? cast(GstAllocationParams*)params.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_allocator_alloc(cast(GstAllocator*)cPtr, size, params ? cast(GstAllocationParams*)params.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

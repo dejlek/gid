@@ -40,7 +40,7 @@ import gobject.object;
 class SocketService : gio.socket_listener.SocketListener
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -70,7 +70,7 @@ class SocketService : gio.socket_listener.SocketListener
   {
     GSocketService* _cretval;
     _cretval = g_socket_service_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -150,10 +150,10 @@ class SocketService : gio.socket_listener.SocketListener
     Connect to Incoming signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectIncoming(T)(T callback, Flag!"after" after = No.after)
+  ulong connectIncoming(T)(T callback, Flag!"After" after = No.After)
   if (is(T : IncomingCallbackDlg) || is(T : IncomingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

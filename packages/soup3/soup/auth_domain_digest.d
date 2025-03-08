@@ -17,7 +17,7 @@ import soup.types;
 class AuthDomainDigest : soup.auth_domain.AuthDomain
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,11 +58,11 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   static string encodePassword(string username, string realm, string password)
   {
     char* _cretval;
-    const(char)* _username = username.toCString(No.alloc);
-    const(char)* _realm = realm.toCString(No.alloc);
-    const(char)* _password = password.toCString(No.alloc);
+    const(char)* _username = username.toCString(No.Alloc);
+    const(char)* _realm = realm.toCString(No.Alloc);
+    const(char)* _password = password.toCString(No.Alloc);
     _cretval = soup_auth_domain_digest_encode_password(_username, _realm, _password);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -87,10 +87,10 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
     {
       string _dretval;
       auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
-      string _username = username.fromCString(No.free);
+      string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _username);
-      char* _retval = _dretval.toCString(Yes.alloc);
+      _dretval = (*_dlg)(ObjectG.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
     }

@@ -42,7 +42,7 @@ import gobject.object;
 class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -84,7 +84,7 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
   this(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;
-    _cretval = atk_no_op_object_new(obj ? cast(ObjectC*)obj.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = atk_no_op_object_new(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

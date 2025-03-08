@@ -21,7 +21,7 @@ import gobject.object;
 class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,9 +48,9 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   this(string objectPath)
   {
     GDBusObjectSkeleton* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_dbus_object_skeleton_new(_objectPath);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,7 +66,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   */
   void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.dup) : null);
+    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -86,7 +86,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   */
   void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.dup) : null);
+    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
   }
 
   /**
@@ -99,7 +99,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   */
   void removeInterfaceByName(string interfaceName)
   {
-    const(char)* _interfaceName = interfaceName.toCString(No.alloc);
+    const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
     g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)cPtr, _interfaceName);
   }
 
@@ -110,7 +110,7 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
   */
   void setObjectPath(string objectPath)
   {
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)cPtr, _objectPath);
   }
 
@@ -141,10 +141,10 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
     Connect to AuthorizeMethod signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAuthorizeMethod(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAuthorizeMethod(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AuthorizeMethodCallbackDlg) || is(T : AuthorizeMethodCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

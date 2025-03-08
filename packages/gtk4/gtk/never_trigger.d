@@ -13,7 +13,7 @@ import gtk.types;
 class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_never_trigger_get();
-    auto _retval = ObjectG.getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

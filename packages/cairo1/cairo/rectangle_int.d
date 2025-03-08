@@ -14,15 +14,15 @@ class RectangleInt : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_rectangle_int_t.sizeof), Yes.take);
+    super(safeMalloc(cairo_rectangle_int_t.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }

@@ -27,7 +27,7 @@ import gstaudio.types;
 class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

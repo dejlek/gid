@@ -13,7 +13,7 @@ import gobject.object;
 class StreamListener : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,7 +56,7 @@ class StreamListener : gobject.object.ObjectG
     auto _metadata = gHashTableFromD!(string, string)(metadata);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_metadata);
     GError *_err;
-    _retval = garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.dup) : null, _metadata, &_err);
+    _retval = garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, _metadata, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -73,7 +73,7 @@ class StreamListener : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema.cPtr(No.dup) : null, &_err);
+    _retval = garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

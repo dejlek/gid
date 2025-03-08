@@ -34,7 +34,7 @@ import gobject.object;
 class Surface : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,8 +63,8 @@ class Surface : gobject.object.ObjectG
   static gdk.surface.Surface newPopup(gdk.surface.Surface parent, bool autohide)
   {
     GdkSurface* _cretval;
-    _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(No.dup) : null, autohide);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.take);
+    _cretval = gdk_surface_new_popup(parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null, autohide);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,8 +77,8 @@ class Surface : gobject.object.ObjectG
   static gdk.surface.Surface newToplevel(gdk.display.Display display)
   {
     GdkSurface* _cretval;
-    _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.take);
+    _cretval = gdk_surface_new_toplevel(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkCairoContext* _cretval;
     _cretval = gdk_surface_create_cairo_context(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cairo_context.CairoContext)(cast(GdkCairoContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.cairo_context.CairoContext)(cast(GdkCairoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class Surface : gobject.object.ObjectG
     _cretval = gdk_surface_create_gl_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Surface : gobject.object.ObjectG
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_surface_create_similar_surface(cast(GdkSurface*)cPtr, content, width, height);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class Surface : gobject.object.ObjectG
     _cretval = gdk_surface_create_vulkan_context(cast(GdkSurface*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.vulkan_context.VulkanContext)(cast(GdkVulkanContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_surface_get_cursor(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,8 +226,8 @@ class Surface : gobject.object.ObjectG
   gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.take);
+    _cretval = gdk_surface_get_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Surface : gobject.object.ObjectG
   bool getDevicePosition(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     bool _retval;
-    _retval = gdk_surface_get_device_position(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y, &mask);
+    _retval = gdk_surface_get_device_position(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_surface_get_display(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Surface : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_surface_get_frame_clock(cast(GdkSurface*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -415,13 +415,13 @@ class Surface : gobject.object.ObjectG
     Note that cursor must be for the same display as surface.
     
     Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
-    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.blankCursor].
+    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor].
     Params:
       cursor =       a [gdk.cursor.Cursor]
   */
   void setCursor(gdk.cursor.Cursor cursor = null)
   {
-    gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null);
+    gdk_surface_set_cursor(cast(GdkSurface*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -431,14 +431,14 @@ class Surface : gobject.object.ObjectG
     cursor of its parent surface. Most surfaces should use this default.
     
     Use [gdk.cursor.Cursor.newFromName] or [gdk.cursor.Cursor.newFromTexture]
-    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.blankCursor].
+    to create the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor].
     Params:
       device =       a pointer [gdk.device.Device]
       cursor =       a [gdk.cursor.Cursor]
   */
   void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
   {
-    gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null);
+    gdk_surface_set_device_cursor(cast(GdkSurface*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -461,7 +461,7 @@ class Surface : gobject.object.ObjectG
   */
   void setInputRegion(cairo.region.Region region)
   {
-    gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.dup) : null);
+    gdk_surface_set_input_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -486,7 +486,7 @@ class Surface : gobject.object.ObjectG
   */
   void setOpaqueRegion(cairo.region.Region region = null)
   {
-    gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.dup) : null);
+    gdk_surface_set_opaque_region(cast(GdkSurface*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -503,7 +503,7 @@ class Surface : gobject.object.ObjectG
   bool translateCoordinates(gdk.surface.Surface to, ref double x, ref double y)
   {
     bool _retval;
-    _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)cPtr, to ? cast(GdkSurface*)to.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gdk_surface_translate_coordinates(cast(GdkSurface*)cPtr, to ? cast(GdkSurface*)to.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -525,10 +525,10 @@ class Surface : gobject.object.ObjectG
     Connect to EnterMonitor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnterMonitor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEnterMonitor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterMonitorCallbackDlg) || is(T : EnterMonitorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -563,10 +563,10 @@ class Surface : gobject.object.ObjectG
     Connect to Event signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -607,10 +607,10 @@ class Surface : gobject.object.ObjectG
     Connect to Layout signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLayout(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLayout(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LayoutCallbackDlg) || is(T : LayoutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -645,10 +645,10 @@ class Surface : gobject.object.ObjectG
     Connect to LeaveMonitor signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLeaveMonitor(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLeaveMonitor(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveMonitorCallbackDlg) || is(T : LeaveMonitorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -683,10 +683,10 @@ class Surface : gobject.object.ObjectG
     Connect to Render signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRender(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRender(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RenderCallbackDlg) || is(T : RenderCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

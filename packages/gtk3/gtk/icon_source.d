@@ -12,12 +12,12 @@ import gtk.types;
 class IconSource : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -70,7 +70,7 @@ class IconSource : gobject.boxed.Boxed
   {
     GtkIconSource* _cretval;
     _cretval = gtk_icon_source_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -83,7 +83,7 @@ class IconSource : gobject.boxed.Boxed
   {
     GtkIconSource* _cretval;
     _cretval = gtk_icon_source_copy(cast(const(GtkIconSource)*)cPtr);
-    auto _retval = _cretval ? new gtk.icon_source.IconSource(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.icon_source.IconSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class IconSource : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_icon_source_get_filename(cast(const(GtkIconSource)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class IconSource : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gtk_icon_source_get_icon_name(cast(const(GtkIconSource)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class IconSource : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     _cretval = gtk_icon_source_get_pixbuf(cast(const(GtkIconSource)*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setFilename(string filename)
   {
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gtk_icon_source_set_filename(cast(GtkIconSource*)cPtr, _filename);
   }
 
@@ -288,7 +288,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setIconName(string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_icon_source_set_icon_name(cast(GtkIconSource*)cPtr, _iconName);
   }
 
@@ -302,7 +302,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_icon_source_set_pixbuf(cast(GtkIconSource*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gtk_icon_source_set_pixbuf(cast(GtkIconSource*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**

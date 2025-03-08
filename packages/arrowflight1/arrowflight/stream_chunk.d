@@ -12,7 +12,7 @@ import gobject.object;
 class StreamChunk : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class StreamChunk : gobject.object.ObjectG
   {
     GArrowRecordBatch* _cretval;
     _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -44,7 +44,7 @@ class StreamChunk : gobject.object.ObjectG
   {
     GArrowBuffer* _cretval;
     _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

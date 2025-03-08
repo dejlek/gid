@@ -11,7 +11,7 @@ class DebugMessage
   GstDebugMessage* cInstancePtr;
   bool owned;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.DebugMessage");
@@ -35,7 +35,7 @@ class DebugMessage
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get(cast(GstDebugMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class DebugMessage
   {
     const(char)* _cretval;
     _cretval = gst_debug_message_get_id(cast(GstDebugMessage*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

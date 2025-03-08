@@ -50,7 +50,7 @@ import gtk.window;
 class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,8 +83,8 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, flags, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -102,9 +102,9 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType)
   {
     GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString(No.alloc);
-    _cretval = gtk_app_chooser_dialog_new_for_content_type(parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null, flags, _contentType);
-    auto _retval = ObjectG.getDObject!(gtk.app_chooser_dialog.AppChooserDialog)(cast(GtkWidget*)_cretval, No.take);
+    const(char)* _contentType = contentType.toCString(No.Alloc);
+    _cretval = gtk_app_chooser_dialog_new_for_content_type(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, flags, _contentType);
+    auto _retval = ObjectG.getDObject!(gtk.app_chooser_dialog.AppChooserDialog)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   {
     const(char)* _cretval;
     _cretval = gtk_app_chooser_dialog_get_heading(cast(GtkAppChooserDialog*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_app_chooser_dialog_get_widget(cast(GtkAppChooserDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
   */
   void setHeading(string heading)
   {
-    const(char)* _heading = heading.toCString(No.alloc);
+    const(char)* _heading = heading.toCString(No.Alloc);
     gtk_app_chooser_dialog_set_heading(cast(GtkAppChooserDialog*)cPtr, _heading);
   }
 }

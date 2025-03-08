@@ -86,7 +86,7 @@ import gtk.types;
 class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -126,7 +126,7 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
   {
     GtkIconFactory* _cretval;
     _cretval = gtk_icon_factory_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -144,9 +144,9 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
   static gtk.icon_set.IconSet lookupDefault(string stockId)
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_icon_factory_lookup_default(_stockId);
-    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -169,8 +169,8 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
   */
   void add(string stockId, gtk.icon_set.IconSet iconSet)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
-    gtk_icon_factory_add(cast(GtkIconFactory*)cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.dup) : null);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    gtk_icon_factory_add(cast(GtkIconFactory*)cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null);
   }
 
   /**
@@ -203,9 +203,9 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
   gtk.icon_set.IconSet lookup(string stockId)
   {
     GtkIconSet* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_icon_factory_lookup(cast(GtkIconFactory*)cPtr, _stockId);
-    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

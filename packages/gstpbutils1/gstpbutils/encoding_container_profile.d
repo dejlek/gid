@@ -13,7 +13,7 @@ import gstpbutils.types;
 class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,11 +42,11 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   this(string name, string description, gst.caps.Caps format, string preset = null)
   {
     GstEncodingContainerProfile* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _description = description.toCString(No.alloc);
-    const(char)* _preset = preset.toCString(No.alloc);
-    _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format.cPtr(No.dup) : null, _preset);
-    this(_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
+    const(char)* _preset = preset.toCString(No.Alloc);
+    _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format.cPtr(No.Dup) : null, _preset);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.dup) : null);
+    _retval = gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(No.dup) : null);
+    _retval = gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(No.Dup) : null);
     return _retval;
   }
 

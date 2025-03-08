@@ -29,7 +29,7 @@ import gtk.widget;
   [gtk.message_dialog.MessageDialog] from [gtk.dialog.Dialog] without too much effort, but
   [gtk.message_dialog.MessageDialog] saves typing.
   
-  The easiest way to do a modal message dialog is to use the [gtk.types.DialogFlags.modal]
+  The easiest way to do a modal message dialog is to use the [gtk.types.DialogFlags.Modal]
   flag, which will call [gtk.window.Window.setModal] internally. The dialog will
   prevent interaction with the parent window until it's hidden or destroyed.
   You can use the [gtk.dialog.Dialog.response] signal to know when the user
@@ -54,7 +54,7 @@ import gtk.widget;
   ```
   
   You might do a non-modal [gtk.message_dialog.MessageDialog] simply by omitting the
-  [gtk.types.DialogFlags.modal] flag:
+  [gtk.types.DialogFlags.Modal] flag:
   
   ```c
   GtkDialogFlags flags = GTK_DIALOG_DESTROY_WITH_PARENT;
@@ -83,7 +83,7 @@ import gtk.widget;
 class MessageDialog : gtk.dialog.Dialog
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -115,7 +115,7 @@ class MessageDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   void setMarkup(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gtk_message_dialog_set_markup(cast(GtkMessageDialog*)cPtr, _str);
   }
 }

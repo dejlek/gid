@@ -29,7 +29,7 @@ import gtksource.types;
 class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,6 +55,6 @@ class StyleSchemeChooserWidget : gtk.widget.Widget, gtksource.style_scheme_choos
   {
     GtkWidget* _cretval;
     _cretval = gtk_source_style_scheme_chooser_widget_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

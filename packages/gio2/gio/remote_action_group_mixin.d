@@ -50,8 +50,8 @@ template RemoteActionGroupT()
   */
   override void activateActionFull(string actionName, glib.variant.VariantG parameter, glib.variant.VariantG platformData)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(VariantC*)parameter.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);
   }
 
   /**
@@ -71,7 +71,7 @@ template RemoteActionGroupT()
   */
   override void changeActionStateFull(string actionName, glib.variant.VariantG value, glib.variant.VariantG platformData)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(VariantC*)value.cPtr(No.Dup) : null, platformData ? cast(VariantC*)platformData.cPtr(No.Dup) : null);
   }
 }

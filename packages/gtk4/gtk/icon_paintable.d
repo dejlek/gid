@@ -19,7 +19,7 @@ import gtk.types;
 class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,8 +52,8 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
   static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, size, scale);
-    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.take);
+    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, size, scale);
+    auto _retval = ObjectG.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
   {
     GFile* _cretval;
     _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
   {
     const(char)* _cretval;
     _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

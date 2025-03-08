@@ -16,7 +16,7 @@ class VideoRegionOfInterestMeta
 {
   GstVideoRegionOfInterestMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoRegionOfInterestMeta");
@@ -122,7 +122,7 @@ class VideoRegionOfInterestMeta
   */
   void addParam(gst.structure.Structure s)
   {
-    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.dup) : null);
+    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -137,9 +137,9 @@ class VideoRegionOfInterestMeta
   gst.structure.Structure getParam(string name)
   {
     GstStructure* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_video_region_of_interest_meta_get_param(cast(GstVideoRegionOfInterestMeta*)cPtr, _name);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

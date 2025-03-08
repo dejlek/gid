@@ -10,7 +10,7 @@ import gid.gid;
 class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
   {
     GADatasetHivePartitioningOptions* _cretval;
     _cretval = gadataset_hive_partitioning_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

@@ -38,7 +38,7 @@ import soup.websocket_extension;
 class WebsocketConnection : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -62,7 +62,7 @@ class WebsocketConnection : gobject.object.ObjectG
     main loop runs.
     
     The code and data are sent to the peer along with the close request.
-    If code is [soup.types.WebsocketCloseCode.noStatus] a close message with no body
+    If code is [soup.types.WebsocketCloseCode.NoStatus] a close message with no body
     (without code and data) is sent.
     Note that the data must be UTF-8 valid.
     Params:
@@ -71,7 +71,7 @@ class WebsocketConnection : gobject.object.ObjectG
   */
   void close(ushort code, string data = null)
   {
-    const(char)* _data = data.toCString(No.alloc);
+    const(char)* _data = data.toCString(No.Alloc);
     soup_websocket_connection_close(cast(SoupWebsocketConnection*)cPtr, code, _data);
   }
 
@@ -79,7 +79,7 @@ class WebsocketConnection : gobject.object.ObjectG
       Get the close code received from the WebSocket peer.
     
     This only becomes valid once the WebSocket is in the
-    [soup.types.WebsocketState.closed] state. The value will often be in the
+    [soup.types.WebsocketState.Closed] state. The value will often be in the
     `enumWebsocketCloseCode` enumeration, but may also be an application
     defined close code.
     Returns:     the close code or zero.
@@ -95,7 +95,7 @@ class WebsocketConnection : gobject.object.ObjectG
       Get the close data received from the WebSocket peer.
     
     This only becomes valid once the WebSocket is in the
-    [soup.types.WebsocketState.closed] state. The data may be freed once
+    [soup.types.WebsocketState.Closed] state. The data may be freed once
     the main loop is run, so copy it if you need to keep it around.
     Returns:     the close data or null
   */
@@ -103,7 +103,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     GIOStream* _cretval;
     _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class WebsocketConnection : gobject.object.ObjectG
   {
     GUri* _cretval;
     _cretval = soup_websocket_connection_get_uri(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class WebsocketConnection : gobject.object.ObjectG
   */
   void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message)
   {
-    soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)cPtr, type, message ? cast(GBytes*)message.cPtr(No.dup) : null);
+    soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)cPtr, type, message ? cast(GBytes*)message.cPtr(No.Dup) : null);
   }
 
   /**
@@ -264,7 +264,7 @@ class WebsocketConnection : gobject.object.ObjectG
   */
   void sendText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     soup_websocket_connection_send_text(cast(SoupWebsocketConnection*)cPtr, _text);
   }
 
@@ -316,10 +316,10 @@ class WebsocketConnection : gobject.object.ObjectG
     Connect to Closed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClosed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosedCallbackDlg) || is(T : ClosedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -351,10 +351,10 @@ class WebsocketConnection : gobject.object.ObjectG
     Connect to Closing signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClosing(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClosing(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClosingCallbackDlg) || is(T : ClosingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -390,10 +390,10 @@ class WebsocketConnection : gobject.object.ObjectG
     Connect to Error signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectError(T)(T callback, Flag!"after" after = No.after)
+  ulong connectError(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ErrorCallbackDlg) || is(T : ErrorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -432,10 +432,10 @@ class WebsocketConnection : gobject.object.ObjectG
     Connect to Message signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMessage(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMessage(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MessageCallbackDlg) || is(T : MessageCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -475,10 +475,10 @@ class WebsocketConnection : gobject.object.ObjectG
     Connect to Pong signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPong(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPong(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PongCallbackDlg) || is(T : PongCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

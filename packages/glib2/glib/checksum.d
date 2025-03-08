@@ -27,12 +27,12 @@ import gobject.boxed;
 class Checksum : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -71,7 +71,7 @@ class Checksum : gobject.boxed.Boxed
   {
     GChecksum* _cretval;
     _cretval = g_checksum_new(checksumType);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class Checksum : gobject.boxed.Boxed
   {
     GChecksum* _cretval;
     _cretval = g_checksum_copy(cast(const(GChecksum)*)cPtr);
-    auto _retval = _cretval ? new glib.checksum.Checksum(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.checksum.Checksum(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Checksum : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_checksum_get_string(cast(GChecksum*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

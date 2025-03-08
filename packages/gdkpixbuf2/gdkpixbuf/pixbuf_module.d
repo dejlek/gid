@@ -60,7 +60,7 @@ class PixbufModule
 {
   GdkPixbufModule cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GdkPixbuf.PixbufModule");
@@ -78,24 +78,24 @@ class PixbufModule
 
   @property string moduleName()
   {
-    return (cast(GdkPixbufModule*)cPtr).moduleName.fromCString(No.free);
+    return (cast(GdkPixbufModule*)cPtr).moduleName.fromCString(No.Free);
   }
 
   @property void moduleName(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
-    (cast(GdkPixbufModule*)cPtr).moduleName = propval.toCString(Yes.alloc);
+    (cast(GdkPixbufModule*)cPtr).moduleName = propval.toCString(Yes.Alloc);
   }
 
   @property string modulePath()
   {
-    return (cast(GdkPixbufModule*)cPtr).modulePath.fromCString(No.free);
+    return (cast(GdkPixbufModule*)cPtr).modulePath.fromCString(No.Free);
   }
 
   @property void modulePath(string propval)
   {
     safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
-    (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(Yes.alloc);
+    (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(Yes.Alloc);
   }
 
   @property gmodule.module_.Module module_()

@@ -17,7 +17,7 @@ import gtk.widget;
 class ButtonBox : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class ButtonBox : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_button_box_new(orientation);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class ButtonBox : gtk.box.Box
   bool getChildNonHomogeneous(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    _retval = gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class ButtonBox : gtk.box.Box
   bool getChildSecondary(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    _retval = gtk_button_box_get_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class ButtonBox : gtk.box.Box
   */
   void setChildNonHomogeneous(gtk.widget.Widget child, bool nonHomogeneous)
   {
-    gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, nonHomogeneous);
+    gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, nonHomogeneous);
   }
 
   /**
@@ -101,12 +101,12 @@ class ButtonBox : gtk.box.Box
     A typical use of a secondary child is the help button in a dialog.
     
     This group appears after the other children if the style
-    is [gtk.types.ButtonBoxStyle.start], [gtk.types.ButtonBoxStyle.spread] or
-    [gtk.types.ButtonBoxStyle.edge], and before the other children if the style
-    is [gtk.types.ButtonBoxStyle.end]. For horizontal button boxes, the definition
+    is [gtk.types.ButtonBoxStyle.Start], [gtk.types.ButtonBoxStyle.Spread] or
+    [gtk.types.ButtonBoxStyle.Edge], and before the other children if the style
+    is [gtk.types.ButtonBoxStyle.End]. For horizontal button boxes, the definition
     of before/after depends on direction of the widget (see
-    [gtk.widget.Widget.setDirection]). If the style is [gtk.types.ButtonBoxStyle.start]
-    or [gtk.types.ButtonBoxStyle.end], then the secondary children are aligned at
+    [gtk.widget.Widget.setDirection]). If the style is [gtk.types.ButtonBoxStyle.Start]
+    or [gtk.types.ButtonBoxStyle.End], then the secondary children are aligned at
     the other end of the button box from the main children. For the
     other styles, they appear immediately next to the main children.
     Params:
@@ -116,7 +116,7 @@ class ButtonBox : gtk.box.Box
   */
   void setChildSecondary(gtk.widget.Widget child, bool isSecondary)
   {
-    gtk_button_box_set_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, isSecondary);
+    gtk_button_box_set_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, isSecondary);
   }
 
   /**

@@ -56,7 +56,7 @@ import gtk.window;
 class ShortcutsWindow : gtk.window.Window
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -94,10 +94,10 @@ class ShortcutsWindow : gtk.window.Window
     Connect to Close signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClose(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClose(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CloseCallbackDlg) || is(T : CloseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -133,10 +133,10 @@ class ShortcutsWindow : gtk.window.Window
     Connect to Search signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSearch(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSearch(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SearchCallbackDlg) || is(T : SearchCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

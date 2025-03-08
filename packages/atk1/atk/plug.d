@@ -16,7 +16,7 @@ import gid.gid;
 class Plug : atk.object.ObjectAtk, atk.component.Component
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
   {
     AtkObject* _cretval;
     _cretval = atk_plug_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
   {
     char* _cretval;
     _cretval = atk_plug_get_id(cast(AtkPlug*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -79,6 +79,6 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
   */
   void setChild(atk.object.ObjectAtk child)
   {
-    atk_plug_set_child(cast(AtkPlug*)cPtr, child ? cast(AtkObject*)child.cPtr(No.dup) : null);
+    atk_plug_set_child(cast(AtkPlug*)cPtr, child ? cast(AtkObject*)child.cPtr(No.Dup) : null);
   }
 }

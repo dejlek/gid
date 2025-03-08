@@ -11,7 +11,7 @@ import gobject.object;
 class Ticket : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,15 +31,15 @@ class Ticket : gobject.object.ObjectG
   this(glib.bytes.Bytes data)
   {
     GAFlightTicket* _cretval;
-    _cretval = gaflight_ticket_new(data ? cast(GBytes*)data.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gaflight_ticket_new(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool equal(arrowflight.ticket.Ticket otherTicket)
   {
     bool _retval;
-    _retval = gaflight_ticket_equal(cast(GAFlightTicket*)cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket.cPtr(No.dup) : null);
+    _retval = gaflight_ticket_equal(cast(GAFlightTicket*)cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket.cPtr(No.Dup) : null);
     return _retval;
   }
 }

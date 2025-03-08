@@ -22,7 +22,7 @@ import gtk.widget;
 class Invisible : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class Invisible : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_invisible_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -59,8 +59,8 @@ class Invisible : gtk.widget.Widget
   static gtk.invisible.Invisible newForScreen(gdk.screen.Screen screen)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Invisible : gtk.widget.Widget
   {
     GdkScreen* _cretval;
     _cretval = gtk_invisible_get_screen(cast(GtkInvisible*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -83,6 +83,6 @@ class Invisible : gtk.widget.Widget
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_invisible_set_screen(cast(GtkInvisible*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+    gtk_invisible_set_screen(cast(GtkInvisible*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 }

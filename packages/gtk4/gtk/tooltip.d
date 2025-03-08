@@ -44,7 +44,7 @@ import gtk.widget;
 class Tooltip : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,7 +72,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setCustom(gtk.widget.Widget customWidget = null)
   {
-    gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.dup) : null);
+    gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -83,7 +83,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setIcon(gdk.paintable.Paintable paintable = null)
   {
-    gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.dup) : null);
+    gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, paintable ? cast(GdkPaintable*)(cast(ObjectG)paintable).cPtr(No.Dup) : null);
   }
 
   /**
@@ -95,7 +95,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setIconFromGicon(gio.icon.Icon gicon = null)
   {
-    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.dup) : null);
+    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setIconFromIconName(string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)cPtr, _iconName);
   }
 
@@ -121,7 +121,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setMarkup(string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tooltip_set_markup(cast(GtkTooltip*)cPtr, _markup);
   }
 
@@ -135,7 +135,7 @@ class Tooltip : gobject.object.ObjectG
   */
   void setText(string text = null)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_tooltip_set_text(cast(GtkTooltip*)cPtr, _text);
   }
 
@@ -153,6 +153,6 @@ class Tooltip : gobject.object.ObjectG
   */
   void setTipArea(gdk.rectangle.Rectangle rect)
   {
-    gtk_tooltip_set_tip_area(cast(GtkTooltip*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null);
+    gtk_tooltip_set_tip_area(cast(GtkTooltip*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
   }
 }

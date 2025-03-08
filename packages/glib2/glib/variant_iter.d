@@ -14,7 +14,7 @@ class VariantIter
 {
   GVariantIter cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.VariantIter");
@@ -84,7 +84,7 @@ class VariantIter
   {
     VariantC* _cretval;
     _cretval = g_variant_iter_next_value(cast(GVariantIter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

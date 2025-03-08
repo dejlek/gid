@@ -19,7 +19,7 @@ import pango.types;
 class Coverage : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,14 +38,14 @@ class Coverage : gobject.object.ObjectG
   /**
       Create a new [pango.coverage.Coverage]
     Returns:     the newly allocated [pango.coverage.Coverage], initialized
-        to [pango.types.CoverageLevel.none] with a reference count of one, which
+        to [pango.types.CoverageLevel.None] with a reference count of one, which
         should be freed with [pango.coverage.Coverage.unref].
   */
   this()
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -67,7 +67,7 @@ class Coverage : gobject.object.ObjectG
 
     auto _bytes = cast(ubyte*)bytes.ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
-    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Coverage : gobject.object.ObjectG
   {
     PangoCoverage* _cretval;
     _cretval = pango_coverage_copy(cast(PangoCoverage*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Coverage : gobject.object.ObjectG
   */
   void max(pango.coverage.Coverage other)
   {
-    pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.dup) : null);
+    pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.Dup) : null);
   }
 
   /**

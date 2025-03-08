@@ -7,7 +7,7 @@ import gio.dtls_client_connection_mixin;
 /// Proxy object for Gio.DtlsClientConnection interface when a GObject has no applicable D binding
 class DtlsClientConnectionIfaceProxy : IfaceProxy, gio.dtls_client_connection.DtlsClientConnection
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

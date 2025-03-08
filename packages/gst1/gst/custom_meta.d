@@ -13,13 +13,13 @@ import gst.types;
   
   Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
   [gst.meta.Meta.deserialize], but only if the #GstStructure does not contain any
-  fields that cannot be serialized, see [gst.types.SerializeFlags.strict].
+  fields that cannot be serialized, see [gst.types.SerializeFlags.Strict].
 */
 class CustomMeta
 {
   GstCustomMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.CustomMeta");
@@ -54,7 +54,7 @@ class CustomMeta
   {
     GstStructure* _cretval;
     _cretval = gst_custom_meta_get_structure(cast(GstCustomMeta*)cPtr);
-    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class CustomMeta
   bool hasName(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gst_custom_meta_has_name(cast(GstCustomMeta*)cPtr, _name);
     return _retval;
   }

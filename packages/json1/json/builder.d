@@ -48,7 +48,7 @@ import json.types;
 class Builder : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -74,7 +74,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_new_immutable();
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_boolean_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_double_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_int_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_add_null_value(cast(JsonBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,9 +185,9 @@ class Builder : gobject.object.ObjectG
   json.builder.Builder addStringValue(string value)
   {
     JsonBuilder* _cretval;
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     _cretval = json_builder_add_string_value(cast(JsonBuilder*)cPtr, _value);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,8 +206,8 @@ class Builder : gobject.object.ObjectG
   json.builder.Builder addValue(json.node.Node node)
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_value(cast(JsonBuilder*)cPtr, node ? cast(JsonNode*)node.cPtr(Yes.dup) : null);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    _cretval = json_builder_add_value(cast(JsonBuilder*)cPtr, node ? cast(JsonNode*)node.cPtr(Yes.Dup) : null);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_begin_array(cast(JsonBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_begin_object(cast(JsonBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_end_array(cast(JsonBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_end_object(cast(JsonBuilder*)cPtr);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class Builder : gobject.object.ObjectG
   {
     JsonNode* _cretval;
     _cretval = json_builder_get_root(cast(JsonBuilder*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -321,9 +321,9 @@ class Builder : gobject.object.ObjectG
   json.builder.Builder setMemberName(string memberName)
   {
     JsonBuilder* _cretval;
-    const(char)* _memberName = memberName.toCString(No.alloc);
+    const(char)* _memberName = memberName.toCString(No.Alloc);
     _cretval = json_builder_set_member_name(cast(JsonBuilder*)cPtr, _memberName);
-    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -29,7 +29,7 @@ import gtk.types;
 class TextTag : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,9 +55,9 @@ class TextTag : gobject.object.ObjectG
   this(string name = null)
   {
     GtkTextTag* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_text_tag_new(_name);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class TextTag : gobject.object.ObjectG
   bool event(gobject.object.ObjectG eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_tag_event(cast(GtkTextTag*)cPtr, eventObject ? cast(ObjectC*)eventObject.cPtr(No.dup) : null, event ? cast(GdkEvent*)event.cPtr : null, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.dup) : null);
+    _retval = gtk_text_tag_event(cast(GtkTextTag*)cPtr, eventObject ? cast(ObjectC*)eventObject.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -143,10 +143,10 @@ class TextTag : gobject.object.ObjectG
     Connect to Event signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

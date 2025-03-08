@@ -53,7 +53,7 @@ import gtk.types;
 class Statusbar : gtk.box.Box
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -77,7 +77,7 @@ class Statusbar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -92,7 +92,7 @@ class Statusbar : gtk.box.Box
   uint getContextId(string contextDescription)
   {
     uint _retval;
-    const(char)* _contextDescription = contextDescription.toCString(No.alloc);
+    const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
     _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)cPtr, _contextDescription);
     return _retval;
   }
@@ -105,7 +105,7 @@ class Statusbar : gtk.box.Box
   {
     GtkWidget* _cretval;
     _cretval = gtk_statusbar_get_message_area(cast(GtkStatusbar*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Statusbar : gtk.box.Box
   uint push(uint contextId, string text)
   {
     uint _retval;
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     _retval = gtk_statusbar_push(cast(GtkStatusbar*)cPtr, contextId, _text);
     return _retval;
   }
@@ -185,10 +185,10 @@ class Statusbar : gtk.box.Box
     Connect to TextPopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextPopped(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextPopped(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextPoppedCallbackDlg) || is(T : TextPoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -224,10 +224,10 @@ class Statusbar : gtk.box.Box
     Connect to TextPushed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTextPushed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTextPushed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TextPushedCallbackDlg) || is(T : TextPushedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

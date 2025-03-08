@@ -26,7 +26,7 @@ import gobject.object;
 class VolumeMonitor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -85,8 +85,8 @@ class VolumeMonitor : gobject.object.ObjectG
   static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount)
   {
     GVolume* _cretval;
-    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.take);
+    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(ObjectG)mount).cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class VolumeMonitor : gobject.object.ObjectG
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
-    auto _retval = ObjectG.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,9 +128,9 @@ class VolumeMonitor : gobject.object.ObjectG
   gio.mount.Mount getMountForUuid(string uuid)
   {
     GMount* _cretval;
-    const(char)* _uuid = uuid.toCString(No.alloc);
+    const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -159,9 +159,9 @@ class VolumeMonitor : gobject.object.ObjectG
   gio.volume.Volume getVolumeForUuid(string uuid)
   {
     GVolume* _cretval;
-    const(char)* _uuid = uuid.toCString(No.alloc);
+    const(char)* _uuid = uuid.toCString(No.Alloc);
     _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -198,10 +198,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to DriveChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDriveChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DriveChangedCallbackDlg) || is(T : DriveChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -235,10 +235,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to DriveConnected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDriveConnected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DriveConnectedCallbackDlg) || is(T : DriveConnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -272,10 +272,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to DriveDisconnected signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDriveDisconnected(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DriveDisconnectedCallbackDlg) || is(T : DriveDisconnectedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -309,10 +309,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to DriveEjectButton signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDriveEjectButton(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DriveEjectButtonCallbackDlg) || is(T : DriveEjectButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -346,10 +346,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to DriveStopButton signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDriveStopButton(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DriveStopButtonCallbackDlg) || is(T : DriveStopButtonCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -383,10 +383,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to MountAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMountAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountAddedCallbackDlg) || is(T : MountAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -420,10 +420,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to MountChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMountChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountChangedCallbackDlg) || is(T : MountChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -460,10 +460,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to MountPreUnmount signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountPreUnmount(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountPreUnmountCallbackDlg) || is(T : MountPreUnmountCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -497,10 +497,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to MountRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMountRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MountRemovedCallbackDlg) || is(T : MountRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -534,10 +534,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to VolumeAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectVolumeAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : VolumeAddedCallbackDlg) || is(T : VolumeAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -571,10 +571,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to VolumeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectVolumeChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : VolumeChangedCallbackDlg) || is(T : VolumeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -608,10 +608,10 @@ class VolumeMonitor : gobject.object.ObjectG
     Connect to VolumeRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectVolumeRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : VolumeRemovedCallbackDlg) || is(T : VolumeRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

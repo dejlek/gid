@@ -118,26 +118,26 @@ T getVal(T)(const(GValue)* gval)
   else static if (is(T == enum)) // enum or flags
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
-    return g_value_get_string(gval).fromCString(No.free);
+    return g_value_get_string(gval).fromCString(No.Free);
   else static if (is(T == VariantG))
   {
     auto v = g_value_get_variant(gval);
-    return v ? new VariantG(v, No.take) : null;
+    return v ? new VariantG(v, No.Take) : null;
   }
   else static if (is(T : ParamSpec))
   {
     auto v = g_value_get_param(gval);
-    return v ? new T(v, No.take) : null;
+    return v ? new T(v, No.Take) : null;
   }
   else static if (is(T : Boxed))
   {
     auto v = g_value_get_boxed(gval);
-    return v ? new T(v, No.take) : null;
+    return v ? new T(v, No.Take) : null;
   }
   else static if (is(T : ObjectG) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return ObjectG.getDObject!T(v, No.take);
+    return ObjectG.getDObject!T(v, No.Take);
   }
   else static if (is(T : Object) || isPointer!T)
     return cast(T)g_value_get_pointer(gval);
@@ -174,7 +174,7 @@ void setVal(T)(GValue* gval, T v)
       g_value_set_enum(gval, v);
   }
   else static if (is(T == string))
-    g_value_take_string(gval, v.toCString(Yes.alloc));
+    g_value_take_string(gval, v.toCString(Yes.Alloc));
   else static if (is(T == VariantG))
     g_value_set_variant(gval, cast(VariantC*)v.cPtr);
   else static if (is(T : ParamSpec))
@@ -185,11 +185,11 @@ void setVal(T)(GValue* gval, T v)
     g_value_set_boxed(gval, v.cInstancePtr);
   }
   else static if (is(T : ObjectG))
-    g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.dup));
+    g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.Dup));
   else static if (is(T == interface))
   {
     if (auto objG = cast(ObjectG)v)
-      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.dup));
+      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.Dup));
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectG in Value.setVal");
   }

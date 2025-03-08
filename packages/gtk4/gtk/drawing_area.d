@@ -100,7 +100,7 @@ import gtk.widget;
 class DrawingArea : gtk.widget.Widget
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -124,7 +124,7 @@ class DrawingArea : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     _cretval = gtk_drawing_area_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -208,7 +208,7 @@ class DrawingArea : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.take), cr ? new cairo.context.Context(cast(void*)cr, No.take) : null, width, height);
+      (*_dlg)(ObjectG.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
 
@@ -240,10 +240,10 @@ class DrawingArea : gtk.widget.Widget
     Connect to Resize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResizeCallbackDlg) || is(T : ResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

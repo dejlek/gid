@@ -10,7 +10,7 @@ import gid.gid;
 class DoubleDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class DoubleDataType : arrow.floating_point_data_type.FloatingPointDataType
   {
     GArrowDoubleDataType* _cretval;
     _cretval = garrow_double_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

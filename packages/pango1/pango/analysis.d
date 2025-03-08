@@ -16,7 +16,7 @@ class Analysis
 {
   PangoAnalysis cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.Analysis");
@@ -34,7 +34,7 @@ class Analysis
 
   @property pango.font.Font font()
   {
-    return ObjectG.getDObject!(pango.font.Font)((cast(PangoAnalysis*)cPtr).font, No.take);
+    return ObjectG.getDObject!(pango.font.Font)((cast(PangoAnalysis*)cPtr).font, No.Take);
   }
 
   @property ubyte level()

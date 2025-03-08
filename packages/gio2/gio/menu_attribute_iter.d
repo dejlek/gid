@@ -14,7 +14,7 @@ import gobject.object;
 class MenuAttributeIter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class MenuAttributeIter : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -73,8 +73,8 @@ class MenuAttributeIter : gobject.object.ObjectG
     char* _outName;
     VariantC* _value;
     _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)cPtr, &_outName, &_value);
-    outName = _outName.fromCString(No.free);
-    value = new glib.variant.VariantG(cast(void*)_value, Yes.take);
+    outName = _outName.fromCString(No.Free);
+    value = new glib.variant.VariantG(cast(void*)_value, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class MenuAttributeIter : gobject.object.ObjectG
   {
     VariantC* _cretval;
     _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

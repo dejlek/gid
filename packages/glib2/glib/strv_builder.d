@@ -21,12 +21,12 @@ import gobject.boxed;
 class StrvBuilder : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -51,7 +51,7 @@ class StrvBuilder : gobject.boxed.Boxed
   {
     GStrvBuilder* _cretval;
     _cretval = g_strv_builder_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -63,7 +63,7 @@ class StrvBuilder : gobject.boxed.Boxed
   */
   void add(string value)
   {
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     g_strv_builder_add(cast(GStrvBuilder*)cPtr, _value);
   }
 
@@ -78,7 +78,7 @@ class StrvBuilder : gobject.boxed.Boxed
   {
     char*[] _tmpvalue;
     foreach (s; value)
-      _tmpvalue ~= s.toCString(No.alloc);
+      _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
     g_strv_builder_addv(cast(GStrvBuilder*)cPtr, _value);
@@ -105,7 +105,7 @@ class StrvBuilder : gobject.boxed.Boxed
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -121,7 +121,7 @@ class StrvBuilder : gobject.boxed.Boxed
   */
   void take(string value)
   {
-    char* _value = value.toCString(Yes.alloc);
+    char* _value = value.toCString(Yes.Alloc);
     g_strv_builder_take(cast(GStrvBuilder*)cPtr, _value);
   }
 }

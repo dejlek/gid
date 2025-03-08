@@ -19,7 +19,7 @@ import gobject.object;
 class ExecutePlan : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class ExecutePlan : gobject.object.ObjectG
     _cretval = garrow_execute_plan_new(&_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -59,10 +59,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_aggregate_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.dup) : null, options ? cast(GArrowAggregateNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_aggregate_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.Dup) : null, options ? cast(GArrowAggregateNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,10 +79,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_filter_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.dup) : null, options ? cast(GArrowFilterNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_filter_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.Dup) : null, options ? cast(GArrowFilterNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,10 +100,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_hash_join_node(cast(GArrowExecutePlan*)cPtr, left ? cast(GArrowExecuteNode*)left.cPtr(No.dup) : null, right ? cast(GArrowExecuteNode*)right.cPtr(No.dup) : null, options ? cast(GArrowHashJoinNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_hash_join_node(cast(GArrowExecutePlan*)cPtr, left ? cast(GArrowExecuteNode*)left.cPtr(No.Dup) : null, right ? cast(GArrowExecuteNode*)right.cPtr(No.Dup) : null, options ? cast(GArrowHashJoinNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,14 +111,14 @@ class ExecutePlan : gobject.object.ObjectG
   arrow.execute_node.ExecuteNode buildNode(string factoryName, arrow.execute_node.ExecuteNode[] inputs, arrow.execute_node_options.ExecuteNodeOptions options)
   {
     GArrowExecuteNode* _cretval;
-    const(char)* _factoryName = factoryName.toCString(No.alloc);
+    const(char)* _factoryName = factoryName.toCString(No.Alloc);
     auto _inputs = gListFromD!(arrow.execute_node.ExecuteNode)(inputs);
     scope(exit) containerFree!(GList*, arrow.execute_node.ExecuteNode, GidOwnership.None)(_inputs);
     GError *_err;
-    _cretval = garrow_execute_plan_build_node(cast(GArrowExecutePlan*)cPtr, _factoryName, _inputs, options ? cast(GArrowExecuteNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_node(cast(GArrowExecutePlan*)cPtr, _factoryName, _inputs, options ? cast(GArrowExecuteNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,10 +135,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_project_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.dup) : null, options ? cast(GArrowProjectNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_project_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.Dup) : null, options ? cast(GArrowProjectNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,10 +155,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_sink_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.dup) : null, options ? cast(GArrowSinkNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_sink_node(cast(GArrowExecutePlan*)cPtr, input ? cast(GArrowExecuteNode*)input.cPtr(No.Dup) : null, options ? cast(GArrowSinkNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -174,10 +174,10 @@ class ExecutePlan : gobject.object.ObjectG
   {
     GArrowExecuteNode* _cretval;
     GError *_err;
-    _cretval = garrow_execute_plan_build_source_node(cast(GArrowExecutePlan*)cPtr, options ? cast(GArrowSourceNodeOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_execute_plan_build_source_node(cast(GArrowExecutePlan*)cPtr, options ? cast(GArrowSourceNodeOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.execute_node.ExecuteNode)(cast(GArrowExecuteNode*)_cretval, Yes.Take);
     return _retval;
   }
 

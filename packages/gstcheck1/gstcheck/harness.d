@@ -115,7 +115,7 @@ class Harness
 {
   GstHarness cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstCheck.Harness");
@@ -133,17 +133,17 @@ class Harness
 
   @property gst.element.Element element()
   {
-    return ObjectG.getDObject!(gst.element.Element)((cast(GstHarness*)cPtr).element, No.take);
+    return ObjectG.getDObject!(gst.element.Element)((cast(GstHarness*)cPtr).element, No.Take);
   }
 
   @property gst.pad.Pad srcpad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).srcpad, No.take);
+    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).srcpad, No.Take);
   }
 
   @property gst.pad.Pad sinkpad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).sinkpad, No.take);
+    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).sinkpad, No.Take);
   }
 
   @property gstcheck.harness.Harness srcHarness()
@@ -165,7 +165,7 @@ class Harness
   */
   void addElementSinkPad(gst.pad.Pad sinkpad)
   {
-    gst_harness_add_element_sink_pad(cast(GstHarness*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.dup) : null);
+    gst_harness_add_element_sink_pad(cast(GstHarness*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,7 +179,7 @@ class Harness
   */
   void addElementSrcPad(gst.pad.Pad srcpad)
   {
-    gst_harness_add_element_src_pad(cast(GstHarness*)cPtr, srcpad ? cast(GstPad*)srcpad.cPtr(No.dup) : null);
+    gst_harness_add_element_src_pad(cast(GstHarness*)cPtr, srcpad ? cast(GstPad*)srcpad.cPtr(No.Dup) : null);
   }
 
   /**
@@ -201,15 +201,15 @@ class Harness
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.take) : null);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _elementName = elementName.toCString(No.alloc);
-    const(char)* _padName = padName.toCString(No.alloc);
+    const(char)* _elementName = elementName.toCString(No.Alloc);
+    const(char)* _padName = padName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     gst_harness_add_probe(cast(GstHarness*)cPtr, _elementName, _padName, mask, _callbackCB, _callback, _callbackDestroyCB);
@@ -226,7 +226,7 @@ class Harness
   */
   void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
   {
-    gst_harness_add_propose_allocation_meta(cast(GstHarness*)cPtr, api, params ? cast(const(GstStructure)*)params.cPtr(No.dup) : null);
+    gst_harness_add_propose_allocation_meta(cast(GstHarness*)cPtr, api, params ? cast(const(GstStructure)*)params.cPtr(No.Dup) : null);
   }
 
   /**
@@ -239,7 +239,7 @@ class Harness
   */
   void addSink(string sinkElementName)
   {
-    const(char)* _sinkElementName = sinkElementName.toCString(No.alloc);
+    const(char)* _sinkElementName = sinkElementName.toCString(No.Alloc);
     gst_harness_add_sink(cast(GstHarness*)cPtr, _sinkElementName);
   }
 
@@ -272,7 +272,7 @@ class Harness
   */
   void addSinkParse(string launchline)
   {
-    const(char)* _launchline = launchline.toCString(No.alloc);
+    const(char)* _launchline = launchline.toCString(No.Alloc);
     gst_harness_add_sink_parse(cast(GstHarness*)cPtr, _launchline);
   }
 
@@ -288,7 +288,7 @@ class Harness
   */
   void addSrc(string srcElementName, bool hasClockWait)
   {
-    const(char)* _srcElementName = srcElementName.toCString(No.alloc);
+    const(char)* _srcElementName = srcElementName.toCString(No.Alloc);
     gst_harness_add_src(cast(GstHarness*)cPtr, _srcElementName, hasClockWait);
   }
 
@@ -329,7 +329,7 @@ class Harness
   */
   void addSrcParse(string launchline, bool hasClockWait)
   {
-    const(char)* _launchline = launchline.toCString(No.alloc);
+    const(char)* _launchline = launchline.toCString(No.Alloc);
     gst_harness_add_src_parse(cast(GstHarness*)cPtr, _launchline, hasClockWait);
   }
 
@@ -414,7 +414,7 @@ class Harness
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_create_buffer(cast(GstHarness*)cPtr, size);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class Harness
   */
   void dumpToFile(string filename)
   {
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     gst_harness_dump_to_file(cast(GstHarness*)cPtr, _filename);
   }
 
@@ -474,9 +474,9 @@ class Harness
   gst.element.Element findElement(string elementName)
   {
     GstElement* _cretval;
-    const(char)* _elementName = elementName.toCString(No.alloc);
+    const(char)* _elementName = elementName.toCString(No.Alloc);
     _cretval = gst_harness_find_element(cast(GstHarness*)cPtr, _elementName);
-    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -495,8 +495,8 @@ class Harness
     GstAllocator* _allocator;
     GstAllocationParams _params;
     gst_harness_get_allocator(cast(GstHarness*)cPtr, &_allocator, &_params);
-    allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.take);
-    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.take);
+    allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.Take);
+    params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
 
   /**
@@ -526,13 +526,13 @@ class Harness
   {
     GstTestClock* _cretval;
     _cretval = gst_harness_get_testclock(cast(GstHarness*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstTestClock*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstcheck.test_clock.TestClock)(cast(GstTestClock*)_cretval, Yes.Take);
     return _retval;
   }
 
   /**
-      This will set the harnessed #GstElement to [gst.types.State.playing].
-    #GstElements without a sink-#GstPad and with the [gst.types.ElementFlags.source]
+      This will set the harnessed #GstElement to [gst.types.State.Playing].
+    #GstElements without a sink-#GstPad and with the [gst.types.ElementFlags.Source]
     flag set is considered a src #GstElement
     Non-src #GstElements (like sinks and filters) are automatically set to
     playing by the #GstHarness, but src #GstElements are not to avoid them
@@ -558,7 +558,7 @@ class Harness
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_pull(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class Harness
   {
     GstEvent* _cretval;
     _cretval = gst_harness_pull_event(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class Harness
     bool _retval;
     GstBuffer* _buf;
     _retval = gst_harness_pull_until_eos(cast(GstHarness*)cPtr, &_buf);
-    buf = new gst.buffer.Buffer(cast(void*)_buf, Yes.take);
+    buf = new gst.buffer.Buffer(cast(void*)_buf, Yes.Take);
     return _retval;
   }
 
@@ -606,7 +606,7 @@ class Harness
   {
     GstEvent* _cretval;
     _cretval = gst_harness_pull_upstream_event(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -622,7 +622,7 @@ class Harness
   gst.types.FlowReturn push(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_harness_push(cast(GstHarness*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
+    _cretval = gst_harness_push(cast(GstHarness*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -640,8 +640,8 @@ class Harness
   gst.buffer.Buffer pushAndPull(gst.buffer.Buffer buffer)
   {
     GstBuffer* _cretval;
-    _cretval = gst_harness_push_and_pull(cast(GstHarness*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.dup) : null);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_harness_push_and_pull(cast(GstHarness*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class Harness
   bool pushEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_harness_push_event(cast(GstHarness*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.dup) : null);
+    _retval = gst_harness_push_event(cast(GstHarness*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -705,7 +705,7 @@ class Harness
   bool pushUpstreamEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_harness_push_upstream_event(cast(GstHarness*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.dup) : null);
+    _retval = gst_harness_push_upstream_event(cast(GstHarness*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -746,7 +746,7 @@ class Harness
   */
   void setCaps(gst.caps.Caps in_, gst.caps.Caps out_)
   {
-    gst_harness_set_caps(cast(GstHarness*)cPtr, in_ ? cast(GstCaps*)in_.cPtr(Yes.dup) : null, out_ ? cast(GstCaps*)out_.cPtr(Yes.dup) : null);
+    gst_harness_set_caps(cast(GstHarness*)cPtr, in_ ? cast(GstCaps*)in_.cPtr(Yes.Dup) : null, out_ ? cast(GstCaps*)out_.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -759,8 +759,8 @@ class Harness
   */
   void setCapsStr(string in_, string out_)
   {
-    const(char)* _in_ = in_.toCString(No.alloc);
-    const(char)* _out_ = out_.toCString(No.alloc);
+    const(char)* _in_ = in_.toCString(No.Alloc);
+    const(char)* _out_ = out_.toCString(No.Alloc);
     gst_harness_set_caps_str(cast(GstHarness*)cPtr, _in_, _out_);
   }
 
@@ -778,10 +778,10 @@ class Harness
   }
 
   /**
-      As a convenience, a src-harness will forward [gst.types.EventType.streamStart],
-    [gst.types.EventType.caps] and [gst.types.EventType.segment] to the main-harness if forwarding
+      As a convenience, a src-harness will forward [gst.types.EventType.StreamStart],
+    [gst.types.EventType.Caps] and [gst.types.EventType.Segment] to the main-harness if forwarding
     is enabled, and forward any sticky-events from the main-harness to
-    the sink-harness. It will also forward the [gst.types.QueryType.allocation].
+    the sink-harness. It will also forward the [gst.types.QueryType.Allocation].
     
     If forwarding is disabled, the user will have to either manually push
     these events from the src-harness using [gstcheck.harness.Harness.srcPushEvent], or
@@ -823,7 +823,7 @@ class Harness
   */
   void setProposeAllocator(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
-    gst_harness_set_propose_allocator(cast(GstHarness*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(Yes.dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.dup) : null);
+    gst_harness_set_propose_allocator(cast(GstHarness*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(Yes.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null);
   }
 
   /**
@@ -835,7 +835,7 @@ class Harness
   */
   void setSinkCaps(gst.caps.Caps caps)
   {
-    gst_harness_set_sink_caps(cast(GstHarness*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.dup) : null);
+    gst_harness_set_sink_caps(cast(GstHarness*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -847,7 +847,7 @@ class Harness
   */
   void setSinkCapsStr(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gst_harness_set_sink_caps_str(cast(GstHarness*)cPtr, _str);
   }
 
@@ -861,7 +861,7 @@ class Harness
   */
   void setSrcCaps(gst.caps.Caps caps)
   {
-    gst_harness_set_src_caps(cast(GstHarness*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.dup) : null);
+    gst_harness_set_src_caps(cast(GstHarness*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -874,7 +874,7 @@ class Harness
   */
   void setSrcCapsStr(string str)
   {
-    const(char)* _str = str.toCString(No.alloc);
+    const(char)* _str = str.toCString(No.Alloc);
     gst_harness_set_src_caps_str(cast(GstHarness*)cPtr, _str);
   }
 
@@ -966,7 +966,7 @@ class Harness
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_take_all_data_as_buffer(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -979,7 +979,7 @@ class Harness
   {
     GBytes* _cretval;
     _cretval = gst_harness_take_all_data_as_bytes(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1005,7 +1005,7 @@ class Harness
   {
     GstBuffer* _cretval;
     _cretval = gst_harness_try_pull(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1020,7 +1020,7 @@ class Harness
   {
     GstEvent* _cretval;
     _cretval = gst_harness_try_pull_event(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1035,7 +1035,7 @@ class Harness
   {
     GstEvent* _cretval;
     _cretval = gst_harness_try_pull_upstream_event(cast(GstHarness*)cPtr);
-    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

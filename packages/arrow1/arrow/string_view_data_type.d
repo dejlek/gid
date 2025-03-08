@@ -10,7 +10,7 @@ import gid.gid;
 class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
   {
     GArrowStringViewDataType* _cretval;
     _cretval = garrow_string_view_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

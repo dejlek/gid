@@ -54,7 +54,7 @@ import gst.types;
 class Task : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -104,7 +104,7 @@ class Task : gst.object.ObjectGst
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _cretval = gst_task_new(_funcCB, _func, _funcDestroyCB);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -130,7 +130,7 @@ class Task : gst.object.ObjectGst
   {
     GstTaskPool* _cretval;
     _cretval = gst_task_get_pool(cast(GstTask*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Task : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.take), thread ? new glib.thread.Thread(cast(void*)thread, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
 
@@ -233,7 +233,7 @@ class Task : gst.object.ObjectGst
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.take), thread ? new glib.thread.Thread(cast(void*)thread, No.take) : null);
+      (*_dlg)(ObjectG.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
 
@@ -268,7 +268,7 @@ class Task : gst.object.ObjectGst
   */
   void setPool(gst.task_pool.TaskPool pool)
   {
-    gst_task_set_pool(cast(GstTask*)cPtr, pool ? cast(GstTaskPool*)pool.cPtr(No.dup) : null);
+    gst_task_set_pool(cast(GstTask*)cPtr, pool ? cast(GstTaskPool*)pool.cPtr(No.Dup) : null);
   }
 
   /**

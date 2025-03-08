@@ -19,7 +19,7 @@ import gtk.widget;
 class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   */
   void setHeader(gtk.widget.Widget header = null)
   {
-    gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.dup) : null);
+    gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
   }
 
   /**
@@ -184,10 +184,10 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -39,7 +39,7 @@ import gtk.types;
   ```
   
   The #GtkFileChooserButton supports the #GtkFileChooserActions
-  [gtk.types.FileChooserAction.open] and [gtk.types.FileChooserAction.selectFolder].
+  [gtk.types.FileChooserAction.Open] and [gtk.types.FileChooserAction.SelectFolder].
   
   > The #GtkFileChooserButton will ellipsize the label, and will thus
   > request little horizontal space.  To give the button more space,
@@ -56,7 +56,7 @@ import gtk.types;
 class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -84,9 +84,9 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   this(string title, gtk.types.FileChooserAction action)
   {
     GtkWidget* _cretval;
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     _cretval = gtk_file_chooser_button_new(_title, action);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -95,10 +95,10 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
     
     Note that dialog must be a #GtkDialog (or subclass) which
     implements the #GtkFileChooser interface and must not have
-    [gtk.types.DialogFlags.destroyWithParent] set.
+    [gtk.types.DialogFlags.DestroyWithParent] set.
     
     Also note that the dialog needs to have its confirmative button
-    added with response [gtk.types.ResponseType.accept] or [gtk.types.ResponseType.ok] in
+    added with response [gtk.types.ResponseType.Accept] or [gtk.types.ResponseType.Ok] in
     order for the button to take over the file selected in the dialog.
     Params:
       dialog =       the widget to use as dialog
@@ -107,8 +107,8 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   static gtk.file_chooser_button.FileChooserButton newWithDialog(gtk.dialog.Dialog dialog)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   {
     const(char)* _cretval;
     _cretval = gtk_file_chooser_button_get_title(cast(GtkFileChooserButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_file_chooser_button_set_title(cast(GtkFileChooserButton*)cPtr, _title);
   }
 
@@ -207,10 +207,10 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
     Connect to FileSet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFileSet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFileSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FileSetCallbackDlg) || is(T : FileSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

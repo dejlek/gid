@@ -76,7 +76,7 @@ import gtk.widget;
   [gtk.level_bar.LevelBar.setMaxValue]. The value will be always drawn in
   proportion to the admissible interval, i.e. a value of 15 with a specified
   interval between 10 and 20 is equivalent to a value of 0.5 with an interval
-  between 0 and 1. When [gtk.types.LevelBarMode.discrete] is used, the bar level
+  between 0 and 1. When [gtk.types.LevelBarMode.Discrete] is used, the bar level
   is rendered as a finite number of separated blocks instead of a single one.
   The number of blocks that will be rendered is equal to the number of units
   specified by the admissible interval.
@@ -115,12 +115,12 @@ import gtk.widget;
   
   # Accessibility
   
-  [gtk.level_bar.LevelBar] uses the [gtk.types.AccessibleRole.meter] role.
+  [gtk.level_bar.LevelBar] uses the [gtk.types.AccessibleRole.Meter] role.
 */
 class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -147,7 +147,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -161,7 +161,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   */
   void addOffsetValue(string name, double value)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_add_offset_value(cast(GtkLevelBar*)cPtr, _name, value);
   }
 
@@ -240,7 +240,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   bool getOffsetValue(string name, out double value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)cPtr, _name, cast(double*)&value);
     return _retval;
   }
@@ -267,7 +267,7 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
   */
   void removeOffsetValue(string name = null)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)cPtr, _name);
   }
 
@@ -354,10 +354,10 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectOffsetChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : OffsetChangedCallbackDlg) || is(T : OffsetChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

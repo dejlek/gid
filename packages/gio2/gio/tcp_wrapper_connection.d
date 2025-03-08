@@ -20,7 +20,7 @@ import gobject.object;
 class TcpWrapperConnection : gio.tcp_connection.TcpConnection
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,8 +46,8 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   this(gio.iostream.IOStream baseIoStream, gio.socket.Socket socket)
   {
     GSocketConnection* _cretval;
-    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.dup) : null, socket ? cast(GSocket*)socket.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -58,7 +58,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   {
     GIOStream* _cretval;
     _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 }

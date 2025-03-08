@@ -135,9 +135,9 @@ template AsyncInitableT()
     Implementations may also support cancellation. If cancellable is not
     null, then initialization can be cancelled by triggering the cancellable
     object from another thread. If the operation was cancelled, the error
-    [gio.types.IOErrorEnum.cancelled] will be returned. If cancellable is not null, and
+    [gio.types.IOErrorEnum.Cancelled] will be returned. If cancellable is not null, and
     the object doesn't support cancellable initialization, the error
-    [gio.types.IOErrorEnum.notSupported] will be returned.
+    [gio.types.IOErrorEnum.NotSupported] will be returned.
     
     As with #GInitable, if the object is not initialized, or initialization
     returns with an error, then all operations on the object except
@@ -168,12 +168,12 @@ template AsyncInitableT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_async_initable_init_async(cast(GAsyncInitable*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_async_initable_init_async(cast(GAsyncInitable*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -188,7 +188,7 @@ template AsyncInitableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -206,10 +206,10 @@ template AsyncInitableT()
   {
     ObjectC* _cretval;
     GError *_err;
-    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.dup) : null, &_err);
+    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(ObjectG)res).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 }

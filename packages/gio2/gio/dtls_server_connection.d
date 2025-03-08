@@ -35,10 +35,10 @@ interface DtlsServerConnection
   {
     GDatagramBased* _cretval;
     GError *_err;
-    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null, &_err);
+    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(ObjectG)baseSocket).cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 }

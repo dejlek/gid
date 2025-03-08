@@ -14,7 +14,7 @@ import gobject.object;
 class CSVReader : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,10 +35,10 @@ class CSVReader : gobject.object.ObjectG
   {
     GArrowCSVReader* _cretval;
     GError *_err;
-    _cretval = garrow_csv_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.dup) : null, options ? cast(GArrowCSVReadOptions*)options.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_csv_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.Dup) : null, options ? cast(GArrowCSVReadOptions*)options.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -49,7 +49,7 @@ class CSVReader : gobject.object.ObjectG
     _cretval = garrow_csv_reader_read(cast(GArrowCSVReader*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -11,7 +11,7 @@ import gid.gid;
 class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,8 +31,8 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowLargeStringArray* _cretval;
-    _cretval = garrow_large_string_array_new(length, valueOffsets ? cast(GArrowBuffer*)valueOffsets.cPtr(No.dup) : null, valueData ? cast(GArrowBuffer*)valueData.cPtr(No.dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.dup) : null, nNulls);
-    this(_cretval, Yes.take);
+    _cretval = garrow_large_string_array_new(length, valueOffsets ? cast(GArrowBuffer*)valueOffsets.cPtr(No.Dup) : null, valueData ? cast(GArrowBuffer*)valueData.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -40,7 +40,7 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
   {
     char* _cretval;
     _cretval = garrow_large_string_array_get_string(cast(GArrowLargeStringArray*)cPtr, i);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

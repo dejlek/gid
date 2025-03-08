@@ -31,7 +31,7 @@ import gobject.object;
 class Window : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,8 +63,8 @@ class Window : gobject.object.ObjectG
   this(gdk.window.Window parent, gdk.window_attr.WindowAttr attributes, gdk.types.WindowAttributesType attributesMask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent.cPtr(No.dup) : null, attributes ? cast(GdkWindowAttr*)attributes.cPtr : null, attributesMask);
-    this(_cretval, Yes.take);
+    _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent.cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes.cPtr : null, attributesMask);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -87,7 +87,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_at_pointer(cast(int*)&winX, cast(int*)&winY);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,8 +191,8 @@ class Window : gobject.object.ObjectG
   gdk.drawing_context.DrawingContext beginDrawFrame(cairo.region.Region region)
   {
     GdkDrawingContext* _cretval;
-    _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.take);
+    _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Window : gobject.object.ObjectG
   */
   void beginMoveDragForDevice(gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_move_drag_for_device(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, button, rootX, rootY, timestamp);
+    gdk_window_begin_move_drag_for_device(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -242,7 +242,7 @@ class Window : gobject.object.ObjectG
   */
   void beginPaintRect(gdk.rectangle.Rectangle rectangle)
   {
-    gdk_window_begin_paint_rect(cast(GdkWindow*)cPtr, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.dup) : null);
+    gdk_window_begin_paint_rect(cast(GdkWindow*)cPtr, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.Dup) : null);
   }
 
   /**
@@ -291,7 +291,7 @@ class Window : gobject.object.ObjectG
   */
   void beginPaintRegion(cairo.region.Region region)
   {
-    gdk_window_begin_paint_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null);
+    gdk_window_begin_paint_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -329,7 +329,7 @@ class Window : gobject.object.ObjectG
   */
   void beginResizeDragForDevice(gdk.types.WindowEdge edge, gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_resize_drag_for_device(cast(GdkWindow*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, button, rootX, rootY, timestamp);
+    gdk_window_begin_resize_drag_for_device(cast(GdkWindow*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -419,7 +419,7 @@ class Window : gobject.object.ObjectG
     _cretval = gdk_window_create_gl_context(cast(GdkWindow*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_window_create_similar_image_surface(cast(GdkWindow*)cPtr, format, width, height, scale);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_surface_t* _cretval;
     _cretval = gdk_window_create_similar_surface(cast(GdkWindow*)cPtr, content, width, height);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -557,7 +557,7 @@ class Window : gobject.object.ObjectG
   */
   void endDrawFrame(gdk.drawing_context.DrawingContext context)
   {
-    gdk_window_end_draw_frame(cast(GdkWindow*)cPtr, context ? cast(GdkDrawingContext*)context.cPtr(No.dup) : null);
+    gdk_window_end_draw_frame(cast(GdkWindow*)cPtr, context ? cast(GdkDrawingContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -709,7 +709,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_pattern_t* _cretval;
     _cretval = gdk_window_get_background_pattern(cast(GdkWindow*)cPtr);
-    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -765,7 +765,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_clip_region(cast(GdkWindow*)cPtr);
-    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -799,7 +799,7 @@ class Window : gobject.object.ObjectG
   {
     GdkCursor* _cretval;
     _cretval = gdk_window_get_cursor(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -832,8 +832,8 @@ class Window : gobject.object.ObjectG
   gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.take);
+    _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -846,7 +846,7 @@ class Window : gobject.object.ObjectG
   gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
   {
     GdkEventMask _cretval;
-    _cretval = gdk_window_get_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    _cretval = gdk_window_get_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -869,8 +869,8 @@ class Window : gobject.object.ObjectG
   gdk.window.Window getDevicePosition(gdk.device.Device device, out int x, out int y, out gdk.types.ModifierType mask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_device_position(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    _cretval = gdk_window_get_device_position(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &mask);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -890,8 +890,8 @@ class Window : gobject.object.ObjectG
   gdk.window.Window getDevicePositionDouble(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, cast(double*)&x, cast(double*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -903,7 +903,7 @@ class Window : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_window_get_display(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -921,7 +921,7 @@ class Window : gobject.object.ObjectG
     GdkWindow* _target;
     _cretval = gdk_window_get_drag_protocol(cast(GdkWindow*)cPtr, &_target);
     gdk.types.DragProtocol _retval = cast(gdk.types.DragProtocol)_cretval;
-    target = new gdk.window.Window(cast(void*)_target, Yes.take);
+    target = new gdk.window.Window(cast(void*)_target, Yes.Take);
     return _retval;
   }
 
@@ -937,7 +937,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_parent(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -954,7 +954,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_effective_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1005,7 +1005,7 @@ class Window : gobject.object.ObjectG
   {
     GdkFrameClock* _cretval;
     _cretval = gdk_window_get_frame_clock(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1021,7 +1021,7 @@ class Window : gobject.object.ObjectG
   {
     GdkRectangle _rect;
     gdk_window_get_frame_extents(cast(GdkWindow*)cPtr, &_rect);
-    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.take);
+    rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 
   /**
@@ -1076,7 +1076,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_group(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1142,7 +1142,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_parent(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1181,7 +1181,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_pointer(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1260,7 +1260,7 @@ class Window : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_window_get_screen(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1307,8 +1307,8 @@ class Window : gobject.object.ObjectG
   /**
       Gets the toplevel window that’s an ancestor of window.
     
-    Any window type but [gdk.types.WindowType.child] is considered a
-    toplevel window, as is a [gdk.types.WindowType.child] window that
+    Any window type but [gdk.types.WindowType.Child] is considered a
+    toplevel window, as is a [gdk.types.WindowType.Child] window that
     has a root window as parent.
     
     Note that you should use [gdk.window.Window.getEffectiveToplevel] when
@@ -1321,7 +1321,7 @@ class Window : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_get_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1350,7 +1350,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_update_area(cast(GdkWindow*)cPtr);
-    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1377,7 +1377,7 @@ class Window : gobject.object.ObjectG
   {
     cairo_region_t* _cretval;
     _cretval = gdk_window_get_visible_region(cast(GdkWindow*)cPtr);
-    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1389,7 +1389,7 @@ class Window : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_window_get_visual(cast(GdkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1479,7 +1479,7 @@ class Window : gobject.object.ObjectG
   */
   void inputShapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
   {
-    gdk_window_input_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.dup) : null, offsetX, offsetY);
+    gdk_window_input_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.Dup) : null, offsetX, offsetY);
   }
 
   /**
@@ -1510,13 +1510,13 @@ class Window : gobject.object.ObjectG
     {
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
       return _retval;
     }
     auto _childFuncCB = childFunc ? &_childFuncCallback : null;
 
     auto _childFunc = childFunc ? cast(void*)&(childFunc) : null;
-    gdk_window_invalidate_maybe_recurse(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null, _childFuncCB, _childFunc);
+    gdk_window_invalidate_maybe_recurse(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, _childFuncCB, _childFunc);
   }
 
   /**
@@ -1530,7 +1530,7 @@ class Window : gobject.object.ObjectG
   */
   void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren)
   {
-    gdk_window_invalidate_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null, invalidateChildren);
+    gdk_window_invalidate_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, invalidateChildren);
   }
 
   /**
@@ -1557,7 +1557,7 @@ class Window : gobject.object.ObjectG
   */
   void invalidateRegion(cairo.region.Region region, bool invalidateChildren)
   {
-    gdk_window_invalidate_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null, invalidateChildren);
+    gdk_window_invalidate_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, invalidateChildren);
   }
 
   /**
@@ -1650,7 +1650,7 @@ class Window : gobject.object.ObjectG
   */
   void markPaintFromClip(cairo.context.Context cr)
   {
-    gdk_window_mark_paint_from_clip(cast(GdkWindow*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
+    gdk_window_mark_paint_from_clip(cast(GdkWindow*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1732,7 +1732,7 @@ class Window : gobject.object.ObjectG
   */
   void moveRegion(cairo.region.Region region, int dx, int dy)
   {
-    gdk_window_move_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null, dx, dy);
+    gdk_window_move_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, dx, dy);
   }
 
   /**
@@ -1761,8 +1761,8 @@ class Window : gobject.object.ObjectG
     offsetting the position of window.
     
     anchor_hints determines how window will be moved if the anchor points cause
-    it to move off-screen. For example, [gdk.types.AnchorHints.flipX] will replace
-    [gdk.types.Gravity.northWest] with [gdk.types.Gravity.northEast] and vice versa if
+    it to move off-screen. For example, [gdk.types.AnchorHints.FlipX] will replace
+    [gdk.types.Gravity.NorthWest] with [gdk.types.Gravity.NorthEast] and vice versa if
     window extends beyond the left or right edges of the monitor.
     
     Connect to the #GdkWindow::moved-to-rect signal to find out how it was
@@ -1778,7 +1778,7 @@ class Window : gobject.object.ObjectG
   */
   void moveToRect(gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity windowAnchor, gdk.types.AnchorHints anchorHints, int rectAnchorDx, int rectAnchorDy)
   {
-    gdk_window_move_to_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
+    gdk_window_move_to_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
   }
 
   /**
@@ -1843,7 +1843,7 @@ class Window : gobject.object.ObjectG
   */
   void reparent(gdk.window.Window newParent, int x, int y)
   {
-    gdk_window_reparent(cast(GdkWindow*)cPtr, newParent ? cast(GdkWindow*)newParent.cPtr(No.dup) : null, x, y);
+    gdk_window_reparent(cast(GdkWindow*)cPtr, newParent ? cast(GdkWindow*)newParent.cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -1881,7 +1881,7 @@ class Window : gobject.object.ObjectG
   */
   void restack(gdk.window.Window sibling, bool above)
   {
-    gdk_window_restack(cast(GdkWindow*)cPtr, sibling ? cast(GdkWindow*)sibling.cPtr(No.dup) : null, above);
+    gdk_window_restack(cast(GdkWindow*)cPtr, sibling ? cast(GdkWindow*)sibling.cPtr(No.Dup) : null, above);
   }
 
   /**
@@ -1933,7 +1933,7 @@ class Window : gobject.object.ObjectG
   */
   void setBackground(gdk.color.Color color)
   {
-    gdk_window_set_background(cast(GdkWindow*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
+    gdk_window_set_background(cast(GdkWindow*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1952,7 +1952,7 @@ class Window : gobject.object.ObjectG
   */
   void setBackgroundPattern(cairo.pattern.Pattern pattern = null)
   {
-    gdk_window_set_background_pattern(cast(GdkWindow*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.dup) : null);
+    gdk_window_set_background_pattern(cast(GdkWindow*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1966,7 +1966,7 @@ class Window : gobject.object.ObjectG
   */
   void setBackgroundRgba(gdk.rgba.RGBA rgba)
   {
-    gdk_window_set_background_rgba(cast(GdkWindow*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.dup) : null);
+    gdk_window_set_background_rgba(cast(GdkWindow*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2031,7 +2031,7 @@ class Window : gobject.object.ObjectG
     Note that cursor must be for the same display as window.
     
     Use [gdk.cursor.Cursor.newForDisplay] or [gdk.cursor.Cursor.newFromPixbuf] to
-    create the cursor. To make the cursor invisible, use [gdk.types.CursorType.blankCursor].
+    create the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor].
     Passing null for the cursor argument to [gdk.window.Window.setCursor] means
     that window will use the cursor of its parent window. Most windows
     should use this default.
@@ -2040,7 +2040,7 @@ class Window : gobject.object.ObjectG
   */
   void setCursor(gdk.cursor.Cursor cursor = null)
   {
-    gdk_window_set_cursor(cast(GdkWindow*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null);
+    gdk_window_set_cursor(cast(GdkWindow*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2069,7 +2069,7 @@ class Window : gobject.object.ObjectG
   /**
       Sets a specific #GdkCursor for a given device when it gets inside window.
     Use [gdk.cursor.Cursor.newForDisplay] or [gdk.cursor.Cursor.newFromPixbuf] to create
-    the cursor. To make the cursor invisible, use [gdk.types.CursorType.blankCursor]. Passing
+    the cursor. To make the cursor invisible, use [gdk.types.CursorType.BlankCursor]. Passing
     null for the cursor argument to [gdk.window.Window.setCursor] means that
     window will use the cursor of its parent window. Most windows should
     use this default.
@@ -2079,7 +2079,7 @@ class Window : gobject.object.ObjectG
   */
   void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
   {
-    gdk_window_set_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.dup) : null);
+    gdk_window_set_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2096,7 +2096,7 @@ class Window : gobject.object.ObjectG
   */
   void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask eventMask)
   {
-    gdk_window_set_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, eventMask);
+    gdk_window_set_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, eventMask);
   }
 
   /**
@@ -2211,7 +2211,7 @@ class Window : gobject.object.ObjectG
     [gdk.window.Window.moveResize].
     
     Note that on X11, this effect has no effect on windows
-    of type [gdk.types.WindowType.temp] or windows where override redirect
+    of type [gdk.types.WindowType.Temp] or windows where override redirect
     has been turned on via [gdk.window.Window.setOverrideRedirect]
     since these windows are not resizable by the user.
     
@@ -2244,7 +2244,7 @@ class Window : gobject.object.ObjectG
   */
   void setGroup(gdk.window.Window leader = null)
   {
-    gdk_window_set_group(cast(GdkWindow*)cPtr, leader ? cast(GdkWindow*)leader.cPtr(No.dup) : null);
+    gdk_window_set_group(cast(GdkWindow*)cPtr, leader ? cast(GdkWindow*)leader.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2285,7 +2285,7 @@ class Window : gobject.object.ObjectG
   */
   void setIconName(string name = null)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gdk_window_set_icon_name(cast(GdkWindow*)cPtr, _name);
   }
 
@@ -2388,7 +2388,7 @@ class Window : gobject.object.ObjectG
   */
   void setOpaqueRegion(cairo.region.Region region = null)
   {
-    gdk_window_set_opaque_region(cast(GdkWindow*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.dup) : null);
+    gdk_window_set_opaque_region(cast(GdkWindow*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2453,7 +2453,7 @@ class Window : gobject.object.ObjectG
   */
   void setRole(string role)
   {
-    const(char)* _role = role.toCString(No.alloc);
+    const(char)* _role = role.toCString(No.Alloc);
     gdk_window_set_role(cast(GdkWindow*)cPtr, _role);
   }
 
@@ -2532,7 +2532,7 @@ class Window : gobject.object.ObjectG
   */
   void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.alloc);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gdk_window_set_startup_id(cast(GdkWindow*)cPtr, _startupId);
   }
 
@@ -2579,7 +2579,7 @@ class Window : gobject.object.ObjectG
   */
   void setTitle(string title)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gdk_window_set_title(cast(GdkWindow*)cPtr, _title);
   }
 
@@ -2596,7 +2596,7 @@ class Window : gobject.object.ObjectG
   */
   void setTransientFor(gdk.window.Window parent)
   {
-    gdk_window_set_transient_for(cast(GdkWindow*)cPtr, parent ? cast(GdkWindow*)parent.cPtr(No.dup) : null);
+    gdk_window_set_transient_for(cast(GdkWindow*)cPtr, parent ? cast(GdkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2638,7 +2638,7 @@ class Window : gobject.object.ObjectG
   */
   void setUserData(gobject.object.ObjectG userData = null)
   {
-    gdk_window_set_user_data(cast(GdkWindow*)cPtr, userData ? cast(ObjectC*)userData.cPtr(No.dup) : null);
+    gdk_window_set_user_data(cast(GdkWindow*)cPtr, userData ? cast(ObjectC*)userData.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2663,7 +2663,7 @@ class Window : gobject.object.ObjectG
   */
   void shapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
   {
-    gdk_window_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.dup) : null, offsetX, offsetY);
+    gdk_window_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.Dup) : null, offsetX, offsetY);
   }
 
   /**
@@ -2834,10 +2834,10 @@ class Window : gobject.object.ObjectG
     Connect to CreateSurface signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateSurface(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreateSurface(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateSurfaceCallbackDlg) || is(T : CreateSurfaceCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2888,10 +2888,10 @@ class Window : gobject.object.ObjectG
     Connect to MovedToRect signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMovedToRect(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMovedToRect(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MovedToRectCallbackDlg) || is(T : MovedToRectCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -2932,10 +2932,10 @@ class Window : gobject.object.ObjectG
     Connect to PickEmbeddedChild signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPickEmbeddedChild(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPickEmbeddedChild(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PickEmbeddedChildCallbackDlg) || is(T : PickEmbeddedChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

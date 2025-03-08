@@ -35,7 +35,7 @@ class Meta
 {
   GstMeta cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.Meta");
@@ -123,7 +123,7 @@ class Meta
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -153,10 +153,10 @@ class Meta
   static gobject.types.GType apiTypeRegister(string api, string[] tags)
   {
     gobject.types.GType _retval;
-    const(char)* _api = api.toCString(No.alloc);
+    const(char)* _api = api.toCString(No.Alloc);
     char*[] _tmptags;
     foreach (s; tags)
-      _tmptags ~= s.toCString(No.alloc);
+      _tmptags ~= s.toCString(No.Alloc);
     _tmptags ~= null;
     const(char*)* _tags = _tmptags.ptr;
     _retval = gst_meta_api_type_register(_api, _tags);
@@ -174,7 +174,7 @@ class Meta
   static gst.meta_info.MetaInfo getInfo(string impl)
   {
     const(GstMetaInfo)* _cretval;
-    const(char)* _impl = impl.toCString(No.alloc);
+    const(char)* _impl = impl.toCString(No.Alloc);
     _cretval = gst_meta_get_info(_impl);
     auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
     return _retval;
@@ -207,16 +207,16 @@ class Meta
     {
       auto _dlg = cast(gst.types.CustomMetaTransformFunction*)userData;
 
-      bool _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.take) : null, type, data);
+      bool _retval = (*_dlg)(transbuf ? new gst.buffer.Buffer(cast(void*)transbuf, No.Take) : null, meta ? new gst.custom_meta.CustomMeta(cast(void*)meta, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, No.Take) : null, type, data);
       return _retval;
     }
     auto _transformFuncCB = transformFunc ? &_transformFuncCallback : null;
 
     const(GstMetaInfo)* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     char*[] _tmptags;
     foreach (s; tags)
-      _tmptags ~= s.toCString(No.alloc);
+      _tmptags ~= s.toCString(No.Alloc);
     _tmptags ~= null;
     const(char*)* _tags = _tmptags.ptr;
 
@@ -237,7 +237,7 @@ class Meta
   static gst.meta_info.MetaInfo registerCustomSimple(string name)
   {
     const(GstMetaInfo)* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_meta_register_custom_simple(_name);
     auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
     return _retval;

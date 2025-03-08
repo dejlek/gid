@@ -21,7 +21,7 @@ import gst.types;
 class SystemClock : gst.clock.Clock
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,7 +49,7 @@ class SystemClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_system_clock_obtain();
-    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,6 +67,6 @@ class SystemClock : gst.clock.Clock
   */
   static void setDefault(gst.clock.Clock newClock = null)
   {
-    gst_system_clock_set_default(newClock ? cast(GstClock*)newClock.cPtr(No.dup) : null);
+    gst_system_clock_set_default(newClock ? cast(GstClock*)newClock.cPtr(No.Dup) : null);
   }
 }

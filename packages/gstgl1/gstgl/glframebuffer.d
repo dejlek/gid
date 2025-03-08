@@ -24,7 +24,7 @@ import gstgl.types;
 class GLFramebuffer : gst.object.ObjectGst
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,8 +50,8 @@ class GLFramebuffer : gst.object.ObjectGst
   this(gstgl.glcontext.GLContext context)
   {
     GstGLFramebuffer* _cretval;
-    _cretval = gst_gl_framebuffer_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = gst_gl_framebuffer_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -66,8 +66,8 @@ class GLFramebuffer : gst.object.ObjectGst
   static gstgl.glframebuffer.GLFramebuffer newWithDefaultDepth(gstgl.glcontext.GLContext context, uint width, uint height)
   {
     GstGLFramebuffer* _cretval;
-    _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, width, height);
-    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.take);
+    _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, width, height);
+    auto _retval = ObjectG.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class GLFramebuffer : gst.object.ObjectGst
   */
   void attach(uint attachmentPoint, gstgl.glbase_memory.GLBaseMemory mem)
   {
-    gst_gl_framebuffer_attach(cast(GstGLFramebuffer*)cPtr, attachmentPoint, mem ? cast(GstGLBaseMemory*)mem.cPtr(No.dup) : null);
+    gst_gl_framebuffer_attach(cast(GstGLFramebuffer*)cPtr, attachmentPoint, mem ? cast(GstGLBaseMemory*)mem.cPtr(No.Dup) : null);
   }
 
   /**

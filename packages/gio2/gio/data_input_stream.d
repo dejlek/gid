@@ -20,7 +20,7 @@ import gobject.object;
 class DataInputStream : gio.buffered_input_stream.BufferedInputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,8 +45,8 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   this(gio.input_stream.InputStream baseStream)
   {
     GDataInputStream* _cretval;
-    _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -84,7 +84,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     ubyte _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_byte(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -104,7 +104,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     short _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_int16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -118,7 +118,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore.
     Returns:     a signed 32-bit/4-byte value read from the stream or `0` if
@@ -128,7 +128,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     int _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_int32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -142,7 +142,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore.
     Returns:     a signed 64-bit/8-byte value read from stream or `0` if
@@ -152,7 +152,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     long _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_int64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -177,12 +177,12 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_data_input_stream_read_line_async(cast(GDataInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_data_input_stream_read_line_async(cast(GDataInputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -202,10 +202,10 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_line_finish_utf8(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       length =       a #gsize to get the length of the data read in.
       cancellable =       optional #GCancellable object, null to ignore.
@@ -230,10 +230,10 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_data_input_stream_read_line_utf8(cast(GDataInputStream*)cPtr, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     ushort _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_uint16(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -265,7 +265,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore.
     Returns:     an unsigned 32-bit/4-byte value read from the stream or `0` if
@@ -275,7 +275,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     uint _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_uint32(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -289,7 +289,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional #GCancellable object, null to ignore.
     Returns:     an unsigned 64-bit/8-byte read from stream or `0` if
@@ -299,7 +299,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     ulong _retval;
     GError *_err;
-    _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_data_input_stream_read_uint64(cast(GDataInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -332,12 +332,12 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   string readUntil(string stopChars, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(No.alloc);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_data_input_stream_read_until(cast(GDataInputStream*)cPtr, _stopChars, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -373,13 +373,13 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _stopChars = stopChars.toCString(No.alloc);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_data_input_stream_read_until_async(cast(GDataInputStream*)cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_data_input_stream_read_until_async(cast(GDataInputStream*)cPtr, _stopChars, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -400,10 +400,10 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_until_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -434,12 +434,12 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
     char* _cretval;
-    const(char)* _stopChars = stopChars.toCString(No.alloc);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_data_input_stream_read_upto(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, cast(size_t*)&length, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -473,13 +473,13 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _stopChars = stopChars.toCString(No.alloc);
+    const(char)* _stopChars = stopChars.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_data_input_stream_read_upto_async(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_data_input_stream_read_upto_async(cast(GDataInputStream*)cPtr, _stopChars, stopCharsLen, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -503,10 +503,10 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&length, &_err);
+    _cretval = g_data_input_stream_read_upto_finish(cast(GDataInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&length, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

@@ -12,7 +12,7 @@ import gid.gid;
 class ScrollEvent : gdk.event.Event
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.ScrollEvent");
@@ -24,7 +24,7 @@ class ScrollEvent : gdk.event.Event
       Extracts the scroll deltas of a scroll event.
     
     The deltas will be zero unless the scroll direction
-    is [gdk.types.ScrollDirection.smooth].
+    is [gdk.types.ScrollDirection.Smooth].
     
     For the representation unit of these deltas, see
     [gdk.scroll_event.ScrollEvent.getUnit].
@@ -52,8 +52,8 @@ class ScrollEvent : gdk.event.Event
   /**
       Extracts the scroll delta unit of a scroll event.
     
-    The unit will always be [gdk.types.ScrollUnit.wheel] if the scroll direction is not
-    [gdk.types.ScrollDirection.smooth].
+    The unit will always be [gdk.types.ScrollUnit.Wheel] if the scroll direction is not
+    [gdk.types.ScrollDirection.Smooth].
     Returns:     the scroll unit.
   */
   gdk.types.ScrollUnit getUnit()

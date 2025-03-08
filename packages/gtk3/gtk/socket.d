@@ -70,7 +70,7 @@ import xlib.types;
 class Socket : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -94,7 +94,7 @@ class Socket : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_socket_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -144,7 +144,7 @@ class Socket : gtk.container.Container
   {
     GdkWindow* _cretval;
     _cretval = gtk_socket_get_plug_window(cast(GtkSocket*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,10 +166,10 @@ class Socket : gtk.container.Container
     Connect to PlugAdded signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPlugAdded(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPlugAdded(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PlugAddedCallbackDlg) || is(T : PlugAddedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -204,10 +204,10 @@ class Socket : gtk.container.Container
     Connect to PlugRemoved signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPlugRemoved(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPlugRemoved(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PlugRemovedCallbackDlg) || is(T : PlugRemovedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

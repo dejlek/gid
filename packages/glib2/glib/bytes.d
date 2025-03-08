@@ -35,12 +35,12 @@ import gobject.boxed;
 class Bytes : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -73,7 +73,7 @@ class Bytes : gobject.boxed.Boxed
 
     auto _data = cast(const(void)*)data.ptr;
     _cretval = g_bytes_new(_data, _size);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class Bytes : gobject.boxed.Boxed
   int compare(glib.bytes.Bytes bytes2)
   {
     int _retval;
-    _retval = g_bytes_compare(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.dup) : null);
+    _retval = g_bytes_compare(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class Bytes : gobject.boxed.Boxed
   bool equal(glib.bytes.Bytes bytes2)
   {
     bool _retval;
-    _retval = g_bytes_equal(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.dup) : null);
+    _retval = g_bytes_equal(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class Bytes : gobject.boxed.Boxed
   {
     GBytes* _cretval;
     _cretval = g_bytes_new_from_bytes(cast(GBytes*)cPtr, offset, length);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

@@ -37,7 +37,7 @@ import gobject.object;
 class Resolver : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -63,7 +63,7 @@ class Resolver : gobject.object.ObjectG
   {
     GResolver* _cretval;
     _cretval = g_resolver_get_default();
-    auto _retval = ObjectG.getDObject!(gio.resolver.Resolver)(cast(GResolver*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.resolver.Resolver)(cast(GResolver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class Resolver : gobject.object.ObjectG
     
     If cancellable is non-null, it can be used to cancel the
     operation, in which case error (if non-null) will be set to
-    [gio.types.IOErrorEnum.cancelled].
+    [gio.types.IOErrorEnum.Cancelled].
     Params:
       address =       the address to reverse-resolve
       cancellable =       a #GCancellable, or null
@@ -98,10 +98,10 @@ class Resolver : gobject.object.ObjectG
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_address(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_address(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -121,12 +121,12 @@ class Resolver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_resolver_lookup_by_address_async(cast(GResolver*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -135,7 +135,7 @@ class Resolver : gobject.object.ObjectG
     
     If the DNS resolution failed, error (if non-null) will be set to
     a value from #GResolverError. If the operation was cancelled,
-    error will be set to [gio.types.IOErrorEnum.cancelled].
+    error will be set to [gio.types.IOErrorEnum.Cancelled].
     Params:
       result =       the result passed to your #GAsyncReadyCallback
     Returns:     a hostname (either ASCII-only, or in ASCII-encoded
@@ -145,10 +145,10 @@ class Resolver : gobject.object.ObjectG
   {
     char* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_address_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Resolver : gobject.object.ObjectG
     
     If cancellable is non-null, it can be used to cancel the
     operation, in which case error (if non-null) will be set to
-    [gio.types.IOErrorEnum.cancelled].
+    [gio.types.IOErrorEnum.Cancelled].
     
     If you are planning to connect to a socket on the resolved IP
     address, it may be easier to create a #GNetworkAddress and use its
@@ -187,9 +187,9 @@ class Resolver : gobject.object.ObjectG
   gio.inet_address.InetAddress[] lookupByName(string hostname, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(No.alloc);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_by_name(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_name(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -213,13 +213,13 @@ class Resolver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _hostname = hostname.toCString(No.alloc);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_resolver_lookup_by_name_async(cast(GResolver*)cPtr, _hostname, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -228,7 +228,7 @@ class Resolver : gobject.object.ObjectG
     
     If the DNS resolution failed, error (if non-null) will be set to
     a value from #GResolverError. If the operation was cancelled,
-    error will be set to [gio.types.IOErrorEnum.cancelled].
+    error will be set to [gio.types.IOErrorEnum.Cancelled].
     Params:
       result =       the result passed to your #GAsyncReadyCallback
     Returns:     a #GList
@@ -239,7 +239,7 @@ class Resolver : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -249,7 +249,7 @@ class Resolver : gobject.object.ObjectG
   /**
       This differs from [gio.resolver.Resolver.lookupByName] in that you can modify
     the lookup behavior with flags. For example this can be used to limit
-    results with [gio.types.ResolverNameLookupFlags.ipv4Only].
+    results with [gio.types.ResolverNameLookupFlags.Ipv4Only].
     Params:
       hostname =       the hostname to look up
       flags =       extra #GResolverNameLookupFlags for the lookup
@@ -262,9 +262,9 @@ class Resolver : gobject.object.ObjectG
   gio.inet_address.InetAddress[] lookupByNameWithFlags(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _hostname = hostname.toCString(No.alloc);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_with_flags(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -289,13 +289,13 @@ class Resolver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _hostname = hostname.toCString(No.alloc);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_resolver_lookup_by_name_with_flags_async(cast(GResolver*)cPtr, _hostname, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -304,7 +304,7 @@ class Resolver : gobject.object.ObjectG
     
     If the DNS resolution failed, error (if non-null) will be set to
     a value from #GResolverError. If the operation was cancelled,
-    error will be set to [gio.types.IOErrorEnum.cancelled].
+    error will be set to [gio.types.IOErrorEnum.Cancelled].
     Params:
       result =       the result passed to your #GAsyncReadyCallback
     Returns:     a #GList
@@ -315,7 +315,7 @@ class Resolver : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_by_name_with_flags_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_by_name_with_flags_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.inet_address.InetAddress, GidOwnership.Full)(cast(GList*)_cretval);
@@ -332,7 +332,7 @@ class Resolver : gobject.object.ObjectG
     
     If cancellable is non-null, it can be used to cancel the
     operation, in which case error (if non-null) will be set to
-    [gio.types.IOErrorEnum.cancelled].
+    [gio.types.IOErrorEnum.Cancelled].
     Params:
       rrname =       the DNS name to look up the record for
       recordType =       the type of DNS record to look up
@@ -345,9 +345,9 @@ class Resolver : gobject.object.ObjectG
   glib.variant.VariantG[] lookupRecords(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _rrname = rrname.toCString(No.alloc);
+    const(char)* _rrname = rrname.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_records(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_records(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(glib.variant.VariantG, GidOwnership.Full)(cast(GList*)_cretval);
@@ -372,13 +372,13 @@ class Resolver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _rrname = rrname.toCString(No.alloc);
+    const(char)* _rrname = rrname.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_resolver_lookup_records_async(cast(GResolver*)cPtr, _rrname, recordType, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -389,7 +389,7 @@ class Resolver : gobject.object.ObjectG
     
     If the DNS resolution failed, error (if non-null) will be set to
     a value from #GResolverError. If the operation was cancelled,
-    error will be set to [gio.types.IOErrorEnum.cancelled].
+    error will be set to [gio.types.IOErrorEnum.Cancelled].
     Params:
       result =       the result passed to your #GAsyncReadyCallback
     Returns:     a non-empty #GList of
@@ -401,7 +401,7 @@ class Resolver : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_records_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_records_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(glib.variant.VariantG, GidOwnership.Full)(cast(GList*)_cretval);
@@ -425,7 +425,7 @@ class Resolver : gobject.object.ObjectG
     
     If cancellable is non-null, it can be used to cancel the
     operation, in which case error (if non-null) will be set to
-    [gio.types.IOErrorEnum.cancelled].
+    [gio.types.IOErrorEnum.Cancelled].
     
     If you are planning to connect to the service, it is usually easier
     to create a #GNetworkService and use its #GSocketConnectable
@@ -443,11 +443,11 @@ class Resolver : gobject.object.ObjectG
   gio.srv_target.SrvTarget[] lookupService(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null)
   {
     GList* _cretval;
-    const(char)* _service = service.toCString(No.alloc);
-    const(char)* _protocol = protocol.toCString(No.alloc);
-    const(char)* _domain = domain.toCString(No.alloc);
+    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resolver_lookup_service(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_service(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.srv_target.SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);
@@ -474,15 +474,15 @@ class Resolver : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _service = service.toCString(No.alloc);
-    const(char)* _protocol = protocol.toCString(No.alloc);
-    const(char)* _domain = domain.toCString(No.alloc);
+    const(char)* _service = service.toCString(No.Alloc);
+    const(char)* _protocol = protocol.toCString(No.Alloc);
+    const(char)* _domain = domain.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_resolver_lookup_service_async(cast(GResolver*)cPtr, _service, _protocol, _domain, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -491,7 +491,7 @@ class Resolver : gobject.object.ObjectG
     
     If the DNS resolution failed, error (if non-null) will be set to
     a value from #GResolverError. If the operation was cancelled,
-    error will be set to [gio.types.IOErrorEnum.cancelled].
+    error will be set to [gio.types.IOErrorEnum.Cancelled].
     Params:
       result =       the result passed to your #GAsyncReadyCallback
     Returns:     a non-empty #GList of
@@ -502,7 +502,7 @@ class Resolver : gobject.object.ObjectG
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_resolver_lookup_service_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_resolver_lookup_service_finish(cast(GResolver*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     auto _retval = gListToD!(gio.srv_target.SrvTarget, GidOwnership.Full)(cast(GList*)_cretval);
@@ -553,10 +553,10 @@ class Resolver : gobject.object.ObjectG
     Connect to Reload signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReload(T)(T callback, Flag!"after" after = No.after)
+  ulong connectReload(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReloadCallbackDlg) || is(T : ReloadCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

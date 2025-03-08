@@ -14,7 +14,7 @@ class SignalQuery
 {
   GSignalQuery cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.SignalQuery");
@@ -42,13 +42,13 @@ class SignalQuery
 
   @property string signalName()
   {
-    return (cast(GSignalQuery*)cPtr).signalName.fromCString(No.free);
+    return (cast(GSignalQuery*)cPtr).signalName.fromCString(No.Free);
   }
 
   @property void signalName(string propval)
   {
     safeFree(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
-    (cast(GSignalQuery*)cPtr).signalName = propval.toCString(Yes.alloc);
+    (cast(GSignalQuery*)cPtr).signalName = propval.toCString(Yes.Alloc);
   }
 
   @property gobject.types.GType itype()

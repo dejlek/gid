@@ -10,7 +10,7 @@ import gobject.object;
 class DayMillisecond : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,14 +31,14 @@ class DayMillisecond : gobject.object.ObjectG
   {
     GArrowDayMillisecond* _cretval;
     _cretval = garrow_day_millisecond_new(day, millisecond);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
-    _retval = garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.dup) : null);
+    _retval = garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -46,7 +46,7 @@ class DayMillisecond : gobject.object.ObjectG
   bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
-    _retval = garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.dup) : null);
+    _retval = garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -40,7 +40,7 @@ import gtk.types;
 class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -66,7 +66,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -81,7 +81,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     GtkCssProvider* _cretval;
     _cretval = gtk_css_provider_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,10 +97,10 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   static gtk.css_provider.CssProvider getNamed(string name, string variant = null)
   {
     GtkCssProvider* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _variant = variant.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _variant = variant.toCString(No.Alloc);
     _cretval = gtk_css_provider_get_named(_name, _variant);
-    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null, &_err);
+    _retval = gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -162,7 +162,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   bool loadFromPath(string path)
   {
     bool _retval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_css_provider_load_from_path(cast(GtkCssProvider*)cPtr, _path, &_err);
     if (_err)
@@ -181,7 +181,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void loadFromResource(string resourcePath)
   {
-    const(char)* _resourcePath = resourcePath.toCString(No.alloc);
+    const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     gtk_css_provider_load_from_resource(cast(GtkCssProvider*)cPtr, _resourcePath);
   }
 
@@ -199,7 +199,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     char* _cretval;
     _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -232,10 +232,10 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     Connect to ParsingError signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectParsingError(T)(T callback, Flag!"after" after = No.after)
+  ulong connectParsingError(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ParsingErrorCallbackDlg) || is(T : ParsingErrorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -42,7 +42,7 @@ import gtk.types;
 class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -72,7 +72,7 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,8 +85,8 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   static gtk.settings.Settings getForDisplay(gdk.display.Display display)
   {
     GtkSettings* _cretval;
-    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.take);
+    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   */
   void resetProperty(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_settings_reset_property(cast(GtkSettings*)cPtr, _name);
   }
 }

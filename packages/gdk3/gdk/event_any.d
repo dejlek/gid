@@ -16,7 +16,7 @@ class EventAny
 {
   GdkEventAny cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventAny");
@@ -44,7 +44,7 @@ class EventAny
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventAny*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventAny*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()

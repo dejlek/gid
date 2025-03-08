@@ -25,12 +25,12 @@ import gobject.boxed;
 class Thread : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -92,10 +92,10 @@ class Thread : gobject.boxed.Boxed
     auto _funcCB = func ? &_funcCallback : null;
 
     GThread* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     _cretval = g_thread_new(_name, _funcCB, _func);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -122,13 +122,13 @@ class Thread : gobject.boxed.Boxed
     auto _funcCB = func ? &_funcCallback : null;
 
     GThread* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GError *_err;
     _cretval = g_thread_try_new(_name, _funcCB, _func, &_err);
     if (_err)
       throw new ThreadException(_err);
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Thread : gobject.boxed.Boxed
   {
     GThread* _cretval;
     _cretval = g_thread_self();
-    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

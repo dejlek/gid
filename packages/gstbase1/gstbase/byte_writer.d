@@ -19,7 +19,7 @@ class ByteWriter
 {
   GstByteWriter cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstBase.ByteWriter");
@@ -110,7 +110,7 @@ class ByteWriter
   {
     GstBuffer* _cretval;
     _cretval = gst_byte_writer_free_and_get_buffer(cast(GstByteWriter*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class ByteWriter
   bool putBuffer(gst.buffer.Buffer buffer, size_t offset, ptrdiff_t size)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_buffer(cast(GstByteWriter*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.dup) : null, offset, size);
+    _retval = gst_byte_writer_put_buffer(cast(GstByteWriter*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, offset, size);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class ByteWriter
   bool putStringUtf8(string data)
   {
     bool _retval;
-    const(char)* _data = data.toCString(No.alloc);
+    const(char)* _data = data.toCString(No.Alloc);
     _retval = gst_byte_writer_put_string_utf8(cast(GstByteWriter*)cPtr, _data);
     return _retval;
   }
@@ -529,7 +529,7 @@ class ByteWriter
   {
     GstBuffer* _cretval;
     _cretval = gst_byte_writer_reset_and_get_buffer(cast(GstByteWriter*)cPtr);
-    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

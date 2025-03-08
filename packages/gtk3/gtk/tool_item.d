@@ -32,7 +32,7 @@ import pango.types;
 class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -58,7 +58,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkToolItem* _cretval;
     _cretval = gtk_tool_item_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -160,9 +160,9 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.widget.Widget getProxyMenuItem(string menuItemId)
   {
     GtkWidget* _cretval;
-    const(char)* _menuItemId = menuItemId.toCString(No.alloc);
+    const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
     _cretval = gtk_tool_item_get_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_tool_item_get_text_size_group(cast(GtkToolItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,11 +233,11 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     
     Possibilities are:
     $(LIST
-      * [gtk.types.ToolbarStyle.both], meaning the tool item should show
+      * [gtk.types.ToolbarStyle.Both], meaning the tool item should show
         both an icon and a label, stacked vertically
-      * [gtk.types.ToolbarStyle.icons], meaning the toolbar shows only icons
-      * [gtk.types.ToolbarStyle.text], meaning the tool item should only show text
-      * [gtk.types.ToolbarStyle.bothHoriz], meaning the tool item should show
+      * [gtk.types.ToolbarStyle.Icons], meaning the toolbar shows only icons
+      * [gtk.types.ToolbarStyle.Text], meaning the tool item should only show text
+      * [gtk.types.ToolbarStyle.BothHoriz], meaning the tool item should show
         both an icon and a label, arranged horizontally
     )
     Returns:     A #GtkToolbarStyle indicating the toolbar style used
@@ -313,7 +313,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_item_retrieve_proxy_menu_item(cast(GtkToolItem*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   /**
       Sets whether tool_item should be considered important. The #GtkToolButton
     class uses this property to determine whether to show or hide its label
-    when the toolbar style is [gtk.types.ToolbarStyle.bothHoriz]. The result is that
+    when the toolbar style is [gtk.types.ToolbarStyle.BothHoriz]. The result is that
     only tool buttons with the “is_important” property set have labels, an
     effect known as “priority text”
     Params:
@@ -368,8 +368,8 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null)
   {
-    const(char)* _menuItemId = menuItemId.toCString(No.alloc);
-    gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.dup) : null);
+    const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
+    gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null);
   }
 
   /**
@@ -380,7 +380,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   override void setTooltipMarkup(string markup)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_tool_item_set_tooltip_markup(cast(GtkToolItem*)cPtr, _markup);
   }
 
@@ -392,7 +392,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   override void setTooltipText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_tool_item_set_tooltip_text(cast(GtkToolItem*)cPtr, _text);
   }
 
@@ -481,10 +481,10 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     Connect to CreateMenuProxy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreateMenuProxy(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreateMenuProxy(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateMenuProxyCallbackDlg) || is(T : CreateMenuProxyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -528,10 +528,10 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     Connect to ToolbarReconfigured signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectToolbarReconfigured(T)(T callback, Flag!"after" after = No.after)
+  ulong connectToolbarReconfigured(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ToolbarReconfiguredCallbackDlg) || is(T : ToolbarReconfiguredCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

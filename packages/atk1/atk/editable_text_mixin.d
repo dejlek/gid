@@ -68,7 +68,7 @@ template EditableTextT()
   */
   override void insertText(string string_, int length, ref int position)
   {
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     atk_editable_text_insert_text(cast(AtkEditableText*)cPtr, _string_, length, cast(int*)&position);
   }
 
@@ -89,7 +89,7 @@ template EditableTextT()
   */
   override void setTextContents(string string_)
   {
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     atk_editable_text_set_text_contents(cast(AtkEditableText*)cPtr, _string_);
   }
 }

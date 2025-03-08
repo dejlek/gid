@@ -12,12 +12,12 @@ import gst.types;
 class TocEntry : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -43,9 +43,9 @@ class TocEntry : gobject.boxed.Boxed
   this(gst.types.TocEntryType type, string uid)
   {
     GstTocEntry* _cretval;
-    const(char)* _uid = uid.toCString(No.alloc);
+    const(char)* _uid = uid.toCString(No.Alloc);
     _cretval = gst_toc_entry_new(type, _uid);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -55,7 +55,7 @@ class TocEntry : gobject.boxed.Boxed
   */
   void appendSubEntry(gst.toc_entry.TocEntry subentry)
   {
-    gst_toc_entry_append_sub_entry(cast(GstTocEntry*)cPtr, subentry ? cast(GstTocEntry*)subentry.cPtr(Yes.dup) : null);
+    gst_toc_entry_append_sub_entry(cast(GstTocEntry*)cPtr, subentry ? cast(GstTocEntry*)subentry.cPtr(Yes.Dup) : null);
   }
 
   /** */
@@ -95,7 +95,7 @@ class TocEntry : gobject.boxed.Boxed
   {
     GstTocEntry* _cretval;
     _cretval = gst_toc_entry_get_parent(cast(GstTocEntry*)cPtr);
-    auto _retval = _cretval ? new gst.toc_entry.TocEntry(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.toc_entry.TocEntry(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class TocEntry : gobject.boxed.Boxed
   {
     GstTagList* _cretval;
     _cretval = gst_toc_entry_get_tags(cast(const(GstTocEntry)*)cPtr);
-    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class TocEntry : gobject.boxed.Boxed
   {
     GstToc* _cretval;
     _cretval = gst_toc_entry_get_toc(cast(GstTocEntry*)cPtr);
-    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class TocEntry : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = gst_toc_entry_get_uid(cast(const(GstTocEntry)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class TocEntry : gobject.boxed.Boxed
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_toc_entry_merge_tags(cast(GstTocEntry*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.dup) : null, mode);
+    gst_toc_entry_merge_tags(cast(GstTocEntry*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -221,6 +221,6 @@ class TocEntry : gobject.boxed.Boxed
   */
   void setTags(gst.tag_list.TagList tags = null)
   {
-    gst_toc_entry_set_tags(cast(GstTocEntry*)cPtr, tags ? cast(GstTagList*)tags.cPtr(Yes.dup) : null);
+    gst_toc_entry_set_tags(cast(GstTocEntry*)cPtr, tags ? cast(GstTagList*)tags.cPtr(Yes.Dup) : null);
   }
 }

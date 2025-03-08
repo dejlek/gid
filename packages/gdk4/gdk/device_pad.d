@@ -8,7 +8,7 @@ import gid.gid;
 
 /**
     [gdk.device_pad.DevicePad] is an interface implemented by devices of type
-  [gdk.types.InputSource.tabletPad]
+  [gdk.types.InputSource.TabletPad]
   
   It allows querying the features provided by the pad device.
   
@@ -23,7 +23,7 @@ import gid.gid;
   (current) for each given group, different groups may have different
   current modes. The number of available modes in a group can be found
   out through [gdk.device_pad.DevicePad.getGroupNModes], and the current mode
-  for a given group will be notified through events of type [gdk.types.EventType.padGroupMode].
+  for a given group will be notified through events of type [gdk.types.EventType.PadGroupMode].
 */
 interface DevicePad
 {

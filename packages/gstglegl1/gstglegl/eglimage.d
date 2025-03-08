@@ -20,15 +20,15 @@ class EGLImage : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstEGLImage.sizeof), Yes.take);
+    super(safeMalloc(GstEGLImage.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -70,8 +70,8 @@ class EGLImage : gobject.boxed.Boxed
   static gstglegl.eglimage.EGLImage fromDmabuf(gstgl.glcontext.GLContext context, int dmabuf, gstvideo.video_info.VideoInfo inInfo, int plane, size_t offset)
   {
     GstEGLImage* _cretval;
-    _cretval = gst_egl_image_from_dmabuf(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, dmabuf, inInfo ? cast(const(GstVideoInfo)*)inInfo.cPtr(No.dup) : null, plane, offset);
-    auto _retval = _cretval ? new gstglegl.eglimage.EGLImage(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_egl_image_from_dmabuf(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, dmabuf, inInfo ? cast(const(GstVideoInfo)*)inInfo.cPtr(No.Dup) : null, plane, offset);
+    auto _retval = _cretval ? new gstglegl.eglimage.EGLImage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

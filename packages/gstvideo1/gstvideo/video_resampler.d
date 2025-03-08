@@ -14,7 +14,7 @@ class VideoResampler
 {
   GstVideoResampler cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoResampler");
@@ -82,7 +82,7 @@ class VideoResampler
   bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = gst_video_resampler_init(cast(GstVideoResampler*)cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options.cPtr(No.dup) : null);
+    _retval = gst_video_resampler_init(cast(GstVideoResampler*)cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options.cPtr(No.Dup) : null);
     return _retval;
   }
 }

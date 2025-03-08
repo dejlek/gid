@@ -96,7 +96,7 @@ import gtk.widget;
 class ScrolledWindow : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -127,8 +127,8 @@ class ScrolledWindow : gtk.bin.Bin
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrolled_window_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_scrolled_window_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -156,7 +156,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void addWithViewport(gtk.widget.Widget child)
   {
-    gtk_scrolled_window_add_with_viewport(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_scrolled_window_add_with_viewport(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -181,7 +181,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -351,7 +351,7 @@ class ScrolledWindow : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -382,13 +382,13 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
-    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.dup) : null);
+    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
   }
 
   /**
       Turns kinetic scrolling on or off.
     Kinetic scrolling only applies to devices with source
-    [gdk.types.InputSource.touchscreen].
+    [gdk.types.InputSource.Touchscreen].
     Params:
       kineticScrolling =       true to enable kinetic scrolling
   */
@@ -471,10 +471,10 @@ class ScrolledWindow : gtk.bin.Bin
       Sets the placement of the contents with respect to the scrollbars
     for the scrolled window.
     
-    The default is [gtk.types.CornerType.topLeft], meaning the child is
+    The default is [gtk.types.CornerType.TopLeft], meaning the child is
     in the top left, with the scrollbars underneath and to the right.
-    Other values in #GtkCornerType are [gtk.types.CornerType.topRight],
-    [gtk.types.CornerType.bottomLeft], and [gtk.types.CornerType.bottomRight].
+    Other values in #GtkCornerType are [gtk.types.CornerType.TopRight],
+    [gtk.types.CornerType.BottomLeft], and [gtk.types.CornerType.BottomRight].
     
     See also [gtk.scrolled_window.ScrolledWindow.getPlacement] and
     [gtk.scrolled_window.ScrolledWindow.unsetPlacement].
@@ -490,9 +490,9 @@ class ScrolledWindow : gtk.bin.Bin
       Sets the scrollbar policy for the horizontal and vertical scrollbars.
     
     The policy determines when the scrollbar should appear; it is a value
-    from the #GtkPolicyType enumeration. If [gtk.types.PolicyType.always], the
-    scrollbar is always present; if [gtk.types.PolicyType.never], the scrollbar is
-    never present; if [gtk.types.PolicyType.automatic], the scrollbar is present only
+    from the #GtkPolicyType enumeration. If [gtk.types.PolicyType.Always], the
+    scrollbar is always present; if [gtk.types.PolicyType.Never], the scrollbar is
+    never present; if [gtk.types.PolicyType.Automatic], the scrollbar is present only
     if needed (that is, if the slider part of the bar would be smaller
     than the trough — the display is larger than the page size).
     Params:
@@ -544,13 +544,13 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
-    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.dup) : null);
+    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
   }
 
   /**
       Unsets the placement of the contents with respect to the scrollbars
     for the scrolled window. If no window placement is set for a scrolled
-    window, it defaults to [gtk.types.CornerType.topLeft].
+    window, it defaults to [gtk.types.CornerType.TopLeft].
     
     See also [gtk.scrolled_window.ScrolledWindow.setPlacement] and
     [gtk.scrolled_window.ScrolledWindow.getPlacement].
@@ -586,10 +586,10 @@ class ScrolledWindow : gtk.bin.Bin
     Connect to EdgeOvershot signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEdgeOvershot(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EdgeOvershotCallbackDlg) || is(T : EdgeOvershotCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -631,10 +631,10 @@ class ScrolledWindow : gtk.bin.Bin
     Connect to EdgeReached signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEdgeReached(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EdgeReachedCallbackDlg) || is(T : EdgeReachedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -661,8 +661,8 @@ class ScrolledWindow : gtk.bin.Bin
   
     ## Parameters
     $(LIST
-      * $(B directionType)       either [gtk.types.DirectionType.tabForward] or
-          [gtk.types.DirectionType.tabBackward]
+      * $(B directionType)       either [gtk.types.DirectionType.TabForward] or
+          [gtk.types.DirectionType.TabBackward]
       * $(B scrolledWindow) the instance the signal is connected to
     )
   */
@@ -675,10 +675,10 @@ class ScrolledWindow : gtk.bin.Bin
     Connect to MoveFocusOut signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveFocusOut(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveFocusOutCallbackDlg) || is(T : MoveFocusOutCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -719,10 +719,10 @@ class ScrolledWindow : gtk.bin.Bin
     Connect to ScrollChild signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollChild(T)(T callback, Flag!"after" after = No.after)
+  ulong connectScrollChild(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScrollChildCallbackDlg) || is(T : ScrollChildCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

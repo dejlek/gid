@@ -102,7 +102,7 @@ import pango.layout;
   in the #GtkSizeRequestMode chosen by the toplevel.
   
   For example, when queried in the normal
-  [gtk.types.SizeRequestMode.heightForWidth] mode:
+  [gtk.types.SizeRequestMode.HeightForWidth] mode:
   First, the default minimum and natural width for each widget
   in the interface will be computed using [gtk.widget.Widget.getPreferredWidth].
   Because the preferred widths for each container depend on the preferred
@@ -147,7 +147,7 @@ import pango.layout;
   height-for-width or width-for-height requests will always be allocated
   at least enough space to fit its own content.
   
-  Here are some examples of how a [gtk.types.SizeRequestMode.heightForWidth] widget
+  Here are some examples of how a [gtk.types.SizeRequestMode.HeightForWidth] widget
   generally deals with width-for-height requests, for #GtkWidgetClass.get_preferred_height()
   it will do:
   
@@ -233,7 +233,7 @@ import pango.layout;
   Since 3.10 GTK+ also supports baseline vertical alignment of widgets. This
   means that widgets are positioned such that the typographical baseline of
   widgets in the same row are aligned. This happens if a widget supports baselines,
-  has a vertical alignment of [gtk.types.Align.baseline], and is inside a container
+  has a vertical alignment of [gtk.types.Align.Baseline], and is inside a container
   that supports baselines and has a natural “row” that it aligns to the baseline,
   or a baseline assigned to it by the grandparent.
   
@@ -245,7 +245,7 @@ import pango.layout;
   so if baselines are not supported it doesn’t need to be implemented.
   
   If a widget ends up baseline aligned it will be allocated all the space in the parent
-  as if it was [gtk.types.Align.fill], but the selected baseline can be found via [gtk.widget.Widget.getAllocatedBaseline].
+  as if it was [gtk.types.Align.Fill], but the selected baseline can be found via [gtk.widget.Widget.getAllocatedBaseline].
   If this has a value other than -1 you need to align the widget such that the baseline
   appears at the position.
   
@@ -458,7 +458,7 @@ import pango.layout;
 class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface.ImplementorIface, gtk.buildable.Buildable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -503,7 +503,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_default_style();
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     direction has not been explicitly set by [gtk.widget.Widget.setDirection].
     Params:
       dir =       the new default direction. This cannot be
-               [gtk.types.TextDirection.none].
+               [gtk.types.TextDirection.None].
   */
   static void setDefaultDirection(gtk.types.TextDirection dir)
   {
@@ -575,12 +575,12 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       accelGroup =       accel group for this widget, added to its toplevel
       accelKey =       GDK keyval of the accelerator
       accelMods =       modifier key combination of the accelerator
-      accelFlags =       flag accelerators, e.g. [gtk.types.AccelFlags.visible]
+      accelFlags =       flag accelerators, e.g. [gtk.types.AccelFlags.Visible]
   */
   void addAccelerator(string accelSignal, gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags)
   {
-    const(char)* _accelSignal = accelSignal.toCString(No.alloc);
-    gtk_widget_add_accelerator(cast(GtkWidget*)cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null, accelKey, accelMods, accelFlags);
+    const(char)* _accelSignal = accelSignal.toCString(No.Alloc);
+    gtk_widget_add_accelerator(cast(GtkWidget*)cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null, accelKey, accelMods, accelFlags);
   }
 
   /**
@@ -592,7 +592,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
   {
-    gtk_widget_add_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, events);
+    gtk_widget_add_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, events);
   }
 
   /**
@@ -619,7 +619,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addMnemonicLabel(gtk.widget.Widget label)
   {
-    gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.dup) : null);
+    gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
 
   /**
@@ -654,7 +654,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     {
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.take), ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.take));
+      bool _retval = (*_dlg)(ObjectG.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -730,7 +730,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void childNotify(string childProperty)
   {
-    const(char)* _childProperty = childProperty.toCString(No.alloc);
+    const(char)* _childProperty = childProperty.toCString(No.Alloc);
     gtk_widget_child_notify(cast(GtkWidget*)cPtr, _childProperty);
   }
 
@@ -752,8 +752,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     char* _path;
     char* _pathReversed;
     gtk_widget_class_path(cast(GtkWidget*)cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
-    path = _path.fromCString(Yes.free);
-    pathReversed = _pathReversed.fromCString(Yes.free);
+    path = _path.fromCString(Yes.Free);
+    pathReversed = _pathReversed.fromCString(Yes.Free);
   }
 
   /**
@@ -789,7 +789,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -809,9 +809,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   pango.layout.Layout createPangoLayout(string text = null)
   {
     PangoLayout* _cretval;
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)cPtr, _text);
-    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -872,7 +872,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void destroyed(gtk.widget.Widget widgetPointer)
   {
-    gtk_widget_destroyed(cast(GtkWidget*)cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer.cPtr(No.dup) : null);
+    gtk_widget_destroyed(cast(GtkWidget*)cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -889,7 +889,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool deviceIsShadowed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gtk_widget_device_is_shadowed(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    _retval = gtk_widget_device_is_shadowed(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -910,8 +910,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.take);
+    _cretval = gtk_drag_begin(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null);
+    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -959,8 +959,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBeginWithCoordinates(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event, int x, int y)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.take);
+    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null, x, y);
+    auto _retval = ObjectG.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1036,8 +1036,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList = null)
   {
     GdkAtom _cretval;
-    _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, targetList ? cast(GtkTargetList*)targetList.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.take) : null;
+    _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1050,7 +1050,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkTargetList* _cretval;
     _cretval = gtk_drag_dest_get_target_list(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1140,7 +1140,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestSetProxy(gdk.window.Window proxyWindow, gdk.types.DragProtocol protocol, bool useCoordinates)
   {
-    gtk_drag_dest_set_proxy(cast(GtkWidget*)cPtr, proxyWindow ? cast(GdkWindow*)proxyWindow.cPtr(No.dup) : null, protocol, useCoordinates);
+    gtk_drag_dest_set_proxy(cast(GtkWidget*)cPtr, proxyWindow ? cast(GdkWindow*)proxyWindow.cPtr(No.Dup) : null, protocol, useCoordinates);
   }
 
   /**
@@ -1152,13 +1152,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestSetTargetList(gtk.target_list.TargetList targetList = null)
   {
-    gtk_drag_dest_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.dup) : null);
+    gtk_drag_dest_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
   }
 
   /**
       Tells the widget to emit #GtkWidget::drag-motion and
     #GtkWidget::drag-leave events regardless of the targets and the
-    [gtk.types.DestDefaults.motion] flag.
+    [gtk.types.DestDefaults.Motion] flag.
     
     This may be used when a widget wants to do generic
     actions regardless of the targets that the source offers.
@@ -1186,7 +1186,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     #GtkWidget::drag-data-received signal. Failure of the retrieval
     is indicated by the length field of the selection_data
     signal parameter being negative. However, when [gtk.widget.Widget.dragGetData]
-    is called implicitely because the [gtk.types.DestDefaults.drop] was set,
+    is called implicitely because the [gtk.types.DestDefaults.Drop] was set,
     then the widget will not receive notification of failed
     drops.
     Params:
@@ -1198,13 +1198,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragGetData(gdk.drag_context.DragContext context, gdk.atom.Atom target, uint time)
   {
-    gtk_drag_get_data(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.dup) : null, target ? cast(GdkAtom)target.cPtr : null, time);
+    gtk_drag_get_data(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, target ? cast(GdkAtom)target.cPtr : null, time);
   }
 
   /**
       Highlights a widget as a currently hovered drop target.
     To end the highlight, call [gtk.widget.Widget.dragUnhighlight].
-    GTK+ calls this automatically if [gtk.types.DestDefaults.highlight] is set.
+    GTK+ calls this automatically if [gtk.types.DestDefaults.Highlight] is set.
   */
   void dragHighlight()
   {
@@ -1256,7 +1256,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkTargetList* _cretval;
     _cretval = gtk_drag_source_get_target_list(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1290,7 +1290,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconGicon(gio.icon.Icon icon)
   {
-    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.dup) : null);
+    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)cPtr, icon ? cast(GIcon*)(cast(ObjectG)icon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -1301,7 +1301,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_drag_source_set_icon_name(cast(GtkWidget*)cPtr, _iconName);
   }
 
@@ -1314,7 +1314,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.dup) : null);
+    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1327,7 +1327,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconStock(string stockId)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_drag_source_set_icon_stock(cast(GtkWidget*)cPtr, _stockId);
   }
 
@@ -1340,7 +1340,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetTargetList(gtk.target_list.TargetList targetList = null)
   {
-    gtk_drag_source_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.dup) : null);
+    gtk_drag_source_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1383,7 +1383,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void draw(cairo.context.Context cr)
   {
-    gtk_widget_draw(cast(GtkWidget*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.dup) : null);
+    gtk_widget_draw(cast(GtkWidget*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1466,7 +1466,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     AtkObject* _cretval;
     _cretval = gtk_widget_get_accessible(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1483,9 +1483,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gio.action_group.ActionGroup getActionGroup(string prefix)
   {
     GActionGroup* _cretval;
-    const(char)* _prefix = prefix.toCString(No.alloc);
+    const(char)* _prefix = prefix.toCString(No.Alloc);
     _cretval = gtk_widget_get_action_group(cast(GtkWidget*)cPtr, _prefix);
-    auto _retval = ObjectG.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1547,7 +1547,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)cPtr, widgetType);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1617,7 +1617,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRequisition _requisition;
     gtk_widget_get_child_requisition(cast(GtkWidget*)cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.take);
+    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
   /**
@@ -1656,7 +1656,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkClipboard* _cretval;
     _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)cPtr, selection ? cast(GdkAtom)selection.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1672,7 +1672,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_composite_name(cast(GtkWidget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1686,7 +1686,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getDeviceEnabled(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gtk_widget_get_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    _retval = gtk_widget_get_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1700,7 +1700,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
   {
     GdkEventMask _cretval;
-    _cretval = gtk_widget_get_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    _cretval = gtk_widget_get_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -1732,7 +1732,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkDisplay* _cretval;
     _cretval = gtk_widget_get_display(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1787,7 +1787,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoFontMap* _cretval;
     _cretval = gtk_widget_get_font_map(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1800,7 +1800,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gtk_widget_get_font_options(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1833,7 +1833,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkFrameClock* _cretval;
     _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1841,8 +1841,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:halign property.
     
     For backwards compatibility reasons this method will never return
-    [gtk.types.Align.baseline], but instead it will convert it to
-    [gtk.types.Align.fill]. Baselines are not supported for horizontal
+    [gtk.types.Align.Baseline], but instead it will convert it to
+    [gtk.types.Align.Fill]. Baselines are not supported for horizontal
     alignment.
     Returns:     the horizontal alignment of widget
   */
@@ -2044,7 +2044,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_widget_get_modifier_style(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2058,7 +2058,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     const(char)* _cretval;
     _cretval = gtk_widget_get_name(cast(GtkWidget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -2101,7 +2101,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoContext* _cretval;
     _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2113,7 +2113,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_parent(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2126,7 +2126,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_parent_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2140,7 +2140,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidgetPath* _cretval;
     _cretval = gtk_widget_get_path(cast(GtkWidget*)cPtr);
-    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -2246,8 +2246,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
     gtk_widget_get_preferred_size(cast(GtkWidget*)cPtr, &_minimumSize, &_naturalSize);
-    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.take);
-    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.take);
+    minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
+    naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
   }
 
   /**
@@ -2353,7 +2353,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRequisition _requisition;
     gtk_widget_get_requisition(cast(GtkWidget*)cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.take);
+    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
   /**
@@ -2373,7 +2373,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_root_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2407,7 +2407,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkScreen* _cretval;
     _cretval = gtk_widget_get_screen(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2438,7 +2438,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkSettings* _cretval;
     _cretval = gtk_widget_get_settings(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2475,7 +2475,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
   /**
       Returns the widget state as a flag set. It is worth mentioning
-    that the effective [gtk.types.StateFlags.insensitive] state will be
+    that the effective [gtk.types.StateFlags.Insensitive] state will be
     returned, that is, also based on parent insensitivity, even if
     widget itself is sensitive.
     
@@ -2502,7 +2502,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_style(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2516,7 +2516,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyleContext* _cretval;
     _cretval = gtk_widget_get_style_context(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2550,9 +2550,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gobject.object.ObjectG getTemplateChild(gobject.types.GType widgetType, string name)
   {
     ObjectC* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_widget_get_template_child(cast(GtkWidget*)cPtr, widgetType, _name);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2565,7 +2565,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2578,7 +2578,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _cretval;
     _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -2592,7 +2592,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWindow* _cretval;
     _cretval = gtk_widget_get_tooltip_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2635,7 +2635,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkWidget* _cretval;
     _cretval = gtk_widget_get_toplevel(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2643,8 +2643,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       Gets the value of the #GtkWidget:valign property.
     
     For backwards compatibility reasons this method will never return
-    [gtk.types.Align.baseline], but instead it will convert it to
-    [gtk.types.Align.fill]. If your widget want to support baseline aligned
+    [gtk.types.Align.Baseline], but instead it will convert it to
+    [gtk.types.Align.Fill]. If your widget want to support baseline aligned
     children it must use [gtk.widget.Widget.getValignWithBaseline], or
     `g_object_get (widget, "valign", &value, NULL)`, which will
     also report the true value.
@@ -2660,7 +2660,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
   /**
       Gets the value of the #GtkWidget:valign property, including
-    [gtk.types.Align.baseline].
+    [gtk.types.Align.Baseline].
     Returns:     the vertical alignment of widget
   */
   gtk.types.Align getValignWithBaseline()
@@ -2724,7 +2724,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkVisual* _cretval;
     _cretval = gtk_widget_get_visual(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2736,7 +2736,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GdkWindow* _cretval;
     _cretval = gtk_widget_get_window(cast(GtkWidget*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2959,7 +2959,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void inputShapeCombineRegion(cairo.region.Region region = null)
   {
-    gtk_widget_input_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.dup) : null);
+    gtk_widget_input_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -2976,8 +2976,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(ObjectG)group).cPtr(No.Dup) : null);
   }
 
   /**
@@ -2995,8 +2995,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     bool _retval;
     GdkRectangle _intersection;
-    _retval = gtk_widget_intersect(cast(GtkWidget*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.dup) : null, &_intersection);
-    intersection = new gdk.rectangle.Rectangle(cast(void*)&_intersection, No.take);
+    _retval = gtk_widget_intersect(cast(GtkWidget*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null, &_intersection);
+    intersection = new gdk.rectangle.Rectangle(cast(void*)&_intersection, No.Take);
     return _retval;
   }
 
@@ -3011,7 +3011,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isAncestor(gtk.widget.Widget ancestor)
   {
     bool _retval;
-    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(No.dup) : null);
+    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -3120,7 +3120,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     [gtk.widget.Widget.childFocus] on the widget’s toplevel.
     
     The default ::keynav-failed handler returns false for
-    [gtk.types.DirectionType.tabForward] and [gtk.types.DirectionType.tabBackward]. For the other
+    [gtk.types.DirectionType.TabForward] and [gtk.types.DirectionType.TabBackward]. For the other
     values of #GtkDirectionType it returns true.
     
     Whenever the default handler returns true, it also calls
@@ -3180,7 +3180,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -3256,7 +3256,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyBase(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_base(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
+    gtk_widget_modify_base(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3284,7 +3284,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyBg(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_bg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
+    gtk_widget_modify_bg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3306,7 +3306,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyCursor(gdk.color.Color primary = null, gdk.color.Color secondary = null)
   {
-    gtk_widget_modify_cursor(cast(GtkWidget*)cPtr, primary ? cast(const(GdkColor)*)primary.cPtr(No.dup) : null, secondary ? cast(const(GdkColor)*)secondary.cPtr(No.dup) : null);
+    gtk_widget_modify_cursor(cast(GtkWidget*)cPtr, primary ? cast(const(GdkColor)*)primary.cPtr(No.Dup) : null, secondary ? cast(const(GdkColor)*)secondary.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3324,7 +3324,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyFg(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_fg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
+    gtk_widget_modify_fg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3340,7 +3340,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyFont(pango.font_description.FontDescription fontDesc = null)
   {
-    gtk_widget_modify_font(cast(GtkWidget*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.dup) : null);
+    gtk_widget_modify_font(cast(GtkWidget*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3369,7 +3369,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyStyle(gtk.rc_style.RcStyle style)
   {
-    gtk_widget_modify_style(cast(GtkWidget*)cPtr, style ? cast(GtkRcStyle*)style.cPtr(No.dup) : null);
+    gtk_widget_modify_style(cast(GtkWidget*)cPtr, style ? cast(GtkRcStyle*)style.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3390,7 +3390,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyText(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_text(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.dup) : null);
+    gtk_widget_modify_text(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3412,7 +3412,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
-    gtk_widget_override_background_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
+    gtk_widget_override_background_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3450,7 +3450,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
-    gtk_widget_override_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
+    gtk_widget_override_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3476,7 +3476,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideCursor(gdk.rgba.RGBA cursor = null, gdk.rgba.RGBA secondaryCursor = null)
   {
-    gtk_widget_override_cursor(cast(GtkWidget*)cPtr, cursor ? cast(const(GdkRGBA)*)cursor.cPtr(No.dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor.cPtr(No.dup) : null);
+    gtk_widget_override_cursor(cast(GtkWidget*)cPtr, cursor ? cast(const(GdkRGBA)*)cursor.cPtr(No.Dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3493,7 +3493,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideFont(pango.font_description.FontDescription fontDesc = null)
   {
-    gtk_widget_override_font(cast(GtkWidget*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.dup) : null);
+    gtk_widget_override_font(cast(GtkWidget*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3515,8 +3515,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideSymbolicColor(string name, gdk.rgba.RGBA color = null)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    gtk_widget_override_symbolic_color(cast(GtkWidget*)cPtr, _name, color ? cast(const(GdkRGBA)*)color.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    gtk_widget_override_symbolic_color(cast(GtkWidget*)cPtr, _name, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3547,8 +3547,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     char* _path;
     char* _pathReversed;
     gtk_widget_path(cast(GtkWidget*)cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
-    path = _path.fromCString(Yes.free);
-    pathReversed = _pathReversed.fromCString(Yes.free);
+    path = _path.fromCString(Yes.Free);
+    pathReversed = _pathReversed.fromCString(Yes.Free);
   }
 
   /**
@@ -3626,7 +3626,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueDrawRegion(cairo.region.Region region)
   {
-    gtk_widget_queue_draw_region(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null);
+    gtk_widget_queue_draw_region(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3698,8 +3698,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   cairo.region.Region regionIntersect(cairo.region.Region region)
   {
     cairo_region_t* _cretval;
-    _cretval = gtk_widget_region_intersect(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gtk_widget_region_intersect(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -3717,7 +3717,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void registerWindow(gdk.window.Window window)
   {
-    gtk_widget_register_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+    gtk_widget_register_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3732,7 +3732,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool removeAccelerator(gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_widget_remove_accelerator(cast(GtkWidget*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null, accelKey, accelMods);
+    _retval = gtk_widget_remove_accelerator(cast(GtkWidget*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null, accelKey, accelMods);
     return _retval;
   }
 
@@ -3747,7 +3747,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void removeMnemonicLabel(gtk.widget.Widget label)
   {
-    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.dup) : null);
+    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3787,10 +3787,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null)
   {
     PixbufC* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
-    const(char)* _detail = detail.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
+    const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon(cast(GtkWidget*)cPtr, _stockId, size, _detail);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3817,9 +3817,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(string stockId, gtk.types.IconSize size)
   {
     PixbufC* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)cPtr, _stockId, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -3833,7 +3833,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void reparent(gtk.widget.Widget newParent)
   {
-    gtk_widget_reparent(cast(GtkWidget*)cPtr, newParent ? cast(GtkWidget*)newParent.cPtr(No.dup) : null);
+    gtk_widget_reparent(cast(GtkWidget*)cPtr, newParent ? cast(GtkWidget*)newParent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -3953,8 +3953,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
-    gtk_widget_set_accel_path(cast(GtkWidget*)cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
+    gtk_widget_set_accel_path(cast(GtkWidget*)cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4037,7 +4037,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setCompositeName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_composite_name(cast(GtkWidget*)cPtr, _name);
   }
 
@@ -4054,7 +4054,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDeviceEnabled(gdk.device.Device device, bool enabled)
   {
-    gtk_widget_set_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, enabled);
+    gtk_widget_set_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, enabled);
   }
 
   /**
@@ -4075,7 +4075,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
   {
-    gtk_widget_set_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, events);
+    gtk_widget_set_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, events);
   }
 
   /**
@@ -4089,7 +4089,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     where the containers are arranged in an order that is explicitly
     visual rather than logical (such as buttons for text justification).
     
-    If the direction is set to [gtk.types.TextDirection.none], then the value
+    If the direction is set to [gtk.types.TextDirection.None], then the value
     set by [gtk.widget.Widget.setDefaultDirection] will be used.
     Params:
       dir =       the new direction
@@ -4179,7 +4179,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setFontMap(pango.font_map.FontMap fontMap = null)
   {
-    gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.dup) : null);
+    gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4191,7 +4191,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setFontOptions(cairo.font_options.FontOptions options = null)
   {
-    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.dup) : null);
+    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4391,7 +4391,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_widget_set_name(cast(GtkWidget*)cPtr, _name);
   }
 
@@ -4444,7 +4444,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setParent(gtk.widget.Widget parent)
   {
-    gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.dup) : null);
+    gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4461,7 +4461,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setParentWindow(gdk.window.Window parentWindow)
   {
-    gtk_widget_set_parent_window(cast(GtkWidget*)cPtr, parentWindow ? cast(GdkWindow*)parentWindow.cPtr(No.dup) : null);
+    gtk_widget_set_parent_window(cast(GtkWidget*)cPtr, parentWindow ? cast(GdkWindow*)parentWindow.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4591,13 +4591,13 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
       This function is for use in widget implementations. Turns on flag
     values in the current widget state (insensitive, prelighted, etc.).
     
-    This function accepts the values [gtk.types.StateFlags.dirLtr] and
-    [gtk.types.StateFlags.dirRtl] but ignores them. If you want to set the widget's
+    This function accepts the values [gtk.types.StateFlags.DirLtr] and
+    [gtk.types.StateFlags.DirRtl] but ignores them. If you want to set the widget's
     direction, use [gtk.widget.Widget.setDirection].
     
-    It is worth mentioning that any other state than [gtk.types.StateFlags.insensitive],
+    It is worth mentioning that any other state than [gtk.types.StateFlags.Insensitive],
     will be propagated down to all non-internal children if widget is a
-    #GtkContainer, while [gtk.types.StateFlags.insensitive] itself will be propagated
+    #GtkContainer, while [gtk.types.StateFlags.Insensitive] itself will be propagated
     down to all #GtkContainer children by different means than turning on the
     state flag down the hierarchy, both [gtk.widget.Widget.getStateFlags] and
     [gtk.widget.Widget.isSensitive] will make use of these.
@@ -4622,7 +4622,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setStyle(gtk.style.Style style = null)
   {
-    gtk_widget_set_style(cast(GtkWidget*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.dup) : null);
+    gtk_widget_set_style(cast(GtkWidget*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4652,7 +4652,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipMarkup(string markup = null)
   {
-    const(char)* _markup = markup.toCString(No.alloc);
+    const(char)* _markup = markup.toCString(No.Alloc);
     gtk_widget_set_tooltip_markup(cast(GtkWidget*)cPtr, _markup);
   }
 
@@ -4667,7 +4667,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipText(string text = null)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_widget_set_tooltip_text(cast(GtkWidget*)cPtr, _text);
   }
 
@@ -4682,7 +4682,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipWindow(gtk.window.Window customWindow = null)
   {
-    gtk_widget_set_tooltip_window(cast(GtkWidget*)cPtr, customWindow ? cast(GtkWindow*)customWindow.cPtr(No.dup) : null);
+    gtk_widget_set_tooltip_window(cast(GtkWidget*)cPtr, customWindow ? cast(GtkWindow*)customWindow.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4751,7 +4751,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setVisual(gdk.visual.Visual visual = null)
   {
-    gtk_widget_set_visual(cast(GtkWidget*)cPtr, visual ? cast(GdkVisual*)visual.cPtr(No.dup) : null);
+    gtk_widget_set_visual(cast(GtkWidget*)cPtr, visual ? cast(GdkVisual*)visual.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4771,7 +4771,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setWindow(gdk.window.Window window)
   {
-    gtk_widget_set_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(Yes.dup) : null);
+    gtk_widget_set_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -4783,7 +4783,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void shapeCombineRegion(cairo.region.Region region = null)
   {
-    gtk_widget_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.dup) : null);
+    gtk_widget_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4847,7 +4847,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRequisition _requisition;
     gtk_widget_size_request(cast(GtkWidget*)cPtr, &_requisition);
-    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.take);
+    requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
   /**
@@ -4878,8 +4878,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void styleGetProperty(string propertyName, gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.alloc);
-    gtk_widget_style_get_property(cast(GtkWidget*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.dup) : null);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
+    gtk_widget_style_get_property(cast(GtkWidget*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4910,7 +4910,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool translateCoordinates(gtk.widget.Widget destWidget, int srcX, int srcY, out int destX, out int destY)
   {
     bool _retval;
-    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(No.dup) : null, srcX, srcY, cast(int*)&destX, cast(int*)&destY);
+    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(No.Dup) : null, srcX, srcY, cast(int*)&destX, cast(int*)&destY);
     return _retval;
   }
 
@@ -4962,7 +4962,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unregisterWindow(gdk.window.Window window)
   {
-    gtk_widget_unregister_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+    gtk_widget_unregister_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
   }
 
   /**
@@ -4987,10 +4987,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to AccelClosuresChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectAccelClosuresChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectAccelClosuresChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : AccelClosuresChangedCallbackDlg) || is(T : AccelClosuresChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5032,10 +5032,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ButtonPressEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectButtonPressEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectButtonPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonPressEventCallbackDlg) || is(T : ButtonPressEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5080,10 +5080,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ButtonReleaseEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectButtonReleaseEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectButtonReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ButtonReleaseEventCallbackDlg) || is(T : ButtonReleaseEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5124,10 +5124,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to CanActivateAccel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCanActivateAccel(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCanActivateAccel(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CanActivateAccelCallbackDlg) || is(T : CanActivateAccelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5166,10 +5166,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Params:
       detail = Signal detail or null (default)
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChildNotify(T)(string detail = null, T callback, Flag!"after" after = No.after)
+  ulong connectChildNotify(T)(string detail = null, T callback, Flag!"After" after = No.After)
   if (is(T : ChildNotifyCallbackDlg) || is(T : ChildNotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5206,10 +5206,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to CompositedChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCompositedChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CompositedChangedCallbackDlg) || is(T : CompositedChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5250,10 +5250,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ConfigureEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectConfigureEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectConfigureEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ConfigureEventCallbackDlg) || is(T : ConfigureEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5293,10 +5293,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DamageEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDamageEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDamageEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DamageEventCallbackDlg) || is(T : DamageEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5338,10 +5338,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DeleteEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeleteEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeleteEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeleteEventCallbackDlg) || is(T : DeleteEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5380,10 +5380,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Destroy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDestroy(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DestroyCallbackDlg) || is(T : DestroyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5425,10 +5425,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DestroyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDestroyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDestroyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DestroyEventCallbackDlg) || is(T : DestroyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5465,10 +5465,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DirectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDirectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DirectionChangedCallbackDlg) || is(T : DirectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5508,10 +5508,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragBegin signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragBegin(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragBegin(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragBeginCallbackDlg) || is(T : DragBeginCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5529,7 +5529,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
   /**
       The ::drag-data-delete signal is emitted on the drag source when a drag
-    with the action [gdk.types.DragAction.move] is successfully completed. The signal
+    with the action [gdk.types.DragAction.Move] is successfully completed. The signal
     handler is responsible for deleting the data that has been dropped. What
     "delete" means depends on the context of the drag operation.
   
@@ -5548,10 +5548,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragDataDelete signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragDataDelete(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragDataDelete(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragDataDeleteCallbackDlg) || is(T : DragDataDeleteCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5593,10 +5593,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragDataGet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragDataGet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragDataGet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragDataGetCallbackDlg) || is(T : DragDataGetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5631,7 +5631,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     
     The handler may inspect the selected action with
     [gdk.drag_context.DragContext.getSelectedAction] before calling
-    [gtk.global.dragFinish], e.g. to implement [gdk.types.DragAction.ask] as
+    [gtk.global.dragFinish], e.g. to implement [gdk.types.DragAction.Ask] as
     shown in the following example:
     ```c
     void
@@ -5698,10 +5698,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragDataReceived signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragDataReceived(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragDataReceived(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragDataReceivedCallbackDlg) || is(T : DragDataReceivedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5753,10 +5753,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragDrop signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragDrop(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragDrop(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragDropCallbackDlg) || is(T : DragDropCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5797,10 +5797,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragEndCallbackDlg) || is(T : DragEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5840,10 +5840,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragFailed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragFailed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragFailed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragFailedCallbackDlg) || is(T : DragFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -5889,10 +5889,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragLeave signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragLeave(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragLeave(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragLeaveCallbackDlg) || is(T : DragLeaveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6016,10 +6016,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to DragMotion signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDragMotion(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDragMotion(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DragMotionCallbackDlg) || is(T : DragMotionCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6076,10 +6076,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Draw signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDraw(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDraw(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DrawCallbackDlg) || is(T : DrawCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6124,10 +6124,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to EnterNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnterNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEnterNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnterNotifyEventCallbackDlg) || is(T : EnterNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6172,10 +6172,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Event signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventCallbackDlg) || is(T : EventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6213,10 +6213,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to EventAfter signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEventAfter(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEventAfter(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EventAfterCallbackDlg) || is(T : EventAfterCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6242,10 +6242,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Focus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocus(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFocus(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusCallbackDlg) || is(T : FocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6288,10 +6288,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to FocusInEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusInEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFocusInEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusInEventCallbackDlg) || is(T : FocusInEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6334,10 +6334,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to FocusOutEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectFocusOutEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectFocusOutEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : FocusOutEventCallbackDlg) || is(T : FocusOutEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6380,10 +6380,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to GrabBrokenEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGrabBrokenEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectGrabBrokenEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GrabBrokenEventCallbackDlg) || is(T : GrabBrokenEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6411,10 +6411,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to GrabFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGrabFocus(T)(T callback, Flag!"after" after = No.after)
+  ulong connectGrabFocus(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GrabFocusCallbackDlg) || is(T : GrabFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6455,10 +6455,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to GrabNotify signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGrabNotify(T)(T callback, Flag!"after" after = No.after)
+  ulong connectGrabNotify(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GrabNotifyCallbackDlg) || is(T : GrabNotifyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6492,10 +6492,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Hide signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHide(T)(T callback, Flag!"after" after = No.after)
+  ulong connectHide(T)(T callback, Flag!"After" after = No.After)
   if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6533,10 +6533,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to HierarchyChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectHierarchyChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectHierarchyChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : HierarchyChangedCallbackDlg) || is(T : HierarchyChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6578,10 +6578,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to KeyPressEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyPressEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeyPressEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyPressEventCallbackDlg) || is(T : KeyPressEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6624,10 +6624,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to KeyReleaseEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeyReleaseEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeyReleaseEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeyReleaseEventCallbackDlg) || is(T : KeyReleaseEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6667,10 +6667,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to KeynavFailed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeynavFailed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeynavFailed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeynavFailedCallbackDlg) || is(T : KeynavFailedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6715,10 +6715,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to LeaveNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLeaveNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLeaveNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LeaveNotifyEventCallbackDlg) || is(T : LeaveNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6761,10 +6761,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Map signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMap(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMap(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MapCallbackDlg) || is(T : MapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6804,10 +6804,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to MapEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMapEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMapEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MapEventCallbackDlg) || is(T : MapEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6846,10 +6846,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to MnemonicActivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMnemonicActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMnemonicActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MnemonicActivateCallbackDlg) || is(T : MnemonicActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6894,10 +6894,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to MotionNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMotionNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMotionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MotionNotifyEventCallbackDlg) || is(T : MotionNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6925,10 +6925,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to MoveFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveFocus(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveFocus(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveFocusCallbackDlg) || is(T : MoveFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -6964,10 +6964,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ParentSet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectParentSet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectParentSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ParentSetCallbackDlg) || is(T : ParentSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7007,10 +7007,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to PopupMenu signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopupMenu(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopupMenu(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupMenuCallbackDlg) || is(T : PopupMenuCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7052,10 +7052,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to PropertyNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPropertyNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPropertyNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PropertyNotifyEventCallbackDlg) || is(T : PropertyNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7097,10 +7097,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ProximityInEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProximityInEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectProximityInEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ProximityInEventCallbackDlg) || is(T : ProximityInEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7142,10 +7142,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ProximityOutEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectProximityOutEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectProximityOutEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ProximityOutEventCallbackDlg) || is(T : ProximityOutEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7198,10 +7198,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to QueryTooltip signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryTooltip(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryTooltip(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipCallbackDlg) || is(T : QueryTooltipCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7241,10 +7241,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Realize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRealize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRealize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RealizeCallbackDlg) || is(T : RealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7279,10 +7279,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ScreenChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScreenChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectScreenChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScreenChangedCallbackDlg) || is(T : ScreenChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7326,10 +7326,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ScrollEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectScrollEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ScrollEventCallbackDlg) || is(T : ScrollEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7369,10 +7369,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to SelectionClearEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionClearEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionClearEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionClearEventCallbackDlg) || is(T : SelectionClearEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7400,10 +7400,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to SelectionGet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionGet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionGet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionGetCallbackDlg) || is(T : SelectionGetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7431,10 +7431,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to SelectionNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionNotifyEventCallbackDlg) || is(T : SelectionNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7462,10 +7462,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to SelectionReceived signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionReceived(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionReceived(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionReceivedCallbackDlg) || is(T : SelectionReceivedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7505,10 +7505,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to SelectionRequestEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSelectionRequestEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSelectionRequestEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SelectionRequestEventCallbackDlg) || is(T : SelectionRequestEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7544,10 +7544,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Show signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShow(T)(T callback, Flag!"after" after = No.after)
+  ulong connectShow(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7572,10 +7572,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to ShowHelp signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectShowHelp(T)(T callback, Flag!"after" after = No.after)
+  ulong connectShowHelp(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ShowHelpCallbackDlg) || is(T : ShowHelpCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7614,10 +7614,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to StateChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStateChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateChangedCallbackDlg) || is(T : StateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7652,10 +7652,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to StateFlagsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStateFlagsChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStateFlagsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateFlagsChangedCallbackDlg) || is(T : StateFlagsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7698,10 +7698,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to StyleSet signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStyleSet(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStyleSet(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StyleSetCallbackDlg) || is(T : StyleSetCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7739,10 +7739,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to StyleUpdated signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStyleUpdated(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStyleUpdated(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StyleUpdatedCallbackDlg) || is(T : StyleUpdatedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7767,10 +7767,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to TouchEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectTouchEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectTouchEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : TouchEventCallbackDlg) || is(T : TouchEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7810,10 +7810,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Unmap signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnmap(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnmap(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnmapCallbackDlg) || is(T : UnmapCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7853,10 +7853,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to UnmapEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnmapEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnmapEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnmapEventCallbackDlg) || is(T : UnmapEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7894,10 +7894,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to Unrealize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnrealize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnrealize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnrealizeCallbackDlg) || is(T : UnrealizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7942,10 +7942,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to VisibilityNotifyEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectVisibilityNotifyEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectVisibilityNotifyEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : VisibilityNotifyEventCallbackDlg) || is(T : VisibilityNotifyEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -7989,10 +7989,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     Connect to WindowStateEvent signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectWindowStateEvent(T)(T callback, Flag!"after" after = No.after)
+  ulong connectWindowStateEvent(T)(T callback, Flag!"After" after = No.After)
   if (is(T : WindowStateEventCallbackDlg) || is(T : WindowStateEventCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

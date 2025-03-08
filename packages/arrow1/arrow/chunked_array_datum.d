@@ -11,7 +11,7 @@ import gid.gid;
 class ChunkedArrayDatum : arrow.datum.Datum
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class ChunkedArrayDatum : arrow.datum.Datum
   this(arrow.chunked_array.ChunkedArray value)
   {
     GArrowChunkedArrayDatum* _cretval;
-    _cretval = garrow_chunked_array_datum_new(value ? cast(GArrowChunkedArray*)value.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_chunked_array_datum_new(value ? cast(GArrowChunkedArray*)value.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

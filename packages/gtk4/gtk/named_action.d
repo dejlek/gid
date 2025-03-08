@@ -12,7 +12,7 @@ import gtk.types;
 class NamedAction : gtk.shortcut_action.ShortcutAction
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,9 +43,9 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   this(string name)
   {
     GtkShortcutAction* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_named_action_new(_name);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,7 +56,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   {
     const(char)* _cretval;
     _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

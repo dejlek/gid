@@ -10,7 +10,7 @@ import gid.gid;
 class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     GArrowBooleanDataType* _cretval;
     _cretval = garrow_boolean_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

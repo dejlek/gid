@@ -15,7 +15,7 @@ class AttrFontDesc
 {
   PangoAttrFontDesc cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Pango.AttrFontDesc");
@@ -55,8 +55,8 @@ class AttrFontDesc
   static pango.attribute.Attribute new_(pango.font_description.FontDescription desc)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.take) : null;
+    _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

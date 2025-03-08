@@ -11,7 +11,7 @@ import glib.error;
 class Time32DataType : arrow.time_data_type.TimeDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,6 +35,6 @@ class Time32DataType : arrow.time_data_type.TimeDataType
     _cretval = garrow_time32_data_type_new(unit, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

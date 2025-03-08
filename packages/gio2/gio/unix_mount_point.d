@@ -15,12 +15,12 @@ import gobject.object;
 class UnixMountPoint : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -46,7 +46,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   int compare(gio.unix_mount_point.UnixMountPoint mount2)
   {
     int _retval;
-    _retval = g_unix_mount_point_compare(cast(GUnixMountPoint*)cPtr, mount2 ? cast(GUnixMountPoint*)mount2.cPtr(No.dup) : null);
+    _retval = g_unix_mount_point_compare(cast(GUnixMountPoint*)cPtr, mount2 ? cast(GUnixMountPoint*)mount2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     GUnixMountPoint* _cretval;
     _cretval = g_unix_mount_point_copy(cast(GUnixMountPoint*)cPtr);
-    auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_device_path(cast(GUnixMountPoint*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_fs_type(cast(GUnixMountPoint*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_mount_path(cast(GUnixMountPoint*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     _cretval = g_unix_mount_point_get_options(cast(GUnixMountPoint*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = g_unix_mount_point_guess_name(cast(GUnixMountPoint*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   {
     GIcon* _cretval;
     _cretval = g_unix_mount_point_guess_symbolic_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -208,9 +208,9 @@ class UnixMountPoint : gobject.boxed.Boxed
   static gio.unix_mount_point.UnixMountPoint at(string mountPath, out ulong timeRead)
   {
     GUnixMountPoint* _cretval;
-    const(char)* _mountPath = mountPath.toCString(No.alloc);
+    const(char)* _mountPath = mountPath.toCString(No.Alloc);
     _cretval = g_unix_mount_point_at(_mountPath, cast(ulong*)&timeRead);
-    auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

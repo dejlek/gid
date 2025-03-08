@@ -10,7 +10,7 @@ import gid.gid;
 class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

@@ -16,7 +16,7 @@ import gobject.object;
 class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   {
     GZlibCompressor* _cretval;
     _cretval = g_zlib_compressor_new(format, level);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -56,13 +56,13 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   {
     GFileInfo* _cretval;
     _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 
   /**
       Sets file_info in compressor. If non-null, and compressor's
-    #GZlibCompressor:format property is [gio.types.ZlibCompressorFormat.gzip],
+    #GZlibCompressor:format property is [gio.types.ZlibCompressorFormat.Gzip],
     it will be used to set the file name and modification time in
     the GZIP header of the compressed data.
     
@@ -74,6 +74,6 @@ class ZlibCompressor : gobject.object.ObjectG, gio.converter.Converter
   */
   void setFileInfo(gio.file_info.FileInfo fileInfo = null)
   {
-    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.dup) : null);
+    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);
   }
 }

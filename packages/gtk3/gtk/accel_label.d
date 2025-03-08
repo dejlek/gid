@@ -35,7 +35,7 @@ import gtk.widget;
   automatically adds a #GtkAccelLabel to the #GtkMenuItem and calls
   [gtk.accel_label.AccelLabel.setAccelWidget] to set it up for you.
   
-  A #GtkAccelLabel will only display accelerators which have [gtk.types.AccelFlags.visible]
+  A #GtkAccelLabel will only display accelerators which have [gtk.types.AccelFlags.Visible]
   set (see #GtkAccelFlags).
   A #GtkAccelLabel can display multiple accelerators and even signal names,
   though it is almost always used to display just one accelerator key.
@@ -79,7 +79,7 @@ import gtk.widget;
 class AccelLabel : gtk.label.Label
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -104,9 +104,9 @@ class AccelLabel : gtk.label.Label
   this(string string_)
   {
     GtkWidget* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_accel_label_new(_string_);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -130,7 +130,7 @@ class AccelLabel : gtk.label.Label
   {
     GtkWidget* _cretval;
     _cretval = gtk_accel_label_get_accel_widget(cast(GtkAccelLabel*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class AccelLabel : gtk.label.Label
   */
   void setAccelClosure(gobject.closure.Closure accelClosure = null)
   {
-    gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)cPtr, accelClosure ? cast(GClosure*)accelClosure.cPtr(No.dup) : null);
+    gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)cPtr, accelClosure ? cast(GClosure*)accelClosure.cPtr(No.Dup) : null);
   }
 
   /**
@@ -199,6 +199,6 @@ class AccelLabel : gtk.label.Label
   */
   void setAccelWidget(gtk.widget.Widget accelWidget = null)
   {
-    gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)cPtr, accelWidget ? cast(GtkWidget*)accelWidget.cPtr(No.dup) : null);
+    gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)cPtr, accelWidget ? cast(GtkWidget*)accelWidget.cPtr(No.Dup) : null);
   }
 }

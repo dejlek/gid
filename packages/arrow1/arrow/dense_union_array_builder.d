@@ -12,7 +12,7 @@ import glib.error;
 class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,9 +33,9 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
   {
     GArrowDenseUnionArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_dense_union_array_builder_new(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.dup) : null, &_err);
+    _cretval = garrow_dense_union_array_builder_new(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

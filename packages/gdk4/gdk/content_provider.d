@@ -29,7 +29,7 @@ import gobject.value;
 class ContentProvider : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,9 +56,9 @@ class ContentProvider : gobject.object.ObjectG
   static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes)
   {
     GdkContentProvider* _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
-    _cretval = gdk_content_provider_new_for_bytes(_mimeType, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.take);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
+    _cretval = gdk_content_provider_new_for_bytes(_mimeType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,8 +71,8 @@ class ContentProvider : gobject.object.ObjectG
   static gdk.content_provider.ContentProvider newForValue(gobject.value.Value value)
   {
     GdkContentProvider* _cretval;
-    _cretval = gdk_content_provider_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.take);
+    _cretval = gdk_content_provider_new_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class ContentProvider : gobject.object.ObjectG
     provided in. This given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] does not need to be listed in the formats
     returned by [gdk.content_provider.ContentProvider.refFormats]. However, if the
     given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is not supported, this operation can fail and
-    [gio.types.IOErrorEnum.notSupported] will be reported.
+    [gio.types.IOErrorEnum.NotSupported] will be reported.
     Params:
       value =       the [gobject.value.Value] to fill
     Returns:     true if the value was set successfully. Otherwise
@@ -105,7 +105,7 @@ class ContentProvider : gobject.object.ObjectG
     _retval = gdk_content_provider_get_value(cast(GdkContentProvider*)cPtr, &_value, &_err);
     if (_err)
       throw new ErrorG(_err);
-    value = new gobject.value.Value(cast(void*)&_value, No.take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class ContentProvider : gobject.object.ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class ContentProvider : gobject.object.ObjectG
   {
     GdkContentFormats* _cretval;
     _cretval = gdk_content_provider_ref_storable_formats(cast(GdkContentProvider*)cPtr);
-    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class ContentProvider : gobject.object.ObjectG
     
     The given mime type does not need to be listed in the formats returned by
     [gdk.content_provider.ContentProvider.refFormats]. However, if the given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is
-    not supported, [gio.types.IOErrorEnum.notSupported] will be reported.
+    not supported, [gio.types.IOErrorEnum.NotSupported] will be reported.
     
     The given stream will not be closed.
     Params:
@@ -165,13 +165,13 @@ class ContentProvider : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gdk_content_provider_write_mime_type_async(cast(GdkContentProvider*)cPtr, _mimeType, stream ? cast(GOutputStream*)stream.cPtr(No.dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    gdk_content_provider_write_mime_type_async(cast(GdkContentProvider*)cPtr, _mimeType, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -187,7 +187,7 @@ class ContentProvider : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = gdk_content_provider_write_mime_type_finish(cast(GdkContentProvider*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -210,10 +210,10 @@ class ContentProvider : gobject.object.ObjectG
     Connect to ContentChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectContentChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectContentChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ContentChangedCallbackDlg) || is(T : ContentChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

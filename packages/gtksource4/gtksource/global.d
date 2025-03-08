@@ -54,9 +54,9 @@ void init_()
 string utilsEscapeSearchText(string text)
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.alloc);
+  const(char)* _text = text.toCString(No.Alloc);
   _cretval = gtk_source_utils_escape_search_text(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -76,8 +76,8 @@ string utilsEscapeSearchText(string text)
 string utilsUnescapeSearchText(string text)
 {
   char* _cretval;
-  const(char)* _text = text.toCString(No.alloc);
+  const(char)* _text = text.toCString(No.Alloc);
   _cretval = gtk_source_utils_unescape_search_text(_text);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }

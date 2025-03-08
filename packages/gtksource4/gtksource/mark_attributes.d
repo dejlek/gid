@@ -16,7 +16,7 @@ import gtksource.types;
 class MarkAttributes : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     GtkSourceMarkAttributes* _cretval;
     _cretval = gtk_source_mark_attributes_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -54,7 +54,7 @@ class MarkAttributes : gobject.object.ObjectG
     bool _retval;
     GdkRGBA _background;
     _retval = gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)cPtr, &_background);
-    background = new gdk.rgba.RGBA(cast(void*)&_background, No.take);
+    background = new gdk.rgba.RGBA(cast(void*)&_background, No.Take);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     GIcon* _cretval;
     _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = gtk_source_mark_attributes_get_icon_name(cast(GtkSourceMarkAttributes*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class MarkAttributes : gobject.object.ObjectG
   {
     const(PixbufC)* _cretval;
     _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,8 +112,8 @@ class MarkAttributes : gobject.object.ObjectG
   string getTooltipMarkup(gtksource.mark.Mark mark)
   {
     char* _cretval;
-    _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -129,8 +129,8 @@ class MarkAttributes : gobject.object.ObjectG
   string getTooltipText(gtksource.mark.Mark mark)
   {
     char* _cretval;
-    _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.dup) : null);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -148,8 +148,8 @@ class MarkAttributes : gobject.object.ObjectG
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.widget.Widget widget, int size)
   {
     const(PixbufC)* _cretval;
-    _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class MarkAttributes : gobject.object.ObjectG
   */
   void setBackground(gdk.rgba.RGBA background)
   {
-    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.dup) : null);
+    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
   }
 
   /**
@@ -170,7 +170,7 @@ class MarkAttributes : gobject.object.ObjectG
   */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.dup) : null);
+    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(ObjectG)gicon).cPtr(No.Dup) : null);
   }
 
   /**
@@ -180,7 +180,7 @@ class MarkAttributes : gobject.object.ObjectG
   */
   void setIconName(string iconName)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_source_mark_attributes_set_icon_name(cast(GtkSourceMarkAttributes*)cPtr, _iconName);
   }
 
@@ -191,7 +191,7 @@ class MarkAttributes : gobject.object.ObjectG
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.dup) : null);
+    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null);
   }
 
   /**
@@ -215,10 +215,10 @@ class MarkAttributes : gobject.object.ObjectG
     Connect to QueryTooltipMarkup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryTooltipMarkup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipMarkupCallbackDlg) || is(T : QueryTooltipMarkupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -256,10 +256,10 @@ class MarkAttributes : gobject.object.ObjectG
     Connect to QueryTooltipText signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectQueryTooltipText(T)(T callback, Flag!"after" after = No.after)
+  ulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After)
   if (is(T : QueryTooltipTextCallbackDlg) || is(T : QueryTooltipTextCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -35,12 +35,12 @@ import gobject.boxed;
 class Surface : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -100,7 +100,7 @@ class Surface : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_for_rectangle(cast(cairo_surface_t*)cPtr, x, y, width, height);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Surface : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_observer(cast(cairo_surface_t*)cPtr, mode);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Surface : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar(cast(cairo_surface_t*)cPtr, content, width, height);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Surface : gobject.boxed.Boxed
   {
     cairo_surface_t* _cretval;
     _cretval = cairo_surface_create_similar_image(cast(cairo_surface_t*)cPtr, format, width, height);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Surface : gobject.boxed.Boxed
     surface are checking status, getting and setting user, referencing
     and destroying, and flushing and finishing it.
     Further drawing to the surface will not affect the
-    surface but will instead trigger a [cairo.types.Status.surfaceFinished]
+    surface but will instead trigger a [cairo.types.Status.SurfaceFinished]
     error.
     
     When the last call to [cairo.surface.Surface.destroy] decreases the
@@ -253,7 +253,7 @@ class Surface : gobject.boxed.Boxed
   {
     cairo_device_t* _cretval;
     _cretval = cairo_surface_get_device(cast(cairo_surface_t*)cPtr);
-    auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new cairo.device.Device(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class Surface : gobject.boxed.Boxed
   */
   void getFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_surface_get_font_options(cast(cairo_surface_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.dup) : null);
+    cairo_surface_get_font_options(cast(cairo_surface_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -319,7 +319,7 @@ class Surface : gobject.boxed.Boxed
   */
   void getMimeData(string mimeType, out ubyte[] data)
   {
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gulong _length;
     const(ubyte)* _data;
     cairo_surface_get_mime_data(cast(cairo_surface_t*)cPtr, _mimeType, &_data, &_length);
@@ -398,13 +398,13 @@ class Surface : gobject.boxed.Boxed
       pointer to a "nil" surface if other is already in an error state
       or any other error occurs. If the returned pointer does not have an
       error status, it is guaranteed to be an image surface whose format
-      is not [cairo.types.Format.invalid].
+      is not [cairo.types.Format.Invalid].
   */
   cairo.surface.Surface mapToImage(cairo.rectangle_int.RectangleInt extents)
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(const(cairo_rectangle_int_t)*)extents.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.take) : null;
+    _cretval = cairo_surface_map_to_image(cast(cairo_surface_t*)cPtr, extents ? cast(const(cairo_rectangle_int_t)*)extents.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -590,7 +590,7 @@ class Surface : gobject.boxed.Boxed
       destroy =       a #cairo_destroy_func_t which will be called when the
         surface is destroyed or when new image data is attached using the
         same mime type.
-    Returns:     [cairo.types.Status.success] or [cairo.types.Status.noMemory] if a
+    Returns:     [cairo.types.Status.Success] or [cairo.types.Status.NoMemory] if a
       slot could not be allocated for the user data.
   */
   cairo.types.Status setMimeData(string mimeType, ubyte[] data, cairo.types.DestroyFunc destroy)
@@ -605,7 +605,7 @@ class Surface : gobject.boxed.Boxed
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     cairo_status_t _cretval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     gulong _length;
     if (data)
       _length = cast(gulong)data.length;
@@ -632,10 +632,10 @@ class Surface : gobject.boxed.Boxed
   /**
       Checks whether an error has previously occurred for this
     surface.
-    Returns:     [cairo.types.Status.success], [cairo.types.Status.nullPointer],
-      [cairo.types.Status.noMemory], [cairo.types.Status.readError],
-      [cairo.types.Status.invalidContent], [cairo.types.Status.invalidFormat], or
-      [cairo.types.Status.invalidVisual].
+    Returns:     [cairo.types.Status.Success], [cairo.types.Status.NullPointer],
+      [cairo.types.Status.NoMemory], [cairo.types.Status.ReadError],
+      [cairo.types.Status.InvalidContent], [cairo.types.Status.InvalidFormat], or
+      [cairo.types.Status.InvalidVisual].
   */
   cairo.types.Status status()
   {
@@ -655,7 +655,7 @@ class Surface : gobject.boxed.Boxed
   cairo.types.Bool supportsMimeType(string mimeType)
   {
     cairo.types.Bool _retval;
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     _retval = cairo_surface_supports_mime_type(cast(cairo_surface_t*)cPtr, _mimeType);
     return _retval;
   }
@@ -673,7 +673,7 @@ class Surface : gobject.boxed.Boxed
   */
   void unmapImage(cairo.surface.Surface image)
   {
-    cairo_surface_unmap_image(cast(cairo_surface_t*)cPtr, image ? cast(cairo_surface_t*)image.cPtr(No.dup) : null);
+    cairo_surface_unmap_image(cast(cairo_surface_t*)cPtr, image ? cast(cairo_surface_t*)image.cPtr(No.Dup) : null);
   }
 
   /**
@@ -682,18 +682,18 @@ class Surface : gobject.boxed.Boxed
     Params:
       filename =       the name of a file to write to; on Windows this filename
           is encoded in UTF-8.
-    Returns:     [cairo.types.Status.success] if the PNG file was written
-      successfully. Otherwise, [cairo.types.Status.noMemory] if memory could not
+    Returns:     [cairo.types.Status.Success] if the PNG file was written
+      successfully. Otherwise, [cairo.types.Status.NoMemory] if memory could not
       be allocated for the operation or
-      [cairo.types.Status.surfaceTypeMismatch] if the surface does not have
-      pixel contents, or [cairo.types.Status.writeError] if an I/O error occurs
-      while attempting to write the file, or [cairo.types.Status.pngError] if libpng
+      [cairo.types.Status.SurfaceTypeMismatch] if the surface does not have
+      pixel contents, or [cairo.types.Status.WriteError] if an I/O error occurs
+      while attempting to write the file, or [cairo.types.Status.PngError] if libpng
       returned an error.
   */
   cairo.types.Status writeToPng(string filename)
   {
     cairo_status_t _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = cairo_surface_write_to_png(cast(cairo_surface_t*)cPtr, _filename);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
@@ -703,11 +703,11 @@ class Surface : gobject.boxed.Boxed
       Writes the image surface to the write function.
     Params:
       writeFunc =       a #cairo_write_func_t
-    Returns:     [cairo.types.Status.success] if the PNG file was written
-      successfully.  Otherwise, [cairo.types.Status.noMemory] is returned if
+    Returns:     [cairo.types.Status.Success] if the PNG file was written
+      successfully.  Otherwise, [cairo.types.Status.NoMemory] is returned if
       memory could not be allocated for the operation,
-      [cairo.types.Status.surfaceTypeMismatch] if the surface does not have
-      pixel contents, or [cairo.types.Status.pngError] if libpng
+      [cairo.types.Status.SurfaceTypeMismatch] if the surface does not have
+      pixel contents, or [cairo.types.Status.PngError] if libpng
       returned an error.
   */
   cairo.types.Status writeToPngStream(cairo.types.WriteFunc writeFunc)

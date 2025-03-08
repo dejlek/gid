@@ -20,7 +20,7 @@ import gobject.object;
 class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -49,8 +49,8 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   this(gio.file.File file)
   {
     GIcon* _cretval;
-    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(ObjectG)file).cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -61,7 +61,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
   {
     GFile* _cretval;
     _cretval = g_file_icon_get_file(cast(GFileIcon*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 }

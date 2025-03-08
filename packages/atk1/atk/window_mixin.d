@@ -37,10 +37,10 @@ template WindowT()
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -73,10 +73,10 @@ template WindowT()
     Connect to Create signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCreate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCreate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CreateCallbackDlg) || is(T : CreateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -109,10 +109,10 @@ template WindowT()
     Connect to Deactivate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDeactivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDeactivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DeactivateCallbackDlg) || is(T : DeactivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -145,10 +145,10 @@ template WindowT()
     Connect to Destroy signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDestroy(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DestroyCallbackDlg) || is(T : DestroyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -181,10 +181,10 @@ template WindowT()
     Connect to Maximize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMaximize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMaximize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MaximizeCallbackDlg) || is(T : MaximizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -217,10 +217,10 @@ template WindowT()
     Connect to Minimize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMinimize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMinimize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MinimizeCallbackDlg) || is(T : MinimizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -253,10 +253,10 @@ template WindowT()
     Connect to Move signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMove(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMove(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveCallbackDlg) || is(T : MoveCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -289,10 +289,10 @@ template WindowT()
     Connect to Resize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectResize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ResizeCallbackDlg) || is(T : ResizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -325,10 +325,10 @@ template WindowT()
     Connect to Restore signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRestore(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRestore(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RestoreCallbackDlg) || is(T : RestoreCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

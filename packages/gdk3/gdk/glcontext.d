@@ -65,7 +65,7 @@ import gobject.object;
 class GLContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -100,7 +100,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class GLContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_gl_context_get_window(cast(GdkGLContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

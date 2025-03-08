@@ -33,7 +33,7 @@ import gobject.object;
 class OutputStream : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class OutputStream : gobject.object.ObjectG
   /**
       Closes the stream, releasing resources related to it.
     
-    Once the stream is closed, all other operations will return [gio.types.IOErrorEnum.closed].
+    Once the stream is closed, all other operations will return [gio.types.IOErrorEnum.Closed].
     Closing a stream multiple times will not return an error.
     
     Closing a stream will automatically flush any outstanding buffers in the
@@ -76,13 +76,13 @@ class OutputStream : gobject.object.ObjectG
     
     On failure the first error that happened will be reported, but the close
     operation will finish as much as possible. A stream that failed to
-    close will still return [gio.types.IOErrorEnum.closed] for all operations. Still, it
+    close will still return [gio.types.IOErrorEnum.Closed] for all operations. Still, it
     is important to check and report the error to the user, otherwise
     there might be a loss of data as all data might not be written.
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Cancelling a close will still leave the stream closed, but there some streams
     can use a faster close that doesn't block to e.g. check errors. On
     cancellation (as with any error) there is no guarantee that all written
@@ -95,7 +95,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_close(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_close(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -125,12 +125,12 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_close_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_close_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -143,7 +143,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_close_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -158,7 +158,7 @@ class OutputStream : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned.
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned.
     Params:
       cancellable =       optional cancellable object
     Returns:     true on success, false on error
@@ -167,7 +167,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_flush(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_flush(cast(GOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -194,12 +194,12 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_flush_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_flush_async(cast(GOutputStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -212,7 +212,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_flush_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -286,7 +286,7 @@ class OutputStream : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_splice(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_splice(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -315,12 +315,12 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_splice_async(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_splice_async(cast(GOutputStream*)cPtr, source ? cast(GInputStream*)source.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -336,7 +336,7 @@ class OutputStream : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_splice_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -347,7 +347,7 @@ class OutputStream : gobject.object.ObjectG
     during the operation.
     
     If count is 0, returns 0 and does nothing. A value of count
-    larger than `G_MAXSSIZE` will cause a [gio.types.IOErrorEnum.invalidArgument] error.
+    larger than `G_MAXSSIZE` will cause a [gio.types.IOErrorEnum.InvalidArgument] error.
     
     On success, the number of bytes written to the stream is returned.
     It is not an error if this is not the same as the requested size, as it
@@ -358,7 +358,7 @@ class OutputStream : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     
@@ -377,7 +377,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_output_stream_write(cast(GOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_write(cast(GOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -419,7 +419,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_output_stream_write_all(cast(GOutputStream*)cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_write_all(cast(GOutputStream*)cPtr, _buffer, _count, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -455,7 +455,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -465,7 +465,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_write_all_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_write_all_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -488,7 +488,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_write_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -501,10 +501,10 @@ class OutputStream : gobject.object.ObjectG
     operation.
     
     During an async request no other sync and async calls are allowed,
-    and will result in [gio.types.IOErrorEnum.pending] errors.
+    and will result in [gio.types.IOErrorEnum.Pending] errors.
     
     A value of count larger than `G_MAXSSIZE` will cause a
-    [gio.types.IOErrorEnum.invalidArgument] error.
+    [gio.types.IOErrorEnum.InvalidArgument] error.
     
     On success, the number of bytes written will be passed to the
     callback. It is not an error if this is not the same as the
@@ -512,7 +512,7 @@ class OutputStream : gobject.object.ObjectG
     but generally we try to write as many bytes as requested.
     
     You are guaranteed that this method will never fail with
-    [gio.types.IOErrorEnum.wouldBlock] - if stream can't accept more data, the
+    [gio.types.IOErrorEnum.WouldBlock] - if stream can't accept more data, the
     method will just wait until this changes.
     
     Any outstanding I/O request with higher priority (lower numerical
@@ -544,7 +544,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -554,7 +554,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _buffer = cast(void*)buffer.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_write_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_write_async(cast(GOutputStream*)cPtr, _buffer, _count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -578,7 +578,7 @@ class OutputStream : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_bytes(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_write_bytes(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -612,12 +612,12 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_write_bytes_async(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_write_bytes_async(cast(GOutputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -630,7 +630,7 @@ class OutputStream : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_write_bytes_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -646,7 +646,7 @@ class OutputStream : gobject.object.ObjectG
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_write_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -668,12 +668,12 @@ class OutputStream : gobject.object.ObjectG
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     
     Some implementations of [gio.output_stream.OutputStream.writev] may have limitations on the
-    aggregate buffer size, and will return [gio.types.IOErrorEnum.invalidArgument] if these
+    aggregate buffer size, and will return [gio.types.IOErrorEnum.InvalidArgument] if these
     are exceeded. For example, when writing to a local file on UNIX platforms,
     the aggregate buffer size must not exceed `G_MAXSSIZE` bytes.
     Params:
@@ -692,7 +692,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     GError *_err;
-    _retval = g_output_stream_writev(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_writev(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -737,7 +737,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _vectors = cast(GOutputVector*)vectors.ptr;
     GError *_err;
-    _retval = g_output_stream_writev_all(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_output_stream_writev_all(cast(GOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -774,7 +774,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -784,7 +784,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _vectors = cast(GOutputVector*)vectors.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_writev_all_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_writev_all_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -807,7 +807,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_all_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -820,7 +820,7 @@ class OutputStream : gobject.object.ObjectG
     operation.
     
     During an async request no other sync and async calls are allowed,
-    and will result in [gio.types.IOErrorEnum.pending] errors.
+    and will result in [gio.types.IOErrorEnum.Pending] errors.
     
     On success, the number of bytes written will be passed to the
     callback. It is not an error if this is not the same as the
@@ -828,7 +828,7 @@ class OutputStream : gobject.object.ObjectG
     but generally we try to write as many bytes as requested.
     
     You are guaranteed that this method will never fail with
-    [gio.types.IOErrorEnum.wouldBlock] — if stream can't accept more data, the
+    [gio.types.IOErrorEnum.WouldBlock] — if stream can't accept more data, the
     method will just wait until this changes.
     
     Any outstanding I/O request with higher priority (lower numerical
@@ -858,7 +858,7 @@ class OutputStream : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -868,7 +868,7 @@ class OutputStream : gobject.object.ObjectG
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_output_stream_writev_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_output_stream_writev_async(cast(GOutputStream*)cPtr, _vectors, _nVectors, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -882,7 +882,7 @@ class OutputStream : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, cast(size_t*)&bytesWritten, &_err);
+    _retval = g_output_stream_writev_finish(cast(GOutputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

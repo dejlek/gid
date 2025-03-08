@@ -13,7 +13,7 @@ import gobject.object;
 class FileWriter : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class FileWriter : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.dup) : null, &_err);
+    _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -56,7 +56,7 @@ class FileWriter : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)cPtr, reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.dup) : null, &_err);
+    _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)cPtr, reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

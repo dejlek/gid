@@ -12,7 +12,7 @@ class SDPAttribute
 {
   GstSDPAttribute cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstSdp.SDPAttribute");
@@ -30,24 +30,24 @@ class SDPAttribute
 
   @property string key()
   {
-    return (cast(GstSDPAttribute*)cPtr).key.fromCString(No.free);
+    return (cast(GstSDPAttribute*)cPtr).key.fromCString(No.Free);
   }
 
   @property void key(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
-    (cast(GstSDPAttribute*)cPtr).key = propval.toCString(Yes.alloc);
+    (cast(GstSDPAttribute*)cPtr).key = propval.toCString(Yes.Alloc);
   }
 
   @property string value()
   {
-    return (cast(GstSDPAttribute*)cPtr).value.fromCString(No.free);
+    return (cast(GstSDPAttribute*)cPtr).value.fromCString(No.Free);
   }
 
   @property void value(string propval)
   {
     safeFree(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
-    (cast(GstSDPAttribute*)cPtr).value = propval.toCString(Yes.alloc);
+    (cast(GstSDPAttribute*)cPtr).value = propval.toCString(Yes.Alloc);
   }
 
   /**
@@ -72,8 +72,8 @@ class SDPAttribute
   gstsdp.types.SDPResult set(string key, string value = null)
   {
     GstSDPResult _cretval;
-    const(char)* _key = key.toCString(No.alloc);
-    const(char)* _value = value.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
+    const(char)* _value = value.toCString(No.Alloc);
     _cretval = gst_sdp_attribute_set(cast(GstSDPAttribute*)cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;

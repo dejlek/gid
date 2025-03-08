@@ -13,7 +13,7 @@ import gobject.object;
 class DragContext : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,7 +31,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Determines the bitmask of actions proposed by the source if
-    [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.ask].
+    [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].
     Returns:     the #GdkDragAction flags
   */
   gdk.types.DragAction getActions()
@@ -50,7 +50,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkDevice* _cretval;
     _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class DragContext : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class DragContext : gobject.object.ObjectG
   bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
   {
     bool _retval;
-    _retval = gdk_drag_context_manage_dnd(cast(GdkDragContext*)cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow.cPtr(No.dup) : null, actions);
+    _retval = gdk_drag_context_manage_dnd(cast(GdkDragContext*)cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow.cPtr(No.Dup) : null, actions);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class DragContext : gobject.object.ObjectG
   */
   void setDevice(gdk.device.Device device)
   {
-    gdk_drag_context_set_device(cast(GdkDragContext*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null);
+    gdk_drag_context_set_device(cast(GdkDragContext*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
   }
 
   /**
@@ -208,10 +208,10 @@ class DragContext : gobject.object.ObjectG
     Connect to ActionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActionChangedCallbackDlg) || is(T : ActionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -249,10 +249,10 @@ class DragContext : gobject.object.ObjectG
     Connect to Cancel signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCancel(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -291,10 +291,10 @@ class DragContext : gobject.object.ObjectG
     Connect to DndFinished signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDndFinished(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -331,10 +331,10 @@ class DragContext : gobject.object.ObjectG
     Connect to DropPerformed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDropPerformed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -12,7 +12,7 @@ import gobject.object;
 class StructDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class StructDataType : arrow.data_type.DataType
     auto _fields = gListFromD!(arrow.field.Field)(fields);
     scope(exit) containerFree!(GList*, arrow.field.Field, GidOwnership.None)(_fields);
     _cretval = garrow_struct_data_type_new(_fields);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -43,7 +43,7 @@ class StructDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     _cretval = garrow_struct_data_type_get_field(cast(GArrowStructDataType*)cPtr, i);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,9 +51,9 @@ class StructDataType : arrow.data_type.DataType
   arrow.field.Field getFieldByName(string name)
   {
     GArrowField* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = garrow_struct_data_type_get_field_by_name(cast(GArrowStructDataType*)cPtr, _name);
-    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class StructDataType : arrow.data_type.DataType
   int getFieldIndex(string name)
   {
     int _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = garrow_struct_data_type_get_field_index(cast(GArrowStructDataType*)cPtr, _name);
     return _retval;
   }

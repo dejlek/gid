@@ -14,7 +14,7 @@ import gtksource.types;
 class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,9 +36,9 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
   this(string name = null, gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
     GtkSourceCompletionWords* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
-    _cretval = gtk_source_completion_words_new(_name, icon ? cast(PixbufC*)icon.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    const(char)* _name = name.toCString(No.Alloc);
+    _cretval = gtk_source_completion_words_new(_name, icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -48,7 +48,7 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
   */
   void register(gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
+    gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 
   /**
@@ -58,6 +58,6 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
   */
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.dup) : null);
+    gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
   }
 }

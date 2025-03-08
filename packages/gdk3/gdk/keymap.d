@@ -20,7 +20,7 @@ import pango.types;
 class Keymap : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -46,7 +46,7 @@ class Keymap : gobject.object.ObjectG
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -59,8 +59,8 @@ class Keymap : gobject.object.ObjectG
   static gdk.keymap.Keymap getForDisplay(gdk.display.Display display)
   {
     GdkKeymap* _cretval;
-    _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.take);
+    _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,8 +96,8 @@ class Keymap : gobject.object.ObjectG
 
   /**
       Returns the direction of effective layout of the keymap.
-    Returns:     [pango.types.Direction.ltr] or [pango.types.Direction.rtl]
-        if it can determine the direction. [pango.types.Direction.neutral]
+    Returns:     [pango.types.Direction.Ltr] or [pango.types.Direction.Rtl]
+        if it can determine the direction. [pango.types.Direction.Neutral]
         otherwise.
   */
   pango.types.Direction getDirection()
@@ -359,10 +359,10 @@ class Keymap : gobject.object.ObjectG
     Connect to DirectionChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectDirectionChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectDirectionChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : DirectionChangedCallbackDlg) || is(T : DirectionChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -395,10 +395,10 @@ class Keymap : gobject.object.ObjectG
     Connect to KeysChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeysChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeysChangedCallbackDlg) || is(T : KeysChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -432,10 +432,10 @@ class Keymap : gobject.object.ObjectG
     Connect to StateChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStateChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStateChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StateChangedCallbackDlg) || is(T : StateChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

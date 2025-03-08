@@ -25,7 +25,7 @@ class ParamSpec
 {
   GParamSpec* cInstancePtr;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GObject.ParamSpec");
@@ -42,7 +42,7 @@ class ParamSpec
   }
 
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       g_param_spec_ref(cInstancePtr);
@@ -64,7 +64,7 @@ class ParamSpec
   static bool isValidName(string name)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _retval = g_param_spec_is_valid_name(_name);
     return _retval;
   }
@@ -77,7 +77,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_blurb(cast(GParamSpec*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class ParamSpec
   {
     const(GValue)* _cretval;
     _cretval = g_param_spec_get_default_value(cast(GParamSpec*)cPtr);
-    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_name(cast(GParamSpec*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class ParamSpec
   {
     const(char)* _cretval;
     _cretval = g_param_spec_get_nick(cast(GParamSpec*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class ParamSpec
   {
     GParamSpec* _cretval;
     _cretval = g_param_spec_get_redirect_target(cast(GParamSpec*)cPtr);
-    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
 

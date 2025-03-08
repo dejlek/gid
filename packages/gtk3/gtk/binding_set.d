@@ -20,7 +20,7 @@ class BindingSet
 {
   GtkBindingSet cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gtk.BindingSet");
@@ -38,13 +38,13 @@ class BindingSet
 
   @property string setName()
   {
-    return (cast(GtkBindingSet*)cPtr).setName.fromCString(No.free);
+    return (cast(GtkBindingSet*)cPtr).setName.fromCString(No.Free);
   }
 
   @property void setName(string propval)
   {
     safeFree(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
-    (cast(GtkBindingSet*)cPtr).setName = propval.toCString(Yes.alloc);
+    (cast(GtkBindingSet*)cPtr).setName = propval.toCString(Yes.Alloc);
   }
 
   @property int priority()
@@ -89,7 +89,7 @@ class BindingSet
   bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectG object)
   {
     bool _retval;
-    _retval = gtk_binding_set_activate(cast(GtkBindingSet*)cPtr, keyval, modifiers, object ? cast(ObjectC*)object.cPtr(No.dup) : null);
+    _retval = gtk_binding_set_activate(cast(GtkBindingSet*)cPtr, keyval, modifiers, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class BindingSet
   */
   void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority)
   {
-    const(char)* _pathPattern = pathPattern.toCString(No.alloc);
+    const(char)* _pathPattern = pathPattern.toCString(No.Alloc);
     gtk_binding_set_add_path(cast(GtkBindingSet*)cPtr, pathType, _pathPattern, priority);
   }
 
@@ -121,7 +121,7 @@ class BindingSet
   static gtk.binding_set.BindingSet find(string setName)
   {
     GtkBindingSet* _cretval;
-    const(char)* _setName = setName.toCString(No.alloc);
+    const(char)* _setName = setName.toCString(No.Alloc);
     _cretval = gtk_binding_set_find(_setName);
     auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval) : null;
     return _retval;

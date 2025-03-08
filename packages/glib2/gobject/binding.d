@@ -86,7 +86,7 @@ import gobject.types;
 class Binding : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -115,7 +115,7 @@ class Binding : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Binding : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_dup_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Binding : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_source(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Binding : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_source_property(cast(GBinding*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Binding : gobject.object.ObjectG
   {
     ObjectC* _cretval;
     _cretval = g_binding_get_target(cast(GBinding*)cPtr);
-    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Binding : gobject.object.ObjectG
   {
     const(char)* _cretval;
     _cretval = g_binding_get_target_property(cast(GBinding*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 

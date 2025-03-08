@@ -54,15 +54,15 @@ class Memory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstMemory.sizeof), Yes.take);
+    super(safeMalloc(GstMemory.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -85,7 +85,7 @@ class Memory : gobject.boxed.Boxed
 
   @property gst.allocator.Allocator allocator()
   {
-    return ObjectG.getDObject!(gst.allocator.Allocator)((cast(GstMemory*)cPtr).allocator, No.take);
+    return ObjectG.getDObject!(gst.allocator.Allocator)((cast(GstMemory*)cPtr).allocator, No.Take);
   }
 
   @property gst.memory.Memory parent()
@@ -166,7 +166,7 @@ class Memory : gobject.boxed.Boxed
     auto _data = cast(void*)data.ptr;
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
     _cretval = gst_memory_new_wrapped(flags, _data, maxsize, offset, _size, _notify, _notifyCB);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Memory : gobject.boxed.Boxed
   {
     GstMemory* _cretval;
     _cretval = gst_memory_copy(cast(GstMemory*)cPtr, offset, size);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class Memory : gobject.boxed.Boxed
   bool isSpan(gst.memory.Memory mem2, out size_t offset)
   {
     bool _retval;
-    _retval = gst_memory_is_span(cast(GstMemory*)cPtr, mem2 ? cast(GstMemory*)mem2.cPtr(No.dup) : null, cast(size_t*)&offset);
+    _retval = gst_memory_is_span(cast(GstMemory*)cPtr, mem2 ? cast(GstMemory*)mem2.cPtr(No.Dup) : null, cast(size_t*)&offset);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Memory : gobject.boxed.Boxed
   bool isType(string memType)
   {
     bool _retval;
-    const(char)* _memType = memType.toCString(No.alloc);
+    const(char)* _memType = memType.toCString(No.Alloc);
     _retval = gst_memory_is_type(cast(GstMemory*)cPtr, _memType);
     return _retval;
   }
@@ -252,7 +252,7 @@ class Memory : gobject.boxed.Boxed
     GstMemory* _cretval;
     GstMapInfo _info;
     _cretval = gst_memory_make_mapped(cast(GstMemory*)cPtr, &_info, flags);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     info = new gst.map_info.MapInfo(cast(void*)&_info);
     return _retval;
   }
@@ -315,7 +315,7 @@ class Memory : gobject.boxed.Boxed
   {
     GstMemory* _cretval;
     _cretval = gst_memory_share(cast(GstMemory*)cPtr, offset, size);
-    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

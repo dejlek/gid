@@ -23,7 +23,7 @@ import gtk.widget;
 class Bin : gtk.container.Container
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -50,7 +50,7 @@ class Bin : gtk.container.Container
   {
     GtkWidget* _cretval;
     _cretval = gtk_bin_get_child(cast(GtkBin*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

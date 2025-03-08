@@ -10,7 +10,7 @@ import gid.gid;
 class PathDescriptor : arrowflight.descriptor.Descriptor
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,10 +36,10 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
 
     char*[] _tmppaths;
     foreach (s; paths)
-      _tmppaths ~= s.toCString(No.alloc);
+      _tmppaths ~= s.toCString(No.Alloc);
     const(char*)* _paths = _tmppaths.ptr;
     _cretval = gaflight_path_descriptor_new(_paths, _nPaths);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -56,7 +56,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }

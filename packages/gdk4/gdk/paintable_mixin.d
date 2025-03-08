@@ -36,7 +36,7 @@ public import gobject.object;
   a different output with the same snapshot. Once that happens, it will call
   [gdk.paintable.Paintable.invalidateContents] which will emit the
   `signal@Gdk.Paintable::invalidate-contents` signal. If a paintable is known
-  to never change its contents, it will set the [gdk.types.PaintableFlags.contents]
+  to never change its contents, it will set the [gdk.types.PaintableFlags.Contents]
   flag. If a consumer cannot deal with changing contents, it may call
   [gdk.paintable.Paintable.getCurrentImage] which will return a static
   paintable and use that.
@@ -48,7 +48,7 @@ public import gobject.object;
   by calling [gdk.paintable.Paintable.invalidateSize] which will emit the
   `signal@Gdk.Paintable::invalidate-size` signal. And just like for contents,
   if a paintable is known to never change its size, it will set the
-  [gdk.types.PaintableFlags.size] flag.
+  [gdk.types.PaintableFlags.Size] flag.
   
   Besides API for applications, there are some functions that are only
   useful for implementing subclasses and should not be used by applications:
@@ -102,7 +102,7 @@ template PaintableT()
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ template PaintableT()
     This function will emit the `signalGdk.Paintable::invalidate-contents`
     signal.
     
-    If a paintable reports the [gdk.types.PaintableFlags.contents] flag,
+    If a paintable reports the [gdk.types.PaintableFlags.Contents] flag,
     it must not call this function.
   */
   override void invalidateContents()
@@ -215,7 +215,7 @@ template PaintableT()
     This function will emit the `signalGdk.Paintable::invalidate-size`
     signal.
     
-    If a paintable reports the [gdk.types.PaintableFlags.size] flag,
+    If a paintable reports the [gdk.types.PaintableFlags.Size] flag,
     it must not call this function.
   */
   override void invalidateSize()
@@ -236,7 +236,7 @@ template PaintableT()
   */
   override void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height)
   {
-    gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(No.dup) : null, width, height);
+    gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(No.Dup) : null, width, height);
   }
 
   /**
@@ -259,10 +259,10 @@ template PaintableT()
     Connect to InvalidateContents signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInvalidateContents(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInvalidateContents(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InvalidateContentsCallbackDlg) || is(T : InvalidateContentsCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -303,10 +303,10 @@ template PaintableT()
     Connect to InvalidateSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectInvalidateSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectInvalidateSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : InvalidateSizeCallbackDlg) || is(T : InvalidateSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -14,11 +14,11 @@ import gtk.types;
   roles:
   
   $(LIST
-    * [gtk.types.AccessibleRole.meter]
-    * [gtk.types.AccessibleRole.progressBar]
-    * [gtk.types.AccessibleRole.scrollbar]
-    * [gtk.types.AccessibleRole.slider]
-    * [gtk.types.AccessibleRole.spinButton]
+    * [gtk.types.AccessibleRole.Meter]
+    * [gtk.types.AccessibleRole.ProgressBar]
+    * [gtk.types.AccessibleRole.Scrollbar]
+    * [gtk.types.AccessibleRole.Slider]
+    * [gtk.types.AccessibleRole.SpinButton]
   )
     
   If that is not the case, a warning will be issued at run time.
@@ -27,10 +27,10 @@ import gtk.types;
   correct values for the following properties:
   
   $(LIST
-    * [gtk.types.AccessibleProperty.valueMax]
-    * [gtk.types.AccessibleProperty.valueMin]
-    * [gtk.types.AccessibleProperty.valueNow]
-    * [gtk.types.AccessibleProperty.valueText]
+    * [gtk.types.AccessibleProperty.ValueMax]
+    * [gtk.types.AccessibleProperty.ValueMin]
+    * [gtk.types.AccessibleProperty.ValueNow]
+    * [gtk.types.AccessibleProperty.ValueText]
   )
 */
 interface AccessibleRange

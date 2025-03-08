@@ -16,12 +16,12 @@ import gstvideo.video_info;
 class GLVideoAllocationParams : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -86,8 +86,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat)
   {
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat);
-    this(_cretval, Yes.take);
+    _cretval = gst_gl_video_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -103,8 +103,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_data(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, wrappedData, userData, _notifyCB);
-    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_data(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, wrappedData, userData, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -137,8 +137,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_gl_handle(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, glHandle, userData, _notifyCB);
-    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_gl_handle(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, glHandle, userData, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -155,8 +155,8 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     GstGLVideoAllocationParams* _cretval;
-    _cretval = gst_gl_video_allocation_params_new_wrapped_texture(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, texId, userData, _notifyCB);
-    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_video_allocation_params_new_wrapped_texture(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, vInfo ? cast(const(GstVideoInfo)*)vInfo.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, target, texFormat, texId, userData, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glvideo_allocation_params.GLVideoAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
   */
   void copyData(gstgl.glvideo_allocation_params.GLVideoAllocationParams destVid)
   {
-    gst_gl_video_allocation_params_copy_data(cast(GstGLVideoAllocationParams*)cPtr, destVid ? cast(GstGLVideoAllocationParams*)destVid.cPtr(No.dup) : null);
+    gst_gl_video_allocation_params_copy_data(cast(GstGLVideoAllocationParams*)cPtr, destVid ? cast(GstGLVideoAllocationParams*)destVid.cPtr(No.Dup) : null);
   }
 
   /**

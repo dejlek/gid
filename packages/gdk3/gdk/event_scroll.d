@@ -14,7 +14,7 @@ import gobject.object;
   when the wheel is turned.
   
   Some GDK backends can also generate “smooth” scroll events, which
-  can be recognized by the [gdk.types.ScrollDirection.smooth] scroll direction. For
+  can be recognized by the [gdk.types.ScrollDirection.Smooth] scroll direction. For
   these, the scroll deltas can be obtained with
   [gdk.event.Event.getScrollDeltas].
 */
@@ -22,7 +22,7 @@ class EventScroll
 {
   GdkEventScroll cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventScroll");
@@ -50,7 +50,7 @@ class EventScroll
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventScroll*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventScroll*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()
@@ -115,7 +115,7 @@ class EventScroll
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventScroll*)cPtr).device, No.take);
+    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventScroll*)cPtr).device, No.Take);
   }
 
   @property double xRoot()

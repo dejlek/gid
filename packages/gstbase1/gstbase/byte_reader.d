@@ -17,7 +17,7 @@ class ByteReader
 {
   GstByteReader cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstBase.ByteReader");
@@ -73,7 +73,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = gst_byte_reader_dup_string_utf8(cast(GstByteReader*)cPtr, &_str);
-    str = _str.fromCString(Yes.free);
+    str = _str.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = gst_byte_reader_get_string_utf8(cast(GstByteReader*)cPtr, &_str);
-    str = _str.fromCString(No.free);
+    str = _str.fromCString(No.Free);
     return _retval;
   }
 
@@ -731,7 +731,7 @@ class ByteReader
     bool _retval;
     char* _str;
     _retval = gst_byte_reader_peek_string_utf8(cast(const(GstByteReader)*)cPtr, &_str);
-    str = _str.fromCString(No.free);
+    str = _str.fromCString(No.Free);
     return _retval;
   }
 

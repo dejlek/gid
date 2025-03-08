@@ -19,12 +19,12 @@ import pango.tab_array;
 class TextAttributes : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -220,7 +220,7 @@ class TextAttributes : gobject.boxed.Boxed
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_attributes_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -232,7 +232,7 @@ class TextAttributes : gobject.boxed.Boxed
   {
     GtkTextAttributes* _cretval;
     _cretval = gtk_text_attributes_copy(cast(GtkTextAttributes*)cPtr);
-    auto _retval = _cretval ? new gtk.text_attributes.TextAttributes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.text_attributes.TextAttributes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -244,6 +244,6 @@ class TextAttributes : gobject.boxed.Boxed
   */
   void copyValues(gtk.text_attributes.TextAttributes dest)
   {
-    gtk_text_attributes_copy_values(cast(GtkTextAttributes*)cPtr, dest ? cast(GtkTextAttributes*)dest.cPtr(No.dup) : null);
+    gtk_text_attributes_copy_values(cast(GtkTextAttributes*)cPtr, dest ? cast(GtkTextAttributes*)dest.cPtr(No.Dup) : null);
   }
 }

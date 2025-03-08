@@ -10,7 +10,7 @@ import gid.gid;
 class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

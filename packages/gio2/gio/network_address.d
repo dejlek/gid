@@ -24,7 +24,7 @@ import gobject.object;
 class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,9 +59,9 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   this(string hostname, ushort port)
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostname = hostname.toCString(No.alloc);
+    const(char)* _hostname = hostname.toCString(No.Alloc);
     _cretval = g_network_address_new(_hostname, port);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -85,7 +85,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   {
     GSocketConnectable* _cretval;
     _cretval = g_network_address_new_loopback(port);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,12 +120,12 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   static gio.network_address.NetworkAddress parse(string hostAndPort, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _hostAndPort = hostAndPort.toCString(No.alloc);
+    const(char)* _hostAndPort = hostAndPort.toCString(No.Alloc);
     GError *_err;
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,12 +145,12 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   static gio.network_address.NetworkAddress parseUri(string uri, ushort defaultPort)
   {
     GSocketConnectable* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
   {
     const(char)* _cretval;
     _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 }

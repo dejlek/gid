@@ -26,7 +26,7 @@ secret.schema.Schema getSchema(secret.types.SchemaType type)
 {
   const(SecretSchema)* _cretval;
   _cretval = secret_get_schema(type);
-  auto _retval = _cretval ? new secret.schema.Schema(cast(void*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new secret.schema.Schema(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -41,7 +41,7 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = secret_password_clear_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+  _retval = secret_password_clear_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -68,7 +68,7 @@ bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, g
   auto _attributes = gHashTableFromD!(string, string)(attributes);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
   GError *_err;
-  _retval = secret_password_clearv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+  _retval = secret_password_clearv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -85,10 +85,10 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
 {
   char* _cretval;
   GError *_err;
-  _cretval = secret_password_lookup_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+  _cretval = secret_password_lookup_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -114,10 +114,10 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
   auto _attributes = gHashTableFromD!(string, string)(attributes);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
   GError *_err;
-  _cretval = secret_password_lookupv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+  _cretval = secret_password_lookupv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -132,7 +132,7 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
 {
   GList* _cretval;
   GError *_err;
-  _cretval = secret_password_search_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+  _cretval = secret_password_search_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   auto _retval = gListToD!(secret.retrievable.Retrievable, GidOwnership.Full)(cast(GList*)_cretval);
@@ -162,7 +162,7 @@ secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema,
   auto _attributes = gHashTableFromD!(string, string)(attributes);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
   GError *_err;
-  _cretval = secret_password_searchv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+  _cretval = secret_password_searchv_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   auto _retval = gListToD!(secret.retrievable.Retrievable, GidOwnership.Full)(cast(GList*)_cretval);
@@ -179,7 +179,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
 {
   bool _retval;
   GError *_err;
-  _retval = secret_password_store_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+  _retval = secret_password_store_finish(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -208,10 +208,10 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-  const(char)* _collection = collection.toCString(No.alloc);
-  const(char)* _label = label.toCString(No.alloc);
+  const(char)* _collection = collection.toCString(No.Alloc);
+  const(char)* _label = label.toCString(No.Alloc);
   GError *_err;
-  _retval = secret_password_storev_binary_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+  _retval = secret_password_storev_binary_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -246,11 +246,11 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
   bool _retval;
   auto _attributes = gHashTableFromD!(string, string)(attributes);
   scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
-  const(char)* _collection = collection.toCString(No.alloc);
-  const(char)* _label = label.toCString(No.alloc);
-  const(char)* _password = password.toCString(No.alloc);
+  const(char)* _collection = collection.toCString(No.Alloc);
+  const(char)* _label = label.toCString(No.Alloc);
+  const(char)* _password = password.toCString(No.Alloc);
   GError *_err;
-  _retval = secret_password_storev_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.dup) : null, _attributes, _collection, _label, _password, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+  _retval = secret_password_storev_sync(schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, _password, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorG(_err);
   return _retval;
@@ -263,6 +263,6 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
 */
 void passwordWipe(string password = null)
 {
-  char* _password = password.toCString(No.alloc);
+  char* _password = password.toCString(No.Alloc);
   secret_password_wipe(_password);
 }

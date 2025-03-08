@@ -56,7 +56,7 @@ import json.types;
 class Parser : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,7 +83,7 @@ class Parser : gobject.object.ObjectG
   {
     JsonParser* _cretval;
     _cretval = json_parser_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class Parser : gobject.object.ObjectG
   {
     JsonParser* _cretval;
     _cretval = json_parser_new_immutable();
-    auto _retval = ObjectG.getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Parser : gobject.object.ObjectG
   {
     JsonNode* _cretval;
     _cretval = json_parser_get_root(cast(JsonParser*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Parser : gobject.object.ObjectG
     bool _retval;
     char* _variableName;
     _retval = json_parser_has_assignment(cast(JsonParser*)cPtr, &_variableName);
-    variableName = _variableName.fromCString(No.free);
+    variableName = _variableName.fromCString(No.Free);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Parser : gobject.object.ObjectG
   bool loadFromData(string data, ptrdiff_t length)
   {
     bool _retval;
-    const(char)* _data = data.toCString(No.alloc);
+    const(char)* _data = data.toCString(No.Alloc);
     GError *_err;
     _retval = json_parser_load_from_data(cast(JsonParser*)cPtr, _data, length, &_err);
     if (_err)
@@ -208,7 +208,7 @@ class Parser : gobject.object.ObjectG
   bool loadFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = json_parser_load_from_file(cast(JsonParser*)cPtr, _filename, &_err);
     if (_err)
@@ -231,7 +231,7 @@ class Parser : gobject.object.ObjectG
   bool loadFromMappedFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = json_parser_load_from_mapped_file(cast(JsonParser*)cPtr, _filename, &_err);
     if (_err)
@@ -244,7 +244,7 @@ class Parser : gobject.object.ObjectG
     
     If `cancellable` is not `NULL`, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the
-    operation was cancelled, [gio.types.IOErrorEnum.cancelled] will be set
+    operation was cancelled, [gio.types.IOErrorEnum.Cancelled] will be set
     on the given `error`.
     Params:
       stream =       the input stream with the JSON data
@@ -256,7 +256,7 @@ class Parser : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = json_parser_load_from_stream(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -283,12 +283,12 @@ class Parser : gobject.object.ObjectG
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    json_parser_load_from_stream_async(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    json_parser_load_from_stream_async(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -303,7 +303,7 @@ class Parser : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -320,7 +320,7 @@ class Parser : gobject.object.ObjectG
   {
     JsonNode* _cretval;
     _cretval = json_parser_steal_root(cast(JsonParser*)cPtr);
-    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -344,10 +344,10 @@ class Parser : gobject.object.ObjectG
     Connect to ArrayElement signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectArrayElement(T)(T callback, Flag!"after" after = No.after)
+  ulong connectArrayElement(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ArrayElementCallbackDlg) || is(T : ArrayElementCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -383,10 +383,10 @@ class Parser : gobject.object.ObjectG
     Connect to ArrayEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectArrayEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ArrayEndCallbackDlg) || is(T : ArrayEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -420,10 +420,10 @@ class Parser : gobject.object.ObjectG
     Connect to ArrayStart signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectArrayStart(T)(T callback, Flag!"after" after = No.after)
+  ulong connectArrayStart(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ArrayStartCallbackDlg) || is(T : ArrayStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -457,10 +457,10 @@ class Parser : gobject.object.ObjectG
     Connect to Error signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectError(T)(T callback, Flag!"after" after = No.after)
+  ulong connectError(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ErrorCallbackDlg) || is(T : ErrorCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -495,10 +495,10 @@ class Parser : gobject.object.ObjectG
     Connect to ObjectEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ObjectEndCallbackDlg) || is(T : ObjectEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -534,10 +534,10 @@ class Parser : gobject.object.ObjectG
     Connect to ObjectMember signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectMember(T)(T callback, Flag!"after" after = No.after)
+  ulong connectObjectMember(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ObjectMemberCallbackDlg) || is(T : ObjectMemberCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -571,10 +571,10 @@ class Parser : gobject.object.ObjectG
     Connect to ObjectStart signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectObjectStart(T)(T callback, Flag!"after" after = No.after)
+  ulong connectObjectStart(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ObjectStartCallbackDlg) || is(T : ObjectStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -607,10 +607,10 @@ class Parser : gobject.object.ObjectG
     Connect to ParseEnd signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectParseEnd(T)(T callback, Flag!"after" after = No.after)
+  ulong connectParseEnd(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ParseEndCallbackDlg) || is(T : ParseEndCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -642,10 +642,10 @@ class Parser : gobject.object.ObjectG
     Connect to ParseStart signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectParseStart(T)(T callback, Flag!"after" after = No.after)
+  ulong connectParseStart(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ParseStartCallbackDlg) || is(T : ParseStartCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -14,7 +14,7 @@ import gst.types;
 class TracerFactory : gst.plugin_feature.PluginFeature
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

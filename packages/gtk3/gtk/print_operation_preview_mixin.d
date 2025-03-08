@@ -79,10 +79,10 @@ template PrintOperationPreviewT()
     Connect to GotPageSize signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectGotPageSize(T)(T callback, Flag!"after" after = No.after)
+  ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
   if (is(T : GotPageSizeCallbackDlg) || is(T : GotPageSizeCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -120,10 +120,10 @@ template PrintOperationPreviewT()
     Connect to Ready signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReady(T)(T callback, Flag!"after" after = No.after)
+  ulong connectReady(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReadyCallbackDlg) || is(T : ReadyCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -19,7 +19,7 @@ import glib.bytes;
 class MemoryTexture : gdk.texture.Texture
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -51,7 +51,7 @@ class MemoryTexture : gdk.texture.Texture
   this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride)
   {
     GdkTexture* _cretval;
-    _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, stride);
-    this(_cretval, Yes.take);
+    _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, stride);
+    this(_cretval, Yes.Take);
   }
 }

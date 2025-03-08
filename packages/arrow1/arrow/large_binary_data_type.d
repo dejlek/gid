@@ -10,7 +10,7 @@ import gid.gid;
 class LargeBinaryDataType : arrow.data_type.DataType
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class LargeBinaryDataType : arrow.data_type.DataType
   {
     GArrowLargeBinaryDataType* _cretval;
     _cretval = garrow_large_binary_data_type_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

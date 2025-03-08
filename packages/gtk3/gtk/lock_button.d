@@ -51,7 +51,7 @@ import gtk.types;
 class LockButton : gtk.button.Button
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -76,8 +76,8 @@ class LockButton : gtk.button.Button
   this(gio.permission.Permission permission = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class LockButton : gtk.button.Button
   {
     GPermission* _cretval;
     _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,6 +99,6 @@ class LockButton : gtk.button.Button
   */
   void setPermission(gio.permission.Permission permission = null)
   {
-    gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.dup) : null);
+    gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
   }
 }

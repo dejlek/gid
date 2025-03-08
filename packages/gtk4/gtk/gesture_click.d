@@ -20,7 +20,7 @@ import gtk.types;
 class GestureClick : gtk.gesture_single.GestureSingle
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -45,7 +45,7 @@ class GestureClick : gtk.gesture_single.GestureSingle
   {
     GtkGesture* _cretval;
     _cretval = gtk_gesture_click_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -68,10 +68,10 @@ class GestureClick : gtk.gesture_single.GestureSingle
     Connect to Pressed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPressed(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPressed(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PressedCallbackDlg) || is(T : PressedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -114,10 +114,10 @@ class GestureClick : gtk.gesture_single.GestureSingle
     Connect to Released signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectReleased(T)(T callback, Flag!"after" after = No.after)
+  ulong connectReleased(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ReleasedCallbackDlg) || is(T : ReleasedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -152,10 +152,10 @@ class GestureClick : gtk.gesture_single.GestureSingle
     Connect to Stopped signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectStopped(T)(T callback, Flag!"after" after = No.after)
+  ulong connectStopped(T)(T callback, Flag!"After" after = No.After)
   if (is(T : StoppedCallbackDlg) || is(T : StoppedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -196,10 +196,10 @@ class GestureClick : gtk.gesture_single.GestureSingle
     Connect to UnpairedRelease signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectUnpairedRelease(T)(T callback, Flag!"after" after = No.after)
+  ulong connectUnpairedRelease(T)(T callback, Flag!"After" after = No.After)
   if (is(T : UnpairedReleaseCallbackDlg) || is(T : UnpairedReleaseCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

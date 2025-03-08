@@ -23,7 +23,7 @@ class EventProximity
 {
   GdkEventProximity cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gdk.EventProximity");
@@ -51,7 +51,7 @@ class EventProximity
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventProximity*)cPtr).window, No.take);
+    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventProximity*)cPtr).window, No.Take);
   }
 
   @property byte sendEvent()
@@ -76,6 +76,6 @@ class EventProximity
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventProximity*)cPtr).device, No.take);
+    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventProximity*)cPtr).device, No.Take);
   }
 }

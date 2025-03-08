@@ -35,7 +35,7 @@ import gtk.widget;
 class Grid : gtk.container.Container, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,7 +61,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -79,7 +79,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void attach(gtk.widget.Widget child, int left, int top, int width, int height)
   {
-    gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, left, top, width, height);
+    gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, left, top, width, height);
   }
 
   /**
@@ -91,7 +91,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
     at the end indicated by side.
     
     Attaching widgets labeled [1], [2], [3] with sibling == null and
-    side == [gtk.types.PositionType.left] yields a layout of [3][2][1].
+    side == [gtk.types.PositionType.Left] yields a layout of [3][2][1].
     Params:
       child =       the widget to add
       sibling =       the child of grid that child will be placed
@@ -102,7 +102,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height)
   {
-    gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.dup) : null, side, width, height);
+    gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side, width, height);
   }
 
   /**
@@ -128,7 +128,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, left, top);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   /**
       Returns the baseline position of row as set
     by [gtk.grid.Grid.setRowBaselinePosition] or the default value
-    [gtk.types.BaselinePosition.center].
+    [gtk.types.BaselinePosition.Center].
     Params:
       row =       a row index
     Returns:     the baseline position of row
@@ -210,8 +210,8 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
       Inserts a row or column at the specified position.
     
     The new row or column is placed next to sibling, on the side
-    determined by side. If side is [gtk.types.PositionType.top] or [gtk.types.PositionType.bottom],
-    a row is inserted. If side is [gtk.types.PositionType.left] of [gtk.types.PositionType.right],
+    determined by side. If side is [gtk.types.PositionType.Top] or [gtk.types.PositionType.Bottom],
+    a row is inserted. If side is [gtk.types.PositionType.Left] of [gtk.types.PositionType.Right],
     a column is inserted.
     Params:
       sibling =       the child of grid that the new row or column will be
@@ -220,7 +220,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side)
   {
-    gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(No.dup) : null, side);
+    gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side);
   }
 
   /**

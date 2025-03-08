@@ -13,7 +13,7 @@ import gobject.object;
 class CSVReadOptions : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,13 +34,13 @@ class CSVReadOptions : gobject.object.ObjectG
   {
     GArrowCSVReadOptions* _cretval;
     _cretval = garrow_csv_read_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   void addColumnName(string columnName)
   {
-    const(char)* _columnName = columnName.toCString(No.alloc);
+    const(char)* _columnName = columnName.toCString(No.Alloc);
     garrow_csv_read_options_add_column_name(cast(GArrowCSVReadOptions*)cPtr, _columnName);
   }
 
@@ -52,21 +52,21 @@ class CSVReadOptions : gobject.object.ObjectG
   */
   void addColumnType(string name, arrow.data_type.DataType dataType)
   {
-    const(char)* _name = name.toCString(No.alloc);
-    garrow_csv_read_options_add_column_type(cast(GArrowCSVReadOptions*)cPtr, _name, dataType ? cast(GArrowDataType*)dataType.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    garrow_csv_read_options_add_column_type(cast(GArrowCSVReadOptions*)cPtr, _name, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null);
   }
 
   /** */
   void addFalseValue(string falseValue)
   {
-    const(char)* _falseValue = falseValue.toCString(No.alloc);
+    const(char)* _falseValue = falseValue.toCString(No.Alloc);
     garrow_csv_read_options_add_false_value(cast(GArrowCSVReadOptions*)cPtr, _falseValue);
   }
 
   /** */
   void addNullValue(string nullValue)
   {
-    const(char)* _nullValue = nullValue.toCString(No.alloc);
+    const(char)* _nullValue = nullValue.toCString(No.Alloc);
     garrow_csv_read_options_add_null_value(cast(GArrowCSVReadOptions*)cPtr, _nullValue);
   }
 
@@ -77,19 +77,19 @@ class CSVReadOptions : gobject.object.ObjectG
   */
   void addSchema(arrow.schema.Schema schema)
   {
-    garrow_csv_read_options_add_schema(cast(GArrowCSVReadOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null);
+    garrow_csv_read_options_add_schema(cast(GArrowCSVReadOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
   }
 
   /** */
   void addTimestampParser(arrow.timestamp_parser.TimestampParser parser)
   {
-    garrow_csv_read_options_add_timestamp_parser(cast(GArrowCSVReadOptions*)cPtr, parser ? cast(GArrowTimestampParser*)parser.cPtr(No.dup) : null);
+    garrow_csv_read_options_add_timestamp_parser(cast(GArrowCSVReadOptions*)cPtr, parser ? cast(GArrowTimestampParser*)parser.cPtr(No.Dup) : null);
   }
 
   /** */
   void addTrueValue(string trueValue)
   {
-    const(char)* _trueValue = trueValue.toCString(No.alloc);
+    const(char)* _trueValue = trueValue.toCString(No.Alloc);
     garrow_csv_read_options_add_true_value(cast(GArrowCSVReadOptions*)cPtr, _trueValue);
   }
 
@@ -107,7 +107,7 @@ class CSVReadOptions : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -135,7 +135,7 @@ class CSVReadOptions : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -154,7 +154,7 @@ class CSVReadOptions : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -182,7 +182,7 @@ class CSVReadOptions : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -196,7 +196,7 @@ class CSVReadOptions : gobject.object.ObjectG
 
     char*[] _tmpcolumnNames;
     foreach (s; columnNames)
-      _tmpcolumnNames ~= s.toCString(No.alloc);
+      _tmpcolumnNames ~= s.toCString(No.Alloc);
     const(char*)* _columnNames = _tmpcolumnNames.ptr;
     garrow_csv_read_options_set_column_names(cast(GArrowCSVReadOptions*)cPtr, _columnNames, _nColumnNames);
   }
@@ -210,7 +210,7 @@ class CSVReadOptions : gobject.object.ObjectG
 
     char*[] _tmpfalseValues;
     foreach (s; falseValues)
-      _tmpfalseValues ~= s.toCString(No.alloc);
+      _tmpfalseValues ~= s.toCString(No.Alloc);
     const(char*)* _falseValues = _tmpfalseValues.ptr;
     garrow_csv_read_options_set_false_values(cast(GArrowCSVReadOptions*)cPtr, _falseValues, _nFalseValues);
   }
@@ -224,7 +224,7 @@ class CSVReadOptions : gobject.object.ObjectG
 
     char*[] _tmpnullValues;
     foreach (s; nullValues)
-      _tmpnullValues ~= s.toCString(No.alloc);
+      _tmpnullValues ~= s.toCString(No.Alloc);
     const(char*)* _nullValues = _tmpnullValues.ptr;
     garrow_csv_read_options_set_null_values(cast(GArrowCSVReadOptions*)cPtr, _nullValues, _nNullValues);
   }
@@ -246,7 +246,7 @@ class CSVReadOptions : gobject.object.ObjectG
 
     char*[] _tmptrueValues;
     foreach (s; trueValues)
-      _tmptrueValues ~= s.toCString(No.alloc);
+      _tmptrueValues ~= s.toCString(No.Alloc);
     const(char*)* _trueValues = _tmptrueValues.ptr;
     garrow_csv_read_options_set_true_values(cast(GArrowCSVReadOptions*)cPtr, _trueValues, _nTrueValues);
   }

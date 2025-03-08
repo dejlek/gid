@@ -22,15 +22,15 @@ class RGBA : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkRGBA.sizeof), Yes.take);
+    super(safeMalloc(GdkRGBA.sizeof), Yes.Take);
   }
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -96,7 +96,7 @@ class RGBA : gobject.boxed.Boxed
   {
     GdkRGBA* _cretval;
     _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)cPtr);
-    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class RGBA : gobject.boxed.Boxed
   bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
-    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.dup) : null);
+    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class RGBA : gobject.boxed.Boxed
   bool parse(string spec)
   {
     bool _retval;
-    const(char)* _spec = spec.toCString(No.alloc);
+    const(char)* _spec = spec.toCString(No.Alloc);
     _retval = gdk_rgba_parse(cast(GdkRGBA*)cPtr, _spec);
     return _retval;
   }
@@ -207,7 +207,7 @@ class RGBA : gobject.boxed.Boxed
   {
     char* _cretval;
     _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

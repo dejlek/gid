@@ -40,7 +40,7 @@ template PopupT()
   {
     GdkSurface* _cretval;
     _cretval = gdk_popup_get_parent(cast(GdkPopup*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ template PopupT()
   override bool present(int width, int height, gdk.popup_layout.PopupLayout layout)
   {
     bool _retval;
-    _retval = gdk_popup_present(cast(GdkPopup*)cPtr, width, height, layout ? cast(GdkPopupLayout*)layout.cPtr(No.dup) : null);
+    _retval = gdk_popup_present(cast(GdkPopup*)cPtr, width, height, layout ? cast(GdkPopupLayout*)layout.cPtr(No.Dup) : null);
     return _retval;
   }
 }

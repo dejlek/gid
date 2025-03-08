@@ -25,7 +25,7 @@ public import gtksource.view;
   `vfunc@Indenter.is_trigger` is called upon key-press to
   determine of the key press should trigger an indentation.  The default
   implementation of the interface checks to see if the key was
-  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.shiftMask] set.
+  [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] without [gdk.types.ModifierType.ShiftMask] set.
   
   `vfunc@Indenter.indent` is called after text has been
   inserted into `class@Buffer` when
@@ -67,7 +67,7 @@ template IndenterT()
   */
   override void indent(gtksource.view.View view, gtk.text_iter.TextIter iter)
   {
-    gtk_source_indenter_indent(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.dup) : null);
+    gtk_source_indenter_indent(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
   }
 
   /**
@@ -76,7 +76,7 @@ template IndenterT()
     
     The default implementation of this virtual method will check to see
     if keyval is [gdk.types.KEY_Return] or [gdk.types.KEY_KP_Enter] and state does
-    not have [gdk.types.ModifierType.shiftMask] set. This is to allow the user to avoid
+    not have [gdk.types.ModifierType.ShiftMask] set. This is to allow the user to avoid
     indentation when Shift+Return is pressed. Other indenters may want
     to copy this behavior to provide a consistent experience to users.
     Params:
@@ -90,7 +90,7 @@ template IndenterT()
   override bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval)
   {
     bool _retval;
-    _retval = gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.dup) : null, location ? cast(const(GtkTextIter)*)location.cPtr(No.dup) : null, state, keyval);
+    _retval = gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location.cPtr(No.Dup) : null, state, keyval);
     return _retval;
   }
 }

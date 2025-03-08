@@ -15,7 +15,7 @@ import gid.gid;
 class BufferOutputStream : arrow.output_stream.OutputStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -35,7 +35,7 @@ class BufferOutputStream : arrow.output_stream.OutputStream
   this(arrow.resizable_buffer.ResizableBuffer buffer)
   {
     GArrowBufferOutputStream* _cretval;
-    _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 }

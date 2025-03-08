@@ -75,7 +75,7 @@ import gtk.types;
 class RecentManager : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -105,7 +105,7 @@ class RecentManager : gobject.object.ObjectG
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -118,7 +118,7 @@ class RecentManager : gobject.object.ObjectG
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
-    auto _retval = ObjectG.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class RecentManager : gobject.object.ObjectG
   bool addFull(string uri, gtk.recent_data.RecentData recentData)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData.cPtr : null);
     return _retval;
   }
@@ -174,7 +174,7 @@ class RecentManager : gobject.object.ObjectG
   bool addItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_add_item(cast(GtkRecentManager*)cPtr, _uri);
     return _retval;
   }
@@ -204,7 +204,7 @@ class RecentManager : gobject.object.ObjectG
   bool hasItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = gtk_recent_manager_has_item(cast(GtkRecentManager*)cPtr, _uri);
     return _retval;
   }
@@ -223,12 +223,12 @@ class RecentManager : gobject.object.ObjectG
   gtk.recent_info.RecentInfo lookupItem(string uri)
   {
     GtkRecentInfo* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -246,8 +246,8 @@ class RecentManager : gobject.object.ObjectG
   bool moveItem(string uri, string newUri = null)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _newUri = newUri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _newUri = newUri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)cPtr, _uri, _newUri, &_err);
     if (_err)
@@ -281,7 +281,7 @@ class RecentManager : gobject.object.ObjectG
   bool removeItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
     if (_err)
@@ -308,10 +308,10 @@ class RecentManager : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

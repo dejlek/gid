@@ -31,7 +31,7 @@ import gobject.object;
 class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,8 +59,8 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   this(gio.input_stream.InputStream baseStream)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -74,8 +74,8 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.take);
+    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     Will block during this read.
     
     If count is zero, returns zero and does nothing. A value of count
-    larger than `G_MAXSSIZE` will cause a [gio.types.IOErrorEnum.invalidArgument] error.
+    larger than `G_MAXSSIZE` will cause a [gio.types.IOErrorEnum.InvalidArgument] error.
     
     On success, the number of bytes read into the buffer is returned.
     It is not an error if this is not the same as the requested size, as it
@@ -96,7 +96,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     
@@ -114,7 +114,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -140,12 +140,12 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -158,7 +158,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -236,7 +236,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     
     If cancellable is not null, then the operation can be cancelled by
     triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.cancelled] will be returned. If an
+    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be returned. If an
     operation was partially finished when the operation was cancelled the
     partial result will be returned, without an error.
     
@@ -249,7 +249,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     int _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

@@ -17,7 +17,7 @@ import gstbase.base_sink;
 class AudioBaseSink : gstbase.base_sink.BaseSink
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -43,7 +43,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   {
     GstAudioRingBuffer* _cretval;
     _cretval = gst_audio_base_sink_create_ringbuffer(cast(GstAudioBaseSink*)cPtr);
-    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
     return _retval;
   }
 

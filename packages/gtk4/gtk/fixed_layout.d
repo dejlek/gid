@@ -44,7 +44,7 @@ import gtk.types;
 class FixedLayout : gtk.layout_manager.LayoutManager
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,6 +68,6 @@ class FixedLayout : gtk.layout_manager.LayoutManager
   {
     GtkLayoutManager* _cretval;
     _cretval = gtk_fixed_layout_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

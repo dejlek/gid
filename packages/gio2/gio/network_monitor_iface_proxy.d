@@ -7,7 +7,7 @@ import gio.network_monitor_mixin;
 /// Proxy object for Gio.NetworkMonitor interface when a GObject has no applicable D binding
 class NetworkMonitorIfaceProxy : IfaceProxy, gio.network_monitor.NetworkMonitor
 {
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

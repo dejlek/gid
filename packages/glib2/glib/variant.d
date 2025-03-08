@@ -267,7 +267,7 @@ class VariantG
 {
   VariantC* cInstancePtr;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.VariantG");
@@ -284,7 +284,7 @@ class VariantG
   }
 
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       g_variant_ref_sink(cInstancePtr);
@@ -302,9 +302,9 @@ class VariantG
   {
     // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
     static if (is(T : VariantG)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.take);
+      this(cast(void*)createVariant(cast(VariantC*)val.cPtr), No.Take);
     else
-      this(cast(void*)createVariant(val), No.take);
+      this(cast(void*)createVariant(val), No.Take);
   }
 
   /**
@@ -329,7 +329,7 @@ class VariantG
         g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new VariantC
     }
 
-    this(g_variant_builder_end(&builder), No.take);
+    this(g_variant_builder_end(&builder), No.Take);
   }
 
   override bool opEquals(Object other)
@@ -411,8 +411,8 @@ class VariantG
     foreach (obj; children)
       _tmpchildren ~= obj ? cast(VariantC*)obj.cPtr : null;
     const(VariantC*)* _children = cast(const(VariantC*)*)_tmpchildren.ptr;
-    _cretval = g_variant_new_array(childType ? cast(const(GVariantType)*)childType.cPtr(No.dup) : null, _children, _nChildren);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_array(childType ? cast(const(GVariantType)*)childType.cPtr(No.Dup) : null, _children, _nChildren);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_boolean(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -440,7 +440,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_byte(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -459,9 +459,9 @@ class VariantG
   static glib.variant.VariantG newBytestring(string string_)
   {
     VariantC* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_variant_new_bytestring(_string_);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -483,10 +483,10 @@ class VariantG
 
     char*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.alloc);
+      _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
     _cretval = g_variant_new_bytestring_array(_strv, _length);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -504,8 +504,8 @@ class VariantG
   static glib.variant.VariantG newDictEntry(glib.variant.VariantG key, glib.variant.VariantG value)
   {
     VariantC* _cretval;
-    _cretval = g_variant_new_dict_entry(key ? cast(VariantC*)key.cPtr(No.dup) : null, value ? cast(VariantC*)value.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_dict_entry(key ? cast(VariantC*)key.cPtr(No.Dup) : null, value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_double(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -547,8 +547,8 @@ class VariantG
   static glib.variant.VariantG newFixedArray(glib.variant_type.VariantType elementType, const(void)* elements, size_t nElements, size_t elementSize)
   {
     VariantC* _cretval;
-    _cretval = g_variant_new_fixed_array(elementType ? cast(const(GVariantType)*)elementType.cPtr(No.dup) : null, elements, nElements, elementSize);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_fixed_array(elementType ? cast(const(GVariantType)*)elementType.cPtr(No.Dup) : null, elements, nElements, elementSize);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -571,8 +571,8 @@ class VariantG
   static glib.variant.VariantG newFromBytes(glib.variant_type.VariantType type, glib.bytes.Bytes bytes, bool trusted)
   {
     VariantC* _cretval;
-    _cretval = g_variant_new_from_bytes(type ? cast(const(GVariantType)*)type.cPtr(No.dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.dup) : null, trusted);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_from_bytes(type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, trusted);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -590,7 +590,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_handle(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -604,7 +604,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_int16(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -618,7 +618,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_int32(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_int64(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -655,8 +655,8 @@ class VariantG
   static glib.variant.VariantG newMaybe(glib.variant_type.VariantType childType = null, glib.variant.VariantG child = null)
   {
     VariantC* _cretval;
-    _cretval = g_variant_new_maybe(childType ? cast(const(GVariantType)*)childType.cPtr(No.dup) : null, child ? cast(VariantC*)child.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_maybe(childType ? cast(const(GVariantType)*)childType.cPtr(No.Dup) : null, child ? cast(VariantC*)child.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -671,9 +671,9 @@ class VariantG
   static glib.variant.VariantG newObjectPath(string objectPath)
   {
     VariantC* _cretval;
-    const(char)* _objectPath = objectPath.toCString(No.alloc);
+    const(char)* _objectPath = objectPath.toCString(No.Alloc);
     _cretval = g_variant_new_object_path(_objectPath);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -698,10 +698,10 @@ class VariantG
 
     const(char)*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.alloc);
+      _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
     _cretval = g_variant_new_objv(_strv, _length);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -716,9 +716,9 @@ class VariantG
   static glib.variant.VariantG newSignature(string signature)
   {
     VariantC* _cretval;
-    const(char)* _signature = signature.toCString(No.alloc);
+    const(char)* _signature = signature.toCString(No.Alloc);
     _cretval = g_variant_new_signature(_signature);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -735,9 +735,9 @@ class VariantG
   static glib.variant.VariantG newString(string string_)
   {
     VariantC* _cretval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = g_variant_new_string(_string_);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -759,10 +759,10 @@ class VariantG
 
     const(char)*[] _tmpstrv;
     foreach (s; strv)
-      _tmpstrv ~= s.toCString(No.alloc);
+      _tmpstrv ~= s.toCString(No.Alloc);
     const(char*)* _strv = _tmpstrv.ptr;
     _cretval = g_variant_new_strv(_strv, _length);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -791,7 +791,7 @@ class VariantG
       _tmpchildren ~= obj ? cast(VariantC*)obj.cPtr : null;
     const(VariantC*)* _children = cast(const(VariantC*)*)_tmpchildren.ptr;
     _cretval = g_variant_new_tuple(_children, _nChildren);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -805,7 +805,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_uint16(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_uint32(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -833,7 +833,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_new_uint64(value);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -850,8 +850,8 @@ class VariantG
   static glib.variant.VariantG newVariant(glib.variant.VariantG value)
   {
     VariantC* _cretval;
-    _cretval = g_variant_new_variant(value ? cast(VariantC*)value.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+    _cretval = g_variant_new_variant(value ? cast(VariantC*)value.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -879,7 +879,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_byteswap(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -906,7 +906,7 @@ class VariantG
   bool checkFormatString(string formatString, bool copyOnly)
   {
     bool _retval;
-    const(char)* _formatString = formatString.toCString(No.alloc);
+    const(char)* _formatString = formatString.toCString(No.Alloc);
     _retval = g_variant_check_format_string(cast(VariantC*)cPtr, _formatString, copyOnly);
     return _retval;
   }
@@ -952,7 +952,7 @@ class VariantG
   int compare(glib.variant.VariantG two)
   {
     int _retval;
-    _retval = g_variant_compare(cast(VariantC*)cPtr, two ? cast(VariantC*)two.cPtr(No.dup) : null);
+    _retval = g_variant_compare(cast(VariantC*)cPtr, two ? cast(VariantC*)two.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1001,7 +1001,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1030,7 +1030,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1050,7 +1050,7 @@ class VariantG
   {
     char* _cretval;
     _cretval = g_variant_dup_string(cast(VariantC*)cPtr, cast(size_t*)&length);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1078,7 +1078,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -1095,7 +1095,7 @@ class VariantG
   bool equal(glib.variant.VariantG two)
   {
     bool _retval;
-    _retval = g_variant_equal(cast(VariantC*)cPtr, two ? cast(VariantC*)two.cPtr(No.dup) : null);
+    _retval = g_variant_equal(cast(VariantC*)cPtr, two ? cast(VariantC*)two.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1152,7 +1152,7 @@ class VariantG
   {
     const(char)* _cretval;
     _cretval = g_variant_get_bytestring(cast(VariantC*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1180,7 +1180,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -1217,7 +1217,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_get_child_value(cast(VariantC*)cPtr, index);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1266,7 +1266,7 @@ class VariantG
   {
     GBytes* _cretval;
     _cretval = g_variant_get_data_as_bytes(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1353,7 +1353,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_get_maybe(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1389,7 +1389,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_get_normal_form(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1417,7 +1417,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -1502,7 +1502,7 @@ class VariantG
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -1518,7 +1518,7 @@ class VariantG
   {
     const(GVariantType)* _cretval;
     _cretval = g_variant_get_type(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1532,7 +1532,7 @@ class VariantG
   {
     const(char)* _cretval;
     _cretval = g_variant_get_type_string(cast(VariantC*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -1587,7 +1587,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_get_variant(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1672,7 +1672,7 @@ class VariantG
   bool isOfType(glib.variant_type.VariantType type)
   {
     bool _retval;
-    _retval = g_variant_is_of_type(cast(VariantC*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.dup) : null);
+    _retval = g_variant_is_of_type(cast(VariantC*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1706,9 +1706,9 @@ class VariantG
   glib.variant.VariantG lookupValue(string key, glib.variant_type.VariantType expectedType = null)
   {
     VariantC* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
-    _cretval = g_variant_lookup_value(cast(VariantC*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    const(char)* _key = key.toCString(No.Alloc);
+    _cretval = g_variant_lookup_value(cast(VariantC*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1749,7 +1749,7 @@ class VariantG
   {
     char* _cretval;
     _cretval = g_variant_print(cast(VariantC*)cPtr, typeAnnotate);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1782,7 +1782,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_ref_sink(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1846,7 +1846,7 @@ class VariantG
   {
     VariantC* _cretval;
     _cretval = g_variant_take_ref(cast(VariantC*)cPtr);
-    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -1866,7 +1866,7 @@ class VariantG
   static bool isObjectPath(string string_)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _retval = g_variant_is_object_path(_string_);
     return _retval;
   }
@@ -1885,7 +1885,7 @@ class VariantG
   static bool isSignature(string string_)
   {
     bool _retval;
-    const(char)* _string_ = string_.toCString(No.alloc);
+    const(char)* _string_ = string_.toCString(No.Alloc);
     _retval = g_variant_is_signature(_string_);
     return _retval;
   }
@@ -1928,9 +1928,9 @@ class VariantG
   static string parseErrorPrintContext(glib.error.ErrorG error, string sourceStr)
   {
     char* _cretval;
-    const(char)* _sourceStr = sourceStr.toCString(No.alloc);
+    const(char)* _sourceStr = sourceStr.toCString(No.Alloc);
     _cretval = g_variant_parse_error_print_context(error ? cast(GError*)error.cPtr : null, _sourceStr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -1986,10 +1986,10 @@ VariantC* createVariant(T)(T val)
   else static if (is(T == float) || is(T == double))
     return g_variant_new_double(val);
   else static if (isSomeString!T)
-    return g_variant_new_string(toCString(val.to!string, No.alloc));
+    return g_variant_new_string(toCString(val.to!string, No.Alloc));
   else static if (is(T : E[], E))
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -2001,7 +2001,7 @@ VariantC* createVariant(T)(T val)
   }
   else static if (is(T : V[K], V, K)) // Dictionary
   {
-    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.alloc)); // ++ new
+    auto variantType = g_variant_type_new(VariantType.getStr!T.toCString(No.Alloc)); // ++ new
     GVariantBuilder builder;
     g_variant_builder_init(&builder, variantType);
     g_variant_type_free(variantType); // -- free
@@ -2089,7 +2089,7 @@ T getVal(T)(VariantC* v)
   else static if (is(T == float) || is(T == double))
     return cast(T)g_variant_get_double(v);
   else static if (isSomeString!T)
-    return fromCString(g_variant_get_string(v, null), No.free); // g_variant_get_string second argument is an optional output length parameter
+    return fromCString(g_variant_get_string(v, null), No.Free); // g_variant_get_string second argument is an optional output length parameter
   else static if (is(T : E[], E))
   {
     T valArray;

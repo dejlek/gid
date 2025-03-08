@@ -68,7 +68,7 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.take) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -113,7 +113,7 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.take) : null);
+      int _retval = (*_dlg)(ObjectG.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
@@ -150,10 +150,10 @@ template TreeSortableT()
     Connect to SortColumnChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSortColumnChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSortColumnChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SortColumnChangedCallbackDlg) || is(T : SortColumnChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

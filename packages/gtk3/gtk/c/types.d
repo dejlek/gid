@@ -25,17 +25,17 @@ enum GtkAccelFlags : uint
   /**
       Accelerator is visible
   */
-  visible = 1,
+  Visible = 1,
 
   /**
       Accelerator not removable
   */
-  locked = 2,
+  Locked = 2,
 
   /**
       Mask
   */
-  mask = 7,
+  Mask = 7,
 }
 
 /**
@@ -62,30 +62,30 @@ enum GtkAlign
       stretch to fill all space if possible, center if
         no meaningful way to stretch
   */
-  fill = 0,
+  Fill = 0,
 
   /**
       snap to left or top side, leaving space on right
         or bottom
   */
-  start = 1,
+  Start = 1,
 
   /**
       snap to right or bottom side, leaving space on left
         or top
   */
-  end = 2,
+  End = 2,
 
   /**
       center natural width of widget inside the
         allocation
   */
-  center = 3,
+  Center = 3,
 
   /**
       align the widget according to the baseline. Since 3.10.
   */
-  baseline = 4,
+  Baseline = 4,
 }
 
 /**
@@ -97,24 +97,24 @@ enum GtkApplicationInhibitFlags : uint
       Inhibit ending the user session
         by logging out or by shutting down the computer
   */
-  logout = 1,
+  Logout = 1,
 
   /**
       Inhibit user switching
   */
-  switch_ = 2,
+  Switch = 2,
 
   /**
       Inhibit suspending the
         session or computer
   */
-  suspend = 4,
+  Suspend = 4,
 
   /**
       Inhibit the session being
         marked as idle (and possibly locked)
   */
-  idle = 8,
+  Idle = 8,
 }
 
 /**
@@ -125,17 +125,17 @@ enum GtkArrowPlacement
   /**
       Place one arrow on each end of the menu.
   */
-  both = 0,
+  Both = 0,
 
   /**
       Place both arrows at the top of the menu.
   */
-  start = 1,
+  Start = 1,
 
   /**
       Place both arrows at the bottom of the menu.
   */
-  end = 2,
+  End = 2,
 }
 
 /**
@@ -146,27 +146,27 @@ enum GtkArrowType
   /**
       Represents an upward pointing arrow.
   */
-  up = 0,
+  Up = 0,
 
   /**
       Represents a downward pointing arrow.
   */
-  down = 1,
+  Down = 1,
 
   /**
       Represents a left pointing arrow.
   */
-  left = 2,
+  Left = 2,
 
   /**
       Represents a right pointing arrow.
   */
-  right = 3,
+  Right = 3,
 
   /**
       No arrow. Since 2.10.
   */
-  none = 4,
+  None = 4,
 }
 
 /**
@@ -174,8 +174,8 @@ enum GtkArrowType
   used to handle buttons sensitivity and visibility.
   
   Note that an assistant needs to end its page flow with a page of type
-  [gtk.types.AssistantPageType.confirm], [gtk.types.AssistantPageType.summary] or
-  [gtk.types.AssistantPageType.progress] to be correct.
+  [gtk.types.AssistantPageType.Confirm], [gtk.types.AssistantPageType.Summary] or
+  [gtk.types.AssistantPageType.Progress] to be correct.
   
   The Cancel button will only be shown if the page isn’t “committed”.
   See [gtk.assistant.Assistant.commit] for details.
@@ -186,40 +186,40 @@ enum GtkAssistantPageType
       The page has regular contents. Both the
      Back and forward buttons will be shown.
   */
-  content = 0,
+  Content = 0,
 
   /**
       The page contains an introduction to the
      assistant task. Only the Forward button will be shown if there is a
       next page.
   */
-  intro = 1,
+  Intro = 1,
 
   /**
       The page lets the user confirm or deny the
      changes. The Back and Apply buttons will be shown.
   */
-  confirm = 2,
+  Confirm = 2,
 
   /**
       The page informs the user of the changes
      done. Only the Close button will be shown.
   */
-  summary = 3,
+  Summary = 3,
 
   /**
       Used for tasks that take a long time to
      complete, blocks the assistant until the page is marked as complete.
       Only the back button will be shown.
   */
-  progress = 4,
+  Progress = 4,
 
   /**
       Used for when other page types are not
      appropriate. No buttons will be shown, and the application must
      add its own buttons through [gtk.assistant.Assistant.addActionWidget].
   */
-  custom = 5,
+  Custom = 5,
 }
 
 /**
@@ -232,17 +232,17 @@ enum GtkAttachOptions : uint
       the widget should expand to take up any extra space in its
     container that has been allocated.
   */
-  expand = 1,
+  Expand = 1,
 
   /**
       the widget should shrink as and when possible.
   */
-  shrink = 2,
+  Shrink = 2,
 
   /**
       the widget should fill the space allocated to it.
   */
-  fill = 4,
+  Fill = 4,
 }
 
 /**
@@ -258,17 +258,17 @@ enum GtkBaselinePosition
   /**
       Align the baseline at the top
   */
-  top = 0,
+  Top = 0,
 
   /**
       Center the baseline
   */
-  center = 1,
+  Center = 1,
 
   /**
       Align the baseline at the bottom
   */
-  bottom = 2,
+  Bottom = 2,
 }
 
 /**
@@ -279,52 +279,52 @@ enum GtkBorderStyle
   /**
       No visible border
   */
-  none = 0,
+  None = 0,
 
   /**
       A single line segment
   */
-  solid = 1,
+  Solid = 1,
 
   /**
       Looks as if the content is sunken into the canvas
   */
-  inset = 2,
+  Inset = 2,
 
   /**
       Looks as if the content is coming out of the canvas
   */
-  outset = 3,
+  Outset = 3,
 
   /**
       Same as @GTK_BORDER_STYLE_NONE
   */
-  hidden = 4,
+  Hidden = 4,
 
   /**
       A series of round dots
   */
-  dotted = 5,
+  Dotted = 5,
 
   /**
       A series of square-ended dashes
   */
-  dashed = 6,
+  Dashed = 6,
 
   /**
       Two parallel lines with some space between them
   */
-  double_ = 7,
+  Double = 7,
 
   /**
       Looks as if it were carved in the canvas
   */
-  groove = 8,
+  Groove = 8,
 
   /**
       Looks as if it were coming out of the canvas
   */
-  ridge = 9,
+  Ridge = 9,
 }
 
 /**
@@ -337,80 +337,80 @@ enum GtkBuilderError
       A type-func attribute didn’t name
      a function that returns a #GType.
   */
-  invalidTypeFunction = 0,
+  InvalidTypeFunction = 0,
 
   /**
       The input contained a tag that #GtkBuilder
      can’t handle.
   */
-  unhandledTag = 1,
+  UnhandledTag = 1,
 
   /**
       An attribute that is required by
      #GtkBuilder was missing.
   */
-  missingAttribute = 2,
+  MissingAttribute = 2,
 
   /**
       #GtkBuilder found an attribute that
      it doesn’t understand.
   */
-  invalidAttribute = 3,
+  InvalidAttribute = 3,
 
   /**
       #GtkBuilder found a tag that
      it doesn’t understand.
   */
-  invalidTag = 4,
+  InvalidTag = 4,
 
   /**
       A required property value was
      missing.
   */
-  missingPropertyValue = 5,
+  MissingPropertyValue = 5,
 
   /**
       #GtkBuilder couldn’t parse
      some attribute value.
   */
-  invalidValue = 6,
+  InvalidValue = 6,
 
   /**
       The input file requires a newer version
      of GTK+.
   */
-  versionMismatch = 7,
+  VersionMismatch = 7,
 
   /**
       An object id occurred twice.
   */
-  duplicateId = 8,
+  DuplicateId = 8,
 
   /**
       A specified object type is of the same type or
      derived from the type of the composite class being extended with builder XML.
   */
-  objectTypeRefused = 9,
+  ObjectTypeRefused = 9,
 
   /**
       The wrong type was specified in a composite class’s template XML
   */
-  templateMismatch = 10,
+  TemplateMismatch = 10,
 
   /**
       The specified property is unknown for the object class.
   */
-  invalidProperty = 11,
+  InvalidProperty = 11,
 
   /**
       The specified signal is unknown for the object class.
   */
-  invalidSignal = 12,
+  InvalidSignal = 12,
 
   /**
       An object id is unknown
   */
-  invalidId = 13,
+  InvalidId = 13,
 }
 
 /**
@@ -422,29 +422,29 @@ enum GtkButtonBoxStyle
   /**
       Buttons are evenly spread across the box.
   */
-  spread = 1,
+  Spread = 1,
 
   /**
       Buttons are placed at the edges of the box.
   */
-  edge = 2,
+  Edge = 2,
 
   /**
       Buttons are grouped towards the start of the box,
       (on the left for a HBox, or the top for a VBox).
   */
-  start = 3,
+  Start = 3,
 
   /**
       Buttons are grouped towards the end of the box,
       (on the right for a HBox, or the bottom for a VBox).
   */
-  end = 4,
+  End = 4,
 
   /**
       Buttons are centered in the box. Since 2.12.
   */
-  center = 5,
+  Center = 5,
 
   /**
       Buttons expand to fill the box. This entails giving
@@ -452,7 +452,7 @@ enum GtkButtonBoxStyle
       setting spacing to 0 (same as calling [gtk.box.Box.setHomogeneous] and
       [gtk.box.Box.setSpacing] manually). Since 3.12.
   */
-  expand = 6,
+  Expand = 6,
 }
 
 /**
@@ -463,26 +463,26 @@ enum GtkButtonRole
   /**
       A plain button
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       A check button
   */
-  check = 1,
+  Check = 1,
 
   /**
       A radio button
   */
-  radio = 2,
+  Radio = 2,
 }
 
 /**
     Prebuilt sets of buttons for the dialog. If
-  none of these choices are appropriate, simply use [gtk.types.ButtonsType.none]
+  none of these choices are appropriate, simply use [gtk.types.ButtonsType.None]
   then call [gtk.dialog.Dialog.addButtons].
   
-  > Please note that [gtk.types.ButtonsType.ok], [gtk.types.ButtonsType.yesNo]
-  > and [gtk.types.ButtonsType.okCancel] are discouraged by the
+  > Please note that [gtk.types.ButtonsType.Ok], [gtk.types.ButtonsType.YesNo]
+  > and [gtk.types.ButtonsType.OkCancel] are discouraged by the
   > [GNOME Human Interface Guidelines](http://library.gnome.org/devel/hig-book/stable/).
 */
 enum GtkButtonsType
@@ -490,32 +490,32 @@ enum GtkButtonsType
   /**
       no buttons at all
   */
-  none = 0,
+  None = 0,
 
   /**
       an OK button
   */
-  ok = 1,
+  Ok = 1,
 
   /**
       a Close button
   */
-  close = 2,
+  Close = 2,
 
   /**
       a Cancel button
   */
-  cancel = 3,
+  Cancel = 3,
 
   /**
       Yes and No buttons
   */
-  yesNo = 4,
+  YesNo = 4,
 
   /**
       OK and Cancel buttons
   */
-  okCancel = 5,
+  OkCancel = 5,
 }
 
 /**
@@ -526,29 +526,29 @@ enum GtkCalendarDisplayOptions : uint
   /**
       Specifies that the month and year should be displayed.
   */
-  showHeading = 1,
+  ShowHeading = 1,
 
   /**
       Specifies that three letter day descriptions should be present.
   */
-  showDayNames = 2,
+  ShowDayNames = 2,
 
   /**
       Prevents the user from switching months with the calendar.
   */
-  noMonthChange = 4,
+  NoMonthChange = 4,
 
   /**
       Displays each week numbers of the current year, down the
     left side of the calendar.
   */
-  showWeekNumbers = 8,
+  ShowWeekNumbers = 8,
 
   /**
       Just show an indicator, not the full details
     text when details are provided. See [gtk.calendar.Calendar.setDetailFunc].
   */
-  showDetails = 32,
+  ShowDetails = 32,
 }
 
 /**
@@ -562,16 +562,16 @@ enum GtkCellRendererAccelMode
   /**
       GTK+ accelerators mode
   */
-  gtk = 0,
+  Gtk = 0,
 
   /**
       Other accelerator mode
     GTK_CELL_RENDERER_ACCEL_MODE_MODIFIER_TAP: Bare modifiers mode
   */
-  other = 1,
+  Other = 1,
 
   /** */
-  modifierTap = 2,
+  ModifierTap = 2,
 }
 
 /**
@@ -585,17 +585,17 @@ enum GtkCellRendererMode
      row being drawn can’t be selected -- just that a particular element of
      it cannot be individually modified.
   */
-  inert = 0,
+  Inert = 0,
 
   /**
       The cell can be clicked.
   */
-  activatable = 1,
+  Activatable = 1,
 
   /**
       The cell can be edited or otherwise modified.
   */
-  editable = 2,
+  Editable = 2,
 }
 
 /**
@@ -607,37 +607,37 @@ enum GtkCellRendererState : uint
       The cell is currently selected, and
      probably has a selection colored background to render to.
   */
-  selected = 1,
+  Selected = 1,
 
   /**
       The mouse is hovering over the cell.
   */
-  prelit = 2,
+  Prelit = 2,
 
   /**
       The cell is drawn in an insensitive manner
   */
-  insensitive = 4,
+  Insensitive = 4,
 
   /**
       The cell is in a sorted row
   */
-  sorted = 8,
+  Sorted = 8,
 
   /**
       The cell is in the focus row.
   */
-  focused = 16,
+  Focused = 16,
 
   /**
       The cell is in a row that can be expanded. Since 3.4
   */
-  expandable = 32,
+  Expandable = 32,
 
   /**
       The cell is in a row that is expanded. Since 3.4
   */
-  expanded = 64,
+  Expanded = 64,
 }
 
 /**
@@ -651,25 +651,25 @@ enum GtkCornerType
       Place the scrollbars on the right and bottom of the
      widget (default behaviour).
   */
-  topLeft = 0,
+  TopLeft = 0,
 
   /**
       Place the scrollbars on the top and right of the
      widget.
   */
-  bottomLeft = 1,
+  BottomLeft = 1,
 
   /**
       Place the scrollbars on the left and bottom of the
      widget.
   */
-  topRight = 2,
+  TopRight = 2,
 
   /**
       Place the scrollbars on the top and left of the
      widget.
   */
-  bottomRight = 3,
+  BottomRight = 3,
 }
 
 /**
@@ -680,32 +680,32 @@ enum GtkCssProviderError
   /**
       Failed.
   */
-  failed = 0,
+  Failed = 0,
 
   /**
       Syntax error.
   */
-  syntax = 1,
+  Syntax = 1,
 
   /**
       Import error.
   */
-  import_ = 2,
+  Import = 2,
 
   /**
       Name error.
   */
-  name = 3,
+  Name = 3,
 
   /**
       Deprecation error.
   */
-  deprecated_ = 4,
+  Deprecated = 4,
 
   /**
       Unknown value.
   */
-  unknownValue = 5,
+  UnknownValue = 5,
 }
 
 /**
@@ -724,121 +724,121 @@ enum GtkCssSectionType
       This section time is the only one where [gtk.css_section.CssSection.getParent]
       might return null.
   */
-  document = 0,
+  Document = 0,
 
   /**
       The section defines an import rule.
   */
-  import_ = 1,
+  Import = 1,
 
   /**
       The section defines a color. This
       is a GTK extension to CSS.
   */
-  colorDefinition = 2,
+  ColorDefinition = 2,
 
   /**
       The section defines a binding set. This
       is a GTK extension to CSS.
   */
-  bindingSet = 3,
+  BindingSet = 3,
 
   /**
       The section defines a CSS ruleset.
   */
-  ruleset = 4,
+  Ruleset = 4,
 
   /**
       The section defines a CSS selector.
   */
-  selector = 5,
+  Selector = 5,
 
   /**
       The section defines the declaration of
       a CSS variable.
   */
-  declaration = 6,
+  Declaration = 6,
 
   /**
       The section defines the value of a CSS declaration.
   */
-  value = 7,
+  Value = 7,
 
   /**
       The section defines keyframes. See [CSS
       Animations](http://dev.w3.org/csswg/css3-animations/#keyframes) for details. Since 3.6
   */
-  keyframes = 8,
+  Keyframes = 8,
 }
 
 /** */
 enum GtkDebugFlag : uint
 {
   /** */
-  misc = 1,
+  Misc = 1,
 
   /** */
-  plugsocket = 2,
+  Plugsocket = 2,
 
   /** */
-  text = 4,
+  Text = 4,
 
   /** */
-  tree = 8,
+  Tree = 8,
 
   /** */
-  updates = 16,
+  Updates = 16,
 
   /** */
-  keybindings = 32,
+  Keybindings = 32,
 
   /** */
-  multihead = 64,
+  Multihead = 64,
 
   /** */
-  modules = 128,
+  Modules = 128,
 
   /** */
-  geometry = 256,
+  Geometry = 256,
 
   /** */
-  icontheme = 512,
+  Icontheme = 512,
 
   /** */
-  printing = 1024,
+  Printing = 1024,
 
   /** */
-  builder = 2048,
+  Builder = 2048,
 
   /** */
-  sizeRequest = 4096,
+  SizeRequest = 4096,
 
   /** */
-  noCssCache = 8192,
+  NoCssCache = 8192,
 
   /** */
-  baselines = 16384,
+  Baselines = 16384,
 
   /** */
-  pixelCache = 32768,
+  PixelCache = 32768,
 
   /** */
-  noPixelCache = 65536,
+  NoPixelCache = 65536,
 
   /** */
-  interactive = 131072,
+  Interactive = 131072,
 
   /** */
-  touchscreen = 262144,
+  Touchscreen = 262144,
 
   /** */
-  actions = 524288,
+  Actions = 524288,
 
   /** */
-  resize = 1048576,
+  Resize = 1048576,
 
   /** */
-  layout = 2097152,
+  Layout = 2097152,
 }
 
 /**
@@ -849,18 +849,18 @@ enum GtkDeleteType
   /**
       Delete characters.
   */
-  chars = 0,
+  Chars = 0,
 
   /**
       Delete only the portion of the word to the
       left/right of cursor if we’re in the middle of a word.
   */
-  wordEnds = 1,
+  WordEnds = 1,
 
   /**
       Delete words.
   */
-  words = 2,
+  Words = 2,
 
   /**
       Delete display-lines. Display-lines
@@ -868,29 +868,29 @@ enum GtkDeleteType
       breaks. As opposed to paragraphs, which are defined by line
       breaks in the input.
   */
-  displayLines = 3,
+  DisplayLines = 3,
 
   /**
       Delete only the portion of the
       display-line to the left/right of cursor.
   */
-  displayLineEnds = 4,
+  DisplayLineEnds = 4,
 
   /**
       Delete to the end of the
       paragraph. Like C-k in Emacs (or its reverse).
   */
-  paragraphEnds = 5,
+  ParagraphEnds = 5,
 
   /**
       Delete entire line. Like C-k in pico.
   */
-  paragraphs = 6,
+  Paragraphs = 6,
 
   /**
       Delete only whitespace. Like M-\ in Emacs.
   */
-  whitespace = 7,
+  Whitespace = 7,
 }
 
 /**
@@ -906,14 +906,14 @@ enum GtkDestDefaults : uint
       and actions.
       GTK+ will then call [gdk.global.dragStatus] as appropriate.
   */
-  motion = 1,
+  Motion = 1,
 
   /**
       If set for a widget, GTK+ will draw a highlight on
       this widget as long as a drag is over this widget and the widget drag format
       and action are acceptable.
   */
-  highlight = 2,
+  Highlight = 2,
 
   /**
       If set for a widget, when a drop occurs, GTK+ will
@@ -923,13 +923,13 @@ enum GtkDestDefaults : uint
       the action was a move, then if the drag was successful, then true will be
       passed for the @delete parameter to [gtk.global.dragFinish].
   */
-  drop = 4,
+  Drop = 4,
 
   /**
       If set, specifies that all default actions should
       be taken.
   */
-  all = 7,
+  All = 7,
 }
 
 /**
@@ -941,19 +941,19 @@ enum GtkDialogFlags : uint
       Make the constructed dialog modal,
         see [gtk.window.Window.setModal]
   */
-  modal = 1,
+  Modal = 1,
 
   /**
       Destroy the dialog when its
         parent is destroyed, see [gtk.window.Window.setDestroyWithParent]
   */
-  destroyWithParent = 2,
+  DestroyWithParent = 2,
 
   /**
       Create dialog with actions in header
         bar instead of action area. Since 3.12.
   */
-  useHeaderBar = 4,
+  UseHeaderBar = 4,
 }
 
 /**
@@ -964,32 +964,32 @@ enum GtkDirectionType
   /**
       Move forward.
   */
-  tabForward = 0,
+  TabForward = 0,
 
   /**
       Move backward.
   */
-  tabBackward = 1,
+  TabBackward = 1,
 
   /**
       Move up.
   */
-  up = 2,
+  Up = 2,
 
   /**
       Move down.
   */
-  down = 3,
+  Down = 3,
 
   /**
       Move left.
   */
-  left = 4,
+  Left = 4,
 
   /**
       Move right.
   */
-  right = 5,
+  Right = 5,
 }
 
 /**
@@ -1002,34 +1002,34 @@ enum GtkDragResult
   /**
       The drag operation was successful.
   */
-  success = 0,
+  Success = 0,
 
   /**
       No suitable drag target.
   */
-  noTarget = 1,
+  NoTarget = 1,
 
   /**
       The user cancelled the drag operation.
   */
-  userCancelled = 2,
+  UserCancelled = 2,
 
   /**
       The drag operation timed out.
   */
-  timeoutExpired = 3,
+  TimeoutExpired = 3,
 
   /**
       The pointer or keyboard grab used
      for the drag operation was broken.
   */
-  grabBroken = 4,
+  GrabBroken = 4,
 
   /**
       The drag operation failed due to some
      unspecified error.
   */
-  error = 5,
+  Error = 5,
 }
 
 /**
@@ -1040,12 +1040,12 @@ enum GtkEntryIconPosition
   /**
       At the beginning of the entry (depending on the text direction).
   */
-  primary = 0,
+  Primary = 0,
 
   /**
       At the end of the entry (depending on the text direction).
   */
-  secondary = 1,
+  Secondary = 1,
 }
 
 /**
@@ -1056,33 +1056,33 @@ enum GtkEventControllerScrollFlags : uint
   /**
       Don't emit scroll.
   */
-  none = 0,
+  None = 0,
 
   /**
       Emit scroll with vertical deltas.
   */
-  vertical = 1,
+  Vertical = 1,
 
   /**
       Emit scroll with horizontal deltas.
   */
-  horizontal = 2,
+  Horizontal = 2,
 
   /**
       Only emit deltas that are multiples of 1.
   */
-  discrete = 4,
+  Discrete = 4,
 
   /**
       Emit #GtkEventControllerScroll::decelerate
       after continuous scroll finishes.
   */
-  kinetic = 8,
+  Kinetic = 8,
 
   /**
       Emit scroll on both axes.
   */
-  bothAxes = 3,
+  BothAxes = 3,
 }
 
 /**
@@ -1093,17 +1093,17 @@ enum GtkEventSequenceState
   /**
       The sequence is handled, but not grabbed.
   */
-  none = 0,
+  None = 0,
 
   /**
       The sequence is handled and grabbed.
   */
-  claimed = 1,
+  Claimed = 1,
 
   /**
       The sequence is denied.
   */
-  denied = 2,
+  Denied = 2,
 }
 
 /**
@@ -1114,22 +1114,22 @@ enum GtkExpanderStyle
   /**
       The style used for a collapsed subtree.
   */
-  collapsed = 0,
+  Collapsed = 0,
 
   /**
       Intermediate style used during animation.
   */
-  semiCollapsed = 1,
+  SemiCollapsed = 1,
 
   /**
       Intermediate style used during animation.
   */
-  semiExpanded = 2,
+  SemiExpanded = 2,
 
   /**
       The style used for an expanded subtree.
   */
-  expanded = 3,
+  Expanded = 3,
 }
 
 /**
@@ -1142,28 +1142,28 @@ enum GtkFileChooserAction
       Indicates open mode.  The file chooser
      will only let the user pick an existing file.
   */
-  open = 0,
+  Open = 0,
 
   /**
       Indicates save mode.  The file chooser
      will let the user pick an existing file, or type in a new
      filename.
   */
-  save = 1,
+  Save = 1,
 
   /**
       Indicates an Open mode for
      selecting folders.  The file chooser will let the user pick an
      existing folder.
   */
-  selectFolder = 2,
+  SelectFolder = 2,
 
   /**
       Indicates a mode for creating a
      new folder.  The file chooser will let the user name an existing or
      new folder.
   */
-  createFolder = 3,
+  CreateFolder = 3,
 }
 
 /**
@@ -1179,19 +1179,19 @@ enum GtkFileChooserConfirmation
       The file chooser will present
      its stock dialog to confirm about overwriting an existing file.
   */
-  confirm = 0,
+  Confirm = 0,
 
   /**
       The file chooser will
      terminate and accept the user’s choice of a file name.
   */
-  acceptFilename = 1,
+  AcceptFilename = 1,
 
   /**
       The file chooser will
      continue running, so as to let the user select another file name.
   */
-  selectAgain = 2,
+  SelectAgain = 2,
 }
 
 /**
@@ -1203,23 +1203,23 @@ enum GtkFileChooserError
   /**
       Indicates that a file does not exist.
   */
-  nonexistent = 0,
+  Nonexistent = 0,
 
   /**
       Indicates a malformed filename.
   */
-  badFilename = 1,
+  BadFilename = 1,
 
   /**
       Indicates a duplicate path (e.g. when
      adding a bookmark).
   */
-  alreadyExists = 2,
+  AlreadyExists = 2,
 
   /**
       Indicates an incomplete hostname (e.g. "http://foo" without a slash after that).
   */
-  incompleteHostname = 3,
+  IncompleteHostname = 3,
 }
 
 /**
@@ -1231,23 +1231,23 @@ enum GtkFileFilterFlags : uint
   /**
       the filename of the file being tested
   */
-  filename = 1,
+  Filename = 1,
 
   /**
       the URI for the file being tested
   */
-  uri = 2,
+  Uri = 2,
 
   /**
       the string that will be used to
       display the file in the file chooser
   */
-  displayName = 4,
+  DisplayName = 4,
 
   /**
       the mime type of the file
   */
-  mimeType = 8,
+  MimeType = 8,
 }
 
 /**
@@ -1262,25 +1262,25 @@ enum GtkFontChooserLevel : uint
   /**
       Allow selecting a font family
   */
-  family = 0,
+  Family = 0,
 
   /**
       Allow selecting a specific font face
   */
-  style = 1,
+  Style = 1,
 
   /**
       Allow selecting a specific font size
   */
-  size = 2,
+  Size = 2,
 
   /** */
-  variations = 4,
+  Variations = 4,
 
   /**
       Allow selecting specific OpenType font features
   */
-  features = 8,
+  Features = 8,
 }
 
 /**
@@ -1292,17 +1292,17 @@ enum GtkIMPreeditStyle
   /**
       Deprecated
   */
-  nothing = 0,
+  Nothing = 0,
 
   /**
       Deprecated
   */
-  callback = 1,
+  Callback = 1,
 
   /**
       Deprecated
   */
-  none = 2,
+  None = 2,
 }
 
 /**
@@ -1314,17 +1314,17 @@ enum GtkIMStatusStyle
   /**
       Deprecated
   */
-  nothing = 0,
+  Nothing = 0,
 
   /**
       Deprecated
   */
-  callback = 1,
+  Callback = 1,
 
   /**
       Deprecated
   */
-  none = 2,
+  None = 2,
 }
 
 /**
@@ -1334,16 +1334,16 @@ enum GtkIconLookupFlags : uint
 {
   /**
       Never get SVG icons, even if gdk-pixbuf
-      supports them. Cannot be used together with [gtk.types.IconLookupFlags.forceSvg].
+      supports them. Cannot be used together with [gtk.types.IconLookupFlags.ForceSvg].
   */
-  noSvg = 1,
+  NoSvg = 1,
 
   /**
       Get SVG icons, even if gdk-pixbuf
       doesn’t support them.
-      Cannot be used together with [gtk.types.IconLookupFlags.noSvg].
+      Cannot be used together with [gtk.types.IconLookupFlags.NoSvg].
   */
-  forceSvg = 2,
+  ForceSvg = 2,
 
   /**
       When passed to
@@ -1351,7 +1351,7 @@ enum GtkIconLookupFlags : uint
       as well as files. For a builtin icon, [gtk.icon_info.IconInfo.getFilename]
       is null and you need to call [gtk.icon_info.IconInfo.getBuiltinPixbuf].
   */
-  useBuiltin = 4,
+  UseBuiltin = 4,
 
   /**
       Try to shorten icon name at '-'
@@ -1359,37 +1359,37 @@ enum GtkIconLookupFlags : uint
       supported in functions that take a single icon name. For more general
       fallback, see [gtk.icon_theme.IconTheme.chooseIcon]. Since 2.12.
   */
-  genericFallback = 8,
+  GenericFallback = 8,
 
   /**
       Always get the icon scaled to the
       requested size. Since 2.14.
   */
-  forceSize = 16,
+  ForceSize = 16,
 
   /**
       Try to always load regular icons, even
       when symbolic icon names are given. Since 3.14.
   */
-  forceRegular = 32,
+  ForceRegular = 32,
 
   /**
       Try to always load symbolic icons, even
       when regular icon names are given. Since 3.14.
   */
-  forceSymbolic = 64,
+  ForceSymbolic = 64,
 
   /**
       Try to load a variant of the icon for left-to-right
       text direction. Since 3.14.
   */
-  dirLtr = 128,
+  DirLtr = 128,
 
   /**
       Try to load a variant of the icon for right-to-left
       text direction. Since 3.14.
   */
-  dirRtl = 256,
+  DirRtl = 256,
 }
 
 /**
@@ -1400,37 +1400,37 @@ enum GtkIconSize
   /**
       Invalid size.
   */
-  invalid = 0,
+  Invalid = 0,
 
   /**
       Size appropriate for menus (16px).
   */
-  menu = 1,
+  Menu = 1,
 
   /**
       Size appropriate for small toolbars (16px).
   */
-  smallToolbar = 2,
+  SmallToolbar = 2,
 
   /**
       Size appropriate for large toolbars (24px)
   */
-  largeToolbar = 3,
+  LargeToolbar = 3,
 
   /**
       Size appropriate for buttons (16px)
   */
-  button = 4,
+  Button = 4,
 
   /**
       Size appropriate for drag and drop (32px)
   */
-  dnd = 5,
+  Dnd = 5,
 
   /**
       Size appropriate for dialogs (48px)
   */
-  dialog = 6,
+  Dialog = 6,
 }
 
 /**
@@ -1441,12 +1441,12 @@ enum GtkIconThemeError
   /**
       The icon specified does not exist in the theme
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       An unspecified error occurred.
   */
-  failed = 1,
+  Failed = 1,
 }
 
 /**
@@ -1457,32 +1457,32 @@ enum GtkIconViewDropPosition
   /**
       no drop possible
   */
-  noDrop = 0,
+  NoDrop = 0,
 
   /**
       dropped item replaces the item
   */
-  dropInto = 1,
+  DropInto = 1,
 
   /**
       droppped item is inserted to the left
   */
-  dropLeft = 2,
+  DropLeft = 2,
 
   /**
       dropped item is inserted to the right
   */
-  dropRight = 3,
+  DropRight = 3,
 
   /**
       dropped item is inserted above
   */
-  dropAbove = 4,
+  DropAbove = 4,
 
   /**
       dropped item is inserted below
   */
-  dropBelow = 5,
+  DropBelow = 5,
 }
 
 /**
@@ -1499,45 +1499,45 @@ enum GtkImageType
   /**
       there is no image displayed by the widget
   */
-  empty = 0,
+  Empty = 0,
 
   /**
       the widget contains a #GdkPixbuf
   */
-  pixbuf = 1,
+  Pixbuf = 1,
 
   /**
       the widget contains a [stock item name][gtkstock]
   */
-  stock = 2,
+  Stock = 2,
 
   /**
       the widget contains a #GtkIconSet
   */
-  iconSet = 3,
+  IconSet = 3,
 
   /**
       the widget contains a #GdkPixbufAnimation
   */
-  animation = 4,
+  Animation = 4,
 
   /**
       the widget contains a named icon.
      This image type was added in GTK+ 2.6
   */
-  iconName = 5,
+  IconName = 5,
 
   /**
       the widget contains a #GIcon.
      This image type was added in GTK+ 2.14
   */
-  gicon = 6,
+  Gicon = 6,
 
   /**
       the widget contains a #cairo_surface_t.
      This image type was added in GTK+ 3.10
   */
-  surface = 7,
+  Surface = 7,
 }
 
 /**
@@ -1556,65 +1556,65 @@ enum GtkInputHints : uint
   /**
       No special behaviour suggested
   */
-  none = 0,
+  None = 0,
 
   /**
       Suggest checking for typos
   */
-  spellcheck = 1,
+  Spellcheck = 1,
 
   /**
       Suggest not checking for typos
   */
-  noSpellcheck = 2,
+  NoSpellcheck = 2,
 
   /**
       Suggest word completion
   */
-  wordCompletion = 4,
+  WordCompletion = 4,
 
   /**
       Suggest to convert all text to lowercase
   */
-  lowercase = 8,
+  Lowercase = 8,
 
   /**
       Suggest to capitalize all text
   */
-  uppercaseChars = 16,
+  UppercaseChars = 16,
 
   /**
       Suggest to capitalize the first
         character of each word
   */
-  uppercaseWords = 32,
+  UppercaseWords = 32,
 
   /**
       Suggest to capitalize the
         first word of each sentence
   */
-  uppercaseSentences = 64,
+  UppercaseSentences = 64,
 
   /**
       Suggest to not show an onscreen keyboard
         (e.g for a calculator that already has all the keys).
   */
-  inhibitOsk = 128,
+  InhibitOsk = 128,
 
   /**
       The text is vertical. Since 3.18
   */
-  verticalWriting = 256,
+  VerticalWriting = 256,
 
   /**
       Suggest offering Emoji support. Since 3.22.20
   */
-  emoji = 512,
+  Emoji = 512,
 
   /**
       Suggest not offering Emoji support. Since 3.22.20
   */
-  noEmoji = 1024,
+  NoEmoji = 1024,
 }
 
 /**
@@ -1642,57 +1642,57 @@ enum GtkInputPurpose
   /**
       Allow any character
   */
-  freeForm = 0,
+  FreeForm = 0,
 
   /**
       Allow only alphabetic characters
   */
-  alpha = 1,
+  Alpha = 1,
 
   /**
       Allow only digits
   */
-  digits = 2,
+  Digits = 2,
 
   /**
       Edited field expects numbers
   */
-  number = 3,
+  Number = 3,
 
   /**
       Edited field expects phone number
   */
-  phone = 4,
+  Phone = 4,
 
   /**
       Edited field expects URL
   */
-  url = 5,
+  Url = 5,
 
   /**
       Edited field expects email address
   */
-  email = 6,
+  Email = 6,
 
   /**
       Edited field expects the name of a person
   */
-  name = 7,
+  Name = 7,
 
   /**
       Like @GTK_INPUT_PURPOSE_FREE_FORM, but characters are hidden
   */
-  password = 8,
+  Password = 8,
 
   /**
       Like @GTK_INPUT_PURPOSE_DIGITS, but characters are hidden
   */
-  pin = 9,
+  Pin = 9,
 
   /**
       Allow any character, in addition to control codes
   */
-  terminal = 10,
+  Terminal = 10,
 }
 
 /**
@@ -1703,47 +1703,47 @@ enum GtkJunctionSides : uint
   /**
       No junctions.
   */
-  none = 0,
+  None = 0,
 
   /**
       Element connects on the top-left corner.
   */
-  cornerTopleft = 1,
+  CornerTopleft = 1,
 
   /**
       Element connects on the top-right corner.
   */
-  cornerTopright = 2,
+  CornerTopright = 2,
 
   /**
       Element connects on the bottom-left corner.
   */
-  cornerBottomleft = 4,
+  CornerBottomleft = 4,
 
   /**
       Element connects on the bottom-right corner.
   */
-  cornerBottomright = 8,
+  CornerBottomright = 8,
 
   /**
       Element connects on the top side.
   */
-  top = 3,
+  Top = 3,
 
   /**
       Element connects on the bottom side.
   */
-  bottom = 12,
+  Bottom = 12,
 
   /**
       Element connects on the left side.
   */
-  left = 5,
+  Left = 5,
 
   /**
       Element connects on the right side.
   */
-  right = 10,
+  Right = 10,
 }
 
 /**
@@ -1755,22 +1755,22 @@ enum GtkJustification
   /**
       The text is placed at the left edge of the label.
   */
-  left = 0,
+  Left = 0,
 
   /**
       The text is placed at the right edge of the label.
   */
-  right = 1,
+  Right = 1,
 
   /**
       The text is placed in the center of the label.
   */
-  center = 2,
+  Center = 2,
 
   /**
       The text is placed is distributed across the label.
   */
-  fill = 3,
+  Fill = 3,
 }
 
 /**
@@ -1783,12 +1783,12 @@ enum GtkLevelBarMode
   /**
       the bar has a continuous mode
   */
-  continuous = 0,
+  Continuous = 0,
 
   /**
       the bar has a discrete mode
   */
-  discrete = 1,
+  Discrete = 1,
 }
 
 /**
@@ -1801,93 +1801,93 @@ enum GtkLicense
   /**
       No license specified
   */
-  unknown = 0,
+  Unknown = 0,
 
   /**
       A license text is going to be specified by the
       developer
   */
-  custom = 1,
+  Custom = 1,
 
   /**
       The GNU General Public License, version 2.0 or later
   */
-  gpl20 = 2,
+  Gpl20 = 2,
 
   /**
       The GNU General Public License, version 3.0 or later
   */
-  gpl30 = 3,
+  Gpl30 = 3,
 
   /**
       The GNU Lesser General Public License, version 2.1 or later
   */
-  lgpl21 = 4,
+  Lgpl21 = 4,
 
   /**
       The GNU Lesser General Public License, version 3.0 or later
   */
-  lgpl30 = 5,
+  Lgpl30 = 5,
 
   /**
       The BSD standard license
   */
-  bsd = 6,
+  Bsd = 6,
 
   /**
       The MIT/X11 standard license
   */
-  mitX11 = 7,
+  MitX11 = 7,
 
   /**
       The Artistic License, version 2.0
   */
-  artistic = 8,
+  Artistic = 8,
 
   /**
       The GNU General Public License, version 2.0 only. Since 3.12.
   */
-  gpl20Only = 9,
+  Gpl20Only = 9,
 
   /**
       The GNU General Public License, version 3.0 only. Since 3.12.
   */
-  gpl30Only = 10,
+  Gpl30Only = 10,
 
   /**
       The GNU Lesser General Public License, version 2.1 only. Since 3.12.
   */
-  lgpl21Only = 11,
+  Lgpl21Only = 11,
 
   /**
       The GNU Lesser General Public License, version 3.0 only. Since 3.12.
   */
-  lgpl30Only = 12,
+  Lgpl30Only = 12,
 
   /**
       The GNU Affero General Public License, version 3.0 or later. Since: 3.22.
   */
-  agpl30 = 13,
+  Agpl30 = 13,
 
   /**
       The GNU Affero General Public License, version 3.0 only. Since: 3.22.27.
   */
-  agpl30Only = 14,
+  Agpl30Only = 14,
 
   /**
       The 3-clause BSD licence. Since: 3.24.20.
   */
-  bsd3 = 15,
+  Bsd3 = 15,
 
   /**
       The Apache License, version 2.0. Since: 3.24.20.
   */
-  apache20 = 16,
+  Apache20 = 16,
 
   /**
       The Mozilla Public License, version 2.0. Since: 3.24.20.
   */
-  mpl20 = 17,
+  Mpl20 = 17,
 }
 
 /**
@@ -1898,22 +1898,22 @@ enum GtkMenuDirectionType
   /**
       To the parent menu shell
   */
-  parent = 0,
+  Parent = 0,
 
   /**
       To the submenu, if any, associated with the item
   */
-  child = 1,
+  Child = 1,
 
   /**
       To the next menu item
   */
-  next = 2,
+  Next = 2,
 
   /**
       To the previous menu item
   */
-  prev = 3,
+  Prev = 3,
 }
 
 /**
@@ -1924,27 +1924,27 @@ enum GtkMessageType
   /**
       Informational message
   */
-  info = 0,
+  Info = 0,
 
   /**
       Non-fatal warning message
   */
-  warning = 1,
+  Warning = 1,
 
   /**
       Question requiring a choice
   */
-  question = 2,
+  Question = 2,
 
   /**
       Fatal error message
   */
-  error = 3,
+  Error = 3,
 
   /**
       None of the above
   */
-  other = 4,
+  Other = 4,
 }
 
 /** */
@@ -1953,62 +1953,62 @@ enum GtkMovementStep
   /**
       Move forward or back by graphemes
   */
-  logicalPositions = 0,
+  LogicalPositions = 0,
 
   /**
       Move left or right by graphemes
   */
-  visualPositions = 1,
+  VisualPositions = 1,
 
   /**
       Move forward or back by words
   */
-  words = 2,
+  Words = 2,
 
   /**
       Move up or down lines (wrapped lines)
   */
-  displayLines = 3,
+  DisplayLines = 3,
 
   /**
       Move to either end of a line
   */
-  displayLineEnds = 4,
+  DisplayLineEnds = 4,
 
   /**
       Move up or down paragraphs (newline-ended lines)
   */
-  paragraphs = 5,
+  Paragraphs = 5,
 
   /**
       Move to either end of a paragraph
   */
-  paragraphEnds = 6,
+  ParagraphEnds = 6,
 
   /**
       Move by pages
   */
-  pages = 7,
+  Pages = 7,
 
   /**
       Move to ends of the buffer
   */
-  bufferEnds = 8,
+  BufferEnds = 8,
 
   /**
       Move horizontally by pages
   */
-  horizontalPages = 9,
+  HorizontalPages = 9,
 }
 
 /** */
 enum GtkNotebookTab
 {
   /** */
-  first = 0,
+  First = 0,
 
   /** */
-  last = 1,
+  Last = 1,
 }
 
 /**
@@ -2020,42 +2020,42 @@ enum GtkNumberUpLayout
   /**
       ![](layout-lrtb.png)
   */
-  lrtb = 0,
+  Lrtb = 0,
 
   /**
       ![](layout-lrbt.png)
   */
-  lrbt = 1,
+  Lrbt = 1,
 
   /**
       ![](layout-rltb.png)
   */
-  rltb = 2,
+  Rltb = 2,
 
   /**
       ![](layout-rlbt.png)
   */
-  rlbt = 3,
+  Rlbt = 3,
 
   /**
       ![](layout-tblr.png)
   */
-  tblr = 4,
+  Tblr = 4,
 
   /**
       ![](layout-tbrl.png)
   */
-  tbrl = 5,
+  Tbrl = 5,
 
   /**
       ![](layout-btlr.png)
   */
-  btlr = 6,
+  Btlr = 6,
 
   /**
       ![](layout-btrl.png)
   */
-  btrl = 7,
+  Btrl = 7,
 }
 
 /**
@@ -2068,12 +2068,12 @@ enum GtkOrientation
   /**
       The element is in horizontal orientation.
   */
-  horizontal = 0,
+  Horizontal = 0,
 
   /**
       The element is in vertical orientation.
   */
-  vertical = 1,
+  Vertical = 1,
 }
 
 /**
@@ -2085,22 +2085,22 @@ enum GtkPackDirection
   /**
       Widgets are packed left-to-right
   */
-  ltr = 0,
+  Ltr = 0,
 
   /**
       Widgets are packed right-to-left
   */
-  rtl = 1,
+  Rtl = 1,
 
   /**
       Widgets are packed top-to-bottom
   */
-  ttb = 2,
+  Ttb = 2,
 
   /**
       Widgets are packed bottom-to-top
   */
-  btt = 3,
+  Btt = 3,
 }
 
 /**
@@ -2112,12 +2112,12 @@ enum GtkPackType
   /**
       The child is packed into the start of the box
   */
-  start = 0,
+  Start = 0,
 
   /**
       The child is packed into the end of the box
   */
-  end = 1,
+  End = 1,
 }
 
 /**
@@ -2128,17 +2128,17 @@ enum GtkPadActionType
   /**
       Action is triggered by a pad button
   */
-  button = 0,
+  Button = 0,
 
   /**
       Action is triggered by a pad ring
   */
-  ring = 1,
+  Ring = 1,
 
   /**
       Action is triggered by a pad strip
   */
-  strip = 2,
+  Strip = 2,
 }
 
 /**
@@ -2149,22 +2149,22 @@ enum GtkPageOrientation
   /**
       Portrait mode.
   */
-  portrait = 0,
+  Portrait = 0,
 
   /**
       Landscape mode.
   */
-  landscape = 1,
+  Landscape = 1,
 
   /**
       Reverse portrait mode.
   */
-  reversePortrait = 2,
+  ReversePortrait = 2,
 
   /**
       Reverse landscape mode.
   */
-  reverseLandscape = 3,
+  ReverseLandscape = 3,
 }
 
 /**
@@ -2175,17 +2175,17 @@ enum GtkPageSet
   /**
       All pages.
   */
-  all = 0,
+  All = 0,
 
   /**
       Even pages.
   */
-  even = 1,
+  Even = 1,
 
   /**
       Odd pages.
   */
-  odd = 2,
+  Odd = 2,
 }
 
 /**
@@ -2196,22 +2196,22 @@ enum GtkPanDirection
   /**
       panned towards the left
   */
-  left = 0,
+  Left = 0,
 
   /**
       panned towards the right
   */
-  right = 1,
+  Right = 1,
 
   /**
       panned upwards
   */
-  up = 2,
+  Up = 2,
 
   /**
       panned downwards
   */
-  down = 3,
+  Down = 3,
 }
 
 /**
@@ -2223,32 +2223,32 @@ enum GtkPathPriorityType
   /**
       Deprecated
   */
-  lowest = 0,
+  Lowest = 0,
 
   /**
       Deprecated
   */
-  gtk = 4,
+  Gtk = 4,
 
   /**
       Deprecated
   */
-  application = 8,
+  Application = 8,
 
   /**
       Deprecated
   */
-  theme = 10,
+  Theme = 10,
 
   /**
       Deprecated
   */
-  rc = 12,
+  Rc = 12,
 
   /**
       Deprecated
   */
-  highest = 15,
+  Highest = 15,
 }
 
 /**
@@ -2260,17 +2260,17 @@ enum GtkPathType
   /**
       Deprecated
   */
-  widget = 0,
+  Widget = 0,
 
   /**
       Deprecated
   */
-  widgetClass = 1,
+  WidgetClass = 1,
 
   /**
       Deprecated
   */
-  class_ = 2,
+  Class = 2,
 }
 
 /**
@@ -2296,7 +2296,7 @@ enum GtkPlacesOpenFlags : uint
      are specified.  It indicates that the calling application should open the selected location
      in the normal way, for example, in the folder view beside the sidebar.
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       When passed to [gtk.places_sidebar.PlacesSidebar.setOpenFlags], this indicates
@@ -2304,13 +2304,13 @@ enum GtkPlacesOpenFlags : uint
      will be passed to the #GtkPlacesSidebar::open-location signal when the user selects
      that a location be opened in a new tab instead of in the standard fashion.
   */
-  newTab = 2,
+  NewTab = 2,
 
   /**
       Similar to @GTK_PLACES_OPEN_NEW_TAB, but indicates that the application
      can open folders in new windows.
   */
-  newWindow = 4,
+  NewWindow = 4,
 }
 
 /**
@@ -2323,26 +2323,26 @@ enum GtkPolicyType
       The scrollbar is always visible. The view size is
      independent of the content.
   */
-  always = 0,
+  Always = 0,
 
   /**
       The scrollbar will appear and disappear as necessary.
      For example, when all of a #GtkTreeView can not be seen.
   */
-  automatic = 1,
+  Automatic = 1,
 
   /**
       The scrollbar should never appear. In this mode the
      content determines the size.
   */
-  never = 2,
+  Never = 2,
 
   /**
       Don't show a scrollbar, but don't force the
      size to follow the content. This can be used e.g. to make multiple
      scrolled windows share a scrollbar. Since: 3.16
   */
-  external = 3,
+  External = 3,
 }
 
 /**
@@ -2355,13 +2355,13 @@ enum GtkPopoverConstraint
       Don't constrain the popover position
       beyond what is imposed by the implementation
   */
-  none = 0,
+  None = 0,
 
   /**
       Constrain the popover to the boundaries
       of the window that it is attached to
   */
-  window = 1,
+  Window = 1,
 }
 
 /**
@@ -2374,22 +2374,22 @@ enum GtkPositionType
   /**
       The feature is at the left edge.
   */
-  left = 0,
+  Left = 0,
 
   /**
       The feature is at the right edge.
   */
-  right = 1,
+  Right = 1,
 
   /**
       The feature is at the top edge.
   */
-  top = 2,
+  Top = 2,
 
   /**
       The feature is at the bottom edge.
   */
-  bottom = 3,
+  Bottom = 3,
 }
 
 /**
@@ -2400,17 +2400,17 @@ enum GtkPrintDuplex
   /**
       No duplex.
   */
-  simplex = 0,
+  Simplex = 0,
 
   /**
       Horizontal duplex.
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       Vertical duplex.
   */
-  vertical = 2,
+  Vertical = 2,
 }
 
 /**
@@ -2422,23 +2422,23 @@ enum GtkPrintError
   /**
       An unspecified error occurred.
   */
-  general = 0,
+  General = 0,
 
   /**
       An internal error occurred.
   */
-  internalError = 1,
+  InternalError = 1,
 
   /**
       A memory allocation failed.
   */
-  nomem = 2,
+  Nomem = 2,
 
   /**
       An error occurred while loading a page setup
         or paper size from a key file.
   */
-  invalidFile = 3,
+  InvalidFile = 3,
 }
 
 /**
@@ -2450,24 +2450,24 @@ enum GtkPrintOperationAction
   /**
       Show the print dialog.
   */
-  printDialog = 0,
+  PrintDialog = 0,
 
   /**
       Start to print without showing
         the print dialog, based on the current print settings.
   */
-  print = 1,
+  Print = 1,
 
   /**
       Show the print preview.
   */
-  preview = 2,
+  Preview = 2,
 
   /**
       Export to a file. This requires
         the export-filename property to be set.
   */
-  export_ = 3,
+  Export = 3,
 }
 
 /**
@@ -2478,24 +2478,24 @@ enum GtkPrintOperationResult
   /**
       An error has occurred.
   */
-  error = 0,
+  Error = 0,
 
   /**
       The print settings should be stored.
   */
-  apply = 1,
+  Apply = 1,
 
   /**
       The print operation has been canceled,
         the print settings should not be stored.
   */
-  cancel = 2,
+  Cancel = 2,
 
   /**
       The print operation is not complete
         yet. This value will only be returned when running asynchronously.
   */
-  inProgress = 3,
+  InProgress = 3,
 }
 
 /**
@@ -2506,22 +2506,22 @@ enum GtkPrintPages
   /**
       All pages.
   */
-  all = 0,
+  All = 0,
 
   /**
       Current page.
   */
-  current = 1,
+  Current = 1,
 
   /**
       Range of pages.
   */
-  ranges = 2,
+  Ranges = 2,
 
   /**
       Selected pages.
   */
-  selection = 3,
+  Selection = 3,
 }
 
 /**
@@ -2532,22 +2532,22 @@ enum GtkPrintQuality
   /**
       Low quality.
   */
-  low = 0,
+  Low = 0,
 
   /**
       Normal quality.
   */
-  normal = 1,
+  Normal = 1,
 
   /**
       High quality.
   */
-  high = 2,
+  High = 2,
 
   /**
       Draft quality.
   */
-  draft = 3,
+  Draft = 3,
 }
 
 /**
@@ -2560,52 +2560,52 @@ enum GtkPrintStatus
       The printing has not started yet; this
         status is set initially, and while the print dialog is shown.
   */
-  initial = 0,
+  Initial = 0,
 
   /**
       This status is set while the begin-print
         signal is emitted and during pagination.
   */
-  preparing = 1,
+  Preparing = 1,
 
   /**
       This status is set while the
         pages are being rendered.
   */
-  generatingData = 2,
+  GeneratingData = 2,
 
   /**
       The print job is being sent off to the
         printer.
   */
-  sendingData = 3,
+  SendingData = 3,
 
   /**
       The print job has been sent to the printer,
         but is not printed for some reason, e.g. the printer may be stopped.
   */
-  pending = 4,
+  Pending = 4,
 
   /**
       Some problem has occurred during
         printing, e.g. a paper jam.
   */
-  pendingIssue = 5,
+  PendingIssue = 5,
 
   /**
       The printer is processing the print job.
   */
-  printing = 6,
+  Printing = 6,
 
   /**
       The printing has been completed successfully.
   */
-  finished = 7,
+  Finished = 7,
 
   /**
       The printing has been aborted.
   */
-  finishedAborted = 8,
+  FinishedAborted = 8,
 }
 
 /**
@@ -2619,7 +2619,7 @@ enum GtkPropagationPhase
       only be used when full control about when, or whether the controller
       handles the event is needed.
   */
-  none = 0,
+  None = 0,
 
   /**
       Events are delivered in the capture phase. The
@@ -2627,21 +2627,21 @@ enum GtkPropagationPhase
       to the event widget. This option should only be used on containers that
       might possibly handle events before their children do.
   */
-  capture = 1,
+  Capture = 1,
 
   /**
       Events are delivered in the bubble phase. The bubble
       phase happens after the capture phase, and before the default handlers
       are run. This phase runs from the event widget, up to the toplevel.
   */
-  bubble = 2,
+  Bubble = 2,
 
   /**
       Events are delivered in the default widget event handlers,
       note that widget implementations must chain up on button, motion, touch and
       grab broken handlers for controllers in this phase to be run.
   */
-  target = 3,
+  Target = 3,
 }
 
 /**
@@ -2652,22 +2652,22 @@ enum GtkRcFlags : uint
   /**
       Deprecated
   */
-  fg = 1,
+  Fg = 1,
 
   /**
       Deprecated
   */
-  bg = 2,
+  Bg = 2,
 
   /**
       Deprecated
   */
-  text = 4,
+  Text = 4,
 
   /**
       Deprecated
   */
-  base = 8,
+  Base = 8,
 }
 
 /**
@@ -2683,202 +2683,202 @@ enum GtkRcTokenType
   /**
       Deprecated
   */
-  invalid = 270,
+  Invalid = 270,
 
   /**
       Deprecated
   */
-  include = 271,
+  Include = 271,
 
   /**
       Deprecated
   */
-  normal = 272,
+  Normal = 272,
 
   /**
       Deprecated
   */
-  active = 273,
+  Active = 273,
 
   /**
       Deprecated
   */
-  prelight = 274,
+  Prelight = 274,
 
   /**
       Deprecated
   */
-  selected = 275,
+  Selected = 275,
 
   /**
       Deprecated
   */
-  insensitive = 276,
+  Insensitive = 276,
 
   /**
       Deprecated
   */
-  fg = 277,
+  Fg = 277,
 
   /**
       Deprecated
   */
-  bg = 278,
+  Bg = 278,
 
   /**
       Deprecated
   */
-  text = 279,
+  Text = 279,
 
   /**
       Deprecated
   */
-  base = 280,
+  Base = 280,
 
   /**
       Deprecated
   */
-  xthickness = 281,
+  Xthickness = 281,
 
   /**
       Deprecated
   */
-  ythickness = 282,
+  Ythickness = 282,
 
   /**
       Deprecated
   */
-  font = 283,
+  Font = 283,
 
   /**
       Deprecated
   */
-  fontset = 284,
+  Fontset = 284,
 
   /**
       Deprecated
   */
-  fontName = 285,
+  FontName = 285,
 
   /**
       Deprecated
   */
-  bgPixmap = 286,
+  BgPixmap = 286,
 
   /**
       Deprecated
   */
-  pixmapPath = 287,
+  PixmapPath = 287,
 
   /**
       Deprecated
   */
-  style = 288,
+  Style = 288,
 
   /**
       Deprecated
   */
-  binding = 289,
+  Binding = 289,
 
   /**
       Deprecated
   */
-  bind = 290,
+  Bind = 290,
 
   /**
       Deprecated
   */
-  widget = 291,
+  Widget = 291,
 
   /**
       Deprecated
   */
-  widgetClass = 292,
+  WidgetClass = 292,
 
   /**
       Deprecated
   */
-  class_ = 293,
+  Class = 293,
 
   /**
       Deprecated
   */
-  lowest = 294,
+  Lowest = 294,
 
   /**
       Deprecated
   */
-  gtk = 295,
+  Gtk = 295,
 
   /**
       Deprecated
   */
-  application = 296,
+  Application = 296,
 
   /**
       Deprecated
   */
-  theme = 297,
+  Theme = 297,
 
   /**
       Deprecated
   */
-  rc = 298,
+  Rc = 298,
 
   /**
       Deprecated
   */
-  highest = 299,
+  Highest = 299,
 
   /**
       Deprecated
   */
-  engine = 300,
+  Engine = 300,
 
   /**
       Deprecated
   */
-  modulePath = 301,
+  ModulePath = 301,
 
   /**
       Deprecated
   */
-  imModulePath = 302,
+  ImModulePath = 302,
 
   /**
       Deprecated
   */
-  imModuleFile = 303,
+  ImModuleFile = 303,
 
   /**
       Deprecated
   */
-  stock = 304,
+  Stock = 304,
 
   /**
       Deprecated
   */
-  ltr = 305,
+  Ltr = 305,
 
   /**
       Deprecated
   */
-  rtl = 306,
+  Rtl = 306,
 
   /**
       Deprecated
   */
-  color = 307,
+  Color = 307,
 
   /**
       Deprecated
   */
-  unbind = 308,
+  Unbind = 308,
 
   /**
       Deprecated
   */
-  last = 309,
+  Last = 309,
 }
 
 /**
@@ -2890,12 +2890,12 @@ enum GtkRecentChooserError
   /**
       Indicates that a file does not exist
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       Indicates a malformed URI
   */
-  invalidUri = 1,
+  InvalidUri = 1,
 }
 
 /**
@@ -2907,35 +2907,35 @@ enum GtkRecentFilterFlags : uint
   /**
       the URI of the file being tested
   */
-  uri = 1,
+  Uri = 1,
 
   /**
       the string that will be used to
      display the file in the recent chooser
   */
-  displayName = 2,
+  DisplayName = 2,
 
   /**
       the mime type of the file
   */
-  mimeType = 4,
+  MimeType = 4,
 
   /**
       the list of applications that have
      registered the file
   */
-  application = 8,
+  Application = 8,
 
   /**
       the groups to which the file belongs to
   */
-  group = 16,
+  Group = 16,
 
   /**
       the number of days elapsed since the file
      has been registered
   */
-  age = 32,
+  Age = 32,
 }
 
 /**
@@ -2947,41 +2947,41 @@ enum GtkRecentManagerError
       the URI specified does not exists in
       the recently used resources list.
   */
-  notFound = 0,
+  NotFound = 0,
 
   /**
       the URI specified is not valid.
   */
-  invalidUri = 1,
+  InvalidUri = 1,
 
   /**
       the supplied string is not
       UTF-8 encoded.
   */
-  invalidEncoding = 2,
+  InvalidEncoding = 2,
 
   /**
       no application has registered
       the specified item.
   */
-  notRegistered = 3,
+  NotRegistered = 3,
 
   /**
       failure while reading the recently used
       resources file.
   */
-  read = 4,
+  Read = 4,
 
   /**
       failure while writing the recently used
       resources file.
   */
-  write = 5,
+  Write = 5,
 
   /**
       unspecified error.
   */
-  unknown = 6,
+  Unknown = 6,
 }
 
 /**
@@ -2994,25 +2994,25 @@ enum GtkRecentSortType
       Do not sort the returned list of recently used
       resources.
   */
-  none = 0,
+  None = 0,
 
   /**
       Sort the returned list with the most recently used
       items first.
   */
-  mru = 1,
+  Mru = 1,
 
   /**
       Sort the returned list with the least recently used
       items first.
   */
-  lru = 2,
+  Lru = 2,
 
   /**
       Sort the returned list using a custom sorting
       function passed using [gtk.recent_chooser.RecentChooser.setSortFunc].
   */
-  custom = 3,
+  Custom = 3,
 }
 
 /**
@@ -3023,32 +3023,32 @@ enum GtkRegionFlags : uint
   /**
       Region has an even number within a set.
   */
-  even = 1,
+  Even = 1,
 
   /**
       Region has an odd number within a set.
   */
-  odd = 2,
+  Odd = 2,
 
   /**
       Region is the first one within a set.
   */
-  first = 4,
+  First = 4,
 
   /**
       Region is the last one within a set.
   */
-  last = 8,
+  Last = 8,
 
   /**
       Region is the only one within a set.
   */
-  only = 16,
+  Only = 16,
 
   /**
       Region is part of a sorted area.
   */
-  sorted = 32,
+  Sorted = 32,
 }
 
 /**
@@ -3059,17 +3059,17 @@ enum GtkReliefStyle
   /**
       Draw a normal relief.
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       A half relief. Deprecated in 3.14, does the same as @GTK_RELIEF_NORMAL
   */
-  half = 1,
+  Half = 1,
 
   /**
       No relief.
   */
-  none = 2,
+  None = 2,
 }
 
 /** */
@@ -3078,17 +3078,17 @@ enum GtkResizeMode
   /**
       Pass resize request to the parent
   */
-  parent = 0,
+  Parent = 0,
 
   /**
       Queue resizes on this widget
   */
-  queue = 1,
+  Queue = 1,
 
   /**
       Resize immediately. Deprecated.
   */
-  immediate = 2,
+  Immediate = 2,
 }
 
 /**
@@ -3102,57 +3102,57 @@ enum GtkResponseType
       Returned if an action widget has no response id,
         or if the dialog gets programmatically hidden or destroyed
   */
-  none = -1,
+  None = -1,
 
   /**
       Generic response id, not used by GTK+ dialogs
   */
-  reject = -2,
+  Reject = -2,
 
   /**
       Generic response id, not used by GTK+ dialogs
   */
-  accept = -3,
+  Accept = -3,
 
   /**
       Returned if the dialog is deleted
   */
-  deleteEvent = -4,
+  DeleteEvent = -4,
 
   /**
       Returned by OK buttons in GTK+ dialogs
   */
-  ok = -5,
+  Ok = -5,
 
   /**
       Returned by Cancel buttons in GTK+ dialogs
   */
-  cancel = -6,
+  Cancel = -6,
 
   /**
       Returned by Close buttons in GTK+ dialogs
   */
-  close = -7,
+  Close = -7,
 
   /**
       Returned by Yes buttons in GTK+ dialogs
   */
-  yes = -8,
+  Yes = -8,
 
   /**
       Returned by No buttons in GTK+ dialogs
   */
-  no = -9,
+  No = -9,
 
   /**
       Returned by Apply buttons in GTK+ dialogs
   */
-  apply = -10,
+  Apply = -10,
 
   /**
       Returned by Help buttons in GTK+ dialogs
   */
-  help = -11,
+  Help = -11,
 }
 
 /**
@@ -3164,32 +3164,32 @@ enum GtkRevealerTransitionType
   /**
       No transition
   */
-  none = 0,
+  None = 0,
 
   /**
       Fade in
   */
-  crossfade = 1,
+  Crossfade = 1,
 
   /**
       Slide in from the left
   */
-  slideRight = 2,
+  SlideRight = 2,
 
   /**
       Slide in from the right
   */
-  slideLeft = 3,
+  SlideLeft = 3,
 
   /**
       Slide in from the bottom
   */
-  slideUp = 4,
+  SlideUp = 4,
 
   /**
       Slide in from the top
   */
-  slideDown = 5,
+  SlideDown = 5,
 }
 
 /** */
@@ -3198,32 +3198,32 @@ enum GtkScrollStep
   /**
       Scroll in steps.
   */
-  steps = 0,
+  Steps = 0,
 
   /**
       Scroll by pages.
   */
-  pages = 1,
+  Pages = 1,
 
   /**
       Scroll to ends.
   */
-  ends = 2,
+  Ends = 2,
 
   /**
       Scroll in horizontal steps.
   */
-  horizontalSteps = 3,
+  HorizontalSteps = 3,
 
   /**
       Scroll by horizontal pages.
   */
-  horizontalPages = 4,
+  HorizontalPages = 4,
 
   /**
       Scroll to the horizontal ends.
   */
-  horizontalEnds = 5,
+  HorizontalEnds = 5,
 }
 
 /**
@@ -3234,82 +3234,82 @@ enum GtkScrollType
   /**
       No scrolling.
   */
-  none = 0,
+  None = 0,
 
   /**
       Jump to new location.
   */
-  jump = 1,
+  Jump = 1,
 
   /**
       Step backward.
   */
-  stepBackward = 2,
+  StepBackward = 2,
 
   /**
       Step forward.
   */
-  stepForward = 3,
+  StepForward = 3,
 
   /**
       Page backward.
   */
-  pageBackward = 4,
+  PageBackward = 4,
 
   /**
       Page forward.
   */
-  pageForward = 5,
+  PageForward = 5,
 
   /**
       Step up.
   */
-  stepUp = 6,
+  StepUp = 6,
 
   /**
       Step down.
   */
-  stepDown = 7,
+  StepDown = 7,
 
   /**
       Page up.
   */
-  pageUp = 8,
+  PageUp = 8,
 
   /**
       Page down.
   */
-  pageDown = 9,
+  PageDown = 9,
 
   /**
       Step to the left.
   */
-  stepLeft = 10,
+  StepLeft = 10,
 
   /**
       Step to the right.
   */
-  stepRight = 11,
+  StepRight = 11,
 
   /**
       Page to the left.
   */
-  pageLeft = 12,
+  PageLeft = 12,
 
   /**
       Page to the right.
   */
-  pageRight = 13,
+  PageRight = 13,
 
   /**
       Scroll to start.
   */
-  start = 14,
+  Start = 14,
 
   /**
       Scroll to end.
   */
-  end = 15,
+  End = 15,
 }
 
 /**
@@ -3321,12 +3321,12 @@ enum GtkScrollablePolicy
   /**
       Scrollable adjustments are based on the minimum size
   */
-  minimum = 0,
+  Minimum = 0,
 
   /**
       Scrollable adjustments are based on the natural size
   */
-  natural = 1,
+  Natural = 1,
 }
 
 /**
@@ -3337,22 +3337,22 @@ enum GtkSelectionMode
   /**
       No selection is possible.
   */
-  none = 0,
+  None = 0,
 
   /**
       Zero or one element may be selected.
   */
-  single = 1,
+  Single = 1,
 
   /**
       Exactly one element is selected.
         In some circumstances, such as initially or during a search
         operation, it’s possible for no element to be selected with
-        [gtk.types.SelectionMode.browse]. What is really enforced is that the user
+        [gtk.types.SelectionMode.Browse]. What is really enforced is that the user
         can’t deselect a currently selected element except by selecting
         another element.
   */
-  browse = 2,
+  Browse = 2,
 
   /**
       Any number of elements may be selected.
@@ -3360,7 +3360,7 @@ enum GtkSelectionMode
          key to select between the focus and the child pointed to.
          Some widgets may also allow Click-drag to select a range of elements.
   */
-  multiple = 3,
+  Multiple = 3,
 }
 
 /**
@@ -3373,17 +3373,17 @@ enum GtkSensitivityType
       The arrow is made insensitive if the
       thumb is at the end
   */
-  auto_ = 0,
+  Auto = 0,
 
   /**
       The arrow is always sensitive
   */
-  on = 1,
+  On = 1,
 
   /**
       The arrow is always insensitive
   */
-  off = 2,
+  Off = 2,
 }
 
 /**
@@ -3398,27 +3398,27 @@ enum GtkShadowType
   /**
       No outline.
   */
-  none = 0,
+  None = 0,
 
   /**
       The outline is bevelled inwards.
   */
-  in_ = 1,
+  In = 1,
 
   /**
       The outline is bevelled outwards like a button.
   */
-  out_ = 2,
+  Out = 2,
 
   /**
       The outline has a sunken 3d appearance.
   */
-  etchedIn = 3,
+  EtchedIn = 3,
 
   /**
       The outline has a raised 3d appearance.
   */
-  etchedOut = 4,
+  EtchedOut = 4,
 }
 
 /**
@@ -3431,43 +3431,43 @@ enum GtkShortcutType
       The shortcut is a keyboard accelerator. The #GtkShortcutsShortcut:accelerator
       property will be used.
   */
-  accelerator = 0,
+  Accelerator = 0,
 
   /**
       The shortcut is a pinch gesture. GTK+ provides an icon and subtitle.
   */
-  gesturePinch = 1,
+  GesturePinch = 1,
 
   /**
       The shortcut is a stretch gesture. GTK+ provides an icon and subtitle.
   */
-  gestureStretch = 2,
+  GestureStretch = 2,
 
   /**
       The shortcut is a clockwise rotation gesture. GTK+ provides an icon and subtitle.
   */
-  gestureRotateClockwise = 3,
+  GestureRotateClockwise = 3,
 
   /**
       The shortcut is a counterclockwise rotation gesture. GTK+ provides an icon and subtitle.
   */
-  gestureRotateCounterclockwise = 4,
+  GestureRotateCounterclockwise = 4,
 
   /**
       The shortcut is a two-finger swipe gesture. GTK+ provides an icon and subtitle.
   */
-  gestureTwoFingerSwipeLeft = 5,
+  GestureTwoFingerSwipeLeft = 5,
 
   /**
       The shortcut is a two-finger swipe gesture. GTK+ provides an icon and subtitle.
   */
-  gestureTwoFingerSwipeRight = 6,
+  GestureTwoFingerSwipeRight = 6,
 
   /**
       The shortcut is a gesture. The #GtkShortcutsShortcut:icon property will be
       used.
   */
-  gesture = 7,
+  Gesture = 7,
 }
 
 /**
@@ -3479,22 +3479,22 @@ enum GtkSizeGroupMode
   /**
       group has no effect
   */
-  none = 0,
+  None = 0,
 
   /**
       group affects horizontal requisition
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       group affects vertical requisition
   */
-  vertical = 2,
+  Vertical = 2,
 
   /**
       group affects both horizontal and vertical requisition
   */
-  both = 3,
+  Both = 3,
 }
 
 /**
@@ -3506,17 +3506,17 @@ enum GtkSizeRequestMode
   /**
       Prefer height-for-width geometry management
   */
-  heightForWidth = 0,
+  HeightForWidth = 0,
 
   /**
       Prefer width-for-height geometry management
   */
-  widthForHeight = 1,
+  WidthForHeight = 1,
 
   /**
       Don’t trade height-for-width or width-for-height
   */
-  constantSize = 2,
+  ConstantSize = 2,
 }
 
 /**
@@ -3527,12 +3527,12 @@ enum GtkSortType
   /**
       Sorting is in ascending order.
   */
-  ascending = 0,
+  Ascending = 0,
 
   /**
       Sorting is in descending order.
   */
-  descending = 1,
+  Descending = 1,
 }
 
 /**
@@ -3546,14 +3546,14 @@ enum GtkSpinButtonUpdatePolicy
       When refreshing your #GtkSpinButton, the value is
         always displayed
   */
-  always = 0,
+  Always = 0,
 
   /**
       When refreshing your #GtkSpinButton, the value is
         only displayed if it is valid within the bounds of the spin button's
         adjustment
   */
-  ifValid = 1,
+  IfValid = 1,
 }
 
 /**
@@ -3565,37 +3565,37 @@ enum GtkSpinType
   /**
       Increment by the adjustments step increment.
   */
-  stepForward = 0,
+  StepForward = 0,
 
   /**
       Decrement by the adjustments step increment.
   */
-  stepBackward = 1,
+  StepBackward = 1,
 
   /**
       Increment by the adjustments page increment.
   */
-  pageForward = 2,
+  PageForward = 2,
 
   /**
       Decrement by the adjustments page increment.
   */
-  pageBackward = 3,
+  PageBackward = 3,
 
   /**
       Go to the adjustments lower bound.
   */
-  home = 4,
+  Home = 4,
 
   /**
       Go to the adjustments upper bound.
   */
-  end = 5,
+  End = 5,
 
   /**
       Change by a specified amount.
   */
-  userDefined = 6,
+  UserDefined = 6,
 }
 
 /**
@@ -3609,102 +3609,102 @@ enum GtkStackTransitionType
   /**
       No transition
   */
-  none = 0,
+  None = 0,
 
   /**
       A cross-fade
   */
-  crossfade = 1,
+  Crossfade = 1,
 
   /**
       Slide from left to right
   */
-  slideRight = 2,
+  SlideRight = 2,
 
   /**
       Slide from right to left
   */
-  slideLeft = 3,
+  SlideLeft = 3,
 
   /**
       Slide from bottom up
   */
-  slideUp = 4,
+  SlideUp = 4,
 
   /**
       Slide from top down
   */
-  slideDown = 5,
+  SlideDown = 5,
 
   /**
       Slide from left or right according to the children order
   */
-  slideLeftRight = 6,
+  SlideLeftRight = 6,
 
   /**
       Slide from top down or bottom up according to the order
   */
-  slideUpDown = 7,
+  SlideUpDown = 7,
 
   /**
       Cover the old page by sliding up. Since 3.12
   */
-  overUp = 8,
+  OverUp = 8,
 
   /**
       Cover the old page by sliding down. Since: 3.12
   */
-  overDown = 9,
+  OverDown = 9,
 
   /**
       Cover the old page by sliding to the left. Since: 3.12
   */
-  overLeft = 10,
+  OverLeft = 10,
 
   /**
       Cover the old page by sliding to the right. Since: 3.12
   */
-  overRight = 11,
+  OverRight = 11,
 
   /**
       Uncover the new page by sliding up. Since 3.12
   */
-  underUp = 12,
+  UnderUp = 12,
 
   /**
       Uncover the new page by sliding down. Since: 3.12
   */
-  underDown = 13,
+  UnderDown = 13,
 
   /**
       Uncover the new page by sliding to the left. Since: 3.12
   */
-  underLeft = 14,
+  UnderLeft = 14,
 
   /**
       Uncover the new page by sliding to the right. Since: 3.12
   */
-  underRight = 15,
+  UnderRight = 15,
 
   /**
       Cover the old page sliding up or uncover the new page sliding down, according to order. Since: 3.12
   */
-  overUpDown = 16,
+  OverUpDown = 16,
 
   /**
       Cover the old page sliding down or uncover the new page sliding up, according to order. Since: 3.14
   */
-  overDownUp = 17,
+  OverDownUp = 17,
 
   /**
       Cover the old page sliding left or uncover the new page sliding right, according to order. Since: 3.14
   */
-  overLeftRight = 18,
+  OverLeftRight = 18,
 
   /**
       Cover the old page sliding right or uncover the new page sliding left, according to order. Since: 3.14
   */
-  overRightLeft = 19,
+  OverRightLeft = 19,
 }
 
 /**
@@ -3717,72 +3717,72 @@ enum GtkStateFlags : uint
   /**
       State during normal operation.
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       Widget is active.
   */
-  active = 1,
+  Active = 1,
 
   /**
       Widget has a mouse pointer over it.
   */
-  prelight = 2,
+  Prelight = 2,
 
   /**
       Widget is selected.
   */
-  selected = 4,
+  Selected = 4,
 
   /**
       Widget is insensitive.
   */
-  insensitive = 8,
+  Insensitive = 8,
 
   /**
       Widget is inconsistent.
   */
-  inconsistent = 16,
+  Inconsistent = 16,
 
   /**
       Widget has the keyboard focus.
   */
-  focused = 32,
+  Focused = 32,
 
   /**
       Widget is in a background toplevel window.
   */
-  backdrop = 64,
+  Backdrop = 64,
 
   /**
       Widget is in left-to-right text direction. Since 3.8
   */
-  dirLtr = 128,
+  DirLtr = 128,
 
   /**
       Widget is in right-to-left text direction. Since 3.8
   */
-  dirRtl = 256,
+  DirRtl = 256,
 
   /**
       Widget is a link. Since 3.12
   */
-  link = 512,
+  Link = 512,
 
   /**
       The location the widget points to has already been visited. Since 3.12
   */
-  visited = 1024,
+  Visited = 1024,
 
   /**
       Widget is checked. Since 3.14
   */
-  checked = 2048,
+  Checked = 2048,
 
   /**
       Widget is highlighted as a drop target for DND. Since 3.20
   */
-  dropActive = 4096,
+  DropActive = 4096,
 }
 
 /**
@@ -3799,41 +3799,41 @@ enum GtkStateType
   /**
       State during normal operation.
   */
-  normal = 0,
+  Normal = 0,
 
   /**
       State of a currently active widget, such as a depressed button.
   */
-  active = 1,
+  Active = 1,
 
   /**
       State indicating that the mouse pointer is over
                          the widget and the widget will respond to mouse clicks.
   */
-  prelight = 2,
+  Prelight = 2,
 
   /**
       State of a selected item, such the selected row in a list.
   */
-  selected = 3,
+  Selected = 3,
 
   /**
       State indicating that the widget is
                             unresponsive to user actions.
   */
-  insensitive = 4,
+  Insensitive = 4,
 
   /**
       The widget is inconsistent, such as checkbuttons
                              or radiobuttons that aren’t either set to true nor false,
                              or buttons requiring the user attention.
   */
-  inconsistent = 5,
+  Inconsistent = 5,
 
   /**
       The widget has the keyboard focus.
   */
-  focused = 6,
+  Focused = 6,
 }
 
 /**
@@ -3843,19 +3843,19 @@ enum GtkStateType
 enum GtkStyleContextPrintFlags : uint
 {
   /** */
-  none = 0,
+  None = 0,
 
   /**
       Print the entire tree of
         CSS nodes starting at the style context's node
   */
-  recurse = 1,
+  Recurse = 1,
 
   /**
       Show the values of the
         CSS properties for each node
   */
-  showStyle = 2,
+  ShowStyle = 2,
 }
 
 /**
@@ -3868,25 +3868,25 @@ enum GtkTargetFlags : uint
       If this is set, the target will only be selected
       for drags within a single application.
   */
-  sameApp = 1,
+  SameApp = 1,
 
   /**
       If this is set, the target will only be selected
       for drags within a single widget.
   */
-  sameWidget = 2,
+  SameWidget = 2,
 
   /**
       If this is set, the target will not be selected
       for drags within a single application.
   */
-  otherApp = 4,
+  OtherApp = 4,
 
   /**
       If this is set, the target will not be selected
       for drags withing a single widget.
   */
-  otherWidget = 8,
+  OtherWidget = 8,
 }
 
 /**
@@ -3902,17 +3902,17 @@ enum GtkTextBufferTargetInfo
   /**
       Buffer contents
   */
-  bufferContents = -1,
+  BufferContents = -1,
 
   /**
       Rich text
   */
-  richText = -2,
+  RichText = -2,
 
   /**
       Text
   */
-  text = -3,
+  Text = -3,
 }
 
 /**
@@ -3923,17 +3923,17 @@ enum GtkTextDirection
   /**
       No direction.
   */
-  none = 0,
+  None = 0,
 
   /**
       Left to right text direction.
   */
-  ltr = 1,
+  Ltr = 1,
 
   /**
       Right to left text direction.
   */
-  rtl = 2,
+  Rtl = 2,
 }
 
 /**
@@ -3946,13 +3946,13 @@ enum GtkTextExtendSelection
       Selects the current word. It is triggered by
       a double-click for example.
   */
-  word = 0,
+  Word = 0,
 
   /**
       Selects the current line. It is triggered by
       a triple-click for example.
   */
-  line = 1,
+  Line = 1,
 }
 
 /**
@@ -3968,19 +3968,19 @@ enum GtkTextSearchFlags : uint
       Search only visible data. A search match may
     have invisible text interspersed.
   */
-  visibleOnly = 1,
+  VisibleOnly = 1,
 
   /**
       Search only text. A match may have pixbufs or
     child widgets mixed inside the matched range.
   */
-  textOnly = 2,
+  TextOnly = 2,
 
   /**
       The text will be matched regardless of
     what case it is in.
   */
-  caseInsensitive = 4,
+  CaseInsensitive = 4,
 }
 
 /**
@@ -3990,24 +3990,24 @@ enum GtkTextSearchFlags : uint
 enum GtkTextViewLayer
 {
   /**
-      Old deprecated layer, use [gtk.types.TextViewLayer.belowText] instead
+      Old deprecated layer, use [gtk.types.TextViewLayer.BelowText] instead
   */
-  below = 0,
+  Below = 0,
 
   /**
-      Old deprecated layer, use [gtk.types.TextViewLayer.aboveText] instead
+      Old deprecated layer, use [gtk.types.TextViewLayer.AboveText] instead
   */
-  above = 1,
+  Above = 1,
 
   /**
       The layer rendered below the text (but above the background).  Since: 3.20
   */
-  belowText = 2,
+  BelowText = 2,
 
   /**
       The layer rendered above the text.  Since: 3.20
   */
-  aboveText = 3,
+  AboveText = 3,
 }
 
 /**
@@ -4018,37 +4018,37 @@ enum GtkTextWindowType
   /**
       Invalid value, used as a marker
   */
-  private_ = 0,
+  Private = 0,
 
   /**
       Window that floats over scrolling areas.
   */
-  widget = 1,
+  Widget = 1,
 
   /**
       Scrollable text window.
   */
-  text = 2,
+  Text = 2,
 
   /**
       Left side border window.
   */
-  left = 3,
+  Left = 3,
 
   /**
       Right side border window.
   */
-  right = 4,
+  Right = 4,
 
   /**
       Top border window.
   */
-  top = 5,
+  Top = 5,
 
   /**
       Bottom border window.
   */
-  bottom = 6,
+  Bottom = 6,
 }
 
 /**
@@ -4059,12 +4059,12 @@ enum GtkToolPaletteDragTargets : uint
   /**
       Support drag of items.
   */
-  items = 1,
+  Items = 1,
 
   /**
       Support drag of groups.
   */
-  groups = 2,
+  Groups = 2,
 }
 
 /**
@@ -4075,12 +4075,12 @@ enum GtkToolbarSpaceStyle
   /**
       Use blank spacers.
   */
-  empty = 0,
+  Empty = 0,
 
   /**
       Use vertical lines for spacers.
   */
-  line = 1,
+  Line = 1,
 }
 
 /**
@@ -4095,23 +4095,23 @@ enum GtkToolbarStyle
   /**
       Buttons display only icons in the toolbar.
   */
-  icons = 0,
+  Icons = 0,
 
   /**
       Buttons display only text labels in the toolbar.
   */
-  text = 1,
+  Text = 1,
 
   /**
       Buttons display text and icons in the toolbar.
   */
-  both = 2,
+  Both = 2,
 
   /**
       Buttons display icons and text alongside each
      other, rather than vertically stacked
   */
-  bothHoriz = 3,
+  BothHoriz = 3,
 }
 
 /**
@@ -4128,13 +4128,13 @@ enum GtkTreeModelFlags : uint
       iterators survive all signals
         emitted by the tree
   */
-  itersPersist = 1,
+  ItersPersist = 1,
 
   /**
       the model is a list only, and never
         has children
   */
-  listOnly = 2,
+  ListOnly = 2,
 }
 
 /**
@@ -4147,17 +4147,17 @@ enum GtkTreeViewColumnSizing
   /**
       Columns only get bigger in reaction to changes in the model
   */
-  growOnly = 0,
+  GrowOnly = 0,
 
   /**
       Columns resize to be the optimal size everytime the model changes.
   */
-  autosize = 1,
+  Autosize = 1,
 
   /**
       Columns are a fixed numbers of pixels wide.
   */
-  fixed = 2,
+  Fixed = 2,
 }
 
 /**
@@ -4168,22 +4168,22 @@ enum GtkTreeViewDropPosition
   /**
       dropped row is inserted before
   */
-  before = 0,
+  Before = 0,
 
   /**
       dropped row is inserted after
   */
-  after = 1,
+  After = 1,
 
   /**
       dropped row becomes a child or is inserted before
   */
-  intoOrBefore = 2,
+  IntoOrBefore = 2,
 
   /**
       dropped row becomes a child or is inserted after
   */
-  intoOrAfter = 3,
+  IntoOrAfter = 3,
 }
 
 /**
@@ -4194,22 +4194,22 @@ enum GtkTreeViewGridLines
   /**
       No grid lines.
   */
-  none = 0,
+  None = 0,
 
   /**
       Horizontal grid lines.
   */
-  horizontal = 1,
+  Horizontal = 1,
 
   /**
       Vertical grid lines.
   */
-  vertical = 2,
+  Vertical = 2,
 
   /**
       Horizontal and vertical grid lines.
   */
-  both = 3,
+  Both = 3,
 }
 
 /**
@@ -4221,58 +4221,58 @@ enum GtkUIManagerItemType : uint
   /**
       Pick the type of the UI element according to context.
   */
-  auto_ = 0,
+  Auto = 0,
 
   /**
       Create a menubar.
   */
-  menubar = 1,
+  Menubar = 1,
 
   /**
       Create a menu.
   */
-  menu = 2,
+  Menu = 2,
 
   /**
       Create a toolbar.
   */
-  toolbar = 4,
+  Toolbar = 4,
 
   /**
       Insert a placeholder.
   */
-  placeholder = 8,
+  Placeholder = 8,
 
   /**
       Create a popup menu.
   */
-  popup = 16,
+  Popup = 16,
 
   /**
       Create a menuitem.
   */
-  menuitem = 32,
+  Menuitem = 32,
 
   /**
       Create a toolitem.
   */
-  toolitem = 64,
+  Toolitem = 64,
 
   /**
       Create a separator.
   */
-  separator = 128,
+  Separator = 128,
 
   /**
       Install an accelerator.
   */
-  accelerator = 256,
+  Accelerator = 256,
 
   /**
-      Same as [gtk.types.UIManagerItemType.popup], but the
+      Same as [gtk.types.UIManagerItemType.Popup], but the
       actions’ accelerators are shown.
   */
-  popupWithAccels = 512,
+  PopupWithAccels = 512,
 }
 
 /**
@@ -4283,22 +4283,22 @@ enum GtkUnit
   /**
       No units.
   */
-  none = 0,
+  None = 0,
 
   /**
       Dimensions in points.
   */
-  points = 1,
+  Points = 1,
 
   /**
       Dimensions in inches.
   */
-  inch = 2,
+  Inch = 2,
 
   /**
       Dimensions in millimeters
   */
-  mm = 3,
+  Mm = 3,
 }
 
 /**
@@ -4309,12 +4309,12 @@ enum GtkWidgetHelpType
   /**
       Tooltip.
   */
-  tooltip = 0,
+  Tooltip = 0,
 
   /**
       What’s this.
   */
-  whatsThis = 1,
+  WhatsThis = 1,
 }
 
 /**
@@ -4327,28 +4327,28 @@ enum GtkWindowPosition
   /**
       No influence is made on placement.
   */
-  none = 0,
+  None = 0,
 
   /**
       Windows should be placed in the center of the screen.
   */
-  center = 1,
+  Center = 1,
 
   /**
       Windows should be placed at the current mouse position.
   */
-  mouse = 2,
+  Mouse = 2,
 
   /**
       Keep window centered as it changes size, etc.
   */
-  centerAlways = 3,
+  CenterAlways = 3,
 
   /**
       Center the window on its transient
      parent (see [gtk.window.Window.setTransientFor]).
   */
-  centerOnParent = 4,
+  CenterOnParent = 4,
 }
 
 /**
@@ -4371,12 +4371,12 @@ enum GtkWindowType
   /**
       A regular window, such as a dialog.
   */
-  toplevel = 0,
+  Toplevel = 0,
 
   /**
       A special window such as a tooltip.
   */
-  popup = 1,
+  Popup = 1,
 }
 
 /**
@@ -4387,25 +4387,25 @@ enum GtkWrapMode
   /**
       do not wrap lines; just make the text area wider
   */
-  none = 0,
+  None = 0,
 
   /**
       wrap text, breaking lines anywhere the cursor can
         appear (between characters, usually - if you want to be technical,
         between graphemes, see [pango.global.getLogAttrs])
   */
-  char_ = 1,
+  Char = 1,
 
   /**
       wrap text, breaking lines in between words
   */
-  word = 2,
+  Word = 2,
 
   /**
       wrap text, breaking lines in between words, or if
         that is not enough, also between graphemes
   */
-  wordChar = 3,
+  WordChar = 3,
 }
 
 /**
@@ -4590,7 +4590,7 @@ struct GtkAccelKey
   automatically adds a #GtkAccelLabel to the #GtkMenuItem and calls
   [gtk.accel_label.AccelLabel.setAccelWidget] to set it up for you.
   
-  A #GtkAccelLabel will only display accelerators which have [gtk.types.AccelFlags.visible]
+  A #GtkAccelLabel will only display accelerators which have [gtk.types.AccelFlags.Visible]
   set (see #GtkAccelFlags).
   A #GtkAccelLabel can display multiple accelerators and even signal names,
   though it is almost always used to display just one accelerator key.
@@ -7284,7 +7284,7 @@ struct GtkCellAccessiblePrivate;
   
   The #GtkCellArea drives keyboard focus from cell to cell in a way
   similar to #GtkWidget. For layouting widgets that support giving
-  focus to cells it’s important to remember to pass [gtk.types.CellRendererState.focused]
+  focus to cells it’s important to remember to pass [gtk.types.CellRendererState.Focused]
   to the area functions for the row that has focus and to tell the
   area to paint the focus at render time.
   
@@ -7399,9 +7399,9 @@ struct GtkCellArea
   refers to adding cell renderers with reference to a particular position
   in a #GtkCellAreaBox. There are two reference positions: the
   start and the end of the box.
-  When the #GtkCellAreaBox is oriented in the [gtk.types.Orientation.vertical]
+  When the #GtkCellAreaBox is oriented in the [gtk.types.Orientation.Vertical]
   orientation, the start is defined as the top of the box and the end is
-  defined as the bottom. In the [gtk.types.Orientation.horizontal] orientation
+  defined as the bottom. In the [gtk.types.Orientation.Horizontal] orientation
   start is defined as the left side and the end is defined as the right
   side.
   
@@ -7506,8 +7506,8 @@ struct GtkCellAreaClass
 
   /**
       This allows an area to tell its layouting widget whether
-        it prefers to be allocated in [gtk.types.SizeRequestMode.heightForWidth] or
-        [gtk.types.SizeRequestMode.widthForHeight] mode.
+        it prefers to be allocated in [gtk.types.SizeRequestMode.HeightForWidth] or
+        [gtk.types.SizeRequestMode.WidthForHeight] mode.
   */
   extern(C) GtkSizeRequestMode function(GtkCellArea* area) getRequestMode;
 
@@ -7537,7 +7537,7 @@ struct GtkCellAreaClass
       Calculates the minimum and natural height of the
         areas cells with the current attributes applied. Essentially this is
         the same as #GtkCellAreaClass.get_preferred_width() only for areas
-        that are being requested as [gtk.types.SizeRequestMode.widthForHeight].
+        that are being requested as [gtk.types.SizeRequestMode.WidthForHeight].
   */
   extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int* minimumHeight, int* naturalHeight) getPreferredHeight;
 
@@ -7545,7 +7545,7 @@ struct GtkCellAreaClass
       Calculates the minimum and natural width
         for the area if the passed @context would be allocated the given
         height. The same as #GtkCellAreaClass.get_preferred_height_for_width()
-        only for handling requests in the [gtk.types.SizeRequestMode.widthForHeight]
+        only for handling requests in the [gtk.types.SizeRequestMode.WidthForHeight]
         mode.
   */
   extern(C) void function(GtkCellArea* area, GtkCellAreaContext* context, GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) getPreferredWidthForHeight;
@@ -8291,7 +8291,7 @@ struct GtkCellRendererSpinnerPrivate;
   style information provided by its properties. The text will be ellipsized if it is
   too long and the #GtkCellRendererText:ellipsize property allows it.
   
-  If the #GtkCellRenderer:mode is [gtk.types.CellRendererMode.editable],
+  If the #GtkCellRenderer:mode is [gtk.types.CellRendererMode.Editable],
   the #GtkCellRendererText allows to edit its text using an entry.
 */
 struct GtkCellRendererText
@@ -9114,8 +9114,8 @@ struct GtkComboBoxTextPrivate;
   that make use of GTK+’s height for width geometry management system. First,
   it’s important to note that a container must prioritize one of its
   dimensions, that is to say that a widget or container can only have a
-  #GtkSizeRequestMode that is [gtk.types.SizeRequestMode.heightForWidth] or
-  [gtk.types.SizeRequestMode.widthForHeight]. However, every widget and container
+  #GtkSizeRequestMode that is [gtk.types.SizeRequestMode.HeightForWidth] or
+  [gtk.types.SizeRequestMode.WidthForHeight]. However, every widget and container
   must be able to respond to the APIs for both dimensions, i.e. even if a
   widget has a request mode that is height-for-width, it is possible that
   its parent will request its sizes using the width-for-height APIs.
@@ -10627,7 +10627,7 @@ struct GtkFileChooser;
   ```
   
   The #GtkFileChooserButton supports the #GtkFileChooserActions
-  [gtk.types.FileChooserAction.open] and [gtk.types.FileChooserAction.selectFolder].
+  [gtk.types.FileChooserAction.Open] and [gtk.types.FileChooserAction.SelectFolder].
   
   > The #GtkFileChooserButton will ellipsize the label, and will thus
   > request little horizontal space.  To give the button more space,
@@ -11725,7 +11725,7 @@ struct GtkFontSelectionPrivate;
   
   The border node can be given the style class “.flat”, which is used by themes
   to disable drawing of the border. To do this from code, call
-  [gtk.frame.Frame.setShadowType] with [gtk.types.ShadowType.none] to add the “.flat” class or
+  [gtk.frame.Frame.setShadowType] with [gtk.types.ShadowType.None] to add the “.flat” class or
   any other shadow type to remove it.
 */
 struct GtkFrame
@@ -11953,7 +11953,7 @@ struct GtkGLAreaClass
   
   After the capture phase, GTK+ emits the traditional #GtkWidget::button-press-event,
   #GtkWidget::button-release-event, #GtkWidget::touch-event, etc signals. Gestures
-  with the [gtk.types.PropagationPhase.target] phase are fed events from the default #GtkWidget::event
+  with the [gtk.types.PropagationPhase.Target] phase are fed events from the default #GtkWidget::event
   handlers.
   
   In the bubble phase, events are propagated up from the target widget to the
@@ -12010,9 +12010,9 @@ struct GtkGLAreaClass
   touchpad gesture events. The only precautions users of #GtkGesture should do
   to enable this support are:
   $(LIST
-    * Enabling [gdk.types.EventMask.touchpadGestureMask] on their #GdkWindows
-    * If the gesture has [gtk.types.PropagationPhase.none], ensuring events of type
-      [gdk.types.EventType.touchpadSwipe] and [gdk.types.EventType.touchpadPinch] are handled by the #GtkGesture
+    * Enabling [gdk.types.EventMask.TouchpadGestureMask] on their #GdkWindows
+    * If the gesture has [gtk.types.PropagationPhase.None], ensuring events of type
+      [gdk.types.EventType.TouchpadSwipe] and [gdk.types.EventType.TouchpadPinch] are handled by the #GtkGesture
   )
 */
 struct GtkGesture;
@@ -12247,7 +12247,7 @@ struct GtkGridPrivate;
   GtkHBox, you can simply change the inheritance to derive directly
   from #GtkBox. No further changes are needed, since the default
   value of the #GtkOrientable:orientation property is
-  [gtk.types.Orientation.horizontal].
+  [gtk.types.Orientation.Horizontal].
   
   If you have a grid-like layout composed of nested boxes, and you don’t
   need first-child or last-child styling, the recommendation is to switch
@@ -12440,7 +12440,7 @@ struct GtkHSeparatorClass
   instance, if the handlebox is packed at the bottom of a VBox, then
   when the handlebox is detached, the bottom edge of the handlebox's
   allocation will remain fixed as the height of the handlebox shrinks,
-  so the snap edge should be set to [gtk.types.PositionType.bottom].
+  so the snap edge should be set to [gtk.types.PositionType.Bottom].
   
   > #GtkHandleBox has been deprecated. It is very specialized, lacks features
   > to make it useful and most importantly does not fit well into modern
@@ -14714,7 +14714,7 @@ struct GtkMenuBarPrivate;
   
   For menus, the #GtkWidget:halign and #GtkWidget:valign properties of the
   menu are also taken into account. For example, when the direction is
-  [gtk.types.ArrowType.down] and the horizontal alignment is [gtk.types.Align.start], the
+  [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start], the
   menu will be positioned below the button, with the starting edge
   (depending on the text direction) of the menu aligned with the starting
   edge of the button. If there is not enough space below the button, the
@@ -15192,7 +15192,7 @@ struct GtkMenuToolButtonPrivate;
   from the taskbar by default.
   
   The easiest way to do a modal message dialog is to use [gtk.dialog.Dialog.run], though
-  you can also pass in the [gtk.types.DialogFlags.modal] flag, [gtk.dialog.Dialog.run] automatically
+  you can also pass in the [gtk.types.DialogFlags.Modal] flag, [gtk.dialog.Dialog.run] automatically
   makes the dialog modal and waits for the user to respond to it. [gtk.dialog.Dialog.run]
   returns when any dialog button is clicked.
   
@@ -15863,10 +15863,10 @@ struct GtkOrientableIface
     GtkOverlay is a container which contains a single main child, on top
   of which it can place “overlay” widgets. The position of each overlay
   widget is determined by its #GtkWidget:halign and #GtkWidget:valign
-  properties. E.g. a widget with both alignments set to [gtk.types.Align.start]
+  properties. E.g. a widget with both alignments set to [gtk.types.Align.Start]
   will be placed at the top left corner of the GtkOverlay container,
-  whereas an overlay with halign set to [gtk.types.Align.center] and valign set
-  to [gtk.types.Align.end] will be placed a the bottom edge of the GtkOverlay,
+  whereas an overlay with halign set to [gtk.types.Align.Center] and valign set
+  to [gtk.types.Align.End] will be placed a the bottom edge of the GtkOverlay,
   horizontally centered. The position can be adjusted by setting the margin
   properties of the child to non-zero values.
   
@@ -15983,7 +15983,7 @@ struct GtkPadActionEntry
   meaning.
   
   Buttons and sensors are not constrained to triggering a single action, some
-  [gdk.types.InputSource.tabletPad] devices feature multiple "modes", all these input
+  [gdk.types.InputSource.TabletPad] devices feature multiple "modes", all these input
   elements have one current mode, which may determine the final action
   being triggered. Pad devices often divide buttons and sensors into groups,
   all elements in a group share the same current mode, but different groups
@@ -16100,7 +16100,7 @@ struct GtkPageSetup;
   small handle that the user can drag to adjust the division. It does not
   draw any relief around the children or around the separator. (The space
   in which the separator is called the gutter.) Often, it is useful to put
-  each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.in_]
+  each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.In]
   so that the gutter appears as a ridge. No separator is drawn if one of
   the children is missing.
   
@@ -19053,7 +19053,7 @@ struct GtkShortcutsWindowClass
   a #GtkSizeGroup to actually be the same size, you need to pack them in
   such a way that they get the size they request and not more. For
   example, if you are packing your widgets into a table, you would not
-  include the [gtk.types.AttachOptions.fill] flag.
+  include the [gtk.types.AttachOptions.Fill] flag.
   
   #GtkSizeGroup objects are referenced by each widget in the size group,
   so once you have added all widgets to a #GtkSizeGroup, you can drop
@@ -19066,16 +19066,16 @@ struct GtkShortcutsWindowClass
   Widgets can be part of multiple size groups; GTK+ will compute the
   horizontal size of a widget from the horizontal requisition of all
   widgets that can be reached from the widget by a chain of size groups
-  of type [gtk.types.SizeGroupMode.horizontal] or [gtk.types.SizeGroupMode.both], and the
+  of type [gtk.types.SizeGroupMode.Horizontal] or [gtk.types.SizeGroupMode.Both], and the
   vertical size from the vertical requisition of all widgets that can be
   reached from the widget by a chain of size groups of type
-  [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both].
+  [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both].
   
   Note that only non-contextual sizes of every widget are ever consulted
   by size groups (since size groups have no knowledge of what size a widget
   will be allocated in one dimension, it cannot derive how much height
   a widget will receive for a given width). When grouping widgets that
-  trade height for width in mode [gtk.types.SizeGroupMode.vertical] or [gtk.types.SizeGroupMode.both]:
+  trade height for width in mode [gtk.types.SizeGroupMode.Vertical] or [gtk.types.SizeGroupMode.Both]:
   the height for the minimum width will be the requested height for all
   widgets in the group. The same is of course true when horizontally grouping
   width for height widgets.
@@ -21294,9 +21294,9 @@ struct GtkTextViewClass
       The draw_layer vfunc is called before and after the text
       view is drawing its own text. Applications can override this vfunc
       in a subclass to draw customized content underneath or above the
-      text. In the [gtk.types.TextViewLayer.belowText] and [gtk.types.TextViewLayer.aboveText]
+      text. In the [gtk.types.TextViewLayer.BelowText] and [gtk.types.TextViewLayer.AboveText]
       the drawing is done in the buffer coordinate space, but the older (deprecated)
-      layers [gtk.types.TextViewLayer.below] and [gtk.types.TextViewLayer.above] work in viewport
+      layers [gtk.types.TextViewLayer.Below] and [gtk.types.TextViewLayer.Above] work in viewport
       coordinates, which makes them unnecessarily hard to use. Since: 3.14
   */
   extern(C) void function(GtkTextView* textView, GtkTextViewLayer layer, cairo_t* cr) drawLayer;
@@ -23491,12 +23491,12 @@ struct GtkUIManagerPrivate;
   All children are allocated the same width.
   
   GtkVBox has been deprecated. You can use #GtkBox with a #GtkOrientable:orientation
-  set to [gtk.types.Orientation.vertical] instead when calling [gtk.box.Box.new_],
+  set to [gtk.types.Orientation.Vertical] instead when calling [gtk.box.Box.new_],
   which is a very quick and easy change.
   
   If you have derived your own classes from GtkVBox, you can change the
   inheritance to derive directly from #GtkBox, and set the #GtkOrientable:orientation
-  property to [gtk.types.Orientation.vertical] in your instance init function,
+  property to [gtk.types.Orientation.Vertical] in your instance init function,
   with a call like:
   
   ```c
@@ -23740,7 +23740,7 @@ struct GtkVolumeButtonClass
   in the #GtkSizeRequestMode chosen by the toplevel.
   
   For example, when queried in the normal
-  [gtk.types.SizeRequestMode.heightForWidth] mode:
+  [gtk.types.SizeRequestMode.HeightForWidth] mode:
   First, the default minimum and natural width for each widget
   in the interface will be computed using [gtk.widget.Widget.getPreferredWidth].
   Because the preferred widths for each container depend on the preferred
@@ -23785,7 +23785,7 @@ struct GtkVolumeButtonClass
   height-for-width or width-for-height requests will always be allocated
   at least enough space to fit its own content.
   
-  Here are some examples of how a [gtk.types.SizeRequestMode.heightForWidth] widget
+  Here are some examples of how a [gtk.types.SizeRequestMode.HeightForWidth] widget
   generally deals with width-for-height requests, for #GtkWidgetClass.get_preferred_height()
   it will do:
   
@@ -23871,7 +23871,7 @@ struct GtkVolumeButtonClass
   Since 3.10 GTK+ also supports baseline vertical alignment of widgets. This
   means that widgets are positioned such that the typographical baseline of
   widgets in the same row are aligned. This happens if a widget supports baselines,
-  has a vertical alignment of [gtk.types.Align.baseline], and is inside a container
+  has a vertical alignment of [gtk.types.Align.Baseline], and is inside a container
   that supports baselines and has a natural “row” that it aligns to the baseline,
   or a baseline assigned to it by the grandparent.
   
@@ -23883,7 +23883,7 @@ struct GtkVolumeButtonClass
   so if baselines are not supported it doesn’t need to be implemented.
   
   If a widget ends up baseline aligned it will be allocated all the space in the parent
-  as if it was [gtk.types.Align.fill], but the selected baseline can be found via [gtk.widget.Widget.getAllocatedBaseline].
+  as if it was [gtk.types.Align.Fill], but the selected baseline can be found via [gtk.widget.Widget.getAllocatedBaseline].
   If this has a value other than -1 you need to align the widget such that the baseline
   appears at the position.
   
@@ -24261,12 +24261,12 @@ struct GtkWidgetClass
 
   /**
       This allows a widget to tell its parent container whether
-      it prefers to be allocated in [gtk.types.SizeRequestMode.heightForWidth] or
-      [gtk.types.SizeRequestMode.widthForHeight] mode.
-      [gtk.types.SizeRequestMode.heightForWidth] means the widget prefers to have
+      it prefers to be allocated in [gtk.types.SizeRequestMode.HeightForWidth] or
+      [gtk.types.SizeRequestMode.WidthForHeight] mode.
+      [gtk.types.SizeRequestMode.HeightForWidth] means the widget prefers to have
       #GtkWidgetClass.get_preferred_width() called and then
       #GtkWidgetClass.get_preferred_height_for_width().
-      [gtk.types.SizeRequestMode.constantSize] disables any height-for-width or
+      [gtk.types.SizeRequestMode.ConstantSize] disables any height-for-width or
       width-for-height geometry management for a said widget and is the
       default return.
       It’s important to note (as described below) that any widget
@@ -24290,7 +24290,7 @@ struct GtkWidgetClass
       This is analogous to
       #GtkWidgetClass.get_preferred_height_for_width() except that it
       operates in the oposite orientation. It’s rare that a widget actually
-      does [gtk.types.SizeRequestMode.widthForHeight] requests but this can happen
+      does [gtk.types.SizeRequestMode.WidthForHeight] requests but this can happen
       when, for example, a widget or container gets additional columns to
       compensate for a smaller allocated height.
   */
@@ -24515,7 +24515,7 @@ struct GtkWidgetClass
 
   /**
       Signal emitted on the drag source when a drag
-      with the action [gdk.types.DragAction.move] is successfully completed.
+      with the action [gdk.types.DragAction.Move] is successfully completed.
   */
   extern(C) void function(GtkWidget* widget, GdkDragContext* context) dragDataDelete;
 

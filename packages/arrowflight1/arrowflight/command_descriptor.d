@@ -10,7 +10,7 @@ import gid.gid;
 class CommandDescriptor : arrowflight.descriptor.Descriptor
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,9 +30,9 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   this(string command)
   {
     GAFlightCommandDescriptor* _cretval;
-    const(char)* _command = command.toCString(No.alloc);
+    const(char)* _command = command.toCString(No.Alloc);
     _cretval = gaflight_command_descriptor_new(_command);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -40,7 +40,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   {
     char* _cretval;
     _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

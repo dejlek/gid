@@ -11,7 +11,7 @@ import glib.error;
 class StructFieldOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -32,13 +32,13 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   {
     GArrowStructFieldOptions* _cretval;
     _cretval = garrow_struct_field_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   void setFieldRef(string fieldRef)
   {
-    const(char)* _fieldRef = fieldRef.toCString(No.alloc);
+    const(char)* _fieldRef = fieldRef.toCString(No.Alloc);
     GError *_err;
     garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)cPtr, _fieldRef, &_err);
     if (_err)

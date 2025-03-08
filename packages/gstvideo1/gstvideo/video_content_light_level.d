@@ -13,7 +13,7 @@ class VideoContentLightLevel
 {
   GstVideoContentLightLevel cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstVideo.VideoContentLightLevel");
@@ -58,7 +58,7 @@ class VideoContentLightLevel
   bool addToCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_content_light_level_add_to_caps(cast(const(GstVideoContentLightLevel)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.dup) : null);
+    _retval = gst_video_content_light_level_add_to_caps(cast(const(GstVideoContentLightLevel)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class VideoContentLightLevel
   bool fromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_content_light_level_from_caps(cast(GstVideoContentLightLevel*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
+    _retval = gst_video_content_light_level_from_caps(cast(GstVideoContentLightLevel*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class VideoContentLightLevel
   bool fromString(string level)
   {
     bool _retval;
-    const(char)* _level = level.toCString(No.alloc);
+    const(char)* _level = level.toCString(No.Alloc);
     _retval = gst_video_content_light_level_from_string(cast(GstVideoContentLightLevel*)cPtr, _level);
     return _retval;
   }
@@ -119,7 +119,7 @@ class VideoContentLightLevel
   {
     char* _cretval;
     _cretval = gst_video_content_light_level_to_string(cast(const(GstVideoContentLightLevel)*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 }

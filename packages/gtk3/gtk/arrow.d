@@ -35,7 +35,7 @@ import gtk.types;
 class Arrow : gtk.misc.Misc
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -64,7 +64,7 @@ class Arrow : gtk.misc.Misc
   {
     GtkWidget* _cretval;
     _cretval = gtk_arrow_new(arrowType, shadowType);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**

@@ -17,7 +17,7 @@ class CollectData
 {
   GstCollectData cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstBase.CollectData");
@@ -35,12 +35,12 @@ class CollectData
 
   @property gstbase.collect_pads.CollectPads collect()
   {
-    return ObjectG.getDObject!(gstbase.collect_pads.CollectPads)((cast(GstCollectData*)cPtr).collect, No.take);
+    return ObjectG.getDObject!(gstbase.collect_pads.CollectPads)((cast(GstCollectData*)cPtr).collect, No.Take);
   }
 
   @property gst.pad.Pad pad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstCollectData*)cPtr).pad, No.take);
+    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstCollectData*)cPtr).pad, No.Take);
   }
 
   @property gst.buffer.Buffer buffer()

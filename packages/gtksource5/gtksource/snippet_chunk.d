@@ -19,7 +19,7 @@ import gtksource.types;
 class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -44,7 +44,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_chunk_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -55,7 +55,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     GtkSourceSnippetChunk* _cretval;
     _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     GtkSourceSnippetContext* _cretval;
     _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -141,14 +141,14 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   {
     const(char)* _cretval;
     _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
   /** */
   void setContext(gtksource.snippet_context.SnippetContext context)
   {
-    gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)cPtr, context ? cast(GtkSourceSnippetContext*)context.cPtr(No.dup) : null);
+    gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)cPtr, context ? cast(GtkSourceSnippetContext*)context.cPtr(No.Dup) : null);
   }
 
   /**
@@ -181,7 +181,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setSpec(string spec)
   {
-    const(char)* _spec = spec.toCString(No.alloc);
+    const(char)* _spec = spec.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)cPtr, _spec);
   }
 
@@ -196,7 +196,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setText(string text)
   {
-    const(char)* _text = text.toCString(No.alloc);
+    const(char)* _text = text.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)cPtr, _text);
   }
 
@@ -216,7 +216,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   /** */
   void setTooltipText(string tooltipText)
   {
-    const(char)* _tooltipText = tooltipText.toCString(No.alloc);
+    const(char)* _tooltipText = tooltipText.toCString(No.Alloc);
     gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)cPtr, _tooltipText);
   }
 }

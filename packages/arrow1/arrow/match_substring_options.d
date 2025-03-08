@@ -10,7 +10,7 @@ import gid.gid;
 class MatchSubstringOptions : arrow.function_options.FunctionOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -31,6 +31,6 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
   {
     GArrowMatchSubstringOptions* _cretval;
     _cretval = garrow_match_substring_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 }

@@ -42,7 +42,7 @@ import soup.websocket_connection;
   Once the headers have been read, #SoupServer will check if there is
   a `class@AuthDomain` `(qv)` covering the Request-URI; if so, and if the
   message does not contain suitable authorization, then the
-  `class@AuthDomain` will set a status of [soup.types.Status.unauthorized] on
+  `class@AuthDomain` will set a status of [soup.types.Status.Unauthorized] on
   the message.
   
   After checking for authorization, #SoupServer will look for "early"
@@ -56,12 +56,12 @@ import soup.websocket_connection;
   #SoupServer will skip the remaining steps and return the response.
   If the request headers contain `Expect:
   100-continue` and no status code has been set,
-  #SoupServer will return a [soup.types.Status.continue_] status before
+  #SoupServer will return a [soup.types.Status.Continue] status before
   continuing.)
   
   The server will then read in the response body (if present). At
   this point, if there are no handlers at all defined for the
-  Request-URI, then the server will return [soup.types.Status.notFound] to
+  Request-URI, then the server will return [soup.types.Status.NotFound] to
   the client.
   
   Otherwise (assuming no previous step assigned a status to the
@@ -72,12 +72,12 @@ import soup.websocket_connection;
   Then, if the path has a WebSocket handler registered (and has
   not yet been assigned a status), #SoupServer will attempt to
   validate the WebSocket handshake, filling in the response and
-  setting a status of [soup.types.Status.switchingProtocols] or
-  [soup.types.Status.badRequest] accordingly.
+  setting a status of [soup.types.Status.SwitchingProtocols] or
+  [soup.types.Status.BadRequest] accordingly.
   
   If the message still has no status code at this point (and has not
   been paused with [soup.server_message.ServerMessage.pause]), then it will be
-  given a status of [soup.types.Status.internalServerError] (because at
+  given a status of [soup.types.Status.InternalServerError] (because at
   least one handler ran, but returned without assigning a status).
   
   Finally, the server will emit `signal@Server::request-finished` (or
@@ -108,7 +108,7 @@ import soup.websocket_connection;
 class Server : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -140,7 +140,7 @@ class Server : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_accept_iostream(cast(SoupServer*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.dup) : null, localAddr ? cast(GSocketAddress*)localAddr.cPtr(No.dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr.cPtr(No.dup) : null, &_err);
+    _retval = soup_server_accept_iostream(cast(SoupServer*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr.cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -163,7 +163,7 @@ class Server : gobject.object.ObjectG
   */
   void addAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
-    soup_server_add_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.dup) : null);
+    soup_server_add_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
   }
 
   /**
@@ -203,14 +203,14 @@ class Server : gobject.object.ObjectG
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
-      string _path = path.fromCString(No.free);
+      string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _path, _query);
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_server_add_early_handler(cast(SoupServer*)cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
@@ -243,7 +243,7 @@ class Server : gobject.object.ObjectG
     to be sent.
     
     To send the response body a bit at a time using "chunked" encoding, first
-    call [soup.message_headers.MessageHeaders.setEncoding] to set [soup.types.Encoding.chunked] on
+    call [soup.message_headers.MessageHeaders.setEncoding] to set [soup.types.Encoding.Chunked] on
     the response-headers. Then call [soup.message_body.MessageBody.append] (or
     [soup.message_body.MessageBody.appendBytes])) to append each chunk as it becomes ready,
     and [soup.server_message.ServerMessage.unpause] to make sure it's running. (The server
@@ -260,14 +260,14 @@ class Server : gobject.object.ObjectG
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData)
     {
       auto _dlg = cast(soup.types.ServerCallback*)userData;
-      string _path = path.fromCString(No.free);
+      string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _path, _query);
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
     soup_server_add_handler(cast(SoupServer*)cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
@@ -322,17 +322,17 @@ class Server : gobject.object.ObjectG
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData)
     {
       auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
-      string _path = path.fromCString(No.free);
+      string _path = path.fromCString(No.Free);
 
-      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.take), _path, ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.take));
+      (*_dlg)(ObjectG.getDObject!(soup.server.Server)(cast(void*)server, No.Take), ObjectG.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, ObjectG.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
-    const(char)* _path = path.toCString(No.alloc);
-    const(char)* _origin = origin.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
+    const(char)* _origin = origin.toCString(No.Alloc);
     char*[] _tmpprotocols;
     foreach (s; protocols)
-      _tmpprotocols ~= s.toCString(No.alloc);
+      _tmpprotocols ~= s.toCString(No.Alloc);
     _tmpprotocols ~= null;
     char** _protocols = _tmpprotocols.ptr;
 
@@ -392,7 +392,7 @@ class Server : gobject.object.ObjectG
   {
     GTlsCertificate* _cretval;
     _cretval = soup_server_get_tls_certificate(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class Server : gobject.object.ObjectG
   {
     GTlsDatabase* _cretval;
     _cretval = soup_server_get_tls_database(cast(SoupServer*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -455,7 +455,7 @@ class Server : gobject.object.ObjectG
   /**
       Attempts to set up server to listen for connections on address.
     
-    If options includes [soup.types.ServerListenOptions.https], and server has
+    If options includes [soup.types.ServerListenOptions.Https], and server has
     been configured for TLS, then server will listen for https
     connections on this port. Otherwise it will listen for plain http.
     
@@ -480,7 +480,7 @@ class Server : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen(cast(SoupServer*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, options, &_err);
+    _retval = soup_server_listen(cast(SoupServer*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, options, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -491,8 +491,8 @@ class Server : gobject.object.ObjectG
     on the system.
     
     That is, it listens on the addresses `0.0.0.0` and/or `::`, depending on
-    whether options includes [soup.types.ServerListenOptions.ipv4Only],
-    [soup.types.ServerListenOptions.ipv6Only], or neither.) If port is specified, server
+    whether options includes [soup.types.ServerListenOptions.Ipv4Only],
+    [soup.types.ServerListenOptions.Ipv6Only], or neither.) If port is specified, server
     will listen on that port. If it is 0, server will find an unused port to
     listen on. (In that case, you can use [soup.server.Server.getUris] to find out
     what port it ended up choosing.
@@ -518,7 +518,7 @@ class Server : gobject.object.ObjectG
       Attempts to set up server to listen for connections on "localhost".
     
     That is, `127.0.0.1` and/or `::1`, depending on whether options includes
-    [soup.types.ServerListenOptions.ipv4Only], [soup.types.ServerListenOptions.ipv6Only], or neither). If
+    [soup.types.ServerListenOptions.Ipv4Only], [soup.types.ServerListenOptions.Ipv6Only], or neither). If
     port is specified, server will listen on that port. If it is 0, server
     will find an unused port to listen on. (In that case, you can use
     [soup.server.Server.getUris] to find out what port it ended up choosing.
@@ -554,7 +554,7 @@ class Server : gobject.object.ObjectG
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen_socket(cast(SoupServer*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.dup) : null, options, &_err);
+    _retval = soup_server_listen_socket(cast(SoupServer*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, options, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -578,7 +578,7 @@ class Server : gobject.object.ObjectG
   */
   void pauseMessage(soup.server_message.ServerMessage msg)
   {
-    soup_server_pause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null);
+    soup_server_pause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
   }
 
   /**
@@ -588,7 +588,7 @@ class Server : gobject.object.ObjectG
   */
   void removeAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
-    soup_server_remove_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.dup) : null);
+    soup_server_remove_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
   }
 
   /**
@@ -598,7 +598,7 @@ class Server : gobject.object.ObjectG
   */
   void removeHandler(string path)
   {
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     soup_server_remove_handler(cast(SoupServer*)cPtr, _path);
   }
 
@@ -630,7 +630,7 @@ class Server : gobject.object.ObjectG
   */
   void setTlsCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
-    soup_server_set_tls_certificate(cast(SoupServer*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.dup) : null);
+    soup_server_set_tls_certificate(cast(SoupServer*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
   }
 
   /**
@@ -640,7 +640,7 @@ class Server : gobject.object.ObjectG
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
   {
-    soup_server_set_tls_database(cast(SoupServer*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.dup) : null);
+    soup_server_set_tls_database(cast(SoupServer*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
   }
 
   /**
@@ -662,7 +662,7 @@ class Server : gobject.object.ObjectG
   */
   void unpauseMessage(soup.server_message.ServerMessage msg)
   {
-    soup_server_unpause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.dup) : null);
+    soup_server_unpause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
   }
 
   /**
@@ -693,10 +693,10 @@ class Server : gobject.object.ObjectG
     Connect to RequestAborted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestAborted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestAborted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestAbortedCallbackDlg) || is(T : RequestAbortedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -731,10 +731,10 @@ class Server : gobject.object.ObjectG
     Connect to RequestFinished signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestFinished(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestFinished(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestFinishedCallbackDlg) || is(T : RequestFinishedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -775,10 +775,10 @@ class Server : gobject.object.ObjectG
     Connect to RequestRead signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestRead(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestRead(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestReadCallbackDlg) || is(T : RequestReadCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -823,10 +823,10 @@ class Server : gobject.object.ObjectG
     Connect to RequestStarted signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectRequestStarted(T)(T callback, Flag!"after" after = No.after)
+  ulong connectRequestStarted(T)(T callback, Flag!"After" after = No.After)
   if (is(T : RequestStartedCallbackDlg) || is(T : RequestStartedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

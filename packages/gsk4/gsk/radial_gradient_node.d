@@ -13,7 +13,7 @@ import gsk.types;
 class RadialGradientNode : gsk.render_node.RenderNode
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gsk.RadialGradientNode");
@@ -29,7 +29,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   {
     const(graphene_point_t)* _cretval;
     _cretval = gsk_radial_gradient_node_get_center(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 

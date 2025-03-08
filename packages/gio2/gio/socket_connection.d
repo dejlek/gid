@@ -34,7 +34,7 @@ import gobject.types;
 class SocketConnection : gio.iostream.IOStream
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -95,7 +95,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _retval = g_socket_connection_connect(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -108,7 +108,7 @@ class SocketConnection : gio.iostream.IOStream
     socket if it is currently set.
     
     If #GSocket:timeout is set, the operation will time out and return
-    [gio.types.IOErrorEnum.timedOut] after that period. Otherwise, it will continue
+    [gio.types.IOErrorEnum.TimedOut] after that period. Otherwise, it will continue
     indefinitely until operating system timeouts (if any) are hit.
     
     Use [gio.socket_connection.SocketConnection.connectFinish] to retrieve the result.
@@ -124,12 +124,12 @@ class SocketConnection : gio.iostream.IOStream
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_socket_connection_connect_async(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_socket_connection_connect_async(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -142,7 +142,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect_finish(cast(GSocketConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _retval = g_socket_connection_connect_finish(cast(GSocketConnection*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -160,7 +160,7 @@ class SocketConnection : gio.iostream.IOStream
     _cretval = g_socket_connection_get_local_address(cast(GSocketConnection*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class SocketConnection : gio.iostream.IOStream
     
     Since GLib 2.40, when used with [gio.socket_client.SocketClient.connect] or
     [gio.socket_client.SocketClient.connectAsync], during emission of
-    [gio.types.SocketClientEvent.connecting], this function will return the remote
+    [gio.types.SocketClientEvent.Connecting], this function will return the remote
     address that will be used for the connection.  This allows
     applications to print e.g. "Connecting to example.com
     (10.42.77.3)...".
@@ -183,7 +183,7 @@ class SocketConnection : gio.iostream.IOStream
     _cretval = g_socket_connection_get_remote_address(cast(GSocketConnection*)cPtr, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     GSocket* _cretval;
     _cretval = g_socket_connection_get_socket(cast(GSocketConnection*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 

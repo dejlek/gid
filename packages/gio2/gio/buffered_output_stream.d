@@ -28,7 +28,7 @@ import gobject.object;
 class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekable.Seekable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,8 +55,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   this(gio.output_stream.OutputStream baseStream)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,8 +69,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.dup) : null, size);
-    auto _retval = ObjectG.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.take);
+    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, size);
+    auto _retval = ObjectG.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

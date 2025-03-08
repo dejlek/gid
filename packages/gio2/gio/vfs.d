@@ -13,7 +13,7 @@ import gobject.object;
 class Vfs : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -38,7 +38,7 @@ class Vfs : gobject.object.ObjectG
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_default();
-    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class Vfs : gobject.object.ObjectG
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_local();
-    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -64,9 +64,9 @@ class Vfs : gobject.object.ObjectG
   gio.file.File getFileForPath(string path)
   {
     GFile* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_path(cast(GVfs*)cPtr, _path);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,9 +84,9 @@ class Vfs : gobject.object.ObjectG
   gio.file.File getFileForUri(string uri)
   {
     GFile* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _cretval = g_vfs_get_file_for_uri(cast(GVfs*)cPtr, _uri);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Vfs : gobject.object.ObjectG
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -138,9 +138,9 @@ class Vfs : gobject.object.ObjectG
   gio.file.File parseName(string parseName)
   {
     GFile* _cretval;
-    const(char)* _parseName = parseName.toCString(No.alloc);
+    const(char)* _parseName = parseName.toCString(No.Alloc);
     _cretval = g_vfs_parse_name(cast(GVfs*)cPtr, _parseName);
-    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -178,10 +178,10 @@ class Vfs : gobject.object.ObjectG
     {
       gio.file.File _dretval;
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
-      string _identifier = identifier.fromCString(No.free);
+      string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -191,17 +191,17 @@ class Vfs : gobject.object.ObjectG
     {
       gio.file.File _dretval;
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
-      string _identifier = identifier.fromCString(No.free);
+      string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.dup);
+      _dretval = (*_dlg)(ObjectG.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(ObjectG)_dretval).cPtr(Yes.Dup);
 
       return _retval;
     }
     auto _parseNameFuncCB = parseNameFunc ? &_parseNameFuncCallback : null;
 
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.alloc);
+    const(char)* _scheme = scheme.toCString(No.Alloc);
     auto _uriFunc = uriFunc ? freezeDelegate(cast(void*)&uriFunc) : null;
     GDestroyNotify _uriFuncDestroyCB = uriFunc ? &thawDelegate : null;
     auto _parseNameFunc = parseNameFunc ? freezeDelegate(cast(void*)&parseNameFunc) : null;
@@ -221,7 +221,7 @@ class Vfs : gobject.object.ObjectG
   bool unregisterUriScheme(string scheme)
   {
     bool _retval;
-    const(char)* _scheme = scheme.toCString(No.alloc);
+    const(char)* _scheme = scheme.toCString(No.Alloc);
     _retval = g_vfs_unregister_uri_scheme(cast(GVfs*)cPtr, _scheme);
     return _retval;
   }

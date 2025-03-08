@@ -23,7 +23,7 @@ import gobject.object;
 class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -61,9 +61,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   this(string desktopId)
   {
     GDesktopAppInfo* _cretval;
-    const(char)* _desktopId = desktopId.toCString(No.alloc);
+    const(char)* _desktopId = desktopId.toCString(No.Alloc);
     _cretval = g_desktop_app_info_new(_desktopId);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -76,9 +76,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   static gio.desktop_app_info.DesktopAppInfo newFromFilename(string filename)
   {
     GDesktopAppInfo* _cretval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = g_desktop_app_info_new_from_filename(_filename);
-    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,8 +91,8 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   static gio.desktop_app_info.DesktopAppInfo newFromKeyfile(glib.key_file.KeyFile keyFile)
   {
     GDesktopAppInfo* _cretval;
-    _cretval = g_desktop_app_info_new_from_keyfile(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.take);
+    _cretval = g_desktop_app_info_new_from_keyfile(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(GDesktopAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   static gio.desktop_app_info.DesktopAppInfo[] getImplementations(string interface_)
   {
     GList* _cretval;
-    const(char)* _interface_ = interface_.toCString(No.alloc);
+    const(char)* _interface_ = interface_.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_implementations(_interface_);
     auto _retval = gListToD!(gio.desktop_app_info.DesktopAppInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
@@ -131,7 +131,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   */
   static void setDesktopEnv(string desktopEnv)
   {
-    const(char)* _desktopEnv = desktopEnv.toCString(No.alloc);
+    const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
     g_desktop_app_info_set_desktop_env(_desktopEnv);
   }
 
@@ -149,9 +149,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   string getActionName(string actionName)
   {
     char* _cretval;
-    const(char)* _actionName = actionName.toCString(No.alloc);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_action_name(cast(GDesktopAppInfo*)cPtr, _actionName);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   bool getBoolean(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_desktop_app_info_get_boolean(cast(GDesktopAppInfo*)cPtr, _key);
     return _retval;
   }
@@ -181,7 +181,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_categories(cast(GDesktopAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_filename(cast(GDesktopAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_generic_name(cast(GDesktopAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }
@@ -259,9 +259,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   string getLocaleString(string key)
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_locale_string(cast(GDesktopAppInfo*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   bool getShowIn(string desktopEnv = null)
   {
     bool _retval;
-    const(char)* _desktopEnv = desktopEnv.toCString(No.alloc);
+    const(char)* _desktopEnv = desktopEnv.toCString(No.Alloc);
     _retval = g_desktop_app_info_get_show_in(cast(GDesktopAppInfo*)cPtr, _desktopEnv);
     return _retval;
   }
@@ -315,7 +315,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     const(char)* _cretval;
     _cretval = g_desktop_app_info_get_startup_wm_class(cast(GDesktopAppInfo*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -331,9 +331,9 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   string getString(string key)
   {
     char* _cretval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_string(cast(GDesktopAppInfo*)cPtr, _key);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   {
     char** _cretval;
     size_t _cretlength;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _cretval = g_desktop_app_info_get_string_list(cast(GDesktopAppInfo*)cPtr, _key, &_cretlength);
     string[] _retval;
 
@@ -358,7 +358,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -373,7 +373,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   bool hasKey(string key)
   {
     bool _retval;
-    const(char)* _key = key.toCString(No.alloc);
+    const(char)* _key = key.toCString(No.Alloc);
     _retval = g_desktop_app_info_has_key(cast(GDesktopAppInfo*)cPtr, _key);
     return _retval;
   }
@@ -401,8 +401,8 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
   */
   void launchAction(string actionName, gio.app_launch_context.AppLaunchContext launchContext = null)
   {
-    const(char)* _actionName = actionName.toCString(No.alloc);
-    g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.dup) : null);
+    const(char)* _actionName = actionName.toCString(No.Alloc);
+    g_desktop_app_info_launch_action(cast(GDesktopAppInfo*)cPtr, _actionName, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null);
   }
 
   /**
@@ -445,7 +445,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.take), pid);
+      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
@@ -455,7 +455,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
     auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
+    _retval = g_desktop_app_info_launch_uris_as_manager(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -495,7 +495,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     {
       auto _dlg = cast(gio.types.DesktopAppLaunchCallback*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.take), pid);
+      (*_dlg)(ObjectG.getDObject!(gio.desktop_app_info.DesktopAppInfo)(cast(void*)appinfo, No.Take), pid);
     }
     auto _pidCallbackCB = pidCallback ? &_pidCallbackCallback : null;
 
@@ -505,7 +505,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     auto _userSetup = userSetup ? freezeDelegate(cast(void*)&userSetup) : null;
     auto _pidCallback = pidCallback ? cast(void*)&(pidCallback) : null;
     GError *_err;
-    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
+    _retval = g_desktop_app_info_launch_uris_as_manager_with_fds(cast(GDesktopAppInfo*)cPtr, _uris, launchContext ? cast(GAppLaunchContext*)launchContext.cPtr(No.Dup) : null, spawnFlags, _userSetupCB, _userSetup, _pidCallbackCB, _pidCallback, stdinFd, stdoutFd, stderrFd, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -532,7 +532,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
         break;
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(No.free);
+        _retval[i] = _cretval[i].fromCString(No.Free);
     }
     return _retval;
   }

@@ -41,7 +41,7 @@ class PathBuf
 {
   GPathBuf cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GLib.PathBuf");
@@ -81,7 +81,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_free_to_path(cast(GPathBuf*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class PathBuf
   glib.path_buf.PathBuf initFromPath(string path = null)
   {
     GPathBuf* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_init_from_path(cast(GPathBuf*)cPtr, _path);
     auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
@@ -197,7 +197,7 @@ class PathBuf
   glib.path_buf.PathBuf push(string path)
   {
     GPathBuf* _cretval;
-    const(char)* _path = path.toCString(No.alloc);
+    const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_push(cast(GPathBuf*)cPtr, _path);
     auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
@@ -217,7 +217,7 @@ class PathBuf
   bool setExtension(string extension = null)
   {
     bool _retval;
-    const(char)* _extension = extension.toCString(No.alloc);
+    const(char)* _extension = extension.toCString(No.Alloc);
     _retval = g_path_buf_set_extension(cast(GPathBuf*)cPtr, _extension);
     return _retval;
   }
@@ -260,7 +260,7 @@ class PathBuf
   bool setFilename(string fileName)
   {
     bool _retval;
-    const(char)* _fileName = fileName.toCString(No.alloc);
+    const(char)* _fileName = fileName.toCString(No.Alloc);
     _retval = g_path_buf_set_filename(cast(GPathBuf*)cPtr, _fileName);
     return _retval;
   }
@@ -278,7 +278,7 @@ class PathBuf
   {
     char* _cretval;
     _cretval = g_path_buf_to_path(cast(GPathBuf*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 

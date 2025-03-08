@@ -121,7 +121,7 @@ template ToolShellT()
   {
     GtkSizeGroup* _cretval;
     _cretval = gtk_tool_shell_get_text_size_group(cast(GtkToolShell*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
     return _retval;
   }
 

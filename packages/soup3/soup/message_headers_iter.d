@@ -19,7 +19,7 @@ class MessageHeadersIter
 {
   SoupMessageHeadersIter cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Soup.MessageHeadersIter");
@@ -56,8 +56,8 @@ class MessageHeadersIter
     char* _name;
     char* _value;
     _retval = soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)cPtr, &_name, &_value);
-    name = _name.fromCString(No.free);
-    value = _value.fromCString(No.free);
+    name = _name.fromCString(No.Free);
+    value = _value.fromCString(No.Free);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class MessageHeadersIter
   static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs)
   {
     SoupMessageHeadersIter _iter;
-    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs.cPtr(No.dup) : null);
+    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs.cPtr(No.Dup) : null);
     iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter);
   }
 }

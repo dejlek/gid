@@ -26,7 +26,7 @@ import pango.font_description;
 class ThemingEngine : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,9 +53,9 @@ class ThemingEngine : gobject.object.ObjectG
   static gtk.theming_engine.ThemingEngine load(string name)
   {
     GtkThemingEngine* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_theming_engine_load(_name);
-    auto _retval = ObjectG.getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -82,7 +82,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GtkBorder _border;
     gtk_theming_engine_get_border(cast(GtkThemingEngine*)cPtr, state, &_border);
-    border = new gtk.border.Border(cast(void*)&_border, No.take);
+    border = new gtk.border.Border(cast(void*)&_border, No.Take);
   }
 
   /**
@@ -95,7 +95,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -108,7 +108,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GdkRGBA _color;
     gtk_theming_engine_get_color(cast(GtkThemingEngine*)cPtr, state, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
   /**
@@ -141,7 +141,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     const(PangoFontDescription)* _cretval;
     _cretval = gtk_theming_engine_get_font(cast(GtkThemingEngine*)cPtr, state);
-    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GtkBorder _margin;
     gtk_theming_engine_get_margin(cast(GtkThemingEngine*)cPtr, state, &_margin);
-    margin = new gtk.border.Border(cast(void*)&_margin, No.take);
+    margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
   }
 
   /**
@@ -180,7 +180,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GtkBorder _padding;
     gtk_theming_engine_get_padding(cast(GtkThemingEngine*)cPtr, state, &_padding);
-    padding = new gtk.border.Border(cast(void*)&_padding, No.take);
+    padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
   }
 
   /**
@@ -191,7 +191,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     const(GtkWidgetPath)* _cretval;
     _cretval = gtk_theming_engine_get_path(cast(GtkThemingEngine*)cPtr);
-    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -209,10 +209,10 @@ class ThemingEngine : gobject.object.ObjectG
   */
   void getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
   {
-    const(char)* _property = property.toCString(No.alloc);
+    const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
     gtk_theming_engine_get_property(cast(GtkThemingEngine*)cPtr, _property, state, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, Yes.take);
+    value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
   }
 
   /**
@@ -223,7 +223,7 @@ class ThemingEngine : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gtk_theming_engine_get_screen(cast(GtkThemingEngine*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -248,10 +248,10 @@ class ThemingEngine : gobject.object.ObjectG
   */
   void getStyleProperty(string propertyName, out gobject.value.Value value)
   {
-    const(char)* _propertyName = propertyName.toCString(No.alloc);
+    const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
     gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)cPtr, _propertyName, &_value);
-    value = new gobject.value.Value(cast(void*)&_value, No.take);
+    value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
   /**
@@ -264,7 +264,7 @@ class ThemingEngine : gobject.object.ObjectG
   bool hasClass(string styleClass)
   {
     bool _retval;
-    const(char)* _styleClass = styleClass.toCString(No.alloc);
+    const(char)* _styleClass = styleClass.toCString(No.Alloc);
     _retval = gtk_theming_engine_has_class(cast(GtkThemingEngine*)cPtr, _styleClass);
     return _retval;
   }
@@ -281,7 +281,7 @@ class ThemingEngine : gobject.object.ObjectG
   bool hasRegion(string styleRegion, out gtk.types.RegionFlags flags)
   {
     bool _retval;
-    const(char)* _styleRegion = styleRegion.toCString(No.alloc);
+    const(char)* _styleRegion = styleRegion.toCString(No.Alloc);
     _retval = gtk_theming_engine_has_region(cast(GtkThemingEngine*)cPtr, _styleRegion, &flags);
     return _retval;
   }
@@ -296,10 +296,10 @@ class ThemingEngine : gobject.object.ObjectG
   bool lookupColor(string colorName, out gdk.rgba.RGBA color)
   {
     bool _retval;
-    const(char)* _colorName = colorName.toCString(No.alloc);
+    const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkRGBA _color;
     _retval = gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)cPtr, _colorName, &_color);
-    color = new gdk.rgba.RGBA(cast(void*)&_color, No.take);
+    color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
 

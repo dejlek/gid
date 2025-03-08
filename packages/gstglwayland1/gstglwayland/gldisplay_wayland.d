@@ -14,7 +14,7 @@ import gstglwayland.types;
 class GLDisplayWayland : gstgl.gldisplay.GLDisplay
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,9 +40,9 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   this(string name = null)
   {
     GstGLDisplayWayland* _cretval;
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_gl_display_wayland_new(_name);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -55,7 +55,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayWayland* _cretval;
     _cretval = gst_gl_display_wayland_new_with_display(display);
-    auto _retval = ObjectG.getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -29,7 +29,7 @@ import gobject.value;
 class Screen : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -55,7 +55,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkScreen* _cretval;
     _cretval = gdk_screen_get_default();
-    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_active_window(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkDisplay* _cretval;
     _cretval = gdk_screen_get_display(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Screen : gobject.object.ObjectG
   {
     const(cairo_font_options_t)* _cretval;
     _cretval = gdk_screen_get_font_options(cast(GdkScreen*)cPtr);
-    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Screen : gobject.object.ObjectG
   int getMonitorAtWindow(gdk.window.Window window)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_at_window(cast(GdkScreen*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.dup) : null);
+    _retval = gdk_screen_get_monitor_at_window(cast(GdkScreen*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkRectangle _dest;
     gdk_screen_get_monitor_geometry(cast(GdkScreen*)cPtr, monitorNum, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.take);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 
   /**
@@ -292,7 +292,7 @@ class Screen : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gdk_screen_get_monitor_plug_name(cast(GdkScreen*)cPtr, monitorNum);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkRectangle _dest;
     gdk_screen_get_monitor_workarea(cast(GdkScreen*)cPtr, monitorNum, &_dest);
-    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.take);
+    dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 
   /**
@@ -442,7 +442,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_rgba_visual(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkWindow* _cretval;
     _cretval = gdk_screen_get_root_window(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -473,8 +473,8 @@ class Screen : gobject.object.ObjectG
   bool getSetting(string name, gobject.value.Value value)
   {
     bool _retval;
-    const(char)* _name = name.toCString(No.alloc);
-    _retval = gdk_screen_get_setting(cast(GdkScreen*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.dup) : null);
+    const(char)* _name = name.toCString(No.Alloc);
+    _retval = gdk_screen_get_setting(cast(GdkScreen*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class Screen : gobject.object.ObjectG
   {
     GdkVisual* _cretval;
     _cretval = gdk_screen_get_system_visual(cast(GdkScreen*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -611,7 +611,7 @@ class Screen : gobject.object.ObjectG
   {
     char* _cretval;
     _cretval = gdk_screen_make_display_name(cast(GdkScreen*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -627,7 +627,7 @@ class Screen : gobject.object.ObjectG
   */
   void setFontOptions(cairo.font_options.FontOptions options = null)
   {
-    gdk_screen_set_font_options(cast(GdkScreen*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.dup) : null);
+    gdk_screen_set_font_options(cast(GdkScreen*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
   }
 
   /**
@@ -662,10 +662,10 @@ class Screen : gobject.object.ObjectG
     Connect to CompositedChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCompositedChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCompositedChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CompositedChangedCallbackDlg) || is(T : CompositedChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -701,10 +701,10 @@ class Screen : gobject.object.ObjectG
     Connect to MonitorsChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMonitorsChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMonitorsChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MonitorsChangedCallbackDlg) || is(T : MonitorsChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -737,10 +737,10 @@ class Screen : gobject.object.ObjectG
     Connect to SizeChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectSizeChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectSizeChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : SizeChangedCallbackDlg) || is(T : SizeChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

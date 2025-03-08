@@ -14,7 +14,7 @@ import gstgl.types;
 class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,8 +34,8 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context)
   {
     GstGLMemoryAllocator* _cretval;
-    _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.take);
+    _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 }

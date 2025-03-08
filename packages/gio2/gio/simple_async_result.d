@@ -181,7 +181,7 @@ import gobject.object;
 class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -225,14 +225,14 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, _callbackCB, _callback, sourceTag);
-    this(_cretval, Yes.take);
+    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -252,14 +252,14 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error.cPtr : null);
-    auto _retval = ObjectG.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.take);
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error.cPtr : null);
+    auto _retval = ObjectG.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectG source = null, void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, source ? cast(ObjectC*)source.cPtr(No.dup) : null, sourceTag);
+    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
     This function has one very specific purpose: the provided cancellable
     is checked at the time of [gio.simple_async_result.SimpleAsyncResult.propagateError] If
     it is cancelled, these functions will return an "Operation was
-    cancelled" error ([gio.types.IOErrorEnum.cancelled]).
+    cancelled" error ([gio.types.IOErrorEnum.Cancelled]).
     
     Implementors of cancellable asynchronous functions should use this in
     order to provide a guarantee to their callers that cancelling an
@@ -394,7 +394,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
   */
   void setCheckCancellable(gio.cancellable.Cancellable checkCancellable = null)
   {
-    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.dup) : null);
+    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.Dup) : null);
   }
 
   /**

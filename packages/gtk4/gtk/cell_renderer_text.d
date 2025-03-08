@@ -14,7 +14,7 @@ import gtk.types;
   style information provided by its properties. The text will be ellipsized if it is
   too long and the `GtkCellRendererText:ellipsize` property allows it.
   
-  If the `GtkCellRenderer:mode` is [gtk.types.CellRendererMode.editable],
+  If the `GtkCellRenderer:mode` is [gtk.types.CellRendererMode.Editable],
   the [gtk.cell_renderer_text.CellRendererText] allows to edit its text using an entry.
 
   Deprecated:     List views use widgets to display their contents.
@@ -23,7 +23,7 @@ import gtk.types;
 class CellRendererText : gtk.cell_renderer.CellRenderer
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
   {
     GtkCellRenderer* _cretval;
     _cretval = gtk_cell_renderer_text_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -94,10 +94,10 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
     Connect to Edited signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEdited(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEdited(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EditedCallbackDlg) || is(T : EditedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

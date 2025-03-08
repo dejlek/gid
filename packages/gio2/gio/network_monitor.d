@@ -38,7 +38,7 @@ interface NetworkMonitor
   {
     GNetworkMonitor* _cretval;
     _cretval = g_network_monitor_get_default();
-    auto _retval = ObjectG.getDObject!(gio.network_monitor.NetworkMonitor)(cast(GNetworkMonitor*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.network_monitor.NetworkMonitor)(cast(GNetworkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ interface NetworkMonitor
     If monitor believes that an attempt to connect to connectable
     will succeed, it will return true. Otherwise, it will return
     false and set error to an appropriate error (such as
-    [gio.types.IOErrorEnum.hostUnreachable]).
+    [gio.types.IOErrorEnum.HostUnreachable]).
     
     Note that although this does not attempt to connect to
     connectable, it may still block for a brief period of time (eg,
@@ -99,18 +99,18 @@ interface NetworkMonitor
     [gio.network_monitor.NetworkMonitor.getNetworkAvailable].
     
     If #GNetworkMonitor:network-available is false, then the
-    connectivity state will be [gio.types.NetworkConnectivity.local].
+    connectivity state will be [gio.types.NetworkConnectivity.Local].
     
     If #GNetworkMonitor:network-available is true, then the
-    connectivity state will be [gio.types.NetworkConnectivity.full] (if there
-    is full Internet connectivity), [gio.types.NetworkConnectivity.limited] (if
+    connectivity state will be [gio.types.NetworkConnectivity.Full] (if there
+    is full Internet connectivity), [gio.types.NetworkConnectivity.Limited] (if
     the host has a default route, but appears to be unable to actually
-    reach the full Internet), or [gio.types.NetworkConnectivity.portal] (if the
+    reach the full Internet), or [gio.types.NetworkConnectivity.Portal] (if the
     host is trapped behind a "captive portal" that requires some sort
     of login or acknowledgement before allowing full Internet access).
     
-    Note that in the case of [gio.types.NetworkConnectivity.limited] and
-    [gio.types.NetworkConnectivity.portal], it is possible that some sites are
+    Note that in the case of [gio.types.NetworkConnectivity.Limited] and
+    [gio.types.NetworkConnectivity.Portal], it is possible that some sites are
     reachable but others are not. In this case, applications can
     attempt to connect to remote servers, but should gracefully fall
     back to their "offline" behavior if the connection attempt fails.
@@ -152,9 +152,9 @@ interface NetworkMonitor
     Connect to NetworkChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectNetworkChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectNetworkChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : NetworkChangedCallbackDlg) || is(T : NetworkChangedCallbackFunc));
   }

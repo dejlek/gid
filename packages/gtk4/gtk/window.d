@@ -72,9 +72,9 @@ import gtk.window_group;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.window] role.
+  Until GTK 4.10, [gtk.window.Window] used the [gtk.types.AccessibleRole.Window] role.
   
-  Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.application] role.
+  Since GTK 4.12, [gtk.window.Window] uses the [gtk.types.AccessibleRole.Application] role.
   
   # Actions
   
@@ -89,7 +89,7 @@ import gtk.window_group;
 class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut_manager.ShortcutManager
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -128,7 +128,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -143,7 +143,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_default_icon_name();
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
-    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   static void setDefaultIconName(string name)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_default_icon_name(_name);
   }
 
@@ -286,7 +286,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void fullscreenOnMonitor(gdk.monitor.MonitorG monitor)
   {
-    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.dup) : null);
+    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -297,7 +297,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkApplication* _cretval;
     _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_child(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWindowGroup* _cretval;
     _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -498,7 +498,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     const(char)* _cretval;
     _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWidget* _cretval;
     _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GtkWindow* _cretval;
     _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -705,7 +705,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setApplication(gtk.application.Application application = null)
   {
-    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.dup) : null);
+    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
   }
 
   /**
@@ -715,7 +715,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -790,7 +790,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
   {
-    gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.dup) : null);
+    gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -838,7 +838,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDisplay(gdk.display.Display display)
   {
-    gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.dup) : null);
+    gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
   }
 
   /**
@@ -855,7 +855,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setFocus(gtk.widget.Widget focus = null)
   {
-    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.dup) : null);
+    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
   }
 
   /**
@@ -906,7 +906,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setIconName(string name = null)
   {
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
   }
 
@@ -971,7 +971,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setStartupId(string startupId)
   {
-    const(char)* _startupId = startupId.toCString(No.alloc);
+    const(char)* _startupId = startupId.toCString(No.Alloc);
     gtk_window_set_startup_id(cast(GtkWindow*)cPtr, _startupId);
   }
 
@@ -991,7 +991,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setTitle(string title = null)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
   }
 
@@ -1012,7 +1012,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setTitlebar(gtk.widget.Widget titlebar = null)
   {
-    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.dup) : null);
+    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.dup) : null);
+    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1109,10 +1109,10 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     Connect to ActivateDefault signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateDefault(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateDefault(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateDefaultCallbackDlg) || is(T : ActivateDefaultCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1147,10 +1147,10 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     Connect to ActivateFocus signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivateFocus(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivateFocus(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateFocusCallbackDlg) || is(T : ActivateFocusCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1183,10 +1183,10 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     Connect to CloseRequest signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectCloseRequest(T)(T callback, Flag!"after" after = No.after)
+  ulong connectCloseRequest(T)(T callback, Flag!"After" after = No.After)
   if (is(T : CloseRequestCallbackDlg) || is(T : CloseRequestCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1231,10 +1231,10 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     Connect to EnableDebugging signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectEnableDebugging(T)(T callback, Flag!"after" after = No.after)
+  ulong connectEnableDebugging(T)(T callback, Flag!"After" after = No.After)
   if (is(T : EnableDebuggingCallbackDlg) || is(T : EnableDebuggingCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -1273,10 +1273,10 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     Connect to KeysChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectKeysChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectKeysChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : KeysChangedCallbackDlg) || is(T : KeysChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

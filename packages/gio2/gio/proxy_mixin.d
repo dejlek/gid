@@ -41,10 +41,10 @@ template ProxyT()
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_proxy_connect(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, &_err);
+    _cretval = g_proxy_connect(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,12 +63,12 @@ template ProxyT()
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.take));
+      (*_dlg)(ObjectG.getDObject!(gobject.object.ObjectG)(cast(void*)sourceObject, No.Take), ObjectG.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_proxy_connect_async(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.dup) : null, _callbackCB, _callback);
+    g_proxy_connect_async(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -81,10 +81,10 @@ template ProxyT()
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_proxy_connect_finish(cast(GProxy*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.dup) : null, &_err);
+    _cretval = g_proxy_connect_finish(cast(GProxy*)cPtr, result ? cast(GAsyncResult*)(cast(ObjectG)result).cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 

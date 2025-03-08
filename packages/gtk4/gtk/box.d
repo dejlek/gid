@@ -46,14 +46,14 @@ import gtk.widget;
   
   # Accessibility
   
-  Until GTK 4.10, [gtk.box.Box] used the [gtk.types.AccessibleRole.group] role.
+  Until GTK 4.10, [gtk.box.Box] used the [gtk.types.AccessibleRole.Group] role.
   
-  Starting from GTK 4.12, [gtk.box.Box] uses the [gtk.types.AccessibleRole.generic] role.
+  Starting from GTK 4.12, [gtk.box.Box] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 class Box : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -82,7 +82,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_box_new(orientation, spacing);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -92,7 +92,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void append(gtk.widget.Widget child)
   {
-    gtk_box_append(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_box_append(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,7 +152,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
-    gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.dup) : null);
+    gtk_box_insert_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
   /**
@@ -162,7 +162,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_box_prepend(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_box_prepend(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -176,7 +176,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_box_remove(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null);
+    gtk_box_remove(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
   }
 
   /**
@@ -190,7 +190,7 @@ class Box : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
-    gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.dup) : null);
+    gtk_box_reorder_child_after(cast(GtkBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
   }
 
   /**

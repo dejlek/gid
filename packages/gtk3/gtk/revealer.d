@@ -29,7 +29,7 @@ import gtk.types;
 class Revealer : gtk.bin.Bin
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -53,7 +53,7 @@ class Revealer : gtk.bin.Bin
   {
     GtkWidget* _cretval;
     _cretval = gtk_revealer_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**

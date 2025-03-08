@@ -13,7 +13,7 @@ import glib.error;
 class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -33,8 +33,8 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType)
   {
     GArrowFixedSizeBinaryArrayBuilder* _cretval;
-    _cretval = garrow_fixed_size_binary_array_builder_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType.cPtr(No.dup) : null);
-    this(_cretval, Yes.take);
+    _cretval = garrow_fixed_size_binary_array_builder_new(dataType ? cast(GArrowFixedSizeBinaryDataType*)dataType.cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -58,7 +58,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_fixed_size_binary_array_builder_append_value_bytes(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.dup) : null, &_err);
+    _retval = garrow_fixed_size_binary_array_builder_append_value_bytes(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -122,7 +122,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_fixed_size_binary_array_builder_append_values_packed(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, values ? cast(GBytes*)values.cPtr(No.dup) : null, _isValids, _isValidsLength, &_err);
+    _retval = garrow_fixed_size_binary_array_builder_append_values_packed(cast(GArrowFixedSizeBinaryArrayBuilder*)cPtr, values ? cast(GBytes*)values.cPtr(No.Dup) : null, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;

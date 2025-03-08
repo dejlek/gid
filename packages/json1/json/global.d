@@ -54,7 +54,7 @@ bool boxedCanSerialize(gobject.types.GType gboxedType, out json.types.NodeType n
 */
 void* boxedDeserialize(gobject.types.GType gboxedType, json.node.Node node)
 {
-  auto _retval = json_boxed_deserialize(gboxedType, node ? cast(JsonNode*)node.cPtr(No.dup) : null);
+  auto _retval = json_boxed_deserialize(gboxedType, node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -71,7 +71,7 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
 {
   JsonNode* _cretval;
   _cretval = json_boxed_serialize(gboxedType, boxed);
-  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -100,12 +100,12 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
 gobject.object.ObjectG constructGobject(gobject.types.GType gtype, string data, size_t length)
 {
   ObjectC* _cretval;
-  const(char)* _data = data.toCString(No.alloc);
+  const(char)* _data = data.toCString(No.Alloc);
   GError *_err;
   _cretval = json_construct_gobject(gtype, _data, length, &_err);
   if (_err)
     throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -123,12 +123,12 @@ gobject.object.ObjectG constructGobject(gobject.types.GType gtype, string data, 
 json.node.Node fromString(string str)
 {
   JsonNode* _cretval;
-  const(char)* _str = str.toCString(No.alloc);
+  const(char)* _str = str.toCString(No.Alloc);
   GError *_err;
   _cretval = json_from_string(_str, &_err);
   if (_err)
     throw new ErrorG(_err);
-  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -137,15 +137,15 @@ json.node.Node fromString(string str)
   using the members of the object in the given node.
   Params:
     gtype =       the type of the object to create
-    node =       a node of type [json.types.NodeType.object] describing the
+    node =       a node of type [json.types.NodeType.Object] describing the
         object instance for the given type
   Returns:     The newly created instance
 */
 gobject.object.ObjectG gobjectDeserialize(gobject.types.GType gtype, json.node.Node node)
 {
   ObjectC* _cretval;
-  _cretval = json_gobject_deserialize(gtype, node ? cast(JsonNode*)node.cPtr(No.dup) : null);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+  _cretval = json_gobject_deserialize(gtype, node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
+  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -168,12 +168,12 @@ gobject.object.ObjectG gobjectDeserialize(gobject.types.GType gtype, json.node.N
 gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, ptrdiff_t length)
 {
   ObjectC* _cretval;
-  const(char)* _data = data.toCString(No.alloc);
+  const(char)* _data = data.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gobject_from_data(gtype, _data, length, &_err);
   if (_err)
     throw new ErrorG(_err);
-  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.take);
+  auto _retval = ObjectG.getDObject!(gobject.object.ObjectG)(cast(ObjectC*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -184,7 +184,7 @@ gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, p
   the object type.
   
   The returned JSON tree will be returned as a [json.node.Node] with a type
-  of [json.types.NodeType.object].
+  of [json.types.NodeType.Object].
   Params:
     gobject =       the object to serialize
   Returns:     the newly created JSON tree
@@ -192,8 +192,8 @@ gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, p
 json.node.Node gobjectSerialize(gobject.object.ObjectG gobject)
 {
   JsonNode* _cretval;
-  _cretval = json_gobject_serialize(gobject ? cast(ObjectC*)gobject.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+  _cretval = json_gobject_serialize(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -213,8 +213,8 @@ json.node.Node gobjectSerialize(gobject.object.ObjectG gobject)
 string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
 {
   char* _cretval;
-  _cretval = json_gobject_to_data(gobject ? cast(ObjectC*)gobject.cPtr(No.dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = json_gobject_to_data(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null, cast(size_t*)&length);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -229,10 +229,10 @@ string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
   
   If `signature` is not `NULL` but does not represent a valid [glib.variant.VariantG] type
   string, `NULL` is returned and the `error` is set to
-  [gio.types.IOErrorEnum.invalidArgument].
+  [gio.types.IOErrorEnum.InvalidArgument].
   
   If a `signature` is provided but the JSON structure cannot be mapped to it,
-  `NULL` is returned and the `error` is set to [gio.types.IOErrorEnum.invalidData].
+  `NULL` is returned and the `error` is set to [gio.types.IOErrorEnum.InvalidData].
   
   If `signature` is `NULL`, the conversion is done based strictly on the types
   in the JSON nodes.
@@ -247,12 +247,12 @@ string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
 glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signature = null)
 {
   VariantC* _cretval;
-  const(char)* _signature = signature.toCString(No.alloc);
+  const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
-  _cretval = json_gvariant_deserialize(jsonNode ? cast(JsonNode*)jsonNode.cPtr(No.dup) : null, _signature, &_err);
+  _cretval = json_gvariant_deserialize(jsonNode ? cast(JsonNode*)jsonNode.cPtr(No.Dup) : null, _signature, &_err);
   if (_err)
     throw new ErrorG(_err);
-  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -277,13 +277,13 @@ glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signat
 glib.variant.VariantG gvariantDeserializeData(string json, ptrdiff_t length, string signature = null)
 {
   VariantC* _cretval;
-  const(char)* _json = json.toCString(No.alloc);
-  const(char)* _signature = signature.toCString(No.alloc);
+  const(char)* _json = json.toCString(No.Alloc);
+  const(char)* _signature = signature.toCString(No.Alloc);
   GError *_err;
   _cretval = json_gvariant_deserialize_data(_json, length, _signature, &_err);
   if (_err)
     throw new ErrorG(_err);
-  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.take) : null;
+  auto _retval = _cretval ? new glib.variant.VariantG(cast(VariantC*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -297,8 +297,8 @@ glib.variant.VariantG gvariantDeserializeData(string json, ptrdiff_t length, str
 json.node.Node gvariantSerialize(glib.variant.VariantG variant)
 {
   JsonNode* _cretval;
-  _cretval = json_gvariant_serialize(variant ? cast(VariantC*)variant.cPtr(No.dup) : null);
-  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.take) : null;
+  _cretval = json_gvariant_serialize(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -316,8 +316,8 @@ json.node.Node gvariantSerialize(glib.variant.VariantG variant)
 string gvariantSerializeData(glib.variant.VariantG variant, out size_t length)
 {
   char* _cretval;
-  _cretval = json_gvariant_serialize_data(variant ? cast(VariantC*)variant.cPtr(No.dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = json_gvariant_serialize_data(variant ? cast(VariantC*)variant.cPtr(No.Dup) : null, cast(size_t*)&length);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -338,8 +338,8 @@ string gvariantSerializeData(glib.variant.VariantG variant, out size_t length)
 string serializeGobject(gobject.object.ObjectG gobject, out size_t length)
 {
   char* _cretval;
-  _cretval = json_serialize_gobject(gobject ? cast(ObjectC*)gobject.cPtr(No.dup) : null, cast(size_t*)&length);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = json_serialize_gobject(gobject ? cast(ObjectC*)gobject.cPtr(No.Dup) : null, cast(size_t*)&length);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 
@@ -355,8 +355,8 @@ string serializeGobject(gobject.object.ObjectG gobject, out size_t length)
 int stringCompare(string a, string b)
 {
   int _retval;
-  const(void)* _a = a.toCString(No.alloc);
-  const(void)* _b = b.toCString(No.alloc);
+  const(void)* _a = a.toCString(No.Alloc);
+  const(void)* _b = b.toCString(No.Alloc);
   _retval = json_string_compare(_a, _b);
   return _retval;
 }
@@ -371,8 +371,8 @@ int stringCompare(string a, string b)
 bool stringEqual(string a, string b)
 {
   bool _retval;
-  const(void)* _a = a.toCString(No.alloc);
-  const(void)* _b = b.toCString(No.alloc);
+  const(void)* _a = a.toCString(No.Alloc);
+  const(void)* _b = b.toCString(No.Alloc);
   _retval = json_string_equal(_a, _b);
   return _retval;
 }
@@ -390,7 +390,7 @@ bool stringEqual(string a, string b)
 uint stringHash(string key)
 {
   uint _retval;
-  const(void)* _key = key.toCString(No.alloc);
+  const(void)* _key = key.toCString(No.Alloc);
   _retval = json_string_hash(_key);
   return _retval;
 }
@@ -406,7 +406,7 @@ uint stringHash(string key)
 string toString_(json.node.Node node, bool pretty)
 {
   char* _cretval;
-  _cretval = json_to_string(node ? cast(JsonNode*)node.cPtr(No.dup) : null, pretty);
-  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+  _cretval = json_to_string(node ? cast(JsonNode*)node.cPtr(No.Dup) : null, pretty);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }

@@ -10,7 +10,7 @@ import parquet.types;
 class Statistics : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -30,7 +30,7 @@ class Statistics : gobject.object.ObjectG
   bool equal(parquet.statistics.Statistics otherStatistics)
   {
     bool _retval;
-    _retval = gparquet_statistics_equal(cast(GParquetStatistics*)cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics.cPtr(No.dup) : null);
+    _retval = gparquet_statistics_equal(cast(GParquetStatistics*)cPtr, otherStatistics ? cast(GParquetStatistics*)otherStatistics.cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -97,7 +97,7 @@ import gtk.widget;
 class Menu : gtk.menu_shell.MenuShell
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -121,7 +121,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -142,8 +142,8 @@ class Menu : gtk.menu_shell.MenuShell
   static gtk.menu.Menu newFromModel(gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkWidget*)_cretval, No.take);
+    _cretval = gtk_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(gtk.menu.Menu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Menu : gtk.menu_shell.MenuShell
   static gtk.widget.Widget[] getForAttachWidget(gtk.widget.Widget widget)
   {
     GList* _cretval;
-    _cretval = gtk_menu_get_for_attach_widget(widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null);
+    _cretval = gtk_menu_get_for_attach_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
     auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -180,7 +180,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach)
   {
-    gtk_menu_attach(cast(GtkMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
+    gtk_menu_attach(cast(GtkMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
   }
 
   /**
@@ -202,7 +202,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkAccelGroup* _cretval;
     _cretval = gtk_menu_get_accel_group(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_accel_path(cast(GtkMenu*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_active(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     GtkWidget* _cretval;
     _cretval = gtk_menu_get_attach_widget(cast(GtkMenu*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class Menu : gtk.menu_shell.MenuShell
   {
     const(char)* _cretval;
     _cretval = gtk_menu_get_title(cast(GtkMenu*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void placeOnMonitor(gdk.monitor.Monitor monitor)
   {
-    gtk_menu_place_on_monitor(cast(GtkMenu*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.dup) : null);
+    gtk_menu_place_on_monitor(cast(GtkMenu*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }
 
   /**
@@ -358,12 +358,12 @@ class Menu : gtk.menu_shell.MenuShell
       ptrThawGC(userData);
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.take), *x, *y, *pushIn);
+      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    gtk_menu_popup(cast(GtkMenu*)cPtr, parentMenuShell ? cast(GtkWidget*)parentMenuShell.cPtr(No.dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem.cPtr(No.dup) : null, _funcCB, _func, button, activateTime);
+    gtk_menu_popup(cast(GtkMenu*)cPtr, parentMenuShell ? cast(GtkWidget*)parentMenuShell.cPtr(No.Dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem.cPtr(No.Dup) : null, _funcCB, _func, button, activateTime);
   }
 
   /**
@@ -417,7 +417,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupAtRect(gdk.window.Window rectWindow, gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
-    gtk_menu_popup_at_rect(cast(GtkMenu*)cPtr, rectWindow ? cast(GdkWindow*)rectWindow.cPtr(No.dup) : null, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.dup) : null, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
+    gtk_menu_popup_at_rect(cast(GtkMenu*)cPtr, rectWindow ? cast(GdkWindow*)rectWindow.cPtr(No.Dup) : null, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, rectAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
   }
 
   /**
@@ -450,7 +450,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void popupAtWidget(gtk.widget.Widget widget, gdk.types.Gravity widgetAnchor, gdk.types.Gravity menuAnchor, gdk.event.Event triggerEvent = null)
   {
-    gtk_menu_popup_at_widget(cast(GtkMenu*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
+    gtk_menu_popup_at_widget(cast(GtkMenu*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, widgetAnchor, menuAnchor, triggerEvent ? cast(const(GdkEvent)*)triggerEvent.cPtr : null);
   }
 
   /**
@@ -498,13 +498,13 @@ class Menu : gtk.menu_shell.MenuShell
     {
       auto _dlg = cast(gtk.types.MenuPositionFunc*)userData;
 
-      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.take), *x, *y, *pushIn);
+      (*_dlg)(ObjectG.getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take), *x, *y, *pushIn);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_menu_popup_for_device(cast(GtkMenu*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.dup) : null, parentMenuShell ? cast(GtkWidget*)parentMenuShell.cPtr(No.dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem.cPtr(No.dup) : null, _funcCB, _func, _funcDestroyCB, button, activateTime);
+    gtk_menu_popup_for_device(cast(GtkMenu*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, parentMenuShell ? cast(GtkWidget*)parentMenuShell.cPtr(No.Dup) : null, parentMenuItem ? cast(GtkWidget*)parentMenuItem.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB, button, activateTime);
   }
 
   /**
@@ -517,7 +517,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void reorderChild(gtk.widget.Widget child, int position)
   {
-    gtk_menu_reorder_child(cast(GtkMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.dup) : null, position);
+    gtk_menu_reorder_child(cast(GtkMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -540,7 +540,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
-    gtk_menu_set_accel_group(cast(GtkMenu*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.dup) : null);
+    gtk_menu_set_accel_group(cast(GtkMenu*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
   }
 
   alias setAccelPath = gtk.widget.Widget.setAccelPath;
@@ -572,7 +572,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setAccelPath(string accelPath = null)
   {
-    const(char)* _accelPath = accelPath.toCString(No.alloc);
+    const(char)* _accelPath = accelPath.toCString(No.Alloc);
     gtk_menu_set_accel_path(cast(GtkMenu*)cPtr, _accelPath);
   }
 
@@ -626,7 +626,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setScreen(gdk.screen.Screen screen = null)
   {
-    gtk_menu_set_screen(cast(GtkMenu*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.dup) : null);
+    gtk_menu_set_screen(cast(GtkMenu*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
   }
 
   /**
@@ -655,7 +655,7 @@ class Menu : gtk.menu_shell.MenuShell
   */
   void setTitle(string title = null)
   {
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     gtk_menu_set_title(cast(GtkMenu*)cPtr, _title);
   }
 
@@ -669,10 +669,10 @@ class Menu : gtk.menu_shell.MenuShell
     Connect to MoveScroll signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectMoveScroll(T)(T callback, Flag!"after" after = No.after)
+  ulong connectMoveScroll(T)(T callback, Flag!"After" after = No.After)
   if (is(T : MoveScrollCallbackDlg) || is(T : MoveScrollCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -732,10 +732,10 @@ class Menu : gtk.menu_shell.MenuShell
     Connect to PoppedUp signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPoppedUp(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPoppedUp(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PoppedUpCallbackDlg) || is(T : PoppedUpCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

@@ -17,12 +17,12 @@ import gstnet.types;
 class NetTimePacket : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -77,7 +77,7 @@ class NetTimePacket : gobject.boxed.Boxed
     assert(!buffer || buffer.length == 16);
     auto _buffer = cast(const(ubyte)*)buffer.ptr;
     _cretval = gst_net_time_packet_new(_buffer);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -88,7 +88,7 @@ class NetTimePacket : gobject.boxed.Boxed
   {
     GstNetTimePacket* _cretval;
     _cretval = gst_net_time_packet_copy(cast(const(GstNetTimePacket)*)cPtr);
-    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class NetTimePacket : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = gst_net_time_packet_send(cast(const(GstNetTimePacket)*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.dup) : null, destAddress ? cast(GSocketAddress*)destAddress.cPtr(No.dup) : null, &_err);
+    _retval = gst_net_time_packet_send(cast(const(GstNetTimePacket)*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, destAddress ? cast(GSocketAddress*)destAddress.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorG(_err);
     return _retval;
@@ -147,11 +147,11 @@ class NetTimePacket : gobject.boxed.Boxed
     GstNetTimePacket* _cretval;
     GSocketAddress* _srcAddress;
     GError *_err;
-    _cretval = gst_net_time_packet_receive(socket ? cast(GSocket*)socket.cPtr(No.dup) : null, &_srcAddress, &_err);
+    _cretval = gst_net_time_packet_receive(socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, &_srcAddress, &_err);
     if (_err)
       throw new ErrorG(_err);
-    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.take) : null;
-    srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.take);
+    auto _retval = _cretval ? new gstnet.net_time_packet.NetTimePacket(cast(void*)_cretval, Yes.Take) : null;
+    srcAddress = new gio.socket_address.SocketAddress(cast(void*)_srcAddress, Yes.Take);
     return _retval;
   }
 }

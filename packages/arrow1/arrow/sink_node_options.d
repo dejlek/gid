@@ -13,7 +13,7 @@ import gobject.object;
 class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -34,15 +34,15 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   {
     GArrowSinkNodeOptions* _cretval;
     _cretval = garrow_sink_node_options_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /** */
   arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema)
   {
     GArrowRecordBatchReader* _cretval;
-    _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.take);
+    _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 }

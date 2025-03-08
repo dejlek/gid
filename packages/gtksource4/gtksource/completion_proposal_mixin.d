@@ -35,7 +35,7 @@ template CompletionProposalT()
   override bool equal(gtksource.completion_proposal.CompletionProposal other)
   {
     bool _retval;
-    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(ObjectG)other).cPtr(No.dup) : null);
+    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(ObjectG)other).cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -47,7 +47,7 @@ template CompletionProposalT()
   {
     GIcon* _cretval;
     _cretval = gtk_source_completion_proposal_get_gicon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ template CompletionProposalT()
   {
     PixbufC* _cretval;
     _cretval = gtk_source_completion_proposal_get_icon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ template CompletionProposalT()
   {
     const(char)* _cretval;
     _cretval = gtk_source_completion_proposal_get_icon_name(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ template CompletionProposalT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_info(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template CompletionProposalT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_label(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ template CompletionProposalT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_markup(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ template CompletionProposalT()
   {
     char* _cretval;
     _cretval = gtk_source_completion_proposal_get_text(cast(GtkSourceCompletionProposal*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -169,10 +169,10 @@ template CompletionProposalT()
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

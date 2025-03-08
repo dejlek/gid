@@ -16,7 +16,7 @@ import gtk.types;
 class VButtonBox : gtk.button_box.ButtonBox
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -36,12 +36,12 @@ class VButtonBox : gtk.button_box.ButtonBox
       Creates a new vertical button box.
     Returns:     a new button box #GtkWidget.
   
-    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.vertical] instead
+    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Vertical] instead
   */
   this()
   {
     GtkWidget* _cretval;
     _cretval = gtk_vbutton_box_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

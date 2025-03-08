@@ -10,7 +10,7 @@ class CheckABIStruct
 {
   GstCheckABIStruct cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for GstCheck.CheckABIStruct");
@@ -28,13 +28,13 @@ class CheckABIStruct
 
   @property string name()
   {
-    return (cast(GstCheckABIStruct*)cPtr).name.fromCString(No.free);
+    return (cast(GstCheckABIStruct*)cPtr).name.fromCString(No.Free);
   }
 
   @property void name(string propval)
   {
     safeFree(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
-    (cast(GstCheckABIStruct*)cPtr).name = propval.toCString(Yes.alloc);
+    (cast(GstCheckABIStruct*)cPtr).name = propval.toCString(Yes.Alloc);
   }
 
   @property int size()

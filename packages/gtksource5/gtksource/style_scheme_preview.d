@@ -28,7 +28,7 @@ import gtksource.types;
 class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,8 +56,8 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   this(gtksource.style_scheme.StyleScheme scheme)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -68,7 +68,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   {
     GtkSourceStyleScheme* _cretval;
     _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,10 +96,10 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     Connect to Activate signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectActivate(T)(T callback, Flag!"after" after = No.after)
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

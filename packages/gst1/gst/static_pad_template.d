@@ -16,7 +16,7 @@ class StaticPadTemplate
 {
   GstStaticPadTemplate cInstance;
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for Gst.StaticPadTemplate");
@@ -34,13 +34,13 @@ class StaticPadTemplate
 
   @property string nameTemplate()
   {
-    return (cast(GstStaticPadTemplate*)cPtr).nameTemplate.fromCString(No.free);
+    return (cast(GstStaticPadTemplate*)cPtr).nameTemplate.fromCString(No.Free);
   }
 
   @property void nameTemplate(string propval)
   {
     safeFree(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
-    (cast(GstStaticPadTemplate*)cPtr).nameTemplate = propval.toCString(Yes.alloc);
+    (cast(GstStaticPadTemplate*)cPtr).nameTemplate = propval.toCString(Yes.Alloc);
   }
 
   @property gst.types.PadDirection direction()
@@ -76,7 +76,7 @@ class StaticPadTemplate
   {
     GstPadTemplate* _cretval;
     _cretval = gst_static_pad_template_get(cast(GstStaticPadTemplate*)cPtr);
-    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class StaticPadTemplate
   {
     GstCaps* _cretval;
     _cretval = gst_static_pad_template_get_caps(cast(GstStaticPadTemplate*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }

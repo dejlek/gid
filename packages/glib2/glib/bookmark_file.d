@@ -50,12 +50,12 @@ import gobject.boxed;
 class BookmarkFile : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -83,7 +83,7 @@ class BookmarkFile : gobject.boxed.Boxed
   {
     GBookmarkFile* _cretval;
     _cretval = g_bookmark_file_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -117,9 +117,9 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void addApplication(string uri, string name = null, string exec = null)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _exec = exec.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _exec = exec.toCString(No.Alloc);
     g_bookmark_file_add_application(cast(GBookmarkFile*)cPtr, _uri, _name, _exec);
   }
 
@@ -134,8 +134,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void addGroup(string uri, string group)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _group = group.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.Alloc);
     g_bookmark_file_add_group(cast(GBookmarkFile*)cPtr, _uri, _group);
   }
 
@@ -148,7 +148,7 @@ class BookmarkFile : gobject.boxed.Boxed
   {
     GBookmarkFile* _cretval;
     _cretval = g_bookmark_file_copy(cast(GBookmarkFile*)cPtr);
-    auto _retval = _cretval ? new glib.bookmark_file.BookmarkFile(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new glib.bookmark_file.BookmarkFile(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class BookmarkFile : gobject.boxed.Boxed
   long getAdded(string uri)
   {
     long _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_get_added(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
@@ -187,12 +187,12 @@ class BookmarkFile : gobject.boxed.Boxed
   glib.date_time.DateTime getAddedDateTime(string uri)
   {
     GDateTime* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_added_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -224,14 +224,14 @@ class BookmarkFile : gobject.boxed.Boxed
   bool getAppInfo(string uri, string name, out string exec, out uint count, out long stamp)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     char* _exec;
     GError *_err;
     _retval = g_bookmark_file_get_app_info(cast(GBookmarkFile*)cPtr, _uri, _name, &_exec, cast(uint*)&count, cast(long*)&stamp, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    exec = _exec.fromCString(Yes.free);
+    exec = _exec.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -260,16 +260,16 @@ class BookmarkFile : gobject.boxed.Boxed
   bool getApplicationInfo(string uri, string name, out string exec, out uint count, out glib.date_time.DateTime stamp)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     char* _exec;
     GDateTime* _stamp;
     GError *_err;
     _retval = g_bookmark_file_get_application_info(cast(GBookmarkFile*)cPtr, _uri, _name, &_exec, cast(uint*)&count, &_stamp, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    exec = _exec.fromCString(Yes.free);
-    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.take);
+    exec = _exec.fromCString(Yes.Free);
+    stamp = new glib.date_time.DateTime(cast(void*)_stamp, No.Take);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class BookmarkFile : gobject.boxed.Boxed
   {
     char** _cretval;
     size_t _cretlength;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_applications(cast(GBookmarkFile*)cPtr, _uri, &_cretlength, &_err);
     if (_err)
@@ -299,7 +299,7 @@ class BookmarkFile : gobject.boxed.Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -317,12 +317,12 @@ class BookmarkFile : gobject.boxed.Boxed
   string getDescription(string uri)
   {
     char* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_description(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class BookmarkFile : gobject.boxed.Boxed
   {
     char** _cretval;
     size_t _cretlength;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_groups(cast(GBookmarkFile*)cPtr, _uri, &_cretlength, &_err);
     if (_err)
@@ -354,7 +354,7 @@ class BookmarkFile : gobject.boxed.Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -374,15 +374,15 @@ class BookmarkFile : gobject.boxed.Boxed
   bool getIcon(string uri, out string href, out string mimeType)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     char* _href;
     char* _mimeType;
     GError *_err;
     _retval = g_bookmark_file_get_icon(cast(GBookmarkFile*)cPtr, _uri, &_href, &_mimeType, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    href = _href.fromCString(Yes.free);
-    mimeType = _mimeType.fromCString(Yes.free);
+    href = _href.fromCString(Yes.Free);
+    mimeType = _mimeType.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class BookmarkFile : gobject.boxed.Boxed
   bool getIsPrivate(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_get_is_private(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
@@ -423,12 +423,12 @@ class BookmarkFile : gobject.boxed.Boxed
   string getMimeType(string uri)
   {
     char* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_mime_type(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class BookmarkFile : gobject.boxed.Boxed
   long getModified(string uri)
   {
     long _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_get_modified(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
@@ -467,12 +467,12 @@ class BookmarkFile : gobject.boxed.Boxed
   glib.date_time.DateTime getModifiedDateTime(string uri)
   {
     GDateTime* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_modified_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -502,12 +502,12 @@ class BookmarkFile : gobject.boxed.Boxed
   string getTitle(string uri = null)
   {
     char* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_title(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
 
@@ -529,7 +529,7 @@ class BookmarkFile : gobject.boxed.Boxed
     {
       _retval = new string[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = _cretval[i].fromCString(Yes.free);
+        _retval[i] = _cretval[i].fromCString(Yes.Free);
     }
     return _retval;
   }
@@ -549,7 +549,7 @@ class BookmarkFile : gobject.boxed.Boxed
   long getVisited(string uri)
   {
     long _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_get_visited(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
@@ -569,12 +569,12 @@ class BookmarkFile : gobject.boxed.Boxed
   glib.date_time.DateTime getVisitedDateTime(string uri)
   {
     GDateTime* _cretval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _cretval = g_bookmark_file_get_visited_date_time(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.take) : null;
+    auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -592,8 +592,8 @@ class BookmarkFile : gobject.boxed.Boxed
   bool hasApplication(string uri, string name)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_has_application(cast(GBookmarkFile*)cPtr, _uri, _name, &_err);
     if (_err)
@@ -615,8 +615,8 @@ class BookmarkFile : gobject.boxed.Boxed
   bool hasGroup(string uri, string group)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _group = group.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_has_group(cast(GBookmarkFile*)cPtr, _uri, _group, &_err);
     if (_err)
@@ -633,7 +633,7 @@ class BookmarkFile : gobject.boxed.Boxed
   bool hasItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     _retval = g_bookmark_file_has_item(cast(GBookmarkFile*)cPtr, _uri);
     return _retval;
   }
@@ -677,13 +677,13 @@ class BookmarkFile : gobject.boxed.Boxed
   bool loadFromDataDirs(string file, out string fullPath)
   {
     bool _retval;
-    const(char)* _file = file.toCString(No.alloc);
+    const(char)* _file = file.toCString(No.Alloc);
     char* _fullPath;
     GError *_err;
     _retval = g_bookmark_file_load_from_data_dirs(cast(GBookmarkFile*)cPtr, _file, &_fullPath, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
-    fullPath = _fullPath.fromCString(Yes.free);
+    fullPath = _fullPath.fromCString(Yes.Free);
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class BookmarkFile : gobject.boxed.Boxed
   bool loadFromFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_load_from_file(cast(GBookmarkFile*)cPtr, _filename, &_err);
     if (_err)
@@ -722,8 +722,8 @@ class BookmarkFile : gobject.boxed.Boxed
   bool moveItem(string oldUri, string newUri = null)
   {
     bool _retval;
-    const(char)* _oldUri = oldUri.toCString(No.alloc);
-    const(char)* _newUri = newUri.toCString(No.alloc);
+    const(char)* _oldUri = oldUri.toCString(No.Alloc);
+    const(char)* _newUri = newUri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_move_item(cast(GBookmarkFile*)cPtr, _oldUri, _newUri, &_err);
     if (_err)
@@ -748,8 +748,8 @@ class BookmarkFile : gobject.boxed.Boxed
   bool removeApplication(string uri, string name)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_remove_application(cast(GBookmarkFile*)cPtr, _uri, _name, &_err);
     if (_err)
@@ -773,8 +773,8 @@ class BookmarkFile : gobject.boxed.Boxed
   bool removeGroup(string uri, string group)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _group = group.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _group = group.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_remove_group(cast(GBookmarkFile*)cPtr, _uri, _group, &_err);
     if (_err)
@@ -791,7 +791,7 @@ class BookmarkFile : gobject.boxed.Boxed
   bool removeItem(string uri)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_remove_item(cast(GBookmarkFile*)cPtr, _uri, &_err);
     if (_err)
@@ -812,7 +812,7 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setAdded(string uri, long added)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_added(cast(GBookmarkFile*)cPtr, _uri, added);
   }
 
@@ -826,8 +826,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setAddedDateTime(string uri, glib.date_time.DateTime added)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    g_bookmark_file_set_added_date_time(cast(GBookmarkFile*)cPtr, _uri, added ? cast(GDateTime*)added.cPtr(No.dup) : null);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    g_bookmark_file_set_added_date_time(cast(GBookmarkFile*)cPtr, _uri, added ? cast(GDateTime*)added.cPtr(No.Dup) : null);
   }
 
   /**
@@ -874,9 +874,9 @@ class BookmarkFile : gobject.boxed.Boxed
   bool setAppInfo(string uri, string name, string exec, int count, long stamp)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _exec = exec.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _exec = exec.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_set_app_info(cast(GBookmarkFile*)cPtr, _uri, _name, _exec, count, stamp, &_err);
     if (_err)
@@ -925,11 +925,11 @@ class BookmarkFile : gobject.boxed.Boxed
   bool setApplicationInfo(string uri, string name, string exec, int count, glib.date_time.DateTime stamp = null)
   {
     bool _retval;
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _name = name.toCString(No.alloc);
-    const(char)* _exec = exec.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _name = name.toCString(No.Alloc);
+    const(char)* _exec = exec.toCString(No.Alloc);
     GError *_err;
-    _retval = g_bookmark_file_set_application_info(cast(GBookmarkFile*)cPtr, _uri, _name, _exec, count, stamp ? cast(GDateTime*)stamp.cPtr(No.dup) : null, &_err);
+    _retval = g_bookmark_file_set_application_info(cast(GBookmarkFile*)cPtr, _uri, _name, _exec, count, stamp ? cast(GDateTime*)stamp.cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new BookmarkFileException(_err);
     return _retval;
@@ -947,8 +947,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setDescription(string uri, string description)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _description = description.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _description = description.toCString(No.Alloc);
     g_bookmark_file_set_description(cast(GBookmarkFile*)cPtr, _uri, _description);
   }
 
@@ -964,14 +964,14 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setGroups(string uri, string[] groups = null)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     size_t _length;
     if (groups)
       _length = cast(size_t)groups.length;
 
     const(char)*[] _tmpgroups;
     foreach (s; groups)
-      _tmpgroups ~= s.toCString(No.alloc);
+      _tmpgroups ~= s.toCString(No.Alloc);
     const(char*)* _groups = _tmpgroups.ptr;
     g_bookmark_file_set_groups(cast(GBookmarkFile*)cPtr, _uri, _groups, _length);
   }
@@ -989,9 +989,9 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setIcon(string uri, string href, string mimeType)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _href = href.toCString(No.alloc);
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _href = href.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     g_bookmark_file_set_icon(cast(GBookmarkFile*)cPtr, _uri, _href, _mimeType);
   }
 
@@ -1005,7 +1005,7 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setIsPrivate(string uri, bool isPrivate)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_is_private(cast(GBookmarkFile*)cPtr, _uri, isPrivate);
   }
 
@@ -1019,8 +1019,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setMimeType(string uri, string mimeType)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _mimeType = mimeType.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _mimeType = mimeType.toCString(No.Alloc);
     g_bookmark_file_set_mime_type(cast(GBookmarkFile*)cPtr, _uri, _mimeType);
   }
 
@@ -1042,7 +1042,7 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setModified(string uri, long modified)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_modified(cast(GBookmarkFile*)cPtr, _uri, modified);
   }
 
@@ -1061,8 +1061,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setModifiedDateTime(string uri, glib.date_time.DateTime modified)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    g_bookmark_file_set_modified_date_time(cast(GBookmarkFile*)cPtr, _uri, modified ? cast(GDateTime*)modified.cPtr(No.dup) : null);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    g_bookmark_file_set_modified_date_time(cast(GBookmarkFile*)cPtr, _uri, modified ? cast(GDateTime*)modified.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1078,8 +1078,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setTitle(string uri, string title)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    const(char)* _title = title.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    const(char)* _title = title.toCString(No.Alloc);
     g_bookmark_file_set_title(cast(GBookmarkFile*)cPtr, _uri, _title);
   }
 
@@ -1102,7 +1102,7 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setVisited(string uri, long visited)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
+    const(char)* _uri = uri.toCString(No.Alloc);
     g_bookmark_file_set_visited(cast(GBookmarkFile*)cPtr, _uri, visited);
   }
 
@@ -1122,8 +1122,8 @@ class BookmarkFile : gobject.boxed.Boxed
   */
   void setVisitedDateTime(string uri, glib.date_time.DateTime visited)
   {
-    const(char)* _uri = uri.toCString(No.alloc);
-    g_bookmark_file_set_visited_date_time(cast(GBookmarkFile*)cPtr, _uri, visited ? cast(GDateTime*)visited.cPtr(No.dup) : null);
+    const(char)* _uri = uri.toCString(No.Alloc);
+    g_bookmark_file_set_visited_date_time(cast(GBookmarkFile*)cPtr, _uri, visited ? cast(GDateTime*)visited.cPtr(No.Dup) : null);
   }
 
   /**
@@ -1157,7 +1157,7 @@ class BookmarkFile : gobject.boxed.Boxed
   bool toFile(string filename)
   {
     bool _retval;
-    const(char)* _filename = filename.toCString(No.alloc);
+    const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
     _retval = g_bookmark_file_to_file(cast(GBookmarkFile*)cPtr, _filename, &_err);
     if (_err)

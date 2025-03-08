@@ -57,7 +57,7 @@ import gtk.types;
 class Scrollbar : gtk.range.Range
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -83,7 +83,7 @@ class Scrollbar : gtk.range.Range
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
-    this(_cretval, No.take);
+    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
   }
 }

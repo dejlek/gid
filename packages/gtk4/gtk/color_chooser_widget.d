@@ -45,7 +45,7 @@ import gtk.widget;
 class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -71,6 +71,6 @@ class ColorChooserWidget : gtk.widget.Widget, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     _cretval = gtk_color_chooser_widget_new();
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 }

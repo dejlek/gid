@@ -14,7 +14,7 @@ import gstglegl.types;
 class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -40,7 +40,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new(deviceIndex);
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -54,7 +54,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new_with_egl_device(device);
-    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
     return _retval;
   }
 }

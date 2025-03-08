@@ -63,12 +63,12 @@ import gstaudio.types;
 class DsdInfo : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -153,7 +153,7 @@ class DsdInfo : gobject.boxed.Boxed
   {
     GstDsdInfo* _cretval;
     _cretval = gst_dsd_info_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -165,8 +165,8 @@ class DsdInfo : gobject.boxed.Boxed
   static gstaudio.dsd_info.DsdInfo newFromCaps(gst.caps.Caps caps)
   {
     GstDsdInfo* _cretval;
-    _cretval = gst_dsd_info_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
-    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_dsd_info_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class DsdInfo : gobject.boxed.Boxed
   {
     GstDsdInfo* _cretval;
     _cretval = gst_dsd_info_copy(cast(const(GstDsdInfo)*)cPtr);
-    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gstaudio.dsd_info.DsdInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class DsdInfo : gobject.boxed.Boxed
   bool isEqual(gstaudio.dsd_info.DsdInfo other)
   {
     bool _retval;
-    _retval = gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)cPtr, other ? cast(const(GstDsdInfo)*)other.cPtr(No.dup) : null);
+    _retval = gst_dsd_info_is_equal(cast(const(GstDsdInfo)*)cPtr, other ? cast(const(GstDsdInfo)*)other.cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class DsdInfo : gobject.boxed.Boxed
   {
     GstCaps* _cretval;
     _cretval = gst_dsd_info_to_caps(cast(const(GstDsdInfo)*)cPtr);
-    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -236,8 +236,8 @@ class DsdInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GstDsdInfo _info;
-    _retval = gst_dsd_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps.cPtr(No.dup) : null);
-    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.take);
+    _retval = gst_dsd_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 
@@ -250,6 +250,6 @@ class DsdInfo : gobject.boxed.Boxed
   {
     GstDsdInfo _info;
     gst_dsd_info_init(&_info);
-    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.take);
+    info = new gstaudio.dsd_info.DsdInfo(cast(void*)&_info, No.Take);
   }
 }

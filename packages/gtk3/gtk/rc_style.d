@@ -15,7 +15,7 @@ import gtk.types;
 class RcStyle : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -42,7 +42,7 @@ class RcStyle : gobject.object.ObjectG
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_rc_style_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class RcStyle : gobject.object.ObjectG
   {
     GtkRcStyle* _cretval;
     _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
     return _retval;
   }
 }

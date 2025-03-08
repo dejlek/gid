@@ -10,7 +10,7 @@ import gio.volume_monitor;
 class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }

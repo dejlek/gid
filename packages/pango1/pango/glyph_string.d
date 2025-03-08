@@ -18,12 +18,12 @@ import pango.types;
 class GlyphString : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -58,7 +58,7 @@ class GlyphString : gobject.boxed.Boxed
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_new();
-    this(_cretval, Yes.take);
+    this(_cretval, Yes.Take);
   }
 
   /**
@@ -69,7 +69,7 @@ class GlyphString : gobject.boxed.Boxed
   {
     PangoGlyphString* _cretval;
     _cretval = pango_glyph_string_copy(cast(PangoGlyphString*)cPtr);
-    auto _retval = _cretval ? new pango.glyph_string.GlyphString(cast(void*)_cretval, Yes.take) : null;
+    auto _retval = _cretval ? new pango.glyph_string.GlyphString(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class GlyphString : gobject.boxed.Boxed
   */
   void extents(pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_glyph_string_extents(cast(PangoGlyphString*)cPtr, font ? cast(PangoFont*)font.cPtr(No.dup) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents(cast(PangoGlyphString*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
 
   /**
@@ -110,7 +110,7 @@ class GlyphString : gobject.boxed.Boxed
   */
   void extentsRange(int start, int end, pango.font.Font font, out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_glyph_string_extents_range(cast(PangoGlyphString*)cPtr, start, end, font ? cast(PangoFont*)font.cPtr(No.dup) : null, &inkRect, &logicalRect);
+    pango_glyph_string_extents_range(cast(PangoGlyphString*)cPtr, start, end, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, &inkRect, &logicalRect);
   }
 
   /**

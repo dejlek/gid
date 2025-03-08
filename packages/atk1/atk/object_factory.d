@@ -21,7 +21,7 @@ import gobject.types;
 class ObjectFactory : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -48,8 +48,8 @@ class ObjectFactory : gobject.object.ObjectG
   atk.object.ObjectAtk createAccessible(gobject.object.ObjectG obj)
   {
     AtkObject* _cretval;
-    _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)cPtr, obj ? cast(ObjectC*)obj.cPtr(No.dup) : null);
-    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.take);
+    _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)cPtr, obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
+    auto _retval = ObjectG.getDObject!(atk.object.ObjectAtk)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 

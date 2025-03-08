@@ -41,7 +41,7 @@ import gtk.widget;
 class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orientable.Orientable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,11 +80,11 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     GtkWidget* _cretval;
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.alloc);
+      _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
     _cretval = gtk_scale_button_new(min, max, step, _icons);
-    this(_cretval, No.take);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -111,7 +111,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkAdjustment* _cretval;
     _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.dup) : null);
+    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   {
     char*[] _tmpicons;
     foreach (s; icons)
-      _tmpicons ~= s.toCString(No.alloc);
+      _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
     gtk_scale_button_set_icons(cast(GtkScaleButton*)cPtr, _icons);
@@ -250,10 +250,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     Connect to Popdown signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopdown(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -290,10 +290,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     Connect to Popup signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectPopup(T)(T callback, Flag!"after" after = No.after)
+  ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
   if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
@@ -326,10 +326,10 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     Connect to ValueChanged signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectValueChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

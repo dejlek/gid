@@ -26,7 +26,7 @@ import gobject.object;
 class FileMonitor : gobject.object.ObjectG
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -68,7 +68,7 @@ class FileMonitor : gobject.object.ObjectG
   */
   void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType)
   {
-    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(No.dup) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(No.dup) : null, eventType);
+    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(ObjectG)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(ObjectG)otherFile).cPtr(No.Dup) : null, eventType);
   }
 
   /**
@@ -97,10 +97,10 @@ class FileMonitor : gobject.object.ObjectG
   /**
       Emitted when file has been changed.
     
-    If using [gio.types.FileMonitorFlags.watchMoves] on a directory monitor, and
+    If using [gio.types.FileMonitorFlags.WatchMoves] on a directory monitor, and
     the information is available (and if supported by the backend),
-    event_type may be [gio.types.FileMonitorEvent.renamed],
-    [gio.types.FileMonitorEvent.movedIn] or [gio.types.FileMonitorEvent.movedOut].
+    event_type may be [gio.types.FileMonitorEvent.Renamed],
+    [gio.types.FileMonitorEvent.MovedIn] or [gio.types.FileMonitorEvent.MovedOut].
     
     In all cases file will be a child of the monitored directory.  For
     renames, file will be the old name and other_file is the new
@@ -110,16 +110,16 @@ class FileMonitor : gobject.object.ObjectG
     the file that used to be in this directory and other_file is the
     name of the file at its new location.
     
-    It makes sense to treat [gio.types.FileMonitorEvent.movedIn] as
-    equivalent to [gio.types.FileMonitorEvent.created] and
-    [gio.types.FileMonitorEvent.movedOut] as equivalent to
-    [gio.types.FileMonitorEvent.deleted], with extra information.
-    [gio.types.FileMonitorEvent.renamed] is equivalent to a delete/create
+    It makes sense to treat [gio.types.FileMonitorEvent.MovedIn] as
+    equivalent to [gio.types.FileMonitorEvent.Created] and
+    [gio.types.FileMonitorEvent.MovedOut] as equivalent to
+    [gio.types.FileMonitorEvent.Deleted], with extra information.
+    [gio.types.FileMonitorEvent.Renamed] is equivalent to a delete/create
     pair.  This is exactly how the events will be reported in the case
-    that the [gio.types.FileMonitorFlags.watchMoves] flag is not in use.
+    that the [gio.types.FileMonitorFlags.WatchMoves] flag is not in use.
     
-    If using the deprecated flag [gio.types.FileMonitorFlags.sendMoved] flag and event_type is
-    [gio.types.FileMonitorEvent.moved], file will be set to a #GFile containing the
+    If using the deprecated flag [gio.types.FileMonitorFlags.SendMoved] flag and event_type is
+    [gio.types.FileMonitorEvent.Moved], file will be set to a #GFile containing the
     old path, and other_file will be set to a #GFile containing the new path.
     
     In all the other cases, other_file will be set to #NULL.
@@ -141,10 +141,10 @@ class FileMonitor : gobject.object.ObjectG
     Connect to Changed signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectChanged(T)(T callback, Flag!"after" after = No.after)
+  ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

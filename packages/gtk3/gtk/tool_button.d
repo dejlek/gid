@@ -44,7 +44,7 @@ import gtk.widget;
 class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
@@ -73,9 +73,9 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   this(gtk.widget.Widget iconWidget = null, string label = null)
   {
     GtkToolItem* _cretval;
-    const(char)* _label = label.toCString(No.alloc);
-    _cretval = gtk_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.dup) : null, _label);
-    this(_cretval, No.take);
+    const(char)* _label = label.toCString(No.Alloc);
+    _cretval = gtk_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null, _label);
+    this(_cretval, No.Take);
   }
 
   /**
@@ -94,9 +94,9 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   static gtk.tool_button.ToolButton newFromStock(string stockId)
   {
     GtkToolItem* _cretval;
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_tool_button_new_from_stock(_stockId);
-    auto _retval = ObjectG.getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_icon_name(cast(GtkToolButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_icon_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_label(cast(GtkToolButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     GtkWidget* _cretval;
     _cretval = gtk_tool_button_get_label_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.take);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     const(char)* _cretval;
     _cretval = gtk_tool_button_get_stock_id(cast(GtkToolButton*)cPtr);
-    string _retval = (cast(const(char)*)_cretval).fromCString(No.free);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setIconName(string iconName = null)
   {
-    const(char)* _iconName = iconName.toCString(No.alloc);
+    const(char)* _iconName = iconName.toCString(No.Alloc);
     gtk_tool_button_set_icon_name(cast(GtkToolButton*)cPtr, _iconName);
   }
 
@@ -208,7 +208,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setIconWidget(gtk.widget.Widget iconWidget = null)
   {
-    gtk_tool_button_set_icon_widget(cast(GtkToolButton*)cPtr, iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.dup) : null);
+    gtk_tool_button_set_icon_widget(cast(GtkToolButton*)cPtr, iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -223,7 +223,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setLabel(string label = null)
   {
-    const(char)* _label = label.toCString(No.alloc);
+    const(char)* _label = label.toCString(No.Alloc);
     gtk_tool_button_set_label(cast(GtkToolButton*)cPtr, _label);
   }
 
@@ -238,7 +238,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_tool_button_set_label_widget(cast(GtkToolButton*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.dup) : null);
+    gtk_tool_button_set_label_widget(cast(GtkToolButton*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
   }
 
   /**
@@ -252,7 +252,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setStockId(string stockId = null)
   {
-    const(char)* _stockId = stockId.toCString(No.alloc);
+    const(char)* _stockId = stockId.toCString(No.Alloc);
     gtk_tool_button_set_stock_id(cast(GtkToolButton*)cPtr, _stockId);
   }
 
@@ -291,10 +291,10 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     Connect to Clicked signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectClicked(T)(T callback, Flag!"after" after = No.after)
+  ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
   if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)

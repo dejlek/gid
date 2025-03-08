@@ -77,7 +77,7 @@ interface MemoryMonitor
   {
     GMemoryMonitor* _cretval;
     _cretval = g_memory_monitor_dup_default();
-    auto _retval = ObjectG.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.take);
+    auto _retval = ObjectG.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,9 +102,9 @@ interface MemoryMonitor
     Connect to LowMemoryWarning signal.
     Params:
       callback = signal callback delegate or function to connect
-      after = Yes.after to execute callback after default handler, No.after to execute before (default)
+      after = Yes.After to execute callback after default handler, No.After to execute before (default)
     Returns: Signal ID
   */
-  ulong connectLowMemoryWarning(T)(T callback, Flag!"after" after = No.after)
+  ulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After)
   if (is(T : LowMemoryWarningCallbackDlg) || is(T : LowMemoryWarningCallbackFunc));
   }

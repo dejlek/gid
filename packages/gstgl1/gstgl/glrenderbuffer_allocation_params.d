@@ -15,12 +15,12 @@ import gstgl.types;
 class GLRenderbufferAllocationParams : gobject.boxed.Boxed
 {
 
-  this(void* ptr, Flag!"take" take = No.take)
+  this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
-  void* cPtr(Flag!"dup" dup = No.dup)
+  void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
@@ -70,8 +70,8 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height)
   {
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, renderbufferFormat, width, height);
-    this(_cretval, Yes.take);
+    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, renderbufferFormat, width, height);
+    this(_cretval, Yes.Take);
   }
 
   /** */
@@ -87,8 +87,8 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context.cPtr(No.dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.dup) : null, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
-    auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.take) : null;
+    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
+    auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 }
