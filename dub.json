@@ -6,6 +6,7 @@
   "license": "MIT",
   "targetType": "none",
   "dependencies": {
+    ":adw1": "*",
     ":arrow1": "*",
     ":arrowdataset1": "*",
     ":arrowflight1": "*",
@@ -54,6 +55,7 @@
     ":xlib2": "*"
   },
   "subPackages": [
+    "packages/adw1/",
     "packages/arrow1/",
     "packages/arrowdataset1/",
     "packages/arrowflight1/",

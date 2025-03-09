@@ -59,3 +59,10 @@ Soup 3
 ------
 
 `sudo dnf install libsoup3-devel` is needed if you want to use gid:soup3
+
+Adwaita
+-------
+
+For gid:libadwaita1 you need the following:
+
+`sudo dnf install libadwaita-devel`
