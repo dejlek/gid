@@ -1,0 +1,104 @@
+module adw.leaflet_page;
+
+import adw.c.functions;
+import adw.c.types;
+import adw.types;
+import gid.gid;
+import gobject.object;
+import gtk.widget;
+
+/**
+    An auxiliary class used by `class@Leaflet`.
+
+  Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+*/
+class LeafletPage : gobject.object.ObjectG
+{
+
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  static GType getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())adw_leaflet_page_get_type != &gidSymbolNotFound ? adw_leaflet_page_get_type() : cast(GType)0;
+  }
+
+  override @property GType gType()
+  {
+    return getGType();
+  }
+
+  /**
+      Gets the leaflet child to which self belongs.
+    Returns:     the child to which self belongs
+  
+    Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  gtk.widget.Widget getChild()
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_leaflet_page_get_child(cast(AdwLeafletPage*)cPtr);
+    auto _retval = ObjectG.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the name of self.
+    Returns:     the name of self.
+  
+    Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  string getName()
+  {
+    const(char)* _cretval;
+    _cretval = adw_leaflet_page_get_name(cast(AdwLeafletPage*)cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the child can be navigated to when folded.
+    Returns:     whether self can be navigated to when folded
+  
+    Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  bool getNavigatable()
+  {
+    bool _retval;
+    _retval = adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the name of the self.
+    Params:
+      name =       the new value to set
+  
+    Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  void setName(string name = null)
+  {
+    const(char)* _name = name.toCString(No.Alloc);
+    adw_leaflet_page_set_name(cast(AdwLeafletPage*)cPtr, _name);
+  }
+
+  /**
+      Sets whether self can be navigated to when folded.
+    
+    If `FALSE`, the child will be ignored by [adw.leaflet.Leaflet.getAdjacentChild],
+    [adw.leaflet.Leaflet.navigate], and swipe gestures.
+    
+    This can be used used to prevent switching to widgets like separators.
+    Params:
+      navigatable =       whether self can be navigated to when folded
+  
+    Deprecated:     See [the migration guide](migrating-to-breakpoints.html#replace-adwleaflet)
+  */
+  void setNavigatable(bool navigatable)
+  {
+    adw_leaflet_page_set_navigatable(cast(AdwLeafletPage*)cPtr, navigatable);
+  }
+}

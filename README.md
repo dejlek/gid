@@ -45,6 +45,7 @@ And finally the D binding source code itself can be used as a referenced.
 Here are some links to the C API documentation, which may be useful.
 Though the adrdox generated documentation is now available and is a better documentation source.
 
+ * [Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/)
  * [Arrow](https://arrow.apache.org/docs/c_glib/arrow-glib/index.html)
  * [ArrowDataset](https://arrow.apache.org/docs/c_glib/arrow-dataset-glib/index.html)
  * [ArrowFlight](https://arrow.apache.org/docs/c_glib/arrow-flight-glib/index.html)
