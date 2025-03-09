@@ -124,13 +124,6 @@ class VideoMeta
     (cast(GstVideoMeta*)cPtr).nPlanes = propval;
   }
 
-  alias MapFuncType = extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info, void** data, int* stride, GstMapFlags flags);
-
-  @property MapFuncType map()
-  {
-    return (cast(GstVideoMeta*)cPtr).map;
-  }
-
   alias UnmapFuncType = extern(C) bool function(GstVideoMeta* meta, uint plane, GstMapInfo* info);
 
   @property UnmapFuncType unmap()

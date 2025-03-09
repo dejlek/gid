@@ -583,6 +583,26 @@ class RTCPPacket
   }
 
   /**
+      This function is like [gstrtp.rtcppacket.RTCPPacket.sdesGetEntry] but it returns a
+    null-terminated copy of the data instead. use [glib.global.gfree] after usage.
+    Params:
+      type =       result of the entry type
+      data =       result entry data
+    Returns:     true if there was valid data.
+  */
+  bool sdesCopyEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
+  {
+    bool _retval;
+    ubyte _len;
+    ubyte* _data;
+    _retval = gst_rtcp_packet_sdes_copy_entry(cast(GstRTCPPacket*)cPtr, &type, &_len, &_data);
+    data.length = _len;
+    data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
+    safeFree(cast(void*)_data);
+    return _retval;
+  }
+
+  /**
       Move to the first SDES entry in the current item.
     Returns:     true if there was a first entry.
   */
@@ -601,6 +621,30 @@ class RTCPPacket
   {
     bool _retval;
     _retval = gst_rtcp_packet_sdes_first_item(cast(GstRTCPPacket*)cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the data of the current SDES item entry. type (when not NULL) will
+    contain the type of the entry. data (when not NULL) will point to len
+    bytes.
+    
+    When type refers to a text item, data will point to a UTF8 string. Note
+    that this UTF8 string is NOT null-terminated. Use
+    [gstrtp.rtcppacket.RTCPPacket.sdesCopyEntry] to get a null-terminated copy of the entry.
+    Params:
+      type =       result of the entry type
+      data =       result entry data
+    Returns:     true if there was valid data.
+  */
+  bool sdesGetEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
+  {
+    bool _retval;
+    ubyte _len;
+    ubyte* _data;
+    _retval = gst_rtcp_packet_sdes_get_entry(cast(GstRTCPPacket*)cPtr, &type, &_len, &_data);
+    data.length = _len;
+    data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
     return _retval;
   }
 
@@ -727,6 +771,91 @@ class RTCPPacket
   }
 
   /**
+      Parse the extended report block for DLRR report block type.
+    Params:
+      nth =       the index of sub-block to retrieve.
+      ssrc =       the SSRC of the receiver.
+      lastRr =       the last receiver reference timestamp of ssrc.
+      delay =       the delay since last_rr.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetDlrrBlock(uint nth, out uint ssrc, out uint lastRr, out uint delay)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_dlrr_block(cast(GstRTCPPacket*)cPtr, nth, cast(uint*)&ssrc, cast(uint*)&lastRr, cast(uint*)&delay);
+    return _retval;
+  }
+
+  /**
+      Retrieve the packet receipt time of seq which ranges in [begin_seq, end_seq).
+    Params:
+      seq =       the sequence to retrieve the time.
+      receiptTime =       the packet receipt time of seq.
+    Returns:     true if the report block returns the receipt time correctly.
+  */
+  bool xrGetPrtBySeq(ushort seq, out uint receiptTime)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_prt_by_seq(cast(GstRTCPPacket*)cPtr, seq, cast(uint*)&receiptTime);
+    return _retval;
+  }
+
+  /**
+      Parse the Packet Recept Times Report Block from a XR packet
+    Params:
+      ssrc =       the SSRC of the RTP data packet source being reported upon by this report block.
+      thinning =       the amount of thinning performed on the sequence number space.
+      beginSeq =       the first sequence number that this block reports on.
+      endSeq =       the last sequence number that this block reports on plus one.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetPrtInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_prt_info(cast(GstRTCPPacket*)cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
+    return _retval;
+  }
+
+  /**
+      Parse the extended report block for Loss RLE and Duplicated LRE block type.
+    Params:
+      ssrc =       the SSRC of the RTP data packet source being reported upon by this report block.
+      thinning =       the amount of thinning performed on the sequence number space.
+      beginSeq =       the first sequence number that this block reports on.
+      endSeq =       the last sequence number that this block reports on plus one.
+      chunkCount =       the number of chunks calculated by block length.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetRleInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq, out uint chunkCount)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_rle_info(cast(GstRTCPPacket*)cPtr, cast(uint*)&ssrc, cast(ubyte*)&thinning, cast(ushort*)&beginSeq, cast(ushort*)&endSeq, cast(uint*)&chunkCount);
+    return _retval;
+  }
+
+  /**
+      Retrieve actual chunk data.
+    Params:
+      nth =       the index of chunk to retrieve.
+      chunk =       the nth chunk.
+    Returns:     true if the report block returns chunk correctly.
+  */
+  bool xrGetRleNthChunk(uint nth, out ushort chunk)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_rle_nth_chunk(cast(GstRTCPPacket*)cPtr, nth, cast(ushort*)&chunk);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetRrt(out ulong timestamp)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_rrt(cast(GstRTCPPacket*)cPtr, cast(ulong*)&timestamp);
+    return _retval;
+  }
+
+  /**
       Get the ssrc field of the XR packet.
     Returns:     the ssrc.
   */
@@ -734,6 +863,134 @@ class RTCPPacket
   {
     uint _retval;
     _retval = gst_rtcp_packet_xr_get_ssrc(cast(GstRTCPPacket*)cPtr);
+    return _retval;
+  }
+
+  /**
+      Extract a basic information from static summary report block of XR packet.
+    Params:
+      ssrc =       the SSRC of the source.
+      beginSeq =       the first sequence number that this block reports on.
+      endSeq =       the last sequence number that this block reports on plus one.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetSummaryInfo(out uint ssrc, out ushort beginSeq, out ushort endSeq)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_summary_info(cast(GstRTCPPacket*)cPtr, cast(uint*)&ssrc, cast(ushort*)&beginSeq, cast(ushort*)&endSeq);
+    return _retval;
+  }
+
+  /**
+      Extract jitter information from the statistics summary. If the jitter flag in
+    a block header is set as zero, all of jitters will be zero.
+    Params:
+      minJitter =       the minimum relative transit time between two sequences.
+      maxJitter =       the maximum relative transit time between two sequences.
+      meanJitter =       the mean relative transit time between two sequences.
+      devJitter =       the standard deviation of the relative transit time between two sequences.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetSummaryJitter(out uint minJitter, out uint maxJitter, out uint meanJitter, out uint devJitter)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_summary_jitter(cast(GstRTCPPacket*)cPtr, cast(uint*)&minJitter, cast(uint*)&maxJitter, cast(uint*)&meanJitter, cast(uint*)&devJitter);
+    return _retval;
+  }
+
+  /**
+      Get the number of lost or duplicate packets. If the flag in a block header
+    is set as zero, lost_packets or dup_packets will be zero.
+    Params:
+      lostPackets =       the number of lost packets between begin_seq and end_seq.
+      dupPackets =       the number of duplicate packets between begin_seq and end_seq.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetSummaryPkt(out uint lostPackets, out uint dupPackets)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_summary_pkt(cast(GstRTCPPacket*)cPtr, cast(uint*)&lostPackets, cast(uint*)&dupPackets);
+    return _retval;
+  }
+
+  /**
+      Extract the value of ttl for ipv4, or hop limit for ipv6.
+    Params:
+      isIpv4 =       the flag to indicate that the return values are ipv4 ttl or ipv6 hop limits.
+      minTtl =       the minimum TTL or Hop Limit value of data packets between two sequences.
+      maxTtl =       the maximum TTL or Hop Limit value of data packets between two sequences.
+      meanTtl =       the mean TTL or Hop Limit value of data packets between two sequences.
+      devTtl =       the standard deviation of the TTL or Hop Limit value of data packets between two sequences.
+    Returns:     true if the report block is correctly parsed.
+  */
+  bool xrGetSummaryTtl(out bool isIpv4, out ubyte minTtl, out ubyte maxTtl, out ubyte meanTtl, out ubyte devTtl)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_summary_ttl(cast(GstRTCPPacket*)cPtr, cast(bool*)&isIpv4, cast(ubyte*)&minTtl, cast(ubyte*)&maxTtl, cast(ubyte*)&meanTtl, cast(ubyte*)&devTtl);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipBurstMetrics(out ubyte burstDensity, out ubyte gapDensity, out ushort burstDuration, out ushort gapDuration)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_burst_metrics(cast(GstRTCPPacket*)cPtr, cast(ubyte*)&burstDensity, cast(ubyte*)&gapDensity, cast(ushort*)&burstDuration, cast(ushort*)&gapDuration);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipConfigurationParams(out ubyte gmin, out ubyte rxConfig)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_configuration_params(cast(GstRTCPPacket*)cPtr, cast(ubyte*)&gmin, cast(ubyte*)&rxConfig);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipDelayMetrics(out ushort roundtripDelay, out ushort endSystemDelay)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_delay_metrics(cast(GstRTCPPacket*)cPtr, cast(ushort*)&roundtripDelay, cast(ushort*)&endSystemDelay);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipJitterBufferParams(out ushort jbNominal, out ushort jbMaximum, out ushort jbAbsMax)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_jitter_buffer_params(cast(GstRTCPPacket*)cPtr, cast(ushort*)&jbNominal, cast(ushort*)&jbMaximum, cast(ushort*)&jbAbsMax);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipMetricsSsrc(out uint ssrc)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_metrics_ssrc(cast(GstRTCPPacket*)cPtr, cast(uint*)&ssrc);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipPacketMetrics(out ubyte lossRate, out ubyte discardRate)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_packet_metrics(cast(GstRTCPPacket*)cPtr, cast(ubyte*)&lossRate, cast(ubyte*)&discardRate);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipQualityMetrics(out ubyte rFactor, out ubyte extRFactor, out ubyte mosLq, out ubyte mosCq)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_quality_metrics(cast(GstRTCPPacket*)cPtr, cast(ubyte*)&rFactor, cast(ubyte*)&extRFactor, cast(ubyte*)&mosLq, cast(ubyte*)&mosCq);
+    return _retval;
+  }
+
+  /** */
+  bool xrGetVoipSignalMetrics(out ubyte signalLevel, out ubyte noiseLevel, out ubyte rerl, out ubyte gmin)
+  {
+    bool _retval;
+    _retval = gst_rtcp_packet_xr_get_voip_signal_metrics(cast(GstRTCPPacket*)cPtr, cast(ubyte*)&signalLevel, cast(ubyte*)&noiseLevel, cast(ubyte*)&rerl, cast(ubyte*)&gmin);
     return _retval;
   }
 

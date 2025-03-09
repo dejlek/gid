@@ -379,6 +379,34 @@ class ByteWriter
   }
 
   /**
+      Writes a NUL-terminated UTF16 string to writer (including the terminator).
+    Params:
+      data =       UTF16 string to write
+    Returns:     true if the value could be written
+  */
+  bool putStringUtf16(ushort[] data)
+  {
+    bool _retval;
+    auto _data = cast(const(ushort)*)(data ~ ushort.init).ptr;
+    _retval = gst_byte_writer_put_string_utf16(cast(GstByteWriter*)cPtr, _data);
+    return _retval;
+  }
+
+  /**
+      Writes a NUL-terminated UTF32 string to writer (including the terminator).
+    Params:
+      data =       UTF32 string to write
+    Returns:     true if the value could be written
+  */
+  bool putStringUtf32(uint[] data)
+  {
+    bool _retval;
+    auto _data = cast(const(uint)*)(data ~ uint.init).ptr;
+    _retval = gst_byte_writer_put_string_utf32(cast(GstByteWriter*)cPtr, _data);
+    return _retval;
+  }
+
+  /**
       Writes a NUL-terminated UTF8 string to writer (including the terminator).
     Params:
       data =       UTF8 string to write

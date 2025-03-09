@@ -202,6 +202,45 @@ void acceleratorParse(string accelerator, out uint acceleratorKey, out gdk.types
 }
 
 /**
+    Parses a string representing an accelerator, similarly to
+  [gtk.global.acceleratorParse] but handles keycodes as well. This is only
+  useful for system-level components, applications should use
+  [gtk.global.acceleratorParse] instead.
+  
+  If accelerator_codes is given and the result stored in it is non-null,
+  the result must be freed with [glib.global.gfree].
+  
+  If a keycode is present in the accelerator and no accelerator_codes
+  is given, the parse will fail.
+  
+  If the parse fails, accelerator_key, accelerator_mods and
+  accelerator_codes will be set to 0 (zero).
+  Params:
+    accelerator =       string representing an accelerator
+    acceleratorKey =       return location for accelerator
+          keyval, or null
+    acceleratorCodes =       return location for accelerator keycodes, or null
+    acceleratorMods =       return location for accelerator
+          modifier mask, null
+*/
+void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, out uint[] acceleratorCodes, out gdk.types.ModifierType acceleratorMods)
+{
+  const(char)* _accelerator = accelerator.toCString(No.Alloc);
+  uint* _acceleratorCodes;
+  gtk_accelerator_parse_with_keycode(_accelerator, cast(uint*)&acceleratorKey, &_acceleratorCodes, &acceleratorMods);
+  uint _lenacceleratorCodes;
+  if (_acceleratorCodes)
+  {
+    for (; _acceleratorCodes[_lenacceleratorCodes] != 0; _lenacceleratorCodes++)
+    {
+    }
+  }
+  acceleratorCodes.length = _lenacceleratorCodes;
+  acceleratorCodes[0 .. $] = (cast(uint*)_acceleratorCodes)[0 .. _lenacceleratorCodes];
+  safeFree(cast(void*)_acceleratorCodes);
+}
+
+/**
     Sets the modifiers that will be considered significant for keyboard
   accelerators. The default mod mask depends on the GDK backend in use,
   but will typically include #GDK_CONTROL_MASK | #GDK_SHIFT_MASK |
@@ -1870,6 +1909,25 @@ uint rcParseColorFull(glib.scanner.Scanner scanner, gtk.rc_style.RcStyle style, 
   GdkColor _color;
   _retval = gtk_rc_parse_color_full(scanner ? cast(GScanner*)scanner.cPtr : null, style ? cast(GtkRcStyle*)style.cPtr(No.Dup) : null, &_color);
   color = new gdk.color.Color(cast(void*)&_color, No.Take);
+  return _retval;
+}
+
+/**
+    Parses a #GtkPathPriorityType variable from the format expected
+  in a RC file.
+  Params:
+    scanner =       a #GScanner (must be initialized for parsing an RC file)
+    priority =       A pointer to #GtkPathPriorityType variable in which
+       to store the result.
+  Returns:     `G_TOKEN_NONE` if parsing succeeded, otherwise the token
+      that was expected but not found.
+
+  Deprecated:     Use #GtkCssProvider instead
+*/
+uint rcParsePriority(glib.scanner.Scanner scanner, out gtk.types.PathPriorityType priority)
+{
+  uint _retval;
+  _retval = gtk_rc_parse_priority(scanner ? cast(GScanner*)scanner.cPtr : null, &priority);
   return _retval;
 }
 

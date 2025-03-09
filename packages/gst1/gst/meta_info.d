@@ -90,6 +90,16 @@ class MetaInfo
     (cast(GstMetaInfo*)cPtr).transformFunc = propval;
   }
 
+  @property GstMetaDeserializeFunction deserializeFunc()
+  {
+    return (cast(GstMetaInfo*)cPtr).deserializeFunc;
+  }
+
+  @property void deserializeFunc(GstMetaDeserializeFunction propval)
+  {
+    (cast(GstMetaInfo*)cPtr).deserializeFunc = propval;
+  }
+
   @property GstMetaClearFunction clearFunc()
   {
     return (cast(GstMetaInfo*)cPtr).clearFunc;

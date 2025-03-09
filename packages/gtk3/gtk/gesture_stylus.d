@@ -48,6 +48,28 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /**
+      Returns the current values for the requested axes. This function
+    must be called from either the #GtkGestureStylus:down,
+    #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity
+    signals.
+    Params:
+      axes =       array of requested axes, terminated with #GDK_AXIS_IGNORE
+      values =       return location for the axis values
+    Returns:     #TRUE if there is a current value for the axes
+  */
+  bool getAxes(gdk.types.AxisUse[] axes, out double[] values)
+  {
+    bool _retval;
+    auto _axes = cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr;
+    double* _values;
+    _retval = gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)cPtr, _axes, &_values);
+    values.length = axes.length;
+    values[0 .. $] = (cast(double*)_values)[0 .. axes.length];
+    safeFree(cast(void*)_values);
+    return _retval;
+  }
+
+  /**
       Returns the current value for the requested axis. This function
     must be called from either the #GtkGestureStylus:down,
     #GtkGestureStylus:motion, #GtkGestureStylus:up or #GtkGestureStylus:proximity

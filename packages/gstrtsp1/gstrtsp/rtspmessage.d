@@ -6,6 +6,7 @@ import gobject.boxed;
 import gst.buffer;
 import gstrtsp.c.functions;
 import gstrtsp.c.types;
+import gstrtsp.rtspauth_credential;
 import gstrtsp.types;
 
 /**
@@ -301,6 +302,30 @@ class RTSPMessage : gobject.boxed.Boxed
     const(char)* _reason = reason.toCString(No.Alloc);
     _cretval = gst_rtsp_message_init_response(cast(GstRTSPMessage*)cPtr, code, _reason, request ? cast(const(GstRTSPMessage)*)request.cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Parses the credentials given in a WWW-Authenticate or Authorization header.
+    Params:
+      field =       a #GstRTSPHeaderField
+    Returns:     null-terminated array of GstRTSPAuthCredential or null.
+  */
+  gstrtsp.rtspauth_credential.RTSPAuthCredential[] parseAuthCredentials(gstrtsp.types.RTSPHeaderField field)
+  {
+    GstRTSPAuthCredential** _cretval;
+    _cretval = gst_rtsp_message_parse_auth_credentials(cast(GstRTSPMessage*)cPtr, field);
+    gstrtsp.rtspauth_credential.RTSPAuthCredential[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] !is null; _cretlength++)
+        break;
+      _retval = new gstrtsp.rtspauth_credential.RTSPAuthCredential[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = new gstrtsp.rtspauth_credential.RTSPAuthCredential(cast(void*)_cretval[i], Yes.Take);
+    }
     return _retval;
   }
 

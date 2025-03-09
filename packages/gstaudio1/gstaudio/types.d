@@ -3,6 +3,7 @@ module gstaudio.types;
 import gid.gid;
 import gst.clock;
 import gst.types;
+import gstaudio.audio_base_sink;
 import gstaudio.audio_ring_buffer;
 import gstaudio.c.functions;
 import gstaudio.c.types;
@@ -85,6 +86,42 @@ alias StreamVolumeFormat = GstStreamVolumeFormat;
 alias AudioSinkClassExtension = GstAudioSinkClassExtension;
 
 // Callbacks
+
+/**
+    This function is set with [gstaudio.audio_base_sink.AudioBaseSink.setCustomSlavingCallback]
+  and is called during playback. It receives the current time of external and
+  internal clocks, which the callback can then use to apply any custom
+  slaving/synchronization schemes.
+  
+  The external clock is the sink's element clock, the internal one is the
+  internal audio clock. The internal audio clock's calibration is applied to
+  the timestamps before they are passed to the callback. The difference between
+  etime and itime is the skew; how much internal and external clock lie apart
+  from each other. A skew of 0 means both clocks are perfectly in sync.
+  itime > etime means the external clock is going slower, while itime < etime
+  means it is going faster than the internal clock. etime and itime are always
+  valid timestamps, except for when a discontinuity happens.
+  
+  requested_skew is an output value the callback can write to. It informs the
+  sink of whether or not it should move the playout pointer, and if so, by how
+  much. This pointer is only NULL if a discontinuity occurs; otherwise, it is
+  safe to write to *requested_skew. The default skew is 0.
+  
+  The sink may experience discontinuities. If one happens, discont is TRUE,
+  itime, etime are set to GST_CLOCK_TIME_NONE, and requested_skew is NULL.
+  This makes it possible to reset custom clock slaving algorithms when a
+  discontinuity happens.
+
+  ## Parameters
+  $(LIST
+    * $(B sink)       a #GstAudioBaseSink
+    * $(B etime)       external clock time
+    * $(B itime)       internal clock time
+    * $(B requestedSkew)       skew amount requested by the callback
+    * $(B discontReason)       reason for discontinuity (if any)
+  )
+*/
+alias AudioBaseSinkCustomSlavingCallback = void delegate(gstaudio.audio_base_sink.AudioBaseSink sink, gst.types.ClockTime etime, gst.types.ClockTime itime, out gst.types.ClockTimeDiff requestedSkew, gstaudio.types.AudioBaseSinkDiscontReason discontReason);
 
 /**
     This function will be called whenever the current clock time needs to be

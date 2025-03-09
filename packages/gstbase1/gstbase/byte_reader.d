@@ -56,6 +56,84 @@ class ByteReader
   /**
       Free-function: g_free
     
+    Returns a newly-allocated copy of the current data position if there is
+    a NUL-terminated UTF-16 string in the data (this could be an empty string
+    as well), and advances the current position.
+    
+    No input checking for valid UTF-16 is done. This function is endianness
+    agnostic - you should not assume the UTF-16 characters are in host
+    endianness.
+    
+    This function will fail if no NUL-terminator was found in in the data.
+    
+    Note: there is no peek or get variant of this function to ensure correct
+    byte alignment of the UTF-16 string.
+    Params:
+      str =       address of a
+            #guint16 pointer variable in which to store the result
+    Returns:     true if a string could be read, false otherwise. The
+          string put into str must be freed with [glib.global.gfree] when no longer needed.
+  */
+  bool dupStringUtf16(out ushort[] str)
+  {
+    bool _retval;
+    ushort* _str;
+    _retval = gst_byte_reader_dup_string_utf16(cast(GstByteReader*)cPtr, &_str);
+    uint _lenstr;
+    if (_str)
+    {
+      for (; _str[_lenstr] != 0; _lenstr++)
+      {
+      }
+    }
+    str.length = _lenstr;
+    str[0 .. $] = (cast(ushort*)_str)[0 .. _lenstr];
+    safeFree(cast(void*)_str);
+    return _retval;
+  }
+
+  /**
+      Free-function: g_free
+    
+    Returns a newly-allocated copy of the current data position if there is
+    a NUL-terminated UTF-32 string in the data (this could be an empty string
+    as well), and advances the current position.
+    
+    No input checking for valid UTF-32 is done. This function is endianness
+    agnostic - you should not assume the UTF-32 characters are in host
+    endianness.
+    
+    This function will fail if no NUL-terminator was found in in the data.
+    
+    Note: there is no peek or get variant of this function to ensure correct
+    byte alignment of the UTF-32 string.
+    Params:
+      str =       address of a
+            #guint32 pointer variable in which to store the result
+    Returns:     true if a string could be read, false otherwise. The
+          string put into str must be freed with [glib.global.gfree] when no longer needed.
+  */
+  bool dupStringUtf32(out uint[] str)
+  {
+    bool _retval;
+    uint* _str;
+    _retval = gst_byte_reader_dup_string_utf32(cast(GstByteReader*)cPtr, &_str);
+    uint _lenstr;
+    if (_str)
+    {
+      for (; _str[_lenstr] != 0; _lenstr++)
+      {
+      }
+    }
+    str.length = _lenstr;
+    str[0 .. $] = (cast(uint*)_str)[0 .. _lenstr];
+    safeFree(cast(void*)_str);
+    return _retval;
+  }
+
+  /**
+      Free-function: g_free
+    
     FIXME:Reads (copies) a NUL-terminated string in the #GstByteReader instance,
     advancing the current position to the byte after the string. This will work
     for any NUL-terminated string with a character width of 8 bits, so ASCII,

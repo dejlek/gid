@@ -58,6 +58,21 @@ class VideoGLTextureUploadMeta
     (cast(GstVideoGLTextureUploadMeta*)cPtr).nTextures = propval;
   }
 
+  /**
+      Uploads the buffer which owns the meta to a specific texture ID.
+    Params:
+      textureId =       the texture IDs to upload to
+    Returns:     true if uploading succeeded, false otherwise.
+  */
+  bool upload(uint[] textureId)
+  {
+    bool _retval;
+    assert(!textureId || textureId.length == 4);
+    auto _textureId = cast(uint*)textureId.ptr;
+    _retval = gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)cPtr, _textureId);
+    return _retval;
+  }
+
   /** */
   static gst.meta_info.MetaInfo getInfo()
   {

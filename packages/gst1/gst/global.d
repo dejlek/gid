@@ -586,6 +586,21 @@ glib.types.Quark flowToQuark(gst.types.FlowReturn ret)
 }
 
 /**
+    See if the given format is inside the format array.
+  Params:
+    formats =       The format array to search
+    format =       the format to find
+  Returns:     true if the format is found inside the array
+*/
+bool formatsContains(gst.types.Format[] formats, gst.types.Format format)
+{
+  bool _retval;
+  auto _formats = cast(const(GstFormat)*)(formats ~ GstFormat.init).ptr;
+  _retval = gst_formats_contains(_formats, format);
+  return _retval;
+}
+
+/**
     This helper is mostly helpful for plugins that need to
   inspect the folder of the main executable to determine
   their set of features.
@@ -1543,6 +1558,27 @@ void utilSetValueFromString(out gobject.value.Value value, string valueStr)
   const(char)* _valueStr = valueStr.toCString(No.Alloc);
   gst_util_set_value_from_string(&_value, _valueStr);
   value = new gobject.value.Value(cast(void*)&_value, No.Take);
+}
+
+/**
+    Calculates the simpler representation of numerator and denominator and
+  update both values with the resulting simplified fraction.
+  
+  Simplify a fraction using a simple continued fraction decomposition.
+  The idea here is to convert fractions such as 333333/10000000 to 1/30
+  using 32 bit arithmetic only. The algorithm is not perfect and relies
+  upon two arbitrary parameters to remove non-significative terms from
+  the simple continued fraction decomposition. Using 8 and 333 for
+  n_terms and threshold respectively seems to give nice results.
+  Params:
+    numerator =       First value as #gint
+    denominator =       Second value as #gint
+    nTerms =       non-significative terms (typical value: 8)
+    threshold =       threshold (typical value: 333)
+*/
+void utilSimplifyFraction(ref int numerator, ref int denominator, uint nTerms, uint threshold)
+{
+  gst_util_simplify_fraction(cast(int*)&numerator, cast(int*)&denominator, nTerms, threshold);
 }
 
 /**

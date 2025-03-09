@@ -164,6 +164,35 @@ class Meta
   }
 
   /**
+      Recreate a #GstMeta from serialized data returned by
+    [gst.meta.Meta.serialize] and add it to buffer.
+    
+    Note that the meta must have been previously registered by calling one of
+    `gst_*_meta_get_info ()` functions.
+    
+    consumed is set to the number of bytes that can be skipped from data to
+    find the next meta serialization, if any. In case of parsing error that does
+    not allow to determine that size, consumed is set to 0.
+    Params:
+      buffer =       a #GstBuffer
+      data =       serialization data obtained from [gst.meta.Meta.serialize]
+      consumed =       total size used by this meta, could be less than size
+    Returns:     the metadata owned by buffer, or null.
+  */
+  static gst.meta.Meta deserialize(gst.buffer.Buffer buffer, ubyte[] data, out uint consumed)
+  {
+    GstMeta* _cretval;
+    size_t _size;
+    if (data)
+      _size = cast(size_t)data.length;
+
+    auto _data = cast(const(ubyte)*)data.ptr;
+    _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval) : null;
+    return _retval;
+  }
+
+  /**
       Lookup a previously registered meta info structure by its implementation name
     impl.
     Params:

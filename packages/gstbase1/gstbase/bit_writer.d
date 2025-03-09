@@ -147,6 +147,24 @@ class BitWriter
   }
 
   /**
+      Write nbytes bytes of data to #GstBitWriter.
+    Params:
+      data =       pointer of data to write
+    Returns:     true if successful, false otherwise.
+  */
+  bool putBytes(ubyte[] data)
+  {
+    bool _retval;
+    uint _nbytes;
+    if (data)
+      _nbytes = cast(uint)data.length;
+
+    auto _data = cast(const(ubyte)*)data.ptr;
+    _retval = gst_bit_writer_put_bytes(cast(GstBitWriter*)cPtr, _data, _nbytes);
+    return _retval;
+  }
+
+  /**
       Resets bitwriter and frees the data if it's owned by bitwriter.
   */
   void reset()

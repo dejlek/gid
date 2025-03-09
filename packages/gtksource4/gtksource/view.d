@@ -178,6 +178,23 @@ class View : gtk.text_view.TextView
   }
 
   /**
+      Gets attributes and priority for the category.
+    Params:
+      category =       the category.
+      priority =       place where priority of the category will be stored.
+    Returns:     #GtkSourceMarkAttributes for the category.
+      The object belongs to view, so it must not be unreffed.
+  */
+  gtksource.mark_attributes.MarkAttributes getMarkAttributes(string category, out int priority)
+  {
+    GtkSourceMarkAttributes* _cretval;
+    const(char)* _category = category.toCString(No.Alloc);
+    _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
+    auto _retval = ObjectG.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
       Gets the position of the right margin in the given view.
     Returns:     the position of the right margin.
   */

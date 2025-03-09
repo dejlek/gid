@@ -14,6 +14,7 @@ import gst.c.types;
 import gst.caps_features;
 import gst.clock;
 import gst.control_binding;
+import gst.control_source;
 import gst.custom_meta;
 import gst.debug_category;
 import gst.debug_message;
@@ -24,6 +25,7 @@ import gst.map_info;
 import gst.memory;
 import gst.message;
 import gst.meta;
+import gst.meta_info;
 import gst.mini_object;
 import gst.object;
 import gst.pad;
@@ -478,6 +480,33 @@ alias ClockCallback = bool delegate(gst.clock.Clock clock, gst.types.ClockTime t
 alias ControlBindingConvert = void delegate(gst.control_binding.ControlBinding binding, double srcValue, gobject.value.Value destValue);
 
 /**
+    Function for returning a value for a given timestamp.
+
+  ## Parameters
+  $(LIST
+    * $(B self)       the #GstControlSource instance
+    * $(B timestamp)       timestamp for which a value should be calculated
+    * $(B value)       a value which will be set to the result.
+  )
+  Returns:     true if the value was successfully calculated.
+*/
+alias ControlSourceGetValue = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, out double value);
+
+/**
+    Function for returning an array of values starting at a given timestamp.
+
+  ## Parameters
+  $(LIST
+    * $(B self)       the #GstControlSource instance
+    * $(B timestamp)       timestamp for which a value should be calculated
+    * $(B interval)       the time spacing between subsequent values
+    * $(B values)       array to put control-values in
+  )
+  Returns:     true if the values were successfully calculated.
+*/
+alias ControlSourceGetValueArray = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, gst.types.ClockTime interval, ref double[] values);
+
+/**
     Function called for each meta in buffer as a result of performing a
   transformation that yields transbuf. Additional type specific transform
   data is passed to the function as data.
@@ -662,6 +691,20 @@ alias LogFunction = void delegate(gst.debug_category.DebugCategory category, gst
 alias MemoryCopyFunction = gst.memory.Memory delegate(gst.memory.Memory mem, ptrdiff_t offset, ptrdiff_t size);
 
 /**
+    Check if mem1 and mem2 occupy contiguous memory and return the offset of
+  mem1 in the parent buffer in offset.
+
+  ## Parameters
+  $(LIST
+    * $(B mem1)       a #GstMemory
+    * $(B mem2)       a #GstMemory
+    * $(B offset)       a result offset
+  )
+  Returns:     true if mem1 and mem2 are in contiguous memory.
+*/
+alias MemoryIsSpanFunction = bool delegate(gst.memory.Memory mem1, gst.memory.Memory mem2, out size_t offset);
+
+/**
     Get the memory of mem that can be accessed according to the mode specified
   in info's flags. The function should return a pointer that contains at least
   maxsize bytes.
@@ -740,6 +783,21 @@ alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
   )
 */
 alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta meta);
+
+/**
+    Recreate a #GstMeta from serialized data returned by
+  #GstMetaSerializeFunction and add it to buffer.
+
+  ## Parameters
+  $(LIST
+    * $(B info)       #GstMetaInfo of the meta
+    * $(B buffer)       a #GstBuffer
+    * $(B data)       data obtained from #GstMetaSerializeFunction
+    * $(B version_) 
+  )
+  Returns:     the metadata owned by buffer, or null.
+*/
+alias MetaDeserializeFunction = gst.meta.Meta delegate(gst.meta_info.MetaInfo info, gst.buffer.Buffer buffer, ubyte[] data, ubyte version_);
 
 /**
     Function called when meta is freed in buffer.

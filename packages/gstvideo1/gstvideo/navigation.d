@@ -334,6 +334,14 @@ interface Navigation
     return _retval;
   }
 
+  /** */
+  static bool eventParseModifierState(gst.event.Event event, out gstvideo.types.NavigationModifierType state)
+  {
+    bool _retval;
+    _retval = gst_navigation_event_parse_modifier_state(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, &state);
+    return _retval;
+  }
+
   /**
       Retrieve the details of either a #GstNavigation mouse button press event or
     a mouse button release event. Determine which type the event is using

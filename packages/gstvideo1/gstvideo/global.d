@@ -264,6 +264,30 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 }
 
 /**
+    Attaches #GstVideoSEIUserDataUnregisteredMeta metadata to buffer with the given
+  parameters.
+  Params:
+    buffer =       a #GstBuffer
+    uuid =       User Data Unregistered UUID
+    data =       SEI User Data Unregistered buffer
+  Returns:     the #GstVideoSEIUserDataUnregisteredMeta on buffer.
+*/
+gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data)
+{
+  GstVideoSEIUserDataUnregisteredMeta* _cretval;
+  assert(!uuid || uuid.length == 16);
+  auto _uuid = cast(ubyte*)uuid.ptr;
+  size_t _size;
+  if (data)
+    _size = cast(size_t)data.length;
+
+  auto _data = cast(ubyte*)data.ptr;
+  _cretval = gst_buffer_add_video_sei_user_data_unregistered_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _uuid, _data, _size);
+  auto _retval = _cretval ? new gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta(cast(GstVideoSEIUserDataUnregisteredMeta*)_cretval) : null;
+  return _retval;
+}
+
+/**
     Attaches #GstVideoTimeCodeMeta metadata to buffer with the given
   parameters.
   Params:

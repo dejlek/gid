@@ -303,6 +303,35 @@ class IconTheme : gobject.object.ObjectG
   }
 
   /**
+      Returns an array of integers describing the sizes at which
+    the icon is available without scaling. A size of -1 means
+    that the icon is available in a scalable format. The array
+    is zero-terminated.
+    Params:
+      iconName =       the name of an icon
+    Returns:     An newly
+      allocated array describing the sizes at which the icon is
+      available. The array should be freed with [glib.global.gfree] when it is no
+      longer needed.
+  */
+  int[] getIconSizes(string iconName)
+  {
+    int* _cretval;
+    const(char)* _iconName = iconName.toCString(No.Alloc);
+    _cretval = gtk_icon_theme_get_icon_sizes(cast(GtkIconTheme*)cPtr, _iconName);
+    int[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      for (; _cretval[_cretlength] != 0; _cretlength++)
+        break;
+      _retval = cast(int[] )_cretval[0 .. _cretlength];
+    }
+    return _retval;
+  }
+
+  /**
       Gets the current search path. See [gtk.icon_theme.IconTheme.setSearchPath].
     Params:
       path =       location to store a list of icon theme path directories or null.

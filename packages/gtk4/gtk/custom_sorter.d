@@ -60,7 +60,7 @@ class CustomSorter : gtk.sorter.Sorter
   }
 
   /**
-  * Sets $(LPAREN)or unsets$(RPAREN) the function used for sorting items.
+  * Sets (or unsets) the function used for sorting items.
   * If sort_func is %NULL, all items are considered equal.
   * If the sort func changes its sorting behavior,
   * [Gtk.Sorter.changed] needs to be called.

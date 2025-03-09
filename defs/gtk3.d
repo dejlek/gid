@@ -8,3 +8,24 @@
 
 //# Change string arguments to character array with length
 //!set callback[ClipboardRichTextReceivedFunc].parameters.parameter[text].type '<array length="3" c:type="const gchar*"><type name="char" c:type="char"/></array>'
+
+//# Disable methods with arrays with sizes not described by parameters (FIXME)
+//!set class[ListStore].method[reorder][unsupported] 1
+
+//# axes param takes a GDK_AXIS_IGNORE terminated array (0 value) and expects the out values[] array to be the same size (use length of axes array)
+//!set class[GestureStylus].method[get_axes].parameters.parameter[axes].array[][zero-terminated] 1
+//!set class[GestureStylus].method[get_axes].parameters.parameter[values].array[][length] 0
+
+//# Set arrays to be zero-terminated=1
+//!set class[IconTheme].method[get_icon_sizes].return-value.array[][zero-terminated] 1
+//!set function[accelerator_parse_with_keycode].parameters.parameter[accelerator_codes].array[][zero-terminated] 1
+//!set function[init_with_args].parameters.parameter[entries].array[][zero-terminated] 1
+
+//# Ignore unimportant APIs
+//!set callback[ModuleInitFunc][ignore] 1
+
+//# Ignore user data parameter
+//!set interface[Buildable].method[custom_tag_end][ignore] 1
+
+//# Set basic parameters to out
+//!set function[rc_parse_priority].parameters.parameter[priority][direction] out

@@ -127,6 +127,33 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   }
 
   /**
+      Sets the custom slaving callback. This callback will
+    be invoked if the slave-method property is set to
+    GST_AUDIO_BASE_SINK_SLAVE_CUSTOM and the audio sink
+    receives and plays samples.
+    
+    Setting the callback to NULL causes the sink to
+    behave as if the GST_AUDIO_BASE_SINK_SLAVE_NONE
+    method were used.
+    Params:
+      callback =       a #GstAudioBaseSinkCustomSlavingCallback
+  */
+  void setCustomSlavingCallback(gstaudio.types.AudioBaseSinkCustomSlavingCallback callback)
+  {
+    extern(C) void _callbackCallback(GstAudioBaseSink* sink, GstClockTime etime, GstClockTime itime, GstClockTimeDiff* requestedSkew, GstAudioBaseSinkDiscontReason discontReason, void* userData)
+    {
+      auto _dlg = cast(gstaudio.types.AudioBaseSinkCustomSlavingCallback*)userData;
+
+      (*_dlg)(ObjectG.getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gst_audio_base_sink_set_custom_slaving_callback(cast(GstAudioBaseSink*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
       Controls how long the sink will wait before creating a discontinuity.
     Params:
       discontWait =       the new discont wait in nanoseconds

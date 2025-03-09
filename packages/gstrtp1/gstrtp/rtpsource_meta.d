@@ -94,6 +94,19 @@ class RTPSourceMeta
     return _retval;
   }
 
+  /**
+      Sets ssrc in meta. If ssrc is null the ssrc of meta will be unset.
+    Params:
+      ssrc =       pointer to the SSRC
+    Returns:     true on success, false otherwise.
+  */
+  bool setSsrc(out uint ssrc)
+  {
+    bool _retval;
+    _retval = gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)cPtr, cast(uint*)&ssrc);
+    return _retval;
+  }
+
   /** */
   static gst.meta_info.MetaInfo getInfo()
   {

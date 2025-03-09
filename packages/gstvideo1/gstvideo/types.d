@@ -5,6 +5,7 @@ import glib.error;
 import gst.sample;
 import gstvideo.c.functions;
 import gstvideo.c.types;
+import gstvideo.video_gltexture_upload_meta;
 
 
 // Enums
@@ -183,6 +184,9 @@ alias VideoTileInfo = GstVideoTileInfo;
 
 /** */
 alias VideoConvertSampleCallback = void delegate(gst.sample.Sample sample, glib.error.ErrorG error);
+
+/** */
+alias VideoGLTextureUpload = bool delegate(gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta meta, uint[] textureId);
 
 /** */
 enum BUFFER_POOL_OPTION_VIDEO_AFFINE_TRANSFORMATION_META = "GstBufferPoolOptionVideoAffineTransformation";

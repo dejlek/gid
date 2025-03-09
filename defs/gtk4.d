@@ -1,5 +1,8 @@
 //!gir Gtk-4.0
 
+//# Disable methods with arrays with sizes not described by parameters (FIXME)
+//!set class[ListStore].method[reorder][unsupported] 1
+
 //# Add missing c:type for GtkSnapshot
 //!set class[Snapshot][c:type] GtkSnapshot
 
@@ -63,7 +66,7 @@
   }
 
   /**
-   * Sets $(LPAREN)or unsets$(RPAREN) the function used for sorting items.
+   * Sets (or unsets) the function used for sorting items.
    * If sort_func is %NULL, all items are considered equal.
    * If the sort func changes its sorting behavior,
    * [Gtk.Sorter.changed] needs to be called.
