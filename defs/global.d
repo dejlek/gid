@@ -176,9 +176,9 @@
 //# Global XML patches
 
 //# Generally free(), ref(), and unref() functions/methods aren't desirable
-//!set *.method[free][introspectable] 0
-//!set *.method[ref][introspectable] 0
-//!set *.method[unref][introspectable] 0
+//!set *.*method[free][ignore] 1
+//!set *.*method[ref][ignore] 1
+//!set *.*method[unref][ignore] 1
 
 //# Remove glib:get-type "intern"
 //!del '*class[glib:get-type=intern][glib:get-type]'
@@ -189,3 +189,7 @@
 //!set *record[*Interface][ignore] 1
 //!set *record[*Private][ignore] 1
 //!set *class.field[priv][ignore] 1
+
+//# Ignore fields with "reserved" or "dummy" in their names
+//!set *.*field[*reserved*][ignore] 1
+//!set *.*field[*dummy*][ignore] 1
