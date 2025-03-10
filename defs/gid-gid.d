@@ -133,12 +133,12 @@ string fromCString(const(char)* cstr, Flag!"Free" free)
 /**
  * An alias for g_malloc0 for allocating memory for interfacing with glib.
  */
-alias safeMalloc = g_malloc0;
+alias gMalloc = g_malloc0;
 
 /**
  * Free a pointer allocated with malloc() but only if it is not null.
  */
-alias safeFree = g_free;
+alias gFree = g_free;
 
 /**
  * Duplicate a zero terminate C string.
