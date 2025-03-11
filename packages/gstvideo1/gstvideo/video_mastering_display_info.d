@@ -22,7 +22,7 @@ class VideoMasteringDisplayInfo
     cInstance = *cast(GstVideoMasteringDisplayInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,7 @@ class VideoMasteringDisplayInfo
 
   @property gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint()
   {
-    return (cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint;
+    return cToD!(gstvideo.types.VideoMasteringDisplayInfoCoordinates)(cast(void*)&(cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint);
   }
 
   @property void whitePoint(gstvideo.types.VideoMasteringDisplayInfoCoordinates propval)

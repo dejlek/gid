@@ -22,7 +22,7 @@ class Variation
     cInstance = *cast(hb_variation_t*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

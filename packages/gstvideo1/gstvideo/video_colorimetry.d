@@ -20,7 +20,7 @@ class VideoColorimetry
     cInstance = *cast(GstVideoColorimetry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -21,7 +21,7 @@ class Queue
     cInstance = *cast(GQueue*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   ~this()

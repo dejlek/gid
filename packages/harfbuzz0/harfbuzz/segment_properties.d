@@ -16,7 +16,7 @@ class SegmentProperties : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_segment_properties_t.sizeof), Yes.Take);
+    super(gMalloc(hb_segment_properties_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -22,7 +22,7 @@ class VideoSEIUserDataUnregisteredMeta
     cInstance = *cast(GstVideoSEIUserDataUnregisteredMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

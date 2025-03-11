@@ -20,7 +20,7 @@ class DBusErrorEntry
     cInstance = *cast(GDBusErrorEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,12 +40,12 @@ class DBusErrorEntry
 
   @property string dbusErrorName()
   {
-    return (cast(GDBusErrorEntry*)cPtr).dbusErrorName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
   }
 
   @property void dbusErrorName(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
-    (cast(GDBusErrorEntry*)cPtr).dbusErrorName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
+    dToC(propval, cast(void*)&(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
   }
 }

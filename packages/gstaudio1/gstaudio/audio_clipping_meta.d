@@ -33,7 +33,7 @@ class AudioClippingMeta
     cInstance = *cast(GstAudioClippingMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -20,7 +20,7 @@ class TokenValue
     cInstance = *cast(GTokenValue*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -30,13 +30,13 @@ class TokenValue
 
   @property string vIdentifier()
   {
-    return (cast(GTokenValue*)cPtr).vIdentifier.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
   }
 
   @property void vIdentifier(string propval)
   {
-    safeFree(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
-    (cast(GTokenValue*)cPtr).vIdentifier = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vIdentifier);
   }
 
   @property gulong vBinary()
@@ -101,24 +101,24 @@ class TokenValue
 
   @property string vString()
   {
-    return (cast(GTokenValue*)cPtr).vString.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vString);
   }
 
   @property void vString(string propval)
   {
-    safeFree(cast(void*)(cast(GTokenValue*)cPtr).vString);
-    (cast(GTokenValue*)cPtr).vString = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vString);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vString);
   }
 
   @property string vComment()
   {
-    return (cast(GTokenValue*)cPtr).vComment.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vComment);
   }
 
   @property void vComment(string propval)
   {
-    safeFree(cast(void*)(cast(GTokenValue*)cPtr).vComment);
-    (cast(GTokenValue*)cPtr).vComment = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vComment);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vComment);
   }
 
   @property ubyte vChar()

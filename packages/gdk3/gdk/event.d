@@ -80,7 +80,7 @@ class Event
     cInstance = *cast(GdkEvent*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

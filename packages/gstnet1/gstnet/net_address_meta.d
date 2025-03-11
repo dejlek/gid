@@ -2,7 +2,6 @@ module gstnet.net_address_meta;
 
 import gid.gid;
 import gio.socket_address;
-import gobject.object;
 import gst.meta;
 import gst.meta_info;
 import gstnet.c.functions;
@@ -26,7 +25,7 @@ class NetAddressMeta
     cInstance = *cast(GstNetAddressMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,7 +40,13 @@ class NetAddressMeta
 
   @property gio.socket_address.SocketAddress addr()
   {
-    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GstNetAddressMeta*)cPtr).addr, No.Take);
+    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);
+  }
+
+  @property void addr(gio.socket_address.SocketAddress propval)
+  {
+    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);
+    dToC(propval, cast(void*)&(cast(GstNetAddressMeta*)cPtr).addr);
   }
 
   /** */

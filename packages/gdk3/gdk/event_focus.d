@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Describes a change of keyboard focus.
@@ -22,7 +21,7 @@ class EventFocus
     cInstance = *cast(GdkEventFocus*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventFocus
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventFocus*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventFocus*)cPtr).window);
   }
 
   @property byte sendEvent()

@@ -20,7 +20,7 @@ class PadActionEntry
     cInstance = *cast(GtkPadActionEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -60,23 +60,23 @@ class PadActionEntry
 
   @property string label()
   {
-    return (cast(GtkPadActionEntry*)cPtr).label.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
   }
 
   @property void label(string propval)
   {
-    safeFree(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
-    (cast(GtkPadActionEntry*)cPtr).label = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)cPtr).label);
   }
 
   @property string actionName()
   {
-    return (cast(GtkPadActionEntry*)cPtr).actionName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
   }
 
   @property void actionName(string propval)
   {
-    safeFree(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
-    (cast(GtkPadActionEntry*)cPtr).actionName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
+    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)cPtr).actionName);
   }
 }

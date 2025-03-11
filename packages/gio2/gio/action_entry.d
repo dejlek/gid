@@ -29,7 +29,7 @@ class ActionEntry
     cInstance = *cast(GActionEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -39,13 +39,13 @@ class ActionEntry
 
   @property string name()
   {
-    return (cast(GActionEntry*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GActionEntry*)cPtr).name);
-    (cast(GActionEntry*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).name);
   }
 
   alias ActivateFuncType = extern(C) void function(GSimpleAction* action, VariantC* parameter, void* userData);
@@ -57,24 +57,24 @@ class ActionEntry
 
   @property string parameterType()
   {
-    return (cast(GActionEntry*)cPtr).parameterType.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
   }
 
   @property void parameterType(string propval)
   {
-    safeFree(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
-    (cast(GActionEntry*)cPtr).parameterType = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).parameterType);
   }
 
   @property string state()
   {
-    return (cast(GActionEntry*)cPtr).state.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
   }
 
   @property void state(string propval)
   {
-    safeFree(cast(void*)(cast(GActionEntry*)cPtr).state);
-    (cast(GActionEntry*)cPtr).state = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).state);
   }
 
   alias ChangeStateFuncType = extern(C) void function(GSimpleAction* action, VariantC* value, void* userData);

@@ -21,7 +21,7 @@ class ColorStop
     cInstance = *cast(GskColorStop*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,6 +41,6 @@ class ColorStop
 
   @property gdk.rgba.RGBA color()
   {
-    return new gdk.rgba.RGBA(cast(GdkRGBA*)&(cast(GskColorStop*)cPtr).color);
+    return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskColorStop*)cPtr).color);
   }
 }

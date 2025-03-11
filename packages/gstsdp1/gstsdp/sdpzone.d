@@ -22,7 +22,7 @@ class SDPZone
     cInstance = *cast(GstSDPZone*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,24 +32,24 @@ class SDPZone
 
   @property string time()
   {
-    return (cast(GstSDPZone*)cPtr).time.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
   }
 
   @property void time(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPZone*)cPtr).time);
-    (cast(GstSDPZone*)cPtr).time = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
+    dToC(propval, cast(void*)&(cast(GstSDPZone*)cPtr).time);
   }
 
   @property string typedTime()
   {
-    return (cast(GstSDPZone*)cPtr).typedTime.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
   }
 
   @property void typedTime(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
-    (cast(GstSDPZone*)cPtr).typedTime = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
+    dToC(propval, cast(void*)&(cast(GstSDPZone*)cPtr).typedTime);
   }
 
   /**

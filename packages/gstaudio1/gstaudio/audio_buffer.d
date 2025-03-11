@@ -31,7 +31,7 @@ class AudioBuffer
     cInstance = *cast(GstAudioBuffer*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,7 +41,7 @@ class AudioBuffer
 
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return new gstaudio.audio_info.AudioInfo(cast(GstAudioInfo*)&(cast(GstAudioBuffer*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioBuffer*)cPtr).info);
   }
 
   @property size_t nSamples()
@@ -66,7 +66,13 @@ class AudioBuffer
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstAudioBuffer*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstAudioBuffer*)cPtr).buffer);
   }
 
   /**

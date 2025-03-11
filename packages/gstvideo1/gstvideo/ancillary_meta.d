@@ -23,7 +23,7 @@ class AncillaryMeta
     cInstance = *cast(GstAncillaryMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

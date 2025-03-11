@@ -15,7 +15,7 @@ class GlyphInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_glyph_info_t.sizeof), Yes.Take);
+    super(gMalloc(hb_glyph_info_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

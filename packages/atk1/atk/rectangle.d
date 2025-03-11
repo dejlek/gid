@@ -15,7 +15,7 @@ class Rectangle : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(AtkRectangle.sizeof), Yes.Take);
+    super(gMalloc(AtkRectangle.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

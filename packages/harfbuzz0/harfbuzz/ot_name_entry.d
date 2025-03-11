@@ -20,7 +20,7 @@ class OtNameEntry
     cInstance = *cast(hb_ot_name_entry_t*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

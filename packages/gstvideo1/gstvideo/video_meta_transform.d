@@ -23,7 +23,7 @@ class VideoMetaTransform
     cInstance = *cast(GstVideoMetaTransform*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,12 +33,24 @@ class VideoMetaTransform
 
   @property gstvideo.video_info.VideoInfo inInfo()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
+  }
+
+  @property void inInfo(gstvideo.video_info.VideoInfo propval)
+  {
+    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
+    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)cPtr).inInfo);
   }
 
   @property gstvideo.video_info.VideoInfo outInfo()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
+  }
+
+  @property void outInfo(gstvideo.video_info.VideoInfo propval)
+  {
+    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
+    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)cPtr).outInfo);
   }
 
   /**

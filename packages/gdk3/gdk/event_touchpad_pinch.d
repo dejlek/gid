@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated during touchpad swipe gestures.
@@ -22,7 +21,7 @@ class EventTouchpadPinch
     cInstance = *cast(GdkEventTouchpadPinch*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventTouchpadPinch
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventTouchpadPinch*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventTouchpadPinch*)cPtr).window);
   }
 
   @property byte sendEvent()

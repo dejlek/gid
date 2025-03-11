@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated during [gdk.types.InputSource.TabletPad] button presses and releases.
@@ -22,7 +21,7 @@ class EventPadButton
     cInstance = *cast(GdkEventPadButton*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventPadButton
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadButton*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventPadButton*)cPtr).window);
   }
 
   @property byte sendEvent()

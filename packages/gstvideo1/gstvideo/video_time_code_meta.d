@@ -26,7 +26,7 @@ class VideoTimeCodeMeta
     cInstance = *cast(GstVideoTimeCodeMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,7 +41,7 @@ class VideoTimeCodeMeta
 
   @property gstvideo.video_time_code.VideoTimeCode tc()
   {
-    return new gstvideo.video_time_code.VideoTimeCode(cast(GstVideoTimeCode*)&(cast(GstVideoTimeCodeMeta*)cPtr).tc);
+    return cToD!(gstvideo.video_time_code.VideoTimeCode)(cast(void*)&(cast(GstVideoTimeCodeMeta*)cPtr).tc);
   }
 
   /** */

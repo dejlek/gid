@@ -25,7 +25,7 @@ class VideoGLTextureUploadMeta
     cInstance = *cast(GstVideoGLTextureUploadMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

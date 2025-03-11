@@ -74,7 +74,7 @@ class IconInfo : gobject.object.ObjectG
     _retval = gtk_icon_info_get_attach_points(cast(GtkIconInfo*)cPtr, &_points, &_nPoints);
     points.length = _nPoints;
     points[0 .. $] = (cast(gdk.types.Point*)_points)[0 .. _nPoints];
-    safeFree(cast(void*)_points);
+    gFree(cast(void*)_points);
     return _retval;
   }
 

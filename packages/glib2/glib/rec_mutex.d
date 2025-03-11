@@ -31,7 +31,7 @@ class RecMutex
     cInstance = *cast(GRecMutex*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

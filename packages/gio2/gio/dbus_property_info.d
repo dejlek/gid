@@ -14,7 +14,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
+    super(gMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,24 +50,24 @@ class DBusPropertyInfo : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GDBusPropertyInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
-    (cast(GDBusPropertyInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)cPtr).name);
   }
 
   @property string signature()
   {
-    return (cast(GDBusPropertyInfo*)cPtr).signature.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
   }
 
   @property void signature(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
-    (cast(GDBusPropertyInfo*)cPtr).signature = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
+    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)cPtr).signature);
   }
 
   @property gio.types.DBusPropertyInfoFlags flags()

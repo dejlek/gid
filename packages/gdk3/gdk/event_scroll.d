@@ -6,7 +6,6 @@ import gdk.device;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated from button presses for the buttons 4 to 7. Wheel mice are
@@ -30,7 +29,7 @@ class EventScroll
     cInstance = *cast(GdkEventScroll*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -50,7 +49,13 @@ class EventScroll
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventScroll*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -115,7 +120,13 @@ class EventScroll
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventScroll*)cPtr).device, No.Take);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
+  }
+
+  @property void device(gdk.device.Device propval)
+  {
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).device);
   }
 
   @property double xRoot()

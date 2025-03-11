@@ -1241,7 +1241,7 @@ bool propertyGet(gdk.window.Window window, gdk.atom.Atom property, gdk.atom.Atom
   actualPropertyType = new gdk.atom.Atom(cast(void*)&_actualPropertyType, No.Take);
   data.length = _actualLength;
   data[0 .. $] = (cast(ubyte*)_data)[0 .. _actualLength];
-  safeFree(cast(void*)_data);
+  gFree(cast(void*)_data);
   return _retval;
 }
 
@@ -1641,7 +1641,7 @@ int textPropertyToUtf8ListForDisplay(gdk.display.Display display, gdk.atom.Atom 
   list.length = _lenlist;
   foreach (i; 0 .. _lenlist)
     list[i] = _list[i].fromCString(Yes.Free);
-  safeFree(cast(void*)_list);
+  gFree(cast(void*)_list);
   return _retval;
 }
 

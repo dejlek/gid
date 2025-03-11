@@ -18,7 +18,7 @@ class CheckABIStruct
     cInstance = *cast(GstCheckABIStruct*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -28,13 +28,13 @@ class CheckABIStruct
 
   @property string name()
   {
-    return (cast(GstCheckABIStruct*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
-    (cast(GstCheckABIStruct*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstCheckABIStruct*)cPtr).name);
   }
 
   @property int size()

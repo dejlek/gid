@@ -22,7 +22,7 @@ class AttrFontFeatures
     cInstance = *cast(PangoAttrFontFeatures*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,18 +32,18 @@ class AttrFontFeatures
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
   }
 
   @property string features()
   {
-    return (cast(PangoAttrFontFeatures*)cPtr).features.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
   }
 
   @property void features(string propval)
   {
-    safeFree(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
-    (cast(PangoAttrFontFeatures*)cPtr).features = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
+    dToC(propval, cast(void*)&(cast(PangoAttrFontFeatures*)cPtr).features);
   }
 
   /**

@@ -28,7 +28,7 @@ class BindingSet
     cInstance = *cast(GtkBindingSet*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -38,13 +38,13 @@ class BindingSet
 
   @property string setName()
   {
-    return (cast(GtkBindingSet*)cPtr).setName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
   }
 
   @property void setName(string propval)
   {
-    safeFree(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
-    (cast(GtkBindingSet*)cPtr).setName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
+    dToC(propval, cast(void*)&(cast(GtkBindingSet*)cPtr).setName);
   }
 
   @property int priority()

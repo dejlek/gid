@@ -34,7 +34,7 @@ class GLMemory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLMemory.sizeof), Yes.Take);
+    super(gMalloc(GstGLMemory.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,7 +60,7 @@ class GLMemory : gobject.boxed.Boxed
 
   @property gstgl.glbase_memory.GLBaseMemory mem()
   {
-    return new gstgl.glbase_memory.GLBaseMemory(cast(GstGLBaseMemory*)&(cast(GstGLMemory*)cPtr).mem);
+    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLMemory*)cPtr).mem);
   }
 
   @property uint texId()
@@ -95,7 +95,7 @@ class GLMemory : gobject.boxed.Boxed
 
   @property gstvideo.video_info.VideoInfo info()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)&(cast(GstGLMemory*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstGLMemory*)cPtr).info);
   }
 
   @property gstvideo.video_alignment.VideoAlignment valign()

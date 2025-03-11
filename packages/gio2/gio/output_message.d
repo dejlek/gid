@@ -5,7 +5,6 @@ import gio.c.functions;
 import gio.c.types;
 import gio.socket_address;
 import gio.types;
-import gobject.object;
 
 /**
     Structure used for scatter/gather data output when sending multiple
@@ -28,7 +27,7 @@ class OutputMessage
     cInstance = *cast(GOutputMessage*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -38,12 +37,18 @@ class OutputMessage
 
   @property gio.socket_address.SocketAddress address()
   {
-    return ObjectG.getDObject!(gio.socket_address.SocketAddress)((cast(GOutputMessage*)cPtr).address, No.Take);
+    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
+  }
+
+  @property void address(gio.socket_address.SocketAddress propval)
+  {
+    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
+    dToC(propval, cast(void*)&(cast(GOutputMessage*)cPtr).address);
   }
 
   @property gio.types.OutputVector vectors()
   {
-    return *(cast(GOutputMessage*)cPtr).vectors;
+    return cToD!(gio.types.OutputVector)(cast(void*)(cast(GOutputMessage*)cPtr).vectors);
   }
 
   @property void vectors(gio.types.OutputVector propval)

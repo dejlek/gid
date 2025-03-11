@@ -2,7 +2,6 @@ module gstgl.glallocation_params;
 
 import gid.gid;
 import gobject.boxed;
-import gobject.object;
 import gst.allocation_params;
 import gstgl.c.functions;
 import gstgl.c.types;
@@ -15,7 +14,7 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLAllocationParams.sizeof), Yes.Take);
+    super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -81,12 +80,24 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   @property gst.allocation_params.AllocationParams allocParams()
   {
-    return new gst.allocation_params.AllocationParams(cast(GstAllocationParams*)(cast(GstGLAllocationParams*)cPtr).allocParams);
+    return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
+  }
+
+  @property void allocParams(gst.allocation_params.AllocationParams propval)
+  {
+    cValueFree!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
+    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).allocParams);
   }
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLAllocationParams*)cPtr).context, No.Take);
+    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
+  }
+
+  @property void context(gstgl.glcontext.GLContext propval)
+  {
+    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
+    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).context);
   }
 
   @property GDestroyNotify notify()

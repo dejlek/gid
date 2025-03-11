@@ -18,7 +18,7 @@ class GLBuffer : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLBuffer.sizeof), Yes.Take);
+    super(gMalloc(GstGLBuffer.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -44,7 +44,7 @@ class GLBuffer : gobject.boxed.Boxed
 
   @property gstgl.glbase_memory.GLBaseMemory mem()
   {
-    return new gstgl.glbase_memory.GLBaseMemory(cast(GstGLBaseMemory*)&(cast(GstGLBuffer*)cPtr).mem);
+    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLBuffer*)cPtr).mem);
   }
 
   @property uint id()

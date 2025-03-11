@@ -22,7 +22,7 @@ class RTSPRange
     cInstance = *cast(GstRTSPRange*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -21,7 +21,7 @@ class SDPKey
     cInstance = *cast(GstSDPKey*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,23 +31,23 @@ class SDPKey
 
   @property string type()
   {
-    return (cast(GstSDPKey*)cPtr).type.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
   }
 
   @property void type(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPKey*)cPtr).type);
-    (cast(GstSDPKey*)cPtr).type = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
+    dToC(propval, cast(void*)&(cast(GstSDPKey*)cPtr).type);
   }
 
   @property string data()
   {
-    return (cast(GstSDPKey*)cPtr).data.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);
   }
 
   @property void data(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPKey*)cPtr).data);
-    (cast(GstSDPKey*)cPtr).data = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);
+    dToC(propval, cast(void*)&(cast(GstSDPKey*)cPtr).data);
   }
 }

@@ -42,7 +42,7 @@ class Message : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstMessage.sizeof), Yes.Take);
+    super(gMalloc(GstMessage.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -68,7 +68,7 @@ class Message : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstMessage*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMessage*)cPtr).miniObject);
   }
 
   @property gst.types.MessageType type()
@@ -93,7 +93,13 @@ class Message : gobject.boxed.Boxed
 
   @property gst.object.ObjectGst src()
   {
-    return ObjectG.getDObject!(gst.object.ObjectGst)((cast(GstMessage*)cPtr).src, No.Take);
+    return cToD!(gst.object.ObjectGst)(cast(void*)(cast(GstMessage*)cPtr).src);
+  }
+
+  @property void src(gst.object.ObjectGst propval)
+  {
+    cValueFree!(gst.object.ObjectGst)(cast(void*)(cast(GstMessage*)cPtr).src);
+    dToC(propval, cast(void*)&(cast(GstMessage*)cPtr).src);
   }
 
   @property uint seqnum()

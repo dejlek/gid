@@ -21,7 +21,7 @@ class FlagsValue
     cInstance = *cast(GFlagsValue*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,23 +41,23 @@ class FlagsValue
 
   @property string valueName()
   {
-    return (cast(GFlagsValue*)cPtr).valueName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
   }
 
   @property void valueName(string propval)
   {
-    safeFree(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
-    (cast(GFlagsValue*)cPtr).valueName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
+    dToC(propval, cast(void*)&(cast(GFlagsValue*)cPtr).valueName);
   }
 
   @property string valueNick()
   {
-    return (cast(GFlagsValue*)cPtr).valueNick.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
   }
 
   @property void valueNick(string propval)
   {
-    safeFree(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
-    (cast(GFlagsValue*)cPtr).valueNick = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
+    dToC(propval, cast(void*)&(cast(GFlagsValue*)cPtr).valueNick);
   }
 }

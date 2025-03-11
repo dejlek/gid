@@ -22,7 +22,7 @@ class AttrSize
     cInstance = *cast(PangoAttrSize*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,7 @@ class AttrSize
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrSize*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrSize*)cPtr).attr);
   }
 
   @property int size()

@@ -67,7 +67,13 @@ class TextAttributes : gobject.boxed.Boxed
 
   @property pango.font_description.FontDescription font()
   {
-    return new pango.font_description.FontDescription(cast(PangoFontDescription*)(cast(GtkTextAttributes*)cPtr).font);
+    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)cPtr).font);
+  }
+
+  @property void font(pango.font_description.FontDescription propval)
+  {
+    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)cPtr).font);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).font);
   }
 
   @property double fontScale()
@@ -142,7 +148,13 @@ class TextAttributes : gobject.boxed.Boxed
 
   @property pango.tab_array.TabArray tabs()
   {
-    return new pango.tab_array.TabArray(cast(PangoTabArray*)(cast(GtkTextAttributes*)cPtr).tabs);
+    return cToD!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)cPtr).tabs);
+  }
+
+  @property void tabs(pango.tab_array.TabArray propval)
+  {
+    cValueFree!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)cPtr).tabs);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).tabs);
   }
 
   @property gtk.types.WrapMode wrapMode()
@@ -157,7 +169,13 @@ class TextAttributes : gobject.boxed.Boxed
 
   @property pango.language.Language language()
   {
-    return new pango.language.Language(cast(PangoLanguage*)(cast(GtkTextAttributes*)cPtr).language);
+    return cToD!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)cPtr).language);
+  }
+
+  @property void language(pango.language.Language propval)
+  {
+    cValueFree!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)cPtr).language);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).language);
   }
 
   @property uint invisible()

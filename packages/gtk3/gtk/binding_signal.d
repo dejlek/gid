@@ -22,7 +22,7 @@ class BindingSignal
     cInstance = *cast(GtkBindingSignal*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -37,13 +37,13 @@ class BindingSignal
 
   @property string signalName()
   {
-    return (cast(GtkBindingSignal*)cPtr).signalName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
   }
 
   @property void signalName(string propval)
   {
-    safeFree(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
-    (cast(GtkBindingSignal*)cPtr).signalName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
+    dToC(propval, cast(void*)&(cast(GtkBindingSignal*)cPtr).signalName);
   }
 
   @property uint nArgs()

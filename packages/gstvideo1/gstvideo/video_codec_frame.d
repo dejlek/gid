@@ -18,7 +18,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
+    super(gMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -94,12 +94,24 @@ class VideoCodecFrame : gobject.boxed.Boxed
 
   @property gst.buffer.Buffer inputBuffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
+  }
+
+  @property void inputBuffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
   }
 
   @property gst.buffer.Buffer outputBuffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
+  }
+
+  @property void outputBuffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
   }
 
   @property gst.types.ClockTime deadline()

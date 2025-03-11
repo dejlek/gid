@@ -22,7 +22,7 @@ class SignalQuery
     cInstance = *cast(GSignalQuery*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,13 +42,13 @@ class SignalQuery
 
   @property string signalName()
   {
-    return (cast(GSignalQuery*)cPtr).signalName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
   }
 
   @property void signalName(string propval)
   {
-    safeFree(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
-    (cast(GSignalQuery*)cPtr).signalName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
+    dToC(propval, cast(void*)&(cast(GSignalQuery*)cPtr).signalName);
   }
 
   @property gobject.types.GType itype()

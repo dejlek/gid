@@ -20,7 +20,7 @@ class MountOperationHandlerProxy
     cInstance = *cast(_GtkMountOperationHandlerProxy*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

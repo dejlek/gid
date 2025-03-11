@@ -22,7 +22,7 @@ class RTPSourceMeta
     cInstance = *cast(GstRTPSourceMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

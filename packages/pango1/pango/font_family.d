@@ -135,6 +135,6 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
       faces[i] = ObjectG.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
-    safeFree(cast(void*)_faces);
+    gFree(cast(void*)_faces);
   }
 }

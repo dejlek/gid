@@ -24,7 +24,7 @@ class RcProperty
     cInstance = *cast(GtkRcProperty*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -54,18 +54,18 @@ class RcProperty
 
   @property string origin()
   {
-    return (cast(GtkRcProperty*)cPtr).origin.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
   }
 
   @property void origin(string propval)
   {
-    safeFree(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
-    (cast(GtkRcProperty*)cPtr).origin = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkRcProperty*)cPtr).origin);
+    dToC(propval, cast(void*)&(cast(GtkRcProperty*)cPtr).origin);
   }
 
   @property gobject.value.Value value()
   {
-    return new gobject.value.Value(cast(GValue*)&(cast(GtkRcProperty*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkRcProperty*)cPtr).value);
   }
 
   /**

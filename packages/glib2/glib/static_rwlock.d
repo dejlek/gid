@@ -93,7 +93,7 @@ class StaticRWLock
     cInstance = *cast(GStaticRWLock*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

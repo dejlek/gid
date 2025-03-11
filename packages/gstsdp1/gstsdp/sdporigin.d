@@ -22,7 +22,7 @@ class SDPOrigin
     cInstance = *cast(GstSDPOrigin*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,67 +32,67 @@ class SDPOrigin
 
   @property string username()
   {
-    return (cast(GstSDPOrigin*)cPtr).username.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).username);
   }
 
   @property void username(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).username);
-    (cast(GstSDPOrigin*)cPtr).username = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).username);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).username);
   }
 
   @property string sessId()
   {
-    return (cast(GstSDPOrigin*)cPtr).sessId.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessId);
   }
 
   @property void sessId(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).sessId);
-    (cast(GstSDPOrigin*)cPtr).sessId = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessId);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).sessId);
   }
 
   @property string sessVersion()
   {
-    return (cast(GstSDPOrigin*)cPtr).sessVersion.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessVersion);
   }
 
   @property void sessVersion(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).sessVersion);
-    (cast(GstSDPOrigin*)cPtr).sessVersion = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessVersion);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).sessVersion);
   }
 
   @property string nettype()
   {
-    return (cast(GstSDPOrigin*)cPtr).nettype.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).nettype);
   }
 
   @property void nettype(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).nettype);
-    (cast(GstSDPOrigin*)cPtr).nettype = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).nettype);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).nettype);
   }
 
   @property string addrtype()
   {
-    return (cast(GstSDPOrigin*)cPtr).addrtype.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addrtype);
   }
 
   @property void addrtype(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).addrtype);
-    (cast(GstSDPOrigin*)cPtr).addrtype = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addrtype);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).addrtype);
   }
 
   @property string addr()
   {
-    return (cast(GstSDPOrigin*)cPtr).addr.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addr);
   }
 
   @property void addr(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPOrigin*)cPtr).addr);
-    (cast(GstSDPOrigin*)cPtr).addr = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addr);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).addr);
   }
 }

@@ -14,7 +14,7 @@ class DBusSignalInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusSignalInfo.sizeof), Yes.Take);
+    super(gMalloc(GDBusSignalInfo.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,12 +50,12 @@ class DBusSignalInfo : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GDBusSignalInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);
-    (cast(GDBusSignalInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusSignalInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusSignalInfo*)cPtr).name);
   }
 }

@@ -1,7 +1,6 @@
 module gstgl.glsync_meta;
 
 import gid.gid;
-import gobject.object;
 import gst.meta;
 import gst.meta_info;
 import gstgl.c.functions;
@@ -25,7 +24,7 @@ class GLSyncMeta
     cInstance = *cast(GstGLSyncMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,7 +39,13 @@ class GLSyncMeta
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLSyncMeta*)cPtr).context, No.Take);
+    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
+  }
+
+  @property void context(gstgl.glcontext.GLContext propval)
+  {
+    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
+    dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)cPtr).context);
   }
 
   alias SetSyncFuncType = extern(C) void function(GstGLSyncMeta* sync, GstGLContext* context);

@@ -46,7 +46,7 @@ class VideoMeta
     cInstance = *cast(GstVideoMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -61,7 +61,13 @@ class VideoMeta
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstVideoMeta*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstVideoMeta*)cPtr).buffer);
   }
 
   @property gstvideo.types.VideoFrameFlags flags()

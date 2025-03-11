@@ -20,7 +20,7 @@ class TypeInstance
     cInstance = *cast(GTypeInstance*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

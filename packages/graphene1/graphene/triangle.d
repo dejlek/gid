@@ -19,7 +19,7 @@ class Triangle : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_triangle_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_triangle_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

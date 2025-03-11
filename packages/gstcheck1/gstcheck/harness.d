@@ -123,7 +123,7 @@ class Harness
     cInstance = *cast(GstHarness*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -133,17 +133,35 @@ class Harness
 
   @property gst.element.Element element()
   {
-    return ObjectG.getDObject!(gst.element.Element)((cast(GstHarness*)cPtr).element, No.Take);
+    return cToD!(gst.element.Element)(cast(void*)(cast(GstHarness*)cPtr).element);
+  }
+
+  @property void element(gst.element.Element propval)
+  {
+    cValueFree!(gst.element.Element)(cast(void*)(cast(GstHarness*)cPtr).element);
+    dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).element);
   }
 
   @property gst.pad.Pad srcpad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).srcpad, No.Take);
+    return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).srcpad);
+  }
+
+  @property void srcpad(gst.pad.Pad propval)
+  {
+    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).srcpad);
+    dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).srcpad);
   }
 
   @property gst.pad.Pad sinkpad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstHarness*)cPtr).sinkpad, No.Take);
+    return cToD!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).sinkpad);
+  }
+
+  @property void sinkpad(gst.pad.Pad propval)
+  {
+    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstHarness*)cPtr).sinkpad);
+    dToC(propval, cast(void*)&(cast(GstHarness*)cPtr).sinkpad);
   }
 
   @property gstcheck.harness.Harness srcHarness()

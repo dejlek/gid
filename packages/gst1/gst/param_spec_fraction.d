@@ -22,7 +22,7 @@ class ParamSpecFraction
     cInstance = *cast(GstParamSpecFraction*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,13 @@ class ParamSpecFraction
 
   @property gobject.param_spec.ParamSpec parentInstance()
   {
-    return new gobject.param_spec.ParamSpec(cast(GParamSpec*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
+  }
+
+  @property void parentInstance(gobject.param_spec.ParamSpec propval)
+  {
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
+    dToC(propval, cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
   }
 
   @property int minNum()

@@ -15,7 +15,7 @@ class GLMemoryEGL : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLMemoryEGL.sizeof), Yes.Take);
+    super(gMalloc(GstGLMemoryEGL.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

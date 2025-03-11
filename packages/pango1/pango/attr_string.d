@@ -22,7 +22,7 @@ class AttrString
     cInstance = *cast(PangoAttrString*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,17 +32,17 @@ class AttrString
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrString*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrString*)cPtr).attr);
   }
 
   @property string value()
   {
-    return (cast(PangoAttrString*)cPtr).value.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(PangoAttrString*)cPtr).value);
   }
 
   @property void value(string propval)
   {
-    safeFree(cast(void*)(cast(PangoAttrString*)cPtr).value);
-    (cast(PangoAttrString*)cPtr).value = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(PangoAttrString*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(PangoAttrString*)cPtr).value);
   }
 }

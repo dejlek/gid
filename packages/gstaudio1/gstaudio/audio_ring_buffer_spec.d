@@ -26,7 +26,7 @@ class AudioRingBufferSpec
     cInstance = *cast(GstAudioRingBufferSpec*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -36,7 +36,13 @@ class AudioRingBufferSpec
 
   @property gst.caps.Caps caps()
   {
-    return new gst.caps.Caps(cast(GstCaps*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
+  }
+
+  @property void caps(gst.caps.Caps propval)
+  {
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).caps);
   }
 
   @property gstaudio.types.AudioRingBufferFormatType type()
@@ -51,7 +57,7 @@ class AudioRingBufferSpec
 
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return new gstaudio.audio_info.AudioInfo(cast(GstAudioInfo*)&(cast(GstAudioRingBufferSpec*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).info);
   }
 
   @property ulong latencyTime()

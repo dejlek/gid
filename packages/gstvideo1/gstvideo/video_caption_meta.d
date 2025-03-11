@@ -22,7 +22,7 @@ class VideoCaptionMeta
     cInstance = *cast(GstVideoCaptionMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -25,7 +25,7 @@ class BindingEntry
     cInstance = *cast(GtkBindingEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

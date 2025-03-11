@@ -24,7 +24,7 @@ class VideoTimeCodeConfig
     cInstance = *cast(GstVideoTimeCodeConfig*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -64,6 +64,12 @@ class VideoTimeCodeConfig
 
   @property glib.date_time.DateTime latestDailyJam()
   {
-    return new glib.date_time.DateTime(cast(GDateTime*)(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
+    return cToD!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
+  }
+
+  @property void latestDailyJam(glib.date_time.DateTime propval)
+  {
+    cValueFree!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
+    dToC(propval, cast(void*)&(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
   }
 }

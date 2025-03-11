@@ -18,7 +18,7 @@ class TestLogBuffer
     cInstance = *cast(GTestLogBuffer*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

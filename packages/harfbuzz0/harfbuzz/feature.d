@@ -18,7 +18,7 @@ class Feature : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_feature_t.sizeof), Yes.Take);
+    super(gMalloc(hb_feature_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

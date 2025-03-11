@@ -23,7 +23,7 @@ class AttrFontDesc
     cInstance = *cast(PangoAttrFontDesc*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,12 +33,18 @@ class AttrFontDesc
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrFontDesc*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)cPtr).attr);
   }
 
   @property pango.font_description.FontDescription desc()
   {
-    return new pango.font_description.FontDescription(cast(PangoFontDescription*)(cast(PangoAttrFontDesc*)cPtr).desc);
+    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);
+  }
+
+  @property void desc(pango.font_description.FontDescription propval)
+  {
+    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);
+    dToC(propval, cast(void*)&(cast(PangoAttrFontDesc*)cPtr).desc);
   }
 
   /**

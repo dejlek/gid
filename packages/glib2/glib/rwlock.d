@@ -82,7 +82,7 @@ class RWLock
     cInstance = *cast(GRWLock*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

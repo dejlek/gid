@@ -23,7 +23,7 @@ class StaticCaps
     cInstance = *cast(GstStaticCaps*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,18 +33,24 @@ class StaticCaps
 
   @property gst.caps.Caps caps()
   {
-    return new gst.caps.Caps(cast(GstCaps*)(cast(GstStaticCaps*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
+  }
+
+  @property void caps(gst.caps.Caps propval)
+  {
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstStaticCaps*)cPtr).caps);
   }
 
   @property string string_()
   {
-    return (cast(GstStaticCaps*)cPtr).string_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
   }
 
   @property void string_(string propval)
   {
-    safeFree(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
-    (cast(GstStaticCaps*)cPtr).string_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
+    dToC(propval, cast(void*)&(cast(GstStaticCaps*)cPtr).string_);
   }
 
   /**

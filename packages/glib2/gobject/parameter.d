@@ -24,7 +24,7 @@ class Parameter
     cInstance = *cast(GParameter*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -34,17 +34,17 @@ class Parameter
 
   @property string name()
   {
-    return (cast(GParameter*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GParameter*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GParameter*)cPtr).name);
-    (cast(GParameter*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GParameter*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GParameter*)cPtr).name);
   }
 
   @property gobject.value.Value value()
   {
-    return new gobject.value.Value(cast(GValue*)&(cast(GParameter*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(GParameter*)cPtr).value);
   }
 }

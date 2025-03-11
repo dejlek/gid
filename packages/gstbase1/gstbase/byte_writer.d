@@ -27,7 +27,7 @@ class ByteWriter
     cInstance = *cast(GstByteWriter*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

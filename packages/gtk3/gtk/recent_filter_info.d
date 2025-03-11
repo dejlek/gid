@@ -21,7 +21,7 @@ class RecentFilterInfo
     cInstance = *cast(GtkRecentFilterInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,35 +41,35 @@ class RecentFilterInfo
 
   @property string uri()
   {
-    return (cast(GtkRecentFilterInfo*)cPtr).uri.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).uri);
   }
 
   @property void uri(string propval)
   {
-    safeFree(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).uri);
-    (cast(GtkRecentFilterInfo*)cPtr).uri = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).uri);
   }
 
   @property string displayName()
   {
-    return (cast(GtkRecentFilterInfo*)cPtr).displayName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).displayName);
   }
 
   @property void displayName(string propval)
   {
-    safeFree(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).displayName);
-    (cast(GtkRecentFilterInfo*)cPtr).displayName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).displayName);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).displayName);
   }
 
   @property string mimeType()
   {
-    return (cast(GtkRecentFilterInfo*)cPtr).mimeType.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).mimeType);
   }
 
   @property void mimeType(string propval)
   {
-    safeFree(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).mimeType);
-    (cast(GtkRecentFilterInfo*)cPtr).mimeType = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).mimeType);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).mimeType);
   }
 
   @property int age()

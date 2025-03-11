@@ -26,7 +26,7 @@ class SDPMedia
     cInstance = *cast(GstSDPMedia*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -36,13 +36,13 @@ class SDPMedia
 
   @property string media()
   {
-    return (cast(GstSDPMedia*)cPtr).media.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).media);
   }
 
   @property void media(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMedia*)cPtr).media);
-    (cast(GstSDPMedia*)cPtr).media = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).media);
+    dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).media);
   }
 
   @property uint port()
@@ -67,24 +67,24 @@ class SDPMedia
 
   @property string proto()
   {
-    return (cast(GstSDPMedia*)cPtr).proto.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).proto);
   }
 
   @property void proto(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMedia*)cPtr).proto);
-    (cast(GstSDPMedia*)cPtr).proto = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).proto);
+    dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).proto);
   }
 
   @property string information()
   {
-    return (cast(GstSDPMedia*)cPtr).information.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).information);
   }
 
   @property void information(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMedia*)cPtr).information);
-    (cast(GstSDPMedia*)cPtr).information = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMedia*)cPtr).information);
+    dToC(propval, cast(void*)&(cast(GstSDPMedia*)cPtr).information);
   }
 
   @property gstsdp.sdpkey.SDPKey key()

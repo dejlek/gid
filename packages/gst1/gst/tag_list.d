@@ -43,7 +43,7 @@ class TagList : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstTagList*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)cPtr).miniObject);
   }
 
   /**

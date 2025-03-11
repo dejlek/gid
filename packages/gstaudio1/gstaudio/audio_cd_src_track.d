@@ -27,7 +27,7 @@ class AudioCdSrcTrack
     cInstance = *cast(GstAudioCdSrcTrack*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -77,6 +77,12 @@ class AudioCdSrcTrack
 
   @property gst.tag_list.TagList tags()
   {
-    return new gst.tag_list.TagList(cast(GstTagList*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
+    return cToD!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
+  }
+
+  @property void tags(gst.tag_list.TagList propval)
+  {
+    cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
+    dToC(propval, cast(void*)&(cast(GstAudioCdSrcTrack*)cPtr).tags);
   }
 }

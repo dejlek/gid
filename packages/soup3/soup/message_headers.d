@@ -361,7 +361,7 @@ class MessageHeaders : gobject.boxed.Boxed
     _retval = soup_message_headers_get_ranges(cast(SoupMessageHeaders*)cPtr, totalLength, &_ranges, &_length);
     ranges.length = _length;
     ranges[0 .. $] = (cast(soup.types.Range*)_ranges)[0 .. _length];
-    safeFree(cast(void*)_ranges);
+    gFree(cast(void*)_ranges);
     return _retval;
   }
 

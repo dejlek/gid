@@ -3,7 +3,6 @@ module gst.memory;
 import gid.gid;
 import glib.types;
 import gobject.boxed;
-import gobject.object;
 import gst.allocator;
 import gst.c.functions;
 import gst.c.types;
@@ -54,7 +53,7 @@ class Memory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstMemory.sizeof), Yes.Take);
+    super(gMalloc(GstMemory.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -80,17 +79,29 @@ class Memory : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstMemory*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)cPtr).miniObject);
   }
 
   @property gst.allocator.Allocator allocator()
   {
-    return ObjectG.getDObject!(gst.allocator.Allocator)((cast(GstMemory*)cPtr).allocator, No.Take);
+    return cToD!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
+  }
+
+  @property void allocator(gst.allocator.Allocator propval)
+  {
+    cValueFree!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
+    dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).allocator);
   }
 
   @property gst.memory.Memory parent()
   {
-    return new gst.memory.Memory(cast(GstMemory*)(cast(GstMemory*)cPtr).parent);
+    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
+  }
+
+  @property void parent(gst.memory.Memory propval)
+  {
+    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
+    dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).parent);
   }
 
   @property size_t maxsize()

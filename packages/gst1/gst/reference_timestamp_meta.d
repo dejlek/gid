@@ -45,7 +45,7 @@ class ReferenceTimestampMeta
     cInstance = *cast(GstReferenceTimestampMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -60,7 +60,13 @@ class ReferenceTimestampMeta
 
   @property gst.caps.Caps reference()
   {
-    return new gst.caps.Caps(cast(GstCaps*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
+  }
+
+  @property void reference(gst.caps.Caps propval)
+  {
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
+    dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)cPtr).reference);
   }
 
   @property gst.types.ClockTime timestamp()

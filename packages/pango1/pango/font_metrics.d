@@ -27,7 +27,7 @@ class FontMetrics : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoFontMetrics.sizeof), Yes.Take);
+    super(gMalloc(PangoFontMetrics.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

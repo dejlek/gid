@@ -39,7 +39,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
 
   @property gstvideo.video_info.VideoInfo vinfo()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)&(cast(GstVideoInfoDmaDrm*)cPtr).vinfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)cPtr).vinfo);
   }
 
   @property uint drmFourcc()

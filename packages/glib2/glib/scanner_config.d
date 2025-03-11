@@ -22,7 +22,7 @@ class ScannerConfig
     cInstance = *cast(GScannerConfig*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,46 +32,46 @@ class ScannerConfig
 
   @property string csetSkipCharacters()
   {
-    return (cast(GScannerConfig*)cPtr).csetSkipCharacters.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetSkipCharacters);
   }
 
   @property void csetSkipCharacters(string propval)
   {
-    safeFree(cast(void*)(cast(GScannerConfig*)cPtr).csetSkipCharacters);
-    (cast(GScannerConfig*)cPtr).csetSkipCharacters = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetSkipCharacters);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetSkipCharacters);
   }
 
   @property string csetIdentifierFirst()
   {
-    return (cast(GScannerConfig*)cPtr).csetIdentifierFirst.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
   }
 
   @property void csetIdentifierFirst(string propval)
   {
-    safeFree(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
-    (cast(GScannerConfig*)cPtr).csetIdentifierFirst = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
   }
 
   @property string csetIdentifierNth()
   {
-    return (cast(GScannerConfig*)cPtr).csetIdentifierNth.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierNth);
   }
 
   @property void csetIdentifierNth(string propval)
   {
-    safeFree(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierNth);
-    (cast(GScannerConfig*)cPtr).csetIdentifierNth = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierNth);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetIdentifierNth);
   }
 
   @property string cpairCommentSingle()
   {
-    return (cast(GScannerConfig*)cPtr).cpairCommentSingle.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).cpairCommentSingle);
   }
 
   @property void cpairCommentSingle(string propval)
   {
-    safeFree(cast(void*)(cast(GScannerConfig*)cPtr).cpairCommentSingle);
-    (cast(GScannerConfig*)cPtr).cpairCommentSingle = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).cpairCommentSingle);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).cpairCommentSingle);
   }
 
   @property uint caseSensitive()

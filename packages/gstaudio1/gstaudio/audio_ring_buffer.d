@@ -347,7 +347,7 @@ class AudioRingBuffer : gst.object.ObjectGst
     _retval = gst_audio_ring_buffer_prepare_read(cast(GstAudioRingBuffer*)cPtr, cast(int*)&segment, &_readptr, &_len);
     readptr.length = _len;
     readptr[0 .. $] = (cast(ubyte*)_readptr)[0 .. _len];
-    safeFree(cast(void*)_readptr);
+    gFree(cast(void*)_readptr);
     return _retval;
   }
 

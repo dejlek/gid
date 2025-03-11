@@ -40,7 +40,7 @@ class DsdPlaneOffsetMeta
     cInstance = *cast(GstDsdPlaneOffsetMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

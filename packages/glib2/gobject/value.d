@@ -33,7 +33,7 @@ class Value : Boxed
 
   this()
   {
-    super(safeMalloc(GValue.sizeof), Yes.Take);
+    super(gMalloc(GValue.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

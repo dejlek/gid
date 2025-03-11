@@ -14,7 +14,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_ot_math_glyph_variant_t.sizeof), Yes.Take);
+    super(gMalloc(hb_ot_math_glyph_variant_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

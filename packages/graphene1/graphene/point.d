@@ -15,7 +15,7 @@ class Point : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_point_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_point_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

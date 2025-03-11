@@ -22,7 +22,7 @@ class TypeQuery
     cInstance = *cast(GTypeQuery*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,13 +42,13 @@ class TypeQuery
 
   @property string typeName()
   {
-    return (cast(GTypeQuery*)cPtr).typeName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
   }
 
   @property void typeName(string propval)
   {
-    safeFree(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
-    (cast(GTypeQuery*)cPtr).typeName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
+    dToC(propval, cast(void*)&(cast(GTypeQuery*)cPtr).typeName);
   }
 
   @property uint classSize()

@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated when a pointer or keyboard grab is broken. On X11, this happens
@@ -26,7 +25,7 @@ class EventGrabBroken
     cInstance = *cast(GdkEventGrabBroken*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -46,7 +45,13 @@ class EventGrabBroken
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -81,6 +86,12 @@ class EventGrabBroken
 
   @property gdk.window.Window grabWindow()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventGrabBroken*)cPtr).grabWindow, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).grabWindow);
+  }
+
+  @property void grabWindow(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).grabWindow);
+    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)cPtr).grabWindow);
   }
 }

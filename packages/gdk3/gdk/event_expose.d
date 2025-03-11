@@ -7,7 +7,6 @@ import gdk.rectangle;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated when all or part of a window becomes visible and needs to be
@@ -25,7 +24,7 @@ class EventExpose
     cInstance = *cast(GdkEventExpose*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -45,7 +44,13 @@ class EventExpose
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventExpose*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -60,12 +65,18 @@ class EventExpose
 
   @property gdk.rectangle.Rectangle area()
   {
-    return new gdk.rectangle.Rectangle(cast(GdkRectangle*)&(cast(GdkEventExpose*)cPtr).area);
+    return cToD!(gdk.rectangle.Rectangle)(cast(void*)&(cast(GdkEventExpose*)cPtr).area);
   }
 
   @property cairo.region.Region region()
   {
-    return new cairo.region.Region(cast(cairo_region_t*)(cast(GdkEventExpose*)cPtr).region);
+    return cToD!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
+  }
+
+  @property void region(cairo.region.Region propval)
+  {
+    cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
+    dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).region);
   }
 
   @property int count()

@@ -26,7 +26,7 @@ class MapInfo
     cInstance = *cast(GstMapInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -36,7 +36,13 @@ class MapInfo
 
   @property gst.memory.Memory memory()
   {
-    return new gst.memory.Memory(cast(GstMemory*)(cast(GstMapInfo*)cPtr).memory);
+    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)cPtr).memory);
+  }
+
+  @property void memory(gst.memory.Memory propval)
+  {
+    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)cPtr).memory);
+    dToC(propval, cast(void*)&(cast(GstMapInfo*)cPtr).memory);
   }
 
   @property gst.types.MapFlags flags()

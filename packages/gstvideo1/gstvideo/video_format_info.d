@@ -20,7 +20,7 @@ class VideoFormatInfo
     cInstance = *cast(GstVideoFormatInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,24 +40,24 @@ class VideoFormatInfo
 
   @property string name()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
-    (cast(GstVideoFormatInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)cPtr).name);
   }
 
   @property string description()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).description.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
   }
 
   @property void description(string propval)
   {
-    safeFree(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
-    (cast(GstVideoFormatInfo*)cPtr).description = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)cPtr).description);
   }
 
   @property gstvideo.types.VideoFormatFlags flags()

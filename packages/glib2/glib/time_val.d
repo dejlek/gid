@@ -31,7 +31,7 @@ class TimeVal
     cInstance = *cast(GTimeVal*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

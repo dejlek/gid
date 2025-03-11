@@ -27,7 +27,7 @@ class VideoCodecState : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstVideoCodecState.sizeof), Yes.Take);
+    super(gMalloc(GstVideoCodecState.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,22 +53,40 @@ class VideoCodecState : gobject.boxed.Boxed
 
   @property gstvideo.video_info.VideoInfo info()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)&(cast(GstVideoCodecState*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)cPtr).info);
   }
 
   @property gst.caps.Caps caps()
   {
-    return new gst.caps.Caps(cast(GstCaps*)(cast(GstVideoCodecState*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
+  }
+
+  @property void caps(gst.caps.Caps propval)
+  {
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).caps);
   }
 
   @property gst.buffer.Buffer codecData()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstVideoCodecState*)cPtr).codecData);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
+  }
+
+  @property void codecData(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).codecData);
   }
 
   @property gst.caps.Caps allocationCaps()
   {
-    return new gst.caps.Caps(cast(GstCaps*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
+  }
+
+  @property void allocationCaps(gst.caps.Caps propval)
+  {
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).allocationCaps);
   }
 
   @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo()

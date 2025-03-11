@@ -29,7 +29,7 @@ class UriParamsIter
     cInstance = *cast(GUriParamsIter*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

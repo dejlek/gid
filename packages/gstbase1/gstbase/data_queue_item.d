@@ -22,7 +22,7 @@ class DataQueueItem
     cInstance = *cast(GstDataQueueItem*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,13 @@ class DataQueueItem
 
   @property gst.mini_object.MiniObject object()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)(cast(GstDataQueueItem*)cPtr).object);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
+  }
+
+  @property void object(gst.mini_object.MiniObject propval)
+  {
+    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
+    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)cPtr).object);
   }
 
   @property uint size()

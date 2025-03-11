@@ -18,7 +18,7 @@ class TreeIter : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GtkTreeIter.sizeof), Yes.Take);
+    super(gMalloc(GtkTreeIter.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

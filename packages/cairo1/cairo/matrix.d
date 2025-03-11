@@ -20,7 +20,7 @@ class Matrix : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_matrix_t.sizeof), Yes.Take);
+    super(gMalloc(cairo_matrix_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -15,7 +15,7 @@ class Color : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoColor.sizeof), Yes.Take);
+    super(gMalloc(PangoColor.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

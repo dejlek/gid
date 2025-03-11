@@ -33,7 +33,7 @@ class VideoBarMeta
     cInstance = *cast(GstVideoBarMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

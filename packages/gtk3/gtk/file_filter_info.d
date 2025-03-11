@@ -21,7 +21,7 @@ class FileFilterInfo
     cInstance = *cast(GtkFileFilterInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,45 +41,45 @@ class FileFilterInfo
 
   @property string filename()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).filename.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
   }
 
   @property void filename(string propval)
   {
-    safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
-    (cast(GtkFileFilterInfo*)cPtr).filename = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).filename);
   }
 
   @property string uri()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).uri.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
   }
 
   @property void uri(string propval)
   {
-    safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
-    (cast(GtkFileFilterInfo*)cPtr).uri = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).uri);
   }
 
   @property string displayName()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).displayName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
   }
 
   @property void displayName(string propval)
   {
-    safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
-    (cast(GtkFileFilterInfo*)cPtr).displayName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).displayName);
   }
 
   @property string mimeType()
   {
-    return (cast(GtkFileFilterInfo*)cPtr).mimeType.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
   }
 
   @property void mimeType(string propval)
   {
-    safeFree(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
-    (cast(GtkFileFilterInfo*)cPtr).mimeType = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).mimeType);
   }
 }

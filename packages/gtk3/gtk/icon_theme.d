@@ -345,7 +345,7 @@ class IconTheme : gobject.object.ObjectG
     path.length = _nElements;
     foreach (i; 0 .. _nElements)
       path[i] = _path[i].fromCString(Yes.Free);
-    safeFree(cast(void*)_path);
+    gFree(cast(void*)_path);
   }
 
   /**

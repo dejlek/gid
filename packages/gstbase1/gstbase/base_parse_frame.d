@@ -42,12 +42,24 @@ class BaseParseFrame : gobject.boxed.Boxed
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstBaseParseFrame*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).buffer);
   }
 
   @property gst.buffer.Buffer outBuffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
+  }
+
+  @property void outBuffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
+    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).outBuffer);
   }
 
   @property uint flags()

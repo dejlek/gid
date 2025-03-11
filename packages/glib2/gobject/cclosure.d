@@ -22,7 +22,7 @@ class CClosure
     cInstance = *cast(GCClosure*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,7 @@ class CClosure
 
   @property gobject.closure.Closure closure()
   {
-    return new gobject.closure.Closure(cast(GClosure*)&(cast(GCClosure*)cPtr).closure);
+    return cToD!(gobject.closure.Closure)(cast(void*)&(cast(GCClosure*)cPtr).closure);
   }
 
   /**

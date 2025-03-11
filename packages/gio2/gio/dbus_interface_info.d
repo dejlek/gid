@@ -18,7 +18,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
+    super(gMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,13 +54,13 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GDBusInterfaceInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
-    (cast(GDBusInterfaceInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusInterfaceInfo*)cPtr).name);
   }
 
   /**

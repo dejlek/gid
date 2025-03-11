@@ -17,7 +17,7 @@ class ControlPoint : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstControlPoint.sizeof), Yes.Take);
+    super(gMalloc(GstControlPoint.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -22,7 +22,7 @@ class Once
     cInstance = *cast(GOnce*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

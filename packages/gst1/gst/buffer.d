@@ -4,7 +4,6 @@ import gid.gid;
 import glib.bytes;
 import glib.types;
 import gobject.boxed;
-import gobject.object;
 import gobject.types;
 import gst.allocation_params;
 import gst.allocator;
@@ -141,12 +140,18 @@ class Buffer : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstBuffer*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstBuffer*)cPtr).miniObject);
   }
 
   @property gst.buffer_pool.BufferPool pool()
   {
-    return ObjectG.getDObject!(gst.buffer_pool.BufferPool)((cast(GstBuffer*)cPtr).pool, No.Take);
+    return cToD!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)cPtr).pool);
+  }
+
+  @property void pool(gst.buffer_pool.BufferPool propval)
+  {
+    cValueFree!(gst.buffer_pool.BufferPool)(cast(void*)(cast(GstBuffer*)cPtr).pool);
+    dToC(propval, cast(void*)&(cast(GstBuffer*)cPtr).pool);
   }
 
   @property gst.types.ClockTime pts()
@@ -512,7 +517,7 @@ class Buffer : gobject.boxed.Boxed
     gst_buffer_extract_dup(cast(GstBuffer*)cPtr, offset, size, &_dest, &_destSize);
     dest.length = _destSize;
     dest[0 .. $] = (cast(ubyte*)_dest)[0 .. _destSize];
-    safeFree(cast(void*)_dest);
+    gFree(cast(void*)_dest);
   }
 
   /**

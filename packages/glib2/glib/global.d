@@ -2509,7 +2509,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
     throw new ErrorG(_err);
   contents.length = _length;
   contents[0 .. $] = (cast(ubyte*)_contents)[0 .. _length];
-  safeFree(cast(void*)_contents);
+  gFree(cast(void*)_contents);
   return _retval;
 }
 
@@ -6340,7 +6340,7 @@ bool shellParseArgv(string commandLine, out string[] argvp)
   argvp.length = _argcp;
   foreach (i; 0 .. _argcp)
     argvp[i] = _argvp[i].fromCString(Yes.Free);
-  safeFree(cast(void*)_argvp);
+  gFree(cast(void*)_argvp);
   return _retval;
 }
 
@@ -7522,7 +7522,7 @@ string[] strTokenizeAndFold(string string_, string translitLocale, out string[] 
   asciiAlternates.length = _lenasciiAlternates;
   foreach (i; 0 .. _lenasciiAlternates)
     asciiAlternates[i] = _asciiAlternates[i].fromCString(Yes.Free);
-  safeFree(cast(void*)_asciiAlternates);
+  gFree(cast(void*)_asciiAlternates);
   return _retval;
 }
 

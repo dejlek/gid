@@ -6,7 +6,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Describes a property change on a window.
@@ -23,7 +22,7 @@ class EventProperty
     cInstance = *cast(GdkEventProperty*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -43,7 +42,13 @@ class EventProperty
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventProperty*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventProperty*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventProperty*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventProperty*)cPtr).window);
   }
 
   @property byte sendEvent()

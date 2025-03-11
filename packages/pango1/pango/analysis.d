@@ -1,7 +1,6 @@
 module pango.analysis;
 
 import gid.gid;
-import gobject.object;
 import pango.c.functions;
 import pango.c.types;
 import pango.font;
@@ -24,7 +23,7 @@ class Analysis
     cInstance = *cast(PangoAnalysis*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -34,7 +33,13 @@ class Analysis
 
   @property pango.font.Font font()
   {
-    return ObjectG.getDObject!(pango.font.Font)((cast(PangoAnalysis*)cPtr).font, No.Take);
+    return cToD!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)cPtr).font);
+  }
+
+  @property void font(pango.font.Font propval)
+  {
+    cValueFree!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)cPtr).font);
+    dToC(propval, cast(void*)&(cast(PangoAnalysis*)cPtr).font);
   }
 
   @property ubyte level()
@@ -79,6 +84,12 @@ class Analysis
 
   @property pango.language.Language language()
   {
-    return new pango.language.Language(cast(PangoLanguage*)(cast(PangoAnalysis*)cPtr).language);
+    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)cPtr).language);
+  }
+
+  @property void language(pango.language.Language propval)
+  {
+    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)cPtr).language);
+    dToC(propval, cast(void*)&(cast(PangoAnalysis*)cPtr).language);
   }
 }

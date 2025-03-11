@@ -24,7 +24,7 @@ class PluginDesc
     cInstance = *cast(GstPluginDesc*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -54,24 +54,24 @@ class PluginDesc
 
   @property string name()
   {
-    return (cast(GstPluginDesc*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).name);
-    (cast(GstPluginDesc*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).name);
   }
 
   @property string description()
   {
-    return (cast(GstPluginDesc*)cPtr).description.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
   }
 
   @property void description(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).description);
-    (cast(GstPluginDesc*)cPtr).description = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).description);
   }
 
   @property GstPluginInitFunc pluginInit()
@@ -86,67 +86,67 @@ class PluginDesc
 
   @property string version_()
   {
-    return (cast(GstPluginDesc*)cPtr).version_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
   }
 
   @property void version_(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
-    (cast(GstPluginDesc*)cPtr).version_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).version_);
   }
 
   @property string license()
   {
-    return (cast(GstPluginDesc*)cPtr).license.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
   }
 
   @property void license(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).license);
-    (cast(GstPluginDesc*)cPtr).license = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).license);
   }
 
   @property string source()
   {
-    return (cast(GstPluginDesc*)cPtr).source.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
   }
 
   @property void source(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).source);
-    (cast(GstPluginDesc*)cPtr).source = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).source);
   }
 
   @property string package_()
   {
-    return (cast(GstPluginDesc*)cPtr).package_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
   }
 
   @property void package_(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
-    (cast(GstPluginDesc*)cPtr).package_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).package_);
   }
 
   @property string origin()
   {
-    return (cast(GstPluginDesc*)cPtr).origin.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
   }
 
   @property void origin(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
-    (cast(GstPluginDesc*)cPtr).origin = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).origin);
   }
 
   @property string releaseDatetime()
   {
-    return (cast(GstPluginDesc*)cPtr).releaseDatetime.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
   }
 
   @property void releaseDatetime(string propval)
   {
-    safeFree(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
-    (cast(GstPluginDesc*)cPtr).releaseDatetime = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).releaseDatetime);
   }
 }

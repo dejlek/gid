@@ -19,7 +19,7 @@ class StockItem
     cInstance = *cast(GtkStockItem*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -29,24 +29,24 @@ class StockItem
 
   @property string stockId()
   {
-    return (cast(GtkStockItem*)cPtr).stockId.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
   }
 
   @property void stockId(string propval)
   {
-    safeFree(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
-    (cast(GtkStockItem*)cPtr).stockId = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).stockId);
   }
 
   @property string label()
   {
-    return (cast(GtkStockItem*)cPtr).label.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
   }
 
   @property void label(string propval)
   {
-    safeFree(cast(void*)(cast(GtkStockItem*)cPtr).label);
-    (cast(GtkStockItem*)cPtr).label = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).label);
   }
 
   @property gdk.types.ModifierType modifier()
@@ -71,12 +71,12 @@ class StockItem
 
   @property string translationDomain()
   {
-    return (cast(GtkStockItem*)cPtr).translationDomain.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
   }
 
   @property void translationDomain(string propval)
   {
-    safeFree(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
-    (cast(GtkStockItem*)cPtr).translationDomain = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).translationDomain);
   }
 }

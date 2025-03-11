@@ -21,7 +21,7 @@ class SDPTime
     cInstance = *cast(GstSDPTime*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,24 +31,24 @@ class SDPTime
 
   @property string start()
   {
-    return (cast(GstSDPTime*)cPtr).start.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
   }
 
   @property void start(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPTime*)cPtr).start);
-    (cast(GstSDPTime*)cPtr).start = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
+    dToC(propval, cast(void*)&(cast(GstSDPTime*)cPtr).start);
   }
 
   @property string stop()
   {
-    return (cast(GstSDPTime*)cPtr).stop.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);
   }
 
   @property void stop(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPTime*)cPtr).stop);
-    (cast(GstSDPTime*)cPtr).stop = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);
+    dToC(propval, cast(void*)&(cast(GstSDPTime*)cPtr).stop);
   }
 
   /**

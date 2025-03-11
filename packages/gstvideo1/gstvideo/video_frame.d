@@ -23,7 +23,7 @@ class VideoFrame
     cInstance = *cast(GstVideoFrame*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,7 +33,7 @@ class VideoFrame
 
   @property gstvideo.video_info.VideoInfo info()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)&(cast(GstVideoFrame*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoFrame*)cPtr).info);
   }
 
   @property gstvideo.types.VideoFrameFlags flags()
@@ -48,7 +48,13 @@ class VideoFrame
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstVideoFrame*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstVideoFrame*)cPtr).buffer);
   }
 
   @property int id()

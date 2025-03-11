@@ -22,7 +22,7 @@ class VideoResampler
     cInstance = *cast(GstVideoResampler*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

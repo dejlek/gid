@@ -52,7 +52,7 @@ class Caps : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstCaps.sizeof), Yes.Take);
+    super(gMalloc(GstCaps.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -78,7 +78,7 @@ class Caps : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstCaps*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstCaps*)cPtr).miniObject);
   }
 
   /**

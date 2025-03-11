@@ -88,7 +88,7 @@ class AudioConverter : gobject.boxed.Boxed
     _retval = gst_audio_converter_convert(cast(GstAudioConverter*)cPtr, flags, _in_, _inSize, &_out_, &_outSize);
     out_.length = _outSize;
     out_[0 .. $] = (cast(ubyte*)_out_)[0 .. _outSize];
-    safeFree(cast(void*)_out_);
+    gFree(cast(void*)_out_);
     return _retval;
   }
 

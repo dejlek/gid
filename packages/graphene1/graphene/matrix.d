@@ -28,7 +28,7 @@ class Matrix : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_matrix_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_matrix_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

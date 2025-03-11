@@ -25,7 +25,7 @@ class RTPBuffer
     cInstance = *cast(GstRTPBuffer*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -35,7 +35,13 @@ class RTPBuffer
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstRTPBuffer*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstRTPBuffer*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstRTPBuffer*)cPtr).buffer);
   }
 
   @property uint state()

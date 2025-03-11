@@ -18,7 +18,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLRenderbuffer.sizeof), Yes.Take);
+    super(gMalloc(GstGLRenderbuffer.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

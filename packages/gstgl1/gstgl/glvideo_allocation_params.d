@@ -39,12 +39,18 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
 
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
-    return new gstgl.glallocation_params.GLAllocationParams(cast(GstGLAllocationParams*)&(cast(GstGLVideoAllocationParams*)cPtr).parent);
+    return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLVideoAllocationParams*)cPtr).parent);
   }
 
   @property gstvideo.video_info.VideoInfo vInfo()
   {
-    return new gstvideo.video_info.VideoInfo(cast(GstVideoInfo*)(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
+  }
+
+  @property void vInfo(gstvideo.video_info.VideoInfo propval)
+  {
+    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
+    dToC(propval, cast(void*)&(cast(GstGLVideoAllocationParams*)cPtr).vInfo);
   }
 
   @property uint plane()

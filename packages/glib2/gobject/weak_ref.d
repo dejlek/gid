@@ -43,7 +43,7 @@ class WeakRef
     cInstance = *cast(GWeakRef*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

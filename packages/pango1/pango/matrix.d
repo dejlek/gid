@@ -22,7 +22,7 @@ class Matrix : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoMatrix.sizeof), Yes.Take);
+    super(gMalloc(PangoMatrix.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

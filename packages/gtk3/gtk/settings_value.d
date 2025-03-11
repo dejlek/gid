@@ -19,7 +19,7 @@ class SettingsValue
     cInstance = *cast(GtkSettingsValue*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -29,17 +29,17 @@ class SettingsValue
 
   @property string origin()
   {
-    return (cast(GtkSettingsValue*)cPtr).origin.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
   }
 
   @property void origin(string propval)
   {
-    safeFree(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
-    (cast(GtkSettingsValue*)cPtr).origin = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
+    dToC(propval, cast(void*)&(cast(GtkSettingsValue*)cPtr).origin);
   }
 
   @property gobject.value.Value value()
   {
-    return new gobject.value.Value(cast(GValue*)&(cast(GtkSettingsValue*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkSettingsValue*)cPtr).value);
   }
 }

@@ -27,7 +27,7 @@ class CustomMeta
     cInstance = *cast(GstCustomMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +42,13 @@ class CustomMeta
 
   @property gst.structure.Structure structure()
   {
-    return new gst.structure.Structure(cast(GstStructure*)(cast(GstCustomMeta*)cPtr).structure);
+    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);
+  }
+
+  @property void structure(gst.structure.Structure propval)
+  {
+    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);
+    dToC(propval, cast(void*)&(cast(GstCustomMeta*)cPtr).structure);
   }
 
   /**

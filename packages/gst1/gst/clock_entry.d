@@ -23,7 +23,7 @@ class ClockEntry
     cInstance = *cast(GstClockEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -17,7 +17,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusNodeInfo.sizeof), Yes.Take);
+    super(gMalloc(GDBusNodeInfo.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -53,13 +53,13 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   @property string path()
   {
-    return (cast(GDBusNodeInfo*)cPtr).path.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
   }
 
   @property void path(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
-    (cast(GDBusNodeInfo*)cPtr).path = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusNodeInfo*)cPtr).path);
+    dToC(propval, cast(void*)&(cast(GDBusNodeInfo*)cPtr).path);
   }
 
   /**

@@ -23,7 +23,7 @@ class Ray : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_ray_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_ray_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

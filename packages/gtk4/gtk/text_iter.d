@@ -26,7 +26,7 @@ class TextIter : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GtkTextIter.sizeof), Yes.Take);
+    super(gMalloc(GtkTextIter.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

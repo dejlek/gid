@@ -14,7 +14,7 @@ class RTSPUrl : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstRTSPUrl.sizeof), Yes.Take);
+    super(gMalloc(GstRTSPUrl.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -60,35 +60,35 @@ class RTSPUrl : gobject.boxed.Boxed
 
   @property string user()
   {
-    return (cast(GstRTSPUrl*)cPtr).user.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
   }
 
   @property void user(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
-    (cast(GstRTSPUrl*)cPtr).user = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).user);
   }
 
   @property string passwd()
   {
-    return (cast(GstRTSPUrl*)cPtr).passwd.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
   }
 
   @property void passwd(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
-    (cast(GstRTSPUrl*)cPtr).passwd = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).passwd);
   }
 
   @property string host()
   {
-    return (cast(GstRTSPUrl*)cPtr).host.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
   }
 
   @property void host(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
-    (cast(GstRTSPUrl*)cPtr).host = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).host);
   }
 
   @property ushort port()
@@ -103,24 +103,24 @@ class RTSPUrl : gobject.boxed.Boxed
 
   @property string abspath()
   {
-    return (cast(GstRTSPUrl*)cPtr).abspath.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
   }
 
   @property void abspath(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
-    (cast(GstRTSPUrl*)cPtr).abspath = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).abspath);
   }
 
   @property string query()
   {
-    return (cast(GstRTSPUrl*)cPtr).query.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
   }
 
   @property void query(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
-    (cast(GstRTSPUrl*)cPtr).query = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).query);
   }
 
   /**

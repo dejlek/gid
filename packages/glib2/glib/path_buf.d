@@ -49,7 +49,7 @@ class PathBuf
     cInstance = *cast(GPathBuf*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

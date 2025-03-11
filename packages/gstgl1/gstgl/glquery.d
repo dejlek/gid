@@ -24,7 +24,7 @@ class GLQuery
     cInstance = *cast(GstGLQuery*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

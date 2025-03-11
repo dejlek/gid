@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated when the pointer enters or leaves a window.
@@ -22,7 +21,7 @@ class EventCrossing
     cInstance = *cast(GdkEventCrossing*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventCrossing
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -57,7 +62,13 @@ class EventCrossing
 
   @property gdk.window.Window subwindow()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventCrossing*)cPtr).subwindow, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).subwindow);
+  }
+
+  @property void subwindow(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).subwindow);
+    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)cPtr).subwindow);
   }
 
   @property uint time()

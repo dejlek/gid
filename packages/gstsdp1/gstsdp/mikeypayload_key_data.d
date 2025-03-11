@@ -22,7 +22,7 @@ class MIKEYPayloadKeyData
     cInstance = *cast(GstMIKEYPayloadKeyData*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,7 @@ class MIKEYPayloadKeyData
 
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return new gstsdp.mikeypayload.MIKEYPayload(cast(GstMIKEYPayload*)&(cast(GstMIKEYPayloadKeyData*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKeyData*)cPtr).pt);
   }
 
   @property gstsdp.types.MIKEYKeyDataType keyType()

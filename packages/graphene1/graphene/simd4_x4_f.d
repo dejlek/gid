@@ -18,7 +18,7 @@ class Simd4X4F
     cInstance = *cast(graphene_simd4x4f_t*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

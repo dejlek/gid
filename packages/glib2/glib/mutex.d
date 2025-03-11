@@ -63,7 +63,7 @@ class Mutex
     cInstance = *cast(GMutex*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

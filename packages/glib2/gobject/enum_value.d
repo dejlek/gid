@@ -21,7 +21,7 @@ class EnumValue
     cInstance = *cast(GEnumValue*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,23 +41,23 @@ class EnumValue
 
   @property string valueName()
   {
-    return (cast(GEnumValue*)cPtr).valueName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueName);
   }
 
   @property void valueName(string propval)
   {
-    safeFree(cast(void*)(cast(GEnumValue*)cPtr).valueName);
-    (cast(GEnumValue*)cPtr).valueName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueName);
+    dToC(propval, cast(void*)&(cast(GEnumValue*)cPtr).valueName);
   }
 
   @property string valueNick()
   {
-    return (cast(GEnumValue*)cPtr).valueNick.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
   }
 
   @property void valueNick(string propval)
   {
-    safeFree(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
-    (cast(GEnumValue*)cPtr).valueNick = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
+    dToC(propval, cast(void*)&(cast(GEnumValue*)cPtr).valueNick);
   }
 }

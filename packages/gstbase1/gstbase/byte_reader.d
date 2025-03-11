@@ -25,7 +25,7 @@ class ByteReader
     cInstance = *cast(GstByteReader*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -88,7 +88,7 @@ class ByteReader
     }
     str.length = _lenstr;
     str[0 .. $] = (cast(ushort*)_str)[0 .. _lenstr];
-    safeFree(cast(void*)_str);
+    gFree(cast(void*)_str);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class ByteReader
     }
     str.length = _lenstr;
     str[0 .. $] = (cast(uint*)_str)[0 .. _lenstr];
-    safeFree(cast(void*)_str);
+    gFree(cast(void*)_str);
     return _retval;
   }
 

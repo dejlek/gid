@@ -20,7 +20,7 @@ class FileAttributeInfo
     cInstance = *cast(GFileAttributeInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -30,13 +30,13 @@ class FileAttributeInfo
 
   @property string name()
   {
-    return (cast(GFileAttributeInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
-    (cast(GFileAttributeInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GFileAttributeInfo*)cPtr).name);
   }
 
   @property gio.types.FileAttributeType type()

@@ -24,7 +24,7 @@ class ProtectionMeta
     cInstance = *cast(GstProtectionMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -39,7 +39,13 @@ class ProtectionMeta
 
   @property gst.structure.Structure info()
   {
-    return new gst.structure.Structure(cast(GstStructure*)(cast(GstProtectionMeta*)cPtr).info);
+    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);
+  }
+
+  @property void info(gst.structure.Structure propval)
+  {
+    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);
+    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)cPtr).info);
   }
 
   /** */

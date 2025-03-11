@@ -35,7 +35,7 @@ class RoundedRect
     cInstance = *cast(GskRoundedRect*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -45,7 +45,7 @@ class RoundedRect
 
   @property graphene.rect.Rect bounds()
   {
-    return new graphene.rect.Rect(cast(graphene_rect_t*)&(cast(GskRoundedRect*)cPtr).bounds);
+    return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)cPtr).bounds);
   }
 
   /**

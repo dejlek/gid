@@ -28,7 +28,7 @@ class Rect : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_rect_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_rect_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,12 +54,12 @@ class Rect : gobject.boxed.Boxed
 
   @property graphene.point.Point origin()
   {
-    return new graphene.point.Point(cast(graphene_point_t*)&(cast(graphene_rect_t*)cPtr).origin);
+    return cToD!(graphene.point.Point)(cast(void*)&(cast(graphene_rect_t*)cPtr).origin);
   }
 
   @property graphene.size.Size size()
   {
-    return new graphene.size.Size(cast(graphene_size_t*)&(cast(graphene_rect_t*)cPtr).size);
+    return cToD!(graphene.size.Size)(cast(void*)&(cast(graphene_rect_t*)cPtr).size);
   }
 
   /**

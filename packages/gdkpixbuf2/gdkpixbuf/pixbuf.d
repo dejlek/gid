@@ -1311,7 +1311,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
       throw new ErrorG(_err);
     buffer.length = _bufferSize;
     buffer[0 .. $] = (cast(ubyte*)_buffer)[0 .. _bufferSize];
-    safeFree(cast(void*)_buffer);
+    gFree(cast(void*)_buffer);
     return _retval;
   }
 

@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated during [gdk.types.InputSource.TabletPad] interaction with tactile sensors.
@@ -22,7 +21,7 @@ class EventPadAxis
     cInstance = *cast(GdkEventPadAxis*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventPadAxis
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventPadAxis*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventPadAxis*)cPtr).window);
   }
 
   @property byte sendEvent()

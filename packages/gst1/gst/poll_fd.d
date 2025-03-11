@@ -20,7 +20,7 @@ class PollFD
     cInstance = *cast(GstPollFD*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

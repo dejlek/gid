@@ -35,7 +35,7 @@ class Scanner
     cInstance = *cast(GScanner*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   ~this()
@@ -70,13 +70,13 @@ class Scanner
 
   @property string inputName()
   {
-    return (cast(GScanner*)cPtr).inputName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
   }
 
   @property void inputName(string propval)
   {
-    safeFree(cast(void*)(cast(GScanner*)cPtr).inputName);
-    (cast(GScanner*)cPtr).inputName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
+    dToC(propval, cast(void*)&(cast(GScanner*)cPtr).inputName);
   }
 
   @property glib.types.Data qdata()

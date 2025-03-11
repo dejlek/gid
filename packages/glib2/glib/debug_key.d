@@ -21,7 +21,7 @@ class DebugKey
     cInstance = *cast(GDebugKey*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,13 +31,13 @@ class DebugKey
 
   @property string key()
   {
-    return (cast(GDebugKey*)cPtr).key.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
   }
 
   @property void key(string propval)
   {
-    safeFree(cast(void*)(cast(GDebugKey*)cPtr).key);
-    (cast(GDebugKey*)cPtr).key = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
+    dToC(propval, cast(void*)&(cast(GDebugKey*)cPtr).key);
   }
 
   @property uint value()

@@ -1104,7 +1104,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     messages.length = _numMessages;
     foreach (i; 0 .. _numMessages)
       messages[i] = ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)(_messages[i], Yes.Take);
-    safeFree(cast(void*)_messages);
+    gFree(cast(void*)_messages);
     return _retval;
   }
 

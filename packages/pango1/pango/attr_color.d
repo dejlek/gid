@@ -23,7 +23,7 @@ class AttrColor
     cInstance = *cast(PangoAttrColor*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,11 +33,11 @@ class AttrColor
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrColor*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrColor*)cPtr).attr);
   }
 
   @property pango.color.Color color()
   {
-    return new pango.color.Color(cast(PangoColor*)&(cast(PangoAttrColor*)cPtr).color);
+    return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)cPtr).color);
   }
 }

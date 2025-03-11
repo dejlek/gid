@@ -2,7 +2,6 @@ module pango.layout_line;
 
 import gid.gid;
 import gobject.boxed;
-import gobject.object;
 import pango.c.functions;
 import pango.c.types;
 import pango.layout;
@@ -21,7 +20,7 @@ class LayoutLine : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoLayoutLine.sizeof), Yes.Take);
+    super(gMalloc(PangoLayoutLine.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -47,7 +46,13 @@ class LayoutLine : gobject.boxed.Boxed
 
   @property pango.layout.Layout layout()
   {
-    return ObjectG.getDObject!(pango.layout.Layout)((cast(PangoLayoutLine*)cPtr).layout, No.Take);
+    return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
+  }
+
+  @property void layout(pango.layout.Layout propval)
+  {
+    cValueFree!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
+    dToC(propval, cast(void*)&(cast(PangoLayoutLine*)cPtr).layout);
   }
 
   @property int startIndex()
@@ -205,7 +210,7 @@ class LayoutLine : gobject.boxed.Boxed
     pango_layout_line_get_x_ranges(cast(PangoLayoutLine*)cPtr, startIndex, endIndex, &_ranges, &_nRanges);
     ranges.length = _nRanges;
     ranges[0 .. $] = (cast(int*)_ranges)[0 .. _nRanges];
-    safeFree(cast(void*)_ranges);
+    gFree(cast(void*)_ranges);
   }
 
   /**

@@ -22,7 +22,7 @@ class MIKEYPayloadSP
     cInstance = *cast(GstMIKEYPayloadSP*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,7 +32,7 @@ class MIKEYPayloadSP
 
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return new gstsdp.mikeypayload.MIKEYPayload(cast(GstMIKEYPayload*)&(cast(GstMIKEYPayloadSP*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadSP*)cPtr).pt);
   }
 
   @property uint policy()

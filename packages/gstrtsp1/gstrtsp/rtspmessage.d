@@ -17,7 +17,7 @@ class RTSPMessage : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstRTSPMessage.sizeof), Yes.Take);
+    super(gMalloc(GstRTSPMessage.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -471,7 +471,7 @@ class RTSPMessage : gobject.boxed.Boxed
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
-    safeFree(cast(void*)_data);
+    gFree(cast(void*)_data);
     return _retval;
   }
 

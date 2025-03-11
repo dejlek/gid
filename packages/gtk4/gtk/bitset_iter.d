@@ -20,7 +20,7 @@ class BitsetIter : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GtkBitsetIter.sizeof), Yes.Take);
+    super(gMalloc(GtkBitsetIter.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

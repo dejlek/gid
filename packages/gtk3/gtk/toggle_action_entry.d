@@ -21,7 +21,7 @@ class ToggleActionEntry
     cInstance = *cast(GtkToggleActionEntry*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,57 +31,57 @@ class ToggleActionEntry
 
   @property string name()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GtkToggleActionEntry*)cPtr).name);
-    (cast(GtkToggleActionEntry*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).name);
   }
 
   @property string stockId()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).stockId.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).stockId);
   }
 
   @property void stockId(string propval)
   {
-    safeFree(cast(void*)(cast(GtkToggleActionEntry*)cPtr).stockId);
-    (cast(GtkToggleActionEntry*)cPtr).stockId = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).stockId);
   }
 
   @property string label()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).label.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).label);
   }
 
   @property void label(string propval)
   {
-    safeFree(cast(void*)(cast(GtkToggleActionEntry*)cPtr).label);
-    (cast(GtkToggleActionEntry*)cPtr).label = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).label);
   }
 
   @property string accelerator()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).accelerator.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).accelerator);
   }
 
   @property void accelerator(string propval)
   {
-    safeFree(cast(void*)(cast(GtkToggleActionEntry*)cPtr).accelerator);
-    (cast(GtkToggleActionEntry*)cPtr).accelerator = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).accelerator);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).accelerator);
   }
 
   @property string tooltip()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).tooltip.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).tooltip);
   }
 
   @property void tooltip(string propval)
   {
-    safeFree(cast(void*)(cast(GtkToggleActionEntry*)cPtr).tooltip);
-    (cast(GtkToggleActionEntry*)cPtr).tooltip = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).tooltip);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).tooltip);
   }
 
   @property GCallback callback()

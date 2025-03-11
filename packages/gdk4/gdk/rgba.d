@@ -22,7 +22,7 @@ class RGBA : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkRGBA.sizeof), Yes.Take);
+    super(gMalloc(GdkRGBA.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

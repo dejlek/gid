@@ -14,7 +14,7 @@ class DrawState : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_draw_state_t.sizeof), Yes.Take);
+    super(gMalloc(hb_draw_state_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

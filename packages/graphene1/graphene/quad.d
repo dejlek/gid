@@ -19,7 +19,7 @@ class Quad : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_quad_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_quad_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

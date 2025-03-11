@@ -5,7 +5,6 @@ import atk.c.types;
 import atk.object;
 import atk.types;
 import gid.gid;
-import gobject.object;
 
 /**
     This structure represents a single  text selection within a document. This
@@ -40,7 +39,7 @@ class TextSelection
     cInstance = *cast(AtkTextSelection*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -50,7 +49,13 @@ class TextSelection
 
   @property atk.object.ObjectAtk startObject()
   {
-    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).startObject, No.Take);
+    return cToD!(atk.object.ObjectAtk)(cast(void*)(cast(AtkTextSelection*)cPtr).startObject);
+  }
+
+  @property void startObject(atk.object.ObjectAtk propval)
+  {
+    cValueFree!(atk.object.ObjectAtk)(cast(void*)(cast(AtkTextSelection*)cPtr).startObject);
+    dToC(propval, cast(void*)&(cast(AtkTextSelection*)cPtr).startObject);
   }
 
   @property int startOffset()
@@ -65,7 +70,13 @@ class TextSelection
 
   @property atk.object.ObjectAtk endObject()
   {
-    return ObjectG.getDObject!(atk.object.ObjectAtk)((cast(AtkTextSelection*)cPtr).endObject, No.Take);
+    return cToD!(atk.object.ObjectAtk)(cast(void*)(cast(AtkTextSelection*)cPtr).endObject);
+  }
+
+  @property void endObject(atk.object.ObjectAtk propval)
+  {
+    cValueFree!(atk.object.ObjectAtk)(cast(void*)(cast(AtkTextSelection*)cPtr).endObject);
+    dToC(propval, cast(void*)&(cast(AtkTextSelection*)cPtr).endObject);
   }
 
   @property int endOffset()

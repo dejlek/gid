@@ -6,7 +6,6 @@ import gdk.drag_context;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated during DND operations.
@@ -23,7 +22,7 @@ class EventDND
     cInstance = *cast(GdkEventDND*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -43,7 +42,13 @@ class EventDND
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventDND*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -58,7 +63,13 @@ class EventDND
 
   @property gdk.drag_context.DragContext context()
   {
-    return ObjectG.getDObject!(gdk.drag_context.DragContext)((cast(GdkEventDND*)cPtr).context, No.Take);
+    return cToD!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
+  }
+
+  @property void context(gdk.drag_context.DragContext propval)
+  {
+    cValueFree!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
+    dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).context);
   }
 
   @property uint time()

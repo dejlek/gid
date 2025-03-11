@@ -21,7 +21,7 @@ class MIKEYPayloadRAND
     cInstance = *cast(GstMIKEYPayloadRAND*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,7 +31,7 @@ class MIKEYPayloadRAND
 
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return new gstsdp.mikeypayload.MIKEYPayload(cast(GstMIKEYPayload*)&(cast(GstMIKEYPayloadRAND*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadRAND*)cPtr).pt);
   }
 
   @property ubyte len()

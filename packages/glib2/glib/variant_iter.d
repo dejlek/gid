@@ -22,7 +22,7 @@ class VariantIter
     cInstance = *cast(GVariantIter*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   ~this()

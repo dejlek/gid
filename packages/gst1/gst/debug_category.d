@@ -21,7 +21,7 @@ class DebugCategory
     cInstance = *cast(GstDebugCategory*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

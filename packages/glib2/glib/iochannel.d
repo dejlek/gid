@@ -384,7 +384,7 @@ class IOChannel : gobject.boxed.Boxed
     glib.types.IOStatus _retval = cast(glib.types.IOStatus)_cretval;
     strReturn.length = _length;
     strReturn[0 .. $] = (cast(ubyte*)_strReturn)[0 .. _length];
-    safeFree(cast(void*)_strReturn);
+    gFree(cast(void*)_strReturn);
     return _retval;
   }
 

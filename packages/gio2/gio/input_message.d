@@ -38,7 +38,7 @@ class InputMessage
     cInstance = *cast(GInputMessage*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

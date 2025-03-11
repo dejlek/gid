@@ -25,7 +25,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstSDPMessage.sizeof), Yes.Take);
+    super(gMalloc(GstSDPMessage.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -51,13 +51,13 @@ class SDPMessage : gobject.boxed.Boxed
 
   @property string version_()
   {
-    return (cast(GstSDPMessage*)cPtr).version_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
   }
 
   @property void version_(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
-    (cast(GstSDPMessage*)cPtr).version_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).version_);
   }
 
   @property gstsdp.sdporigin.SDPOrigin origin()
@@ -67,35 +67,35 @@ class SDPMessage : gobject.boxed.Boxed
 
   @property string sessionName()
   {
-    return (cast(GstSDPMessage*)cPtr).sessionName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
   }
 
   @property void sessionName(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
-    (cast(GstSDPMessage*)cPtr).sessionName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).sessionName);
   }
 
   @property string information()
   {
-    return (cast(GstSDPMessage*)cPtr).information.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
   }
 
   @property void information(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMessage*)cPtr).information);
-    (cast(GstSDPMessage*)cPtr).information = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).information);
   }
 
   @property string uri()
   {
-    return (cast(GstSDPMessage*)cPtr).uri.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
   }
 
   @property void uri(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
-    (cast(GstSDPMessage*)cPtr).uri = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).uri);
   }
 
   @property gstsdp.sdpconnection.SDPConnection connection()

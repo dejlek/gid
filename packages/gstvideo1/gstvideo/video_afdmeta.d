@@ -35,7 +35,7 @@ class VideoAFDMeta
     cInstance = *cast(GstVideoAFDMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

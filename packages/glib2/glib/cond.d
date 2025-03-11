@@ -85,7 +85,7 @@ class Cond
     cInstance = *cast(GCond*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

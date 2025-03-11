@@ -29,7 +29,7 @@ class AudioDownmixMeta
     cInstance = *cast(GstAudioDownmixMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

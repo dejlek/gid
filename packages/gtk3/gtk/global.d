@@ -237,7 +237,7 @@ void acceleratorParseWithKeycode(string accelerator, out uint acceleratorKey, ou
   }
   acceleratorCodes.length = _lenacceleratorCodes;
   acceleratorCodes[0 .. $] = (cast(uint*)_acceleratorCodes)[0 .. _lenacceleratorCodes];
-  safeFree(cast(void*)_acceleratorCodes);
+  gFree(cast(void*)_acceleratorCodes);
 }
 
 /**

@@ -30,7 +30,7 @@ class ParentBufferMeta
     cInstance = *cast(GstParentBufferMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -45,7 +45,13 @@ class ParentBufferMeta
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstParentBufferMeta*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstParentBufferMeta*)cPtr).buffer);
   }
 
   /**

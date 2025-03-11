@@ -46,7 +46,7 @@ class ThreadPool
     cInstance = *cast(GThreadPool*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   ~this()

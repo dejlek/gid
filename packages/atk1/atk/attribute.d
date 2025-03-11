@@ -30,7 +30,7 @@ class Attribute
     cInstance = *cast(AtkAttribute*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,23 +40,23 @@ class Attribute
 
   @property string name()
   {
-    return (cast(AtkAttribute*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(AtkAttribute*)cPtr).name);
-    (cast(AtkAttribute*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(AtkAttribute*)cPtr).name);
   }
 
   @property string value()
   {
-    return (cast(AtkAttribute*)cPtr).value.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);
   }
 
   @property void value(string propval)
   {
-    safeFree(cast(void*)(cast(AtkAttribute*)cPtr).value);
-    (cast(AtkAttribute*)cPtr).value = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(AtkAttribute*)cPtr).value);
   }
 }

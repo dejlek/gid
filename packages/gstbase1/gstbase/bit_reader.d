@@ -22,7 +22,7 @@ class BitReader
     cInstance = *cast(GstBitReader*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -45,13 +45,13 @@ class String : gobject.boxed.Boxed
 
   @property string str()
   {
-    return (cast(GString*)cPtr).str.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GString*)cPtr).str);
   }
 
   @property void str(string propval)
   {
-    safeFree(cast(void*)(cast(GString*)cPtr).str);
-    (cast(GString*)cPtr).str = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GString*)cPtr).str);
+    dToC(propval, cast(void*)&(cast(GString*)cPtr).str);
   }
 
   @property size_t len()

@@ -44,7 +44,7 @@ class Query : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstQuery.sizeof), Yes.Take);
+    super(gMalloc(GstQuery.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -70,7 +70,7 @@ class Query : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject miniObject()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstQuery*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstQuery*)cPtr).miniObject);
   }
 
   @property gst.types.QueryType type()

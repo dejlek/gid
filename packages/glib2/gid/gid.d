@@ -80,7 +80,7 @@ void* freezeDelegate(void* dlg)
 extern(C) void thawDelegate(void* dlg)
 {
   ptrThawGC((cast(void delegate()*)dlg).ptr);
-  safeFree(dlg);
+  gFree(dlg);
 }
 
 /**
@@ -133,12 +133,12 @@ string fromCString(const(char)* cstr, Flag!"Free" free)
 /**
 * An alias for g_malloc0 for allocating memory for interfacing with glib.
 */
-alias safeMalloc = g_malloc0;
+alias gMalloc = g_malloc0;
 
 /**
 * Free a pointer allocated with malloc() but only if it is not null.
 */
-alias safeFree = g_free;
+alias gFree = g_free;
 
 /**
 * Duplicate a zero terminate C string.
@@ -164,17 +164,6 @@ char* strdup(const(char)* s)
 }
 
 /**
-* Zero a memory area.
-* Params:
-*   p = Pointer to the memory area
-*   len = Length in bytes of memory area
-*/
-void zero(void* p, size_t len)
-{
-  memset(p, 0, len);
-}
-
-/**
 * Template to copy a D array for use by C.
 * Params:
 *   T = The array type
@@ -197,7 +186,7 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
       retArray = cast(T*)g_try_malloc((array.length + 1) * T.sizeof);
 
       if (retArray)
-        zero(cast(void*)&retArray[array.length], T.sizeof);
+        memset(cast(void*)&retArray[array.length], 0, T.sizeof);
     }
     else
       retArray = cast(T*)g_try_malloc(array.length * T.sizeof);
@@ -210,7 +199,7 @@ T* arrayDtoC(T, Flag!"Alloc" alloc = No.Alloc, Flag!"ZeroTerm" zeroTerm = No.Zer
     static if (zeroTerm)
     {
       retArray = new T[array.length + 1].ptr;
-      zero(&retArray[array.length], T.sizeof); // Zero terminate
+      memset(&retArray[array.length], 0, T.sizeof); // Zero terminate
     }
     else
       retArray = new T[array.length].ptr;
@@ -301,9 +290,9 @@ if (containerTypeIsSupported!T)
 
   a.length = gArray.len;
 
-  static if (!containerTypeIsSimple!T && !is(T == void*) && !is(T == const(void)*))
+  static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
     foreach (i; 0 .. gArray.len)
-    a[i] = containerGetItem!T((cast(void**)gArray.data)[i]);
+    a[i] = cToD!T((cast(void**)gArray.data)[i]);
   else
     a[0 .. $] = (cast(T*)gArray.data)[0 .. gArray.len];
 
@@ -334,7 +323,7 @@ if (containerTypeIsSupported!T)
   a.length = ptrArray.len;
 
   foreach (i; 0 .. ptrArray.len)
-    a[i] = containerGetItem!T(ptrArray.pdata[i]);
+    a[i] = cToD!T(ptrArray.pdata[i]);
 
   static if (ownership == GidOwnership.Full)
     g_ptr_array_unref(ptrArray);
@@ -360,10 +349,10 @@ if (containerTypeIsSupported!T)
   for (auto n = list; n; )
   {
     a.length++;
-    a[$ - 1] = containerGetItem!T(n.data);
+    a[$ - 1] = cToD!T(n.data);
 
     static if (ownership == GidOwnership.Full && !is(T == void*) && !is(T == const(void)*))
-      containerFreeItem!T(n.data);
+      cValueFree!T(n.data);
 
     static if (ownership != GidOwnership.None)
     {
@@ -394,10 +383,10 @@ if (containerTypeIsSupported!T)
   for (auto n = list; n; )
   {
     a.length++;
-    a[$ - 1] = containerGetItem!T(n.data);
+    a[$ - 1] = cToD!T(n.data);
 
     static if (ownership == GidOwnership.Full && !is(T == void*) && !is(T == const(void)*))
-      containerFreeItem!T(n.data);
+      cValueFree!T(n.data);
 
     static if (ownership != GidOwnership.None)
     {
@@ -431,7 +420,7 @@ if ((is(K == string) || is(K == const(void)*))
   V[K] map;
 
   for (g_hash_table_iter_init(&iter, hash); g_hash_table_iter_next(&iter, &key, &value); )
-    map[containerGetItem!K(key)] = containerGetItem!V(value);
+    map[cToD!K(key)] = cToD!V(value);
 
   static if (ownership == GidOwnership.Container)
   {
@@ -484,11 +473,11 @@ if (containerTypeIsSupported!T)
 {
   auto gArray = g_array_sized_new(zeroTerminated, false, containerTypeSize!T, cast(uint)a.length);
 
-  static if (!containerTypeIsSimple!T && !is(T == void*) && !is(T == const(void)*))
+  static if (!isTypeSimple!T && !is(T == void*) && !is(T == const(void)*))
   {
     extern(C) void clearFunc(void* elem)
     {
-      containerFreeItem!T(*cast(void**)elem);
+      cValueFree!T(*cast(void**)elem);
       *cast(void**)elem = null;
     }
 
@@ -496,7 +485,7 @@ if (containerTypeIsSupported!T)
     g_array_set_size(gArray, cast(uint)a.length);
 
     foreach (i; 0 .. a.length)
-      containerSetItem(a[i], cast(void*)&gArray.data[i * containerTypeSize!T]);
+      dToC(a[i], cast(void*)&gArray.data[i * containerTypeSize!T]);
   }
   else
     g_array_append_vals(gArray, a.ptr, cast(uint)a.length);
@@ -521,7 +510,7 @@ if (containerTypeIsSupported!T)
   {
     extern(C) void clearFunc(void* elem)
     {
-      containerFreeItem!T(elem);
+      cValueFree!T(elem);
     }
 
     g_ptr_array_set_free_func(gPtrArray, &clearFunc);
@@ -529,10 +518,10 @@ if (containerTypeIsSupported!T)
 
   g_ptr_array_set_size(gPtrArray, cast(int)a.length);
 
-  static if (!containerTypeIsSimple!T)
+  static if (!isTypeSimple!T)
   {
     foreach (i; 0 .. a.length)
-      containerSetItem(a[i], cast(void*)&gPtrArray.pdata[i]);
+      dToC(a[i], cast(void*)&gPtrArray.pdata[i]);
   }
   else
   {
@@ -551,16 +540,16 @@ if (containerTypeIsSupported!T)
 * Returns: New GList which should be freed with containerFree!() template (if ownership not taken by C code)
 */
 GList* gListFromD(T)(T[] a)
-if (containerTypeIsSupported!T && !containerTypeIsSimple!T)
+if (containerTypeIsSupported!T && !isTypeSimple!T)
 {
   GList* list;
 
-  static if (!containerTypeIsSimple!T)
+  static if (!isTypeSimple!T)
   {
     foreach (i; 0 .. a.length)
     {
       list = g_list_prepend(list, null);
-      containerSetItem(a[i], cast(void*)&list.data);
+      dToC(a[i], cast(void*)&list.data);
     }
   }
   else
@@ -588,12 +577,12 @@ if (containerTypeIsSupported!T)
 {
   GSList* list;
 
-  static if (!containerTypeIsSimple!T)
+  static if (!isTypeSimple!T)
   {
     foreach (i; 0 .. a.length)
     {
       list = g_slist_prepend(list, null);
-      containerSetItem(a[i], cast(void*)&list.data);
+      dToC(a[i], cast(void*)&list.data);
     }
   }
   else
@@ -639,23 +628,12 @@ if ((is(K == string) || is(K == const(void)*))
     void* keyptr;
     void* valptr;
 
-    containerSetItem!K(k, &keyptr);
-    containerSetItem!V(v, &valptr);
+    dToC!K(k, &keyptr);
+    dToC!V(v, &valptr);
     g_hash_table_insert(hash, keyptr, valptr);
   }
 
   return hash;
-}
-
-/**
-* Check if a type is a Boxed or Reffed type
-* Params:
-*   T = Type to check
-* Returns: true if type is a boxed or reffed type
-*/
-bool isTypeBoxedOrReffed(T)()
-{
-  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
 }
 
 /**
@@ -666,19 +644,8 @@ bool isTypeBoxedOrReffed(T)()
 */
 bool containerTypeIsSupported(T)()
 {
-  return is(T : ObjectG) || is(T == interface) || is(T == string) || isTypeBoxedOrReffed!T || containerTypeIsSimple!T
+  return is(T : ObjectG) || is(T == interface) || is(T == string) || isTypeCopyableStruct!T || isTypeSimple!T
   || is(T == void*) || is(T == const(void)*);
-}
-
-/**
-* Check if a type is considered a simple container type (can be copied directly)
-* Params:
-*   T = The D type to check
-* Returns: bool if type is considered simple
-*/
-bool containerTypeIsSimple(T)()
-{
-  return isScalarType!T || is(T == struct) || is(T == union);
 }
 
 /**
@@ -690,7 +657,7 @@ bool containerTypeIsSimple(T)()
 uint containerTypeSize(T)()
 if (containerTypeIsSupported!T)
 {
-  static if (containerTypeIsSimple!T)
+  static if (isTypeSimple!T)
     return T.sizeof;
   else
     return (void*).sizeof;
@@ -744,7 +711,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        containerFreeItem!T(n.data);
+        cValueFree!T(n.data);
         g_list_free_1(n);
       }
     }
@@ -759,7 +726,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        containerFreeItem!T(n.data);
+        cValueFree!T(n.data);
         g_slist_free_1(n);
       }
     }
@@ -778,39 +745,62 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
 }
 
 /**
-* Template to get a D value from a container C data item. Used internally for transforming C containers.
+* Check if a type is a Boxed or Reffed type
 * Params:
-*   T = The D item type
-*   data = The container C data pointer
-* Returns: The D item which is a copy of the C item
+*   T = Type to check
+* Returns: true if type is a boxed or reffed type
 */
-T containerGetItem(T)(void* data)
+bool isTypeCopyableStruct(T)()
+{
+  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
+}
+
+/**
+* Check if a type is considered a simple container type (can be copied directly)
+* Params:
+*   T = The D type to check
+* Returns: bool if type is considered simple
+*/
+bool isTypeSimple(T)()
+{
+  return isScalarType!T || is(T == struct) || is(T == union);
+}
+
+/**
+* Template to copy a D value from a C value.
+* Params:
+*   T = The D value type
+*   data = Pointer to the C value
+* Returns: D value which is a copy of the C value
+*/
+T cToD(T)(void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || is(T == interface))
     return ObjectG.getDObject!T(data, No.Take);
   else static if (is(T == string))
     return fromCString(cast(const(char)*)data, No.Free);
-  else static if (isTypeBoxedOrReffed!T)
+  else static if (isTypeCopyableStruct!T)
     return new T(data, No.Take);
   else static if (is(T == void*) || is(T == const(void)*))
     return data;
-  else static if (containerTypeIsSimple!T)
+  else static if (isTypeSimple!T)
     return *(cast(T*)data);
   else
     assert(0);
 }
 
 /**
-* Template to set a C container item from a D value. Used internally for transforming C containers.
+* Template to copy a C value from a D value.
 * Params:
-*   T = The D item type
-*   data = The container C data pointer
+*   T = The D value type
+*   val = The D value to copy
+*   data = Pointer to the location to store the C value
 */
-void containerSetItem(T)(T val, void* data)
+void dToC(T)(T val, void* data)
 if (containerTypeIsSupported!T)
 {
-  static if (is(T : ObjectG) || isTypeBoxedOrReffed!T)
+  static if (is(T : ObjectG) || isTypeCopyableStruct!T)
     *(cast(void**)data) = val.cPtr(Yes.Dup);
   else static if (is(T == interface))
   {
@@ -823,20 +813,19 @@ if (containerTypeIsSupported!T)
     *cast(char**)data = toCString(val, Yes.Alloc); // Transfer the string to C (use g_malloc)
   else static if (is(T == void*) || is(T == const(void)*))
     *(cast(void**)data) = cast(void*)val;
-  else static if (containerTypeIsSimple!T)
+  else static if (isTypeSimple!T)
     *(cast(T*)data) = val;
   else
     assert(0);
 }
 
 /**
-* Free a container C item. Used internally for binding containers.
-* Does nothing if the type does not need to be freed.
+* Free a C value. The value type is defined by the equivalent D template type T. Does nothing if the type does not need to be freed.
 * Params:
-*   T = The D item type
-*   data = The container C data pointer
+*   T = The D type counterpart
+*   data = Pointer to the C value
 */
-void containerFreeItem(T)(void* data)
+void cValueFree(T)(void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : ObjectG) || is(T == interface))
@@ -845,8 +834,8 @@ if (containerTypeIsSupported!T)
     Boxed.boxedFree!T(data);
   else static if (__traits(compiles, T.unref(data))) // Reffed types
     T.unref(data);
-  else static if (is(T : string) || containerTypeIsSimple!T)
-    g_free(data);
+  else static if (is(T : string) || isTypeSimple!T)
+    gFree(data);
 }
 
 /// Exception class used for ObjectG constructor errors

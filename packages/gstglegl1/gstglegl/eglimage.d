@@ -20,7 +20,7 @@ class EGLImage : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstEGLImage.sizeof), Yes.Take);
+    super(gMalloc(GstEGLImage.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

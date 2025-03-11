@@ -22,7 +22,7 @@ class VideoAlignment
     cInstance = *cast(GstVideoAlignment*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

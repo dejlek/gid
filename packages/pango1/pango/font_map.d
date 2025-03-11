@@ -134,7 +134,7 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
       families[i] = ObjectG.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
-    safeFree(cast(void*)_families);
+    gFree(cast(void*)_families);
   }
 
   /**

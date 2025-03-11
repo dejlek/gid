@@ -21,7 +21,7 @@ class FormatDefinition
     cInstance = *cast(GstFormatDefinition*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,24 +41,24 @@ class FormatDefinition
 
   @property string nick()
   {
-    return (cast(GstFormatDefinition*)cPtr).nick.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
   }
 
   @property void nick(string propval)
   {
-    safeFree(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
-    (cast(GstFormatDefinition*)cPtr).nick = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
+    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).nick);
   }
 
   @property string description()
   {
-    return (cast(GstFormatDefinition*)cPtr).description.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
   }
 
   @property void description(string propval)
   {
-    safeFree(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
-    (cast(GstFormatDefinition*)cPtr).description = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).description);
   }
 
   @property glib.types.Quark quark()

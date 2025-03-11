@@ -24,7 +24,7 @@ class PadProbeInfo
     cInstance = *cast(GstPadProbeInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

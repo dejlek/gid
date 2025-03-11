@@ -14,7 +14,7 @@ class UserDataKey : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_user_data_key_t.sizeof), Yes.Take);
+    super(gMalloc(hb_user_data_key_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

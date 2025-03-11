@@ -21,7 +21,7 @@ class GlyphInfo
     cInstance = *cast(PangoGlyphInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -41,7 +41,7 @@ class GlyphInfo
 
   @property pango.types.GlyphGeometry geometry()
   {
-    return (cast(PangoGlyphInfo*)cPtr).geometry;
+    return cToD!(pango.types.GlyphGeometry)(cast(void*)&(cast(PangoGlyphInfo*)cPtr).geometry);
   }
 
   @property void geometry(pango.types.GlyphGeometry propval)
@@ -51,7 +51,7 @@ class GlyphInfo
 
   @property pango.types.GlyphVisAttr attr()
   {
-    return (cast(PangoGlyphInfo*)cPtr).attr;
+    return cToD!(pango.types.GlyphVisAttr)(cast(void*)&(cast(PangoGlyphInfo*)cPtr).attr);
   }
 
   @property void attr(pango.types.GlyphVisAttr propval)

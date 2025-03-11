@@ -20,7 +20,7 @@ class SDPAttribute
     cInstance = *cast(GstSDPAttribute*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -30,24 +30,24 @@ class SDPAttribute
 
   @property string key()
   {
-    return (cast(GstSDPAttribute*)cPtr).key.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
   }
 
   @property void key(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
-    (cast(GstSDPAttribute*)cPtr).key = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
+    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)cPtr).key);
   }
 
   @property string value()
   {
-    return (cast(GstSDPAttribute*)cPtr).value.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
   }
 
   @property void value(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
-    (cast(GstSDPAttribute*)cPtr).value = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)cPtr).value);
   }
 
   /**

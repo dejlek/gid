@@ -23,7 +23,7 @@ class AttrLanguage
     cInstance = *cast(PangoAttrLanguage*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,12 +33,18 @@ class AttrLanguage
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrLanguage*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)cPtr).attr);
   }
 
   @property pango.language.Language value()
   {
-    return new pango.language.Language(cast(PangoLanguage*)(cast(PangoAttrLanguage*)cPtr).value);
+    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);
+  }
+
+  @property void value(pango.language.Language propval)
+  {
+    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(PangoAttrLanguage*)cPtr).value);
   }
 
   /**

@@ -19,7 +19,7 @@ class TextAppearance
     cInstance = *cast(GtkTextAppearance*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -29,12 +29,12 @@ class TextAppearance
 
   @property gdk.color.Color bgColor()
   {
-    return new gdk.color.Color(cast(GdkColor*)&(cast(GtkTextAppearance*)cPtr).bgColor);
+    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)cPtr).bgColor);
   }
 
   @property gdk.color.Color fgColor()
   {
-    return new gdk.color.Color(cast(GdkColor*)&(cast(GtkTextAppearance*)cPtr).fgColor);
+    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)cPtr).fgColor);
   }
 
   @property int rise()

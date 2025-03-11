@@ -21,7 +21,7 @@ class RTSPTransport
     cInstance = *cast(GstRTSPTransport*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -61,24 +61,24 @@ class RTSPTransport
 
   @property string destination()
   {
-    return (cast(GstRTSPTransport*)cPtr).destination.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
   }
 
   @property void destination(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
-    (cast(GstRTSPTransport*)cPtr).destination = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
+    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).destination);
   }
 
   @property string source()
   {
-    return (cast(GstRTSPTransport*)cPtr).source.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
   }
 
   @property void source(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
-    (cast(GstRTSPTransport*)cPtr).source = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
+    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).source);
   }
 
   @property uint layers()

@@ -20,7 +20,7 @@ class KeyEventStruct
     cInstance = *cast(AtkKeyEventStruct*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -70,13 +70,13 @@ class KeyEventStruct
 
   @property string string_()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).string_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
   }
 
   @property void string_(string propval)
   {
-    safeFree(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
-    (cast(AtkKeyEventStruct*)cPtr).string_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
+    dToC(propval, cast(void*)&(cast(AtkKeyEventStruct*)cPtr).string_);
   }
 
   @property ushort keycode()

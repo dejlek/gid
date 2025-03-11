@@ -1,7 +1,6 @@
 module gstbase.collect_data;
 
 import gid.gid;
-import gobject.object;
 import gst.buffer;
 import gst.pad;
 import gst.segment;
@@ -25,7 +24,7 @@ class CollectData
     cInstance = *cast(GstCollectData*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -35,17 +34,35 @@ class CollectData
 
   @property gstbase.collect_pads.CollectPads collect()
   {
-    return ObjectG.getDObject!(gstbase.collect_pads.CollectPads)((cast(GstCollectData*)cPtr).collect, No.Take);
+    return cToD!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)cPtr).collect);
+  }
+
+  @property void collect(gstbase.collect_pads.CollectPads propval)
+  {
+    cValueFree!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)cPtr).collect);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).collect);
   }
 
   @property gst.pad.Pad pad()
   {
-    return ObjectG.getDObject!(gst.pad.Pad)((cast(GstCollectData*)cPtr).pad, No.Take);
+    return cToD!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)cPtr).pad);
+  }
+
+  @property void pad(gst.pad.Pad propval)
+  {
+    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)cPtr).pad);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).pad);
   }
 
   @property gst.buffer.Buffer buffer()
   {
-    return new gst.buffer.Buffer(cast(GstBuffer*)(cast(GstCollectData*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)cPtr).buffer);
+  }
+
+  @property void buffer(gst.buffer.Buffer propval)
+  {
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).buffer);
   }
 
   @property uint pos()
@@ -60,6 +77,6 @@ class CollectData
 
   @property gst.segment.Segment segment()
   {
-    return new gst.segment.Segment(cast(GstSegment*)&(cast(GstCollectData*)cPtr).segment);
+    return cToD!(gst.segment.Segment)(cast(void*)&(cast(GstCollectData*)cPtr).segment);
   }
 }

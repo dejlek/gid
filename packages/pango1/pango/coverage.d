@@ -138,6 +138,6 @@ class Coverage : gobject.object.ObjectG
     pango_coverage_to_bytes(cast(PangoCoverage*)cPtr, &_bytes, &_nBytes);
     bytes.length = _nBytes;
     bytes[0 .. $] = (cast(ubyte*)_bytes)[0 .. _nBytes];
-    safeFree(cast(void*)_bytes);
+    gFree(cast(void*)_bytes);
   }
 }

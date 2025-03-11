@@ -20,7 +20,7 @@ class Node
     cInstance = *cast(GNode*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

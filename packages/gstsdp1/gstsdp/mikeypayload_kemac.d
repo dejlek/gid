@@ -21,7 +21,7 @@ class MIKEYPayloadKEMAC
     cInstance = *cast(GstMIKEYPayloadKEMAC*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,7 +31,7 @@ class MIKEYPayloadKEMAC
 
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return new gstsdp.mikeypayload.MIKEYPayload(cast(GstMIKEYPayload*)&(cast(GstMIKEYPayloadKEMAC*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKEMAC*)cPtr).pt);
   }
 
   @property gstsdp.types.MIKEYEncAlg encAlg()

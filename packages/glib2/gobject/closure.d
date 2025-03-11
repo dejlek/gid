@@ -61,7 +61,7 @@ class Closure : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GClosure.sizeof), Yes.Take);
+    super(gMalloc(GClosure.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -22,7 +22,7 @@ class StaticResource
     cInstance = *cast(GStaticResource*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

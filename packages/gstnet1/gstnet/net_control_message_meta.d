@@ -2,7 +2,6 @@ module gstnet.net_control_message_meta;
 
 import gid.gid;
 import gio.socket_control_message;
-import gobject.object;
 import gst.meta;
 import gst.meta_info;
 import gstnet.c.functions;
@@ -28,7 +27,7 @@ class NetControlMessageMeta
     cInstance = *cast(GstNetControlMessageMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -43,7 +42,13 @@ class NetControlMessageMeta
 
   @property gio.socket_control_message.SocketControlMessage message()
   {
-    return ObjectG.getDObject!(gio.socket_control_message.SocketControlMessage)((cast(GstNetControlMessageMeta*)cPtr).message, No.Take);
+    return cToD!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)cPtr).message);
+  }
+
+  @property void message(gio.socket_control_message.SocketControlMessage propval)
+  {
+    cValueFree!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)cPtr).message);
+    dToC(propval, cast(void*)&(cast(GstNetControlMessageMeta*)cPtr).message);
   }
 
   /** */

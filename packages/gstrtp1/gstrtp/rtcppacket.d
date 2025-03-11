@@ -22,7 +22,7 @@ class RTCPPacket
     cInstance = *cast(GstRTCPPacket*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -301,7 +301,7 @@ class RTCPPacket
     _retval = gst_rtcp_packet_copy_profile_specific_ext(cast(GstRTCPPacket*)cPtr, &_data, &_len);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
-    safeFree(cast(void*)_data);
+    gFree(cast(void*)_data);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class RTCPPacket
     _retval = gst_rtcp_packet_sdes_copy_entry(cast(GstRTCPPacket*)cPtr, &type, &_len, &_data);
     data.length = _len;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _len];
-    safeFree(cast(void*)_data);
+    gFree(cast(void*)_data);
     return _retval;
   }
 

@@ -19,7 +19,7 @@ class PixbufFormat : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GdkPixbufFormat.sizeof), Yes.Take);
+    super(gMalloc(GdkPixbufFormat.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -45,13 +45,13 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GdkPixbufFormat*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
-    (cast(GdkPixbufFormat*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).name);
   }
 
   @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
@@ -61,24 +61,24 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string domain()
   {
-    return (cast(GdkPixbufFormat*)cPtr).domain.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
   }
 
   @property void domain(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
-    (cast(GdkPixbufFormat*)cPtr).domain = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).domain);
+    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).domain);
   }
 
   @property string description()
   {
-    return (cast(GdkPixbufFormat*)cPtr).description.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
   }
 
   @property void description(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
-    (cast(GdkPixbufFormat*)cPtr).description = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).description);
+    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).description);
   }
 
   @property uint flags()
@@ -103,13 +103,13 @@ class PixbufFormat : gobject.boxed.Boxed
 
   @property string license()
   {
-    return (cast(GdkPixbufFormat*)cPtr).license.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);
   }
 
   @property void license(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);
-    (cast(GdkPixbufFormat*)cPtr).license = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).license);
+    dToC(propval, cast(void*)&(cast(GdkPixbufFormat*)cPtr).license);
   }
 
   /**

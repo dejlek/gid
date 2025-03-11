@@ -22,7 +22,7 @@ class ColorStop : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(hb_color_stop_t.sizeof), Yes.Take);
+    super(gMalloc(hb_color_stop_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

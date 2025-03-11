@@ -41,7 +41,7 @@ class MiniObject : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstMiniObject.sizeof), Yes.Take);
+    super(gMalloc(GstMiniObject.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

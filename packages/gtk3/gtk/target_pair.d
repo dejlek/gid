@@ -23,7 +23,7 @@ class TargetPair
     cInstance = *cast(GtkTargetPair*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

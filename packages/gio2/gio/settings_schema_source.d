@@ -120,7 +120,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     nonRelocatable.length = _lennonRelocatable;
     foreach (i; 0 .. _lennonRelocatable)
       nonRelocatable[i] = _nonRelocatable[i].fromCString(Yes.Free);
-    safeFree(cast(void*)_nonRelocatable);
+    gFree(cast(void*)_nonRelocatable);
     uint _lenrelocatable;
     if (_relocatable)
     {
@@ -131,7 +131,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     relocatable.length = _lenrelocatable;
     foreach (i; 0 .. _lenrelocatable)
       relocatable[i] = _relocatable[i].fromCString(Yes.Free);
-    safeFree(cast(void*)_relocatable);
+    gFree(cast(void*)_relocatable);
   }
 
   /**

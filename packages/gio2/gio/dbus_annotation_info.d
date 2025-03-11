@@ -14,7 +14,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
+    super(gMalloc(GDBusAnnotationInfo.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -50,24 +50,24 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
 
   @property string key()
   {
-    return (cast(GDBusAnnotationInfo*)cPtr).key.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
   }
 
   @property void key(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
-    (cast(GDBusAnnotationInfo*)cPtr).key = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
+    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)cPtr).key);
   }
 
   @property string value()
   {
-    return (cast(GDBusAnnotationInfo*)cPtr).value.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
   }
 
   @property void value(string propval)
   {
-    safeFree(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
-    (cast(GDBusAnnotationInfo*)cPtr).value = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)cPtr).value);
   }
 
   /**

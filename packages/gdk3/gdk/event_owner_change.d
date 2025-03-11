@@ -6,7 +6,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Generated when the owner of a selection changes. On X11, this
@@ -25,7 +24,7 @@ class EventOwnerChange
     cInstance = *cast(GdkEventOwnerChange*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -45,7 +44,13 @@ class EventOwnerChange
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -60,7 +65,13 @@ class EventOwnerChange
 
   @property gdk.window.Window owner()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventOwnerChange*)cPtr).owner, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).owner);
+  }
+
+  @property void owner(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).owner);
+    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)cPtr).owner);
   }
 
   @property gdk.types.OwnerChange reason()

@@ -20,7 +20,7 @@ class SDPConnection
     cInstance = *cast(GstSDPConnection*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -30,35 +30,35 @@ class SDPConnection
 
   @property string nettype()
   {
-    return (cast(GstSDPConnection*)cPtr).nettype.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
   }
 
   @property void nettype(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
-    (cast(GstSDPConnection*)cPtr).nettype = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).nettype);
   }
 
   @property string addrtype()
   {
-    return (cast(GstSDPConnection*)cPtr).addrtype.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
   }
 
   @property void addrtype(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
-    (cast(GstSDPConnection*)cPtr).addrtype = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).addrtype);
   }
 
   @property string address()
   {
-    return (cast(GstSDPConnection*)cPtr).address.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
   }
 
   @property void address(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPConnection*)cPtr).address);
-    (cast(GstSDPConnection*)cPtr).address = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).address);
   }
 
   @property uint ttl()

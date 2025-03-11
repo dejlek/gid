@@ -21,7 +21,7 @@ class ParamSpecArray
     cInstance = *cast(GstParamSpecArray*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,11 +31,23 @@ class ParamSpecArray
 
   @property gobject.param_spec.ParamSpec parentInstance()
   {
-    return new gobject.param_spec.ParamSpec(cast(GParamSpec*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
+  }
+
+  @property void parentInstance(gobject.param_spec.ParamSpec propval)
+  {
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
+    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
   }
 
   @property gobject.param_spec.ParamSpec elementSpec()
   {
-    return new gobject.param_spec.ParamSpec(cast(GParamSpec*)(cast(GstParamSpecArray*)cPtr).elementSpec);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)cPtr).elementSpec);
+  }
+
+  @property void elementSpec(gobject.param_spec.ParamSpec propval)
+  {
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)cPtr).elementSpec);
+    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)cPtr).elementSpec);
   }
 }

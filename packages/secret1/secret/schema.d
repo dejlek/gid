@@ -87,13 +87,13 @@ class Schema : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(SecretSchema*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(SecretSchema*)cPtr).name);
-    (cast(SecretSchema*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(SecretSchema*)cPtr).name);
   }
 
   @property secret.types.SchemaFlags flags()

@@ -22,7 +22,7 @@ class VideoCropMeta
     cInstance = *cast(GstVideoCropMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

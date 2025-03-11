@@ -66,7 +66,7 @@ class StaticMutex
     cInstance = *cast(GStaticMutex*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

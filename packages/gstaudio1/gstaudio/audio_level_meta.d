@@ -22,7 +22,7 @@ class AudioLevelMeta
     cInstance = *cast(GstAudioLevelMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

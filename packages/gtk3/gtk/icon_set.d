@@ -146,7 +146,7 @@ class IconSet : gobject.boxed.Boxed
     gtk_icon_set_get_sizes(cast(GtkIconSet*)cPtr, &_sizes, &_nSizes);
     sizes.length = _nSizes;
     sizes[0 .. $] = (cast(gtk.types.IconSize*)_sizes)[0 .. _nSizes];
-    safeFree(cast(void*)_sizes);
+    gFree(cast(void*)_sizes);
   }
 
   /**

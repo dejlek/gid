@@ -6,7 +6,6 @@ import gdk.device;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Used for button press and button release events. The
@@ -59,7 +58,7 @@ class EventButton
     cInstance = *cast(GdkEventButton*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -79,7 +78,13 @@ class EventButton
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventButton*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventButton*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventButton*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventButton*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -144,7 +149,13 @@ class EventButton
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventButton*)cPtr).device, No.Take);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventButton*)cPtr).device);
+  }
+
+  @property void device(gdk.device.Device propval)
+  {
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventButton*)cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventButton*)cPtr).device);
   }
 
   @property double xRoot()

@@ -65,7 +65,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     _retval = gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)cPtr, _axes, &_values);
     values.length = axes.length;
     values[0 .. $] = (cast(double*)_values)[0 .. axes.length];
-    safeFree(cast(void*)_values);
+    gFree(cast(void*)_values);
     return _retval;
   }
 

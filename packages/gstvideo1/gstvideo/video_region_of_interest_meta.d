@@ -24,7 +24,7 @@ class VideoRegionOfInterestMeta
     cInstance = *cast(GstVideoRegionOfInterestMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -68,7 +68,7 @@ class PixbufModule
     cInstance = *cast(GdkPixbufModule*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -78,24 +78,24 @@ class PixbufModule
 
   @property string moduleName()
   {
-    return (cast(GdkPixbufModule*)cPtr).moduleName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
   }
 
   @property void moduleName(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
-    (cast(GdkPixbufModule*)cPtr).moduleName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).moduleName);
   }
 
   @property string modulePath()
   {
-    return (cast(GdkPixbufModule*)cPtr).modulePath.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
   }
 
   @property void modulePath(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
-    (cast(GdkPixbufModule*)cPtr).modulePath = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).modulePath);
   }
 
   @property gmodule.module_.Module module_()
@@ -105,7 +105,13 @@ class PixbufModule
 
   @property gdkpixbuf.pixbuf_format.PixbufFormat info()
   {
-    return new gdkpixbuf.pixbuf_format.PixbufFormat(cast(GdkPixbufFormat*)(cast(GdkPixbufModule*)cPtr).info);
+    return cToD!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)cPtr).info);
+  }
+
+  @property void info(gdkpixbuf.pixbuf_format.PixbufFormat propval)
+  {
+    cValueFree!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)cPtr).info);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).info);
   }
 
   @property GdkPixbufModuleLoadFunc load()

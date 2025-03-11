@@ -22,7 +22,7 @@ class GlyphItem : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoGlyphItem.sizeof), Yes.Take);
+    super(gMalloc(PangoGlyphItem.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -48,12 +48,24 @@ class GlyphItem : gobject.boxed.Boxed
 
   @property pango.item.Item item()
   {
-    return new pango.item.Item(cast(PangoItem*)(cast(PangoGlyphItem*)cPtr).item);
+    return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
+  }
+
+  @property void item(pango.item.Item propval)
+  {
+    cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).item);
   }
 
   @property pango.glyph_string.GlyphString glyphs()
   {
-    return new pango.glyph_string.GlyphString(cast(PangoGlyphString*)(cast(PangoGlyphItem*)cPtr).glyphs);
+    return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
+  }
+
+  @property void glyphs(pango.glyph_string.GlyphString propval)
+  {
+    cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).glyphs);
   }
 
   @property int yOffset()

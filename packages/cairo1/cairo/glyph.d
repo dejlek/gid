@@ -27,7 +27,7 @@ class Glyph : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_glyph_t.sizeof), Yes.Take);
+    super(gMalloc(cairo_glyph_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -24,7 +24,7 @@ class MIKEYPayloadPKE
     cInstance = *cast(GstMIKEYPayloadPKE*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -34,7 +34,7 @@ class MIKEYPayloadPKE
 
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return new gstsdp.mikeypayload.MIKEYPayload(cast(GstMIKEYPayload*)&(cast(GstMIKEYPayloadPKE*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadPKE*)cPtr).pt);
   }
 
   @property gstsdp.types.MIKEYCacheType C()

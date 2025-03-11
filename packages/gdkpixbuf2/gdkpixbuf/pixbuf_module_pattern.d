@@ -49,7 +49,7 @@ class PixbufModulePattern
     cInstance = *cast(GdkPixbufModulePattern*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -59,24 +59,24 @@ class PixbufModulePattern
 
   @property string prefix()
   {
-    return (cast(GdkPixbufModulePattern*)cPtr).prefix.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
   }
 
   @property void prefix(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
-    (cast(GdkPixbufModulePattern*)cPtr).prefix = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).prefix);
   }
 
   @property string mask()
   {
-    return (cast(GdkPixbufModulePattern*)cPtr).mask.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
   }
 
   @property void mask(string propval)
   {
-    safeFree(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
-    (cast(GdkPixbufModulePattern*)cPtr).mask = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).mask);
   }
 
   @property int relevance()

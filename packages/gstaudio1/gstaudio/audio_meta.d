@@ -25,7 +25,7 @@ class AudioMeta
     cInstance = *cast(GstAudioMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,7 +40,7 @@ class AudioMeta
 
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return new gstaudio.audio_info.AudioInfo(cast(GstAudioInfo*)&(cast(GstAudioMeta*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioMeta*)cPtr).info);
   }
 
   @property size_t samples()

@@ -21,7 +21,7 @@ class HookList
     cInstance = *cast(GHookList*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -14,7 +14,7 @@ class TextRange : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(AtkTextRange.sizeof), Yes.Take);
+    super(gMalloc(AtkTextRange.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,7 +40,7 @@ class TextRange : gobject.boxed.Boxed
 
   @property atk.types.TextRectangle bounds()
   {
-    return (cast(AtkTextRange*)cPtr).bounds;
+    return cToD!(atk.types.TextRectangle)(cast(void*)&(cast(AtkTextRange*)cPtr).bounds);
   }
 
   @property void bounds(atk.types.TextRectangle propval)
@@ -70,12 +70,12 @@ class TextRange : gobject.boxed.Boxed
 
   @property string content()
   {
-    return (cast(AtkTextRange*)cPtr).content.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(AtkTextRange*)cPtr).content);
   }
 
   @property void content(string propval)
   {
-    safeFree(cast(void*)(cast(AtkTextRange*)cPtr).content);
-    (cast(AtkTextRange*)cPtr).content = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(AtkTextRange*)cPtr).content);
+    dToC(propval, cast(void*)&(cast(AtkTextRange*)cPtr).content);
   }
 }

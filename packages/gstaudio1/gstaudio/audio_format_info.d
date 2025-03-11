@@ -20,7 +20,7 @@ class AudioFormatInfo
     cInstance = *cast(GstAudioFormatInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,24 +40,24 @@ class AudioFormatInfo
 
   @property string name()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
-    (cast(GstAudioFormatInfo*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)cPtr).name);
   }
 
   @property string description()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).description.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
   }
 
   @property void description(string propval)
   {
-    safeFree(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
-    (cast(GstAudioFormatInfo*)cPtr).description = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)cPtr).description);
   }
 
   @property gstaudio.types.AudioFormatFlags flags()

@@ -31,7 +31,7 @@ class VideoAffineTransformationMeta
     cInstance = *cast(GstVideoAffineTransformationMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

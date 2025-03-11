@@ -7,7 +7,6 @@ import gdk.event_sequence;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Used for touch events.
@@ -33,7 +32,7 @@ class EventTouch
     cInstance = *cast(GdkEventTouch*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -53,7 +52,13 @@ class EventTouch
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventTouch*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -108,7 +113,13 @@ class EventTouch
 
   @property gdk.event_sequence.EventSequence sequence()
   {
-    return new gdk.event_sequence.EventSequence(cast(GdkEventSequence*)(cast(GdkEventTouch*)cPtr).sequence);
+    return cToD!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)cPtr).sequence);
+  }
+
+  @property void sequence(gdk.event_sequence.EventSequence propval)
+  {
+    cValueFree!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)cPtr).sequence);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).sequence);
   }
 
   @property bool emulatingPointer()
@@ -123,7 +134,13 @@ class EventTouch
 
   @property gdk.device.Device device()
   {
-    return ObjectG.getDObject!(gdk.device.Device)((cast(GdkEventTouch*)cPtr).device, No.Take);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)cPtr).device);
+  }
+
+  @property void device(gdk.device.Device propval)
+  {
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).device);
   }
 
   @property double xRoot()

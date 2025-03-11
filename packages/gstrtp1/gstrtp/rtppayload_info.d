@@ -20,7 +20,7 @@ class RTPPayloadInfo
     cInstance = *cast(GstRTPPayloadInfo*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -40,24 +40,24 @@ class RTPPayloadInfo
 
   @property string media()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).media.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
   }
 
   @property void media(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
-    (cast(GstRTPPayloadInfo*)cPtr).media = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).media);
   }
 
   @property string encodingName()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).encodingName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
   }
 
   @property void encodingName(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
-    (cast(GstRTPPayloadInfo*)cPtr).encodingName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingName);
   }
 
   @property uint clockRate()
@@ -72,13 +72,13 @@ class RTPPayloadInfo
 
   @property string encodingParameters()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).encodingParameters.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
   }
 
   @property void encodingParameters(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
-    (cast(GstRTPPayloadInfo*)cPtr).encodingParameters = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
   }
 
   @property uint bitrate()

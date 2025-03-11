@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Contains the fields which are common to all event structs.
@@ -24,7 +23,7 @@ class EventAny
     cInstance = *cast(GdkEventAny*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -44,7 +43,13 @@ class EventAny
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventAny*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventAny*)cPtr).window);
   }
 
   @property byte sendEvent()

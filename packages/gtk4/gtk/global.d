@@ -213,7 +213,7 @@ bool acceleratorParseWithKeycode(string accelerator, gdk.display.Display display
   }
   acceleratorCodes.length = _lenacceleratorCodes;
   acceleratorCodes[0 .. $] = (cast(uint*)_acceleratorCodes)[0 .. _lenacceleratorCodes];
-  safeFree(cast(void*)_acceleratorCodes);
+  gFree(cast(void*)_acceleratorCodes);
   return _retval;
 }
 

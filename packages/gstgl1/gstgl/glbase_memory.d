@@ -4,7 +4,6 @@ import gid.gid;
 import glib.mutex;
 import glib.types;
 import gobject.boxed;
-import gobject.object;
 import gst.allocation_params;
 import gst.allocator;
 import gst.memory;
@@ -28,7 +27,7 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLBaseMemory.sizeof), Yes.Take);
+    super(gMalloc(GstGLBaseMemory.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -54,12 +53,18 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   @property gst.memory.Memory mem()
   {
-    return new gst.memory.Memory(cast(GstMemory*)&(cast(GstGLBaseMemory*)cPtr).mem);
+    return cToD!(gst.memory.Memory)(cast(void*)&(cast(GstGLBaseMemory*)cPtr).mem);
   }
 
   @property gstgl.glcontext.GLContext context()
   {
-    return ObjectG.getDObject!(gstgl.glcontext.GLContext)((cast(GstGLBaseMemory*)cPtr).context, No.Take);
+    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)cPtr).context);
+  }
+
+  @property void context(gstgl.glcontext.GLContext propval)
+  {
+    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLBaseMemory*)cPtr).context);
+    dToC(propval, cast(void*)&(cast(GstGLBaseMemory*)cPtr).context);
   }
 
   @property glib.mutex.Mutex lock()

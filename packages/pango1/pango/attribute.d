@@ -30,7 +30,7 @@ class Attribute : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(PangoAttribute.sizeof), Yes.Take);
+    super(gMalloc(PangoAttribute.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

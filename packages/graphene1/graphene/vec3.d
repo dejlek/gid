@@ -19,7 +19,7 @@ class Vec3 : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(graphene_vec3_t.sizeof), Yes.Take);
+    super(gMalloc(graphene_vec3_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

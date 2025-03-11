@@ -1,7 +1,6 @@
 module gtk.fixed_child;
 
 import gid.gid;
-import gobject.object;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.types;
@@ -20,7 +19,7 @@ class FixedChild
     cInstance = *cast(GtkFixedChild*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -30,7 +29,13 @@ class FixedChild
 
   @property gtk.widget.Widget widget()
   {
-    return ObjectG.getDObject!(gtk.widget.Widget)((cast(GtkFixedChild*)cPtr).widget, No.Take);
+    return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)cPtr).widget);
+  }
+
+  @property void widget(gtk.widget.Widget propval)
+  {
+    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)cPtr).widget);
+    dToC(propval, cast(void*)&(cast(GtkFixedChild*)cPtr).widget);
   }
 
   @property int x()

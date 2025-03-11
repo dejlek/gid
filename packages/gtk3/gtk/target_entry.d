@@ -37,13 +37,13 @@ class TargetEntry : gobject.boxed.Boxed
 
   @property string target()
   {
-    return (cast(GtkTargetEntry*)cPtr).target.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
   }
 
   @property void target(string propval)
   {
-    safeFree(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
-    (cast(GtkTargetEntry*)cPtr).target = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
+    dToC(propval, cast(void*)&(cast(GtkTargetEntry*)cPtr).target);
   }
 
   @property uint flags()

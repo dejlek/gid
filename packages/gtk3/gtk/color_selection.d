@@ -65,7 +65,7 @@ class ColorSelection : gtk.box.Box
     colors.length = _nColors;
     foreach (i; 0 .. _nColors)
       colors[i] = new gdk.color.Color(cast(void*)&_colors[i], Yes.Take);
-    safeFree(cast(void*)_colors);
+    gFree(cast(void*)_colors);
     return _retval;
   }
 

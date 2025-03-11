@@ -16,7 +16,7 @@ class RectangleList : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(cairo_rectangle_list_t.sizeof), Yes.Take);
+    super(gMalloc(cairo_rectangle_list_t.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -52,7 +52,13 @@ class RectangleList : gobject.boxed.Boxed
 
   @property cairo.rectangle.Rectangle rectangles()
   {
-    return new cairo.rectangle.Rectangle(cast(cairo_rectangle_t*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+    return cToD!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+  }
+
+  @property void rectangles(cairo.rectangle.Rectangle propval)
+  {
+    cValueFree!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+    dToC(propval, cast(void*)&(cast(cairo_rectangle_list_t*)cPtr).rectangles);
   }
 
   @property int numRectangles()

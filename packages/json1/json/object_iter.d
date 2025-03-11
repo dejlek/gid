@@ -31,7 +31,7 @@ class ObjectIter
     cInstance = *cast(JsonObjectIter*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

@@ -24,7 +24,7 @@ class StaticPadTemplate
     cInstance = *cast(GstStaticPadTemplate*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -34,13 +34,13 @@ class StaticPadTemplate
 
   @property string nameTemplate()
   {
-    return (cast(GstStaticPadTemplate*)cPtr).nameTemplate.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
   }
 
   @property void nameTemplate(string propval)
   {
-    safeFree(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
-    (cast(GstStaticPadTemplate*)cPtr).nameTemplate = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
+    dToC(propval, cast(void*)&(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
   }
 
   @property gst.types.PadDirection direction()

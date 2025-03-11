@@ -23,7 +23,7 @@ class VideoOverlayCompositionMeta
     cInstance = *cast(GstVideoOverlayCompositionMeta*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -38,7 +38,13 @@ class VideoOverlayCompositionMeta
 
   @property gstvideo.video_overlay_composition.VideoOverlayComposition overlay()
   {
-    return new gstvideo.video_overlay_composition.VideoOverlayComposition(cast(GstVideoOverlayComposition*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
+    return cToD!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
+  }
+
+  @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval)
+  {
+    cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
+    dToC(propval, cast(void*)&(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
   }
 
   /** */

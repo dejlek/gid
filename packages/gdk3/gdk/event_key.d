@@ -5,7 +5,6 @@ import gdk.c.types;
 import gdk.types;
 import gdk.window;
 import gid.gid;
-import gobject.object;
 
 /**
     Describes a key press or key release event.
@@ -22,7 +21,7 @@ class EventKey
     cInstance = *cast(GdkEventKey*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -42,7 +41,13 @@ class EventKey
 
   @property gdk.window.Window window()
   {
-    return ObjectG.getDObject!(gdk.window.Window)((cast(GdkEventKey*)cPtr).window, No.Take);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)cPtr).window);
+  }
+
+  @property void window(gdk.window.Window propval)
+  {
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventKey*)cPtr).window);
   }
 
   @property byte sendEvent()
@@ -97,13 +102,13 @@ class EventKey
 
   @property string string_()
   {
-    return (cast(GdkEventKey*)cPtr).string_.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GdkEventKey*)cPtr).string_);
   }
 
   @property void string_(string propval)
   {
-    safeFree(cast(void*)(cast(GdkEventKey*)cPtr).string_);
-    (cast(GdkEventKey*)cPtr).string_ = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GdkEventKey*)cPtr).string_);
+    dToC(propval, cast(void*)&(cast(GdkEventKey*)cPtr).string_);
   }
 
   @property ushort hardwareKeycode()

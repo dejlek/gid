@@ -14,7 +14,7 @@ class RTSPAuthParam : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstRTSPAuthParam.sizeof), Yes.Take);
+    super(gMalloc(GstRTSPAuthParam.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,24 +40,24 @@ class RTSPAuthParam : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(GstRTSPAuthParam*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
-    (cast(GstRTSPAuthParam*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)cPtr).name);
   }
 
   @property string value()
   {
-    return (cast(GstRTSPAuthParam*)cPtr).value.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
   }
 
   @property void value(string propval)
   {
-    safeFree(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
-    (cast(GstRTSPAuthParam*)cPtr).value = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
+    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)cPtr).value);
   }
 
   /** */

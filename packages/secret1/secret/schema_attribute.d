@@ -14,7 +14,7 @@ class SchemaAttribute : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(SecretSchemaAttribute.sizeof), Yes.Take);
+    super(gMalloc(SecretSchemaAttribute.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -40,13 +40,13 @@ class SchemaAttribute : gobject.boxed.Boxed
 
   @property string name()
   {
-    return (cast(SecretSchemaAttribute*)cPtr).name.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
   }
 
   @property void name(string propval)
   {
-    safeFree(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
-    (cast(SecretSchemaAttribute*)cPtr).name = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);
+    dToC(propval, cast(void*)&(cast(SecretSchemaAttribute*)cPtr).name);
   }
 
   @property secret.types.SchemaAttributeType type()

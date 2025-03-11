@@ -21,7 +21,7 @@ class SDPBandwidth
     cInstance = *cast(GstSDPBandwidth*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -31,13 +31,13 @@ class SDPBandwidth
 
   @property string bwtype()
   {
-    return (cast(GstSDPBandwidth*)cPtr).bwtype.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
   }
 
   @property void bwtype(string propval)
   {
-    safeFree(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
-    (cast(GstSDPBandwidth*)cPtr).bwtype = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
+    dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)cPtr).bwtype);
   }
 
   @property uint bandwidth()

@@ -23,7 +23,7 @@ class PropertyValues
     cInstance = *cast(AtkPropertyValues*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -33,22 +33,22 @@ class PropertyValues
 
   @property string propertyName()
   {
-    return (cast(AtkPropertyValues*)cPtr).propertyName.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
   }
 
   @property void propertyName(string propval)
   {
-    safeFree(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
-    (cast(AtkPropertyValues*)cPtr).propertyName = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
+    dToC(propval, cast(void*)&(cast(AtkPropertyValues*)cPtr).propertyName);
   }
 
   @property gobject.value.Value oldValue()
   {
-    return new gobject.value.Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).oldValue);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)cPtr).oldValue);
   }
 
   @property gobject.value.Value newValue()
   {
-    return new gobject.value.Value(cast(GValue*)&(cast(AtkPropertyValues*)cPtr).newValue);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)cPtr).newValue);
   }
 }

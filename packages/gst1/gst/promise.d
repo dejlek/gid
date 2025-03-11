@@ -89,7 +89,7 @@ class Promise : gobject.boxed.Boxed
 
   @property gst.mini_object.MiniObject parent()
   {
-    return new gst.mini_object.MiniObject(cast(GstMiniObject*)&(cast(GstPromise*)cPtr).parent);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)cPtr).parent);
   }
 
   /** */

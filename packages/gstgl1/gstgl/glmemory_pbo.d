@@ -17,7 +17,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
 
   this()
   {
-    super(safeMalloc(GstGLMemoryPBO.sizeof), Yes.Take);
+    super(gMalloc(GstGLMemoryPBO.sizeof), Yes.Take);
   }
 
   this(void* ptr, Flag!"Take" take = No.Take)

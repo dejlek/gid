@@ -21,7 +21,7 @@ class TypeValueTable
     cInstance = *cast(GTypeValueTable*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -71,13 +71,13 @@ class TypeValueTable
 
   @property string collectFormat()
   {
-    return (cast(GTypeValueTable*)cPtr).collectFormat.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
   }
 
   @property void collectFormat(string propval)
   {
-    safeFree(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
-    (cast(GTypeValueTable*)cPtr).collectFormat = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
+    dToC(propval, cast(void*)&(cast(GTypeValueTable*)cPtr).collectFormat);
   }
 
   @property GTypeValueCollectFunc collectValue()
@@ -92,13 +92,13 @@ class TypeValueTable
 
   @property string lcopyFormat()
   {
-    return (cast(GTypeValueTable*)cPtr).lcopyFormat.fromCString(No.Free);
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
   }
 
   @property void lcopyFormat(string propval)
   {
-    safeFree(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
-    (cast(GTypeValueTable*)cPtr).lcopyFormat = propval.toCString(Yes.Alloc);
+    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
+    dToC(propval, cast(void*)&(cast(GTypeValueTable*)cPtr).lcopyFormat);
   }
 
   @property GTypeValueLCopyFunc lcopyValue()

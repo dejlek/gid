@@ -22,7 +22,7 @@ class AttrShape
     cInstance = *cast(PangoAttrShape*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()
@@ -32,12 +32,12 @@ class AttrShape
 
   @property pango.attribute.Attribute attr()
   {
-    return new pango.attribute.Attribute(cast(PangoAttribute*)&(cast(PangoAttrShape*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrShape*)cPtr).attr);
   }
 
   @property pango.types.Rectangle inkRect()
   {
-    return (cast(PangoAttrShape*)cPtr).inkRect;
+    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).inkRect);
   }
 
   @property void inkRect(pango.types.Rectangle propval)
@@ -47,7 +47,7 @@ class AttrShape
 
   @property pango.types.Rectangle logicalRect()
   {
-    return (cast(PangoAttrShape*)cPtr).logicalRect;
+    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).logicalRect);
   }
 
   @property void logicalRect(pango.types.Rectangle propval)

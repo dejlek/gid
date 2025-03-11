@@ -21,7 +21,7 @@ class VideoContentLightLevel
     cInstance = *cast(GstVideoContentLightLevel*)ptr;
 
     if (take)
-      safeFree(ptr);
+      gFree(ptr);
   }
 
   void* cPtr()

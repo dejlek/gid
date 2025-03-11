@@ -72,7 +72,13 @@ class ValueArray : gobject.boxed.Boxed
 
   @property gobject.value.Value values()
   {
-    return new gobject.value.Value(cast(GValue*)(cast(GValueArray*)cPtr).values);
+    return cToD!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);
+  }
+
+  @property void values(gobject.value.Value propval)
+  {
+    cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);
+    dToC(propval, cast(void*)&(cast(GValueArray*)cPtr).values);
   }
 
   /**
