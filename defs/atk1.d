@@ -2,6 +2,8 @@
 
 //!subdtype Object ObjectAtk
 
+//!add alias[AttributeSet].type '<type name="Attribute"></type>'
+
 //# Rename Text.remove_selection which conflicts with Selection.remove_selection which are both implemented by NoOpObject
 //!set interface[Text].method[remove_selection][name] text_remove_selection
 

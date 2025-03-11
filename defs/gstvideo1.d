@@ -1,5 +1,8 @@
 //!gir GstVideo-1.0
 
+//# Ignore this type which is derived from Gst.FlagSet which is a fundamental type with limited usage and no clear way to bind it
+//!set class[VideoMultiviewFlagsSet][ignore] 1
+
 //!set record[VideoMeta].method[set_alignment][unsupported] 1
 //!set class[VideoSink].function[center_rect][unsupported] 1
 

@@ -2,6 +2,17 @@
 
 //!subdtype Object ObjectGst
 
+//# These are all fundamental types with no obvious way to wrap them and minimal usage, ignore them
+//!set class[Bitmask][ignore] 1
+//!set class[DoubleRange][ignore] 1
+//!set class[FlagSet][ignore] 1
+//!set class[Fraction][ignore] 1
+//!set class[FractionRange][ignore] 1
+//!set class[Int64Range][ignore] 1
+//!set class[IntRange][ignore] 1
+//!set class[ValueArray][ignore] 1
+//!set class[ValueList][ignore] 1
+
 //# Ignore "protected/private" structure fields
 //!set record[Iterator].*field[][ignore] 1
 //!set record[TypeFind].*field[][ignore] 1

@@ -65,7 +65,7 @@ abstract class Boxed
    */
   void* copy_()
   {
-    return cast(void*)g_boxed_copy(gType, cInstancePtr);
+    return cInstancePtr ? cast(void*)g_boxed_copy(gType, cInstancePtr) : null;
   }
 
   /**
@@ -77,7 +77,7 @@ abstract class Boxed
    */
   static void* boxedCopy(T)(void* cBoxed)
   {
-    return g_boxed_copy(T.getType, cBoxed);
+    return cBoxed ? g_boxed_copy(T.getType, cBoxed) : null;
   }
 
   /**
@@ -88,6 +88,7 @@ abstract class Boxed
    */
   static void boxedFree(T)(void* cBoxed)
   {
-    g_boxed_free(T.getType, cBoxed);
+    if (cBoxed)
+      g_boxed_free(T.getType, cBoxed);
   }
 }
