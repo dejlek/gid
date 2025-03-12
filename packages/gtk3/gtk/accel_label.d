@@ -95,6 +95,11 @@ class AccelLabel : gtk.label.Label
     return getGType();
   }
 
+  override AccelLabel self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkAccelLabel.
     Params:

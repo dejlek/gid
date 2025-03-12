@@ -61,6 +61,11 @@ class NavigationPage : gtk.widget.Widget
     return getGType();
   }
 
+  override NavigationPage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.navigation_page.NavigationPage].
     Params:

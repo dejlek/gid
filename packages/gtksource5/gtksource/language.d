@@ -34,6 +34,11 @@ class Language : gobject.object.ObjectG
     return getGType();
   }
 
+  override Language self()
+  {
+    return this;
+  }
+
   /**
       Returns the globs associated to this language.
     

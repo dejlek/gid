@@ -28,6 +28,11 @@ class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     return getGType();
   }
 
+  override DiscovererVideoInfo self()
+  {
+    return this;
+  }
+
   /** */
   uint getBitrate()
   {

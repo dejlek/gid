@@ -28,6 +28,11 @@ class LargeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override LargeBinaryArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

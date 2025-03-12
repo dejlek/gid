@@ -64,6 +64,11 @@ class IMContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override IMContext self()
+  {
+    return this;
+  }
+
   /**
       Requests the platform to show an on-screen keyboard for user input.
     

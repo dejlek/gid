@@ -55,6 +55,11 @@ class FontDialogButton : gtk.widget.Widget
     return getGType();
   }
 
+  override FontDialogButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.font_dialog_button.FontDialogButton] with the
     given [gtk.font_dialog.FontDialog].

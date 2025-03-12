@@ -103,6 +103,11 @@ class Aggregator : gst.element.Element
     return getGType();
   }
 
+  override Aggregator self()
+  {
+    return this;
+  }
+
   /**
       This method will push the provided output buffer downstream. If needed,
     mandatory events such as stream-start, caps, and segment events will be

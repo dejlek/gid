@@ -80,6 +80,11 @@ class ButtonContent : gtk.widget.Widget
     return getGType();
   }
 
+  override ButtonContent self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.button_content.ButtonContent].
     Returns:     the new created [adw.button_content.ButtonContent]

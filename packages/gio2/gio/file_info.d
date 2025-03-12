@@ -67,6 +67,11 @@ class FileInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileInfo self()
+  {
+    return this;
+  }
+
   /**
       Creates a new file info structure.
     Returns:     a #GFileInfo.

@@ -35,6 +35,11 @@ class FileLoader : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileLoader self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceFileLoader object. The contents is read from the
     #GtkSourceFile's location. If not already done, call

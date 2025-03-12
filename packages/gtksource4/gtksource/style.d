@@ -27,6 +27,11 @@ class Style : gobject.object.ObjectG
     return getGType();
   }
 
+  override Style self()
+  {
+    return this;
+  }
+
   /**
       This function modifies the #GtkTextTag properties that are related to the
     #GtkSourceStyle properties. Other #GtkTextTag properties are left untouched.

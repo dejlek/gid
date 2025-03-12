@@ -38,6 +38,11 @@ class NetworkService : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     return getGType();
   }
 
+  override NetworkService self()
+  {
+    return this;
+  }
+
   mixin SocketConnectableT!();
 
   /**

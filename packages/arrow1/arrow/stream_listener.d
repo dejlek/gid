@@ -29,6 +29,11 @@ class StreamListener : gobject.object.ObjectG
     return getGType();
   }
 
+  override StreamListener self()
+  {
+    return this;
+  }
+
   /**
       Processes an EOS event.
     Returns:     true on success, false on error.

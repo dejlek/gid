@@ -30,5 +30,10 @@ class FlowBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     return getGType();
   }
 
+  override FlowBoxAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
 }

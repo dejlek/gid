@@ -34,6 +34,11 @@ class AudioClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  override AudioClock self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstAudioClock instance. Whenever the clock time should be
     calculated it will call func with user_data. When func returns

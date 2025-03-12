@@ -74,6 +74,11 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     return getGType();
   }
 
+  override IconView self()
+  {
+    return this;
+  }
+
   mixin CellLayoutT!();
   mixin ScrollableT!();
 

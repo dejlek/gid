@@ -37,6 +37,11 @@ class Language : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Language self()
+  {
+    return this;
+  }
+
   /**
       Get a string that is representative of the characters needed to
     render a particular language.

@@ -36,6 +36,11 @@ class SelectionData : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SelectionData self()
+  {
+    return this;
+  }
+
   /**
       Makes a copy of a #GtkSelectionData-struct and its data.
     Returns:     a pointer to a copy of data.

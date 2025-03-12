@@ -26,6 +26,11 @@ class Datum : gobject.object.ObjectG
     return getGType();
   }
 
+  override Datum self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(arrow.datum.Datum otherDatum)
   {

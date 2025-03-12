@@ -82,6 +82,11 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  override FlowBox self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

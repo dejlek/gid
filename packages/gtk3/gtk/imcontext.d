@@ -98,6 +98,11 @@ class IMContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override IMContext self()
+  {
+    return this;
+  }
+
   /**
       Asks the widget that the input context is attached to to delete
     characters around the cursor position by emitting the

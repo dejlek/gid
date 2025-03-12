@@ -55,6 +55,11 @@ class ColorDialogButton : gtk.widget.Widget
     return getGType();
   }
 
+  override ColorDialogButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.color_dialog_button.ColorDialogButton] with the
     given [gtk.color_dialog.ColorDialog].

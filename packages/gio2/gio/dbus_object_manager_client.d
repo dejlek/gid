@@ -119,6 +119,11 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
     return getGType();
   }
 
+  override DBusObjectManagerClient self()
+  {
+    return this;
+  }
+
   mixin AsyncInitableT!();
   mixin DBusObjectManagerT!();
   mixin InitableT!();

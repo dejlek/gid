@@ -65,6 +65,11 @@ class IMContextSimple : gtk.imcontext.IMContext
     return getGType();
   }
 
+  override IMContextSimple self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.imcontext_simple.IMContextSimple].
     Returns:     a new [gtk.imcontext_simple.IMContextSimple]

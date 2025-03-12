@@ -41,6 +41,11 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  override CookieJar self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 
   /**

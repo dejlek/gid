@@ -42,6 +42,11 @@ class GLTextureBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  override GLTextureBuilder self()
+  {
+    return this;
+  }
+
   /**
       Creates a new texture builder.
     Returns:     the new `GdkTextureBuilder`

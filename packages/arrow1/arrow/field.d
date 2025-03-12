@@ -28,6 +28,11 @@ class Field : gobject.object.ObjectG
     return getGType();
   }
 
+  override Field self()
+  {
+    return this;
+  }
+
   /** */
   this(string name, arrow.data_type.DataType dataType)
   {

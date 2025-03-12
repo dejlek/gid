@@ -33,6 +33,11 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     return getGType();
   }
 
+  override GLFilter self()
+  {
+    return this;
+  }
+
   /**
       Render a fullscreen quad using the current GL state.  The only GL state this
     modifies is the necessary vertex/index buffers and, if necessary, a

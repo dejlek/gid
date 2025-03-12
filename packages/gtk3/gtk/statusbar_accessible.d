@@ -27,4 +27,9 @@ class StatusbarAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override StatusbarAccessible self()
+  {
+    return this;
+  }
 }

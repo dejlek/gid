@@ -123,6 +123,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
     return getGType();
   }
 
+  override Entry self()
+  {
+    return this;
+  }
+
   mixin CellEditableT!();
   mixin EditableT!();
 

@@ -105,6 +105,11 @@ class ViewSwitcher : gtk.widget.Widget
     return getGType();
   }
 
+  override ViewSwitcher self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.view_switcher.ViewSwitcher].
     Returns:     the newly created [adw.view_switcher.ViewSwitcher]

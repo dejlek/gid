@@ -39,6 +39,11 @@ class GLMemoryEGL : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLMemoryEGL self()
+  {
+    return this;
+  }
+
   /** */
   void* getDisplay()
   {

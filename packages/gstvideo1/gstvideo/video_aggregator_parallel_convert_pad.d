@@ -29,4 +29,9 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
   {
     return getGType();
   }
+
+  override VideoAggregatorParallelConvertPad self()
+  {
+    return this;
+  }
 }

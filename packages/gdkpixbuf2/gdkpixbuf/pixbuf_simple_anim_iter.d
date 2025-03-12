@@ -25,4 +25,9 @@ class PixbufSimpleAnimIter : gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter
   {
     return getGType();
   }
+
+  override PixbufSimpleAnimIter self()
+  {
+    return this;
+  }
 }

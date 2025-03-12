@@ -28,6 +28,11 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
     return getGType();
   }
 
+  override ExtensionDataTypeRegistry self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.extension_data_type_registry.ExtensionDataTypeRegistry default_()
   {

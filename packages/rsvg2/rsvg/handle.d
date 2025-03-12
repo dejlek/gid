@@ -193,6 +193,11 @@ class Handle : gobject.object.ObjectG
     return getGType();
   }
 
+  override Handle self()
+  {
+    return this;
+  }
+
   /**
       Returns a new rsvg handle.  Must be freed with [gobject.object.ObjectG.unref].  This
     handle can be used to load an image.

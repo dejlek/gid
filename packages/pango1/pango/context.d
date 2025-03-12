@@ -43,6 +43,11 @@ class Context : gobject.object.ObjectG
     return getGType();
   }
 
+  override Context self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [pango.context.Context] initialized to default values.
     

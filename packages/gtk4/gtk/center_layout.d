@@ -36,6 +36,11 @@ class CenterLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override CenterLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.center_layout.CenterLayout].
     Returns:     the newly created [gtk.center_layout.CenterLayout]

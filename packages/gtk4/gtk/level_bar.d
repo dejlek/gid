@@ -136,6 +136,11 @@ class LevelBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.or
     return getGType();
   }
 
+  override LevelBar self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin OrientableT!();
 

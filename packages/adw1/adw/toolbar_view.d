@@ -134,6 +134,11 @@ class ToolbarView : gtk.widget.Widget
     return getGType();
   }
 
+  override ToolbarView self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.toolbar_view.ToolbarView].
     Returns:     the newly created [adw.toolbar_view.ToolbarView]

@@ -151,6 +151,11 @@ class Toast : gobject.object.ObjectG
     return getGType();
   }
 
+  override Toast self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.toast.Toast].
     

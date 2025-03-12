@@ -46,6 +46,11 @@ class Frustum : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Frustum self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_frustum_t structure.
     

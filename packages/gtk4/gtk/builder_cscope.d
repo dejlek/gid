@@ -45,6 +45,11 @@ class BuilderCScope : gobject.object.ObjectG, gtk.builder_scope.BuilderScope
     return getGType();
   }
 
+  override BuilderCScope self()
+  {
+    return this;
+  }
+
   mixin BuilderScopeT!();
 
   /**

@@ -39,6 +39,11 @@ class SnippetManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override SnippetManager self()
+  {
+    return this;
+  }
+
   /**
       Returns the default #GtkSourceSnippetManager instance.
     Returns:     a #GtkSourceSnippetManager which

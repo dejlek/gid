@@ -31,6 +31,11 @@ class MemoryMappedInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  override MemoryMappedInputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(string path)
   {

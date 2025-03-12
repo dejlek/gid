@@ -41,6 +41,11 @@ class HoverDisplay : gtk.widget.Widget
     return getGType();
   }
 
+  override HoverDisplay self()
+  {
+    return this;
+  }
+
   /** */
   void append(gtk.widget.Widget child)
   {

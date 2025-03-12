@@ -34,6 +34,11 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLBufferAllocationParams self()
+  {
+    return this;
+  }
+
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
     return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLBufferAllocationParams*)cPtr).parent);

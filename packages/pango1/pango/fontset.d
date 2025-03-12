@@ -35,6 +35,11 @@ class Fontset : gobject.object.ObjectG
     return getGType();
   }
 
+  override Fontset self()
+  {
+    return this;
+  }
+
   /**
       Iterates through all the fonts in a fontset, calling func for
     each one.

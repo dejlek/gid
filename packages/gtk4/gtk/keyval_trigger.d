@@ -29,6 +29,11 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  override KeyvalTrigger self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever
     the key with the given keyval and modifiers is pressed.

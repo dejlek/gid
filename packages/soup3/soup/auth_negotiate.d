@@ -37,6 +37,11 @@ class AuthNegotiate : soup.auth.Auth
     return getGType();
   }
 
+  override AuthNegotiate self()
+  {
+    return this;
+  }
+
   /**
       Indicates whether libsoup was built with GSSAPI support.
     

@@ -72,6 +72,11 @@ class Parser : gobject.object.ObjectG
     return getGType();
   }
 
+  override Parser self()
+  {
+    return this;
+  }
+
   /**
       Creates a new JSON parser.
     

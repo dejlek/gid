@@ -28,6 +28,11 @@ class LargeListDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override LargeListDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field field)
   {

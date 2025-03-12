@@ -42,4 +42,9 @@ class AudioSrc : gstaudio.audio_base_src.AudioBaseSrc
   {
     return getGType();
   }
+
+  override AudioSrc self()
+  {
+    return this;
+  }
 }

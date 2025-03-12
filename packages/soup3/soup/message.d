@@ -64,6 +64,11 @@ class Message : gobject.object.ObjectG
     return getGType();
   }
 
+  override Message self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty #SoupMessage, which will connect to uri.
     Params:

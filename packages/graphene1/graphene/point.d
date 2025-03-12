@@ -39,6 +39,11 @@ class Point : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Point self()
+  {
+    return this;
+  }
+
   @property float x()
   {
     return (cast(graphene_point_t*)cPtr).x;

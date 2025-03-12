@@ -34,6 +34,11 @@ class OutputStream : gobject.object.ObjectG, arrow.file.File, arrow.writable.Wri
     return getGType();
   }
 
+  override OutputStream self()
+  {
+    return this;
+  }
+
   mixin FileT!();
   mixin WritableT!();
 

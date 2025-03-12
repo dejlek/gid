@@ -42,6 +42,11 @@ class GestureSingle : gtk.gesture.Gesture
     return getGType();
   }
 
+  override GestureSingle self()
+  {
+    return this;
+  }
+
   /**
       Returns the button number gesture listens for.
     

@@ -45,6 +45,11 @@ class TextTag : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextTag self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.text_tag.TextTag].
     Params:

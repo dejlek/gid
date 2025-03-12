@@ -42,6 +42,11 @@ class GLRenderbuffer : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLRenderbuffer self()
+  {
+    return this;
+  }
+
   @property uint renderbufferId()
   {
     return (cast(GstGLRenderbuffer*)cPtr).renderbufferId;

@@ -33,6 +33,11 @@ class RadioAction : gtk.toggle_action.ToggleAction
     return getGType();
   }
 
+  override RadioAction self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRadioAction object. To add the action to
     a #GtkActionGroup and set the accelerator for the action,

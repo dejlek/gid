@@ -26,6 +26,11 @@ class FloatScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override FloatScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(float value)
   {

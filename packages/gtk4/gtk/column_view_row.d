@@ -32,6 +32,11 @@ class ColumnViewRow : gobject.object.ObjectG
     return getGType();
   }
 
+  override ColumnViewRow self()
+  {
+    return this;
+  }
+
   /**
       Gets the accessible description of self.
     Returns:     the accessible description

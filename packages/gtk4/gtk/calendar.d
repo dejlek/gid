@@ -84,6 +84,11 @@ class Calendar : gtk.widget.Widget
     return getGType();
   }
 
+  override Calendar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new calendar, with the current date being selected.
     Returns:     a newly [gtk.calendar.Calendar] widget

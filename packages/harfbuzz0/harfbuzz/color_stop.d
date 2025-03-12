@@ -46,6 +46,11 @@ class ColorStop : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ColorStop self()
+  {
+    return this;
+  }
+
   @property float offset()
   {
     return (cast(hb_color_stop_t*)cPtr).offset;

@@ -34,6 +34,11 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
     return getGType();
   }
 
+  override DataOutputStream self()
+  {
+    return this;
+  }
+
   mixin SeekableT!();
 
   /**

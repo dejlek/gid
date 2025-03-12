@@ -31,4 +31,9 @@ class VideoSink : gstbase.base_sink.BaseSink
   {
     return getGType();
   }
+
+  override VideoSink self()
+  {
+    return this;
+  }
 }

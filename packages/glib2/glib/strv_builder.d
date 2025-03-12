@@ -42,6 +42,11 @@ class StrvBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override StrvBuilder self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GStrvBuilder with a reference count of 1.
     Use [glib.strv_builder.StrvBuilder.unref] on the returned value when no longer needed.

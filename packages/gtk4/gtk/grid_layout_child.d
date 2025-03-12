@@ -28,6 +28,11 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  override GridLayoutChild self()
+  {
+    return this;
+  }
+
   /**
       Retrieves the column number to which child attaches its left side.
     Returns:     the column number

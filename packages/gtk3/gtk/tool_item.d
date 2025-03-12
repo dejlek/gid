@@ -48,6 +48,11 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
     return getGType();
   }
 
+  override ToolItem self()
+  {
+    return this;
+  }
+
   mixin ActivatableT!();
 
   /**

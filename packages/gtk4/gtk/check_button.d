@@ -94,6 +94,11 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override CheckButton self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

@@ -456,6 +456,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
     return getGType();
   }
 
+  override Widget self()
+  {
+    return this;
+  }
+
   mixin AccessibleT!();
   mixin BuildableT!();
   mixin ConstraintTargetT!();

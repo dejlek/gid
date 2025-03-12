@@ -30,6 +30,11 @@ class DRMDumbAllocator : gst.allocator.Allocator
     return getGType();
   }
 
+  override DRMDumbAllocator self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstDRMDumbAllocator for the specific device path. This
     function can fail if the path does not exist, is not a DRM device or if

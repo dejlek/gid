@@ -63,6 +63,11 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  override EditableLabel self()
+  {
+    return this;
+  }
+
   mixin EditableT!();
 
   /**

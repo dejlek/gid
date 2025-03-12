@@ -35,6 +35,11 @@ class ViewStackPages : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sel
     return getGType();
   }
 
+  override ViewStackPages self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SelectionModelT!();
 

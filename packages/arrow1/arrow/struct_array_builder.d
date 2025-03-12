@@ -29,6 +29,11 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override StructArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.struct_data_type.StructDataType dataType)
   {

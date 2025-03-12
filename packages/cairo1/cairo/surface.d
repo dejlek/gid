@@ -56,6 +56,11 @@ class Surface : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Surface self()
+  {
+    return this;
+  }
+
   /**
       Emits the current page for backends that support multiple pages,
     but doesn't clear it, so that the contents of the current page will

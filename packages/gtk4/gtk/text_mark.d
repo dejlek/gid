@@ -61,6 +61,11 @@ class TextMark : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextMark self()
+  {
+    return this;
+  }
+
   /**
       Creates a text mark.
     

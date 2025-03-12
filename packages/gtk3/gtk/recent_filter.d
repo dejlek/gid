@@ -78,6 +78,11 @@ class RecentFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.B
     return getGType();
   }
 
+  override RecentFilter self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

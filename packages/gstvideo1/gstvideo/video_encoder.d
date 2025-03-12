@@ -103,6 +103,11 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
     return getGType();
   }
 
+  override VideoEncoder self()
+  {
+    return this;
+  }
+
   mixin PresetT!();
 
   /**

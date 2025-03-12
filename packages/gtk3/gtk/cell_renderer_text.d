@@ -34,6 +34,11 @@ class CellRendererText : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  override CellRendererText self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkCellRendererText. Adjust how text is drawn using
     object properties. Object properties can be

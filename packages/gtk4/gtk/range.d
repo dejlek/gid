@@ -50,6 +50,11 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
     return getGType();
   }
 
+  override Range self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin OrientableT!();
 

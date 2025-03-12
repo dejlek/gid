@@ -28,5 +28,10 @@ class WidgetAccessible : gtk.accessible.Accessible, atk.component.Component
     return getGType();
   }
 
+  override WidgetAccessible self()
+  {
+    return this;
+  }
+
   mixin ComponentT!();
 }

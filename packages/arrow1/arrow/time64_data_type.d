@@ -27,6 +27,11 @@ class Time64DataType : arrow.time_data_type.TimeDataType
     return getGType();
   }
 
+  override Time64DataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.TimeUnit unit)
   {

@@ -31,6 +31,11 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override CompletionContext self()
+  {
+    return this;
+  }
+
   /**
       Providers can use this function to add proposals to the completion. They
     can do so asynchronously by means of the finished argument. Providers must

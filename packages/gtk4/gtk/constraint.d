@@ -43,6 +43,11 @@ class Constraint : gobject.object.ObjectG
     return getGType();
   }
 
+  override Constraint self()
+  {
+    return this;
+  }
+
   /**
       Creates a new constraint representing a relation between a layout
     attribute on a source and a layout attribute on a target.

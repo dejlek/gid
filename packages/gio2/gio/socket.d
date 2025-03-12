@@ -110,6 +110,11 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
     return getGType();
   }
 
+  override Socket self()
+  {
+    return this;
+  }
+
   mixin DatagramBasedT!();
   mixin InitableT!();
 

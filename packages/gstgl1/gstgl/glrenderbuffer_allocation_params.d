@@ -36,6 +36,11 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLRenderbufferAllocationParams self()
+  {
+    return this;
+  }
+
   @property gstgl.types.GLFormat renderbufferFormat()
   {
     return cast(gstgl.types.GLFormat)(cast(GstGLRenderbufferAllocationParams*)cPtr).renderbufferFormat;

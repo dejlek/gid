@@ -27,6 +27,11 @@ class Time32DataType : arrow.time_data_type.TimeDataType
     return getGType();
   }
 
+  override Time32DataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.TimeUnit unit)
   {

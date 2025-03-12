@@ -43,6 +43,11 @@ class VideoTimeCode : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoTimeCode self()
+  {
+    return this;
+  }
+
   @property gstvideo.video_time_code_config.VideoTimeCodeConfig config()
   {
     return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)cPtr).config);

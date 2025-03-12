@@ -42,6 +42,11 @@ class FileMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileMonitor self()
+  {
+    return this;
+  }
+
   /**
       Cancels a file monitor.
     Returns:     always true

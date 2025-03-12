@@ -34,6 +34,11 @@ class Dir : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Dir self()
+  {
+    return this;
+  }
+
   /**
       Opens a directory for reading. The names of the files in the
     directory can then be retrieved using [glib.dir.Dir.readName].  Note

@@ -40,6 +40,11 @@ class HSV : gtk.widget.Widget
     return getGType();
   }
 
+  override HSV self()
+  {
+    return this;
+  }
+
   /**
       Creates a new HSV color selector.
     Returns:     A newly-created HSV color selector.

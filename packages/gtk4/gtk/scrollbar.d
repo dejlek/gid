@@ -79,6 +79,11 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Scrollbar self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

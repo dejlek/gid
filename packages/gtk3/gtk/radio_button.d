@@ -121,6 +121,11 @@ class RadioButton : gtk.check_button.CheckButton
     return getGType();
   }
 
+  override RadioButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRadioButton. To be of any practical value, a widget should
     then be packed into the radio button.

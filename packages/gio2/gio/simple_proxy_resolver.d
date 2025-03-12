@@ -37,6 +37,11 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
     return getGType();
   }
 
+  override SimpleProxyResolver self()
+  {
+    return this;
+  }
+
   mixin ProxyResolverT!();
 
   /**

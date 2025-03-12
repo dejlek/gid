@@ -72,6 +72,11 @@ class CollectPads : gst.object.ObjectGst
     return getGType();
   }
 
+  override CollectPads self()
+  {
+    return this;
+  }
+
   /**
       Create a new instance of #GstCollectPads.
     

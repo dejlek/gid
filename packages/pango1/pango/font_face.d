@@ -31,6 +31,11 @@ class FontFace : gobject.object.ObjectG
     return getGType();
   }
 
+  override FontFace self()
+  {
+    return this;
+  }
+
   /**
       Returns a font description that matches the face.
     

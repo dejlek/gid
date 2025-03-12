@@ -97,6 +97,11 @@ class TabOverview : gtk.widget.Widget
     return getGType();
   }
 
+  override TabOverview self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.tab_overview.TabOverview].
     Returns:     the newly created [adw.tab_overview.TabOverview]

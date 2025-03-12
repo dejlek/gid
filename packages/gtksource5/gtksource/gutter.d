@@ -53,6 +53,11 @@ class Gutter : gtk.widget.Widget
     return getGType();
   }
 
+  override Gutter self()
+  {
+    return this;
+  }
+
   /** */
   gtksource.view.View getView()
   {

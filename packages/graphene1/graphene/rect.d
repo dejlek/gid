@@ -52,6 +52,11 @@ class Rect : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Rect self()
+  {
+    return this;
+  }
+
   @property graphene.point.Point origin()
   {
     return cToD!(graphene.point.Point)(cast(void*)&(cast(graphene_rect_t*)cPtr).origin);

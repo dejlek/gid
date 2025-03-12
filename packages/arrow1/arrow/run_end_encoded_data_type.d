@@ -28,6 +28,11 @@ class RunEndEncodedDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  override RunEndEncodedDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType runEndDataType, arrow.data_type.DataType valueDataType)
   {

@@ -34,6 +34,11 @@ class RTPBasePayload : gst.element.Element
     return getGType();
   }
 
+  override RTPBasePayload self()
+  {
+    return this;
+  }
+
   /**
       Allocate a new #GstBuffer with enough data to hold an RTP packet with
     minimum csrc_count CSRCs, a payload length of payload_len and padding of

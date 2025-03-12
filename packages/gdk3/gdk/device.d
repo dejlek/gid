@@ -40,6 +40,11 @@ class Device : gobject.object.ObjectG
     return getGType();
   }
 
+  override Device self()
+  {
+    return this;
+  }
+
   /**
       Determines information about the current keyboard grab.
     This is not public API and must not be used by applications.

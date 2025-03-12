@@ -45,6 +45,11 @@ class ToggleToolButton : gtk.tool_button.ToolButton
     return getGType();
   }
 
+  override ToggleToolButton self()
+  {
+    return this;
+  }
+
   /**
       Returns a new #GtkToggleToolButton
     Returns:     a newly created #GtkToggleToolButton

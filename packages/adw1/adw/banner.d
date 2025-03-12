@@ -58,6 +58,11 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override Banner self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

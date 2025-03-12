@@ -58,6 +58,11 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
     return getGType();
   }
 
+  override NoOpObject self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin ComponentT!();
   mixin DocumentT!();

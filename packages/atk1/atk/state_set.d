@@ -32,6 +32,11 @@ class StateSet : gobject.object.ObjectG
     return getGType();
   }
 
+  override StateSet self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty state set.
     Returns:     a new #AtkStateSet

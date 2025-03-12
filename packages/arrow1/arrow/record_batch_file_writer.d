@@ -29,6 +29,11 @@ class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStream
     return getGType();
   }
 
+  override RecordBatchFileWriter self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.output_stream.OutputStream sink, arrow.schema.Schema schema)
   {

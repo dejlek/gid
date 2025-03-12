@@ -27,6 +27,11 @@ class DenseUnionDataType : arrow.union_data_type.UnionDataType
     return getGType();
   }
 
+  override DenseUnionDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field[] fields, byte[] typeCodes)
   {

@@ -35,6 +35,11 @@ class FontFamily : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  override FontFamily self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
 
   /**

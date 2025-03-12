@@ -41,6 +41,11 @@ class Hover : gobject.object.ObjectG
     return getGType();
   }
 
+  override Hover self()
+  {
+    return this;
+  }
+
   /** */
   void addProvider(gtksource.hover_provider.HoverProvider provider)
   {

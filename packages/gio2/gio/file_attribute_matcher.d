@@ -33,6 +33,11 @@ class FileAttributeMatcher : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FileAttributeMatcher self()
+  {
+    return this;
+  }
+
   /**
       Creates a new file attribute matcher, which matches attributes
     against a given string. #GFileAttributeMatchers are reference

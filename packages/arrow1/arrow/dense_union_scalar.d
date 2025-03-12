@@ -28,6 +28,11 @@ class DenseUnionScalar : arrow.union_scalar.UnionScalar
     return getGType();
   }
 
+  override DenseUnionScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {

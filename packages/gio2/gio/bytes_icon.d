@@ -34,6 +34,11 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
     return getGType();
   }
 
+  override BytesIcon self()
+  {
+    return this;
+  }
+
   mixin IconT!();
   mixin LoadableIconT!();
 

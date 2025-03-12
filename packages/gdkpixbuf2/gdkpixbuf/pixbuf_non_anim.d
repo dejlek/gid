@@ -27,6 +27,11 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return getGType();
   }
 
+  override PixbufNonAnim self()
+  {
+    return this;
+  }
+
   /** */
   this(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {

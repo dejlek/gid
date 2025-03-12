@@ -57,6 +57,11 @@ class Value : Boxed
     return getGType();
   }
 
+  override Value self()
+  {
+    return this;
+  }
+
   /**
   * Template to create a new Value from a D type.
   * Params:

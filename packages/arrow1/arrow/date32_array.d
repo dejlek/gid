@@ -27,6 +27,11 @@ class Date32Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override Date32Array self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

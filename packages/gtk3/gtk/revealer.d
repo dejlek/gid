@@ -45,6 +45,11 @@ class Revealer : gtk.bin.Bin
     return getGType();
   }
 
+  override Revealer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRevealer.
     Returns:     a newly created #GtkRevealer

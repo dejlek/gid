@@ -74,4 +74,9 @@ class ListItemFactory : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override ListItemFactory self()
+  {
+    return this;
+  }
 }

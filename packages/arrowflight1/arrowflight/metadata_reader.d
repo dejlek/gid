@@ -28,6 +28,11 @@ class MetadataReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override MetadataReader self()
+  {
+    return this;
+  }
+
   /** */
   arrow.buffer.Buffer read()
   {

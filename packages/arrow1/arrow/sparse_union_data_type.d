@@ -27,6 +27,11 @@ class SparseUnionDataType : arrow.union_data_type.UnionDataType
     return getGType();
   }
 
+  override SparseUnionDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field[] fields, byte[] typeCodes)
   {

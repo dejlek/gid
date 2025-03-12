@@ -47,6 +47,11 @@ class Window : gobject.object.ObjectG
     return getGType();
   }
 
+  override Window self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GdkWindow using the attributes from
     attributes. See #GdkWindowAttr and #GdkWindowAttributesType for

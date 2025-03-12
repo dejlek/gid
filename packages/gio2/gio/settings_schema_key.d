@@ -36,6 +36,11 @@ class SettingsSchemaKey : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SettingsSchemaKey self()
+  {
+    return this;
+  }
+
   /**
       Gets the default value for key.
     

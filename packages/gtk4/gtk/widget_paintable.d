@@ -50,6 +50,11 @@ class WidgetPaintable : gobject.object.ObjectG, gdk.paintable.Paintable
     return getGType();
   }
 
+  override WidgetPaintable self()
+  {
+    return this;
+  }
+
   mixin PaintableT!();
 
   /**

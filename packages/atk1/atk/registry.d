@@ -39,6 +39,11 @@ class Registry : gobject.object.ObjectG
     return getGType();
   }
 
+  override Registry self()
+  {
+    return this;
+  }
+
   /**
       Gets an #AtkObjectFactory appropriate for creating #AtkObjects
     appropriate for type.

@@ -44,6 +44,11 @@ class Euler : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Euler self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_euler_t.
     

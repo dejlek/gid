@@ -34,6 +34,11 @@ class TreeViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return getGType();
   }
 
+  override TreeViewAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
   mixin TableT!();
   mixin CellAccessibleParentT!();

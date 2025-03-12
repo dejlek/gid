@@ -33,6 +33,11 @@ class GLWindow : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLWindow self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.gldisplay.GLDisplay display)
   {

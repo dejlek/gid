@@ -41,6 +41,11 @@ class DBusNodeInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DBusNodeInfo self()
+  {
+    return this;
+  }
+
   @property int refCount()
   {
     return (cast(GDBusNodeInfo*)cPtr).refCount;

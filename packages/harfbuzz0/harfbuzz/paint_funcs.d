@@ -51,4 +51,9 @@ class PaintFuncs : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override PaintFuncs self()
+  {
+    return this;
+  }
 }

@@ -82,6 +82,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
     return getGType();
   }
 
+  override TextView self()
+  {
+    return this;
+  }
+
   mixin AccessibleTextT!();
   mixin ScrollableT!();
 

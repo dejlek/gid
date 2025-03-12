@@ -27,4 +27,9 @@ class GLMemoryPBOAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   {
     return getGType();
   }
+
+  override GLMemoryPBOAllocator self()
+  {
+    return this;
+  }
 }

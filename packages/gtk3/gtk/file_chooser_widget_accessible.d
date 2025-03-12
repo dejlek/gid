@@ -30,6 +30,11 @@ class FileChooserWidgetAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  override FileChooserWidgetAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;
   alias getName = atk.object.ObjectAtk.getName;

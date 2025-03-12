@@ -26,6 +26,11 @@ class StrptimeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override StrptimeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

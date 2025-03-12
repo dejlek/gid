@@ -65,6 +65,11 @@ class RTPBaseDepayload : gst.element.Element
     return getGType();
   }
 
+  override RTPBaseDepayload self()
+  {
+    return this;
+  }
+
   /**
       Called from GstRTPBaseDepayload.process or
     GstRTPBaseDepayload.process_rtp_packet when the depayloader needs

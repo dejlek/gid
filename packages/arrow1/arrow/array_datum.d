@@ -27,6 +27,11 @@ class ArrayDatum : arrow.datum.Datum
     return getGType();
   }
 
+  override ArrayDatum self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.array.Array value)
   {

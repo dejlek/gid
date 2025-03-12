@@ -30,6 +30,11 @@ class RecordBatchFileReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchFileReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.seekable_input_stream.SeekableInputStream file)
   {

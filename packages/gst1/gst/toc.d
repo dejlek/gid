@@ -79,6 +79,11 @@ class Toc : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Toc self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstToc structure.
     Params:

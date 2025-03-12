@@ -34,6 +34,11 @@ class VideoVBIEncoder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoVBIEncoder self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstVideoVBIEncoder for the specified format and pixel_width.
     Params:

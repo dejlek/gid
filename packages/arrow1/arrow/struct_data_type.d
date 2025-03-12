@@ -28,6 +28,11 @@ class StructDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override StructDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field[] fields)
   {

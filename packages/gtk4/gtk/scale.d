@@ -120,6 +120,11 @@ class Scale : gtk.range.Range
     return getGType();
   }
 
+  override Scale self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.scale.Scale].
     Params:

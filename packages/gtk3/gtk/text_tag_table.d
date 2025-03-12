@@ -51,6 +51,11 @@ class TextTagTable : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override TextTagTable self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

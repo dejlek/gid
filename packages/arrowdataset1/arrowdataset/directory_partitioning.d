@@ -30,6 +30,11 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     return getGType();
   }
 
+  override DirectoryPartitioning self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.key_value_partitioning_options.KeyValuePartitioningOptions options = null)
   {

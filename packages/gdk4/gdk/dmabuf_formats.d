@@ -52,6 +52,11 @@ class DmabufFormats : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DmabufFormats self()
+  {
+    return this;
+  }
+
   /**
       Returns whether a given format is contained in formats.
     Params:

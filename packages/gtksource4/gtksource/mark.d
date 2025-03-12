@@ -27,6 +27,11 @@ class Mark : gtk.text_mark.TextMark
     return getGType();
   }
 
+  override Mark self()
+  {
+    return this;
+  }
+
   /**
       Creates a text mark. Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
     If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved

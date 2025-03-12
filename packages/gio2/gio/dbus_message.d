@@ -32,6 +32,11 @@ class DBusMessage : gobject.object.ObjectG
     return getGType();
   }
 
+  override DBusMessage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty #GDBusMessage.
     Returns:     A #GDBusMessage. Free with [gobject.object.ObjectG.unref].

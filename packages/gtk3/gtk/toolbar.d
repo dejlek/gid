@@ -63,6 +63,11 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
     return getGType();
   }
 
+  override Toolbar self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
   mixin ToolShellT!();
   alias getStyle = gtk.widget.Widget.getStyle;

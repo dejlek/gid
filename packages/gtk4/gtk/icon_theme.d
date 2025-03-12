@@ -63,6 +63,11 @@ class IconTheme : gobject.object.ObjectG
     return getGType();
   }
 
+  override IconTheme self()
+  {
+    return this;
+  }
+
   /**
       Creates a new icon theme object.
     

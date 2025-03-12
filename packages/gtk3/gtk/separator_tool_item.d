@@ -46,6 +46,11 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
     return getGType();
   }
 
+  override SeparatorToolItem self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkSeparatorToolItem
     Returns:     the new #GtkSeparatorToolItem

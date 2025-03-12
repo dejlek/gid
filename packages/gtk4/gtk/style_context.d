@@ -72,6 +72,11 @@ class StyleContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleContext self()
+  {
+    return this;
+  }
+
   /**
       Adds a global style provider to display, which will be used
     in style construction for all `GtkStyleContexts` under display.

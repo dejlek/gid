@@ -35,6 +35,11 @@ class BindingGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  override BindingGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GBindingGroup.
     Returns:     a new #GBindingGroup

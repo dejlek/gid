@@ -52,6 +52,11 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
     return getGType();
   }
 
+  override ScaleButton self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

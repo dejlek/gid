@@ -37,6 +37,11 @@ class GLBufferPool : gst.buffer_pool.BufferPool
     return getGType();
   }
 
+  override GLBufferPool self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context)
   {

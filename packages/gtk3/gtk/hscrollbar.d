@@ -42,6 +42,11 @@ class HScrollbar : gtk.scrollbar.Scrollbar
     return getGType();
   }
 
+  override HScrollbar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new horizontal scrollbar.
     Params:

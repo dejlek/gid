@@ -47,6 +47,11 @@ class DynamicTypeFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  override DynamicTypeFactory self()
+  {
+    return this;
+  }
+
   /** */
   static gobject.types.GType load(string factoryname)
   {

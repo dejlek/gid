@@ -26,6 +26,11 @@ class Int8Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Int8Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(byte value)
   {

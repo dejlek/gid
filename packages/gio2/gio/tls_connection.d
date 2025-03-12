@@ -42,6 +42,11 @@ class TlsConnection : gio.iostream.IOStream
     return getGType();
   }
 
+  override TlsConnection self()
+  {
+    return this;
+  }
+
   /**
       Used by #GTlsConnection implementations to emit the
     #GTlsConnection::accept-certificate signal.

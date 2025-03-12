@@ -29,6 +29,11 @@ class DragContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override DragContext self()
+  {
+    return this;
+  }
+
   /**
       Determines the bitmask of actions proposed by the source if
     [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].

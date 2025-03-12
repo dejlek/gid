@@ -43,6 +43,11 @@ class PrintSettings : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintSettings self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkPrintSettings object.
     Returns:     a new #GtkPrintSettings object

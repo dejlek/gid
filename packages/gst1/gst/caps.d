@@ -76,6 +76,11 @@ class Caps : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Caps self()
+  {
+    return this;
+  }
+
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstCaps*)cPtr).miniObject);

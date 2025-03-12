@@ -56,6 +56,11 @@ class SocketService : gio.socket_listener.SocketListener
     return getGType();
   }
 
+  override SocketService self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSocketService with no sockets to listen for.
     New listeners can be added with e.g. [gio.socket_listener.SocketListener.addAddress]

@@ -27,4 +27,9 @@ class FrameAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override FrameAccessible self()
+  {
+    return this;
+  }
 }

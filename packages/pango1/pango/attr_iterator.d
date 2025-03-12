@@ -42,6 +42,11 @@ class AttrIterator : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AttrIterator self()
+  {
+    return this;
+  }
+
   /**
       Copy a [pango.attr_iterator.AttrIterator].
     Returns:     the newly allocated

@@ -27,6 +27,11 @@ class Int64ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override Int64ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -52,6 +52,11 @@ class ObjectJson : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ObjectJson self()
+  {
+    return this;
+  }
+
   /**
       Creates a new object.
     Returns:     the newly created object

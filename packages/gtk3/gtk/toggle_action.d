@@ -32,6 +32,11 @@ class ToggleAction : gtk.action.Action
     return getGType();
   }
 
+  override ToggleAction self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkToggleAction object. To add the action to
     a #GtkActionGroup and set the accelerator for the action,

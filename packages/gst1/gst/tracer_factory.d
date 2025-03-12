@@ -30,6 +30,11 @@ class TracerFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  override TracerFactory self()
+  {
+    return this;
+  }
+
   /**
       Gets the list of all registered tracer factories. You must free the
     list using [gst.plugin_feature.PluginFeature.listFree].

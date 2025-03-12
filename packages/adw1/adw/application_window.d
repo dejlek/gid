@@ -80,6 +80,11 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
     return getGType();
   }
 
+  override ApplicationWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.application_window.ApplicationWindow] for app.
     Params:

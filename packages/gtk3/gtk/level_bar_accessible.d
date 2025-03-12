@@ -30,5 +30,10 @@ class LevelBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Val
     return getGType();
   }
 
+  override LevelBarAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

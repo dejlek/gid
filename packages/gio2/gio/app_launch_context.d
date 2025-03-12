@@ -34,6 +34,11 @@ class AppLaunchContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override AppLaunchContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new application launch context. This is not normally used,
     instead you instantiate a subclass of this, such as #GdkAppLaunchContext.

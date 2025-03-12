@@ -134,6 +134,11 @@ class GLArea : gtk.widget.Widget
     return getGType();
   }
 
+  override GLArea self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkGLArea widget.
     Returns:     a new #GtkGLArea

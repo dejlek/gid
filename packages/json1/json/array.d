@@ -50,6 +50,11 @@ class Array : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Array self()
+  {
+    return this;
+  }
+
   /**
       Creates a new array.
     Returns:     the newly created array

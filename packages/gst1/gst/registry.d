@@ -94,6 +94,11 @@ class Registry : gst.object.ObjectGst
     return getGType();
   }
 
+  override Registry self()
+  {
+    return this;
+  }
+
   /**
       By default GStreamer will perform scanning and rebuilding of the
     registry file using a helper child process.

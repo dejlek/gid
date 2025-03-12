@@ -42,6 +42,11 @@ class RecentInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RecentInfo self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GAppInfo for the specified #GtkRecentInfo
     Params:

@@ -27,6 +27,11 @@ class BooleanArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override BooleanArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

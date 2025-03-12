@@ -26,6 +26,11 @@ class CountOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override CountOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

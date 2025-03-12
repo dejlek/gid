@@ -57,6 +57,11 @@ class StackSwitcher : gtk.box.Box
     return getGType();
   }
 
+  override StackSwitcher self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkStackSwitcher.
     Returns:     a new #GtkStackSwitcher.

@@ -99,6 +99,11 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
     return getGType();
   }
 
+  override DBusConnection self()
+  {
+    return this;
+  }
+
   mixin AsyncInitableT!();
   mixin InitableT!();
 

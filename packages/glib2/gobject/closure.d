@@ -85,6 +85,11 @@ class Closure : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Closure self()
+  {
+    return this;
+  }
+
   @property uint inMarshal()
   {
     return (cast(GClosure*)cPtr).inMarshal;

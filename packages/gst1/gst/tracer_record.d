@@ -28,4 +28,9 @@ class TracerRecord : gst.object.ObjectGst
   {
     return getGType();
   }
+
+  override TracerRecord self()
+  {
+    return this;
+  }
 }

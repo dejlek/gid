@@ -36,6 +36,11 @@ class Menu : gio.menu_model.MenuModel
     return getGType();
   }
 
+  override Menu self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GMenu.
     

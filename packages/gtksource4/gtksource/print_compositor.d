@@ -30,6 +30,11 @@ class PrintCompositor : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintCompositor self()
+  {
+    return this;
+  }
+
   /**
       Creates a new print compositor that can be used to print buffer.
     Params:

@@ -52,6 +52,11 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
     return getGType();
   }
 
+  override DragIcon self()
+  {
+    return this;
+  }
+
   mixin NativeT!();
   mixin RootT!();
 

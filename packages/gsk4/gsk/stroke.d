@@ -35,6 +35,11 @@ class Stroke : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Stroke self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gsk.stroke.Stroke] with the given line_width.
     Params:

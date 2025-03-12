@@ -45,6 +45,11 @@ class Permission : gobject.object.ObjectG
     return getGType();
   }
 
+  override Permission self()
+  {
+    return this;
+  }
+
   /**
       Attempts to acquire the permission represented by permission.
     

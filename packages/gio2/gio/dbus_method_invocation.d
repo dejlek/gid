@@ -43,6 +43,11 @@ class DBusMethodInvocation : gobject.object.ObjectG
     return getGType();
   }
 
+  override DBusMethodInvocation self()
+  {
+    return this;
+  }
+
   /**
       Gets the #GDBusConnection the method was invoked on.
     Returns:     A #GDBusConnection. Do not free, it is owned by invocation.

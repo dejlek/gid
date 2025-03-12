@@ -26,6 +26,11 @@ class LargeBinaryDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override LargeBinaryDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -34,6 +34,11 @@ class AnyFilter : gtk.multi_filter.MultiFilter
     return getGType();
   }
 
+  override AnyFilter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty "any" filter.
     

@@ -32,4 +32,9 @@ class Map : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Map self()
+  {
+    return this;
+  }
 }

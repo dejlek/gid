@@ -32,6 +32,11 @@ class FileFormat : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileFormat self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(arrowdataset.file_format.FileFormat otherFormat)
   {

@@ -42,6 +42,11 @@ class GesturePan : gtk.gesture_drag.GestureDrag
     return getGType();
   }
 
+  override GesturePan self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created [gtk.gesture.Gesture] that recognizes pan gestures.
     Params:

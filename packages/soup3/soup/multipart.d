@@ -46,6 +46,11 @@ class Multipart : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Multipart self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty #SoupMultipart with a randomly-generated
     boundary string.

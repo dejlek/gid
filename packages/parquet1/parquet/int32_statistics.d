@@ -26,6 +26,11 @@ class Int32Statistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  override Int32Statistics self()
+  {
+    return this;
+  }
+
   /** */
   int getMax()
   {

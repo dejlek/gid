@@ -32,6 +32,11 @@ class Regex : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Regex self()
+  {
+    return this;
+  }
+
   /**
       Compiles pattern into a regex for use as a match regex
     with [vte.terminal.Terminal.matchAddRegex] or

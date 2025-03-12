@@ -38,6 +38,11 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
     return getGType();
   }
 
+  override MemoryOutputStream self()
+  {
+    return this;
+  }
+
   mixin PollableOutputStreamT!();
   mixin SeekableT!();
 

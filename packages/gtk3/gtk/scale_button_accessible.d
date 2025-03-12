@@ -34,5 +34,10 @@ class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.
     return getGType();
   }
 
+  override ScaleButtonAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

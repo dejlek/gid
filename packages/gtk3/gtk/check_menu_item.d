@@ -55,6 +55,11 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  override CheckMenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkCheckMenuItem.
     Returns:     a new #GtkCheckMenuItem.

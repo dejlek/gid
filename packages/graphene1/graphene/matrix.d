@@ -52,6 +52,11 @@ class Matrix : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Matrix self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_matrix_t.
     Returns:     the newly allocated matrix

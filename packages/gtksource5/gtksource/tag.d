@@ -34,6 +34,11 @@ class Tag : gtk.text_tag.TextTag
     return getGType();
   }
 
+  override Tag self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtksource.tag.Tag].
     

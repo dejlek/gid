@@ -35,6 +35,11 @@ class ShortcutLabel : gtk.box.Box
     return getGType();
   }
 
+  override ShortcutLabel self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkShortcutLabel with accelerator set.
     Params:

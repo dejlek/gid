@@ -53,6 +53,11 @@ class DirectoryList : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  override DirectoryList self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
 
   /**

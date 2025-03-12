@@ -150,6 +150,11 @@ class MenuModel : gobject.object.ObjectG
     return getGType();
   }
 
+  override MenuModel self()
+  {
+    return this;
+  }
+
   /**
       Queries the item at position item_index in model for the attribute
     specified by attribute.

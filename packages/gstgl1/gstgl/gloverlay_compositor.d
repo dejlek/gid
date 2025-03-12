@@ -31,6 +31,11 @@ class GLOverlayCompositor : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLOverlayCompositor self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context)
   {

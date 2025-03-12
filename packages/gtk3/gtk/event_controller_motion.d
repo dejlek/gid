@@ -33,6 +33,11 @@ class EventControllerMotion : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerMotion self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle motion events
     for the given widget.

@@ -63,6 +63,11 @@ class MenuShell : gtk.container.Container
     return getGType();
   }
 
+  override MenuShell self()
+  {
+    return this;
+  }
+
   /**
       Activates the menu item within the menu shell.
     Params:

@@ -27,6 +27,11 @@ class MonthIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override MonthIntervalArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

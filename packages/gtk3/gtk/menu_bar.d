@@ -40,6 +40,11 @@ class MenuBar : gtk.menu_shell.MenuShell
     return getGType();
   }
 
+  override MenuBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkMenuBar
     Returns:     the new menu bar, as a #GtkWidget

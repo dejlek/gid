@@ -29,6 +29,11 @@ class Decimal64Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Decimal64Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal64_data_type.Decimal64DataType dataType, arrow.decimal64.Decimal64 value)
   {

@@ -62,6 +62,11 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Squeezer self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

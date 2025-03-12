@@ -36,6 +36,11 @@ class FlowBoxChild : gtk.widget.Widget
     return getGType();
   }
 
+  override FlowBoxChild self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.flow_box_child.FlowBoxChild].
     

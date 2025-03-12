@@ -30,5 +30,10 @@ class ProgressBarAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.
     return getGType();
   }
 
+  override ProgressBarAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

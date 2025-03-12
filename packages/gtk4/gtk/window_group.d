@@ -44,6 +44,11 @@ class WindowGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  override WindowGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.window_group.WindowGroup] object.
     

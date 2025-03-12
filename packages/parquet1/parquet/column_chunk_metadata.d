@@ -27,6 +27,11 @@ class ColumnChunkMetadata : gobject.object.ObjectG
     return getGType();
   }
 
+  override ColumnChunkMetadata self()
+  {
+    return this;
+  }
+
   /** */
   bool canDecompress()
   {

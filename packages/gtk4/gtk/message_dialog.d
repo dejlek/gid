@@ -99,6 +99,11 @@ class MessageDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override MessageDialog self()
+  {
+    return this;
+  }
+
   /**
       Returns the message area of the dialog.
     

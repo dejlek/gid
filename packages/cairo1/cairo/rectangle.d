@@ -38,6 +38,11 @@ class Rectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Rectangle self()
+  {
+    return this;
+  }
+
   @property double x()
   {
     return (cast(cairo_rectangle_t*)cPtr).x;

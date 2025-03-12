@@ -26,6 +26,11 @@ class S3GlobalOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override S3GlobalOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

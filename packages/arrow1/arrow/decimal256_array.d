@@ -29,6 +29,11 @@ class Decimal256Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
     return getGType();
   }
 
+  override Decimal256Array self()
+  {
+    return this;
+  }
+
   /** */
   string formatValue(long i)
   {

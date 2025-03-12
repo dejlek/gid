@@ -37,6 +37,11 @@ class MainContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MainContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GMainContext structure.
     Returns:     the new #GMainContext

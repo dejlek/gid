@@ -74,6 +74,11 @@ class Fixed : gtk.container.Container
     return getGType();
   }
 
+  override Fixed self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkFixed.
     Returns:     a new #GtkFixed.

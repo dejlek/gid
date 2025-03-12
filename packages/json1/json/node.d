@@ -69,6 +69,11 @@ class Node : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Node self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new, uninitialized node.
     

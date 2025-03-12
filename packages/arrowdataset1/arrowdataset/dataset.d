@@ -30,6 +30,11 @@ class Dataset : gobject.object.ObjectG
     return getGType();
   }
 
+  override Dataset self()
+  {
+    return this;
+  }
+
   /** */
   arrowdataset.scanner_builder.ScannerBuilder beginScan()
   {

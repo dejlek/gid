@@ -69,6 +69,11 @@ class Statusbar : gtk.box.Box
     return getGType();
   }
 
+  override Statusbar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkStatusbar ready for messages.
     Returns:     the new #GtkStatusbar

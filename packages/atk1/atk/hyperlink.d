@@ -39,6 +39,11 @@ class Hyperlink : gobject.object.ObjectG, atk.action.Action
     return getGType();
   }
 
+  override Hyperlink self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
 
   /**

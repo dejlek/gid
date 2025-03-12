@@ -46,6 +46,11 @@ class WindowTitle : gtk.widget.Widget
     return getGType();
   }
 
+  override WindowTitle self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.window_title.WindowTitle].
     Params:

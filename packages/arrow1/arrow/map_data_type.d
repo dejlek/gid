@@ -28,6 +28,11 @@ class MapDataType : arrow.list_data_type.ListDataType
     return getGType();
   }
 
+  override MapDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType keyType, arrow.data_type.DataType itemType)
   {

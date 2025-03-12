@@ -29,6 +29,11 @@ class Gutter : gobject.object.ObjectG
     return getGType();
   }
 
+  override Gutter self()
+  {
+    return this;
+  }
+
   /**
       Finds the #GtkSourceGutterRenderer at (x, y).
     Params:

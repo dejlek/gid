@@ -55,6 +55,11 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override Viewport self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

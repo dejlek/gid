@@ -26,6 +26,11 @@ class FeatherWriteProperties : gobject.object.ObjectG
     return getGType();
   }
 
+  override FeatherWriteProperties self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

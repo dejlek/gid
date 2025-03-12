@@ -27,6 +27,11 @@ class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getGType();
   }
 
+  override StringScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.buffer.Buffer value)
   {

@@ -50,6 +50,11 @@ class NetClientClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  override NetClientClock self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstNetClientClock that will report the time
     provided by the #GstNetTimeProvider on remote_address and

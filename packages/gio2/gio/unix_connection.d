@@ -44,6 +44,11 @@ class UnixConnection : gio.socket_connection.SocketConnection
     return getGType();
   }
 
+  override UnixConnection self()
+  {
+    return this;
+  }
+
   /**
       Receives credentials from the sending end of the connection.  The
     sending end has to call [gio.unix_connection.UnixConnection.sendCredentials] (or

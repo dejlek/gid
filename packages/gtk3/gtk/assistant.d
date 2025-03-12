@@ -63,6 +63,11 @@ class Assistant : gtk.window.Window
     return getGType();
   }
 
+  override Assistant self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkAssistant.
     Returns:     a newly created #GtkAssistant

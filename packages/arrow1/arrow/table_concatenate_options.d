@@ -26,6 +26,11 @@ class TableConcatenateOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override TableConcatenateOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

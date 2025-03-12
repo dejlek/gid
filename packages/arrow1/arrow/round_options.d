@@ -26,6 +26,11 @@ class RoundOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override RoundOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

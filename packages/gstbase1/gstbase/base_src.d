@@ -153,6 +153,11 @@ class BaseSrc : gst.element.Element
     return getGType();
   }
 
+  override BaseSrc self()
+  {
+    return this;
+  }
+
   /**
       Lets #GstBaseSrc sub-classes to know the memory allocator
     used by the base class and its params.

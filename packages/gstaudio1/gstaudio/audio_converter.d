@@ -44,6 +44,11 @@ class AudioConverter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AudioConverter self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstAudioConverter that is able to convert between in and out
     audio formats.

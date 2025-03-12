@@ -43,6 +43,11 @@ class EventController : gobject.object.ObjectG
     return getGType();
   }
 
+  override EventController self()
+  {
+    return this;
+  }
+
   /**
       Returns the event that is currently being handled by the controller.
     

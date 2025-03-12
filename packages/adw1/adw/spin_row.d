@@ -76,6 +76,11 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
     return getGType();
   }
 
+  override SpinRow self()
+  {
+    return this;
+  }
+
   mixin EditableT!();
 
   /**

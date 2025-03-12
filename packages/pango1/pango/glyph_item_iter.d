@@ -78,6 +78,11 @@ class GlyphItemIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GlyphItemIter self()
+  {
+    return this;
+  }
+
   @property pango.glyph_item.GlyphItem glyphItem()
   {
     return cToD!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);

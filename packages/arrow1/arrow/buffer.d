@@ -28,6 +28,11 @@ class Buffer : gobject.object.ObjectG
     return getGType();
   }
 
+  override Buffer self()
+  {
+    return this;
+  }
+
   /** */
   this(ubyte[] data)
   {

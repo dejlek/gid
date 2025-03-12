@@ -29,6 +29,11 @@ class Decimal128Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Decimal128Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal128_data_type.Decimal128DataType dataType, arrow.decimal128.Decimal128 value)
   {

@@ -49,6 +49,11 @@ class SocketListener : gobject.object.ObjectG
     return getGType();
   }
 
+  override SocketListener self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSocketListener with no sockets to listen for.
     New listeners can be added with e.g. [gio.socket_listener.SocketListener.addAddress]

@@ -78,6 +78,11 @@ class Session : gobject.object.ObjectG
     return getGType();
   }
 
+  override Session self()
+  {
+    return this;
+  }
+
   /**
       Creates a #SoupSession with the default options.
     Returns:     the new session.

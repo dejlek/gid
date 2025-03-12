@@ -53,6 +53,11 @@ class Drop : gobject.object.ObjectG
     return getGType();
   }
 
+  override Drop self()
+  {
+    return this;
+  }
+
   /**
       Ends the drag operation after a drop.
     

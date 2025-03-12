@@ -31,6 +31,11 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
     return getGType();
   }
 
+  override PropertyAnimationTarget self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.property_animation_target.PropertyAnimationTarget] for the property_name property on
     object.

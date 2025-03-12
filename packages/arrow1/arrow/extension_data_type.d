@@ -30,6 +30,11 @@ class ExtensionDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override ExtensionDataType self()
+  {
+    return this;
+  }
+
   /** */
   string getExtensionName()
   {

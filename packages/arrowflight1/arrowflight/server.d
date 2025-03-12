@@ -38,6 +38,11 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
     return getGType();
   }
 
+  override Server self()
+  {
+    return this;
+  }
+
   mixin ServableT!();
 
   /** */

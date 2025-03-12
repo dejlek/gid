@@ -129,6 +129,11 @@ class Gesture : gtk.event_controller.EventController
     return getGType();
   }
 
+  override Gesture self()
+  {
+    return this;
+  }
+
   /**
       If there are touch sequences being currently handled by gesture,
     this function returns true and fills in rect with the bounding

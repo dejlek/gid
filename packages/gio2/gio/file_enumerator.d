@@ -58,6 +58,11 @@ class FileEnumerator : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileEnumerator self()
+  {
+    return this;
+  }
+
   /**
       Releases all resources used by this enumerator, making the
     enumerator return [gio.types.IOErrorEnum.Closed] on all calls.

@@ -56,6 +56,11 @@ class Table : gtk.container.Container
     return getGType();
   }
 
+  override Table self()
+  {
+    return this;
+  }
+
   /**
       Used to create a new table widget. An initial size must be given by
     specifying how many rows and columns the table should have, although

@@ -54,6 +54,11 @@ class GLContext : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLContext self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstGLContext with the specified display
     Params:

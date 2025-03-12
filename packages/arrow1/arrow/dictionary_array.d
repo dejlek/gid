@@ -30,6 +30,11 @@ class DictionaryArray : arrow.array.Array
     return getGType();
   }
 
+  override DictionaryArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType dataType, arrow.array.Array indices, arrow.array.Array dictionary)
   {

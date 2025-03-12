@@ -74,6 +74,11 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
     return getGType();
   }
 
+  override Leaflet self()
+  {
+    return this;
+  }
+
   mixin SwipeableT!();
   mixin OrientableT!();
 

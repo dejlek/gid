@@ -54,6 +54,11 @@ class WebsocketConnection : gobject.object.ObjectG
     return getGType();
   }
 
+  override WebsocketConnection self()
+  {
+    return this;
+  }
+
   /**
       Close the connection in an orderly fashion.
     

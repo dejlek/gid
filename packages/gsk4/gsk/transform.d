@@ -47,6 +47,11 @@ class Transform : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Transform self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

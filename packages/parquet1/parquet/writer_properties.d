@@ -27,6 +27,11 @@ class WriterProperties : gobject.object.ObjectG
     return getGType();
   }
 
+  override WriterProperties self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

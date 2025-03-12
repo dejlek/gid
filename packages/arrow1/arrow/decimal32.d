@@ -28,6 +28,11 @@ class Decimal32 : gobject.object.ObjectG
     return getGType();
   }
 
+  override Decimal32 self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.decimal32.Decimal32 newInteger(long data)
   {

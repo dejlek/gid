@@ -92,6 +92,11 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  override Subprocess self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

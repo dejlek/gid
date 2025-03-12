@@ -29,6 +29,11 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override FixedSizeBinaryArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType)
   {

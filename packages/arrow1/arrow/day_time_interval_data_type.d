@@ -26,6 +26,11 @@ class DayTimeIntervalDataType : arrow.interval_data_type.IntervalDataType
     return getGType();
   }
 
+  override DayTimeIntervalDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -165,6 +165,11 @@ class VideoDecoder : gst.element.Element
     return getGType();
   }
 
+  override VideoDecoder self()
+  {
+    return this;
+  }
+
   /**
       Removes next n_bytes of input data and adds it to currently parsed frame.
     Params:

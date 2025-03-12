@@ -41,6 +41,11 @@ class TreeListRowSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  override TreeListRowSorter self()
+  {
+    return this;
+  }
+
   /**
       Create a special-purpose sorter that applies the sorting
     of sorter to the levels of a [gtk.tree_list_model.TreeListModel].

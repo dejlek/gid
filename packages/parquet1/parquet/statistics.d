@@ -26,6 +26,11 @@ class Statistics : gobject.object.ObjectG
     return getGType();
   }
 
+  override Statistics self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(parquet.statistics.Statistics otherStatistics)
   {

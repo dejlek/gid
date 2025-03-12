@@ -28,6 +28,11 @@ class BaseListScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override BaseListScalar self()
+  {
+    return this;
+  }
+
   /** */
   arrow.array.Array getValue()
   {

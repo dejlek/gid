@@ -87,6 +87,11 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     return getGType();
   }
 
+  override MenuItem self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
   mixin ActivatableT!();
 

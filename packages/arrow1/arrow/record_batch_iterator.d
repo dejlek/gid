@@ -28,6 +28,11 @@ class RecordBatchIterator : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchIterator self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.record_batch.RecordBatch[] recordBatches)
   {

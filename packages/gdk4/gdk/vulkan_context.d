@@ -39,6 +39,11 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
     return getGType();
   }
 
+  override VulkanContext self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

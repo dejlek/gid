@@ -156,6 +156,11 @@ class PopoverMenu : gtk.popover.Popover
     return getGType();
   }
 
+  override PopoverMenu self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.popover_menu.PopoverMenu] and populates it according to model.
     

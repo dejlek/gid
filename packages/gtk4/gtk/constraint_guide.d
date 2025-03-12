@@ -41,6 +41,11 @@ class ConstraintGuide : gobject.object.ObjectG, gtk.constraint_target.Constraint
     return getGType();
   }
 
+  override ConstraintGuide self()
+  {
+    return this;
+  }
+
   mixin ConstraintTargetT!();
 
   /**

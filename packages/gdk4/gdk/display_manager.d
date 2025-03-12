@@ -71,6 +71,11 @@ class DisplayManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override DisplayManager self()
+  {
+    return this;
+  }
+
   /**
       Gets the singleton [gdk.display_manager.DisplayManager] object.
     

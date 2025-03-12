@@ -30,6 +30,11 @@ class PluginFeature : gst.object.ObjectGst
     return getGType();
   }
 
+  override PluginFeature self()
+  {
+    return this;
+  }
+
   /**
       Copies the list of features. Caller should call gst_plugin_feature_list_free
     when done with the list.

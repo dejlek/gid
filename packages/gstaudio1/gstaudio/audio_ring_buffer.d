@@ -39,6 +39,11 @@ class AudioRingBuffer : gst.object.ObjectGst
     return getGType();
   }
 
+  override AudioRingBuffer self()
+  {
+    return this;
+  }
+
   /**
       Print debug info about the buffer sized in spec to the debug log.
     Params:

@@ -35,6 +35,11 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SettingsSchemaSource self()
+  {
+    return this;
+  }
+
   /**
       Attempts to create a new schema source corresponding to the contents
     of the given directory.

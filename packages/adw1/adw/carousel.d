@@ -56,6 +56,11 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
     return getGType();
   }
 
+  override Carousel self()
+  {
+    return this;
+  }
+
   mixin SwipeableT!();
   mixin OrientableT!();
 

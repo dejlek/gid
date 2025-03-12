@@ -72,6 +72,11 @@ class ActionBar : gtk.widget.Widget
     return getGType();
   }
 
+  override ActionBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.action_bar.ActionBar] widget.
     Returns:     a new [gtk.action_bar.ActionBar]

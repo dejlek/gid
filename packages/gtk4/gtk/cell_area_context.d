@@ -42,6 +42,11 @@ class CellAreaContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override CellAreaContext self()
+  {
+    return this;
+  }
+
   /**
       Allocates a width and/or a height for all rows which are to be
     rendered with context.

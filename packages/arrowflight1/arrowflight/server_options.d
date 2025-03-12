@@ -27,6 +27,11 @@ class ServerOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override ServerOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrowflight.location.Location location)
   {

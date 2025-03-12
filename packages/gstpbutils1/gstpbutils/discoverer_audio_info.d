@@ -28,6 +28,11 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
     return getGType();
   }
 
+  override DiscovererAudioInfo self()
+  {
+    return this;
+  }
+
   /** */
   uint getBitrate()
   {

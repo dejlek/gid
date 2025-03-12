@@ -38,4 +38,9 @@ class ShortcutsGroup : gtk.box.Box
   {
     return getGType();
   }
+
+  override ShortcutsGroup self()
+  {
+    return this;
+  }
 }

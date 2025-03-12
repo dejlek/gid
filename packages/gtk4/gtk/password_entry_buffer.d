@@ -31,6 +31,11 @@ class PasswordEntryBuffer : gtk.entry_buffer.EntryBuffer
     return getGType();
   }
 
+  override PasswordEntryBuffer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.entry_buffer.EntryBuffer] using secure memory allocations.
     Returns:     the newly created instance

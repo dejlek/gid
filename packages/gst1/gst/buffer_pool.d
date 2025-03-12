@@ -66,6 +66,11 @@ class BufferPool : gst.object.ObjectGst
     return getGType();
   }
 
+  override BufferPool self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstBufferPool instance.
     Returns:     a new #GstBufferPool instance

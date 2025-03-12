@@ -39,6 +39,11 @@ class OptionGroup : gobject.boxed.Boxed
     return getGType();
   }
 
+  override OptionGroup self()
+  {
+    return this;
+  }
+
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;

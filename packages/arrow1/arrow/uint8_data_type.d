@@ -26,6 +26,11 @@ class UInt8DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  override UInt8DataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -26,6 +26,11 @@ class UInt32Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override UInt32Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(uint value)
   {

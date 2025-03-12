@@ -34,6 +34,11 @@ class EveryFilter : gtk.multi_filter.MultiFilter
     return getGType();
   }
 
+  override EveryFilter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty "every" filter.
     

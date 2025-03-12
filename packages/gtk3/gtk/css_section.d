@@ -37,6 +37,11 @@ class CssSection : gobject.boxed.Boxed
     return getGType();
   }
 
+  override CssSection self()
+  {
+    return this;
+  }
+
   /**
       Returns the line in the CSS document where this section end.
     The line number is 0-indexed, so the first line of the document

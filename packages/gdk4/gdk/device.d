@@ -38,6 +38,11 @@ class Device : gobject.object.ObjectG
     return getGType();
   }
 
+  override Device self()
+  {
+    return this;
+  }
+
   /**
       Retrieves whether the Caps Lock modifier of the keyboard is locked.
     

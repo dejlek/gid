@@ -35,6 +35,11 @@ class CustomLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override CustomLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new legacy layout manager.
     

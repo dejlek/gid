@@ -39,6 +39,11 @@ class IconSet : gobject.boxed.Boxed
     return getGType();
   }
 
+  override IconSet self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkIconSet. A #GtkIconSet represents a single icon
     in various sizes and widget states. It can provide a #GdkPixbuf

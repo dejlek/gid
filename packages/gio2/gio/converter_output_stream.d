@@ -37,6 +37,11 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
     return getGType();
   }
 
+  override ConverterOutputStream self()
+  {
+    return this;
+  }
+
   mixin PollableOutputStreamT!();
 
   /**

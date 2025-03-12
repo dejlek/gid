@@ -31,6 +31,11 @@ class TreePath : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TreePath self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkTreePath-struct.
     This refers to a row.

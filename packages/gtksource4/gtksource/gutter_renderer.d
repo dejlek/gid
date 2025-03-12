@@ -36,6 +36,11 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override GutterRenderer self()
+  {
+    return this;
+  }
+
   /**
       Emits the #GtkSourceGutterRenderer::activate signal of the renderer. This is
     called from #GtkSourceGutter and should never have to be called manually.

@@ -34,6 +34,11 @@ class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.edi
     return getGType();
   }
 
+  override TextViewAccessible self()
+  {
+    return this;
+  }
+
   mixin EditableTextT!();
   mixin StreamableContentT!();
   mixin TextT!();

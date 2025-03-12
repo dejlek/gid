@@ -64,6 +64,11 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
     return getGType();
   }
 
+  override Item self()
+  {
+    return this;
+  }
+
   mixin RetrievableT!();
 
   /**

@@ -58,6 +58,11 @@ class HandleBox : gtk.bin.Bin
     return getGType();
   }
 
+  override HandleBox self()
+  {
+    return this;
+  }
+
   /**
       Create a new handle box.
     Returns:     a new #GtkHandleBox.

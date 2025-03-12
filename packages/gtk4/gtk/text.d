@@ -106,6 +106,11 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
     return getGType();
   }
 
+  override Text self()
+  {
+    return this;
+  }
+
   mixin AccessibleTextT!();
   mixin EditableT!();
 

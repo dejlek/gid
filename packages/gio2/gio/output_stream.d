@@ -49,6 +49,11 @@ class OutputStream : gobject.object.ObjectG
     return getGType();
   }
 
+  override OutputStream self()
+  {
+    return this;
+  }
+
   /**
       Clears the pending flag on stream.
   */

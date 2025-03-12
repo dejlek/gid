@@ -29,6 +29,11 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override SinkNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

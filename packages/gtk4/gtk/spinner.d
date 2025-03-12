@@ -48,6 +48,11 @@ class Spinner : gtk.widget.Widget
     return getGType();
   }
 
+  override Spinner self()
+  {
+    return this;
+  }
+
   /**
       Returns a new spinner widget. Not yet started.
     Returns:     a new [gtk.spinner.Spinner]

@@ -29,6 +29,11 @@ class BooleanArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  override BooleanArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

@@ -35,6 +35,11 @@ class Requisition : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Requisition self()
+  {
+    return this;
+  }
+
   @property int width()
   {
     return (cast(GtkRequisition*)cPtr).width;

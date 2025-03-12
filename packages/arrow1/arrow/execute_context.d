@@ -26,6 +26,11 @@ class ExecuteContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override ExecuteContext self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

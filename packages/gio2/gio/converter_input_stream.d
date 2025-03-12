@@ -37,6 +37,11 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     return getGType();
   }
 
+  override ConverterInputStream self()
+  {
+    return this;
+  }
+
   mixin PollableInputStreamT!();
 
   /**

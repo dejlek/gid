@@ -28,6 +28,11 @@ class TimestampArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override TimestampArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

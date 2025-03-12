@@ -32,6 +32,11 @@ class FilterOutputStream : gio.output_stream.OutputStream
     return getGType();
   }
 
+  override FilterOutputStream self()
+  {
+    return this;
+  }
+
   /**
       Gets the base stream for the filter stream.
     Returns:     a #GOutputStream.

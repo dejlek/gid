@@ -26,6 +26,11 @@ class FileSystemDatasetWriteOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileSystemDatasetWriteOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

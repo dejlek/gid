@@ -27,6 +27,11 @@ class LanguageManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override LanguageManager self()
+  {
+    return this;
+  }
+
   /**
       Creates a new language manager. If you do not need more than one language
     manager or a private language manager instance then use

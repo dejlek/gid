@@ -27,6 +27,11 @@ class ProjectNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override ProjectNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.expression.Expression[] expressions, string[] names = null)
   {

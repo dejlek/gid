@@ -30,4 +30,9 @@ class InitiallyUnowned : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override InitiallyUnowned self()
+  {
+    return this;
+  }
 }

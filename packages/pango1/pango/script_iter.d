@@ -34,6 +34,11 @@ class ScriptIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ScriptIter self()
+  {
+    return this;
+  }
+
   /**
       Create a new [pango.script_iter.ScriptIter], used to break a string of
     Unicode text into runs by Unicode script.

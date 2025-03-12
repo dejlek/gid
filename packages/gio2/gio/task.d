@@ -560,6 +560,11 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  override Task self()
+  {
+    return this;
+  }
+
   mixin AsyncResultT!();
 
   /**

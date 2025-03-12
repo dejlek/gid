@@ -48,6 +48,11 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     return getGType();
   }
 
+  override RadioToolButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRadioToolButton, adding it to group.
     Params:

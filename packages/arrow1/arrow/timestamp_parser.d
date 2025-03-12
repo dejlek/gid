@@ -26,6 +26,11 @@ class TimestampParser : gobject.object.ObjectG
     return getGType();
   }
 
+  override TimestampParser self()
+  {
+    return this;
+  }
+
   /** */
   string getKind()
   {

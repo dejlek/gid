@@ -48,6 +48,11 @@ class SrvTarget : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SrvTarget self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSrvTarget with the given parameters.
     

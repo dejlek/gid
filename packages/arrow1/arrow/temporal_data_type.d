@@ -25,4 +25,9 @@ class TemporalDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     return getGType();
   }
+
+  override TemporalDataType self()
+  {
+    return this;
+  }
 }

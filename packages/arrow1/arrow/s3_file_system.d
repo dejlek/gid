@@ -25,4 +25,9 @@ class S3FileSystem : arrow.file_system.FileSystem
   {
     return getGType();
   }
+
+  override S3FileSystem self()
+  {
+    return this;
+  }
 }

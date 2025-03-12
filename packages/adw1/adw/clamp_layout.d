@@ -52,6 +52,11 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return getGType();
   }
 
+  override ClampLayout self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

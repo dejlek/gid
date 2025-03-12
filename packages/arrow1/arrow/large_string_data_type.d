@@ -26,6 +26,11 @@ class LargeStringDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override LargeStringDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

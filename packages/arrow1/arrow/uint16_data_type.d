@@ -26,6 +26,11 @@ class UInt16DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  override UInt16DataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

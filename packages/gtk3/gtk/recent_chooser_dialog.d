@@ -74,5 +74,10 @@ class RecentChooserDialog : gtk.dialog.Dialog, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  override RecentChooserDialog self()
+  {
+    return this;
+  }
+
   mixin RecentChooserT!();
 }

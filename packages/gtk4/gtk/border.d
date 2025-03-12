@@ -35,6 +35,11 @@ class Border : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Border self()
+  {
+    return this;
+  }
+
   @property short left()
   {
     return (cast(GtkBorder*)cPtr).left;

@@ -39,6 +39,11 @@ class SimpleIOStream : gio.iostream.IOStream
     return getGType();
   }
 
+  override SimpleIOStream self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSimpleIOStream wrapping input_stream and output_stream.
     See also #GIOStream.

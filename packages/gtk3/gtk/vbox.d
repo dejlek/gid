@@ -58,6 +58,11 @@ class VBox : gtk.box.Box
     return getGType();
   }
 
+  override VBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkVBox.
     Params:

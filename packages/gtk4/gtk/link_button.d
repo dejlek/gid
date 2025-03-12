@@ -63,6 +63,11 @@ class LinkButton : gtk.button.Button
     return getGType();
   }
 
+  override LinkButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.link_button.LinkButton] with the URI as its text.
     Params:

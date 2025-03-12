@@ -28,6 +28,11 @@ class Schema : gobject.object.ObjectG
     return getGType();
   }
 
+  override Schema self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field[] fields)
   {

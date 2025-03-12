@@ -40,6 +40,11 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
     return getGType();
   }
 
+  override SingleSelection self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
   mixin SelectionModelT!();

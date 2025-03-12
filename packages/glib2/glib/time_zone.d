@@ -58,6 +58,11 @@ class TimeZone : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TimeZone self()
+  {
+    return this;
+  }
+
   /**
       A version of [glib.time_zone.TimeZone.newIdentifier] which returns the UTC time zone
     if identifier could not be parsed or loaded.

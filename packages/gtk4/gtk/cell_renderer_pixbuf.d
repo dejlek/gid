@@ -44,6 +44,11 @@ class CellRendererPixbuf : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  override CellRendererPixbuf self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.cell_renderer_pixbuf.CellRendererPixbuf]. Adjust rendering
     parameters using object properties. Object properties can be set

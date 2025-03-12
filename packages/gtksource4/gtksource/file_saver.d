@@ -34,6 +34,11 @@ class FileSaver : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileSaver self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceFileSaver object. The buffer will be saved to the
     #GtkSourceFile's location.

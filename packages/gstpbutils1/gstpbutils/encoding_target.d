@@ -33,6 +33,11 @@ class EncodingTarget : gobject.object.ObjectG
     return getGType();
   }
 
+  override EncodingTarget self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstEncodingTarget.
     

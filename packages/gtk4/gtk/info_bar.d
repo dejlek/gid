@@ -114,6 +114,11 @@ class InfoBar : gtk.widget.Widget
     return getGType();
   }
 
+  override InfoBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.info_bar.InfoBar] object.
     Returns:     a new [gtk.info_bar.InfoBar] object

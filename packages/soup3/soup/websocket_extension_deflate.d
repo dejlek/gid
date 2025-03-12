@@ -31,4 +31,9 @@ class WebsocketExtensionDeflate : soup.websocket_extension.WebsocketExtension
   {
     return getGType();
   }
+
+  override WebsocketExtensionDeflate self()
+  {
+    return this;
+  }
 }

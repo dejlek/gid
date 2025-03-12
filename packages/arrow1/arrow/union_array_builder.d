@@ -27,6 +27,11 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override UnionArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   byte appendChild(arrow.array_builder.ArrayBuilder child, string fieldName = null)
   {

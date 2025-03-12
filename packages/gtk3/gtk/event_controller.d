@@ -32,6 +32,11 @@ class EventController : gobject.object.ObjectG
     return getGType();
   }
 
+  override EventController self()
+  {
+    return this;
+  }
+
   /**
       Gets the propagation phase at which controller handles events.
     Returns:     the propagation phase

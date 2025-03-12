@@ -59,6 +59,11 @@ class ShortcutAction : gobject.object.ObjectG
     return getGType();
   }
 
+  override ShortcutAction self()
+  {
+    return this;
+  }
+
   /**
       Tries to parse the given string into an action.
     

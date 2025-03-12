@@ -28,6 +28,11 @@ class DoubleArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override DoubleArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

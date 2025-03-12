@@ -29,6 +29,11 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override ActivateAction self()
+  {
+    return this;
+  }
+
   /**
       Gets the activate action.
     

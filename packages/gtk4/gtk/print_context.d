@@ -101,6 +101,11 @@ class PrintContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [pango.context.Context] that can be used with the
     [gtk.print_context.PrintContext].

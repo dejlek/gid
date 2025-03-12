@@ -30,5 +30,10 @@ class PanedAccessible : gtk.container_accessible.ContainerAccessible, atk.value.
     return getGType();
   }
 
+  override PanedAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

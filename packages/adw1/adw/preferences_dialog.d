@@ -51,6 +51,11 @@ class PreferencesDialog : adw.dialog.Dialog
     return getGType();
   }
 
+  override PreferencesDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.preferences_dialog.PreferencesDialog].
     Returns:     the newly created [adw.preferences_dialog.PreferencesDialog]

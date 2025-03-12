@@ -35,6 +35,11 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
     return getGType();
   }
 
+  override ListBoxRow self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

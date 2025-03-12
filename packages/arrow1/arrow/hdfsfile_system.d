@@ -25,4 +25,9 @@ class HDFSFileSystem : arrow.file_system.FileSystem
   {
     return getGType();
   }
+
+  override HDFSFileSystem self()
+  {
+    return this;
+  }
 }

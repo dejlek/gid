@@ -26,6 +26,11 @@ class RoundToMultipleOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override RoundToMultipleOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

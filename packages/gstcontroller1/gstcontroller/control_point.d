@@ -41,6 +41,11 @@ class ControlPoint : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ControlPoint self()
+  {
+    return this;
+  }
+
   @property gst.types.ClockTime timestamp()
   {
     return (cast(GstControlPoint*)cPtr).timestamp;

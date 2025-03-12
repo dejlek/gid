@@ -27,6 +27,11 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override StructFieldOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

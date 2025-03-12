@@ -45,4 +45,9 @@ class PushSrc : gstbase.base_src.BaseSrc
   {
     return getGType();
   }
+
+  override PushSrc self()
+  {
+    return this;
+  }
 }

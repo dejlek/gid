@@ -46,6 +46,11 @@ class AccelGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  override AccelGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkAccelGroup.
     Returns:     a new #GtkAccelGroup object

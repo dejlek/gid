@@ -39,6 +39,11 @@ class Font : gobject.object.ObjectG
     return getGType();
   }
 
+  override Font self()
+  {
+    return this;
+  }
+
   /**
       Loads data previously created via [pango.font.Font.serialize].
     

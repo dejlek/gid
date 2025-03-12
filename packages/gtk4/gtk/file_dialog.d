@@ -45,6 +45,11 @@ class FileDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.file_dialog.FileDialog] object.
     Returns:     the new [gtk.file_dialog.FileDialog]

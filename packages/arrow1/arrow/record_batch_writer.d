@@ -29,6 +29,11 @@ class RecordBatchWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchWriter self()
+  {
+    return this;
+  }
+
   /** */
   bool close()
   {

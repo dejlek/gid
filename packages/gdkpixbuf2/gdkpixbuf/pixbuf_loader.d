@@ -80,6 +80,11 @@ class PixbufLoader : gobject.object.ObjectG
     return getGType();
   }
 
+  override PixbufLoader self()
+  {
+    return this;
+  }
+
   /**
       Creates a new pixbuf loader object.
     Returns:     A newly-created pixbuf loader.

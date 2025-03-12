@@ -37,6 +37,11 @@ class CookieJarDB : soup.cookie_jar.CookieJar
     return getGType();
   }
 
+  override CookieJarDB self()
+  {
+    return this;
+  }
+
   /**
       Creates a #SoupCookieJarDB.
     

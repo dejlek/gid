@@ -31,4 +31,9 @@ class AuthNTLM : soup.auth.Auth
   {
     return getGType();
   }
+
+  override AuthNTLM self()
+  {
+    return this;
+  }
 }

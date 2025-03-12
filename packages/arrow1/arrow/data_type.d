@@ -27,6 +27,11 @@ class DataType : gobject.object.ObjectG
     return getGType();
   }
 
+  override DataType self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.data_type.DataType import_(void* cAbiSchema)
   {

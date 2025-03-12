@@ -45,6 +45,11 @@ class Shortcut : gobject.object.ObjectG
     return getGType();
   }
 
+  override Shortcut self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.shortcut.Shortcut] that is triggered by
     trigger and then activates action.

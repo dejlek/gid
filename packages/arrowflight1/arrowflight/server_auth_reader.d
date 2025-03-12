@@ -28,6 +28,11 @@ class ServerAuthReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override ServerAuthReader self()
+  {
+    return this;
+  }
+
   /**
       Reads a message from the client.
     Returns:     Read data as #GBytes on

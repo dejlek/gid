@@ -97,6 +97,11 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
     return getGType();
   }
 
+  override PrintOperation self()
+  {
+    return this;
+  }
+
   mixin PrintOperationPreviewT!();
 
   /**

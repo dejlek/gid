@@ -31,4 +31,9 @@ class ToggleButtonAccessible : gtk.button_accessible.ButtonAccessible
   {
     return getGType();
   }
+
+  override ToggleButtonAccessible self()
+  {
+    return this;
+  }
 }

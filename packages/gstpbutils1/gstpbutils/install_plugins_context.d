@@ -34,6 +34,11 @@ class InstallPluginsContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  override InstallPluginsContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstInstallPluginsContext.
     Returns:     a new #GstInstallPluginsContext. Free with

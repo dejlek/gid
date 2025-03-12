@@ -215,6 +215,11 @@ class Label : gtk.misc.Misc
     return getGType();
   }
 
+  override Label self()
+  {
+    return this;
+  }
+
   /**
       Creates a new label with the given text inside it. You can
     pass null to get an empty label widget.

@@ -33,6 +33,11 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
     return getGType();
   }
 
+  override AuthDomainBasic self()
+  {
+    return this;
+  }
+
   /**
       Sets the callback that domain will use to authenticate incoming
     requests.

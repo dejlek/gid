@@ -39,6 +39,11 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
     return getGType();
   }
 
+  override DesktopAppInfo self()
+  {
+    return this;
+  }
+
   mixin AppInfoT!();
 
   /**

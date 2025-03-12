@@ -66,6 +66,11 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  override AppChooserDialog self()
+  {
+    return this;
+  }
+
   mixin AppChooserT!();
 
   /**

@@ -322,6 +322,11 @@ class Settings : gobject.object.ObjectG
     return getGType();
   }
 
+  override Settings self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSettings object with the schema specified by
     schema_id.

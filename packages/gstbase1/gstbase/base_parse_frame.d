@@ -40,6 +40,11 @@ class BaseParseFrame : gobject.boxed.Boxed
     return getGType();
   }
 
+  override BaseParseFrame self()
+  {
+    return this;
+  }
+
   @property gst.buffer.Buffer buffer()
   {
     return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);

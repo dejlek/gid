@@ -30,6 +30,11 @@ class RecordBatchBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema)
   {

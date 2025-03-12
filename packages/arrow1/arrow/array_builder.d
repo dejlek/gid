@@ -29,6 +29,11 @@ class ArrayBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  override ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   bool appendEmptyValue()
   {

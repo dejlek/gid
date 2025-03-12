@@ -35,6 +35,11 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
     return getGType();
   }
 
+  override Emblem self()
+  {
+    return this;
+  }
+
   mixin IconT!();
 
   /**

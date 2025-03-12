@@ -26,6 +26,11 @@ class TakeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override TakeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -39,6 +39,11 @@ class ContentSniffer : gobject.object.ObjectG, soup.session_feature.SessionFeatu
     return getGType();
   }
 
+  override ContentSniffer self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 
   /**

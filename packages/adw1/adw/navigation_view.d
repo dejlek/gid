@@ -206,6 +206,11 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     return getGType();
   }
 
+  override NavigationView self()
+  {
+    return this;
+  }
+
   mixin SwipeableT!();
 
   /**

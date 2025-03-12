@@ -175,6 +175,11 @@ class BaseParse : gst.element.Element
     return getGType();
   }
 
+  override BaseParse self()
+  {
+    return this;
+  }
+
   /**
       Adds an entry to the index associating offset to ts.  It is recommended
     to only add keyframe entries.  force allows to bypass checks, such as

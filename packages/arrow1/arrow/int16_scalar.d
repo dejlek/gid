@@ -26,6 +26,11 @@ class Int16Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Int16Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(short value)
   {

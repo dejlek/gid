@@ -34,6 +34,11 @@ class EventBox : gtk.bin.Bin
     return getGType();
   }
 
+  override EventBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkEventBox.
     Returns:     a new #GtkEventBox

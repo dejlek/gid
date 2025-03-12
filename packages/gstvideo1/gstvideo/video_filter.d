@@ -30,4 +30,9 @@ class VideoFilter : gstbase.base_transform.BaseTransform
   {
     return getGType();
   }
+
+  override VideoFilter self()
+  {
+    return this;
+  }
 }

@@ -101,6 +101,11 @@ class Clock : gst.object.ObjectGst
     return getGType();
   }
 
+  override Clock self()
+  {
+    return this;
+  }
+
   /**
       Compares the two #GstClockID instances. This function can be used
     as a GCompareFunc when sorting ids.

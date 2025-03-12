@@ -28,6 +28,11 @@ class Int8Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override Int8Array self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

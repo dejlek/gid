@@ -199,6 +199,11 @@ class ApplicationCommandLine : gobject.object.ObjectG
     return getGType();
   }
 
+  override ApplicationCommandLine self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GFile corresponding to a filename that was given as part
     of the invocation of cmdline.

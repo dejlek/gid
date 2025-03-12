@@ -37,6 +37,11 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  override CellRendererToggle self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.cell_renderer_toggle.CellRendererToggle]. Adjust rendering
     parameters using object properties. Object properties can be set

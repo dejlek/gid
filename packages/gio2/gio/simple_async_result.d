@@ -197,6 +197,11 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  override SimpleAsyncResult self()
+  {
+    return this;
+  }
+
   mixin AsyncResultT!();
 
   /**

@@ -27,4 +27,9 @@ class FlowBoxChildAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override FlowBoxChildAccessible self()
+  {
+    return this;
+  }
 }

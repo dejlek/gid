@@ -33,4 +33,9 @@ class AudioVisualizer : gst.element.Element
   {
     return getGType();
   }
+
+  override AudioVisualizer self()
+  {
+    return this;
+  }
 }

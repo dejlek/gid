@@ -139,6 +139,11 @@ class ListView : gtk.list_base.ListBase
     return getGType();
   }
 
+  override ListView self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.list_view.ListView] that uses the given factory for
     mapping items to widgets.

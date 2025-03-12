@@ -32,6 +32,11 @@ class GestureRotate : gtk.gesture.Gesture
     return getGType();
   }
 
+  override GestureRotate self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created [gtk.gesture.Gesture] that recognizes 2-touch
     rotation gestures.

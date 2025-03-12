@@ -49,6 +49,11 @@ class Stack : gtk.container.Container
     return getGType();
   }
 
+  override Stack self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkStack container.
     Returns:     a new #GtkStack

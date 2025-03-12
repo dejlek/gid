@@ -25,4 +25,9 @@ class FloatingPointDataType : arrow.numeric_data_type.NumericDataType
   {
     return getGType();
   }
+
+  override FloatingPointDataType self()
+  {
+    return this;
+  }
 }

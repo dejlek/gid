@@ -60,6 +60,11 @@ class TabBar : gtk.widget.Widget
     return getGType();
   }
 
+  override TabBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.tab_bar.TabBar].
     Returns:     the newly created [adw.tab_bar.TabBar]

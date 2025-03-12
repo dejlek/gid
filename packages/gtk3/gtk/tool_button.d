@@ -60,6 +60,11 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     return getGType();
   }
 
+  override ToolButton self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

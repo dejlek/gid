@@ -31,6 +31,11 @@ class RcStyle : gobject.object.ObjectG
     return getGType();
   }
 
+  override RcStyle self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRcStyle with no fields set and
     a reference count of 1.

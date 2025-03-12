@@ -34,6 +34,11 @@ class Rand : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Rand self()
+  {
+    return this;
+  }
+
   /**
       Creates a new random number generator initialized with a seed taken
     either from `/dev/urandom` (if existing) or from the current time

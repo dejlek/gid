@@ -35,6 +35,11 @@ class FileAttributeInfoList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FileAttributeInfoList self()
+  {
+    return this;
+  }
+
   @property gio.file_attribute_info.FileAttributeInfo infos()
   {
     return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)cPtr).infos);

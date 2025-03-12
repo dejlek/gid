@@ -25,4 +25,9 @@ class NumericDataType : arrow.fixed_width_data_type.FixedWidthDataType
   {
     return getGType();
   }
+
+  override NumericDataType self()
+  {
+    return this;
+  }
 }

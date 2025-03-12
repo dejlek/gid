@@ -28,6 +28,11 @@ class DictionaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  override DictionaryDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType indexDataType, arrow.data_type.DataType valueDataType, bool ordered)
   {

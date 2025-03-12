@@ -50,6 +50,11 @@ class Surface : gobject.object.ObjectG
     return getGType();
   }
 
+  override Surface self()
+  {
+    return this;
+  }
+
   /**
       Create a new popup surface.
     

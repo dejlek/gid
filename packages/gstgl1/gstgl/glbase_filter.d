@@ -33,6 +33,11 @@ class GLBaseFilter : gstbase.base_transform.BaseTransform
     return getGType();
   }
 
+  override GLBaseFilter self()
+  {
+    return this;
+  }
+
   /** */
   bool findGlContext()
   {

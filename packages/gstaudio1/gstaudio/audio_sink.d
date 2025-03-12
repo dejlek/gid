@@ -51,4 +51,9 @@ class AudioSink : gstaudio.audio_base_sink.AudioBaseSink
   {
     return getGType();
   }
+
+  override AudioSink self()
+  {
+    return this;
+  }
 }

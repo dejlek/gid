@@ -33,6 +33,11 @@ class Seat : gobject.object.ObjectG
     return getGType();
   }
 
+  override Seat self()
+  {
+    return this;
+  }
+
   /**
       Returns the capabilities this [gdk.seat.Seat] currently has.
     Returns:     the seat capabilities

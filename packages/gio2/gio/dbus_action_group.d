@@ -37,6 +37,11 @@ class DBusActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, gi
     return getGType();
   }
 
+  override DBusActionGroup self()
+  {
+    return this;
+  }
+
   mixin ActionGroupT!();
   mixin RemoteActionGroupT!();
 

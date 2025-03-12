@@ -213,6 +213,11 @@ class AboutWindow : adw.window.Window
     return getGType();
   }
 
+  override AboutWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.about_window.AboutWindow].
     Returns:     the newly created [adw.about_window.AboutWindow]

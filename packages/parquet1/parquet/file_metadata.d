@@ -28,6 +28,11 @@ class FileMetadata : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileMetadata self()
+  {
+    return this;
+  }
+
   /** */
   bool canDecompress()
   {

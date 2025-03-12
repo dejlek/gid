@@ -34,6 +34,11 @@ class CairoContext : gdk.draw_context.DrawContext
     return getGType();
   }
 
+  override CairoContext self()
+  {
+    return this;
+  }
+
   /**
       Retrieves a Cairo context to be used to draw on the [gdk.surface.Surface]
     of context.

@@ -44,6 +44,11 @@ class BitsetIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override BitsetIter self()
+  {
+    return this;
+  }
+
   /**
       Gets the current value that iter points to.
     

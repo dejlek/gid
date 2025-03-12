@@ -33,4 +33,9 @@ class Buffer : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Buffer self()
+  {
+    return this;
+  }
 }

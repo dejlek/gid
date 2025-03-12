@@ -26,6 +26,11 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
     return getGType();
   }
 
+  override VideoBufferPool self()
+  {
+    return this;
+  }
+
   /**
       Create a new bufferpool that can allocate video frames. This bufferpool
     supports all the video bufferpool options.

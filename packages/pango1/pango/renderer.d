@@ -40,6 +40,11 @@ class Renderer : gobject.object.ObjectG
     return getGType();
   }
 
+  override Renderer self()
+  {
+    return this;
+  }
+
   /**
       Does initial setup before rendering operations on renderer.
     

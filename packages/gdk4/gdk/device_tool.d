@@ -28,6 +28,11 @@ class DeviceTool : gobject.object.ObjectG
     return getGType();
   }
 
+  override DeviceTool self()
+  {
+    return this;
+  }
+
   /**
       Gets the axes of the tool.
     Returns:     the axes of tool

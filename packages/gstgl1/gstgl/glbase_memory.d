@@ -51,6 +51,11 @@ class GLBaseMemory : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLBaseMemory self()
+  {
+    return this;
+  }
+
   @property gst.memory.Memory mem()
   {
     return cToD!(gst.memory.Memory)(cast(void*)&(cast(GstGLBaseMemory*)cPtr).mem);

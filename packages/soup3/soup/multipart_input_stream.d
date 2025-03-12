@@ -48,6 +48,11 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
     return getGType();
   }
 
+  override MultipartInputStream self()
+  {
+    return this;
+  }
+
   mixin PollableInputStreamT!();
 
   /**

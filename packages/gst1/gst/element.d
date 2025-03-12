@@ -94,6 +94,11 @@ class Element : gst.object.ObjectGst
     return getGType();
   }
 
+  override Element self()
+  {
+    return this;
+  }
+
   /**
       Creates an element for handling the given URI.
     Params:

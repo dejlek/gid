@@ -47,6 +47,11 @@ class StreamCollection : gst.object.ObjectGst
     return getGType();
   }
 
+  override StreamCollection self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstStreamCollection.
     Params:

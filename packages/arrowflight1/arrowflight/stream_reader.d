@@ -25,4 +25,9 @@ class StreamReader : arrowflight.record_batch_reader.RecordBatchReader
   {
     return getGType();
   }
+
+  override StreamReader self()
+  {
+    return this;
+  }
 }

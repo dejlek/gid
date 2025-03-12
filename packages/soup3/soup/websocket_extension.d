@@ -32,6 +32,11 @@ class WebsocketExtension : gobject.object.ObjectG
     return getGType();
   }
 
+  override WebsocketExtension self()
+  {
+    return this;
+  }
+
   /**
       Get the parameters strings to be included in the request header.
     

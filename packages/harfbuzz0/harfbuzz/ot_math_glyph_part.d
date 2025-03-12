@@ -40,6 +40,11 @@ class OtMathGlyphPart : gobject.boxed.Boxed
     return getGType();
   }
 
+  override OtMathGlyphPart self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Codepoint glyph()
   {
     return (cast(hb_ot_math_glyph_part_t*)cPtr).glyph;

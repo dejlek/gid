@@ -64,6 +64,11 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
     return getGType();
   }
 
+  override ExpanderRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.expander_row.ExpanderRow].
     Returns:     the newly created [adw.expander_row.ExpanderRow]

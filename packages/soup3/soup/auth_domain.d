@@ -45,6 +45,11 @@ class AuthDomain : gobject.object.ObjectG
     return getGType();
   }
 
+  override AuthDomain self()
+  {
+    return this;
+  }
+
   /**
       Checks if msg contains appropriate authorization for domain to
     accept it.

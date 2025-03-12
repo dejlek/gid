@@ -35,6 +35,11 @@ class Coverage : gobject.object.ObjectG
     return getGType();
   }
 
+  override Coverage self()
+  {
+    return this;
+  }
+
   /**
       Create a new [pango.coverage.Coverage]
     Returns:     the newly allocated [pango.coverage.Coverage], initialized

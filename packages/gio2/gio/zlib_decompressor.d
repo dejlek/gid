@@ -32,6 +32,11 @@ class ZlibDecompressor : gobject.object.ObjectG, gio.converter.Converter
     return getGType();
   }
 
+  override ZlibDecompressor self()
+  {
+    return this;
+  }
+
   mixin ConverterT!();
 
   /**

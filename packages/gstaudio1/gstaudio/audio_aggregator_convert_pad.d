@@ -29,4 +29,9 @@ class AudioAggregatorConvertPad : gstaudio.audio_aggregator_pad.AudioAggregatorP
   {
     return getGType();
   }
+
+  override AudioAggregatorConvertPad self()
+  {
+    return this;
+  }
 }

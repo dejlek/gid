@@ -38,6 +38,11 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
     return getGType();
   }
 
+  override ThemedIcon self()
+  {
+    return this;
+  }
+
   mixin IconT!();
 
   /**

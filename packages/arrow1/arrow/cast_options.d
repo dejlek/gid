@@ -26,6 +26,11 @@ class CastOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override CastOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

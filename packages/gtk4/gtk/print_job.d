@@ -43,6 +43,11 @@ class PrintJob : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintJob self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.print_job.PrintJob].
     Params:

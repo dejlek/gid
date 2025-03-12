@@ -41,6 +41,11 @@ class StyleScheme : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleScheme self()
+  {
+    return this;
+  }
+
   /** */
   string[] getAuthors()
   {

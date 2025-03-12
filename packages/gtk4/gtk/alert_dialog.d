@@ -41,6 +41,11 @@ class AlertDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override AlertDialog self()
+  {
+    return this;
+  }
+
   /**
       This function shows the alert to the user.
     

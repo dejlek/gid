@@ -30,4 +30,9 @@ class EventSequence : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override EventSequence self()
+  {
+    return this;
+  }
 }

@@ -156,6 +156,11 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
     return getGType();
   }
 
+  override SpinButton self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin CellEditableT!();
   mixin EditableT!();

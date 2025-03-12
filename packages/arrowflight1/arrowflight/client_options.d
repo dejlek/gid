@@ -26,6 +26,11 @@ class ClientOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override ClientOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

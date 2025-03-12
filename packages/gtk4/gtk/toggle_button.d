@@ -112,6 +112,11 @@ class ToggleButton : gtk.button.Button
     return getGType();
   }
 
+  override ToggleButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new toggle button.
     

@@ -55,6 +55,11 @@ class Revealer : gtk.widget.Widget
     return getGType();
   }
 
+  override Revealer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.revealer.Revealer].
     Returns:     a newly created [gtk.revealer.Revealer]

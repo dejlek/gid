@@ -29,6 +29,11 @@ class CustomFilter : gtk.filter.Filter
     return getGType();
   }
 
+  override CustomFilter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new filter using the given match_func to filter
     items.

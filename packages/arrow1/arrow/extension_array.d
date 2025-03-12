@@ -27,6 +27,11 @@ class ExtensionArray : arrow.array.Array
     return getGType();
   }
 
+  override ExtensionArray self()
+  {
+    return this;
+  }
+
   /** */
   arrow.array.Array getStorage()
   {

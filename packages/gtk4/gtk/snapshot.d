@@ -62,6 +62,11 @@ class Snapshot : gdk.snapshot.Snapshot
     return getGType();
   }
 
+  override Snapshot self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.snapshot.Snapshot].
     Returns:     a newly-allocated [gtk.snapshot.Snapshot]

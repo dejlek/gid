@@ -108,6 +108,11 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override ColumnView self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

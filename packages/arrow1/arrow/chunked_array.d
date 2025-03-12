@@ -33,6 +33,11 @@ class ChunkedArray : gobject.object.ObjectG
     return getGType();
   }
 
+  override ChunkedArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.array.Array[] chunks)
   {

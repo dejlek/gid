@@ -97,6 +97,11 @@ class Popover : gtk.bin.Bin
     return getGType();
   }
 
+  override Popover self()
+  {
+    return this;
+  }
+
   /**
       Creates a new popover to point to relative_to
     Params:

@@ -70,6 +70,11 @@ class IOChannel : gobject.boxed.Boxed
     return getGType();
   }
 
+  override IOChannel self()
+  {
+    return this;
+  }
+
   /**
       Open a file filename as a #GIOChannel using mode mode. This
     channel will be closed when the last reference to it is dropped,

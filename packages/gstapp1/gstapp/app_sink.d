@@ -71,6 +71,11 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
     return getGType();
   }
 
+  override AppSink self()
+  {
+    return this;
+  }
+
   mixin URIHandlerT!();
 
   /**

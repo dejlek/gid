@@ -26,6 +26,11 @@ class FinishOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override FinishOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

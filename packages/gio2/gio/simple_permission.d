@@ -33,6 +33,11 @@ class SimplePermission : gio.permission.Permission
     return getGType();
   }
 
+  override SimplePermission self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GPermission instance that represents an action that is
     either always or never allowed.

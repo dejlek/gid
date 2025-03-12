@@ -31,6 +31,11 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override SignalAction self()
+  {
+    return this;
+  }
+
   /**
       Creates an action that when activated, emits the given action signal
     on the provided widget.

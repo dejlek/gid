@@ -31,6 +31,11 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override CallbackAction self()
+  {
+    return this;
+  }
+
   /**
       Create a custom action that calls the given callback when
     activated.

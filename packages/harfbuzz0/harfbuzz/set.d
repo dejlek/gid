@@ -35,4 +35,9 @@ class Set : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Set self()
+  {
+    return this;
+  }
 }

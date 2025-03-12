@@ -29,6 +29,11 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
     return getGType();
   }
 
+  override EncodingAudioProfile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstEncodingAudioProfile
     

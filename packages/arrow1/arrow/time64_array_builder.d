@@ -28,6 +28,11 @@ class Time64ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override Time64ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.time64_data_type.Time64DataType dataType)
   {

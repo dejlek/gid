@@ -33,6 +33,11 @@ class HSTSEnforcerDB : soup.hstsenforcer.HSTSEnforcer
     return getGType();
   }
 
+  override HSTSEnforcerDB self()
+  {
+    return this;
+  }
+
   /**
       Creates a #SoupHSTSEnforcerDB.
     

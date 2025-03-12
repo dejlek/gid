@@ -34,6 +34,11 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoTimeCodeInterval self()
+  {
+    return this;
+  }
+
   @property uint hours()
   {
     return (cast(GstVideoTimeCodeInterval*)cPtr).hours;

@@ -48,6 +48,11 @@ class PatternSpec : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PatternSpec self()
+  {
+    return this;
+  }
+
   /**
       Compiles a pattern to a #GPatternSpec.
     Params:

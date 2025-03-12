@@ -61,6 +61,11 @@ class Completion : gobject.object.ObjectG
     return getGType();
   }
 
+  override Completion self()
+  {
+    return this;
+  }
+
   /**
       This will add `<b>` tags around matched characters in haystack
     based on casefold_query.

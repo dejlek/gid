@@ -74,6 +74,11 @@ class EntryCompletion : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.cel
     return getGType();
   }
 
+  override EntryCompletion self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
   mixin CellLayoutT!();
 

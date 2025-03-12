@@ -70,6 +70,11 @@ class Task : gst.object.ObjectGst
     return getGType();
   }
 
+  override Task self()
+  {
+    return this;
+  }
+
   /**
       Create a new Task that will repeatedly call the provided func
     with user_data as a parameter. Typically the task will run in

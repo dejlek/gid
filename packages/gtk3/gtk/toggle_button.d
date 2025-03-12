@@ -97,6 +97,11 @@ class ToggleButton : gtk.button.Button
     return getGType();
   }
 
+  override ToggleButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new toggle button. A widget should be packed into the button, as in [gtk.button.Button.new_].
     Returns:     a new toggle button.

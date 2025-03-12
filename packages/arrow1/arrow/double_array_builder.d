@@ -27,6 +27,11 @@ class DoubleArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override DoubleArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

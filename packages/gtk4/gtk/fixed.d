@@ -73,6 +73,11 @@ class Fixed : gtk.widget.Widget
     return getGType();
   }
 
+  override Fixed self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.fixed.Fixed].
     Returns:     a new [gtk.fixed.Fixed].

@@ -49,6 +49,11 @@ class SymbolicColor : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SymbolicColor self()
+  {
+    return this;
+  }
+
   /**
       Creates a symbolic color by modifying the relative alpha
     value of color. A factor < 1.0 would resolve to a more

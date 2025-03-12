@@ -33,6 +33,11 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
     return getGType();
   }
 
+  override RendererCellAccessible self()
+  {
+    return this;
+  }
+
   /** */
   this(gtk.cell_renderer.CellRenderer renderer)
   {

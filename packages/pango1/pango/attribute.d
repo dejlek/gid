@@ -54,6 +54,11 @@ class Attribute : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Attribute self()
+  {
+    return this;
+  }
+
   @property uint startIndex()
   {
     return (cast(PangoAttribute*)cPtr).startIndex;

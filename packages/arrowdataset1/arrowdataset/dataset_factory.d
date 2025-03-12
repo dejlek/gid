@@ -29,6 +29,11 @@ class DatasetFactory : gobject.object.ObjectG
     return getGType();
   }
 
+  override DatasetFactory self()
+  {
+    return this;
+  }
+
   /** */
   arrowdataset.dataset.Dataset finish(arrowdataset.finish_options.FinishOptions options = null)
   {

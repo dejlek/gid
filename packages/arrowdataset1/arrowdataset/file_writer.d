@@ -29,6 +29,11 @@ class FileWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileWriter self()
+  {
+    return this;
+  }
+
   /** */
   bool finish()
   {

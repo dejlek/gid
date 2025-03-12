@@ -36,6 +36,11 @@ class ATContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override ATContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.atcontext.ATContext] instance for the given accessible role,
     accessible instance, and display connection.

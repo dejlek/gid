@@ -29,6 +29,11 @@ class Vfs : gobject.object.ObjectG
     return getGType();
   }
 
+  override Vfs self()
+  {
+    return this;
+  }
+
   /**
       Gets the default #GVfs for the system.
     Returns:     a #GVfs, which will be the local

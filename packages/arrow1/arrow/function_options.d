@@ -26,6 +26,11 @@ class FunctionOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override FunctionOptions self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {

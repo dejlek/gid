@@ -127,6 +127,11 @@ class Expander : gtk.widget.Widget
     return getGType();
   }
 
+  override Expander self()
+  {
+    return this;
+  }
+
   /**
       Creates a new expander using label as the text of the label.
     Params:

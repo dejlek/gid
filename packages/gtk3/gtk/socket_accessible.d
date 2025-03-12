@@ -28,6 +28,11 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
     return getGType();
   }
 
+  override SocketAccessible self()
+  {
+    return this;
+  }
+
   /** */
   void embed(string path)
   {

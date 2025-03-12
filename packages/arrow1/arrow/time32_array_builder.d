@@ -28,6 +28,11 @@ class Time32ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override Time32ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.time32_data_type.Time32DataType dataType)
   {

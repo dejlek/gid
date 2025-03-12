@@ -63,6 +63,11 @@ class EventControllerScroll : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerScroll self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle scroll events.
     Params:

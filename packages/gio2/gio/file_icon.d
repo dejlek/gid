@@ -36,6 +36,11 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
     return getGType();
   }
 
+  override FileIcon self()
+  {
+    return this;
+  }
+
   mixin IconT!();
   mixin LoadableIconT!();
 

@@ -28,6 +28,11 @@ class Endpoint : gobject.object.ObjectG
     return getGType();
   }
 
+  override Endpoint self()
+  {
+    return this;
+  }
+
   /** */
   this(arrowflight.ticket.Ticket ticket, arrowflight.location.Location[] locations)
   {

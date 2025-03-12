@@ -34,6 +34,11 @@ class EventControllerLegacy : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerLegacy self()
+  {
+    return this;
+  }
+
   /**
       Creates a new legacy event controller.
     Returns:     the newly created event controller.

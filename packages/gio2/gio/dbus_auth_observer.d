@@ -93,6 +93,11 @@ class DBusAuthObserver : gobject.object.ObjectG
     return getGType();
   }
 
+  override DBusAuthObserver self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GDBusAuthObserver object.
     Returns:     A #GDBusAuthObserver. Free with [gobject.object.ObjectG.unref].

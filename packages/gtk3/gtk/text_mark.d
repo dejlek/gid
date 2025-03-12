@@ -57,6 +57,11 @@ class TextMark : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextMark self()
+  {
+    return this;
+  }
+
   /**
       Creates a text mark. Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
     If name is null, the mark is anonymous; otherwise, the mark can be

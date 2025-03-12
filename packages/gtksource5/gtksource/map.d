@@ -61,6 +61,11 @@ class Map : gtksource.view.View
     return getGType();
   }
 
+  override Map self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtksource.map.Map].
     Returns:     a new #GtkSourceMap.

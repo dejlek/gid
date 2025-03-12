@@ -31,6 +31,11 @@ class BufferOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  override BufferOutputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.resizable_buffer.ResizableBuffer buffer)
   {

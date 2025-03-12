@@ -30,6 +30,11 @@ class VulkanRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  override VulkanRenderer self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -37,6 +37,11 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLVideoAllocationParams self()
+  {
+    return this;
+  }
+
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
     return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLVideoAllocationParams*)cPtr).parent);

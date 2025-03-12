@@ -28,6 +28,11 @@ class DenseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getGType();
   }
 
+  override DenseUnionArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.dense_union_data_type.DenseUnionDataType dataType = null)
   {

@@ -29,6 +29,11 @@ class FeatherFileReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override FeatherFileReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.seekable_input_stream.SeekableInputStream file)
   {

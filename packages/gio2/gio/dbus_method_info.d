@@ -38,6 +38,11 @@ class DBusMethodInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DBusMethodInfo self()
+  {
+    return this;
+  }
+
   @property int refCount()
   {
     return (cast(GDBusMethodInfo*)cPtr).refCount;

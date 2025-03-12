@@ -37,6 +37,11 @@ class SnippetContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override SnippetContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceSnippetContext.
     

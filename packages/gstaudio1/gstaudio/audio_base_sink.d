@@ -33,6 +33,11 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
     return getGType();
   }
 
+  override AudioBaseSink self()
+  {
+    return this;
+  }
+
   /**
       Create and return the #GstAudioRingBuffer for sink. This function will
     call the ::create_ringbuffer vmethod and will set sink as the parent of

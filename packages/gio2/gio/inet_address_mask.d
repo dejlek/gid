@@ -35,6 +35,11 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  override InetAddressMask self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

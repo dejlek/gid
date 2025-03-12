@@ -48,6 +48,11 @@ class Alignment : gtk.bin.Bin
     return getGType();
   }
 
+  override Alignment self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkAlignment.
     Params:

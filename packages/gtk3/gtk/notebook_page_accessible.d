@@ -30,6 +30,11 @@ class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  override NotebookPageAccessible self()
+  {
+    return this;
+  }
+
   mixin ComponentT!();
 
   /** */

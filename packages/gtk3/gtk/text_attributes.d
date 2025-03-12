@@ -40,6 +40,11 @@ class TextAttributes : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TextAttributes self()
+  {
+    return this;
+  }
+
   @property gtk.text_appearance.TextAppearance appearance()
   {
     return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)cPtr).appearance);

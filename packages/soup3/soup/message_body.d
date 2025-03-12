@@ -46,6 +46,11 @@ class MessageBody : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MessageBody self()
+  {
+    return this;
+  }
+
   @property long length()
   {
     return (cast(SoupMessageBody*)cPtr).length;

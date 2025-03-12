@@ -101,6 +101,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Paned self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

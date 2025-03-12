@@ -36,6 +36,11 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  override ColorChooserDialog self()
+  {
+    return this;
+  }
+
   mixin ColorChooserT!();
 
   /**

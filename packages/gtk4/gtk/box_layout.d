@@ -43,6 +43,11 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
     return getGType();
   }
 
+  override BoxLayout self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

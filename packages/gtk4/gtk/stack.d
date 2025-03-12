@@ -83,6 +83,11 @@ class Stack : gtk.widget.Widget
     return getGType();
   }
 
+  override Stack self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.stack.Stack].
     Returns:     a new [gtk.stack.Stack]

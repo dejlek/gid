@@ -52,6 +52,11 @@ class ShortcutsGroup : gtk.box.Box
     return getGType();
   }
 
+  override ShortcutsGroup self()
+  {
+    return this;
+  }
+
   /**
       Adds a shortcut to the shortcuts group.
     

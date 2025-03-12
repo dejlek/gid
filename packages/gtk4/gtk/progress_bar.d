@@ -84,6 +84,11 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     return getGType();
   }
 
+  override ProgressBar self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin OrientableT!();
 

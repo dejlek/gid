@@ -117,6 +117,11 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
     return getGType();
   }
 
+  override Popover self()
+  {
+    return this;
+  }
+
   mixin NativeT!();
   mixin ShortcutManagerT!();
 

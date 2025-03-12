@@ -51,6 +51,11 @@ class FontMetrics : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FontMetrics self()
+  {
+    return this;
+  }
+
   /**
       Gets the approximate character width for a font metrics structure.
     

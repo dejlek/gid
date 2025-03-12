@@ -52,6 +52,11 @@ class TlsInteraction : gobject.object.ObjectG
     return getGType();
   }
 
+  override TlsInteraction self()
+  {
+    return this;
+  }
+
   /**
       Run synchronous interaction to ask the user for a password. In general,
     [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this

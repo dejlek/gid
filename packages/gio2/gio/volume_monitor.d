@@ -42,6 +42,11 @@ class VolumeMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  override VolumeMonitor self()
+  {
+    return this;
+  }
+
   /**
       This function should be called by any #GVolumeMonitor
     implementation when a new #GMount object is created that is not

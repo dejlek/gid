@@ -35,6 +35,11 @@ class GLUpload : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLUpload self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context)
   {

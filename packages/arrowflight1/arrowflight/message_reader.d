@@ -28,6 +28,11 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
     return getGType();
   }
 
+  override MessageReader self()
+  {
+    return this;
+  }
+
   /** */
   arrowflight.descriptor.Descriptor getDescriptor()
   {

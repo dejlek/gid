@@ -42,6 +42,11 @@ class ShortcutTrigger : gobject.object.ObjectG
     return getGType();
   }
 
+  override ShortcutTrigger self()
+  {
+    return this;
+  }
+
   /**
       Tries to parse the given string into a trigger.
     

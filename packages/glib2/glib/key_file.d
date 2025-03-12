@@ -167,6 +167,11 @@ class KeyFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  override KeyFile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty #GKeyFile object. Use
     [glib.key_file.KeyFile.loadFromFile], [glib.key_file.KeyFile.loadFromData],

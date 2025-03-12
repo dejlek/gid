@@ -26,6 +26,11 @@ class MonthIntervalScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override MonthIntervalScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(int value)
   {

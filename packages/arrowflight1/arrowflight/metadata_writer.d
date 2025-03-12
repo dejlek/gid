@@ -28,6 +28,11 @@ class MetadataWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  override MetadataWriter self()
+  {
+    return this;
+  }
+
   /**
       Writes metadata to the client.
     Params:

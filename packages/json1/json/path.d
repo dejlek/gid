@@ -158,6 +158,11 @@ class Path : gobject.object.ObjectG
     return getGType();
   }
 
+  override Path self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [json.path.Path] instance.
     

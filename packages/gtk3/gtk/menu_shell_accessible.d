@@ -30,5 +30,10 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
     return getGType();
   }
 
+  override MenuShellAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
 }

@@ -80,6 +80,11 @@ class Frame : gtk.widget.Widget
     return getGType();
   }
 
+  override Frame self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.frame.Frame], with optional label label.
     

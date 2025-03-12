@@ -28,6 +28,11 @@ class RecordBatchStreamReader : arrow.record_batch_reader.RecordBatchReader
     return getGType();
   }
 
+  override RecordBatchStreamReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.input_stream.InputStream stream)
   {

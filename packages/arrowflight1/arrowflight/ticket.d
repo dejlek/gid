@@ -27,6 +27,11 @@ class Ticket : gobject.object.ObjectG
     return getGType();
   }
 
+  override Ticket self()
+  {
+    return this;
+  }
+
   /** */
   this(glib.bytes.Bytes data)
   {

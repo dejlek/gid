@@ -38,6 +38,11 @@ class DropControllerMotion : gtk.event_controller.EventController
     return getGType();
   }
 
+  override DropControllerMotion self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle pointer motion
     events during drag and drop.

@@ -69,6 +69,11 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
     return getGType();
   }
 
+  override AppChooserButton self()
+  {
+    return this;
+  }
+
   mixin AppChooserT!();
 
   /**

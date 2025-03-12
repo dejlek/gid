@@ -90,6 +90,11 @@ class ViewStack : gtk.widget.Widget
     return getGType();
   }
 
+  override ViewStack self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.view_stack.ViewStack].
     Returns:     the newly created [adw.view_stack.ViewStack]

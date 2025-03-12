@@ -27,4 +27,9 @@ class HeaderBarAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override HeaderBarAccessible self()
+  {
+    return this;
+  }
 }

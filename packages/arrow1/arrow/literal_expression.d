@@ -27,6 +27,11 @@ class LiteralExpression : arrow.expression.Expression
     return getGType();
   }
 
+  override LiteralExpression self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.datum.Datum datum)
   {

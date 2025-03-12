@@ -27,6 +27,11 @@ class UIntArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override UIntArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

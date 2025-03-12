@@ -26,6 +26,11 @@ class CallOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override CallOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

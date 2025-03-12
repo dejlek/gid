@@ -28,6 +28,11 @@ class Time64Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override Time64Array self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.time64_data_type.Time64DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

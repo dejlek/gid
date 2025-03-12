@@ -27,6 +27,11 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  override TimestampDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.TimeUnit unit, glib.time_zone.TimeZone timeZone = null)
   {

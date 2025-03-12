@@ -61,6 +61,11 @@ class ColumnViewSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  override ColumnViewSorter self()
+  {
+    return this;
+  }
+
   /**
       Returns the number of columns by which the sorter sorts.
     

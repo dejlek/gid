@@ -38,6 +38,11 @@ class MarkupParseContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MarkupParseContext self()
+  {
+    return this;
+  }
+
   this(ref MarkupParser parser, MarkupParseFlags flags)
   {
     GMarkupParseContext* _cretval;

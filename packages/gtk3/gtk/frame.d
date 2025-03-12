@@ -75,6 +75,11 @@ class Frame : gtk.bin.Bin
     return getGType();
   }
 
+  override Frame self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkFrame, with optional label label.
     If label is null, the label is omitted.

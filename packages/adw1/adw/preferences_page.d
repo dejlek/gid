@@ -51,6 +51,11 @@ class PreferencesPage : gtk.widget.Widget
     return getGType();
   }
 
+  override PreferencesPage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.preferences_page.PreferencesPage].
     Returns:     the newly created [adw.preferences_page.PreferencesPage]

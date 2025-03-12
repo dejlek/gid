@@ -36,6 +36,11 @@ class FontSelection : gtk.box.Box
     return getGType();
   }
 
+  override FontSelection self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkFontSelection.
     Returns:     a new #GtkFontSelection

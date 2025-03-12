@@ -42,6 +42,11 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
     return getGType();
   }
 
+  override NumerableIcon self()
+  {
+    return this;
+  }
+
   /**
       Creates a new unthemed #GtkNumerableIcon.
     Params:

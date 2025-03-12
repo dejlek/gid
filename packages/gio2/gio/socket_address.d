@@ -34,6 +34,11 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
     return getGType();
   }
 
+  override SocketAddress self()
+  {
+    return this;
+  }
+
   mixin SocketConnectableT!();
 
   /**

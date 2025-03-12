@@ -31,4 +31,9 @@ class AuthBasic : soup.auth.Auth
   {
     return getGType();
   }
+
+  override AuthBasic self()
+  {
+    return this;
+  }
 }

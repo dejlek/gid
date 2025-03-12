@@ -50,6 +50,11 @@ class Video : gtk.widget.Widget
     return getGType();
   }
 
+  override Video self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty [gtk.video.Video].
     Returns:     a new [gtk.video.Video]

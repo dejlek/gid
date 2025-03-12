@@ -126,6 +126,11 @@ class TreeView : gtk.container.Container, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override TreeView self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

@@ -27,4 +27,9 @@ class GLMemoryEGLAllocator : gstgl.glmemory_allocator.GLMemoryAllocator
   {
     return getGType();
   }
+
+  override GLMemoryEGLAllocator self()
+  {
+    return this;
+  }
 }

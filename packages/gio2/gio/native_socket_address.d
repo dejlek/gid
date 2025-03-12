@@ -33,6 +33,11 @@ class NativeSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  override NativeSocketAddress self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GNativeSocketAddress for native and len.
     Params:

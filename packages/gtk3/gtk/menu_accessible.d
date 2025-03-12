@@ -29,4 +29,9 @@ class MenuAccessible : gtk.menu_shell_accessible.MenuShellAccessible
   {
     return getGType();
   }
+
+  override MenuAccessible self()
+  {
+    return this;
+  }
 }

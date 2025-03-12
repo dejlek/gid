@@ -73,6 +73,11 @@ class TextView : gtk.container.Container, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override TextView self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

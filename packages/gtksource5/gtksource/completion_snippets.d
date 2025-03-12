@@ -34,6 +34,11 @@ class CompletionSnippets : gobject.object.ObjectG, gtksource.completion_provider
     return getGType();
   }
 
+  override CompletionSnippets self()
+  {
+    return this;
+  }
+
   mixin CompletionProviderT!();
 
   /** */

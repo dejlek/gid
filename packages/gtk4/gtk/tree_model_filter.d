@@ -106,6 +106,11 @@ class TreeModelFilter : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSou
     return getGType();
   }
 
+  override TreeModelFilter self()
+  {
+    return this;
+  }
+
   mixin TreeDragSourceT!();
   mixin TreeModelT!();
 

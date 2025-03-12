@@ -27,4 +27,9 @@ class ContainerAccessible : gtk.widget_accessible.WidgetAccessible
   {
     return getGType();
   }
+
+  override ContainerAccessible self()
+  {
+    return this;
+  }
 }

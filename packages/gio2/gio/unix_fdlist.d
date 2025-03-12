@@ -42,6 +42,11 @@ class UnixFDList : gobject.object.ObjectG
     return getGType();
   }
 
+  override UnixFDList self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GUnixFDList containing no file descriptors.
     Returns:     a new #GUnixFDList

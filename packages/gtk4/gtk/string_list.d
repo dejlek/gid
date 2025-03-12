@@ -58,6 +58,11 @@ class StringList : gobject.object.ObjectG, gio.list_model.ListModel, gtk.buildab
     return getGType();
   }
 
+  override StringList self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin BuildableT!();
 

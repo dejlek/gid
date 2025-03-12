@@ -41,6 +41,11 @@ class Stream : gst.object.ObjectGst
     return getGType();
   }
 
+  override Stream self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstStream for the given stream_id, caps, type
     and flags

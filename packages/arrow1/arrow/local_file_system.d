@@ -27,6 +27,11 @@ class LocalFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  override LocalFileSystem self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.local_file_system_options.LocalFileSystemOptions options = null)
   {

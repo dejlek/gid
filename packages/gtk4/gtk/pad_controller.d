@@ -77,6 +77,11 @@ class PadController : gtk.event_controller.EventController
     return getGType();
   }
 
+  override PadController self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.pad_controller.PadController] that will associate events from pad to
     actions.

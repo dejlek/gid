@@ -59,6 +59,11 @@ class DateTime : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DateTime self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GDateTime corresponding to the given date and time in
     the time zone tz.

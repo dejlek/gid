@@ -46,6 +46,11 @@ class Bin : gtk.widget.Widget
     return getGType();
   }
 
+  override Bin self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.bin.Bin].
     Returns:     the new created [adw.bin.Bin]

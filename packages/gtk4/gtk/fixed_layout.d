@@ -60,6 +60,11 @@ class FixedLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override FixedLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.fixed_layout.FixedLayout].
     Returns:     the newly created [gtk.fixed_layout.FixedLayout]

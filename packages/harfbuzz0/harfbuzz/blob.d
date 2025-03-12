@@ -34,4 +34,9 @@ class Blob : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Blob self()
+  {
+    return this;
+  }
 }

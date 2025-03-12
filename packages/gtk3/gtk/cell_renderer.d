@@ -70,6 +70,11 @@ class CellRenderer : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override CellRenderer self()
+  {
+    return this;
+  }
+
   /**
       Passes an activate event to the cell renderer for possible processing.
     Some cell renderers may use events; for example, #GtkCellRendererToggle

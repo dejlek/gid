@@ -49,6 +49,11 @@ class SocketClient : gobject.object.ObjectG
     return getGType();
   }
 
+  override SocketClient self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSocketClient with the default options.
     Returns:     a #GSocketClient.

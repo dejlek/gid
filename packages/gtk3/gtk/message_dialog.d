@@ -85,6 +85,11 @@ class MessageDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override MessageDialog self()
+  {
+    return this;
+  }
+
   /**
       Gets the dialog’s image.
     Returns:     the dialog’s image

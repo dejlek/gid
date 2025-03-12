@@ -45,6 +45,11 @@ class ContentProvider : gobject.object.ObjectG
     return getGType();
   }
 
+  override ContentProvider self()
+  {
+    return this;
+  }
+
   /**
       Create a content provider that provides the given bytes as data for
     the given mime_type.

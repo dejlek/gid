@@ -28,6 +28,11 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override NamedAction self()
+  {
+    return this;
+  }
+
   /**
       Creates an action that when activated, activates
     the named action on the widget.

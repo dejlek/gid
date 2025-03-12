@@ -28,4 +28,9 @@ class ThreadedResolver : gio.resolver.Resolver
   {
     return getGType();
   }
+
+  override ThreadedResolver self()
+  {
+    return this;
+  }
 }

@@ -33,6 +33,11 @@ class IMMulticontext : gtk.imcontext.IMContext
     return getGType();
   }
 
+  override IMMulticontext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.immulticontext.IMMulticontext].
     Returns:     a new [gtk.immulticontext.IMMulticontext].

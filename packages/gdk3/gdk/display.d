@@ -57,6 +57,11 @@ class Display : gobject.object.ObjectG
     return getGType();
   }
 
+  override Display self()
+  {
+    return this;
+  }
+
   /**
       Gets the default #GdkDisplay. This is a convenience
     function for:
@@ -267,11 +272,11 @@ class Display : gobject.object.ObjectG
     Returns:     the #GdkMonitor, or null if
          monitor_num is not a valid monitor number
   */
-  gdk.monitor.Monitor getMonitor(int monitorNum)
+  gdk.monitor.MonitorG getMonitor(int monitorNum)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor(cast(GdkDisplay*)cPtr, monitorNum);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.Monitor)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -283,11 +288,11 @@ class Display : gobject.object.ObjectG
       y =       the y coordinate of the point
     Returns:     the monitor containing the point
   */
-  gdk.monitor.Monitor getMonitorAtPoint(int x, int y)
+  gdk.monitor.MonitorG getMonitorAtPoint(int x, int y)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_point(cast(GdkDisplay*)cPtr, x, y);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.Monitor)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -299,11 +304,11 @@ class Display : gobject.object.ObjectG
       window =       a #GdkWindow
     Returns:     the monitor with the largest overlap with window
   */
-  gdk.monitor.Monitor getMonitorAtWindow(gdk.window.Window window)
+  gdk.monitor.MonitorG getMonitorAtWindow(gdk.window.Window window)
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_monitor_at_window(cast(GdkDisplay*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.Monitor)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -376,11 +381,11 @@ class Display : gobject.object.ObjectG
     Returns:     the primary monitor, or null if no primary
           monitor is configured by the user
   */
-  gdk.monitor.Monitor getPrimaryMonitor()
+  gdk.monitor.MonitorG getPrimaryMonitor()
   {
     GdkMonitor* _cretval;
     _cretval = gdk_display_get_primary_monitor(cast(GdkDisplay*)cPtr);
-    auto _retval = ObjectG.getDObject!(gdk.monitor.Monitor)(cast(GdkMonitor*)_cretval, No.Take);
+    auto _retval = ObjectG.getDObject!(gdk.monitor.MonitorG)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -785,10 +790,10 @@ class Display : gobject.object.ObjectG
       * $(B display) the instance the signal is connected to
     )
   */
-  alias MonitorAddedCallbackDlg = void delegate(gdk.monitor.Monitor monitor, gdk.display.Display display);
+  alias MonitorAddedCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.display.Display display);
 
   /** ditto */
-  alias MonitorAddedCallbackFunc = void function(gdk.monitor.Monitor monitor, gdk.display.Display display);
+  alias MonitorAddedCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.display.Display display);
 
   /**
     Connect to MonitorAdded signal.
@@ -805,7 +810,7 @@ class Display : gobject.object.ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!(gdk.display.Display)(_paramVals);
-      auto monitor = getVal!(gdk.monitor.Monitor)(&_paramVals[1]);
+      auto monitor = getVal!(gdk.monitor.MonitorG)(&_paramVals[1]);
       _dClosure.dlg(monitor, display);
     }
 
@@ -823,10 +828,10 @@ class Display : gobject.object.ObjectG
       * $(B display) the instance the signal is connected to
     )
   */
-  alias MonitorRemovedCallbackDlg = void delegate(gdk.monitor.Monitor monitor, gdk.display.Display display);
+  alias MonitorRemovedCallbackDlg = void delegate(gdk.monitor.MonitorG monitor, gdk.display.Display display);
 
   /** ditto */
-  alias MonitorRemovedCallbackFunc = void function(gdk.monitor.Monitor monitor, gdk.display.Display display);
+  alias MonitorRemovedCallbackFunc = void function(gdk.monitor.MonitorG monitor, gdk.display.Display display);
 
   /**
     Connect to MonitorRemoved signal.
@@ -843,7 +848,7 @@ class Display : gobject.object.ObjectG
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       auto display = getVal!(gdk.display.Display)(_paramVals);
-      auto monitor = getVal!(gdk.monitor.Monitor)(&_paramVals[1]);
+      auto monitor = getVal!(gdk.monitor.MonitorG)(&_paramVals[1]);
       _dClosure.dlg(monitor, display);
     }
 

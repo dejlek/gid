@@ -80,6 +80,11 @@ class Segment : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Segment self()
+  {
+    return this;
+  }
+
   @property gst.types.SegmentFlags flags()
   {
     return cast(gst.types.SegmentFlags)(cast(GstSegment*)cPtr).flags;

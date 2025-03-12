@@ -27,4 +27,9 @@ class GLRenderbufferAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAlloca
   {
     return getGType();
   }
+
+  override GLRenderbufferAllocator self()
+  {
+    return this;
+  }
 }

@@ -26,6 +26,11 @@ class FixedWidthDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override FixedWidthDataType self()
+  {
+    return this;
+  }
+
   /** */
   int getBitWidth()
   {

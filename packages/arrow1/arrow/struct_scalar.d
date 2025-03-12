@@ -27,6 +27,11 @@ class StructScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override StructScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.struct_data_type.StructDataType dataType, arrow.scalar.Scalar[] value)
   {

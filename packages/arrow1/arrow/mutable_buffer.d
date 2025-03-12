@@ -29,6 +29,11 @@ class MutableBuffer : arrow.buffer.Buffer
     return getGType();
   }
 
+  override MutableBuffer self()
+  {
+    return this;
+  }
+
   /** */
   this(ubyte[] data)
   {

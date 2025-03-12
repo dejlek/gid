@@ -39,6 +39,11 @@ class GlyphInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GlyphInfo self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Codepoint codepoint()
   {
     return (cast(hb_glyph_info_t*)cPtr).codepoint;

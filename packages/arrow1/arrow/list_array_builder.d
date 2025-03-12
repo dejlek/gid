@@ -29,6 +29,11 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override ListArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.list_data_type.ListDataType dataType)
   {

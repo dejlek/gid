@@ -48,6 +48,11 @@ class Discoverer : gobject.object.ObjectG
     return getGType();
   }
 
+  override Discoverer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstDiscoverer with the provided timeout.
     Params:

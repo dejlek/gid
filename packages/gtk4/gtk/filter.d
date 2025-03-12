@@ -46,6 +46,11 @@ class Filter : gobject.object.ObjectG
     return getGType();
   }
 
+  override Filter self()
+  {
+    return this;
+  }
+
   /**
       Notifies all users of the filter that it has changed.
     

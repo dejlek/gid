@@ -43,6 +43,11 @@ class PathMeasure : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PathMeasure self()
+  {
+    return this;
+  }
+
   /**
       Creates a measure object for the given path with the
     default tolerance.

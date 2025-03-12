@@ -359,6 +359,11 @@ class CellArea : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Build
     return getGType();
   }
 
+  override CellArea self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
   mixin CellLayoutT!();
 

@@ -38,6 +38,11 @@ class SliceListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
     return getGType();
   }
 
+  override SliceListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 

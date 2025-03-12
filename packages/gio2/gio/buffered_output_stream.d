@@ -44,6 +44,11 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
     return getGType();
   }
 
+  override BufferedOutputStream self()
+  {
+    return this;
+  }
+
   mixin SeekableT!();
 
   /**

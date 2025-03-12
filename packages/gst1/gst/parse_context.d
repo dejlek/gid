@@ -33,6 +33,11 @@ class ParseContext : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ParseContext self()
+  {
+    return this;
+  }
+
   /**
       Allocates a parse context for use with [gst.global.parseLaunchFull] or
     [gst.global.parseLaunchvFull].

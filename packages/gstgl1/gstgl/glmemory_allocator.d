@@ -30,6 +30,11 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
     return getGType();
   }
 
+  override GLMemoryAllocator self()
+  {
+    return this;
+  }
+
   /** */
   static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context)
   {

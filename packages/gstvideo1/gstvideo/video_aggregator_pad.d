@@ -28,6 +28,11 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
     return getGType();
   }
 
+  override VideoAggregatorPad self()
+  {
+    return this;
+  }
+
   /**
       Returns the currently queued buffer that is going to be used
     for the current output frame.

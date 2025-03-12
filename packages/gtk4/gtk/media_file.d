@@ -40,6 +40,11 @@ class MediaFile : gtk.media_stream.MediaStream
     return getGType();
   }
 
+  override MediaFile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty media file.
     Returns:     a new [gtk.media_file.MediaFile]

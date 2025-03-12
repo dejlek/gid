@@ -59,4 +59,9 @@ class TagDemux : gst.element.Element
   {
     return getGType();
   }
+
+  override TagDemux self()
+  {
+    return this;
+  }
 }

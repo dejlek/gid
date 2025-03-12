@@ -73,6 +73,11 @@ class ProgressBar : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override ProgressBar self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

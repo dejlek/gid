@@ -43,6 +43,11 @@ class Triangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Triangle self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_triangle_t.
     

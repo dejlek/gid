@@ -51,6 +51,11 @@ class CapsFeatures : gobject.boxed.Boxed
     return getGType();
   }
 
+  override CapsFeatures self()
+  {
+    return this;
+  }
+
   /**
       Creates a new, ANY #GstCapsFeatures. This will be equal
     to any other #GstCapsFeatures but caps with these are

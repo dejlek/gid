@@ -35,6 +35,11 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoOverlayRectangle self()
+  {
+    return this;
+  }
+
   /**
       Creates a new video overlay rectangle with ARGB or AYUV pixel data.
     The layout in case of ARGB of the components in memory is B-G-R-A

@@ -96,6 +96,11 @@ class ComboBoxText : gtk.combo_box.ComboBox
     return getGType();
   }
 
+  override ComboBoxText self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.combo_box_text.ComboBoxText].
     Returns:     A new [gtk.combo_box_text.ComboBoxText]

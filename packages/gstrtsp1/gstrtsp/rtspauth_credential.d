@@ -38,6 +38,11 @@ class RTSPAuthCredential : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RTSPAuthCredential self()
+  {
+    return this;
+  }
+
   @property gstrtsp.types.RTSPAuthMethod scheme()
   {
     return cast(gstrtsp.types.RTSPAuthMethod)(cast(GstRTSPAuthCredential*)cPtr).scheme;

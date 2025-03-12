@@ -118,6 +118,11 @@ class Window : gtk.window.Window
     return getGType();
   }
 
+  override Window self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.window.Window].
     Returns:     the newly created [adw.window.Window]

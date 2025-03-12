@@ -44,6 +44,11 @@ class ShortcutsSection : gtk.box.Box
     return getGType();
   }
 
+  override ShortcutsSection self()
+  {
+    return this;
+  }
+
   /** */
   alias ChangeCurrentPageCallbackDlg = bool delegate(int object, gtk.shortcuts_section.ShortcutsSection shortcutsSection);
 

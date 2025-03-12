@@ -45,6 +45,11 @@ class AttrList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AttrList self()
+  {
+    return this;
+  }
+
   /**
       Create a new empty attribute list with a reference
     count of one.

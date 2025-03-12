@@ -27,6 +27,11 @@ class ScalarDatum : arrow.datum.Datum
     return getGType();
   }
 
+  override ScalarDatum self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.scalar.Scalar value)
   {

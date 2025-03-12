@@ -37,6 +37,11 @@ class TlsCertificate : gobject.object.ObjectG
     return getGType();
   }
 
+  override TlsCertificate self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GTlsCertificate from the data in file.
     

@@ -29,6 +29,11 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override MnemonicAction self()
+  {
+    return this;
+  }
+
   /**
       Gets the mnemonic action.
     

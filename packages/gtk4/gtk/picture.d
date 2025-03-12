@@ -83,6 +83,11 @@ class Picture : gtk.widget.Widget
     return getGType();
   }
 
+  override Picture self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty [gtk.picture.Picture] widget.
     Returns:     a newly created [gtk.picture.Picture] widget.

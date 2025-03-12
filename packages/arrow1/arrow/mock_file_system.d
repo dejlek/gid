@@ -25,4 +25,9 @@ class MockFileSystem : arrow.file_system.FileSystem
   {
     return getGType();
   }
+
+  override MockFileSystem self()
+  {
+    return this;
+  }
 }

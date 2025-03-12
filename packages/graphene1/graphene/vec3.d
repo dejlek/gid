@@ -43,6 +43,11 @@ class Vec3 : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Vec3 self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_vec3_t structure.
     

@@ -84,6 +84,11 @@ class DsdInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DsdInfo self()
+  {
+    return this;
+  }
+
   @property gstaudio.types.DsdFormat format()
   {
     return cast(gstaudio.types.DsdFormat)(cast(GstDsdInfo*)cPtr).format;

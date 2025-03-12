@@ -44,6 +44,11 @@ class LayoutLine : gobject.boxed.Boxed
     return getGType();
   }
 
+  override LayoutLine self()
+  {
+    return this;
+  }
+
   @property pango.layout.Layout layout()
   {
     return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);

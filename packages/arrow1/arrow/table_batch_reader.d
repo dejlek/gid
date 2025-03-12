@@ -27,6 +27,11 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
     return getGType();
   }
 
+  override TableBatchReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.table.Table table)
   {

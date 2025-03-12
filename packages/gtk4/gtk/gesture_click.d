@@ -36,6 +36,11 @@ class GestureClick : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureClick self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created [gtk.gesture.Gesture] that recognizes
     single and multiple presses.

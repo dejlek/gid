@@ -46,6 +46,11 @@ class ThreadedSocketService : gio.socket_service.SocketService
     return getGType();
   }
 
+  override ThreadedSocketService self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GThreadedSocketService with no listeners. Listeners
     must be added with one of the #GSocketListener "add" methods.

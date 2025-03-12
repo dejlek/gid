@@ -34,6 +34,11 @@ class OverlayLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override OverlayLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.overlay_layout.OverlayLayout] instance.
     Returns:     the newly created instance

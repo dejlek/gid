@@ -36,6 +36,11 @@ class Keymap : gobject.object.ObjectG
     return getGType();
   }
 
+  override Keymap self()
+  {
+    return this;
+  }
+
   /**
       Returns the #GdkKeymap attached to the default display.
     Returns:     the #GdkKeymap attached to the default display.

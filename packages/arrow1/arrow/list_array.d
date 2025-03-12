@@ -29,6 +29,11 @@ class ListArray : arrow.array.Array
     return getGType();
   }
 
+  override ListArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType dataType, long length, arrow.buffer.Buffer valueOffsets, arrow.array.Array values, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

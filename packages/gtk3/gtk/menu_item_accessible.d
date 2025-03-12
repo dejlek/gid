@@ -32,6 +32,11 @@ class MenuItemAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return getGType();
   }
 
+  override MenuItemAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin SelectionT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;

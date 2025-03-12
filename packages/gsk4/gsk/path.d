@@ -56,6 +56,11 @@ class Path : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Path self()
+  {
+    return this;
+  }
+
   /**
       Calls func for every operation of the path.
     

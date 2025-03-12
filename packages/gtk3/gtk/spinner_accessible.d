@@ -30,5 +30,10 @@ class SpinnerAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Imag
     return getGType();
   }
 
+  override SpinnerAccessible self()
+  {
+    return this;
+  }
+
   mixin ImageT!();
 }

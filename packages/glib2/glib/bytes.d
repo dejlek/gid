@@ -56,6 +56,11 @@ class Bytes : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Bytes self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GBytes from data.
     

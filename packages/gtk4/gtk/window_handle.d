@@ -48,6 +48,11 @@ class WindowHandle : gtk.widget.Widget
     return getGType();
   }
 
+  override WindowHandle self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.window_handle.WindowHandle].
     Returns:     a new [gtk.window_handle.WindowHandle].

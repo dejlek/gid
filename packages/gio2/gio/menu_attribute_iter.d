@@ -30,6 +30,11 @@ class MenuAttributeIter : gobject.object.ObjectG
     return getGType();
   }
 
+  override MenuAttributeIter self()
+  {
+    return this;
+  }
+
   /**
       Gets the name of the attribute at the current iterator position, as
     a string.

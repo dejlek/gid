@@ -36,6 +36,11 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ContentFormatsBuilder self()
+  {
+    return this;
+  }
+
   /**
       Create a new [gdk.content_formats_builder.ContentFormatsBuilder] object.
     

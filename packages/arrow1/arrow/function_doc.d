@@ -26,6 +26,11 @@ class FunctionDoc : gobject.object.ObjectG
     return getGType();
   }
 
+  override FunctionDoc self()
+  {
+    return this;
+  }
+
   /** */
   string[] getArgNames()
   {

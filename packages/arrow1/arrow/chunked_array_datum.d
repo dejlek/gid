@@ -27,6 +27,11 @@ class ChunkedArrayDatum : arrow.datum.Datum
     return getGType();
   }
 
+  override ChunkedArrayDatum self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.chunked_array.ChunkedArray value)
   {

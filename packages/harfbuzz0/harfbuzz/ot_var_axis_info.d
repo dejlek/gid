@@ -43,6 +43,11 @@ class OtVarAxisInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override OtVarAxisInfo self()
+  {
+    return this;
+  }
+
   @property uint axisIndex()
   {
     return (cast(hb_ot_var_axis_info_t*)cPtr).axisIndex;

@@ -29,6 +29,11 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
     return getGType();
   }
 
+  override PixbufSimpleAnim self()
+  {
+    return this;
+  }
+
   /**
       Creates a new, empty animation.
     Params:

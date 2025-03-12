@@ -41,6 +41,11 @@ class GLMemoryPBO : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLMemoryPBO self()
+  {
+    return this;
+  }
+
   /**
       Copies gl_mem into the texture specified by tex_id.  The format of tex_id
     is specified by tex_format, width and height.

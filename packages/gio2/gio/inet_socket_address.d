@@ -36,6 +36,11 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  override InetSocketAddress self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GInetSocketAddress for address and port.
     Params:

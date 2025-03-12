@@ -40,6 +40,11 @@ class SegmentProperties : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SegmentProperties self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Direction direction()
   {
     return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)cPtr).direction;

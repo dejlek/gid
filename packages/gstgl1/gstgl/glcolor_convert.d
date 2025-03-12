@@ -41,6 +41,11 @@ class GLColorConvert : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLColorConvert self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context)
   {

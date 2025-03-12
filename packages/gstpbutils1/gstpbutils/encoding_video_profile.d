@@ -29,6 +29,11 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
     return getGType();
   }
 
+  override EncodingVideoProfile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstEncodingVideoProfile
     

@@ -88,6 +88,11 @@ class Regex : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Regex self()
+  {
+    return this;
+  }
+
   /**
       Compiles the regular expression to an internal form, and does
     the initial setup of the #GRegex structure.

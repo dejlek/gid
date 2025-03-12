@@ -62,6 +62,11 @@ class FrameClock : gobject.object.ObjectG
     return getGType();
   }
 
+  override FrameClock self()
+  {
+    return this;
+  }
+
   /**
       Starts updates for an animation.
     

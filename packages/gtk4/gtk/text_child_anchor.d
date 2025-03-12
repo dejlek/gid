@@ -32,6 +32,11 @@ class TextChildAnchor : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextChildAnchor self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.text_child_anchor.TextChildAnchor].
     

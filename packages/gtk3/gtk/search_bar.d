@@ -56,6 +56,11 @@ class SearchBar : gtk.bin.Bin
     return getGType();
   }
 
+  override SearchBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GtkSearchBar. You will need to tell it about
     which widget is going to be your text entry using

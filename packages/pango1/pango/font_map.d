@@ -40,6 +40,11 @@ class FontMap : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  override FontMap self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
 
   /**

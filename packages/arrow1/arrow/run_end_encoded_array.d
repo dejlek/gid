@@ -29,6 +29,11 @@ class RunEndEncodedArray : arrow.array.Array
     return getGType();
   }
 
+  override RunEndEncodedArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType dataType, long logicalLength, arrow.array.Array runEnds, arrow.array.Array values, long logicalOffset)
   {

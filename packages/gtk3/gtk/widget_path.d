@@ -82,6 +82,11 @@ class WidgetPath : gobject.boxed.Boxed
     return getGType();
   }
 
+  override WidgetPath self()
+  {
+    return this;
+  }
+
   /**
       Returns an empty widget path.
     Returns:     A newly created, empty, #GtkWidgetPath

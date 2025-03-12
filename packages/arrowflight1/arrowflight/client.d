@@ -37,6 +37,11 @@ class Client : gobject.object.ObjectG
     return getGType();
   }
 
+  override Client self()
+  {
+    return this;
+  }
+
   /** */
   this(arrowflight.location.Location location, arrowflight.client_options.ClientOptions options = null)
   {

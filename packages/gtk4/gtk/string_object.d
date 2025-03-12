@@ -32,6 +32,11 @@ class StringObject : gobject.object.ObjectG
     return getGType();
   }
 
+  override StringObject self()
+  {
+    return this;
+  }
+
   /**
       Wraps a string in an object for use with [gio.list_model.ListModel].
     Params:

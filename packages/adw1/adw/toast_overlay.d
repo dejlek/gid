@@ -74,6 +74,11 @@ class ToastOverlay : gtk.widget.Widget
     return getGType();
   }
 
+  override ToastOverlay self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.toast_overlay.ToastOverlay].
     Returns:     the new created [adw.toast_overlay.ToastOverlay]

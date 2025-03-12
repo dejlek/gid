@@ -57,6 +57,11 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
     return getGType();
   }
 
+  override ScaleButton self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin OrientableT!();
 

@@ -37,4 +37,9 @@ class UserDataKey : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override UserDataKey self()
+  {
+    return this;
+  }
 }

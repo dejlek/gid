@@ -38,6 +38,11 @@ class LayoutChild : gobject.object.ObjectG
     return getGType();
   }
 
+  override LayoutChild self()
+  {
+    return this;
+  }
+
   /**
       Retrieves the [gtk.widget.Widget] associated to the given layout_child.
     Returns:     a [gtk.widget.Widget]

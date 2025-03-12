@@ -44,6 +44,11 @@ class EGLImage : gobject.boxed.Boxed
     return getGType();
   }
 
+  override EGLImage self()
+  {
+    return this;
+  }
+
   /** */
   void* getImage()
   {

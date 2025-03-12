@@ -31,6 +31,11 @@ class Cursor : gobject.object.ObjectG
     return getGType();
   }
 
+  override Cursor self()
+  {
+    return this;
+  }
+
   /**
       Creates a new cursor from the set of builtin cursors for the default display.
     See [gdk.cursor.Cursor.newForDisplay].

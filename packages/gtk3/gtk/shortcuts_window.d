@@ -72,6 +72,11 @@ class ShortcutsWindow : gtk.window.Window
     return getGType();
   }
 
+  override ShortcutsWindow self()
+  {
+    return this;
+  }
+
   /**
       The ::close signal is a
     [keybinding signal][GtkBindingSignal]

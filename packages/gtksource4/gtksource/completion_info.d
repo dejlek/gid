@@ -32,6 +32,11 @@ class CompletionInfo : gtk.window.Window
     return getGType();
   }
 
+  override CompletionInfo self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

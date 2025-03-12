@@ -39,6 +39,11 @@ class Range : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Range self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #AtkRange.
     Params:

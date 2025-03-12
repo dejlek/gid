@@ -48,6 +48,11 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
     return getGType();
   }
 
+  override UnixCredentialsMessage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GUnixCredentialsMessage with credentials matching the current processes.
     Returns:     a new #GUnixCredentialsMessage

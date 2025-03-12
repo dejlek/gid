@@ -36,6 +36,11 @@ class StringSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  override StringSorter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new string sorter that compares items using the given
     expression.

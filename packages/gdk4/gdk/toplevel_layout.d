@@ -43,6 +43,11 @@ class ToplevelLayout : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ToplevelLayout self()
+  {
+    return this;
+  }
+
   /**
       Create a toplevel layout description.
     

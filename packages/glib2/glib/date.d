@@ -72,6 +72,11 @@ class Date : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Date self()
+  {
+    return this;
+  }
+
   @property uint julianDays()
   {
     return (cast(GDate*)cPtr).julianDays;

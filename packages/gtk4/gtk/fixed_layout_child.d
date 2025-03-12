@@ -29,6 +29,11 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  override FixedLayoutChild self()
+  {
+    return this;
+  }
+
   /**
       Retrieves the transformation of the child.
     Returns:     a [gsk.transform.Transform]

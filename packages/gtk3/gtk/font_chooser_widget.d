@@ -52,6 +52,11 @@ class FontChooserWidget : gtk.box.Box, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  override FontChooserWidget self()
+  {
+    return this;
+  }
+
   mixin FontChooserT!();
 
   /**

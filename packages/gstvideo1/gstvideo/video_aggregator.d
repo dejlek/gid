@@ -38,6 +38,11 @@ class VideoAggregator : gstbase.aggregator.Aggregator
     return getGType();
   }
 
+  override VideoAggregator self()
+  {
+    return this;
+  }
+
   /**
       The returned #GstTaskPool is used internally for performing parallel
     video format conversions/scaling/etc during the

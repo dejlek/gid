@@ -92,6 +92,11 @@ class StyleContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a standalone #GtkStyleContext, this style context
     won’t be attached to any widget, so you may want

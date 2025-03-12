@@ -33,6 +33,11 @@ class MIKEYPayload : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MIKEYPayload self()
+  {
+    return this;
+  }
+
   @property gstsdp.types.MIKEYPayloadType type()
   {
     return cast(gstsdp.types.MIKEYPayloadType)(cast(GstMIKEYPayload*)cPtr).type;

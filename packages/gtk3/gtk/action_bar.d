@@ -45,6 +45,11 @@ class ActionBar : gtk.bin.Bin
     return getGType();
   }
 
+  override ActionBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkActionBar widget.
     Returns:     a new #GtkActionBar

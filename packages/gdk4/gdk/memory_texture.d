@@ -35,6 +35,11 @@ class MemoryTexture : gdk.texture.Texture
     return getGType();
   }
 
+  override MemoryTexture self()
+  {
+    return this;
+  }
+
   /**
       Creates a new texture for a blob of image data.
     

@@ -33,6 +33,11 @@ class ArrowFileWriter : gobject.object.ObjectG
     return getGType();
   }
 
+  override ArrowFileWriter self()
+  {
+    return this;
+  }
+
   /** */
   static parquet.arrow_file_writer.ArrowFileWriter newArrow(arrow.schema.Schema schema, arrow.output_stream.OutputStream sink, parquet.writer_properties.WriterProperties writerProperties = null)
   {

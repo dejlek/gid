@@ -43,6 +43,11 @@ class Drag : gobject.object.ObjectG
     return getGType();
   }
 
+  override Drag self()
+  {
+    return this;
+  }
+
   /**
       Starts a drag and creates a new drag context for it.
     

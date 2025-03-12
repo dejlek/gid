@@ -77,6 +77,11 @@ class GridView : gtk.list_base.ListBase
     return getGType();
   }
 
+  override GridView self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.grid_view.GridView] that uses the given factory for
     mapping items to widgets.

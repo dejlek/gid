@@ -55,6 +55,11 @@ class ColorChooserWidget : gtk.box.Box, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  override ColorChooserWidget self()
+  {
+    return this;
+  }
+
   mixin ColorChooserT!();
 
   /**

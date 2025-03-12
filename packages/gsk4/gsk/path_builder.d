@@ -78,6 +78,11 @@ class PathBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PathBuilder self()
+  {
+    return this;
+  }
+
   /**
       Create a new [gsk.path_builder.PathBuilder] object.
     

@@ -51,6 +51,11 @@ class HSTSPolicy : gobject.boxed.Boxed
     return getGType();
   }
 
+  override HSTSPolicy self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #SoupHSTSPolicy with the given attributes.
     

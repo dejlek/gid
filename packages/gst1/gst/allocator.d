@@ -41,6 +41,11 @@ class Allocator : gst.object.ObjectGst
     return getGType();
   }
 
+  override Allocator self()
+  {
+    return this;
+  }
+
   /**
       Find a previously registered allocator with name. When name is null, the
     default allocator will be returned.

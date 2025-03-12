@@ -37,6 +37,11 @@ class MonitorG : gobject.object.ObjectG
     return getGType();
   }
 
+  override MonitorG self()
+  {
+    return this;
+  }
+
   /**
       Gets the name of the monitor's connector, if available.
     

@@ -71,6 +71,11 @@ class Bus : gst.object.ObjectGst
     return getGType();
   }
 
+  override Bus self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstBus instance.
     Returns:     a new #GstBus instance

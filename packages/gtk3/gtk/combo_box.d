@@ -96,6 +96,11 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     return getGType();
   }
 
+  override ComboBox self()
+  {
+    return this;
+  }
+
   mixin CellEditableT!();
   mixin CellLayoutT!();
 

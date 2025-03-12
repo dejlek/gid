@@ -47,6 +47,11 @@ class ScaledFont : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ScaledFont self()
+  {
+    return this;
+  }
+
   /**
       Gets the metrics for a #cairo_scaled_font_t.
     Params:

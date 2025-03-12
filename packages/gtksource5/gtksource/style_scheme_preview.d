@@ -44,6 +44,11 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override StyleSchemePreview self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

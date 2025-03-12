@@ -49,6 +49,11 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
     return getGType();
   }
 
+  override Inscription self()
+  {
+    return this;
+  }
+
   mixin AccessibleTextT!();
 
   /**

@@ -48,6 +48,11 @@ class AspectFrame : gtk.widget.Widget
     return getGType();
   }
 
+  override AspectFrame self()
+  {
+    return this;
+  }
+
   /**
       Create a new [gtk.aspect_frame.AspectFrame].
     Params:

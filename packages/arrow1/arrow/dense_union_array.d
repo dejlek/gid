@@ -32,6 +32,11 @@ class DenseUnionArray : arrow.union_array.UnionArray
     return getGType();
   }
 
+  override DenseUnionArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.int8_array.Int8Array typeIds, arrow.int32_array.Int32Array valueOffsets, arrow.array.Array[] fields)
   {

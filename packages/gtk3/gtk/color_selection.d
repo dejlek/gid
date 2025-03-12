@@ -35,6 +35,11 @@ class ColorSelection : gtk.box.Box
     return getGType();
   }
 
+  override ColorSelection self()
+  {
+    return this;
+  }
+
   /**
       Creates a new GtkColorSelection.
     Returns:     a new #GtkColorSelection

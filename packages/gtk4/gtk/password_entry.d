@@ -70,6 +70,11 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  override PasswordEntry self()
+  {
+    return this;
+  }
+
   mixin EditableT!();
 
   /**

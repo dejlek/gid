@@ -170,6 +170,11 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
     return getGType();
   }
 
+  override OverlaySplitView self()
+  {
+    return this;
+  }
+
   mixin SwipeableT!();
 
   /**

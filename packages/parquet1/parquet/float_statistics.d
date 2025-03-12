@@ -26,6 +26,11 @@ class FloatStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  override FloatStatistics self()
+  {
+    return this;
+  }
+
   /** */
   float getMax()
   {

@@ -27,6 +27,11 @@ class NtpClock : gstnet.net_client_clock.NetClientClock
     return getGType();
   }
 
+  override NtpClock self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstNtpClock that will report the time provided by
     the NTPv4 server on remote_address and remote_port.

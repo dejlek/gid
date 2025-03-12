@@ -27,6 +27,11 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
     return getGType();
   }
 
+  override ListScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.list_array.ListArray value)
   {

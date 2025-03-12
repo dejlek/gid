@@ -30,6 +30,11 @@ class CSVReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override CSVReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.input_stream.InputStream input, arrow.csvread_options.CSVReadOptions options = null)
   {

@@ -41,6 +41,11 @@ class Sphere : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Sphere self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_sphere_t.
     

@@ -31,6 +31,11 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
     return getGType();
   }
 
+  override ProxyAddress self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GProxyAddress for inetaddr with protocol that should
     tunnel through dest_hostname and dest_port.

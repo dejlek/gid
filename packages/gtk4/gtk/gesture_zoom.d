@@ -33,6 +33,11 @@ class GestureZoom : gtk.gesture.Gesture
     return getGType();
   }
 
+  override GestureZoom self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created [gtk.gesture.Gesture] that recognizes
     pinch/zoom gestures.

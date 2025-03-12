@@ -37,6 +37,11 @@ class ObjectFactory : gobject.object.ObjectG
     return getGType();
   }
 
+  override ObjectFactory self()
+  {
+    return this;
+  }
+
   /**
       Provides an #AtkObject that implements an accessibility interface
     on behalf of obj

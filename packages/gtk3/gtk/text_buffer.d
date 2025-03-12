@@ -42,6 +42,11 @@ class TextBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextBuffer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new text buffer.
     Params:

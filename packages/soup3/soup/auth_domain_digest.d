@@ -33,6 +33,11 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
     return getGType();
   }
 
+  override AuthDomainDigest self()
+  {
+    return this;
+  }
+
   /**
       Encodes the username/realm/password triplet for Digest
     authentication.

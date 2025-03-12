@@ -77,6 +77,11 @@ class AudioAggregator : gstbase.aggregator.Aggregator
     return getGType();
   }
 
+  override AudioAggregator self()
+  {
+    return this;
+  }
+
   /** */
   void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps)
   {

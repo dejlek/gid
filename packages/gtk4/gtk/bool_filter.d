@@ -30,6 +30,11 @@ class BoolFilter : gtk.filter.Filter
     return getGType();
   }
 
+  override BoolFilter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new bool filter.
     Params:

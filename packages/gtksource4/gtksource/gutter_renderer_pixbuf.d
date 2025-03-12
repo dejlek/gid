@@ -29,6 +29,11 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
     return getGType();
   }
 
+  override GutterRendererPixbuf self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkSourceGutterRendererPixbuf.
     Returns:     A #GtkSourceGutterRenderer

@@ -26,6 +26,11 @@ class Tag : gtk.text_tag.TextTag
     return getGType();
   }
 
+  override Tag self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GtkSourceTag. Configure the tag using object arguments,
     i.e. using [gobject.object.ObjectG.set].

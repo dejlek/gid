@@ -136,6 +136,11 @@ class AudioEncoder : gst.element.Element, gst.preset.Preset
     return getGType();
   }
 
+  override AudioEncoder self()
+  {
+    return this;
+  }
+
   mixin PresetT!();
 
   /**

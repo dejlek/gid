@@ -36,6 +36,11 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
     return getGType();
   }
 
+  override DataInputStream self()
+  {
+    return this;
+  }
+
   /**
       Creates a new data input stream for the base_stream.
     Params:

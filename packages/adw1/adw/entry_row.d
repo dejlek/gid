@@ -75,6 +75,11 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
     return getGType();
   }
 
+  override EntryRow self()
+  {
+    return this;
+  }
+
   mixin EditableT!();
 
   /**

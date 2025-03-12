@@ -33,6 +33,11 @@ class MessageHeaders : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MessageHeaders self()
+  {
+    return this;
+  }
+
   /**
       Creates a #SoupMessageHeaders.
     

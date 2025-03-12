@@ -26,6 +26,11 @@ class ParquetFileFormat : arrowdataset.file_format.FileFormat
     return getGType();
   }
 
+  override ParquetFileFormat self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

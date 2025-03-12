@@ -42,6 +42,11 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  override SeparatorMenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSeparatorMenuItem.
     Returns:     a new #GtkSeparatorMenuItem.

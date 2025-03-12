@@ -73,6 +73,11 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
     return getGType();
   }
 
+  override PlacesSidebar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkPlacesSidebar widget.
     

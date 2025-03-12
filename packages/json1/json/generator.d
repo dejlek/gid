@@ -35,6 +35,11 @@ class Generator : gobject.object.ObjectG
     return getGType();
   }
 
+  override Generator self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [json.generator.Generator].
     

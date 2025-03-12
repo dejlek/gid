@@ -40,6 +40,11 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureSwipe self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created [gtk.gesture.Gesture] that recognizes swipes.
     Returns:     a newly created [gtk.gesture_swipe.GestureSwipe]

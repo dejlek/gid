@@ -42,6 +42,11 @@ class TlsDatabase : gobject.object.ObjectG
     return getGType();
   }
 
+  override TlsDatabase self()
+  {
+    return this;
+  }
+
   /**
       Create a handle string for the certificate. The database will only be able
     to create a handle for certificates that originate from the database. In

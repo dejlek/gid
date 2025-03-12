@@ -45,6 +45,11 @@ class Screen : gobject.object.ObjectG
     return getGType();
   }
 
+  override Screen self()
+  {
+    return this;
+  }
+
   /**
       Gets the default screen for the default display. (See
     gdk_display_get_default ()).
@@ -353,7 +358,7 @@ class Screen : gobject.object.ObjectG
       dest =       a #GdkRectangle to be filled with
             the monitor workarea
   
-    Deprecated:     Use [gdk.monitor.Monitor.getWorkarea] instead
+    Deprecated:     Use [gdk.monitor.MonitorG.getWorkarea] instead
   */
   void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest)
   {

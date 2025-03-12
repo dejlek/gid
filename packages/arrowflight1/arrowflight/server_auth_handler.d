@@ -25,4 +25,9 @@ class ServerAuthHandler : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override ServerAuthHandler self()
+  {
+    return this;
+  }
 }

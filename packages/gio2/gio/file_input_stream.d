@@ -43,6 +43,11 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
     return getGType();
   }
 
+  override FileInputStream self()
+  {
+    return this;
+  }
+
   mixin SeekableT!();
 
   /**

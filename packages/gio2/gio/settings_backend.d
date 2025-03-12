@@ -50,6 +50,11 @@ class SettingsBackend : gobject.object.ObjectG
     return getGType();
   }
 
+  override SettingsBackend self()
+  {
+    return this;
+  }
+
   /**
       Returns the default #GSettingsBackend. It is possible to override
     the default by setting the `GSETTINGS_BACKEND` environment variable

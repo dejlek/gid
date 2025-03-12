@@ -240,6 +240,11 @@ class Container : gtk.widget.Widget
     return getGType();
   }
 
+  override Container self()
+  {
+    return this;
+  }
+
   /**
       Adds widget to container. Typically used for simple containers
     such as #GtkWindow, #GtkFrame, or #GtkButton; for more complicated

@@ -26,6 +26,11 @@ class Language : gobject.object.ObjectG
     return getGType();
   }
 
+  override Language self()
+  {
+    return this;
+  }
+
   /**
       Returns the globs associated to this language. This is just
     an utility wrapper around [gtksource.language.Language.getMetadata] to

@@ -39,6 +39,11 @@ class AudioStreamAlign : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AudioStreamAlign self()
+  {
+    return this;
+  }
+
   /**
       Allocate a new #GstAudioStreamAlign with the given configuration. All
     processing happens according to sample rate rate, until

@@ -30,6 +30,11 @@ class StructArray : arrow.array.Array
     return getGType();
   }
 
+  override StructArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType dataType, long length, arrow.array.Array[] fields, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

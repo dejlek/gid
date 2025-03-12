@@ -40,6 +40,11 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
     return getGType();
   }
 
+  override NoSelection self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
   mixin SelectionModelT!();

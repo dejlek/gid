@@ -43,6 +43,11 @@ class ColumnViewColumn : gobject.object.ObjectG
     return getGType();
   }
 
+  override ColumnViewColumn self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.column_view_column.ColumnViewColumn] that uses the given factory for
     mapping items to widgets.

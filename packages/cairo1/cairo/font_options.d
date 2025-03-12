@@ -48,6 +48,11 @@ class FontOptions : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FontOptions self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new font options object copying the option values from
      original.

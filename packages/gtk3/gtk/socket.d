@@ -86,6 +86,11 @@ class Socket : gtk.container.Container
     return getGType();
   }
 
+  override Socket self()
+  {
+    return this;
+  }
+
   /**
       Create a new empty #GtkSocket.
     Returns:     the new #GtkSocket.

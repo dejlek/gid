@@ -49,6 +49,11 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override Layout self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

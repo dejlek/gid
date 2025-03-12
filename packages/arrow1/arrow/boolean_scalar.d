@@ -26,6 +26,11 @@ class BooleanScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override BooleanScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(bool value)
   {

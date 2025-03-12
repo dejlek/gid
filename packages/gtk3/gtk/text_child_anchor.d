@@ -31,6 +31,11 @@ class TextChildAnchor : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextChildAnchor self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkTextChildAnchor. Usually you would then insert
     it into a #GtkTextBuffer with [gtk.text_buffer.TextBuffer.insertChildAnchor].

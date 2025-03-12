@@ -123,6 +123,11 @@ class SettingsSchema : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SettingsSchema self()
+  {
+    return this;
+  }
+
   /**
       Get the ID of schema.
     Returns:     the ID

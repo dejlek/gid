@@ -26,6 +26,11 @@ class NullScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override NullScalar self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

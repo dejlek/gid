@@ -30,6 +30,11 @@ class TlsPassword : gobject.object.ObjectG
     return getGType();
   }
 
+  override TlsPassword self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GTlsPassword object.
     Params:

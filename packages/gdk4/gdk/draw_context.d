@@ -39,6 +39,11 @@ class DrawContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override DrawContext self()
+  {
+    return this;
+  }
+
   /**
       Indicates that you are beginning the process of redrawing region
     on the context's surface.

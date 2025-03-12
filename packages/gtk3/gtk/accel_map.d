@@ -85,6 +85,11 @@ class AccelMap : gobject.object.ObjectG
     return getGType();
   }
 
+  override AccelMap self()
+  {
+    return this;
+  }
+
   /**
       Registers a new accelerator with the global accelerator map.
     This function should only be called once per accel_path

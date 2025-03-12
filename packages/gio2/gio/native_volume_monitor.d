@@ -25,4 +25,9 @@ class NativeVolumeMonitor : gio.volume_monitor.VolumeMonitor
   {
     return getGType();
   }
+
+  override NativeVolumeMonitor self()
+  {
+    return this;
+  }
 }

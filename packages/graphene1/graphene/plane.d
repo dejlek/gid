@@ -45,6 +45,11 @@ class Plane : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Plane self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_plane_t structure.
     

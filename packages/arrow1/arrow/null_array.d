@@ -26,6 +26,11 @@ class NullArray : arrow.array.Array
     return getGType();
   }
 
+  override NullArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length)
   {

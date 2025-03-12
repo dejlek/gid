@@ -47,6 +47,11 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
     return getGType();
   }
 
+  override ContentSerializer self()
+  {
+    return this;
+  }
+
   mixin AsyncResultT!();
 
   /**

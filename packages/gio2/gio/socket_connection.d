@@ -50,6 +50,11 @@ class SocketConnection : gio.iostream.IOStream
     return getGType();
   }
 
+  override SocketConnection self()
+  {
+    return this;
+  }
+
   /**
       Looks up the #GType to be used when creating socket connections on
     sockets with the specified family, type and protocol_id.

@@ -35,6 +35,11 @@ class FlattenListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.s
     return getGType();
   }
 
+  override FlattenListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 

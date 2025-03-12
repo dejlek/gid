@@ -27,4 +27,9 @@ class AnimationTarget : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override AnimationTarget self()
+  {
+    return this;
+  }
 }

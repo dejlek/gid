@@ -26,6 +26,11 @@ class LocalFileSystemOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override LocalFileSystemOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

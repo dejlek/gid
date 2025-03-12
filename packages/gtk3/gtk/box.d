@@ -82,6 +82,11 @@ class Box : gtk.container.Container, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Box self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

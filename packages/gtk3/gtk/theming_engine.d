@@ -42,6 +42,11 @@ class ThemingEngine : gobject.object.ObjectG
     return getGType();
   }
 
+  override ThemingEngine self()
+  {
+    return this;
+  }
+
   /**
       Loads and initializes a theming engine module from the
     standard directories.

@@ -71,6 +71,11 @@ class BookmarkFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  override BookmarkFile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty #GBookmarkFile object.
     

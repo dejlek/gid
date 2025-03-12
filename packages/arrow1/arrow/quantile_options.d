@@ -26,6 +26,11 @@ class QuantileOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override QuantileOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

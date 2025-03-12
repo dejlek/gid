@@ -38,6 +38,11 @@ class NetTimePacket : gobject.boxed.Boxed
     return getGType();
   }
 
+  override NetTimePacket self()
+  {
+    return this;
+  }
+
   @property gst.types.ClockTime localTime()
   {
     return (cast(GstNetTimePacket*)cPtr).localTime;

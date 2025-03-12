@@ -66,6 +66,11 @@ class EmojiChooser : gtk.popover.Popover
     return getGType();
   }
 
+  override EmojiChooser self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.emoji_chooser.EmojiChooser].
     Returns:     a new [gtk.emoji_chooser.EmojiChooser]

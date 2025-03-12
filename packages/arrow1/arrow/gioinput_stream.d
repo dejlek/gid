@@ -32,6 +32,11 @@ class GIOInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  override GIOInputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(gio.input_stream.InputStream gioInputStream)
   {

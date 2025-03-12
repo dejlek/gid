@@ -46,6 +46,11 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
     return getGType();
   }
 
+  override TreeViewColumn self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
   mixin CellLayoutT!();
 

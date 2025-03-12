@@ -32,6 +32,11 @@ class GIOOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  override GIOOutputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(gio.output_stream.OutputStream gioOutputStream)
   {

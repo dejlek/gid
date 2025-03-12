@@ -4804,6 +4804,9 @@ struct GdkKeymapKey
   int level;
 }
 
+/** */
+struct GdkMonitorClass;
+
 /**
     GdkMonitor objects represent the individual outputs that are
   associated with a #GdkDisplay. GdkDisplay has APIs to enumerate
@@ -4815,9 +4818,6 @@ struct GdkKeymapKey
   APIs in GdkScreen to obtain monitor-related information.
 */
 struct GdkMonitor;
-
-/** */
-struct GdkMonitorClass;
 
 /**
     Defines the x and y coordinates of a point.

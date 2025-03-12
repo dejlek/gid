@@ -32,6 +32,11 @@ class Plug : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  override Plug self()
+  {
+    return this;
+  }
+
   mixin ComponentT!();
 
   /**

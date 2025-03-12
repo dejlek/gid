@@ -31,6 +31,11 @@ class Encoding : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Encoding self()
+  {
+    return this;
+  }
+
   /**
       Used by language bindings.
     Returns:     a copy of enc.

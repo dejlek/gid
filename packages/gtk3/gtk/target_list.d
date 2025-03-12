@@ -38,6 +38,11 @@ class TargetList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TargetList self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkTargetList from an array of #GtkTargetEntry.
     Params:

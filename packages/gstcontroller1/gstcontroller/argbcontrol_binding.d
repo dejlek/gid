@@ -32,6 +32,11 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  override ARGBControlBinding self()
+  {
+    return this;
+  }
+
   /**
       Create a new control-binding that attaches the given #GstControlSource to the
     #GObject property.

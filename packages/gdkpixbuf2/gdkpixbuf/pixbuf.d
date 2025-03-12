@@ -174,6 +174,11 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
     return getGType();
   }
 
+  override Pixbuf self()
+  {
+    return this;
+  }
+
   mixin IconT!();
   mixin LoadableIconT!();
 

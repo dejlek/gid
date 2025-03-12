@@ -26,6 +26,11 @@ class Date64Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Date64Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(long value)
   {

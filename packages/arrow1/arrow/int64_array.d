@@ -28,6 +28,11 @@ class Int64Array : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override Int64Array self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

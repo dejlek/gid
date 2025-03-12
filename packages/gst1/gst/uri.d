@@ -35,6 +35,11 @@ class Uri : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Uri self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstUri object with the given URI parts. The path and query
     strings will be broken down into their elements. All strings should not be

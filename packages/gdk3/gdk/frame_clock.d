@@ -62,6 +62,11 @@ class FrameClock : gobject.object.ObjectG
     return getGType();
   }
 
+  override FrameClock self()
+  {
+    return this;
+  }
+
   /**
       Starts updates for an animation. Until a matching call to
     [gdk.frame_clock.FrameClock.endUpdating] is made, the frame clock will continually

@@ -38,6 +38,11 @@ class EntryBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  override EntryBuffer self()
+  {
+    return this;
+  }
+
   /**
       Create a new [gtk.entry_buffer.EntryBuffer] object.
     

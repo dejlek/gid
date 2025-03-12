@@ -41,6 +41,11 @@ class HoverContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override HoverContext self()
+  {
+    return this;
+  }
+
   /**
       Gets the current word bounds of the hover.
     

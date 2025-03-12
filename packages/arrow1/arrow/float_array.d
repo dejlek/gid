@@ -28,6 +28,11 @@ class FloatArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override FloatArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

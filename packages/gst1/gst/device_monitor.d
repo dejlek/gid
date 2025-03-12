@@ -92,6 +92,11 @@ class DeviceMonitor : gst.object.ObjectGst
     return getGType();
   }
 
+  override DeviceMonitor self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstDeviceMonitor
     Returns:     a new device monitor.

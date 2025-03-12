@@ -29,6 +29,11 @@ class SpaceDrawer : gobject.object.ObjectG
     return getGType();
   }
 
+  override SpaceDrawer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceSpaceDrawer object. Useful for storing space drawing
     settings independently of a #GtkSourceView.

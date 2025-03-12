@@ -43,6 +43,11 @@ class FilterListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
     return getGType();
   }
 
+  override FilterListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 

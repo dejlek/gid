@@ -65,6 +65,14 @@ abstract class Boxed
   }
 
   /**
+  * Convenience method to return `this` cast to a type. For use in D with statements.
+  */
+  Boxed self()
+  {
+    return this;
+  }
+
+  /**
   * Make a copy of the wrapped C boxed data.
   * Returns: Copy of the boxed type
   */

@@ -39,6 +39,11 @@ class AudioInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AudioInfo self()
+  {
+    return this;
+  }
+
   @property gstaudio.audio_format_info.AudioFormatInfo finfo()
   {
     return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)cPtr).finfo);

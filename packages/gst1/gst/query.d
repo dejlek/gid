@@ -68,6 +68,11 @@ class Query : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Query self()
+  {
+    return this;
+  }
+
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstQuery*)cPtr).miniObject);

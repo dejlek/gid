@@ -25,4 +25,9 @@ class GCSFileSystem : arrow.file_system.FileSystem
   {
     return getGType();
   }
+
+  override GCSFileSystem self()
+  {
+    return this;
+  }
 }

@@ -27,6 +27,11 @@ class SortKey : gobject.object.ObjectG
     return getGType();
   }
 
+  override SortKey self()
+  {
+    return this;
+  }
+
   /** */
   this(string target, arrow.types.SortOrder order)
   {

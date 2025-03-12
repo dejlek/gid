@@ -48,6 +48,11 @@ class AuthManager : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  override AuthManager self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 
   /**

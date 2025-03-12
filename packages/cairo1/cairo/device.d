@@ -40,6 +40,11 @@ class Device : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Device self()
+  {
+    return this;
+  }
+
   /**
       Acquires the device for the current thread. This function will block
     until no other thread has acquired the device.

@@ -27,6 +27,11 @@ class Criteria : gobject.object.ObjectG
     return getGType();
   }
 
+  override Criteria self()
+  {
+    return this;
+  }
+
   /** */
   this(glib.bytes.Bytes expression)
   {

@@ -50,6 +50,11 @@ class SignalGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  override SignalGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSignalGroup for target instances of target_type.
     Params:

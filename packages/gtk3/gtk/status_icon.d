@@ -69,6 +69,11 @@ class StatusIcon : gobject.object.ObjectG
     return getGType();
   }
 
+  override StatusIcon self()
+  {
+    return this;
+  }
+
   /**
       Creates an empty status icon object.
     Returns:     a new #GtkStatusIcon

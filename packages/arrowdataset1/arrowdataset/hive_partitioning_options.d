@@ -26,6 +26,11 @@ class HivePartitioningOptions : arrowdataset.key_value_partitioning_options.KeyV
     return getGType();
   }
 
+  override HivePartitioningOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

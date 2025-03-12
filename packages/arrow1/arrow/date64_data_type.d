@@ -26,6 +26,11 @@ class Date64DataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  override Date64DataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

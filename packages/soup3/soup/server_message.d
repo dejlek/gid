@@ -49,6 +49,11 @@ class ServerMessage : gobject.object.ObjectG
     return getGType();
   }
 
+  override ServerMessage self()
+  {
+    return this;
+  }
+
   /**
       Get the HTTP version of msg.
     Returns:     a #SoupHTTPVersion.

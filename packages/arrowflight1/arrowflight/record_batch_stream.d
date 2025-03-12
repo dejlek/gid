@@ -28,6 +28,11 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
     return getGType();
   }
 
+  override RecordBatchStream self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.record_batch_reader.RecordBatchReader reader, arrow.write_options.WriteOptions options = null)
   {

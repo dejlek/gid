@@ -65,6 +65,11 @@ class PreferencesGroup : gtk.widget.Widget
     return getGType();
   }
 
+  override PreferencesGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.preferences_group.PreferencesGroup].
     Returns:     the newly created [adw.preferences_group.PreferencesGroup]

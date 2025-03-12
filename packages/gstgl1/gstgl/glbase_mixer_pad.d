@@ -25,4 +25,9 @@ class GLBaseMixerPad : gstvideo.video_aggregator_pad.VideoAggregatorPad
   {
     return getGType();
   }
+
+  override GLBaseMixerPad self()
+  {
+    return this;
+  }
 }

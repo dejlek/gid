@@ -46,6 +46,11 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
     return getGType();
   }
 
+  override StyleSchemeChooserButton self()
+  {
+    return this;
+  }
+
   mixin StyleSchemeChooserT!();
 
   /**

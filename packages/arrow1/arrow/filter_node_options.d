@@ -27,6 +27,11 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override FilterNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.expression.Expression expression)
   {

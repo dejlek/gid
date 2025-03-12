@@ -37,6 +37,11 @@ class TimedValueControlSource : gst.control_source.ControlSource
     return getGType();
   }
 
+  override TimedValueControlSource self()
+  {
+    return this;
+  }
+
   /**
       Find last value before given timestamp in control point list.
     If all values in the control point list come after the given

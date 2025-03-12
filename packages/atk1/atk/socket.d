@@ -55,6 +55,11 @@ class Socket : atk.object.ObjectAtk, atk.component.Component
     return getGType();
   }
 
+  override Socket self()
+  {
+    return this;
+  }
+
   mixin ComponentT!();
 
   /**

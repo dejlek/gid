@@ -26,6 +26,11 @@ class DoubleStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  override DoubleStatistics self()
+  {
+    return this;
+  }
+
   /** */
   double getMax()
   {

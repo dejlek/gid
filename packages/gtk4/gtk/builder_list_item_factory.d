@@ -53,6 +53,11 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
     return getGType();
   }
 
+  override BuilderListItemFactory self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.builder_list_item_factory.BuilderListItemFactory] that instantiates widgets
     using bytes as the data to pass to [gtk.builder.Builder].

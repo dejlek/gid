@@ -34,6 +34,11 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
     return getGType();
   }
 
+  override DBusObjectProxy self()
+  {
+    return this;
+  }
+
   mixin DBusObjectT!();
 
   /**

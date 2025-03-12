@@ -29,6 +29,11 @@ class Decimal256Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Decimal256Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {

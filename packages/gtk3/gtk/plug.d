@@ -54,6 +54,11 @@ class Plug : gtk.window.Window
     return getGType();
   }
 
+  override Plug self()
+  {
+    return this;
+  }
+
   /**
       Creates a new plug widget inside the #GtkSocket identified
     by socket_id. If socket_id is 0, the plug is left “unplugged” and

@@ -50,6 +50,11 @@ class TearoffMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  override TearoffMenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkTearoffMenuItem.
     Returns:     a new #GtkTearoffMenuItem.

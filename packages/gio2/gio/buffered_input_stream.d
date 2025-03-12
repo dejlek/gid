@@ -47,6 +47,11 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
     return getGType();
   }
 
+  override BufferedInputStream self()
+  {
+    return this;
+  }
+
   mixin SeekableT!();
 
   /**

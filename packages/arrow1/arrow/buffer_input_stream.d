@@ -32,6 +32,11 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  override BufferInputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.buffer.Buffer buffer)
   {

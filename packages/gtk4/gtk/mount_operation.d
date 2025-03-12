@@ -43,6 +43,11 @@ class MountOperation : gio.mount_operation.MountOperation
     return getGType();
   }
 
+  override MountOperation self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.mount_operation.MountOperation].
     Params:

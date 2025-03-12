@@ -182,6 +182,11 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
     return getGType();
   }
 
+  override FileChooserNative self()
+  {
+    return this;
+  }
+
   mixin FileChooserT!();
 
   /**

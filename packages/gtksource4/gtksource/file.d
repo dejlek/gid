@@ -28,6 +28,11 @@ class File : gobject.object.ObjectG
     return getGType();
   }
 
+  override File self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

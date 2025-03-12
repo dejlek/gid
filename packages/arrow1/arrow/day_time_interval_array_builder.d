@@ -28,6 +28,11 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override DayTimeIntervalArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

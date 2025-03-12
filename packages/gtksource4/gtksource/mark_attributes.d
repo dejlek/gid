@@ -32,6 +32,11 @@ class MarkAttributes : gobject.object.ObjectG
     return getGType();
   }
 
+  override MarkAttributes self()
+  {
+    return this;
+  }
+
   /**
       Creates a new source mark attributes.
     Returns:     a new source mark attributes.

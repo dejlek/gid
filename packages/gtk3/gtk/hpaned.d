@@ -39,6 +39,11 @@ class HPaned : gtk.paned.Paned
     return getGType();
   }
 
+  override HPaned self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkHPaned
     Returns:     the new #GtkHPaned

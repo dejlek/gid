@@ -29,6 +29,11 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  override NeverTrigger self()
+  {
+    return this;
+  }
+
   /**
       Gets the never trigger.
     

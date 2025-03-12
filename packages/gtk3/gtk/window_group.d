@@ -45,6 +45,11 @@ class WindowGroup : gobject.object.ObjectG
     return getGType();
   }
 
+  override WindowGroup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkWindowGroup object. Grabs added with
     [gtk.widget.Widget.grabAdd] only affect windows within the same #GtkWindowGroup.

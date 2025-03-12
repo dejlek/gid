@@ -28,6 +28,11 @@ class CustomSorter : gtk.sorter.Sorter
   {
     return getGType();
   }
+
+  override CustomSorter self()
+  {
+    return this;
+  }
   import gobject.object;
 
   // Define a sort delegate that takes ObjectG objects, instead of the CompareDataFunc which is passed raw ObjectC pointers

@@ -31,4 +31,9 @@ class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
   {
     return getGType();
   }
+
+  override LockButtonAccessible self()
+  {
+    return this;
+  }
 }

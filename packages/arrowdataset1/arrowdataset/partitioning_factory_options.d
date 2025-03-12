@@ -26,6 +26,11 @@ class PartitioningFactoryOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override PartitioningFactoryOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

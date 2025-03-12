@@ -38,6 +38,11 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
     return getGType();
   }
 
+  override MemoryInputStream self()
+  {
+    return this;
+  }
+
   mixin PollableInputStreamT!();
   mixin SeekableT!();
 

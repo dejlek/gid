@@ -30,5 +30,10 @@ class WindowAccessible : gtk.container_accessible.ContainerAccessible, atk.windo
     return getGType();
   }
 
+  override WindowAccessible self()
+  {
+    return this;
+  }
+
   mixin WindowT!();
 }

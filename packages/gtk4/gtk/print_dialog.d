@@ -45,6 +45,11 @@ class PrintDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.print_dialog.PrintDialog] object.
     Returns:     the new [gtk.print_dialog.PrintDialog]

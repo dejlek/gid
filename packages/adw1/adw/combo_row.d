@@ -86,6 +86,11 @@ class ComboRow : adw.action_row.ActionRow
     return getGType();
   }
 
+  override ComboRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.combo_row.ComboRow].
     Returns:     the newly created [adw.combo_row.ComboRow]

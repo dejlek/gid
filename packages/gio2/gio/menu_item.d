@@ -33,6 +33,11 @@ class MenuItem : gobject.object.ObjectG
     return getGType();
   }
 
+  override MenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GMenuItem.
     

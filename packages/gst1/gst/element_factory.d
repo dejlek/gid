@@ -57,6 +57,11 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  override ElementFactory self()
+  {
+    return this;
+  }
+
   /**
       Search for an element factory of the given name. Refs the returned
     element factory; caller is responsible for unreffing.

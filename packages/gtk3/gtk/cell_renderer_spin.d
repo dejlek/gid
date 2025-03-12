@@ -40,6 +40,11 @@ class CellRendererSpin : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  override CellRendererSpin self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkCellRendererSpin.
     Returns:     a new #GtkCellRendererSpin

@@ -26,6 +26,11 @@ class UInt64Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override UInt64Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(ulong value)
   {

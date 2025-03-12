@@ -27,6 +27,11 @@ class RankOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override RankOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -33,6 +33,11 @@ class CookieJarText : soup.cookie_jar.CookieJar
     return getGType();
   }
 
+  override CookieJarText self()
+  {
+    return this;
+  }
+
   /**
       Creates a #SoupCookieJarText.
     

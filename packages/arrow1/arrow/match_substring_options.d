@@ -26,6 +26,11 @@ class MatchSubstringOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override MatchSubstringOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

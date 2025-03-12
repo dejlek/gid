@@ -32,4 +32,9 @@ class Face : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Face self()
+  {
+    return this;
+  }
 }

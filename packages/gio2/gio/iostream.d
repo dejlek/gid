@@ -80,6 +80,11 @@ class IOStream : gobject.object.ObjectG
     return getGType();
   }
 
+  override IOStream self()
+  {
+    return this;
+  }
+
   /**
       Finishes an asynchronous io stream splice operation.
     Params:

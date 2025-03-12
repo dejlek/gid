@@ -45,6 +45,11 @@ class TimedAnimation : adw.animation.Animation
     return getGType();
   }
 
+  override TimedAnimation self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.timed_animation.TimedAnimation] on widget to animate target from from
     to to.

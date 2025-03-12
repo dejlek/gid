@@ -34,6 +34,11 @@ class FontsetSimple : pango.fontset.Fontset
     return getGType();
   }
 
+  override FontsetSimple self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [pango.fontset_simple.FontsetSimple] for the given language.
     Params:

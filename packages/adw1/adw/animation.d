@@ -75,6 +75,11 @@ class Animation : gobject.object.ObjectG
     return getGType();
   }
 
+  override Animation self()
+  {
+    return this;
+  }
+
   /**
       Gets whether self should be skipped when animations are globally disabled.
     Returns:     whether to follow the global setting

@@ -26,6 +26,11 @@ class DeviceTool : gobject.object.ObjectG
     return getGType();
   }
 
+  override DeviceTool self()
+  {
+    return this;
+  }
+
   /**
       Gets the hardware ID of this tool, or 0 if it's not known. When
     non-zero, the identificator is unique for the given tool model,

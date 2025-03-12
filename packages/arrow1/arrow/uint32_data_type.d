@@ -26,6 +26,11 @@ class UInt32DataType : arrow.integer_data_type.IntegerDataType
     return getGType();
   }
 
+  override UInt32DataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

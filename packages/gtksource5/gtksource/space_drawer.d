@@ -77,6 +77,11 @@ class SpaceDrawer : gobject.object.ObjectG
     return getGType();
   }
 
+  override SpaceDrawer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceSpaceDrawer object.
     

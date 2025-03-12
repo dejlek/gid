@@ -31,6 +31,11 @@ class FlowBoxChild : gtk.bin.Bin
     return getGType();
   }
 
+  override FlowBoxChild self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkFlowBoxChild, to be used as a child
     of a #GtkFlowBox.

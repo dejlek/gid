@@ -26,6 +26,11 @@ class MemoryPool : gobject.object.ObjectG
     return getGType();
   }
 
+  override MemoryPool self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.memory_pool.MemoryPool default_()
   {

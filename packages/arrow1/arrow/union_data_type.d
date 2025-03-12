@@ -28,6 +28,11 @@ class UnionDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override UnionDataType self()
+  {
+    return this;
+  }
+
   /** */
   arrow.field.Field getField(int i)
   {

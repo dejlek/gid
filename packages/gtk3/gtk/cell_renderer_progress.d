@@ -33,6 +33,11 @@ class CellRendererProgress : gtk.cell_renderer.CellRenderer, gtk.orientable.Orie
     return getGType();
   }
 
+  override CellRendererProgress self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

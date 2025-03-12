@@ -51,6 +51,11 @@ class OffscreenWindow : gtk.window.Window
     return getGType();
   }
 
+  override OffscreenWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a toplevel container widget that is used to retrieve
     snapshots of widgets without showing them on the screen.

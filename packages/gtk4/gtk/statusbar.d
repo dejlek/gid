@@ -72,6 +72,11 @@ class Statusbar : gtk.widget.Widget
     return getGType();
   }
 
+  override Statusbar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.statusbar.Statusbar] ready for messages.
     Returns:     the new [gtk.statusbar.Statusbar]

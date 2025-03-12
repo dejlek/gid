@@ -105,6 +105,11 @@ class IconTheme : gobject.object.ObjectG
     return getGType();
   }
 
+  override IconTheme self()
+  {
+    return this;
+  }
+
   /**
       Creates a new icon theme object. Icon theme objects are used
     to lookup up an icon by name in a particular icon theme.

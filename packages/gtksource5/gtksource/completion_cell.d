@@ -52,6 +52,11 @@ class CompletionCell : gtk.widget.Widget
     return getGType();
   }
 
+  override CompletionCell self()
+  {
+    return this;
+  }
+
   /** */
   gtksource.types.CompletionColumn getColumn()
   {

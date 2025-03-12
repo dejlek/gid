@@ -30,6 +30,11 @@ class JSONReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override JSONReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.input_stream.InputStream input, arrow.jsonread_options.JSONReadOptions options = null)
   {

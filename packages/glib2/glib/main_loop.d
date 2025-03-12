@@ -35,6 +35,11 @@ class MainLoop : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MainLoop self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GMainLoop structure.
     Params:

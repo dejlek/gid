@@ -36,4 +36,9 @@ class ShortcutsShortcut : gtk.widget.Widget
   {
     return getGType();
   }
+
+  override ShortcutsShortcut self()
+  {
+    return this;
+  }
 }

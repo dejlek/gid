@@ -35,6 +35,11 @@ class TargetEntry : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TargetEntry self()
+  {
+    return this;
+  }
+
   @property string target()
   {
     return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);

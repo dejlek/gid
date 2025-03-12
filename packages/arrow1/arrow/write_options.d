@@ -26,6 +26,11 @@ class WriteOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override WriteOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

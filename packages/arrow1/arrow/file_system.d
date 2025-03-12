@@ -32,6 +32,11 @@ class FileSystem : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileSystem self()
+  {
+    return this;
+  }
+
   /**
       This is a factory function to create a specific #GArrowFileSystem
     object.

@@ -53,6 +53,11 @@ class Resolver : gobject.object.ObjectG
     return getGType();
   }
 
+  override Resolver self()
+  {
+    return this;
+  }
+
   /**
       Gets the default #GResolver. You should unref it when you are done
     with it. #GResolver may use its reference count as a hint about how

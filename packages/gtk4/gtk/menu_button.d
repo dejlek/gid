@@ -99,6 +99,11 @@ class MenuButton : gtk.widget.Widget
     return getGType();
   }
 
+  override MenuButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.menu_button.MenuButton] widget with downwards-pointing
     arrow as the only child.

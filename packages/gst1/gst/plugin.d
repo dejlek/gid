@@ -49,6 +49,11 @@ class Plugin : gst.object.ObjectGst
     return getGType();
   }
 
+  override Plugin self()
+  {
+    return this;
+  }
+
   /**
       Load the named plugin. Refs the plugin.
     Params:

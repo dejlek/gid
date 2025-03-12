@@ -87,6 +87,11 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
     return getGType();
   }
 
+  override DBusProxy self()
+  {
+    return this;
+  }
+
   mixin AsyncInitableT!();
   mixin DBusInterfaceT!();
   mixin InitableT!();

@@ -99,6 +99,11 @@ class Pad : gst.object.ObjectGst
     return getGType();
   }
 
+  override Pad self()
+  {
+    return this;
+  }
+
   /**
       Creates a new pad with the given name in the given direction.
     If name is null, a guaranteed unique name (across all pads)

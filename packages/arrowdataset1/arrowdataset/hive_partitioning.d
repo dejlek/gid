@@ -30,6 +30,11 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     return getGType();
   }
 
+  override HivePartitioning self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.array.Array[] dictionaries = null, arrowdataset.hive_partitioning_options.HivePartitioningOptions options = null)
   {

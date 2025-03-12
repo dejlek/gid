@@ -56,6 +56,11 @@ class GLDisplay : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLDisplay self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

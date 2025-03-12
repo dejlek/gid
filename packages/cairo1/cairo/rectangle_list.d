@@ -40,6 +40,11 @@ class RectangleList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RectangleList self()
+  {
+    return this;
+  }
+
   @property cairo.types.Status status()
   {
     return cast(cairo.types.Status)(cast(cairo_rectangle_list_t*)cPtr).status;

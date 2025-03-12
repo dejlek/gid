@@ -28,6 +28,11 @@ class SparseUnionScalar : arrow.union_scalar.UnionScalar
     return getGType();
   }
 
+  override SparseUnionScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType, byte typeCode, arrow.scalar.Scalar value)
   {

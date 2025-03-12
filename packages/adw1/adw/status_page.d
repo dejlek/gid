@@ -52,6 +52,11 @@ class StatusPage : gtk.widget.Widget
     return getGType();
   }
 
+  override StatusPage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.status_page.StatusPage].
     Returns:     the newly created [adw.status_page.StatusPage]

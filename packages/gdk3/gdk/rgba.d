@@ -39,6 +39,11 @@ class RGBA : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RGBA self()
+  {
+    return this;
+  }
+
   @property double red()
   {
     return (cast(GdkRGBA*)cPtr).red;

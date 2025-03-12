@@ -66,6 +66,11 @@ class Message : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Message self()
+  {
+    return this;
+  }
+
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMessage*)cPtr).miniObject);

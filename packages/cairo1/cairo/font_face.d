@@ -45,6 +45,11 @@ class FontFace : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FontFace self()
+  {
+    return this;
+  }
+
   /**
       This function returns the type of the backend used to create
     a font face. See #cairo_font_type_t for available types.

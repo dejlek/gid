@@ -58,6 +58,11 @@ class PreferencesWindow : adw.window.Window
     return getGType();
   }
 
+  override PreferencesWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.preferences_window.PreferencesWindow].
     Returns:     the newly created [adw.preferences_window.PreferencesWindow]

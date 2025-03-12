@@ -27,6 +27,11 @@ class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
     return getGType();
   }
 
+  override Decimal128DataType self()
+  {
+    return this;
+  }
+
   /** */
   this(int precision, int scale)
   {

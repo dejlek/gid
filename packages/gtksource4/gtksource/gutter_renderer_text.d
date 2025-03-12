@@ -26,6 +26,11 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
     return getGType();
   }
 
+  override GutterRendererText self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkSourceGutterRendererText.
     Returns:     A #GtkSourceGutterRenderer

@@ -44,6 +44,11 @@ class ColumnViewCell : gtk.list_item.ListItem
     return getGType();
   }
 
+  override ColumnViewCell self()
+  {
+    return this;
+  }
+
   /**
       Gets the child previously set via [gtk.column_view_cell.ColumnViewCell.setChild] or
     null if none was set.

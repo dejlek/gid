@@ -32,6 +32,11 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
     return getGType();
   }
 
+  override MultiFilter self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin BuildableT!();
 

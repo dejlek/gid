@@ -29,4 +29,9 @@ class ScaleAccessible : gtk.range_accessible.RangeAccessible
   {
     return getGType();
   }
+
+  override ScaleAccessible self()
+  {
+    return this;
+  }
 }

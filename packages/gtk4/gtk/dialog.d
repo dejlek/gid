@@ -167,6 +167,11 @@ class Dialog : gtk.window.Window
     return getGType();
   }
 
+  override Dialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new dialog box.
     

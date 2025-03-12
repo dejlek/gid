@@ -37,6 +37,11 @@ class SubprocessLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  override SubprocessLauncher self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSubprocessLauncher.
     

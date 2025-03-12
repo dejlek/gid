@@ -30,6 +30,11 @@ class EntryIconAccessible : atk.object.ObjectAtk, atk.action.Action, atk.compone
     return getGType();
   }
 
+  override EntryIconAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin ComponentT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;

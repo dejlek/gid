@@ -33,6 +33,11 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     return getGType();
   }
 
+  override FileSystemDatasetFactory self()
+  {
+    return this;
+  }
+
   /** */
   this(arrowdataset.file_format.FileFormat fileFormat)
   {

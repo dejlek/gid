@@ -30,6 +30,11 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
     return getGType();
   }
 
+  override CompletionWords self()
+  {
+    return this;
+  }
+
   mixin CompletionProviderT!();
 
   /** */

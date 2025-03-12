@@ -26,6 +26,11 @@ class BroadwayRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  override BroadwayRenderer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new Broadway renderer.
     

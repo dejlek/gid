@@ -41,6 +41,11 @@ class Color : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Color self()
+  {
+    return this;
+  }
+
   @property uint pixel()
   {
     return (cast(GdkColor*)cPtr).pixel;

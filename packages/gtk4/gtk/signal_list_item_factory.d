@@ -69,6 +69,11 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
     return getGType();
   }
 
+  override SignalListItemFactory self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.signal_list_item_factory.SignalListItemFactory].
     

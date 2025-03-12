@@ -27,4 +27,9 @@ class PopoverAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override PopoverAccessible self()
+  {
+    return this;
+  }
 }

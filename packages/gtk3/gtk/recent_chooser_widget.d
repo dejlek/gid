@@ -46,6 +46,11 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  override RecentChooserWidget self()
+  {
+    return this;
+  }
+
   mixin RecentChooserT!();
 
   /**

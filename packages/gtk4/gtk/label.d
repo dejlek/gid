@@ -223,6 +223,11 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
     return getGType();
   }
 
+  override Label self()
+  {
+    return this;
+  }
+
   mixin AccessibleTextT!();
 
   /**

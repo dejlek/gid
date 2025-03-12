@@ -37,6 +37,11 @@ class TabArray : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TabArray self()
+  {
+    return this;
+  }
+
   /**
       Creates an array of initial_size tab stops.
     

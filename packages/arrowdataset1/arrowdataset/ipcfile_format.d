@@ -26,6 +26,11 @@ class IPCFileFormat : arrowdataset.file_format.FileFormat
     return getGType();
   }
 
+  override IPCFileFormat self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

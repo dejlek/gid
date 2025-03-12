@@ -51,6 +51,11 @@ class Arrow : gtk.misc.Misc
     return getGType();
   }
 
+  override Arrow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkArrow widget.
     Params:

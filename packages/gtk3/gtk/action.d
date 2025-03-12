@@ -85,6 +85,11 @@ class Action : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override Action self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

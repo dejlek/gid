@@ -36,5 +36,10 @@ class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Val
     return getGType();
   }
 
+  override SpinButtonAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

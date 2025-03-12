@@ -28,6 +28,11 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override TimestampArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType)
   {

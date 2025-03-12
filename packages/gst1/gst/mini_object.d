@@ -65,6 +65,11 @@ class MiniObject : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MiniObject self()
+  {
+    return this;
+  }
+
   @property gobject.types.GType type()
   {
     return (cast(GstMiniObject*)cPtr).type;

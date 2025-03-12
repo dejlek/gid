@@ -41,6 +41,11 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
     return getGType();
   }
 
+  override RecentAction self()
+  {
+    return this;
+  }
+
   mixin RecentChooserT!();
 
   /**

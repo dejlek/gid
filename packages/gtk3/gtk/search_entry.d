@@ -61,6 +61,11 @@ class SearchEntry : gtk.entry.Entry
     return getGType();
   }
 
+  override SearchEntry self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GtkSearchEntry, with a find icon when the search field is
     empty, and a clear icon when it isn't.

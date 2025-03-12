@@ -33,6 +33,11 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  override AlternativeTrigger self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever
     either of the two given triggers gets triggered.

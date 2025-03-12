@@ -27,6 +27,11 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
     return getGType();
   }
 
+  override HalfFloatArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

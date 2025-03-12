@@ -34,6 +34,11 @@ class EventControllerKey : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerKey self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle key events.
     Returns:     a new [gtk.event_controller_key.EventControllerKey]

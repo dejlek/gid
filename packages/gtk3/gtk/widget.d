@@ -474,6 +474,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     return getGType();
   }
 
+  override Widget self()
+  {
+    return this;
+  }
+
   mixin ImplementorIfaceT!();
   mixin BuildableT!();
 

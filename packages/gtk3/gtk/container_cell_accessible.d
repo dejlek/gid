@@ -32,6 +32,11 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
     return getGType();
   }
 
+  override ContainerCellAccessible self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

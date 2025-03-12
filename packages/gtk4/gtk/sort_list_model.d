@@ -58,6 +58,11 @@ class SortListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sect
     return getGType();
   }
 
+  override SortListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 

@@ -48,6 +48,11 @@ class PixbufAnimation : gobject.object.ObjectG
     return getGType();
   }
 
+  override PixbufAnimation self()
+  {
+    return this;
+  }
+
   /**
       Creates a new animation by loading it from a file.
     

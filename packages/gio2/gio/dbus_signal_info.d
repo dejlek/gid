@@ -38,6 +38,11 @@ class DBusSignalInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DBusSignalInfo self()
+  {
+    return this;
+  }
+
   @property int refCount()
   {
     return (cast(GDBusSignalInfo*)cPtr).refCount;

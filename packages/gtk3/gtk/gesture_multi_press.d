@@ -40,6 +40,11 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureMultiPress self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created #GtkGesture that recognizes single and multiple
     presses.

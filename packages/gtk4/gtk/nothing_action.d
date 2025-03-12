@@ -29,6 +29,11 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
     return getGType();
   }
 
+  override NothingAction self()
+  {
+    return this;
+  }
+
   /**
       Gets the nothing action.
     

@@ -49,6 +49,11 @@ class PathPoint : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PathPoint self()
+  {
+    return this;
+  }
+
   /**
       Returns whether point1 is before or after point2.
     Params:

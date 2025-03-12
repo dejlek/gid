@@ -32,6 +32,11 @@ class StreamDecoder : gobject.object.ObjectG
     return getGType();
   }
 
+  override StreamDecoder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
   {

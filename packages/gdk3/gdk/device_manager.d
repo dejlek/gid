@@ -144,6 +144,11 @@ class DeviceManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override DeviceManager self()
+  {
+    return this;
+  }
+
   /**
       Returns the client pointer, that is, the master pointer that acts as the core pointer
     for this application. In X11, window managers may change this depending on the interaction

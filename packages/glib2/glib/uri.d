@@ -195,6 +195,11 @@ class Uri : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Uri self()
+  {
+    return this;
+  }
+
   /**
       Gets uri's authentication parameters, which may contain
     `%`-encoding, depending on the flags with which uri was created.

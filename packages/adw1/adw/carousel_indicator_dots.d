@@ -55,6 +55,11 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override CarouselIndicatorDots self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

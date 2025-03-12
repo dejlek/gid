@@ -26,6 +26,11 @@ class JSONReadOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override JSONReadOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

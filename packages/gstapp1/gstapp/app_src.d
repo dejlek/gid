@@ -100,6 +100,11 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
     return getGType();
   }
 
+  override AppSrc self()
+  {
+    return this;
+  }
+
   mixin URIHandlerT!();
 
   /**

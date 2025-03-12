@@ -31,6 +31,11 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
     return getGType();
   }
 
+  override GLMixer self()
+  {
+    return this;
+  }
+
   /** */
   gstgl.glframebuffer.GLFramebuffer getFramebuffer()
   {

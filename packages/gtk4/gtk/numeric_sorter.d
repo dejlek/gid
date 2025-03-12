@@ -32,6 +32,11 @@ class NumericSorter : gtk.sorter.Sorter
     return getGType();
   }
 
+  override NumericSorter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new numeric sorter using the given expression.
     

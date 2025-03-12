@@ -42,6 +42,11 @@ class IconInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  override IconInfo self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GtkIconInfo for a #GdkPixbuf.
     Params:

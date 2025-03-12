@@ -26,6 +26,11 @@ class BooleanDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  override BooleanDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

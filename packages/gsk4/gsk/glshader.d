@@ -146,6 +146,11 @@ class GLShader : gobject.object.ObjectG
     return getGType();
   }
 
+  override GLShader self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gsk.glshader.GLShader] that will render pixels using the specified code.
     Params:

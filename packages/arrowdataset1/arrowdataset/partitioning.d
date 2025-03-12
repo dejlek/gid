@@ -26,6 +26,11 @@ class Partitioning : gobject.object.ObjectG
     return getGType();
   }
 
+  override Partitioning self()
+  {
+    return this;
+  }
+
   /** */
   static arrowdataset.partitioning.Partitioning createDefault()
   {

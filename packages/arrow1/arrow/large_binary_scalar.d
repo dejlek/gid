@@ -27,6 +27,11 @@ class LargeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getGType();
   }
 
+  override LargeBinaryScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.buffer.Buffer value)
   {

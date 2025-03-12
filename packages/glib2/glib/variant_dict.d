@@ -123,6 +123,11 @@ class VariantDict : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VariantDict self()
+  {
+    return this;
+  }
+
   /**
       Allocates and initialises a new #GVariantDict.
     

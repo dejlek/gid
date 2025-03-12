@@ -29,6 +29,11 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
     return getGType();
   }
 
+  override CallbackAnimationTarget self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.animation_target.AnimationTarget] that calls the given callback during
     the animation.

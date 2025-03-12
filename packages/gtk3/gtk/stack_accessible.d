@@ -27,4 +27,9 @@ class StackAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override StackAccessible self()
+  {
+    return this;
+  }
 }

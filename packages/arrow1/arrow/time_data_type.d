@@ -26,6 +26,11 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  override TimeDataType self()
+  {
+    return this;
+  }
+
   /** */
   arrow.types.TimeUnit getUnit()
   {

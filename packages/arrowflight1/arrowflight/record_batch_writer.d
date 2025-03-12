@@ -31,6 +31,11 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
     return getGType();
   }
 
+  override RecordBatchWriter self()
+  {
+    return this;
+  }
+
   /**
       Begins writing data with the given schema. Only used with
     `DoExchange`.

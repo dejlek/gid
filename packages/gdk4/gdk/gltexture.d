@@ -36,6 +36,11 @@ class GLTexture : gdk.texture.Texture
     return getGType();
   }
 
+  override GLTexture self()
+  {
+    return this;
+  }
+
   /**
       Creates a new texture for an existing GL texture.
     

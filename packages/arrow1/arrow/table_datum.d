@@ -27,6 +27,11 @@ class TableDatum : arrow.datum.Datum
     return getGType();
   }
 
+  override TableDatum self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.table.Table value)
   {

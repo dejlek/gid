@@ -170,6 +170,11 @@ class AlertDialog : adw.dialog.Dialog
     return getGType();
   }
 
+  override AlertDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.alert_dialog.AlertDialog].
     

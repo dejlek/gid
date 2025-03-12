@@ -85,6 +85,11 @@ class Schema : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Schema self()
+  {
+    return this;
+  }
+
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);

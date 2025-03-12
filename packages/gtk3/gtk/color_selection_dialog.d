@@ -32,6 +32,11 @@ class ColorSelectionDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override ColorSelectionDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkColorSelectionDialog.
     Params:

@@ -60,6 +60,11 @@ class MenuToolButton : gtk.tool_button.ToolButton
     return getGType();
   }
 
+  override MenuToolButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkMenuToolButton using icon_widget as icon and
     label as label.

@@ -38,6 +38,11 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DBusAnnotationInfo self()
+  {
+    return this;
+  }
+
   @property int refCount()
   {
     return (cast(GDBusAnnotationInfo*)cPtr).refCount;

@@ -31,6 +31,11 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  override GLDisplayEGL self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstGLDisplayEGL using the default EGL_DEFAULT_DISPLAY.
     Returns:     a new #GstGLDisplayEGL or null

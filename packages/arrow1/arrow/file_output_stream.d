@@ -31,6 +31,11 @@ class FileOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  override FileOutputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(string path, bool append)
   {

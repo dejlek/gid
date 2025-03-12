@@ -27,6 +27,11 @@ class FloatArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override FloatArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

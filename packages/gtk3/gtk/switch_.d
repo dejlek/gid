@@ -52,6 +52,11 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
     return getGType();
   }
 
+  override Switch self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
   mixin ActivatableT!();
 

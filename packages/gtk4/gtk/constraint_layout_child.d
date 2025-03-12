@@ -27,4 +27,9 @@ class ConstraintLayoutChild : gtk.layout_child.LayoutChild
   {
     return getGType();
   }
+
+  override ConstraintLayoutChild self()
+  {
+    return this;
+  }
 }

@@ -27,6 +27,11 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  override FixedLengthByteArrayStatistics self()
+  {
+    return this;
+  }
+
   /** */
   glib.bytes.Bytes getMax()
   {

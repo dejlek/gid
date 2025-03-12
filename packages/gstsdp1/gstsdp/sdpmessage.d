@@ -49,6 +49,11 @@ class SDPMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SDPMessage self()
+  {
+    return this;
+  }
+
   @property string version_()
   {
     return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);

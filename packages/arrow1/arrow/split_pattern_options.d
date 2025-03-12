@@ -26,6 +26,11 @@ class SplitPatternOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override SplitPatternOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

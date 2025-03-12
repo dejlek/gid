@@ -26,6 +26,11 @@ class StringDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override StringDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -50,6 +50,11 @@ class FontDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override FontDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.font_dialog.FontDialog] object.
     Returns:     the new [gtk.font_dialog.FontDialog]

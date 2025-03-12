@@ -89,6 +89,11 @@ class AboutDialog : gtk.window.Window
     return getGType();
   }
 
+  override AboutDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.about_dialog.AboutDialog].
     Returns:     a newly created [gtk.about_dialog.AboutDialog]

@@ -27,6 +27,11 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
     return getGType();
   }
 
+  override DecimalDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(int precision, int scale)
   {

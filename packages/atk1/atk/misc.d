@@ -31,6 +31,11 @@ class Misc : gobject.object.ObjectG
     return getGType();
   }
 
+  override Misc self()
+  {
+    return this;
+  }
+
   /**
       Obtain the singleton instance of AtkMisc for this application.
     Returns:     The singleton instance of AtkMisc for this application.

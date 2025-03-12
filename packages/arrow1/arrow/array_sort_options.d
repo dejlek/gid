@@ -26,6 +26,11 @@ class ArraySortOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override ArraySortOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.SortOrder order)
   {

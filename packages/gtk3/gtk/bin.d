@@ -39,6 +39,11 @@ class Bin : gtk.container.Container
     return getGType();
   }
 
+  override Bin self()
+  {
+    return this;
+  }
+
   /**
       Gets the child of the #GtkBin, or null if the bin contains
     no child widget. The returned widget does not have a reference

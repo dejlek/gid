@@ -30,6 +30,11 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override BinaryDictionaryArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

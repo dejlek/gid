@@ -120,6 +120,11 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Grid self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

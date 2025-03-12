@@ -81,6 +81,11 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
     return getGType();
   }
 
+  override SearchEntry self()
+  {
+    return this;
+  }
+
   mixin EditableT!();
 
   /**

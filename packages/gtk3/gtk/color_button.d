@@ -49,6 +49,11 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
     return getGType();
   }
 
+  override ColorButton self()
+  {
+    return this;
+  }
+
   mixin ColorChooserT!();
 
   /**

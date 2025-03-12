@@ -29,6 +29,11 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  override ProxyControlBinding self()
+  {
+    return this;
+  }
+
   /**
       #GstProxyControlBinding forwards all access to data or `sync_values()`
     requests from property_name on object to the control binding at

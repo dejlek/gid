@@ -61,6 +61,11 @@ class SpringAnimation : adw.animation.Animation
     return getGType();
   }
 
+  override SpringAnimation self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.spring_animation.SpringAnimation] on widget.
     

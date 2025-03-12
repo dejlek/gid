@@ -32,6 +32,11 @@ class ButtonAccessible : gtk.container_accessible.ContainerAccessible, atk.actio
     return getGType();
   }
 
+  override ButtonAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin ImageT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;

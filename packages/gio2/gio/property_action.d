@@ -81,6 +81,11 @@ class PropertyAction : gobject.object.ObjectG, gio.action.Action
     return getGType();
   }
 
+  override PropertyAction self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
 
   /**

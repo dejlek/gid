@@ -199,6 +199,11 @@ class Resource : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Resource self()
+  {
+    return this;
+  }
+
   /**
       Creates a GResource from a reference to the binary resource bundle.
     This will keep a reference to data while the resource lives, so

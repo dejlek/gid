@@ -42,6 +42,11 @@ class VideoCodecFrame : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoCodecFrame self()
+  {
+    return this;
+  }
+
   @property uint systemFrameNumber()
   {
     return (cast(GstVideoCodecFrame*)cPtr).systemFrameNumber;

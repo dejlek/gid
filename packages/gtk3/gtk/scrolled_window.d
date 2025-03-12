@@ -112,6 +112,11 @@ class ScrolledWindow : gtk.bin.Bin
     return getGType();
   }
 
+  override ScrolledWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new scrolled window.
     

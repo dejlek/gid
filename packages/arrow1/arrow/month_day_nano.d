@@ -26,6 +26,11 @@ class MonthDayNano : gobject.object.ObjectG
     return getGType();
   }
 
+  override MonthDayNano self()
+  {
+    return this;
+  }
+
   /** */
   this(int month, int day, long nanosecond)
   {

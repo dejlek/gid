@@ -49,6 +49,11 @@ class TextCluster : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TextCluster self()
+  {
+    return this;
+  }
+
   @property int numBytes()
   {
     return (cast(cairo_text_cluster_t*)cPtr).numBytes;

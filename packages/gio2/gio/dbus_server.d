@@ -54,6 +54,11 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  override DBusServer self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

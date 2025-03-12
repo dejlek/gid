@@ -89,6 +89,11 @@ class Dialog : gtk.widget.Widget
     return getGType();
   }
 
+  override Dialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.dialog.Dialog].
     Returns:     the new created [adw.dialog.Dialog]

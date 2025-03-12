@@ -27,6 +27,11 @@ class SlowFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  override SlowFileSystem self()
+  {
+    return this;
+  }
+
   /**
       The latency is normally distributed with a standard deviation of
     average_latency * 0.1.

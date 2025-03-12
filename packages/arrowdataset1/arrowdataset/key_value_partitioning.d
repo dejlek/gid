@@ -25,4 +25,9 @@ class KeyValuePartitioning : arrowdataset.partitioning.Partitioning
   {
     return getGType();
   }
+
+  override KeyValuePartitioning self()
+  {
+    return this;
+  }
 }

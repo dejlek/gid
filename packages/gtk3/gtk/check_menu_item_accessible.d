@@ -31,4 +31,9 @@ class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
   {
     return getGType();
   }
+
+  override CheckMenuItemAccessible self()
+  {
+    return this;
+  }
 }

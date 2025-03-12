@@ -32,6 +32,11 @@ class SearchSettings : gobject.object.ObjectG
     return getGType();
   }
 
+  override SearchSettings self()
+  {
+    return this;
+  }
+
   /**
       Creates a new search settings object.
     Returns:     a new search settings object.

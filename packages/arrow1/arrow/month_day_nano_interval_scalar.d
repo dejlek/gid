@@ -28,6 +28,11 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override MonthDayNanoIntervalScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.month_day_nano.MonthDayNano value)
   {

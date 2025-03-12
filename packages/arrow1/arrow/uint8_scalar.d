@@ -26,6 +26,11 @@ class UInt8Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override UInt8Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(ubyte value)
   {

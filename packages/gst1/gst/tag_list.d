@@ -41,6 +41,11 @@ class TagList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TagList self()
+  {
+    return this;
+  }
+
   @property gst.mini_object.MiniObject miniObject()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)cPtr).miniObject);

@@ -27,6 +27,11 @@ class SortOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override SortOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.sort_key.SortKey[] sortKeys = null)
   {

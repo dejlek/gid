@@ -37,4 +37,9 @@ class DrawFuncs : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override DrawFuncs self()
+  {
+    return this;
+  }
 }

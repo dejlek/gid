@@ -219,5 +219,10 @@ class FileChooserDialog : gtk.dialog.Dialog, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  override FileChooserDialog self()
+  {
+    return this;
+  }
+
   mixin FileChooserT!();
 }

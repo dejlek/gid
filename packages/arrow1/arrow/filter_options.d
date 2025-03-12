@@ -26,6 +26,11 @@ class FilterOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override FilterOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

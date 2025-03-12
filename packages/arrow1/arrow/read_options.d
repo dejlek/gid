@@ -26,6 +26,11 @@ class ReadOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override ReadOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

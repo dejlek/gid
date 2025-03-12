@@ -60,6 +60,11 @@ class ValueArray : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ValueArray self()
+  {
+    return this;
+  }
+
   @property uint nValues()
   {
     return (cast(GValueArray*)cPtr).nValues;

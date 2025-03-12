@@ -185,6 +185,11 @@ class ListStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
     return getGType();
   }
 
+  override ListStore self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
   mixin TreeDragDestT!();
   mixin TreeDragSourceT!();

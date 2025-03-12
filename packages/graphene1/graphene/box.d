@@ -42,6 +42,11 @@ class Box : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Box self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_box_t.
     

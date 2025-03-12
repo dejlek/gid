@@ -44,6 +44,11 @@ class GhostPad : gst.proxy_pad.ProxyPad
     return getGType();
   }
 
+  override GhostPad self()
+  {
+    return this;
+  }
+
   /**
       Create a new ghostpad with target as the target. The direction will be taken
     from the target pad. target must be unlinked.

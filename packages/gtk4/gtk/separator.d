@@ -51,6 +51,11 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Separator self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

@@ -36,6 +36,11 @@ class DirectControlBinding : gst.control_binding.ControlBinding
     return getGType();
   }
 
+  override DirectControlBinding self()
+  {
+    return this;
+  }
+
   /**
       Create a new control-binding that attaches the #GstControlSource to the
     #GObject property. It will map the control source range [0.0 ... 1.0] to

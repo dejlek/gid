@@ -25,4 +25,9 @@ class DataStream : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override DataStream self()
+  {
+    return this;
+  }
 }

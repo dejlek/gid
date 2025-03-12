@@ -32,6 +32,11 @@ class ArrowFileReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override ArrowFileReader self()
+  {
+    return this;
+  }
+
   /** */
   static parquet.arrow_file_reader.ArrowFileReader newArrow(arrow.seekable_input_stream.SeekableInputStream source)
   {

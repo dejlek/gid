@@ -264,6 +264,11 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override UIManager self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

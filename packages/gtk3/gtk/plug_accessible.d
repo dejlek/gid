@@ -30,6 +30,11 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
     return getGType();
   }
 
+  override PlugAccessible self()
+  {
+    return this;
+  }
+
   /** */
   string getId()
   {

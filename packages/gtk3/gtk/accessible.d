@@ -40,6 +40,11 @@ class Accessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  override Accessible self()
+  {
+    return this;
+  }
+
   /**
       This function specifies the callback function to be called
     when the widget corresponding to a GtkAccessible is destroyed.

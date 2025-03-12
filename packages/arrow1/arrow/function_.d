@@ -32,6 +32,11 @@ class Function : gobject.object.ObjectG
     return getGType();
   }
 
+  override Function self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.function_.Function[] all()
   {

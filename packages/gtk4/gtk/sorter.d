@@ -48,6 +48,11 @@ class Sorter : gobject.object.ObjectG
     return getGType();
   }
 
+  override Sorter self()
+  {
+    return this;
+  }
+
   /**
       Notifies all users of the sorter that it has changed.
     

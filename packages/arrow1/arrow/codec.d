@@ -27,6 +27,11 @@ class Codec : gobject.object.ObjectG
     return getGType();
   }
 
+  override Codec self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.CompressionType type)
   {

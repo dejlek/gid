@@ -29,6 +29,11 @@ class MapArray : arrow.list_array.ListArray
     return getGType();
   }
 
+  override MapArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.array.Array offsets, arrow.array.Array keys, arrow.array.Array items)
   {

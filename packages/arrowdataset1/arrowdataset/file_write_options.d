@@ -25,4 +25,9 @@ class FileWriteOptions : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override FileWriteOptions self()
+  {
+    return this;
+  }
 }

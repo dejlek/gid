@@ -32,6 +32,11 @@ class CellAccessible : gtk.accessible.Accessible, atk.action.Action, atk.compone
     return getGType();
   }
 
+  override CellAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin ComponentT!();
   mixin TableCellT!();

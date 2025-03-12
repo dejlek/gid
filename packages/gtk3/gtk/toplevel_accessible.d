@@ -27,6 +27,11 @@ class ToplevelAccessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  override ToplevelAccessible self()
+  {
+    return this;
+  }
+
   /** */
   gtk.window.Window[] getChildren()
   {

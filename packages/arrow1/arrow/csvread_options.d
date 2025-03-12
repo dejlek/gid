@@ -29,6 +29,11 @@ class CSVReadOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override CSVReadOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

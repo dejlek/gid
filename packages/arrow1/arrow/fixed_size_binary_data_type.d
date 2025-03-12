@@ -26,6 +26,11 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
     return getGType();
   }
 
+  override FixedSizeBinaryDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(int byteWidth)
   {

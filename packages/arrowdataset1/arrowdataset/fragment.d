@@ -25,4 +25,9 @@ class Fragment : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override Fragment self()
+  {
+    return this;
+  }
 }

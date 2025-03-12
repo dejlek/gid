@@ -26,6 +26,11 @@ class UTF8NormalizeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override UTF8NormalizeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

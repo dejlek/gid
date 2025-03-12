@@ -33,6 +33,11 @@ class ButtonBox : gtk.box.Box
     return getGType();
   }
 
+  override ButtonBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkButtonBox.
     Params:

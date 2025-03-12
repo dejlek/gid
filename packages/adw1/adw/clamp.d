@@ -63,6 +63,11 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override Clamp self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

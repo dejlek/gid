@@ -33,6 +33,11 @@ class BreakpointCondition : gobject.boxed.Boxed
     return getGType();
   }
 
+  override BreakpointCondition self()
+  {
+    return this;
+  }
+
   /**
       Creates a condition that triggers when condition_1 and condition_2 are both
     true.

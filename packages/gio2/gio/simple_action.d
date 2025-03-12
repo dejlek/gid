@@ -35,6 +35,11 @@ class SimpleAction : gobject.object.ObjectG, gio.action.Action
     return getGType();
   }
 
+  override SimpleAction self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
 
   /**

@@ -48,6 +48,11 @@ class MediaStream : gobject.object.ObjectG, gdk.paintable.Paintable
     return getGType();
   }
 
+  override MediaStream self()
+  {
+    return this;
+  }
+
   mixin PaintableT!();
 
   /**

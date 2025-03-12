@@ -47,6 +47,11 @@ class Bitset : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Bitset self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty bitset.
     Returns:     A new empty bitset

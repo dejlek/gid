@@ -26,6 +26,11 @@ class DayMillisecond : gobject.object.ObjectG
     return getGType();
   }
 
+  override DayMillisecond self()
+  {
+    return this;
+  }
+
   /** */
   this(int day, int millisecond)
   {

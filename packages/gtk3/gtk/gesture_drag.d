@@ -35,6 +35,11 @@ class GestureDrag : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureDrag self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created #GtkGesture that recognizes drags.
     Params:

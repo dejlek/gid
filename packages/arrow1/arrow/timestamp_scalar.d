@@ -27,6 +27,11 @@ class TimestampScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override TimestampScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
   {

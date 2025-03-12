@@ -38,6 +38,11 @@ class LanguageManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override LanguageManager self()
+  {
+    return this;
+  }
+
   /**
       Creates a new language manager.
     

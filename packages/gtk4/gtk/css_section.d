@@ -39,6 +39,11 @@ class CssSection : gobject.boxed.Boxed
     return getGType();
   }
 
+  override CssSection self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.css_section.CssSection] referring to the section
     in the given `file` from the `start` location to the

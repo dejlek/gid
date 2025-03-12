@@ -37,6 +37,11 @@ class MappedFile : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MappedFile self()
+  {
+    return this;
+  }
+
   /**
       Maps a file into memory. On UNIX, this is using the mmap() function.
     

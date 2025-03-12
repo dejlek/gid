@@ -36,6 +36,11 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
     return getGType();
   }
 
+  override TcpWrapperConnection self()
+  {
+    return this;
+  }
+
   /**
       Wraps base_io_stream and socket together as a #GSocketConnection.
     Params:

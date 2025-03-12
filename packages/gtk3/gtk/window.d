@@ -99,6 +99,11 @@ class Window : gtk.bin.Bin
     return getGType();
   }
 
+  override Window self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkWindow, which is a toplevel window that can
     contain other widgets. Nearly always, the type of the window should

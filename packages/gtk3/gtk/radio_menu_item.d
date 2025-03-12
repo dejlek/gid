@@ -72,6 +72,11 @@ class RadioMenuItem : gtk.check_menu_item.CheckMenuItem
     return getGType();
   }
 
+  override RadioMenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkRadioMenuItem.
     Params:

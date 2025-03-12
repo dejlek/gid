@@ -32,6 +32,11 @@ class ControlBinding : gst.object.ObjectGst
     return getGType();
   }
 
+  override ControlBinding self()
+  {
+    return this;
+  }
+
   alias getGValueArray = gst.object.ObjectGst.getGValueArray;
 
   /**

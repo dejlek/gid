@@ -109,6 +109,11 @@ class DragSource : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override DragSource self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.drag_source.DragSource] object.
     Returns:     the new [gtk.drag_source.DragSource]

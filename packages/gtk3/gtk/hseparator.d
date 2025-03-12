@@ -43,6 +43,11 @@ class HSeparator : gtk.separator.Separator
     return getGType();
   }
 
+  override HSeparator self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkHSeparator.
     Returns:     a new #GtkHSeparator.

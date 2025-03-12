@@ -31,6 +31,11 @@ class Info : gobject.object.ObjectG
     return getGType();
   }
 
+  override Info self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrowflight.descriptor.Descriptor descriptor, arrowflight.endpoint.Endpoint[] endpoints, long totalRecords, long totalBytes)
   {

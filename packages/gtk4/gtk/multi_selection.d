@@ -35,6 +35,11 @@ class MultiSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sec
     return getGType();
   }
 
+  override MultiSelection self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
   mixin SelectionModelT!();

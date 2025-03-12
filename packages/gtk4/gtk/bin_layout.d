@@ -34,6 +34,11 @@ class BinLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override BinLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.bin_layout.BinLayout] instance.
     Returns:     the newly created [gtk.bin_layout.BinLayout]

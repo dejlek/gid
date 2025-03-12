@@ -91,6 +91,11 @@ class ListBox : gtk.widget.Widget
     return getGType();
   }
 
+  override ListBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.list_box.ListBox] container.
     Returns:     a new [gtk.list_box.ListBox]

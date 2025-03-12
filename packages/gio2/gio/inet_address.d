@@ -37,6 +37,11 @@ class InetAddress : gobject.object.ObjectG
     return getGType();
   }
 
+  override InetAddress self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GInetAddress for the "any" address (unassigned/"don't
     care") for family.

@@ -29,6 +29,11 @@ class DiscovererSubtitleInfo : gstpbutils.discoverer_stream_info.DiscovererStrea
     return getGType();
   }
 
+  override DiscovererSubtitleInfo self()
+  {
+    return this;
+  }
+
   /** */
   string getLanguage()
   {

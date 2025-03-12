@@ -34,6 +34,11 @@ class EntryAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Actio
     return getGType();
   }
 
+  override EntryAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   mixin EditableTextT!();
   mixin TextT!();

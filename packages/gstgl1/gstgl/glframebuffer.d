@@ -40,6 +40,11 @@ class GLFramebuffer : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLFramebuffer self()
+  {
+    return this;
+  }
+
   /**
       This function will internally create an OpenGL framebuffer object and must
     be called on context's OpenGL thread.

@@ -102,6 +102,11 @@ class Binding : gobject.object.ObjectG
     return getGType();
   }
 
+  override Binding self()
+  {
+    return this;
+  }
+
   /**
       Retrieves the #GObject instance used as the source of the binding.
     

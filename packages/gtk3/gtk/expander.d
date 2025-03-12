@@ -116,6 +116,11 @@ class Expander : gtk.bin.Bin
     return getGType();
   }
 
+  override Expander self()
+  {
+    return this;
+  }
+
   /**
       Creates a new expander using label as the text of the label.
     Params:

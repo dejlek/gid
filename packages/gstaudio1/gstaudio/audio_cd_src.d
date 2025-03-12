@@ -73,6 +73,11 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
     return getGType();
   }
 
+  override AudioCdSrc self()
+  {
+    return this;
+  }
+
   mixin URIHandlerT!();
 
   /**

@@ -28,6 +28,11 @@ class ListDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override ListDataType self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.field.Field field)
   {

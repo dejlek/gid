@@ -39,6 +39,11 @@ class DiscovererInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  override DiscovererInfo self()
+  {
+    return this;
+  }
+
   /**
       Parses a #GVariant as produced by [gstpbutils.discoverer_info.DiscovererInfo.toVariant]
     back to a #GstDiscovererInfo.

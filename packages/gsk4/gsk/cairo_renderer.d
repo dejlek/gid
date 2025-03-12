@@ -31,6 +31,11 @@ class CairoRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  override CairoRenderer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new Cairo renderer.
     

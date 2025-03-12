@@ -41,6 +41,11 @@ class Mark : gtk.text_mark.TextMark
     return getGType();
   }
 
+  override Mark self()
+  {
+    return this;
+  }
+
   /**
       Creates a text mark.
     

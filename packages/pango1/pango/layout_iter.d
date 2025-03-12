@@ -41,6 +41,11 @@ class LayoutIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override LayoutIter self()
+  {
+    return this;
+  }
+
   /**
       Determines whether iter is on the last line of the layout.
     Returns:     true if iter is on the last line

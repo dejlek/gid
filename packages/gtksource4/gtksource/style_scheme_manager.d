@@ -27,6 +27,11 @@ class StyleSchemeManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleSchemeManager self()
+  {
+    return this;
+  }
+
   /**
       Creates a new style manager. If you do not need more than one style
     manager then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.

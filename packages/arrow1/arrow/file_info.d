@@ -26,6 +26,11 @@ class FileInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileInfo self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

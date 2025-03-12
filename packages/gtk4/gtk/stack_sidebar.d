@@ -50,6 +50,11 @@ class StackSidebar : gtk.widget.Widget
     return getGType();
   }
 
+  override StackSidebar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.stack_sidebar.StackSidebar].
     Returns:     the new [gtk.stack_sidebar.StackSidebar]

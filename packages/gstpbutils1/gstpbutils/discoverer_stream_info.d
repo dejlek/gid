@@ -46,6 +46,11 @@ class DiscovererStreamInfo : gobject.object.ObjectG
     return getGType();
   }
 
+  override DiscovererStreamInfo self()
+  {
+    return this;
+  }
+
   /**
       Decrements the reference count of all contained #GstDiscovererStreamInfo
     and fress the #GList.

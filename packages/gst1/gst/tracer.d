@@ -33,6 +33,11 @@ class Tracer : gst.object.ObjectGst
     return getGType();
   }
 
+  override Tracer self()
+  {
+    return this;
+  }
+
   /**
       Create a new tracer-factory  capable of instantiating objects of the
     type and add the factory to plugin.

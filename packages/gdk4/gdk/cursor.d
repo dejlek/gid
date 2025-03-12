@@ -62,6 +62,11 @@ class Cursor : gobject.object.ObjectG
     return getGType();
   }
 
+  override Cursor self()
+  {
+    return this;
+  }
+
   /**
       Creates a new cursor by looking up name in the current cursor
     theme.

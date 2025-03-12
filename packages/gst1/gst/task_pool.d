@@ -32,6 +32,11 @@ class TaskPool : gst.object.ObjectGst
     return getGType();
   }
 
+  override TaskPool self()
+  {
+    return this;
+  }
+
   /**
       Create a new default task pool. The default task pool will use a regular
     GThreadPool for threads.

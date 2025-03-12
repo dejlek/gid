@@ -144,6 +144,11 @@ class BaseSink : gst.element.Element
     return getGType();
   }
 
+  override BaseSink self()
+  {
+    return this;
+  }
+
   /**
       If the sink spawns its own thread for pulling buffers from upstream it
     should call this method after it has pulled a buffer. If the element needed

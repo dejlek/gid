@@ -81,6 +81,11 @@ class Pipeline : gst.bin.Bin
     return getGType();
   }
 
+  override Pipeline self()
+  {
+    return this;
+  }
+
   /**
       Create a new pipeline with the given name.
     Params:

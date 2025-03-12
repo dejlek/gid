@@ -28,6 +28,11 @@ class BaseBinaryScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override BaseBinaryScalar self()
+  {
+    return this;
+  }
+
   /** */
   arrow.buffer.Buffer getValue()
   {

@@ -32,6 +32,11 @@ class FontSelectionDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override FontSelectionDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkFontSelectionDialog.
     Params:

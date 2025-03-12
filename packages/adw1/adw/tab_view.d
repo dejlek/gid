@@ -80,6 +80,11 @@ class TabView : gtk.widget.Widget
     return getGType();
   }
 
+  override TabView self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.tab_view.TabView].
     Returns:     the newly created [adw.tab_view.TabView]

@@ -30,6 +30,11 @@ class MenuLinkIter : gobject.object.ObjectG
     return getGType();
   }
 
+  override MenuLinkIter self()
+  {
+    return this;
+  }
+
   /**
       Gets the name of the link at the current iterator position.
     

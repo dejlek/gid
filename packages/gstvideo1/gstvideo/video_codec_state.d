@@ -51,6 +51,11 @@ class VideoCodecState : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoCodecState self()
+  {
+    return this;
+  }
+
   @property gstvideo.video_info.VideoInfo info()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)cPtr).info);

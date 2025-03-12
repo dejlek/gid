@@ -26,6 +26,11 @@ class Int32Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Int32Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(int value)
   {

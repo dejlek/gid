@@ -30,6 +30,11 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  override GLDisplayEGLDevice self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstGLDisplayEGLDevice with an EGLDevice supported device
     Params:

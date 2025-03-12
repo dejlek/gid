@@ -25,4 +25,9 @@ class FileSelector : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override FileSelector self()
+  {
+    return this;
+  }
 }

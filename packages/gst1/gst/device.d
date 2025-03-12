@@ -38,6 +38,11 @@ class Device : gst.object.ObjectGst
     return getGType();
   }
 
+  override Device self()
+  {
+    return this;
+  }
+
   /**
       Creates the element with all of the required parameters set to use
     this device.

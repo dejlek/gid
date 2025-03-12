@@ -89,6 +89,11 @@ class TreeExpander : gtk.widget.Widget
     return getGType();
   }
 
+  override TreeExpander self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.tree_expander.TreeExpander]
     Returns:     a new [gtk.tree_expander.TreeExpander]

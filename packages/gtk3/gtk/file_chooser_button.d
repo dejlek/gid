@@ -72,6 +72,11 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
     return getGType();
   }
 
+  override FileChooserButton self()
+  {
+    return this;
+  }
+
   mixin FileChooserT!();
 
   /**

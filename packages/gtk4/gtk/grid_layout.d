@@ -41,6 +41,11 @@ class GridLayout : gtk.layout_manager.LayoutManager
     return getGType();
   }
 
+  override GridLayout self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.grid_layout.GridLayout].
     Returns:     the newly created [gtk.grid_layout.GridLayout]

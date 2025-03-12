@@ -107,6 +107,11 @@ class DropTarget : gtk.event_controller.EventController
     return getGType();
   }
 
+  override DropTarget self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.drop_target.DropTarget] object.
     

@@ -106,6 +106,11 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
     return getGType();
   }
 
+  override Paned self()
+  {
+    return this;
+  }
+
   mixin AccessibleRangeT!();
   mixin OrientableT!();
 

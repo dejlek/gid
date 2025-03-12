@@ -29,6 +29,11 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override StringDictionaryArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -30,6 +30,11 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
     return getGType();
   }
 
+  override Cache self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 
   /**

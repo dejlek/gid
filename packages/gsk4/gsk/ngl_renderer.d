@@ -26,6 +26,11 @@ class NglRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  override NglRenderer self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -27,6 +27,11 @@ class LargeStringArray : arrow.large_binary_array.LargeBinaryArray
     return getGType();
   }
 
+  override LargeStringArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer valueOffsets, arrow.buffer.Buffer valueData, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

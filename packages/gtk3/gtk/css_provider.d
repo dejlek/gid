@@ -56,6 +56,11 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  override CssProvider self()
+  {
+    return this;
+  }
+
   mixin StyleProviderT!();
 
   /**

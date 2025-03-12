@@ -25,4 +25,9 @@ class ExtensionScalar : arrow.scalar.Scalar
   {
     return getGType();
   }
+
+  override ExtensionScalar self()
+  {
+    return this;
+  }
 }

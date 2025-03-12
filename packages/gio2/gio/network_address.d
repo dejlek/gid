@@ -40,6 +40,11 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
     return getGType();
   }
 
+  override NetworkAddress self()
+  {
+    return this;
+  }
+
   mixin SocketConnectableT!();
 
   /**

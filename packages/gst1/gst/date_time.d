@@ -41,6 +41,11 @@ class DateTime : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DateTime self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstDateTime using the date and times in the gregorian calendar
     in the supplied timezone.

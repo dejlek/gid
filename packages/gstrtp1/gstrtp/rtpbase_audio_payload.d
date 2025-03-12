@@ -58,6 +58,11 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
     return getGType();
   }
 
+  override RTPBaseAudioPayload self()
+  {
+    return this;
+  }
+
   /**
       Create an RTP buffer and store payload_len bytes of the adapter as the
     payload. Set the timestamp on the new buffer to timestamp before pushing

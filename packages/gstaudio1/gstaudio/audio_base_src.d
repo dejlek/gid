@@ -32,6 +32,11 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
     return getGType();
   }
 
+  override AudioBaseSrc self()
+  {
+    return this;
+  }
+
   /**
       Create and return the #GstAudioRingBuffer for src. This function will call
     the ::create_ringbuffer vmethod and will set src as the parent of the

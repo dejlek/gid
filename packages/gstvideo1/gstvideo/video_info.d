@@ -43,6 +43,11 @@ class VideoInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoInfo self()
+  {
+    return this;
+  }
+
   @property gstvideo.video_format_info.VideoFormatInfo finfo()
   {
     return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)cPtr).finfo);

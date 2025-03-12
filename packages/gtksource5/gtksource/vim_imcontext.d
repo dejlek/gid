@@ -78,6 +78,11 @@ class VimIMContext : gtk.imcontext.IMContext
     return getGType();
   }
 
+  override VimIMContext self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

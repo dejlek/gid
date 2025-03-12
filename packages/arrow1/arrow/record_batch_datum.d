@@ -27,6 +27,11 @@ class RecordBatchDatum : arrow.datum.Datum
     return getGType();
   }
 
+  override RecordBatchDatum self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.record_batch.RecordBatch value)
   {

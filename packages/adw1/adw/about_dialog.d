@@ -207,6 +207,11 @@ class AboutDialog : adw.dialog.Dialog
     return getGType();
   }
 
+  override AboutDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.about_dialog.AboutDialog].
     Returns:     the newly created [adw.about_dialog.AboutDialog]

@@ -25,4 +25,9 @@ class GLMixerPad : gstgl.glbase_mixer_pad.GLBaseMixerPad
   {
     return getGType();
   }
+
+  override GLMixerPad self()
+  {
+    return this;
+  }
 }

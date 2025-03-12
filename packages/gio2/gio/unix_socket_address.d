@@ -49,6 +49,11 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
     return getGType();
   }
 
+  override UnixSocketAddress self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GUnixSocketAddress for path.
     

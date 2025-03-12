@@ -37,6 +37,11 @@ class ExpressionWatch : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ExpressionWatch self()
+  {
+    return this;
+  }
+
   /**
       Evaluates the watched expression and on success stores the result
     in `value`.

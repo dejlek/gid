@@ -29,6 +29,11 @@ class FdAllocator : gst.allocator.Allocator
     return getGType();
   }
 
+  override FdAllocator self()
+  {
+    return this;
+  }
+
   /**
       Return a new fd allocator.
     Returns:     a new fd allocator. Use [gst.object.ObjectGst.unref] to

@@ -39,6 +39,11 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override Adjustment self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.adjustment.Adjustment].
     Params:

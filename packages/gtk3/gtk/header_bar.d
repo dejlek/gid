@@ -48,6 +48,11 @@ class HeaderBar : gtk.container.Container
     return getGType();
   }
 
+  override HeaderBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkHeaderBar widget.
     Returns:     a new #GtkHeaderBar

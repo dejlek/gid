@@ -36,6 +36,11 @@ class MatchInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MatchInfo self()
+  {
+    return this;
+  }
+
   /**
       Returns a new string containing the text in string_to_expand with
     references and escape sequences expanded. References refer to the last

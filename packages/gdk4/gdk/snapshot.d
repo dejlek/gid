@@ -29,4 +29,9 @@ class Snapshot : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override Snapshot self()
+  {
+    return this;
+  }
 }

@@ -37,6 +37,11 @@ class DBusObjectSkeleton : gobject.object.ObjectG, gio.dbus_object.DBusObject
     return getGType();
   }
 
+  override DBusObjectSkeleton self()
+  {
+    return this;
+  }
+
   mixin DBusObjectT!();
 
   /**

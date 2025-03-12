@@ -36,6 +36,11 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
     return getGType();
   }
 
+  override DBusInterfaceSkeleton self()
+  {
+    return this;
+  }
+
   mixin DBusInterfaceT!();
 
   /**

@@ -39,6 +39,11 @@ class Sample : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Sample self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstSample with the provided details.
     

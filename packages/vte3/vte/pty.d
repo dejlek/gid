@@ -33,6 +33,11 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
     return getGType();
   }
 
+  override Pty self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

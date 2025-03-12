@@ -115,6 +115,11 @@ class Notebook : gtk.container.Container
     return getGType();
   }
 
+  override Notebook self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkNotebook widget with no pages.
     Returns:     the newly created #GtkNotebook

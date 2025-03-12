@@ -49,6 +49,11 @@ class Path : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Path self()
+  {
+    return this;
+  }
+
   @property cairo.types.Status status()
   {
     return cast(cairo.types.Status)(cast(cairo_path_t*)cPtr).status;

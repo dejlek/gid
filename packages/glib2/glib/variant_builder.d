@@ -41,6 +41,11 @@ class VariantBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VariantBuilder self()
+  {
+    return this;
+  }
+
   /**
       Allocates and initialises a new #GVariantBuilder.
     

@@ -39,6 +39,11 @@ class NetTimeProvider : gst.object.ObjectGst, gio.initable.Initable
     return getGType();
   }
 
+  override NetTimeProvider self()
+  {
+    return this;
+  }
+
   mixin InitableT!();
 
   /**

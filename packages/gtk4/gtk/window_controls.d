@@ -83,6 +83,11 @@ class WindowControls : gtk.widget.Widget
     return getGType();
   }
 
+  override WindowControls self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.window_controls.WindowControls].
     Params:

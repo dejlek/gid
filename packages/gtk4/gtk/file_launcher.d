@@ -45,6 +45,11 @@ class FileLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  override FileLauncher self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.file_launcher.FileLauncher] object.
     Params:

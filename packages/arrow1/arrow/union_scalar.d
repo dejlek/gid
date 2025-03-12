@@ -27,6 +27,11 @@ class UnionScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override UnionScalar self()
+  {
+    return this;
+  }
+
   /** */
   byte getTypeCode()
   {

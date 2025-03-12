@@ -38,6 +38,11 @@ class Invisible : gtk.widget.Widget
     return getGType();
   }
 
+  override Invisible self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkInvisible.
     Returns:     a new #GtkInvisible.

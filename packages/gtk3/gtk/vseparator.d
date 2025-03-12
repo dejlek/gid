@@ -38,6 +38,11 @@ class VSeparator : gtk.separator.Separator
     return getGType();
   }
 
+  override VSeparator self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkVSeparator.
     Returns:     a new #GtkVSeparator.

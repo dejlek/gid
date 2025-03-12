@@ -31,6 +31,11 @@ class GLSLStage : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLSLStage self()
+  {
+    return this;
+  }
+
   /** */
   this(gstgl.glcontext.GLContext context, uint type)
   {

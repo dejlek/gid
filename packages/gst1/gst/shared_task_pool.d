@@ -28,6 +28,11 @@ class SharedTaskPool : gst.task_pool.TaskPool
     return getGType();
   }
 
+  override SharedTaskPool self()
+  {
+    return this;
+  }
+
   /**
       Create a new shared task pool. The shared task pool will queue tasks on
     a maximum number of threads, 1 by default.

@@ -26,6 +26,11 @@ class GLRenderer : gsk.renderer.Renderer
     return getGType();
   }
 
+  override GLRenderer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
     Returns:     a new GL renderer

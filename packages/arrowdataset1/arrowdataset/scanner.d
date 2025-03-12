@@ -29,6 +29,11 @@ class Scanner : gobject.object.ObjectG
     return getGType();
   }
 
+  override Scanner self()
+  {
+    return this;
+  }
+
   /** */
   arrow.record_batch_reader.RecordBatchReader toRecordBatchReader()
   {

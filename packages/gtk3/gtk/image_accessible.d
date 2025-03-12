@@ -30,5 +30,10 @@ class ImageAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     return getGType();
   }
 
+  override ImageAccessible self()
+  {
+    return this;
+  }
+
   mixin ImageT!();
 }

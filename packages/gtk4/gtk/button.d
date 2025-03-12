@@ -67,6 +67,11 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override Button self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

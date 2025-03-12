@@ -376,6 +376,11 @@ class Builder : gobject.object.ObjectG
     return getGType();
   }
 
+  override Builder self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty builder object.
     

@@ -26,6 +26,11 @@ class ScalarAggregateOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override ScalarAggregateOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

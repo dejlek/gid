@@ -26,6 +26,11 @@ class IntegerDataType : arrow.numeric_data_type.NumericDataType
     return getGType();
   }
 
+  override IntegerDataType self()
+  {
+    return this;
+  }
+
   /** */
   bool isSigned()
   {

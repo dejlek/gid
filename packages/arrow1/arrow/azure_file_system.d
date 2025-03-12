@@ -25,4 +25,9 @@ class AzureFileSystem : arrow.file_system.FileSystem
   {
     return getGType();
   }
+
+  override AzureFileSystem self()
+  {
+    return this;
+  }
 }

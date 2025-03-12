@@ -45,6 +45,11 @@ class Quaternion : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Quaternion self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_quaternion_t.
     

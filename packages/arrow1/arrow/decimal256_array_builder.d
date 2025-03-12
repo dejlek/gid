@@ -30,6 +30,11 @@ class Decimal256ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     return getGType();
   }
 
+  override Decimal256ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal256_data_type.Decimal256DataType dataType)
   {

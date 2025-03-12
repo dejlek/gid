@@ -43,6 +43,11 @@ class Quad : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Quad self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_quad_t instance.
     

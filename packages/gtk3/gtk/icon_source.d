@@ -33,6 +33,11 @@ class IconSource : gobject.boxed.Boxed
     return getGType();
   }
 
+  override IconSource self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkIconSource. A #GtkIconSource contains a #GdkPixbuf (or
     image filename) that serves as the base image for one or more of the

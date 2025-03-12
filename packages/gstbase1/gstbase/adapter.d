@@ -130,6 +130,11 @@ class Adapter : gobject.object.ObjectG
     return getGType();
   }
 
+  override Adapter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstAdapter. Free with [gobject.object.ObjectG.unref].
     Returns:     a new #GstAdapter

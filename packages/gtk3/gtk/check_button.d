@@ -63,6 +63,11 @@ class CheckButton : gtk.toggle_button.ToggleButton
     return getGType();
   }
 
+  override CheckButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkCheckButton.
     Returns:     a #GtkWidget.

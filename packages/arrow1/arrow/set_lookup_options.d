@@ -27,6 +27,11 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override SetLookupOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.datum.Datum valueSet = null)
   {

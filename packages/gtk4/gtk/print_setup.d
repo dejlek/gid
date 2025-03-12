@@ -45,6 +45,11 @@ class PrintSetup : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PrintSetup self()
+  {
+    return this;
+  }
+
   /**
       Returns the page setup of setup.
     

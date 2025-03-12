@@ -58,6 +58,11 @@ class VideoOverlayComposition : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoOverlayComposition self()
+  {
+    return this;
+  }
+
   /**
       Creates a new video overlay composition object to hold one or more
     overlay rectangles.

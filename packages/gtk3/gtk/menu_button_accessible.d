@@ -31,4 +31,9 @@ class MenuButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
   {
     return getGType();
   }
+
+  override MenuButtonAccessible self()
+  {
+    return this;
+  }
 }

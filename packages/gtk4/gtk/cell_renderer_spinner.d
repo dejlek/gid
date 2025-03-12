@@ -42,6 +42,11 @@ class CellRendererSpinner : gtk.cell_renderer.CellRenderer
     return getGType();
   }
 
+  override CellRendererSpinner self()
+  {
+    return this;
+  }
+
   /**
       Returns a new cell renderer which will show a spinner to indicate
     activity.

@@ -28,6 +28,11 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
     return getGType();
   }
 
+  override OverlayLayoutChild self()
+  {
+    return this;
+  }
+
   /**
       Retrieves whether the child is clipped.
     Returns:     whether the child is clipped

@@ -48,6 +48,11 @@ class PtpClock : gst.system_clock.SystemClock
     return getGType();
   }
 
+  override PtpClock self()
+  {
+    return this;
+  }
+
   /**
       Creates a new PTP clock instance that exports the PTP time of the master
     clock in domain. This clock can be slaved to other clocks as needed.

@@ -32,6 +32,11 @@ class GLViewConvert : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLViewConvert self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

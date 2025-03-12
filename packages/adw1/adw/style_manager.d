@@ -36,6 +36,11 @@ class StyleManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleManager self()
+  {
+    return this;
+  }
+
   /**
       Gets the default [adw.style_manager.StyleManager] instance.
     

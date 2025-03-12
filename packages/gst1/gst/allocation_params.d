@@ -33,6 +33,11 @@ class AllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AllocationParams self()
+  {
+    return this;
+  }
+
   @property gst.types.MemoryFlags flags()
   {
     return cast(gst.types.MemoryFlags)(cast(GstAllocationParams*)cPtr).flags;

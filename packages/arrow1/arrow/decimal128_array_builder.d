@@ -30,6 +30,11 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
     return getGType();
   }
 
+  override Decimal128ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal128_data_type.Decimal128DataType dataType)
   {

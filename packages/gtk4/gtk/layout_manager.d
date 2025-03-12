@@ -77,6 +77,11 @@ class LayoutManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override LayoutManager self()
+  {
+    return this;
+  }
+
   /**
       Assigns the given width, height, and baseline to
     a widget, and computes the position and sizes of the children of

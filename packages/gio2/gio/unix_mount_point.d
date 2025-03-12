@@ -36,6 +36,11 @@ class UnixMountPoint : gobject.boxed.Boxed
     return getGType();
   }
 
+  override UnixMountPoint self()
+  {
+    return this;
+  }
+
   /**
       Compares two unix mount points.
     Params:

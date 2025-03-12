@@ -36,6 +36,11 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
     return getGType();
   }
 
+  override InputStream self()
+  {
+    return this;
+  }
+
   mixin FileT!();
   mixin ReadableT!();
   alias close = gio.input_stream.InputStream.close;

@@ -64,6 +64,11 @@ class PopoverMenuBar : gtk.widget.Widget
     return getGType();
   }
 
+  override PopoverMenuBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.popover_menu_bar.PopoverMenuBar] from a [gio.menu_model.MenuModel].
     Params:

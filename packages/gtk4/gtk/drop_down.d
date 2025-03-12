@@ -94,6 +94,11 @@ class DropDown : gtk.widget.Widget
     return getGType();
   }
 
+  override DropDown self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.drop_down.DropDown].
     

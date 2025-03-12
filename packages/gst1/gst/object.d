@@ -86,6 +86,11 @@ class ObjectGst : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override ObjectGst self()
+  {
+    return this;
+  }
+
   /**
       Checks to see if there is any object named name in list. This function
     does not do any locking of any kind. You might want to protect the

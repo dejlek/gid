@@ -30,6 +30,11 @@ class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.Com
     return getGType();
   }
 
+  override CompletionItem self()
+  {
+    return this;
+  }
+
   mixin CompletionProposalT!();
 
   /**

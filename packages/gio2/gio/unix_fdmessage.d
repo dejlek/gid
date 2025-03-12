@@ -43,6 +43,11 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
     return getGType();
   }
 
+  override UnixFDMessage self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GUnixFDMessage containing an empty file descriptor
     list.

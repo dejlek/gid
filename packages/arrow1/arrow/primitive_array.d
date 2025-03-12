@@ -28,6 +28,11 @@ class PrimitiveArray : arrow.array.Array
     return getGType();
   }
 
+  override PrimitiveArray self()
+  {
+    return this;
+  }
+
   /** */
   arrow.buffer.Buffer getBuffer()
   {

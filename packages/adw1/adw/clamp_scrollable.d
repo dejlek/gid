@@ -47,6 +47,11 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
     return getGType();
   }
 
+  override ClampScrollable self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
   mixin ScrollableT!();
 

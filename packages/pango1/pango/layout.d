@@ -73,6 +73,11 @@ class Layout : gobject.object.ObjectG
     return getGType();
   }
 
+  override Layout self()
+  {
+    return this;
+  }
+
   /**
       Create a new [pango.layout.Layout] object with attributes initialized to
     default values for a particular [pango.context.Context].

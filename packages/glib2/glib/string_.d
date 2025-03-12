@@ -43,6 +43,11 @@ class String : gobject.boxed.Boxed
     return getGType();
   }
 
+  override String self()
+  {
+    return this;
+  }
+
   @property string str()
   {
     return cToD!(string)(cast(void*)(cast(GString*)cPtr).str);

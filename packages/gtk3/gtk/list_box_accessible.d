@@ -30,5 +30,10 @@ class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.sele
     return getGType();
   }
 
+  override ListBoxAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
 }

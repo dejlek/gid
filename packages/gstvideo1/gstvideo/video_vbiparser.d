@@ -34,6 +34,11 @@ class VideoVBIParser : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoVBIParser self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstVideoVBIParser for the specified format and pixel_width.
     Params:

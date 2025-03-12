@@ -34,6 +34,11 @@ class GObjectAccessible : atk.object.ObjectAtk
     return getGType();
   }
 
+  override GObjectAccessible self()
+  {
+    return this;
+  }
+
   /**
       Gets the accessible object for the specified obj.
     Params:

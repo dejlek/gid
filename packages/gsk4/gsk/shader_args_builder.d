@@ -38,6 +38,11 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ShaderArgsBuilder self()
+  {
+    return this;
+  }
+
   /**
       Allocates a builder that can be used to construct a new uniform data
     chunk.

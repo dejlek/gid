@@ -41,6 +41,11 @@ class Array : gobject.object.ObjectG
     return getGType();
   }
 
+  override Array self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.array.Array import_(void* cAbiArray, arrow.data_type.DataType dataType)
   {

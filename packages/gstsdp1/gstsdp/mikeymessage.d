@@ -37,6 +37,11 @@ class MIKEYMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MIKEYMessage self()
+  {
+    return this;
+  }
+
   @property ubyte version_()
   {
     return (cast(GstMIKEYMessage*)cPtr).version_;

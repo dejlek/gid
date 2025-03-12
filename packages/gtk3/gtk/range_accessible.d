@@ -30,5 +30,10 @@ class RangeAccessible : gtk.widget_accessible.WidgetAccessible, atk.value.Value
     return getGType();
   }
 
+  override RangeAccessible self()
+  {
+    return this;
+  }
+
   mixin ValueT!();
 }

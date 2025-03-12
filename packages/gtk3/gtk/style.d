@@ -53,6 +53,11 @@ class Style : gobject.object.ObjectG
     return getGType();
   }
 
+  override Style self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkStyle.
     Returns:     a new #GtkStyle.

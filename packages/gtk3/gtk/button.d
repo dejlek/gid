@@ -61,6 +61,11 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     return getGType();
   }
 
+  override Button self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
   mixin ActivatableT!();
 

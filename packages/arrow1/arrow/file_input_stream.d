@@ -32,6 +32,11 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     return getGType();
   }
 
+  override FileInputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(string path)
   {

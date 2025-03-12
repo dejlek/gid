@@ -32,6 +32,11 @@ class TabPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  override TabPage self()
+  {
+    return this;
+  }
+
   mixin AccessibleT!();
 
   /**

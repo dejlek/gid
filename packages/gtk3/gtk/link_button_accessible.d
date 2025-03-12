@@ -34,5 +34,10 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
     return getGType();
   }
 
+  override LinkButtonAccessible self()
+  {
+    return this;
+  }
+
   mixin HyperlinkImplT!();
 }

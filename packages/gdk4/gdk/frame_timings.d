@@ -40,6 +40,11 @@ class FrameTimings : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FrameTimings self()
+  {
+    return this;
+  }
+
   /**
       Returns whether timings are complete.
     

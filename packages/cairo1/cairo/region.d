@@ -40,6 +40,11 @@ class Region : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Region self()
+  {
+    return this;
+  }
+
   /**
       Checks whether (x, y) is contained in region.
     Params:

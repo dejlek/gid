@@ -32,6 +32,11 @@ class VButtonBox : gtk.button_box.ButtonBox
     return getGType();
   }
 
+  override VButtonBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new vertical button box.
     Returns:     a new button box #GtkWidget.

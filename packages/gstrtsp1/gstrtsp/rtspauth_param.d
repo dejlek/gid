@@ -38,6 +38,11 @@ class RTSPAuthParam : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RTSPAuthParam self()
+  {
+    return this;
+  }
+
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);

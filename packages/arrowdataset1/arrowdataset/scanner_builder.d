@@ -31,6 +31,11 @@ class ScannerBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  override ScannerBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrowdataset.dataset.Dataset dataset)
   {

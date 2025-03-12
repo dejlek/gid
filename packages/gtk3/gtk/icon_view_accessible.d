@@ -30,5 +30,10 @@ class IconViewAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return getGType();
   }
 
+  override IconViewAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
 }

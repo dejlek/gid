@@ -27,4 +27,9 @@ class GLBaseMemoryAllocator : gst.allocator.Allocator
   {
     return getGType();
   }
+
+  override GLBaseMemoryAllocator self()
+  {
+    return this;
+  }
 }

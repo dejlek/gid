@@ -51,6 +51,11 @@ class HBox : gtk.box.Box
     return getGType();
   }
 
+  override HBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkHBox.
     Params:

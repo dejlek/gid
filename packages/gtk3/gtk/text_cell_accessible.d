@@ -34,5 +34,10 @@ class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, 
     return getGType();
   }
 
+  override TextCellAccessible self()
+  {
+    return this;
+  }
+
   mixin TextT!();
 }

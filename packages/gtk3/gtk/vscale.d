@@ -42,6 +42,11 @@ class VScale : gtk.scale.Scale
     return getGType();
   }
 
+  override VScale self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkVScale.
     Params:

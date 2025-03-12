@@ -49,6 +49,11 @@ class StackSidebar : gtk.bin.Bin
     return getGType();
   }
 
+  override StackSidebar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new sidebar.
     Returns:     the new #GtkStackSidebar

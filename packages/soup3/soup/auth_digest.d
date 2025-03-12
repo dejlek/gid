@@ -31,4 +31,9 @@ class AuthDigest : soup.auth.Auth
   {
     return getGType();
   }
+
+  override AuthDigest self()
+  {
+    return this;
+  }
 }

@@ -131,6 +131,11 @@ class MenuButton : gtk.toggle_button.ToggleButton
     return getGType();
   }
 
+  override MenuButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkMenuButton widget with downwards-pointing
     arrow as the only child. You can replace the child widget

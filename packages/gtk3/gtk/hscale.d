@@ -42,6 +42,11 @@ class HScale : gtk.scale.Scale
     return getGType();
   }
 
+  override HScale self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkHScale.
     Params:

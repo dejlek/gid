@@ -43,6 +43,11 @@ class VolumeButton : gtk.scale_button.ScaleButton
     return getGType();
   }
 
+  override VolumeButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.volume_button.VolumeButton].
     

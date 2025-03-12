@@ -99,6 +99,11 @@ class PrintContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override PrintContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #PangoContext that can be used with the
     #GtkPrintContext.

@@ -35,6 +35,11 @@ class Buffer : gtk.text_buffer.TextBuffer
     return getGType();
   }
 
+  override Buffer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new source buffer.
     Params:

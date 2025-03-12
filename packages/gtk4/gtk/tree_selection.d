@@ -59,6 +59,11 @@ class TreeSelection : gobject.object.ObjectG
     return getGType();
   }
 
+  override TreeSelection self()
+  {
+    return this;
+  }
+
   /**
       Returns the number of rows that have been selected in tree.
     Returns:     The number of rows selected.

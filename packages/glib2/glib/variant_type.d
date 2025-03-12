@@ -191,6 +191,11 @@ class VariantType : Boxed
     return getGType();
   }
 
+  override VariantType self()
+  {
+    return this;
+  }
+
   /**
   * Template for creating a new VariantType from one or more D types
   * Returns: New variant type

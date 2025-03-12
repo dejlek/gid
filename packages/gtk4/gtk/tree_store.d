@@ -73,6 +73,11 @@ class TreeStore : gobject.object.ObjectG, gtk.buildable.Buildable, gtk.tree_drag
     return getGType();
   }
 
+  override TreeStore self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
   mixin TreeDragDestT!();
   mixin TreeDragSourceT!();

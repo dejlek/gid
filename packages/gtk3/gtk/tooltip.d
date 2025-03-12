@@ -70,6 +70,11 @@ class Tooltip : gobject.object.ObjectG
     return getGType();
   }
 
+  override Tooltip self()
+  {
+    return this;
+  }
+
   /**
       Triggers a new tooltip query on display, in order to update the current
     visible tooltip, or to show/hide the current tooltip.  This function is

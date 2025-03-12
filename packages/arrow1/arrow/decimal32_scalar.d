@@ -29,6 +29,11 @@ class Decimal32Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Decimal32Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal32_data_type.Decimal32DataType dataType, arrow.decimal32.Decimal32 value)
   {

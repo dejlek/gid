@@ -26,6 +26,11 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
     return getGType();
   }
 
+  override StrptimeTimestampParser self()
+  {
+    return this;
+  }
+
   /** */
   this(string format)
   {

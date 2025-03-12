@@ -31,6 +31,11 @@ class RTPHeaderExtension : gst.element.Element
     return getGType();
   }
 
+  override RTPHeaderExtension self()
+  {
+    return this;
+  }
+
   /** */
   static gstrtp.rtpheader_extension.RTPHeaderExtension createFromUri(string uri)
   {

@@ -37,6 +37,11 @@ class ScrollInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ScrollInfo self()
+  {
+    return this;
+  }
+
   /**
       Creates a new scroll info for scrolling an element into view.
     Returns:     A new scroll info

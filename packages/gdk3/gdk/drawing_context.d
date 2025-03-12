@@ -40,6 +40,11 @@ class DrawingContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override DrawingContext self()
+  {
+    return this;
+  }
+
   /**
       Retrieves a Cairo context to be used to draw on the #GdkWindow
     that created the #GdkDrawingContext.

@@ -38,6 +38,11 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
     return getGType();
   }
 
+  override ListBase self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
   mixin ScrollableT!();
 }

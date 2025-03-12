@@ -77,6 +77,11 @@ class ActionRow : adw.preferences_row.PreferencesRow
     return getGType();
   }
 
+  override ActionRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.action_row.ActionRow].
     Returns:     the newly created [adw.action_row.ActionRow]

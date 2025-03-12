@@ -32,6 +32,11 @@ class EncodingProfile : gobject.object.ObjectG
     return getGType();
   }
 
+  override EncodingProfile self()
+  {
+    return this;
+  }
+
   /**
       Find the #GstEncodingProfile with the specified name and category.
     Params:

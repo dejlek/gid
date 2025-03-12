@@ -29,6 +29,11 @@ class RecordBatchReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchReader self()
+  {
+    return this;
+  }
+
   /** */
   arrow.table.Table readAll()
   {

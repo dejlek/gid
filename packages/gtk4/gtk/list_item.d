@@ -43,6 +43,11 @@ class ListItem : gobject.object.ObjectG
     return getGType();
   }
 
+  override ListItem self()
+  {
+    return this;
+  }
+
   /**
       Gets the accessible description of self.
     Returns:     the accessible description

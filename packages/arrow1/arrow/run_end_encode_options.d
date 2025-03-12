@@ -27,6 +27,11 @@ class RunEndEncodeOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override RunEndEncodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.data_type.DataType runEndDataType = null)
   {

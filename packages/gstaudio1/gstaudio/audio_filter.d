@@ -39,4 +39,9 @@ class AudioFilter : gstbase.base_transform.BaseTransform
   {
     return getGType();
   }
+
+  override AudioFilter self()
+  {
+    return this;
+  }
 }

@@ -94,6 +94,11 @@ class SizeGroup : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override SizeGroup self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

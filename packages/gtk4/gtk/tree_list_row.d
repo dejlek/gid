@@ -39,6 +39,11 @@ class TreeListRow : gobject.object.ObjectG
     return getGType();
   }
 
+  override TreeListRow self()
+  {
+    return this;
+  }
+
   /**
       If self is not expanded or position is greater than the
     number of children, null is returned.

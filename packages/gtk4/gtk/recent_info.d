@@ -39,6 +39,11 @@ class RecentInfo : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RecentInfo self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gio.app_info.AppInfo] for the specified [gtk.recent_info.RecentInfo]
     

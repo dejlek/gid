@@ -36,4 +36,9 @@ class ProxyAddressEnumerator : gio.socket_address_enumerator.SocketAddressEnumer
   {
     return getGType();
   }
+
+  override ProxyAddressEnumerator self()
+  {
+    return this;
+  }
 }

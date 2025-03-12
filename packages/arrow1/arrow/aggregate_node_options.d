@@ -28,6 +28,11 @@ class AggregateNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override AggregateNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.aggregation.Aggregation[] aggregations, string[] keys = null)
   {

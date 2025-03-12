@@ -37,6 +37,11 @@ class RecordBatch : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatch self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema, uint nRows, arrow.array.Array[] columns)
   {

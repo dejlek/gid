@@ -46,6 +46,11 @@ class MessageMetrics : gobject.boxed.Boxed
     return getGType();
   }
 
+  override MessageMetrics self()
+  {
+    return this;
+  }
+
   /**
       Copies metrics.
     Returns:     a copy of metrics

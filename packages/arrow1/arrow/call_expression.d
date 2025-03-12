@@ -27,6 +27,11 @@ class CallExpression : arrow.expression.Expression
     return getGType();
   }
 
+  override CallExpression self()
+  {
+    return this;
+  }
+
   /** */
   this(string function_, arrow.expression.Expression[] arguments, arrow.function_options.FunctionOptions options = null)
   {

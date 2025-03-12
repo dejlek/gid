@@ -30,6 +30,11 @@ class GLShader : gst.object.ObjectGst
     return getGType();
   }
 
+  override GLShader self()
+  {
+    return this;
+  }
+
   /**
       Note: must be called in the GL thread
     Params:

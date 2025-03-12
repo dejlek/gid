@@ -78,6 +78,11 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  override TypeFindFactory self()
+  {
+    return this;
+  }
+
   /**
       Gets the list of all registered typefind factories. You must free the
     list using [gst.plugin_feature.PluginFeature.listFree].

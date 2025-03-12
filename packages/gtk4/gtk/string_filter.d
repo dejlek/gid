@@ -41,6 +41,11 @@ class StringFilter : gtk.filter.Filter
     return getGType();
   }
 
+  override StringFilter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new string filter.
     

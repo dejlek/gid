@@ -32,6 +32,11 @@ class FilterInputStream : gio.input_stream.InputStream
     return getGType();
   }
 
+  override FilterInputStream self()
+  {
+    return this;
+  }
+
   /**
       Gets the base stream for the filter stream.
     Returns:     a #GInputStream.

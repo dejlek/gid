@@ -113,6 +113,11 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
     return getGType();
   }
 
+  override ToolPalette self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
   mixin ScrollableT!();
 

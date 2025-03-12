@@ -32,6 +32,11 @@ class CompressedOutputStream : arrow.output_stream.OutputStream
     return getGType();
   }
 
+  override CompressedOutputStream self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.codec.Codec codec, arrow.output_stream.OutputStream raw)
   {

@@ -65,6 +65,11 @@ class SwitchRow : adw.action_row.ActionRow
     return getGType();
   }
 
+  override SwitchRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.switch_row.SwitchRow].
     Returns:     the newly created [adw.switch_row.SwitchRow]

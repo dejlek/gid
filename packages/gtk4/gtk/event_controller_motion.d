@@ -37,6 +37,11 @@ class EventControllerMotion : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerMotion self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle motion events.
     Returns:     a new [gtk.event_controller_motion.EventControllerMotion]

@@ -173,6 +173,11 @@ class NavigationSplitView : gtk.widget.Widget
     return getGType();
   }
 
+  override NavigationSplitView self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.navigation_split_view.NavigationSplitView].
     Returns:     the newly created [adw.navigation_split_view.NavigationSplitView]

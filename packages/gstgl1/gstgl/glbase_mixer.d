@@ -32,6 +32,11 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
     return getGType();
   }
 
+  override GLBaseMixer self()
+  {
+    return this;
+  }
+
   /** */
   gstgl.glcontext.GLContext getGlContext()
   {

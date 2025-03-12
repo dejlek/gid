@@ -102,6 +102,11 @@ class IconFactory : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override IconFactory self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

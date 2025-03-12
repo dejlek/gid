@@ -25,4 +25,9 @@ class DoPutResult : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override DoPutResult self()
+  {
+    return this;
+  }
 }

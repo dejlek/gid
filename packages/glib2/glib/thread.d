@@ -46,6 +46,11 @@ class Thread : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Thread self()
+  {
+    return this;
+  }
+
   /**
       This function creates a new thread. The new thread starts by invoking
     func with the argument data. The thread will run until func returns

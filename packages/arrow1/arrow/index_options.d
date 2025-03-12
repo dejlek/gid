@@ -26,6 +26,11 @@ class IndexOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override IndexOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

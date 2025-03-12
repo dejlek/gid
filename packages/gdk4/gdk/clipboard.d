@@ -56,6 +56,11 @@ class Clipboard : gobject.object.ObjectG
     return getGType();
   }
 
+  override Clipboard self()
+  {
+    return this;
+  }
+
   /**
       Returns the [gdk.content_provider.ContentProvider] currently set on clipboard.
     

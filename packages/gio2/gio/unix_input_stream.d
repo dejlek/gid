@@ -40,6 +40,11 @@ class UnixInputStream : gio.input_stream.InputStream, gio.file_descriptor_based.
     return getGType();
   }
 
+  override UnixInputStream self()
+  {
+    return this;
+  }
+
   mixin FileDescriptorBasedT!();
   mixin PollableInputStreamT!();
 

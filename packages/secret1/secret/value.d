@@ -46,6 +46,11 @@ class Value : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Value self()
+  {
+    return this;
+  }
+
   /**
       Create a #SecretValue for the secret data passed in.
     

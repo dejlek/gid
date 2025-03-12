@@ -75,6 +75,11 @@ class ListBox : gtk.container.Container
     return getGType();
   }
 
+  override ListBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkListBox container.
     Returns:     a new #GtkListBox

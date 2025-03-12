@@ -30,6 +30,11 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
     return getGType();
   }
 
+  override Decimal64ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.decimal64_data_type.Decimal64DataType dataType)
   {

@@ -34,6 +34,11 @@ class ListHeader : gobject.object.ObjectG
     return getGType();
   }
 
+  override ListHeader self()
+  {
+    return this;
+  }
+
   /**
       Gets the child previously set via [gtk.list_header.ListHeader.setChild] or
     null if none was set.

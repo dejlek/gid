@@ -65,6 +65,11 @@ class DropTargetAsync : gtk.event_controller.EventController
     return getGType();
   }
 
+  override DropTargetAsync self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.drop_target_async.DropTargetAsync] object.
     Params:

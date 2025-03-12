@@ -38,6 +38,11 @@ class TreeRowReference : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TreeRowReference self()
+  {
+    return this;
+  }
+
   /**
       Creates a row reference based on path.
     

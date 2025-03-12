@@ -39,6 +39,11 @@ class EntryBuffer : gobject.object.ObjectG
     return getGType();
   }
 
+  override EntryBuffer self()
+  {
+    return this;
+  }
+
   /**
       Create a new GtkEntryBuffer object.
     

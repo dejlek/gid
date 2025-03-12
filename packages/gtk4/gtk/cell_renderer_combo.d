@@ -44,6 +44,11 @@ class CellRendererCombo : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  override CellRendererCombo self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.cell_renderer_combo.CellRendererCombo].
     Adjust how text is drawn using object properties.

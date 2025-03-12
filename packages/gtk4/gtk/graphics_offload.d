@@ -72,6 +72,11 @@ class GraphicsOffload : gtk.widget.Widget
     return getGType();
   }
 
+  override GraphicsOffload self()
+  {
+    return this;
+  }
+
   /**
       Creates a new GtkGraphicsOffload widget.
     Params:

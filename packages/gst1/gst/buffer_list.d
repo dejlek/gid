@@ -41,6 +41,11 @@ class BufferList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override BufferList self()
+  {
+    return this;
+  }
+
   /**
       Creates a new, empty #GstBufferList.
     Returns:     the new #GstBufferList.

@@ -43,6 +43,11 @@ class PixbufFormat : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PixbufFormat self()
+  {
+    return this;
+  }
+
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)cPtr).name);

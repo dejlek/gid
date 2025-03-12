@@ -67,6 +67,11 @@ class FlowCombiner : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FlowCombiner self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstFlowCombiner, use [gstbase.flow_combiner.FlowCombiner.free] to free it.
     Returns:     A new #GstFlowCombiner

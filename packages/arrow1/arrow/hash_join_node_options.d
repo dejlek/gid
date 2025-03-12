@@ -27,6 +27,11 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override HashJoinNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.types.JoinType type, string[] leftKeys, string[] rightKeys)
   {

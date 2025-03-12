@@ -78,6 +78,11 @@ class Breakpoint : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override Breakpoint self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

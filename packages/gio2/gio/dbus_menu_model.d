@@ -32,6 +32,11 @@ class DBusMenuModel : gio.menu_model.MenuModel
     return getGType();
   }
 
+  override DBusMenuModel self()
+  {
+    return this;
+  }
+
   /**
       Obtains a #GDBusMenuModel for the menu model which is exported
     at the given bus_name and object_path.

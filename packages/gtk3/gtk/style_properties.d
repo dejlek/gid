@@ -47,6 +47,11 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  override StyleProperties self()
+  {
+    return this;
+  }
+
   mixin StyleProviderT!();
 
   /**

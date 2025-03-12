@@ -70,6 +70,11 @@ class StackSwitcher : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override StackSwitcher self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

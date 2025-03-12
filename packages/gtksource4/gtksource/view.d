@@ -42,6 +42,11 @@ class View : gtk.text_view.TextView
     return getGType();
   }
 
+  override View self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceView.
     

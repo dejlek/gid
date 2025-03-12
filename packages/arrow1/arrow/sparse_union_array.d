@@ -31,6 +31,11 @@ class SparseUnionArray : arrow.union_array.UnionArray
     return getGType();
   }
 
+  override SparseUnionArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.int8_array.Int8Array typeIds, arrow.array.Array[] fields)
   {

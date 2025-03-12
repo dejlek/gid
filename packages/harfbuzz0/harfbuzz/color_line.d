@@ -38,6 +38,11 @@ class ColorLine : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ColorLine self()
+  {
+    return this;
+  }
+
   @property hb_color_line_get_color_stops_func_t getColorStops()
   {
     return (cast(hb_color_line_t*)cPtr).getColorStops;

@@ -93,6 +93,11 @@ class DmabufTextureBuilder : gobject.object.ObjectG
     return getGType();
   }
 
+  override DmabufTextureBuilder self()
+  {
+    return this;
+  }
+
   /**
       Creates a new texture builder.
     Returns:     the new `GdkTextureBuilder`

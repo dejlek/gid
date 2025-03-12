@@ -34,6 +34,11 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
     return getGType();
   }
 
+  override CellRendererAccel self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkCellRendererAccel.
     Returns:     the new cell renderer

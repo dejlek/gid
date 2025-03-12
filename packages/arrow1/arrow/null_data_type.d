@@ -26,6 +26,11 @@ class NullDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override NullDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

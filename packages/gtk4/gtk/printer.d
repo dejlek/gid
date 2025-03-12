@@ -39,6 +39,11 @@ class Printer : gobject.object.ObjectG
     return getGType();
   }
 
+  override Printer self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.printer.Printer].
     Params:

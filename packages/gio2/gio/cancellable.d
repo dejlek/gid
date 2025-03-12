@@ -36,6 +36,11 @@ class Cancellable : gobject.object.ObjectG
     return getGType();
   }
 
+  override Cancellable self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GCancellable object.
     

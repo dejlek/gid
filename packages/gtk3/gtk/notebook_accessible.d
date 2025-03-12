@@ -30,5 +30,10 @@ class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.sel
     return getGType();
   }
 
+  override NotebookAccessible self()
+  {
+    return this;
+  }
+
   mixin SelectionT!();
 }

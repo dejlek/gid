@@ -146,6 +146,11 @@ class BreakpointBin : gtk.widget.Widget
     return getGType();
   }
 
+  override BreakpointBin self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.breakpoint_bin.BreakpointBin].
     Returns:     the newly created [adw.breakpoint_bin.BreakpointBin]

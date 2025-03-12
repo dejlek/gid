@@ -128,6 +128,11 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override LevelBar self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

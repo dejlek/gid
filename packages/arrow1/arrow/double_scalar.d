@@ -26,6 +26,11 @@ class DoubleScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override DoubleScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(double value)
   {

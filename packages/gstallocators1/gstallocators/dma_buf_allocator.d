@@ -30,6 +30,11 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
     return getGType();
   }
 
+  override DmaBufAllocator self()
+  {
+    return this;
+  }
+
   /**
       Return a new dmabuf allocator.
     Returns:     a new dmabuf allocator. Use [gst.object.ObjectGst.unref] to

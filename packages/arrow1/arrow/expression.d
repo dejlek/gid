@@ -26,6 +26,11 @@ class Expression : gobject.object.ObjectG
     return getGType();
   }
 
+  override Expression self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(arrow.expression.Expression otherExpression)
   {

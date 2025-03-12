@@ -56,6 +56,11 @@ class Display : gobject.object.ObjectG
     return getGType();
   }
 
+  override Display self()
+  {
+    return this;
+  }
+
   /**
       Gets the default [gdk.display.Display].
     

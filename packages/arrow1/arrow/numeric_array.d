@@ -27,6 +27,11 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  override NumericArray self()
+  {
+    return this;
+  }
+
   /** */
   double mean()
   {

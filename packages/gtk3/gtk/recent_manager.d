@@ -91,6 +91,11 @@ class RecentManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecentManager self()
+  {
+    return this;
+  }
+
   /**
       Creates a new recent manager object. Recent manager objects are used to
     handle the list of recently used resources. A #GtkRecentManager object

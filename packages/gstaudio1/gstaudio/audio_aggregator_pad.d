@@ -27,4 +27,9 @@ class AudioAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   {
     return getGType();
   }
+
+  override AudioAggregatorPad self()
+  {
+    return this;
+  }
 }

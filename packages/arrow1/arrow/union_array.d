@@ -27,6 +27,11 @@ class UnionArray : arrow.array.Array
     return getGType();
   }
 
+  override UnionArray self()
+  {
+    return this;
+  }
+
   /** */
   int getChildId(long i)
   {

@@ -71,6 +71,11 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
     return getGType();
   }
 
+  override FileFilter self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

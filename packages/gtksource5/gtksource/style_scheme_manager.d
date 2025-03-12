@@ -29,6 +29,11 @@ class StyleSchemeManager : gobject.object.ObjectG
     return getGType();
   }
 
+  override StyleSchemeManager self()
+  {
+    return this;
+  }
+
   /**
       Creates a new style manager.
     

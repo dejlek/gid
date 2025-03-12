@@ -38,6 +38,11 @@ class SchemaAttribute : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SchemaAttribute self()
+  {
+    return this;
+  }
+
   @property string name()
   {
     return cToD!(string)(cast(void*)(cast(SecretSchemaAttribute*)cPtr).name);

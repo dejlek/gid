@@ -74,6 +74,11 @@ class PageSetup : gobject.object.ObjectG
     return getGType();
   }
 
+  override PageSetup self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkPageSetup.
     Returns:     a new #GtkPageSetup.

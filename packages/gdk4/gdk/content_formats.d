@@ -66,6 +66,11 @@ class ContentFormats : gobject.boxed.Boxed
     return getGType();
   }
 
+  override ContentFormats self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gdk.content_formats.ContentFormats] from an array of mime types.
     

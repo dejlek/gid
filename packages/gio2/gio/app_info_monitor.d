@@ -69,6 +69,11 @@ class AppInfoMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  override AppInfoMonitor self()
+  {
+    return this;
+  }
+
   /**
       Gets the #GAppInfoMonitor for the current thread-default main
     context.

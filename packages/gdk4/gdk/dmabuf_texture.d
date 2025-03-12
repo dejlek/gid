@@ -38,4 +38,9 @@ class DmabufTexture : gdk.texture.Texture
   {
     return getGType();
   }
+
+  override DmabufTexture self()
+  {
+    return this;
+  }
 }

@@ -36,6 +36,11 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureLongPress self()
+  {
+    return this;
+  }
+
   /**
       Returns a newly created #GtkGesture that recognizes long presses.
     Params:

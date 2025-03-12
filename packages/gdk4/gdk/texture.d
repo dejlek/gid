@@ -52,6 +52,11 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
     return getGType();
   }
 
+  override Texture self()
+  {
+    return this;
+  }
+
   mixin PaintableT!();
   mixin IconT!();
   mixin LoadableIconT!();

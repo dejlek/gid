@@ -46,6 +46,11 @@ class PaperSize : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PaperSize self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkPaperSize object by parsing a
     [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)

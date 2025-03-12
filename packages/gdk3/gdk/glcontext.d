@@ -81,6 +81,11 @@ class GLContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override GLContext self()
+  {
+    return this;
+  }
+
   /**
       Clears the current #GdkGLContext.
     

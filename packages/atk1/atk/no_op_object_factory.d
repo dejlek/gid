@@ -32,6 +32,11 @@ class NoOpObjectFactory : atk.object_factory.ObjectFactory
     return getGType();
   }
 
+  override NoOpObjectFactory self()
+  {
+    return this;
+  }
+
   /**
       Creates an instance of an #AtkObjectFactory which generates primitive
     (non-functioning) #AtkObjects.

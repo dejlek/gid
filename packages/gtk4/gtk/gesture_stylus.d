@@ -35,6 +35,11 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     return getGType();
   }
 
+  override GestureStylus self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.gesture_stylus.GestureStylus].
     Returns:     a newly created stylus gesture

@@ -38,6 +38,11 @@ class Auth : gobject.object.ObjectG
     return getGType();
   }
 
+  override Auth self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #SoupAuth of type type with the information from
     msg and auth_header.

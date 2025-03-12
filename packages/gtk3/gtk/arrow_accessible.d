@@ -30,5 +30,10 @@ class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
     return getGType();
   }
 
+  override ArrowAccessible self()
+  {
+    return this;
+  }
+
   mixin ImageT!();
 }

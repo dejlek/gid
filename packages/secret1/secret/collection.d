@@ -53,6 +53,11 @@ class Collection : gio.dbus_proxy.DBusProxy
     return getGType();
   }
 
+  override Collection self()
+  {
+    return this;
+  }
+
   /**
       Create a new collection in the secret service.
     

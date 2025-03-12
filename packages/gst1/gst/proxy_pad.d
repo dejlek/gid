@@ -31,6 +31,11 @@ class ProxyPad : gst.pad.Pad
     return getGType();
   }
 
+  override ProxyPad self()
+  {
+    return this;
+  }
+
   /**
       Invoke the default chain function of the proxy pad.
     Params:

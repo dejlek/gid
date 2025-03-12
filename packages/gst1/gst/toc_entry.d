@@ -33,6 +33,11 @@ class TocEntry : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TocEntry self()
+  {
+    return this;
+  }
+
   /**
       Create new #GstTocEntry structure.
     Params:

@@ -31,6 +31,11 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
     return getGType();
   }
 
+  override ServerCustomAuthHandler self()
+  {
+    return this;
+  }
+
   /**
       Authenticates the client on initial connection. The server can send
     and read responses from the client at any time.

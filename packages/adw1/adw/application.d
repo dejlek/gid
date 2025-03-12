@@ -64,6 +64,11 @@ class Application : gtk.application.Application
     return getGType();
   }
 
+  override Application self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.application.Application].
     

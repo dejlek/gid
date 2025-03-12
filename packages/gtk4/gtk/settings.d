@@ -58,6 +58,11 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
     return getGType();
   }
 
+  override Settings self()
+  {
+    return this;
+  }
+
   mixin StyleProviderT!();
 
   /**

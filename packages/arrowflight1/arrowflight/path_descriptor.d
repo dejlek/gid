@@ -26,6 +26,11 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
     return getGType();
   }
 
+  override PathDescriptor self()
+  {
+    return this;
+  }
+
   /** */
   this(string[] paths)
   {

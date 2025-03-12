@@ -30,6 +30,11 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
     return getGType();
   }
 
+  override VideoAggregatorConvertPad self()
+  {
+    return this;
+  }
+
   /**
       Requests the pad to check and update the converter before the next usage to
     update for any changes that have happened.

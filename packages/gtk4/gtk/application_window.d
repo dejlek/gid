@@ -117,6 +117,11 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
     return getGType();
   }
 
+  override ApplicationWindow self()
+  {
+    return this;
+  }
+
   mixin ActionGroupT!();
   mixin ActionMapT!();
   alias activateAction = gtk.widget.Widget.activateAction;

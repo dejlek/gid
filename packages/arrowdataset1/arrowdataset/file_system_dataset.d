@@ -29,6 +29,11 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
     return getGType();
   }
 
+  override FileSystemDataset self()
+  {
+    return this;
+  }
+
   /** */
   static bool writeScanner(arrowdataset.scanner.Scanner scanner, arrowdataset.file_system_dataset_write_options.FileSystemDatasetWriteOptions options)
   {

@@ -51,6 +51,11 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     return getGType();
   }
 
+  override AppLaunchContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GdkAppLaunchContext.
     Returns:     a new #GdkAppLaunchContext

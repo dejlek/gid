@@ -124,6 +124,11 @@ class Server : gobject.object.ObjectG
     return getGType();
   }
 
+  override Server self()
+  {
+    return this;
+  }
+
   /**
       Adds a new client stream to the server.
     Params:

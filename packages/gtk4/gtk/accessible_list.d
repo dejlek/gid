@@ -35,6 +35,11 @@ class AccessibleList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AccessibleList self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new list of accessible instances.
     Params:

@@ -26,6 +26,11 @@ class HalfFloatScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override HalfFloatScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(ushort value)
   {

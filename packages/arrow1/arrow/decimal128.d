@@ -28,6 +28,11 @@ class Decimal128 : gobject.object.ObjectG
     return getGType();
   }
 
+  override Decimal128 self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.decimal128.Decimal128 newInteger(long data)
   {

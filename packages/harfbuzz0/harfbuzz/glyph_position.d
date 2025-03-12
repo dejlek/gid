@@ -40,6 +40,11 @@ class GlyphPosition : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GlyphPosition self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Position xAdvance()
   {
     return (cast(hb_glyph_position_t*)cPtr).xAdvance;

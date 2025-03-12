@@ -34,6 +34,11 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
     return getGType();
   }
 
+  override CharsetConverter self()
+  {
+    return this;
+  }
+
   mixin ConverterT!();
   mixin InitableT!();
 

@@ -27,6 +27,11 @@ class ExecuteNode : gobject.object.ObjectG
     return getGType();
   }
 
+  override ExecuteNode self()
+  {
+    return this;
+  }
+
   /** */
   string getKindName()
   {

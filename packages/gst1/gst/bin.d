@@ -144,6 +144,11 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
     return getGType();
   }
 
+  override Bin self()
+  {
+    return this;
+  }
+
   mixin ChildProxyT!();
 
   /**

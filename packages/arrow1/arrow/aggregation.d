@@ -27,6 +27,11 @@ class Aggregation : gobject.object.ObjectG
     return getGType();
   }
 
+  override Aggregation self()
+  {
+    return this;
+  }
+
   /** */
   this(string function_, arrow.function_options.FunctionOptions options, string input, string output)
   {

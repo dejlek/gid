@@ -31,4 +31,9 @@ class BooleanCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessibl
   {
     return getGType();
   }
+
+  override BooleanCellAccessible self()
+  {
+    return this;
+  }
 }

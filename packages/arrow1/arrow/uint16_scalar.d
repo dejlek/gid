@@ -26,6 +26,11 @@ class UInt16Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override UInt16Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(ushort value)
   {

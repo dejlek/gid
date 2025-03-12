@@ -72,6 +72,11 @@ class Region : gobject.object.ObjectG
     return getGType();
   }
 
+  override Region self()
+  {
+    return this;
+  }
+
   /** */
   this(gtk.text_buffer.TextBuffer buffer)
   {

@@ -116,6 +116,11 @@ class DrawingArea : gtk.widget.Widget
     return getGType();
   }
 
+  override DrawingArea self()
+  {
+    return this;
+  }
+
   /**
       Creates a new drawing area.
     Returns:     a new #GtkDrawingArea

@@ -26,6 +26,11 @@ class Date32Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Date32Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(int value)
   {

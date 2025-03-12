@@ -31,4 +31,9 @@ class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAcce
   {
     return getGType();
   }
+
+  override RadioMenuItemAccessible self()
+  {
+    return this;
+  }
 }

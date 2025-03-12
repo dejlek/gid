@@ -66,6 +66,11 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override TabButton self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

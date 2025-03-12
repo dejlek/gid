@@ -51,6 +51,11 @@ class Context : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Context self()
+  {
+    return this;
+  }
+
   /**
       Append the path onto the current path. The path may be either the
     return value from one of [cairo.context.Context.copyPath] or

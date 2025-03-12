@@ -27,6 +27,11 @@ class Time32Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Time32Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.time32_data_type.Time32DataType dataType, int value)
   {

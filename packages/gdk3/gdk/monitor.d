@@ -19,7 +19,7 @@ import gobject.object;
   GdkMonitor was introduced in GTK+ 3.22 and supersedes earlier
   APIs in GdkScreen to obtain monitor-related information.
 */
-class Monitor : gobject.object.ObjectG
+class MonitorG : gobject.object.ObjectG
 {
 
   this(void* ptr, Flag!"Take" take = No.Take)
@@ -36,6 +36,11 @@ class Monitor : gobject.object.ObjectG
   override @property GType gType()
   {
     return getGType();
+  }
+
+  override MonitorG self()
+  {
+    return this;
   }
 
   /**
@@ -196,10 +201,10 @@ class Monitor : gobject.object.ObjectG
   }
 
   /** */
-  alias InvalidateCallbackDlg = void delegate(gdk.monitor.Monitor monitor);
+  alias InvalidateCallbackDlg = void delegate(gdk.monitor.MonitorG monitorG);
 
   /** ditto */
-  alias InvalidateCallbackFunc = void function(gdk.monitor.Monitor monitor);
+  alias InvalidateCallbackFunc = void function(gdk.monitor.MonitorG monitorG);
 
   /**
     Connect to Invalidate signal.
@@ -215,8 +220,8 @@ class Monitor : gobject.object.ObjectG
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto monitor = getVal!(gdk.monitor.Monitor)(_paramVals);
-      _dClosure.dlg(monitor);
+      auto monitorG = getVal!(gdk.monitor.MonitorG)(_paramVals);
+      _dClosure.dlg(monitorG);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

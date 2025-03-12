@@ -51,6 +51,11 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
     return getGType();
   }
 
+  override CellAreaBox self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

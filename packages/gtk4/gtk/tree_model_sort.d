@@ -133,6 +133,11 @@ class TreeModelSort : gobject.object.ObjectG, gtk.tree_drag_source.TreeDragSourc
     return getGType();
   }
 
+  override TreeModelSort self()
+  {
+    return this;
+  }
+
   mixin TreeDragSourceT!();
   mixin TreeModelT!();
   mixin TreeSortableT!();

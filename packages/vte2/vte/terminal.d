@@ -51,6 +51,11 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     return getGType();
   }
 
+  override Terminal self()
+  {
+    return this;
+  }
+
   mixin ScrollableT!();
 
   /**

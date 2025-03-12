@@ -30,4 +30,9 @@ class GLBaseSrc : gstbase.push_src.PushSrc
   {
     return getGType();
   }
+
+  override GLBaseSrc self()
+  {
+    return this;
+  }
 }

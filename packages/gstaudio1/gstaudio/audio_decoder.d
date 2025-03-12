@@ -131,6 +131,11 @@ class AudioDecoder : gst.element.Element
     return getGType();
   }
 
+  override AudioDecoder self()
+  {
+    return this;
+  }
+
   /**
       Helper function that allocates a buffer to hold an audio frame
     for dec's current output format.

@@ -59,6 +59,11 @@ class Avatar : gtk.widget.Widget
     return getGType();
   }
 
+  override Avatar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.avatar.Avatar].
     Params:

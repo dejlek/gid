@@ -37,6 +37,11 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
     return getGType();
   }
 
+  override VideoInfoDmaDrm self()
+  {
+    return this;
+  }
+
   @property gstvideo.video_info.VideoInfo vinfo()
   {
     return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)cPtr).vinfo);

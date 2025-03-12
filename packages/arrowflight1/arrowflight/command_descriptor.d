@@ -26,6 +26,11 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
     return getGType();
   }
 
+  override CommandDescriptor self()
+  {
+    return this;
+  }
+
   /** */
   this(string command)
   {

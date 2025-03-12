@@ -35,6 +35,11 @@ class FileList : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FileList self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gdk.file_list.FileList] for the given array of files.
     

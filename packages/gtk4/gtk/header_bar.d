@@ -105,6 +105,11 @@ class HeaderBar : gtk.widget.Widget
     return getGType();
   }
 
+  override HeaderBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.header_bar.HeaderBar] widget.
     Returns:     a new [gtk.header_bar.HeaderBar]

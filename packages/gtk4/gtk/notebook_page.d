@@ -29,6 +29,11 @@ class NotebookPage : gobject.object.ObjectG
     return getGType();
   }
 
+  override NotebookPage self()
+  {
+    return this;
+  }
+
   /**
       Returns the notebook child to which page belongs.
     Returns:     the child to which page belongs

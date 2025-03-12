@@ -29,4 +29,9 @@ class DataQueue : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override DataQueue self()
+  {
+    return this;
+  }
 }

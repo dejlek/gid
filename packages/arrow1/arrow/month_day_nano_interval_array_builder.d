@@ -28,6 +28,11 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override MonthDayNanoIntervalArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -26,6 +26,11 @@ class MonthIntervalDataType : arrow.interval_data_type.IntervalDataType
     return getGType();
   }
 
+  override MonthIntervalDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

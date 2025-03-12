@@ -35,6 +35,11 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
     return getGType();
   }
 
+  override TriggerControlSource self()
+  {
+    return this;
+  }
+
   /**
       This returns a new, unbound #GstTriggerControlSource.
     Returns:     a new, unbound #GstTriggerControlSource.

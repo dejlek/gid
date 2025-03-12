@@ -44,6 +44,11 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
     return getGType();
   }
 
+  override PreferencesRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.preferences_row.PreferencesRow].
     Returns:     the newly created [adw.preferences_row.PreferencesRow]

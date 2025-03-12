@@ -42,6 +42,11 @@ class Feature : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Feature self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Tag tag()
   {
     return (cast(hb_feature_t*)cPtr).tag;

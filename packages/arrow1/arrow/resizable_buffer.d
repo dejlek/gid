@@ -27,6 +27,11 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
     return getGType();
   }
 
+  override ResizableBuffer self()
+  {
+    return this;
+  }
+
   /** */
   this(long initialSize)
   {

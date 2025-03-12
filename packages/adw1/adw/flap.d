@@ -99,6 +99,11 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
     return getGType();
   }
 
+  override Flap self()
+  {
+    return this;
+  }
+
   mixin SwipeableT!();
   mixin OrientableT!();
 

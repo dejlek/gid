@@ -31,6 +31,11 @@ class SqueezerPage : gobject.object.ObjectG
     return getGType();
   }
 
+  override SqueezerPage self()
+  {
+    return this;
+  }
+
   /**
       Returns the squeezer child to which self belongs.
     Returns:     the child to which self belongs

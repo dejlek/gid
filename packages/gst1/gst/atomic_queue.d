@@ -34,6 +34,11 @@ class AtomicQueue : gobject.boxed.Boxed
     return getGType();
   }
 
+  override AtomicQueue self()
+  {
+    return this;
+  }
+
   /**
       Create a new atomic queue instance. initial_size will be rounded up to the
     nearest power of 2 and used as the initial size of the queue.

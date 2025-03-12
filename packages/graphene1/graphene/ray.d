@@ -47,6 +47,11 @@ class Ray : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Ray self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_ray_t structure.
     

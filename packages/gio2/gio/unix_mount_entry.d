@@ -33,4 +33,9 @@ class UnixMountEntry : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override UnixMountEntry self()
+  {
+    return this;
+  }
 }

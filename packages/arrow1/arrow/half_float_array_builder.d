@@ -27,6 +27,11 @@ class HalfFloatArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override HalfFloatArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

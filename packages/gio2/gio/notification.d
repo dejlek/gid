@@ -74,6 +74,11 @@ class Notification : gobject.object.ObjectG
     return getGType();
   }
 
+  override Notification self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GNotification with title as its title.
     

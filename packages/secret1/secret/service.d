@@ -84,6 +84,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     return getGType();
   }
 
+  override Service self()
+  {
+    return this;
+  }
+
   mixin BackendT!();
 
   /**

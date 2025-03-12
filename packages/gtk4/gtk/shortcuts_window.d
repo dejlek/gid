@@ -92,6 +92,11 @@ class ShortcutsWindow : gtk.window.Window
     return getGType();
   }
 
+  override ShortcutsWindow self()
+  {
+    return this;
+  }
+
   /**
       Adds a section to the shortcuts window.
     

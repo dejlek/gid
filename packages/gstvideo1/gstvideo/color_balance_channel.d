@@ -31,6 +31,11 @@ class ColorBalanceChannel : gobject.object.ObjectG
     return getGType();
   }
 
+  override ColorBalanceChannel self()
+  {
+    return this;
+  }
+
   /**
       Fired when the value of the indicated channel has changed.
   

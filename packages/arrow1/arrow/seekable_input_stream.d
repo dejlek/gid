@@ -34,6 +34,11 @@ class SeekableInputStream : arrow.input_stream.InputStream
     return getGType();
   }
 
+  override SeekableInputStream self()
+  {
+    return this;
+  }
+
   /** */
   ulong getSize()
   {

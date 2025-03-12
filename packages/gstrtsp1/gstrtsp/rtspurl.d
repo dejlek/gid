@@ -38,6 +38,11 @@ class RTSPUrl : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RTSPUrl self()
+  {
+    return this;
+  }
+
   @property gstrtsp.types.RTSPLowerTrans transports()
   {
     return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPUrl*)cPtr).transports;

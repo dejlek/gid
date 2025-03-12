@@ -30,6 +30,11 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
     return getGType();
   }
 
+  override GLDisplayWayland self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GstGLDisplayWayland from the wayland display name.  See `wl_display_connect`()
     for details on what is a valid name.

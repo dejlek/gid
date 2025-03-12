@@ -70,6 +70,11 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
     return getGType();
   }
 
+  override CenterBox self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

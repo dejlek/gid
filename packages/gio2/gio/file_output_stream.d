@@ -48,6 +48,11 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
     return getGType();
   }
 
+  override FileOutputStream self()
+  {
+    return this;
+  }
+
   mixin SeekableT!();
 
   /**

@@ -27,4 +27,9 @@ class ScrolledWindowAccessible : gtk.container_accessible.ContainerAccessible
   {
     return getGType();
   }
+
+  override ScrolledWindowAccessible self()
+  {
+    return this;
+  }
 }

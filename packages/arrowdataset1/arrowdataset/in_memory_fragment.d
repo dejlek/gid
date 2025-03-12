@@ -28,6 +28,11 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
     return getGType();
   }
 
+  override InMemoryFragment self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.schema.Schema schema, arrow.record_batch.RecordBatch[] recordBatches)
   {

@@ -48,6 +48,11 @@ class Checksum : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Checksum self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GChecksum, using the checksum algorithm checksum_type.
     If the checksum_type is not known, null is returned.

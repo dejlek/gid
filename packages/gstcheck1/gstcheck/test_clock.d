@@ -173,6 +173,11 @@ class TestClock : gst.clock.Clock
     return getGType();
   }
 
+  override TestClock self()
+  {
+    return this;
+  }
+
   /**
       Creates a new test clock with its time set to zero.
     

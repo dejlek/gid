@@ -29,6 +29,11 @@ class TcpConnection : gio.socket_connection.SocketConnection
     return getGType();
   }
 
+  override TcpConnection self()
+  {
+    return this;
+  }
+
   /**
       Checks if graceful disconnects are used. See
     [gio.tcp_connection.TcpConnection.setGracefulDisconnect].

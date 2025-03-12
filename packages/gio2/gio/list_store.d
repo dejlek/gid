@@ -35,6 +35,11 @@ class ListStore : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  override ListStore self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
 
   /**

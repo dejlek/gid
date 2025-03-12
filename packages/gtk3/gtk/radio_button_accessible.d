@@ -31,4 +31,9 @@ class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessibl
   {
     return getGType();
   }
+
+  override RadioButtonAccessible self()
+  {
+    return this;
+  }
 }

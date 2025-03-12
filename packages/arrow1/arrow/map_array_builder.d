@@ -29,6 +29,11 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override MapArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.map_data_type.MapDataType dataType)
   {

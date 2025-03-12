@@ -45,6 +45,11 @@ class TextureDownloader : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TextureDownloader self()
+  {
+    return this;
+  }
+
   /**
       Creates a new texture downloader for texture.
     Params:

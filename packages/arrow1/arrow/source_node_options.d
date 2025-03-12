@@ -30,6 +30,11 @@ class SourceNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     return getGType();
   }
 
+  override SourceNodeOptions self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.source_node_options.SourceNodeOptions newRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {

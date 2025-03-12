@@ -40,6 +40,11 @@ class Table : gobject.object.ObjectG
     return getGType();
   }
 
+  override Table self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.table.Table newArrays(arrow.schema.Schema schema, arrow.array.Array[] arrays)
   {

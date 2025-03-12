@@ -28,6 +28,11 @@ class RowGroupMetadata : gobject.object.ObjectG
     return getGType();
   }
 
+  override RowGroupMetadata self()
+  {
+    return this;
+  }
+
   /** */
   bool canDecompress()
   {

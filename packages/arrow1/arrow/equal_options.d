@@ -26,6 +26,11 @@ class EqualOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override EqualOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

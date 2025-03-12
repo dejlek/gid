@@ -45,6 +45,11 @@ class TextTag : gobject.object.ObjectG
     return getGType();
   }
 
+  override TextTag self()
+  {
+    return this;
+  }
+
   /**
       Creates a #GtkTextTag. Configure the tag using object arguments,
     i.e. using [gobject.object.ObjectG.set].

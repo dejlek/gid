@@ -77,6 +77,11 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
     return getGType();
   }
 
+  override FileFilter self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

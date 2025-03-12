@@ -31,6 +31,11 @@ class LeafletPage : gobject.object.ObjectG
     return getGType();
   }
 
+  override LeafletPage self()
+  {
+    return this;
+  }
+
   /**
       Gets the leaflet child to which self belongs.
     Returns:     the child to which self belongs

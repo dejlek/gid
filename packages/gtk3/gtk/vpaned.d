@@ -39,6 +39,11 @@ class VPaned : gtk.paned.Paned
     return getGType();
   }
 
+  override VPaned self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GtkVPaned
     Returns:     the new #GtkVPaned

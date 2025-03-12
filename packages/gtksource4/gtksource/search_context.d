@@ -34,6 +34,11 @@ class SearchContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override SearchContext self()
+  {
+    return this;
+  }
+
   /**
       Creates a new search context, associated with buffer, and customized with
     settings. If settings is null, a new #GtkSourceSearchSettings object will

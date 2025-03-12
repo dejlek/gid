@@ -39,6 +39,11 @@ class Color : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Color self()
+  {
+    return this;
+  }
+
   @property ushort red()
   {
     return (cast(PangoColor*)cPtr).red;

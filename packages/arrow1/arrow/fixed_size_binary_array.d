@@ -29,6 +29,11 @@ class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  override FixedSizeBinaryArray self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

@@ -35,6 +35,11 @@ class Relation : gobject.object.ObjectG
     return getGType();
   }
 
+  override Relation self()
+  {
+    return this;
+  }
+
   /**
       Create a new relation for the specified key and the specified list
     of targets.  See also [atk.object.ObjectAtk.addRelationship].

@@ -99,6 +99,11 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     return getGType();
   }
 
+  override ImageMenuItem self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkImageMenuItem with an empty label.
     Returns:     a new #GtkImageMenuItem

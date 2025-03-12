@@ -26,6 +26,11 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
     return getGType();
   }
 
+  override IntervalDataType self()
+  {
+    return this;
+  }
+
   /** */
   arrow.types.IntervalType getIntervalType()
   {

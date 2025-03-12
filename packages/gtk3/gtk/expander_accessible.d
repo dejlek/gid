@@ -30,6 +30,11 @@ class ExpanderAccessible : gtk.container_accessible.ContainerAccessible, atk.act
     return getGType();
   }
 
+  override ExpanderAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;
   alias getName = atk.object.ObjectAtk.getName;

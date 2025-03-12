@@ -27,6 +27,11 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override Date64ArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

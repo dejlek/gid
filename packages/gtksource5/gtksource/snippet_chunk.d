@@ -35,6 +35,11 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
     return getGType();
   }
 
+  override SnippetChunk self()
+  {
+    return this;
+  }
+
   /**
       Create a new [gtksource.snippet_chunk.SnippetChunk] that can be added to
     a `classSnippet`.

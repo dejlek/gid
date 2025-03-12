@@ -134,6 +134,11 @@ class ModelButton : gtk.button.Button
     return getGType();
   }
 
+  override ModelButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new GtkModelButton.
     Returns:     the newly created #GtkModelButton widget

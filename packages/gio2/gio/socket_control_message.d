@@ -47,6 +47,11 @@ class SocketControlMessage : gobject.object.ObjectG
     return getGType();
   }
 
+  override SocketControlMessage self()
+  {
+    return this;
+  }
+
   /**
       Tries to deserialize a socket control message of a given
     level and type. This will ask all known (to GType) subclasses

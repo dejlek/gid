@@ -27,6 +27,11 @@ class Time64Scalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override Time64Scalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.time64_data_type.Time64DataType dataType, long value)
   {

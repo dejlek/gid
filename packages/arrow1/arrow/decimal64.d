@@ -28,6 +28,11 @@ class Decimal64 : gobject.object.ObjectG
     return getGType();
   }
 
+  override Decimal64 self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.decimal64.Decimal64 newInteger(long data)
   {

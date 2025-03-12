@@ -26,6 +26,11 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
     return getGType();
   }
 
+  override MonthDayNanoIntervalDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

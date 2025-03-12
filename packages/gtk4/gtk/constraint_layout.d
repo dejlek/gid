@@ -202,6 +202,11 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     return getGType();
   }
 
+  override ConstraintLayout self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

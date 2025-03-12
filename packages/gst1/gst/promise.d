@@ -87,6 +87,11 @@ class Promise : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Promise self()
+  {
+    return this;
+  }
+
   @property gst.mini_object.MiniObject parent()
   {
     return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)cPtr).parent);

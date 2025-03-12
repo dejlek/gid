@@ -104,6 +104,11 @@ class PrintUnixDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override PrintUnixDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.print_unix_dialog.PrintUnixDialog].
     Params:

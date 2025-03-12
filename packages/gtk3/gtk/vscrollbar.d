@@ -42,6 +42,11 @@ class VScrollbar : gtk.scrollbar.Scrollbar
     return getGType();
   }
 
+  override VScrollbar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new vertical scrollbar.
     Params:

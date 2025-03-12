@@ -26,6 +26,11 @@ class NullArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override NullArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

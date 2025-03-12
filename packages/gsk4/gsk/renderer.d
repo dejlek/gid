@@ -45,6 +45,11 @@ class Renderer : gobject.object.ObjectG
     return getGType();
   }
 
+  override Renderer self()
+  {
+    return this;
+  }
+
   /**
       Creates an appropriate [gsk.renderer.Renderer] instance for the given surface.
     

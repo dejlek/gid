@@ -80,6 +80,11 @@ class GLContext : gdk.draw_context.DrawContext
     return getGType();
   }
 
+  override GLContext self()
+  {
+    return this;
+  }
+
   /**
       Clears the current [gdk.glcontext.GLContext].
     

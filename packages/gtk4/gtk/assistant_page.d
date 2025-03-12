@@ -31,6 +31,11 @@ class AssistantPage : gobject.object.ObjectG
     return getGType();
   }
 
+  override AssistantPage self()
+  {
+    return this;
+  }
+
   /**
       Returns the child to which page belongs.
     Returns:     the child to which page belongs

@@ -35,6 +35,11 @@ class SimpleActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup, 
     return getGType();
   }
 
+  override SimpleActionGroup self()
+  {
+    return this;
+  }
+
   mixin ActionGroupT!();
   mixin ActionMapT!();
 

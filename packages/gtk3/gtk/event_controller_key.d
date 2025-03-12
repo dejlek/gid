@@ -36,6 +36,11 @@ class EventControllerKey : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerKey self()
+  {
+    return this;
+  }
+
   /** */
   this(gtk.widget.Widget widget)
   {

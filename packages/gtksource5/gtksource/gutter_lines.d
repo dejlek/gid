@@ -40,6 +40,11 @@ class GutterLines : gobject.object.ObjectG
     return getGType();
   }
 
+  override GutterLines self()
+  {
+    return this;
+  }
+
   /**
       Adds the class name to line.
     

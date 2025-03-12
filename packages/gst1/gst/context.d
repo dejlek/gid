@@ -62,6 +62,11 @@ class Context : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Context self()
+  {
+    return this;
+  }
+
   /**
       Creates a new context.
     Params:

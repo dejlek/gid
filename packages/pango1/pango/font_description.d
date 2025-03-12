@@ -38,6 +38,11 @@ class FontDescription : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FontDescription self()
+  {
+    return this;
+  }
+
   /**
       Creates a new font description structure with all fields unset.
     Returns:     the newly allocated [pango.font_description.FontDescription],

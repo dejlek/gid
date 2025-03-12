@@ -26,6 +26,11 @@ class VarianceOptions : arrow.function_options.FunctionOptions
     return getGType();
   }
 
+  override VarianceOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

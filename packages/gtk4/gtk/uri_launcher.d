@@ -44,6 +44,11 @@ class UriLauncher : gobject.object.ObjectG
     return getGType();
   }
 
+  override UriLauncher self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.uri_launcher.UriLauncher] object.
     Params:

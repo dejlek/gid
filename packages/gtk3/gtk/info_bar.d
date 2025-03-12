@@ -107,6 +107,11 @@ class InfoBar : gtk.box.Box
     return getGType();
   }
 
+  override InfoBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkInfoBar object.
     Returns:     a new #GtkInfoBar object

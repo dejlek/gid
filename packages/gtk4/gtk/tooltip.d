@@ -60,6 +60,11 @@ class Tooltip : gobject.object.ObjectG
     return getGType();
   }
 
+  override Tooltip self()
+  {
+    return this;
+  }
+
   /**
       Replaces the widget packed into the tooltip with
     custom_widget. custom_widget does not get destroyed when the tooltip goes

@@ -32,6 +32,11 @@ class HButtonBox : gtk.button_box.ButtonBox
     return getGType();
   }
 
+  override HButtonBox self()
+  {
+    return this;
+  }
+
   /**
       Creates a new horizontal button box.
     Returns:     a new button box #GtkWidget.

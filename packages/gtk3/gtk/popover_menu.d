@@ -103,6 +103,11 @@ class PopoverMenu : gtk.popover.Popover
     return getGType();
   }
 
+  override PopoverMenu self()
+  {
+    return this;
+  }
+
   /**
       Creates a new popover menu.
     Returns:     a new #GtkPopoverMenu

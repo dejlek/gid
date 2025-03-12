@@ -28,6 +28,11 @@ class Decimal256 : gobject.object.ObjectG
     return getGType();
   }
 
+  override Decimal256 self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.decimal256.Decimal256 newInteger(long data)
   {

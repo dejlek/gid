@@ -52,6 +52,11 @@ class Gradient : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Gradient self()
+  {
+    return this;
+  }
+
   /**
       Creates a new linear gradient along the line defined by (x0, y0) and (x1, y1). Before using the gradient
     a number of stop colors must be added through [gtk.gradient.Gradient.addColorStop].

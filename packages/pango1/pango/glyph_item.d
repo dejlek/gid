@@ -46,6 +46,11 @@ class GlyphItem : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GlyphItem self()
+  {
+    return this;
+  }
+
   @property pango.item.Item item()
   {
     return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);

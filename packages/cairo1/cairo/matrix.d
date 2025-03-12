@@ -44,6 +44,11 @@ class Matrix : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Matrix self()
+  {
+    return this;
+  }
+
   @property double xx()
   {
     return (cast(cairo_matrix_t*)cPtr).xx;

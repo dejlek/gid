@@ -28,6 +28,11 @@ class StreamChunk : gobject.object.ObjectG
     return getGType();
   }
 
+  override StreamChunk self()
+  {
+    return this;
+  }
+
   alias getData = gobject.object.ObjectG.getData;
 
   /** */

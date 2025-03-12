@@ -32,6 +32,11 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
     return getGType();
   }
 
+  override LabelAccessible self()
+  {
+    return this;
+  }
+
   mixin HypertextT!();
   mixin TextT!();
 }

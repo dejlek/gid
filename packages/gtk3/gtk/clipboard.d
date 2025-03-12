@@ -92,6 +92,11 @@ class Clipboard : gobject.object.ObjectG
     return getGType();
   }
 
+  override Clipboard self()
+  {
+    return this;
+  }
+
   /**
       Returns the clipboard object for the given selection.
     See [gtk.clipboard.Clipboard.getForDisplay] for complete details.

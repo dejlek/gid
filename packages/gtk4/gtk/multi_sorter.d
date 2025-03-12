@@ -36,6 +36,11 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
     return getGType();
   }
 
+  override MultiSorter self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin BuildableT!();
 

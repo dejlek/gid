@@ -31,6 +31,11 @@ class PixbufAnimationIter : gobject.object.ObjectG
     return getGType();
   }
 
+  override PixbufAnimationIter self()
+  {
+    return this;
+  }
+
   /**
       Possibly advances an animation to a new frame.
     

@@ -93,6 +93,11 @@ class PadTemplate : gst.object.ObjectGst
     return getGType();
   }
 
+  override PadTemplate self()
+  {
+    return this;
+  }
+
   /**
       Creates a new pad template with a name according to the given template
     and with the given arguments.

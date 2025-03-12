@@ -35,6 +35,11 @@ class ExecutePlan : gobject.object.ObjectG
     return getGType();
   }
 
+  override ExecutePlan self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

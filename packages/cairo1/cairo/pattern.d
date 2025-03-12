@@ -50,6 +50,11 @@ class Pattern : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Pattern self()
+  {
+    return this;
+  }
+
   /**
       Adds an opaque color stop to a gradient pattern. The offset
     specifies the location along the gradient's control vector. For

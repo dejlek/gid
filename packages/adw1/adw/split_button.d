@@ -76,6 +76,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
     return getGType();
   }
 
+  override SplitButton self()
+  {
+    return this;
+  }
+
   mixin ActionableT!();
 
   /**

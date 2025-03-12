@@ -88,6 +88,11 @@ class Reader : gobject.object.ObjectG
     return getGType();
   }
 
+  override Reader self()
+  {
+    return this;
+  }
+
   /**
       Creates a new reader.
     

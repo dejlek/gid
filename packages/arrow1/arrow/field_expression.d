@@ -27,6 +27,11 @@ class FieldExpression : arrow.expression.Expression
     return getGType();
   }
 
+  override FieldExpression self()
+  {
+    return this;
+  }
+
   /** */
   this(string reference)
   {

@@ -28,6 +28,11 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
     return getGType();
   }
 
+  override DayTimeIntervalScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.day_millisecond.DayMillisecond value)
   {

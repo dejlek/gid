@@ -32,6 +32,11 @@ class AggregatorPad : gst.pad.Pad
     return getGType();
   }
 
+  override AggregatorPad self()
+  {
+    return this;
+  }
+
   /**
       Drop the buffer currently queued in pad.
     Returns:     TRUE if there was a buffer queued in pad, or FALSE if not.

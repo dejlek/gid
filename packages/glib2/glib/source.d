@@ -36,6 +36,11 @@ class Source : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Source self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GSource structure. The size is specified to
     allow creating structures derived from #GSource that contain

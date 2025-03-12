@@ -151,6 +151,11 @@ class BaseTransform : gst.element.Element
     return getGType();
   }
 
+  override BaseTransform self()
+  {
+    return this;
+  }
+
   /**
       Lets #GstBaseTransform sub-classes know the memory allocator
     used by the base class and its params.

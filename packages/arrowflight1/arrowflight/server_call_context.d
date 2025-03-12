@@ -26,6 +26,11 @@ class ServerCallContext : gobject.object.ObjectG
     return getGType();
   }
 
+  override ServerCallContext self()
+  {
+    return this;
+  }
+
   /**
       Iterates over all incoming headers.
     Params:

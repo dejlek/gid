@@ -38,6 +38,11 @@ class Item : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Item self()
+  {
+    return this;
+  }
+
   @property int offset()
   {
     return (cast(PangoItem*)cPtr).offset;

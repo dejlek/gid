@@ -28,6 +28,11 @@ class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
     return getGType();
   }
 
+  override FixedSizeBinaryScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType dataType, arrow.buffer.Buffer value)
   {

@@ -37,6 +37,11 @@ class SystemClock : gst.clock.Clock
     return getGType();
   }
 
+  override SystemClock self()
+  {
+    return this;
+  }
+
   /**
       Get a handle to the default system clock. The refcount of the
     clock will be increased so you need to unref the clock after

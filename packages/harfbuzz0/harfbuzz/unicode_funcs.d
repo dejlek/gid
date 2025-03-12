@@ -39,4 +39,9 @@ class UnicodeFuncs : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override UnicodeFuncs self()
+  {
+    return this;
+  }
 }

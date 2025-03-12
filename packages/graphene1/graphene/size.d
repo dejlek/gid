@@ -38,6 +38,11 @@ class Size : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Size self()
+  {
+    return this;
+  }
+
   @property float width()
   {
     return (cast(graphene_size_t*)cPtr).width;

@@ -46,6 +46,11 @@ class SocketAddressEnumerator : gobject.object.ObjectG
     return getGType();
   }
 
+  override SocketAddressEnumerator self()
+  {
+    return this;
+  }
+
   /**
       Retrieves the next #GSocketAddress from enumerator. Note that this
     may block for some amount of time. (Eg, a #GNetworkAddress may need

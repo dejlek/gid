@@ -31,6 +31,11 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
     return getGType();
   }
 
+  override TreeListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
 
   /**

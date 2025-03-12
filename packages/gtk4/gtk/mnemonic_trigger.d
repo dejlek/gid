@@ -31,6 +31,11 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
     return getGType();
   }
 
+  override MnemonicTrigger self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.shortcut_trigger.ShortcutTrigger] that will trigger whenever the key with
     the given keyval is pressed and mnemonics have been activated.

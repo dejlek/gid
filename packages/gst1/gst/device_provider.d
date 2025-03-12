@@ -43,6 +43,11 @@ class DeviceProvider : gst.object.ObjectGst
     return getGType();
   }
 
+  override DeviceProvider self()
+  {
+    return this;
+  }
+
   /**
       Create a new device providerfactory capable of instantiating objects of the
     type and add the factory to plugin.

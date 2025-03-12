@@ -63,6 +63,11 @@ class Credentials : gobject.object.ObjectG
     return getGType();
   }
 
+  override Credentials self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GCredentials object with credentials matching the
     the current process.

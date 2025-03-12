@@ -106,6 +106,11 @@ class TestDBus : gobject.object.ObjectG
     return getGType();
   }
 
+  override TestDBus self()
+  {
+    return this;
+  }
+
   /**
       Create a new #GTestDBus object.
     Params:

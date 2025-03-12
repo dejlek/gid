@@ -38,6 +38,11 @@ class GLAllocationParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GLAllocationParams self()
+  {
+    return this;
+  }
+
   @property size_t structSize()
   {
     return (cast(GstGLAllocationParams*)cPtr).structSize;

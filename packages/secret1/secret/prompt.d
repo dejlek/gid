@@ -54,6 +54,11 @@ class Prompt : gio.dbus_proxy.DBusProxy
     return getGType();
   }
 
+  override Prompt self()
+  {
+    return this;
+  }
+
   /**
       Runs a prompt and performs the prompting.
     

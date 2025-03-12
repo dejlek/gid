@@ -34,5 +34,10 @@ class ImageCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible,
     return getGType();
   }
 
+  override ImageCellAccessible self()
+  {
+    return this;
+  }
+
   mixin ImageT!();
 }

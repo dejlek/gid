@@ -38,6 +38,11 @@ class FrameTimings : gobject.boxed.Boxed
     return getGType();
   }
 
+  override FrameTimings self()
+  {
+    return this;
+  }
+
   /**
       The timing information in a #GdkFrameTimings is filled in
     incrementally as the frame as drawn and passed off to the

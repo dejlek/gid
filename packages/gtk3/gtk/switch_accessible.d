@@ -30,6 +30,11 @@ class SwitchAccessible : gtk.widget_accessible.WidgetAccessible, atk.action.Acti
     return getGType();
   }
 
+  override SwitchAccessible self()
+  {
+    return this;
+  }
+
   mixin ActionT!();
   alias getDescription = atk.object.ObjectAtk.getDescription;
   alias getName = atk.object.ObjectAtk.getName;

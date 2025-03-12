@@ -56,6 +56,11 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
     return getGType();
   }
 
+  override PageSetupUnixDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new page setup dialog.
     Params:

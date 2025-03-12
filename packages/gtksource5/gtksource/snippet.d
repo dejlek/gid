@@ -42,6 +42,11 @@ class Snippet : gobject.object.ObjectG
     return getGType();
   }
 
+  override Snippet self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkSourceSnippet
     Params:

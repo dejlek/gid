@@ -41,6 +41,11 @@ class Vec2 : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Vec2 self()
+  {
+    return this;
+  }
+
   /**
       Allocates a new #graphene_vec2_t structure.
     

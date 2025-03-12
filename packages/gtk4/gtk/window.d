@@ -105,6 +105,11 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
     return getGType();
   }
 
+  override Window self()
+  {
+    return this;
+  }
+
   mixin NativeT!();
   mixin RootT!();
   mixin ShortcutManagerT!();

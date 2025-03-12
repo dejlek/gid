@@ -60,6 +60,11 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
     return getGType();
   }
 
+  override MapListModel self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin SectionModelT!();
 

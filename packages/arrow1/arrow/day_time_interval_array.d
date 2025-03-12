@@ -29,6 +29,11 @@ class DayTimeIntervalArray : arrow.primitive_array.PrimitiveArray
     return getGType();
   }
 
+  override DayTimeIntervalArray self()
+  {
+    return this;
+  }
+
   /** */
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {

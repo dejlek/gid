@@ -40,6 +40,11 @@ class ControlSource : gst.object.ObjectGst
     return getGType();
   }
 
+  override ControlSource self()
+  {
+    return this;
+  }
+
   /**
       Gets the value for this #GstControlSource at a given timestamp.
     Params:

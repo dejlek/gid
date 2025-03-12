@@ -26,6 +26,11 @@ class Descriptor : gobject.object.ObjectG
     return getGType();
   }
 
+  override Descriptor self()
+  {
+    return this;
+  }
+
   /** */
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {

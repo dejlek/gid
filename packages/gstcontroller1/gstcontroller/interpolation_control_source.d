@@ -35,6 +35,11 @@ class InterpolationControlSource : gstcontroller.timed_value_control_source.Time
     return getGType();
   }
 
+  override InterpolationControlSource self()
+  {
+    return this;
+  }
+
   /**
       This returns a new, unbound #GstInterpolationControlSource.
     Returns:     a new, unbound #GstInterpolationControlSource.

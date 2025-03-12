@@ -53,5 +53,10 @@ class ContentDecoder : gobject.object.ObjectG, soup.session_feature.SessionFeatu
     return getGType();
   }
 
+  override ContentDecoder self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 }

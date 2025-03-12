@@ -28,6 +28,11 @@ class EnumListItem : gobject.object.ObjectG
     return getGType();
   }
 
+  override EnumListItem self()
+  {
+    return this;
+  }
+
   /**
       Gets the enum value name.
     Returns:     the enum value name

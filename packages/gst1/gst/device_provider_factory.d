@@ -38,6 +38,11 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
     return getGType();
   }
 
+  override DeviceProviderFactory self()
+  {
+    return this;
+  }
+
   /**
       Search for an device provider factory of the given name. Refs the returned
     device provider factory; caller is responsible for unreffing.

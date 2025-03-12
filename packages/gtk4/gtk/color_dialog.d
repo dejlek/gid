@@ -45,6 +45,11 @@ class ColorDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override ColorDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.color_dialog.ColorDialog] object.
     Returns:     the new [gtk.color_dialog.ColorDialog]

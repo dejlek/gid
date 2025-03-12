@@ -49,6 +49,11 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
     return getGType();
   }
 
+  override AppLaunchContext self()
+  {
+    return this;
+  }
+
   alias getDisplay = gio.app_launch_context.AppLaunchContext.getDisplay;
 
   /**

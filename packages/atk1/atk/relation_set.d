@@ -40,6 +40,11 @@ class RelationSet : gobject.object.ObjectG
     return getGType();
   }
 
+  override RelationSet self()
+  {
+    return this;
+  }
+
   /**
       Creates a new empty relation set.
     Returns:     a new #AtkRelationSet

@@ -27,6 +27,11 @@ class Location : gobject.object.ObjectG
     return getGType();
   }
 
+  override Location self()
+  {
+    return this;
+  }
+
   /** */
   this(string uri)
   {

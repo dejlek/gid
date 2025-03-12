@@ -25,4 +25,9 @@ class ExecuteNodeOptions : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override ExecuteNodeOptions self()
+  {
+    return this;
+  }
 }

@@ -37,5 +37,10 @@ class WebsocketExtensionManager : gobject.object.ObjectG, soup.session_feature.S
     return getGType();
   }
 
+  override WebsocketExtensionManager self()
+  {
+    return this;
+  }
+
   mixin SessionFeatureT!();
 }

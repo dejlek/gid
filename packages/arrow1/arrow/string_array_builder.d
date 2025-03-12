@@ -27,6 +27,11 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
     return getGType();
   }
 
+  override StringArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

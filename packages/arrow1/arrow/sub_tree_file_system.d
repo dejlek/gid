@@ -26,6 +26,11 @@ class SubTreeFileSystem : arrow.file_system.FileSystem
     return getGType();
   }
 
+  override SubTreeFileSystem self()
+  {
+    return this;
+  }
+
   /** */
   this(string basePath, arrow.file_system.FileSystem baseFileSystem)
   {

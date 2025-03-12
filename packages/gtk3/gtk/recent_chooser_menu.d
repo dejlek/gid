@@ -55,6 +55,11 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
     return getGType();
   }
 
+  override RecentChooserMenu self()
+  {
+    return this;
+  }
+
   mixin ActivatableT!();
   mixin RecentChooserT!();
 

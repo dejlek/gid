@@ -31,6 +31,11 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  override ViewStackPage self()
+  {
+    return this;
+  }
+
   mixin AccessibleT!();
 
   /**

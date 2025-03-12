@@ -40,4 +40,9 @@ class ShapePlan : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override ShapePlan self()
+  {
+    return this;
+  }
 }

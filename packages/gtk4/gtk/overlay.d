@@ -66,6 +66,11 @@ class Overlay : gtk.widget.Widget
     return getGType();
   }
 
+  override Overlay self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.overlay.Overlay].
     Returns:     a new [gtk.overlay.Overlay] object.

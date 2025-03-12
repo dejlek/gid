@@ -74,6 +74,11 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
     return getGType();
   }
 
+  override ShortcutController self()
+  {
+    return this;
+  }
+
   mixin ListModelT!();
   mixin BuildableT!();
 

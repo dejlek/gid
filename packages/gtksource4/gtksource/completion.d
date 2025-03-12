@@ -36,6 +36,11 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
     return getGType();
   }
 
+  override Completion self()
+  {
+    return this;
+  }
+
   mixin BuildableT!();
 
   /**

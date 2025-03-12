@@ -38,6 +38,11 @@ class DrawState : gobject.boxed.Boxed
     return getGType();
   }
 
+  override DrawState self()
+  {
+    return this;
+  }
+
   @property harfbuzz.types.Bool pathOpen()
   {
     return (cast(hb_draw_state_t*)cPtr).pathOpen;

@@ -42,6 +42,11 @@ class SwipeTracker : gobject.object.ObjectG, gtk.orientable.Orientable
     return getGType();
   }
 
+  override SwipeTracker self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

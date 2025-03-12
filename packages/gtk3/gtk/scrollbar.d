@@ -73,6 +73,11 @@ class Scrollbar : gtk.range.Range
     return getGType();
   }
 
+  override Scrollbar self()
+  {
+    return this;
+  }
+
   /**
       Creates a new scrollbar with the given orientation.
     Params:

@@ -29,6 +29,11 @@ class UnixMountMonitor : gobject.object.ObjectG
     return getGType();
   }
 
+  override UnixMountMonitor self()
+  {
+    return this;
+  }
+
   /**
       Deprecated alias for [gio.unix_mount_monitor.UnixMountMonitor.get].
     

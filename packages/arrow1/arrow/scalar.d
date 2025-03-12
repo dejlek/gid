@@ -30,6 +30,11 @@ class Scalar : gobject.object.ObjectG
     return getGType();
   }
 
+  override Scalar self()
+  {
+    return this;
+  }
+
   /** */
   static arrow.scalar.Scalar parse(arrow.data_type.DataType dataType, ubyte[] data)
   {

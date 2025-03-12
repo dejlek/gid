@@ -29,6 +29,11 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
     return getGType();
   }
 
+  override EncodingContainerProfile self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GstEncodingContainerProfile.
     Params:

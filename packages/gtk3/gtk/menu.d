@@ -113,6 +113,11 @@ class Menu : gtk.menu_shell.MenuShell
     return getGType();
   }
 
+  override Menu self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkMenu
     Returns:     a new #GtkMenu
@@ -300,7 +305,7 @@ class Menu : gtk.menu_shell.MenuShell
     Params:
       monitor =       the monitor to place the menu on
   */
-  void placeOnMonitor(gdk.monitor.Monitor monitor)
+  void placeOnMonitor(gdk.monitor.MonitorG monitor)
   {
     gtk_menu_place_on_monitor(cast(GtkMenu*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
   }

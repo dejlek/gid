@@ -42,6 +42,11 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
     return getGType();
   }
 
+  override FontChooserDialog self()
+  {
+    return this;
+  }
+
   mixin FontChooserT!();
 
   /**

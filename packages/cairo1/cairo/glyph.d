@@ -51,6 +51,11 @@ class Glyph : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Glyph self()
+  {
+    return this;
+  }
+
   @property gulong index()
   {
     return (cast(cairo_glyph_t*)cPtr).index;

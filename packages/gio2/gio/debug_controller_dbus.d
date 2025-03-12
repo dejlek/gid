@@ -146,6 +146,11 @@ class DebugControllerDBus : gobject.object.ObjectG, gio.debug_controller.DebugCo
     return getGType();
   }
 
+  override DebugControllerDBus self()
+  {
+    return this;
+  }
+
   mixin DebugControllerT!();
   mixin InitableT!();
 

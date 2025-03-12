@@ -30,6 +30,11 @@ class RecordBatchReader : gobject.object.ObjectG
     return getGType();
   }
 
+  override RecordBatchReader self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.record_batch.RecordBatch[] recordBatches, arrow.schema.Schema schema = null)
   {

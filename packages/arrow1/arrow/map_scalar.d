@@ -27,6 +27,11 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
     return getGType();
   }
 
+  override MapScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.struct_array.StructArray value)
   {

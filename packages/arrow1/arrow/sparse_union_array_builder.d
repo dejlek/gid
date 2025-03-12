@@ -28,6 +28,11 @@ class SparseUnionArrayBuilder : arrow.union_array_builder.UnionArrayBuilder
     return getGType();
   }
 
+  override SparseUnionArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.sparse_union_data_type.SparseUnionDataType dataType = null)
   {

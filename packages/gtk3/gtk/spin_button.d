@@ -147,6 +147,11 @@ class SpinButton : gtk.entry.Entry, gtk.orientable.Orientable
     return getGType();
   }
 
+  override SpinButton self()
+  {
+    return this;
+  }
+
   mixin OrientableT!();
 
   /**

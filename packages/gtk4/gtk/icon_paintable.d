@@ -35,6 +35,11 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
     return getGType();
   }
 
+  override IconPaintable self()
+  {
+    return this;
+  }
+
   mixin PaintableT!();
   mixin SymbolicPaintableT!();
 

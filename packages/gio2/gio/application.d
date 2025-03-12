@@ -166,6 +166,11 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
     return getGType();
   }
 
+  override Application self()
+  {
+    return this;
+  }
+
   mixin ActionGroupT!();
   mixin ActionMapT!();
 

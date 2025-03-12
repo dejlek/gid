@@ -35,6 +35,11 @@ class LFOControlSource : gst.control_source.ControlSource
     return getGType();
   }
 
+  override LFOControlSource self()
+  {
+    return this;
+  }
+
   /**
       This returns a new, unbound #GstLFOControlSource.
     Returns:     a new, unbound #GstLFOControlSource.

@@ -29,6 +29,11 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
     return getGType();
   }
 
+  override LargeListArrayBuilder self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.large_list_data_type.LargeListDataType dataType)
   {

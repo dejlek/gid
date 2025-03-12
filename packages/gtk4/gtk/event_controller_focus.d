@@ -37,6 +37,11 @@ class EventControllerFocus : gtk.event_controller.EventController
     return getGType();
   }
 
+  override EventControllerFocus self()
+  {
+    return this;
+  }
+
   /**
       Creates a new event controller that will handle focus events.
     Returns:     a new [gtk.event_controller_focus.EventControllerFocus]

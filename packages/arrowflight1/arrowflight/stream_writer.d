@@ -27,6 +27,11 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
     return getGType();
   }
 
+  override StreamWriter self()
+  {
+    return this;
+  }
+
   /** */
   bool doneWriting()
   {

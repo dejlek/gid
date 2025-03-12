@@ -31,6 +31,11 @@ class FilenameCompleter : gobject.object.ObjectG
     return getGType();
   }
 
+  override FilenameCompleter self()
+  {
+    return this;
+  }
+
   /**
       Creates a new filename completer.
     Returns:     a #GFilenameCompleter.

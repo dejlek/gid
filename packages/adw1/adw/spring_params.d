@@ -64,6 +64,11 @@ class SpringParams : gobject.boxed.Boxed
     return getGType();
   }
 
+  override SpringParams self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.spring_params.SpringParams] from mass, stiffness and damping_ratio.
     

@@ -79,6 +79,11 @@ class SearchBar : gtk.widget.Widget
     return getGType();
   }
 
+  override SearchBar self()
+  {
+    return this;
+  }
+
   /**
       Creates a [gtk.search_bar.SearchBar].
     

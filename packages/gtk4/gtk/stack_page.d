@@ -31,6 +31,11 @@ class StackPage : gobject.object.ObjectG, gtk.accessible.Accessible
     return getGType();
   }
 
+  override StackPage self()
+  {
+    return this;
+  }
+
   mixin AccessibleT!();
 
   /**

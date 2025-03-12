@@ -104,6 +104,11 @@ class Application : gio.application.Application
     return getGType();
   }
 
+  override Application self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.application.Application] instance.
     

@@ -72,6 +72,11 @@ class GutterRenderer : gtk.widget.Widget
     return getGType();
   }
 
+  override GutterRenderer self()
+  {
+    return this;
+  }
+
   alias activate = gtk.widget.Widget.activate;
 
   /**

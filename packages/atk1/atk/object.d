@@ -53,6 +53,11 @@ class ObjectAtk : gobject.object.ObjectG
     return getGType();
   }
 
+  override ObjectAtk self()
+  {
+    return this;
+  }
+
   /**
       Adds a relationship of the specified type with the specified target.
     Params:

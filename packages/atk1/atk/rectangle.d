@@ -39,6 +39,11 @@ class Rectangle : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Rectangle self()
+  {
+    return this;
+  }
+
   @property int x()
   {
     return (cast(AtkRectangle*)cPtr).x;

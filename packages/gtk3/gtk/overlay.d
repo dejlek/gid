@@ -59,6 +59,11 @@ class Overlay : gtk.bin.Bin
     return getGType();
   }
 
+  override Overlay self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GtkOverlay.
     Returns:     a new #GtkOverlay object.

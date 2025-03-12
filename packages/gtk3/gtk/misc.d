@@ -46,6 +46,11 @@ class Misc : gtk.widget.Widget
     return getGType();
   }
 
+  override Misc self()
+  {
+    return this;
+  }
+
   /**
       Gets the X and Y alignment of the widget within its allocation.
     See [gtk.misc.Misc.setAlignment].

@@ -42,6 +42,11 @@ class TreeIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TreeIter self()
+  {
+    return this;
+  }
+
   @property int stamp()
   {
     return (cast(GtkTreeIter*)cPtr).stamp;

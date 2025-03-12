@@ -50,6 +50,11 @@ class MountOperation : gobject.object.ObjectG
     return getGType();
   }
 
+  override MountOperation self()
+  {
+    return this;
+  }
+
   /**
       Creates a new mount operation.
     Returns:     a #GMountOperation.

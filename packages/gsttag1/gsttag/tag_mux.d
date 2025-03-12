@@ -45,5 +45,10 @@ class TagMux : gst.element.Element, gst.tag_setter.TagSetter
     return getGType();
   }
 
+  override TagMux self()
+  {
+    return this;
+  }
+
   mixin TagSetterT!();
 }

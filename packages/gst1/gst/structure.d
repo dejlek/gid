@@ -144,6 +144,11 @@ class Structure : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Structure self()
+  {
+    return this;
+  }
+
   @property gobject.types.GType type()
   {
     return (cast(GstStructure*)cPtr).type;

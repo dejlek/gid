@@ -58,6 +58,11 @@ class Cookie : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Cookie self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #SoupCookie with the given attributes.
     

@@ -41,6 +41,11 @@ class RTSPMessage : gobject.boxed.Boxed
     return getGType();
   }
 
+  override RTSPMessage self()
+  {
+    return this;
+  }
+
   @property gstrtsp.types.RTSPMsgType type()
   {
     return cast(gstrtsp.types.RTSPMsgType)(cast(GstRTSPMessage*)cPtr).type;

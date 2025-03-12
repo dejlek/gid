@@ -38,6 +38,11 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
     return getGType();
   }
 
+  override ShmAllocator self()
+  {
+    return this;
+  }
+
   /**
       Get the #GstShmAllocator singleton previously registered with
     [gstallocators.shm_allocator.ShmAllocator.initOnce].

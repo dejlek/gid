@@ -46,6 +46,11 @@ class NativeDialog : gobject.object.ObjectG
     return getGType();
   }
 
+  override NativeDialog self()
+  {
+    return this;
+  }
+
   /**
       Destroys a dialog.
     

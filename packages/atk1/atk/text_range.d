@@ -38,6 +38,11 @@ class TextRange : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TextRange self()
+  {
+    return this;
+  }
+
   @property atk.types.TextRectangle bounds()
   {
     return cToD!(atk.types.TextRectangle)(cast(void*)&(cast(AtkTextRange*)cPtr).bounds);

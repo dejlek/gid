@@ -66,6 +66,11 @@ class PopupLayout : gobject.boxed.Boxed
     return getGType();
   }
 
+  override PopupLayout self()
+  {
+    return this;
+  }
+
   /**
       Create a popup layout description.
     

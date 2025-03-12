@@ -76,6 +76,11 @@ class LockButton : gtk.button.Button
     return getGType();
   }
 
+  override LockButton self()
+  {
+    return this;
+  }
+
   /**
       Creates a new lock button which reflects the permission.
     Params:

@@ -52,6 +52,11 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
     return getGType();
   }
 
+  override DBusObjectManagerServer self()
+  {
+    return this;
+  }
+
   mixin DBusObjectManagerT!();
 
   /**

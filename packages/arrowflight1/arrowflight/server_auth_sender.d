@@ -28,6 +28,11 @@ class ServerAuthSender : gobject.object.ObjectG
     return getGType();
   }
 
+  override ServerAuthSender self()
+  {
+    return this;
+  }
+
   /**
       Writes a message to the client.
     Params:

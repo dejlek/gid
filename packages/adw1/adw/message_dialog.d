@@ -175,6 +175,11 @@ class MessageDialog : gtk.window.Window
     return getGType();
   }
 
+  override MessageDialog self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.message_dialog.MessageDialog].
     

@@ -39,6 +39,11 @@ class GlyphString : gobject.boxed.Boxed
     return getGType();
   }
 
+  override GlyphString self()
+  {
+    return this;
+  }
+
   @property int numGlyphs()
   {
     return (cast(PangoGlyphString*)cPtr).numGlyphs;

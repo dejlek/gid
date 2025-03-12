@@ -40,6 +40,11 @@ class MediaControls : gtk.widget.Widget
     return getGType();
   }
 
+  override MediaControls self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [gtk.media_controls.MediaControls] managing the stream passed to it.
     Params:

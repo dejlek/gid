@@ -104,6 +104,11 @@ class ScrolledWindow : gtk.widget.Widget
     return getGType();
   }
 
+  override ScrolledWindow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new scrolled window.
     Returns:     a new scrolled window

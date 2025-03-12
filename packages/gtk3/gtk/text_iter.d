@@ -49,6 +49,11 @@ class TextIter : gobject.boxed.Boxed
     return getGType();
   }
 
+  override TextIter self()
+  {
+    return this;
+  }
+
   /**
       Assigns the value of other to iter.  This function
     is not useful in applications, because iterators can be assigned

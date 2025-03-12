@@ -26,6 +26,11 @@ class BooleanStatistics : parquet.statistics.Statistics
     return getGType();
   }
 
+  override BooleanStatistics self()
+  {
+    return this;
+  }
+
   /** */
   bool getMax()
   {

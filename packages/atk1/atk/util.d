@@ -32,4 +32,9 @@ class Util : gobject.object.ObjectG
   {
     return getGType();
   }
+
+  override Util self()
+  {
+    return this;
+  }
 }

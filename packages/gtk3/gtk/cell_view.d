@@ -61,6 +61,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
     return getGType();
   }
 
+  override CellView self()
+  {
+    return this;
+  }
+
   mixin CellLayoutT!();
   mixin OrientableT!();
 

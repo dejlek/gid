@@ -56,6 +56,11 @@ class PasswordEntryRow : adw.entry_row.EntryRow
     return getGType();
   }
 
+  override PasswordEntryRow self()
+  {
+    return this;
+  }
+
   /**
       Creates a new [adw.password_entry_row.PasswordEntryRow].
     Returns:     the newly created [adw.password_entry_row.PasswordEntryRow]

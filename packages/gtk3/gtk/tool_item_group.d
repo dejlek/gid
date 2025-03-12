@@ -44,6 +44,11 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
     return getGType();
   }
 
+  override ToolItemGroup self()
+  {
+    return this;
+  }
+
   mixin ToolShellT!();
   alias getStyle = gtk.widget.Widget.getStyle;
 

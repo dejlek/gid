@@ -30,6 +30,11 @@ class Visual : gobject.object.ObjectG
     return getGType();
   }
 
+  override Visual self()
+  {
+    return this;
+  }
+
   /**
       Get the visual with the most available colors for the default
     GDK screen. The return value should not be freed.

@@ -47,6 +47,11 @@ class Hmac : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Hmac self()
+  {
+    return this;
+  }
+
   /**
       Creates a new #GHmac, using the digest algorithm digest_type.
     If the digest_type is not known, null is returned.

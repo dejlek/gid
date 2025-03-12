@@ -27,6 +27,11 @@ class LargeListScalar : arrow.base_list_scalar.BaseListScalar
     return getGType();
   }
 
+  override LargeListScalar self()
+  {
+    return this;
+  }
+
   /** */
   this(arrow.large_list_array.LargeListArray value)
   {

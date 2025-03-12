@@ -73,6 +73,11 @@ class Iterator : gobject.boxed.Boxed
     return getGType();
   }
 
+  override Iterator self()
+  {
+    return this;
+  }
+
   /**
       This #GstIterator is a convenient iterator for the common
     case where a #GstIterator needs to be returned but only

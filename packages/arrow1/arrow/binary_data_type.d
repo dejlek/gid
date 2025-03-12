@@ -26,6 +26,11 @@ class BinaryDataType : arrow.data_type.DataType
     return getGType();
   }
 
+  override BinaryDataType self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {

@@ -32,4 +32,9 @@ class Font : gobject.boxed.Boxed
   {
     return getGType();
   }
+
+  override Font self()
+  {
+    return this;
+  }
 }

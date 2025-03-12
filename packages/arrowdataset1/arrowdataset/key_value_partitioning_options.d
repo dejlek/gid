@@ -26,6 +26,11 @@ class KeyValuePartitioningOptions : gobject.object.ObjectG
     return getGType();
   }
 
+  override KeyValuePartitioningOptions self()
+  {
+    return this;
+  }
+
   /** */
   this()
   {
