@@ -192,6 +192,14 @@ class ObjectG
   }
 
   /**
+   * Convenience method to return `this` cast to a type. For use in D with statements.
+   */
+  ObjectG self()
+  {
+    return this;
+  }
+
+  /**
    * Template to get the D object from a C GObject and cast it to the given D object type.
    * Params:
    *   T = The D object type
