@@ -3,9 +3,10 @@
 //# Merge GObject into GLib package to simplify interdependencies
 //!merge GLib 2.0
 
-//# Re-enable EnumClass and FlagClass which were set to ignore with global wildcard rule
+//# Re-enable some structures which were set to ignore with global wildcard rule
 //!set record[EnumClass][ignore] 0
 //!set record[FlagsClass][ignore] 0
+//!set record[TypeClass][ignore] 0
 
 //# Add DClosure class type which is defined in GObject-DClosure.d
 //!add repository.namespace '<class name="DClosure" parent="Closure"></class>'

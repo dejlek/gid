@@ -3,7 +3,8 @@
 
 import core.exception : OutOfMemoryError;
 import core.memory : GC;
-import core.stdc.string : memset, strlen;
+import core.stdc.string : strlen;
+public import core.stdc.string : memset;
 import std.conv : to;
 import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
