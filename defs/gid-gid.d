@@ -1,6 +1,9 @@
 //!kind gid Namespace
 //!inhibit imports init funcs
 
+public import std.typecons : Flag, No, Tuple, Yes;
+public import std.traits : isCallable, Parameters, ParameterStorageClass, ParameterStorageClassTuple, ReturnType;
+
 import core.exception : OutOfMemoryError;
 import core.memory : GC;
 import core.stdc.string : strlen;
@@ -8,8 +11,6 @@ public import core.stdc.string : memset;
 import std.conv : to;
 import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
-public import std.typecons : Flag, No, Yes;
-
 import glib.c.functions;
 import glib.c.types;
 import gobject.boxed;
