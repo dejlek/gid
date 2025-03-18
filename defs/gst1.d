@@ -45,3 +45,7 @@
 //# utilSimplifyFraction.direction/denominator are inout params
 //!set function[util_simplify_fraction].parameters.parameter[numerator][direction] inout
 //!set function[util_simplify_fraction].parameters.parameter[denominator][direction] inout
+
+//# Disable unnecessary ByteArrayInterface functions (can use GArray versions instead)
+//!set record[Meta].method[serialize][ignore] 1
+//!set callback[MetaSerializeFunction][ignore] 1
