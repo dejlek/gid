@@ -29,3 +29,6 @@
 
 //# Set basic parameters to out
 //!set function[rc_parse_priority].parameters.parameter[priority][direction] out
+
+//# Return callback array should be transfer-ownership full
+//!set callback[TextBufferSerializeFunc].return-value[][transfer-ownership] full
