@@ -85,6 +85,15 @@
 //# Set some methods to not introspectable as they should be
 //!set class[SignalGroup].method[connect_swapped][introspectable] 0
 
+//# Ignore type plugin callbacks
+//!set callback[TypeInterfaceCheckFunc][ignore] 1
+//!set callback[TypePluginCompleteInterfaceInfo][ignore] 1
+//!set callback[TypePluginCompleteTypeInfo][ignore] 1
+//!set callback[TypePluginUnuse][ignore] 1
+//!set callback[TypePluginUse][ignore] 1
+//!set callback[InterfaceFinalizeFunc][ignore] 1
+//!set callback[InterfaceInitFunc][ignore] 1
+
 //# Add missing closure parameter designations
 //!set callback[SignalEmissionHook].parameters.parameter[data][closure] 3
 
