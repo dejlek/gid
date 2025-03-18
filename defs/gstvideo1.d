@@ -27,3 +27,6 @@
 
 //# Set basic parameters to out
 //!set interface[Navigation].function[event_parse_modifier_state].parameters.parameter[state][direction] out
+
+//# Disable interface APIs
+//!set interface[VideoOverlay].function[install_properties][ignore] 1

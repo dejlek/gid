@@ -1,5 +1,8 @@
 //!gir Pango-1.0
 
+//# Disable a method which depends on AttrClass
+//!set record[Attribute].method[init][ignore] 1
+
 //# LayoutLine isParagraphStart conflicts with property, disable it
 //!set record[LayoutLine].method[is_paragraph_start][ignore] 1
 
