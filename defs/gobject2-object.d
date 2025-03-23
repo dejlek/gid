@@ -50,7 +50,6 @@ string objectGMixin()
 `;
 }
 
-/// Base class wrapper for GObject types
 class ObjectG
 {
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
@@ -84,11 +83,7 @@ class ObjectG
   { // D object is being garbage collected. Only happens when there is only the toggle reference on GObject and there are no more pointers to the D proxy object.
     if (cInstancePtr) // Might be null if an exception occurred during construction
     {
-      import core.memory : GC;
-
-      if (!GC.inFinalizer)
-        debug objectDebugLog("dtor");
-
+      debug objectDebugLog("dtor");
       g_object_remove_toggle_ref(cInstancePtr, &_cObjToggleNotify, cast(void*)this); // Remove the toggle reference, which will likely lead to the destruction of the GObject
     }
   }
@@ -130,6 +125,12 @@ class ObjectG
   // Toggle ref callback
   extern(C) static void _cObjToggleNotify(void *dObj, ObjectC* gObj, bool isLastRef)
   {
+    debug
+    {
+      (cast(ObjectG)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
+        : "_cObjToggleNotify isLastRef=false");
+    }
+
     if (isLastRef) // Is the toggle reference the only reference?
       ptrThawGC(dObj);
     else // Toggle reference was the last reference, but now there is an additional one
@@ -147,7 +148,7 @@ class ObjectG
     if (dup)
       g_object_ref(cInstancePtr);
 
-    debug objectDebugLog("cPtr(" ~ dup.to!string ~ ")");
+    debug objectDebugLog(dup ? "cPtr(Yes.Dup)" : "cPtr(No.Dup)");
 
     return cast(void*)cInstancePtr;
   }
@@ -296,16 +297,60 @@ class ObjectG
   }
 
   debug
-  {
-    void objectDebugLog(string action)
+  { // Function for GObject debugging output (@nogc to avoid memory issues during GC finalization)
+    void objectDebugLog(string action) @nogc
     {
       if (gidObjectDebug)
       {
-        import std.stdio : writeln;
-        import std.conv : to;
-        writeln(action, " ", typeid(this).name, "@0x", (cast(ulong)cast(void*)this).to!string(16), "(GObject@0x",
-          (cast(ulong)cast(void*)cInstancePtr).to!string(16), ") refcount=", cInstancePtr.refCount);
+        import core.stdc.stdio : fwrite, stderr;
+        char[16] thisHexBuf;
+        char[16] cPtrHexBuf;
+        char[10] refCountBuf;
+
+        auto thisTypeName = typeid(this).name;
+        toHex(thisHexBuf, cast(ulong)cast(void*)this);
+        toHex(cPtrHexBuf, cast(ulong)cast(void*)cInstancePtr);
+        auto refCountBufLen = toDec(refCountBuf, cInstancePtr.refCount);
+
+        fwrite(action.ptr, 1, action.length, stderr);
+        fwrite(" ".ptr, 1, " ".length, stderr);
+        fwrite(thisTypeName.ptr, 1, thisTypeName.length, stderr);
+        fwrite("@0x".ptr, 1, "@0x".length, stderr);
+        fwrite(thisHexBuf.ptr, 1, thisHexBuf.length, stderr);
+        fwrite("(GObject@0x".ptr, 1, "(GObject@0x".length, stderr);
+        fwrite(cPtrHexBuf.ptr, 1, cPtrHexBuf.length, stderr);
+        fwrite(") refcount=".ptr, 1, ") refcount=".length, stderr);
+        fwrite(refCountBuf.ptr, 1, refCountBufLen, stderr);
+        fwrite("\n".ptr, 1, "\n".length, stderr);
       }
+    }
+
+    private static void toHex(char[] buffer, ulong value) @nogc
+    {
+      foreach (i; 0 .. 16)
+        buffer[i] = "0123456789ABCDEF"[(value >> (60 - i * 4)) & 0xF];
+    }
+
+    private static uint toDec(char[] buffer, uint value) @nogc
+    {
+      uint pos;
+      uint div = 1_000_000_000;
+
+      foreach (i; 0 .. 10)
+      {
+        auto digit = value / div;
+        buffer[pos] = cast(char)('0' + digit);
+
+        if (pos > 0 || digit > 0)
+        {
+          pos++;
+          value -= digit * div;
+        }
+
+        div /= 10;
+      }
+
+      return pos > 0 ? pos : 1;
     }
   }
 
