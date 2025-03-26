@@ -30,11 +30,15 @@ shared static this()
 private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 
 // String quark used to assign the D ObjectG to the C GObject keyed-data list
-private immutable Quark gidObjectQuark;
+immutable Quark gidObjectQuark;
 
-private shared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info
-private shared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
-private shared bool classMapsInitialized;
+// One time initialized on first use and considered immutable there-after
+__gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info
+__gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
+__gshared bool classMapsInitialized;
+
+// Multi-thread protected
+shared bool[ObjectG] objReferences; /// References to objects which still have C GObject references so they don't get garbage collected
 
 /**
  * A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
@@ -53,6 +57,7 @@ string objectGMixin()
 class ObjectG
 {
   protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
+  DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
    * Create an ObjectG which is wrapping a C GObject with the given GType.
@@ -106,17 +111,18 @@ class ObjectG
     // Add a toggle reference to bind the GObject to this proxy D Object to prevent the GObject from being destroyed, while also preventing ref loops.
     g_object_add_toggle_ref(cInstancePtr, &_cObjToggleNotify, cast(void*)this);
 
-    // Add D object as a root to garbage collector so that it doesn't get collected as long as the GObject has a strong reference on it (toggle ref + 1 or more other refs).
+    // Add a reference from D GC memory to the D wrapper object so that it does not get garbage collected while the C GObject still exists.
     // There will always be at least 2 references at this point, one from the caller and one for the toggle ref.
-    ptrFreezeGC(cast(void*)this);
+    synchronized objReferences[this] = true;
 
-    // If object has a floating reference (GInitiallyOwned), take ownership of it
+    // If object has a floating reference, remove it
     if (g_object_is_floating(cInstancePtr))
+    {
       g_object_ref_sink(cInstancePtr);
+      g_object_unref(cInstancePtr);
+    }
 
-    // If taking ownership of the object, remove the extra reference. May trigger toggle notify if it is the last remaining ref,
-    // which will call GC.removeRoot() allowing the D object to be garbage collected if it is no longer being accessed, resulting in the destruction of the GObject in dtor.
-    if (take)
+    if (take) // If taking ownership of the object, remove the extra reference. May trigger toggle notify if it is the last remaining ref
       g_object_unref(cInstancePtr);
 
     debug objectDebugLog("new");
@@ -131,10 +137,13 @@ class ObjectG
         : "_cObjToggleNotify isLastRef=false");
     }
 
-    if (isLastRef) // Is the toggle reference the only reference?
-      ptrThawGC(dObj);
-    else // Toggle reference was the last reference, but now there is an additional one
-      ptrFreezeGC(dObj);
+    synchronized
+    {
+      if (isLastRef) // Is the toggle reference the only reference?
+        objReferences.remove(cast(ObjectG)dObj);
+      else // Toggle reference was the last reference, but now there is an additional one
+        objReferences[cast(ObjectG)dObj] = true;
+    }
   }
 
   /**
@@ -148,7 +157,11 @@ class ObjectG
     if (dup)
       g_object_ref(cInstancePtr);
 
-    debug objectDebugLog(dup ? "cPtr(Yes.Dup)" : "cPtr(No.Dup)");
+    debug
+    {
+      if (dup)
+        objectDebugLog("cPtr(Yes.Dup)");
+    }
 
     return cast(void*)cInstancePtr;
   }
@@ -244,14 +257,14 @@ class ObjectG
               auto obj = cast(IfaceProxy)_d_newclass(c);
 
               if (auto ifaceInfo = obj.getIface)
-                ifaceProxyClasses[ifaceInfo] = cast(shared)c;
+                ifaceProxyClasses[ifaceInfo] = c;
             }
             else if (c && gobjClass.isBaseOf(c))
             { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
               auto obj = _d_newclass(c);
 
               if (auto gType = (cast(ObjectG)obj).gType)
-                gtypeClasses[gType] = cast(shared)c;
+                gtypeClasses[gType] = c;
             }
           }
         }
@@ -364,7 +377,14 @@ class ObjectG
    */
   ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
   {
-    return g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), cast(GClosure*)(cast(Closure)closure).cPtr, after == Yes.After);
+    auto gclosure = cast(GClosure*)(cast(Closure)closure).cPtr;
+    auto retval = g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
+    g_object_watch_closure(cInstancePtr, gclosure); // Invalidate closure when object is finalized
+
+    if (retval != 0)
+      signalClosures[retval] = closure;
+
+    return retval;
   }
 
   /**

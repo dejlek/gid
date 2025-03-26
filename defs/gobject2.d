@@ -97,6 +97,44 @@
 //# Add missing closure parameter designations
 //!set callback[SignalEmissionHook].parameters.parameter[data][closure] 3
 
+//# Override signalHandlerDisconnect and signalHandlersDestroy to update signalClosures references to allow garbage collection of objects referenced by signal callbacks
+//# NOTE: signalHandlersDisconnectMatched is also a potential candidate, but not currently implemented
+//!set function[signal_handler_disconnect][ignore] 1
+//!set function[signal_handlers_destroy][ignore] 1
+//!class global pre
+
+/**
+    Disconnects a handler from an instance so it will not be called during
+    any future or currently ongoing emissions of the signal it has been
+    connected to. The handler_id becomes invalid and may be reused.
+    
+    The handler_id has to be a valid signal handler id, connected to a
+    signal of instance.
+
+    Params:
+      instance = The instance to remove the signal handler from.
+      handlerId = Handler id of the handler to be disconnected.
+*/
+void signalHandlerDisconnect(gobject.object.ObjectG instance, gulong handlerId)
+{
+  g_signal_handler_disconnect(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
+  instance.signalClosures.remove(handlerId);
+}
+
+/**
+    Destroy all signal handlers of a type instance. This function is
+    an implementation detail of the #GObject dispose implementation,
+    and should not be used outside of the type system.
+
+    Params:
+      instance = The instance whose signal handlers are destroyed
+*/
+void signalHandlersDestroy(gobject.object.ObjectG instance)
+{
+  g_signal_handlers_destroy(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
+  instance.signalClosures.clear;
+}
+
 //!class types
 
   enum GTypeFundamentalShift = 2; /// Fundamental GType shift value (G_TYPE_FUNDAMENTAL_SHIFT)
