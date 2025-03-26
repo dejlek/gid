@@ -62,27 +62,27 @@ extern(C) void ptrThawDestroyNotify(void* ptr)
 }
 
 /**
- * Freeze a delegate to C heap memory and pin the context in the GC.
+ * Duplicate a delegate in GC memory and freeze it so that it isn't garbage collected when still referenced from C code.
  * Params:
  *   dlg = Pointer to the delegate to freeze
- * Returns: The duplicated delegate in C heap memory
+ * Returns: The duplicated delegate which is added as a GC root
  */
 void* freezeDelegate(void* dlg)
 {
-  auto dlgCast = cast(void delegate()*)dlg;
-  ptrFreezeGC(dlgCast.ptr);
-  return g_memdup2(dlg, (*dlgCast).sizeof);
+  auto dupDlg = GC.malloc((void delegate()).sizeof, GC.BlkAttr.NO_MOVE);
+  *cast(void delegate()*)dupDlg = *cast(void delegate()*)dlg;
+  ptrFreezeGC(dupDlg);
+  return dupDlg;
 }
 
 /**
- * Destroy a C heap memory allocated duplicated delegate and unpin context in the GC which was created with freezeDelegate().
+ * Unfreeze a delegate which was frozen with `freezeDelegate`, allowing it to be garbage collected
  * Params:
  *   dlg = The C heap memory allocated delegate
  */
 extern(C) void thawDelegate(void* dlg)
 {
-  ptrThawGC((cast(void delegate()*)dlg).ptr);
-  gFree(dlg);
+  ptrThawGC(dlg);
 }
 
 /**
