@@ -42,31 +42,7 @@ And finally the D binding source code itself can be used as a referenced.
 
 ### C API Library Reference
 
-Here are some links to the C API documentation, which may be useful.
-Though the adrdox generated documentation is now available and is a better documentation source.
-
- * [Adwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/)
- * [Arrow](https://arrow.apache.org/docs/c_glib/arrow-glib/index.html)
- * [ArrowDataset](https://arrow.apache.org/docs/c_glib/arrow-dataset-glib/index.html)
- * [ArrowFlight](https://arrow.apache.org/docs/c_glib/arrow-flight-glib/index.html)
- * [Atk](https://docs.gtk.org/atk/)
- * [Cairo](https://www.cairographics.org/manual/)
- * [Gdk4](https://docs.gtk.org/gdk4/)
- * [GdkPixbuf](https://docs.gtk.org/gdk-pixbuf/)
- * [Gio](https://docs.gtk.org/gio/)
- * [GLib](https://docs.gtk.org/glib/)
- * [GObject](https://docs.gtk.org/gobject/)
- * [Gsk](https://docs.gtk.org/gsk4/)
- * [Gtk4](https://docs.gtk.org/gtk4/)
- * [GtkSource5](https://gnome.pages.gitlab.gnome.org/gtksourceview/gtksourceview5/)
- * [Panel](https://gnome.pages.gitlab.gnome.org/libpanel/panel-1.0/)
- * [Pango](https://docs.gtk.org/Pango/)
- * [Parquet](https://arrow.apache.org/docs/c_glib/parquet-glib/index.html)
- * [RSvg2](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/index.html)
- * [Secret1](https://gnome.pages.gitlab.gnome.org/libsecret/)
- * [Soup3](https://libsoup.gnome.org/libsoup-3.0/index.html)
- * [Vte3](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
-
+See the doc/C_API_Library_Reference.md file for the comprehensive list.
 
 ## Dub Packages
 
