@@ -201,6 +201,7 @@ class ObjectG
 
   /**
    * Convenience method to return `this` cast to a type. For use in D with statements.
+   * Returns: The object instance
    */
   ObjectG self()
   {
@@ -413,7 +414,9 @@ class ObjectG
   }
 }
 
-/// Interface proxy class - used to wrap unknown GObjects as a specific interface
+/**
+ * Interface proxy class - used to wrap unknown GObjects as a known interface
+ */
 abstract class IfaceProxy : ObjectG
 {
   this(void* ptr, Flag!"Take" take = No.Take)

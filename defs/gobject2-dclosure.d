@@ -12,6 +12,7 @@ class DClosure : Closure
 {
   void* contextPtr; // Used to keep a reference to delegate context so it doesn't get GC'd
 
+  /** */
   this(T)(T cb, GClosureMarshal cMarshal)
   {
     static if (is(T == delegate))
@@ -28,7 +29,9 @@ class DClosure : Closure
   }
 }
 
-/// New GClosure type with a delegate pointer
+/**
+ * New GClosure type with a delegate pointer
+ */
 struct DGClosure(T)
 {
   GClosure closure;

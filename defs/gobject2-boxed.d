@@ -28,8 +28,8 @@ abstract class Boxed
   }
 
   /**
-    * Constructor for duplicating a wrapped boxed type value.
-    */
+   * Constructor for duplicating a wrapped boxed type value.
+   */
   this(Boxed boxed)
   {
     this(boxed.cInstancePtr, false);

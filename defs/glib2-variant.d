@@ -51,6 +51,7 @@ class VariantG
     this(g_variant_builder_end(&builder), No.Take);
   }
 
+  /** */
   override bool opEquals(Object other)
   {
     if (auto otherVariant = cast(VariantG)other)
@@ -59,6 +60,7 @@ class VariantG
       return this.opEquals(other);
   }
 
+  /** */
   override int opCmp(Object other)
   {
     if (auto otherVariant = cast(VariantG)other)
@@ -67,6 +69,7 @@ class VariantG
       return this.opCmp(other);
   }
 
+  /** */
   override string toString()
   {
     return print(true);
@@ -74,6 +77,9 @@ class VariantG
 
   /**
    * Template to get a single value from a VariantG
+   * Params:
+   *   T = The D type of the value to get
+   * Returns: The single value of the VariantG of type `T`
    */
   T get(T)()
   {
@@ -85,6 +91,9 @@ class VariantG
 
   /**
    * Template to get multiple values from a VariantG
+   * Params:
+   *   T = The D types of the values to get
+   * Returns: A tuple containing the values from the VariantG of the specified types
    */
   auto get(T...)()
     if (T.length > 1)
@@ -207,6 +216,10 @@ VariantC* createVariant(T...)(T vals)
 
 /**
  * Template to get a single value from a VariantC
+ * Params:
+ *   T = D type of the value to get
+ *   v = VariantC struct pointer
+ * Returns: The single variant value of type `T`
  */
 T getVal(T)(VariantC* v)
 {
@@ -293,6 +306,10 @@ T getVal(T)(VariantC* v)
 
 /**
  * Template to get multiple values from a VariantC
+ * Params:
+ *   T = D types of the values to get
+ *   v = VariantC struct pointer
+ * Returns: A tuple containing the values from the VariantG of the specified types
  */
 auto getVal(T...)(VariantC* v)
   if (T.length > 1)

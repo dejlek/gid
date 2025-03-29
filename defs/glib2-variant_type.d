@@ -8,6 +8,8 @@ class VariantType : Boxed
 
   /**
    * Template for creating a new VariantType from one or more D types
+   * Params:
+   *   T = One or more D types to create a VariantType for
    * Returns: New variant type
    */
   static VariantType create(T...)()
@@ -17,6 +19,8 @@ class VariantType : Boxed
 
   /**
    * Template to get a variant type string from one or more D types (type strings are concatenated)
+   * Params:
+   *   T = One or more D types to create a VariantType for
    * Returns: Variant type string which can be used with VariantType
    */
   static string getStr(T...)()

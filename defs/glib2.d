@@ -240,6 +240,7 @@
 //!set record[MarkupParseContext].constructor[new][ignore] 1
 //!class MarkupParseContext
 
+  /** */
   this(ref MarkupParser parser, MarkupParseFlags flags)
   {
     GMarkupParseContext* _cretval;
@@ -252,6 +253,7 @@
 //!set record[OptionGroup].constructor[new][ignore] 1
 //!class OptionGroup
 
+  /** */
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
