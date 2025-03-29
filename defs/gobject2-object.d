@@ -37,9 +37,6 @@ __gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info
 __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
 __gshared bool classMapsInitialized;
 
-// Multi-thread protected
-shared bool[ObjectG] objReferences; /// References to objects which still have C GObject references so they don't get garbage collected
-
 /**
  * A convenient string mixin to be used for ObjectG derived classes to declare boilerplate constructors.
  * Returns: A string value to use with mixin() within ObjectG derived classes.
@@ -111,9 +108,9 @@ class ObjectG
     // Add a toggle reference to bind the GObject to this proxy D Object to prevent the GObject from being destroyed, while also preventing ref loops.
     g_object_add_toggle_ref(cInstancePtr, &_cObjToggleNotify, cast(void*)this);
 
-    // Add a reference from D GC memory to the D wrapper object so that it does not get garbage collected while the C GObject still exists.
+    // Add D object as a root to garbage collector so that it doesn't get collected as long as the GObject has a strong reference on it (toggle ref + 1 or more other refs).
     // There will always be at least 2 references at this point, one from the caller and one for the toggle ref.
-    synchronized objReferences[this] = true;
+    ptrFreezeGC(cast(void*)this);
 
     // If object has a floating reference, remove it
     if (g_object_is_floating(cInstancePtr))
@@ -137,13 +134,10 @@ class ObjectG
         : "_cObjToggleNotify isLastRef=false");
     }
 
-    synchronized
-    {
-      if (isLastRef) // Is the toggle reference the only reference?
-        objReferences.remove(cast(ObjectG)dObj);
-      else // Toggle reference was the last reference, but now there is an additional one
-        objReferences[cast(ObjectG)dObj] = true;
-    }
+    if (isLastRef) // Is the toggle reference the only reference?
+      ptrThawGC(dObj);
+    else // Toggle reference was the last reference, but now there is an additional one
+      ptrFreezeGC(dObj);
   }
 
   /**
@@ -207,6 +201,7 @@ class ObjectG
 
   /**
    * Convenience method to return `this` cast to a type. For use in D with statements.
+   * Returns: The object instance
    */
   ObjectG self()
   {
@@ -419,7 +414,9 @@ class ObjectG
   }
 }
 
-/// Interface proxy class - used to wrap unknown GObjects as a specific interface
+/**
+ * Interface proxy class - used to wrap unknown GObjects as a known interface
+ */
 abstract class IfaceProxy : ObjectG
 {
   this(void* ptr, Flag!"Take" take = No.Take)

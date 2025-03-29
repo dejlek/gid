@@ -5,6 +5,9 @@ import std.traits : isPointer;
 import gobject.object;
 import gobject.types;
 
+/**
+ * Abstract class used as the base for GObject boxed types.
+ */
 class Value : Boxed
 {
 
@@ -55,6 +58,12 @@ class Value : Boxed
   }
 }
 
+/**
+ * Template to initialize a C GValue structure.
+ * Params:
+ *   T = The D type to initialize the GValue to
+ *   gval = The C GValue structure pointer
+ */
 void initVal(T)(GValue* gval)
 {
   static if (is(T == bool))
@@ -94,7 +103,13 @@ void initVal(T)(GValue* gval)
     assert(0, "Unsupported type " ~ T.stringof ~ " in Value.initVal");
 }
 
-/// Template to get a value from a GValue of a given D type (must contain the correct type)
+/**
+ * Template to get a value from a GValue of a given D type (must contain the correct type)
+ * Params:
+ *   T = D type which the C GValue structure contains
+ *   gval = C GValue structure pointer
+ * Returns: The value of type `T`
+ */
 T getVal(T)(const(GValue)* gval)
 {
   static if (is(T == bool))
@@ -145,7 +160,13 @@ T getVal(T)(const(GValue)* gval)
     assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
 }
 
-/// Template to set a GValue to a given D type (must have been initialized to the proper type)
+/**
+ * Template to set a GValue to a given D type (must have been initialized to the proper type)
+ * Params:
+ *   T = D type which the C GValue structure has been initialized to (except Boxed types which are initialized by this template)
+ *   gval = C GValue structure pointer
+ *   v = The value to set the GValue structure to
+ */
 void setVal(T)(GValue* gval, T v)
 {
   static if (is(T == bool))
