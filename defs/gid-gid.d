@@ -34,7 +34,9 @@ enum GidOwnership
 void ptrFreezeGC(const void* ptr)
 {
   GC.addRoot(ptr);
-  GC.setAttr(ptr, GC.BlkAttr.NO_MOVE);
+
+  if (!GC.inFinalizer)
+    GC.setAttr(ptr, GC.BlkAttr.NO_MOVE); // This call fails with an core.exception.InvalidMemoryOperationError if called during finalization
 }
 
 /**
@@ -47,7 +49,7 @@ void ptrThawGC(const void* ptr)
   GC.removeRoot(ptr);
 
   if (!GC.inFinalizer)
-    GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE); // FIXME - This call fails with an core.exception.InvalidMemoryOperationError if called during finalization, should removeRoot also not be called?
+    GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE); // This call fails with an core.exception.InvalidMemoryOperationError if called during finalization
 }
 
 /**
