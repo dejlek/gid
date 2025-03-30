@@ -1,3 +1,4 @@
+/// Module for [CustomLayout] class
 module gtk.custom_layout;
 
 import gid.gid;
@@ -10,26 +11,29 @@ import gtk.widget;
 
 /**
     [gtk.custom_layout.CustomLayout] uses closures for size negotiation.
-  
-  A `GtkCustomLayout `uses closures matching to the old [gtk.widget.Widget]
-  virtual functions for size negotiation, as a convenience API to
-  ease the porting towards the corresponding `GtkLayoutManager
-  virtual functions.
+    
+    A `GtkCustomLayout `uses closures matching to the old [gtk.widget.Widget]
+    virtual functions for size negotiation, as a convenience API to
+    ease the porting towards the corresponding `GtkLayoutManager
+    virtual functions.
 */
 class CustomLayout : gtk.layout_manager.LayoutManager
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_layout_get_type != &gidSymbolNotFound ? gtk_custom_layout_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,18 +46,19 @@ class CustomLayout : gtk.layout_manager.LayoutManager
 
   /**
       Creates a new legacy layout manager.
-    
-    Legacy layout managers map to the old [gtk.widget.Widget] size negotiation
-    virtual functions, and are meant to be used during the transition
-    from layout containers to layout manager delegates.
-    Params:
-      requestMode =       a function to retrieve
-          the [gtk.types.SizeRequestMode] of the widget using the layout; the
-          default request mode is [gtk.types.SizeRequestMode.ConstantSize]
-      measure =       a function to measure the widget using the layout manager
-      allocate =       a function to allocate the children of the widget using
-          the layout manager
-    Returns:     the newly created [gtk.custom_layout.CustomLayout]
+      
+      Legacy layout managers map to the old [gtk.widget.Widget] size negotiation
+      virtual functions, and are meant to be used during the transition
+      from layout containers to layout manager delegates.
+  
+      Params:
+        requestMode = a function to retrieve
+            the [gtk.types.SizeRequestMode] of the widget using the layout; the
+            default request mode is [gtk.types.SizeRequestMode.ConstantSize]
+        measure = a function to measure the widget using the layout manager
+        allocate = a function to allocate the children of the widget using
+            the layout manager
+      Returns: the newly created [gtk.custom_layout.CustomLayout]
   */
   this(gtk.types.CustomRequestModeFunc requestMode, gtk.types.CustomMeasureFunc measure, gtk.types.CustomAllocateFunc allocate)
   {

@@ -1,3 +1,4 @@
+/// Module for [UnixFDMessage] class
 module gio.unix_fdmessage;
 
 import gid.gid;
@@ -11,33 +12,36 @@ import gobject.object;
 
 /**
     This [gio.socket_control_message.SocketControlMessage] contains a [gio.unix_fdlist.UnixFDList].
-  It may be sent using [gio.socket.Socket.sendMessage] and received using
-  [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in the
-  [gio.types.SocketFamily.Unix] family). The file descriptors are copied
-  between processes by the kernel.
-  
-  For an easier way to send and receive file descriptors over
-  stream-oriented UNIX sockets, see [gio.unix_connection.UnixConnection.sendFd] and
-  [gio.unix_connection.UnixConnection.receiveFd].
-  
-  Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
-  interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
-  file or the `GioUnix-2.0` GIR namespace when using it.
+    It may be sent using [gio.socket.Socket.sendMessage] and received using
+    [gio.socket.Socket.receiveMessage] over UNIX sockets (ie: sockets in the
+    [gio.types.SocketFamily.Unix] family). The file descriptors are copied
+    between processes by the kernel.
+    
+    For an easier way to send and receive file descriptors over
+    stream-oriented UNIX sockets, see [gio.unix_connection.UnixConnection.sendFd] and
+    [gio.unix_connection.UnixConnection.receiveFd].
+    
+    Note that `<gio/gunixfdmessage.h>` belongs to the UNIX-specific GIO
+    interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
+    file or the `GioUnix-2.0` GIR namespace when using it.
 */
 class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_message_get_type != &gidSymbolNotFound ? g_unix_fd_message_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,8 +54,8 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   /**
       Creates a new #GUnixFDMessage containing an empty file descriptor
-    list.
-    Returns:     a new #GUnixFDMessage
+      list.
+      Returns: a new #GUnixFDMessage
   */
   this()
   {
@@ -62,9 +66,10 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   /**
       Creates a new #GUnixFDMessage containing list.
-    Params:
-      fdList =       a #GUnixFDList
-    Returns:     a new #GUnixFDMessage
+  
+      Params:
+        fdList = a #GUnixFDList
+      Returns: a new #GUnixFDMessage
   */
   static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList)
   {
@@ -76,16 +81,17 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   /**
       Adds a file descriptor to message.
-    
-    The file descriptor is duplicated using dup(). You keep your copy
-    of the descriptor and the copy contained in message will be closed
-    when message is finalized.
-    
-    A possible cause of failure is exceeding the per-process or
-    system-wide file descriptor limit.
-    Params:
-      fd =       a valid open file descriptor
-    Returns:     true in case of success, else false (and error is set)
+      
+      The file descriptor is duplicated using dup(). You keep your copy
+      of the descriptor and the copy contained in message will be closed
+      when message is finalized.
+      
+      A possible cause of failure is exceeding the per-process or
+      system-wide file descriptor limit.
+  
+      Params:
+        fd = a valid open file descriptor
+      Returns: true in case of success, else false (and error is set)
   */
   bool appendFd(int fd)
   {
@@ -99,9 +105,9 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   /**
       Gets the #GUnixFDList contained in message.  This function does not
-    return a reference to the caller, but the returned list is valid for
-    the lifetime of message.
-    Returns:     the #GUnixFDList from message
+      return a reference to the caller, but the returned list is valid for
+      the lifetime of message.
+      Returns: the #GUnixFDList from message
   */
   gio.unix_fdlist.UnixFDList getFdList()
   {
@@ -113,24 +119,24 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
 
   /**
       Returns the array of file descriptors that is contained in this
-    object.
-    
-    After this call, the descriptors are no longer contained in
-    message. Further calls will return an empty list (unless more
-    descriptors have been added).
-    
-    The return result of this function must be freed with [glib.global.gfree].
-    The caller is also responsible for closing all of the file
-    descriptors.
-    
-    If length is non-null then it is set to the number of file
-    descriptors in the returned array. The returned array is also
-    terminated with -1.
-    
-    This function never returns null. In case there are no file
-    descriptors contained in message, an empty array is returned.
-    Returns:     an array of file
-          descriptors
+      object.
+      
+      After this call, the descriptors are no longer contained in
+      message. Further calls will return an empty list (unless more
+      descriptors have been added).
+      
+      The return result of this function must be freed with [glib.global.gfree].
+      The caller is also responsible for closing all of the file
+      descriptors.
+      
+      If length is non-null then it is set to the number of file
+      descriptors in the returned array. The returned array is also
+      terminated with -1.
+      
+      This function never returns null. In case there are no file
+      descriptors contained in message, an empty array is returned.
+      Returns: an array of file
+            descriptors
   */
   int[] stealFds()
   {

@@ -1,3 +1,4 @@
+/// Module for [VideoCodecFrame] class
 module gstvideo.video_codec_frame;
 
 import gid.gid;
@@ -11,32 +12,37 @@ import gstvideo.types;
 
 /**
     A #GstVideoCodecFrame represents a video frame both in raw and
-  encoded form.
+    encoded form.
 */
 class VideoCodecFrame : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstVideoCodecFrame.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_codec_frame_get_type != &gidSymbolNotFound ? gst_video_codec_frame_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -131,8 +137,8 @@ class VideoCodecFrame : gobject.boxed.Boxed
 
   /**
       Gets private data set on the frame by the subclass via
-    [gstvideo.video_codec_frame.VideoCodecFrame.setUserData] previously.
-    Returns:     The previously set user_data
+      [gstvideo.video_codec_frame.VideoCodecFrame.setUserData] previously.
+      Returns: The previously set user_data
   */
   void* getUserData()
   {
@@ -142,12 +148,13 @@ class VideoCodecFrame : gobject.boxed.Boxed
 
   /**
       Sets user_data on the frame and the #GDestroyNotify that will be called when
-    the frame is freed. Allows to attach private data by the subclass to frames.
-    
-    If a user_data was previously set, then the previous set notify will be called
-    before the user_data is replaced.
-    Params:
-      notify =       a #GDestroyNotify
+      the frame is freed. Allows to attach private data by the subclass to frames.
+      
+      If a user_data was previously set, then the previous set notify will be called
+      before the user_data is replaced.
+  
+      Params:
+        notify = a #GDestroyNotify
   */
   void setUserData(glib.types.DestroyNotify notify)
   {

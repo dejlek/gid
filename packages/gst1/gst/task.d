@@ -1,3 +1,4 @@
+/// Module for [Task] class
 module gst.task;
 
 import gid.gid;
@@ -12,59 +13,62 @@ import gst.types;
 
 /**
     #GstTask is used by #GstElement and #GstPad to provide the data passing
-  threads in a #GstPipeline.
-  
-  A #GstPad will typically start a #GstTask to push or pull data to/from the
-  peer pads. Most source elements start a #GstTask to push data. In some cases
-  a demuxer element can start a #GstTask to pull data from a peer element. This
-  is typically done when the demuxer can perform random access on the upstream
-  peer element for improved performance.
-  
-  Although convenience functions exist on #GstPad to start/pause/stop tasks, it
-  might sometimes be needed to create a #GstTask manually if it is not related to
-  a #GstPad.
-  
-  Before the #GstTask can be run, it needs a #GRecMutex that can be set with
-  [gst.task.Task.setLock].
-  
-  The task can be started, paused and stopped with [gst.task.Task.start], [gst.task.Task.pause]
-  and [gst.task.Task.stop] respectively or with the [gst.task.Task.setState] function.
-  
-  A #GstTask will repeatedly call the #GstTaskFunction with the user data
-  that was provided when creating the task with [gst.task.Task.new_]. While calling
-  the function it will acquire the provided lock. The provided lock is released
-  when the task pauses or stops.
-  
-  Stopping a task with [gst.task.Task.stop] will not immediately make sure the task is
-  not running anymore. Use [gst.task.Task.join] to make sure the task is completely
-  stopped and the thread is stopped.
-  
-  After creating a #GstTask, use [gst.object.ObjectGst.unref] to free its resources. This can
-  only be done when the task is not running anymore.
-  
-  Task functions can send a #GstMessage to send out-of-band data to the
-  application. The application can receive messages from the #GstBus in its
-  mainloop.
-  
-  For debugging purposes, the task will configure its object name as the thread
-  name on Linux. Please note that the object name should be configured before the
-  task is started; changing the object name after the task has been started, has
-  no effect on the thread name.
+    threads in a #GstPipeline.
+    
+    A #GstPad will typically start a #GstTask to push or pull data to/from the
+    peer pads. Most source elements start a #GstTask to push data. In some cases
+    a demuxer element can start a #GstTask to pull data from a peer element. This
+    is typically done when the demuxer can perform random access on the upstream
+    peer element for improved performance.
+    
+    Although convenience functions exist on #GstPad to start/pause/stop tasks, it
+    might sometimes be needed to create a #GstTask manually if it is not related to
+    a #GstPad.
+    
+    Before the #GstTask can be run, it needs a #GRecMutex that can be set with
+    [gst.task.Task.setLock].
+    
+    The task can be started, paused and stopped with [gst.task.Task.start], [gst.task.Task.pause]
+    and [gst.task.Task.stop] respectively or with the [gst.task.Task.setState] function.
+    
+    A #GstTask will repeatedly call the #GstTaskFunction with the user data
+    that was provided when creating the task with [gst.task.Task.new_]. While calling
+    the function it will acquire the provided lock. The provided lock is released
+    when the task pauses or stops.
+    
+    Stopping a task with [gst.task.Task.stop] will not immediately make sure the task is
+    not running anymore. Use [gst.task.Task.join] to make sure the task is completely
+    stopped and the thread is stopped.
+    
+    After creating a #GstTask, use [gst.object.ObjectGst.unref] to free its resources. This can
+    only be done when the task is not running anymore.
+    
+    Task functions can send a #GstMessage to send out-of-band data to the
+    application. The application can receive messages from the #GstBus in its
+    mainloop.
+    
+    For debugging purposes, the task will configure its object name as the thread
+    name on Linux. Please note that the object name should be configured before the
+    task is started; changing the object name after the task has been started, has
+    no effect on the thread name.
 */
 class Task : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_get_type != &gidSymbolNotFound ? gst_task_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -77,23 +81,24 @@ class Task : gst.object.ObjectGst
 
   /**
       Create a new Task that will repeatedly call the provided func
-    with user_data as a parameter. Typically the task will run in
-    a new thread.
-    
-    The function cannot be changed after the task has been created. You
-    must create a new #GstTask to change the function.
-    
-    This function will not yet create and start a thread. Use [gst.task.Task.start] or
-    [gst.task.Task.pause] to create and start the GThread.
-    
-    Before the task can be used, a #GRecMutex must be configured using the
-    [gst.task.Task.setLock] function. This lock will always be acquired while
-    func is called.
-    Params:
-      func =       The #GstTaskFunction to use
-    Returns:     A new #GstTask.
+      with user_data as a parameter. Typically the task will run in
+      a new thread.
       
-      MT safe.
+      The function cannot be changed after the task has been created. You
+      must create a new #GstTask to change the function.
+      
+      This function will not yet create and start a thread. Use [gst.task.Task.start] or
+      [gst.task.Task.pause] to create and start the GThread.
+      
+      Before the task can be used, a #GRecMutex must be configured using the
+      [gst.task.Task.setLock] function. This lock will always be acquired while
+      func is called.
+  
+      Params:
+        func = The #GstTaskFunction to use
+      Returns: A new #GstTask.
+        
+        MT safe.
   */
   this(gst.types.TaskFunction func)
   {
@@ -114,9 +119,9 @@ class Task : gst.object.ObjectGst
 
   /**
       Wait for all tasks to be stopped. This is mainly used internally
-    to ensure proper cleanup of internal data structures in test suites.
-    
-    MT safe.
+      to ensure proper cleanup of internal data structures in test suites.
+      
+      MT safe.
   */
   static void cleanupAll()
   {
@@ -125,11 +130,11 @@ class Task : gst.object.ObjectGst
 
   /**
       Get the #GstTaskPool that this task will use for its streaming
-    threads.
-    
-    MT safe.
-    Returns:     the #GstTaskPool used by task. [gst.object.ObjectGst.unref]
-      after usage.
+      threads.
+      
+      MT safe.
+      Returns: the #GstTaskPool used by task. [gst.object.ObjectGst.unref]
+        after usage.
   */
   gst.task_pool.TaskPool getPool()
   {
@@ -141,9 +146,9 @@ class Task : gst.object.ObjectGst
 
   /**
       Get the current state of the task.
-    Returns:     The #GstTaskState of the task
-      
-      MT safe.
+      Returns: The #GstTaskState of the task
+        
+        MT safe.
   */
   gst.types.TaskState getState()
   {
@@ -155,16 +160,16 @@ class Task : gst.object.ObjectGst
 
   /**
       Joins task. After this call, it is safe to unref the task
-    and clean up the lock set with [gst.task.Task.setLock].
-    
-    The task will automatically be stopped with this call.
-    
-    This function cannot be called from within a task function as this
-    would cause a deadlock. The function will detect this and print a
-    g_warning.
-    Returns:     true if the task could be joined.
+      and clean up the lock set with [gst.task.Task.setLock].
       
-      MT safe.
+      The task will automatically be stopped with this call.
+      
+      This function cannot be called from within a task function as this
+      would cause a deadlock. The function will detect this and print a
+      g_warning.
+      Returns: true if the task could be joined.
+        
+        MT safe.
   */
   bool join()
   {
@@ -175,12 +180,12 @@ class Task : gst.object.ObjectGst
 
   /**
       Pauses task. This method can also be called on a task in the
-    stopped state, in which case a thread will be started and will remain
-    in the paused state. This function does not wait for the task to complete
-    the paused state.
-    Returns:     true if the task could be paused.
-      
-      MT safe.
+      stopped state, in which case a thread will be started and will remain
+      in the paused state. This function does not wait for the task to complete
+      the paused state.
+      Returns: true if the task could be paused.
+        
+        MT safe.
   */
   bool pause()
   {
@@ -191,10 +196,10 @@ class Task : gst.object.ObjectGst
 
   /**
       Resume task in case it was paused. If the task was stopped, it will
-    remain in that state and this function will return false.
-    Returns:     true if the task could be resumed.
-      
-      MT safe.
+      remain in that state and this function will return false.
+      Returns: true if the task could be resumed.
+        
+        MT safe.
   */
   bool resume()
   {
@@ -205,10 +210,11 @@ class Task : gst.object.ObjectGst
 
   /**
       Call enter_func when the task function of task is entered. user_data will
-    be passed to enter_func and notify will be called when user_data is no
-    longer referenced.
-    Params:
-      enterFunc =       a #GstTaskThreadFunc
+      be passed to enter_func and notify will be called when user_data is no
+      longer referenced.
+  
+      Params:
+        enterFunc = a #GstTaskThreadFunc
   */
   void setEnterCallback(gst.types.TaskThreadFunc enterFunc)
   {
@@ -227,10 +233,11 @@ class Task : gst.object.ObjectGst
 
   /**
       Call leave_func when the task function of task is left. user_data will
-    be passed to leave_func and notify will be called when user_data is no
-    longer referenced.
-    Params:
-      leaveFunc =       a #GstTaskThreadFunc
+      be passed to leave_func and notify will be called when user_data is no
+      longer referenced.
+  
+      Params:
+        leaveFunc = a #GstTaskThreadFunc
   */
   void setLeaveCallback(gst.types.TaskThreadFunc leaveFunc)
   {
@@ -249,14 +256,15 @@ class Task : gst.object.ObjectGst
 
   /**
       Set the mutex used by the task. The mutex will be acquired before
-    calling the #GstTaskFunction.
-    
-    This function has to be called before calling [gst.task.Task.pause] or
-    [gst.task.Task.start].
-    
-    MT safe.
-    Params:
-      mutex =       The #GRecMutex to use
+      calling the #GstTaskFunction.
+      
+      This function has to be called before calling [gst.task.Task.pause] or
+      [gst.task.Task.start].
+      
+      MT safe.
+  
+      Params:
+        mutex = The #GRecMutex to use
   */
   void setLock(glib.rec_mutex.RecMutex mutex)
   {
@@ -265,11 +273,12 @@ class Task : gst.object.ObjectGst
 
   /**
       Set pool as the new GstTaskPool for task. Any new streaming threads that
-    will be created by task will now use pool.
-    
-    MT safe.
-    Params:
-      pool =       a #GstTaskPool
+      will be created by task will now use pool.
+      
+      MT safe.
+  
+      Params:
+        pool = a #GstTaskPool
   */
   void setPool(gst.task_pool.TaskPool pool)
   {
@@ -278,15 +287,16 @@ class Task : gst.object.ObjectGst
 
   /**
       Sets the state of task to state.
-    
-    The task must have a lock associated with it using
-    [gst.task.Task.setLock] when going to GST_TASK_STARTED or GST_TASK_PAUSED or
-    this function will return false.
-    
-    MT safe.
-    Params:
-      state =       the new task state
-    Returns:     true if the state could be changed.
+      
+      The task must have a lock associated with it using
+      [gst.task.Task.setLock] when going to GST_TASK_STARTED or GST_TASK_PAUSED or
+      this function will return false.
+      
+      MT safe.
+  
+      Params:
+        state = the new task state
+      Returns: true if the state could be changed.
   */
   bool setState(gst.types.TaskState state)
   {
@@ -297,10 +307,10 @@ class Task : gst.object.ObjectGst
 
   /**
       Starts task. The task must have a lock associated with it using
-    [gst.task.Task.setLock] or this function will return false.
-    Returns:     true if the task could be started.
-      
-      MT safe.
+      [gst.task.Task.setLock] or this function will return false.
+      Returns: true if the task could be started.
+        
+        MT safe.
   */
   bool start()
   {
@@ -311,11 +321,11 @@ class Task : gst.object.ObjectGst
 
   /**
       Stops task. This method merely schedules the task to stop and
-    will not wait for the task to have completely stopped. Use
-    [gst.task.Task.join] to stop and wait for completion.
-    Returns:     true if the task could be stopped.
-      
-      MT safe.
+      will not wait for the task to have completely stopped. Use
+      [gst.task.Task.join] to stop and wait for completion.
+      Returns: true if the task could be stopped.
+        
+        MT safe.
   */
   bool stop()
   {

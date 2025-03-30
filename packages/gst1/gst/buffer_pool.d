@@ -1,3 +1,4 @@
+/// Module for [BufferPool] class
 module gst.buffer_pool;
 
 import gid.gid;
@@ -13,54 +14,57 @@ import gst.types;
 
 /**
     A #GstBufferPool is an object that can be used to pre-allocate and recycle
-  buffers of the same size and with the same properties.
-  
-  A #GstBufferPool is created with [gst.buffer_pool.BufferPool.new_].
-  
-  Once a pool is created, it needs to be configured. A call to
-  [gst.buffer_pool.BufferPool.getConfig] returns the current configuration structure from
-  the pool. With [gst.buffer_pool.BufferPool.configSetParams] and
-  [gst.buffer_pool.BufferPool.configSetAllocator] the bufferpool parameters and
-  allocator can be configured. Other properties can be configured in the pool
-  depending on the pool implementation.
-  
-  A bufferpool can have extra options that can be enabled with
-  [gst.buffer_pool.BufferPool.configAddOption]. The available options can be retrieved
-  with [gst.buffer_pool.BufferPool.getOptions]. Some options allow for additional
-  configuration properties to be set.
-  
-  After the configuration structure has been configured,
-  [gst.buffer_pool.BufferPool.setConfig] updates the configuration in the pool. This can
-  fail when the configuration structure is not accepted.
-  
-  After the pool has been configured, it can be activated with
-  [gst.buffer_pool.BufferPool.setActive]. This will preallocate the configured resources
-  in the pool.
-  
-  When the pool is active, [gst.buffer_pool.BufferPool.acquireBuffer] can be used to
-  retrieve a buffer from the pool.
-  
-  Buffers allocated from a bufferpool will automatically be returned to the
-  pool with [gst.buffer_pool.BufferPool.releaseBuffer] when their refcount drops to 0.
-  
-  The bufferpool can be deactivated again with [gst.buffer_pool.BufferPool.setActive].
-  All further [gst.buffer_pool.BufferPool.acquireBuffer] calls will return an error. When
-  all buffers are returned to the pool they will be freed.
+    buffers of the same size and with the same properties.
+    
+    A #GstBufferPool is created with [gst.buffer_pool.BufferPool.new_].
+    
+    Once a pool is created, it needs to be configured. A call to
+    [gst.buffer_pool.BufferPool.getConfig] returns the current configuration structure from
+    the pool. With [gst.buffer_pool.BufferPool.configSetParams] and
+    [gst.buffer_pool.BufferPool.configSetAllocator] the bufferpool parameters and
+    allocator can be configured. Other properties can be configured in the pool
+    depending on the pool implementation.
+    
+    A bufferpool can have extra options that can be enabled with
+    [gst.buffer_pool.BufferPool.configAddOption]. The available options can be retrieved
+    with [gst.buffer_pool.BufferPool.getOptions]. Some options allow for additional
+    configuration properties to be set.
+    
+    After the configuration structure has been configured,
+    [gst.buffer_pool.BufferPool.setConfig] updates the configuration in the pool. This can
+    fail when the configuration structure is not accepted.
+    
+    After the pool has been configured, it can be activated with
+    [gst.buffer_pool.BufferPool.setActive]. This will preallocate the configured resources
+    in the pool.
+    
+    When the pool is active, [gst.buffer_pool.BufferPool.acquireBuffer] can be used to
+    retrieve a buffer from the pool.
+    
+    Buffers allocated from a bufferpool will automatically be returned to the
+    pool with [gst.buffer_pool.BufferPool.releaseBuffer] when their refcount drops to 0.
+    
+    The bufferpool can be deactivated again with [gst.buffer_pool.BufferPool.setActive].
+    All further [gst.buffer_pool.BufferPool.acquireBuffer] calls will return an error. When
+    all buffers are returned to the pool they will be freed.
 */
 class BufferPool : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_pool_get_type != &gidSymbolNotFound ? gst_buffer_pool_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -73,7 +77,7 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Creates a new #GstBufferPool instance.
-    Returns:     a new #GstBufferPool instance
+      Returns: a new #GstBufferPool instance
   */
   this()
   {
@@ -84,12 +88,13 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Enables the option in config. This will instruct the bufferpool to enable
-    the specified option on the buffers that it allocates.
-    
-    The options supported by pool can be retrieved with [gst.buffer_pool.BufferPool.getOptions].
-    Params:
-      config =       a #GstBufferPool configuration
-      option =       an option to add
+      the specified option on the buffers that it allocates.
+      
+      The options supported by pool can be retrieved with [gst.buffer_pool.BufferPool.getOptions].
+  
+      Params:
+        config = a #GstBufferPool configuration
+        option = an option to add
   */
   static void configAddOption(gst.structure.Structure config, string option)
   {
@@ -99,11 +104,12 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Gets the allocator and params from config.
-    Params:
-      config =       a #GstBufferPool configuration
-      allocator =       a #GstAllocator, or null
-      params =       #GstAllocationParams, or null
-    Returns:     true, if the values are set.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        allocator = a #GstAllocator, or null
+        params = #GstAllocationParams, or null
+      Returns: true, if the values are set.
   */
   static bool configGetAllocator(gst.structure.Structure config, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
@@ -118,11 +124,12 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Parses an available config and gets the option at index of the options API
-    array.
-    Params:
-      config =       a #GstBufferPool configuration
-      index =       position in the option array to read
-    Returns:     the option at index.
+      array.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        index = position in the option array to read
+      Returns: the option at index.
   */
   static string configGetOption(gst.structure.Structure config, uint index)
   {
@@ -134,13 +141,14 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Gets the configuration values from config.
-    Params:
-      config =       a #GstBufferPool configuration
-      caps =       the caps of buffers
-      size =       the size of each buffer, not including prefix and padding
-      minBuffers =       the minimum amount of buffers to allocate.
-      maxBuffers =       the maximum amount of buffers to allocate or 0 for unlimited.
-    Returns:     true if all parameters could be fetched.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        caps = the caps of buffers
+        size = the size of each buffer, not including prefix and padding
+        minBuffers = the minimum amount of buffers to allocate.
+        maxBuffers = the maximum amount of buffers to allocate or 0 for unlimited.
+      Returns: true if all parameters could be fetched.
   */
   static bool configGetParams(gst.structure.Structure config, out gst.caps.Caps caps, out uint size, out uint minBuffers, out uint maxBuffers)
   {
@@ -153,10 +161,11 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Checks if config contains option.
-    Params:
-      config =       a #GstBufferPool configuration
-      option =       an option
-    Returns:     true if the options array contains option.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        option = an option
+      Returns: true if the options array contains option.
   */
   static bool configHasOption(gst.structure.Structure config, string option)
   {
@@ -168,10 +177,11 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Retrieves the number of values currently stored in the options array of the
-    config structure.
-    Params:
-      config =       a #GstBufferPool configuration
-    Returns:     the options array size as a #guint.
+      config structure.
+  
+      Params:
+        config = a #GstBufferPool configuration
+      Returns: the options array size as a #guint.
   */
   static uint configNOptions(gst.structure.Structure config)
   {
@@ -182,21 +192,22 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Sets the allocator and params on config.
-    
-    One of allocator and params can be null, but not both. When allocator
-    is null, the default allocator of the pool will use the values in param
-    to perform its allocation. When param is null, the pool will use the
-    provided allocator with its default #GstAllocationParams.
-    
-    A call to [gst.buffer_pool.BufferPool.setConfig] can update the allocator and params
-    with the values that it is able to do. Some pools are, for example, not able
-    to operate with different allocators or cannot allocate with the values
-    specified in params. Use [gst.buffer_pool.BufferPool.getConfig] to get the currently
-    used values.
-    Params:
-      config =       a #GstBufferPool configuration
-      allocator =       a #GstAllocator
-      params =       #GstAllocationParams
+      
+      One of allocator and params can be null, but not both. When allocator
+      is null, the default allocator of the pool will use the values in param
+      to perform its allocation. When param is null, the pool will use the
+      provided allocator with its default #GstAllocationParams.
+      
+      A call to [gst.buffer_pool.BufferPool.setConfig] can update the allocator and params
+      with the values that it is able to do. Some pools are, for example, not able
+      to operate with different allocators or cannot allocate with the values
+      specified in params. Use [gst.buffer_pool.BufferPool.getConfig] to get the currently
+      used values.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        allocator = a #GstAllocator
+        params = #GstAllocationParams
   */
   static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
@@ -205,12 +216,13 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Configures config with the given parameters.
-    Params:
-      config =       a #GstBufferPool configuration
-      caps =       caps for the buffers
-      size =       the size of each buffer, not including prefix and padding
-      minBuffers =       the minimum amount of buffers to allocate.
-      maxBuffers =       the maximum amount of buffers to allocate or 0 for unlimited.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        caps = caps for the buffers
+        size = the size of each buffer, not including prefix and padding
+        minBuffers = the minimum amount of buffers to allocate.
+        maxBuffers = the maximum amount of buffers to allocate or 0 for unlimited.
   */
   static void configSetParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
   {
@@ -219,20 +231,21 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Validates that changes made to config are still valid in the context of the
-    expected parameters. This function is a helper that can be used to validate
-    changes made by a pool to a config when [gst.buffer_pool.BufferPool.setConfig]
-    returns false. This expects that caps haven't changed and that
-    min_buffers aren't lower then what we initially expected.
-    This does not check if options or allocator parameters are still valid,
-    won't check if size have changed, since changing the size is valid to adapt
-    padding.
-    Params:
-      config =       a #GstBufferPool configuration
-      caps =       the excepted caps of buffers
-      size =       the expected size of each buffer, not including prefix and padding
-      minBuffers =       the expected minimum amount of buffers to allocate.
-      maxBuffers =       the expect maximum amount of buffers to allocate or 0 for unlimited.
-    Returns:     true, if the parameters are valid in this context.
+      expected parameters. This function is a helper that can be used to validate
+      changes made by a pool to a config when [gst.buffer_pool.BufferPool.setConfig]
+      returns false. This expects that caps haven't changed and that
+      min_buffers aren't lower then what we initially expected.
+      This does not check if options or allocator parameters are still valid,
+      won't check if size have changed, since changing the size is valid to adapt
+      padding.
+  
+      Params:
+        config = a #GstBufferPool configuration
+        caps = the excepted caps of buffers
+        size = the expected size of each buffer, not including prefix and padding
+        minBuffers = the expected minimum amount of buffers to allocate.
+        maxBuffers = the expect maximum amount of buffers to allocate or 0 for unlimited.
+      Returns: true, if the parameters are valid in this context.
   */
   static bool configValidateParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
   {
@@ -243,16 +256,17 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Acquires a buffer from pool. buffer should point to a memory location that
-    can hold a pointer to the new buffer. When the pool is empty, this function
-    will by default block until a buffer is released into the pool again or when
-    the pool is set to flushing or deactivated.
-    
-    params can contain optional parameters to influence the allocation.
-    Params:
-      buffer =       a location for a #GstBuffer
-      params =       parameters.
-    Returns:     a #GstFlowReturn such as [gst.types.FlowReturn.Flushing] when the pool is
-      inactive.
+      can hold a pointer to the new buffer. When the pool is empty, this function
+      will by default block until a buffer is released into the pool again or when
+      the pool is set to flushing or deactivated.
+      
+      params can contain optional parameters to influence the allocation.
+  
+      Params:
+        buffer = a location for a #GstBuffer
+        params = parameters.
+      Returns: a #GstFlowReturn such as [gst.types.FlowReturn.Flushing] when the pool is
+        inactive.
   */
   gst.types.FlowReturn acquireBuffer(out gst.buffer.Buffer buffer, gst.types.BufferPoolAcquireParams params)
   {
@@ -266,8 +280,8 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Gets a copy of the current configuration of the pool. This configuration
-    can be modified and used for the [gst.buffer_pool.BufferPool.setConfig] call.
-    Returns:     a copy of the current configuration of pool.
+      can be modified and used for the [gst.buffer_pool.BufferPool.setConfig] call.
+      Returns: a copy of the current configuration of pool.
   */
   gst.structure.Structure getConfig()
   {
@@ -279,10 +293,10 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Gets a null terminated array of string with supported bufferpool options for
-    pool. An option would typically be enabled with
-    [gst.buffer_pool.BufferPool.configAddOption].
-    Returns:     a null terminated array
-               of strings.
+      pool. An option would typically be enabled with
+      [gst.buffer_pool.BufferPool.configAddOption].
+      Returns: a null terminated array
+                 of strings.
   */
   string[] getOptions()
   {
@@ -304,9 +318,10 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Checks if the bufferpool supports option.
-    Params:
-      option =       an option
-    Returns:     true if the buffer pool contains option.
+  
+      Params:
+        option = an option
+      Returns: true if the buffer pool contains option.
   */
   bool hasOption(string option)
   {
@@ -318,8 +333,8 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Checks if pool is active. A pool can be activated with the
-    [gst.buffer_pool.BufferPool.setActive] call.
-    Returns:     true when the pool is active.
+      [gst.buffer_pool.BufferPool.setActive] call.
+      Returns: true when the pool is active.
   */
   bool isActive()
   {
@@ -330,12 +345,13 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Releases buffer to pool. buffer should have previously been allocated from
-    pool with [gst.buffer_pool.BufferPool.acquireBuffer].
-    
-    This function is usually called automatically when the last ref on buffer
-    disappears.
-    Params:
-      buffer =       a #GstBuffer
+      pool with [gst.buffer_pool.BufferPool.acquireBuffer].
+      
+      This function is usually called automatically when the last ref on buffer
+      disappears.
+  
+      Params:
+        buffer = a #GstBuffer
   */
   void releaseBuffer(gst.buffer.Buffer buffer)
   {
@@ -344,18 +360,19 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Controls the active state of pool. When the pool is inactive, new calls to
-    [gst.buffer_pool.BufferPool.acquireBuffer] will return with [gst.types.FlowReturn.Flushing].
-    
-    Activating the bufferpool will preallocate all resources in the pool based on
-    the configuration of the pool.
-    
-    Deactivating will free the resources again when there are no outstanding
-    buffers. When there are outstanding buffers, they will be freed as soon as
-    they are all returned to the pool.
-    Params:
-      active =       the new active state
-    Returns:     false when the pool was not configured or when preallocation of the
-      buffers failed.
+      [gst.buffer_pool.BufferPool.acquireBuffer] will return with [gst.types.FlowReturn.Flushing].
+      
+      Activating the bufferpool will preallocate all resources in the pool based on
+      the configuration of the pool.
+      
+      Deactivating will free the resources again when there are no outstanding
+      buffers. When there are outstanding buffers, they will be freed as soon as
+      they are all returned to the pool.
+  
+      Params:
+        active = the new active state
+      Returns: false when the pool was not configured or when preallocation of the
+        buffers failed.
   */
   bool setActive(bool active)
   {
@@ -366,24 +383,25 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Sets the configuration of the pool. If the pool is already configured, and
-    the configuration hasn't changed, this function will return true. If the
-    pool is active, this method will return false and active configuration
-    will remain. Buffers allocated from this pool must be returned or else this
-    function will do nothing and return false.
-    
-    config is a #GstStructure that contains the configuration parameters for
-    the pool. A default and mandatory set of parameters can be configured with
-    [gst.buffer_pool.BufferPool.configSetParams], [gst.buffer_pool.BufferPool.configSetAllocator]
-    and [gst.buffer_pool.BufferPool.configAddOption].
-    
-    If the parameters in config can not be set exactly, this function returns
-    false and will try to update as much state as possible. The new state can
-    then be retrieved and refined with [gst.buffer_pool.BufferPool.getConfig].
-    
-    This function takes ownership of config.
-    Params:
-      config =       a #GstStructure
-    Returns:     true when the configuration could be set.
+      the configuration hasn't changed, this function will return true. If the
+      pool is active, this method will return false and active configuration
+      will remain. Buffers allocated from this pool must be returned or else this
+      function will do nothing and return false.
+      
+      config is a #GstStructure that contains the configuration parameters for
+      the pool. A default and mandatory set of parameters can be configured with
+      [gst.buffer_pool.BufferPool.configSetParams], [gst.buffer_pool.BufferPool.configSetAllocator]
+      and [gst.buffer_pool.BufferPool.configAddOption].
+      
+      If the parameters in config can not be set exactly, this function returns
+      false and will try to update as much state as possible. The new state can
+      then be retrieved and refined with [gst.buffer_pool.BufferPool.getConfig].
+      
+      This function takes ownership of config.
+  
+      Params:
+        config = a #GstStructure
+      Returns: true when the configuration could be set.
   */
   bool setConfig(gst.structure.Structure config)
   {
@@ -394,9 +412,10 @@ class BufferPool : gst.object.ObjectGst
 
   /**
       Enables or disables the flushing state of a pool without freeing or
-    allocating buffers.
-    Params:
-      flushing =       whether to start or stop flushing
+      allocating buffers.
+  
+      Params:
+        flushing = whether to start or stop flushing
   */
   void setFlushing(bool flushing)
   {

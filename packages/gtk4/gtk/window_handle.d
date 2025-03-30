@@ -1,3 +1,4 @@
+/// Module for [WindowHandle] class
 module gtk.window_handle;
 
 import gid.gid;
@@ -15,34 +16,37 @@ import gtk.widget;
 
 /**
     [gtk.window_handle.WindowHandle] is a titlebar area widget.
-  
-  When added into a window, it can be dragged to move the window, and handles
-  right click, double click and middle click as expected of a titlebar.
-  
-  # CSS nodes
-  
-  [gtk.window_handle.WindowHandle] has a single CSS node with the name `windowhandle`.
-  
-  # Accessibility
-  
-  Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
-  
-  Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
+    
+    When added into a window, it can be dragged to move the window, and handles
+    right click, double click and middle click as expected of a titlebar.
+    
+    # CSS nodes
+    
+    [gtk.window_handle.WindowHandle] has a single CSS node with the name `windowhandle`.
+    
+    # Accessibility
+    
+    Until GTK 4.10, [gtk.window_handle.WindowHandle] used the [gtk.types.AccessibleRole.Group] role.
+    
+    Starting from GTK 4.12, [gtk.window_handle.WindowHandle] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 class WindowHandle : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_handle_get_type != &gidSymbolNotFound ? gtk_window_handle_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,7 +59,7 @@ class WindowHandle : gtk.widget.Widget
 
   /**
       Creates a new [gtk.window_handle.WindowHandle].
-    Returns:     a new [gtk.window_handle.WindowHandle].
+      Returns: a new [gtk.window_handle.WindowHandle].
   */
   this()
   {
@@ -66,7 +70,7 @@ class WindowHandle : gtk.widget.Widget
 
   /**
       Gets the child widget of self.
-    Returns:     the child widget of self
+      Returns: the child widget of self
   */
   gtk.widget.Widget getChild()
   {
@@ -78,8 +82,9 @@ class WindowHandle : gtk.widget.Widget
 
   /**
       Sets the child widget of self.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {

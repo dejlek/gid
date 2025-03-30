@@ -1,3 +1,4 @@
+/// Module for [DebugMessage] class
 module gst.debug_message;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class DebugMessage
   GstDebugMessage* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class DebugMessage
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -28,8 +31,8 @@ class DebugMessage
 
   /**
       Gets the string representation of a #GstDebugMessage. This function is used
-    in debug handlers to extract the message.
-    Returns:     the string representation of a #GstDebugMessage.
+      in debug handlers to extract the message.
+      Returns: the string representation of a #GstDebugMessage.
   */
   string get()
   {
@@ -41,8 +44,8 @@ class DebugMessage
 
   /**
       Get the id of the object that emitted this message. This function is used in
-    debug handlers. Can be empty.
-    Returns:     The emitter of a #GstDebugMessage.
+      debug handlers. Can be empty.
+      Returns: The emitter of a #GstDebugMessage.
   */
   string getId()
   {

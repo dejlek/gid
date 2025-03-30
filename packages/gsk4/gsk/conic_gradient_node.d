@@ -1,3 +1,4 @@
+/// Module for [ConicGradientNode] class
 module gsk.conic_gradient_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class ConicGradientNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,12 +25,12 @@ class ConicGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the angle for the gradient in radians, normalized in [0, 2 * PI].
-    
-    The angle is starting at the top and going clockwise, as expressed
-    in the css specification:
-    
-        angle = 90 - [gsk.conic_gradient_node.ConicGradientNode.getRotation]
-    Returns:     the angle for the gradient
+      
+      The angle is starting at the top and going clockwise, as expressed
+      in the css specification:
+      
+          angle = 90 - [gsk.conic_gradient_node.ConicGradientNode.getRotation]
+      Returns: the angle for the gradient
   */
   float getAngle()
   {
@@ -39,7 +41,7 @@ class ConicGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the center pointer for the gradient.
-    Returns:     the center point for the gradient
+      Returns: the center point for the gradient
   */
   graphene.point.Point getCenter()
   {
@@ -51,7 +53,7 @@ class ConicGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of color stops in the gradient.
-    Returns:     the number of color stops
+      Returns: the number of color stops
   */
   size_t getNColorStops()
   {
@@ -62,7 +64,7 @@ class ConicGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the rotation for the gradient in degrees.
-    Returns:     the rotation for the gradient
+      Returns: the rotation for the gradient
   */
   float getRotation()
   {

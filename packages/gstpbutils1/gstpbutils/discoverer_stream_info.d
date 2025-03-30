@@ -1,3 +1,4 @@
+/// Module for [DiscovererStreamInfo] class
 module gstpbutils.discoverer_stream_info;
 
 import gid.gid;
@@ -12,35 +13,38 @@ import gstpbutils.types;
 
 /**
     Base structure for information concerning a media stream. Depending on the
-  stream type, one can find more media-specific information in
-  #GstDiscovererAudioInfo, #GstDiscovererVideoInfo, and
-  #GstDiscovererContainerInfo.
-  
-  The #GstDiscovererStreamInfo represents the topology of the stream. Siblings
-  can be iterated over with [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getNext] and
-  [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getPrevious]. Children (sub-streams) of a
-  stream can be accessed using the #GstDiscovererContainerInfo API.
-  
-  As a simple example, if you run #GstDiscoverer on an AVI file with one audio
-  and one video stream, you will get a #GstDiscovererContainerInfo
-  corresponding to the AVI container, which in turn will have a
-  #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
-  for the audio and video streams respectively.
+    stream type, one can find more media-specific information in
+    #GstDiscovererAudioInfo, #GstDiscovererVideoInfo, and
+    #GstDiscovererContainerInfo.
+    
+    The #GstDiscovererStreamInfo represents the topology of the stream. Siblings
+    can be iterated over with [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getNext] and
+    [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getPrevious]. Children (sub-streams) of a
+    stream can be accessed using the #GstDiscovererContainerInfo API.
+    
+    As a simple example, if you run #GstDiscoverer on an AVI file with one audio
+    and one video stream, you will get a #GstDiscovererContainerInfo
+    corresponding to the AVI container, which in turn will have a
+    #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
+    for the audio and video streams respectively.
 */
 class DiscovererStreamInfo : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_stream_info_get_type != &gidSymbolNotFound ? gst_discoverer_stream_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,9 +57,10 @@ class DiscovererStreamInfo : gobject.object.ObjectG
 
   /**
       Decrements the reference count of all contained #GstDiscovererStreamInfo
-    and fress the #GList.
-    Params:
-      infos =       a #GList of #GstDiscovererStreamInfo
+      and fress the #GList.
+  
+      Params:
+        infos = a #GList of #GstDiscovererStreamInfo
   */
   static void listFree(gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] infos)
   {

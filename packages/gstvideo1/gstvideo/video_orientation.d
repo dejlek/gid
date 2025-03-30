@@ -1,3 +1,4 @@
+/// Module for [VideoOrientation] interface
 module gstvideo.video_orientation;
 
 public import gstvideo.video_orientation_iface_proxy;
@@ -9,11 +10,12 @@ import gstvideo.types;
 
 /**
     The interface allows unified access to control flipping and autocenter
-  operation of video-sources or operators.
+    operation of video-sources or operators.
 */
 interface VideoOrientation
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -22,11 +24,12 @@ interface VideoOrientation
 
   /**
       Parses the "image-orientation" tag and transforms it into the
-    #GstVideoOrientationMethod enum.
-    Params:
-      taglist =       A #GstTagList
-      method =       The location where to return the orientation.
-    Returns:     TRUE if there was a valid "image-orientation" tag in the taglist.
+      #GstVideoOrientationMethod enum.
+  
+      Params:
+        taglist = A #GstTagList
+        method = The location where to return the orientation.
+      Returns: TRUE if there was a valid "image-orientation" tag in the taglist.
   */
   static bool fromTag(gst.tag_list.TagList taglist, out gstvideo.types.VideoOrientationMethod method)
   {
@@ -37,65 +40,73 @@ interface VideoOrientation
 
   /**
       Get the horizontal centering offset from the given object.
-    Params:
-      center =       return location for the result
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = return location for the result
+      Returns: true in case the element supports centering
   */
   bool getHcenter(out int center);
 
   /**
       Get the horizontal flipping state (true for flipped) from the given object.
-    Params:
-      flip =       return location for the result
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = return location for the result
+      Returns: true in case the element supports flipping
   */
   bool getHflip(out bool flip);
 
   /**
       Get the vertical centering offset from the given object.
-    Params:
-      center =       return location for the result
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = return location for the result
+      Returns: true in case the element supports centering
   */
   bool getVcenter(out int center);
 
   /**
       Get the vertical flipping state (true for flipped) from the given object.
-    Params:
-      flip =       return location for the result
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = return location for the result
+      Returns: true in case the element supports flipping
   */
   bool getVflip(out bool flip);
 
   /**
       Set the horizontal centering offset for the given object.
-    Params:
-      center =       centering offset
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = centering offset
+      Returns: true in case the element supports centering
   */
   bool setHcenter(int center);
 
   /**
       Set the horizontal flipping state (true for flipped) for the given object.
-    Params:
-      flip =       use flipping
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = use flipping
+      Returns: true in case the element supports flipping
   */
   bool setHflip(bool flip);
 
   /**
       Set the vertical centering offset for the given object.
-    Params:
-      center =       centering offset
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = centering offset
+      Returns: true in case the element supports centering
   */
   bool setVcenter(int center);
 
   /**
       Set the vertical flipping state (true for flipped) for the given object.
-    Params:
-      flip =       use flipping
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = use flipping
+      Returns: true in case the element supports flipping
   */
   bool setVflip(bool flip);
 }

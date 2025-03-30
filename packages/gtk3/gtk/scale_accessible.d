@@ -1,3 +1,4 @@
+/// Module for [ScaleAccessible] class
 module gtk.scale_accessible;
 
 import atk.component;
@@ -14,17 +15,20 @@ import gtk.types;
 class ScaleAccessible : gtk.range_accessible.RangeAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_accessible_get_type != &gidSymbolNotFound ? gtk_scale_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

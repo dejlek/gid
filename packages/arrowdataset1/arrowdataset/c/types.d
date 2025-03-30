@@ -1,3 +1,4 @@
+/// C types for arrowdataset1 library
 module arrowdataset.c.types;
 
 public import gid.basictypes;

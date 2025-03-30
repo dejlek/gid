@@ -1,3 +1,4 @@
+/// Module for [Pad] class
 module gst.pad;
 
 import gid.gid;
@@ -21,79 +22,82 @@ import gst.types;
 
 /**
     A #GstElement is linked to other elements via "pads", which are extremely
-  light-weight generic link points.
-  
-  Pads have a #GstPadDirection, source pads produce data, sink pads consume
-  data.
-  
-  Pads are typically created from a #GstPadTemplate with
-  [gst.pad.Pad.newFromTemplate] and are then added to a #GstElement. This usually
-  happens when the element is created but it can also happen dynamically based
-  on the data that the element is processing or based on the pads that the
-  application requests.
-  
-  Pads without pad templates can be created with [gst.pad.Pad.new_],
-  which takes a direction and a name as an argument.  If the name is null,
-  then a guaranteed unique name will be assigned to it.
-  
-  A #GstElement creating a pad will typically use the various
-  gst_pad_set_*_function\() calls to register callbacks for events, queries or
-  dataflow on the pads.
-  
-  gst_pad_get_parent() will retrieve the #GstElement that owns the pad.
-  
-  After two pads are retrieved from an element by [gst.element.Element.getStaticPad],
-  the pads can be linked with [gst.pad.Pad.link]. (For quick links,
-  you can also use [gst.element.Element.link], which will make the obvious
-  link for you if it's straightforward.). Pads can be unlinked again with
-  [gst.pad.Pad.unlink]. [gst.pad.Pad.getPeer] can be used to check what the pad is
-  linked to.
-  
-  Before dataflow is possible on the pads, they need to be activated with
-  [gst.pad.Pad.setActive].
-  
-  [gst.pad.Pad.query] and [gst.pad.Pad.peerQuery] can be used to query various
-  properties of the pad and the stream.
-  
-  To send a #GstEvent on a pad, use [gst.pad.Pad.sendEvent] and
-  [gst.pad.Pad.pushEvent]. Some events will be sticky on the pad, meaning that
-  after they pass on the pad they can be queried later with
-  [gst.pad.Pad.getStickyEvent] and [gst.pad.Pad.stickyEventsForeach].
-  [gst.pad.Pad.getCurrentCaps] and [gst.pad.Pad.hasCurrentCaps] are convenience
-  functions to query the current sticky CAPS event on a pad.
-  
-  GstElements will use [gst.pad.Pad.push] and [gst.pad.Pad.pullRange] to push out
-  or pull in a buffer.
-  
-  The dataflow, events and queries that happen on a pad can be monitored with
-  probes that can be installed with [gst.pad.Pad.addProbe]. [gst.pad.Pad.isBlocked]
-  can be used to check if a block probe is installed on the pad.
-  [gst.pad.Pad.isBlocking] checks if the blocking probe is currently blocking the
-  pad. [gst.pad.Pad.removeProbe] is used to remove a previously installed probe
-  and unblock blocking probes if any.
-  
-  Pad have an offset that can be retrieved with [gst.pad.Pad.getOffset]. This
-  offset will be applied to the running_time of all data passing over the pad.
-  [gst.pad.Pad.setOffset] can be used to change the offset.
-  
-  Convenience functions exist to start, pause and stop the task on a pad with
-  [gst.pad.Pad.startTask], [gst.pad.Pad.pauseTask] and [gst.pad.Pad.stopTask]
-  respectively.
+    light-weight generic link points.
+    
+    Pads have a #GstPadDirection, source pads produce data, sink pads consume
+    data.
+    
+    Pads are typically created from a #GstPadTemplate with
+    [gst.pad.Pad.newFromTemplate] and are then added to a #GstElement. This usually
+    happens when the element is created but it can also happen dynamically based
+    on the data that the element is processing or based on the pads that the
+    application requests.
+    
+    Pads without pad templates can be created with [gst.pad.Pad.new_],
+    which takes a direction and a name as an argument.  If the name is null,
+    then a guaranteed unique name will be assigned to it.
+    
+    A #GstElement creating a pad will typically use the various
+    gst_pad_set_*_function\() calls to register callbacks for events, queries or
+    dataflow on the pads.
+    
+    gst_pad_get_parent() will retrieve the #GstElement that owns the pad.
+    
+    After two pads are retrieved from an element by [gst.element.Element.getStaticPad],
+    the pads can be linked with [gst.pad.Pad.link]. (For quick links,
+    you can also use [gst.element.Element.link], which will make the obvious
+    link for you if it's straightforward.). Pads can be unlinked again with
+    [gst.pad.Pad.unlink]. [gst.pad.Pad.getPeer] can be used to check what the pad is
+    linked to.
+    
+    Before dataflow is possible on the pads, they need to be activated with
+    [gst.pad.Pad.setActive].
+    
+    [gst.pad.Pad.query] and [gst.pad.Pad.peerQuery] can be used to query various
+    properties of the pad and the stream.
+    
+    To send a #GstEvent on a pad, use [gst.pad.Pad.sendEvent] and
+    [gst.pad.Pad.pushEvent]. Some events will be sticky on the pad, meaning that
+    after they pass on the pad they can be queried later with
+    [gst.pad.Pad.getStickyEvent] and [gst.pad.Pad.stickyEventsForeach].
+    [gst.pad.Pad.getCurrentCaps] and [gst.pad.Pad.hasCurrentCaps] are convenience
+    functions to query the current sticky CAPS event on a pad.
+    
+    GstElements will use [gst.pad.Pad.push] and [gst.pad.Pad.pullRange] to push out
+    or pull in a buffer.
+    
+    The dataflow, events and queries that happen on a pad can be monitored with
+    probes that can be installed with [gst.pad.Pad.addProbe]. [gst.pad.Pad.isBlocked]
+    can be used to check if a block probe is installed on the pad.
+    [gst.pad.Pad.isBlocking] checks if the blocking probe is currently blocking the
+    pad. [gst.pad.Pad.removeProbe] is used to remove a previously installed probe
+    and unblock blocking probes if any.
+    
+    Pad have an offset that can be retrieved with [gst.pad.Pad.getOffset]. This
+    offset will be applied to the running_time of all data passing over the pad.
+    [gst.pad.Pad.setOffset] can be used to change the offset.
+    
+    Convenience functions exist to start, pause and stop the task on a pad with
+    [gst.pad.Pad.startTask], [gst.pad.Pad.pauseTask] and [gst.pad.Pad.stopTask]
+    respectively.
 */
 class Pad : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pad_get_type != &gidSymbolNotFound ? gst_pad_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -106,15 +110,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Creates a new pad with the given name in the given direction.
-    If name is null, a guaranteed unique name (across all pads)
-    will be assigned.
-    This function makes a copy of the name so you can safely free the name.
-    Params:
-      name =       the name of the new pad.
-      direction =       the #GstPadDirection of the pad.
-    Returns:     a new #GstPad.
-      
-      MT safe.
+      If name is null, a guaranteed unique name (across all pads)
+      will be assigned.
+      This function makes a copy of the name so you can safely free the name.
+  
+      Params:
+        name = the name of the new pad.
+        direction = the #GstPadDirection of the pad.
+      Returns: a new #GstPad.
+        
+        MT safe.
   */
   this(string name, gst.types.PadDirection direction)
   {
@@ -126,13 +131,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Creates a new pad with the given name from the given static template.
-    If name is null, a guaranteed unique name (across all pads)
-    will be assigned.
-    This function makes a copy of the name so you can safely free the name.
-    Params:
-      templ =       the #GstStaticPadTemplate to use
-      name =       the name of the pad
-    Returns:     a new #GstPad.
+      If name is null, a guaranteed unique name (across all pads)
+      will be assigned.
+      This function makes a copy of the name so you can safely free the name.
+  
+      Params:
+        templ = the #GstStaticPadTemplate to use
+        name = the name of the pad
+      Returns: a new #GstPad.
   */
   static gst.pad.Pad newFromStaticTemplate(gst.static_pad_template.StaticPadTemplate templ, string name)
   {
@@ -145,13 +151,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Creates a new pad with the given name from the given template.
-    If name is null, a guaranteed unique name (across all pads)
-    will be assigned.
-    This function makes a copy of the name so you can safely free the name.
-    Params:
-      templ =       the pad template to use
-      name =       the name of the pad
-    Returns:     a new #GstPad.
+      If name is null, a guaranteed unique name (across all pads)
+      will be assigned.
+      This function makes a copy of the name so you can safely free the name.
+  
+      Params:
+        templ = the pad template to use
+        name = the name of the pad
+      Returns: a new #GstPad.
   */
   static gst.pad.Pad newFromTemplate(gst.pad_template.PadTemplate templ, string name = null)
   {
@@ -164,9 +171,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets a string representing the given pad-link return.
-    Params:
-      ret =       a #GstPadLinkReturn to get the name of.
-    Returns:     a static string with the name of the pad-link return.
+  
+      Params:
+        ret = a #GstPadLinkReturn to get the name of.
+      Returns: a static string with the name of the pad-link return.
   */
   static string linkGetName(gst.types.PadLinkReturn ret)
   {
@@ -178,15 +186,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Activates or deactivates the given pad in mode via dispatching to the
-    pad's activatemodefunc. For use from within pad activation functions only.
-    
-    If you don't know what this is, you probably don't want to call it.
-    Params:
-      mode =       the requested activation mode
-      active =       whether or not the pad should be active.
-    Returns:     true if the operation was successful.
+      pad's activatemodefunc. For use from within pad activation functions only.
       
-      MT safe.
+      If you don't know what this is, you probably don't want to call it.
+  
+      Params:
+        mode = the requested activation mode
+        active = whether or not the pad should be active.
+      Returns: true if the operation was successful.
+        
+        MT safe.
   */
   bool activateMode(gst.types.PadMode mode, bool active)
   {
@@ -197,24 +206,25 @@ class Pad : gst.object.ObjectGst
 
   /**
       Be notified of different states of pads. The provided callback is called for
-    every state that matches mask.
-    
-    Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
-    called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
-    exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
-    immediately if the pad is already idle while calling [gst.pad.Pad.addProbe].
-    In each of the groups, probes are called in the order in which they were
-    added.
-    Params:
-      mask =       the probe mask
-      callback =       #GstPadProbeCallback that will be called with notifications of
-                  the pad state
-    Returns:     an id or 0 if no probe is pending. The id can be used to remove the
-      probe with [gst.pad.Pad.removeProbe]. When using GST_PAD_PROBE_TYPE_IDLE it can
-      happen that the probe can be run immediately and if the probe returns
-      GST_PAD_PROBE_REMOVE this functions returns 0.
+      every state that matches mask.
       
-      MT safe.
+      Probes are called in groups: First GST_PAD_PROBE_TYPE_BLOCK probes are
+      called, then others, then finally GST_PAD_PROBE_TYPE_IDLE. The only
+      exception here are GST_PAD_PROBE_TYPE_IDLE probes that are called
+      immediately if the pad is already idle while calling [gst.pad.Pad.addProbe].
+      In each of the groups, probes are called in the order in which they were
+      added.
+  
+      Params:
+        mask = the probe mask
+        callback = #GstPadProbeCallback that will be called with notifications of
+                    the pad state
+      Returns: an id or 0 if no probe is pending. The id can be used to remove the
+        probe with [gst.pad.Pad.removeProbe]. When using GST_PAD_PROBE_TYPE_IDLE it can
+        happen that the probe can be run immediately and if the probe returns
+        GST_PAD_PROBE_REMOVE this functions returns 0.
+        
+        MT safe.
   */
   gulong addProbe(gst.types.PadProbeType mask, gst.types.PadProbeCallback callback)
   {
@@ -239,10 +249,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Checks if the source pad and the sink pad are compatible so they can be
-    linked.
-    Params:
-      sinkpad =       the sink #GstPad.
-    Returns:     true if the pads can be linked.
+      linked.
+  
+      Params:
+        sinkpad = the sink #GstPad.
+      Returns: true if the pads can be linked.
   */
   bool canLink(gst.pad.Pad sinkpad)
   {
@@ -253,26 +264,27 @@ class Pad : gst.object.ObjectGst
 
   /**
       Chain a buffer to pad.
-    
-    The function returns #GST_FLOW_FLUSHING if the pad was flushing.
-    
-    If the buffer type is not acceptable for pad (as negotiated with a
-    preceding GST_EVENT_CAPS event), this function returns
-    #GST_FLOW_NOT_NEGOTIATED.
-    
-    The function proceeds calling the chain function installed on pad (see
-    gst_pad_set_chain_function()) and the return value of that function is
-    returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if pad has no
-    chain function.
-    
-    In all cases, success or failure, the caller loses its reference to buffer
-    after calling this function.
-    Params:
-      buffer =       the #GstBuffer to send, return GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the pad.
       
-      MT safe.
+      The function returns #GST_FLOW_FLUSHING if the pad was flushing.
+      
+      If the buffer type is not acceptable for pad (as negotiated with a
+      preceding GST_EVENT_CAPS event), this function returns
+      #GST_FLOW_NOT_NEGOTIATED.
+      
+      The function proceeds calling the chain function installed on pad (see
+      gst_pad_set_chain_function()) and the return value of that function is
+      returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if pad has no
+      chain function.
+      
+      In all cases, success or failure, the caller loses its reference to buffer
+      after calling this function.
+  
+      Params:
+        buffer = the #GstBuffer to send, return GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the pad.
+        
+        MT safe.
   */
   gst.types.FlowReturn chain(gst.buffer.Buffer buffer)
   {
@@ -284,25 +296,26 @@ class Pad : gst.object.ObjectGst
 
   /**
       Chain a bufferlist to pad.
-    
-    The function returns #GST_FLOW_FLUSHING if the pad was flushing.
-    
-    If pad was not negotiated properly with a CAPS event, this function
-    returns #GST_FLOW_NOT_NEGOTIATED.
-    
-    The function proceeds calling the chainlist function installed on pad (see
-    gst_pad_set_chain_list_function()) and the return value of that function is
-    returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if pad has no
-    chainlist function.
-    
-    In all cases, success or failure, the caller loses its reference to list
-    after calling this function.
-    
-    MT safe.
-    Params:
-      list =       the #GstBufferList to send, return GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the pad.
+      
+      The function returns #GST_FLOW_FLUSHING if the pad was flushing.
+      
+      If pad was not negotiated properly with a CAPS event, this function
+      returns #GST_FLOW_NOT_NEGOTIATED.
+      
+      The function proceeds calling the chainlist function installed on pad (see
+      gst_pad_set_chain_list_function()) and the return value of that function is
+      returned to the caller. #GST_FLOW_NOT_SUPPORTED is returned if pad has no
+      chainlist function.
+      
+      In all cases, success or failure, the caller loses its reference to list
+      after calling this function.
+      
+      MT safe.
+  
+      Params:
+        list = the #GstBufferList to send, return GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the pad.
   */
   gst.types.FlowReturn chainList(gst.buffer_list.BufferList list)
   {
@@ -314,8 +327,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Check and clear the #GST_PAD_FLAG_NEED_RECONFIGURE flag on pad and return true
-    if the flag was set.
-    Returns:     true is the GST_PAD_FLAG_NEED_RECONFIGURE flag was set on pad.
+      if the flag was set.
+      Returns: true is the GST_PAD_FLAG_NEED_RECONFIGURE flag was set on pad.
   */
   bool checkReconfigure()
   {
@@ -326,26 +339,27 @@ class Pad : gst.object.ObjectGst
 
   /**
       Creates a stream-id for the source #GstPad pad by combining the
-    upstream information with the optional stream_id of the stream
-    of pad. pad must have a parent #GstElement and which must have zero
-    or one sinkpad. stream_id can only be null if the parent element
-    of pad has only a single source pad.
-    
-    This function generates an unique stream-id by getting the upstream
-    stream-start event stream ID and appending stream_id to it. If the
-    element has no sinkpad it will generate an upstream stream-id by
-    doing an URI query on the element and in the worst case just uses
-    a random number. Source elements that don't implement the URI
-    handler interface should ideally generate a unique, deterministic
-    stream-id manually instead.
-    
-    Since stream IDs are sorted alphabetically, any numbers in the
-    stream ID should be printed with a fixed number of characters,
-    preceded by 0's, such as by using the format \`03u` instead of \`u`.
-    Params:
-      parent =       Parent #GstElement of pad
-      streamId =       The stream-id
-    Returns:     A stream-id for pad. [glib.global.gfree] after usage.
+      upstream information with the optional stream_id of the stream
+      of pad. pad must have a parent #GstElement and which must have zero
+      or one sinkpad. stream_id can only be null if the parent element
+      of pad has only a single source pad.
+      
+      This function generates an unique stream-id by getting the upstream
+      stream-start event stream ID and appending stream_id to it. If the
+      element has no sinkpad it will generate an upstream stream-id by
+      doing an URI query on the element and in the worst case just uses
+      a random number. Source elements that don't implement the URI
+      handler interface should ideally generate a unique, deterministic
+      stream-id manually instead.
+      
+      Since stream IDs are sorted alphabetically, any numbers in the
+      stream ID should be printed with a fixed number of characters,
+      preceded by 0's, such as by using the format \`03u` instead of \`u`.
+  
+      Params:
+        parent = Parent #GstElement of pad
+        streamId = The stream-id
+      Returns: A stream-id for pad. [glib.global.gfree] after usage.
   */
   string createStreamId(gst.element.Element parent, string streamId = null)
   {
@@ -358,16 +372,17 @@ class Pad : gst.object.ObjectGst
 
   /**
       Invokes the default event handler for the given pad.
-    
-    The EOS event will pause the task associated with pad before it is forwarded
-    to all internally linked pads,
-    
-    The event is sent to all pads internally linked to pad. This function
-    takes ownership of event.
-    Params:
-      parent =       the parent of pad or null
-      event =       the #GstEvent to handle.
-    Returns:     true if the event was sent successfully.
+      
+      The EOS event will pause the task associated with pad before it is forwarded
+      to all internally linked pads,
+      
+      The event is sent to all pads internally linked to pad. This function
+      takes ownership of event.
+  
+      Params:
+        parent = the parent of pad or null
+        event = the #GstEvent to handle.
+      Returns: true if the event was sent successfully.
   */
   bool eventDefault(gst.object.ObjectGst parent, gst.event.Event event)
   {
@@ -378,13 +393,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Calls forward for all internally linked pads of pad. This function deals with
-    dynamically changing internal pads and will make sure that the forward
-    function is only called once for each pad.
-    
-    When forward returns true, no further pads will be processed.
-    Params:
-      forward =       a #GstPadForwardFunction
-    Returns:     true if one of the dispatcher functions returned true.
+      dynamically changing internal pads and will make sure that the forward
+      function is only called once for each pad.
+      
+      When forward returns true, no further pads will be processed.
+  
+      Params:
+        forward = a #GstPadForwardFunction
+      Returns: true if one of the dispatcher functions returned true.
   */
   bool forward(gst.types.PadForwardFunction forward)
   {
@@ -405,16 +421,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the capabilities of the allowed media types that can flow through
-    pad and its peer.
-    
-    The allowed capabilities is calculated as the intersection of the results of
-    calling [gst.pad.Pad.queryCaps] on pad and its peer. The caller owns a reference
-    on the resulting caps.
-    Returns:     the allowed #GstCaps of the
-          pad link. Unref the caps when you no longer need it. This
-          function returns null when pad has no peer.
+      pad and its peer.
       
-      MT safe.
+      The allowed capabilities is calculated as the intersection of the results of
+      calling [gst.pad.Pad.queryCaps] on pad and its peer. The caller owns a reference
+      on the resulting caps.
+      Returns: the allowed #GstCaps of the
+            pad link. Unref the caps when you no longer need it. This
+            function returns null when pad has no peer.
+        
+        MT safe.
   */
   gst.caps.Caps getAllowedCaps()
   {
@@ -426,9 +442,9 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the capabilities currently configured on pad with the last
-    #GST_EVENT_CAPS event.
-    Returns:     the current caps of the pad with
-      incremented ref-count or null when pad has no caps. Unref after usage.
+      #GST_EVENT_CAPS event.
+      Returns: the current caps of the pad with
+        incremented ref-count or null when pad has no caps. Unref after usage.
   */
   gst.caps.Caps getCurrentCaps()
   {
@@ -440,11 +456,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the direction of the pad. The direction of the pad is
-    decided at construction time so this function does not take
-    the LOCK.
-    Returns:     the #GstPadDirection of the pad.
-      
-      MT safe.
+      decided at construction time so this function does not take
+      the LOCK.
+      Returns: the #GstPadDirection of the pad.
+        
+        MT safe.
   */
   gst.types.PadDirection getDirection()
   {
@@ -456,8 +472,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the private data of a pad.
-    No locking is performed in this function.
-    Returns:     a #gpointer to the private data.
+      No locking is performed in this function.
+      Returns: a #gpointer to the private data.
   */
   void* getElementPrivate()
   {
@@ -467,7 +483,7 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the #GstFlowReturn return from the last data passed by this pad.
-    Returns: 
+      Returns: 
   */
   gst.types.FlowReturn getLastFlowReturn()
   {
@@ -479,8 +495,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Get the offset applied to the running time of pad. pad has to be a source
-    pad.
-    Returns:     the offset.
+      pad.
+      Returns: the offset.
   */
   long getOffset()
   {
@@ -491,9 +507,9 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the template for pad.
-    Returns:     the #GstPadTemplate from which
-          this pad was instantiated, or null if this pad has no
-          template. Unref after usage.
+      Returns: the #GstPadTemplate from which
+            this pad was instantiated, or null if this pad has no
+            template. Unref after usage.
   */
   gst.pad_template.PadTemplate getPadTemplate()
   {
@@ -505,8 +521,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the capabilities for pad's template.
-    Returns:     the #GstCaps of this pad template.
-      Unref after usage.
+      Returns: the #GstCaps of this pad template.
+        Unref after usage.
   */
   gst.caps.Caps getPadTemplateCaps()
   {
@@ -518,12 +534,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the parent of pad, cast to a #GstElement. If a pad has no parent or
-    its parent is not an element, return null.
-    Returns:     the parent of the pad. The
-      caller has a reference on the parent, so unref when you're finished
-      with it.
-      
-      MT safe.
+      its parent is not an element, return null.
+      Returns: the parent of the pad. The
+        caller has a reference on the parent, so unref when you're finished
+        with it.
+        
+        MT safe.
   */
   gst.element.Element getParentElement()
   {
@@ -535,10 +551,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the peer of pad. This function refs the peer pad so
-    you need to unref it after use.
-    Returns:     the peer #GstPad. Unref after usage.
-      
-      MT safe.
+      you need to unref it after use.
+      Returns: the peer #GstPad. Unref after usage.
+        
+        MT safe.
   */
   gst.pad.Pad getPeer()
   {
@@ -550,39 +566,40 @@ class Pad : gst.object.ObjectGst
 
   /**
       When pad is flushing this function returns #GST_FLOW_FLUSHING
-    immediately and buffer is null.
-    
-    Calls the getrange function of pad, see #GstPadGetRangeFunction for a
-    description of a getrange function. If pad has no getrange function
-    installed (see gst_pad_set_getrange_function()) this function returns
-    #GST_FLOW_NOT_SUPPORTED.
-    
-    If buffer points to a variable holding null, a valid new #GstBuffer will be
-    placed in buffer when this function returns #GST_FLOW_OK. The new buffer
-    must be freed with gst_buffer_unref() after usage.
-    
-    When buffer points to a variable that points to a valid #GstBuffer, the
-    buffer will be filled with the result data when this function returns
-    #GST_FLOW_OK. If the provided buffer is larger than size, only
-    size bytes will be filled in the result buffer and its size will be updated
-    accordingly.
-    
-    Note that less than size bytes can be returned in buffer when, for example,
-    an EOS condition is near or when buffer is not large enough to hold size
-    bytes. The caller should check the result buffer size to get the result size.
-    
-    When this function returns any other result value than #GST_FLOW_OK, buffer
-    will be unchanged.
-    
-    This is a lowlevel function. Usually [gst.pad.Pad.pullRange] is used.
-    Params:
-      offset =       The start offset of the buffer
-      size =       The length of the buffer
-      buffer =       a pointer to hold the #GstBuffer,
-            returns #GST_FLOW_ERROR if null.
-    Returns:     a #GstFlowReturn from the pad.
+      immediately and buffer is null.
       
-      MT safe.
+      Calls the getrange function of pad, see #GstPadGetRangeFunction for a
+      description of a getrange function. If pad has no getrange function
+      installed (see gst_pad_set_getrange_function()) this function returns
+      #GST_FLOW_NOT_SUPPORTED.
+      
+      If buffer points to a variable holding null, a valid new #GstBuffer will be
+      placed in buffer when this function returns #GST_FLOW_OK. The new buffer
+      must be freed with gst_buffer_unref() after usage.
+      
+      When buffer points to a variable that points to a valid #GstBuffer, the
+      buffer will be filled with the result data when this function returns
+      #GST_FLOW_OK. If the provided buffer is larger than size, only
+      size bytes will be filled in the result buffer and its size will be updated
+      accordingly.
+      
+      Note that less than size bytes can be returned in buffer when, for example,
+      an EOS condition is near or when buffer is not large enough to hold size
+      bytes. The caller should check the result buffer size to get the result size.
+      
+      When this function returns any other result value than #GST_FLOW_OK, buffer
+      will be unchanged.
+      
+      This is a lowlevel function. Usually [gst.pad.Pad.pullRange] is used.
+  
+      Params:
+        offset = The start offset of the buffer
+        size = The length of the buffer
+        buffer = a pointer to hold the #GstBuffer,
+              returns #GST_FLOW_ERROR if null.
+      Returns: a #GstFlowReturn from the pad.
+        
+        MT safe.
   */
   gst.types.FlowReturn getRange(ulong offset, uint size, out gst.buffer.Buffer buffer)
   {
@@ -596,10 +613,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       If there is a single internal link of the given pad, this function will
-    return it. Otherwise, it will return NULL.
-    Returns:     a #GstPad, or null if pad has none
-      or more than one internal links. Unref returned pad with
-      [gst.object.ObjectGst.unref].
+      return it. Otherwise, it will return NULL.
+      Returns: a #GstPad, or null if pad has none
+        or more than one internal links. Unref returned pad with
+        [gst.object.ObjectGst.unref].
   */
   gst.pad.Pad getSingleInternalLink()
   {
@@ -611,13 +628,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Returns a new reference of the sticky event of type event_type
-    from the event.
-    Params:
-      eventType =       the #GstEventType that should be retrieved.
-      idx =       the index of the event
-    Returns:     a #GstEvent of type
-      event_type or null when no event of event_type was on
-      pad. Unref after usage.
+      from the event.
+  
+      Params:
+        eventType = the #GstEventType that should be retrieved.
+        idx = the index of the event
+      Returns: a #GstEvent of type
+        event_type or null when no event of event_type was on
+        pad. Unref after usage.
   */
   gst.event.Event getStickyEvent(gst.types.EventType eventType, uint idx)
   {
@@ -629,12 +647,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       Returns the current #GstStream for the pad, or null if none has been
-    set yet, i.e. the pad has not received a stream-start event yet.
-    
-    This is a convenience wrapper around [gst.pad.Pad.getStickyEvent] and
-    [gst.event.Event.parseStream].
-    Returns:     the current #GstStream for pad, or null.
-          unref the returned stream when no longer needed.
+      set yet, i.e. the pad has not received a stream-start event yet.
+      
+      This is a convenience wrapper around [gst.pad.Pad.getStickyEvent] and
+      [gst.event.Event.parseStream].
+      Returns: the current #GstStream for pad, or null.
+            unref the returned stream when no longer needed.
   */
   gst.stream.Stream getStream()
   {
@@ -646,16 +664,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Returns the current stream-id for the pad, or null if none has been
-    set yet, i.e. the pad has not received a stream-start event yet.
-    
-    This is a convenience wrapper around [gst.pad.Pad.getStickyEvent] and
-    [gst.event.Event.parseStreamStart].
-    
-    The returned stream-id string should be treated as an opaque string, its
-    contents should not be interpreted.
-    Returns:     a newly-allocated copy of the stream-id for
-          pad, or null.  [glib.global.gfree] the returned string when no longer
-          needed.
+      set yet, i.e. the pad has not received a stream-start event yet.
+      
+      This is a convenience wrapper around [gst.pad.Pad.getStickyEvent] and
+      [gst.event.Event.parseStreamStart].
+      
+      The returned stream-id string should be treated as an opaque string, its
+      contents should not be interpreted.
+      Returns: a newly-allocated copy of the stream-id for
+            pad, or null.  [glib.global.gfree] the returned string when no longer
+            needed.
   */
   string getStreamId()
   {
@@ -667,8 +685,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Get pad task state. If no task is currently
-    set, #GST_TASK_STOPPED is returned.
-    Returns:     The current state of pad's task.
+      set, #GST_TASK_STOPPED is returned.
+      Returns: The current state of pad's task.
   */
   gst.types.TaskState getTaskState()
   {
@@ -680,7 +698,7 @@ class Pad : gst.object.ObjectGst
 
   /**
       Check if pad has caps set on it with a #GST_EVENT_CAPS event.
-    Returns:     true when pad has caps associated with it.
+      Returns: true when pad has caps associated with it.
   */
   bool hasCurrentCaps()
   {
@@ -691,9 +709,9 @@ class Pad : gst.object.ObjectGst
 
   /**
       Query if a pad is active
-    Returns:     true if the pad is active.
-      
-      MT safe.
+      Returns: true if the pad is active.
+        
+        MT safe.
   */
   bool isActive()
   {
@@ -704,11 +722,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Checks if the pad is blocked or not. This function returns the
-    last requested state of the pad. It is not certain that the pad
-    is actually blocking at this point (see [gst.pad.Pad.isBlocking]).
-    Returns:     true if the pad is blocked.
-      
-      MT safe.
+      last requested state of the pad. It is not certain that the pad
+      is actually blocking at this point (see [gst.pad.Pad.isBlocking]).
+      Returns: true if the pad is blocked.
+        
+        MT safe.
   */
   bool isBlocked()
   {
@@ -719,10 +737,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       Checks if the pad is blocking or not. This is a guaranteed state
-    of whether the pad is actually blocking on a #GstBuffer or a #GstEvent.
-    Returns:     true if the pad is blocking.
-      
-      MT safe.
+      of whether the pad is actually blocking on a #GstBuffer or a #GstEvent.
+      Returns: true if the pad is blocking.
+        
+        MT safe.
   */
   bool isBlocking()
   {
@@ -733,9 +751,9 @@ class Pad : gst.object.ObjectGst
 
   /**
       Checks if a pad is linked to another pad or not.
-    Returns:     true if the pad is linked, false otherwise.
-      
-      MT safe.
+      Returns: true if the pad is linked, false otherwise.
+        
+        MT safe.
   */
   bool isLinked()
   {
@@ -746,15 +764,15 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets an iterator for the pads to which the given pad is linked to inside
-    of the parent element.
-    
-    Each #GstPad element yielded by the iterator will have its refcount increased,
-    so unref after use.
-    
-    Free-function: gst_iterator_free
-    Returns:     a new #GstIterator of #GstPad
-          or null when the pad does not have an iterator function
-          configured. Use [gst.iterator.Iterator.free] after usage.
+      of the parent element.
+      
+      Each #GstPad element yielded by the iterator will have its refcount increased,
+      so unref after use.
+      
+      Free-function: gst_iterator_free
+      Returns: a new #GstIterator of #GstPad
+            or null when the pad does not have an iterator function
+            configured. Use [gst.iterator.Iterator.free] after usage.
   */
   gst.iterator.Iterator iterateInternalLinks()
   {
@@ -766,15 +784,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Iterate the list of pads to which the given pad is linked to inside of
-    the parent element.
-    This is the default handler, and thus returns an iterator of all of the
-    pads inside the parent element with opposite direction.
-    
-    The caller must free this iterator after use with [gst.iterator.Iterator.free].
-    Params:
-      parent =       the parent of pad or null
-    Returns:     a #GstIterator of #GstPad, or null if pad
-      has no parent. Unref each returned pad with [gst.object.ObjectGst.unref].
+      the parent element.
+      This is the default handler, and thus returns an iterator of all of the
+      pads inside the parent element with opposite direction.
+      
+      The caller must free this iterator after use with [gst.iterator.Iterator.free].
+  
+      Params:
+        parent = the parent of pad or null
+      Returns: a #GstIterator of #GstPad, or null if pad
+        has no parent. Unref each returned pad with [gst.object.ObjectGst.unref].
   */
   gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectGst parent = null)
   {
@@ -786,12 +805,13 @@ class Pad : gst.object.ObjectGst
 
   /**
       Links the source pad and the sink pad.
-    Params:
-      sinkpad =       the sink #GstPad to link.
-    Returns:     A result code indicating if the connection worked or
-               what went wrong.
-      
-      MT Safe.
+  
+      Params:
+        sinkpad = the sink #GstPad to link.
+      Returns: A result code indicating if the connection worked or
+                 what went wrong.
+        
+        MT Safe.
   */
   gst.types.PadLinkReturn link(gst.pad.Pad sinkpad)
   {
@@ -803,19 +823,20 @@ class Pad : gst.object.ObjectGst
 
   /**
       Links the source pad and the sink pad.
-    
-    This variant of #gst_pad_link provides a more granular control on the
-    checks being done when linking. While providing some considerable speedups
-    the caller of this method must be aware that wrong usage of those flags
-    can cause severe issues. Refer to the documentation of #GstPadLinkCheck
-    for more information.
-    
-    MT Safe.
-    Params:
-      sinkpad =       the sink #GstPad to link.
-      flags =       the checks to validate when linking
-    Returns:     A result code indicating if the connection worked or
-               what went wrong.
+      
+      This variant of #gst_pad_link provides a more granular control on the
+      checks being done when linking. While providing some considerable speedups
+      the caller of this method must be aware that wrong usage of those flags
+      can cause severe issues. Refer to the documentation of #GstPadLinkCheck
+      for more information.
+      
+      MT Safe.
+  
+      Params:
+        sinkpad = the sink #GstPad to link.
+        flags = the checks to validate when linking
+      Returns: A result code indicating if the connection worked or
+                 what went wrong.
   */
   gst.types.PadLinkReturn linkFull(gst.pad.Pad sinkpad, gst.types.PadLinkCheck flags)
   {
@@ -827,15 +848,16 @@ class Pad : gst.object.ObjectGst
 
   /**
       Links src to sink, creating any #GstGhostPad's in between as necessary.
-    
-    This is a convenience function to save having to create and add intermediate
-    #GstGhostPad's as required for linking across #GstBin boundaries.
-    
-    If src or sink pads don't have parent elements or do not share a common
-    ancestor, the link will fail.
-    Params:
-      sink =       a #GstPad
-    Returns:     whether the link succeeded.
+      
+      This is a convenience function to save having to create and add intermediate
+      #GstGhostPad's as required for linking across #GstBin boundaries.
+      
+      If src or sink pads don't have parent elements or do not share a common
+      ancestor, the link will fail.
+  
+      Params:
+        sink = a #GstPad
+      Returns: whether the link succeeded.
   */
   bool linkMaybeGhosting(gst.pad.Pad sink)
   {
@@ -846,20 +868,21 @@ class Pad : gst.object.ObjectGst
 
   /**
       Links src to sink, creating any #GstGhostPad's in between as necessary.
-    
-    This is a convenience function to save having to create and add intermediate
-    #GstGhostPad's as required for linking across #GstBin boundaries.
-    
-    If src or sink pads don't have parent elements or do not share a common
-    ancestor, the link will fail.
-    
-    Calling [gst.pad.Pad.linkMaybeGhostingFull] with
-    flags == [gst.types.PadLinkCheck.Default] is the recommended way of linking
-    pads with safety checks applied.
-    Params:
-      sink =       a #GstPad
-      flags =       some #GstPadLinkCheck flags
-    Returns:     whether the link succeeded.
+      
+      This is a convenience function to save having to create and add intermediate
+      #GstGhostPad's as required for linking across #GstBin boundaries.
+      
+      If src or sink pads don't have parent elements or do not share a common
+      ancestor, the link will fail.
+      
+      Calling [gst.pad.Pad.linkMaybeGhostingFull] with
+      flags == [gst.types.PadLinkCheck.Default] is the recommended way of linking
+      pads with safety checks applied.
+  
+      Params:
+        sink = a #GstPad
+        flags = some #GstPadLinkCheck flags
+      Returns: whether the link succeeded.
   */
   bool linkMaybeGhostingFull(gst.pad.Pad sink, gst.types.PadLinkCheck flags)
   {
@@ -870,7 +893,7 @@ class Pad : gst.object.ObjectGst
 
   /**
       Mark a pad for needing reconfiguration. The next call to
-    [gst.pad.Pad.checkReconfigure] will return true after this call.
+      [gst.pad.Pad.checkReconfigure] will return true after this call.
   */
   void markReconfigure()
   {
@@ -879,8 +902,8 @@ class Pad : gst.object.ObjectGst
 
   /**
       Check the #GST_PAD_FLAG_NEED_RECONFIGURE flag on pad and return true
-    if the flag was set.
-    Returns:     true is the GST_PAD_FLAG_NEED_RECONFIGURE flag is set on pad.
+      if the flag was set.
+      Returns: true is the GST_PAD_FLAG_NEED_RECONFIGURE flag is set on pad.
   */
   bool needsReconfigure()
   {
@@ -891,10 +914,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       Pause the task of pad. This function will also wait until the
-    function executed by the task is finished if this function is not
-    called from the task function.
-    Returns:     a true if the task could be paused or false when the pad
-      has no task.
+      function executed by the task is finished if this function is not
+      called from the task function.
+      Returns: a true if the task could be paused or false when the pad
+        has no task.
   */
   bool pauseTask()
   {
@@ -905,13 +928,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Performs [gst.pad.Pad.query] on the peer of pad.
-    
-    The caller is responsible for both the allocation and deallocation of
-    the query structure.
-    Params:
-      query =       the #GstQuery to perform.
-    Returns:     true if the query could be performed. This function returns false
-      if pad has no peer.
+      
+      The caller is responsible for both the allocation and deallocation of
+      the query structure.
+  
+      Params:
+        query = the #GstQuery to perform.
+      Returns: true if the query could be performed. This function returns false
+        if pad has no peer.
   */
   bool peerQuery(gst.query.Query query)
   {
@@ -922,10 +946,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Check if the peer of pad accepts caps. If pad has no peer, this function
-    returns true.
-    Params:
-      caps =       a #GstCaps to check on the pad
-    Returns:     true if the peer of pad can accept the caps or pad has no peer.
+      returns true.
+  
+      Params:
+        caps = a #GstCaps to check on the pad
+      Returns: true if the peer of pad can accept the caps or pad has no peer.
   */
   bool peerQueryAcceptCaps(gst.caps.Caps caps)
   {
@@ -936,18 +961,19 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the capabilities of the peer connected to this pad. Similar to
-    [gst.pad.Pad.queryCaps].
-    
-    When called on srcpads filter contains the caps that
-    upstream could produce in the order preferred by upstream. When
-    called on sinkpads filter contains the caps accepted by
-    downstream in the preferred order. filter might be null but
-    if it is not null the returned caps will be a subset of filter.
-    Params:
-      filter =       a #GstCaps filter, or null.
-    Returns:     the caps of the peer pad with incremented
-      ref-count. When there is no peer pad, this function returns filter or,
-      when filter is null, ANY caps.
+      [gst.pad.Pad.queryCaps].
+      
+      When called on srcpads filter contains the caps that
+      upstream could produce in the order preferred by upstream. When
+      called on sinkpads filter contains the caps accepted by
+      downstream in the preferred order. filter might be null but
+      if it is not null the returned caps will be a subset of filter.
+  
+      Params:
+        filter = a #GstCaps filter, or null.
+      Returns: the caps of the peer pad with incremented
+        ref-count. When there is no peer pad, this function returns filter or,
+        when filter is null, ANY caps.
   */
   gst.caps.Caps peerQueryCaps(gst.caps.Caps filter = null)
   {
@@ -959,13 +985,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries the peer pad of a given sink pad to convert src_val in src_format
-    to dest_format.
-    Params:
-      srcFormat =       a #GstFormat to convert from.
-      srcVal =       a value to convert.
-      destFormat =       the #GstFormat to convert to.
-      destVal =       a pointer to the result.
-    Returns:     true if the query could be performed.
+      to dest_format.
+  
+      Params:
+        srcFormat = a #GstFormat to convert from.
+        srcVal = a value to convert.
+        destFormat = the #GstFormat to convert to.
+        destVal = a pointer to the result.
+      Returns: true if the query could be performed.
   */
   bool peerQueryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
@@ -976,11 +1003,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries the peer pad of a given sink pad for the total stream duration.
-    Params:
-      format =       the #GstFormat requested
-      duration =       a location in which to store the total
-            duration, or null.
-    Returns:     true if the query could be performed.
+  
+      Params:
+        format = the #GstFormat requested
+        duration = a location in which to store the total
+              duration, or null.
+      Returns: true if the query could be performed.
   */
   bool peerQueryDuration(gst.types.Format format, out long duration)
   {
@@ -991,11 +1019,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries the peer of a given sink pad for the stream position.
-    Params:
-      format =       the #GstFormat requested
-      cur =       a location in which to store the current
-            position, or null.
-    Returns:     true if the query could be performed.
+  
+      Params:
+        format = the #GstFormat requested
+        cur = a location in which to store the current
+              position, or null.
+      Returns: true if the query could be performed.
   */
   bool peerQueryPosition(gst.types.Format format, out long cur)
   {
@@ -1006,14 +1035,15 @@ class Pad : gst.object.ObjectGst
 
   /**
       Checks if all internally linked pads of pad accepts the caps in query and
-    returns the intersection of the results.
-    
-    This function is useful as a default accept caps query function for an element
-    that can handle any stream format, but requires caps that are acceptable for
-    all opposite pads.
-    Params:
-      query =       an ACCEPT_CAPS #GstQuery.
-    Returns:     true if query could be executed
+      returns the intersection of the results.
+      
+      This function is useful as a default accept caps query function for an element
+      that can handle any stream format, but requires caps that are acceptable for
+      all opposite pads.
+  
+      Params:
+        query = an ACCEPT_CAPS #GstQuery.
+      Returns: true if query could be executed
   */
   bool proxyQueryAcceptCaps(gst.query.Query query)
   {
@@ -1024,14 +1054,15 @@ class Pad : gst.object.ObjectGst
 
   /**
       Calls [gst.pad.Pad.queryCaps] for all internally linked pads of pad and returns
-    the intersection of the results.
-    
-    This function is useful as a default caps query function for an element
-    that can handle any stream format, but requires all its pads to have
-    the same caps.  Two such elements are tee and adder.
-    Params:
-      query =       a CAPS #GstQuery.
-    Returns:     true if query could be executed
+      the intersection of the results.
+      
+      This function is useful as a default caps query function for an element
+      that can handle any stream format, but requires all its pads to have
+      the same caps.  Two such elements are tee and adder.
+  
+      Params:
+        query = a CAPS #GstQuery.
+      Returns: true if query could be executed
   */
   bool proxyQueryCaps(gst.query.Query query)
   {
@@ -1042,38 +1073,39 @@ class Pad : gst.object.ObjectGst
 
   /**
       Pulls a buffer from the peer pad or fills up a provided buffer.
-    
-    This function will first trigger the pad block signal if it was
-    installed.
-    
-    When pad is not linked #GST_FLOW_NOT_LINKED is returned else this
-    function returns the result of [gst.pad.Pad.getRange] on the peer pad.
-    See [gst.pad.Pad.getRange] for a list of return values and for the
-    semantics of the arguments of this function.
-    
-    If buffer points to a variable holding null, a valid new #GstBuffer will be
-    placed in buffer when this function returns #GST_FLOW_OK. The new buffer
-    must be freed with gst_buffer_unref() after usage. When this function
-    returns any other result value, buffer will still point to null.
-    
-    When buffer points to a variable that points to a valid #GstBuffer, the
-    buffer will be filled with the result data when this function returns
-    #GST_FLOW_OK. When this function returns any other result value,
-    buffer will be unchanged. If the provided buffer is larger than size, only
-    size bytes will be filled in the result buffer and its size will be updated
-    accordingly.
-    
-    Note that less than size bytes can be returned in buffer when, for example,
-    an EOS condition is near or when buffer is not large enough to hold size
-    bytes. The caller should check the result buffer size to get the result size.
-    Params:
-      offset =       The start offset of the buffer
-      size =       The length of the buffer
-      buffer =       a pointer to hold the #GstBuffer, returns
-            GST_FLOW_ERROR if null.
-    Returns:     a #GstFlowReturn from the peer pad.
       
-      MT safe.
+      This function will first trigger the pad block signal if it was
+      installed.
+      
+      When pad is not linked #GST_FLOW_NOT_LINKED is returned else this
+      function returns the result of [gst.pad.Pad.getRange] on the peer pad.
+      See [gst.pad.Pad.getRange] for a list of return values and for the
+      semantics of the arguments of this function.
+      
+      If buffer points to a variable holding null, a valid new #GstBuffer will be
+      placed in buffer when this function returns #GST_FLOW_OK. The new buffer
+      must be freed with gst_buffer_unref() after usage. When this function
+      returns any other result value, buffer will still point to null.
+      
+      When buffer points to a variable that points to a valid #GstBuffer, the
+      buffer will be filled with the result data when this function returns
+      #GST_FLOW_OK. When this function returns any other result value,
+      buffer will be unchanged. If the provided buffer is larger than size, only
+      size bytes will be filled in the result buffer and its size will be updated
+      accordingly.
+      
+      Note that less than size bytes can be returned in buffer when, for example,
+      an EOS condition is near or when buffer is not large enough to hold size
+      bytes. The caller should check the result buffer size to get the result size.
+  
+      Params:
+        offset = The start offset of the buffer
+        size = The length of the buffer
+        buffer = a pointer to hold the #GstBuffer, returns
+              GST_FLOW_ERROR if null.
+      Returns: a #GstFlowReturn from the peer pad.
+        
+        MT safe.
   */
   gst.types.FlowReturn pullRange(ulong offset, uint size, out gst.buffer.Buffer buffer)
   {
@@ -1087,22 +1119,23 @@ class Pad : gst.object.ObjectGst
 
   /**
       Pushes a buffer to the peer of pad.
-    
-    This function will call installed block probes before triggering any
-    installed data probes.
-    
-    The function proceeds calling [gst.pad.Pad.chain] on the peer pad and returns
-    the value from that function. If pad has no peer, #GST_FLOW_NOT_LINKED will
-    be returned.
-    
-    In all cases, success or failure, the caller loses its reference to buffer
-    after calling this function.
-    Params:
-      buffer =       the #GstBuffer to push returns GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the peer pad.
       
-      MT safe.
+      This function will call installed block probes before triggering any
+      installed data probes.
+      
+      The function proceeds calling [gst.pad.Pad.chain] on the peer pad and returns
+      the value from that function. If pad has no peer, #GST_FLOW_NOT_LINKED will
+      be returned.
+      
+      In all cases, success or failure, the caller loses its reference to buffer
+      after calling this function.
+  
+      Params:
+        buffer = the #GstBuffer to push returns GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the peer pad.
+        
+        MT safe.
   */
   gst.types.FlowReturn push(gst.buffer.Buffer buffer)
   {
@@ -1114,16 +1147,17 @@ class Pad : gst.object.ObjectGst
 
   /**
       Sends the event to the peer of the given pad. This function is
-    mainly used by elements to send events to their peer
-    elements.
-    
-    This function takes ownership of the provided event so you should
-    gst_event_ref() it if you want to reuse the event after this call.
-    Params:
-      event =       the #GstEvent to send to the pad.
-    Returns:     true if the event was handled.
+      mainly used by elements to send events to their peer
+      elements.
       
-      MT safe.
+      This function takes ownership of the provided event so you should
+      gst_event_ref() it if you want to reuse the event after this call.
+  
+      Params:
+        event = the #GstEvent to send to the pad.
+      Returns: true if the event was handled.
+        
+        MT safe.
   */
   bool pushEvent(gst.event.Event event)
   {
@@ -1134,24 +1168,25 @@ class Pad : gst.object.ObjectGst
 
   /**
       Pushes a buffer list to the peer of pad.
-    
-    This function will call installed block probes before triggering any
-    installed data probes.
-    
-    The function proceeds calling the chain function on the peer pad and returns
-    the value from that function. If pad has no peer, #GST_FLOW_NOT_LINKED will
-    be returned. If the peer pad does not have any installed chainlist function
-    every group buffer of the list will be merged into a normal #GstBuffer and
-    chained via [gst.pad.Pad.chain].
-    
-    In all cases, success or failure, the caller loses its reference to list
-    after calling this function.
-    Params:
-      list =       the #GstBufferList to push returns GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the peer pad.
       
-      MT safe.
+      This function will call installed block probes before triggering any
+      installed data probes.
+      
+      The function proceeds calling the chain function on the peer pad and returns
+      the value from that function. If pad has no peer, #GST_FLOW_NOT_LINKED will
+      be returned. If the peer pad does not have any installed chainlist function
+      every group buffer of the list will be merged into a normal #GstBuffer and
+      chained via [gst.pad.Pad.chain].
+      
+      In all cases, success or failure, the caller loses its reference to list
+      after calling this function.
+  
+      Params:
+        list = the #GstBufferList to push returns GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the peer pad.
+        
+        MT safe.
   */
   gst.types.FlowReturn pushList(gst.buffer_list.BufferList list)
   {
@@ -1163,18 +1198,19 @@ class Pad : gst.object.ObjectGst
 
   /**
       Dispatches a query to a pad. The query should have been allocated by the
-    caller via one of the type-specific allocation functions. The element that
-    the pad belongs to is responsible for filling the query with an appropriate
-    response, which should then be parsed with a type-specific query parsing
-    function.
-    
-    Again, the caller is responsible for both the allocation and deallocation of
-    the query structure.
-    
-    Please also note that some queries might need a running pipeline to work.
-    Params:
-      query =       the #GstQuery to perform.
-    Returns:     true if the query could be performed.
+      caller via one of the type-specific allocation functions. The element that
+      the pad belongs to is responsible for filling the query with an appropriate
+      response, which should then be parsed with a type-specific query parsing
+      function.
+      
+      Again, the caller is responsible for both the allocation and deallocation of
+      the query structure.
+      
+      Please also note that some queries might need a running pipeline to work.
+  
+      Params:
+        query = the #GstQuery to perform.
+      Returns: true if the query could be performed.
   */
   bool query(gst.query.Query query)
   {
@@ -1185,9 +1221,10 @@ class Pad : gst.object.ObjectGst
 
   /**
       Check if the given pad accepts the caps.
-    Params:
-      caps =       a #GstCaps to check on the pad
-    Returns:     true if the pad can accept the caps.
+  
+      Params:
+        caps = a #GstCaps to check on the pad
+      Returns: true if the pad can accept the caps.
   */
   bool queryAcceptCaps(gst.caps.Caps caps)
   {
@@ -1198,23 +1235,24 @@ class Pad : gst.object.ObjectGst
 
   /**
       Gets the capabilities this pad can produce or consume.
-    Note that this method doesn't necessarily return the caps set by sending a
-    [gst.event.Event.newCaps] - use [gst.pad.Pad.getCurrentCaps] for that instead.
-    gst_pad_query_caps returns all possible caps a pad can operate with, using
-    the pad's CAPS query function, If the query fails, this function will return
-    filter, if not null, otherwise ANY.
-    
-    When called on sinkpads filter contains the caps that
-    upstream could produce in the order preferred by upstream. When
-    called on srcpads filter contains the caps accepted by
-    downstream in the preferred order. filter might be null but
-    if it is not null the returned caps will be a subset of filter.
-    
-    Note that this function does not return writable #GstCaps, use
-    gst_caps_make_writable() before modifying the caps.
-    Params:
-      filter =       suggested #GstCaps, or null
-    Returns:     the caps of the pad with incremented ref-count.
+      Note that this method doesn't necessarily return the caps set by sending a
+      [gst.event.Event.newCaps] - use [gst.pad.Pad.getCurrentCaps] for that instead.
+      gst_pad_query_caps returns all possible caps a pad can operate with, using
+      the pad's CAPS query function, If the query fails, this function will return
+      filter, if not null, otherwise ANY.
+      
+      When called on sinkpads filter contains the caps that
+      upstream could produce in the order preferred by upstream. When
+      called on srcpads filter contains the caps accepted by
+      downstream in the preferred order. filter might be null but
+      if it is not null the returned caps will be a subset of filter.
+      
+      Note that this function does not return writable #GstCaps, use
+      gst_caps_make_writable() before modifying the caps.
+  
+      Params:
+        filter = suggested #GstCaps, or null
+      Returns: the caps of the pad with incremented ref-count.
   */
   gst.caps.Caps queryCaps(gst.caps.Caps filter = null)
   {
@@ -1226,12 +1264,13 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries a pad to convert src_val in src_format to dest_format.
-    Params:
-      srcFormat =       a #GstFormat to convert from.
-      srcVal =       a value to convert.
-      destFormat =       the #GstFormat to convert to.
-      destVal =       a pointer to the result.
-    Returns:     true if the query could be performed.
+  
+      Params:
+        srcFormat = a #GstFormat to convert from.
+        srcVal = a value to convert.
+        destFormat = the #GstFormat to convert to.
+        destVal = a pointer to the result.
+      Returns: true if the query could be performed.
   */
   bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
@@ -1242,14 +1281,15 @@ class Pad : gst.object.ObjectGst
 
   /**
       Invokes the default query handler for the given pad.
-    The query is sent to all pads internally linked to pad. Note that
-    if there are many possible sink pads that are internally linked to
-    pad, only one will be sent the query.
-    Multi-sinkpad elements should implement custom query handlers.
-    Params:
-      parent =       the parent of pad or null
-      query =       the #GstQuery to handle.
-    Returns:     true if the query was performed successfully.
+      The query is sent to all pads internally linked to pad. Note that
+      if there are many possible sink pads that are internally linked to
+      pad, only one will be sent the query.
+      Multi-sinkpad elements should implement custom query handlers.
+  
+      Params:
+        parent = the parent of pad or null
+        query = the #GstQuery to handle.
+      Returns: true if the query was performed successfully.
   */
   bool queryDefault(gst.object.ObjectGst parent, gst.query.Query query)
   {
@@ -1260,11 +1300,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries a pad for the total stream duration.
-    Params:
-      format =       the #GstFormat requested
-      duration =       a location in which to store the total
-            duration, or null.
-    Returns:     true if the query could be performed.
+  
+      Params:
+        format = the #GstFormat requested
+        duration = a location in which to store the total
+              duration, or null.
+      Returns: true if the query could be performed.
   */
   bool queryDuration(gst.types.Format format, out long duration)
   {
@@ -1275,10 +1316,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Queries a pad for the stream position.
-    Params:
-      format =       the #GstFormat requested
-      cur =       A location in which to store the current position, or null.
-    Returns:     true if the query could be performed.
+  
+      Params:
+        format = the #GstFormat requested
+        cur = A location in which to store the current position, or null.
+      Returns: true if the query could be performed.
   */
   bool queryPosition(gst.types.Format format, out long cur)
   {
@@ -1289,10 +1331,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Remove the probe with id from pad.
-    
-    MT safe.
-    Params:
-      id =       the probe id to remove
+      
+      MT safe.
+  
+      Params:
+        id = the probe id to remove
   */
   void removeProbe(gulong id)
   {
@@ -1301,28 +1344,29 @@ class Pad : gst.object.ObjectGst
 
   /**
       Sends the event to the pad. This function can be used
-    by applications to send events in the pipeline.
-    
-    If pad is a source pad, event should be an upstream event. If pad is a
-    sink pad, event should be a downstream event. For example, you would not
-    send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.
-    Furthermore, some downstream events have to be serialized with data flow,
-    like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If
-    the event needs to be serialized with data flow, this function will take the
-    pad's stream lock while calling its event function.
-    
-    To find out whether an event type is upstream, downstream, or downstream and
-    serialized, see #GstEventTypeFlags, [gst.global.eventTypeGetFlags],
-    #GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
-    #GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
-    plugin doesn't need to bother itself with this information; the core handles
-    all necessary locks and checks.
-    
-    This function takes ownership of the provided event so you should
-    gst_event_ref() it if you want to reuse the event after this call.
-    Params:
-      event =       the #GstEvent to send to the pad.
-    Returns:     true if the event was handled.
+      by applications to send events in the pipeline.
+      
+      If pad is a source pad, event should be an upstream event. If pad is a
+      sink pad, event should be a downstream event. For example, you would not
+      send a #GST_EVENT_EOS on a src pad; EOS events only propagate downstream.
+      Furthermore, some downstream events have to be serialized with data flow,
+      like EOS, while some can travel out-of-band, like #GST_EVENT_FLUSH_START. If
+      the event needs to be serialized with data flow, this function will take the
+      pad's stream lock while calling its event function.
+      
+      To find out whether an event type is upstream, downstream, or downstream and
+      serialized, see #GstEventTypeFlags, [gst.global.eventTypeGetFlags],
+      #GST_EVENT_IS_UPSTREAM, #GST_EVENT_IS_DOWNSTREAM, and
+      #GST_EVENT_IS_SERIALIZED. Note that in practice that an application or
+      plugin doesn't need to bother itself with this information; the core handles
+      all necessary locks and checks.
+      
+      This function takes ownership of the provided event so you should
+      gst_event_ref() it if you want to reuse the event after this call.
+  
+      Params:
+        event = the #GstEvent to send to the pad.
+      Returns: true if the event was handled.
   */
   bool sendEvent(gst.event.Event event)
   {
@@ -1333,19 +1377,20 @@ class Pad : gst.object.ObjectGst
 
   /**
       Activates or deactivates the given pad.
-    Normally called from within core state change functions.
-    
-    If active, makes sure the pad is active. If it is already active, either in
-    push or pull mode, just return. Otherwise dispatches to the pad's activate
-    function to perform the actual activation.
-    
-    If not active, calls [gst.pad.Pad.activateMode] with the pad's current mode
-    and a false argument.
-    Params:
-      active =       whether or not the pad should be active.
-    Returns:     true if the operation was successful.
+      Normally called from within core state change functions.
       
-      MT safe.
+      If active, makes sure the pad is active. If it is already active, either in
+      push or pull mode, just return. Otherwise dispatches to the pad's activate
+      function to perform the actual activation.
+      
+      If not active, calls [gst.pad.Pad.activateMode] with the pad's current mode
+      and a false argument.
+  
+      Params:
+        active = whether or not the pad should be active.
+      Returns: true if the operation was successful.
+        
+        MT safe.
   */
   bool setActive(bool active)
   {
@@ -1356,10 +1401,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Set the given private data gpointer on the pad.
-    This function can only be used by the element that owns the pad.
-    No locking is performed in this function.
-    Params:
-      priv =       The private data to attach to the pad.
+      This function can only be used by the element that owns the pad.
+      No locking is performed in this function.
+  
+      Params:
+        priv = The private data to attach to the pad.
   */
   void setElementPrivate(void* priv = null)
   {
@@ -1368,8 +1414,9 @@ class Pad : gst.object.ObjectGst
 
   /**
       Set the offset that will be applied to the running time of pad.
-    Params:
-      offset =       the offset
+  
+      Params:
+        offset = the offset
   */
   void setOffset(long offset)
   {
@@ -1378,12 +1425,13 @@ class Pad : gst.object.ObjectGst
 
   /**
       Starts a task that repeatedly calls func with user_data. This function
-    is mostly used in pad activation functions to start the dataflow.
-    The #GST_PAD_STREAM_LOCK of pad will automatically be acquired
-    before func is called.
-    Params:
-      func =       the task function to call
-    Returns:     a true if the task could be started.
+      is mostly used in pad activation functions to start the dataflow.
+      The #GST_PAD_STREAM_LOCK of pad will automatically be acquired
+      before func is called.
+  
+      Params:
+        func = the task function to call
+      Returns: a true if the task could be started.
   */
   bool startTask(gst.types.TaskFunction func)
   {
@@ -1404,10 +1452,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Iterates all sticky events on pad and calls foreach_func for every
-    event. If foreach_func returns false the iteration is immediately stopped.
-    Params:
-      foreachFunc =       the #GstPadStickyEventsForeachFunction that
-                       should be called for every event.
+      event. If foreach_func returns false the iteration is immediately stopped.
+  
+      Params:
+        foreachFunc = the #GstPadStickyEventsForeachFunction that
+                         should be called for every event.
   */
   void stickyEventsForeach(gst.types.PadStickyEventsForeachFunction foreachFunc)
   {
@@ -1426,15 +1475,15 @@ class Pad : gst.object.ObjectGst
 
   /**
       Stop the task of pad. This function will also make sure that the
-    function executed by the task will effectively stop if not called
-    from the GstTaskFunction.
-    
-    This function will deadlock if called from the GstTaskFunction of
-    the task. Use [gst.task.Task.pause] instead.
-    
-    Regardless of whether the pad has a task, the stream lock is acquired and
-    released so as to ensure that streaming through this pad has finished.
-    Returns:     a true if the task could be stopped or false on error.
+      function executed by the task will effectively stop if not called
+      from the GstTaskFunction.
+      
+      This function will deadlock if called from the GstTaskFunction of
+      the task. Use [gst.task.Task.pause] instead.
+      
+      Regardless of whether the pad has a task, the stream lock is acquired and
+      released so as to ensure that streaming through this pad has finished.
+      Returns: a true if the task could be stopped or false on error.
   */
   bool stopTask()
   {
@@ -1445,10 +1494,11 @@ class Pad : gst.object.ObjectGst
 
   /**
       Store the sticky event on pad
-    Params:
-      event =       a #GstEvent
-    Returns:     #GST_FLOW_OK on success, #GST_FLOW_FLUSHING when the pad
-      was flushing or #GST_FLOW_EOS when the pad was EOS.
+  
+      Params:
+        event = a #GstEvent
+      Returns: #GST_FLOW_OK on success, #GST_FLOW_FLUSHING when the pad
+        was flushing or #GST_FLOW_EOS when the pad was EOS.
   */
   gst.types.FlowReturn storeStickyEvent(gst.event.Event event)
   {
@@ -1460,13 +1510,14 @@ class Pad : gst.object.ObjectGst
 
   /**
       Unlinks the source pad from the sink pad. Will emit the #GstPad::unlinked
-    signal on both pads.
-    Params:
-      sinkpad =       the sink #GstPad to unlink.
-    Returns:     true if the pads were unlinked. This function returns false if
-      the pads were not linked together.
-      
-      MT safe.
+      signal on both pads.
+  
+      Params:
+        sinkpad = the sink #GstPad to unlink.
+      Returns: true if the pads were unlinked. This function returns false if
+        the pads were not linked together.
+        
+        MT safe.
   */
   bool unlink(gst.pad.Pad sinkpad)
   {
@@ -1477,12 +1528,12 @@ class Pad : gst.object.ObjectGst
 
   /**
       A helper function you can use that sets the FIXED_CAPS flag
-    This way the default CAPS query will always return the negotiated caps
-    or in case the pad is not negotiated, the padtemplate caps.
-    
-    The negotiated caps are the caps of the last CAPS event that passed on the
-    pad. Use this function on a pad that, once it negotiated to a CAPS, cannot
-    be renegotiated to something else.
+      This way the default CAPS query will always return the negotiated caps
+      or in case the pad is not negotiated, the padtemplate caps.
+      
+      The negotiated caps are the caps of the last CAPS event that passed on the
+      pad. Use this function on a pad that, once it negotiated to a CAPS, cannot
+      be renegotiated to something else.
   */
   void useFixedCaps()
   {
@@ -1490,36 +1541,43 @@ class Pad : gst.object.ObjectGst
   }
 
   /**
+      Connect to `Linked` signal.
+  
       Signals that a pad has been linked to the peer pad.
   
-    ## Parameters
-    $(LIST
-      * $(B peer)       the peer pad that has been connected
-      * $(B pad) the instance the signal is connected to
-    )
-  */
-  alias LinkedCallbackDlg = void delegate(gst.pad.Pad peer, gst.pad.Pad pad);
-
-  /** ditto */
-  alias LinkedCallbackFunc = void function(gst.pad.Pad peer, gst.pad.Pad pad);
-
-  /**
-    Connect to Linked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gst.pad.Pad peer, gst.pad.Pad pad))
+  
+          `peer` the peer pad that has been connected (optional)
+  
+          `pad` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectLinked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : LinkedCallbackDlg) || is(T : LinkedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.pad.Pad)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pad = getVal!(gst.pad.Pad)(_paramVals);
-      auto peer = getVal!(gst.pad.Pad)(&_paramVals[1]);
-      _dClosure.dlg(peer, pad);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1527,36 +1585,43 @@ class Pad : gst.object.ObjectGst
   }
 
   /**
+      Connect to `Unlinked` signal.
+  
       Signals that a pad has been unlinked from the peer pad.
   
-    ## Parameters
-    $(LIST
-      * $(B peer)       the peer pad that has been disconnected
-      * $(B pad) the instance the signal is connected to
-    )
-  */
-  alias UnlinkedCallbackDlg = void delegate(gst.pad.Pad peer, gst.pad.Pad pad);
-
-  /** ditto */
-  alias UnlinkedCallbackFunc = void function(gst.pad.Pad peer, gst.pad.Pad pad);
-
-  /**
-    Connect to Unlinked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gst.pad.Pad peer, gst.pad.Pad pad))
+  
+          `peer` the peer pad that has been disconnected (optional)
+  
+          `pad` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectUnlinked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : UnlinkedCallbackDlg) || is(T : UnlinkedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.pad.Pad)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.pad.Pad)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto pad = getVal!(gst.pad.Pad)(_paramVals);
-      auto peer = getVal!(gst.pad.Pad)(&_paramVals[1]);
-      _dClosure.dlg(peer, pad);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

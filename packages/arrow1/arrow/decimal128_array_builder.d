@@ -1,3 +1,4 @@
+/// Module for [Decimal128ArrayBuilder] class
 module arrow.decimal128_array_builder;
 
 import arrow.c.functions;
@@ -14,17 +15,20 @@ import glib.error;
 class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBinaryArrayBuilder
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal128_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -71,14 +75,15 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
   /**
       Append multiple values at once. It's more efficient than multiple
-    `append` and `append_null` calls.
-    Params:
-      values =       The array of #GArrowDecimal128.
-      isValids =       The array of
-          boolean that shows whether the Nth value is valid or not. If the
-          Nth is_valids is true, the Nth values is valid value. Otherwise
-          the Nth value is null value.
-    Returns:     true on success, false if there was an error.
+      `append` and `append_null` calls.
+  
+      Params:
+        values = The array of #GArrowDecimal128.
+        isValids = The array of
+            boolean that shows whether the Nth value is valid or not. If the
+            Nth is_valids is true, the Nth values is valid value. Otherwise
+            the Nth value is null value.
+      Returns: true on success, false if there was an error.
   */
   bool appendValues(arrow.decimal128.Decimal128[] values, bool[] isValids = null)
   {

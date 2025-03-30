@@ -1,3 +1,4 @@
+/// Module for [BookmarkList] class
 module gtk.bookmark_list;
 
 import gid.gid;
@@ -10,28 +11,31 @@ import gtk.types;
 
 /**
     [gtk.bookmark_list.BookmarkList] is a list model that wraps [glib.bookmark_file.BookmarkFile].
-  
-  It presents a [gio.list_model.ListModel] and fills it asynchronously with the
-  [gio.file_info.FileInfo]s returned from that function.
-  
-  The [gio.file_info.FileInfo]s in the list have some attributes in the recent
-  namespace added: `recent::private` (boolean) and `recent:applications`
-  (stringv).
+    
+    It presents a [gio.list_model.ListModel] and fills it asynchronously with the
+    [gio.file_info.FileInfo]s returned from that function.
+    
+    The [gio.file_info.FileInfo]s in the list have some attributes in the recent
+    namespace added: `recent::private` (boolean) and `recent:applications`
+    (stringv).
 */
 class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bookmark_list_get_type != &gidSymbolNotFound ? gtk_bookmark_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,10 +50,11 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Creates a new [gtk.bookmark_list.BookmarkList] with the given attributes.
-    Params:
-      filename =       The bookmark file to load
-      attributes =       The attributes to query
-    Returns:     a new [gtk.bookmark_list.BookmarkList]
+  
+      Params:
+        filename = The bookmark file to load
+        attributes = The attributes to query
+      Returns: a new [gtk.bookmark_list.BookmarkList]
   */
   this(string filename = null, string attributes = null)
   {
@@ -62,7 +67,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the attributes queried on the children.
-    Returns:     The queried attributes
+      Returns: The queried attributes
   */
   string getAttributes()
   {
@@ -74,8 +79,8 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Returns the filename of the bookmark file that
-    this list is loading.
-    Returns:     the filename of the .xbel file
+      this list is loading.
+      Returns: the filename of the .xbel file
   */
   string getFilename()
   {
@@ -87,7 +92,7 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the IO priority to use while loading file.
-    Returns:     The IO priority.
+      Returns: The IO priority.
   */
   int getIoPriority()
   {
@@ -98,11 +103,11 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Returns true if the files are currently being loaded.
-    
-    Files will be added to self from time to time while loading is
-    going on. The order in which are added is undefined and may change
-    in between runs.
-    Returns:     true if self is loading
+      
+      Files will be added to self from time to time while loading is
+      going on. The order in which are added is undefined and may change
+      in between runs.
+      Returns: true if self is loading
   */
   bool isLoading()
   {
@@ -113,11 +118,12 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Sets the attributes to be enumerated and starts the enumeration.
-    
-    If attributes is null, no attributes will be queried, but a list
-    of [gio.file_info.FileInfo]s will still be created.
-    Params:
-      attributes =       the attributes to enumerate
+      
+      If attributes is null, no attributes will be queried, but a list
+      of [gio.file_info.FileInfo]s will still be created.
+  
+      Params:
+        attributes = the attributes to enumerate
   */
   void setAttributes(string attributes = null)
   {
@@ -127,10 +133,11 @@ class BookmarkList : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Sets the IO priority to use while loading files.
-    
-    The default IO priority is `G_PRIORITY_DEFAULT`.
-    Params:
-      ioPriority =       IO priority to use
+      
+      The default IO priority is `G_PRIORITY_DEFAULT`.
+  
+      Params:
+        ioPriority = IO priority to use
   */
   void setIoPriority(int ioPriority)
   {

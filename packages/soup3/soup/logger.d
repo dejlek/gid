@@ -1,3 +1,4 @@
+/// Module for [Logger] class
 module soup.logger;
 
 import gid.gid;
@@ -11,78 +12,81 @@ import soup.types;
 
 /**
     Debug logging support
-  
-  #SoupLogger watches a `class@Session` and logs the HTTP traffic that
-  it generates, for debugging purposes. Many applications use an
-  environment variable to determine whether or not to use
-  #SoupLogger, and to determine the amount of debugging output.
-  
-  To use #SoupLogger, first create a logger with [soup.logger.Logger.new_], optionally
-  configure it with [soup.logger.Logger.setRequestFilter],
-  [soup.logger.Logger.setResponseFilter], and [soup.logger.Logger.setPrinter], and
-  then attach it to a session (or multiple sessions) with
-  [soup.session.Session.addFeature].
-  
-  By default, the debugging output is sent to `stdout`, and looks something
-  like:
-  
-  ```
-  > POST /unauth HTTP/1.1
-  > Soup-Debug-Timestamp: 1200171744
-  > Soup-Debug: SoupSession 1 (0x612190), SoupMessage 1 (0x617000), GSocket 1 (0x612220)
-  > Host: localhost
-  > Content-Type: text/plain
-  > Connection: close
-  
-  &lt; HTTP/1.1 201 Created
-  &lt; Soup-Debug-Timestamp: 1200171744
-  &lt; Soup-Debug: SoupMessage 1 (0x617000)
-  &lt; Date: Sun, 12 Jan 2008 21:02:24 GMT
-  &lt; Content-Length: 0
-  ```
-  
-  The `Soup-Debug-Timestamp` line gives the time (as a `time_t`) when the
-  request was sent, or the response fully received.
-  
-  The `Soup-Debug` line gives further debugging information about the
-  `class@Session`, `class@Message`, and [gio.socket.Socket] involved; the hex
-  numbers are the addresses of the objects in question (which may be useful if
-  you are running in a debugger). The decimal IDs are simply counters that
-  uniquely identify objects across the lifetime of the #SoupLogger. In
-  particular, this can be used to identify when multiple messages are sent
-  across the same connection.
-  
-  Currently, the request half of the message is logged just before
-  the first byte of the request gets written to the network (from the
-  `signal@Message::starting` signal).
-  
-  The response is logged just after the last byte of the response body is read
-  from the network (from the `signal@Message::got-body` or
-  `signal@Message::got-informational` signal), which means that the
-  `signal@Message::got-headers` signal, and anything triggered off it (such as
-  #SoupMessage::authenticate) will be emitted *before* the response headers are
-  actually logged.
-  
-  If the response doesn't happen to trigger the `signal@Message::got-body` nor
-  `signal@Message::got-informational` signals due to, for example, a
-  cancellation before receiving the last byte of the response body, the
-  response will still be logged on the event of the `signal@Message::finished`
-  signal.
+    
+    #SoupLogger watches a `class@Session` and logs the HTTP traffic that
+    it generates, for debugging purposes. Many applications use an
+    environment variable to determine whether or not to use
+    #SoupLogger, and to determine the amount of debugging output.
+    
+    To use #SoupLogger, first create a logger with [soup.logger.Logger.new_], optionally
+    configure it with [soup.logger.Logger.setRequestFilter],
+    [soup.logger.Logger.setResponseFilter], and [soup.logger.Logger.setPrinter], and
+    then attach it to a session (or multiple sessions) with
+    [soup.session.Session.addFeature].
+    
+    By default, the debugging output is sent to `stdout`, and looks something
+    like:
+    
+    ```
+    > POST /unauth HTTP/1.1
+    > Soup-Debug-Timestamp: 1200171744
+    > Soup-Debug: SoupSession 1 (0x612190), SoupMessage 1 (0x617000), GSocket 1 (0x612220)
+    > Host: localhost
+    > Content-Type: text/plain
+    > Connection: close
+    
+    &lt; HTTP/1.1 201 Created
+    &lt; Soup-Debug-Timestamp: 1200171744
+    &lt; Soup-Debug: SoupMessage 1 (0x617000)
+    &lt; Date: Sun, 12 Jan 2008 21:02:24 GMT
+    &lt; Content-Length: 0
+    ```
+    
+    The `Soup-Debug-Timestamp` line gives the time (as a `time_t`) when the
+    request was sent, or the response fully received.
+    
+    The `Soup-Debug` line gives further debugging information about the
+    `class@Session`, `class@Message`, and [gio.socket.Socket] involved; the hex
+    numbers are the addresses of the objects in question (which may be useful if
+    you are running in a debugger). The decimal IDs are simply counters that
+    uniquely identify objects across the lifetime of the #SoupLogger. In
+    particular, this can be used to identify when multiple messages are sent
+    across the same connection.
+    
+    Currently, the request half of the message is logged just before
+    the first byte of the request gets written to the network (from the
+    `signal@Message::starting` signal).
+    
+    The response is logged just after the last byte of the response body is read
+    from the network (from the `signal@Message::got-body` or
+    `signal@Message::got-informational` signal), which means that the
+    `signal@Message::got-headers` signal, and anything triggered off it (such as
+    #SoupMessage::authenticate) will be emitted *before* the response headers are
+    actually logged.
+    
+    If the response doesn't happen to trigger the `signal@Message::got-body` nor
+    `signal@Message::got-informational` signals due to, for example, a
+    cancellation before receiving the last byte of the response body, the
+    response will still be logged on the event of the `signal@Message::finished`
+    signal.
 */
 class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_logger_get_type != &gidSymbolNotFound ? soup_logger_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -97,13 +101,14 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Creates a new #SoupLogger with the given debug level.
-    
-    If you need finer control over what message parts are and aren't
-    logged, use [soup.logger.Logger.setRequestFilter] and
-    [soup.logger.Logger.setResponseFilter].
-    Params:
-      level =       the debug level
-    Returns:     a new #SoupLogger
+      
+      If you need finer control over what message parts are and aren't
+      logged, use [soup.logger.Logger.setRequestFilter] and
+      [soup.logger.Logger.setResponseFilter].
+  
+      Params:
+        level = the debug level
+      Returns: a new #SoupLogger
   */
   this(soup.types.LoggerLogLevel level)
   {
@@ -114,7 +119,7 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Get the maximum body size for logger.
-    Returns:     the maximum body size, or -1 if unlimited
+      Returns: the maximum body size, or -1 if unlimited
   */
   int getMaxBodySize()
   {
@@ -125,8 +130,9 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets the maximum body size for logger (-1 means no limit).
-    Params:
-      maxBodySize =       the maximum body size to log
+  
+      Params:
+        maxBodySize = the maximum body size to log
   */
   void setMaxBodySize(int maxBodySize)
   {
@@ -135,9 +141,10 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets up an alternate log printing routine, if you don't want
-    the log to go to `stdout`.
-    Params:
-      printer =       the callback for printing logging output
+      the log to go to `stdout`.
+  
+      Params:
+        printer = the callback for printing logging output
   */
   void setPrinter(soup.types.LoggerPrinter printer)
   {
@@ -157,13 +164,14 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets up a filter to determine the log level for a given request.
-    
-    For each HTTP request logger will invoke request_filter to
-    determine how much (if any) of that request to log. (If you do not
-    set a request filter, logger will just always log requests at the
-    level passed to [soup.logger.Logger.new_].)
-    Params:
-      requestFilter =       the callback for request debugging
+      
+      For each HTTP request logger will invoke request_filter to
+      determine how much (if any) of that request to log. (If you do not
+      set a request filter, logger will just always log requests at the
+      level passed to [soup.logger.Logger.new_].)
+  
+      Params:
+        requestFilter = the callback for request debugging
   */
   void setRequestFilter(soup.types.LoggerFilter requestFilter)
   {
@@ -186,13 +194,14 @@ class Logger : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets up a filter to determine the log level for a given response.
-    
-    For each HTTP response logger will invoke response_filter to
-    determine how much (if any) of that response to log. (If you do not
-    set a response filter, logger will just always log responses at
-    the level passed to [soup.logger.Logger.new_].)
-    Params:
-      responseFilter =       the callback for response debugging
+      
+      For each HTTP response logger will invoke response_filter to
+      determine how much (if any) of that response to log. (If you do not
+      set a response filter, logger will just always log responses at
+      the level passed to [soup.logger.Logger.new_].)
+  
+      Params:
+        responseFilter = the callback for response debugging
   */
   void setResponseFilter(soup.types.LoggerFilter responseFilter)
   {

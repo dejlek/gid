@@ -1,3 +1,4 @@
+/// Module for [Relation] class
 module glib.relation;
 
 import gid.gid;
@@ -7,52 +8,53 @@ import glib.types;
 
 /**
     A [glib.relation.Relation] is a table of data which can be indexed on any number
-  of fields, rather like simple database tables. A [glib.relation.Relation] contains
-  a number of records, called tuples. Each record contains a number of
-  fields. Records are not ordered, so it is not possible to find the
-  record at a particular index.
-  
-  Note that [glib.relation.Relation] tables are currently limited to 2 fields.
-  
-  To create a [glib.relation.Relation], use [glib.relation.Relation.new_].
-  
-  To specify which fields should be indexed, use [glib.relation.Relation.index].
-  Note that this must be called before any tuples are added to the
-  [glib.relation.Relation].
-  
-  To add records to a [glib.relation.Relation] use [glib.relation.Relation.insert].
-  
-  To determine if a given record appears in a [glib.relation.Relation], use
-  [glib.relation.Relation.exists]. Note that fields are compared directly, so
-  pointers must point to the exact same position (i.e. different
-  copies of the same string will not match.)
-  
-  To count the number of records which have a particular value in a
-  given field, use [glib.relation.Relation.count].
-  
-  To get all the records which have a particular value in a given
-  field, use [glib.relation.Relation.select]. To access fields of the resulting
-  records, use [glib.tuples.Tuples.index]. To free the resulting records use
-  [glib.tuples.Tuples.destroy].
-  
-  To delete all records which have a particular value in a given
-  field, use [glib.relation.Relation.delete_].
-  
-  To destroy the [glib.relation.Relation], use [glib.relation.Relation.destroy].
-  
-  To help debug [glib.relation.Relation] objects, use [glib.relation.Relation.print].
-  
-  [glib.relation.Relation] has been marked as deprecated, since this API has never
-  been fully implemented, is not very actively maintained and rarely
-  used.
+    of fields, rather like simple database tables. A [glib.relation.Relation] contains
+    a number of records, called tuples. Each record contains a number of
+    fields. Records are not ordered, so it is not possible to find the
+    record at a particular index.
+    
+    Note that [glib.relation.Relation] tables are currently limited to 2 fields.
+    
+    To create a [glib.relation.Relation], use [glib.relation.Relation.new_].
+    
+    To specify which fields should be indexed, use [glib.relation.Relation.index].
+    Note that this must be called before any tuples are added to the
+    [glib.relation.Relation].
+    
+    To add records to a [glib.relation.Relation] use [glib.relation.Relation.insert].
+    
+    To determine if a given record appears in a [glib.relation.Relation], use
+    [glib.relation.Relation.exists]. Note that fields are compared directly, so
+    pointers must point to the exact same position (i.e. different
+    copies of the same string will not match.)
+    
+    To count the number of records which have a particular value in a
+    given field, use [glib.relation.Relation.count].
+    
+    To get all the records which have a particular value in a given
+    field, use [glib.relation.Relation.select]. To access fields of the resulting
+    records, use [glib.tuples.Tuples.index]. To free the resulting records use
+    [glib.tuples.Tuples.destroy].
+    
+    To delete all records which have a particular value in a given
+    field, use [glib.relation.Relation.delete_].
+    
+    To destroy the [glib.relation.Relation], use [glib.relation.Relation.destroy].
+    
+    To help debug [glib.relation.Relation] objects, use [glib.relation.Relation.print].
+    
+    [glib.relation.Relation] has been marked as deprecated, since this API has never
+    been fully implemented, is not very actively maintained and rarely
+    used.
 
-  Deprecated:     Rarely used API
+    Deprecated: Rarely used API
 */
 class Relation
 {
   GRelation* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -63,6 +65,7 @@ class Relation
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -70,13 +73,14 @@ class Relation
 
   /**
       Returns the number of tuples in a #GRelation that have the given
-    value in the given field.
-    Params:
-      key =       the value to compare with.
-      field =       the field of each record to match.
-    Returns:     the number of matches.
+      value in the given field.
   
-    Deprecated:     Rarely used API
+      Params:
+        key = the value to compare with.
+        field = the field of each record to match.
+      Returns: the number of matches.
+  
+      Deprecated: Rarely used API
   */
   int count(const(void)* key, int field)
   {
@@ -87,13 +91,14 @@ class Relation
 
   /**
       Deletes any records from a #GRelation that have the given key value
-    in the given field.
-    Params:
-      key =       the value to compare with.
-      field =       the field of each record to match.
-    Returns:     the number of records deleted.
+      in the given field.
   
-    Deprecated:     Rarely used API
+      Params:
+        key = the value to compare with.
+        field = the field of each record to match.
+      Returns: the number of records deleted.
+  
+      Deprecated: Rarely used API
   */
   int delete_(const(void)* key, int field)
   {
@@ -104,10 +109,10 @@ class Relation
 
   /**
       Destroys the #GRelation, freeing all memory allocated. However, it
-    does not free memory allocated for the tuple data, so you should
-    free that first if appropriate.
+      does not free memory allocated for the tuple data, so you should
+      free that first if appropriate.
   
-    Deprecated:     Rarely used API
+      Deprecated: Rarely used API
   */
   void destroy()
   {
@@ -116,9 +121,9 @@ class Relation
 
   /**
       Outputs information about all records in a #GRelation, as well as
-    the indexes. It is for debugging.
+      the indexes. It is for debugging.
   
-    Deprecated:     Rarely used API
+      Deprecated: Rarely used API
   */
   void print()
   {

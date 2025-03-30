@@ -1,3 +1,4 @@
+/// Module for [ColorNode] class
 module gsk.color_node;
 
 import gdk.rgba;
@@ -14,6 +15,7 @@ import gsk.types;
 class ColorNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,11 +26,12 @@ class ColorNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will render the color specified by rgba into
-    the area given by bounds.
-    Params:
-      rgba =       a [gdk.rgba.RGBA] specifying a color
-      bounds =       the rectangle to render the color into
-    Returns:     A new [gsk.render_node.RenderNode]
+      the area given by bounds.
+  
+      Params:
+        rgba = a [gdk.rgba.RGBA] specifying a color
+        bounds = the rectangle to render the color into
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gdk.rgba.RGBA rgba, graphene.rect.Rect bounds)
   {
@@ -39,7 +42,7 @@ class ColorNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color of the given node.
-    Returns:     the color of the node
+      Returns: the color of the node
   */
   gdk.rgba.RGBA getColor()
   {

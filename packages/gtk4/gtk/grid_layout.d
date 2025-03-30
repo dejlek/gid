@@ -1,3 +1,4 @@
+/// Module for [GridLayout] class
 module gtk.grid_layout;
 
 import gid.gid;
@@ -8,34 +9,37 @@ import gtk.types;
 
 /**
     [gtk.grid_layout.GridLayout] is a layout manager which arranges child widgets in
-  rows and columns.
-  
-  Children have an "attach point" defined by the horizontal and vertical
-  index of the cell they occupy; children can span multiple rows or columns.
-  The layout properties for setting the attach points and spans are set
-  using the [gtk.grid_layout_child.GridLayoutChild] associated to each child widget.
-  
-  The behaviour of [gtk.grid_layout.GridLayout] when several children occupy the same
-  grid cell is undefined.
-  
-  [gtk.grid_layout.GridLayout] can be used like a [gtk.box_layout.BoxLayout] if all children are
-  attached to the same row or column; however, if you only ever need a
-  single row or column, you should consider using [gtk.box_layout.BoxLayout].
+    rows and columns.
+    
+    Children have an "attach point" defined by the horizontal and vertical
+    index of the cell they occupy; children can span multiple rows or columns.
+    The layout properties for setting the attach points and spans are set
+    using the [gtk.grid_layout_child.GridLayoutChild] associated to each child widget.
+    
+    The behaviour of [gtk.grid_layout.GridLayout] when several children occupy the same
+    grid cell is undefined.
+    
+    [gtk.grid_layout.GridLayout] can be used like a [gtk.box_layout.BoxLayout] if all children are
+    attached to the same row or column; however, if you only ever need a
+    single row or column, you should consider using [gtk.box_layout.BoxLayout].
 */
 class GridLayout : gtk.layout_manager.LayoutManager
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_get_type != &gidSymbolNotFound ? gtk_grid_layout_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +52,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Creates a new [gtk.grid_layout.GridLayout].
-    Returns:     the newly created [gtk.grid_layout.GridLayout]
+      Returns: the newly created [gtk.grid_layout.GridLayout]
   */
   this()
   {
@@ -59,7 +63,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Retrieves the row set with [gtk.grid_layout.GridLayout.setBaselineRow].
-    Returns:     the global baseline row
+      Returns: the global baseline row
   */
   int getBaselineRow()
   {
@@ -70,7 +74,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Checks whether all columns of grid should have the same width.
-    Returns:     true if the columns are homogeneous, and false otherwise
+      Returns: true if the columns are homogeneous, and false otherwise
   */
   bool getColumnHomogeneous()
   {
@@ -81,7 +85,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Retrieves the spacing set with [gtk.grid_layout.GridLayout.setColumnSpacing].
-    Returns:     the spacing between consecutive columns
+      Returns: the spacing between consecutive columns
   */
   uint getColumnSpacing()
   {
@@ -92,14 +96,15 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Returns the baseline position of row.
-    
-    If no value has been set with
-    [gtk.grid_layout.GridLayout.setRowBaselinePosition],
-    the default value of [gtk.types.BaselinePosition.Center]
-    is returned.
-    Params:
-      row =       a row index
-    Returns:     the baseline position of row
+      
+      If no value has been set with
+      [gtk.grid_layout.GridLayout.setRowBaselinePosition],
+      the default value of [gtk.types.BaselinePosition.Center]
+      is returned.
+  
+      Params:
+        row = a row index
+      Returns: the baseline position of row
   */
   gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
@@ -111,7 +116,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Checks whether all rows of grid should have the same height.
-    Returns:     true if the rows are homogeneous, and false otherwise
+      Returns: true if the rows are homogeneous, and false otherwise
   */
   bool getRowHomogeneous()
   {
@@ -122,7 +127,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Retrieves the spacing set with [gtk.grid_layout.GridLayout.setRowSpacing].
-    Returns:     the spacing between consecutive rows
+      Returns: the spacing between consecutive rows
   */
   uint getRowSpacing()
   {
@@ -133,12 +138,13 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets which row defines the global baseline for the entire grid.
-    
-    Each row in the grid can have its own local baseline, but only
-    one of those is global, meaning it will be the baseline in the
-    parent of the grid.
-    Params:
-      row =       the row index
+      
+      Each row in the grid can have its own local baseline, but only
+      one of those is global, meaning it will be the baseline in the
+      parent of the grid.
+  
+      Params:
+        row = the row index
   */
   void setBaselineRow(int row)
   {
@@ -147,8 +153,9 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets whether all columns of grid should have the same width.
-    Params:
-      homogeneous =       true to make columns homogeneous
+  
+      Params:
+        homogeneous = true to make columns homogeneous
   */
   void setColumnHomogeneous(bool homogeneous)
   {
@@ -157,8 +164,9 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets the amount of space to insert between consecutive columns.
-    Params:
-      spacing =       the amount of space between columns, in pixels
+  
+      Params:
+        spacing = the amount of space between columns, in pixels
   */
   void setColumnSpacing(uint spacing)
   {
@@ -167,10 +175,11 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets how the baseline should be positioned on row of the
-    grid, in case that row is assigned more space than is requested.
-    Params:
-      row =       a row index
-      pos =       a [gtk.types.BaselinePosition]
+      grid, in case that row is assigned more space than is requested.
+  
+      Params:
+        row = a row index
+        pos = a [gtk.types.BaselinePosition]
   */
   void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
@@ -179,8 +188,9 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets whether all rows of grid should have the same height.
-    Params:
-      homogeneous =       true to make rows homogeneous
+  
+      Params:
+        homogeneous = true to make rows homogeneous
   */
   void setRowHomogeneous(bool homogeneous)
   {
@@ -189,8 +199,9 @@ class GridLayout : gtk.layout_manager.LayoutManager
 
   /**
       Sets the amount of space to insert between consecutive rows.
-    Params:
-      spacing =       the amount of space between rows, in pixels
+  
+      Params:
+        spacing = the amount of space between rows, in pixels
   */
   void setRowSpacing(uint spacing)
   {

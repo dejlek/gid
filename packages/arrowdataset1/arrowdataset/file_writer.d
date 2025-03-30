@@ -1,3 +1,4 @@
+/// Module for [FileWriter] class
 module arrowdataset.file_writer;
 
 import arrow.record_batch;
@@ -13,17 +14,20 @@ import gobject.object;
 class FileWriter : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_writer_get_type != &gidSymbolNotFound ? gadataset_file_writer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

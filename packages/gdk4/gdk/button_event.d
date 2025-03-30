@@ -1,3 +1,4 @@
+/// Module for [ButtonEvent] class
 module gdk.button_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class ButtonEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,7 +24,7 @@ class ButtonEvent : gdk.event.Event
 
   /**
       Extract the button number from a button event.
-    Returns:     the button of event
+      Returns: the button of event
   */
   uint getButton()
   {

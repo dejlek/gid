@@ -1,3 +1,4 @@
+/// Module for [FilterInputStream] class
 module gio.filter_input_stream;
 
 import gid.gid;
@@ -9,24 +10,27 @@ import gobject.object;
 
 /**
     Base class for input stream implementations that perform some
-  kind of filtering operation on a base stream. Typical examples
-  of filtering operations are character set conversion, compression
-  and byte order flipping.
+    kind of filtering operation on a base stream. Typical examples
+    of filtering operations are character set conversion, compression
+    and byte order flipping.
 */
 class FilterInputStream : gio.input_stream.InputStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_filter_input_stream_get_type != &gidSymbolNotFound ? g_filter_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,7 +43,7 @@ class FilterInputStream : gio.input_stream.InputStream
 
   /**
       Gets the base stream for the filter stream.
-    Returns:     a #GInputStream.
+      Returns: a #GInputStream.
   */
   gio.input_stream.InputStream getBaseStream()
   {
@@ -51,8 +55,8 @@ class FilterInputStream : gio.input_stream.InputStream
 
   /**
       Returns whether the base stream will be closed when stream is
-    closed.
-    Returns:     true if the base stream will be closed.
+      closed.
+      Returns: true if the base stream will be closed.
   */
   bool getCloseBaseStream()
   {
@@ -63,8 +67,9 @@ class FilterInputStream : gio.input_stream.InputStream
 
   /**
       Sets whether the base stream will be closed when stream is closed.
-    Params:
-      closeBase =       true to close the base stream.
+  
+      Params:
+        closeBase = true to close the base stream.
   */
   void setCloseBaseStream(bool closeBase)
   {

@@ -1,3 +1,4 @@
+/// Module for [EncodingContainerProfile] class
 module gstpbutils.encoding_container_profile;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gstpbutils.types;
 class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_container_profile_get_type != &gidSymbolNotFound ? gst_encoding_container_profile_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,13 +40,14 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 
   /**
       Creates a new #GstEncodingContainerProfile.
-    Params:
-      name =       The name of the container profile, can be null
-      description =       The description of the container profile,
-            can be null
-      format =       The format to use for this profile
-      preset =       The preset to use for this profile.
-    Returns:     The newly created #GstEncodingContainerProfile.
+  
+      Params:
+        name = The name of the container profile, can be null
+        description = The description of the container profile,
+              can be null
+        format = The format to use for this profile
+        preset = The preset to use for this profile.
+      Returns: The newly created #GstEncodingContainerProfile.
   */
   this(string name, string description, gst.caps.Caps format, string preset = null)
   {
@@ -56,12 +61,13 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 
   /**
       Add a #GstEncodingProfile to the list of profiles handled by container.
-    
-    No copy of profile will be made, if you wish to use it elsewhere after this
-    method you should increment its reference count.
-    Params:
-      profile =       the #GstEncodingProfile to add.
-    Returns:     true if the stream was properly added, else false.
+      
+      No copy of profile will be made, if you wish to use it elsewhere after this
+      method you should increment its reference count.
+  
+      Params:
+        profile = the #GstEncodingProfile to add.
+      Returns: true if the stream was properly added, else false.
   */
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
@@ -72,11 +78,12 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
 
   /**
       Checks if container contains a #GstEncodingProfile identical to
-    profile.
-    Params:
-      profile =       a #GstEncodingProfile
-    Returns:     true if container contains a #GstEncodingProfile identical
-      to profile, else false.
+      profile.
+  
+      Params:
+        profile = a #GstEncodingProfile
+      Returns: true if container contains a #GstEncodingProfile identical
+        to profile, else false.
   */
   bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {

@@ -1,3 +1,4 @@
+/// Module for [GLColorConvert] class
 module gstgl.glcolor_convert;
 
 import gid.gid;
@@ -13,29 +14,32 @@ import gstgl.types;
 
 /**
     #GstGLColorConvert is an object that converts between color spaces and/or
-  formats using OpenGL Shaders.
-  
-  A #GstGLColorConvert can be created with [gstgl.glcolor_convert.GLColorConvert.new_], the
-  configuration negotiated with [gstgl.glcolor_convert.GLColorConvert.transformCaps] and the
-  conversion performed with [gstgl.glcolor_convert.GLColorConvert.perform].
-  
-  The glcolorconvertelement provides a GStreamer element that uses
-  #GstGLColorConvert to convert between video formats and color spaces.
+    formats using OpenGL Shaders.
+    
+    A #GstGLColorConvert can be created with [gstgl.glcolor_convert.GLColorConvert.new_], the
+    configuration negotiated with [gstgl.glcolor_convert.GLColorConvert.transformCaps] and the
+    conversion performed with [gstgl.glcolor_convert.GLColorConvert.perform].
+    
+    The glcolorconvertelement provides a GStreamer element that uses
+    #GstGLColorConvert to convert between video formats and color spaces.
 */
 class GLColorConvert : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_color_convert_get_type != &gidSymbolNotFound ? gst_gl_color_convert_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,12 +60,13 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       Provides an implementation of #GstBaseTransformClass.fixate_caps()
-    Params:
-      context =       a #GstGLContext to use for transforming caps
-      direction =       a #GstPadDirection
-      caps =       the #GstCaps of direction
-      other =       the #GstCaps to fixate
-    Returns:     the fixated #GstCaps
+  
+      Params:
+        context = a #GstGLContext to use for transforming caps
+        direction = a #GstPadDirection
+        caps = the #GstCaps of direction
+        other = the #GstCaps to fixate
+      Returns: the fixated #GstCaps
   */
   static gst.caps.Caps fixateCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps other)
   {
@@ -82,12 +87,13 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       Provides an implementation of #GstBaseTransformClass.transform_caps()
-    Params:
-      context =       a #GstGLContext to use for transforming caps
-      direction =       a #GstPadDirection
-      caps =       the #GstCaps to transform
-      filter =       a set of filter #GstCaps
-    Returns:     the converted #GstCaps
+  
+      Params:
+        context = a #GstGLContext to use for transforming caps
+        direction = a #GstPadDirection
+        caps = the #GstCaps to transform
+        filter = a set of filter #GstCaps
+      Returns: the converted #GstCaps
   */
   static gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {
@@ -99,16 +105,17 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       The returned glsl function has declaration:
-    
-    `vec3 yuv_to_rgb (vec3 rgb, vec3 offset, vec3 ycoeff, vec3 ucoeff, vec3 vcoeff);`
-    
-    The Y component is placed in the 0th index of the returned value, The U component in the
-    1st, and the V component in the 2nd.  offset, ycoeff, ucoeff, and vcoeff are the
-    specific coefficients and offset used for the conversion.
-    Params:
-      context =       a #GstGLContext
-    Returns:     a glsl function that can be used to convert from
-      yuv to rgb
+      
+      `vec3 yuv_to_rgb (vec3 rgb, vec3 offset, vec3 ycoeff, vec3 ucoeff, vec3 vcoeff);`
+      
+      The Y component is placed in the 0th index of the returned value, The U component in the
+      1st, and the V component in the 2nd.  offset, ycoeff, ucoeff, and vcoeff are the
+      specific coefficients and offset used for the conversion.
+  
+      Params:
+        context = a #GstGLContext
+      Returns: a glsl function that can be used to convert from
+        yuv to rgb
   */
   static string yuvToRgbShaderString(gstgl.glcontext.GLContext context)
   {
@@ -120,9 +127,10 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       Provides an implementation of #GstBaseTransformClass.decide_allocation()
-    Params:
-      query =       a completed ALLOCATION #GstQuery
-    Returns:     whether the allocation parameters were successfully chosen
+  
+      Params:
+        query = a completed ALLOCATION #GstQuery
+      Returns: whether the allocation parameters were successfully chosen
   */
   bool decideAllocation(gst.query.Query query)
   {
@@ -133,10 +141,11 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       Converts the data contained by inbuf using the formats specified by the
-    #GstCaps passed to [gstgl.glcolor_convert.GLColorConvert.setCaps]
-    Params:
-      inbuf =       the #GstGLMemory filled #GstBuffer to convert
-    Returns:     a converted #GstBuffer or null
+      #GstCaps passed to [gstgl.glcolor_convert.GLColorConvert.setCaps]
+  
+      Params:
+        inbuf = the #GstGLMemory filled #GstBuffer to convert
+      Returns: a converted #GstBuffer or null
   */
   gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
   {
@@ -148,10 +157,11 @@ class GLColorConvert : gst.object.ObjectGst
 
   /**
       Initializes convert with the information required for conversion.
-    Params:
-      inCaps =       input #GstCaps
-      outCaps =       output #GstCaps
-    Returns: 
+  
+      Params:
+        inCaps = input #GstCaps
+        outCaps = output #GstCaps
+      Returns: 
   */
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {

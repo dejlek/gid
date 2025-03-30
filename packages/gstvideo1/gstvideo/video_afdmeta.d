@@ -1,3 +1,4 @@
+/// Module for [VideoAFDMeta] class
 module gstvideo.video_afdmeta;
 
 import gid.gid;
@@ -9,24 +10,25 @@ import gstvideo.types;
 
 /**
     Active Format Description (AFD)
-  
-  For details, see Table 6.14 Active Format in:
-  
-  ATSC Digital Television Standard:
-  Part 4 – MPEG-2 Video System Characteristics
-  
-  https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
-  
-  and Active Format Description in Complete list of AFD codes
-  
-  https://en.wikipedia.org/wiki/Active_Format_Description#Complete_list_of_AFD_codes
-  
-  and SMPTE ST2016-1
+    
+    For details, see Table 6.14 Active Format in:
+    
+    ATSC Digital Television Standard:
+    Part 4 – MPEG-2 Video System Characteristics
+    
+    https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
+    
+    and Active Format Description in Complete list of AFD codes
+    
+    https://en.wikipedia.org/wiki/Active_Format_Description#Complete_list_of_AFD_codes
+    
+    and SMPTE ST2016-1
 */
 class VideoAFDMeta
 {
   GstVideoAFDMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -38,6 +40,7 @@ class VideoAFDMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

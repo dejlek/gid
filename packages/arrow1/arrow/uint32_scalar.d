@@ -1,3 +1,4 @@
+/// Module for [UInt32Scalar] class
 module arrow.uint32_scalar;
 
 import arrow.c.functions;
@@ -10,17 +11,20 @@ import gid.gid;
 class UInt32Scalar : arrow.scalar.Scalar
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint32_scalar_get_type != &gidSymbolNotFound ? garrow_uint32_scalar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

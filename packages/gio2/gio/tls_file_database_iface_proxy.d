@@ -1,10 +1,11 @@
+/// Module for [TlsFileDatabaseIfaceProxy] interface proxy object
 module gio.tls_file_database_iface_proxy;
 
 import gobject.object;
 import gio.tls_file_database;
 import gio.tls_file_database_mixin;
 
-/// Proxy object for Gio.TlsFileDatabase interface when a GObject has no applicable D binding
+/// Proxy object for [Gio.TlsFileDatabase] interface when a GObject has no applicable D binding
 class TlsFileDatabaseIfaceProxy : IfaceProxy, gio.tls_file_database.TlsFileDatabase
 {
   this(void* ptr, Flag!"Take" take = No.Take)

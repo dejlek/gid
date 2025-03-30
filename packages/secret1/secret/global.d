@@ -1,3 +1,4 @@
+/// Global functions for secret1 library
 module secret.global;
 
 import gid.gid;
@@ -15,12 +16,13 @@ import secret.value;
 
 /**
     Get a secret storage schema of the given type.
-  
-  C code may access the schemas (such as `SECRET_SCHEMA_NOTE`) directly, but
-  language bindings cannot, and must use this accessor.
-  Params:
-    type =       type of schema to get
-  Returns:     schema type
+    
+    C code may access the schemas (such as `SECRET_SCHEMA_NOTE`) directly, but
+    language bindings cannot, and must use this accessor.
+
+    Params:
+      type = type of schema to get
+    Returns: schema type
 */
 secret.schema.Schema getSchema(secret.types.SchemaType type)
 {
@@ -32,10 +34,11 @@ secret.schema.Schema getSchema(secret.types.SchemaType type)
 
 /**
     Finish an asynchronous operation to remove passwords from the secret
-  service.
-  Params:
-    result =       the asynchronous result passed to the callback
-  Returns:     whether any passwords were removed
+    service.
+
+    Params:
+      result = the asynchronous result passed to the callback
+    Returns: whether any passwords were removed
 */
 bool passwordClearFinish(gio.async_result.AsyncResult result)
 {
@@ -49,18 +52,19 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
 
 /**
     Remove unlocked matching passwords from the secret service.
-  
-  The attributes should be a set of key and value string pairs.
-  
-  All unlocked items that match the attributes will be deleted.
-  
-  This method may block indefinitely and should not be used in user interface
-  threads.
-  Params:
-    schema =       the schema for the attributes
-    attributes =       the attribute keys and values
-    cancellable =       optional cancellation object
-  Returns:     whether any passwords were removed
+    
+    The attributes should be a set of key and value string pairs.
+    
+    All unlocked items that match the attributes will be deleted.
+    
+    This method may block indefinitely and should not be used in user interface
+    threads.
+
+    Params:
+      schema = the schema for the attributes
+      attributes = the attribute keys and values
+      cancellable = optional cancellation object
+    Returns: whether any passwords were removed
 */
 bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -76,10 +80,11 @@ bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, g
 
 /**
     Finish an asynchronous operation to lookup a password in the secret service.
-  Params:
-    result =       the asynchronous result passed to the callback
-  Returns:     a new password string which should be freed with
-      `funcpassword_free` or may be freed with `funcGLib.free` when done
+
+    Params:
+      result = the asynchronous result passed to the callback
+    Returns: a new password string which should be freed with
+        `funcpassword_free` or may be freed with `funcGLib.free` when done
 */
 string passwordLookupFinish(gio.async_result.AsyncResult result)
 {
@@ -94,19 +99,20 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
 
 /**
     Lookup a password in the secret service.
-  
-  The attributes should be a set of key and value string pairs.
-  
-  If no secret is found then null is returned.
-  
-  This method may block indefinitely and should not be used in user interface
-  threads.
-  Params:
-    schema =       the schema for attributes
-    attributes =       the attribute keys and values
-    cancellable =       optional cancellation object
-  Returns:     a new password string which should be freed with
-      `funcpassword_free` or may be freed with `funcGLib.free` when done
+    
+    The attributes should be a set of key and value string pairs.
+    
+    If no secret is found then null is returned.
+    
+    This method may block indefinitely and should not be used in user interface
+    threads.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      cancellable = optional cancellation object
+    Returns: a new password string which should be freed with
+        `funcpassword_free` or may be freed with `funcGLib.free` when done
 */
 string passwordLookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -123,10 +129,11 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
 
 /**
     Finish an asynchronous operation to search for items in the secret service.
-  Params:
-    result =       the asynchronous result passed to the callback
-  Returns:     a list of
-      `ifaceRetrievable` containing attributes of the matched items
+
+    Params:
+      result = the asynchronous result passed to the callback
+    Returns: a list of
+        `ifaceRetrievable` containing attributes of the matched items
 */
 secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResult result)
 {
@@ -141,20 +148,21 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
 
 /**
     Search for items in the secret service.
-  
-  The attributes should be a set of key and value string pairs.
-  
-  If no secret is found then null is returned.
-  
-  This method may block indefinitely and should not be used in user interface
-  threads.
-  Params:
-    schema =       the schema for attributes
-    attributes =       the attribute keys and values
-    flags =       search option flags
-    cancellable =       optional cancellation object
-  Returns:     a list of
-      `ifaceRetrievable` containing attributes of the matched items
+    
+    The attributes should be a set of key and value string pairs.
+    
+    If no secret is found then null is returned.
+    
+    This method may block indefinitely and should not be used in user interface
+    threads.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      flags = search option flags
+      cancellable = optional cancellation object
+    Returns: a list of
+        `ifaceRetrievable` containing attributes of the matched items
 */
 secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
 {
@@ -171,9 +179,10 @@ secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema,
 
 /**
     Finish asynchronous operation to store a password in the secret service.
-  Params:
-    result =       the asynchronous result passed to the callback
-  Returns:     whether the storage was successful or not
+
+    Params:
+      result = the asynchronous result passed to the callback
+    Returns: whether the storage was successful or not
 */
 bool passwordStoreFinish(gio.async_result.AsyncResult result)
 {
@@ -187,21 +196,22 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
 
 /**
     Store a password in the secret service.
-  
-  This is similar to `funcpassword_storev_sync`, but takes a `structValue` as
-  the argument instead of a null-terminated passwords.
-  
-  This method may block indefinitely and should not be used in user interface
-  threads.
-  Params:
-    schema =       the schema for attributes
-    attributes =       the attribute keys and values
-    collection =       a collection alias, or D-Bus object path of the
-        collection where to store the secret
-    label =       label for the secret
-    value =       a `structValue`
-    cancellable =       optional cancellation object
-  Returns:     whether the storage was successful or not
+    
+    This is similar to `funcpassword_storev_sync`, but takes a `structValue` as
+    the argument instead of a null-terminated passwords.
+    
+    This method may block indefinitely and should not be used in user interface
+    threads.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      collection = a collection alias, or D-Bus object path of the
+          collection where to store the secret
+      label = label for the secret
+      value = a `structValue`
+      cancellable = optional cancellation object
+    Returns: whether the storage was successful or not
 */
 bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
 {
@@ -219,27 +229,28 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
 
 /**
     Store a password in the secret service.
-  
-  The attributes should be a set of key and value string pairs.
-  
-  If the attributes match a secret item already stored in the collection, then
-  the item will be updated with these new values.
-  
-  If collection is null, then the default collection will be
-  used. Use `constCOLLECTION_SESSION` to store the password in the session
-  collection, which doesn't get stored across login sessions.
-  
-  This method may block indefinitely and should not be used in user interface
-  threads.
-  Params:
-    schema =       the schema for attributes
-    attributes =       the attribute keys and values
-    collection =       a collection alias, or D-Bus object path of the
-        collection where to store the secret
-    label =       label for the secret
-    password =       the null-terminated password to store
-    cancellable =       optional cancellation object
-  Returns:     whether the storage was successful or not
+    
+    The attributes should be a set of key and value string pairs.
+    
+    If the attributes match a secret item already stored in the collection, then
+    the item will be updated with these new values.
+    
+    If collection is null, then the default collection will be
+    used. Use `constCOLLECTION_SESSION` to store the password in the session
+    collection, which doesn't get stored across login sessions.
+    
+    This method may block indefinitely and should not be used in user interface
+    threads.
+
+    Params:
+      schema = the schema for attributes
+      attributes = the attribute keys and values
+      collection = a collection alias, or D-Bus object path of the
+          collection where to store the secret
+      label = label for the secret
+      password = the null-terminated password to store
+      cancellable = optional cancellation object
+    Returns: whether the storage was successful or not
 */
 bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable = null)
 {
@@ -258,8 +269,9 @@ bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, s
 
 /**
     Clear the memory used by a password.
-  Params:
-    password =       password to clear
+
+    Params:
+      password = password to clear
 */
 void passwordWipe(string password = null)
 {

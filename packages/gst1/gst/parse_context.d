@@ -1,3 +1,4 @@
+/// Module for [ParseContext] class
 module gst.parse_context;
 
 import gid.gid;
@@ -12,22 +13,26 @@ import gst.types;
 class ParseContext : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_parse_context_get_type != &gidSymbolNotFound ? gst_parse_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,11 +45,11 @@ class ParseContext : gobject.boxed.Boxed
 
   /**
       Allocates a parse context for use with [gst.global.parseLaunchFull] or
-    [gst.global.parseLaunchvFull].
-    
-    Free-function: gst_parse_context_free
-    Returns:     a newly-allocated parse context. Free
-          with [gst.parse_context.ParseContext.free] when no longer needed.
+      [gst.global.parseLaunchvFull].
+      
+      Free-function: gst_parse_context_free
+      Returns: a newly-allocated parse context. Free
+            with [gst.parse_context.ParseContext.free] when no longer needed.
   */
   this()
   {
@@ -55,7 +60,7 @@ class ParseContext : gobject.boxed.Boxed
 
   /**
       Copies the context.
-    Returns:     A copied #GstParseContext
+      Returns: A copied #GstParseContext
   */
   gst.parse_context.ParseContext copy()
   {
@@ -67,11 +72,11 @@ class ParseContext : gobject.boxed.Boxed
 
   /**
       Retrieve missing elements from a previous run of [gst.global.parseLaunchFull]
-    or [gst.global.parseLaunchvFull]. Will only return results if an error code
-    of [gst.types.ParseError.NoSuchElement] was returned.
-    Returns:     a
-          null-terminated array of element factory name strings of missing
-          elements. Free with [glib.global.strfreev] when no longer needed.
+      or [gst.global.parseLaunchvFull]. Will only return results if an error code
+      of [gst.types.ParseError.NoSuchElement] was returned.
+      Returns: a
+            null-terminated array of element factory name strings of missing
+            elements. Free with [glib.global.strfreev] when no longer needed.
   */
   string[] getMissingElements()
   {

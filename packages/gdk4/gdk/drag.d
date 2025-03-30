@@ -1,3 +1,4 @@
+/// Module for [Drag] class
 module gdk.drag;
 
 import gdk.c.functions;
@@ -14,30 +15,33 @@ import gobject.object;
 
 /**
     The [gdk.drag.Drag] object represents the source of an ongoing DND operation.
-  
-  A [gdk.drag.Drag] is created when a drag is started, and stays alive for duration of
-  the DND operation. After a drag has been started with [gdk.drag.Drag.begin],
-  the caller gets informed about the status of the ongoing drag operation
-  with signals on the [gdk.drag.Drag] object.
-  
-  GTK provides a higher level abstraction based on top of these functions,
-  and so they are not normally needed in GTK applications. See the
-  "Drag and Drop" section of the GTK documentation for more information.
+    
+    A [gdk.drag.Drag] is created when a drag is started, and stays alive for duration of
+    the DND operation. After a drag has been started with [gdk.drag.Drag.begin],
+    the caller gets informed about the status of the ongoing drag operation
+    with signals on the [gdk.drag.Drag] object.
+    
+    GTK provides a higher level abstraction based on top of these functions,
+    and so they are not normally needed in GTK applications. See the
+    "Drag and Drop" section of the GTK documentation for more information.
 */
 class Drag : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drag_get_type != &gidSymbolNotFound ? gdk_drag_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,27 +54,28 @@ class Drag : gobject.object.ObjectG
 
   /**
       Starts a drag and creates a new drag context for it.
-    
-    This function is called by the drag source. After this call, you
-    probably want to set up the drag icon using the surface returned
-    by [gdk.drag.Drag.getDragSurface].
-    
-    This function returns a reference to the [gdk.drag.Drag] object,
-    but GTK keeps its own reference as well, as long as the DND operation
-    is going on.
-    
-    Note: if actions include [gdk.types.DragAction.Move], you need to listen for
-    the `signalGdk.Drag::dnd-finished` signal and delete the data at
-    the source if [gdk.drag.Drag.getSelectedAction] returns
-    [gdk.types.DragAction.Move].
-    Params:
-      surface =       the source surface for this drag
-      device =       the device that controls this drag
-      content =       the offered content
-      actions =       the actions supported by this drag
-      dx =       the x offset to device's position where the drag nominally started
-      dy =       the y offset to device's position where the drag nominally started
-    Returns:     a newly created [gdk.drag.Drag]
+      
+      This function is called by the drag source. After this call, you
+      probably want to set up the drag icon using the surface returned
+      by [gdk.drag.Drag.getDragSurface].
+      
+      This function returns a reference to the [gdk.drag.Drag] object,
+      but GTK keeps its own reference as well, as long as the DND operation
+      is going on.
+      
+      Note: if actions include [gdk.types.DragAction.Move], you need to listen for
+      the `signalGdk.Drag::dnd-finished` signal and delete the data at
+      the source if [gdk.drag.Drag.getSelectedAction] returns
+      [gdk.types.DragAction.Move].
+  
+      Params:
+        surface = the source surface for this drag
+        device = the device that controls this drag
+        content = the offered content
+        actions = the actions supported by this drag
+        dx = the x offset to device's position where the drag nominally started
+        dy = the y offset to device's position where the drag nominally started
+      Returns: a newly created [gdk.drag.Drag]
   */
   static gdk.drag.Drag begin(gdk.surface.Surface surface, gdk.device.Device device, gdk.content_provider.ContentProvider content, gdk.types.DragAction actions, double dx, double dy)
   {
@@ -82,18 +87,19 @@ class Drag : gobject.object.ObjectG
 
   /**
       Informs GDK that the drop ended.
-    
-    Passing false for success may trigger a drag cancellation
-    animation.
-    
-    This function is called by the drag source, and should be the
-    last call before dropping the reference to the drag.
-    
-    The [gdk.drag.Drag] will only take the first [gdk.drag.Drag.dropDone]
-    call as effective, if this function is called multiple times,
-    all subsequent calls will be ignored.
-    Params:
-      success =       whether the drag was ultimatively successful
+      
+      Passing false for success may trigger a drag cancellation
+      animation.
+      
+      This function is called by the drag source, and should be the
+      last call before dropping the reference to the drag.
+      
+      The [gdk.drag.Drag] will only take the first [gdk.drag.Drag.dropDone]
+      call as effective, if this function is called multiple times,
+      all subsequent calls will be ignored.
+  
+      Params:
+        success = whether the drag was ultimatively successful
   */
   void dropDone(bool success)
   {
@@ -102,7 +108,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Determines the bitmask of possible actions proposed by the source.
-    Returns:     the [gdk.types.DragAction] flags
+      Returns: the [gdk.types.DragAction] flags
   */
   gdk.types.DragAction getActions()
   {
@@ -114,7 +120,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Returns the [gdk.content_provider.ContentProvider] associated to the [gdk.drag.Drag] object.
-    Returns:     The [gdk.content_provider.ContentProvider] associated to drag.
+      Returns: The [gdk.content_provider.ContentProvider] associated to drag.
   */
   gdk.content_provider.ContentProvider getContent()
   {
@@ -126,7 +132,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Returns the [gdk.device.Device] associated to the [gdk.drag.Drag] object.
-    Returns:     The [gdk.device.Device] associated to drag.
+      Returns: The [gdk.device.Device] associated to drag.
   */
   gdk.device.Device getDevice()
   {
@@ -138,7 +144,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Gets the [gdk.display.Display] that the drag object was created for.
-    Returns:     a [gdk.display.Display]
+      Returns: a [gdk.display.Display]
   */
   gdk.display.Display getDisplay()
   {
@@ -150,13 +156,13 @@ class Drag : gobject.object.ObjectG
 
   /**
       Returns the surface on which the drag icon should be rendered
-    during the drag operation.
-    
-    Note that the surface may not be available until the drag operation
-    has begun. GDK will move the surface in accordance with the ongoing
-    drag operation. The surface is owned by drag and will be destroyed
-    when the drag operation is over.
-    Returns:     the drag surface
+      during the drag operation.
+      
+      Note that the surface may not be available until the drag operation
+      has begun. GDK will move the surface in accordance with the ongoing
+      drag operation. The surface is owned by drag and will be destroyed
+      when the drag operation is over.
+      Returns: the drag surface
   */
   gdk.surface.Surface getDragSurface()
   {
@@ -168,7 +174,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Retrieves the formats supported by this [gdk.drag.Drag] object.
-    Returns:     a [gdk.content_formats.ContentFormats]
+      Returns: a [gdk.content_formats.ContentFormats]
   */
   gdk.content_formats.ContentFormats getFormats()
   {
@@ -180,7 +186,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Determines the action chosen by the drag destination.
-    Returns:     a [gdk.types.DragAction] value
+      Returns: a [gdk.types.DragAction] value
   */
   gdk.types.DragAction getSelectedAction()
   {
@@ -192,7 +198,7 @@ class Drag : gobject.object.ObjectG
 
   /**
       Returns the [gdk.surface.Surface] where the drag originates.
-    Returns:     The [gdk.surface.Surface] where the drag originates
+      Returns: The [gdk.surface.Surface] where the drag originates
   */
   gdk.surface.Surface getSurface()
   {
@@ -204,12 +210,13 @@ class Drag : gobject.object.ObjectG
 
   /**
       Sets the position of the drag surface that will be kept
-    under the cursor hotspot.
-    
-    Initially, the hotspot is at the top left corner of the drag surface.
-    Params:
-      hotX =       x coordinate of the drag surface hotspot
-      hotY =       y coordinate of the drag surface hotspot
+      under the cursor hotspot.
+      
+      Initially, the hotspot is at the top left corner of the drag surface.
+  
+      Params:
+        hotX = x coordinate of the drag surface hotspot
+        hotY = y coordinate of the drag surface hotspot
   */
   void setHotspot(int hotX, int hotY)
   {
@@ -217,36 +224,43 @@ class Drag : gobject.object.ObjectG
   }
 
   /**
+      Connect to `Cancel` signal.
+  
       Emitted when the drag operation is cancelled.
   
-    ## Parameters
-    $(LIST
-      * $(B reason)       The reason the drag was cancelled
-      * $(B drag) the instance the signal is connected to
-    )
-  */
-  alias CancelCallbackDlg = void delegate(gdk.types.DragCancelReason reason, gdk.drag.Drag drag);
-
-  /** ditto */
-  alias CancelCallbackFunc = void function(gdk.types.DragCancelReason reason, gdk.drag.Drag drag);
-
-  /**
-    Connect to Cancel signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.types.DragCancelReason reason, gdk.drag.Drag drag))
+  
+          `reason` The reason the drag was cancelled (optional)
+  
+          `drag` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragCancelReason)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag.Drag)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
-      auto reason = getVal!(gdk.types.DragCancelReason)(&_paramVals[1]);
-      _dClosure.dlg(reason, drag);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -254,36 +268,38 @@ class Drag : gobject.object.ObjectG
   }
 
   /**
-      Emitted when the destination side has finished reading all data.
-    
-    The drag object can now free all miscellaneous data.
+      Connect to `DndFinished` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B drag) the instance the signal is connected to
-    )
-  */
-  alias DndFinishedCallbackDlg = void delegate(gdk.drag.Drag drag);
-
-  /** ditto */
-  alias DndFinishedCallbackFunc = void function(gdk.drag.Drag drag);
-
-  /**
-    Connect to DndFinished signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the destination side has finished reading all data.
+      
+      The drag object can now free all miscellaneous data.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.drag.Drag drag))
+  
+          `drag` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
-      _dClosure.dlg(drag);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -291,34 +307,36 @@ class Drag : gobject.object.ObjectG
   }
 
   /**
+      Connect to `DropPerformed` signal.
+  
       Emitted when the drop operation is performed on an accepting client.
   
-    ## Parameters
-    $(LIST
-      * $(B drag) the instance the signal is connected to
-    )
-  */
-  alias DropPerformedCallbackDlg = void delegate(gdk.drag.Drag drag);
-
-  /** ditto */
-  alias DropPerformedCallbackFunc = void function(gdk.drag.Drag drag);
-
-  /**
-    Connect to DropPerformed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.drag.Drag drag))
+  
+          `drag` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag.Drag)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto drag = getVal!(gdk.drag.Drag)(_paramVals);
-      _dClosure.dlg(drag);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

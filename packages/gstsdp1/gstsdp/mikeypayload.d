@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayload] class
 module gstsdp.mikeypayload;
 
 import gid.gid;
@@ -12,22 +13,26 @@ import gstsdp.types;
 class MIKEYPayload : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mikey_payload_get_type != &gidSymbolNotFound ? gst_mikey_payload_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -60,9 +65,10 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Make a new #GstMIKEYPayload with type.
-    Params:
-      type =       a #GstMIKEYPayloadType
-    Returns:     a new #GstMIKEYPayload or null on failure.
+  
+      Params:
+        type = a #GstMIKEYPayloadType
+      Returns: a new #GstMIKEYPayload or null on failure.
   */
   this(gstsdp.types.MIKEYPayloadType type)
   {
@@ -73,9 +79,10 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Add a new sub payload to payload.
-    Params:
-      newpay =       a #GstMIKEYPayload to add
-    Returns:     true on success.
+  
+      Params:
+        newpay = a #GstMIKEYPayload to add
+      Returns: true on success.
   */
   bool kemacAddSub(gstsdp.mikeypayload.MIKEYPayload newpay)
   {
@@ -86,8 +93,8 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the number of sub payloads of payload. payload should be of type
-    `GST_MIKEY_PT_KEMAC`.
-    Returns:     the number of sub payloads in payload
+      `GST_MIKEY_PT_KEMAC`.
+      Returns: the number of sub payloads in payload
   */
   uint kemacGetNSub()
   {
@@ -98,10 +105,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the sub payload of payload at idx. payload should be of type
-    `GST_MIKEY_PT_KEMAC`.
-    Params:
-      idx =       an index
-    Returns:     the #GstMIKEYPayload at idx.
+      `GST_MIKEY_PT_KEMAC`.
+  
+      Params:
+        idx = an index
+      Returns: the #GstMIKEYPayload at idx.
   */
   gstsdp.mikeypayload.MIKEYPayload kemacGetSub(uint idx)
   {
@@ -113,9 +121,10 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Remove the sub payload at idx in payload.
-    Params:
-      idx =       the index to remove
-    Returns:     true on success.
+  
+      Params:
+        idx = the index to remove
+      Returns: true on success.
   */
   bool kemacRemoveSub(uint idx)
   {
@@ -126,11 +135,12 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the KEMAC parameters. payload should point to a `GST_MIKEY_PT_KEMAC`
-    payload.
-    Params:
-      encAlg =       the #GstMIKEYEncAlg
-      macAlg =       a #GstMIKEYMacAlg
-    Returns:     true on success
+      payload.
+  
+      Params:
+        encAlg = the #GstMIKEYEncAlg
+        macAlg = a #GstMIKEYMacAlg
+      Returns: true on success
   */
   bool kemacSet(gstsdp.types.MIKEYEncAlg encAlg, gstsdp.types.MIKEYMacAlg macAlg)
   {
@@ -141,10 +151,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the key validity period in the `GST_MIKEY_PT_KEY_DATA` payload.
-    Params:
-      vfData =       the Valid From data
-      vtData =       the Valid To data
-    Returns:     true on success
+  
+      Params:
+        vfData = the Valid From data
+        vtData = the Valid To data
+      Returns: true on success
   */
   bool keyDataSetInterval(ubyte[] vfData, ubyte[] vtData)
   {
@@ -165,11 +176,12 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set key_len bytes of key_data of type key_type as the key for the
-    `GST_MIKEY_PT_KEY_DATA` payload.
-    Params:
-      keyType =       a #GstMIKEYKeyDataType
-      keyData =       the key of type key_type
-    Returns:     true on success
+      `GST_MIKEY_PT_KEY_DATA` payload.
+  
+      Params:
+        keyType = a #GstMIKEYKeyDataType
+        keyData = the key of type key_type
+      Returns: true on success
   */
   bool keyDataSetKey(gstsdp.types.MIKEYKeyDataType keyType, ubyte[] keyData)
   {
@@ -185,10 +197,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the salt key data. If salt_len is 0 and salt_data is null, the
-    salt data will be removed.
-    Params:
-      saltData =       the salt
-    Returns:     true on success
+      salt data will be removed.
+  
+      Params:
+        saltData = the salt
+      Returns: true on success
   */
   bool keyDataSetSalt(ubyte[] saltData = null)
   {
@@ -204,9 +217,10 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the SPI/MKI validity in the `GST_MIKEY_PT_KEY_DATA` payload.
-    Params:
-      spiData =       the SPI/MKI data
-    Returns:     true on success
+  
+      Params:
+        spiData = the SPI/MKI data
+      Returns: true on success
   */
   bool keyDataSetSpi(ubyte[] spiData)
   {
@@ -222,11 +236,12 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the PKE values in payload. payload must be of type
-    `GST_MIKEY_PT_PKE`.
-    Params:
-      C =       envelope key cache indicator
-      data =       the encrypted envelope key
-    Returns:     true on success
+      `GST_MIKEY_PT_PKE`.
+  
+      Params:
+        C = envelope key cache indicator
+        data = the encrypted envelope key
+      Returns: true on success
   */
   bool pkeSet(gstsdp.types.MIKEYCacheType C, ubyte[] data)
   {
@@ -242,9 +257,10 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the random values in a `GST_MIKEY_PT_RAND` payload.
-    Params:
-      rand =       random values
-    Returns:     true on success
+  
+      Params:
+        rand = random values
+      Returns: true on success
   */
   bool randSet(ubyte[] rand)
   {
@@ -260,11 +276,12 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Add a new parameter to the `GST_MIKEY_PT_SP` payload with type, len
-    and val.
-    Params:
-      type =       a type
-      val =       len bytes of data
-    Returns:     true on success
+      and val.
+  
+      Params:
+        type = a type
+        val = len bytes of data
+      Returns: true on success
   */
   bool spAddParam(ubyte type, ubyte[] val)
   {
@@ -280,8 +297,8 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the number of security policy parameters in a `GST_MIKEY_PT_SP`
-    payload.
-    Returns:     the number of parameters in payload
+      payload.
+      Returns: the number of parameters in payload
   */
   uint spGetNParams()
   {
@@ -292,10 +309,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Get the Security Policy parameter in a `GST_MIKEY_PT_SP` payload
-    at idx.
-    Params:
-      idx =       an index
-    Returns:     the #GstMIKEYPayloadSPParam at idx in payload
+      at idx.
+  
+      Params:
+        idx = an index
+      Returns: the #GstMIKEYPayloadSPParam at idx in payload
   */
   gstsdp.types.MIKEYPayloadSPParam spGetParam(uint idx)
   {
@@ -309,10 +327,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Remove the Security Policy parameters from a `GST_MIKEY_PT_SP`
-    payload at idx.
-    Params:
-      idx =       an index
-    Returns:     true on success
+      payload at idx.
+  
+      Params:
+        idx = an index
+      Returns: true on success
   */
   bool spRemoveParam(uint idx)
   {
@@ -323,10 +342,11 @@ class MIKEYPayload : gobject.boxed.Boxed
 
   /**
       Set the Security Policy parameters for payload.
-    Params:
-      policy =       the policy number
-      proto =       a #GstMIKEYSecProto
-    Returns:     true on success
+  
+      Params:
+        policy = the policy number
+        proto = a #GstMIKEYSecProto
+      Returns: true on success
   */
   bool spSet(uint policy, gstsdp.types.MIKEYSecProto proto)
   {

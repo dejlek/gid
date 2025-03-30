@@ -1,3 +1,4 @@
+/// Module for [HookList] class
 module glib.hook_list;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class HookList
 {
   GHookList cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class HookList
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -84,10 +87,11 @@ class HookList
 
   /**
       Initializes a #GHookList.
-    This must be called before the #GHookList is used.
-    Params:
-      hookSize =       the size of each element in the #GHookList,
-            typically `sizeof (GHook)`.
+      This must be called before the #GHookList is used.
+  
+      Params:
+        hookSize = the size of each element in the #GHookList,
+              typically `sizeof (GHook)`.
   */
   void init_(uint hookSize)
   {
@@ -96,10 +100,11 @@ class HookList
 
   /**
       Calls all of the #GHook functions in a #GHookList.
-    Params:
-      mayRecurse =       true if functions which are already running
-            (e.g. in another thread) can be called. If set to false,
-            these are skipped
+  
+      Params:
+        mayRecurse = true if functions which are already running
+              (e.g. in another thread) can be called. If set to false,
+              these are skipped
   */
   void invoke(bool mayRecurse)
   {
@@ -108,11 +113,12 @@ class HookList
 
   /**
       Calls all of the #GHook functions in a #GHookList.
-    Any function which returns false is removed from the #GHookList.
-    Params:
-      mayRecurse =       true if functions which are already running
-            (e.g. in another thread) can be called. If set to false,
-            these are skipped
+      Any function which returns false is removed from the #GHookList.
+  
+      Params:
+        mayRecurse = true if functions which are already running
+              (e.g. in another thread) can be called. If set to false,
+              these are skipped
   */
   void invokeCheck(bool mayRecurse)
   {
@@ -121,11 +127,12 @@ class HookList
 
   /**
       Calls a function on each valid #GHook.
-    Params:
-      mayRecurse =       true if hooks which are currently running
-            (e.g. in another thread) are considered valid. If set to false,
-            these are skipped
-      marshaller =       the function to call for each #GHook
+  
+      Params:
+        mayRecurse = true if hooks which are currently running
+              (e.g. in another thread) are considered valid. If set to false,
+              these are skipped
+        marshaller = the function to call for each #GHook
   */
   void marshal(bool mayRecurse, glib.types.HookMarshaller marshaller)
   {
@@ -143,12 +150,13 @@ class HookList
 
   /**
       Calls a function on each valid #GHook and destroys it if the
-    function returns false.
-    Params:
-      mayRecurse =       true if hooks which are currently running
-            (e.g. in another thread) are considered valid. If set to false,
-            these are skipped
-      marshaller =       the function to call for each #GHook
+      function returns false.
+  
+      Params:
+        mayRecurse = true if hooks which are currently running
+              (e.g. in another thread) are considered valid. If set to false,
+              these are skipped
+        marshaller = the function to call for each #GHook
   */
   void marshalCheck(bool mayRecurse, glib.types.HookCheckMarshaller marshaller)
   {

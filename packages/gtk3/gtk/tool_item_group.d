@@ -1,3 +1,4 @@
+/// Module for [ToolItemGroup] class
 module gtk.tool_item_group;
 
 import atk.implementor_iface;
@@ -9,6 +10,7 @@ import gtk.buildable_mixin;
 import gtk.c.functions;
 import gtk.c.types;
 import gtk.container;
+import gtk.style;
 import gtk.tool_item;
 import gtk.tool_shell;
 import gtk.tool_shell_mixin;
@@ -18,27 +20,30 @@ import pango.types;
 
 /**
     A #GtkToolItemGroup is used together with #GtkToolPalette to add
-  #GtkToolItems to a palette like container with different
-  categories and drag and drop support.
-  
-  # CSS nodes
-  
-  GtkToolItemGroup has a single CSS node named toolitemgroup.
+    #GtkToolItems to a palette like container with different
+    categories and drag and drop support.
+    
+    # CSS nodes
+    
+    GtkToolItemGroup has a single CSS node named toolitemgroup.
 */
 class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_group_get_type != &gidSymbolNotFound ? gtk_tool_item_group_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -54,9 +59,10 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Creates a new tool item group with label label.
-    Params:
-      label =       the label of the new group
-    Returns:     a new #GtkToolItemGroup.
+  
+      Params:
+        label = the label of the new group
+      Returns: a new #GtkToolItemGroup.
   */
   this(string label)
   {
@@ -68,7 +74,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets whether group is collapsed or expanded.
-    Returns:     true if group is collapsed, false if it is expanded
+      Returns: true if group is collapsed, false if it is expanded
   */
   bool getCollapsed()
   {
@@ -79,10 +85,11 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the tool item at position (x, y).
-    Params:
-      x =       the x position
-      y =       the y position
-    Returns:     the #GtkToolItem at position (x, y)
+  
+      Params:
+        x = the x position
+        y = the y position
+      Returns: the #GtkToolItem at position (x, y)
   */
   gtk.tool_item.ToolItem getDropItem(int x, int y)
   {
@@ -94,7 +101,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the ellipsization mode of group.
-    Returns:     the #PangoEllipsizeMode of group
+      Returns: the #PangoEllipsizeMode of group
   */
   pango.types.EllipsizeMode getEllipsize()
   {
@@ -106,7 +113,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the relief mode of the header button of group.
-    Returns:     the #GtkReliefStyle
+      Returns: the #GtkReliefStyle
   */
   gtk.types.ReliefStyle getHeaderRelief()
   {
@@ -118,9 +125,10 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the position of item in group as index.
-    Params:
-      item =       a #GtkToolItem
-    Returns:     the index of item in group or -1 if item is no child of group
+  
+      Params:
+        item = a #GtkToolItem
+      Returns: the index of item in group or -1 if item is no child of group
   */
   int getItemPosition(gtk.tool_item.ToolItem item)
   {
@@ -131,9 +139,9 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the label of group.
-    Returns:     the label of group. The label is an internal string of group
-          and must not be modified. Note that null is returned if a custom
-          label has been set with [gtk.tool_item_group.ToolItemGroup.setLabelWidget]
+      Returns: the label of group. The label is an internal string of group
+            and must not be modified. Note that null is returned if a custom
+            label has been set with [gtk.tool_item_group.ToolItemGroup.setLabelWidget]
   */
   string getLabel()
   {
@@ -145,8 +153,8 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the label widget of group.
-    See [gtk.tool_item_group.ToolItemGroup.setLabelWidget].
-    Returns:     the label widget of group
+      See [gtk.tool_item_group.ToolItemGroup.setLabelWidget].
+      Returns: the label widget of group
   */
   gtk.widget.Widget getLabelWidget()
   {
@@ -158,7 +166,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the number of tool items in group.
-    Returns:     the number of tool items in group
+      Returns: the number of tool items in group
   */
   uint getNItems()
   {
@@ -169,9 +177,10 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Gets the tool item at index in group.
-    Params:
-      index =       the index
-    Returns:     the #GtkToolItem at index
+  
+      Params:
+        index = the index
+      Returns: the #GtkToolItem at index
   */
   gtk.tool_item.ToolItem getNthItem(uint index)
   {
@@ -183,10 +192,11 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Inserts item at position in the list of children of group.
-    Params:
-      item =       the #GtkToolItem to insert into group
-      position =       the position of item in group, starting with 0.
-            The position -1 means end of list.
+  
+      Params:
+        item = the #GtkToolItem to insert into group
+        position = the position of item in group, starting with 0.
+              The position -1 means end of list.
   */
   void insert(gtk.tool_item.ToolItem item, int position)
   {
@@ -195,8 +205,9 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Sets whether the group should be collapsed or expanded.
-    Params:
-      collapsed =       whether the group should be collapsed or expanded
+  
+      Params:
+        collapsed = whether the group should be collapsed or expanded
   */
   void setCollapsed(bool collapsed)
   {
@@ -205,8 +216,9 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Sets the ellipsization mode which should be used by labels in group.
-    Params:
-      ellipsize =       the #PangoEllipsizeMode labels in group should use
+  
+      Params:
+        ellipsize = the #PangoEllipsizeMode labels in group should use
   */
   void setEllipsize(pango.types.EllipsizeMode ellipsize)
   {
@@ -215,9 +227,10 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Set the button relief of the group header.
-    See [gtk.button.Button.setRelief] for details.
-    Params:
-      style =       the #GtkReliefStyle
+      See [gtk.button.Button.setRelief] for details.
+  
+      Params:
+        style = the #GtkReliefStyle
   */
   void setHeaderRelief(gtk.types.ReliefStyle style)
   {
@@ -226,11 +239,12 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Sets the position of item in the list of children of group.
-    Params:
-      item =       the #GtkToolItem to move to a new position, should
-            be a child of group.
-      position =       the new position of item in group, starting with 0.
-            The position -1 means end of list.
+  
+      Params:
+        item = the #GtkToolItem to move to a new position, should
+              be a child of group.
+        position = the new position of item in group, starting with 0.
+              The position -1 means end of list.
   */
   void setItemPosition(gtk.tool_item.ToolItem item, int position)
   {
@@ -239,9 +253,10 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Sets the label of the tool item group. The label is displayed in the header
-    of the group.
-    Params:
-      label =       the new human-readable label of of the group
+      of the group.
+  
+      Params:
+        label = the new human-readable label of of the group
   */
   void setLabel(string label)
   {
@@ -251,10 +266,11 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
 
   /**
       Sets the label of the tool item group.
-    The label widget is displayed in the header of the group, in place
-    of the usual label.
-    Params:
-      labelWidget =       the widget to be displayed in place of the usual label
+      The label widget is displayed in the header of the group, in place
+      of the usual label.
+  
+      Params:
+        labelWidget = the widget to be displayed in place of the usual label
   */
   void setLabelWidget(gtk.widget.Widget labelWidget)
   {

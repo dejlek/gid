@@ -1,3 +1,4 @@
+/// D types for gtksource5 library
 module gtksource.types;
 
 import gid.gid;
@@ -59,38 +60,36 @@ alias ViewGutterPosition = GtkSourceViewGutterPosition;
 
 /**
     This function is called incrementally to process additional background work.
-  A deadline is provided which can be checked using `funcGLib.get_monotonic_time` so
-  that additional work can be processed each frame.
-  
-  This is useful for situations where you are incrementally performing
-  background work such as spell checking or semantic syntax highlighting.
+    A deadline is provided which can be checked using `funcGLib.get_monotonic_time` so
+    that additional work can be processed each frame.
+    
+    This is useful for situations where you are incrementally performing
+    background work such as spell checking or semantic syntax highlighting.
 
-  ## Parameters
-  $(LIST
-    * $(B deadline)       the time the callback should complete by
-  )
-  Returns:     true if there is more work to process, otherwise false and the
-      handler is unregistered.
+    Params:
+      deadline = the time the callback should complete by
+    Returns: true if there is more work to process, otherwise false and the
+        handler is unregistered.
 */
 alias SchedulerCallback = bool delegate(long deadline);
 
 /**
     Like [gtksource.global.getMajorVersion], but from the headers used at
-  application compile time, rather than from the library linked
-  against at application run time.
+    application compile time, rather than from the library linked
+    against at application run time.
 */
 enum MAJOR_VERSION = 5;
 
 /**
     Like [gtksource.global.getMicroVersion], but from the headers used at
-  application compile time, rather than from the library linked
-  against at application run time.
+    application compile time, rather than from the library linked
+    against at application run time.
 */
 enum MICRO_VERSION = 1;
 
 /**
     Like [gtksource.global.getMinorVersion], but from the headers used at
-  application compile time, rather than from the library linked
-  against at application run time.
+    application compile time, rather than from the library linked
+    against at application run time.
 */
 enum MINOR_VERSION = 12;

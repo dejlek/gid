@@ -1,3 +1,4 @@
+/// Module for [Plane] class
 module graphene.plane;
 
 import gid.gid;
@@ -12,34 +13,39 @@ import graphene.vec4;
 
 /**
     A 2D plane that extends infinitely in a 3D volume.
-  
-  The contents of the [graphene.plane.Plane] are private, and should not be
-  modified directly.
+    
+    The contents of the [graphene.plane.Plane] are private, and should not be
+    modified directly.
 */
 class Plane : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_plane_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_plane_get_type != &gidSymbolNotFound ? graphene_plane_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,11 +58,11 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_plane_t structure.
-    
-    The contents of the returned structure are undefined.
-    Returns:     the newly allocated #graphene_plane_t.
-        Use [graphene.plane.Plane.free] to free the resources allocated by
-        this function
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_plane_t.
+          Use [graphene.plane.Plane.free] to free the resources allocated by
+          this function
   */
   static graphene.plane.Plane alloc()
   {
@@ -67,10 +73,11 @@ class Plane : gobject.boxed.Boxed
   }
 
   /**
-      Computes the distance of point from a #graphene_plane_t.
-    Params:
-      point =       a #graphene_point3d_t
-    Returns:     the distance of the given #graphene_point3d_t from the plane
+      Computes the distance of `p`oint from a #graphene_plane_t.
+  
+      Params:
+        point = a #graphene_point3d_t
+      Returns: the distance of the given #graphene_point3d_t from the plane
   */
   float distance(graphene.point3_d.Point3D point)
   {
@@ -81,9 +88,10 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Checks whether the two given #graphene_plane_t are equal.
-    Params:
-      b =       a #graphene_plane_t
-    Returns:     `true` if the given planes are equal
+  
+      Params:
+        b = a #graphene_plane_t
+      Returns: `true` if the given planes are equal
   */
   bool equal(graphene.plane.Plane b)
   {
@@ -94,8 +102,8 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Retrieves the distance along the normal vector of the
-    given #graphene_plane_t from the origin.
-    Returns:     the constant value of the plane
+      given #graphene_plane_t from the origin.
+      Returns: the constant value of the plane
   */
   float getConstant()
   {
@@ -106,9 +114,10 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Retrieves the normal vector pointing towards the origin of the
-    given #graphene_plane_t.
-    Params:
-      normal =       return location for the normal vector
+      given #graphene_plane_t.
+  
+      Params:
+        normal = return location for the normal vector
   */
   void getNormal(out graphene.vec3.Vec3 normal)
   {
@@ -119,14 +128,15 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_plane_t using the given normal vector
-    and constant values.
-    Params:
-      normal =       a unit length normal vector defining the plane
-          pointing towards the origin; if unset, we use the X axis by default
-      constant =       the distance from the origin to the plane along the
-          normal vector; the sign determines the half-space occupied by the
-          plane
-    Returns:     the initialized plane
+      and constant values.
+  
+      Params:
+        normal = a unit length normal vector defining the plane
+            pointing towards the origin; if unset, we use the X axis by default
+        constant = the distance from the origin to the plane along the
+            normal vector; the sign determines the half-space occupied by the
+            plane
+      Returns: the initialized plane
   */
   graphene.plane.Plane init_(graphene.vec3.Vec3 normal, float constant)
   {
@@ -138,10 +148,11 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_plane_t using the normal
-    vector and constant of another #graphene_plane_t.
-    Params:
-      src =       a #graphene_plane_t
-    Returns:     the initialized plane
+      vector and constant of another #graphene_plane_t.
+  
+      Params:
+        src = a #graphene_plane_t
+      Returns: the initialized plane
   */
   graphene.plane.Plane initFromPlane(graphene.plane.Plane src)
   {
@@ -153,11 +164,12 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_plane_t using the given normal vector
-    and an arbitrary co-planar point.
-    Params:
-      normal =       a normal vector defining the plane pointing towards the origin
-      point =       a #graphene_point3d_t
-    Returns:     the initialized plane
+      and an arbitrary co-planar point.
+  
+      Params:
+        normal = a normal vector defining the plane pointing towards the origin
+        point = a #graphene_point3d_t
+      Returns: the initialized plane
   */
   graphene.plane.Plane initFromPoint(graphene.vec3.Vec3 normal, graphene.point3_d.Point3D point)
   {
@@ -169,15 +181,16 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_plane_t using the 3 provided co-planar
-    points.
-    
-    The winding order is counter-clockwise, and determines which direction
-    the normal vector will point.
-    Params:
-      a =       a #graphene_point3d_t
-      b =       a #graphene_point3d_t
-      c =       a #graphene_point3d_t
-    Returns:     the initialized plane
+      points.
+      
+      The winding order is counter-clockwise, and determines which direction
+      the normal vector will point.
+  
+      Params:
+        a = a #graphene_point3d_t
+        b = a #graphene_point3d_t
+        c = a #graphene_point3d_t
+      Returns: the initialized plane
   */
   graphene.plane.Plane initFromPoints(graphene.point3_d.Point3D a, graphene.point3_d.Point3D b, graphene.point3_d.Point3D c)
   {
@@ -189,11 +202,12 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_plane_t using the components of
-    the given #graphene_vec4_t vector.
-    Params:
-      src =       a #graphene_vec4_t containing the normal vector in its first
-          three components, and the distance in its fourth component
-    Returns:     the initialized plane
+      the given #graphene_vec4_t vector.
+  
+      Params:
+        src = a #graphene_vec4_t containing the normal vector in its first
+            three components, and the distance in its fourth component
+      Returns: the initialized plane
   */
   graphene.plane.Plane initFromVec4(graphene.vec4.Vec4 src)
   {
@@ -205,9 +219,10 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Negates the normal vector and constant of a #graphene_plane_t, effectively
-    mirroring the plane across the origin.
-    Params:
-      res =       return location for the negated plane
+      mirroring the plane across the origin.
+  
+      Params:
+        res = return location for the negated plane
   */
   void negate(out graphene.plane.Plane res)
   {
@@ -218,9 +233,10 @@ class Plane : gobject.boxed.Boxed
 
   /**
       Normalizes the vector of the given #graphene_plane_t,
-    and adjusts the constant accordingly.
-    Params:
-      res =       return location for the normalized plane
+      and adjusts the constant accordingly.
+  
+      Params:
+        res = return location for the normalized plane
   */
   void normalize(out graphene.plane.Plane res)
   {
@@ -230,18 +246,19 @@ class Plane : gobject.boxed.Boxed
   }
 
   /**
-      Transforms a #graphene_plane_t p using the given matrix
-    and normal_matrix.
-    
-    If normal_matrix is null, a transformation matrix for the plane
-    normal will be computed from matrix. If you are transforming
-    multiple planes using the same matrix it's recommended to compute
-    the normal matrix beforehand to avoid incurring in the cost of
-    recomputing it every time.
-    Params:
-      matrix =       a #graphene_matrix_t
-      normalMatrix =       a #graphene_matrix_t
-      res =       the transformed plane
+      Transforms a #graphene_plane_t `p` using the given matrix
+      and normal_matrix.
+      
+      If normal_matrix is null, a transformation matrix for the plane
+      normal will be computed from matrix. If you are transforming
+      multiple planes using the same matrix it's recommended to compute
+      the normal matrix beforehand to avoid incurring in the cost of
+      recomputing it every time.
+  
+      Params:
+        matrix = a #graphene_matrix_t
+        normalMatrix = a #graphene_matrix_t
+        res = the transformed plane
   */
   void transform(graphene.matrix.Matrix matrix, graphene.matrix.Matrix normalMatrix, out graphene.plane.Plane res)
   {

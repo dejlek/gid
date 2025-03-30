@@ -1,3 +1,4 @@
+/// Module for [GLSyncMeta] class
 module gstgl.glsync_meta;
 
 import gid.gid;
@@ -10,12 +11,13 @@ import gstgl.types;
 
 /**
     #GstGLSyncMeta provides the ability to synchronize the OpenGL command stream
-  with the CPU or with other OpenGL contexts.
+    with the CPU or with other OpenGL contexts.
 */
 class GLSyncMeta
 {
   GstGLSyncMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class GLSyncMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -113,8 +116,9 @@ class GLSyncMeta
 
   /**
       Set a sync point to possibly wait on at a later time.
-    Params:
-      context =       a #GstGLContext
+  
+      Params:
+        context = a #GstGLContext
   */
   void setSyncPoint(gstgl.glcontext.GLContext context)
   {
@@ -123,9 +127,10 @@ class GLSyncMeta
 
   /**
       Insert a wait into context's command stream ensuring all previous OpenGL
-    commands before sync_meta have completed.
-    Params:
-      context =       a #GstGLContext
+      commands before sync_meta have completed.
+  
+      Params:
+        context = a #GstGLContext
   */
   void wait(gstgl.glcontext.GLContext context)
   {
@@ -134,10 +139,11 @@ class GLSyncMeta
 
   /**
       Perform a wait so that the sync point has passed from the CPU's perspective
-    What that means, is that all GL operations changing CPU-visible data before
-    the sync point are now visible.
-    Params:
-      context =       a #GstGLContext
+      What that means, is that all GL operations changing CPU-visible data before
+      the sync point are now visible.
+  
+      Params:
+        context = a #GstGLContext
   */
   void waitCpu(gstgl.glcontext.GLContext context)
   {

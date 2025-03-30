@@ -1,3 +1,4 @@
+/// Module for [BufferedOutputStream] class
 module gio.buffered_output_stream;
 
 import gid.gid;
@@ -12,33 +13,36 @@ import gobject.object;
 
 /**
     Buffered output stream implements [gio.filter_output_stream.FilterOutputStream] and provides
-  for buffered writes.
-  
-  By default, [gio.buffered_output_stream.BufferedOutputStream]'s buffer size is set at 4 kilobytes.
-  
-  To create a buffered output stream, use [gio.buffered_output_stream.BufferedOutputStream.new_],
-  or [gio.buffered_output_stream.BufferedOutputStream.newSized] to specify the buffer's size
-  at construction.
-  
-  To get the size of a buffer within a buffered input stream, use
-  [gio.buffered_output_stream.BufferedOutputStream.getBufferSize]. To change the size of a
-  buffered output stream's buffer, use [gio.buffered_output_stream.BufferedOutputStream.setBufferSize].
-  Note that the buffer's size cannot be reduced below the size of the data within the buffer.
+    for buffered writes.
+    
+    By default, [gio.buffered_output_stream.BufferedOutputStream]'s buffer size is set at 4 kilobytes.
+    
+    To create a buffered output stream, use [gio.buffered_output_stream.BufferedOutputStream.new_],
+    or [gio.buffered_output_stream.BufferedOutputStream.newSized] to specify the buffer's size
+    at construction.
+    
+    To get the size of a buffer within a buffered input stream, use
+    [gio.buffered_output_stream.BufferedOutputStream.getBufferSize]. To change the size of a
+    buffered output stream's buffer, use [gio.buffered_output_stream.BufferedOutputStream.setBufferSize].
+    Note that the buffer's size cannot be reduced below the size of the data within the buffer.
 */
 class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekable.Seekable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_buffered_output_stream_get_type != &gidSymbolNotFound ? g_buffered_output_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,9 +57,10 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Creates a new buffered output stream for a base stream.
-    Params:
-      baseStream =       a #GOutputStream.
-    Returns:     a #GOutputStream for the given base_stream.
+  
+      Params:
+        baseStream = a #GOutputStream.
+      Returns: a #GOutputStream for the given base_stream.
   */
   this(gio.output_stream.OutputStream baseStream)
   {
@@ -66,10 +71,11 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Creates a new buffered output stream with a given buffer size.
-    Params:
-      baseStream =       a #GOutputStream.
-      size =       a #gsize.
-    Returns:     a #GOutputStream with an internal buffer set to size.
+  
+      Params:
+        baseStream = a #GOutputStream.
+        size = a #gsize.
+      Returns: a #GOutputStream with an internal buffer set to size.
   */
   static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size)
   {
@@ -81,8 +87,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Checks if the buffer automatically grows as data is added.
-    Returns:     true if the stream's buffer automatically grows,
-      false otherwise.
+      Returns: true if the stream's buffer automatically grows,
+        false otherwise.
   */
   bool getAutoGrow()
   {
@@ -93,7 +99,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Gets the size of the buffer in the stream.
-    Returns:     the current size of the buffer.
+      Returns: the current size of the buffer.
   */
   size_t getBufferSize()
   {
@@ -104,11 +110,12 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Sets whether or not the stream's buffer should automatically grow.
-    If auto_grow is true, then each write will just make the buffer
-    larger, and you must manually flush the buffer to actually write out
-    the data to the underlying stream.
-    Params:
-      autoGrow =       a #gboolean.
+      If auto_grow is true, then each write will just make the buffer
+      larger, and you must manually flush the buffer to actually write out
+      the data to the underlying stream.
+  
+      Params:
+        autoGrow = a #gboolean.
   */
   void setAutoGrow(bool autoGrow)
   {
@@ -117,8 +124,9 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 
   /**
       Sets the size of the internal buffer to size.
-    Params:
-      size =       a #gsize.
+  
+      Params:
+        size = a #gsize.
   */
   void setBufferSize(size_t size)
   {

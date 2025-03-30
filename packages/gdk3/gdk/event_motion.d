@@ -1,3 +1,4 @@
+/// Module for [EventMotion] class
 module gdk.event_motion;
 
 import gdk.c.functions;
@@ -14,6 +15,7 @@ class EventMotion
 {
   GdkEventMotion cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class EventMotion
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [ServerCallContext] class
 module arrowflight.server_call_context;
 
 import arrowflight.c.functions;
@@ -10,17 +11,20 @@ import gobject.object;
 class ServerCallContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_call_context_get_type != &gidSymbolNotFound ? gaflight_server_call_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -33,8 +37,9 @@ class ServerCallContext : gobject.object.ObjectG
 
   /**
       Iterates over all incoming headers.
-    Params:
-      func =       The user's callback function.
+  
+      Params:
+        func = The user's callback function.
   */
   void foreachIncomingHeader(arrowflight.types.HeaderFunc func)
   {

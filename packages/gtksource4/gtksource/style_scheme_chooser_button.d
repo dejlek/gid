@@ -1,3 +1,4 @@
+/// Module for [StyleSchemeChooserButton] class
 module gtksource.style_scheme_chooser_button;
 
 import atk.implementor_iface;
@@ -20,17 +21,20 @@ import gtksource.types;
 class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_chooser.StyleSchemeChooser
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_chooser_button_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_chooser_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,7 +49,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
 
   /**
       Creates a new #GtkSourceStyleSchemeChooserButton.
-    Returns:     a new #GtkSourceStyleSchemeChooserButton.
+      Returns: a new #GtkSourceStyleSchemeChooserButton.
   */
   this()
   {

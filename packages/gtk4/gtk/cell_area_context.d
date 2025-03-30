@@ -1,3 +1,4 @@
+/// Module for [CellAreaContext] class
 module gtk.cell_area_context;
 
 import gid.gid;
@@ -9,34 +10,37 @@ import gtk.types;
 
 /**
     Stores geometrical information for a series of rows in a GtkCellArea
-  
-  The [gtk.cell_area_context.CellAreaContext] object is created by a given [gtk.cell_area.CellArea]
-  implementation via its `GtkCellAreaClass.create_context()` virtual
-  method and is used to store cell sizes and alignments for a series of
-  [gtk.tree_model.TreeModel] rows that are requested and rendered in the same context.
-  
-  [gtk.cell_layout.CellLayout] widgets can create any number of contexts in which to
-  request and render groups of data rows. However, it’s important that the
-  same context which was used to request sizes for a given [gtk.tree_model.TreeModel]
-  row also be used for the same row when calling other [gtk.cell_area.CellArea] APIs
-  such as [gtk.cell_area.CellArea.render] and [gtk.cell_area.CellArea.event].
+    
+    The [gtk.cell_area_context.CellAreaContext] object is created by a given [gtk.cell_area.CellArea]
+    implementation via its `GtkCellAreaClass.create_context()` virtual
+    method and is used to store cell sizes and alignments for a series of
+    [gtk.tree_model.TreeModel] rows that are requested and rendered in the same context.
+    
+    [gtk.cell_layout.CellLayout] widgets can create any number of contexts in which to
+    request and render groups of data rows. However, it’s important that the
+    same context which was used to request sizes for a given [gtk.tree_model.TreeModel]
+    row also be used for the same row when calling other [gtk.cell_area.CellArea] APIs
+    such as [gtk.cell_area.CellArea.render] and [gtk.cell_area.CellArea.event].
 
-  Deprecated:     This object will be removed in GTK 5
+    Deprecated: This object will be removed in GTK 5
 */
 class CellAreaContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_context_get_type != &gidSymbolNotFound ? gtk_cell_area_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,22 +53,23 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Allocates a width and/or a height for all rows which are to be
-    rendered with context.
-    
-    Usually allocation is performed only horizontally or sometimes
-    vertically since a group of rows are usually rendered side by
-    side vertically or horizontally and share either the same width
-    or the same height. Sometimes they are allocated in both horizontal
-    and vertical orientations producing a homogeneous effect of the
-    rows. This is generally the case for [gtk.tree_view.TreeView] when
-    `GtkTreeView:fixed-height-mode` is enabled.
-    Params:
-      width =       the allocated width for all [gtk.tree_model.TreeModel] rows rendered
-          with context, or -1
-      height =       the allocated height for all [gtk.tree_model.TreeModel] rows rendered
-          with context, or -1
+      rendered with context.
+      
+      Usually allocation is performed only horizontally or sometimes
+      vertically since a group of rows are usually rendered side by
+      side vertically or horizontally and share either the same width
+      or the same height. Sometimes they are allocated in both horizontal
+      and vertical orientations producing a homogeneous effect of the
+      rows. This is generally the case for [gtk.tree_view.TreeView] when
+      `GtkTreeView:fixed-height-mode` is enabled.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        width = the allocated width for all [gtk.tree_model.TreeModel] rows rendered
+            with context, or -1
+        height = the allocated height for all [gtk.tree_model.TreeModel] rows rendered
+            with context, or -1
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void allocate(int width, int height)
   {
@@ -73,15 +78,16 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Fetches the current allocation size for context.
-    
-    If the context was not allocated in width or height, or if the
-    context was recently reset with [gtk.cell_area_context.CellAreaContext.reset],
-    the returned value will be -1.
-    Params:
-      width =       location to store the allocated width
-      height =       location to store the allocated height
+      
+      If the context was not allocated in width or height, or if the
+      context was recently reset with [gtk.cell_area_context.CellAreaContext.reset],
+      the returned value will be -1.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        width = location to store the allocated width
+        height = location to store the allocated height
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void getAllocation(out int width, out int height)
   {
@@ -90,18 +96,18 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Fetches the [gtk.cell_area.CellArea] this context was created by.
-    
-    This is generally unneeded by layouting widgets; however,
-    it is important for the context implementation itself to
-    fetch information about the area it is being used for.
-    
-    For instance at `GtkCellAreaContextClass.allocate()` time
-    it’s important to know details about any cell spacing
-    that the [gtk.cell_area.CellArea] is configured with in order to
-    compute a proper allocation.
-    Returns:     the [gtk.cell_area.CellArea] this context was created by.
+      
+      This is generally unneeded by layouting widgets; however,
+      it is important for the context implementation itself to
+      fetch information about the area it is being used for.
+      
+      For instance at `GtkCellAreaContextClass.allocate()` time
+      it’s important to know details about any cell spacing
+      that the [gtk.cell_area.CellArea] is configured with in order to
+      compute a proper allocation.
+      Returns: the [gtk.cell_area.CellArea] this context was created by.
   
-    Deprecated:     This object will be removed in GTK 5
+      Deprecated: This object will be removed in GTK 5
   */
   gtk.cell_area.CellArea getArea()
   {
@@ -113,15 +119,16 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Gets the accumulative preferred height for all rows which have been
-    requested with this context.
-    
-    After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
-    requesting the size of a [gtk.cell_area.CellArea], the returned values are 0.
-    Params:
-      minimumHeight =       location to store the minimum height
-      naturalHeight =       location to store the natural height
+      requested with this context.
+      
+      After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a [gtk.cell_area.CellArea], the returned values are 0.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        minimumHeight = location to store the minimum height
+        naturalHeight = location to store the natural height
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void getPreferredHeight(out int minimumHeight, out int naturalHeight)
   {
@@ -130,16 +137,17 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Gets the accumulative preferred height for width for all rows
-    which have been requested for the same said width with this context.
-    
-    After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
-    requesting the size of a [gtk.cell_area.CellArea], the returned values are -1.
-    Params:
-      width =       a proposed width for allocation
-      minimumHeight =       location to store the minimum height
-      naturalHeight =       location to store the natural height
+      which have been requested for the same said width with this context.
+      
+      After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a [gtk.cell_area.CellArea], the returned values are -1.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        width = a proposed width for allocation
+        minimumHeight = location to store the minimum height
+        naturalHeight = location to store the natural height
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
   {
@@ -148,15 +156,16 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Gets the accumulative preferred width for all rows which have been
-    requested with this context.
-    
-    After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
-    requesting the size of a [gtk.cell_area.CellArea], the returned values are 0.
-    Params:
-      minimumWidth =       location to store the minimum width
-      naturalWidth =       location to store the natural width
+      requested with this context.
+      
+      After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a [gtk.cell_area.CellArea], the returned values are 0.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        minimumWidth = location to store the minimum width
+        naturalWidth = location to store the natural width
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void getPreferredWidth(out int minimumWidth, out int naturalWidth)
   {
@@ -165,16 +174,17 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Gets the accumulative preferred width for height for all rows which
-    have been requested for the same said height with this context.
-    
-    After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
-    requesting the size of a [gtk.cell_area.CellArea], the returned values are -1.
-    Params:
-      height =       a proposed height for allocation
-      minimumWidth =       location to store the minimum width
-      naturalWidth =       location to store the natural width
+      have been requested for the same said height with this context.
+      
+      After [gtk.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a [gtk.cell_area.CellArea], the returned values are -1.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        height = a proposed height for allocation
+        minimumWidth = location to store the minimum width
+        naturalWidth = location to store the natural width
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
   {
@@ -183,17 +193,18 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Causes the minimum and/or natural height to grow if the new
-    proposed sizes exceed the current minimum and natural height.
-    
-    This is used by [gtk.cell_area_context.CellAreaContext] implementations during
-    the request process over a series of [gtk.tree_model.TreeModel] rows to
-    progressively push the requested height over a series of
-    [gtk.cell_area.CellArea.getPreferredHeight] requests.
-    Params:
-      minimumHeight =       the proposed new minimum height for context
-      naturalHeight =       the proposed new natural height for context
+      proposed sizes exceed the current minimum and natural height.
+      
+      This is used by [gtk.cell_area_context.CellAreaContext] implementations during
+      the request process over a series of [gtk.tree_model.TreeModel] rows to
+      progressively push the requested height over a series of
+      [gtk.cell_area.CellArea.getPreferredHeight] requests.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        minimumHeight = the proposed new minimum height for context
+        naturalHeight = the proposed new natural height for context
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void pushPreferredHeight(int minimumHeight, int naturalHeight)
   {
@@ -202,17 +213,18 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Causes the minimum and/or natural width to grow if the new
-    proposed sizes exceed the current minimum and natural width.
-    
-    This is used by [gtk.cell_area_context.CellAreaContext] implementations during
-    the request process over a series of [gtk.tree_model.TreeModel] rows to
-    progressively push the requested width over a series of
-    [gtk.cell_area.CellArea.getPreferredWidth] requests.
-    Params:
-      minimumWidth =       the proposed new minimum width for context
-      naturalWidth =       the proposed new natural width for context
+      proposed sizes exceed the current minimum and natural width.
+      
+      This is used by [gtk.cell_area_context.CellAreaContext] implementations during
+      the request process over a series of [gtk.tree_model.TreeModel] rows to
+      progressively push the requested width over a series of
+      [gtk.cell_area.CellArea.getPreferredWidth] requests.
   
-    Deprecated:     This object will be removed in GTK 5
+      Params:
+        minimumWidth = the proposed new minimum width for context
+        naturalWidth = the proposed new natural width for context
+  
+      Deprecated: This object will be removed in GTK 5
   */
   void pushPreferredWidth(int minimumWidth, int naturalWidth)
   {
@@ -221,29 +233,29 @@ class CellAreaContext : gobject.object.ObjectG
 
   /**
       Resets any previously cached request and allocation
-    data.
-    
-    When underlying [gtk.tree_model.TreeModel] data changes its
-    important to reset the context if the content
-    size is allowed to shrink. If the content size
-    is only allowed to grow (this is usually an option
-    for views rendering large data stores as a measure
-    of optimization), then only the row that changed
-    or was inserted needs to be (re)requested with
-    [gtk.cell_area.CellArea.getPreferredWidth].
-    
-    When the new overall size of the context requires
-    that the allocated size changes (or whenever this
-    allocation changes at all), the variable row
-    sizes need to be re-requested for every row.
-    
-    For instance, if the rows are displayed all with
-    the same width from top to bottom then a change
-    in the allocated width necessitates a recalculation
-    of all the displayed row heights using
-    [gtk.cell_area.CellArea.getPreferredHeightForWidth].
+      data.
+      
+      When underlying [gtk.tree_model.TreeModel] data changes its
+      important to reset the context if the content
+      size is allowed to shrink. If the content size
+      is only allowed to grow (this is usually an option
+      for views rendering large data stores as a measure
+      of optimization), then only the row that changed
+      or was inserted needs to be (re)requested with
+      [gtk.cell_area.CellArea.getPreferredWidth].
+      
+      When the new overall size of the context requires
+      that the allocated size changes (or whenever this
+      allocation changes at all), the variable row
+      sizes need to be re-requested for every row.
+      
+      For instance, if the rows are displayed all with
+      the same width from top to bottom then a change
+      in the allocated width necessitates a recalculation
+      of all the displayed row heights using
+      [gtk.cell_area.CellArea.getPreferredHeightForWidth].
   
-    Deprecated:     This object will be removed in GTK 5
+      Deprecated: This object will be removed in GTK 5
   */
   void reset()
   {

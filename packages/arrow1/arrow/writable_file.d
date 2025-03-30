@@ -1,3 +1,4 @@
+/// Module for [WritableFile] interface
 module arrow.writable_file;
 
 public import arrow.writable_file_iface_proxy;
@@ -11,6 +12,7 @@ import glib.error;
 interface WritableFile
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

@@ -1,3 +1,4 @@
+/// Module for [Servable] interface
 module arrowflight.servable;
 
 public import arrowflight.servable_iface_proxy;
@@ -10,6 +11,7 @@ import gid.gid;
 interface Servable
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

@@ -1,3 +1,4 @@
+/// Module for [Decimal64Scalar] class
 module arrow.decimal64_scalar;
 
 import arrow.c.functions;
@@ -13,17 +14,20 @@ import gobject.object;
 class Decimal64Scalar : arrow.scalar.Scalar
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_scalar_get_type != &gidSymbolNotFound ? garrow_decimal64_scalar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

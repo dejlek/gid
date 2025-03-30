@@ -1,3 +1,4 @@
+/// Module for [StreamWriter] class
 module arrowflight.stream_writer;
 
 import arrowflight.c.functions;
@@ -11,17 +12,20 @@ import glib.error;
 class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_writer_get_type != &gidSymbolNotFound ? gaflight_stream_writer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

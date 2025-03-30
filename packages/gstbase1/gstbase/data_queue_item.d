@@ -1,3 +1,4 @@
+/// Module for [DataQueueItem] class
 module gstbase.data_queue_item;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstbase.types;
 
 /**
     Structure used by #GstDataQueue. You can supply a different structure, as
-  long as the top of the structure is identical to this structure.
+    long as the top of the structure is identical to this structure.
 */
 class DataQueueItem
 {
   GstDataQueueItem cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class DataQueueItem
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

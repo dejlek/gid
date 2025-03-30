@@ -1,3 +1,4 @@
+/// Module for [Table] class
 module arrow.table;
 
 import arrow.array;
@@ -24,17 +25,20 @@ import gobject.object;
 class Table : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_get_type != &gidSymbolNotFound ? garrow_table_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -303,10 +307,11 @@ class Table : gobject.object.ObjectG
 
   /**
       Writes the table as Feather format data to the sink.
-    Params:
-      sink =       The output.
-      properties =       The properties for this write.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        sink = The output.
+        properties = The properties for this write.
+      Returns: true on success, false if there was an error.
   */
   bool writeAsFeather(arrow.output_stream.OutputStream sink, arrow.feather_write_properties.FeatherWriteProperties properties = null)
   {

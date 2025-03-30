@@ -1,3 +1,4 @@
+/// Module for [DragContext] class
 module gdk.drag_context;
 
 import gdk.c.functions;
@@ -13,17 +14,20 @@ import gobject.object;
 class DragContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drag_context_get_type != &gidSymbolNotFound ? gdk_drag_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,8 +40,8 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Determines the bitmask of actions proposed by the source if
-    [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].
-    Returns:     the #GdkDragAction flags
+      [gdk.drag_context.DragContext.getSuggestedAction] returns [gdk.types.DragAction.Ask].
+      Returns: the #GdkDragAction flags
   */
   gdk.types.DragAction getActions()
   {
@@ -49,7 +53,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Returns the destination window for the DND operation.
-    Returns:     a #GdkWindow
+      Returns: a #GdkWindow
   */
   gdk.window.Window getDestWindow()
   {
@@ -61,7 +65,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Returns the #GdkDevice associated to the drag context.
-    Returns:     The #GdkDevice associated to context.
+      Returns: The #GdkDevice associated to context.
   */
   gdk.device.Device getDevice()
   {
@@ -73,12 +77,12 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Returns the window on which the drag icon should be rendered
-    during the drag operation. Note that the window may not be
-    available until the drag operation has begun. GDK will move
-    the window in accordance with the ongoing drag operation.
-    The window is owned by context and will be destroyed when
-    the drag operation is over.
-    Returns:     the drag window, or null
+      during the drag operation. Note that the window may not be
+      available until the drag operation has begun. GDK will move
+      the window in accordance with the ongoing drag operation.
+      The window is owned by context and will be destroyed when
+      the drag operation is over.
+      Returns: the drag window, or null
   */
   gdk.window.Window getDragWindow()
   {
@@ -90,7 +94,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Returns the drag protocol that is used by this context.
-    Returns:     the drag protocol
+      Returns: the drag protocol
   */
   gdk.types.DragProtocol getProtocol()
   {
@@ -102,7 +106,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Determines the action chosen by the drag destination.
-    Returns:     a #GdkDragAction value
+      Returns: a #GdkDragAction value
   */
   gdk.types.DragAction getSelectedAction()
   {
@@ -114,7 +118,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Returns the #GdkWindow where the DND operation started.
-    Returns:     a #GdkWindow
+      Returns: a #GdkWindow
   */
   gdk.window.Window getSourceWindow()
   {
@@ -126,7 +130,7 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Determines the suggested drag action of the context.
-    Returns:     a #GdkDragAction value
+      Returns: a #GdkDragAction value
   */
   gdk.types.DragAction getSuggestedAction()
   {
@@ -138,27 +142,28 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Requests the drag and drop operation to be managed by context.
-    When a drag and drop operation becomes managed, the #GdkDragContext
-    will internally handle all input and source-side #GdkEventDND events
-    as required by the windowing system.
-    
-    Once the drag and drop operation is managed, the drag context will
-    emit the following signals:
-    $(LIST
-      * The #GdkDragContext::action-changed signal whenever the final action
-        to be performed by the drag and drop operation changes.
-      * The #GdkDragContext::drop-performed signal after the user performs
-        the drag and drop gesture (typically by releasing the mouse button).
-      * The #GdkDragContext::dnd-finished signal after the drag and drop
-        operation concludes (after all #GdkSelection transfers happen).
-      * The #GdkDragContext::cancel signal if the drag and drop operation is
-        finished but doesn't happen over an accepting destination, or is
-        cancelled through other means.
-    )
-    Params:
-      ipcWindow =       Window to use for IPC messaging/events
-      actions =       the actions supported by the drag source
-    Returns:     #TRUE if the drag and drop operation is managed.
+      When a drag and drop operation becomes managed, the #GdkDragContext
+      will internally handle all input and source-side #GdkEventDND events
+      as required by the windowing system.
+      
+      Once the drag and drop operation is managed, the drag context will
+      emit the following signals:
+      $(LIST
+        * The #GdkDragContext::action-changed signal whenever the final action
+          to be performed by the drag and drop operation changes.
+        * The #GdkDragContext::drop-performed signal after the user performs
+          the drag and drop gesture (typically by releasing the mouse button).
+        * The #GdkDragContext::dnd-finished signal after the drag and drop
+          operation concludes (after all #GdkSelection transfers happen).
+        * The #GdkDragContext::cancel signal if the drag and drop operation is
+          finished but doesn't happen over an accepting destination, or is
+          cancelled through other means.
+      )
+  
+      Params:
+        ipcWindow = Window to use for IPC messaging/events
+        actions = the actions supported by the drag source
+      Returns: #TRUE if the drag and drop operation is managed.
   */
   bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
   {
@@ -169,9 +174,10 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Associates a #GdkDevice to context, so all Drag and Drop events
-    for context are emitted as if they came from this device.
-    Params:
-      device =       a #GdkDevice
+      for context are emitted as if they came from this device.
+  
+      Params:
+        device = a #GdkDevice
   */
   void setDevice(gdk.device.Device device)
   {
@@ -180,11 +186,12 @@ class DragContext : gobject.object.ObjectG
 
   /**
       Sets the position of the drag window that will be kept
-    under the cursor hotspot. Initially, the hotspot is at the
-    top left corner of the drag window.
-    Params:
-      hotX =       x coordinate of the drag window hotspot
-      hotY =       y coordinate of the drag window hotspot
+      under the cursor hotspot. Initially, the hotspot is at the
+      top left corner of the drag window.
+  
+      Params:
+        hotX = x coordinate of the drag window hotspot
+        hotY = y coordinate of the drag window hotspot
   */
   void setHotspot(int hotX, int hotY)
   {
@@ -192,40 +199,47 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-      A new action is being chosen for the drag and drop operation.
-    
-    This signal will only be emitted if the #GdkDragContext manages
-    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-    for more information.
+      Connect to `ActionChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B action)       The action currently chosen
-      * $(B dragContext) the instance the signal is connected to
-    )
-  */
-  alias ActionChangedCallbackDlg = void delegate(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext);
-
-  /** ditto */
-  alias ActionChangedCallbackFunc = void function(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext);
-
-  /**
-    Connect to ActionChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      A new action is being chosen for the drag and drop operation.
+      
+      This signal will only be emitted if the #GdkDragContext manages
+      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+      for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.types.DragAction action, gdk.drag_context.DragContext dragContext))
+  
+          `action` The action currently chosen (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActionChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActionChangedCallbackDlg) || is(T : ActionChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragAction)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragContext = getVal!(gdk.drag_context.DragContext)(_paramVals);
-      auto action = getVal!(gdk.types.DragAction)(&_paramVals[1]);
-      _dClosure.dlg(action, dragContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -233,40 +247,47 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-      The drag and drop operation was cancelled.
-    
-    This signal will only be emitted if the #GdkDragContext manages
-    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-    for more information.
+      Connect to `Cancel` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B reason)       The reason the context was cancelled
-      * $(B dragContext) the instance the signal is connected to
-    )
-  */
-  alias CancelCallbackDlg = void delegate(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext);
-
-  /** ditto */
-  alias CancelCallbackFunc = void function(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext);
-
-  /**
-    Connect to Cancel signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The drag and drop operation was cancelled.
+      
+      This signal will only be emitted if the #GdkDragContext manages
+      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+      for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.types.DragCancelReason reason, gdk.drag_context.DragContext dragContext))
+  
+          `reason` The reason the context was cancelled (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCancel(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CancelCallbackDlg) || is(T : CancelCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.types.DragCancelReason)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragContext = getVal!(gdk.drag_context.DragContext)(_paramVals);
-      auto reason = getVal!(gdk.types.DragCancelReason)(&_paramVals[1]);
-      _dClosure.dlg(reason, dragContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -274,40 +295,42 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-      The drag and drop operation was finished, the drag destination
-    finished reading all data. The drag source can now free all
-    miscellaneous data.
-    
-    This signal will only be emitted if the #GdkDragContext manages
-    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-    for more information.
+      Connect to `DndFinished` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B dragContext) the instance the signal is connected to
-    )
-  */
-  alias DndFinishedCallbackDlg = void delegate(gdk.drag_context.DragContext dragContext);
-
-  /** ditto */
-  alias DndFinishedCallbackFunc = void function(gdk.drag_context.DragContext dragContext);
-
-  /**
-    Connect to DndFinished signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The drag and drop operation was finished, the drag destination
+      finished reading all data. The drag source can now free all
+      miscellaneous data.
+      
+      This signal will only be emitted if the #GdkDragContext manages
+      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+      for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.drag_context.DragContext dragContext))
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDndFinished(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DndFinishedCallbackDlg) || is(T : DndFinishedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragContext = getVal!(gdk.drag_context.DragContext)(_paramVals);
-      _dClosure.dlg(dragContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -315,40 +338,47 @@ class DragContext : gobject.object.ObjectG
   }
 
   /**
-      The drag and drop operation was performed on an accepting client.
-    
-    This signal will only be emitted if the #GdkDragContext manages
-    the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
-    for more information.
+      Connect to `DropPerformed` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B time)       the time at which the drop happened.
-      * $(B dragContext) the instance the signal is connected to
-    )
-  */
-  alias DropPerformedCallbackDlg = void delegate(int time, gdk.drag_context.DragContext dragContext);
-
-  /** ditto */
-  alias DropPerformedCallbackFunc = void function(int time, gdk.drag_context.DragContext dragContext);
-
-  /**
-    Connect to DropPerformed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The drag and drop operation was performed on an accepting client.
+      
+      This signal will only be emitted if the #GdkDragContext manages
+      the drag and drop operation. See [gdk.drag_context.DragContext.manageDnd]
+      for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int time, gdk.drag_context.DragContext dragContext))
+  
+          `time` the time at which the drop happened. (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DropPerformedCallbackDlg) || is(T : DropPerformedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.drag_context.DragContext)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dragContext = getVal!(gdk.drag_context.DragContext)(_paramVals);
-      auto time = getVal!(int)(&_paramVals[1]);
-      _dClosure.dlg(time, dragContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

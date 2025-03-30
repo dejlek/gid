@@ -1,3 +1,4 @@
+/// Module for [TestLogBuffer] class
 module glib.test_log_buffer;
 
 import gid.gid;
@@ -10,6 +11,7 @@ class TestLogBuffer
 {
   GTestLogBuffer cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class TestLogBuffer
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -28,8 +31,9 @@ class TestLogBuffer
 
   /**
       Internal function for gtester to decode test log messages, no ABI guarantees provided.
-    Params:
-      bytes = 
+  
+      Params:
+        bytes = 
   */
   void push(ubyte[] bytes)
   {

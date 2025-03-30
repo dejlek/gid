@@ -1,3 +1,4 @@
+/// Module for [MarkAttributes] class
 module gtksource.mark_attributes;
 
 import gdk.rgba;
@@ -16,17 +17,20 @@ import gtksource.types;
 class MarkAttributes : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_attributes_get_type != &gidSymbolNotFound ? gtk_source_mark_attributes_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,7 +43,7 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Creates a new source mark attributes.
-    Returns:     a new source mark attributes.
+      Returns: a new source mark attributes.
   */
   this()
   {
@@ -50,9 +54,10 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Stores background color in background.
-    Params:
-      background =       a #GdkRGBA.
-    Returns:     whether background color for attributes was set.
+  
+      Params:
+        background = a #GdkRGBA.
+      Returns: whether background color for attributes was set.
   */
   bool getBackground(out gdk.rgba.RGBA background)
   {
@@ -65,9 +70,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Gets a #GIcon to be used as a base for rendered icon. Note that the icon can
-    be null if it wasn't set earlier.
-    Returns:     An icon. The icon belongs to attributes and should
-      not be unreffed.
+      be null if it wasn't set earlier.
+      Returns: An icon. The icon belongs to attributes and should
+        not be unreffed.
   */
   gio.icon.Icon getGicon()
   {
@@ -79,9 +84,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Gets a name of an icon to be used as a base for rendered icon. Note that the
-    icon name can be null if it wasn't set earlier.
-    Returns:     An icon name. The string belongs to attributes and
-      should not be freed.
+      icon name can be null if it wasn't set earlier.
+      Returns: An icon name. The string belongs to attributes and
+        should not be freed.
   */
   string getIconName()
   {
@@ -93,9 +98,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Gets a #GdkPixbuf to be used as a base for rendered icon. Note that the
-    pixbuf can be null if it wasn't set earlier.
-    Returns:     A pixbuf. The pixbuf belongs to attributes and
-      should not be unreffed.
+      pixbuf can be null if it wasn't set earlier.
+      Returns: A pixbuf. The pixbuf belongs to attributes and
+        should not be unreffed.
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
@@ -107,12 +112,13 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Queries for a tooltip by emitting
-    a #GtkSourceMarkAttributes::query-tooltip-markup signal. The tooltip may contain
-    a markup.
-    Params:
-      mark =       a #GtkSourceMark.
-    Returns:     A tooltip. The returned string should be freed by
-      using [glib.global.gfree] when done with it.
+      a #GtkSourceMarkAttributes::query-tooltip-markup signal. The tooltip may contain
+      a markup.
+  
+      Params:
+        mark = a #GtkSourceMark.
+      Returns: A tooltip. The returned string should be freed by
+        using [glib.global.gfree] when done with it.
   */
   string getTooltipMarkup(gtksource.mark.Mark mark)
   {
@@ -124,12 +130,13 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Queries for a tooltip by emitting
-    a #GtkSourceMarkAttributes::query-tooltip-text signal. The tooltip is a plain
-    text.
-    Params:
-      mark =       a #GtkSourceMark.
-    Returns:     A tooltip. The returned string should be freed by
-      using [glib.global.gfree] when done with it.
+      a #GtkSourceMarkAttributes::query-tooltip-text signal. The tooltip is a plain
+      text.
+  
+      Params:
+        mark = a #GtkSourceMark.
+      Returns: A tooltip. The returned string should be freed by
+        using [glib.global.gfree] when done with it.
   */
   string getTooltipText(gtksource.mark.Mark mark)
   {
@@ -141,14 +148,15 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Renders an icon of given size. The base of the icon is set by the last call
-    to one of: [gtksource.mark_attributes.MarkAttributes.setPixbuf],
-    [gtksource.mark_attributes.MarkAttributes.setGicon] or
-    [gtksource.mark_attributes.MarkAttributes.setIconName]. size cannot be lower than 1.
-    Params:
-      widget =       widget of which style settings may be used.
-      size =       size of the rendered icon.
-    Returns:     A rendered pixbuf. The pixbuf belongs to attributes
-      and should not be unreffed.
+      to one of: [gtksource.mark_attributes.MarkAttributes.setPixbuf],
+      [gtksource.mark_attributes.MarkAttributes.setGicon] or
+      [gtksource.mark_attributes.MarkAttributes.setIconName]. size cannot be lower than 1.
+  
+      Params:
+        widget = widget of which style settings may be used.
+        size = size of the rendered icon.
+      Returns: A rendered pixbuf. The pixbuf belongs to attributes
+        and should not be unreffed.
   */
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.widget.Widget widget, int size)
   {
@@ -160,8 +168,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Sets background color to the one given in background.
-    Params:
-      background =       a #GdkRGBA.
+  
+      Params:
+        background = a #GdkRGBA.
   */
   void setBackground(gdk.rgba.RGBA background)
   {
@@ -170,8 +179,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Sets an icon to be used as a base for rendered icon.
-    Params:
-      gicon =       a #GIcon to be used.
+  
+      Params:
+        gicon = a #GIcon to be used.
   */
   void setGicon(gio.icon.Icon gicon)
   {
@@ -180,8 +190,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Sets a name of an icon to be used as a base for rendered icon.
-    Params:
-      iconName =       name of an icon to be used.
+  
+      Params:
+        iconName = name of an icon to be used.
   */
   void setIconName(string iconName)
   {
@@ -191,8 +202,9 @@ class MarkAttributes : gobject.object.ObjectG
 
   /**
       Sets a pixbuf to be used as a base for rendered icon.
-    Params:
-      pixbuf =       a #GdkPixbuf to be used.
+  
+      Params:
+        pixbuf = a #GdkPixbuf to be used.
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
@@ -200,39 +212,46 @@ class MarkAttributes : gobject.object.ObjectG
   }
 
   /**
-      The code should connect to this signal to provide a tooltip for given
-    mark. The tooltip can contain a markup.
+      Connect to `QueryTooltipMarkup` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B mark)       The #GtkSourceMark.
-      * $(B markAttributes) the instance the signal is connected to
-    )
-    Returns:     A tooltip. The string should be freed with
-      [glib.global.gfree] when done with it.
-  */
-  alias QueryTooltipMarkupCallbackDlg = string delegate(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
-
-  /** ditto */
-  alias QueryTooltipMarkupCallbackFunc = string function(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
-
-  /**
-    Connect to QueryTooltipMarkup signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The code should connect to this signal to provide a tooltip for given
+      mark. The tooltip can contain a markup.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+  
+          `mark` The #GtkSourceMark. (optional)
+  
+          `markAttributes` the instance the signal is connected to (optional)
+  
+          `Returns` A tooltip. The string should be freed with
+          [glib.global.gfree] when done with it.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectQueryTooltipMarkup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : QueryTooltipMarkupCallbackDlg) || is(T : QueryTooltipMarkupCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == string)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto markAttributes = getVal!(gtksource.mark_attributes.MarkAttributes)(_paramVals);
-      auto mark = getVal!(gtksource.mark.Mark)(&_paramVals[1]);
-      auto _retval = _dClosure.dlg(mark, markAttributes);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!string(_returnValue, _retval);
     }
 
@@ -241,39 +260,46 @@ class MarkAttributes : gobject.object.ObjectG
   }
 
   /**
-      The code should connect to this signal to provide a tooltip for given
-    mark. The tooltip should be just a plain text.
+      Connect to `QueryTooltipText` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B mark)       The #GtkSourceMark.
-      * $(B markAttributes) the instance the signal is connected to
-    )
-    Returns:     A tooltip. The string should be freed with
-      [glib.global.gfree] when done with it.
-  */
-  alias QueryTooltipTextCallbackDlg = string delegate(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
-
-  /** ditto */
-  alias QueryTooltipTextCallbackFunc = string function(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes);
-
-  /**
-    Connect to QueryTooltipText signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The code should connect to this signal to provide a tooltip for given
+      mark. The tooltip should be just a plain text.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D string callback(gtksource.mark.Mark mark, gtksource.mark_attributes.MarkAttributes markAttributes))
+  
+          `mark` The #GtkSourceMark. (optional)
+  
+          `markAttributes` the instance the signal is connected to (optional)
+  
+          `Returns` A tooltip. The string should be freed with
+          [glib.global.gfree] when done with it.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectQueryTooltipText(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : QueryTooltipTextCallbackDlg) || is(T : QueryTooltipTextCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == string)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.mark.Mark)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.mark_attributes.MarkAttributes)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto markAttributes = getVal!(gtksource.mark_attributes.MarkAttributes)(_paramVals);
-      auto mark = getVal!(gtksource.mark.Mark)(&_paramVals[1]);
-      auto _retval = _dClosure.dlg(mark, markAttributes);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!string(_returnValue, _retval);
     }
 

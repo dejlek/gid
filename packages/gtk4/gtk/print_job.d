@@ -1,3 +1,4 @@
+/// Module for [PrintJob] class
 module gtk.print_job;
 
 import cairo.surface;
@@ -14,30 +15,33 @@ import gtk.types;
 
 /**
     A [gtk.print_job.PrintJob] object represents a job that is sent to a printer.
-  
-  You only need to deal directly with print jobs if you use the
-  non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
-  
-  Use [gtk.print_job.PrintJob.getSurface] to obtain the cairo surface
-  onto which the pages must be drawn. Use [gtk.print_job.PrintJob.send]
-  to send the finished job to the printer. If you don’t use cairo
-  [gtk.print_job.PrintJob] also supports printing of manually generated PostScript,
-  via [gtk.print_job.PrintJob.setSourceFile].
+    
+    You only need to deal directly with print jobs if you use the
+    non-portable [gtk.print_unix_dialog.PrintUnixDialog] API.
+    
+    Use [gtk.print_job.PrintJob.getSurface] to obtain the cairo surface
+    onto which the pages must be drawn. Use [gtk.print_job.PrintJob.send]
+    to send the finished job to the printer. If you don’t use cairo
+    [gtk.print_job.PrintJob] also supports printing of manually generated PostScript,
+    via [gtk.print_job.PrintJob.setSourceFile].
 */
 class PrintJob : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_job_get_type != &gidSymbolNotFound ? gtk_print_job_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,12 +54,13 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Creates a new [gtk.print_job.PrintJob].
-    Params:
-      title =       the job title
-      printer =       a [gtk.printer.Printer]
-      settings =       a [gtk.print_settings.PrintSettings]
-      pageSetup =       a [gtk.page_setup.PageSetup]
-    Returns:     a new [gtk.print_job.PrintJob]
+  
+      Params:
+        title = the job title
+        printer = a [gtk.printer.Printer]
+        settings = a [gtk.print_settings.PrintSettings]
+        pageSetup = a [gtk.page_setup.PageSetup]
+      Returns: a new [gtk.print_job.PrintJob]
   */
   this(string title, gtk.printer.Printer printer, gtk.print_settings.PrintSettings settings, gtk.page_setup.PageSetup pageSetup)
   {
@@ -67,7 +72,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets whether this job is printed collated.
-    Returns:     whether the job is printed collated
+      Returns: whether the job is printed collated
   */
   bool getCollate()
   {
@@ -78,7 +83,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the n-up setting for this job.
-    Returns:     the n-up setting
+      Returns: the n-up setting
   */
   uint getNUp()
   {
@@ -89,7 +94,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the n-up layout setting for this job.
-    Returns:     the n-up layout
+      Returns: the n-up layout
   */
   gtk.types.NumberUpLayout getNUpLayout()
   {
@@ -101,7 +106,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the number of copies of this job.
-    Returns:     the number of copies
+      Returns: the number of copies
   */
   int getNumCopies()
   {
@@ -112,8 +117,8 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the page ranges for this job.
-    Returns:     a pointer to an
-        array of [gtk.types.PageRange] structs
+      Returns: a pointer to an
+          array of [gtk.types.PageRange] structs
   */
   gtk.types.PageRange[] getPageRanges()
   {
@@ -133,7 +138,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the [gtk.types.PageSet] setting for this job.
-    Returns:     the [gtk.types.PageSet] setting
+      Returns: the [gtk.types.PageSet] setting
   */
   gtk.types.PageSet getPageSet()
   {
@@ -145,7 +150,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the [gtk.types.PrintPages] setting for this job.
-    Returns:     the [gtk.types.PrintPages] setting
+      Returns: the [gtk.types.PrintPages] setting
   */
   gtk.types.PrintPages getPages()
   {
@@ -157,7 +162,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the [gtk.printer.Printer] of the print job.
-    Returns:     the printer of job
+      Returns: the printer of job
   */
   gtk.printer.Printer getPrinter()
   {
@@ -169,7 +174,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets whether this job is printed reversed.
-    Returns:     whether the job is printed reversed.
+      Returns: whether the job is printed reversed.
   */
   bool getReverse()
   {
@@ -180,7 +185,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets whether the job is printed rotated.
-    Returns:     whether the job is printed rotated
+      Returns: whether the job is printed rotated
   */
   bool getRotate()
   {
@@ -191,7 +196,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the scale for this job.
-    Returns:     the scale
+      Returns: the scale
   */
   double getScale()
   {
@@ -202,7 +207,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the [gtk.print_settings.PrintSettings] of the print job.
-    Returns:     the settings of job
+      Returns: the settings of job
   */
   gtk.print_settings.PrintSettings getSettings()
   {
@@ -214,7 +219,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the status of the print job.
-    Returns:     the status of job
+      Returns: the status of job
   */
   gtk.types.PrintStatus getStatus()
   {
@@ -226,8 +231,8 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets a cairo surface onto which the pages of
-    the print job should be rendered.
-    Returns:     the cairo surface of job
+      the print job should be rendered.
+      Returns: the cairo surface of job
   */
   cairo.surface.Surface getSurface()
   {
@@ -242,7 +247,7 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Gets the job title.
-    Returns:     the title of job
+      Returns: the title of job
   */
   string getTitle()
   {
@@ -254,9 +259,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Returns whether jobs will be tracked after printing.
-    
-    For details, see [gtk.print_job.PrintJob.setTrackPrintStatus].
-    Returns:     true if print job status will be reported after printing
+      
+      For details, see [gtk.print_job.PrintJob.setTrackPrintStatus].
+      Returns: true if print job status will be reported after printing
   */
   bool getTrackPrintStatus()
   {
@@ -267,8 +272,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sends the print job off to the printer.
-    Params:
-      callback =       function to call when the job completes or an error occurs
+  
+      Params:
+        callback = function to call when the job completes or an error occurs
   */
   void send(gtk.types.PrintJobCompleteFunc callback)
   {
@@ -287,8 +293,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets whether this job is printed collated.
-    Params:
-      collate =       whether the job is printed collated
+  
+      Params:
+        collate = whether the job is printed collated
   */
   void setCollate(bool collate)
   {
@@ -297,8 +304,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the n-up setting for this job.
-    Params:
-      nUp =       the n-up value
+  
+      Params:
+        nUp = the n-up value
   */
   void setNUp(uint nUp)
   {
@@ -307,8 +315,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the n-up layout setting for this job.
-    Params:
-      layout =       the n-up layout setting
+  
+      Params:
+        layout = the n-up layout setting
   */
   void setNUpLayout(gtk.types.NumberUpLayout layout)
   {
@@ -317,8 +326,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the number of copies for this job.
-    Params:
-      numCopies =       the number of copies
+  
+      Params:
+        numCopies = the number of copies
   */
   void setNumCopies(int numCopies)
   {
@@ -327,8 +337,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the [gtk.types.PageSet] setting for this job.
-    Params:
-      pageSet =       a [gtk.types.PageSet] setting
+  
+      Params:
+        pageSet = a [gtk.types.PageSet] setting
   */
   void setPageSet(gtk.types.PageSet pageSet)
   {
@@ -337,8 +348,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the [gtk.types.PrintPages] setting for this job.
-    Params:
-      pages =       the [gtk.types.PrintPages] setting
+  
+      Params:
+        pages = the [gtk.types.PrintPages] setting
   */
   void setPages(gtk.types.PrintPages pages)
   {
@@ -347,8 +359,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets whether this job is printed reversed.
-    Params:
-      reverse =       whether the job is printed reversed
+  
+      Params:
+        reverse = whether the job is printed reversed
   */
   void setReverse(bool reverse)
   {
@@ -357,8 +370,9 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets whether this job is printed rotated.
-    Params:
-      rotate =       whether to print rotated
+  
+      Params:
+        rotate = whether to print rotated
   */
   void setRotate(bool rotate)
   {
@@ -367,10 +381,11 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Sets the scale for this job.
-    
-    1.0 means unscaled.
-    Params:
-      scale =       the scale
+      
+      1.0 means unscaled.
+  
+      Params:
+        scale = the scale
   */
   void setScale(double scale)
   {
@@ -379,19 +394,20 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Make the [gtk.print_job.PrintJob] send an existing document to the
-    printing system.
-    
-    The file can be in any format understood by the platforms
-    printing system (typically PostScript, but on many platforms
-    PDF may work too). See [gtk.printer.Printer.acceptsPdf] and
-    [gtk.printer.Printer.acceptsPs].
-    
-    This is similar to [gtk.print_job.PrintJob.setSourceFile],
-    but takes expects an open file descriptor for the file,
-    instead of a filename.
-    Params:
-      fd =       a file descriptor
-    Returns:     false if an error occurred
+      printing system.
+      
+      The file can be in any format understood by the platforms
+      printing system (typically PostScript, but on many platforms
+      PDF may work too). See [gtk.printer.Printer.acceptsPdf] and
+      [gtk.printer.Printer.acceptsPs].
+      
+      This is similar to [gtk.print_job.PrintJob.setSourceFile],
+      but takes expects an open file descriptor for the file,
+      instead of a filename.
+  
+      Params:
+        fd = a file descriptor
+      Returns: false if an error occurred
   */
   bool setSourceFd(int fd)
   {
@@ -405,15 +421,16 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       Make the [gtk.print_job.PrintJob] send an existing document to the
-    printing system.
-    
-    The file can be in any format understood by the platforms
-    printing system (typically PostScript, but on many platforms
-    PDF may work too). See [gtk.printer.Printer.acceptsPdf] and
-    [gtk.printer.Printer.acceptsPs].
-    Params:
-      filename =       the file to be printed
-    Returns:     false if an error occurred
+      printing system.
+      
+      The file can be in any format understood by the platforms
+      printing system (typically PostScript, but on many platforms
+      PDF may work too). See [gtk.printer.Printer.acceptsPdf] and
+      [gtk.printer.Printer.acceptsPs].
+  
+      Params:
+        filename = the file to be printed
+      Returns: false if an error occurred
   */
   bool setSourceFile(string filename)
   {
@@ -428,15 +445,16 @@ class PrintJob : gobject.object.ObjectG
 
   /**
       If track_status is true, the print job will try to continue report
-    on the status of the print job in the printer queues and printer.
-    
-    This can allow your application to show things like “out of paper”
-    issues, and when the print job actually reaches the printer.
-    
-    This function is often implemented using some form of polling,
-    so it should not be enabled unless needed.
-    Params:
-      trackStatus =       true to track status after printing
+      on the status of the print job in the printer queues and printer.
+      
+      This can allow your application to show things like “out of paper”
+      issues, and when the print job actually reaches the printer.
+      
+      This function is often implemented using some form of polling,
+      so it should not be enabled unless needed.
+  
+      Params:
+        trackStatus = true to track status after printing
   */
   void setTrackPrintStatus(bool trackStatus)
   {
@@ -444,37 +462,39 @@ class PrintJob : gobject.object.ObjectG
   }
 
   /**
-      Emitted when the status of a job changes.
-    
-    The signal handler can use [gtk.print_job.PrintJob.getStatus]
-    to obtain the new status.
+      Connect to `StatusChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B printJob) the instance the signal is connected to
-    )
-  */
-  alias StatusChangedCallbackDlg = void delegate(gtk.print_job.PrintJob printJob);
-
-  /** ditto */
-  alias StatusChangedCallbackFunc = void function(gtk.print_job.PrintJob printJob);
-
-  /**
-    Connect to StatusChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the status of a job changes.
+      
+      The signal handler can use [gtk.print_job.PrintJob.getStatus]
+      to obtain the new status.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.print_job.PrintJob printJob))
+  
+          `printJob` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectStatusChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : StatusChangedCallbackDlg) || is(T : StatusChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_job.PrintJob)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printJob = getVal!(gtk.print_job.PrintJob)(_paramVals);
-      _dClosure.dlg(printJob);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

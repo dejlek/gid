@@ -1,3 +1,4 @@
+/// Module for [GlyphItemIter] class
 module pango.glyph_item_iter;
 
 import gid.gid;
@@ -9,70 +10,75 @@ import pango.types;
 
 /**
     A [pango.glyph_item_iter.GlyphItemIter] is an iterator over the clusters in a
-  [pango.glyph_item.GlyphItem].
-  
-  The *forward direction* of the iterator is the logical direction of text.
-  That is, with increasing @start_index and @start_char values. If @glyph_item
-  is right-to-left (that is, if `glyph_item->item->analysis.level` is odd),
-  then @start_glyph decreases as the iterator moves forward.  Moreover,
-  in right-to-left cases, @start_glyph is greater than @end_glyph.
-  
-  An iterator should be initialized using either
-  [pango.glyph_item_iter.GlyphItemIter.initStart] or
-  [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
-  respectively, and walked over using any desired mixture of
-  [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
-  [pango.glyph_item_iter.GlyphItemIter.prevCluster].
-  
-  A common idiom for doing a forward iteration over the clusters is:
-  
-  ```
-  PangoGlyphItemIter cluster_iter;
-  gboolean have_cluster;
-  
-  for (have_cluster = pango_glyph_item_iter_init_start (&cluster_iter,
-                                                        glyph_item, text);
-       have_cluster;
-       have_cluster = pango_glyph_item_iter_next_cluster (&cluster_iter))
-  {
-    ...
-  }
-  ```
-  
-  Note that @text is the start of the text for layout, which is then
-  indexed by `glyph_item->item->offset` to get to the text of @glyph_item.
-  The @start_index and @end_index values can directly index into @text. The
-  @start_glyph, @end_glyph, @start_char, and @end_char values however are
-  zero-based for the @glyph_item.  For each cluster, the item pointed at by
-  the start variables is included in the cluster while the one pointed at by
-  end variables is not.
-  
-  None of the members of a [pango.glyph_item_iter.GlyphItemIter] should be modified manually.
+    [pango.glyph_item.GlyphItem].
+    
+    The *forward direction* of the iterator is the logical direction of text.
+    That is, with increasing @start_index and @start_char values. If @glyph_item
+    is right-to-left (that is, if `glyph_item->item->analysis.level` is odd),
+    then @start_glyph decreases as the iterator moves forward.  Moreover,
+    in right-to-left cases, @start_glyph is greater than @end_glyph.
+    
+    An iterator should be initialized using either
+    [pango.glyph_item_iter.GlyphItemIter.initStart] or
+    [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
+    respectively, and walked over using any desired mixture of
+    [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
+    [pango.glyph_item_iter.GlyphItemIter.prevCluster].
+    
+    A common idiom for doing a forward iteration over the clusters is:
+    
+    ```
+    PangoGlyphItemIter cluster_iter;
+    gboolean have_cluster;
+    
+    for (have_cluster = pango_glyph_item_iter_init_start (&cluster_iter,
+                                                          glyph_item, text);
+         have_cluster;
+         have_cluster = pango_glyph_item_iter_next_cluster (&cluster_iter))
+    {
+      ...
+    }
+    ```
+    
+    Note that @text is the start of the text for layout, which is then
+    indexed by `glyph_item->item->offset` to get to the text of @glyph_item.
+    The @start_index and @end_index values can directly index into @text. The
+    @start_glyph, @end_glyph, @start_char, and @end_char values however are
+    zero-based for the @glyph_item.  For each cluster, the item pointed at by
+    the start variables is included in the cluster while the one pointed at by
+    end variables is not.
+    
+    None of the members of a [pango.glyph_item_iter.GlyphItemIter] should be modified manually.
 */
 class GlyphItemIter : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(PangoGlyphItemIter.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_iter_get_type != &gidSymbolNotFound ? pango_glyph_item_iter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -167,7 +173,7 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   /**
       Make a shallow copy of an existing [pango.glyph_item_iter.GlyphItemIter] structure.
-    Returns:     the newly allocated [pango.glyph_item_iter.GlyphItemIter]
+      Returns: the newly allocated [pango.glyph_item_iter.GlyphItemIter]
   */
   pango.glyph_item_iter.GlyphItemIter copy()
   {
@@ -179,13 +185,14 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   /**
       Initializes a [pango.glyph_item_iter.GlyphItemIter] structure to point to the
-    last cluster in a glyph item.
-    
-    See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
-    Params:
-      glyphItem =       the glyph item to iterate over
-      text =       text corresponding to the glyph item
-    Returns:     false if there are no clusters in the glyph item
+      last cluster in a glyph item.
+      
+      See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
+  
+      Params:
+        glyphItem = the glyph item to iterate over
+        text = text corresponding to the glyph item
+      Returns: false if there are no clusters in the glyph item
   */
   bool initEnd(pango.glyph_item.GlyphItem glyphItem, string text)
   {
@@ -197,13 +204,14 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   /**
       Initializes a [pango.glyph_item_iter.GlyphItemIter] structure to point to the
-    first cluster in a glyph item.
-    
-    See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
-    Params:
-      glyphItem =       the glyph item to iterate over
-      text =       text corresponding to the glyph item
-    Returns:     false if there are no clusters in the glyph item
+      first cluster in a glyph item.
+      
+      See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
+  
+      Params:
+        glyphItem = the glyph item to iterate over
+        text = text corresponding to the glyph item
+      Returns: false if there are no clusters in the glyph item
   */
   bool initStart(pango.glyph_item.GlyphItem glyphItem, string text)
   {
@@ -215,10 +223,10 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   /**
       Advances the iterator to the next cluster in the glyph item.
-    
-    See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
-    Returns:     true if the iterator was advanced,
-        false if we were already on the  last cluster.
+      
+      See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
+      Returns: true if the iterator was advanced,
+          false if we were already on the  last cluster.
   */
   bool nextCluster()
   {
@@ -229,9 +237,9 @@ class GlyphItemIter : gobject.boxed.Boxed
 
   /**
       Moves the iterator to the preceding cluster in the glyph item.
-    See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
-    Returns:     true if the iterator was moved,
-        false if we were already on the first cluster.
+      See [pango.glyph_item_iter.GlyphItemIter] for details of cluster orders.
+      Returns: true if the iterator was moved,
+          false if we were already on the first cluster.
   */
   bool prevCluster()
   {

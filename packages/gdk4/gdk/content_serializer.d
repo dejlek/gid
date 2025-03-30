@@ -1,3 +1,4 @@
+/// Module for [ContentSerializer] class
 module gdk.content_serializer;
 
 import gdk.c.functions;
@@ -16,32 +17,35 @@ import gobject.value;
 
 /**
     A [gdk.content_serializer.ContentSerializer] is used to serialize content for
-  inter-application data transfers.
-  
-  The [gdk.content_serializer.ContentSerializer] transforms an object that is identified
-  by a GType into a serialized form (i.e. a byte stream) that is
-  identified by a mime type.
-  
-  GTK provides serializers and deserializers for common data types
-  such as text, colors, images or file lists. To register your own
-  serialization functions, use `func@Gdk.content_register_serializer`.
-  
-  Also see [gdk.content_deserializer.ContentDeserializer].
+    inter-application data transfers.
+    
+    The [gdk.content_serializer.ContentSerializer] transforms an object that is identified
+    by a GType into a serialized form (i.e. a byte stream) that is
+    identified by a mime type.
+    
+    GTK provides serializers and deserializers for common data types
+    such as text, colors, images or file lists. To register your own
+    serialization functions, use `func@Gdk.content_register_serializer`.
+    
+    Also see [gdk.content_deserializer.ContentDeserializer].
 */
 class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_serializer_get_type != &gidSymbolNotFound ? gdk_content_serializer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,9 +60,9 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the cancellable for the current operation.
-    
-    This is the [gio.cancellable.Cancellable] that was passed to `funccontent_serialize_async`.
-    Returns:     the cancellable for the current operation
+      
+      This is the [gio.cancellable.Cancellable] that was passed to `funccontent_serialize_async`.
+      Returns: the cancellable for the current operation
   */
   gio.cancellable.Cancellable getCancellable()
   {
@@ -70,7 +74,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] to of the object to serialize.
-    Returns:     the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] for the current operation
+      Returns: the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] for the current operation
   */
   gobject.types.GType getGtype()
   {
@@ -81,7 +85,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the mime type to serialize to.
-    Returns:     the mime type for the current operation
+      Returns: the mime type for the current operation
   */
   string getMimeType()
   {
@@ -93,9 +97,9 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the output stream for the current operation.
-    
-    This is the stream that was passed to `funccontent_serialize_async`.
-    Returns:     the output stream for the current operation
+      
+      This is the stream that was passed to `funccontent_serialize_async`.
+      Returns: the output stream for the current operation
   */
   gio.output_stream.OutputStream getOutputStream()
   {
@@ -107,9 +111,9 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the I/O priority for the current operation.
-    
-    This is the priority that was passed to `funccontent_serialize_async`.
-    Returns:     the I/O priority for the current operation
+      
+      This is the priority that was passed to `funccontent_serialize_async`.
+      Returns: the I/O priority for the current operation
   */
   int getPriority()
   {
@@ -120,9 +124,9 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the data that was associated with the current operation.
-    
-    See [gdk.content_serializer.ContentSerializer.setTaskData].
-    Returns:     the task data for serializer
+      
+      See [gdk.content_serializer.ContentSerializer.setTaskData].
+      Returns: the task data for serializer
   */
   void* getTaskData()
   {
@@ -132,7 +136,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the user data that was passed when the serializer was registered.
-    Returns:     the user data for this serializer
+      Returns: the user data for this serializer
   */
   void* getUserData()
   {
@@ -142,7 +146,7 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Gets the [gobject.value.Value] to read the object to serialize from.
-    Returns:     the [gobject.value.Value] for the current operation
+      Returns: the [gobject.value.Value] for the current operation
   */
   gobject.value.Value getValue()
   {
@@ -154,10 +158,11 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Indicate that the serialization has ended with an error.
-    
-    This function consumes error.
-    Params:
-      error =       a [glib.error.ErrorG]
+      
+      This function consumes error.
+  
+      Params:
+        error = a [glib.error.ErrorG]
   */
   void returnError(glib.error.ErrorG error)
   {
@@ -174,9 +179,10 @@ class ContentSerializer : gobject.object.ObjectG, gio.async_result.AsyncResult
 
   /**
       Associate data with the current serialization operation.
-    Params:
-      data =       data to associate with this operation
-      notify =       destroy notify for data
+  
+      Params:
+        data = data to associate with this operation
+        notify = destroy notify for data
   */
   void setTaskData(void* data, glib.types.DestroyNotify notify)
   {

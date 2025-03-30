@@ -1,3 +1,4 @@
+/// Module for [Variation] class
 module harfbuzz.variation;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import harfbuzz.types;
 
 /**
     Data type for holding variation data. Registered OpenType
-  variation-axis tags are listed in
-  [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
+    variation-axis tags are listed in
+    [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 */
 class Variation
 {
   hb_variation_t cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class Variation
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

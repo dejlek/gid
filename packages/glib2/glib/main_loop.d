@@ -1,3 +1,4 @@
+/// Module for [MainLoop] class
 module glib.main_loop;
 
 import gid.gid;
@@ -9,27 +10,31 @@ import gobject.boxed;
 
 /**
     The [glib.main_loop.MainLoop] struct is an opaque data type
-  representing the main event loop of a GLib or GTK application.
+    representing the main event loop of a GLib or GTK application.
 */
 class MainLoop : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_main_loop_get_type != &gidSymbolNotFound ? g_main_loop_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,13 +47,14 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Creates a new #GMainLoop structure.
-    Params:
-      context =       a #GMainContext  (if null, the global-default
-          main context will be used).
-      isRunning =       set to true to indicate that the loop is running. This
-        is not very important since calling [glib.main_loop.MainLoop.run] will set this to
-        true anyway.
-    Returns:     a new #GMainLoop.
+  
+      Params:
+        context = a #GMainContext  (if null, the global-default
+            main context will be used).
+        isRunning = set to true to indicate that the loop is running. This
+          is not very important since calling [glib.main_loop.MainLoop.run] will set this to
+          true anyway.
+      Returns: a new #GMainLoop.
   */
   this(glib.main_context.MainContext context, bool isRunning)
   {
@@ -59,7 +65,7 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Returns the #GMainContext of loop.
-    Returns:     the #GMainContext of loop
+      Returns: the #GMainContext of loop
   */
   glib.main_context.MainContext getContext()
   {
@@ -71,7 +77,7 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Checks to see if the main loop is currently being run via [glib.main_loop.MainLoop.run].
-    Returns:     true if the mainloop is currently being run.
+      Returns: true if the mainloop is currently being run.
   */
   bool isRunning()
   {
@@ -82,10 +88,10 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Stops a #GMainLoop from running. Any calls to [glib.main_loop.MainLoop.run]
-    for the loop will return.
-    
-    Note that sources that have already been dispatched when
-    [glib.main_loop.MainLoop.quit] is called will still be executed.
+      for the loop will return.
+      
+      Note that sources that have already been dispatched when
+      [glib.main_loop.MainLoop.quit] is called will still be executed.
   */
   void quit()
   {
@@ -94,9 +100,9 @@ class MainLoop : gobject.boxed.Boxed
 
   /**
       Runs a main loop until [glib.main_loop.MainLoop.quit] is called on the loop.
-    If this is called for the thread of the loop's #GMainContext,
-    it will process events from the loop, otherwise it will
-    simply wait.
+      If this is called for the thread of the loop's #GMainContext,
+      it will process events from the loop, otherwise it will
+      simply wait.
   */
   void run()
   {

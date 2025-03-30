@@ -1,3 +1,4 @@
+/// D types for gid library
 module gid.types;
 
 import gid.c.functions;

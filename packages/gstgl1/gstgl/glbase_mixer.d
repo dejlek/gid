@@ -1,3 +1,4 @@
+/// Module for [GLBaseMixer] class
 module gstgl.glbase_mixer;
 
 import gid.gid;
@@ -10,23 +11,26 @@ import gstvideo.video_aggregator;
 
 /**
     #GstGLBaseMixer handles the nitty gritty details of retrieving an OpenGL
-  context.  It provides some virtual methods to know when the OpenGL context
-  is available and is not available within this element.
+    context.  It provides some virtual methods to know when the OpenGL context
+    is available and is not available within this element.
 */
 class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_mixer_get_type != &gidSymbolNotFound ? gst_gl_base_mixer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [PrintOperationPreview] interface
 module gtk.print_operation_preview;
 
 public import gtk.print_operation_preview_iface_proxy;
@@ -13,6 +14,7 @@ import gtk.types;
 interface PrintOperationPreview
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -21,89 +23,82 @@ interface PrintOperationPreview
 
   /**
       Ends a preview.
-    
-    This function must be called to finish a custom print preview.
+      
+      This function must be called to finish a custom print preview.
   */
   void endPreview();
 
   /**
       Returns whether the given page is included in the set of pages that
-    have been selected for printing.
-    Params:
-      pageNr =       a page number
-    Returns:     true if the page has been selected for printing
+      have been selected for printing.
+  
+      Params:
+        pageNr = a page number
+      Returns: true if the page has been selected for printing
   */
   bool isSelected(int pageNr);
 
   /**
       Renders a page to the preview, using the print context that
-    was passed to the #GtkPrintOperation::preview handler together
-    with preview.
-    
-    A custom iprint preview should use this function in its ::expose
-    handler to render the currently selected page.
-    
-    Note that this function requires a suitable cairo context to
-    be associated with the print context.
-    Params:
-      pageNr =       the page to render
+      was passed to the #GtkPrintOperation::preview handler together
+      with preview.
+      
+      A custom iprint preview should use this function in its ::expose
+      handler to render the currently selected page.
+      
+      Note that this function requires a suitable cairo context to
+      be associated with the print context.
+  
+      Params:
+        pageNr = the page to render
   */
   void renderPage(int pageNr);
 
   /**
+      Connect to `GotPageSize` signal.
+  
       The ::got-page-size signal is emitted once for each page
-    that gets rendered to the preview.
-    
-    A handler for this signal should update the context
-    according to page_setup and set up a suitable cairo
-    context, using [gtk.print_context.PrintContext.setCairoContext].
+      that gets rendered to the preview.
+      
+      A handler for this signal should update the context
+      according to page_setup and set up a suitable cairo
+      context, using [gtk.print_context.PrintContext.setCairoContext].
   
-    ## Parameters
-    $(LIST
-      * $(B context)       the current #GtkPrintContext
-      * $(B pageSetup)       the #GtkPageSetup for the current page
-      * $(B printOperationPreview) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+  
+          `context` the current #GtkPrintContext (optional)
+  
+          `pageSetup` the #GtkPageSetup for the current page (optional)
+  
+          `printOperationPreview` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias GotPageSizeCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /** ditto */
-  alias GotPageSizeCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
+  ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to GotPageSize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : GotPageSizeCallbackDlg) || is(T : GotPageSizeCallbackFunc));
-
-  /**
+      Connect to `Ready` signal.
+  
       The ::ready signal gets emitted once per preview operation,
-    before the first page is rendered.
-    
-    A handler for this signal can be used for setup tasks.
+      before the first page is rendered.
+      
+      A handler for this signal can be used for setup tasks.
   
-    ## Parameters
-    $(LIST
-      * $(B context)       the current #GtkPrintContext
-      * $(B printOperationPreview) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+  
+          `context` the current #GtkPrintContext (optional)
+  
+          `printOperationPreview` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias ReadyCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /** ditto */
-  alias ReadyCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /**
-    Connect to Ready signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectReady(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ReadyCallbackDlg) || is(T : ReadyCallbackFunc));
-  }
+  ulong connectReady(T)(T callback, Flag!"After" after = No.After);
+}

@@ -1,3 +1,4 @@
+/// Module for [EnumValue] class
 module gobject.enum_value;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gobject.types;
 
 /**
     A structure which contains a single enum value, its name, and its
-  nickname.
+    nickname.
 */
 class EnumValue
 {
   GEnumValue cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EnumValue
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [GutterRendererText] class
 module gtksource.gutter_renderer_text;
 
 import gid.gid;
@@ -10,17 +11,20 @@ import gtksource.types;
 class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_text_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_text_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -33,7 +37,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Create a new #GtkSourceGutterRendererText.
-    Returns:     A #GtkSourceGutterRenderer
+      Returns: A #GtkSourceGutterRenderer
   */
   this()
   {
@@ -44,13 +48,14 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Measures the text provided using the pango layout used by the
-    #GtkSourceGutterRendererText.
-    Params:
-      text =       the text to measure.
-      width =       location to store the width of the text in pixels,
-          or null.
-      height =       location to store the height of the text in
-          pixels, or null.
+      #GtkSourceGutterRendererText.
+  
+      Params:
+        text = the text to measure.
+        width = location to store the width of the text in pixels,
+            or null.
+        height = location to store the height of the text in
+            pixels, or null.
   */
   void measure(string text, out int width, out int height)
   {
@@ -60,13 +65,14 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Measures the pango markup provided using the pango layout used by the
-    #GtkSourceGutterRendererText.
-    Params:
-      markup =       the pango markup to measure.
-      width =       location to store the width of the text in pixels,
-          or null.
-      height =       location to store the height of the text in
-          pixels, or null.
+      #GtkSourceGutterRendererText.
+  
+      Params:
+        markup = the pango markup to measure.
+        width = location to store the width of the text in pixels,
+            or null.
+        height = location to store the height of the text in
+            pixels, or null.
   */
   void measureMarkup(string markup, out int width, out int height)
   {

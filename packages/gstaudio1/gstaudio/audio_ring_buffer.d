@@ -1,3 +1,4 @@
+/// Module for [AudioRingBuffer] class
 module gstaudio.audio_ring_buffer;
 
 import gid.gid;
@@ -12,28 +13,31 @@ import gstaudio.types;
 
 /**
     This object is the base class for audio ringbuffers used by the base
-  audio source and sink classes.
-  
-  The ringbuffer abstracts a circular buffer of data. One reader and
-  one writer can operate on the data from different threads in a lockfree
-  manner. The base class is sufficiently flexible to be used as an
-  abstraction for DMA based ringbuffers as well as a pure software
-  implementations.
+    audio source and sink classes.
+    
+    The ringbuffer abstracts a circular buffer of data. One reader and
+    one writer can operate on the data from different threads in a lockfree
+    manner. The base class is sufficiently flexible to be used as an
+    abstraction for DMA based ringbuffers as well as a pure software
+    implementations.
 */
 class AudioRingBuffer : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_ring_buffer_get_type != &gidSymbolNotFound ? gst_audio_ring_buffer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,8 +50,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Print debug info about the buffer sized in spec to the debug log.
-    Params:
-      spec =       the spec to debug
+  
+      Params:
+        spec = the spec to debug
   */
   static void debugSpecBuff(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec)
   {
@@ -56,8 +61,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Print debug info about the parsed caps in spec to the debug log.
-    Params:
-      spec =       the spec to debug
+  
+      Params:
+        spec = the spec to debug
   */
   static void debugSpecCaps(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec)
   {
@@ -66,10 +72,11 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Parse caps into spec.
-    Params:
-      spec =       a spec
-      caps =       a #GstCaps
-    Returns:     TRUE if the caps could be parsed.
+  
+      Params:
+        spec = a spec
+        caps = a #GstCaps
+      Returns: TRUE if the caps could be parsed.
   */
   static bool parseCaps(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec, gst.caps.Caps caps)
   {
@@ -80,13 +87,14 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Allocate the resources for the ringbuffer. This function fills
-    in the data pointer of the ring buffer with a valid #GstBuffer
-    to which samples can be written.
-    Params:
-      spec =       the specs of the buffer
-    Returns:     TRUE if the device could be acquired, FALSE on error.
-      
-      MT safe.
+      in the data pointer of the ring buffer with a valid #GstBuffer
+      to which samples can be written.
+  
+      Params:
+        spec = the specs of the buffer
+      Returns: TRUE if the device could be acquired, FALSE on error.
+        
+        MT safe.
   */
   bool acquire(gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec spec)
   {
@@ -97,12 +105,13 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Activate buf to start or stop pulling data.
-    
-    MT safe.
-    Params:
-      active =       the new mode
-    Returns:     TRUE if the device could be activated in the requested mode,
-      FALSE on error.
+      
+      MT safe.
+  
+      Params:
+        active = the new mode
+      Returns: TRUE if the device could be activated in the requested mode,
+        FALSE on error.
   */
   bool activate(bool active)
   {
@@ -113,11 +122,12 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Subclasses should call this function to notify the fact that
-    advance segments are now processed by the device.
-    
-    MT safe.
-    Params:
-      advance =       the number of segments written
+      advance segments are now processed by the device.
+      
+      MT safe.
+  
+      Params:
+        advance = the number of segments written
   */
   void advance(uint advance)
   {
@@ -126,11 +136,12 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Clear the given segment of the buffer with silence samples.
-    This function is used by subclasses.
-    
-    MT safe.
-    Params:
-      segment =       the segment to clear
+      This function is used by subclasses.
+      
+      MT safe.
+  
+      Params:
+        segment = the segment to clear
   */
   void clear(int segment)
   {
@@ -139,8 +150,8 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Clear all samples from the ringbuffer.
-    
-    MT safe.
+      
+      MT safe.
   */
   void clearAll()
   {
@@ -149,10 +160,10 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Close the audio device associated with the ring buffer. The ring buffer
-    should already have been released via [gstaudio.audio_ring_buffer.AudioRingBuffer.release].
-    Returns:     TRUE if the device could be closed, FALSE on error.
-      
-      MT safe.
+      should already have been released via [gstaudio.audio_ring_buffer.AudioRingBuffer.release].
+      Returns: TRUE if the device could be closed, FALSE on error.
+        
+        MT safe.
   */
   bool closeDevice()
   {
@@ -163,32 +174,33 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Commit in_samples samples pointed to by data to the ringbuffer buf.
-    
-    in_samples and out_samples define the rate conversion to perform on the
-    samples in data. For negative rates, out_samples must be negative and
-    in_samples positive.
-    
-    When out_samples is positive, the first sample will be written at position sample
-    in the ringbuffer. When out_samples is negative, the last sample will be written to
-    sample in reverse order.
-    
-    out_samples does not need to be a multiple of the segment size of the ringbuffer
-    although it is recommended for optimal performance.
-    
-    accum will hold a temporary accumulator used in rate conversion and should be
-    set to 0 when this function is first called. In case the commit operation is
-    interrupted, one can resume the processing by passing the previously returned
-    accum value back to this function.
-    
-    MT safe.
-    Params:
-      sample =       the sample position of the data
-      data =       the data to commit
-      outSamples =       the number of samples to write to the ringbuffer
-      accum =       accumulator for rate conversion.
-    Returns:     The number of samples written to the ringbuffer or -1 on error. The
-      number of samples written can be less than out_samples when buf was interrupted
-      with a flush or stop.
+      
+      in_samples and out_samples define the rate conversion to perform on the
+      samples in data. For negative rates, out_samples must be negative and
+      in_samples positive.
+      
+      When out_samples is positive, the first sample will be written at position sample
+      in the ringbuffer. When out_samples is negative, the last sample will be written to
+      sample in reverse order.
+      
+      out_samples does not need to be a multiple of the segment size of the ringbuffer
+      although it is recommended for optimal performance.
+      
+      accum will hold a temporary accumulator used in rate conversion and should be
+      set to 0 when this function is first called. In case the commit operation is
+      interrupted, one can resume the processing by passing the previously returned
+      accum value back to this function.
+      
+      MT safe.
+  
+      Params:
+        sample = the sample position of the data
+        data = the data to commit
+        outSamples = the number of samples to write to the ringbuffer
+        accum = accumulator for rate conversion.
+      Returns: The number of samples written to the ringbuffer or -1 on error. The
+        number of samples written can be less than out_samples when buf was interrupted
+        with a flush or stop.
   */
   uint commit(ref ulong sample, ubyte[] data, int outSamples, ref int accum)
   {
@@ -204,13 +216,14 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Convert src_val in src_fmt to the equivalent value in dest_fmt. The result
-    will be put in dest_val.
-    Params:
-      srcFmt =       the source format
-      srcVal =       the source value
-      destFmt =       the destination format
-      destVal =       a location to store the converted value
-    Returns:     TRUE if the conversion succeeded.
+      will be put in dest_val.
+  
+      Params:
+        srcFmt = the source format
+        srcVal = the source value
+        destFmt = the destination format
+        destVal = a location to store the converted value
+      Returns: TRUE if the conversion succeeded.
   */
   bool convert(gst.types.Format srcFmt, long srcVal, gst.types.Format destFmt, out long destVal)
   {
@@ -221,18 +234,18 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Get the number of samples queued in the audio device. This is
-    usually less than the segment size but can be bigger when the
-    implementation uses another internal buffer between the audio
-    device.
-    
-    For playback ringbuffers this is the amount of samples transferred from the
-    ringbuffer to the device but still not played.
-    
-    For capture ringbuffers this is the amount of samples in the device that are
-    not yet transferred to the ringbuffer.
-    Returns:     The number of samples queued in the audio device.
+      usually less than the segment size but can be bigger when the
+      implementation uses another internal buffer between the audio
+      device.
       
-      MT safe.
+      For playback ringbuffers this is the amount of samples transferred from the
+      ringbuffer to the device but still not played.
+      
+      For capture ringbuffers this is the amount of samples in the device that are
+      not yet transferred to the ringbuffer.
+      Returns: The number of samples queued in the audio device.
+        
+        MT safe.
   */
   uint delay()
   {
@@ -243,9 +256,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Checks the status of the device associated with the ring buffer.
-    Returns:     TRUE if the device was open, FALSE if it was closed.
-      
-      MT safe.
+      Returns: TRUE if the device was open, FALSE if it was closed.
+        
+        MT safe.
   */
   bool deviceIsOpen()
   {
@@ -256,9 +269,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Check if the ringbuffer is acquired and ready to use.
-    Returns:     TRUE if the ringbuffer is acquired, FALSE on error.
-      
-      MT safe.
+      Returns: TRUE if the ringbuffer is acquired, FALSE on error.
+        
+        MT safe.
   */
   bool isAcquired()
   {
@@ -269,9 +282,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Check if buf is activated.
-    
-    MT safe.
-    Returns:     TRUE if the device is active.
+      
+      MT safe.
+      Returns: TRUE if the device is active.
   */
   bool isActive()
   {
@@ -282,9 +295,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Check if buf is flushing.
-    
-    MT safe.
-    Returns:     TRUE if the device is flushing.
+      
+      MT safe.
+      Returns: TRUE if the device is flushing.
   */
   bool isFlushing()
   {
@@ -295,11 +308,12 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Tell the ringbuffer that it is allowed to start playback when
-    the ringbuffer is filled with samples.
-    
-    MT safe.
-    Params:
-      allowed =       the new value
+      the ringbuffer is filled with samples.
+      
+      MT safe.
+  
+      Params:
+        allowed = the new value
   */
   void mayStart(bool allowed)
   {
@@ -308,11 +322,11 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Open the audio device associated with the ring buffer. Does not perform any
-    setup on the device. You must open the device before acquiring the ring
-    buffer.
-    Returns:     TRUE if the device could be opened, FALSE on error.
-      
-      MT safe.
+      setup on the device. You must open the device before acquiring the ring
+      buffer.
+      Returns: TRUE if the device could be opened, FALSE on error.
+        
+        MT safe.
   */
   bool openDevice()
   {
@@ -323,9 +337,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Pause processing samples from the ringbuffer.
-    Returns:     TRUE if the device could be paused, FALSE on error.
-      
-      MT safe.
+      Returns: TRUE if the device could be paused, FALSE on error.
+        
+        MT safe.
   */
   bool pause()
   {
@@ -336,13 +350,14 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Returns a pointer to memory where the data from segment segment
-    can be found. This function is mostly used by subclasses.
-    Params:
-      segment =       the segment to read
-      readptr =       the pointer to the memory where samples can be read
-    Returns:     FALSE if the buffer is not started.
-      
-      MT safe.
+      can be found. This function is mostly used by subclasses.
+  
+      Params:
+        segment = the segment to read
+        readptr = the pointer to the memory where samples can be read
+      Returns: FALSE if the buffer is not started.
+        
+        MT safe.
   */
   bool prepareRead(out int segment, out ubyte[] readptr)
   {
@@ -358,22 +373,23 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Read len samples from the ringbuffer into the memory pointed
-    to by data.
-    The first sample should be read from position sample in
-    the ringbuffer.
-    
-    len should not be a multiple of the segment size of the ringbuffer
-    although it is recommended.
-    
-    timestamp will return the timestamp associated with the data returned.
-    Params:
-      sample =       the sample position of the data
-      data =       where the data should be read
-      timestamp =       where the timestamp is returned
-    Returns:     The number of samples read from the ringbuffer or -1 on
-      error.
+      to by data.
+      The first sample should be read from position sample in
+      the ringbuffer.
       
-      MT safe.
+      len should not be a multiple of the segment size of the ringbuffer
+      although it is recommended.
+      
+      timestamp will return the timestamp associated with the data returned.
+  
+      Params:
+        sample = the sample position of the data
+        data = where the data should be read
+        timestamp = where the timestamp is returned
+      Returns: The number of samples read from the ringbuffer or -1 on
+        error.
+        
+        MT safe.
   */
   uint read(ulong sample, ubyte[] data, out gst.types.ClockTime timestamp)
   {
@@ -389,9 +405,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Free the resources of the ringbuffer.
-    Returns:     TRUE if the device could be released, FALSE on error.
-      
-      MT safe.
+      Returns: TRUE if the device could be released, FALSE on error.
+        
+        MT safe.
   */
   bool release()
   {
@@ -402,11 +418,11 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Get the number of samples that were processed by the ringbuffer
-    since it was last started. This does not include the number of samples not
-    yet processed (see [gstaudio.audio_ring_buffer.AudioRingBuffer.delay]).
-    Returns:     The number of samples processed by the ringbuffer.
-      
-      MT safe.
+      since it was last started. This does not include the number of samples not
+      yet processed (see [gstaudio.audio_ring_buffer.AudioRingBuffer.delay]).
+      Returns: The number of samples processed by the ringbuffer.
+        
+        MT safe.
   */
   ulong samplesDone()
   {
@@ -417,11 +433,12 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Sets the given callback function on the buffer. This function
-    will be called every time a segment has been written to a device.
-    
-    MT safe.
-    Params:
-      cb =       the callback to set
+      will be called every time a segment has been written to a device.
+      
+      MT safe.
+  
+      Params:
+        cb = the callback to set
   */
   void setCallback(gstaudio.types.AudioRingBufferCallback cb = null)
   {
@@ -443,8 +460,8 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Mark the ringbuffer as errored after it has started.
-    
-    MT safe.
+      
+      MT safe.
   */
   void setErrored()
   {
@@ -453,10 +470,11 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Set the ringbuffer to flushing mode or normal mode.
-    
-    MT safe.
-    Params:
-      flushing =       the new mode
+      
+      MT safe.
+  
+      Params:
+        flushing = the new mode
   */
   void setFlushing(bool flushing)
   {
@@ -465,15 +483,16 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Make sure that the next sample written to the device is
-    accounted for as being the sample sample written to the
-    device. This value will be used in reporting the current
-    sample position of the ringbuffer.
-    
-    This function will also clear the buffer with silence.
-    
-    MT safe.
-    Params:
-      sample =       the sample number to set
+      accounted for as being the sample sample written to the
+      device. This value will be used in reporting the current
+      sample position of the ringbuffer.
+      
+      This function will also clear the buffer with silence.
+      
+      MT safe.
+  
+      Params:
+        sample = the sample number to set
   */
   void setSample(ulong sample)
   {
@@ -488,9 +507,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Start processing samples from the ringbuffer.
-    Returns:     TRUE if the device could be started, FALSE on error.
-      
-      MT safe.
+      Returns: TRUE if the device could be started, FALSE on error.
+        
+        MT safe.
   */
   bool start()
   {
@@ -501,9 +520,9 @@ class AudioRingBuffer : gst.object.ObjectGst
 
   /**
       Stop processing samples from the ringbuffer.
-    Returns:     TRUE if the device could be stopped, FALSE on error.
-      
-      MT safe.
+      Returns: TRUE if the device could be stopped, FALSE on error.
+        
+        MT safe.
   */
   bool stop()
   {

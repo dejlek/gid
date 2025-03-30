@@ -1,3 +1,4 @@
+/// Module for [LockButtonAccessible] class
 module gtk.lock_button_accessible;
 
 import atk.action;
@@ -16,17 +17,20 @@ import gtk.types;
 class LockButtonAccessible : gtk.button_accessible.ButtonAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_lock_button_accessible_get_type != &gidSymbolNotFound ? gtk_lock_button_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

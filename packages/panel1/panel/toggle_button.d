@@ -1,3 +1,4 @@
+/// Module for [ToggleButton] class
 module panel.toggle_button;
 
 import gid.gid;
@@ -28,17 +29,20 @@ import panel.types;
 class ToggleButton : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_toggle_button_get_type != &gidSymbolNotFound ? panel_toggle_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

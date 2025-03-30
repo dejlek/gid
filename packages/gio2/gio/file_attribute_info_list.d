@@ -1,3 +1,4 @@
+/// Module for [FileAttributeInfoList] class
 module gio.file_attribute_info_list;
 
 import gid.gid;
@@ -9,27 +10,31 @@ import gobject.boxed;
 
 /**
     Acts as a lightweight registry for possible valid file attributes.
-  The registry stores Key-Value pair formats as #GFileAttributeInfos.
+    The registry stores Key-Value pair formats as #GFileAttributeInfos.
 */
 class FileAttributeInfoList : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_info_list_get_type != &gidSymbolNotFound ? g_file_attribute_info_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -57,7 +62,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 
   /**
       Creates a new file attribute info list.
-    Returns:     a #GFileAttributeInfoList.
+      Returns: a #GFileAttributeInfoList.
   */
   this()
   {
@@ -68,11 +73,12 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 
   /**
       Adds a new attribute with name to the list, setting
-    its type and flags.
-    Params:
-      name =       the name of the attribute to add.
-      type =       the #GFileAttributeType for the attribute.
-      flags =       #GFileAttributeInfoFlags for the attribute.
+      its type and flags.
+  
+      Params:
+        name = the name of the attribute to add.
+        type = the #GFileAttributeType for the attribute.
+        flags = #GFileAttributeInfoFlags for the attribute.
   */
   void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags)
   {
@@ -82,7 +88,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 
   /**
       Makes a duplicate of a file attribute info list.
-    Returns:     a copy of the given list.
+      Returns: a copy of the given list.
   */
   gio.file_attribute_info_list.FileAttributeInfoList dup()
   {
@@ -94,10 +100,11 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 
   /**
       Gets the file attribute with the name name from list.
-    Params:
-      name =       the name of the attribute to look up.
-    Returns:     a #GFileAttributeInfo for the name, or null if an
-      attribute isn't found.
+  
+      Params:
+        name = the name of the attribute to look up.
+      Returns: a #GFileAttributeInfo for the name, or null if an
+        attribute isn't found.
   */
   gio.file_attribute_info.FileAttributeInfo lookup(string name)
   {

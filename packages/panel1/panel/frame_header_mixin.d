@@ -1,3 +1,4 @@
+/// Module for [FrameHeader] interface mixin
 module panel.frame_header_mixin;
 
 public import panel.frame_header_iface_proxy;

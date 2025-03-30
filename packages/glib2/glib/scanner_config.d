@@ -1,3 +1,4 @@
+/// Module for [ScannerConfig] class
 module glib.scanner_config;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import glib.types;
 
 /**
     Specifies the #GScanner parser configuration. Most settings can
-  be changed during the parsing phase and will affect the lexical
-  parsing of the next unpeeked token.
+    be changed during the parsing phase and will affect the lexical
+    parsing of the next unpeeked token.
 */
 class ScannerConfig
 {
   GScannerConfig cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class ScannerConfig
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [CollectData] class
 module gstbase.collect_data;
 
 import gid.gid;
@@ -16,6 +17,7 @@ class CollectData
 {
   GstCollectData cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class CollectData
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

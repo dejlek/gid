@@ -1,3 +1,4 @@
+/// Module for [EventWindowState] class
 module gdk.event_window_state;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventWindowState
 {
   GdkEventWindowState cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventWindowState
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

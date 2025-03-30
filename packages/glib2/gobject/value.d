@@ -1,3 +1,4 @@
+/// Module for [Value] class
 module gobject.value;
 
 import gid.gid;
@@ -17,41 +18,49 @@ import gobject.object;
 import gobject.types;
 
 /**
+* Abstract class used as the base for GObject boxed types.
+*/
+/**
     An opaque structure used to hold different types of values.
-  
-  The data within the structure has protected scope: it is accessible only
-  to functions within a #GTypeValueTable structure, or implementations of
-  the g_value_*() API. That is, code portions which implement new fundamental
-  types.
-  
-  #GValue users cannot make any assumptions about how data is stored
-  within the 2 element @data union, and the @g_type member should
-  only be accessed through the G_VALUE_TYPE() macro.
+    
+    The data within the structure has protected scope: it is accessible only
+    to functions within a #GTypeValueTable structure, or implementations of
+    the g_value_*() API. That is, code portions which implement new fundamental
+    types.
+    
+    #GValue users cannot make any assumptions about how data is stored
+    within the 2 element @data union, and the @g_type member should
+    only be accessed through the G_VALUE_TYPE() macro.
 */
 class Value : Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GValue.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_get_type != &gidSymbolNotFound ? g_value_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -110,8 +119,9 @@ class Value : Boxed
 
   /**
       Copies the value of src_value into dest_value.
-    Params:
-      destValue =       An initialized #GValue structure of the same type as src_value.
+  
+      Params:
+        destValue = An initialized #GValue structure of the same type as src_value.
   */
   void copy(gobject.value.Value destValue)
   {
@@ -120,10 +130,10 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_OBJECT` derived #GValue, increasing
-    its reference count. If the contents of the #GValue are null, then
-    null will be returned.
-    Returns:     object content of value,
-               should be unreferenced when no longer needed.
+      its reference count. If the contents of the #GValue are null, then
+      null will be returned.
+      Returns: object content of value,
+                 should be unreferenced when no longer needed.
   */
   gobject.object.ObjectG dupObject()
   {
@@ -135,7 +145,7 @@ class Value : Boxed
 
   /**
       Get a copy the contents of a `G_TYPE_STRING` #GValue.
-    Returns:     a newly allocated copy of the string content of value
+      Returns: a newly allocated copy of the string content of value
   */
   string dupString()
   {
@@ -147,9 +157,9 @@ class Value : Boxed
 
   /**
       Get the contents of a variant #GValue, increasing its refcount. The returned
-    #GVariant is never floating.
-    Returns:     variant contents of value (may be null);
-         should be unreffed using [glib.variant.VariantG.unref] when no longer needed
+      #GVariant is never floating.
+      Returns: variant contents of value (may be null);
+           should be unreffed using [glib.variant.VariantG.unref] when no longer needed
   */
   glib.variant.VariantG dupVariant()
   {
@@ -161,8 +171,8 @@ class Value : Boxed
 
   /**
       Determines if value will fit inside the size of a pointer value.
-    This is an internal function introduced mainly for C marshallers.
-    Returns:     true if value will fit inside a pointer value.
+      This is an internal function introduced mainly for C marshallers.
+      Returns: true if value will fit inside a pointer value.
   */
   bool fitsPointer()
   {
@@ -173,7 +183,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_BOOLEAN` #GValue.
-    Returns:     boolean contents of value
+      Returns: boolean contents of value
   */
   bool getBoolean()
   {
@@ -184,7 +194,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_BOXED` derived #GValue.
-    Returns:     boxed contents of value
+      Returns: boxed contents of value
   */
   void* getBoxed()
   {
@@ -194,12 +204,12 @@ class Value : Boxed
 
   /**
       Do not use this function; it is broken on platforms where the [glib.types.char]
-    type is unsigned, such as ARM and PowerPC.  See [gobject.value.Value.getSchar].
-    
-    Get the contents of a `G_TYPE_CHAR` #GValue.
-    Returns:     character contents of value
+      type is unsigned, such as ARM and PowerPC.  See [gobject.value.Value.getSchar].
+      
+      Get the contents of a `G_TYPE_CHAR` #GValue.
+      Returns: character contents of value
   
-    Deprecated:     This function's return type is broken, see [gobject.value.Value.getSchar]
+      Deprecated: This function's return type is broken, see [gobject.value.Value.getSchar]
   */
   char getChar()
   {
@@ -210,7 +220,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_DOUBLE` #GValue.
-    Returns:     double contents of value
+      Returns: double contents of value
   */
   double getDouble()
   {
@@ -221,7 +231,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_ENUM` #GValue.
-    Returns:     enum contents of value
+      Returns: enum contents of value
   */
   int getEnum()
   {
@@ -232,7 +242,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_FLAGS` #GValue.
-    Returns:     flags contents of value
+      Returns: flags contents of value
   */
   uint getFlags()
   {
@@ -243,7 +253,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_FLOAT` #GValue.
-    Returns:     float contents of value
+      Returns: float contents of value
   */
   float getFloat()
   {
@@ -254,7 +264,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_GTYPE` #GValue.
-    Returns:     the #GType stored in value
+      Returns: the #GType stored in value
   */
   gobject.types.GType getGtype()
   {
@@ -265,7 +275,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_INT` #GValue.
-    Returns:     integer contents of value
+      Returns: integer contents of value
   */
   int getInt()
   {
@@ -276,7 +286,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_INT64` #GValue.
-    Returns:     64bit integer contents of value
+      Returns: 64bit integer contents of value
   */
   long getInt64()
   {
@@ -287,7 +297,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_LONG` #GValue.
-    Returns:     long integer contents of value
+      Returns: long integer contents of value
   */
   glong getLong()
   {
@@ -298,7 +308,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_OBJECT` derived #GValue.
-    Returns:     object contents of value
+      Returns: object contents of value
   */
   gobject.object.ObjectG getObject()
   {
@@ -310,7 +320,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_PARAM` #GValue.
-    Returns:     #GParamSpec content of value
+      Returns: #GParamSpec content of value
   */
   gobject.param_spec.ParamSpec getParam()
   {
@@ -322,7 +332,7 @@ class Value : Boxed
 
   /**
       Get the contents of a pointer #GValue.
-    Returns:     pointer contents of value
+      Returns: pointer contents of value
   */
   void* getPointer()
   {
@@ -332,7 +342,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_CHAR` #GValue.
-    Returns:     signed 8 bit integer contents of value
+      Returns: signed 8 bit integer contents of value
   */
   byte getSchar()
   {
@@ -343,7 +353,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_STRING` #GValue.
-    Returns:     string content of value
+      Returns: string content of value
   */
   string getString()
   {
@@ -355,7 +365,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_UCHAR` #GValue.
-    Returns:     unsigned character contents of value
+      Returns: unsigned character contents of value
   */
   ubyte getUchar()
   {
@@ -366,7 +376,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_UINT` #GValue.
-    Returns:     unsigned integer contents of value
+      Returns: unsigned integer contents of value
   */
   uint getUint()
   {
@@ -377,7 +387,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_UINT64` #GValue.
-    Returns:     unsigned 64bit integer contents of value
+      Returns: unsigned 64bit integer contents of value
   */
   ulong getUint64()
   {
@@ -388,7 +398,7 @@ class Value : Boxed
 
   /**
       Get the contents of a `G_TYPE_ULONG` #GValue.
-    Returns:     unsigned long integer contents of value
+      Returns: unsigned long integer contents of value
   */
   gulong getUlong()
   {
@@ -399,7 +409,7 @@ class Value : Boxed
 
   /**
       Get the contents of a variant #GValue.
-    Returns:     variant contents of value (may be null)
+      Returns: variant contents of value (may be null)
   */
   glib.variant.VariantG getVariant()
   {
@@ -411,9 +421,10 @@ class Value : Boxed
 
   /**
       Initializes value with the default value of type.
-    Params:
-      gType =       Type the #GValue should hold values of.
-    Returns:     the #GValue structure that has been passed in
+  
+      Params:
+        gType = Type the #GValue should hold values of.
+      Returns: the #GValue structure that has been passed in
   */
   gobject.value.Value init_(gobject.types.GType gType)
   {
@@ -425,14 +436,15 @@ class Value : Boxed
 
   /**
       Initializes and sets value from an instantiatable type via the
-    value_table's collect_value() function.
-    
-    Note: The value will be initialised with the exact type of
-    instance.  If you wish to set the value's type to a different GType
-    (such as a parent class GType), you need to manually call
-    [gobject.value.Value.init_] and [gobject.value.Value.setInstance].
-    Params:
-      instance =       the instance
+      value_table's collect_value() function.
+      
+      Note: The value will be initialised with the exact type of
+      instance.  If you wish to set the value's type to a different GType
+      (such as a parent class GType), you need to manually call
+      [gobject.value.Value.init_] and [gobject.value.Value.setInstance].
+  
+      Params:
+        instance = the instance
   */
   void initFromInstance(gobject.type_instance.TypeInstance instance)
   {
@@ -441,9 +453,9 @@ class Value : Boxed
 
   /**
       Returns the value contents as pointer. This function asserts that
-    [gobject.value.Value.fitsPointer] returned true for the passed in value.
-    This is an internal function introduced mainly for C marshallers.
-    Returns:     the value contents as pointer
+      [gobject.value.Value.fitsPointer] returned true for the passed in value.
+      This is an internal function introduced mainly for C marshallers.
+      Returns: the value contents as pointer
   */
   void* peekPointer()
   {
@@ -453,8 +465,8 @@ class Value : Boxed
 
   /**
       Clears the current value in value and resets it to the default value
-    (as if the value had just been initialized).
-    Returns:     the #GValue structure that has been passed in
+      (as if the value had just been initialized).
+      Returns: the #GValue structure that has been passed in
   */
   gobject.value.Value reset()
   {
@@ -466,8 +478,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_BOOLEAN` #GValue to v_boolean.
-    Params:
-      vBoolean =       boolean value to be set
+  
+      Params:
+        vBoolean = boolean value to be set
   */
   void setBoolean(bool vBoolean)
   {
@@ -476,8 +489,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_BOXED` derived #GValue to v_boxed.
-    Params:
-      vBoxed =       boxed value to be set
+  
+      Params:
+        vBoxed = boxed value to be set
   */
   void setBoxed(const(void)* vBoxed = null)
   {
@@ -486,10 +500,11 @@ class Value : Boxed
 
   /**
       This is an internal function introduced mainly for C marshallers.
-    Params:
-      vBoxed =       duplicated unowned boxed value to be set
   
-    Deprecated:     Use [gobject.value.Value.takeBoxed] instead.
+      Params:
+        vBoxed = duplicated unowned boxed value to be set
+  
+      Deprecated: Use [gobject.value.Value.takeBoxed] instead.
   */
   void setBoxedTakeOwnership(const(void)* vBoxed = null)
   {
@@ -498,10 +513,11 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_CHAR` #GValue to v_char.
-    Params:
-      vChar =       character value to be set
   
-    Deprecated:     This function's input type is broken, see [gobject.value.Value.setSchar]
+      Params:
+        vChar = character value to be set
+  
+      Deprecated: This function's input type is broken, see [gobject.value.Value.setSchar]
   */
   void setChar(char vChar)
   {
@@ -510,8 +526,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_DOUBLE` #GValue to v_double.
-    Params:
-      vDouble =       double value to be set
+  
+      Params:
+        vDouble = double value to be set
   */
   void setDouble(double vDouble)
   {
@@ -520,8 +537,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_ENUM` #GValue to v_enum.
-    Params:
-      vEnum =       enum value to be set
+  
+      Params:
+        vEnum = enum value to be set
   */
   void setEnum(int vEnum)
   {
@@ -530,8 +548,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_FLAGS` #GValue to v_flags.
-    Params:
-      vFlags =       flags value to be set
+  
+      Params:
+        vFlags = flags value to be set
   */
   void setFlags(uint vFlags)
   {
@@ -540,8 +559,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_FLOAT` #GValue to v_float.
-    Params:
-      vFloat =       float value to be set
+  
+      Params:
+        vFloat = float value to be set
   */
   void setFloat(float vFloat)
   {
@@ -550,8 +570,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_GTYPE` #GValue to v_gtype.
-    Params:
-      vGtype =       #GType to be set
+  
+      Params:
+        vGtype = #GType to be set
   */
   void setGtype(gobject.types.GType vGtype)
   {
@@ -560,9 +581,10 @@ class Value : Boxed
 
   /**
       Sets value from an instantiatable type via the
-    value_table's collect_value() function.
-    Params:
-      instance =       the instance
+      value_table's collect_value() function.
+  
+      Params:
+        instance = the instance
   */
   void setInstance(void* instance = null)
   {
@@ -571,8 +593,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_INT` #GValue to v_int.
-    Params:
-      vInt =       integer value to be set
+  
+      Params:
+        vInt = integer value to be set
   */
   void setInt(int vInt)
   {
@@ -581,8 +604,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_INT64` #GValue to v_int64.
-    Params:
-      vInt64 =       64bit integer value to be set
+  
+      Params:
+        vInt64 = 64bit integer value to be set
   */
   void setInt64(long vInt64)
   {
@@ -591,10 +615,11 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_STRING` #GValue to v_string.  The string is
-    assumed to be static and interned (canonical, for example from
-    [glib.global.internString]), and is thus not duplicated when setting the #GValue.
-    Params:
-      vString =       static string to be set
+      assumed to be static and interned (canonical, for example from
+      [glib.global.internString]), and is thus not duplicated when setting the #GValue.
+  
+      Params:
+        vString = static string to be set
   */
   void setInternedString(string vString = null)
   {
@@ -604,8 +629,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_LONG` #GValue to v_long.
-    Params:
-      vLong =       long integer value to be set
+  
+      Params:
+        vLong = long integer value to be set
   */
   void setLong(glong vLong)
   {
@@ -614,18 +640,19 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_OBJECT` derived #GValue to v_object.
-    
-    [gobject.value.Value.setObject] increases the reference count of v_object
-    (the #GValue holds a reference to v_object).  If you do not wish
-    to increase the reference count of the object (i.e. you wish to
-    pass your current reference to the #GValue because you no longer
-    need it), use [gobject.value.Value.takeObject] instead.
-    
-    It is important that your #GValue holds a reference to v_object (either its
-    own, or one it has taken) to ensure that the object won't be destroyed while
-    the #GValue still exists).
-    Params:
-      vObject =       object value to be set
+      
+      [gobject.value.Value.setObject] increases the reference count of v_object
+      (the #GValue holds a reference to v_object).  If you do not wish
+      to increase the reference count of the object (i.e. you wish to
+      pass your current reference to the #GValue because you no longer
+      need it), use [gobject.value.Value.takeObject] instead.
+      
+      It is important that your #GValue holds a reference to v_object (either its
+      own, or one it has taken) to ensure that the object won't be destroyed while
+      the #GValue still exists).
+  
+      Params:
+        vObject = object value to be set
   */
   void setObject(gobject.object.ObjectG vObject = null)
   {
@@ -634,8 +661,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_PARAM` #GValue to param.
-    Params:
-      param =       the #GParamSpec to be set
+  
+      Params:
+        param = the #GParamSpec to be set
   */
   void setParam(gobject.param_spec.ParamSpec param = null)
   {
@@ -644,8 +672,9 @@ class Value : Boxed
 
   /**
       Set the contents of a pointer #GValue to v_pointer.
-    Params:
-      vPointer =       pointer value to be set
+  
+      Params:
+        vPointer = pointer value to be set
   */
   void setPointer(void* vPointer = null)
   {
@@ -654,8 +683,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_CHAR` #GValue to v_char.
-    Params:
-      vChar =       signed 8 bit integer to be set
+  
+      Params:
+        vChar = signed 8 bit integer to be set
   */
   void setSchar(byte vChar)
   {
@@ -664,11 +694,12 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_BOXED` derived #GValue to v_boxed.
-    
-    The boxed value is assumed to be static, and is thus not duplicated
-    when setting the #GValue.
-    Params:
-      vBoxed =       static boxed value to be set
+      
+      The boxed value is assumed to be static, and is thus not duplicated
+      when setting the #GValue.
+  
+      Params:
+        vBoxed = static boxed value to be set
   */
   void setStaticBoxed(const(void)* vBoxed = null)
   {
@@ -677,13 +708,14 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_STRING` #GValue to v_string.
-    The string is assumed to be static, and is thus not duplicated
-    when setting the #GValue.
-    
-    If the the string is a canonical string, using [gobject.value.Value.setInternedString]
-    is more appropriate.
-    Params:
-      vString =       static string to be set
+      The string is assumed to be static, and is thus not duplicated
+      when setting the #GValue.
+      
+      If the the string is a canonical string, using [gobject.value.Value.setInternedString]
+      is more appropriate.
+  
+      Params:
+        vString = static string to be set
   */
   void setStaticString(string vString = null)
   {
@@ -693,8 +725,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_STRING` #GValue to a copy of v_string.
-    Params:
-      vString =       caller-owned string to be duplicated for the #GValue
+  
+      Params:
+        vString = caller-owned string to be duplicated for the #GValue
   */
   void setString(string vString = null)
   {
@@ -704,10 +737,11 @@ class Value : Boxed
 
   /**
       This is an internal function introduced mainly for C marshallers.
-    Params:
-      vString =       duplicated unowned string to be set
   
-    Deprecated:     Use [gobject.value.Value.takeString] instead.
+      Params:
+        vString = duplicated unowned string to be set
+  
+      Deprecated: Use [gobject.value.Value.takeString] instead.
   */
   void setStringTakeOwnership(string vString = null)
   {
@@ -717,8 +751,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_UCHAR` #GValue to v_uchar.
-    Params:
-      vUchar =       unsigned character value to be set
+  
+      Params:
+        vUchar = unsigned character value to be set
   */
   void setUchar(ubyte vUchar)
   {
@@ -727,8 +762,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_UINT` #GValue to v_uint.
-    Params:
-      vUint =       unsigned integer value to be set
+  
+      Params:
+        vUint = unsigned integer value to be set
   */
   void setUint(uint vUint)
   {
@@ -737,8 +773,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_UINT64` #GValue to v_uint64.
-    Params:
-      vUint64 =       unsigned 64bit integer value to be set
+  
+      Params:
+        vUint64 = unsigned 64bit integer value to be set
   */
   void setUint64(ulong vUint64)
   {
@@ -747,8 +784,9 @@ class Value : Boxed
 
   /**
       Set the contents of a `G_TYPE_ULONG` #GValue to v_ulong.
-    Params:
-      vUlong =       unsigned long integer value to be set
+  
+      Params:
+        vUlong = unsigned long integer value to be set
   */
   void setUlong(gulong vUlong)
   {
@@ -757,9 +795,10 @@ class Value : Boxed
 
   /**
       Set the contents of a variant #GValue to variant.
-    If the variant is floating, it is consumed.
-    Params:
-      variant =       a #GVariant, or null
+      If the variant is floating, it is consumed.
+  
+      Params:
+        variant = a #GVariant, or null
   */
   void setVariant(glib.variant.VariantG variant = null)
   {
@@ -768,16 +807,16 @@ class Value : Boxed
 
   /**
       Steal ownership on contents of a `G_TYPE_STRING` #GValue.
-    As a result of this operation the value's contents will be reset to null.
-    
-    The purpose of this call is to provide a way to avoid an extra copy
-    when some object have been serialized into string through #GValue API.
-    
-    NOTE: for safety and compatibility purposes, if #GValue contains
-    static string, or an interned one, this function will return a copy
-    of the string. Otherwise the transfer notation would be ambiguous.
-    Returns:     string content of value;
-       Should be freed with [glib.global.gfree] when no longer needed.
+      As a result of this operation the value's contents will be reset to null.
+      
+      The purpose of this call is to provide a way to avoid an extra copy
+      when some object have been serialized into string through #GValue API.
+      
+      NOTE: for safety and compatibility purposes, if #GValue contains
+      static string, or an interned one, this function will return a copy
+      of the string. Otherwise the transfer notation would be ambiguous.
+      Returns: string content of value;
+         Should be freed with [glib.global.gfree] when no longer needed.
   */
   string stealString()
   {
@@ -789,10 +828,11 @@ class Value : Boxed
 
   /**
       Sets the contents of a `G_TYPE_BOXED` derived #GValue to v_boxed
-    and takes over the ownership of the caller’s reference to v_boxed;
-    the caller doesn’t have to unref it any more.
-    Params:
-      vBoxed =       duplicated unowned boxed value to be set
+      and takes over the ownership of the caller’s reference to v_boxed;
+      the caller doesn’t have to unref it any more.
+  
+      Params:
+        vBoxed = duplicated unowned boxed value to be set
   */
   void takeBoxed(const(void)* vBoxed = null)
   {
@@ -801,8 +841,9 @@ class Value : Boxed
 
   /**
       Sets the contents of a `G_TYPE_STRING` #GValue to v_string.
-    Params:
-      vString =       string to take ownership of
+  
+      Params:
+        vString = string to take ownership of
   */
   void takeString(string vString = null)
   {
@@ -812,19 +853,20 @@ class Value : Boxed
 
   /**
       Set the contents of a variant #GValue to variant, and takes over
-    the ownership of the caller's reference to variant;
-    the caller doesn't have to unref it any more (i.e. the reference
-    count of the variant is not increased).
-    
-    If variant was floating then its floating reference is converted to
-    a hard reference.
-    
-    If you want the #GValue to hold its own reference to variant, use
-    [gobject.value.Value.setVariant] instead.
-    
-    This is an internal function introduced mainly for C marshallers.
-    Params:
-      variant =       a #GVariant, or null
+      the ownership of the caller's reference to variant;
+      the caller doesn't have to unref it any more (i.e. the reference
+      count of the variant is not increased).
+      
+      If variant was floating then its floating reference is converted to
+      a hard reference.
+      
+      If you want the #GValue to hold its own reference to variant, use
+      [gobject.value.Value.setVariant] instead.
+      
+      This is an internal function introduced mainly for C marshallers.
+  
+      Params:
+        variant = a #GVariant, or null
   */
   void takeVariant(glib.variant.VariantG variant = null)
   {
@@ -833,16 +875,17 @@ class Value : Boxed
 
   /**
       Tries to cast the contents of src_value into a type appropriate
-    to store in dest_value, e.g. to transform a `G_TYPE_INT` value
-    into a `G_TYPE_FLOAT` value. Performing transformations between
-    value types might incur precision lossage. Especially
-    transformations into strings might reveal seemingly arbitrary
-    results and shouldn't be relied upon for production code (such
-    as rcfile value or object property serialization).
-    Params:
-      destValue =       Target value.
-    Returns:     Whether a transformation rule was found and could be applied.
-       Upon failing transformations, dest_value is left untouched.
+      to store in dest_value, e.g. to transform a `G_TYPE_INT` value
+      into a `G_TYPE_FLOAT` value. Performing transformations between
+      value types might incur precision lossage. Especially
+      transformations into strings might reveal seemingly arbitrary
+      results and shouldn't be relied upon for production code (such
+      as rcfile value or object property serialization).
+  
+      Params:
+        destValue = Target value.
+      Returns: Whether a transformation rule was found and could be applied.
+         Upon failing transformations, dest_value is left untouched.
   */
   bool transform(gobject.value.Value destValue)
   {
@@ -853,9 +896,9 @@ class Value : Boxed
 
   /**
       Clears the current value in value (if any) and "unsets" the type,
-    this releases all resources associated with this GValue. An unset
-    value is the same as an uninitialized (zero-filled) #GValue
-    structure.
+      this releases all resources associated with this GValue. An unset
+      value is the same as an uninitialized (zero-filled) #GValue
+      structure.
   */
   void unset()
   {
@@ -864,11 +907,12 @@ class Value : Boxed
 
   /**
       Returns whether a #GValue of type src_type can be copied into
-    a #GValue of type dest_type.
-    Params:
-      srcType =       source type to be copied.
-      destType =       destination type for copying.
-    Returns:     true if [gobject.value.Value.copy] is possible with src_type and dest_type.
+      a #GValue of type dest_type.
+  
+      Params:
+        srcType = source type to be copied.
+        destType = destination type for copying.
+      Returns: true if [gobject.value.Value.copy] is possible with src_type and dest_type.
   */
   static bool typeCompatible(gobject.types.GType srcType, gobject.types.GType destType)
   {
@@ -879,13 +923,14 @@ class Value : Boxed
 
   /**
       Check whether [gobject.value.Value.transform] is able to transform values
-    of type src_type into values of type dest_type. Note that for
-    the types to be transformable, they must be compatible or a
-    transformation function must be registered.
-    Params:
-      srcType =       Source type.
-      destType =       Target type.
-    Returns:     true if the transformation is possible, false otherwise.
+      of type src_type into values of type dest_type. Note that for
+      the types to be transformable, they must be compatible or a
+      transformation function must be registered.
+  
+      Params:
+        srcType = Source type.
+        destType = Target type.
+      Returns: true if the transformation is possible, false otherwise.
   */
   static bool typeTransformable(gobject.types.GType srcType, gobject.types.GType destType)
   {
@@ -895,6 +940,12 @@ class Value : Boxed
   }
 }
 
+/**
+* Template to initialize a C GValue structure.
+* Params:
+*   T = The D type to initialize the GValue to
+*   gval = The C GValue structure pointer
+*/
 void initVal(T)(GValue* gval)
 {
   static if (is(T == bool))
@@ -934,7 +985,13 @@ void initVal(T)(GValue* gval)
     assert(0, "Unsupported type " ~ T.stringof ~ " in Value.initVal");
 }
 
-/// Template to get a value from a GValue of a given D type (must contain the correct type)
+/**
+* Template to get a value from a GValue of a given D type (must contain the correct type)
+* Params:
+*   T = D type which the C GValue structure contains
+*   gval = C GValue structure pointer
+* Returns: The value of type `T`
+*/
 T getVal(T)(const(GValue)* gval)
 {
   static if (is(T == bool))
@@ -985,7 +1042,13 @@ T getVal(T)(const(GValue)* gval)
     assert(0, "Unsupported type " ~ T.stringof ~ " in Value.getVal");
 }
 
-/// Template to set a GValue to a given D type (must have been initialized to the proper type)
+/**
+* Template to set a GValue to a given D type (must have been initialized to the proper type)
+* Params:
+*   T = D type which the C GValue structure has been initialized to (except Boxed types which are initialized by this template)
+*   gval = C GValue structure pointer
+*   v = The value to set the GValue structure to
+*/
 void setVal(T)(GValue* gval, T v)
 {
   static if (is(T == bool))

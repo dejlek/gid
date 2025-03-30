@@ -1,3 +1,4 @@
+/// Module for [ParamSpecUInt64] class
 module gobject.param_spec_uint64;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gobject.types;
 class ParamSpecUInt64 : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

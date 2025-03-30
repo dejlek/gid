@@ -1,3 +1,4 @@
+/// D types for panel1 library
 module panel.types;
 
 import gid.gid;

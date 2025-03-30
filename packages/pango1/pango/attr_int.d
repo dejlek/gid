@@ -1,3 +1,4 @@
+/// Module for [AttrInt] class
 module pango.attr_int;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import pango.types;
 
 /**
     The [pango.attr_int.AttrInt] structure is used to represent attributes with
-  an integer or enumeration value.
+    an integer or enumeration value.
 */
 class AttrInt
 {
   PangoAttrInt cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AttrInt
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

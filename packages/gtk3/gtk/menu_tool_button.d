@@ -1,3 +1,4 @@
+/// Module for [MenuToolButton] class
 module gtk.menu_tool_button;
 
 import atk.implementor_iface;
@@ -19,42 +20,45 @@ import gtk.widget;
 
 /**
     A #GtkMenuToolButton is a #GtkToolItem that contains a button and
-  a small additional button with an arrow. When clicked, the arrow
-  button pops up a dropdown menu.
-  
-  Use [gtk.menu_tool_button.MenuToolButton.new_] to create a new
-  #GtkMenuToolButton.
-  
-  # GtkMenuToolButton as GtkBuildable
-  
-  The GtkMenuToolButton implementation of the GtkBuildable interface
-  supports adding a menu by specifying “menu” as the “type” attribute
-  of a `<child>` element.
-  
-  An example for a UI definition fragment with menus:
-  
-  ```xml
-  <object class="GtkMenuToolButton">
-    <child type="menu">
-      <object class="GtkMenu"/>
-    </child>
-  </object>
-  ```
+    a small additional button with an arrow. When clicked, the arrow
+    button pops up a dropdown menu.
+    
+    Use [gtk.menu_tool_button.MenuToolButton.new_] to create a new
+    #GtkMenuToolButton.
+    
+    # GtkMenuToolButton as GtkBuildable
+    
+    The GtkMenuToolButton implementation of the GtkBuildable interface
+    supports adding a menu by specifying “menu” as the “type” attribute
+    of a `<child>` element.
+    
+    An example for a UI definition fragment with menus:
+    
+    ```xml
+    <object class="GtkMenuToolButton">
+      <child type="menu">
+        <object class="GtkMenu"/>
+      </child>
+    </object>
+    ```
 */
 class MenuToolButton : gtk.tool_button.ToolButton
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_tool_button_get_type != &gidSymbolNotFound ? gtk_menu_tool_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -67,11 +71,12 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Creates a new #GtkMenuToolButton using icon_widget as icon and
-    label as label.
-    Params:
-      iconWidget =       a widget that will be used as icon widget, or null
-      label =       a string that will be used as label, or null
-    Returns:     the new #GtkMenuToolButton
+      label as label.
+  
+      Params:
+        iconWidget = a widget that will be used as icon widget, or null
+        label = a string that will be used as label, or null
+      Returns: the new #GtkMenuToolButton
   */
   this(gtk.widget.Widget iconWidget = null, string label = null)
   {
@@ -83,13 +88,14 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Creates a new #GtkMenuToolButton.
-    The new #GtkMenuToolButton will contain an icon and label from
-    the stock item indicated by stock_id.
-    Params:
-      stockId =       the name of a stock item
-    Returns:     the new #GtkMenuToolButton
+      The new #GtkMenuToolButton will contain an icon and label from
+      the stock item indicated by stock_id.
   
-    Deprecated:     Use [gtk.menu_tool_button.MenuToolButton.new_] instead.
+      Params:
+        stockId = the name of a stock item
+      Returns: the new #GtkMenuToolButton
+  
+      Deprecated: Use [gtk.menu_tool_button.MenuToolButton.new_] instead.
   */
   static gtk.menu_tool_button.MenuToolButton newFromStock(string stockId)
   {
@@ -102,8 +108,8 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Gets the #GtkMenu associated with #GtkMenuToolButton.
-    Returns:     the #GtkMenu associated
-          with #GtkMenuToolButton
+      Returns: the #GtkMenu associated
+            with #GtkMenuToolButton
   */
   gtk.widget.Widget getMenu()
   {
@@ -115,10 +121,11 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Sets the tooltip markup text to be used as tooltip for the arrow button
-    which pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting
-    a tooltip on the whole #GtkMenuToolButton.
-    Params:
-      markup =       markup text to be used as tooltip text for button’s arrow button
+      which pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting
+      a tooltip on the whole #GtkMenuToolButton.
+  
+      Params:
+        markup = markup text to be used as tooltip text for button’s arrow button
   */
   void setArrowTooltipMarkup(string markup)
   {
@@ -128,10 +135,11 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Sets the tooltip text to be used as tooltip for the arrow button which
-    pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting a tooltip
-    on the whole #GtkMenuToolButton.
-    Params:
-      text =       text to be used as tooltip text for button’s arrow button
+      pops up the menu.  See [gtk.tool_item.ToolItem.setTooltipText] for setting a tooltip
+      on the whole #GtkMenuToolButton.
+  
+      Params:
+        text = text to be used as tooltip text for button’s arrow button
   */
   void setArrowTooltipText(string text)
   {
@@ -141,9 +149,10 @@ class MenuToolButton : gtk.tool_button.ToolButton
 
   /**
       Sets the #GtkMenu that is popped up when the user clicks on the arrow.
-    If menu is NULL, the arrow button becomes insensitive.
-    Params:
-      menu =       the #GtkMenu associated with #GtkMenuToolButton
+      If menu is NULL, the arrow button becomes insensitive.
+  
+      Params:
+        menu = the #GtkMenu associated with #GtkMenuToolButton
   */
   void setMenu(gtk.widget.Widget menu)
   {
@@ -151,41 +160,43 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /**
-      The ::show-menu signal is emitted before the menu is shown.
-    
-    It can be used to populate the menu on demand, using
-    [gtk.menu_tool_button.MenuToolButton.setMenu].
-    
-    Note that even if you populate the menu dynamically in this way,
-    you must set an empty menu on the #GtkMenuToolButton beforehand,
-    since the arrow is made insensitive if the menu is not set.
+      Connect to `ShowMenu` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B menuToolButton) the instance the signal is connected to
-    )
-  */
-  alias ShowMenuCallbackDlg = void delegate(gtk.menu_tool_button.MenuToolButton menuToolButton);
-
-  /** ditto */
-  alias ShowMenuCallbackFunc = void function(gtk.menu_tool_button.MenuToolButton menuToolButton);
-
-  /**
-    Connect to ShowMenu signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::show-menu signal is emitted before the menu is shown.
+      
+      It can be used to populate the menu on demand, using
+      [gtk.menu_tool_button.MenuToolButton.setMenu].
+      
+      Note that even if you populate the menu dynamically in this way,
+      you must set an empty menu on the #GtkMenuToolButton beforehand,
+      since the arrow is made insensitive if the menu is not set.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.menu_tool_button.MenuToolButton menuToolButton))
+  
+          `menuToolButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowMenu(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowMenuCallbackDlg) || is(T : ShowMenuCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_tool_button.MenuToolButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuToolButton = getVal!(gtk.menu_tool_button.MenuToolButton)(_paramVals);
-      _dClosure.dlg(menuToolButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

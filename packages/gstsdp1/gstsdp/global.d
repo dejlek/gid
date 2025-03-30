@@ -1,3 +1,4 @@
+/// Global functions for gstsdp1 library
 module gstsdp.global;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gstsdp.types;
 
 /**
     Check if the given addr is a multicast address.
-  Params:
-    nettype =       a network type
-    addrtype =       an address type
-    addr =       an address
-  Returns:     TRUE when addr is multicast.
+
+    Params:
+      nettype = a network type
+      addrtype = an address type
+      addr = an address
+    Returns: TRUE when addr is multicast.
 */
 bool sdpAddressIsMulticast(string nettype, string addrtype, string addr)
 {
@@ -26,10 +28,11 @@ bool sdpAddressIsMulticast(string nettype, string addrtype, string addr)
 
 /**
     Makes key management data
-  Params:
-    uri =       a #gchar URI
-    base64 =       a #gchar base64-encoded key data
-  Returns:     a #gchar key-mgmt data,
+
+    Params:
+      uri = a #gchar URI
+      base64 = a #gchar base64-encoded key data
+    Returns: a #gchar key-mgmt data,
 */
 string sdpMakeKeymgmt(string uri, string base64)
 {

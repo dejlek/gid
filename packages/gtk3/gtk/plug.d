@@ -1,3 +1,4 @@
+/// Module for [Plug] class
 module gtk.plug;
 
 import atk.implementor_iface;
@@ -17,38 +18,41 @@ import xlib.types;
 
 /**
     Together with #GtkSocket, #GtkPlug provides the ability to embed
-  widgets from one process into another process in a fashion that is
-  transparent to the user. One process creates a #GtkSocket widget
-  and passes the ID of that widget’s window to the other process,
-  which then creates a #GtkPlug with that window ID. Any widgets
-  contained in the #GtkPlug then will appear inside the first
-  application’s window.
-  
-  The communication between a #GtkSocket and a #GtkPlug follows the
-  [XEmbed Protocol](http://www.freedesktop.org/Standards/xembed-spec).
-  This protocol has also been implemented in other toolkits, e.g. Qt,
-  allowing the same level of integration when embedding a Qt widget
-  in GTK+ or vice versa.
-  
-  The #GtkPlug and #GtkSocket widgets are only available when GTK+
-  is compiled for the X11 platform and `GDK_WINDOWING_X11` is defined.
-  They can only be used on a #GdkX11Display. To use #GtkPlug and
-  #GtkSocket, you need to include the `gtk/gtkx.h` header.
+    widgets from one process into another process in a fashion that is
+    transparent to the user. One process creates a #GtkSocket widget
+    and passes the ID of that widget’s window to the other process,
+    which then creates a #GtkPlug with that window ID. Any widgets
+    contained in the #GtkPlug then will appear inside the first
+    application’s window.
+    
+    The communication between a #GtkSocket and a #GtkPlug follows the
+    [XEmbed Protocol](http://www.freedesktop.org/Standards/xembed-spec).
+    This protocol has also been implemented in other toolkits, e.g. Qt,
+    allowing the same level of integration when embedding a Qt widget
+    in GTK+ or vice versa.
+    
+    The #GtkPlug and #GtkSocket widgets are only available when GTK+
+    is compiled for the X11 platform and `GDK_WINDOWING_X11` is defined.
+    They can only be used on a #GdkX11Display. To use #GtkPlug and
+    #GtkSocket, you need to include the `gtk/gtkx.h` header.
 */
 class Plug : gtk.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_get_type != &gidSymbolNotFound ? gtk_plug_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,11 +65,12 @@ class Plug : gtk.window.Window
 
   /**
       Creates a new plug widget inside the #GtkSocket identified
-    by socket_id. If socket_id is 0, the plug is left “unplugged” and
-    can later be plugged into a #GtkSocket by  [gtk.socket.Socket.addId].
-    Params:
-      socketId =       the window ID of the socket, or 0.
-    Returns:     the new #GtkPlug widget.
+      by socket_id. If socket_id is 0, the plug is left “unplugged” and
+      can later be plugged into a #GtkSocket by  [gtk.socket.Socket.addId].
+  
+      Params:
+        socketId = the window ID of the socket, or 0.
+      Returns: the new #GtkPlug widget.
   */
   this(xlib.types.Window socketId)
   {
@@ -76,10 +81,11 @@ class Plug : gtk.window.Window
 
   /**
       Create a new plug widget inside the #GtkSocket identified by socket_id.
-    Params:
-      display =       the #GdkDisplay on which socket_id is displayed
-      socketId =       the XID of the socket’s window.
-    Returns:     the new #GtkPlug widget.
+  
+      Params:
+        display = the #GdkDisplay on which socket_id is displayed
+        socketId = the XID of the socket’s window.
+      Returns: the new #GtkPlug widget.
   */
   static gtk.plug.Plug newForDisplay(gdk.display.Display display, xlib.types.Window socketId)
   {
@@ -91,9 +97,10 @@ class Plug : gtk.window.Window
 
   /**
       Finish the initialization of plug for a given #GtkSocket identified by
-    socket_id. This function will generally only be used by classes deriving from #GtkPlug.
-    Params:
-      socketId =       the XID of the socket’s window.
+      socket_id. This function will generally only be used by classes deriving from #GtkPlug.
+  
+      Params:
+        socketId = the XID of the socket’s window.
   */
   void construct(xlib.types.Window socketId)
   {
@@ -102,12 +109,13 @@ class Plug : gtk.window.Window
 
   /**
       Finish the initialization of plug for a given #GtkSocket identified by
-    socket_id which is currently displayed on display.
-    This function will generally only be used by classes deriving from #GtkPlug.
-    Params:
-      display =       the #GdkDisplay associated with socket_id’s
-             #GtkSocket.
-      socketId =       the XID of the socket’s window.
+      socket_id which is currently displayed on display.
+      This function will generally only be used by classes deriving from #GtkPlug.
+  
+      Params:
+        display = the #GdkDisplay associated with socket_id’s
+               #GtkSocket.
+        socketId = the XID of the socket’s window.
   */
   void constructForDisplay(gdk.display.Display display, xlib.types.Window socketId)
   {
@@ -116,7 +124,7 @@ class Plug : gtk.window.Window
 
   /**
       Determines whether the plug is embedded in a socket.
-    Returns:     true if the plug is embedded in a socket
+      Returns: true if the plug is embedded in a socket
   */
   bool getEmbedded()
   {
@@ -127,9 +135,9 @@ class Plug : gtk.window.Window
 
   /**
       Gets the window ID of a #GtkPlug widget, which can then
-    be used to embed this window inside another window, for
-    instance with [gtk.socket.Socket.addId].
-    Returns:     the window ID for the plug
+      be used to embed this window inside another window, for
+      instance with [gtk.socket.Socket.addId].
+      Returns: the window ID for the plug
   */
   xlib.types.Window getId()
   {
@@ -140,7 +148,7 @@ class Plug : gtk.window.Window
 
   /**
       Retrieves the socket the plug is embedded in.
-    Returns:     the window of the socket, or null
+      Returns: the window of the socket, or null
   */
   gdk.window.Window getSocketWindow()
   {
@@ -151,34 +159,36 @@ class Plug : gtk.window.Window
   }
 
   /**
+      Connect to `Embedded` signal.
+  
       Gets emitted when the plug becomes embedded in a socket.
   
-    ## Parameters
-    $(LIST
-      * $(B plug) the instance the signal is connected to
-    )
-  */
-  alias EmbeddedCallbackDlg = void delegate(gtk.plug.Plug plug);
-
-  /** ditto */
-  alias EmbeddedCallbackFunc = void function(gtk.plug.Plug plug);
-
-  /**
-    Connect to Embedded signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.plug.Plug plug))
+  
+          `plug` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectEmbedded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : EmbeddedCallbackDlg) || is(T : EmbeddedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.plug.Plug)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto plug = getVal!(gtk.plug.Plug)(_paramVals);
-      _dClosure.dlg(plug);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

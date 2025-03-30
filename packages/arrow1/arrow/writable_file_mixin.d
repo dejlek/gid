@@ -1,3 +1,4 @@
+/// Module for [WritableFile] interface mixin
 module arrow.writable_file_mixin;
 
 public import arrow.writable_file_iface_proxy;

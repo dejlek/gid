@@ -1,3 +1,4 @@
+/// Module for [Gutter] class
 module gtksource.gutter;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtksource.view;
 class Gutter : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_get_type != &gidSymbolNotFound ? gtk_source_gutter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,11 @@ class Gutter : gobject.object.ObjectG
 
   /**
       Finds the #GtkSourceGutterRenderer at (x, y).
-    Params:
-      x =       The x position to get identified.
-      y =       The y position to get identified.
-    Returns:     the renderer at (x, y) or null.
+  
+      Params:
+        x = The x position to get identified.
+        y = The y position to get identified.
+      Returns: the renderer at (x, y) or null.
   */
   gtksource.gutter_renderer.GutterRenderer getRendererAtPos(int x, int y)
   {
@@ -69,12 +74,13 @@ class Gutter : gobject.object.ObjectG
 
   /**
       Insert renderer into the gutter. If renderer is yet unowned then gutter
-    claims its ownership. Otherwise just increases renderer's reference count.
-    renderer cannot be already inserted to another gutter.
-    Params:
-      renderer =       a gutter renderer (must inherit from #GtkSourceGutterRenderer).
-      position =       the renderer position.
-    Returns:     true if operation succeeded. Otherwise false.
+      claims its ownership. Otherwise just increases renderer's reference count.
+      renderer cannot be already inserted to another gutter.
+  
+      Params:
+        renderer = a gutter renderer (must inherit from #GtkSourceGutterRenderer).
+        position = the renderer position.
+      Returns: true if operation succeeded. Otherwise false.
   */
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
@@ -85,7 +91,7 @@ class Gutter : gobject.object.ObjectG
 
   /**
       Invalidates the drawable area of the gutter. You can use this to force a
-    redraw of the gutter if something has changed and needs to be redrawn.
+      redraw of the gutter if something has changed and needs to be redrawn.
   */
   void queueDraw()
   {
@@ -94,8 +100,9 @@ class Gutter : gobject.object.ObjectG
 
   /**
       Removes renderer from gutter.
-    Params:
-      renderer =       a #GtkSourceGutterRenderer.
+  
+      Params:
+        renderer = a #GtkSourceGutterRenderer.
   */
   void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
@@ -104,9 +111,10 @@ class Gutter : gobject.object.ObjectG
 
   /**
       Reorders renderer in gutter to new position.
-    Params:
-      renderer =       a #GtkCellRenderer.
-      position =       the new renderer position.
+  
+      Params:
+        renderer = a #GtkCellRenderer.
+        position = the new renderer position.
   */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {

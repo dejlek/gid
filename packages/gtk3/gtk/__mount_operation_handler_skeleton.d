@@ -1,3 +1,4 @@
+/// Module for [MountOperationHandlerSkeleton] class
 module gtk.__mount_operation_handler_skeleton;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class MountOperationHandlerSkeleton
 {
   _GtkMountOperationHandlerSkeleton cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class MountOperationHandlerSkeleton
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

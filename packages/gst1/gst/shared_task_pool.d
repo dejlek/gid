@@ -1,3 +1,4 @@
+/// Module for [SharedTaskPool] class
 module gst.shared_task_pool;
 
 import gid.gid;
@@ -12,17 +13,20 @@ import gst.types;
 class SharedTaskPool : gst.task_pool.TaskPool
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_shared_task_pool_get_type != &gidSymbolNotFound ? gst_shared_task_pool_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,12 +39,12 @@ class SharedTaskPool : gst.task_pool.TaskPool
 
   /**
       Create a new shared task pool. The shared task pool will queue tasks on
-    a maximum number of threads, 1 by default.
-    
-    Do not use a #GstSharedTaskPool to manage potentially inter-dependent tasks such
-    as pad tasks, as having one task waiting on another to return before returning
-    would cause obvious deadlocks if they happen to share the same thread.
-    Returns:     a new #GstSharedTaskPool. [gst.object.ObjectGst.unref] after usage.
+      a maximum number of threads, 1 by default.
+      
+      Do not use a #GstSharedTaskPool to manage potentially inter-dependent tasks such
+      as pad tasks, as having one task waiting on another to return before returning
+      would cause obvious deadlocks if they happen to share the same thread.
+      Returns: a new #GstSharedTaskPool. [gst.object.ObjectGst.unref] after usage.
   */
   this()
   {
@@ -59,12 +63,13 @@ class SharedTaskPool : gst.task_pool.TaskPool
 
   /**
       Update the maximal number of threads the pool may spawn. When
-    the maximal number of threads is reduced, existing threads are not
-    immediately shut down, see [glib.thread_pool.ThreadPool.setMaxThreads].
-    
-    Setting max_threads to 0 effectively freezes the pool.
-    Params:
-      maxThreads =       Maximum number of threads to spawn.
+      the maximal number of threads is reduced, existing threads are not
+      immediately shut down, see [glib.thread_pool.ThreadPool.setMaxThreads].
+      
+      Setting max_threads to 0 effectively freezes the pool.
+  
+      Params:
+        maxThreads = Maximum number of threads to spawn.
   */
   void setMaxThreads(uint maxThreads)
   {

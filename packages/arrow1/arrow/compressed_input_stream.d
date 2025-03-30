@@ -1,3 +1,4 @@
+/// Module for [CompressedInputStream] class
 module arrow.compressed_input_stream;
 
 import arrow.c.functions;
@@ -16,17 +17,20 @@ import glib.error;
 class CompressedInputStream : arrow.input_stream.InputStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_compressed_input_stream_get_type != &gidSymbolNotFound ? garrow_compressed_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

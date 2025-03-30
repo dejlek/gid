@@ -1,3 +1,4 @@
+/// Module for [RecordBatchReader] class
 module arrowflight.record_batch_reader;
 
 import arrow.table;
@@ -13,17 +14,20 @@ import gobject.object;
 class RecordBatchReader : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_reader_get_type != &gidSymbolNotFound ? gaflight_record_batch_reader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

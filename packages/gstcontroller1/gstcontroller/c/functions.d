@@ -1,3 +1,4 @@
+/// C functions for gstcontroller1 library
 module gstcontroller.c.functions;
 
 public import gid.basictypes;
@@ -18,90 +19,140 @@ else
 __gshared extern(C)
 {
   // ARGBControlBinding
-  extern(C) GType function() c_gst_argb_control_binding_get_type;
-  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* csA, GstControlSource* csR, GstControlSource* csG, GstControlSource* csB) c_gst_argb_control_binding_new;
+  GType function() c_gst_argb_control_binding_get_type; ///
+  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* csA, GstControlSource* csR, GstControlSource* csG, GstControlSource* csB) c_gst_argb_control_binding_new; ///
 
   // ControlPoint
-  extern(C) GType function() c_gst_control_point_get_type;
-  GstControlPoint* function(GstControlPoint* cp) c_gst_control_point_copy;
-  void function(GstControlPoint* cp) c_gst_control_point_free;
+  GType function() c_gst_control_point_get_type; ///
+  GstControlPoint* function(GstControlPoint* cp) c_gst_control_point_copy; ///
+  void function(GstControlPoint* cp) c_gst_control_point_free; ///
 
   // DirectControlBinding
-  extern(C) GType function() c_gst_direct_control_binding_get_type;
-  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* cs) c_gst_direct_control_binding_new;
-  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* cs) c_gst_direct_control_binding_new_absolute;
+  GType function() c_gst_direct_control_binding_get_type; ///
+  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* cs) c_gst_direct_control_binding_new; ///
+  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstControlSource* cs) c_gst_direct_control_binding_new_absolute; ///
 
   // InterpolationControlSource
-  extern(C) GType function() c_gst_interpolation_control_source_get_type;
-  GstControlSource* function() c_gst_interpolation_control_source_new;
+  GType function() c_gst_interpolation_control_source_get_type; ///
+  GstControlSource* function() c_gst_interpolation_control_source_new; ///
 
   // LFOControlSource
-  extern(C) GType function() c_gst_lfo_control_source_get_type;
-  GstControlSource* function() c_gst_lfo_control_source_new;
+  GType function() c_gst_lfo_control_source_get_type; ///
+  GstControlSource* function() c_gst_lfo_control_source_new; ///
 
   // ProxyControlBinding
-  extern(C) GType function() c_gst_proxy_control_binding_get_type;
-  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstObject* refObject, const(char)* refPropertyName) c_gst_proxy_control_binding_new;
+  GType function() c_gst_proxy_control_binding_get_type; ///
+  GstControlBinding* function(GstObject* object, const(char)* propertyName, GstObject* refObject, const(char)* refPropertyName) c_gst_proxy_control_binding_new; ///
 
   // TimedValueControlSource
-  extern(C) GType function() c_gst_timed_value_control_source_get_type;
-  GSequenceIter* function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_find_control_point_iter;
-  GList* function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_all;
-  int function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_count;
-  bool function(GstTimedValueControlSource* self, GstClockTime timestamp, double value) c_gst_timed_value_control_source_set;
-  bool function(GstTimedValueControlSource* self, const(GSList)* timedvalues) c_gst_timed_value_control_source_set_from_list;
-  bool function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_unset;
-  void function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_unset_all;
+  GType function() c_gst_timed_value_control_source_get_type; ///
+  GSequenceIter* function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_find_control_point_iter; ///
+  GList* function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_all; ///
+  int function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_get_count; ///
+  bool function(GstTimedValueControlSource* self, GstClockTime timestamp, double value) c_gst_timed_value_control_source_set; ///
+  bool function(GstTimedValueControlSource* self, const(GSList)* timedvalues) c_gst_timed_value_control_source_set_from_list; ///
+  bool function(GstTimedValueControlSource* self, GstClockTime timestamp) c_gst_timed_value_control_source_unset; ///
+  void function(GstTimedValueControlSource* self) c_gst_timed_value_control_source_unset_all; ///
 
   // TriggerControlSource
-  extern(C) GType function() c_gst_trigger_control_source_get_type;
-  GstControlSource* function() c_gst_trigger_control_source_new;
+  GType function() c_gst_trigger_control_source_get_type; ///
+  GstControlSource* function() c_gst_trigger_control_source_new; ///
 
   // global
-  void function(GstTimedValueControlSource* self) c_gst_timed_value_control_invalidate_cache;
+  void function(GstTimedValueControlSource* self) c_gst_timed_value_control_invalidate_cache; ///
 }
 
 // ARGBControlBinding
+
+/** */
 alias gst_argb_control_binding_get_type = c_gst_argb_control_binding_get_type;
+
+/** */
 alias gst_argb_control_binding_new = c_gst_argb_control_binding_new;
 
 // ControlPoint
+
+/** */
 alias gst_control_point_get_type = c_gst_control_point_get_type;
+
+/** */
 alias gst_control_point_copy = c_gst_control_point_copy;
+
+/** */
 alias gst_control_point_free = c_gst_control_point_free;
 
 // DirectControlBinding
+
+/** */
 alias gst_direct_control_binding_get_type = c_gst_direct_control_binding_get_type;
+
+/** */
 alias gst_direct_control_binding_new = c_gst_direct_control_binding_new;
+
+/** */
 alias gst_direct_control_binding_new_absolute = c_gst_direct_control_binding_new_absolute;
 
 // InterpolationControlSource
+
+/** */
 alias gst_interpolation_control_source_get_type = c_gst_interpolation_control_source_get_type;
+
+/** */
 alias gst_interpolation_control_source_new = c_gst_interpolation_control_source_new;
 
 // LFOControlSource
+
+/** */
 alias gst_lfo_control_source_get_type = c_gst_lfo_control_source_get_type;
+
+/** */
 alias gst_lfo_control_source_new = c_gst_lfo_control_source_new;
 
 // ProxyControlBinding
+
+/** */
 alias gst_proxy_control_binding_get_type = c_gst_proxy_control_binding_get_type;
+
+/** */
 alias gst_proxy_control_binding_new = c_gst_proxy_control_binding_new;
 
 // TimedValueControlSource
+
+/** */
 alias gst_timed_value_control_source_get_type = c_gst_timed_value_control_source_get_type;
+
+/** */
 alias gst_timed_value_control_source_find_control_point_iter = c_gst_timed_value_control_source_find_control_point_iter;
+
+/** */
 alias gst_timed_value_control_source_get_all = c_gst_timed_value_control_source_get_all;
+
+/** */
 alias gst_timed_value_control_source_get_count = c_gst_timed_value_control_source_get_count;
+
+/** */
 alias gst_timed_value_control_source_set = c_gst_timed_value_control_source_set;
+
+/** */
 alias gst_timed_value_control_source_set_from_list = c_gst_timed_value_control_source_set_from_list;
+
+/** */
 alias gst_timed_value_control_source_unset = c_gst_timed_value_control_source_unset;
+
+/** */
 alias gst_timed_value_control_source_unset_all = c_gst_timed_value_control_source_unset_all;
 
 // TriggerControlSource
+
+/** */
 alias gst_trigger_control_source_get_type = c_gst_trigger_control_source_get_type;
+
+/** */
 alias gst_trigger_control_source_new = c_gst_trigger_control_source_new;
 
 // global
+
+/** */
 alias gst_timed_value_control_invalidate_cache = c_gst_timed_value_control_invalidate_cache;
 
 shared static this()

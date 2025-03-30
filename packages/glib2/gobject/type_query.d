@@ -1,3 +1,4 @@
+/// Module for [TypeQuery] class
 module gobject.type_query;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gobject.types;
 
 /**
     A structure holding information for a specific type.
-  
-  See also: [gobject.global.typeQuery]
+    
+    See also: [gobject.global.typeQuery]
 */
 class TypeQuery
 {
   GTypeQuery cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class TypeQuery
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [StyleSchemeChooser] interface
 module gtksource.style_scheme_chooser;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
@@ -12,6 +13,7 @@ import gtksource.types;
 interface StyleSchemeChooser
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -20,14 +22,15 @@ interface StyleSchemeChooser
 
   /**
       Gets the currently-selected scheme.
-    Returns:     the currently-selected scheme.
+      Returns: the currently-selected scheme.
   */
   gtksource.style_scheme.StyleScheme getStyleScheme();
 
   /**
       Sets the scheme.
-    Params:
-      scheme =       a #GtkSourceStyleScheme
+  
+      Params:
+        scheme = a #GtkSourceStyleScheme
   */
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme);
 }

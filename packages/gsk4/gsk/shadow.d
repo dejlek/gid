@@ -1,3 +1,4 @@
+/// Module for [Shadow] class
 module gsk.shadow;
 
 import gdk.rgba;
@@ -13,6 +14,7 @@ class Shadow
 {
   GskShadow cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class Shadow
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [MIKEYMessage] class
 module gstsdp.mikeymessage;
 
 import gid.gid;
@@ -16,22 +17,26 @@ import gstsdp.types;
 class MIKEYMessage : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mikey_message_get_type != &gidSymbolNotFound ? gst_mikey_message_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -104,7 +109,7 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Make a new MIKEY message.
-    Returns:     a new #GstMIKEYMessage on success
+      Returns: a new #GstMIKEYMessage on success
   */
   this()
   {
@@ -115,10 +120,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Make a new #GstMIKEYMessage from bytes.
-    Params:
-      bytes =       a #GBytes
-      info =       a #GstMIKEYDecryptInfo
-    Returns:     a new #GstMIKEYMessage
+  
+      Params:
+        bytes = a #GBytes
+        info = a #GstMIKEYDecryptInfo
+      Returns: a new #GstMIKEYMessage
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromBytes(glib.bytes.Bytes bytes, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -133,15 +139,16 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Makes mikey message including:
-     $(LIST
-        * Security Policy Payload
-        * Key Data Transport Payload
-        * Key Data Sub-Payload
-     )
-    Params:
-      caps =       a #GstCaps, including SRTP parameters (srtp/srtcp cipher, authorization, key data)
-    Returns:     a #GstMIKEYMessage,
-      or null if there is no srtp information in the caps.
+       $(LIST
+          * Security Policy Payload
+          * Key Data Transport Payload
+          * Key Data Sub-Payload
+       )
+  
+      Params:
+        caps = a #GstCaps, including SRTP parameters (srtp/srtcp cipher, authorization, key data)
+      Returns: a #GstMIKEYMessage,
+        or null if there is no srtp information in the caps.
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromCaps(gst.caps.Caps caps)
   {
@@ -153,12 +160,13 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Parse size bytes from data into a #GstMIKEYMessage. info contains the
-    parameters to decrypt and verify the data.
-    Params:
-      data =       bytes to read
-      info =       #GstMIKEYDecryptInfo
-    Returns:     a #GstMIKEYMessage on success or null when parsing failed and
-      error will be set.
+      parameters to decrypt and verify the data.
+  
+      Params:
+        data = bytes to read
+        info = #GstMIKEYDecryptInfo
+      Returns: a #GstMIKEYMessage on success or null when parsing failed and
+        error will be set.
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromData(ubyte[] data, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -178,11 +186,12 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a Crypto policy for SRTP to msg.
-    Params:
-      policy =       The security policy applied for the stream with ssrc
-      ssrc =       the SSRC that must be used for the stream
-      roc =       current rollover counter
-    Returns:     true on success
+  
+      Params:
+        policy = The security policy applied for the stream with ssrc
+        ssrc = the SSRC that must be used for the stream
+        roc = current rollover counter
+      Returns: true on success
   */
   bool addCsSrtp(ubyte policy, uint ssrc, uint roc)
   {
@@ -193,9 +202,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a new payload to msg.
-    Params:
-      payload =       a #GstMIKEYPayload
-    Returns:     true on success
+  
+      Params:
+        payload = a #GstMIKEYPayload
+      Returns: true on success
   */
   bool addPayload(gstsdp.mikeypayload.MIKEYPayload payload)
   {
@@ -206,10 +216,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a new PKE payload to msg with the given parameters.
-    Params:
-      C =       envelope key cache indicator
-      data =       the encrypted envelope key
-    Returns:     true on success
+  
+      Params:
+        C = envelope key cache indicator
+        data = the encrypted envelope key
+      Returns: true on success
   */
   bool addPke(gstsdp.types.MIKEYCacheType C, ubyte[] data)
   {
@@ -225,9 +236,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a new RAND payload to msg with the given parameters.
-    Params:
-      rand =       random data
-    Returns:     true on success
+  
+      Params:
+        rand = random data
+      Returns: true on success
   */
   bool addRand(ubyte[] rand)
   {
@@ -243,9 +255,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a new RAND payload to msg with len random bytes.
-    Params:
-      len =       length
-    Returns:     true on success
+  
+      Params:
+        len = length
+      Returns: true on success
   */
   bool addRandLen(ubyte len)
   {
@@ -256,8 +269,8 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Add a new T payload to msg that contains the current time
-    in NTP-UTC format.
-    Returns:     true on success
+      in NTP-UTC format.
+      Returns: true on success
   */
   bool addTNowNtpUtc()
   {
@@ -277,10 +290,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Find the nth occurrence of the payload with type in msg.
-    Params:
-      type =       a #GstMIKEYPayloadType
-      nth =       payload to find
-    Returns:     the nth #GstMIKEYPayload of type.
+  
+      Params:
+        type = a #GstMIKEYPayloadType
+        nth = payload to find
+      Returns: the nth #GstMIKEYPayload of type.
   */
   gstsdp.mikeypayload.MIKEYPayload findPayload(gstsdp.types.MIKEYPayloadType type, uint nth)
   {
@@ -292,9 +306,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Get the policy information of msg at idx.
-    Params:
-      idx =       an index
-    Returns:     a #GstMIKEYMapSRTP
+  
+      Params:
+        idx = an index
+      Returns: a #GstMIKEYMapSRTP
   */
   gstsdp.types.MIKEYMapSRTP getCsSrtp(uint idx)
   {
@@ -308,7 +323,7 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Get the number of crypto sessions in msg.
-    Returns:     the number of crypto sessions
+      Returns: the number of crypto sessions
   */
   uint getNCs()
   {
@@ -319,7 +334,7 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Get the number of payloads in msg.
-    Returns:     the number of payloads in msg
+      Returns: the number of payloads in msg
   */
   uint getNPayloads()
   {
@@ -330,10 +345,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Get the #GstMIKEYPayload at idx in msg
-    Params:
-      idx =       an index
-    Returns:     the #GstMIKEYPayload at idx. The payload
-      remains valid for as long as it is part of msg.
+  
+      Params:
+        idx = an index
+      Returns: the #GstMIKEYPayload at idx. The payload
+        remains valid for as long as it is part of msg.
   */
   gstsdp.mikeypayload.MIKEYPayload getPayload(uint idx)
   {
@@ -345,12 +361,13 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Insert a Crypto Session map for SRTP in msg at idx
-    
-    When idx is -1, the policy will be appended.
-    Params:
-      idx =       the index to insert at
-      map =       the map info
-    Returns:     true on success
+      
+      When idx is -1, the policy will be appended.
+  
+      Params:
+        idx = the index to insert at
+        map = the map info
+      Returns: true on success
   */
   bool insertCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
   {
@@ -361,11 +378,12 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Insert the payload at index idx in msg. If idx is -1, the payload
-    will be appended to msg.
-    Params:
-      idx =       an index
-      payload =       a #GstMIKEYPayload
-    Returns:     true on success
+      will be appended to msg.
+  
+      Params:
+        idx = an index
+        payload = a #GstMIKEYPayload
+      Returns: true on success
   */
   bool insertPayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
@@ -376,9 +394,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Remove the SRTP policy at idx.
-    Params:
-      idx =       the index to remove
-    Returns:     true on success
+  
+      Params:
+        idx = the index to remove
+      Returns: true on success
   */
   bool removeCsSrtp(int idx)
   {
@@ -389,9 +408,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Remove the payload in msg at idx
-    Params:
-      idx =       an index
-    Returns:     true on success
+  
+      Params:
+        idx = an index
+      Returns: true on success
   */
   bool removePayload(uint idx)
   {
@@ -402,10 +422,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Replace a Crypto Session map for SRTP in msg at idx with map.
-    Params:
-      idx =       the index to insert at
-      map =       the map info
-    Returns:     true on success
+  
+      Params:
+        idx = the index to insert at
+        map = the map info
+      Returns: true on success
   */
   bool replaceCsSrtp(int idx, gstsdp.types.MIKEYMapSRTP map)
   {
@@ -416,10 +437,11 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Replace the payload at idx in msg with payload.
-    Params:
-      idx =       an index
-      payload =       a #GstMIKEYPayload
-    Returns:     true on success
+  
+      Params:
+        idx = an index
+        payload = a #GstMIKEYPayload
+      Returns: true on success
   */
   bool replacePayload(uint idx, gstsdp.mikeypayload.MIKEYPayload payload)
   {
@@ -430,14 +452,15 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Set the information in msg.
-    Params:
-      version_ =       a version
-      type =       a #GstMIKEYType
-      V =       verify flag
-      prfFunc =       the #GstMIKEYPRFFunc function to use
-      CSBId =       the Crypto Session Bundle id
-      mapType =       the #GstMIKEYMapType
-    Returns:     true on success
+  
+      Params:
+        version_ = a version
+        type = a #GstMIKEYType
+        V = verify flag
+        prfFunc = the #GstMIKEYPRFFunc function to use
+        CSBId = the Crypto Session Bundle id
+        mapType = the #GstMIKEYMapType
+      Returns: true on success
   */
   bool setInfo(ubyte version_, gstsdp.types.MIKEYType type, bool V, gstsdp.types.MIKEYPRFFunc prfFunc, uint CSBId, gstsdp.types.MIKEYMapType mapType)
   {
@@ -448,9 +471,10 @@ class MIKEYMessage : gobject.boxed.Boxed
 
   /**
       Convert msg to a #GBytes.
-    Params:
-      info =       a #GstMIKEYEncryptInfo
-    Returns:     a new #GBytes for msg.
+  
+      Params:
+        info = a #GstMIKEYEncryptInfo
+      Returns: a new #GBytes for msg.
   */
   glib.bytes.Bytes toBytes(gstsdp.types.MIKEYEncryptInfo info)
   {

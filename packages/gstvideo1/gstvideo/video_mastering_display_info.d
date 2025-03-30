@@ -1,3 +1,4 @@
+/// Module for [VideoMasteringDisplayInfo] class
 module gstvideo.video_mastering_display_info;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstvideo.types;
 
 /**
     Mastering display color volume information defined by SMPTE ST 2086
-  (a.k.a static HDR metadata).
+    (a.k.a static HDR metadata).
 */
 class VideoMasteringDisplayInfo
 {
   GstVideoMasteringDisplayInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoMasteringDisplayInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -62,9 +65,10 @@ class VideoMasteringDisplayInfo
 
   /**
       Set string representation of minfo to caps
-    Params:
-      caps =       a #GstCaps
-    Returns:     true if minfo was successfully set to caps
+  
+      Params:
+        caps = a #GstCaps
+      Returns: true if minfo was successfully set to caps
   */
   bool addToCaps(gst.caps.Caps caps)
   {
@@ -75,9 +79,10 @@ class VideoMasteringDisplayInfo
 
   /**
       Parse caps and update minfo
-    Params:
-      caps =       a #GstCaps
-    Returns:     true if caps has #GstVideoMasteringDisplayInfo and could be parsed
+  
+      Params:
+        caps = a #GstCaps
+      Returns: true if caps has #GstVideoMasteringDisplayInfo and could be parsed
   */
   bool fromCaps(gst.caps.Caps caps)
   {
@@ -96,9 +101,10 @@ class VideoMasteringDisplayInfo
 
   /**
       Checks equality between minfo and other.
-    Params:
-      other =       a #GstVideoMasteringDisplayInfo
-    Returns:     true if minfo and other are equal.
+  
+      Params:
+        other = a #GstVideoMasteringDisplayInfo
+      Returns: true if minfo and other are equal.
   */
   bool isEqual(gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo other)
   {
@@ -109,7 +115,7 @@ class VideoMasteringDisplayInfo
 
   /**
       Convert minfo to its string representation
-    Returns:     a string representation of minfo
+      Returns: a string representation of minfo
   */
   string toString_()
   {
@@ -121,10 +127,11 @@ class VideoMasteringDisplayInfo
 
   /**
       Extract #GstVideoMasteringDisplayInfo from mastering
-    Params:
-      minfo =       a #GstVideoMasteringDisplayInfo
-      mastering =       a #GstStructure representing #GstVideoMasteringDisplayInfo
-    Returns:     true if minfo was filled with mastering
+  
+      Params:
+        minfo = a #GstVideoMasteringDisplayInfo
+        mastering = a #GstStructure representing #GstVideoMasteringDisplayInfo
+      Returns: true if minfo was filled with mastering
   */
   static bool fromString(out gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo minfo, string mastering)
   {

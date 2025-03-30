@@ -1,3 +1,4 @@
+/// Module for [Spinner] class
 module gtk.spinner;
 
 import atk.implementor_iface;
@@ -12,31 +13,34 @@ import gtk.widget;
 
 /**
     A GtkSpinner widget displays an icon-size spinning animation.
-  It is often used as an alternative to a #GtkProgressBar for
-  displaying indefinite activity, instead of actual progress.
-  
-  To start the animation, use [gtk.spinner.Spinner.start], to stop it
-  use [gtk.spinner.Spinner.stop].
-  
-  # CSS nodes
-  
-  GtkSpinner has a single CSS node with the name spinner. When the animation is
-  active, the :checked pseudoclass is added to this node.
+    It is often used as an alternative to a #GtkProgressBar for
+    displaying indefinite activity, instead of actual progress.
+    
+    To start the animation, use [gtk.spinner.Spinner.start], to stop it
+    use [gtk.spinner.Spinner.stop].
+    
+    # CSS nodes
+    
+    GtkSpinner has a single CSS node with the name spinner. When the animation is
+    active, the :checked pseudoclass is added to this node.
 */
 class Spinner : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_get_type != &gidSymbolNotFound ? gtk_spinner_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,7 +53,7 @@ class Spinner : gtk.widget.Widget
 
   /**
       Returns a new spinner widget. Not yet started.
-    Returns:     a new #GtkSpinner
+      Returns: a new #GtkSpinner
   */
   this()
   {

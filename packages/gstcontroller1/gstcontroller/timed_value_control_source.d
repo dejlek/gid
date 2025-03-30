@@ -1,3 +1,4 @@
+/// Module for [TimedValueControlSource] class
 module gstcontroller.timed_value_control_source;
 
 import gid.gid;
@@ -12,26 +13,29 @@ import gstcontroller.types;
 
 /**
     Base class for #GstControlSource that use time-stamped values.
-  
-  When overriding bind, chain up first to give this bind implementation a
-  chance to setup things.
-  
-  All functions are MT-safe.
+    
+    When overriding bind, chain up first to give this bind implementation a
+    chance to setup things.
+    
+    All functions are MT-safe.
 */
 class TimedValueControlSource : gst.control_source.ControlSource
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_timed_value_control_source_get_type != &gidSymbolNotFound ? gst_timed_value_control_source_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,13 +48,14 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Find last value before given timestamp in control point list.
-    If all values in the control point list come after the given
-    timestamp or no values exist, null is returned.
-    
-    For use in control source implementations.
-    Params:
-      timestamp =       the search key
-    Returns:     the found #GSequenceIter or null
+      If all values in the control point list come after the given
+      timestamp or no values exist, null is returned.
+      
+      For use in control source implementations.
+  
+      Params:
+        timestamp = the search key
+      Returns: the found #GSequenceIter or null
   */
   glib.sequence_iter.SequenceIter findControlPointIter(gst.types.ClockTime timestamp)
   {
@@ -62,9 +67,9 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Returns a read-only copy of the list of #GstTimedValue for the given property.
-    Free the list after done with it.
-    Returns:     a copy
-      of the list, or null if the property isn't handled by the controller
+      Free the list after done with it.
+      Returns: a copy
+        of the list, or null if the property isn't handled by the controller
   */
   gst.types.TimedValue[] getAll()
   {
@@ -76,7 +81,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Get the number of control points that are set.
-    Returns:     the number of control points that are set.
+      Returns: the number of control points that are set.
   */
   int getCount()
   {
@@ -87,10 +92,11 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Set the value of given controller-handled property at a certain time.
-    Params:
-      timestamp =       the time the control-change is scheduled for
-      value =       the control-value
-    Returns:     FALSE if the values couldn't be set, TRUE otherwise.
+  
+      Params:
+        timestamp = the time the control-change is scheduled for
+        value = the control-value
+      Returns: FALSE if the values couldn't be set, TRUE otherwise.
   */
   bool set(gst.types.ClockTime timestamp, double value)
   {
@@ -101,10 +107,11 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Sets multiple timed values at once.
-    Params:
-      timedvalues =       a list
-        with #GstTimedValue items
-    Returns:     FALSE if the values couldn't be set, TRUE otherwise.
+  
+      Params:
+        timedvalues = a list
+          with #GstTimedValue items
+      Returns: FALSE if the values couldn't be set, TRUE otherwise.
   */
   bool setFromList(gst.types.TimedValue[] timedvalues)
   {
@@ -117,10 +124,11 @@ class TimedValueControlSource : gst.control_source.ControlSource
 
   /**
       Used to remove the value of given controller-handled property at a certain
-    time.
-    Params:
-      timestamp =       the time the control-change should be removed from
-    Returns:     FALSE if the value couldn't be unset (i.e. not found, TRUE otherwise.
+      time.
+  
+      Params:
+        timestamp = the time the control-change should be removed from
+      Returns: FALSE if the value couldn't be unset (i.e. not found, TRUE otherwise.
   */
   bool unset(gst.types.ClockTime timestamp)
   {
@@ -138,36 +146,43 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /**
+      Connect to `ValueAdded` signal.
+  
       Emitted right after the new value has been added to self
   
-    ## Parameters
-    $(LIST
-      * $(B timedValue)       The newly added #GstTimedValue
-      * $(B timedValueControlSource) the instance the signal is connected to
-    )
-  */
-  alias ValueAddedCallbackDlg = void delegate(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /** ditto */
-  alias ValueAddedCallbackFunc = void function(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /**
-    Connect to ValueAdded signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+  
+          `timedValue` The newly added #GstTimedValue (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectValueAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ValueAddedCallbackDlg) || is(T : ValueAddedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto timedValueControlSource = getVal!(gstcontroller.timed_value_control_source.TimedValueControlSource)(_paramVals);
-      auto timedValue = getVal!(gstcontroller.control_point.ControlPoint)(&_paramVals[1]);
-      _dClosure.dlg(timedValue, timedValueControlSource);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -175,36 +190,43 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /**
+      Connect to `ValueChanged` signal.
+  
       Emitted right after the new value has been set on timed_signals
   
-    ## Parameters
-    $(LIST
-      * $(B timedValue)       The #GstTimedValue where the value changed
-      * $(B timedValueControlSource) the instance the signal is connected to
-    )
-  */
-  alias ValueChangedCallbackDlg = void delegate(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /** ditto */
-  alias ValueChangedCallbackFunc = void function(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /**
-    Connect to ValueChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+  
+          `timedValue` The #GstTimedValue where the value changed (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto timedValueControlSource = getVal!(gstcontroller.timed_value_control_source.TimedValueControlSource)(_paramVals);
-      auto timedValue = getVal!(gstcontroller.control_point.ControlPoint)(&_paramVals[1]);
-      _dClosure.dlg(timedValue, timedValueControlSource);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -212,36 +234,43 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /**
+      Connect to `ValueRemoved` signal.
+  
       Emitted when timed_value is removed from self
   
-    ## Parameters
-    $(LIST
-      * $(B timedValue)       The removed #GstTimedValue
-      * $(B timedValueControlSource) the instance the signal is connected to
-    )
-  */
-  alias ValueRemovedCallbackDlg = void delegate(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /** ditto */
-  alias ValueRemovedCallbackFunc = void function(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource);
-
-  /**
-    Connect to ValueRemoved signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gstcontroller.control_point.ControlPoint timedValue, gstcontroller.timed_value_control_source.TimedValueControlSource timedValueControlSource))
+  
+          `timedValue` The removed #GstTimedValue (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectValueRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ValueRemovedCallbackDlg) || is(T : ValueRemovedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gstcontroller.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstcontroller.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto timedValueControlSource = getVal!(gstcontroller.timed_value_control_source.TimedValueControlSource)(_paramVals);
-      auto timedValue = getVal!(gstcontroller.control_point.ControlPoint)(&_paramVals[1]);
-      _dClosure.dlg(timedValue, timedValueControlSource);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

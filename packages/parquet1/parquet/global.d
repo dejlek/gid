@@ -1,3 +1,4 @@
+/// Global functions for parquet1 library
 module parquet.global;
 
 import gid.gid;

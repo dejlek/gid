@@ -1,3 +1,4 @@
+/// Module for [DeviceProvider] class
 module gst.device_provider;
 
 import gid.gid;
@@ -15,29 +16,32 @@ import gst.types;
 
 /**
     A #GstDeviceProvider subclass is provided by a plugin that handles devices
-  if there is a way to programmatically list connected devices. It can also
-  optionally provide updates to the list of connected devices.
-  
-  Each #GstDeviceProvider subclass is a singleton, a plugin should
-  normally provide a single subclass for all devices.
-  
-  Applications would normally use a #GstDeviceMonitor to monitor devices
-  from all relevant providers.
+    if there is a way to programmatically list connected devices. It can also
+    optionally provide updates to the list of connected devices.
+    
+    Each #GstDeviceProvider subclass is a singleton, a plugin should
+    normally provide a single subclass for all devices.
+    
+    Applications would normally use a #GstDeviceMonitor to monitor devices
+    from all relevant providers.
 */
 class DeviceProvider : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_provider_get_type != &gidSymbolNotFound ? gst_device_provider_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,14 +54,15 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Create a new device providerfactory capable of instantiating objects of the
-    type and add the factory to plugin.
-    Params:
-      plugin =       #GstPlugin to register the device provider with, or null for
-            a static device provider.
-      name =       name of device providers of this type
-      rank =       rank of device provider (higher rank means more importance when autoplugging)
-      type =       GType of device provider to register
-    Returns:     true, if the registering succeeded, false on error
+      type and add the factory to plugin.
+  
+      Params:
+        plugin = #GstPlugin to register the device provider with, or null for
+              a static device provider.
+        name = name of device providers of this type
+        rank = rank of device provider (higher rank means more importance when autoplugging)
+        type = GType of device provider to register
+      Returns: true, if the registering succeeded, false on error
   */
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gobject.types.GType type)
   {
@@ -77,14 +82,15 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Posts a message on the provider's #GstBus to inform applications that
-    a new device has been added.
-    
-    This is for use by subclasses.
-    
-    device's reference count will be incremented, and any floating reference
-    will be removed (see [gst.object.ObjectGst.refSink]).
-    Params:
-      device =       a #GstDevice that has been added
+      a new device has been added.
+      
+      This is for use by subclasses.
+      
+      device's reference count will be incremented, and any floating reference
+      will be removed (see [gst.object.ObjectGst.refSink]).
+  
+      Params:
+        device = a #GstDevice that has been added
   */
   void deviceAdd(gst.device.Device device)
   {
@@ -93,13 +99,14 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       This function is used when changed_device was modified into its new form
-    device. This will post a `DEVICE_CHANGED` message on the bus to let
-    the application know that the device was modified. #GstDevice is immutable
-    for MT. safety purposes so this is an "atomic" way of letting the application
-    know when a device was modified.
-    Params:
-      device =       the new version of changed_device
-      changedDevice =       the old version of the device that has been updated
+      device. This will post a `DEVICE_CHANGED` message on the bus to let
+      the application know that the device was modified. #GstDevice is immutable
+      for MT. safety purposes so this is an "atomic" way of letting the application
+      know when a device was modified.
+  
+      Params:
+        device = the new version of changed_device
+        changedDevice = the old version of the device that has been updated
   */
   void deviceChanged(gst.device.Device device, gst.device.Device changedDevice)
   {
@@ -108,11 +115,12 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Posts a message on the provider's #GstBus to inform applications that
-    a device has been removed.
-    
-    This is for use by subclasses.
-    Params:
-      device =       a #GstDevice that has been removed
+      a device has been removed.
+      
+      This is for use by subclasses.
+  
+      Params:
+        device = a #GstDevice that has been removed
   */
   void deviceRemove(gst.device.Device device)
   {
@@ -121,7 +129,7 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Gets the #GstBus of this #GstDeviceProvider
-    Returns:     a #GstBus
+      Returns: a #GstBus
   */
   gst.bus.Bus getBus()
   {
@@ -133,12 +141,12 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Gets a list of devices that this provider understands. This may actually
-    probe the hardware if the provider is not currently started.
-    
-    If the provider has been started, this will returned the same #GstDevice
-    objedcts that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.
-    Returns:     a #GList of
-        #GstDevice
+      probe the hardware if the provider is not currently started.
+      
+      If the provider has been started, this will returned the same #GstDevice
+      objedcts that have been returned by the #GST_MESSAGE_DEVICE_ADDED messages.
+      Returns: a #GList of
+          #GstDevice
   */
   gst.device.Device[] getDevices()
   {
@@ -150,8 +158,8 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Retrieves the factory that was used to create this device provider.
-    Returns:     the #GstDeviceProviderFactory used for
-          creating this device provider. no refcounting is needed.
+      Returns: the #GstDeviceProviderFactory used for
+            creating this device provider. no refcounting is needed.
   */
   gst.device_provider_factory.DeviceProviderFactory getFactory()
   {
@@ -163,9 +171,9 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Get the provider factory names of the #GstDeviceProvider instances that
-    are hidden by provider.
-    Returns:     a list of hidden providers factory names or null when
-        nothing is hidden by provider. Free with g_strfreev.
+      are hidden by provider.
+      Returns: a list of hidden providers factory names or null when
+          nothing is hidden by provider. Free with g_strfreev.
   */
   string[] getHiddenProviders()
   {
@@ -187,9 +195,10 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Get metadata with key in provider.
-    Params:
-      key =       the key to get
-    Returns:     the metadata for key.
+  
+      Params:
+        key = the key to get
+      Returns: the metadata for key.
   */
   string getMetadata(string key)
   {
@@ -202,12 +211,13 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Make provider hide the devices from the factory with name.
-    
-    This function is used when provider will also provide the devices reported
-    by provider factory name. A monitor should stop monitoring the
-    device provider with name to avoid duplicate devices.
-    Params:
-      name =       a provider factory name
+      
+      This function is used when provider will also provide the devices reported
+      by provider factory name. A monitor should stop monitoring the
+      device provider with name to avoid duplicate devices.
+  
+      Params:
+        name = a provider factory name
   */
   void hideProvider(string name)
   {
@@ -217,7 +227,7 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       This function can be used to know if the provider was successfully started.
-    Returns: 
+      Returns: 
   */
   bool isStarted()
   {
@@ -228,18 +238,18 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Starts providering the devices. This will cause #GST_MESSAGE_DEVICE_ADDED
-    and #GST_MESSAGE_DEVICE_REMOVED messages to be posted on the provider's bus
-    when devices are added or removed from the system.
-    
-    Since the #GstDeviceProvider is a singleton,
-    [gst.device_provider.DeviceProvider.start] may already have been called by another
-    user of the object, [gst.device_provider.DeviceProvider.stop] needs to be called the same
-    number of times.
-    
-    After this function has been called, [gst.device_provider.DeviceProvider.getDevices] will
-    return the same objects that have been received from the
-    #GST_MESSAGE_DEVICE_ADDED messages and will no longer probe.
-    Returns:     true if the device providering could be started
+      and #GST_MESSAGE_DEVICE_REMOVED messages to be posted on the provider's bus
+      when devices are added or removed from the system.
+      
+      Since the #GstDeviceProvider is a singleton,
+      [gst.device_provider.DeviceProvider.start] may already have been called by another
+      user of the object, [gst.device_provider.DeviceProvider.stop] needs to be called the same
+      number of times.
+      
+      After this function has been called, [gst.device_provider.DeviceProvider.getDevices] will
+      return the same objects that have been received from the
+      #GST_MESSAGE_DEVICE_ADDED messages and will no longer probe.
+      Returns: true if the device providering could be started
   */
   bool start()
   {
@@ -250,8 +260,8 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Decreases the use-count by one. If the use count reaches zero, this
-    #GstDeviceProvider will stop providering the devices. This needs to be
-    called the same number of times that [gst.device_provider.DeviceProvider.start] was called.
+      #GstDeviceProvider will stop providering the devices. This needs to be
+      called the same number of times that [gst.device_provider.DeviceProvider.start] was called.
   */
   void stop()
   {
@@ -260,13 +270,14 @@ class DeviceProvider : gst.object.ObjectGst
 
   /**
       Make provider unhide the devices from factory name.
-    
-    This function is used when provider will no longer provide the devices
-    reported by provider factory name. A monitor should start
-    monitoring the devices from provider factory name in order to see
-    all devices again.
-    Params:
-      name =       a provider factory name
+      
+      This function is used when provider will no longer provide the devices
+      reported by provider factory name. A monitor should start
+      monitoring the devices from provider factory name in order to see
+      all devices again.
+  
+      Params:
+        name = a provider factory name
   */
   void unhideProvider(string name)
   {
@@ -274,58 +285,88 @@ class DeviceProvider : gst.object.ObjectGst
     gst_device_provider_unhide_provider(cast(GstDeviceProvider*)cPtr, _name);
   }
 
-  /** */
-  alias ProviderHiddenCallbackDlg = void delegate(string object, gst.device_provider.DeviceProvider deviceProvider);
-
-  /** ditto */
-  alias ProviderHiddenCallbackFunc = void function(string object, gst.device_provider.DeviceProvider deviceProvider);
-
   /**
-    Connect to ProviderHidden signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ProviderHidden` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string object, gst.device_provider.DeviceProvider deviceProvider))
+  
+          `object`  (optional)
+  
+          `deviceProvider` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectProviderHidden(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ProviderHiddenCallbackDlg) || is(T : ProviderHiddenCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.device_provider.DeviceProvider)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto deviceProvider = getVal!(gst.device_provider.DeviceProvider)(_paramVals);
-      auto object = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(object, deviceProvider);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("provider-hidden", closure, after);
   }
 
-  /** */
-  alias ProviderUnhiddenCallbackDlg = void delegate(string object, gst.device_provider.DeviceProvider deviceProvider);
-
-  /** ditto */
-  alias ProviderUnhiddenCallbackFunc = void function(string object, gst.device_provider.DeviceProvider deviceProvider);
-
   /**
-    Connect to ProviderUnhidden signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ProviderUnhidden` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string object, gst.device_provider.DeviceProvider deviceProvider))
+  
+          `object`  (optional)
+  
+          `deviceProvider` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectProviderUnhidden(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ProviderUnhiddenCallbackDlg) || is(T : ProviderUnhiddenCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gst.device_provider.DeviceProvider)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto deviceProvider = getVal!(gst.device_provider.DeviceProvider)(_paramVals);
-      auto object = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(object, deviceProvider);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

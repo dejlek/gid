@@ -1,3 +1,4 @@
+/// C types for gstallocators1 library
 module gstallocators.c.types;
 
 public import gid.basictypes;
@@ -15,19 +16,19 @@ enum GstFdMemoryFlags : uint
 
   /**
       once the memory is mapped,
-           keep it mapped until the memory is destroyed.
+             keep it mapped until the memory is destroyed.
   */
   KeepMapped = 1,
 
   /**
       do a private mapping instead of
-           the default shared mapping.
+             the default shared mapping.
   */
   MapPrivate = 2,
 
   /**
       don't close the file descriptor when
-           the memory is freed. Since: 1.10
+             the memory is freed. Since: 1.10
   */
   DontClose = 4,
 }
@@ -97,21 +98,21 @@ struct GstPhysMemoryAllocatorInterface
 
   /**
       Implementations shall return the physicall memory address
-       that is backing the provided memory, or 0 if none.
+         that is backing the provided memory, or 0 if none.
   */
   extern(C) size_t function(GstPhysMemoryAllocator* allocator, GstMemory* mem) getPhysAddr;
 }
 
 /**
     This is a subclass of #GstFdAllocator that implements the
-  [gst.allocator.Allocator.alloc] method using `memfd_create()` when available, POSIX
-  `shm_open()` otherwise. Platforms not supporting any of those (Windows) will
-  always return null.
-  
-  Note that allocating new shared memories has a significant performance cost,
-  it is thus recommended to keep a pool of pre-allocated #GstMemory, using
-  #GstBufferPool. For that reason, this allocator has the
-  [gst.types.AllocatorFlags.NoCopy] flag set.
+    [gst.allocator.Allocator.alloc] method using `memfd_create()` when available, POSIX
+    `shm_open()` otherwise. Platforms not supporting any of those (Windows) will
+    always return null.
+    
+    Note that allocating new shared memories has a significant performance cost,
+    it is thus recommended to keep a pool of pre-allocated #GstMemory, using
+    #GstBufferPool. For that reason, this allocator has the
+    [gst.types.AllocatorFlags.NoCopy] flag set.
 */
 struct GstShmAllocator;
 

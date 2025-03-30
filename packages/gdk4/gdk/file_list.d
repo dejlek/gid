@@ -1,3 +1,4 @@
+/// Module for [FileList] class
 module gdk.file_list;
 
 import gdk.c.functions;
@@ -14,22 +15,26 @@ import gobject.object;
 class FileList : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_file_list_get_type != &gidSymbolNotFound ? gdk_file_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,11 +47,12 @@ class FileList : gobject.boxed.Boxed
 
   /**
       Creates a new [gdk.file_list.FileList] for the given array of files.
-    
-    This function is meant to be used by language bindings.
-    Params:
-      files =       the files to add to the list
-    Returns:     the newly create files list
+      
+      This function is meant to be used by language bindings.
+  
+      Params:
+        files = the files to add to the list
+      Returns: the newly create files list
   */
   static gdk.file_list.FileList newFromArray(gio.file.File[] files)
   {
@@ -66,12 +72,13 @@ class FileList : gobject.boxed.Boxed
 
   /**
       Creates a new files list container from a singly linked list of
-    [gio.file.File] instances.
-    
-    This function is meant to be used by language bindings
-    Params:
-      files =       a list of files
-    Returns:     the newly created files list
+      [gio.file.File] instances.
+      
+      This function is meant to be used by language bindings
+  
+      Params:
+        files = a list of files
+      Returns: the newly created files list
   */
   static gdk.file_list.FileList newFromList(gio.file.File[] files)
   {
@@ -85,9 +92,9 @@ class FileList : gobject.boxed.Boxed
 
   /**
       Retrieves the list of files inside a [gdk.file_list.FileList].
-    
-    This function is meant for language bindings.
-    Returns:     the files inside the list
+      
+      This function is meant for language bindings.
+      Returns: the files inside the list
   */
   gio.file.File[] getFiles()
   {

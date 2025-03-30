@@ -1,3 +1,4 @@
+/// Module for [TlsServerConnection] interface
 module gio.tls_server_connection;
 
 public import gio.tls_server_connection_iface_proxy;
@@ -12,11 +13,12 @@ import gobject.object;
 
 /**
     [gio.tls_server_connection.TlsServerConnection] is the server-side subclass of
-  [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
+    [gio.tls_connection.TlsConnection], representing a server-side TLS connection.
 */
 interface TlsServerConnection
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -25,16 +27,17 @@ interface TlsServerConnection
 
   /**
       Creates a new #GTlsServerConnection wrapping base_io_stream (which
-    must have pollable input and output streams).
-    
-    See the documentation for #GTlsConnection:base-io-stream for restrictions
-    on when application code can run operations on the base_io_stream after
-    this function has returned.
-    Params:
-      baseIoStream =       the #GIOStream to wrap
-      certificate =       the default server certificate, or null
-    Returns:     the new
-      #GTlsServerConnection, or null on error
+      must have pollable input and output streams).
+      
+      See the documentation for #GTlsConnection:base-io-stream for restrictions
+      on when application code can run operations on the base_io_stream after
+      this function has returned.
+  
+      Params:
+        baseIoStream = the #GIOStream to wrap
+        certificate = the default server certificate, or null
+      Returns: the new
+        #GTlsServerConnection, or null on error
   */
   static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate = null)
   {

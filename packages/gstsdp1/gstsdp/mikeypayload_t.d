@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadT] class
 module gstsdp.mikeypayload_t;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class MIKEYPayloadT
 {
   GstMIKEYPayloadT cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class MIKEYPayloadT
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

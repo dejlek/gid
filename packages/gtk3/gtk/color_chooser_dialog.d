@@ -1,3 +1,4 @@
+/// Module for [ColorChooserDialog] class
 module gtk.color_chooser_dialog;
 
 import atk.implementor_iface;
@@ -15,22 +16,25 @@ import gtk.window;
 
 /**
     The #GtkColorChooserDialog widget is a dialog for choosing
-  a color. It implements the #GtkColorChooser interface.
+    a color. It implements the #GtkColorChooser interface.
 */
 class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_color_chooser_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,10 +49,11 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
 
   /**
       Creates a new #GtkColorChooserDialog.
-    Params:
-      title =       Title of the dialog, or null
-      parent =       Transient parent of the dialog, or null
-    Returns:     a new #GtkColorChooserDialog
+  
+      Params:
+        title = Title of the dialog, or null
+        parent = Transient parent of the dialog, or null
+      Returns: a new #GtkColorChooserDialog
   */
   this(string title = null, gtk.window.Window parent = null)
   {

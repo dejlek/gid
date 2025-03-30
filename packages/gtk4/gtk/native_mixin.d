@@ -1,3 +1,4 @@
+/// Module for [Native] interface mixin
 module gtk.native_mixin;
 
 public import gtk.native_iface_proxy;
@@ -11,20 +12,20 @@ public import gtk.types;
 
 /**
     [gtk.native.Native] is the interface implemented by all widgets that have
-  their own [gdk.surface.Surface].
-  
-  The obvious example of a [gtk.native.Native] is [gtk.window.Window].
-  
-  Every widget that is not itself a [gtk.native.Native] is contained in one,
-  and you can get it with [gtk.widget.Widget.getNative].
-  
-  To get the surface of a [gtk.native.Native], use [gtk.native.Native.getSurface].
-  It is also possible to find the [gtk.native.Native] to which a surface
-  belongs, with [gtk.native.Native.getForSurface].
-  
-  In addition to a [gdk.surface.Surface], a [gtk.native.Native] also provides
-  a [gsk.renderer.Renderer] for rendering on that surface. To get the
-  renderer, use [gtk.native.Native.getRenderer].
+    their own [gdk.surface.Surface].
+    
+    The obvious example of a [gtk.native.Native] is [gtk.window.Window].
+    
+    Every widget that is not itself a [gtk.native.Native] is contained in one,
+    and you can get it with [gtk.widget.Widget.getNative].
+    
+    To get the surface of a [gtk.native.Native], use [gtk.native.Native.getSurface].
+    It is also possible to find the [gtk.native.Native] to which a surface
+    belongs, with [gtk.native.Native.getForSurface].
+    
+    In addition to a [gdk.surface.Surface], a [gtk.native.Native] also provides
+    a [gsk.renderer.Renderer] for rendering on that surface. To get the
+    renderer, use [gtk.native.Native.getRenderer].
 */
 template NativeT()
 {
@@ -32,7 +33,7 @@ template NativeT()
 
   /**
       Returns the renderer that is used for this [gtk.native.Native].
-    Returns:     the renderer for self
+      Returns: the renderer for self
   */
   override gsk.renderer.Renderer getRenderer()
   {
@@ -44,7 +45,7 @@ template NativeT()
 
   /**
       Returns the surface of this [gtk.native.Native].
-    Returns:     the surface of self
+      Returns: the surface of self
   */
   override gdk.surface.Surface getSurface()
   {
@@ -56,12 +57,13 @@ template NativeT()
 
   /**
       Retrieves the surface transform of self.
-    
-    This is the translation from self's surface coordinates into
-    self's widget coordinates.
-    Params:
-      x =       return location for the x coordinate
-      y =       return location for the y coordinate
+      
+      This is the translation from self's surface coordinates into
+      self's widget coordinates.
+  
+      Params:
+        x = return location for the x coordinate
+        y = return location for the y coordinate
   */
   override void getSurfaceTransform(out double x, out double y)
   {
@@ -70,8 +72,8 @@ template NativeT()
 
   /**
       Realizes a [gtk.native.Native].
-    
-    This should only be used by subclasses.
+      
+      This should only be used by subclasses.
   */
   override void realize()
   {
@@ -80,8 +82,8 @@ template NativeT()
 
   /**
       Unrealizes a [gtk.native.Native].
-    
-    This should only be used by subclasses.
+      
+      This should only be used by subclasses.
   */
   override void unrealize()
   {

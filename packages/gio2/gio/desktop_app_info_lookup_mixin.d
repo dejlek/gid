@@ -1,3 +1,4 @@
+/// Module for [DesktopAppInfoLookup] interface mixin
 module gio.desktop_app_info_lookup_mixin;
 
 public import gio.desktop_app_info_lookup_iface_proxy;
@@ -10,30 +11,31 @@ public import gobject.object;
 
 /**
     #GDesktopAppInfoLookup is an opaque data structure and can only be accessed
-  using the following functions.
+    using the following functions.
 
-  Deprecated:     The #GDesktopAppInfoLookup interface is deprecated and
-       unused by GIO.
+    Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
+         unused by GIO.
 */
 template DesktopAppInfoLookupT()
 {
 
   /**
       Gets the default application for launching applications
-    using this URI scheme for a particular #GDesktopAppInfoLookup
-    implementation.
-    
-    The #GDesktopAppInfoLookup interface and this function is used
-    to implement [gio.app_info.AppInfo.getDefaultForUriScheme] backends
-    in a GIO module. There is no reason for applications to use it
-    directly. Applications should use [gio.app_info.AppInfo.getDefaultForUriScheme].
-    Params:
-      uriScheme =       a string containing a URI scheme.
-    Returns:     #GAppInfo for given uri_scheme or
-         null on error.
+      using this URI scheme for a particular #GDesktopAppInfoLookup
+      implementation.
+      
+      The #GDesktopAppInfoLookup interface and this function is used
+      to implement [gio.app_info.AppInfo.getDefaultForUriScheme] backends
+      in a GIO module. There is no reason for applications to use it
+      directly. Applications should use [gio.app_info.AppInfo.getDefaultForUriScheme].
   
-    Deprecated:     The #GDesktopAppInfoLookup interface is deprecated and
-         unused by GIO.
+      Params:
+        uriScheme = a string containing a URI scheme.
+      Returns: #GAppInfo for given uri_scheme or
+           null on error.
+  
+      Deprecated: The #GDesktopAppInfoLookup interface is deprecated and
+           unused by GIO.
   */
   override gio.app_info.AppInfo getDefaultForUriScheme(string uriScheme)
   {

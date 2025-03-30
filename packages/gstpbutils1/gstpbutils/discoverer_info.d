@@ -1,3 +1,4 @@
+/// Module for [DiscovererInfo] class
 module gstpbutils.discoverer_info;
 
 import gid.gid;
@@ -23,17 +24,20 @@ import gstpbutils.types;
 class DiscovererInfo : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_info_get_type != &gidSymbolNotFound ? gst_discoverer_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,10 +50,11 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Parses a #GVariant as produced by [gstpbutils.discoverer_info.DiscovererInfo.toVariant]
-    back to a #GstDiscovererInfo.
-    Params:
-      variant =       A #GVariant to deserialize into a #GstDiscovererInfo.
-    Returns:     A newly-allocated #GstDiscovererInfo.
+      back to a #GstDiscovererInfo.
+  
+      Params:
+        variant = A #GVariant to deserialize into a #GstDiscovererInfo.
+      Returns: A newly-allocated #GstDiscovererInfo.
   */
   static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.VariantG variant)
   {
@@ -70,9 +75,9 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Finds all the #GstDiscovererAudioInfo contained in info
-    Returns:     A #GList of
-      matching #GstDiscovererStreamInfo. The caller should free it with
-      [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
+      Returns: A #GList of
+        matching #GstDiscovererStreamInfo. The caller should free it with
+        [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
   gstpbutils.discoverer_audio_info.DiscovererAudioInfo[] getAudioStreams()
   {
@@ -84,9 +89,9 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Finds all the #GstDiscovererContainerInfo contained in info
-    Returns:     A #GList of
-      matching #GstDiscovererStreamInfo. The caller should free it with
-      [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
+      Returns: A #GList of
+        matching #GstDiscovererStreamInfo. The caller should free it with
+        [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
   gstpbutils.discoverer_container_info.DiscovererContainerInfo[] getContainerStreams()
   {
@@ -123,10 +128,10 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Get the installer details for missing elements
-    Returns:     An array of strings
-      containing information about how to install the various missing elements
-      for info to be usable. If you wish to use the strings after the life-time
-      of info, you will need to copy them.
+      Returns: An array of strings
+        containing information about how to install the various missing elements
+        for info to be usable. If you wish to use the strings after the life-time
+        of info, you will need to copy them.
   */
   string[] getMissingElementsInstallerDetails()
   {
@@ -183,12 +188,13 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Finds the #GstDiscovererStreamInfo contained in info that match the
-    given streamtype.
-    Params:
-      streamtype =       a #GType derived from #GstDiscovererStreamInfo
-    Returns:     A #GList of
-      matching #GstDiscovererStreamInfo. The caller should free it with
-      [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
+      given streamtype.
+  
+      Params:
+        streamtype = a #GType derived from #GstDiscovererStreamInfo
+      Returns: A #GList of
+        matching #GstDiscovererStreamInfo. The caller should free it with
+        [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams(gobject.types.GType streamtype)
   {
@@ -200,9 +206,9 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Finds all the #GstDiscovererSubtitleInfo contained in info
-    Returns:     A #GList of
-      matching #GstDiscovererStreamInfo. The caller should free it with
-      [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
+      Returns: A #GList of
+        matching #GstDiscovererStreamInfo. The caller should free it with
+        [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
   gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo[] getSubtitleStreams()
   {
@@ -241,9 +247,9 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Finds all the #GstDiscovererVideoInfo contained in info
-    Returns:     A #GList of
-      matching #GstDiscovererStreamInfo. The caller should free it with
-      [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
+      Returns: A #GList of
+        matching #GstDiscovererStreamInfo. The caller should free it with
+        [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.listFree].
   */
   gstpbutils.discoverer_video_info.DiscovererVideoInfo[] getVideoStreams()
   {
@@ -255,14 +261,15 @@ class DiscovererInfo : gobject.object.ObjectG
 
   /**
       Serializes info to a #GVariant that can be parsed again
-    through [gstpbutils.discoverer_info.DiscovererInfo.fromVariant].
-    
-    Note that any #GstToc (s) that might have been discovered will not be serialized
-    for now.
-    Params:
-      flags =       A combination of #GstDiscovererSerializeFlags to specify
-        what needs to be serialized.
-    Returns:     A newly-allocated #GVariant representing info.
+      through [gstpbutils.discoverer_info.DiscovererInfo.fromVariant].
+      
+      Note that any #GstToc (s) that might have been discovered will not be serialized
+      for now.
+  
+      Params:
+        flags = A combination of #GstDiscovererSerializeFlags to specify
+          what needs to be serialized.
+      Returns: A newly-allocated #GVariant representing info.
   */
   glib.variant.VariantG toVariant(gstpbutils.types.DiscovererSerializeFlags flags)
   {

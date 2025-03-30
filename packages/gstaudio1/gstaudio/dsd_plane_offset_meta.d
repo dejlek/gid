@@ -1,3 +1,4 @@
+/// Module for [DsdPlaneOffsetMeta] class
 module gstaudio.dsd_plane_offset_meta;
 
 import gid.gid;
@@ -9,29 +10,30 @@ import gstaudio.types;
 
 /**
     Buffer metadata describing planar DSD contents in the buffer. This is not needed
-  for interleaved DSD data, and is required for non-interleaved (= planar) data.
-  
-  The different channels in @offsets are always in the GStreamer channel order.
-  Zero-copy channel reordering can be implemented by swapping the values in
-  @offsets.
-  
-  It is not allowed for channels to overlap in memory,
-  i.e. for each i in [0, channels), the range
-  [@offsets[i], @offsets[i] + @num_bytes_per_channel) must not overlap
-  with any other such range.
-  
-  It is, however, allowed to have parts of the buffer memory unused, by using
-  @offsets and @num_bytes_per_channel in such a way that leave gaps on it.
-  This is used to implement zero-copy clipping in non-interleaved buffers.
-  
-  Obviously, due to the above, it is not safe to infer the
-  number of valid bytes from the size of the buffer. You should always
-  use the @num_bytes_per_channel variable of this metadata.
+    for interleaved DSD data, and is required for non-interleaved (= planar) data.
+    
+    The different channels in @offsets are always in the GStreamer channel order.
+    Zero-copy channel reordering can be implemented by swapping the values in
+    @offsets.
+    
+    It is not allowed for channels to overlap in memory,
+    i.e. for each i in [0, channels), the range
+    [@offsets[i], @offsets[i] + @num_bytes_per_channel) must not overlap
+    with any other such range.
+    
+    It is, however, allowed to have parts of the buffer memory unused, by using
+    @offsets and @num_bytes_per_channel in such a way that leave gaps on it.
+    This is used to implement zero-copy clipping in non-interleaved buffers.
+    
+    Obviously, due to the above, it is not safe to infer the
+    number of valid bytes from the size of the buffer. You should always
+    use the @num_bytes_per_channel variable of this metadata.
 */
 class DsdPlaneOffsetMeta
 {
   GstDsdPlaneOffsetMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -43,6 +45,7 @@ class DsdPlaneOffsetMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

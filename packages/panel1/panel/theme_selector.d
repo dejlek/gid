@@ -1,3 +1,4 @@
+/// Module for [ThemeSelector] class
 module panel.theme_selector;
 
 import gid.gid;
@@ -27,17 +28,20 @@ import panel.types;
 class ThemeSelector : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_theme_selector_get_type != &gidSymbolNotFound ? panel_theme_selector_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [ScaleButtonAccessible] class
 module gtk.scale_button_accessible;
 
 import atk.action;
@@ -18,17 +19,20 @@ import gtk.types;
 class ScaleButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.value.Value
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_accessible_get_type != &gidSymbolNotFound ? gtk_scale_button_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

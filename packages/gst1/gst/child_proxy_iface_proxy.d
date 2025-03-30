@@ -1,10 +1,11 @@
+/// Module for [ChildProxyIfaceProxy] interface proxy object
 module gst.child_proxy_iface_proxy;
 
 import gobject.object;
 import gst.child_proxy;
 import gst.child_proxy_mixin;
 
-/// Proxy object for Gst.ChildProxy interface when a GObject has no applicable D binding
+/// Proxy object for [Gst.ChildProxy] interface when a GObject has no applicable D binding
 class ChildProxyIfaceProxy : IfaceProxy, gst.child_proxy.ChildProxy
 {
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,3 +1,4 @@
+/// Module for [RecentInfo] class
 module gtk.recent_info;
 
 import gid.gid;
@@ -13,27 +14,31 @@ import gtk.types;
 
 /**
     [gtk.recent_info.RecentInfo] contains the metadata associated with an item in the
-  recently used files list.
+    recently used files list.
 */
 class RecentInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_info_get_type != &gidSymbolNotFound ? gtk_recent_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,14 +51,15 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Creates a [gio.app_info.AppInfo] for the specified [gtk.recent_info.RecentInfo]
-    
-    In case of error, error will be set either with a
-    `GTK_RECENT_MANAGER_ERROR` or a `G_IO_ERROR`
-    Params:
-      appName =       the name of the application that should
-          be mapped to a [gio.app_info.AppInfo]; if null is used then the default
-          application for the MIME type is used
-    Returns:     the newly created [gio.app_info.AppInfo]
+      
+      In case of error, error will be set either with a
+      `GTK_RECENT_MANAGER_ERROR` or a `G_IO_ERROR`
+  
+      Params:
+        appName = the name of the application that should
+            be mapped to a [gio.app_info.AppInfo]; if null is used then the default
+            application for the MIME type is used
+      Returns: the newly created [gio.app_info.AppInfo]
   */
   gio.app_info.AppInfo createAppInfo(string appName = null)
   {
@@ -69,9 +75,9 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Checks whether the resource pointed by info still exists.
-    At the moment this check is done only on resources pointing
-    to local files.
-    Returns:     true if the resource exists
+      At the moment this check is done only on resources pointing
+      to local files.
+      Returns: true if the resource exists
   */
   bool exists()
   {
@@ -82,9 +88,9 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the time when the resource
-    was added to the recently used resources list.
-    Returns:     a [glib.date_time.DateTime] for the time
-         when the resource was added
+      was added to the recently used resources list.
+      Returns: a [glib.date_time.DateTime] for the time
+           when the resource was added
   */
   glib.date_time.DateTime getAdded()
   {
@@ -96,9 +102,9 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the number of days elapsed since the last update
-    of the resource pointed by info.
-    Returns:     a positive integer containing the number of days
-        elapsed since the time this resource was last modified
+      of the resource pointed by info.
+      Returns: a positive integer containing the number of days
+          elapsed since the time this resource was last modified
   */
   int getAge()
   {
@@ -109,21 +115,22 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the data regarding the application that has registered the resource
-    pointed by info.
-    
-    If the command line contains any escape characters defined inside the
-    storage specification, they will be expanded.
-    Params:
-      appName =       the name of the application that has registered this item
-      appExec =       return location for the string containing
-           the command line
-      count =       return location for the number of times this item was registered
-      stamp =       return location for the time this item was last
-           registered for this application
-    Returns:     true if an application with app_name has registered this
-        resource inside the recently used list, or false otherwise. The
-        app_exec string is owned by the [gtk.recent_info.RecentInfo] and should not be
-        modified or freed
+      pointed by info.
+      
+      If the command line contains any escape characters defined inside the
+      storage specification, they will be expanded.
+  
+      Params:
+        appName = the name of the application that has registered this item
+        appExec = return location for the string containing
+             the command line
+        count = return location for the number of times this item was registered
+        stamp = return location for the time this item was last
+             registered for this application
+      Returns: true if an application with app_name has registered this
+          resource inside the recently used list, or false otherwise. The
+          app_exec string is owned by the [gtk.recent_info.RecentInfo] and should not be
+          modified or freed
   */
   bool getApplicationInfo(string appName, out string appExec, out uint count, out glib.date_time.DateTime stamp)
   {
@@ -139,8 +146,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Retrieves the list of applications that have registered this resource.
-    Returns:     a newly
-        allocated null-terminated array of strings. Use [glib.global.strfreev] to free it.
+      Returns: a newly
+          allocated null-terminated array of strings. Use [glib.global.strfreev] to free it.
   */
   string[] getApplications()
   {
@@ -160,8 +167,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the (short) description of the resource.
-    Returns:     the description of the resource. The returned string
-        is owned by the recent manager, and should not be freed.
+      Returns: the description of the resource. The returned string
+          is owned by the recent manager, and should not be freed.
   */
   string getDescription()
   {
@@ -173,11 +180,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the name of the resource.
-    
-    If none has been defined, the basename
-    of the resource is obtained.
-    Returns:     the display name of the resource. The returned string
-        is owned by the recent manager, and should not be freed.
+      
+      If none has been defined, the basename
+      of the resource is obtained.
+      Returns: the display name of the resource. The returned string
+          is owned by the recent manager, and should not be freed.
   */
   string getDisplayName()
   {
@@ -189,7 +196,7 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Retrieves the icon associated to the resource MIME type.
-    Returns:     a [gio.icon.Icon] containing the icon
+      Returns: a [gio.icon.Icon] containing the icon
   */
   gio.icon.Icon getGicon()
   {
@@ -201,11 +208,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Returns all groups registered for the recently used item info.
-    
-    The array of returned group names will be null terminated, so
-    length might optionally be null.
-    Returns:     a newly allocated null terminated array of strings.
-        Use [glib.global.strfreev] to free it.
+      
+      The array of returned group names will be null terminated, so
+      length might optionally be null.
+      Returns: a newly allocated null terminated array of strings.
+          Use [glib.global.strfreev] to free it.
   */
   string[] getGroups()
   {
@@ -225,8 +232,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the MIME type of the resource.
-    Returns:     the MIME type of the resource. The returned string
-        is owned by the recent manager, and should not be freed.
+      Returns: the MIME type of the resource. The returned string
+          is owned by the recent manager, and should not be freed.
   */
   string getMimeType()
   {
@@ -238,9 +245,9 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the time when the meta-data
-    for the resource was last modified.
-    Returns:     a [glib.date_time.DateTime] for the time
-        when the resource was last modified
+      for the resource was last modified.
+      Returns: a [glib.date_time.DateTime] for the time
+          when the resource was last modified
   */
   glib.date_time.DateTime getModified()
   {
@@ -252,11 +259,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the value of the “private” flag.
-    
-    Resources in the recently used list that have this flag
-    set to true should only be displayed by the applications
-    that have registered them.
-    Returns:     true if the private flag was found, false otherwise
+      
+      Resources in the recently used list that have this flag
+      set to true should only be displayed by the applications
+      that have registered them.
+      Returns: true if the private flag was found, false otherwise
   */
   bool getPrivateHint()
   {
@@ -267,12 +274,12 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Computes a valid UTF-8 string that can be used as the
-    name of the item in a menu or list.
-    
-    For example, calling this function on an item that refers
-    to “file:///foo/bar.txt” will yield “bar.txt”.
-    Returns:     A newly-allocated string in UTF-8 encoding
-        free it with [glib.global.gfree]
+      name of the item in a menu or list.
+      
+      For example, calling this function on an item that refers
+      to “file:///foo/bar.txt” will yield “bar.txt”.
+      Returns: A newly-allocated string in UTF-8 encoding
+          free it with [glib.global.gfree]
   */
   string getShortName()
   {
@@ -284,8 +291,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the URI of the resource.
-    Returns:     the URI of the resource. The returned string is
-        owned by the recent manager, and should not be freed.
+      Returns: the URI of the resource. The returned string is
+          owned by the recent manager, and should not be freed.
   */
   string getUri()
   {
@@ -297,12 +304,12 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets a displayable version of the resource’s URI.
-    
-    If the resource is local, it returns a local path; if the
-    resource is not local, it returns the UTF-8 encoded content
-    of [gtk.recent_info.RecentInfo.getUri].
-    Returns:     a newly allocated UTF-8 string containing the
-        resource’s URI or null. Use [glib.global.gfree] when done using it.
+      
+      If the resource is local, it returns a local path; if the
+      resource is not local, it returns the UTF-8 encoded content
+      of [gtk.recent_info.RecentInfo.getUri].
+      Returns: a newly allocated UTF-8 string containing the
+          resource’s URI or null. Use [glib.global.gfree] when done using it.
   */
   string getUriDisplay()
   {
@@ -314,9 +321,9 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the time when the meta-data
-    for the resource was last visited.
-    Returns:     a [glib.date_time.DateTime] for the time
-         when the resource was last visited
+      for the resource was last visited.
+      Returns: a [glib.date_time.DateTime] for the time
+           when the resource was last visited
   */
   glib.date_time.DateTime getVisited()
   {
@@ -328,10 +335,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Checks whether an application registered this resource using app_name.
-    Params:
-      appName =       a string containing an application name
-    Returns:     true if an application with name app_name was found,
-        false otherwise
+  
+      Params:
+        appName = a string containing an application name
+      Returns: true if an application with name app_name was found,
+          false otherwise
   */
   bool hasApplication(string appName)
   {
@@ -343,10 +351,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Checks whether group_name appears inside the groups
-    registered for the recently used item info.
-    Params:
-      groupName =       name of a group
-    Returns:     true if the group was found
+      registered for the recently used item info.
+  
+      Params:
+        groupName = name of a group
+      Returns: true if the group was found
   */
   bool hasGroup(string groupName)
   {
@@ -358,8 +367,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Checks whether the resource is local or not by looking at the
-    scheme of its URI.
-    Returns:     true if the resource is local
+      scheme of its URI.
+      Returns: true if the resource is local
   */
   bool isLocal()
   {
@@ -370,8 +379,8 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Gets the name of the last application that have registered the
-    recently used resource represented by info.
-    Returns:     an application name. Use [glib.global.gfree] to free it.
+      recently used resource represented by info.
+      Returns: an application name. Use [glib.global.gfree] to free it.
   */
   string lastApplication()
   {
@@ -383,10 +392,11 @@ class RecentInfo : gobject.boxed.Boxed
 
   /**
       Checks whether two [gtk.recent_info.RecentInfo] point to the same resource.
-    Params:
-      infoB =       a [gtk.recent_info.RecentInfo]
-    Returns:     true if both [gtk.recent_info.RecentInfo] point to the same
-        resource, false otherwise
+  
+      Params:
+        infoB = a [gtk.recent_info.RecentInfo]
+      Returns: true if both [gtk.recent_info.RecentInfo] point to the same
+          resource, false otherwise
   */
   bool match(gtk.recent_info.RecentInfo infoB)
   {

@@ -1,3 +1,4 @@
+/// Module for [Bin] class
 module adw.bin;
 
 import adw.c.functions;
@@ -15,32 +16,35 @@ import gtk.widget;
 
 /**
     A widget with one child.
-  
-  <picture>
-    <source srcset="bin-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="bin.png" alt="bin">
-  </picture>
-  
-  The [adw.bin.Bin] widget has only one child, set with the `property@Bin:child`
-  property.
-  
-  It is useful for deriving subclasses, since it provides common code needed
-  for handling a single child widget.
+    
+    <picture>
+      <source srcset="bin-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="bin.png" alt="bin">
+    </picture>
+    
+    The [adw.bin.Bin] widget has only one child, set with the `property@Bin:child`
+    property.
+    
+    It is useful for deriving subclasses, since it provides common code needed
+    for handling a single child widget.
 */
 class Bin : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_bin_get_type != &gidSymbolNotFound ? adw_bin_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,7 +57,7 @@ class Bin : gtk.widget.Widget
 
   /**
       Creates a new [adw.bin.Bin].
-    Returns:     the new created [adw.bin.Bin]
+      Returns: the new created [adw.bin.Bin]
   */
   this()
   {
@@ -64,7 +68,7 @@ class Bin : gtk.widget.Widget
 
   /**
       Gets the child widget of self.
-    Returns:     the child widget of self
+      Returns: the child widget of self
   */
   gtk.widget.Widget getChild()
   {
@@ -76,8 +80,9 @@ class Bin : gtk.widget.Widget
 
   /**
       Sets the child widget of self.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {

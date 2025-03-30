@@ -1,3 +1,4 @@
+/// Module for [Banner] class
 module adw.banner;
 
 import adw.c.functions;
@@ -17,42 +18,45 @@ import gtk.widget;
 
 /**
     A bar with contextual information.
-  
-  <picture>
-    <source srcset="banner-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="banner.png" alt="banner">
-  </picture>
-  
-  Banners are hidden by default, use `property@Banner:revealed` to show them.
-  
-  Banners have a title, set with `property@Banner:title`. Titles can be marked
-  up with Pango markup, use `property@Banner:use-markup` to enable it.
-  
-  The title will be shown centered or left-aligned depending on available
-  space.
-  
-  Banners can optionally have a button with text on it, set through
-  `property@Banner:button-label`. The button can be used with a [gio.action.Action],
-  or with the `signal@Banner::button-clicked` signal.
-  
-  ## CSS nodes
-  
-  [adw.banner.Banner] has a main CSS node with the name `banner`.
+    
+    <picture>
+      <source srcset="banner-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="banner.png" alt="banner">
+    </picture>
+    
+    Banners are hidden by default, use `property@Banner:revealed` to show them.
+    
+    Banners have a title, set with `property@Banner:title`. Titles can be marked
+    up with Pango markup, use `property@Banner:use-markup` to enable it.
+    
+    The title will be shown centered or left-aligned depending on available
+    space.
+    
+    Banners can optionally have a button with text on it, set through
+    `property@Banner:button-label`. The button can be used with a [gio.action.Action],
+    or with the `signal@Banner::button-clicked` signal.
+    
+    ## CSS nodes
+    
+    [adw.banner.Banner] has a main CSS node with the name `banner`.
 */
 class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_banner_get_type != &gidSymbolNotFound ? adw_banner_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -67,9 +71,10 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [adw.banner.Banner].
-    Params:
-      title =       the banner title
-    Returns:     the newly created [adw.banner.Banner]
+  
+      Params:
+        title = the banner title
+      Returns: the newly created [adw.banner.Banner]
   */
   this(string title)
   {
@@ -81,7 +86,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the button label for self.
-    Returns:     the button label for self
+      Returns: the button label for self
   */
   string getButtonLabel()
   {
@@ -93,7 +98,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets if a banner is revealed
-    Returns:     Whether a banner is revealed
+      Returns: Whether a banner is revealed
   */
   bool getRevealed()
   {
@@ -104,7 +109,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the title for self.
-    Returns:     the title for self
+      Returns: the title for self
   */
   string getTitle()
   {
@@ -116,7 +121,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets whether to use Pango markup for the banner title.
-    Returns:     whether to use markup
+      Returns: whether to use markup
   */
   bool getUseMarkup()
   {
@@ -127,13 +132,14 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the button label for self.
-    
-    If set to `""` or `NULL`, the button won't be shown.
-    
-    The button can be used with a [gio.action.Action], or with the
-    `signalBanner::button-clicked` signal.
-    Params:
-      label =       the label
+      
+      If set to `""` or `NULL`, the button won't be shown.
+      
+      The button can be used with a [gio.action.Action], or with the
+      `signalBanner::button-clicked` signal.
+  
+      Params:
+        label = the label
   */
   void setButtonLabel(string label = null)
   {
@@ -143,8 +149,9 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets whether a banner should be revealed
-    Params:
-      revealed =       whether a banner should be revealed
+  
+      Params:
+        revealed = whether a banner should be revealed
   */
   void setRevealed(bool revealed)
   {
@@ -153,10 +160,11 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the title for this banner.
-    
-    See also: `propertyBanner:use-markup`.
-    Params:
-      title =       the title
+      
+      See also: `propertyBanner:use-markup`.
+  
+      Params:
+        title = the title
   */
   void setTitle(string title)
   {
@@ -166,10 +174,11 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets whether to use Pango markup for the banner title.
-    
-    See also `funcPango.parse_markup`.
-    Params:
-      useMarkup =       whether to use markup
+      
+      See also `funcPango.parse_markup`.
+  
+      Params:
+        useMarkup = whether to use markup
   */
   void setUseMarkup(bool useMarkup)
   {
@@ -177,36 +186,38 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      This signal is emitted after the action button has been clicked.
-    
-    It can be used as an alternative to setting an action.
+      Connect to `ButtonClicked` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B banner) the instance the signal is connected to
-    )
-  */
-  alias ButtonClickedCallbackDlg = void delegate(adw.banner.Banner banner);
-
-  /** ditto */
-  alias ButtonClickedCallbackFunc = void function(adw.banner.Banner banner);
-
-  /**
-    Connect to ButtonClicked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted after the action button has been clicked.
+      
+      It can be used as an alternative to setting an action.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.banner.Banner banner))
+  
+          `banner` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectButtonClicked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ButtonClickedCallbackDlg) || is(T : ButtonClickedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.banner.Banner)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto banner = getVal!(adw.banner.Banner)(_paramVals);
-      _dClosure.dlg(banner);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

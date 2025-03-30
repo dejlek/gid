@@ -1,3 +1,4 @@
+/// Module for [AudioResampler] class
 module gstaudio.audio_resampler;
 
 import gid.gid;
@@ -8,13 +9,14 @@ import gstaudio.types;
 
 /**
     #GstAudioResampler is a structure which holds the information
-  required to perform various kinds of resampling filtering.
+    required to perform various kinds of resampling filtering.
 */
 class AudioResampler
 {
   GstAudioResampler* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AudioResampler
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -32,11 +35,12 @@ class AudioResampler
 
   /**
       Get the number of input frames that would currently be needed
-    to produce out_frames from resampler.
-    Params:
-      outFrames =       number of input frames
-    Returns:     The number of input frames needed for producing
-      out_frames of data from resampler.
+      to produce out_frames from resampler.
+  
+      Params:
+        outFrames = number of input frames
+      Returns: The number of input frames needed for producing
+        out_frames of data from resampler.
   */
   size_t getInFrames(size_t outFrames)
   {
@@ -47,9 +51,9 @@ class AudioResampler
 
   /**
       Get the maximum number of input samples that the resampler would
-    need before producing output.
-    Returns:     the latency of resampler as expressed in the number of
-      frames.
+      need before producing output.
+      Returns: the latency of resampler as expressed in the number of
+        frames.
   */
   size_t getMaxLatency()
   {
@@ -60,11 +64,12 @@ class AudioResampler
 
   /**
       Get the number of output frames that would be currently available when
-    in_frames are given to resampler.
-    Params:
-      inFrames =       number of input frames
-    Returns:     The number of frames that would be available after giving
-      in_frames as input to resampler.
+      in_frames are given to resampler.
+  
+      Params:
+        inFrames = number of input frames
+      Returns: The number of frames that would be available after giving
+        in_frames as input to resampler.
   */
   size_t getOutFrames(size_t inFrames)
   {
@@ -75,7 +80,7 @@ class AudioResampler
 
   /**
       Reset resampler to the state it was when it was first created, discarding
-    all sample history.
+      all sample history.
   */
   void reset()
   {
@@ -84,16 +89,17 @@ class AudioResampler
 
   /**
       Update the resampler parameters for resampler. This function should
-    not be called concurrently with any other function on resampler.
-    
-    When in_rate or out_rate is 0, its value is unchanged.
-    
-    When options is null, the previously configured options are reused.
-    Params:
-      inRate =       new input rate
-      outRate =       new output rate
-      options =       new options or null
-    Returns:     true if the new parameters could be set
+      not be called concurrently with any other function on resampler.
+      
+      When in_rate or out_rate is 0, its value is unchanged.
+      
+      When options is null, the previously configured options are reused.
+  
+      Params:
+        inRate = new input rate
+        outRate = new output rate
+        options = new options or null
+      Returns: true if the new parameters could be set
   */
   bool update(int inRate, int outRate, gst.structure.Structure options)
   {
@@ -104,15 +110,16 @@ class AudioResampler
 
   /**
       Make a new resampler.
-    Params:
-      method =       a #GstAudioResamplerMethod
-      flags =       #GstAudioResamplerFlags
-      format =       the #GstAudioFormat
-      channels =       the number of channels
-      inRate =       input rate
-      outRate =       output rate
-      options =       extra options
-    Returns:     The new #GstAudioResampler.
+  
+      Params:
+        method = a #GstAudioResamplerMethod
+        flags = #GstAudioResamplerFlags
+        format = the #GstAudioFormat
+        channels = the number of channels
+        inRate = input rate
+        outRate = output rate
+        options = extra options
+      Returns: The new #GstAudioResampler.
   */
   static gstaudio.audio_resampler.AudioResampler new_(gstaudio.types.AudioResamplerMethod method, gstaudio.types.AudioResamplerFlags flags, gstaudio.types.AudioFormat format, int channels, int inRate, int outRate, gst.structure.Structure options)
   {
@@ -124,13 +131,14 @@ class AudioResampler
 
   /**
       Set the parameters for resampling from in_rate to out_rate using method
-    for quality in options.
-    Params:
-      method =       a #GstAudioResamplerMethod
-      quality =       the quality
-      inRate =       the input rate
-      outRate =       the output rate
-      options =       a #GstStructure
+      for quality in options.
+  
+      Params:
+        method = a #GstAudioResamplerMethod
+        quality = the quality
+        inRate = the input rate
+        outRate = the output rate
+        options = a #GstStructure
   */
   static void optionsSetQuality(gstaudio.types.AudioResamplerMethod method, uint quality, int inRate, int outRate, gst.structure.Structure options)
   {

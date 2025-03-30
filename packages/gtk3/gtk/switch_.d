@@ -1,3 +1,4 @@
+/// Module for [Switch] class
 module gtk.switch_;
 
 import atk.implementor_iface;
@@ -17,36 +18,39 @@ import gtk.widget;
 
 /**
     #GtkSwitch is a widget that has two states: on or off. The user can control
-  which state should be active by clicking the empty area, or by dragging the
-  handle.
-  
-  GtkSwitch can also handle situations where the underlying state changes with
-  a delay. See #GtkSwitch::state-set for details.
-  
-  # CSS nodes
-  
-  ```plain
-  switch
-  ╰── slider
-  ```
-  
-  GtkSwitch has two css nodes, the main node with the name switch and a subnode
-  named slider. Neither of them is using any style classes.
+    which state should be active by clicking the empty area, or by dragging the
+    handle.
+    
+    GtkSwitch can also handle situations where the underlying state changes with
+    a delay. See #GtkSwitch::state-set for details.
+    
+    # CSS nodes
+    
+    ```plain
+    switch
+    ╰── slider
+    ```
+    
+    GtkSwitch has two css nodes, the main node with the name switch and a subnode
+    named slider. Neither of them is using any style classes.
 */
 class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Activatable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_switch_get_type != &gidSymbolNotFound ? gtk_switch_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -62,7 +66,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
   /**
       Creates a new #GtkSwitch widget.
-    Returns:     the newly created #GtkSwitch instance
+      Returns: the newly created #GtkSwitch instance
   */
   this()
   {
@@ -73,7 +77,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
   /**
       Gets whether the #GtkSwitch is in its “on” or “off” state.
-    Returns:     true if the #GtkSwitch is active, and false otherwise
+      Returns: true if the #GtkSwitch is active, and false otherwise
   */
   bool getActive()
   {
@@ -86,7 +90,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
   /**
       Gets the underlying state of the #GtkSwitch.
-    Returns:     the underlying state
+      Returns: the underlying state
   */
   bool getState()
   {
@@ -97,8 +101,9 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
   /**
       Changes the state of sw to the desired one.
-    Params:
-      isActive =       true if sw should be active, and false otherwise
+  
+      Params:
+        isActive = true if sw should be active, and false otherwise
   */
   void setActive(bool isActive)
   {
@@ -109,14 +114,15 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
 
   /**
       Sets the underlying state of the #GtkSwitch.
-    
-    Normally, this is the same as #GtkSwitch:active, unless the switch
-    is set up for delayed state changes. This function is typically
-    called from a #GtkSwitch::state-set signal handler.
-    
-    See #GtkSwitch::state-set for details.
-    Params:
-      state =       the new state
+      
+      Normally, this is the same as #GtkSwitch:active, unless the switch
+      is set up for delayed state changes. This function is typically
+      called from a #GtkSwitch::state-set signal handler.
+      
+      See #GtkSwitch::state-set for details.
+  
+      Params:
+        state = the new state
   */
   void setState(bool state)
   {
@@ -124,37 +130,39 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 
   /**
-      The ::activate signal on GtkSwitch is an action signal and
-    emitting it causes the switch to animate.
-    Applications should never connect to this signal, but use the
-    notify::active signal.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B switch_) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.switch_.Switch switch_);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.switch_.Switch switch_);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::activate signal on GtkSwitch is an action signal and
+      emitting it causes the switch to animate.
+      Applications should never connect to this signal, but use the
+      notify::active signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.switch_.Switch switch_))
+  
+          `switch_` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.switch_.Switch)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto switch_ = getVal!(gtk.switch_.Switch)(_paramVals);
-      _dClosure.dlg(switch_);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -162,50 +170,56 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 
   /**
-      The ::state-set signal on GtkSwitch is emitted to change the underlying
-    state. It is emitted when the user changes the switch position. The
-    default handler keeps the state in sync with the #GtkSwitch:active
-    property.
-    
-    To implement delayed state change, applications can connect to this signal,
-    initiate the change of the underlying state, and call [gtk.switch_.Switch.setState]
-    when the underlying state change is complete. The signal handler should
-    return true to prevent the default handler from running.
-    
-    Visually, the underlying state is represented by the trough color of
-    the switch, while the #GtkSwitch:active property is represented by the
-    position of the switch.
+      Connect to `StateSet` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B state)       the new state of the switch
-      * $(B switch_) the instance the signal is connected to
-    )
-    Returns:     true to stop the signal emission
-  */
-  alias StateSetCallbackDlg = bool delegate(bool state, gtk.switch_.Switch switch_);
-
-  /** ditto */
-  alias StateSetCallbackFunc = bool function(bool state, gtk.switch_.Switch switch_);
-
-  /**
-    Connect to StateSet signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::state-set signal on GtkSwitch is emitted to change the underlying
+      state. It is emitted when the user changes the switch position. The
+      default handler keeps the state in sync with the #GtkSwitch:active
+      property.
+      
+      To implement delayed state change, applications can connect to this signal,
+      initiate the change of the underlying state, and call [gtk.switch_.Switch.setState]
+      when the underlying state change is complete. The signal handler should
+      return true to prevent the default handler from running.
+      
+      Visually, the underlying state is represented by the trough color of
+      the switch, while the #GtkSwitch:active property is represented by the
+      position of the switch.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(bool state, gtk.switch_.Switch switch_))
+  
+          `state` the new state of the switch (optional)
+  
+          `switch_` the instance the signal is connected to (optional)
+  
+          `Returns` true to stop the signal emission
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectStateSet(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : StateSetCallbackDlg) || is(T : StateSetCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.switch_.Switch)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto switch_ = getVal!(gtk.switch_.Switch)(_paramVals);
-      auto state = getVal!(bool)(&_paramVals[1]);
-      _retval = _dClosure.dlg(state, switch_);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 

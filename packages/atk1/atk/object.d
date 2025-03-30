@@ -1,3 +1,4 @@
+/// Module for [ObjectAtk] class
 module atk.object;
 
 import atk.c.functions;
@@ -12,42 +13,45 @@ import gobject.object;
 
 /**
     The base object class for the Accessibility Toolkit API.
-  
-  This class is the primary class for accessibility support via the
-  Accessibility ToolKit (ATK).  Objects which are instances of
-  #AtkObject (or instances of AtkObject-derived types) are queried
-  for properties which relate basic (and generic) properties of a UI
-  component such as name and description.  Instances of #AtkObject
-  may also be queried as to whether they implement other ATK
-  interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
-  to the role which a given UI component plays in a user interface.
-  
-  All UI components in an application which provide useful
-  information or services to the user must provide corresponding
-  #AtkObject instances on request (in GTK+, for instance, usually on
-  a call to #gtk_widget_get_accessible ()), either via ATK support
-  built into the toolkit for the widget class or ancestor class, or
-  in the case of custom widgets, if the inherited #AtkObject
-  implementation is insufficient, via instances of a new #AtkObject
-  subclass.
-  
-  See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
-  #GtkAccessible).
+    
+    This class is the primary class for accessibility support via the
+    Accessibility ToolKit (ATK).  Objects which are instances of
+    #AtkObject (or instances of AtkObject-derived types) are queried
+    for properties which relate basic (and generic) properties of a UI
+    component such as name and description.  Instances of #AtkObject
+    may also be queried as to whether they implement other ATK
+    interfaces (e.g. #AtkAction, #AtkComponent, etc.), as appropriate
+    to the role which a given UI component plays in a user interface.
+    
+    All UI components in an application which provide useful
+    information or services to the user must provide corresponding
+    #AtkObject instances on request (in GTK+, for instance, usually on
+    a call to #gtk_widget_get_accessible ()), either via ATK support
+    built into the toolkit for the widget class or ancestor class, or
+    in the case of custom widgets, if the inherited #AtkObject
+    implementation is insufficient, via instances of a new #AtkObject
+    subclass.
+    
+    See `class@AtkObjectFactory`, `class@AtkRegistry`.  (GTK+ users see also
+    #GtkAccessible).
 */
 class ObjectAtk : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_object_get_type != &gidSymbolNotFound ? atk_object_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -60,10 +64,11 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Adds a relationship of the specified type with the specified target.
-    Params:
-      relationship =       The #AtkRelationType of the relation
-      target =       The #AtkObject which is to be the target of the relation.
-    Returns:     TRUE if the relationship is added.
+  
+      Params:
+        relationship = The #AtkRelationType of the relation
+        target = The #AtkObject which is to be the target of the relation.
+      Returns: TRUE if the relationship is added.
   */
   bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
@@ -74,8 +79,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible id of the accessible.
-    Returns:     a character string representing the accessible id of the object, or
-      NULL if no such string was set.
+      Returns: a character string representing the accessible id of the object, or
+        NULL if no such string was set.
   */
   string getAccessibleId()
   {
@@ -87,8 +92,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible description of the accessible.
-    Returns:     a character string representing the accessible description
-      of the accessible.
+      Returns: a character string representing the accessible description
+        of the accessible.
   */
   string getDescription()
   {
@@ -100,8 +105,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the help text associated with the accessible.
-    Returns:     a character string representing the help text or the object, or
-      NULL if no such string was set.
+      Returns: a character string representing the help text or the object, or
+        NULL if no such string was set.
   */
   string getHelpText()
   {
@@ -113,8 +118,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the 0-based index of this accessible in its parent; returns -1 if the
-    accessible does not have an accessible parent.
-    Returns:     an integer which is the index of the accessible in its parent
+      accessible does not have an accessible parent.
+      Returns: an integer which is the index of the accessible in its parent
   */
   int getIndexInParent()
   {
@@ -125,9 +130,9 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the layer of the accessible.
-    Returns:     an #AtkLayer which is the layer of the accessible
+      Returns: an #AtkLayer which is the layer of the accessible
   
-    Deprecated:     Use atk_component_get_layer instead.
+      Deprecated: Use atk_component_get_layer instead.
   */
   atk.types.Layer getLayer()
   {
@@ -139,12 +144,12 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the zorder of the accessible. The value G_MININT will be returned
-    if the layer of the accessible is not ATK_LAYER_MDI.
-    Returns:     a gint which is the zorder of the accessible, i.e. the depth at
-      which the component is shown in relation to other components in the same
-      container.
+      if the layer of the accessible is not ATK_LAYER_MDI.
+      Returns: a gint which is the zorder of the accessible, i.e. the depth at
+        which the component is shown in relation to other components in the same
+        container.
   
-    Deprecated:     Use atk_component_get_mdi_zorder instead.
+      Deprecated: Use atk_component_get_mdi_zorder instead.
   */
   int getMdiZorder()
   {
@@ -155,8 +160,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the number of accessible children of the accessible.
-    Returns:     an integer representing the number of accessible children
-      of the accessible.
+      Returns: an integer representing the number of accessible children
+        of the accessible.
   */
   int getNAccessibleChildren()
   {
@@ -167,7 +172,7 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible name of the accessible.
-    Returns:     a character string representing the accessible name of the object.
+      Returns: a character string representing the accessible name of the object.
   */
   string getName()
   {
@@ -179,9 +184,9 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
-    of accessible.
-    Returns:     a UTF-8 string indicating the POSIX-style LC_MESSAGES
-               locale of accessible.
+      of accessible.
+      Returns: a UTF-8 string indicating the POSIX-style LC_MESSAGES
+                 locale of accessible.
   */
   string getObjectLocale()
   {
@@ -193,15 +198,15 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible parent of the accessible. By default this is
-    the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
-    that ATK implementors have ways to get the parent of the object
-    without the need of assigning it manually with
-    [atk.object.ObjectAtk.setParent], and will return it with this method.
-    
-    If you are only interested on the parent assigned with
-    [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
-    Returns:     an #AtkObject representing the accessible
-      parent of the accessible
+      the one assigned with [atk.object.ObjectAtk.setParent], but it is assumed
+      that ATK implementors have ways to get the parent of the object
+      without the need of assigning it manually with
+      [atk.object.ObjectAtk.setParent], and will return it with this method.
+      
+      If you are only interested on the parent assigned with
+      [atk.object.ObjectAtk.setParent], use [atk.object.ObjectAtk.peekParent].
+      Returns: an #AtkObject representing the accessible
+        parent of the accessible
   */
   atk.object.ObjectAtk getParent()
   {
@@ -213,7 +218,7 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the role of the accessible.
-    Returns:     an #AtkRole which is the role of the accessible
+      Returns: an #AtkRole which is the role of the accessible
   */
   atk.types.Role getRole()
   {
@@ -225,11 +230,12 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       This function is called when implementing subclasses of #AtkObject.
-    It does initialization required for the new object. It is intended
-    that this function should called only in the ..._new() functions used
-    to create an instance of a subclass of #AtkObject
-    Params:
-      data =       a #gpointer which identifies the object for which the AtkObject was created.
+      It does initialization required for the new object. It is intended
+      that this function should called only in the ..._new() functions used
+      to create an instance of a subclass of #AtkObject
+  
+      Params:
+        data = a #gpointer which identifies the object for which the AtkObject was created.
   */
   void initialize(void* data = null)
   {
@@ -238,12 +244,13 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Emits a state-change signal for the specified state.
-    
-    Note that as a general rule when the state of an existing object changes,
-    emitting a notification is expected.
-    Params:
-      state =       an #AtkState whose state is changed
-      value =       a gboolean which indicates whether the state is being set on or off
+      
+      Note that as a general rule when the state of an existing object changes,
+      emitting a notification is expected.
+  
+      Params:
+        state = an #AtkState whose state is changed
+        value = a gboolean which indicates whether the state is being set on or off
   */
   void notifyStateChange(atk.types.State state, bool value)
   {
@@ -252,14 +259,14 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the accessible parent of the accessible, if it has been
-    manually assigned with atk_object_set_parent. Otherwise, this
-    function returns null.
-    
-    This method is intended as an utility for ATK implementors, and not
-    to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
-    further reference.
-    Returns:     an #AtkObject representing the accessible
-      parent of the accessible if assigned
+      manually assigned with atk_object_set_parent. Otherwise, this
+      function returns null.
+      
+      This method is intended as an utility for ATK implementors, and not
+      to be exposed to accessible tools. See [atk.object.ObjectAtk.getParent] for
+      further reference.
+      Returns: an #AtkObject representing the accessible
+        parent of the accessible if assigned
   */
   atk.object.ObjectAtk peekParent()
   {
@@ -271,12 +278,13 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets a reference to the specified accessible child of the object.
-    The accessible children are 0-based so the first accessible child is
-    at index 0, the second at index 1 and so on.
-    Params:
-      i =       a gint representing the position of the child, starting from 0
-    Returns:     an #AtkObject representing the specified
-      accessible child of the accessible.
+      The accessible children are 0-based so the first accessible child is
+      at index 0, the second at index 1 and so on.
+  
+      Params:
+        i = a gint representing the position of the child, starting from 0
+      Returns: an #AtkObject representing the specified
+        accessible child of the accessible.
   */
   atk.object.ObjectAtk refAccessibleChild(int i)
   {
@@ -288,8 +296,8 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets the #AtkRelationSet associated with the object.
-    Returns:     an #AtkRelationSet representing the relation set
-      of the object.
+      Returns: an #AtkRelationSet representing the relation set
+        of the object.
   */
   atk.relation_set.RelationSet refRelationSet()
   {
@@ -301,9 +309,9 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Gets a reference to the state set of the accessible; the caller must
-    unreference it when it is no longer needed.
-    Returns:     a reference to an #AtkStateSet which is the state
-      set of the accessible
+      unreference it when it is no longer needed.
+      Returns: a reference to an #AtkStateSet which is the state
+        set of the accessible
   */
   atk.state_set.StateSet refStateSet()
   {
@@ -315,10 +323,11 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Removes a property change handler.
-    Params:
-      handlerId =       a guint which identifies the handler to be removed.
   
-    Deprecated:     See [atk.object.ObjectAtk.connectPropertyChangeHandler]
+      Params:
+        handlerId = a guint which identifies the handler to be removed.
+  
+      Deprecated: See [atk.object.ObjectAtk.connectPropertyChangeHandler]
   */
   void removePropertyChangeHandler(uint handlerId)
   {
@@ -327,10 +336,11 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Removes a relationship of the specified type with the specified target.
-    Params:
-      relationship =       The #AtkRelationType of the relation
-      target =       The #AtkObject which is the target of the relation to be removed.
-    Returns:     TRUE if the relationship is removed.
+  
+      Params:
+        relationship = The #AtkRelationType of the relation
+        target = The #AtkObject which is the target of the relation to be removed.
+      Returns: TRUE if the relationship is removed.
   */
   bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectAtk target)
   {
@@ -341,12 +351,13 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the accessible ID of the accessible.  This is not meant to be presented
-    to the user, but to be an ID which is stable over application development.
-    Typically, this is the gtkbuilder ID. Such an ID will be available for
-    instance to identify a given well-known accessible object for tailored screen
-    reading, or for automatic regression testing.
-    Params:
-      id =       a character string to be set as the accessible id
+      to the user, but to be an ID which is stable over application development.
+      Typically, this is the gtkbuilder ID. Such an ID will be available for
+      instance to identify a given well-known accessible object for tailored screen
+      reading, or for automatic regression testing.
+  
+      Params:
+        id = a character string to be set as the accessible id
   */
   void setAccessibleId(string id)
   {
@@ -356,11 +367,12 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the accessible description of the accessible. You can't set
-    the description to NULL. This is reserved for the initial value. In
-    this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
-    the name to a empty value you can use "".
-    Params:
-      description =       a character string to be set as the accessible description
+      the description to NULL. This is reserved for the initial value. In
+      this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+      the name to a empty value you can use "".
+  
+      Params:
+        description = a character string to be set as the accessible description
   */
   void setDescription(string description)
   {
@@ -370,10 +382,11 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the help text associated with the accessible. This can be used to
-    expose context-sensitive information to help a user understand how to
-    interact with the object.
-    Params:
-      helpText =       a character string to be set as the accessible's help text
+      expose context-sensitive information to help a user understand how to
+      interact with the object.
+  
+      Params:
+        helpText = a character string to be set as the accessible's help text
   */
   void setHelpText(string helpText)
   {
@@ -383,11 +396,12 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the accessible name of the accessible. You can't set the name
-    to NULL. This is reserved for the initial value. In this aspect
-    NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
-    a empty value you can use "".
-    Params:
-      name =       a character string to be set as the accessible name
+      to NULL. This is reserved for the initial value. In this aspect
+      NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+      a empty value you can use "".
+  
+      Params:
+        name = a character string to be set as the accessible name
   */
   void setName(string name)
   {
@@ -397,8 +411,9 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the accessible parent of the accessible. parent can be NULL.
-    Params:
-      parent =       an #AtkObject to be set as the accessible parent
+  
+      Params:
+        parent = an #AtkObject to be set as the accessible parent
   */
   void setParent(atk.object.ObjectAtk parent)
   {
@@ -407,8 +422,9 @@ class ObjectAtk : gobject.object.ObjectG
 
   /**
       Sets the role of the accessible.
-    Params:
-      role =       an #AtkRole to be set as the role
+  
+      Params:
+        role = an #AtkRole to be set as the role
   */
   void setRole(atk.types.Role role)
   {
@@ -416,40 +432,47 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "active-descendant-changed" signal is emitted by an object
-    which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
-    object in the object changes. For instance, a table will emit the
-    signal when the cell in the table which has focus changes.
+      Connect to `ActiveDescendantChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       the newly focused object.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias ActiveDescendantChangedCallbackDlg = void delegate(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias ActiveDescendantChangedCallbackFunc = void function(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to ActiveDescendantChanged signal.
-    Params:
-      detail = Signal detail or null (default)
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "active-descendant-changed" signal is emitted by an object
+      which has the state ATK_STATE_MANAGES_DESCENDANTS when the focus
+      object in the object changes. For instance, a table will emit the
+      signal when the cell in the table which has focus changes.
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.object.ObjectAtk arg1, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` the newly focused object. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActiveDescendantChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T : ActiveDescendantChangedCallbackDlg) || is(T : ActiveDescendantChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(atk.object.ObjectAtk)(&_paramVals[1]);
-      _dClosure.dlg(arg1, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -457,39 +480,46 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "announcement" signal can be emitted to pass an announcement on to
-    be read by a screen reader.
-    
-    Depcrecated (2.50): Use AtkObject::notification instead.
+      Connect to `Announcement` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       the text to be announced.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias AnnouncementCallbackDlg = void delegate(string arg1, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias AnnouncementCallbackFunc = void function(string arg1, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to Announcement signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "announcement" signal can be emitted to pass an announcement on to
+      be read by a screen reader.
+      
+      Depcrecated (2.50): Use AtkObject::notification instead.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string arg1, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` the text to be announced. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAnnouncement(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AnnouncementCallbackDlg) || is(T : AnnouncementCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(arg1, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -497,40 +527,52 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "attribute-changed" signal should be emitted when one of an object's
-    attributes changes.
+      Connect to `AttributeChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       the name of the attribute being modified, or null if not
-                 available.
-      * $(B arg2)       the attribute's new value, or null if not available.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias AttributeChangedCallbackDlg = void delegate(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias AttributeChangedCallbackFunc = void function(string arg1, string arg2, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to AttributeChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "attribute-changed" signal should be emitted when one of an object's
+      attributes changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string arg1, string arg2, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` the name of the attribute being modified, or null if not
+                   available. (optional)
+  
+          `arg2` the attribute's new value, or null if not available. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAttributeChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AttributeChangedCallbackDlg) || is(T : AttributeChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(string)(&_paramVals[1]);
-      auto arg2 = getVal!(string)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -538,46 +580,58 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The signal "children-changed" is emitted when a child is added or
-    removed from an object. It supports two details: "add" and
-    "remove"
+      Connect to `ChildrenChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The index of the added or removed child. The value can be
-        -1. This is used if the value is not known by the implementor
-        when the child is added/removed or irrelevant.
-      * $(B arg2)       A gpointer to the child AtkObject which was added or
-        removed. If the child was removed, it is possible that it is not
-        available for the implementor. In that case this pointer can be
-        NULL.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias ChildrenChangedCallbackDlg = void delegate(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias ChildrenChangedCallbackFunc = void function(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to ChildrenChanged signal.
-    Params:
-      detail = Signal detail or null (default)
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The signal "children-changed" is emitted when a child is added or
+      removed from an object. It supports two details: "add" and
+      "remove"
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(uint arg1, atk.object.ObjectAtk arg2, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` The index of the added or removed child. The value can be
+          -1. This is used if the value is not known by the implementor
+          when the child is added/removed or irrelevant. (optional)
+  
+          `arg2` A gpointer to the child AtkObject which was added or
+          removed. If the child was removed, it is possible that it is not
+          available for the implementor. In that case this pointer can be
+          NULL. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectChildrenChanged(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T : ChildrenChangedCallbackDlg) || is(T : ChildrenChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(uint)(&_paramVals[1]);
-      auto arg2 = getVal!(atk.object.ObjectAtk)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -585,40 +639,47 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
+      Connect to `FocusEvent` signal.
+  
       The signal "focus-event" is emitted when an object gained or lost
-    focus.
+      focus.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       a boolean value which indicates whether the object gained
-        or lost focus.
-      * $(B objectAtk) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
   
-    Deprecated:     Use the #AtkObject::state-change signal instead.
-  */
-  alias FocusEventCallbackDlg = void delegate(bool arg1, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias FocusEventCallbackFunc = void function(bool arg1, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to FocusEvent signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+          $(D void callback(bool arg1, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` a boolean value which indicates whether the object gained
+          or lost focus. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Use the #AtkObject::state-change signal instead.
   */
   ulong connectFocusEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : FocusEventCallbackDlg) || is(T : FocusEventCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(bool)(&_paramVals[1]);
-      _dClosure.dlg(arg1, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -626,40 +687,52 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "notification" signal can be emitted to pass an announcement on to
-    be read by a screen reader.
+      Connect to `Notification` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       the text to be announced.
-      * $(B arg2)       an #AtkLive specifying the politeness of the notification.
-        Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias NotificationCallbackDlg = void delegate(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias NotificationCallbackFunc = void function(string arg1, int arg2, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to Notification signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "notification" signal can be emitted to pass an announcement on to
+      be read by a screen reader.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string arg1, int arg2, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` the text to be announced. (optional)
+  
+          `arg2` an #AtkLive specifying the politeness of the notification.
+          Should be either ATK_LIVE_POLITE or ATK_LIVE_ASSERTIVE. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectNotification(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : NotificationCallbackDlg) || is(T : NotificationCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(string)(&_paramVals[1]);
-      auto arg2 = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -667,50 +740,57 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The signal "property-change" is emitted when an object's property
-    value changes. arg1 contains an #AtkPropertyValues with the name
-    and the new value of the property whose value has changed. Note
-    that, as with GObject notify, getting this signal does not
-    guarantee that the value of the property has actually changed; it
-    may also be emitted when the setter of the property is called to
-    reinstate the previous value.
-    
-    Toolkit implementor note: ATK implementors should use
-    [gobject.object.ObjectG.notify] to emit property-changed
-    notifications. #AtkObject::property-changed is needed by the
-    implementation of [atk.global.addGlobalEventListener] because GObject
-    notify doesn't support emission hooks.
+      Connect to `PropertyChange` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       an #AtkPropertyValues containing the new
-        value of the property which changed.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias PropertyChangeCallbackDlg = void delegate(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias PropertyChangeCallbackFunc = void function(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to PropertyChange signal.
-    Params:
-      detail = Signal detail or null (default)
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The signal "property-change" is emitted when an object's property
+      value changes. arg1 contains an #AtkPropertyValues with the name
+      and the new value of the property whose value has changed. Note
+      that, as with GObject notify, getting this signal does not
+      guarantee that the value of the property has actually changed; it
+      may also be emitted when the setter of the property is called to
+      reinstate the previous value.
+      
+      Toolkit implementor note: ATK implementors should use
+      [gobject.object.ObjectG.notify] to emit property-changed
+      notifications. #AtkObject::property-changed is needed by the
+      implementation of [atk.global.addGlobalEventListener] because GObject
+      notify doesn't support emission hooks.
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.property_values.PropertyValues arg1, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` an #AtkPropertyValues containing the new
+          value of the property which changed. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPropertyChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T : PropertyChangeCallbackDlg) || is(T : PropertyChangeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == atk.property_values.PropertyValues)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(atk.property_values.PropertyValues)(&_paramVals[1]);
-      _dClosure.dlg(arg1, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -718,41 +798,53 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "state-change" signal is emitted when an object's state
-    changes.  The detail value identifies the state type which has
-    changed.
+      Connect to `StateChange` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The name of the state which has changed
-      * $(B arg2)       A boolean which indicates whether the state has been set or unset.
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias StateChangeCallbackDlg = void delegate(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias StateChangeCallbackFunc = void function(string arg1, bool arg2, atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to StateChange signal.
-    Params:
-      detail = Signal detail or null (default)
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "state-change" signal is emitted when an object's state
+      changes.  The detail value identifies the state type which has
+      changed.
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string arg1, bool arg2, atk.object.ObjectAtk objectAtk))
+  
+          `arg1` The name of the state which has changed (optional)
+  
+          `arg2` A boolean which indicates whether the state has been set or unset. (optional)
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectStateChange(T)(string detail = null, T callback, Flag!"After" after = No.After)
-  if (is(T : StateChangeCallbackDlg) || is(T : StateChangeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      auto arg1 = getVal!(string)(&_paramVals[1]);
-      auto arg2 = getVal!(bool)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -760,35 +852,37 @@ class ObjectAtk : gobject.object.ObjectG
   }
 
   /**
-      The "visible-data-changed" signal is emitted when the visual
-    appearance of the object changed.
+      Connect to `VisibleDataChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B objectAtk) the instance the signal is connected to
-    )
-  */
-  alias VisibleDataChangedCallbackDlg = void delegate(atk.object.ObjectAtk objectAtk);
-
-  /** ditto */
-  alias VisibleDataChangedCallbackFunc = void function(atk.object.ObjectAtk objectAtk);
-
-  /**
-    Connect to VisibleDataChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "visible-data-changed" signal is emitted when the visual
+      appearance of the object changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.object.ObjectAtk objectAtk))
+  
+          `objectAtk` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectVisibleDataChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : VisibleDataChangedCallbackDlg) || is(T : VisibleDataChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.object.ObjectAtk)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto objectAtk = getVal!(atk.object.ObjectAtk)(_paramVals);
-      _dClosure.dlg(objectAtk);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [ParamArray] class
 module gst.param_array;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gst.types;
 
 /**
     A fundamental type that describes a #GParamSpec for arrays of
-  values
+    values
 */
 class ParamArray : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

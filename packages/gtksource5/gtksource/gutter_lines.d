@@ -1,3 +1,4 @@
+/// Module for [GutterLines] class
 module gtksource.gutter_lines;
 
 import gid.gid;
@@ -12,29 +13,32 @@ import gtksource.types;
 
 /**
     Collected information about visible lines.
-  
-  The [gtksource.gutter_lines.GutterLines] object is used to collect information about
-  visible lines.
-  
-  Use this from your `signal@GutterRenderer::query-data` to collect the
-  necessary information on visible lines. Doing so reduces the number of
-  passes through the text btree allowing GtkSourceView to reach more
-  frames-per-second while performing kinetic scrolling.
+    
+    The [gtksource.gutter_lines.GutterLines] object is used to collect information about
+    visible lines.
+    
+    Use this from your `signal@GutterRenderer::query-data` to collect the
+    necessary information on visible lines. Doing so reduces the number of
+    passes through the text btree allowing GtkSourceView to reach more
+    frames-per-second while performing kinetic scrolling.
 */
 class GutterLines : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_lines_get_type != &gidSymbolNotFound ? gtk_source_gutter_lines_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,14 +51,15 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Adds the class name to line.
-    
-    name will be converted to a [glib.types.uint] as part of this process. A
-    faster version of this function is available via
-    [gtksource.gutter_lines.GutterLines.addQclass] for situations where the [glib.types.uint] is
-    known ahead of time.
-    Params:
-      line =       a line number starting from zero
-      name =       a class name
+      
+      name will be converted to a [glib.types.uint] as part of this process. A
+      faster version of this function is available via
+      [gtksource.gutter_lines.GutterLines.addQclass] for situations where the [glib.types.uint] is
+      known ahead of time.
+  
+      Params:
+        line = a line number starting from zero
+        name = a class name
   */
   void addClass(uint line, string name)
   {
@@ -64,15 +69,16 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Adds the class denoted by qname to line.
-    
-    You may check if a line has qname by calling
-    [gtksource.gutter_lines.GutterLines.hasQclass].
-    
-    You can remove qname by calling
-    [gtksource.gutter_lines.GutterLines.removeQclass].
-    Params:
-      line =       a line number starting from zero
-      qname =       a class name as a #GQuark
+      
+      You may check if a line has qname by calling
+      [gtksource.gutter_lines.GutterLines.hasQclass].
+      
+      You can remove qname by calling
+      [gtksource.gutter_lines.GutterLines.removeQclass].
+  
+      Params:
+        line = a line number starting from zero
+        qname = a class name as a #GQuark
   */
   void addQclass(uint line, glib.types.Quark qname)
   {
@@ -81,7 +87,7 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets the [gtk.text_buffer.TextBuffer] that the [gtksource.gutter_lines.GutterLines] represents.
-    Returns:     a #GtkTextBuffer
+      Returns: a #GtkTextBuffer
   */
   gtk.text_buffer.TextBuffer getBuffer()
   {
@@ -93,8 +99,8 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets the line number (starting from 0) for the first line that is
-    user visible.
-    Returns:     a line number starting from 0
+      user visible.
+      Returns: a line number starting from 0
   */
   uint getFirst()
   {
@@ -105,9 +111,10 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets a #GtkTextIter for the current buffer at line
-    Params:
-      iter =       a location for a #GtkTextIter
-      line =       the line number
+  
+      Params:
+        iter = a location for a #GtkTextIter
+        line = the line number
   */
   void getIterAtLine(out gtk.text_iter.TextIter iter, uint line)
   {
@@ -118,8 +125,8 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets the line number (starting from 0) for the last line that is
-    user visible.
-    Returns:     a line number starting from 0
+      user visible.
+      Returns: a line number starting from 0
   */
   uint getLast()
   {
@@ -130,13 +137,14 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets the Y range for a line based on mode.
-    
-    The value for y is relative to the renderers widget coordinates.
-    Params:
-      line =       a line number starting from zero
-      mode =       a #GtkSourceGutterRendererAlignmentMode
-      y =       a location for the Y position in widget coordinates
-      height =       the line height based on mode
+      
+      The value for `y` is relative to the renderers widget coordinates.
+  
+      Params:
+        line = a line number starting from zero
+        mode = a #GtkSourceGutterRendererAlignmentMode
+        y = a location for the Y position in widget coordinates
+        height = the line height based on mode
   */
   void getLineYrange(uint line, gtksource.types.GutterRendererAlignmentMode mode, out int y, out int height)
   {
@@ -145,7 +153,7 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Gets the [gtk.text_view.TextView] that the [gtksource.gutter_lines.GutterLines] represents.
-    Returns:     a #GtkTextView
+      Returns: a #GtkTextView
   */
   gtk.text_view.TextView getView()
   {
@@ -157,11 +165,12 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if the line has any GQuark classes set. This can be
-    used to help renderer implementations avoid work if nothing has
-    been set on the class.
-    Params:
-      line =       a line contained within lines
-    Returns:     true if any quark was set for the line
+      used to help renderer implementations avoid work if nothing has
+      been set on the class.
+  
+      Params:
+        line = a line contained within lines
+      Returns: true if any quark was set for the line
   */
   bool hasAnyClass(uint line)
   {
@@ -172,15 +181,16 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if [gtksource.gutter_lines.GutterLines.addClass] was called with
-    the name for line.
-    
-    A faster version of this function is provided via
-    [gtksource.gutter_lines.GutterLines.hasQclass] for situations where the quark
-    is known ahead of time.
-    Params:
-      line =       a line number starting from zero
-      name =       a class name that may be converted, to a #GQuark
-    Returns:     true if line contains name
+      the name for line.
+      
+      A faster version of this function is provided via
+      [gtksource.gutter_lines.GutterLines.hasQclass] for situations where the quark
+      is known ahead of time.
+  
+      Params:
+        line = a line number starting from zero
+        name = a class name that may be converted, to a #GQuark
+      Returns: true if line contains name
   */
   bool hasClass(uint line, string name)
   {
@@ -192,11 +202,12 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if [gtksource.gutter_lines.GutterLines.addQclass] was called with
-    the quark denoted by qname for line.
-    Params:
-      line =       a line number starting from zero
-      qname =       a #GQuark containing the class name
-    Returns:     true if line contains qname
+      the quark denoted by qname for line.
+  
+      Params:
+        line = a line number starting from zero
+        qname = a #GQuark containing the class name
+      Returns: true if line contains qname
   */
   bool hasQclass(uint line, glib.types.Quark qname)
   {
@@ -207,9 +218,10 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if line contains the insertion cursor.
-    Params:
-      line =       a line number starting from zero
-    Returns:     true if the insertion cursor is on line
+  
+      Params:
+        line = a line number starting from zero
+      Returns: true if the insertion cursor is on line
   */
   bool isCursor(uint line)
   {
@@ -220,10 +232,11 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if line is marked as prelit. Generally, this means
-    the mouse pointer is over the line within the gutter.
-    Params:
-      line =       a line number starting from zero
-    Returns:     true if the line is prelit
+      the mouse pointer is over the line within the gutter.
+  
+      Params:
+        line = a line number starting from zero
+      Returns: true if the line is prelit
   */
   bool isPrelit(uint line)
   {
@@ -234,10 +247,11 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Checks to see if the view had a selection and if that selection overlaps
-    line in some way.
-    Params:
-      line =       a line number starting from zero
-    Returns:     true if the line contains a selection
+      line in some way.
+  
+      Params:
+        line = a line number starting from zero
+      Returns: true if the line contains a selection
   */
   bool isSelected(uint line)
   {
@@ -248,13 +262,14 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Removes the class matching name from line.
-    
-    A faster version of this function is available via
-    [gtksource.gutter_lines.GutterLines.removeQclass] for situations where the
-    #GQuark is known ahead of time.
-    Params:
-      line =       a line number starting from zero
-      name =       a class name
+      
+      A faster version of this function is available via
+      [gtksource.gutter_lines.GutterLines.removeQclass] for situations where the
+      #GQuark is known ahead of time.
+  
+      Params:
+        line = a line number starting from zero
+        name = a class name
   */
   void removeClass(uint line, string name)
   {
@@ -264,10 +279,11 @@ class GutterLines : gobject.object.ObjectG
 
   /**
       Reverses a call to [gtksource.gutter_lines.GutterLines.addQclass] by removing
-    the [glib.types.uint] matching qname.
-    Params:
-      line =       a line number starting from zero
-      qname =       a #GQuark to remove from line
+      the [glib.types.uint] matching qname.
+  
+      Params:
+        line = a line number starting from zero
+        qname = a #GQuark to remove from line
   */
   void removeQclass(uint line, glib.types.Quark qname)
   {

@@ -1,3 +1,4 @@
+/// Module for [RadioActionEntry] class
 module gtk.radio_action_entry;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     #GtkRadioActionEntry structs are used with
-  [gtk.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
+    [gtk.action_group.ActionGroup.addRadioActions] to construct groups of radio actions.
 */
 class RadioActionEntry
 {
   GtkRadioActionEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class RadioActionEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

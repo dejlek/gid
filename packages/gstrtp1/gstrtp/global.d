@@ -1,3 +1,4 @@
+/// Global functions for gstrtp1 library
 module gstrtp.global;
 
 import gid.gid;
@@ -12,10 +13,11 @@ import gstrtp.types;
 
 /**
     Find the #GstRTPSourceMeta on buffer.
-  Params:
-    buffer =       a #GstBuffer
-  Returns:     the #GstRTPSourceMeta or null when there
-    is no such metadata on buffer.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstRTPSourceMeta or null when there
+      is no such metadata on buffer.
 */
 gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buffer)
 {
@@ -27,12 +29,13 @@ gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buf
 
 /**
     Converts an NTP time to UNIX nanoseconds. ntptime can typically be
-  the NTP time of an SR RTCP message and contains, in the upper 32 bits, the
-  number of seconds since 1900 and, in the lower 32 bits, the fractional
-  seconds. The resulting value will be the number of nanoseconds since 1970.
-  Params:
-    ntptime =       an NTP timestamp
-  Returns:     the UNIX time for ntptime in nanoseconds.
+    the NTP time of an SR RTCP message and contains, in the upper 32 bits, the
+    number of seconds since 1900 and, in the lower 32 bits, the fractional
+    seconds. The resulting value will be the number of nanoseconds since 1970.
+
+    Params:
+      ntptime = an NTP timestamp
+    Returns: the UNIX time for ntptime in nanoseconds.
 */
 ulong rtcpNtpToUnix(ulong ntptime)
 {
@@ -43,11 +46,12 @@ ulong rtcpNtpToUnix(ulong ntptime)
 
 /**
     Convert name into a GstRTCPSDESType. name is typically a key in a
-  #GstStructure containing SDES items.
-  Params:
-    name =       a SDES name
-  Returns:     the #GstRTCPSDESType for name or #GST_RTCP_SDES_PRIV when name
-    is a private sdes item.
+    #GstStructure containing SDES items.
+
+    Params:
+      name = a SDES name
+    Returns: the #GstRTCPSDESType for name or #GST_RTCP_SDES_PRIV when name
+      is a private sdes item.
 */
 gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name)
 {
@@ -60,10 +64,11 @@ gstrtp.types.RTCPSDESType rtcpSdesNameToType(string name)
 
 /**
     Converts type to the string equivalent. The string is typically used as a
-  key in a #GstStructure containing SDES items.
-  Params:
-    type =       a #GstRTCPSDESType
-  Returns:     the string equivalent of type
+    key in a #GstStructure containing SDES items.
+
+    Params:
+      type = a #GstRTCPSDESType
+    Returns: the string equivalent of type
 */
 string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type)
 {
@@ -75,13 +80,14 @@ string rtcpSdesTypeToName(gstrtp.types.RTCPSDESType type)
 
 /**
     Converts a UNIX timestamp in nanoseconds to an NTP time. The caller should
-  pass a value with nanoseconds since 1970. The NTP time will, in the upper
-  32 bits, contain the number of seconds since 1900 and, in the lower 32
-  bits, the fractional seconds. The resulting value can be used as an ntptime
-  for constructing SR RTCP packets.
-  Params:
-    unixtime =       an UNIX timestamp in nanoseconds
-  Returns:     the NTP time for unixtime.
+    pass a value with nanoseconds since 1970. The NTP time will, in the upper
+    32 bits, contain the number of seconds since 1900 and, in the lower 32
+    bits, the fractional seconds. The resulting value can be used as an ntptime
+    for constructing SR RTCP packets.
+
+    Params:
+      unixtime = an UNIX timestamp in nanoseconds
+    Returns: the NTP time for unixtime.
 */
 ulong rtcpUnixToNtp(ulong unixtime)
 {
@@ -92,10 +98,10 @@ ulong rtcpUnixToNtp(ulong unixtime)
 
 /**
     Retrieve all the factories of the currently registered RTP header
-  extensions.  Call [gst.element_factory.ElementFactory.create] with each factory to create
-  the associated #GstRTPHeaderExtension.
-  Returns:     a #GList of
-        #GstElementFactory's. Use [gst.plugin_feature.PluginFeature.listFree] after use
+    extensions.  Call [gst.element_factory.ElementFactory.create] with each factory to create
+    the associated #GstRTPHeaderExtension.
+    Returns: a #GList of
+          #GstElementFactory's. Use [gst.plugin_feature.PluginFeature.listFree] after use
 */
 gst.element_factory.ElementFactory[] rtpGetHeaderExtensionList()
 {
@@ -107,11 +113,12 @@ gst.element_factory.ElementFactory[] rtpGetHeaderExtensionList()
 
 /**
     Reads the NTP time from the size NTP-56 extension bytes in data and store the
-  result in ntptime.
-  Params:
-    data =       the data to read from
-    ntptime =       the result NTP time
-  Returns:     true on success.
+    result in ntptime.
+
+    Params:
+      data = the data to read from
+      ntptime = the result NTP time
+    Returns: true on success.
 */
 bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
 {
@@ -127,11 +134,12 @@ bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime)
 
 /**
     Reads the NTP time from the size NTP-64 extension bytes in data and store the
-  result in ntptime.
-  Params:
-    data =       the data to read from
-    ntptime =       the result NTP time
-  Returns:     true on success.
+    result in ntptime.
+
+    Params:
+      data = the data to read from
+      ntptime = the result NTP time
+    Returns: true on success.
 */
 bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
 {
@@ -147,12 +155,13 @@ bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime)
 
 /**
     Writes the NTP time in ntptime to the format required for the NTP-56 header
-  extension. data must hold at least #GST_RTP_HDREXT_NTP_56_SIZE bytes.
-  Params:
-    data =       the data to write to
-    size =       the size of data
-    ntptime =       the NTP time
-  Returns:     true on success.
+    extension. data must hold at least #GST_RTP_HDREXT_NTP_56_SIZE bytes.
+
+    Params:
+      data = the data to write to
+      size = the size of data
+      ntptime = the NTP time
+    Returns: true on success.
 */
 bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
 {
@@ -163,12 +172,13 @@ bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime)
 
 /**
     Writes the NTP time in ntptime to the format required for the NTP-64 header
-  extension. data must hold at least #GST_RTP_HDREXT_NTP_64_SIZE bytes.
-  Params:
-    data =       the data to write to
-    size =       the size of data
-    ntptime =       the NTP time
-  Returns:     true on success.
+    extension. data must hold at least #GST_RTP_HDREXT_NTP_64_SIZE bytes.
+
+    Params:
+      data = the data to write to
+      size = the size of data
+      ntptime = the NTP time
+    Returns: true on success.
 */
 bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime)
 {

@@ -1,14 +1,17 @@
+/// Module for [gid] class
 module gid.gid;
 
 
+public import std.typecons : Flag, No, Tuple, Yes;
+public import std.traits : isCallable, Parameters, ParameterStorageClass, ParameterStorageClassTuple, ReturnType;
+
 import core.exception : OutOfMemoryError;
 import core.memory : GC;
-import core.stdc.string : memset, strlen;
+import core.stdc.string : strlen;
+public import core.stdc.string : memset;
 import std.conv : to;
 import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
-public import std.typecons : Flag, No, Yes;
-
 import glib.c.functions;
 import glib.c.types;
 import gobject.boxed;
@@ -32,7 +35,9 @@ enum GidOwnership
 void ptrFreezeGC(const void* ptr)
 {
   GC.addRoot(ptr);
-  GC.setAttr(ptr, GC.BlkAttr.NO_MOVE);
+
+  if (!GC.inFinalizer)
+    GC.setAttr(ptr, GC.BlkAttr.NO_MOVE); // This call fails with an core.exception.InvalidMemoryOperationError if called during finalization
 }
 
 /**
@@ -45,7 +50,7 @@ void ptrThawGC(const void* ptr)
   GC.removeRoot(ptr);
 
   if (!GC.inFinalizer)
-    GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE); // FIXME - This call fails with an core.exception.InvalidMemoryOperationError if called during finalization, should removeRoot also not be called?
+    GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE); // This call fails with an core.exception.InvalidMemoryOperationError if called during finalization
 }
 
 /**
@@ -60,27 +65,27 @@ extern(C) void ptrThawDestroyNotify(void* ptr)
 }
 
 /**
-* Freeze a delegate to C heap memory and pin the context in the GC.
+* Duplicate a delegate in GC memory and freeze it so that it isn't garbage collected when still referenced from C code.
 * Params:
 *   dlg = Pointer to the delegate to freeze
-* Returns: The duplicated delegate in C heap memory
+* Returns: The duplicated delegate which is added as a GC root
 */
 void* freezeDelegate(void* dlg)
 {
-  auto dlgCast = cast(void delegate()*)dlg;
-  ptrFreezeGC(dlgCast.ptr);
-  return g_memdup2(dlg, (*dlgCast).sizeof);
+  auto dupDlg = GC.malloc((void delegate()).sizeof, GC.BlkAttr.NO_MOVE);
+  *cast(void delegate()*)dupDlg = *cast(void delegate()*)dlg;
+  ptrFreezeGC(dupDlg);
+  return dupDlg;
 }
 
 /**
-* Destroy a C heap memory allocated duplicated delegate and unpin context in the GC which was created with freezeDelegate().
+* Unfreeze a delegate which was frozen with `freezeDelegate`, allowing it to be garbage collected
 * Params:
 *   dlg = The C heap memory allocated delegate
 */
 extern(C) void thawDelegate(void* dlg)
 {
-  ptrThawGC((cast(void delegate()*)dlg).ptr);
-  gFree(dlg);
+  ptrThawGC(dlg);
 }
 
 /**

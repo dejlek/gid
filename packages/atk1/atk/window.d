@@ -1,3 +1,4 @@
+/// Module for [Window] interface
 module atk.window;
 
 public import atk.window_iface_proxy;
@@ -9,16 +10,17 @@ import gobject.dclosure;
 
 /**
     The ATK Interface provided by UI components that represent a top-level window.
-  
-  #AtkWindow should be implemented by the UI elements that represent
-  a top-level window, such as the main window of an application or
-  dialog.
-  
-  See `class@AtkObject`
+    
+    #AtkWindow should be implemented by the UI elements that represent
+    a top-level window, such as the main window of an application or
+    dialog.
+    
+    See `class@AtkObject`
 */
 interface Window
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -26,218 +28,164 @@ interface Window
   }
 
   /**
+      Connect to `Activate` signal.
+  
       The signal #AtkWindow::activate is emitted when a window
-    becomes the active window of the application or session.
+      becomes the active window of the application or session.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias ActivateCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(atk.window.Window window);
+  ulong connectActivate(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc));
-
-  /**
+      Connect to `Create` signal.
+  
       The signal #AtkWindow::create is emitted when a new window
-    is created.
+      is created.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias CreateCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias CreateCallbackFunc = void function(atk.window.Window window);
+  ulong connectCreate(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Create signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectCreate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CreateCallbackDlg) || is(T : CreateCallbackFunc));
-
-  /**
+      Connect to `Deactivate` signal.
+  
       The signal #AtkWindow::deactivate is emitted when a window is
-    no longer the active window of the application or session.
+      no longer the active window of the application or session.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias DeactivateCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias DeactivateCallbackFunc = void function(atk.window.Window window);
+  ulong connectDeactivate(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Deactivate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectDeactivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DeactivateCallbackDlg) || is(T : DeactivateCallbackFunc));
-
-  /**
+      Connect to `Destroy` signal.
+  
       The signal #AtkWindow::destroy is emitted when a window is
-    destroyed.
+      destroyed.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias DestroyCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias DestroyCallbackFunc = void function(atk.window.Window window);
+  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Destroy signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectDestroy(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DestroyCallbackDlg) || is(T : DestroyCallbackFunc));
-
-  /**
+      Connect to `Maximize` signal.
+  
       The signal #AtkWindow::maximize is emitted when a window
-    is maximized.
+      is maximized.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias MaximizeCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias MaximizeCallbackFunc = void function(atk.window.Window window);
+  ulong connectMaximize(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Maximize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectMaximize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MaximizeCallbackDlg) || is(T : MaximizeCallbackFunc));
-
-  /**
+      Connect to `Minimize` signal.
+  
       The signal #AtkWindow::minimize is emitted when a window
-    is minimized.
+      is minimized.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias MinimizeCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias MinimizeCallbackFunc = void function(atk.window.Window window);
+  ulong connectMinimize(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Minimize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectMinimize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MinimizeCallbackDlg) || is(T : MinimizeCallbackFunc));
-
-  /**
+      Connect to `Move` signal.
+  
       The signal #AtkWindow::move is emitted when a window
-    is moved.
+      is moved.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias MoveCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias MoveCallbackFunc = void function(atk.window.Window window);
+  ulong connectMove(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Move signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectMove(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveCallbackDlg) || is(T : MoveCallbackFunc));
-
-  /**
+      Connect to `Resize` signal.
+  
       The signal #AtkWindow::resize is emitted when a window
-    is resized.
+      is resized.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias ResizeCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias ResizeCallbackFunc = void function(atk.window.Window window);
+  ulong connectResize(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to Resize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectResize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ResizeCallbackDlg) || is(T : ResizeCallbackFunc));
-
-  /**
+      Connect to `Restore` signal.
+  
       The signal #AtkWindow::restore is emitted when a window
-    is restored.
+      is restored.
   
-    ## Parameters
-    $(LIST
-      * $(B window) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.window.Window window))
+  
+          `window` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias RestoreCallbackDlg = void delegate(atk.window.Window window);
-
-  /** ditto */
-  alias RestoreCallbackFunc = void function(atk.window.Window window);
-
-  /**
-    Connect to Restore signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectRestore(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RestoreCallbackDlg) || is(T : RestoreCallbackFunc));
-  }
+  ulong connectRestore(T)(T callback, Flag!"After" after = No.After);
+}

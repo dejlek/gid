@@ -1,3 +1,4 @@
+/// Module for [TabButton] class
 module adw.tab_button;
 
 import adw.c.functions;
@@ -19,48 +20,51 @@ import gtk.widget;
 
 /**
     A button that displays the number of `class@TabView` pages.
-  
-  <picture>
-    <source srcset="tab-button-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="tab-button.png" alt="tab-button">
-  </picture>
-  
-  [adw.tab_button.TabButton] is a button that displays the number of pages in a given
-  [adw.tab_view.TabView], as well as whether one of the inactive pages needs attention.
-  
-  It's intended to be used as a visible indicator when there's no visible tab
-  bar, typically opening an `class@TabOverview` on click, e.g. via the
-  `overview.open` action name:
-  
-  ```xml
-  <object class="AdwTabButton">
-    <property name="view">view</property>
-    <property name="action-name">overview.open</property>
-  </object>
-  ```
-  
-  ## CSS nodes
-  
-  [adw.tab_button.TabButton] has a main CSS node with name `tabbutton`.
-  
-  # Accessibility
-  
-  [adw.tab_button.TabButton] uses the [gtk.types.AccessibleRole.Button] role.
+    
+    <picture>
+      <source srcset="tab-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="tab-button.png" alt="tab-button">
+    </picture>
+    
+    [adw.tab_button.TabButton] is a button that displays the number of pages in a given
+    [adw.tab_view.TabView], as well as whether one of the inactive pages needs attention.
+    
+    It's intended to be used as a visible indicator when there's no visible tab
+    bar, typically opening an `class@TabOverview` on click, e.g. via the
+    `overview.open` action name:
+    
+    ```xml
+    <object class="AdwTabButton">
+      <property name="view">view</property>
+      <property name="action-name">overview.open</property>
+    </object>
+    ```
+    
+    ## CSS nodes
+    
+    [adw.tab_button.TabButton] has a main CSS node with name `tabbutton`.
+    
+    # Accessibility
+    
+    [adw.tab_button.TabButton] uses the [gtk.types.AccessibleRole.Button] role.
 */
 class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_button_get_type != &gidSymbolNotFound ? adw_tab_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -75,7 +79,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [adw.tab_button.TabButton].
-    Returns:     the newly created [adw.tab_button.TabButton]
+      Returns: the newly created [adw.tab_button.TabButton]
   */
   this()
   {
@@ -86,7 +90,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the tab view self displays.
-    Returns:     the tab view
+      Returns: the tab view
   */
   adw.tab_view.TabView getView()
   {
@@ -98,8 +102,9 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the tab view to display.
-    Params:
-      view =       a tab view
+  
+      Params:
+        view = a tab view
   */
   void setView(adw.tab_view.TabView view = null)
   {
@@ -107,37 +112,39 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Emitted to animate press then release.
-    
-    This is an action signal. Applications should never connect to this signal,
-    but use the `signalTabButton::clicked` signal.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B tabButton) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(adw.tab_button.TabButton tabButton);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(adw.tab_button.TabButton tabButton);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to animate press then release.
+      
+      This is an action signal. Applications should never connect to this signal,
+      but use the `signalTabButton::clicked` signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.tab_button.TabButton tabButton))
+  
+          `tabButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_button.TabButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto tabButton = getVal!(adw.tab_button.TabButton)(_paramVals);
-      _dClosure.dlg(tabButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -145,34 +152,36 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+      Connect to `Clicked` signal.
+  
       Emitted when the button has been activated (pressed and released).
   
-    ## Parameters
-    $(LIST
-      * $(B tabButton) the instance the signal is connected to
-    )
-  */
-  alias ClickedCallbackDlg = void delegate(adw.tab_button.TabButton tabButton);
-
-  /** ditto */
-  alias ClickedCallbackFunc = void function(adw.tab_button.TabButton tabButton);
-
-  /**
-    Connect to Clicked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.tab_button.TabButton tabButton))
+  
+          `tabButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_button.TabButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto tabButton = getVal!(adw.tab_button.TabButton)(_paramVals);
-      _dClosure.dlg(tabButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

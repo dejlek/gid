@@ -1,3 +1,4 @@
+/// Module for [StaticPadTemplate] class
 module gst.static_pad_template;
 
 import gid.gid;
@@ -16,6 +17,7 @@ class StaticPadTemplate
 {
   GstStaticPadTemplate cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class StaticPadTemplate
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -70,7 +73,7 @@ class StaticPadTemplate
 
   /**
       Converts a #GstStaticPadTemplate into a #GstPadTemplate.
-    Returns:     a new #GstPadTemplate.
+      Returns: a new #GstPadTemplate.
   */
   gst.pad_template.PadTemplate get()
   {
@@ -82,10 +85,10 @@ class StaticPadTemplate
 
   /**
       Gets the capabilities of the static pad template.
-    Returns:     the #GstCaps of the static pad template.
-      Unref after usage. Since the core holds an additional
-      ref to the returned caps, use gst_caps_make_writable()
-      on the returned caps to modify it.
+      Returns: the #GstCaps of the static pad template.
+        Unref after usage. Since the core holds an additional
+        ref to the returned caps, use gst_caps_make_writable()
+        on the returned caps to modify it.
   */
   gst.caps.Caps getCaps()
   {

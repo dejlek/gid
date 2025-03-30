@@ -1,3 +1,4 @@
+/// Module for [AspectFrame] class
 module gtk.aspect_frame;
 
 import atk.implementor_iface;
@@ -12,31 +13,34 @@ import gtk.types;
 
 /**
     The #GtkAspectFrame is useful when you want
-  pack a widget so that it can resize but always retains
-  the same aspect ratio. For instance, one might be
-  drawing a small preview of a larger image. #GtkAspectFrame
-  derives from #GtkFrame, so it can draw a label and
-  a frame around the child. The frame will be
-  “shrink-wrapped” to the size of the child.
-  
-  # CSS nodes
-  
-  GtkAspectFrame uses a CSS node with name frame.
+    pack a widget so that it can resize but always retains
+    the same aspect ratio. For instance, one might be
+    drawing a small preview of a larger image. #GtkAspectFrame
+    derives from #GtkFrame, so it can draw a label and
+    a frame around the child. The frame will be
+    “shrink-wrapped” to the size of the child.
+    
+    # CSS nodes
+    
+    GtkAspectFrame uses a CSS node with name frame.
 */
 class AspectFrame : gtk.frame.Frame
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_aspect_frame_get_type != &gidSymbolNotFound ? gtk_aspect_frame_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,18 +53,19 @@ class AspectFrame : gtk.frame.Frame
 
   /**
       Create a new #GtkAspectFrame.
-    Params:
-      label =       Label text.
-      xalign =       Horizontal alignment of the child within the allocation of
-         the #GtkAspectFrame. This ranges from 0.0 (left aligned)
-         to 1.0 (right aligned)
-      yalign =       Vertical alignment of the child within the allocation of
-         the #GtkAspectFrame. This ranges from 0.0 (top aligned)
-         to 1.0 (bottom aligned)
-      ratio =       The desired aspect ratio.
-      obeyChild =       If true, ratio is ignored, and the aspect
-         ratio is taken from the requistion of the child.
-    Returns:     the new #GtkAspectFrame.
+  
+      Params:
+        label = Label text.
+        xalign = Horizontal alignment of the child within the allocation of
+           the #GtkAspectFrame. This ranges from 0.0 (left aligned)
+           to 1.0 (right aligned)
+        yalign = Vertical alignment of the child within the allocation of
+           the #GtkAspectFrame. This ranges from 0.0 (top aligned)
+           to 1.0 (bottom aligned)
+        ratio = The desired aspect ratio.
+        obeyChild = If true, ratio is ignored, and the aspect
+           ratio is taken from the requistion of the child.
+      Returns: the new #GtkAspectFrame.
   */
   this(string label, float xalign, float yalign, float ratio, bool obeyChild)
   {
@@ -72,16 +77,17 @@ class AspectFrame : gtk.frame.Frame
 
   /**
       Set parameters for an existing #GtkAspectFrame.
-    Params:
-      xalign =       Horizontal alignment of the child within the allocation of
-         the #GtkAspectFrame. This ranges from 0.0 (left aligned)
-         to 1.0 (right aligned)
-      yalign =       Vertical alignment of the child within the allocation of
-         the #GtkAspectFrame. This ranges from 0.0 (top aligned)
-         to 1.0 (bottom aligned)
-      ratio =       The desired aspect ratio.
-      obeyChild =       If true, ratio is ignored, and the aspect
-         ratio is taken from the requistion of the child.
+  
+      Params:
+        xalign = Horizontal alignment of the child within the allocation of
+           the #GtkAspectFrame. This ranges from 0.0 (left aligned)
+           to 1.0 (right aligned)
+        yalign = Vertical alignment of the child within the allocation of
+           the #GtkAspectFrame. This ranges from 0.0 (top aligned)
+           to 1.0 (bottom aligned)
+        ratio = The desired aspect ratio.
+        obeyChild = If true, ratio is ignored, and the aspect
+           ratio is taken from the requistion of the child.
   */
   void set(float xalign, float yalign, float ratio, bool obeyChild)
   {

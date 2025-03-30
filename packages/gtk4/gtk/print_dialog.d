@@ -1,3 +1,4 @@
+/// Module for [PrintDialog] class
 module gtk.print_dialog;
 
 import gid.gid;
@@ -18,28 +19,31 @@ import gtk.window;
 
 /**
     A [gtk.print_dialog.PrintDialog] object collects the arguments that
-  are needed to present a print dialog to the user, such
-  as a title for the dialog and whether it should be modal.
-  
-  The dialog is shown with the [gtk.print_dialog.PrintDialog.setup] function.
-  The actual printing can be done with [gtk.print_dialog.PrintDialog.print] or
-  [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
-  and the results can be obtained by calling the corresponding finish methods.
+    are needed to present a print dialog to the user, such
+    as a title for the dialog and whether it should be modal.
+    
+    The dialog is shown with the [gtk.print_dialog.PrintDialog.setup] function.
+    The actual printing can be done with [gtk.print_dialog.PrintDialog.print] or
+    [gtk.print_dialog.PrintDialog.printFile]. These APIs follows the GIO async pattern,
+    and the results can be obtained by calling the corresponding finish methods.
 */
 class PrintDialog : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_dialog_get_type != &gidSymbolNotFound ? gtk_print_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,7 +56,7 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Creates a new [gtk.print_dialog.PrintDialog] object.
-    Returns:     the new [gtk.print_dialog.PrintDialog]
+      Returns: the new [gtk.print_dialog.PrintDialog]
   */
   this()
   {
@@ -63,8 +67,8 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Returns the label that will be shown on the
-    accept button of the print dialog.
-    Returns:     the accept label
+      accept button of the print dialog.
+      Returns: the accept label
   */
   string getAcceptLabel()
   {
@@ -76,9 +80,9 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Returns whether the print dialog blocks
-    interaction with the parent window while
-    it is presented.
-    Returns:     whether the print dialog is modal
+      interaction with the parent window while
+      it is presented.
+      Returns: whether the print dialog is modal
   */
   bool getModal()
   {
@@ -89,7 +93,7 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Returns the page setup.
-    Returns:     the page setup
+      Returns: the page setup
   */
   gtk.page_setup.PageSetup getPageSetup()
   {
@@ -101,7 +105,7 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Returns the print settings for the print dialog.
-    Returns:     the settings
+      Returns: the settings
   */
   gtk.print_settings.PrintSettings getPrintSettings()
   {
@@ -113,8 +117,8 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Returns the title that will be shown on the
-    print dialog.
-    Returns:     the title
+      print dialog.
+      Returns: the title
   */
   string getTitle()
   {
@@ -126,17 +130,18 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       This function prints content from a stream.
-    
-    If you pass `NULL` as setup, then this method will present a print dialog.
-    Otherwise, it will attempt to print directly, without user interaction.
-    
-    The callback will be called when the printing is done. It should call
-    [gtk.print_dialog.PrintDialog.printFinish] to obtain the results.
-    Params:
-      parent =       the parent [gtk.window.Window]
-      setup =       the [gtk.print_setup.PrintSetup] to use
-      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
-      callback =       a callback to call when the operation is complete
+      
+      If you pass `NULL` as setup, then this method will present a print dialog.
+      Otherwise, it will attempt to print directly, without user interaction.
+      
+      The callback will be called when the printing is done. It should call
+      [gtk.print_dialog.PrintDialog.printFinish] to obtain the results.
+  
+      Params:
+        parent = the parent [gtk.window.Window]
+        setup = the [gtk.print_setup.PrintSetup] to use
+        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
   */
   void print(gtk.window.Window parent = null, gtk.print_setup.PrintSetup setup = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -155,18 +160,19 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       This function prints a file.
-    
-    If you pass `NULL` as setup, then this method will present a print dialog.
-    Otherwise, it will attempt to print directly, without user interaction.
-    
-    The callback will be called when the printing is done. It should call
-    [gtk.print_dialog.PrintDialog.printFileFinish] to obtain the results.
-    Params:
-      parent =       the parent [gtk.window.Window]
-      setup =       the [gtk.print_setup.PrintSetup] to use
-      file =       the [gio.file.File] to print
-      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
-      callback =       a callback to call when the operation is complete
+      
+      If you pass `NULL` as setup, then this method will present a print dialog.
+      Otherwise, it will attempt to print directly, without user interaction.
+      
+      The callback will be called when the printing is done. It should call
+      [gtk.print_dialog.PrintDialog.printFileFinish] to obtain the results.
+  
+      Params:
+        parent = the parent [gtk.window.Window]
+        setup = the [gtk.print_setup.PrintSetup] to use
+        file = the [gio.file.File] to print
+        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
   */
   void printFile(gtk.window.Window parent, gtk.print_setup.PrintSetup setup, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -185,10 +191,11 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Finishes the [gtk.print_dialog.PrintDialog.printFile] call and
-    returns the results.
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     Whether the call was successful
+      returns the results.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: Whether the call was successful
   */
   bool printFileFinish(gio.async_result.AsyncResult result)
   {
@@ -202,20 +209,21 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Finishes the [gtk.print_dialog.PrintDialog.print] call and
-    returns the results.
-    
-    If the call was successful, the content to be printed should be
-    written to the returned output stream. Otherwise, `NULL` is returned.
-    
-    The overall results of the print operation will be returned in the
-    [gio.output_stream.OutputStream.close] call, so if you are interested in the
-    results, you need to explicitly close the output stream (it will be
-    closed automatically if you just unref it). Be aware that the close
-    call may not be instant as it operation will for the printer to finish
-    printing.
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     a [gio.output_stream.OutputStream]
+      returns the results.
+      
+      If the call was successful, the content to be printed should be
+      written to the returned output stream. Otherwise, `NULL` is returned.
+      
+      The overall results of the print operation will be returned in the
+      [gio.output_stream.OutputStream.close] call, so if you are interested in the
+      results, you need to explicitly close the output stream (it will be
+      closed automatically if you just unref it). Be aware that the close
+      call may not be instant as it operation will for the printer to finish
+      printing.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: a [gio.output_stream.OutputStream]
   */
   gio.output_stream.OutputStream printFinish(gio.async_result.AsyncResult result)
   {
@@ -230,10 +238,11 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Sets the label that will be shown on the
-    accept button of the print dialog shown for
-    [gtk.print_dialog.PrintDialog.setup].
-    Params:
-      acceptLabel =       the new accept label
+      accept button of the print dialog shown for
+      [gtk.print_dialog.PrintDialog.setup].
+  
+      Params:
+        acceptLabel = the new accept label
   */
   void setAcceptLabel(string acceptLabel)
   {
@@ -243,10 +252,11 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Sets whether the print dialog blocks
-    interaction with the parent window while
-    it is presented.
-    Params:
-      modal =       the new value
+      interaction with the parent window while
+      it is presented.
+  
+      Params:
+        modal = the new value
   */
   void setModal(bool modal)
   {
@@ -255,8 +265,9 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Set the page setup for the print dialog.
-    Params:
-      pageSetup =       the new page setup
+  
+      Params:
+        pageSetup = the new page setup
   */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
@@ -265,8 +276,9 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Sets the print settings for the print dialog.
-    Params:
-      printSettings =       the new print settings
+  
+      Params:
+        printSettings = the new print settings
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
   {
@@ -275,8 +287,9 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Sets the title that will be shown on the print dialog.
-    Params:
-      title =       the new title
+  
+      Params:
+        title = the new title
   */
   void setTitle(string title)
   {
@@ -286,22 +299,23 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       This function presents a print dialog to let the user select a printer,
-    and set up print settings and page setup.
-    
-    The callback will be called when the dialog is dismissed.
-    It should call [gtk.print_dialog.PrintDialog.setupFinish]
-    to obtain the results in the form of a [gtk.print_setup.PrintSetup],
-    that can then be passed to [gtk.print_dialog.PrintDialog.print]
-    or [gtk.print_dialog.PrintDialog.printFile].
-    
-    One possible use for this method is to have the user select a printer,
-    then show a page setup UI in the application (e.g. to arrange images
-    on a page), then call [gtk.print_dialog.PrintDialog.print] on self
-    to do the printing without further user interaction.
-    Params:
-      parent =       the parent [gtk.window.Window]
-      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
-      callback =       a callback to call when the operation is complete
+      and set up print settings and page setup.
+      
+      The callback will be called when the dialog is dismissed.
+      It should call [gtk.print_dialog.PrintDialog.setupFinish]
+      to obtain the results in the form of a [gtk.print_setup.PrintSetup],
+      that can then be passed to [gtk.print_dialog.PrintDialog.print]
+      or [gtk.print_dialog.PrintDialog.printFile].
+      
+      One possible use for this method is to have the user select a printer,
+      then show a page setup UI in the application (e.g. to arrange images
+      on a page), then call [gtk.print_dialog.PrintDialog.print] on self
+      to do the printing without further user interaction.
+  
+      Params:
+        parent = the parent [gtk.window.Window]
+        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
   */
   void setup(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -320,14 +334,15 @@ class PrintDialog : gobject.object.ObjectG
 
   /**
       Finishes the [gtk.print_dialog.PrintDialog.setup] call.
-    
-    If the call was successful, it returns a [gtk.print_setup.PrintSetup]
-    which contains the print settings and page setup information that
-    will be used to print.
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     The [gtk.print_setup.PrintSetup] object that resulted from the call,
-        or `NULL` if the call was not successful
+      
+      If the call was successful, it returns a [gtk.print_setup.PrintSetup]
+      which contains the print settings and page setup information that
+      will be used to print.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: The [gtk.print_setup.PrintSetup] object that resulted from the call,
+          or `NULL` if the call was not successful
   */
   gtk.print_setup.PrintSetup setupFinish(gio.async_result.AsyncResult result)
   {

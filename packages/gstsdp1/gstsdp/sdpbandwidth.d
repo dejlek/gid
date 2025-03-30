@@ -1,3 +1,4 @@
+/// Module for [SDPBandwidth] class
 module gstsdp.sdpbandwidth;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gstsdp.types;
 
 /**
     The contents of the SDP "b=" field which specifies the proposed bandwidth to
-  be used by the session or media.
+    be used by the session or media.
 */
 class SDPBandwidth
 {
   GstSDPBandwidth cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class SDPBandwidth
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -52,7 +55,7 @@ class SDPBandwidth
 
   /**
       Reset the bandwidth information in bw.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult clear()
   {
@@ -64,10 +67,11 @@ class SDPBandwidth
 
   /**
       Set bandwidth information in bw.
-    Params:
-      bwtype =       the bandwidth modifier type
-      bandwidth =       the bandwidth in kilobits per second
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        bwtype = the bandwidth modifier type
+        bandwidth = the bandwidth in kilobits per second
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult set(string bwtype, uint bandwidth)
   {

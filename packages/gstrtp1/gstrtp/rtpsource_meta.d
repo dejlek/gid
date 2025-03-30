@@ -1,3 +1,4 @@
+/// Module for [RTPSourceMeta] class
 module gstrtp.rtpsource_meta;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class RTPSourceMeta
 {
   GstRTPSourceMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class RTPSourceMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -67,9 +70,10 @@ class RTPSourceMeta
 
   /**
       Appends csrc to the list of contributing sources in meta.
-    Params:
-      csrc =       the csrcs to append
-    Returns:     true if all elements in csrc was added, false otherwise.
+  
+      Params:
+        csrc = the csrcs to append
+      Returns: true if all elements in csrc was added, false otherwise.
   */
   bool appendCsrc(uint[] csrc)
   {
@@ -85,7 +89,7 @@ class RTPSourceMeta
 
   /**
       Count the total number of RTP sources found in meta, both SSRC and CSRC.
-    Returns:     The number of RTP sources
+      Returns: The number of RTP sources
   */
   uint getSourceCount()
   {
@@ -96,9 +100,10 @@ class RTPSourceMeta
 
   /**
       Sets ssrc in meta. If ssrc is null the ssrc of meta will be unset.
-    Params:
-      ssrc =       pointer to the SSRC
-    Returns:     true on success, false otherwise.
+  
+      Params:
+        ssrc = pointer to the SSRC
+      Returns: true on success, false otherwise.
   */
   bool setSsrc(out uint ssrc)
   {

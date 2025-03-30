@@ -1,3 +1,4 @@
+/// Module for [FormatDefinition] class
 module gst.format_definition;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class FormatDefinition
 {
   GstFormatDefinition cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class FormatDefinition
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

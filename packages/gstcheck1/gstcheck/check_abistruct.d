@@ -1,3 +1,4 @@
+/// Module for [CheckABIStruct] class
 module gstcheck.check_abistruct;
 
 import gid.gid;
@@ -10,6 +11,7 @@ class CheckABIStruct
 {
   GstCheckABIStruct cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class CheckABIStruct
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

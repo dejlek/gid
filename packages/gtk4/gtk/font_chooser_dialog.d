@@ -1,3 +1,4 @@
+/// Module for [FontChooserDialog] class
 module gtk.font_chooser_dialog;
 
 import gid.gid;
@@ -20,44 +21,48 @@ import gtk.shortcut_manager;
 import gtk.shortcut_manager_mixin;
 import gtk.types;
 import gtk.window;
+import pango.font_map;
 
 /**
     The [gtk.font_chooser_dialog.FontChooserDialog] widget is a dialog for selecting a font.
-  
-  ![An example GtkFontChooserDialog](fontchooser.png)
-  
-  [gtk.font_chooser_dialog.FontChooserDialog] implements the [gtk.font_chooser.FontChooser] interface
-  and does not provide much API of its own.
-  
-  To create a [gtk.font_chooser_dialog.FontChooserDialog], use [gtk.font_chooser_dialog.FontChooserDialog.new_].
-  
-  # GtkFontChooserDialog as GtkBuildable
-  
-  The [gtk.font_chooser_dialog.FontChooserDialog] implementation of the [gtk.buildable.Buildable]
-  interface exposes the buttons with the names “select_button”
-  and “cancel_button”.
-  
-  ## CSS nodes
-  
-  [gtk.font_chooser_dialog.FontChooserDialog] has a single CSS node with the name `window` and style
-  class `.fontchooser`.
+    
+    ![An example GtkFontChooserDialog](fontchooser.png)
+    
+    [gtk.font_chooser_dialog.FontChooserDialog] implements the [gtk.font_chooser.FontChooser] interface
+    and does not provide much API of its own.
+    
+    To create a [gtk.font_chooser_dialog.FontChooserDialog], use [gtk.font_chooser_dialog.FontChooserDialog.new_].
+    
+    # GtkFontChooserDialog as GtkBuildable
+    
+    The [gtk.font_chooser_dialog.FontChooserDialog] implementation of the [gtk.buildable.Buildable]
+    interface exposes the buttons with the names “select_button”
+    and “cancel_button”.
+    
+    ## CSS nodes
+    
+    [gtk.font_chooser_dialog.FontChooserDialog] has a single CSS node with the name `window` and style
+    class `.fontchooser`.
 
-  Deprecated:     Use [gtk.font_dialog.FontDialog] instead
+    Deprecated: Use [gtk.font_dialog.FontDialog] instead
 */
 class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_font_chooser_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -72,12 +77,13 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 
   /**
       Creates a new [gtk.font_chooser_dialog.FontChooserDialog].
-    Params:
-      title =       Title of the dialog
-      parent =       Transient parent of the dialog
-    Returns:     a new [gtk.font_chooser_dialog.FontChooserDialog]
   
-    Deprecated:     Use [gtk.font_dialog.FontDialog] instead
+      Params:
+        title = Title of the dialog
+        parent = Transient parent of the dialog
+      Returns: a new [gtk.font_chooser_dialog.FontChooserDialog]
+  
+      Deprecated: Use [gtk.font_dialog.FontDialog] instead
   */
   this(string title = null, gtk.window.Window parent = null)
   {

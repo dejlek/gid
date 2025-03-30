@@ -1,3 +1,4 @@
+/// Module for [ScaleButton] class
 module gtk.scale_button;
 
 import atk.implementor_iface;
@@ -22,31 +23,34 @@ import gtk.widget;
 
 /**
     #GtkScaleButton provides a button which pops up a scale widget.
-  This kind of widget is commonly used for volume controls in multimedia
-  applications, and GTK+ provides a #GtkVolumeButton subclass that
-  is tailored for this use case.
-  
-  # CSS nodes
-  
-  GtkScaleButton has a single CSS node with name button. To differentiate
-  it from a plain #GtkButton, it gets the .scale style class.
-  
-  The popup widget that contains the scale has a .scale-popup style class.
+    This kind of widget is commonly used for volume controls in multimedia
+    applications, and GTK+ provides a #GtkVolumeButton subclass that
+    is tailored for this use case.
+    
+    # CSS nodes
+    
+    GtkScaleButton has a single CSS node with name button. To differentiate
+    it from a plain #GtkButton, it gets the .scale style class.
+    
+    The popup widget that contains the scale has a .scale-popup style class.
 */
 class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_get_type != &gidSymbolNotFound ? gtk_scale_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,17 +65,18 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Creates a #GtkScaleButton, with a range between min and max, with
-    a stepping of step.
-    Params:
-      size =       a stock icon size (#GtkIconSize)
-      min =       the minimum value of the scale (usually 0)
-      max =       the maximum value of the scale (usually 100)
-      step =       the stepping of value when a scroll-wheel event,
-               or up/down arrow event occurs (usually 2)
-      icons =       a null-terminated
-                array of icon names, or null if you want to set the list
-                later with [gtk.scale_button.ScaleButton.setIcons]
-    Returns:     a new #GtkScaleButton
+      a stepping of step.
+  
+      Params:
+        size = a stock icon size (#GtkIconSize)
+        min = the minimum value of the scale (usually 0)
+        max = the maximum value of the scale (usually 100)
+        step = the stepping of value when a scroll-wheel event,
+                 or up/down arrow event occurs (usually 2)
+        icons = a null-terminated
+                  array of icon names, or null if you want to set the list
+                  later with [gtk.scale_button.ScaleButton.setIcons]
+      Returns: a new #GtkScaleButton
   */
   this(gtk.types.IconSize size, double min, double max, double step, string[] icons = null)
   {
@@ -87,8 +92,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Gets the #GtkAdjustment associated with the #GtkScaleButton’s scale.
-    See [gtk.range.Range.getAdjustment] for details.
-    Returns:     the adjustment associated with the scale
+      See [gtk.range.Range.getAdjustment] for details.
+      Returns: the adjustment associated with the scale
   */
   gtk.adjustment.Adjustment getAdjustment()
   {
@@ -100,7 +105,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Retrieves the minus button of the #GtkScaleButton.
-    Returns:     the minus button of the #GtkScaleButton as a #GtkButton
+      Returns: the minus button of the #GtkScaleButton as a #GtkButton
   */
   gtk.button.Button getMinusButton()
   {
@@ -112,7 +117,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Retrieves the plus button of the #GtkScaleButton.
-    Returns:     the plus button of the #GtkScaleButton as a #GtkButton
+      Returns: the plus button of the #GtkScaleButton as a #GtkButton
   */
   gtk.button.Button getPlusButton()
   {
@@ -124,7 +129,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Retrieves the popup of the #GtkScaleButton.
-    Returns:     the popup of the #GtkScaleButton
+      Returns: the popup of the #GtkScaleButton
   */
   gtk.widget.Widget getPopup()
   {
@@ -136,7 +141,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Gets the current value of the scale button.
-    Returns:     current value of the scale button
+      Returns: current value of the scale button
   */
   double getValue()
   {
@@ -147,10 +152,11 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Sets the #GtkAdjustment to be used as a model
-    for the #GtkScaleButton’s scale.
-    See [gtk.range.Range.setAdjustment] for details.
-    Params:
-      adjustment =       a #GtkAdjustment
+      for the #GtkScaleButton’s scale.
+      See [gtk.range.Range.setAdjustment] for details.
+  
+      Params:
+        adjustment = a #GtkAdjustment
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
@@ -159,9 +165,10 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Sets the icons to be used by the scale button.
-    For details, see the #GtkScaleButton:icons property.
-    Params:
-      icons =       a null-terminated array of icon names
+      For details, see the #GtkScaleButton:icons property.
+  
+      Params:
+        icons = a null-terminated array of icon names
   */
   void setIcons(string[] icons)
   {
@@ -175,11 +182,12 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
 
   /**
       Sets the current value of the scale; if the value is outside
-    the minimum or maximum range values, it will be clamped to fit
-    inside them. The scale button emits the #GtkScaleButton::value-changed
-    signal if the value changes.
-    Params:
-      value =       new value of the scale button
+      the minimum or maximum range values, it will be clamped to fit
+      inside them. The scale button emits the #GtkScaleButton::value-changed
+      signal if the value changes.
+  
+      Params:
+        value = new value of the scale button
   */
   void setValue(double value)
   {
@@ -187,38 +195,40 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 
   /**
-      The ::popdown signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to popdown the scale widget.
-    
-    The default binding for this signal is Escape.
+      Connect to `Popdown` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B scaleButton) the instance the signal is connected to
-    )
-  */
-  alias PopdownCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
-
-  /** ditto */
-  alias PopdownCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
-
-  /**
-    Connect to Popdown signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::popdown signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to popdown the scale widget.
+      
+      The default binding for this signal is Escape.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.scale_button.ScaleButton scaleButton))
+  
+          `scaleButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPopdown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PopdownCallbackDlg) || is(T : PopdownCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
-      _dClosure.dlg(scaleButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -226,38 +236,40 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 
   /**
-      The ::popup signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to popup the scale widget.
-    
-    The default bindings for this signal are Space, Enter and Return.
+      Connect to `Popup` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B scaleButton) the instance the signal is connected to
-    )
-  */
-  alias PopupCallbackDlg = void delegate(gtk.scale_button.ScaleButton scaleButton);
-
-  /** ditto */
-  alias PopupCallbackFunc = void function(gtk.scale_button.ScaleButton scaleButton);
-
-  /**
-    Connect to Popup signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::popup signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to popup the scale widget.
+      
+      The default bindings for this signal are Space, Enter and Return.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.scale_button.ScaleButton scaleButton))
+  
+          `scaleButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPopup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PopupCallbackDlg) || is(T : PopupCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.scale_button.ScaleButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
-      _dClosure.dlg(scaleButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -265,37 +277,44 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 
   /**
-      The ::value-changed signal is emitted when the value field has
-    changed.
+      Connect to `ValueChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B value)       the new value
-      * $(B scaleButton) the instance the signal is connected to
-    )
-  */
-  alias ValueChangedCallbackDlg = void delegate(double value, gtk.scale_button.ScaleButton scaleButton);
-
-  /** ditto */
-  alias ValueChangedCallbackFunc = void function(double value, gtk.scale_button.ScaleButton scaleButton);
-
-  /**
-    Connect to ValueChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::value-changed signal is emitted when the value field has
+      changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double value, gtk.scale_button.ScaleButton scaleButton))
+  
+          `value` the new value (optional)
+  
+          `scaleButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectValueChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ValueChangedCallbackDlg) || is(T : ValueChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.scale_button.ScaleButton)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto scaleButton = getVal!(gtk.scale_button.ScaleButton)(_paramVals);
-      auto value = getVal!(double)(&_paramVals[1]);
-      _dClosure.dlg(value, scaleButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

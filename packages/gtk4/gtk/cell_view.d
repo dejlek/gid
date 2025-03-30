@@ -1,3 +1,4 @@
+/// Module for [CellView] class
 module gtk.cell_view;
 
 import gdk.texture;
@@ -24,42 +25,45 @@ import gtk.widget;
 
 /**
     A widget displaying a single row of a GtkTreeModel
-  
-  A [gtk.cell_view.CellView] displays a single row of a [gtk.tree_model.TreeModel] using a [gtk.cell_area.CellArea]
-  and [gtk.cell_area_context.CellAreaContext]. A [gtk.cell_area_context.CellAreaContext] can be provided to the
-  [gtk.cell_view.CellView] at construction time in order to keep the cellview in context
-  of a group of cell views, this ensures that the renderers displayed will
-  be properly aligned with each other (like the aligned cells in the menus
-  of [gtk.combo_box.ComboBox]).
-  
-  [gtk.cell_view.CellView] is [gtk.orientable.Orientable] in order to decide in which orientation
-  the underlying [gtk.cell_area_context.CellAreaContext] should be allocated. Taking the [gtk.combo_box.ComboBox]
-  menu as an example, cellviews should be oriented horizontally if the menus are
-  listed top-to-bottom and thus all share the same width but may have separate
-  individual heights (left-to-right menus should be allocated vertically since
-  they all share the same height but may have variable widths).
-  
-  ## CSS nodes
-  
-  GtkCellView has a single CSS node with name cellview.
+    
+    A [gtk.cell_view.CellView] displays a single row of a [gtk.tree_model.TreeModel] using a [gtk.cell_area.CellArea]
+    and [gtk.cell_area_context.CellAreaContext]. A [gtk.cell_area_context.CellAreaContext] can be provided to the
+    [gtk.cell_view.CellView] at construction time in order to keep the cellview in context
+    of a group of cell views, this ensures that the renderers displayed will
+    be properly aligned with each other (like the aligned cells in the menus
+    of [gtk.combo_box.ComboBox]).
+    
+    [gtk.cell_view.CellView] is [gtk.orientable.Orientable] in order to decide in which orientation
+    the underlying [gtk.cell_area_context.CellAreaContext] should be allocated. Taking the [gtk.combo_box.ComboBox]
+    menu as an example, cellviews should be oriented horizontally if the menus are
+    listed top-to-bottom and thus all share the same width but may have separate
+    individual heights (left-to-right menus should be allocated vertically since
+    they all share the same height but may have variable widths).
+    
+    ## CSS nodes
+    
+    GtkCellView has a single CSS node with name cellview.
 
-  Deprecated:     List views use widgets to display their contents.
-      You can use [gtk.box.Box] instead
+    Deprecated: List views use widgets to display their contents.
+        You can use [gtk.box.Box] instead
 */
 class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_view_get_type != &gidSymbolNotFound ? gtk_cell_view_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -75,7 +79,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Creates a new [gtk.cell_view.CellView] widget.
-    Returns:     A newly created [gtk.cell_view.CellView] widget.
+      Returns: A newly created [gtk.cell_view.CellView] widget.
   */
   this()
   {
@@ -86,16 +90,17 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Creates a new [gtk.cell_view.CellView] widget with a specific [gtk.cell_area.CellArea]
-    to layout cells and a specific [gtk.cell_area_context.CellAreaContext].
-    
-    Specifying the same context for a handful of cells lets
-    the underlying area synchronize the geometry for those cells,
-    in this way alignments with cellviews for other rows are
-    possible.
-    Params:
-      area =       the [gtk.cell_area.CellArea] to layout cells
-      context =       the [gtk.cell_area_context.CellAreaContext] in which to calculate cell geometry
-    Returns:     A newly created [gtk.cell_view.CellView] widget.
+      to layout cells and a specific [gtk.cell_area_context.CellAreaContext].
+      
+      Specifying the same context for a handful of cells lets
+      the underlying area synchronize the geometry for those cells,
+      in this way alignments with cellviews for other rows are
+      possible.
+  
+      Params:
+        area = the [gtk.cell_area.CellArea] to layout cells
+        context = the [gtk.cell_area_context.CellAreaContext] in which to calculate cell geometry
+      Returns: A newly created [gtk.cell_view.CellView] widget.
   */
   static gtk.cell_view.CellView newWithContext(gtk.cell_area.CellArea area, gtk.cell_area_context.CellAreaContext context)
   {
@@ -107,11 +112,12 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Creates a new [gtk.cell_view.CellView] widget, adds a [gtk.cell_renderer_text.CellRendererText]
-    to it, and makes it show markup. The text can be marked up with
-    the [Pango text markup language](https://docs.gtk.org/Pango/pango_markup.html).
-    Params:
-      markup =       the text to display in the cell view
-    Returns:     A newly created [gtk.cell_view.CellView] widget.
+      to it, and makes it show markup. The text can be marked up with
+      the [Pango text markup language](https://docs.gtk.org/Pango/pango_markup.html).
+  
+      Params:
+        markup = the text to display in the cell view
+      Returns: A newly created [gtk.cell_view.CellView] widget.
   */
   static gtk.cell_view.CellView newWithMarkup(string markup)
   {
@@ -124,10 +130,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Creates a new [gtk.cell_view.CellView] widget, adds a [gtk.cell_renderer_text.CellRendererText]
-    to it, and makes it show text.
-    Params:
-      text =       the text to display in the cell view
-    Returns:     A newly created [gtk.cell_view.CellView] widget.
+      to it, and makes it show text.
+  
+      Params:
+        text = the text to display in the cell view
+      Returns: A newly created [gtk.cell_view.CellView] widget.
   */
   static gtk.cell_view.CellView newWithText(string text)
   {
@@ -140,10 +147,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Creates a new [gtk.cell_view.CellView] widget, adds a [gtk.cell_renderer_pixbuf.CellRendererPixbuf]
-    to it, and makes it show texture.
-    Params:
-      texture =       the image to display in the cell view
-    Returns:     A newly created [gtk.cell_view.CellView] widget.
+      to it, and makes it show texture.
+  
+      Params:
+        texture = the image to display in the cell view
+      Returns: A newly created [gtk.cell_view.CellView] widget.
   */
   static gtk.cell_view.CellView newWithTexture(gdk.texture.Texture texture)
   {
@@ -155,9 +163,9 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Returns a [gtk.tree_path.TreePath] referring to the currently
-    displayed row. If no row is currently displayed,
-    null is returned.
-    Returns:     the currently displayed row
+      displayed row. If no row is currently displayed,
+      null is returned.
+      Returns: the currently displayed row
   */
   gtk.tree_path.TreePath getDisplayedRow()
   {
@@ -169,9 +177,9 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Gets whether cell_view is configured to draw all of its
-    cells in a sensitive state.
-    Returns:     whether cell_view draws all of its
-      cells in a sensitive state
+      cells in a sensitive state.
+      Returns: whether cell_view draws all of its
+        cells in a sensitive state
   */
   bool getDrawSensitive()
   {
@@ -182,9 +190,9 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Gets whether cell_view is configured to request space
-    to fit the entire [gtk.tree_model.TreeModel].
-    Returns:     whether cell_view requests space to fit
-      the entire [gtk.tree_model.TreeModel].
+      to fit the entire [gtk.tree_model.TreeModel].
+      Returns: whether cell_view requests space to fit
+        the entire [gtk.tree_model.TreeModel].
   */
   bool getFitModel()
   {
@@ -195,8 +203,8 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Returns the model for cell_view. If no model is used null is
-    returned.
-    Returns:     a [gtk.tree_model.TreeModel] used
+      returned.
+      Returns: a [gtk.tree_model.TreeModel] used
   */
   gtk.tree_model.TreeModel getModel()
   {
@@ -208,13 +216,14 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Sets the row of the model that is currently displayed
-    by the [gtk.cell_view.CellView]. If the path is unset, then the
-    contents of the cellview “stick” at their last value;
-    this is not normally a desired result, but may be
-    a needed intermediate state if say, the model for
-    the [gtk.cell_view.CellView] becomes temporarily empty.
-    Params:
-      path =       a [gtk.tree_path.TreePath] or null to unset.
+      by the [gtk.cell_view.CellView]. If the path is unset, then the
+      contents of the cellview “stick” at their last value;
+      this is not normally a desired result, but may be
+      a needed intermediate state if say, the model for
+      the [gtk.cell_view.CellView] becomes temporarily empty.
+  
+      Params:
+        path = a [gtk.tree_path.TreePath] or null to unset.
   */
   void setDisplayedRow(gtk.tree_path.TreePath path = null)
   {
@@ -223,11 +232,12 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Sets whether cell_view should draw all of its
-    cells in a sensitive state, this is used by [gtk.combo_box.ComboBox] menus
-    to ensure that rows with insensitive cells that contain
-    children appear sensitive in the parent menu item.
-    Params:
-      drawSensitive =       whether to draw all cells in a sensitive state.
+      cells in a sensitive state, this is used by [gtk.combo_box.ComboBox] menus
+      to ensure that rows with insensitive cells that contain
+      children appear sensitive in the parent menu item.
+  
+      Params:
+        drawSensitive = whether to draw all cells in a sensitive state.
   */
   void setDrawSensitive(bool drawSensitive)
   {
@@ -236,12 +246,13 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Sets whether cell_view should request space to fit the entire [gtk.tree_model.TreeModel].
-    
-    This is used by [gtk.combo_box.ComboBox] to ensure that the cell view displayed on
-    the combo box’s button always gets enough space and does not resize
-    when selection changes.
-    Params:
-      fitModel =       whether cell_view should request space for the whole model.
+      
+      This is used by [gtk.combo_box.ComboBox] to ensure that the cell view displayed on
+      the combo box’s button always gets enough space and does not resize
+      when selection changes.
+  
+      Params:
+        fitModel = whether cell_view should request space for the whole model.
   */
   void setFitModel(bool fitModel)
   {
@@ -250,10 +261,11 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 
   /**
       Sets the model for cell_view.  If cell_view already has a model
-    set, it will remove it before setting the new model.  If model is
-    null, then it will unset the old model.
-    Params:
-      model =       a [gtk.tree_model.TreeModel]
+      set, it will remove it before setting the new model.  If model is
+      null, then it will unset the old model.
+  
+      Params:
+        model = a [gtk.tree_model.TreeModel]
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {

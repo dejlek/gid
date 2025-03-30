@@ -1,3 +1,4 @@
+/// Module for [Writable] interface mixin
 module arrow.writable_mixin;
 
 public import arrow.writable_iface_proxy;
@@ -13,7 +14,7 @@ template WritableT()
 
   /**
       It ensures writing all data on memory to storage.
-    Returns:     true on success, false if there was an error.
+      Returns: true on success, false if there was an error.
   */
   override bool flush()
   {

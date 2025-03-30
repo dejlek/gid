@@ -1,3 +1,4 @@
+/// Module for [HButtonBox] class
 module gtk.hbutton_box;
 
 import atk.implementor_iface;
@@ -16,17 +17,20 @@ import gtk.types;
 class HButtonBox : gtk.button_box.ButtonBox
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hbutton_box_get_type != &gidSymbolNotFound ? gtk_hbutton_box_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,9 +43,9 @@ class HButtonBox : gtk.button_box.ButtonBox
 
   /**
       Creates a new horizontal button box.
-    Returns:     a new button box #GtkWidget.
+      Returns: a new button box #GtkWidget.
   
-    Deprecated:     Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Horizontal] instead
+      Deprecated: Use [gtk.button_box.ButtonBox.new_] with [gtk.types.Orientation.Horizontal] instead
   */
   this()
   {

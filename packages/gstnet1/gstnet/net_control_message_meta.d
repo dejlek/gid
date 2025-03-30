@@ -1,3 +1,4 @@
+/// Module for [NetControlMessageMeta] class
 module gstnet.net_control_message_meta;
 
 import gid.gid;
@@ -10,15 +11,16 @@ import gstnet.types;
 
 /**
     #GstNetControlMessageMeta can be used to store control messages (ancillary
-  data) which was received with or is to be sent alongside the buffer data.
-  When used with socket sinks and sources which understand this meta it allows
-  sending and receiving ancillary data such as unix credentials (See
-  #GUnixCredentialsMessage) and Unix file descriptions (See #GUnixFDMessage).
+    data) which was received with or is to be sent alongside the buffer data.
+    When used with socket sinks and sources which understand this meta it allows
+    sending and receiving ancillary data such as unix credentials (See
+    #GUnixCredentialsMessage) and Unix file descriptions (See #GUnixFDMessage).
 */
 class NetControlMessageMeta
 {
   GstNetControlMessageMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -30,6 +32,7 @@ class NetControlMessageMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

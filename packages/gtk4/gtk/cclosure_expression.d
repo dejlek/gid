@@ -1,3 +1,4 @@
+/// Module for [CClosureExpression] class
 module gtk.cclosure_expression;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gtk.types;
 class CClosureExpression : gtk.expression.Expression
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

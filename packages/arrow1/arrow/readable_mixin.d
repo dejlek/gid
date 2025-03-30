@@ -1,3 +1,4 @@
+/// Module for [Readable] interface mixin
 module arrow.readable_mixin;
 
 public import arrow.readable_iface_proxy;

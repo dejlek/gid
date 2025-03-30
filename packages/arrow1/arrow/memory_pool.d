@@ -1,3 +1,4 @@
+/// Module for [MemoryPool] class
 module arrow.memory_pool;
 
 import arrow.c.functions;
@@ -10,17 +11,20 @@ import gobject.object;
 class MemoryPool : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_memory_pool_get_type != &gidSymbolNotFound ? garrow_memory_pool_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,8 +63,8 @@ class MemoryPool : gobject.object.ObjectG
 
   /**
       Return peak memory allocation in this memory pool.
-    Returns:     Maximum bytes allocated. If not known (or not implemented),
-        returns -1.
+      Returns: Maximum bytes allocated. If not known (or not implemented),
+          returns -1.
   */
   long getMaxMemory()
   {

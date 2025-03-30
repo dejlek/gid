@@ -1,3 +1,4 @@
+/// Module for [CallbackAction] class
 module gtk.callback_action;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gtk.widget;
 class CallbackAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_callback_action_get_type != &gidSymbolNotFound ? gtk_callback_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,10 +42,11 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Create a custom action that calls the given callback when
-    activated.
-    Params:
-      callback =       the callback to call
-    Returns:     A new shortcut action
+      activated.
+  
+      Params:
+        callback = the callback to call
+      Returns: A new shortcut action
   */
   this(gtk.types.ShortcutFunc callback = null)
   {

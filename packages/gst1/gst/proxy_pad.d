@@ -1,3 +1,4 @@
+/// Module for [ProxyPad] class
 module gst.proxy_pad;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gst.types;
 class ProxyPad : gst.pad.Pad
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_proxy_pad_get_type != &gidSymbolNotFound ? gst_proxy_pad_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,12 +42,13 @@ class ProxyPad : gst.pad.Pad
 
   /**
       Invoke the default chain function of the proxy pad.
-    Params:
-      pad =       a sink #GstPad, returns GST_FLOW_ERROR if not.
-      parent =       the parent of pad or null
-      buffer =       the #GstBuffer to send, return GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the pad.
+  
+      Params:
+        pad = a sink #GstPad, returns GST_FLOW_ERROR if not.
+        parent = the parent of pad or null
+        buffer = the #GstBuffer to send, return GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the pad.
   */
   static gst.types.FlowReturn chainDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer.Buffer buffer)
   {
@@ -55,12 +60,13 @@ class ProxyPad : gst.pad.Pad
 
   /**
       Invoke the default chain list function of the proxy pad.
-    Params:
-      pad =       a sink #GstPad, returns GST_FLOW_ERROR if not.
-      parent =       the parent of pad or null
-      list =       the #GstBufferList to send, return GST_FLOW_ERROR
-            if not.
-    Returns:     a #GstFlowReturn from the pad.
+  
+      Params:
+        pad = a sink #GstPad, returns GST_FLOW_ERROR if not.
+        parent = the parent of pad or null
+        list = the #GstBufferList to send, return GST_FLOW_ERROR
+              if not.
+      Returns: a #GstFlowReturn from the pad.
   */
   static gst.types.FlowReturn chainListDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer_list.BufferList list)
   {
@@ -72,14 +78,15 @@ class ProxyPad : gst.pad.Pad
 
   /**
       Invoke the default getrange function of the proxy pad.
-    Params:
-      pad =       a src #GstPad, returns #GST_FLOW_ERROR if not.
-      parent =       the parent of pad
-      offset =       The start offset of the buffer
-      size =       The length of the buffer
-      buffer =       a pointer to hold the #GstBuffer,
-            returns #GST_FLOW_ERROR if null.
-    Returns:     a #GstFlowReturn from the pad.
+  
+      Params:
+        pad = a src #GstPad, returns #GST_FLOW_ERROR if not.
+        parent = the parent of pad
+        offset = The start offset of the buffer
+        size = The length of the buffer
+        buffer = a pointer to hold the #GstBuffer,
+              returns #GST_FLOW_ERROR if null.
+      Returns: a #GstFlowReturn from the pad.
   */
   static gst.types.FlowReturn getrangeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, ulong offset, uint size, out gst.buffer.Buffer buffer)
   {
@@ -93,11 +100,12 @@ class ProxyPad : gst.pad.Pad
 
   /**
       Invoke the default iterate internal links function of the proxy pad.
-    Params:
-      pad =       the #GstPad to get the internal links of.
-      parent =       the parent of pad or null
-    Returns:     a #GstIterator of #GstPad, or null if pad
-      has no parent. Unref each returned pad with [gst.object.ObjectGst.unref].
+  
+      Params:
+        pad = the #GstPad to get the internal links of.
+        parent = the parent of pad or null
+      Returns: a #GstIterator of #GstPad, or null if pad
+        has no parent. Unref each returned pad with [gst.object.ObjectGst.unref].
   */
   static gst.iterator.Iterator iterateInternalLinksDefault(gst.pad.Pad pad, gst.object.ObjectGst parent = null)
   {
@@ -109,11 +117,11 @@ class ProxyPad : gst.pad.Pad
 
   /**
       Get the internal pad of pad. Unref target pad after usage.
-    
-    The internal pad of a #GstGhostPad is the internally used
-    pad of opposite direction, which is used to link to the target.
-    Returns:     the target #GstProxyPad, can
-      be null.  Unref target pad after usage.
+      
+      The internal pad of a #GstGhostPad is the internally used
+      pad of opposite direction, which is used to link to the target.
+      Returns: the target #GstProxyPad, can
+        be null.  Unref target pad after usage.
   */
   gst.proxy_pad.ProxyPad getInternal()
   {

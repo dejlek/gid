@@ -1,3 +1,4 @@
+/// Module for [MetaInfo] class
 module gst.meta_info;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gst.types;
 
 /**
     The #GstMetaInfo provides information about a specific metadata
-  structure.
+    structure.
 */
 class MetaInfo
 {
   GstMetaInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class MetaInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -120,11 +123,11 @@ class MetaInfo
 
   /**
       Registers a new meta.
-    
-    Use the structure returned by [gst.meta_info.MetaInfo.new_], it consumes it and the
-    structure shouldnt be used after. The one returned by the function can be
-    kept.
-    Returns:     the registered meta
+      
+      Use the structure returned by [gst.meta_info.MetaInfo.new_], it consumes it and the
+      structure shouldnt be used after. The one returned by the function can be
+      kept.
+      Returns: the registered meta
   */
   gst.meta_info.MetaInfo register()
   {

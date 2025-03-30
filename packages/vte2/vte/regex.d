@@ -1,3 +1,4 @@
+/// Module for [Regex] class
 module vte.regex;
 
 import gid.gid;
@@ -11,22 +12,26 @@ import vte.types;
 class Regex : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_regex_get_type != &gidSymbolNotFound ? vte_regex_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,21 +44,22 @@ class Regex : gobject.boxed.Boxed
 
   /**
       Compiles pattern into a regex for use as a match regex
-    with [vte.terminal.Terminal.matchAddRegex] or
-    [vte.terminal.Terminal.eventCheckRegexSimple].
-    
-    See man:pcre2pattern(3) for information
-    about the supported regex language, and man:pcre2api(3) for
-    information about the supported flags.
-    
-    The regex will be compiled using <literal>PCRE2_UTF</literal> and
-    possibly other flags, in addition to the flags supplied in flags.
-    Params:
-      pattern =       a regex pattern string
-      patternLength =       the length of pattern in bytes, or -1 if the
-         string is NUL-terminated and the length is unknown
-      flags =       PCRE2 compile flags
-    Returns:     a newly created #VteRegex, or null with error filled in
+      with [vte.terminal.Terminal.matchAddRegex] or
+      [vte.terminal.Terminal.eventCheckRegexSimple].
+      
+      See man:pcre2pattern(3) for information
+      about the supported regex language, and man:pcre2api(3) for
+      information about the supported flags.
+      
+      The regex will be compiled using <literal>PCRE2_UTF</literal> and
+      possibly other flags, in addition to the flags supplied in flags.
+  
+      Params:
+        pattern = a regex pattern string
+        patternLength = the length of pattern in bytes, or -1 if the
+           string is NUL-terminated and the length is unknown
+        flags = PCRE2 compile flags
+      Returns: a newly created #VteRegex, or null with error filled in
   */
   static vte.regex.Regex newForMatch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -69,26 +75,27 @@ class Regex : gobject.boxed.Boxed
 
   /**
       Compiles pattern into a regex for use as a match regex
-    with [vte.terminal.Terminal.matchAddRegex] or
-    [vte.terminal.Terminal.eventCheckRegexSimple].
-    
-    See man:pcre2pattern(3) for information
-    about the supported regex language, and man:pcre2api(3) for
-    information about the supported flags and extra_flags.
-    
-    The regex will be compiled using <literal>PCRE2_UTF</literal> and
-    possibly other flags, in addition to the flags supplied in flags.
-    
-    If regex compilation fails, error will be set and error_offset point
-    to error as an offset into pattern.
-    Params:
-      pattern =       a regex pattern string
-      patternLength =       the length of pattern in bytes, or -1 if the
-         string is NUL-terminated and the length is unknown
-      flags =       PCRE2 compile flags
-      extraFlags =       PCRE2 extra compile flags
-      errorOffset =       return location to store the error offset
-    Returns:     a newly created #VteRegex, or null
+      with [vte.terminal.Terminal.matchAddRegex] or
+      [vte.terminal.Terminal.eventCheckRegexSimple].
+      
+      See man:pcre2pattern(3) for information
+      about the supported regex language, and man:pcre2api(3) for
+      information about the supported flags and extra_flags.
+      
+      The regex will be compiled using <literal>PCRE2_UTF</literal> and
+      possibly other flags, in addition to the flags supplied in flags.
+      
+      If regex compilation fails, error will be set and error_offset point
+      to error as an offset into pattern.
+  
+      Params:
+        pattern = a regex pattern string
+        patternLength = the length of pattern in bytes, or -1 if the
+           string is NUL-terminated and the length is unknown
+        flags = PCRE2 compile flags
+        extraFlags = PCRE2 extra compile flags
+        errorOffset = return location to store the error offset
+      Returns: a newly created #VteRegex, or null
   */
   static vte.regex.Regex newForMatchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -104,20 +111,21 @@ class Regex : gobject.boxed.Boxed
 
   /**
       Compiles pattern into a regex for use as a search regex
-    with [vte.terminal.Terminal.searchSetRegex].
-    
-    See man:pcre2pattern(3) for information
-    about the supported regex language, and man:pcre2api(3) for
-    information about the supported flags.
-    
-    The regex will be compiled using <literal>PCRE2_UTF</literal> and
-    possibly other flags, in addition to the flags supplied in flags.
-    Params:
-      pattern =       a regex pattern string
-      patternLength =       the length of pattern in bytes, or -1 if the
-         string is NUL-terminated and the length is unknown
-      flags =       PCRE2 compile flags
-    Returns:     a newly created #VteRegex, or null with error filled in
+      with [vte.terminal.Terminal.searchSetRegex].
+      
+      See man:pcre2pattern(3) for information
+      about the supported regex language, and man:pcre2api(3) for
+      information about the supported flags.
+      
+      The regex will be compiled using <literal>PCRE2_UTF</literal> and
+      possibly other flags, in addition to the flags supplied in flags.
+  
+      Params:
+        pattern = a regex pattern string
+        patternLength = the length of pattern in bytes, or -1 if the
+           string is NUL-terminated and the length is unknown
+        flags = PCRE2 compile flags
+      Returns: a newly created #VteRegex, or null with error filled in
   */
   static vte.regex.Regex newForSearch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -133,25 +141,26 @@ class Regex : gobject.boxed.Boxed
 
   /**
       Compiles pattern into a regex for use as a search regex
-    with [vte.terminal.Terminal.searchSetRegex].
-    
-    See man:pcre2pattern(3) for information
-    about the supported regex language, and man:pcre2api(3) for
-    information about the supported flags and extra_flags.
-    
-    The regex will be compiled using <literal>PCRE2_UTF</literal> and
-    possibly other flags, in addition to the flags supplied in flags.
-    
-    If regex compilation fails, error will be set and error_offset point
-    to error as an offset into pattern.
-    Params:
-      pattern =       a regex pattern string
-      patternLength =       the length of pattern in bytes, or -1 if the
-         string is NUL-terminated and the length is unknown
-      flags =       PCRE2 compile flags
-      extraFlags = 
-      errorOffset =       return location to store the error offset
-    Returns:     a newly created #VteRegex, or null
+      with [vte.terminal.Terminal.searchSetRegex].
+      
+      See man:pcre2pattern(3) for information
+      about the supported regex language, and man:pcre2api(3) for
+      information about the supported flags and extra_flags.
+      
+      The regex will be compiled using <literal>PCRE2_UTF</literal> and
+      possibly other flags, in addition to the flags supplied in flags.
+      
+      If regex compilation fails, error will be set and error_offset point
+      to error as an offset into pattern.
+  
+      Params:
+        pattern = a regex pattern string
+        patternLength = the length of pattern in bytes, or -1 if the
+           string is NUL-terminated and the length is unknown
+        flags = PCRE2 compile flags
+        extraFlags = 
+        errorOffset = return location to store the error offset
+      Returns: a newly created #VteRegex, or null
   */
   static vte.regex.Regex newForSearchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -167,10 +176,11 @@ class Regex : gobject.boxed.Boxed
 
   /**
       If the platform supports JITing, JIT compiles regex.
-    Params:
-      flags =       PCRE2 JIT flags, or 0
-    Returns:     true if JITing succeeded (or PCRE2 was built without
-        JIT support), or false with error filled in
+  
+      Params:
+        flags = PCRE2 JIT flags, or 0
+      Returns: true if JITing succeeded (or PCRE2 was built without
+          JIT support), or false with error filled in
   */
   bool jit(uint flags)
   {
@@ -184,12 +194,13 @@ class Regex : gobject.boxed.Boxed
 
   /**
       See man:pcre2api(3) and man:pcre2_substitute(3) for more information.
-    Params:
-      subject =       the subject string
-      replacement =       the replacement string
-      flags =       PCRE2 match flags
-    Returns:     the substituted string, or null
-        if an error occurred
+  
+      Params:
+        subject = the subject string
+        replacement = the replacement string
+        flags = PCRE2 match flags
+      Returns: the substituted string, or null
+          if an error occurred
   */
   string substitute(string subject, string replacement, uint flags)
   {

@@ -1,3 +1,4 @@
+/// Module for [File] class
 module gtksource.file;
 
 import gid.gid;
@@ -10,29 +11,32 @@ import gtksource.types;
 
 /**
     On-disk representation of a `class@Buffer`.
-  
-  A [gtksource.file.File] object is the on-disk representation of a `class@Buffer`.
-  With a [gtksource.file.File], you can create and configure a `class@FileLoader`
-  and `class@FileSaver` which take by default the values of the
-  [gtksource.file.File] properties (except for the file loader which auto-detect some
-  properties). On a successful load or save operation, the [gtksource.file.File]
-  properties are updated. If an operation fails, the [gtksource.file.File] properties
-  have still the previous valid values.
+    
+    A [gtksource.file.File] object is the on-disk representation of a `class@Buffer`.
+    With a [gtksource.file.File], you can create and configure a `class@FileLoader`
+    and `class@FileSaver` which take by default the values of the
+    [gtksource.file.File] properties (except for the file loader which auto-detect some
+    properties). On a successful load or save operation, the [gtksource.file.File]
+    properties are updated. If an operation fails, the [gtksource.file.File] properties
+    have still the previous valid values.
 */
 class File : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_get_type != &gidSymbolNotFound ? gtk_source_file_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,14 +57,14 @@ class File : gobject.object.ObjectG
 
   /**
       Checks synchronously the file on disk, to know whether the file is externally
-    modified, or has been deleted, and whether the file is read-only.
-    
-    #GtkSourceFile doesn't create a [gio.file_monitor.FileMonitor] to track those properties, so
-    this function needs to be called instead. Creating lots of [gio.file_monitor.FileMonitor]'s
-    would take lots of resources.
-    
-    Since this function is synchronous, it is advised to call it only on local
-    files. See [gtksource.file.File.isLocal].
+      modified, or has been deleted, and whether the file is read-only.
+      
+      #GtkSourceFile doesn't create a [gio.file_monitor.FileMonitor] to track those properties, so
+      this function needs to be called instead. Creating lots of [gio.file_monitor.FileMonitor]'s
+      would take lots of resources.
+      
+      Since this function is synchronous, it is advised to call it only on local
+      files. See [gtksource.file.File.isLocal].
   */
   void checkFileOnDisk()
   {
@@ -78,8 +82,8 @@ class File : gobject.object.ObjectG
 
   /**
       The encoding is initially null. After a successful file loading or saving
-    operation, the encoding is non-null.
-    Returns:     the character encoding.
+      operation, the encoding is non-null.
+      Returns: the character encoding.
   */
   gtksource.encoding.Encoding getEncoding()
   {
@@ -109,11 +113,11 @@ class File : gobject.object.ObjectG
 
   /**
       Returns whether the file has been deleted. If the
-    `propertyFile:location` is null, returns false.
-    
-    To have an up-to-date value, you must first call
-    [gtksource.file.File.checkFileOnDisk].
-    Returns:     whether the file has been deleted.
+      `propertyFile:location` is null, returns false.
+      
+      To have an up-to-date value, you must first call
+      [gtksource.file.File.checkFileOnDisk].
+      Returns: whether the file has been deleted.
   */
   bool isDeleted()
   {
@@ -124,11 +128,11 @@ class File : gobject.object.ObjectG
 
   /**
       Returns whether the file is externally modified. If the
-    `propertyFile:location` is null, returns false.
-    
-    To have an up-to-date value, you must first call
-    [gtksource.file.File.checkFileOnDisk].
-    Returns:     whether the file is externally modified.
+      `propertyFile:location` is null, returns false.
+      
+      To have an up-to-date value, you must first call
+      [gtksource.file.File.checkFileOnDisk].
+      Returns: whether the file is externally modified.
   */
   bool isExternallyModified()
   {
@@ -139,8 +143,8 @@ class File : gobject.object.ObjectG
 
   /**
       Returns whether the file is local. If the `propertyFile:location` is null,
-    returns false.
-    Returns:     whether the file is local.
+      returns false.
+      Returns: whether the file is local.
   */
   bool isLocal()
   {
@@ -151,11 +155,11 @@ class File : gobject.object.ObjectG
 
   /**
       Returns whether the file is read-only. If the
-    `propertyFile:location` is null, returns false.
-    
-    To have an up-to-date value, you must first call
-    [gtksource.file.File.checkFileOnDisk].
-    Returns:     whether the file is read-only.
+      `propertyFile:location` is null, returns false.
+      
+      To have an up-to-date value, you must first call
+      [gtksource.file.File.checkFileOnDisk].
+      Returns: whether the file is read-only.
   */
   bool isReadonly()
   {
@@ -166,8 +170,9 @@ class File : gobject.object.ObjectG
 
   /**
       Sets the location.
-    Params:
-      location =       the new #GFile, or null.
+  
+      Params:
+        location = the new #GFile, or null.
   */
   void setLocation(gio.file.File location = null)
   {

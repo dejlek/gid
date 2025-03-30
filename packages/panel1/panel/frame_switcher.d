@@ -1,3 +1,4 @@
+/// Module for [FrameSwitcher] class
 module panel.frame_switcher;
 
 import gid.gid;
@@ -24,17 +25,20 @@ import panel.types;
 class FrameSwitcher : gtk.widget.Widget, gtk.orientable.Orientable, panel.frame_header.FrameHeader
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_switcher_get_type != &gidSymbolNotFound ? panel_frame_switcher_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

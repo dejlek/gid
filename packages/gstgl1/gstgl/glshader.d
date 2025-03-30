@@ -1,3 +1,4 @@
+/// Module for [GLShader] class
 module gstgl.glshader;
 
 import gid.gid;
@@ -14,17 +15,20 @@ import gstgl.types;
 class GLShader : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_shader_get_type != &gidSymbolNotFound ? gst_gl_shader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,9 +41,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Note: must be called in the GL thread
-    Params:
-      context =       a #GstGLContext
-    Returns:     a new empty shader
+  
+      Params:
+        context = a #GstGLContext
+      Returns: a new empty shader
   */
   this(gstgl.glcontext.GLContext context)
   {
@@ -50,9 +55,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Note: must be called in the GL thread
-    Params:
-      context =       a #GstGLContext
-    Returns:     a default shader or null on failure
+  
+      Params:
+        context = a #GstGLContext
+      Returns: a default shader or null on failure
   */
   static gstgl.glshader.GLShader newDefault(gstgl.glcontext.GLContext context)
   {
@@ -85,18 +91,19 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Generates a shader string that defines the precision of float types in
-    GLSL shaders.  This is particularly needed for fragment shaders in a
-    GLSL ES context where there is no default precision specified.
-    
-    Practically, this will return the string 'precision mediump float'
-    or 'precision highp float' depending on if high precision floats are
-    determined to be supported.
-    Params:
-      context =       a #GstGLContext
-      version_ =       a #GstGLSLVersion
-      profile =       a #GstGLSLProfile
-    Returns:     a shader string defining the precision of float types based on
-           context, version and profile
+      GLSL shaders.  This is particularly needed for fragment shaders in a
+      GLSL ES context where there is no default precision specified.
+      
+      Practically, this will return the string 'precision mediump float'
+      or 'precision highp float' depending on if high precision floats are
+      determined to be supported.
+  
+      Params:
+        context = a #GstGLContext
+        version_ = a #GstGLSLVersion
+        profile = a #GstGLSLProfile
+      Returns: a shader string defining the precision of float types based on
+             context, version and profile
   */
   static string stringGetHighestPrecision(gstgl.glcontext.GLContext context, gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
@@ -108,12 +115,13 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Attaches stage to shader.  stage must have been successfully compiled
-    with [gstgl.glslstage.GLSLStage.compile].
-    
-    Note: must be called in the GL thread
-    Params:
-      stage =       a #GstGLSLStage to attach
-    Returns:     whether stage could be attached to shader
+      with [gstgl.glslstage.GLSLStage.compile].
+      
+      Note: must be called in the GL thread
+  
+      Params:
+        stage = a #GstGLSLStage to attach
+      Returns: whether stage could be attached to shader
   */
   bool attach(gstgl.glslstage.GLSLStage stage)
   {
@@ -124,12 +132,13 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Attaches stage to shader.  stage must have been successfully compiled
-    with [gstgl.glslstage.GLSLStage.compile].
-    
-    Note: must be called in the GL thread
-    Params:
-      stage =       a #GstGLSLStage to attach
-    Returns:     whether stage could be attached to shader
+      with [gstgl.glslstage.GLSLStage.compile].
+      
+      Note: must be called in the GL thread
+  
+      Params:
+        stage = a #GstGLSLStage to attach
+      Returns: whether stage could be attached to shader
   */
   bool attachUnlocked(gstgl.glslstage.GLSLStage stage)
   {
@@ -140,10 +149,11 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Bind attribute name to the specified location index using
-    `glBindAttributeLocation()`.
-    Params:
-      index =       attribute index to set
-      name =       name of the attribute
+      `glBindAttributeLocation()`.
+  
+      Params:
+        index = attribute index to set
+        name = name of the attribute
   */
   void bindAttributeLocation(uint index, string name)
   {
@@ -153,10 +163,11 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Bind attribute name to the specified location index using
-    `glBindFragDataLocation()`.
-    Params:
-      index =       attribute index to set
-      name =       name of the attribute
+      `glBindFragDataLocation()`.
+  
+      Params:
+        index = attribute index to set
+        name = name of the attribute
   */
   void bindFragDataLocation(uint index, string name)
   {
@@ -166,11 +177,12 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Compiles stage and attaches it to shader.
-    
-    Note: must be called in the GL thread
-    Params:
-      stage =       a #GstGLSLStage to attach
-    Returns:     whether stage could be compiled and attached to shader
+      
+      Note: must be called in the GL thread
+  
+      Params:
+        stage = a #GstGLSLStage to attach
+      Returns: whether stage could be compiled and attached to shader
   */
   bool compileAttachStage(gstgl.glslstage.GLSLStage stage)
   {
@@ -184,11 +196,12 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Detaches stage from shader.  stage must have been successfully attached
-    to shader with [gstgl.glshader.GLShader.attach] or [gstgl.glshader.GLShader.attachUnlocked].
-    
-    Note: must be called in the GL thread
-    Params:
-      stage =       a #GstGLSLStage to attach
+      to shader with [gstgl.glshader.GLShader.attach] or [gstgl.glshader.GLShader.attachUnlocked].
+      
+      Note: must be called in the GL thread
+  
+      Params:
+        stage = a #GstGLSLStage to attach
   */
   void detach(gstgl.glslstage.GLSLStage stage)
   {
@@ -197,11 +210,12 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Detaches stage from shader.  stage must have been successfully attached
-    to shader with [gstgl.glshader.GLShader.attach] or [gstgl.glshader.GLShader.attachUnlocked].
-    
-    Note: must be called in the GL thread
-    Params:
-      stage =       a #GstGLSLStage to attach
+      to shader with [gstgl.glshader.GLShader.attach] or [gstgl.glshader.GLShader.attachUnlocked].
+      
+      Note: must be called in the GL thread
+  
+      Params:
+        stage = a #GstGLSLStage to attach
   */
   void detachUnlocked(gstgl.glslstage.GLSLStage stage)
   {
@@ -227,7 +241,7 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Note: must be called in the GL thread
-    Returns:     whether shader has been successfully linked
+      Returns: whether shader has been successfully linked
   */
   bool isLinked()
   {
@@ -238,9 +252,9 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Links the current list of #GstGLSLStage's in shader.
-    
-    Note: must be called in the GL thread
-    Returns:     whether shader could be linked together.
+      
+      Note: must be called in the GL thread
+      Returns: whether shader could be linked together.
   */
   bool link()
   {
@@ -254,8 +268,8 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Releases the shader and stages.
-    
-    Note: must be called in the GL thread
+      
+      Note: must be called in the GL thread
   */
   void release()
   {
@@ -264,8 +278,8 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Releases the shader and stages.
-    
-    Note: must be called in the GL thread
+      
+      Note: must be called in the GL thread
   */
   void releaseUnlocked()
   {
@@ -274,9 +288,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform1f()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       value to set
+  
+      Params:
+        name = name of the uniform
+        value = value to set
   */
   void setUniform1f(string name, float value)
   {
@@ -286,9 +301,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform1fv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform1fv(string name, float[] value)
   {
@@ -303,9 +319,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform1i()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       value to set
+  
+      Params:
+        name = name of the uniform
+        value = value to set
   */
   void setUniform1i(string name, int value)
   {
@@ -315,9 +332,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform1iv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform1iv(string name, int[] value)
   {
@@ -332,10 +350,11 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform2f()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
   */
   void setUniform2f(string name, float v0, float v1)
   {
@@ -345,9 +364,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform2fv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform2fv(string name, float[] value)
   {
@@ -362,10 +382,11 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform2i()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
   */
   void setUniform2i(string name, int v0, int v1)
   {
@@ -375,9 +396,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform2iv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform2iv(string name, int[] value)
   {
@@ -392,11 +414,12 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform3f()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
-      v2 =       third value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
+        v2 = third value to set
   */
   void setUniform3f(string name, float v0, float v1, float v2)
   {
@@ -406,9 +429,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform3fv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform3fv(string name, float[] value)
   {
@@ -423,11 +447,12 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform3i()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
-      v2 =       third value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
+        v2 = third value to set
   */
   void setUniform3i(string name, int v0, int v1, int v2)
   {
@@ -437,9 +462,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform3iv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform3iv(string name, int[] value)
   {
@@ -454,12 +480,13 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform4f()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
-      v2 =       third value to set
-      v3 =       fourth value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
+        v2 = third value to set
+        v3 = fourth value to set
   */
   void setUniform4f(string name, float v0, float v1, float v2, float v3)
   {
@@ -469,9 +496,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform4fv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform4fv(string name, float[] value)
   {
@@ -486,12 +514,13 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform4i()` for name on shader
-    Params:
-      name =       name of the uniform
-      v0 =       first value to set
-      v1 =       second value to set
-      v2 =       third value to set
-      v3 =       fourth value to set
+  
+      Params:
+        name = name of the uniform
+        v0 = first value to set
+        v1 = second value to set
+        v2 = third value to set
+        v3 = fourth value to set
   */
   void setUniform4i(string name, int v0, int v1, int v2, int v3)
   {
@@ -501,9 +530,10 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Perform `glUniform4iv()` for name on shader
-    Params:
-      name =       name of the uniform
-      value =       values to set
+  
+      Params:
+        name = name of the uniform
+        value = values to set
   */
   void setUniform4iv(string name, int[] value)
   {
@@ -518,8 +548,8 @@ class GLShader : gst.object.ObjectGst
 
   /**
       Mark's shader as being used for the next GL draw command.
-    
-    Note: must be called in the GL thread and shader must have been linked.
+      
+      Note: must be called in the GL thread and shader must have been linked.
   */
   void use()
   {

@@ -1,3 +1,4 @@
+/// C types for gstglwayland1 library
 module gstglwayland.c.types;
 
 public import gid.basictypes;
@@ -8,7 +9,7 @@ public import gstvideo.c.types;
 
 /**
     the contents of a #GstGLDisplayWayland are private and should only be accessed
-  through the provided API
+    through the provided API
 */
 struct GstGLDisplayWayland
 {

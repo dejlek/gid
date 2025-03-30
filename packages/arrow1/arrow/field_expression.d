@@ -1,3 +1,4 @@
+/// Module for [FieldExpression] class
 module arrow.field_expression;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import glib.error;
 class FieldExpression : arrow.expression.Expression
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_field_expression_get_type != &gidSymbolNotFound ? garrow_field_expression_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

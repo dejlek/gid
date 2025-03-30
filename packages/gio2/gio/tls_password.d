@@ -1,3 +1,4 @@
+/// Module for [TlsPassword] class
 module gio.tls_password;
 
 import gid.gid;
@@ -9,22 +10,25 @@ import gobject.object;
 
 /**
     An abstract interface representing a password used in TLS. Often used in
-  user interaction such as unlocking a key storage token.
+    user interaction such as unlocking a key storage token.
 */
 class TlsPassword : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_password_get_type != &gidSymbolNotFound ? g_tls_password_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,10 +41,11 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Create a new #GTlsPassword object.
-    Params:
-      flags =       the password flags
-      description =       description of what the password is for
-    Returns:     The newly allocated password object
+  
+      Params:
+        flags = the password flags
+        description = description of what the password is for
+      Returns: The newly allocated password object
   */
   this(gio.types.TlsPasswordFlags flags, string description)
   {
@@ -52,7 +57,7 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Get a description string about what the password will be used for.
-    Returns:     The description of the password.
+      Returns: The description of the password.
   */
   string getDescription()
   {
@@ -64,7 +69,7 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Get flags about the password.
-    Returns:     The flags about the password.
+      Returns: The flags about the password.
   */
   gio.types.TlsPasswordFlags getFlags()
   {
@@ -76,11 +81,11 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Get the password value. If length is not null then it will be
-    filled in with the length of the password value. (Note that the
-    password value is not nul-terminated, so you can only pass null
-    for length in contexts where you know the password will have a
-    certain fixed length.)
-    Returns:     The password value (owned by the password object).
+      filled in with the length of the password value. (Note that the
+      password value is not nul-terminated, so you can only pass null
+      for length in contexts where you know the password will have a
+      certain fixed length.)
+      Returns: The password value (owned by the password object).
   */
   ubyte[] getValue()
   {
@@ -98,9 +103,9 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Get a user readable translated warning. Usually this warning is a
-    representation of the password flags returned from
-    [gio.tls_password.TlsPassword.getFlags].
-    Returns:     The warning.
+      representation of the password flags returned from
+      [gio.tls_password.TlsPassword.getFlags].
+      Returns: The warning.
   */
   string getWarning()
   {
@@ -112,8 +117,9 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Set a description string about what the password will be used for.
-    Params:
-      description =       The description of the password
+  
+      Params:
+        description = The description of the password
   */
   void setDescription(string description)
   {
@@ -123,8 +129,9 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Set flags about the password.
-    Params:
-      flags =       The flags about the password
+  
+      Params:
+        flags = The flags about the password
   */
   void setFlags(gio.types.TlsPasswordFlags flags)
   {
@@ -133,14 +140,15 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Set the value for this password. The value will be copied by the password
-    object.
-    
-    Specify the length, for a non-nul-terminated password. Pass -1 as
-    length if using a nul-terminated password, and length will be
-    calculated automatically. (Note that the terminating nul is not
-    considered part of the password in this case.)
-    Params:
-      value =       the new password value
+      object.
+      
+      Specify the length, for a non-nul-terminated password. Pass -1 as
+      length if using a nul-terminated password, and length will be
+      calculated automatically. (Note that the terminating nul is not
+      considered part of the password in this case.)
+  
+      Params:
+        value = the new password value
   */
   void setValue(ubyte[] value)
   {
@@ -154,17 +162,18 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Provide the value for this password.
-    
-    The value will be owned by the password object, and later freed using
-    the destroy function callback.
-    
-    Specify the length, for a non-nul-terminated password. Pass -1 as
-    length if using a nul-terminated password, and length will be
-    calculated automatically. (Note that the terminating nul is not
-    considered part of the password in this case.)
-    Params:
-      value =       the value for the password
-      destroy =       a function to use to free the password.
+      
+      The value will be owned by the password object, and later freed using
+      the destroy function callback.
+      
+      Specify the length, for a non-nul-terminated password. Pass -1 as
+      length if using a nul-terminated password, and length will be
+      calculated automatically. (Note that the terminating nul is not
+      considered part of the password in this case.)
+  
+      Params:
+        value = the value for the password
+        destroy = a function to use to free the password.
   */
   void setValueFull(ubyte[] value, glib.types.DestroyNotify destroy = null)
   {
@@ -187,10 +196,11 @@ class TlsPassword : gobject.object.ObjectG
 
   /**
       Set a user readable translated warning. Usually this warning is a
-    representation of the password flags returned from
-    [gio.tls_password.TlsPassword.getFlags].
-    Params:
-      warning =       The user readable warning
+      representation of the password flags returned from
+      [gio.tls_password.TlsPassword.getFlags].
+  
+      Params:
+        warning = The user readable warning
   */
   void setWarning(string warning)
   {

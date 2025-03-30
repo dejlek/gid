@@ -1,3 +1,4 @@
+/// Module for [StyleSchemePreview] class
 module gtksource.style_scheme_preview;
 
 import gid.gid;
@@ -19,26 +20,29 @@ import gtksource.types;
 
 /**
     A preview widget for `class@StyleScheme`.
-  
-  This widget provides a convenient [gtk.widget.Widget] to preview a `class@StyleScheme`.
-  
-  The `property@StyleSchemePreview:selected` property can be used to manage
-  the selection state of a single preview widget.
+    
+    This widget provides a convenient [gtk.widget.Widget] to preview a `class@StyleScheme`.
+    
+    The `property@StyleSchemePreview:selected` property can be used to manage
+    the selection state of a single preview widget.
 */
 class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_preview_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_preview_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,10 +57,11 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new #GtkSourceStyleSchemePreview to preview the style scheme
-    provided in scheme.
-    Params:
-      scheme =       a #GtkSourceStyleScheme
-    Returns:     a #GtkWidget
+      provided in scheme.
+  
+      Params:
+        scheme = a #GtkSourceStyleScheme
+      Returns: a #GtkWidget
   */
   this(gtksource.style_scheme.StyleScheme scheme)
   {
@@ -67,7 +72,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the #GtkSourceStyleScheme previewed by the widget.
-    Returns:     a #GtkSourceStyleScheme
+      Returns: a #GtkSourceStyleScheme
   */
   gtksource.style_scheme.StyleScheme getScheme()
   {
@@ -91,28 +96,37 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
     gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)cPtr, selected);
   }
 
-  /** */
-  alias ActivateCallbackDlg = void delegate(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview);
-
   /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Activate` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.style_scheme_preview.StyleSchemePreview styleSchemePreview))
+  
+          `styleSchemePreview` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.style_scheme_preview.StyleSchemePreview)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto styleSchemePreview = getVal!(gtksource.style_scheme_preview.StyleSchemePreview)(_paramVals);
-      _dClosure.dlg(styleSchemePreview);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

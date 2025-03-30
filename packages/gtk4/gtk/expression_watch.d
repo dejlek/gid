@@ -1,3 +1,4 @@
+/// Module for [ExpressionWatch] class
 module gtk.expression_watch;
 
 import gid.gid;
@@ -9,29 +10,33 @@ import gtk.types;
 
 /**
     An opaque structure representing a watched [gtk.expression.Expression].
-  
-  The contents of [gtk.expression_watch.ExpressionWatch] should only be accessed through the
-  provided API.
+    
+    The contents of [gtk.expression_watch.ExpressionWatch] should only be accessed through the
+    provided API.
 */
 class ExpressionWatch : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expression_watch_get_type != &gidSymbolNotFound ? gtk_expression_watch_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,13 +49,14 @@ class ExpressionWatch : gobject.boxed.Boxed
 
   /**
       Evaluates the watched expression and on success stores the result
-    in `value`.
-    
-    This is equivalent to calling [gtk.expression.Expression.evaluate] with the
-    expression and this pointer originally used to create `watch`.
-    Params:
-      value =       an empty [gobject.value.Value] to be set
-    Returns:     `TRUE` if the expression could be evaluated and `value` was set
+      in `value`.
+      
+      This is equivalent to calling [gtk.expression.Expression.evaluate] with the
+      expression and this pointer originally used to create `watch`.
+  
+      Params:
+        value = an empty [gobject.value.Value] to be set
+      Returns: `TRUE` if the expression could be evaluated and `value` was set
   */
   bool evaluate(gobject.value.Value value)
   {
@@ -61,9 +67,9 @@ class ExpressionWatch : gobject.boxed.Boxed
 
   /**
       Stops watching an expression.
-    
-    See [gtk.expression.Expression.watch] for how the watch
-    was established.
+      
+      See [gtk.expression.Expression.watch] for how the watch
+      was established.
   */
   void unwatch()
   {

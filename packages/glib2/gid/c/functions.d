@@ -1,3 +1,4 @@
+/// C functions for gid library
 module gid.c.functions;
 
 public import gid.basictypes;

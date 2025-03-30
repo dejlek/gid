@@ -1,3 +1,4 @@
+/// Module for [MetadataReader] class
 module arrowflight.metadata_reader;
 
 import arrow.buffer;
@@ -12,17 +13,20 @@ import gobject.object;
 class MetadataReader : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_metadata_reader_get_type != &gidSymbolNotFound ? gaflight_metadata_reader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

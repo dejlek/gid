@@ -1,3 +1,4 @@
+/// Module for [Style] class
 module gtksource.style;
 
 import gid.gid;
@@ -9,24 +10,27 @@ import gtksource.types;
 
 /**
     Represents a style.
-  
-  The [gtksource.style.Style] structure is used to describe text attributes
-  which are set when given style is used.
+    
+    The [gtksource.style.Style] structure is used to describe text attributes
+    which are set when given style is used.
 */
 class Style : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_get_type != &gidSymbolNotFound ? gtk_source_style_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,14 +43,15 @@ class Style : gobject.object.ObjectG
 
   /**
       This function modifies the [gtk.text_tag.TextTag] properties that are related to the
-    #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
-    
-    If style is non-null, applies style to tag.
-    
-    If style is null, the related *-set properties of [gtk.text_tag.TextTag] are set to
-    false.
-    Params:
-      tag =       a #GtkTextTag to apply styles to.
+      #GtkSourceStyle properties. Other [gtk.text_tag.TextTag] properties are left untouched.
+      
+      If style is non-null, applies style to tag.
+      
+      If style is null, the related *-set properties of [gtk.text_tag.TextTag] are set to
+      false.
+  
+      Params:
+        tag = a #GtkTextTag to apply styles to.
   */
   void apply(gtk.text_tag.TextTag tag)
   {
@@ -55,9 +60,9 @@ class Style : gobject.object.ObjectG
 
   /**
       Creates a copy of style, that is a new #GtkSourceStyle instance which
-    has the same attributes set.
-    Returns:     copy of style, call [gobject.object.ObjectG.unref]
-      when you are done with it.
+      has the same attributes set.
+      Returns: copy of style, call [gobject.object.ObjectG.unref]
+        when you are done with it.
   */
   gtksource.style.Style copy()
   {

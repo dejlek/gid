@@ -1,3 +1,4 @@
+/// Module for [EventProperty] class
 module gdk.event_property;
 
 import gdk.atom;
@@ -14,6 +15,7 @@ class EventProperty
 {
   GdkEventProperty cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class EventProperty
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

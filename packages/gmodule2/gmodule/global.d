@@ -1,3 +1,4 @@
+/// Global functions for gmodule2 library
 module gmodule.global;
 
 import gid.gid;

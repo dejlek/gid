@@ -1,3 +1,4 @@
+/// Module for [MapArray] class
 module arrow.map_array;
 
 import arrow.array;
@@ -13,17 +14,20 @@ import gobject.object;
 class MapArray : arrow.list_array.ListArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_array_get_type != &gidSymbolNotFound ? garrow_map_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

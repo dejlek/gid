@@ -1,3 +1,4 @@
+/// Module for [StockItem] class
 module gtk.stock_item;
 
 import gdk.types;
@@ -11,6 +12,7 @@ class StockItem
 {
   GtkStockItem cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,6 +24,7 @@ class StockItem
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

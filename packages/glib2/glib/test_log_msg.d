@@ -1,3 +1,4 @@
+/// Module for [TestLogMsg] class
 module glib.test_log_msg;
 
 import gid.gid;
@@ -10,6 +11,7 @@ class TestLogMsg
 {
   GTestLogMsg cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class TestLogMsg
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

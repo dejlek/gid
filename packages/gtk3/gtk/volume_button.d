@@ -1,3 +1,4 @@
+/// Module for [VolumeButton] class
 module gtk.volume_button;
 
 import atk.implementor_iface;
@@ -18,23 +19,26 @@ import gtk.types;
 
 /**
     #GtkVolumeButton is a subclass of #GtkScaleButton that has
-  been tailored for use as a volume control widget with suitable
-  icons, tooltips and accessible labels.
+    been tailored for use as a volume control widget with suitable
+    icons, tooltips and accessible labels.
 */
 class VolumeButton : gtk.scale_button.ScaleButton
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_volume_button_get_type != &gidSymbolNotFound ? gtk_volume_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,9 +51,9 @@ class VolumeButton : gtk.scale_button.ScaleButton
 
   /**
       Creates a #GtkVolumeButton, with a range between 0.0 and 1.0, with
-    a stepping of 0.02. Volume values can be obtained and modified using
-    the functions from #GtkScaleButton.
-    Returns:     a new #GtkVolumeButton
+      a stepping of 0.02. Volume values can be obtained and modified using
+      the functions from #GtkScaleButton.
+      Returns: a new #GtkVolumeButton
   */
   this()
   {

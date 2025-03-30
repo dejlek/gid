@@ -1,3 +1,4 @@
+/// Module for [AttrFloat] class
 module pango.attr_float;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import pango.types;
 
 /**
     The [pango.attr_float.AttrFloat] structure is used to represent attributes with
-  a float or double value.
+    a float or double value.
 */
 class AttrFloat
 {
   PangoAttrFloat cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AttrFloat
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

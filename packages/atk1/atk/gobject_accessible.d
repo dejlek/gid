@@ -1,3 +1,4 @@
+/// Module for [GObjectAccessible] class
 module atk.gobject_accessible;
 
 import atk.c.functions;
@@ -9,26 +10,29 @@ import gobject.object;
 
 /**
     This object class is derived from AtkObject and can be used as a basis implementing accessible objects.
-  
-  This object class is derived from AtkObject. It can be used as a
-  basis for implementing accessible objects for GObjects which are
-  not derived from GtkWidget. One example of its use is in providing
-  an accessible object for GnomeCanvasItem in the GAIL library.
+    
+    This object class is derived from AtkObject. It can be used as a
+    basis for implementing accessible objects for GObjects which are
+    not derived from GtkWidget. One example of its use is in providing
+    an accessible object for GnomeCanvasItem in the GAIL library.
 */
 class GObjectAccessible : atk.object.ObjectAtk
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_gobject_accessible_get_type != &gidSymbolNotFound ? atk_gobject_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,10 +45,11 @@ class GObjectAccessible : atk.object.ObjectAtk
 
   /**
       Gets the accessible object for the specified obj.
-    Params:
-      obj =       a #GObject
-    Returns:     a #AtkObject which is the accessible object for
-      the obj
+  
+      Params:
+        obj = a #GObject
+      Returns: a #AtkObject which is the accessible object for
+        the obj
   */
   static atk.object.ObjectAtk forObject(gobject.object.ObjectG obj)
   {
@@ -56,8 +61,8 @@ class GObjectAccessible : atk.object.ObjectAtk
 
   /**
       Gets the GObject for which obj is the accessible object.
-    Returns:     a #GObject which is the object for which obj is
-      the accessible object
+      Returns: a #GObject which is the object for which obj is
+        the accessible object
   */
   gobject.object.ObjectG getObject()
   {

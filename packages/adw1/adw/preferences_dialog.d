@@ -1,3 +1,4 @@
+/// Module for [PreferencesDialog] class
 module adw.preferences_dialog;
 
 import adw.c.functions;
@@ -18,34 +19,37 @@ import gtk.constraint_target_mixin;
 
 /**
     A dialog showing application's preferences.
-  
-  <picture>
-    <source srcset="preferences-dialog-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="preferences-dialog.png" alt="preferences-dialog">
-  </picture>
-  
-  The [adw.preferences_dialog.PreferencesDialog] widget presents an application's preferences
-  gathered into pages and groups. The preferences are searchable by the user.
-  
-  ## CSS nodes
-  
-  [adw.preferences_dialog.PreferencesDialog] has a main CSS node with the name `dialog` and the
-  style class `.preferences`.
+    
+    <picture>
+      <source srcset="preferences-dialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="preferences-dialog.png" alt="preferences-dialog">
+    </picture>
+    
+    The [adw.preferences_dialog.PreferencesDialog] widget presents an application's preferences
+    gathered into pages and groups. The preferences are searchable by the user.
+    
+    ## CSS nodes
+    
+    [adw.preferences_dialog.PreferencesDialog] has a main CSS node with the name `dialog` and the
+    style class `.preferences`.
 */
 class PreferencesDialog : adw.dialog.Dialog
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_dialog_get_type != &gidSymbolNotFound ? adw_preferences_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -58,7 +62,7 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Creates a new [adw.preferences_dialog.PreferencesDialog].
-    Returns:     the newly created [adw.preferences_dialog.PreferencesDialog]
+      Returns: the newly created [adw.preferences_dialog.PreferencesDialog]
   */
   this()
   {
@@ -69,8 +73,9 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Adds a preferences page to self.
-    Params:
-      page =       the page to add
+  
+      Params:
+        page = the page to add
   */
   void add(adw.preferences_page.PreferencesPage page)
   {
@@ -79,10 +84,11 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Displays toast.
-    
-    See [adw.toast_overlay.ToastOverlay.addToast].
-    Params:
-      toast =       a toast
+      
+      See [adw.toast_overlay.ToastOverlay.addToast].
+  
+      Params:
+        toast = a toast
   */
   void addToast(adw.toast.Toast toast)
   {
@@ -91,7 +97,7 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Gets whether search is enabled for self.
-    Returns:     whether search is enabled for self.
+      Returns: whether search is enabled for self.
   */
   bool getSearchEnabled()
   {
@@ -102,7 +108,7 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Gets the currently visible page of self.
-    Returns:     the visible page
+      Returns: the visible page
   */
   adw.preferences_page.PreferencesPage getVisiblePage()
   {
@@ -114,7 +120,7 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Gets the name of currently visible page of self.
-    Returns:     the name of the visible page
+      Returns: the name of the visible page
   */
   string getVisiblePageName()
   {
@@ -126,7 +132,7 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Pop the visible page from the subpage stack of self.
-    Returns:     `TRUE` if a page has been popped
+      Returns: `TRUE` if a page has been popped
   */
   bool popSubpage()
   {
@@ -137,10 +143,11 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Pushes page onto the subpage stack of self.
-    
-    The page will be automatically removed when popped.
-    Params:
-      page =       the subpage
+      
+      The page will be automatically removed when popped.
+  
+      Params:
+        page = the subpage
   */
   void pushSubpage(adw.navigation_page.NavigationPage page)
   {
@@ -149,8 +156,9 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Removes a page from self.
-    Params:
-      page =       the page to remove
+  
+      Params:
+        page = the page to remove
   */
   void remove(adw.preferences_page.PreferencesPage page)
   {
@@ -159,8 +167,9 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Sets whether search is enabled for self.
-    Params:
-      searchEnabled =       whether search is enabled
+  
+      Params:
+        searchEnabled = whether search is enabled
   */
   void setSearchEnabled(bool searchEnabled)
   {
@@ -169,8 +178,9 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Makes page the visible page of self.
-    Params:
-      page =       a page of self
+  
+      Params:
+        page = a page of self
   */
   void setVisiblePage(adw.preferences_page.PreferencesPage page)
   {
@@ -179,10 +189,11 @@ class PreferencesDialog : adw.dialog.Dialog
 
   /**
       Makes the page with the given name visible.
-    
-    See `propertyPreferencesDialog:visible-page`.
-    Params:
-      name =       the name of the page to make visible
+      
+      See `propertyPreferencesDialog:visible-page`.
+  
+      Params:
+        name = the name of the page to make visible
   */
   void setVisiblePageName(string name)
   {

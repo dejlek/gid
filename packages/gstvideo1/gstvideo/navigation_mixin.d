@@ -1,3 +1,4 @@
+/// Module for [Navigation] interface mixin
 module gstvideo.navigation_mixin;
 
 public import gstvideo.navigation_iface_proxy;
@@ -13,30 +14,30 @@ public import gstvideo.types;
 
 /**
     The Navigation interface is used for creating and injecting navigation
-  related events such as mouse button presses, cursor motion and key presses.
-  The associated library also provides methods for parsing received events, and
-  for sending and receiving navigation related bus events. One main usecase is
-  DVD menu navigation.
-  
-  The main parts of the API are:
-  
-  $(LIST
-    * The GstNavigation interface, implemented by elements which provide an
-      application with the ability to create and inject navigation events into
-      the pipeline.
-    * GstNavigation event handling API. GstNavigation events are created in
-      response to calls on a GstNavigation interface implementation, and sent in
-      the pipeline. Upstream elements can use the navigation event API functions
-      to parse the contents of received messages.
+    related events such as mouse button presses, cursor motion and key presses.
+    The associated library also provides methods for parsing received events, and
+    for sending and receiving navigation related bus events. One main usecase is
+    DVD menu navigation.
     
-    * GstNavigation message handling API. GstNavigation messages may be sent on
-      the message bus to inform applications of navigation related changes in the
-      pipeline, such as the mouse moving over a clickable region, or the set of
-      available angles changing.
-  )
+    The main parts of the API are:
     
-  The GstNavigation message functions provide functions for creating and
-  parsing custom bus messages for signaling GstNavigation changes.
+    $(LIST
+      * The GstNavigation interface, implemented by elements which provide an
+        application with the ability to create and inject navigation events into
+        the pipeline.
+      * GstNavigation event handling API. GstNavigation events are created in
+        response to calls on a GstNavigation interface implementation, and sent in
+        the pipeline. Upstream elements can use the navigation event API functions
+        to parse the contents of received messages.
+      
+      * GstNavigation message handling API. GstNavigation messages may be sent on
+        the message bus to inform applications of navigation related changes in the
+        pipeline, such as the mouse moving over a clickable region, or the set of
+        available angles changing.
+    )
+      
+    The GstNavigation message functions provide functions for creating and
+    parsing custom bus messages for signaling GstNavigation changes.
 */
 template NavigationT()
 {
@@ -82,8 +83,9 @@ template NavigationT()
 
   /**
       Sends the indicated command to the navigation interface.
-    Params:
-      command =       The command to issue
+  
+      Params:
+        command = The command to issue
   */
   override void sendCommand(gstvideo.types.NavigationCommand command)
   {
@@ -98,8 +100,9 @@ template NavigationT()
 
   /**
       Sends an event to the navigation interface.
-    Params:
-      event =       The event to send
+  
+      Params:
+        event = The event to send
   */
   override void sendEventSimple(gst.event.Event event)
   {
@@ -116,16 +119,17 @@ template NavigationT()
 
   /**
       Sends a mouse event to the navigation interface. Mouse event coordinates
-    are sent relative to the display space of the related output area. This is
-    usually the size in pixels of the window associated with the element
-    implementing the #GstNavigation interface.
-    Params:
-      event =       The type of mouse event, as a text string. Recognised values are
-        "mouse-button-press", "mouse-button-release" and "mouse-move".
-      button =       The button number of the button being pressed or released. Pass 0
-        for mouse-move events.
-      x =       The x coordinate of the mouse event.
-      y =       The y coordinate of the mouse event.
+      are sent relative to the display space of the related output area. This is
+      usually the size in pixels of the window associated with the element
+      implementing the #GstNavigation interface.
+  
+      Params:
+        event = The type of mouse event, as a text string. Recognised values are
+          "mouse-button-press", "mouse-button-release" and "mouse-move".
+        button = The button number of the button being pressed or released. Pass 0
+          for mouse-move events.
+        x = The x coordinate of the mouse event.
+        y = The y coordinate of the mouse event.
   */
   override void sendMouseEvent(string event, int button, double x, double y)
   {
@@ -135,14 +139,15 @@ template NavigationT()
 
   /**
       Sends a mouse scroll event to the navigation interface. Mouse event coordinates
-    are sent relative to the display space of the related output area. This is
-    usually the size in pixels of the window associated with the element
-    implementing the #GstNavigation interface.
-    Params:
-      x =       The x coordinate of the mouse event.
-      y =       The y coordinate of the mouse event.
-      deltaX =       The delta_x coordinate of the mouse event.
-      deltaY =       The delta_y coordinate of the mouse event.
+      are sent relative to the display space of the related output area. This is
+      usually the size in pixels of the window associated with the element
+      implementing the #GstNavigation interface.
+  
+      Params:
+        x = The x coordinate of the mouse event.
+        y = The y coordinate of the mouse event.
+        deltaX = The delta_x coordinate of the mouse event.
+        deltaY = The delta_y coordinate of the mouse event.
   */
   override void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY)
   {

@@ -1,3 +1,4 @@
+/// Module for [File] interface
 module arrow.file;
 
 public import arrow.file_iface_proxy;
@@ -11,6 +12,7 @@ import glib.error;
 interface File
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

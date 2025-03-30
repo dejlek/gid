@@ -1,3 +1,4 @@
+/// Module for [PreferencesGroup] class
 module adw.preferences_group;
 
 import adw.c.functions;
@@ -15,51 +16,54 @@ import gtk.widget;
 
 /**
     A group of preference rows.
-  
-  <picture>
-    <source srcset="preferences-group-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="preferences-group.png" alt="preferences-group">
-  </picture>
-  
-  An [adw.preferences_group.PreferencesGroup] represents a group or tightly related preferences,
-  which in turn are represented by `class@PreferencesRow`.
-  
-  To summarize the role of the preferences it gathers, a group can have both a
-  title and a description. The title will be used by `class@PreferencesDialog`
-  to let the user look for a preference.
-  
-  ## AdwPreferencesGroup as GtkBuildable
-  
-  The [adw.preferences_group.PreferencesGroup] implementation of the [gtk.buildable.Buildable] interface
-  supports adding `class@PreferencesRow`s to the list by omitting "type". If "type"
-  is omitted and the widget isn't a `class@PreferencesRow` the child is added to
-  a box below the list.
-  
-  When the "type" attribute of a child is `header-suffix`, the child
-  is set as the suffix on the end of the title and description.
-  
-  ## CSS nodes
-  
-  [adw.preferences_group.PreferencesGroup] has a single CSS node with name `preferencesgroup`.
-  
-  ## Accessibility
-  
-  [adw.preferences_group.PreferencesGroup] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    <picture>
+      <source srcset="preferences-group-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="preferences-group.png" alt="preferences-group">
+    </picture>
+    
+    An [adw.preferences_group.PreferencesGroup] represents a group or tightly related preferences,
+    which in turn are represented by `class@PreferencesRow`.
+    
+    To summarize the role of the preferences it gathers, a group can have both a
+    title and a description. The title will be used by `class@PreferencesDialog`
+    to let the user look for a preference.
+    
+    ## AdwPreferencesGroup as GtkBuildable
+    
+    The [adw.preferences_group.PreferencesGroup] implementation of the [gtk.buildable.Buildable] interface
+    supports adding `class@PreferencesRow`s to the list by omitting "type". If "type"
+    is omitted and the widget isn't a `class@PreferencesRow` the child is added to
+    a box below the list.
+    
+    When the "type" attribute of a child is `header-suffix`, the child
+    is set as the suffix on the end of the title and description.
+    
+    ## CSS nodes
+    
+    [adw.preferences_group.PreferencesGroup] has a single CSS node with name `preferencesgroup`.
+    
+    ## Accessibility
+    
+    [adw.preferences_group.PreferencesGroup] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class PreferencesGroup : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_group_get_type != &gidSymbolNotFound ? adw_preferences_group_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -72,7 +76,7 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Creates a new [adw.preferences_group.PreferencesGroup].
-    Returns:     the newly created [adw.preferences_group.PreferencesGroup]
+      Returns: the newly created [adw.preferences_group.PreferencesGroup]
   */
   this()
   {
@@ -83,8 +87,9 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Adds a child to self.
-    Params:
-      child =       the widget to add
+  
+      Params:
+        child = the widget to add
   */
   void add(gtk.widget.Widget child)
   {
@@ -93,7 +98,7 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Gets the description of self.
-    Returns:     the description of self
+      Returns: the description of self
   */
   string getDescription()
   {
@@ -105,7 +110,7 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Gets the suffix for self's header.
-    Returns:     the suffix for self's header.
+      Returns: the suffix for self's header.
   */
   gtk.widget.Widget getHeaderSuffix()
   {
@@ -117,7 +122,7 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Gets the title of self.
-    Returns:     the title of self
+      Returns: the title of self
   */
   string getTitle()
   {
@@ -129,8 +134,9 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Removes a child from self.
-    Params:
-      child =       the child to remove
+  
+      Params:
+        child = the child to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -139,8 +145,9 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Sets the description for self.
-    Params:
-      description =       the description
+  
+      Params:
+        description = the description
   */
   void setDescription(string description = null)
   {
@@ -150,12 +157,13 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Sets the suffix for self's header.
-    
-    Displayed above the list, next to the title and description.
-    
-    Suffixes are commonly used to show a button or a spinner for the whole group.
-    Params:
-      suffix =       the suffix to set
+      
+      Displayed above the list, next to the title and description.
+      
+      Suffixes are commonly used to show a button or a spinner for the whole group.
+  
+      Params:
+        suffix = the suffix to set
   */
   void setHeaderSuffix(gtk.widget.Widget suffix = null)
   {
@@ -164,8 +172,9 @@ class PreferencesGroup : gtk.widget.Widget
 
   /**
       Sets the title for self.
-    Params:
-      title =       the title
+  
+      Params:
+        title = the title
   */
   void setTitle(string title)
   {

@@ -1,3 +1,4 @@
+/// Module for [FixedSizeBinaryScalar] class
 module arrow.fixed_size_binary_scalar;
 
 import arrow.base_binary_scalar;
@@ -12,17 +13,20 @@ import gid.gid;
 class FixedSizeBinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_scalar_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_scalar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [CharsetConverter] class
 module gio.charset_converter;
 
 import gid.gid;
@@ -13,22 +14,25 @@ import gobject.object;
 
 /**
     [gio.charset_converter.CharsetConverter] is an implementation of [gio.converter.Converter] based on
-  [glib.types.void*].
+    [glib.types.void*].
 */
 class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.initable.Initable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_charset_converter_get_type != &gidSymbolNotFound ? g_charset_converter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,10 +48,11 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
 
   /**
       Creates a new #GCharsetConverter.
-    Params:
-      toCharset =       destination charset
-      fromCharset =       source charset
-    Returns:     a new #GCharsetConverter or null on error.
+  
+      Params:
+        toCharset = destination charset
+        fromCharset = source charset
+      Returns: a new #GCharsetConverter or null on error.
   */
   this(string toCharset, string fromCharset)
   {
@@ -63,7 +68,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
 
   /**
       Gets the number of fallbacks that converter has applied so far.
-    Returns:     the number of fallbacks that converter has applied
+      Returns: the number of fallbacks that converter has applied
   */
   uint getNumFallbacks()
   {
@@ -74,7 +79,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
 
   /**
       Gets the #GCharsetConverter:use-fallback property.
-    Returns:     true if fallbacks are used by converter
+      Returns: true if fallbacks are used by converter
   */
   bool getUseFallback()
   {
@@ -85,8 +90,9 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
 
   /**
       Sets the #GCharsetConverter:use-fallback property.
-    Params:
-      useFallback =       true to use fallbacks
+  
+      Params:
+        useFallback = true to use fallbacks
   */
   void setUseFallback(bool useFallback)
   {

@@ -1,3 +1,4 @@
+/// Module for [Item] class
 module secret.item;
 
 import gid.gid;
@@ -25,40 +26,43 @@ import secret.value;
 
 /**
     A secret item
-  
-  #SecretItem represents a secret item stored in the Secret Service.
-  
-  Each item has a value, represented by a `struct@Value`, which can be
-  retrieved by [secret.item.Item.getSecret] or set by [secret.item.Item.setSecret].
-  The item is only available when the item is not locked.
-  
-  Items can be locked or unlocked using the [secret.service.Service.lock] or
-  [secret.service.Service.unlock] functions. The Secret Service may not be able to
-  unlock individual items, and may unlock an entire collection when a single
-  item is unlocked.
-  
-  Each item has a set of attributes, which are used to locate the item later.
-  These are not stored or transferred in a secure manner. Each attribute has
-  a string name and a string value. Use [secret.service.Service.search] to search for
-  items based on their attributes, and [secret.item.Item.setAttributes] to change
-  the attributes associated with an item.
-  
-  Items can be created with [secret.item.Item.create] or [secret.service.Service.store].
+    
+    #SecretItem represents a secret item stored in the Secret Service.
+    
+    Each item has a value, represented by a `struct@Value`, which can be
+    retrieved by [secret.item.Item.getSecret] or set by [secret.item.Item.setSecret].
+    The item is only available when the item is not locked.
+    
+    Items can be locked or unlocked using the [secret.service.Service.lock] or
+    [secret.service.Service.unlock] functions. The Secret Service may not be able to
+    unlock individual items, and may unlock an entire collection when a single
+    item is unlocked.
+    
+    Each item has a set of attributes, which are used to locate the item later.
+    These are not stored or transferred in a secure manner. Each attribute has
+    a string name and a string value. Use [secret.service.Service.search] to search for
+    items based on their attributes, and [secret.item.Item.setAttributes] to change
+    the attributes associated with an item.
+    
+    Items can be created with [secret.item.Item.create] or [secret.service.Service.store].
 */
 class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_item_get_type != &gidSymbolNotFound ? secret_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -73,23 +77,24 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Create a new item in the secret service.
-    
-    If the flags contains [secret.types.ItemCreateFlags.Replace], then the secret
-    service will search for an item matching the attributes, and update that item
-    instead of creating a new one.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads. The secret service may prompt the user. [secret.service.Service.prompt]
-    will be used to handle any prompts that are required.
-    Params:
-      collection =       a secret collection to create this item in
-      schema =       the schema for the attributes
-      attributes =       attributes for the new item
-      label =       label for the new item
-      value =       secret value for the new item
-      flags =       flags for the creation of the new item
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      If the flags contains [secret.types.ItemCreateFlags.Replace], then the secret
+      service will search for an item matching the attributes, and update that item
+      instead of creating a new one.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads. The secret service may prompt the user. [secret.service.Service.prompt]
+      will be used to handle any prompts that are required.
+  
+      Params:
+        collection = a secret collection to create this item in
+        schema = the schema for the attributes
+        attributes = attributes for the new item
+        label = label for the new item
+        value = secret value for the new item
+        flags = flags for the creation of the new item
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   static void create(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -111,10 +116,11 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Finish operation to create a new item in the secret service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     the new item, which should be unreferenced
-        with [gobject.object.ObjectG.unref]
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: the new item, which should be unreferenced
+          with [gobject.object.ObjectG.unref]
   */
   static secret.item.Item createFinish(gio.async_result.AsyncResult result)
   {
@@ -129,24 +135,25 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Create a new item in the secret service.
-    
-    If the flags contains [secret.types.ItemCreateFlags.Replace], then the secret
-    service will search for an item matching the attributes, and update that item
-    instead of creating a new one.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads. The secret service may prompt the user. [secret.service.Service.prompt]
-    will be used to handle any prompts that are required.
-    Params:
-      collection =       a secret collection to create this item in
-      schema =       the schema for the attributes
-      attributes =       attributes for the new item
-      label =       label for the new item
-      value =       secret value for the new item
-      flags =       flags for the creation of the new item
-      cancellable =       optional cancellation object
-    Returns:     the new item, which should be unreferenced
-        with [gobject.object.ObjectG.unref]
+      
+      If the flags contains [secret.types.ItemCreateFlags.Replace], then the secret
+      service will search for an item matching the attributes, and update that item
+      instead of creating a new one.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads. The secret service may prompt the user. [secret.service.Service.prompt]
+      will be used to handle any prompts that are required.
+  
+      Params:
+        collection = a secret collection to create this item in
+        schema = the schema for the attributes
+        attributes = attributes for the new item
+        label = label for the new item
+        value = secret value for the new item
+        flags = flags for the creation of the new item
+        cancellable = optional cancellation object
+      Returns: the new item, which should be unreferenced
+          with [gobject.object.ObjectG.unref]
   */
   static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -164,14 +171,15 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Load the secret values for a secret item stored in the service.
-    
-    The items must all have the same `propertyItem:service` property.
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      items =       the items to retrieve secrets for
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The items must all have the same `propertyItem:service` property.
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        items = the items to retrieve secrets for
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   static void loadSecrets(secret.item.Item[] items, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -192,12 +200,13 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete asynchronous operation to load the secret values for
-    secret items stored in the service.
-    
-    Items that are locked will not have their secrets loaded.
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     whether the operation succeeded or not
+      secret items stored in the service.
+      
+      Items that are locked will not have their secrets loaded.
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: whether the operation succeeded or not
   */
   static bool loadSecretsFinish(gio.async_result.AsyncResult result)
   {
@@ -211,17 +220,18 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Load the secret values for a secret item stored in the service.
-    
-    The items must all have the same `propertyItem:service` property.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    
-    Items that are locked will not have their secrets loaded.
-    Params:
-      items =       the items to retrieve secrets for
-      cancellable =       optional cancellation object
-    Returns:     whether the operation succeeded or not
+      
+      The items must all have the same `propertyItem:service` property.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+      
+      Items that are locked will not have their secrets loaded.
+  
+      Params:
+        items = the items to retrieve secrets for
+        cancellable = optional cancellation object
+      Returns: whether the operation succeeded or not
   */
   static bool loadSecretsSync(secret.item.Item[] items, gio.cancellable.Cancellable cancellable = null)
   {
@@ -237,13 +247,14 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Delete this item.
-    
-    This method returns immediately and completes asynchronously. The secret
-    service may prompt the user. [secret.service.Service.prompt] will be used to handle
-    any prompts that show up.
-    Params:
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      This method returns immediately and completes asynchronously. The secret
+      service may prompt the user. [secret.service.Service.prompt] will be used to handle
+      any prompts that show up.
+  
+      Params:
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void delete_(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -262,9 +273,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete asynchronous operation to delete the secret item.
-    Params:
-      result =       asynchronous result passed to the callback
-    Returns:     whether the item was successfully deleted or not
+  
+      Params:
+        result = asynchronous result passed to the callback
+      Returns: whether the item was successfully deleted or not
   */
   bool deleteFinish(gio.async_result.AsyncResult result)
   {
@@ -278,13 +290,14 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Delete this secret item.
-    
-    This method may block indefinitely and should not be used in user
-    interface threads. The secret service may prompt the user.
-    [secret.service.Service.prompt] will be used to handle any prompts that show up.
-    Params:
-      cancellable =       optional cancellation object
-    Returns:     whether the item was successfully deleted or not
+      
+      This method may block indefinitely and should not be used in user
+      interface threads. The secret service may prompt the user.
+      [secret.service.Service.prompt] will be used to handle any prompts that show up.
+  
+      Params:
+        cancellable = optional cancellation object
+      Returns: whether the item was successfully deleted or not
   */
   bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -298,16 +311,16 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the attributes of this item.
-    
-    The attributes are a mapping of string keys to string values.
-    Attributes are used to search for items. Attributes are not stored
-    or transferred securely by the secret service.
-    
-    Do not modify the attributes returned by this method. Use
-    [secret.item.Item.setAttributes] instead.
-    Returns:     a new reference
-        to the attributes, which should not be modified, and
-        released with [glib.hash_table.HashTable.unref]
+      
+      The attributes are a mapping of string keys to string values.
+      Attributes are used to search for items. Attributes are not stored
+      or transferred securely by the secret service.
+      
+      Do not modify the attributes returned by this method. Use
+      [secret.item.Item.setAttributes] instead.
+      Returns: a new reference
+          to the attributes, which should not be modified, and
+          released with [glib.hash_table.HashTable.unref]
   */
   string[string] getAttributes()
   {
@@ -319,10 +332,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the created date and time of the item.
-    
-    The return value is the number of seconds since the unix epoch, January 1st
-    1970.
-    Returns:     the created date and time
+      
+      The return value is the number of seconds since the unix epoch, January 1st
+      1970.
+      Returns: the created date and time
   */
   ulong getCreated()
   {
@@ -335,11 +348,11 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the flags representing what features of the #SecretItem proxy
-    have been initialized.
-    
-    Use [secret.item.Item.loadSecret] to initialize further features
-    and change the flags.
-    Returns:     the flags for features initialized
+      have been initialized.
+      
+      Use [secret.item.Item.loadSecret] to initialize further features
+      and change the flags.
+      Returns: the flags for features initialized
   */
   secret.types.ItemFlags getFlags()
   {
@@ -351,7 +364,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the label of this item.
-    Returns:     the label, which should be freed with `funcGLib.free`
+      Returns: the label, which should be freed with `funcGLib.free`
   */
   string getLabel()
   {
@@ -363,10 +376,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get whether the item is locked or not.
-    
-    Depending on the secret service an item may not be able to be locked
-    independently from the collection that it is in.
-    Returns:     whether the item is locked or not
+      
+      Depending on the secret service an item may not be able to be locked
+      independently from the collection that it is in.
+      Returns: whether the item is locked or not
   */
   bool getLocked()
   {
@@ -377,10 +390,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the modified date and time of the item.
-    
-    The return value is the number of seconds since the unix epoch, January 1st
-    1970.
-    Returns:     the modified date and time
+      
+      The return value is the number of seconds since the unix epoch, January 1st
+      1970.
+      Returns: the modified date and time
   */
   ulong getModified()
   {
@@ -391,8 +404,8 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Gets the name of the schema that this item was stored with. This is also
-    available at the `xdg:schema` attribute.
-    Returns:     the schema name
+      available at the `xdg:schema` attribute.
+      Returns: the schema name
   */
   string getSchemaName()
   {
@@ -404,13 +417,13 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the secret value of this item.
-    
-    If this item is locked or the secret has not yet been loaded then this will
-    return null.
-    
-    To load the secret call the [secret.item.Item.loadSecret] method.
-    Returns:     the secret value which should be
-        released with [secret.value.Value.unref], or null
+      
+      If this item is locked or the secret has not yet been loaded then this will
+      return null.
+      
+      To load the secret call the [secret.item.Item.loadSecret] method.
+      Returns: the secret value which should be
+          released with [secret.value.Value.unref], or null
   */
   secret.value.Value getSecret()
   {
@@ -422,7 +435,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Get the Secret Service object that this item was created with.
-    Returns:     the Secret Service object
+      Returns: the Secret Service object
   */
   secret.service.Service getService()
   {
@@ -434,16 +447,17 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Load the secret value of this item.
-    
-    Each item has a single secret which might be a password or some
-    other secret binary value.
-    
-    This function will fail if the secret item is locked.
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      Each item has a single secret which might be a password or some
+      other secret binary value.
+      
+      This function will fail if the secret item is locked.
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void loadSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -462,12 +476,13 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete asynchronous operation to load the secret value of this item.
-    
-    The newly loaded secret value can be accessed by calling
-    [secret.item.Item.getSecret].
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     whether the secret item successfully loaded or not
+      
+      The newly loaded secret value can be accessed by calling
+      [secret.item.Item.getSecret].
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: whether the secret item successfully loaded or not
   */
   bool loadSecretFinish(gio.async_result.AsyncResult result)
   {
@@ -481,15 +496,16 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Load the secret value of this item.
-    
-    Each item has a single secret which might be a password or some
-    other secret binary value.
-    
-    This function may block indefinitely. Use the asynchronous version
-    in user interface threads.
-    Params:
-      cancellable =       optional cancellation object
-    Returns:     whether the secret item successfully loaded or not
+      
+      Each item has a single secret which might be a password or some
+      other secret binary value.
+      
+      This function may block indefinitely. Use the asynchronous version
+      in user interface threads.
+  
+      Params:
+        cancellable = optional cancellation object
+      Returns: whether the secret item successfully loaded or not
   */
   bool loadSecretSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -503,12 +519,12 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Refresh the properties on this item.
-    
-    This fires off a request to refresh, and the properties will be updated
-    later.
-    
-    Calling this method is not normally necessary, as the secret service
-    will notify the client when properties change.
+      
+      This fires off a request to refresh, and the properties will be updated
+      later.
+      
+      Calling this method is not normally necessary, as the secret service
+      will notify the client when properties change.
   */
   void refresh()
   {
@@ -517,17 +533,18 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the attributes of this item.
-    
-    The attributes are a mapping of string keys to string values.
-    Attributes are used to search for items. Attributes are not stored
-    or transferred securely by the secret service.
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       a new set of attributes
-      cancellable =       optional cancellation object
-      callback =       called when the asynchronous operation completes
+      
+      The attributes are a mapping of string keys to string values.
+      Attributes are used to search for items. Attributes are not stored
+      or transferred securely by the secret service.
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = a new set of attributes
+        cancellable = optional cancellation object
+        callback = called when the asynchronous operation completes
   */
   void setAttributes(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -548,9 +565,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete operation to set the attributes of this item.
-    Params:
-      result =       asynchronous result passed to the callback
-    Returns:     whether the change was successful or not
+  
+      Params:
+        result = asynchronous result passed to the callback
+      Returns: whether the change was successful or not
   */
   bool setAttributesFinish(gio.async_result.AsyncResult result)
   {
@@ -564,18 +582,19 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the attributes of this item.
-    
-    The attributes are a mapping of string keys to string values.
-    Attributes are used to search for items. Attributes are not stored
-    or transferred securely by the secret service.
-    
-    This function may block indefinitely. Use the asynchronous version
-    in user interface threads.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       a new set of attributes
-      cancellable =       optional cancellation object
-    Returns:     whether the change was successful or not
+      
+      The attributes are a mapping of string keys to string values.
+      Attributes are used to search for items. Attributes are not stored
+      or transferred securely by the secret service.
+      
+      This function may block indefinitely. Use the asynchronous version
+      in user interface threads.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = a new set of attributes
+        cancellable = optional cancellation object
+      Returns: whether the change was successful or not
   */
   bool setAttributesSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -591,12 +610,13 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the label of this item.
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      label =       a new label
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        label = a new label
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void setLabel(string label, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -616,9 +636,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete asynchronous operation to set the label of this collection.
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     whether the change was successful or not
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: whether the change was successful or not
   */
   bool setLabelFinish(gio.async_result.AsyncResult result)
   {
@@ -632,13 +653,14 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the label of this item.
-    
-    This function may block indefinitely. Use the asynchronous version
-    in user interface threads.
-    Params:
-      label =       a new label
-      cancellable =       optional cancellation object
-    Returns:     whether the change was successful or not
+      
+      This function may block indefinitely. Use the asynchronous version
+      in user interface threads.
+  
+      Params:
+        label = a new label
+        cancellable = optional cancellation object
+      Returns: whether the change was successful or not
   */
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
@@ -653,15 +675,16 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the secret value of this item.
-    
-    Each item has a single secret which might be a password or some
-    other secret binary value.
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      value =       a new secret value
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      Each item has a single secret which might be a password or some
+      other secret binary value.
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        value = a new secret value
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void setSecret(secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -680,9 +703,10 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Complete asynchronous operation to set the secret value of this item.
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     whether the change was successful or not
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: whether the change was successful or not
   */
   bool setSecretFinish(gio.async_result.AsyncResult result)
   {
@@ -696,16 +720,17 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
 
   /**
       Set the secret value of this item.
-    
-    Each item has a single secret which might be a password or some
-    other secret binary value.
-    
-    This function may block indefinitely. Use the asynchronous version
-    in user interface threads.
-    Params:
-      value =       a new secret value
-      cancellable =       optional cancellation object
-    Returns:     whether the change was successful or not
+      
+      Each item has a single secret which might be a password or some
+      other secret binary value.
+      
+      This function may block indefinitely. Use the asynchronous version
+      in user interface threads.
+  
+      Params:
+        value = a new secret value
+        cancellable = optional cancellation object
+      Returns: whether the change was successful or not
   */
   bool setSecretSync(secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {

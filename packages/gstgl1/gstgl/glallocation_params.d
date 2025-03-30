@@ -1,3 +1,4 @@
+/// Module for [GLAllocationParams] class
 module gstgl.glallocation_params;
 
 import gid.gid;
@@ -12,27 +13,32 @@ import gstgl.types;
 class GLAllocationParams : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstGLAllocationParams.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_allocation_params_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -126,9 +132,10 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   /**
       Copies the dynamically allocated data from src to dest.  Direct subclasses
-    should call this function in their own overridden copy function.
-    Params:
-      dest =       the destination #GstGLAllocationParams
+      should call this function in their own overridden copy function.
+  
+      Params:
+        dest = the destination #GstGLAllocationParams
   */
   void copyData(gstgl.glallocation_params.GLAllocationParams dest)
   {
@@ -137,7 +144,7 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   /**
       Frees the dynamically allocated data in params.  Direct subclasses
-    should call this function in their own overridden free function.
+      should call this function in their own overridden free function.
   */
   void freeData()
   {

@@ -1,3 +1,4 @@
+/// Module for [DBusObjectManagerServer] class
 module gio.dbus_object_manager_server;
 
 import gid.gid;
@@ -12,41 +13,44 @@ import gobject.object;
 
 /**
     [gio.dbus_object_manager_server.DBusObjectManagerServer] is used to export [gio.dbus_object.DBusObject] instances
-  using the standardized
-  [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-  interface. For example, remote D-Bus clients can get all objects
-  and properties in a single call. Additionally, any change in the
-  object hierarchy is broadcast using signals. This means that D-Bus
-  clients can keep caches up to date by only listening to D-Bus
-  signals.
-  
-  The recommended path to export an object manager at is the path form of the
-  well-known name of a D-Bus service, or below. For example, if a D-Bus service
-  is available at the well-known name `net.example.ExampleService1`, the object
-  manager should typically be exported at `/net/example/ExampleService1`, or
-  below (to allow for multiple object managers in a service).
-  
-  It is supported, but not recommended, to export an object manager at the root
-  path, `/`.
-  
-  See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side code that is
-  intended to be used with [gio.dbus_object_manager_server.DBusObjectManagerServer] or any D-Bus
-  object implementing the `org.freedesktop.DBus.ObjectManager` interface.
+    using the standardized
+    [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
+    interface. For example, remote D-Bus clients can get all objects
+    and properties in a single call. Additionally, any change in the
+    object hierarchy is broadcast using signals. This means that D-Bus
+    clients can keep caches up to date by only listening to D-Bus
+    signals.
+    
+    The recommended path to export an object manager at is the path form of the
+    well-known name of a D-Bus service, or below. For example, if a D-Bus service
+    is available at the well-known name `net.example.ExampleService1`, the object
+    manager should typically be exported at `/net/example/ExampleService1`, or
+    below (to allow for multiple object managers in a service).
+    
+    It is supported, but not recommended, to export an object manager at the root
+    path, `/`.
+    
+    See [gio.dbus_object_manager_client.DBusObjectManagerClient] for the client-side code that is
+    intended to be used with [gio.dbus_object_manager_server.DBusObjectManagerServer] or any D-Bus
+    object implementing the `org.freedesktop.DBus.ObjectManager` interface.
 */
 class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.DBusObjectManager
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_manager_server_get_type != &gidSymbolNotFound ? g_dbus_object_manager_server_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,15 +65,16 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Creates a new #GDBusObjectManagerServer object.
-    
-    The returned server isn't yet exported on any connection. To do so,
-    use [gio.dbus_object_manager_server.DBusObjectManagerServer.setConnection]. Normally you
-    want to export all of your objects before doing so to avoid
-    [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
-    signals being emitted.
-    Params:
-      objectPath =       The object path to export the manager object at.
-    Returns:     A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectG.unref].
+      
+      The returned server isn't yet exported on any connection. To do so,
+      use [gio.dbus_object_manager_server.DBusObjectManagerServer.setConnection]. Normally you
+      want to export all of your objects before doing so to avoid
+      [InterfacesAdded](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
+      signals being emitted.
+  
+      Params:
+        objectPath = The object path to export the manager object at.
+      Returns: A #GDBusObjectManagerServer object. Free with [gobject.object.ObjectG.unref].
   */
   this(string objectPath)
   {
@@ -81,17 +86,18 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Exports object on manager.
-    
-    If there is already a #GDBusObject exported at the object path,
-    then the old object is removed.
-    
-    The object path for object must be in the hierarchy rooted by the
-    object path for manager.
-    
-    Note that manager will take a reference on object for as long as
-    it is exported.
-    Params:
-      object =       A #GDBusObjectSkeleton.
+      
+      If there is already a #GDBusObject exported at the object path,
+      then the old object is removed.
+      
+      The object path for object must be in the hierarchy rooted by the
+      object path for manager.
+      
+      Note that manager will take a reference on object for as long as
+      it is exported.
+  
+      Params:
+        object = A #GDBusObjectSkeleton.
   */
   void export_(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
@@ -100,11 +106,12 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Like [gio.dbus_object_manager_server.DBusObjectManagerServer.export_] but appends a string of
-    the form _N (with N being a natural number) to object's object path
-    if an object with the given path already exists. As such, the
-    #GDBusObjectProxy:g-object-path property of object may be modified.
-    Params:
-      object =       An object.
+      the form _N (with N being a natural number) to object's object path
+      if an object with the given path already exists. As such, the
+      #GDBusObjectProxy:g-object-path property of object may be modified.
+  
+      Params:
+        object = An object.
   */
   void exportUniquely(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
@@ -113,9 +120,9 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Gets the #GDBusConnection used by manager.
-    Returns:     A #GDBusConnection object or null if
-        manager isn't exported on a connection. The returned object should
-        be freed with [gobject.object.ObjectG.unref].
+      Returns: A #GDBusConnection object or null if
+          manager isn't exported on a connection. The returned object should
+          be freed with [gobject.object.ObjectG.unref].
   */
   gio.dbus_connection.DBusConnection getConnection()
   {
@@ -127,9 +134,10 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Returns whether object is currently exported on manager.
-    Params:
-      object =       An object.
-    Returns:     true if object is exported
+  
+      Params:
+        object = An object.
+      Returns: true if object is exported
   */
   bool isExported(gio.dbus_object_skeleton.DBusObjectSkeleton object)
   {
@@ -140,9 +148,10 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       Exports all objects managed by manager on connection. If
-    connection is null, stops exporting objects.
-    Params:
-      connection =       A #GDBusConnection or null.
+      connection is null, stops exporting objects.
+  
+      Params:
+        connection = A #GDBusConnection or null.
   */
   void setConnection(gio.dbus_connection.DBusConnection connection = null)
   {
@@ -151,13 +160,14 @@ class DBusObjectManagerServer : gobject.object.ObjectG, gio.dbus_object_manager.
 
   /**
       If manager has an object at path, removes the object. Otherwise
-    does nothing.
-    
-    Note that object_path must be in the hierarchy rooted by the
-    object path for manager.
-    Params:
-      objectPath =       An object path.
-    Returns:     true if object at object_path was removed, false otherwise.
+      does nothing.
+      
+      Note that object_path must be in the hierarchy rooted by the
+      object path for manager.
+  
+      Params:
+        objectPath = An object path.
+      Returns: true if object at object_path was removed, false otherwise.
   */
   bool unexport(string objectPath)
   {

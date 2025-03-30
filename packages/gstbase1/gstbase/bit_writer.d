@@ -1,3 +1,4 @@
+/// Module for [BitWriter] class
 module gstbase.bit_writer;
 
 import gid.gid;
@@ -8,13 +9,14 @@ import gstbase.types;
 
 /**
     #GstBitWriter provides a bit writer that can write any number of
-  bits into a memory buffer. It provides functions for writing any
-  number of bits into 8, 16, 32 and 64 bit variables.
+    bits into a memory buffer. It provides functions for writing any
+    number of bits into 8, 16, 32 and 64 bit variables.
 */
 class BitWriter
 {
   GstBitWriter cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class BitWriter
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -43,10 +46,11 @@ class BitWriter
 
   /**
       Write trailing bit to align last byte of data. trailing_bit can
-    only be 1 or 0.
-    Params:
-      trailingBit =       trailing bits of last byte, 0 or 1
-    Returns:     true if successful, false otherwise.
+      only be 1 or 0.
+  
+      Params:
+        trailingBit = trailing bits of last byte, 0 or 1
+      Returns: true if successful, false otherwise.
   */
   bool alignBytes(ubyte trailingBit)
   {
@@ -57,11 +61,11 @@ class BitWriter
 
   /**
       Frees bitwriter without destroying the internal data, which is
-    returned as #GstBuffer.
-    
-    Free-function: gst_buffer_unref
-    Returns:     a new allocated #GstBuffer wrapping the
-          data inside. gst_buffer_unref() after usage.
+      returned as #GstBuffer.
+      
+      Free-function: gst_buffer_unref
+      Returns: a new allocated #GstBuffer wrapping the
+            data inside. gst_buffer_unref() after usage.
   */
   gst.buffer.Buffer freeAndGetBuffer()
   {
@@ -81,7 +85,7 @@ class BitWriter
 
   /**
       Get size of written data
-    Returns:     size of bits written in data
+      Returns: size of bits written in data
   */
   uint getSize()
   {
@@ -92,10 +96,11 @@ class BitWriter
 
   /**
       Write nbits bits of value to #GstBitWriter.
-    Params:
-      value =       value of #guint16 to write
-      nbits =       number of bits to write
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        value = value of #guint16 to write
+        nbits = number of bits to write
+      Returns: true if successful, false otherwise.
   */
   bool putBitsUint16(ushort value, uint nbits)
   {
@@ -106,10 +111,11 @@ class BitWriter
 
   /**
       Write nbits bits of value to #GstBitWriter.
-    Params:
-      value =       value of #guint32 to write
-      nbits =       number of bits to write
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        value = value of #guint32 to write
+        nbits = number of bits to write
+      Returns: true if successful, false otherwise.
   */
   bool putBitsUint32(uint value, uint nbits)
   {
@@ -120,10 +126,11 @@ class BitWriter
 
   /**
       Write nbits bits of value to #GstBitWriter.
-    Params:
-      value =       value of #guint64 to write
-      nbits =       number of bits to write
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        value = value of #guint64 to write
+        nbits = number of bits to write
+      Returns: true if successful, false otherwise.
   */
   bool putBitsUint64(ulong value, uint nbits)
   {
@@ -134,10 +141,11 @@ class BitWriter
 
   /**
       Write nbits bits of value to #GstBitWriter.
-    Params:
-      value =       value of #guint8 to write
-      nbits =       number of bits to write
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        value = value of #guint8 to write
+        nbits = number of bits to write
+      Returns: true if successful, false otherwise.
   */
   bool putBitsUint8(ubyte value, uint nbits)
   {
@@ -148,9 +156,10 @@ class BitWriter
 
   /**
       Write nbytes bytes of data to #GstBitWriter.
-    Params:
-      data =       pointer of data to write
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        data = pointer of data to write
+      Returns: true if successful, false otherwise.
   */
   bool putBytes(ubyte[] data)
   {
@@ -174,10 +183,10 @@ class BitWriter
 
   /**
       Resets bitwriter and returns the current data as #GstBuffer.
-    
-    Free-function: gst_buffer_unref
-    Returns:     a new allocated #GstBuffer wrapping the
-          current data. gst_buffer_unref() after usage.
+      
+      Free-function: gst_buffer_unref
+      Returns: a new allocated #GstBuffer wrapping the
+            current data. gst_buffer_unref() after usage.
   */
   gst.buffer.Buffer resetAndGetBuffer()
   {

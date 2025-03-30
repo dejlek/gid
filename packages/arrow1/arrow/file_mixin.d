@@ -1,3 +1,4 @@
+/// Module for [File] interface mixin
 module arrow.file_mixin;
 
 public import arrow.file_iface_proxy;

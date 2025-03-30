@@ -1,3 +1,4 @@
+/// Module for [ArrowAccessible] class
 module gtk.arrow_accessible;
 
 import atk.component;
@@ -14,17 +15,20 @@ import gtk.widget_accessible;
 class ArrowAccessible : gtk.widget_accessible.WidgetAccessible, atk.image.Image
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_arrow_accessible_get_type != &gidSymbolNotFound ? gtk_arrow_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

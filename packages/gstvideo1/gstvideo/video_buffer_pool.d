@@ -1,3 +1,4 @@
+/// Module for [VideoBufferPool] class
 module gstvideo.video_buffer_pool;
 
 import gid.gid;
@@ -10,17 +11,20 @@ import gstvideo.types;
 class VideoBufferPool : gst.buffer_pool.BufferPool
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_buffer_pool_get_type != &gidSymbolNotFound ? gst_video_buffer_pool_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -33,8 +37,8 @@ class VideoBufferPool : gst.buffer_pool.BufferPool
 
   /**
       Create a new bufferpool that can allocate video frames. This bufferpool
-    supports all the video bufferpool options.
-    Returns:     a new #GstBufferPool to allocate video frames
+      supports all the video bufferpool options.
+      Returns: a new #GstBufferPool to allocate video frames
   */
   this()
   {

@@ -1,3 +1,4 @@
+/// Module for [AudioQuantize] class
 module gstaudio.audio_quantize;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class AudioQuantize
   GstAudioQuantize* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class AudioQuantize
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -28,7 +31,7 @@ class AudioQuantize
 
   /**
       Reset quant to the state is was when created, clearing any
-    history it might have.
+      history it might have.
   */
   void reset()
   {

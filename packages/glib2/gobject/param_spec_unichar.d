@@ -1,3 +1,4 @@
+/// Module for [ParamSpecUnichar] class
 module gobject.param_spec_unichar;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gobject.types;
 class ParamSpecUnichar : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

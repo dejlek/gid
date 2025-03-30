@@ -1,3 +1,4 @@
+/// Module for [CookieJar] class
 module soup.cookie_jar;
 
 import gid.gid;
@@ -13,29 +14,32 @@ import soup.types;
 
 /**
     Automatic cookie handling for SoupSession.
-  
-  A #SoupCookieJar stores `struct@Cookie`s and arrange for them to be sent with
-  the appropriate `class@Message`s. #SoupCookieJar implements
-  `iface@SessionFeature`, so you can add a cookie jar to a session with
-  [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
-  
-  Note that the base #SoupCookieJar class does not support any form
-  of long-term cookie persistence.
+    
+    A #SoupCookieJar stores `struct@Cookie`s and arrange for them to be sent with
+    the appropriate `class@Message`s. #SoupCookieJar implements
+    `iface@SessionFeature`, so you can add a cookie jar to a session with
+    [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType].
+    
+    Note that the base #SoupCookieJar class does not support any form
+    of long-term cookie persistence.
 */
 class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_get_type != &gidSymbolNotFound ? soup_cookie_jar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,10 +54,10 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Creates a new #SoupCookieJar.
-    
-    The base #SoupCookieJar class does not support persistent storage of cookies;
-    use a subclass for that.
-    Returns:     a new #SoupCookieJar
+      
+      The base #SoupCookieJar class does not support persistent storage of cookies;
+      use a subclass for that.
+      Returns: a new #SoupCookieJar
   */
   this()
   {
@@ -64,14 +68,15 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Adds cookie to jar.
-    
-    Emits the `signalCookieJar::changed` signal if we are modifying
-    an existing cookie or adding a valid new cookie ('valid' means
-    that the cookie's expire date is not in the past).
-    
-    cookie will be 'stolen' by the jar, so don't free it afterwards.
-    Params:
-      cookie =       a #SoupCookie
+      
+      Emits the `signalCookieJar::changed` signal if we are modifying
+      an existing cookie or adding a valid new cookie ('valid' means
+      that the cookie's expire date is not in the past).
+      
+      cookie will be 'stolen' by the jar, so don't free it afterwards.
+  
+      Params:
+        cookie = a #SoupCookie
   */
   void addCookie(soup.cookie.Cookie cookie)
   {
@@ -80,22 +85,23 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Adds cookie to jar.
-    
-    Emits the `signalCookieJar::changed` signal if we are modifying an existing
-    cookie or adding a valid new cookie ('valid' means that the cookie's expire
-    date is not in the past).
-    
-    first_party will be used to reject cookies coming from third party
-    resources in case such a security policy is set in the jar.
-    
-    uri will be used to reject setting or overwriting secure cookies
-    from insecure origins. null is treated as secure.
-    
-    cookie will be 'stolen' by the jar, so don't free it afterwards.
-    Params:
-      cookie =       a #SoupCookie
-      uri =       the URI setting the cookie
-      firstParty =       the URI for the main document
+      
+      Emits the `signalCookieJar::changed` signal if we are modifying an existing
+      cookie or adding a valid new cookie ('valid' means that the cookie's expire
+      date is not in the past).
+      
+      first_party will be used to reject cookies coming from third party
+      resources in case such a security policy is set in the jar.
+      
+      uri will be used to reject setting or overwriting secure cookies
+      from insecure origins. null is treated as secure.
+      
+      cookie will be 'stolen' by the jar, so don't free it afterwards.
+  
+      Params:
+        cookie = a #SoupCookie
+        uri = the URI setting the cookie
+        firstParty = the URI for the main document
   */
   void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null)
   {
@@ -104,21 +110,22 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Adds cookie to jar.
-    
-    Emits the `signalCookieJar::changed` signal if we are modifying
-    an existing cookie or adding a valid new cookie ('valid' means
-    that the cookie's expire date is not in the past).
-    
-    first_party will be used to reject cookies coming from third party
-    resources in case such a security policy is set in the jar.
-    
-    cookie will be 'stolen' by the jar, so don't free it afterwards.
-    
-    For secure cookies to work properly you may want to use
-    [soup.cookie_jar.CookieJar.addCookieFull].
-    Params:
-      firstParty =       the URI for the main document
-      cookie =       a #SoupCookie
+      
+      Emits the `signalCookieJar::changed` signal if we are modifying
+      an existing cookie or adding a valid new cookie ('valid' means
+      that the cookie's expire date is not in the past).
+      
+      first_party will be used to reject cookies coming from third party
+      resources in case such a security policy is set in the jar.
+      
+      cookie will be 'stolen' by the jar, so don't free it afterwards.
+      
+      For secure cookies to work properly you may want to use
+      [soup.cookie_jar.CookieJar.addCookieFull].
+  
+      Params:
+        firstParty = the URI for the main document
+        cookie = a #SoupCookie
   */
   void addCookieWithFirstParty(glib.uri.Uri firstParty, soup.cookie.Cookie cookie)
   {
@@ -127,11 +134,11 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Constructs a [glib.list.List] with every cookie inside the jar.
-    
-    The cookies in the list are a copy of the original, so
-    you have to free them when you are done with them.
-    Returns:     a #GSList
-        with all the cookies in the jar.
+      
+      The cookies in the list are a copy of the original, so
+      you have to free them when you are done with them.
+      Returns: a #GSList
+          with all the cookies in the jar.
   */
   soup.cookie.Cookie[] allCookies()
   {
@@ -143,10 +150,11 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Deletes cookie from jar.
-    
-    Emits the `signalCookieJar::changed` signal.
-    Params:
-      cookie =       a #SoupCookie
+      
+      Emits the `signalCookieJar::changed` signal.
+  
+      Params:
+        cookie = a #SoupCookie
   */
   void deleteCookie(soup.cookie.Cookie cookie)
   {
@@ -155,7 +163,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Gets jar's `enumCookieJarAcceptPolicy`.
-    Returns:     the #SoupCookieJarAcceptPolicy set in the jar
+      Returns: the #SoupCookieJarAcceptPolicy set in the jar
   */
   soup.types.CookieJarAcceptPolicy getAcceptPolicy()
   {
@@ -167,21 +175,22 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Retrieves the list of cookies that would be sent with a request to uri
-    as a [glib.list.List] of #SoupCookie objects.
-    
-    If for_http is true, the return value will include cookies marked
-    "HttpOnly" (that is, cookies that the server wishes to keep hidden
-    from client-side scripting operations such as the JavaScript
-    document.cookies property). Since #SoupCookieJar sets the Cookie
-    header itself when making the actual HTTP request, you should
-    almost certainly be setting for_http to false if you are calling
-    this.
-    Params:
-      uri =       a #GUri
-      forHttp =       whether or not the return value is being passed directly
-          to an HTTP operation
-    Returns:     a #GSList
-        with the cookies in the jar that would be sent with a request to uri.
+      as a [glib.list.List] of #SoupCookie objects.
+      
+      If for_http is true, the return value will include cookies marked
+      "HttpOnly" (that is, cookies that the server wishes to keep hidden
+      from client-side scripting operations such as the JavaScript
+      document.cookies property). Since #SoupCookieJar sets the Cookie
+      header itself when making the actual HTTP request, you should
+      almost certainly be setting for_http to false if you are calling
+      this.
+  
+      Params:
+        uri = a #GUri
+        forHttp = whether or not the return value is being passed directly
+            to an HTTP operation
+      Returns: a #GSList
+          with the cookies in the jar that would be sent with a request to uri.
   */
   soup.cookie.Cookie[] getCookieList(glib.uri.Uri uri, bool forHttp)
   {
@@ -193,22 +202,23 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       This is an extended version of [soup.cookie_jar.CookieJar.getCookieList] that
-    provides more information required to use SameSite cookies.
-    
-    See the [SameSite cookies
-    spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) for
-    more detailed information.
-    Params:
-      uri =       a #GUri
-      topLevel =       a #GUri for the top level document
-      siteForCookies =       a #GUri indicating the origin to get cookies for
-      forHttp =       whether or not the return value is being passed directly
-          to an HTTP operation
-      isSafeMethod =       if the HTTP method is safe, as defined by RFC 7231, ignored when for_http is false
-      isTopLevelNavigation =       whether or not the HTTP request is part of
-          top level navigation
-    Returns:     a #GSList
-        with the cookies in the jar that would be sent with a request to uri.
+      provides more information required to use SameSite cookies.
+      
+      See the [SameSite cookies
+      spec](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) for
+      more detailed information.
+  
+      Params:
+        uri = a #GUri
+        topLevel = a #GUri for the top level document
+        siteForCookies = a #GUri indicating the origin to get cookies for
+        forHttp = whether or not the return value is being passed directly
+            to an HTTP operation
+        isSafeMethod = if the HTTP method is safe, as defined by RFC 7231, ignored when for_http is false
+        isTopLevelNavigation = whether or not the HTTP request is part of
+            top level navigation
+      Returns: a #GSList
+          with the cookies in the jar that would be sent with a request to uri.
   */
   soup.cookie.Cookie[] getCookieListWithSameSiteInfo(glib.uri.Uri uri, glib.uri.Uri topLevel, glib.uri.Uri siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation)
   {
@@ -220,21 +230,22 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Retrieves (in Cookie-header form) the list of cookies that would
-    be sent with a request to uri.
-    
-    If for_http is true, the return value will include cookies marked
-    "HttpOnly" (that is, cookies that the server wishes to keep hidden
-    from client-side scripting operations such as the JavaScript
-    document.cookies property). Since #SoupCookieJar sets the Cookie
-    header itself when making the actual HTTP request, you should
-    almost certainly be setting for_http to false if you are calling
-    this.
-    Params:
-      uri =       a #GUri
-      forHttp =       whether or not the return value is being passed directly
-          to an HTTP operation
-    Returns:     the cookies, in string form, or null if
-        there are no cookies for uri.
+      be sent with a request to uri.
+      
+      If for_http is true, the return value will include cookies marked
+      "HttpOnly" (that is, cookies that the server wishes to keep hidden
+      from client-side scripting operations such as the JavaScript
+      document.cookies property). Since #SoupCookieJar sets the Cookie
+      header itself when making the actual HTTP request, you should
+      almost certainly be setting for_http to false if you are calling
+      this.
+  
+      Params:
+        uri = a #GUri
+        forHttp = whether or not the return value is being passed directly
+            to an HTTP operation
+      Returns: the cookies, in string form, or null if
+          there are no cookies for uri.
   */
   string getCookies(glib.uri.Uri uri, bool forHttp)
   {
@@ -246,7 +257,7 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Gets whether jar stores cookies persistenly.
-    Returns:     true if jar storage is persistent or false otherwise.
+      Returns: true if jar storage is persistent or false otherwise.
   */
   bool isPersistent()
   {
@@ -257,8 +268,9 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets policy as the cookie acceptance policy for jar.
-    Params:
-      policy =       a #SoupCookieJarAcceptPolicy
+  
+      Params:
+        policy = a #SoupCookieJarAcceptPolicy
   */
   void setAcceptPolicy(soup.types.CookieJarAcceptPolicy policy)
   {
@@ -267,17 +279,18 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Adds cookie to jar, exactly as though it had appeared in a
-    Set-Cookie header returned from a request to uri.
-    
-    Keep in mind that if the `enumCookieJarAcceptPolicy` set is either
-    [soup.types.CookieJarAcceptPolicy.NoThirdParty] or
-    [soup.types.CookieJarAcceptPolicy.GrandfatheredThirdParty] you'll need to use
-    [soup.cookie_jar.CookieJar.setCookieWithFirstParty], otherwise the jar
-    will have no way of knowing if the cookie is being set by a third
-    party or not.
-    Params:
-      uri =       the URI setting the cookie
-      cookie =       the stringified cookie to set
+      Set-Cookie header returned from a request to uri.
+      
+      Keep in mind that if the `enumCookieJarAcceptPolicy` set is either
+      [soup.types.CookieJarAcceptPolicy.NoThirdParty] or
+      [soup.types.CookieJarAcceptPolicy.GrandfatheredThirdParty] you'll need to use
+      [soup.cookie_jar.CookieJar.setCookieWithFirstParty], otherwise the jar
+      will have no way of knowing if the cookie is being set by a third
+      party or not.
+  
+      Params:
+        uri = the URI setting the cookie
+        cookie = the stringified cookie to set
   */
   void setCookie(glib.uri.Uri uri, string cookie)
   {
@@ -287,14 +300,15 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Adds cookie to jar, exactly as though it had appeared in a
-    Set-Cookie header returned from a request to uri.
-    
-    first_party will be used to reject cookies coming from third party resources
-    in case such a security policy is set in the jar.
-    Params:
-      uri =       the URI setting the cookie
-      firstParty =       the URI for the main document
-      cookie =       the stringified cookie to set
+      Set-Cookie header returned from a request to uri.
+      
+      first_party will be used to reject cookies coming from third party resources
+      in case such a security policy is set in the jar.
+  
+      Params:
+        uri = the URI setting the cookie
+        firstParty = the URI for the main document
+        cookie = the stringified cookie to set
   */
   void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie)
   {
@@ -303,46 +317,58 @@ class CookieJar : gobject.object.ObjectG, soup.session_feature.SessionFeature
   }
 
   /**
-      Emitted when jar changes.
-    
-    If a cookie has been added,
-    new_cookie will contain the newly-added cookie and
-    old_cookie will be null. If a cookie has been deleted,
-    old_cookie will contain the to-be-deleted cookie and
-    new_cookie will be null. If a cookie has been changed,
-    old_cookie will contain its old value, and new_cookie its
-    new value.
+      Connect to `Changed` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B oldCookie)       the old #SoupCookie value
-      * $(B newCookie)       the new #SoupCookie value
-      * $(B cookieJar) the instance the signal is connected to
-    )
-  */
-  alias ChangedCallbackDlg = void delegate(soup.cookie.Cookie oldCookie, soup.cookie.Cookie newCookie, soup.cookie_jar.CookieJar cookieJar);
-
-  /** ditto */
-  alias ChangedCallbackFunc = void function(soup.cookie.Cookie oldCookie, soup.cookie.Cookie newCookie, soup.cookie_jar.CookieJar cookieJar);
-
-  /**
-    Connect to Changed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when jar changes.
+      
+      If a cookie has been added,
+      new_cookie will contain the newly-added cookie and
+      old_cookie will be null. If a cookie has been deleted,
+      old_cookie will contain the to-be-deleted cookie and
+      new_cookie will be null. If a cookie has been changed,
+      old_cookie will contain its old value, and new_cookie its
+      new value.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.cookie.Cookie oldCookie, soup.cookie.Cookie newCookie, soup.cookie_jar.CookieJar cookieJar))
+  
+          `oldCookie` the old #SoupCookie value (optional)
+  
+          `newCookie` the new #SoupCookie value (optional)
+  
+          `cookieJar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == soup.cookie.Cookie)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == soup.cookie.Cookie)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.cookie_jar.CookieJar)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cookieJar = getVal!(soup.cookie_jar.CookieJar)(_paramVals);
-      auto oldCookie = getVal!(soup.cookie.Cookie)(&_paramVals[1]);
-      auto newCookie = getVal!(soup.cookie.Cookie)(&_paramVals[2]);
-      _dClosure.dlg(oldCookie, newCookie, cookieJar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

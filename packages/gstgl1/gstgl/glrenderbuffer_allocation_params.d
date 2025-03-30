@@ -1,3 +1,4 @@
+/// Module for [GLRenderbufferAllocationParams] class
 module gstgl.glrenderbuffer_allocation_params;
 
 import gid.gid;
@@ -15,22 +16,26 @@ import gstgl.types;
 class GLRenderbufferAllocationParams : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_renderbuffer_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_renderbuffer_allocation_params_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

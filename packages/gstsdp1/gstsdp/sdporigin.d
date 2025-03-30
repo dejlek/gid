@@ -1,3 +1,4 @@
+/// Module for [SDPOrigin] class
 module gstsdp.sdporigin;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gstsdp.types;
 
 /**
     The contents of the SDP "o=" field which gives the originator of the session
-  (their username and the address of the user's host) plus a session id and
-  session version number.
+    (their username and the address of the user's host) plus a session id and
+    session version number.
 */
 class SDPOrigin
 {
   GstSDPOrigin cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class SDPOrigin
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

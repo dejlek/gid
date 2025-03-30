@@ -1,3 +1,4 @@
+/// Module for [Settings] class
 module gtk.settings;
 
 import gdk.screen;
@@ -15,56 +16,59 @@ import gtk.types;
 
 /**
     GtkSettings provide a mechanism to share global settings between
-  applications.
-  
-  On the X window system, this sharing is realized by an
-  [XSettings](http://www.freedesktop.org/wiki/Specifications/xsettings-spec)
-  manager that is usually part of the desktop environment, along with
-  utilities that let the user change these settings. In the absence of
-  an Xsettings manager, GTK+ reads default values for settings from
-  `settings.ini` files in
-  `/etc/gtk-3.0`, `$XDG_CONFIG_DIRS/gtk-3.0`
-  and `$XDG_CONFIG_HOME/gtk-3.0`.
-  These files must be valid key files (see #GKeyFile), and have
-  a section called Settings. Themes can also provide default values
-  for settings by installing a `settings.ini` file
-  next to their `gtk.css` file.
-  
-  Applications can override system-wide settings by setting the property
-  of the GtkSettings object with [gobject.object.ObjectG.set]. This should be restricted
-  to special cases though; GtkSettings are not meant as an application
-  configuration facility. When doing so, you need to be aware that settings
-  that are specific to individual widgets may not be available before the
-  widget type has been realized at least once. The following example
-  demonstrates a way to do this:
-  ```c
-    gtk_init (&argc, &argv);
-  
-    // make sure the type is realized
-    g_type_class_unref (g_type_class_ref (GTK_TYPE_IMAGE_MENU_ITEM));
-  
-    g_object_set (gtk_settings_get_default (), "gtk-enable-animations", FALSE, NULL);
-  ```
-  
-  There is one GtkSettings instance per screen. It can be obtained with
-  [gtk.settings.Settings.getForScreen], but in many cases, it is more convenient
-  to use [gtk.widget.Widget.getSettings]. [gtk.settings.Settings.getDefault] returns the
-  GtkSettings instance for the default screen.
+    applications.
+    
+    On the X window system, this sharing is realized by an
+    [XSettings](http://www.freedesktop.org/wiki/Specifications/xsettings-spec)
+    manager that is usually part of the desktop environment, along with
+    utilities that let the user change these settings. In the absence of
+    an Xsettings manager, GTK+ reads default values for settings from
+    `settings.ini` files in
+    `/etc/gtk-3.0`, `$XDG_CONFIG_DIRS/gtk-3.0`
+    and `$XDG_CONFIG_HOME/gtk-3.0`.
+    These files must be valid key files (see #GKeyFile), and have
+    a section called Settings. Themes can also provide default values
+    for settings by installing a `settings.ini` file
+    next to their `gtk.css` file.
+    
+    Applications can override system-wide settings by setting the property
+    of the GtkSettings object with [gobject.object.ObjectG.set]. This should be restricted
+    to special cases though; GtkSettings are not meant as an application
+    configuration facility. When doing so, you need to be aware that settings
+    that are specific to individual widgets may not be available before the
+    widget type has been realized at least once. The following example
+    demonstrates a way to do this:
+    ```c
+      gtk_init (&argc, &argv);
+    
+      // make sure the type is realized
+      g_type_class_unref (g_type_class_ref (GTK_TYPE_IMAGE_MENU_ITEM));
+    
+      g_object_set (gtk_settings_get_default (), "gtk-enable-animations", FALSE, NULL);
+    ```
+    
+    There is one GtkSettings instance per screen. It can be obtained with
+    [gtk.settings.Settings.getForScreen], but in many cases, it is more convenient
+    to use [gtk.widget.Widget.getSettings]. [gtk.settings.Settings.getDefault] returns the
+    GtkSettings instance for the default screen.
 */
 class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_settings_get_type != &gidSymbolNotFound ? gtk_settings_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -79,9 +83,9 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Gets the #GtkSettings object for the default GDK screen, creating
-    it if necessary. See [gtk.settings.Settings.getForScreen].
-    Returns:     a #GtkSettings object. If there is
-      no default screen, then returns null.
+      it if necessary. See [gtk.settings.Settings.getForScreen].
+      Returns: a #GtkSettings object. If there is
+        no default screen, then returns null.
   */
   static gtk.settings.Settings getDefault()
   {
@@ -93,9 +97,10 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Gets the #GtkSettings object for screen, creating it if necessary.
-    Params:
-      screen =       a #GdkScreen.
-    Returns:     a #GtkSettings object.
+  
+      Params:
+        screen = a #GdkScreen.
+      Returns: a #GtkSettings object.
   */
   static gtk.settings.Settings getForScreen(gdk.screen.Screen screen)
   {
@@ -130,11 +135,12 @@ class Settings : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Undoes the effect of calling [gobject.object.ObjectG.set] to install an
-    application-specific value for a setting. After this call,
-    the setting will again follow the session-wide value for
-    this setting.
-    Params:
-      name =       the name of the setting to reset
+      application-specific value for a setting. After this call,
+      the setting will again follow the session-wide value for
+      this setting.
+  
+      Params:
+        name = the name of the setting to reset
   */
   void resetProperty(string name)
   {

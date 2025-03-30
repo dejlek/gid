@@ -1,3 +1,4 @@
+/// Module for [InetAddressMask] class
 module gio.inet_address_mask;
 
 import gid.gid;
@@ -12,24 +13,27 @@ import gobject.object;
 
 /**
     [gio.inet_address_mask.InetAddressMask] represents a range of IPv4 or IPv6 addresses
-  described by a base address and a length indicating how many bits
-  of the base address are relevant for matching purposes. These are
-  often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
+    described by a base address and a length indicating how many bits
+    of the base address are relevant for matching purposes. These are
+    often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
 */
 class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_address_mask_get_type != &gidSymbolNotFound ? g_inet_address_mask_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,11 +48,12 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Creates a new #GInetAddressMask representing all addresses whose
-    first length bits match addr.
-    Params:
-      addr =       a #GInetAddress
-      length =       number of bits of addr to use
-    Returns:     a new #GInetAddressMask, or null on error
+      first length bits match addr.
+  
+      Params:
+        addr = a #GInetAddress
+        length = number of bits of addr to use
+      Returns: a new #GInetAddressMask, or null on error
   */
   this(gio.inet_address.InetAddress addr, uint length)
   {
@@ -62,13 +67,14 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Parses mask_string as an IP address and (optional) length, and
-    creates a new #GInetAddressMask. The length, if present, is
-    delimited by a "/". If it is not present, then the length is
-    assumed to be the full length of the address.
-    Params:
-      maskString =       an IP address or address/length string
-    Returns:     a new #GInetAddressMask corresponding to string, or null
-      on error.
+      creates a new #GInetAddressMask. The length, if present, is
+      delimited by a "/". If it is not present, then the length is
+      assumed to be the full length of the address.
+  
+      Params:
+        maskString = an IP address or address/length string
+      Returns: a new #GInetAddressMask corresponding to string, or null
+        on error.
   */
   static gio.inet_address_mask.InetAddressMask newFromString(string maskString)
   {
@@ -84,9 +90,10 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Tests if mask and mask2 are the same mask.
-    Params:
-      mask2 =       another #GInetAddressMask
-    Returns:     whether mask and mask2 are the same mask
+  
+      Params:
+        mask2 = another #GInetAddressMask
+      Returns: whether mask and mask2 are the same mask
   */
   bool equal(gio.inet_address_mask.InetAddressMask mask2)
   {
@@ -97,7 +104,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Gets mask's base address
-    Returns:     mask's base address
+      Returns: mask's base address
   */
   gio.inet_address.InetAddress getAddress()
   {
@@ -109,7 +116,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Gets the #GSocketFamily of mask's address
-    Returns:     the #GSocketFamily of mask's address
+      Returns: the #GSocketFamily of mask's address
   */
   gio.types.SocketFamily getFamily()
   {
@@ -121,7 +128,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Gets mask's length
-    Returns:     mask's length
+      Returns: mask's length
   */
   uint getLength()
   {
@@ -132,10 +139,11 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Tests if address falls within the range described by mask.
-    Params:
-      address =       a #GInetAddress
-    Returns:     whether address falls within the range described by
-      mask.
+  
+      Params:
+        address = a #GInetAddress
+      Returns: whether address falls within the range described by
+        mask.
   */
   bool matches(gio.inet_address.InetAddress address)
   {
@@ -146,7 +154,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
 
   /**
       Converts mask back to its corresponding string form.
-    Returns:     a string corresponding to mask.
+      Returns: a string corresponding to mask.
   */
   string toString_()
   {

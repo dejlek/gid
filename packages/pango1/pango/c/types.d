@@ -1,3 +1,4 @@
+/// C types for pango1 library
 module pango.c.types;
 
 public import gid.basictypes;
@@ -13,36 +14,36 @@ alias PangoGlyph = uint;
 
 /**
     The `PangoGlyphUnit` type is used to store dimensions within
-  Pango.
-  
-  Dimensions are stored in 1/PANGO_SCALE of a device unit.
-  (A device unit might be a pixel for screen display, or
-  a point on a printer.) PANGO_SCALE is currently 1024, and
-  may change in the future (unlikely though), but you should not
-  depend on its exact value.
-  
-  The PANGO_PIXELS() macro can be used to convert from glyph units
-  into device units with correct rounding.
+    Pango.
+    
+    Dimensions are stored in 1/PANGO_SCALE of a device unit.
+    (A device unit might be a pixel for screen display, or
+    a point on a printer.) PANGO_SCALE is currently 1024, and
+    may change in the future (unlikely though), but you should not
+    depend on its exact value.
+    
+    The PANGO_PIXELS() macro can be used to convert from glyph units
+    into device units with correct rounding.
 */
 alias PangoGlyphUnit = int;
 
 /**
     A `PangoLayoutRun` represents a single run within a [pango.layout_line.LayoutLine].
-  
-  It is simply an alternate name for [pango.glyph_item.GlyphItem].
-  See the [pango.glyph_item.GlyphItem] docs for details on the fields.
+    
+    It is simply an alternate name for [pango.glyph_item.GlyphItem].
+    See the [pango.glyph_item.GlyphItem] docs for details on the fields.
 */
 alias PangoLayoutRun = PangoGlyphItem;
 
 /**
     [pango.types.Alignment] describes how to align the lines of a [pango.layout.Layout]
-  within the available space.
-  
-  If the [pango.layout.Layout] is set to justify using [pango.layout.Layout.setJustify],
-  this only affects partial lines.
-  
-  See [pango.layout.Layout.setAutoDir] for how text direction affects
-  the interpretation of [pango.types.Alignment] values.
+    within the available space.
+    
+    If the [pango.layout.Layout] is set to justify using [pango.layout.Layout.setJustify],
+    this only affects partial lines.
+    
+    See [pango.layout.Layout.setAutoDir] for how text direction affects
+    the interpretation of [pango.types.Alignment] values.
 */
 enum PangoAlignment
 {
@@ -64,11 +65,11 @@ enum PangoAlignment
 
 /**
     The [pango.types.AttrType] distinguishes between different types of attributes.
-  
-  Along with the predefined values, it is possible to allocate additional
-  values for custom attributes using `func@AttrType.register`. The predefined
-  values are given below. The type of structure used to store the attribute is
-  listed in parentheses after the description.
+    
+    Along with the predefined values, it is possible to allocate additional
+    values for custom attributes using `func@AttrType.register`. The predefined
+    values are given below. The type of structure used to store the attribute is
+    listed in parentheses after the description.
 */
 enum PangoAttrType
 {
@@ -273,25 +274,25 @@ enum PangoBaselineShift
 
   /**
       Shift the baseline to the superscript position,
-      relative to the previous run
+        relative to the previous run
   */
   Superscript = 1,
 
   /**
       Shift the baseline to the subscript position,
-      relative to the previous run
+        relative to the previous run
   */
   Subscript = 2,
 }
 
 /**
     [pango.types.BidiType] represents the bidirectional character
-  type of a Unicode character.
-  
-  The values in this enumeration are specified by the
-  [Unicode bidirectional algorithm](http://www.unicode.org/reports/tr9/).
+    type of a Unicode character.
+    
+    The values in this enumeration are specified by the
+    [Unicode bidirectional algorithm](http://www.unicode.org/reports/tr9/).
 
-  Deprecated:     Use fribidi for this information
+    Deprecated: Use fribidi for this information
 */
 enum PangoBidiType
 {
@@ -413,61 +414,61 @@ enum PangoBidiType
 
 /**
     [pango.types.CoverageLevel] is used to indicate how well a font can
-  represent a particular Unicode character for a particular script.
-  
-  Since 1.44, only [pango.types.CoverageLevel.None] and [pango.types.CoverageLevel.Exact]
-  will be returned.
+    represent a particular Unicode character for a particular script.
+    
+    Since 1.44, only [pango.types.CoverageLevel.None] and [pango.types.CoverageLevel.Exact]
+    will be returned.
 */
 enum PangoCoverageLevel
 {
   /**
       The character is not representable with
-      the font.
+        the font.
   */
   None = 0,
 
   /**
       The character is represented in a
-      way that may be comprehensible but is not the correct
-      graphical form. For instance, a Hangul character represented
-      as a a sequence of Jamos, or a Latin transliteration of a
-      Cyrillic word.
+        way that may be comprehensible but is not the correct
+        graphical form. For instance, a Hangul character represented
+        as a a sequence of Jamos, or a Latin transliteration of a
+        Cyrillic word.
   */
   Fallback = 1,
 
   /**
       The character is represented as
-      basically the correct graphical form, but with a stylistic
-      variant inappropriate for the current script.
+        basically the correct graphical form, but with a stylistic
+        variant inappropriate for the current script.
   */
   Approximate = 2,
 
   /**
       The character is represented as the
-      correct graphical form.
+        correct graphical form.
   */
   Exact = 3,
 }
 
 /**
     [pango.types.Direction] represents a direction in the Unicode bidirectional
-  algorithm.
-  
-  Not every value in this enumeration makes sense for every usage of
-  [pango.types.Direction]; for example, the return value of `func@unichar_direction`
-  and `func@find_base_dir` cannot be [pango.types.Direction.WeakLtr] or
-  [pango.types.Direction.WeakRtl], since every character is either neutral
-  or has a strong direction; on the other hand [pango.types.Direction.Neutral]
-  doesn't make sense to pass to `func@itemize_with_base_dir`.
-  
-  The [pango.types.Direction.TtbLtr], [pango.types.Direction.TtbRtl] values come from
-  an earlier interpretation of this enumeration as the writing direction
-  of a block of text and are no longer used. See [pango.types.Gravity] for how
-  vertical text is handled in Pango.
-  
-  If you are interested in text direction, you should really use fribidi
-  directly. [pango.types.Direction] is only retained because it is used in some
-  public apis.
+    algorithm.
+    
+    Not every value in this enumeration makes sense for every usage of
+    [pango.types.Direction]; for example, the return value of `func@unichar_direction`
+    and `func@find_base_dir` cannot be [pango.types.Direction.WeakLtr] or
+    [pango.types.Direction.WeakRtl], since every character is either neutral
+    or has a strong direction; on the other hand [pango.types.Direction.Neutral]
+    doesn't make sense to pass to `func@itemize_with_base_dir`.
+    
+    The [pango.types.Direction.TtbLtr], [pango.types.Direction.TtbRtl] values come from
+    an earlier interpretation of this enumeration as the writing direction
+    of a block of text and are no longer used. See [pango.types.Gravity] for how
+    vertical text is handled in Pango.
+    
+    If you are interested in text direction, you should really use fribidi
+    directly. [pango.types.Direction] is only retained because it is used in some
+    public apis.
 */
 enum PangoDirection
 {
@@ -483,13 +484,13 @@ enum PangoDirection
 
   /**
       Deprecated value; treated the
-      same as [pango.types.Direction.Rtl].
+        same as [pango.types.Direction.Rtl].
   */
   TtbLtr = 2,
 
   /**
       Deprecated value; treated the
-      same as [pango.types.Direction.Ltr]
+        same as [pango.types.Direction.Ltr]
   */
   TtbRtl = 3,
 
@@ -511,11 +512,11 @@ enum PangoDirection
 
 /**
     [pango.types.EllipsizeMode] describes what sort of ellipsization
-  should be applied to text.
-  
-  In the ellipsization process characters are removed from the
-  text in order to make it fit to a given width and replaced
-  with an ellipsis.
+    should be applied to text.
+    
+    In the ellipsization process characters are removed from the
+    text in order to make it fit to a given width and replaced
+    with an ellipsis.
 */
 enum PangoEllipsizeMode
 {
@@ -542,7 +543,7 @@ enum PangoEllipsizeMode
 
 /**
     The bits in a [pango.types.FontMask] correspond to the set fields in a
-  [pango.font_description.FontDescription].
+    [pango.font_description.FontDescription].
 */
 enum PangoFontMask : uint
 {
@@ -589,7 +590,7 @@ enum PangoFontMask : uint
 
 /**
     An enumeration that affects font sizes for superscript
-  and subscript positioning and for (emulated) Small Caps.
+    and subscript positioning and for (emulated) Small Caps.
 */
 enum PangoFontScale
 {
@@ -616,18 +617,18 @@ enum PangoFontScale
 
 /**
     [pango.types.Gravity] represents the orientation of glyphs in a segment
-  of text.
-  
-  This is useful when rendering vertical text layouts. In those situations,
-  the layout is rotated using a non-identity [pango.matrix.Matrix], and then
-  glyph orientation is controlled using [pango.types.Gravity].
-  
-  Not every value in this enumeration makes sense for every usage of
-  [pango.types.Gravity]; for example, [pango.types.Gravity.Auto] only can be passed to
-  [pango.context.Context.setBaseGravity] and can only be returned by
-  [pango.context.Context.getBaseGravity].
-  
-  See also: [pango.types.GravityHint]
+    of text.
+    
+    This is useful when rendering vertical text layouts. In those situations,
+    the layout is rotated using a non-identity [pango.matrix.Matrix], and then
+    glyph orientation is controlled using [pango.types.Gravity].
+    
+    Not every value in this enumeration makes sense for every usage of
+    [pango.types.Gravity]; for example, [pango.types.Gravity.Auto] only can be passed to
+    [pango.context.Context.setBaseGravity] and can only be returned by
+    [pango.context.Context.getBaseGravity].
+    
+    See also: [pango.types.GravityHint]
 */
 enum PangoGravity
 {
@@ -659,31 +660,31 @@ enum PangoGravity
 
 /**
     [pango.types.GravityHint] defines how horizontal scripts should behave in a
-  vertical context.
-  
-  That is, English excerpts in a vertical paragraph for example.
-  
-  See also [pango.types.Gravity]
+    vertical context.
+    
+    That is, English excerpts in a vertical paragraph for example.
+    
+    See also [pango.types.Gravity]
 */
 enum PangoGravityHint
 {
   /**
       scripts will take their natural gravity based
-      on the base gravity and the script.  This is the default.
+        on the base gravity and the script.  This is the default.
   */
   Natural = 0,
 
   /**
       always use the base gravity set, regardless of
-      the script.
+        the script.
   */
   Strong = 1,
 
   /**
       for scripts not in their natural direction (eg.
-      Latin in East gravity), choose per-script gravity such that every script
-      respects the line progression. This means, Latin and Arabic will take
-      opposite gravities and both flow top-to-bottom for example.
+        Latin in East gravity), choose per-script gravity such that every script
+        respects the line progression. This means, Latin and Arabic will take
+        opposite gravities and both flow top-to-bottom for example.
   */
   Line = 2,
 }
@@ -700,21 +701,21 @@ enum PangoLayoutDeserializeError
 
   /**
       A JSon value could not be
-      interpreted
+        interpreted
   */
   InvalidValue = 1,
 
   /**
       A required JSon member was
-      not found
+        not found
   */
   MissingValue = 2,
 }
 
 /**
     Flags that influence the behavior of [pango.layout.Layout.deserialize].
-  
-  New members may be added to this enumeration over time.
+    
+    New members may be added to this enumeration over time.
 */
 enum PangoLayoutDeserializeFlags : uint
 {
@@ -725,15 +726,15 @@ enum PangoLayoutDeserializeFlags : uint
 
   /**
       Apply context information
-      from the serialization to the [pango.context.Context]
+        from the serialization to the [pango.context.Context]
   */
   Context = 1,
 }
 
 /**
     Flags that influence the behavior of [pango.layout.Layout.serialize].
-  
-  New members may be added to this enumeration over time.
+    
+    New members may be added to this enumeration over time.
 */
 enum PangoLayoutSerializeFlags : uint
 {
@@ -755,7 +756,7 @@ enum PangoLayoutSerializeFlags : uint
 
 /**
     The [pango.types.Overline] enumeration is used to specify whether text
-  should be overlined, and if so, the type of line.
+    should be overlined, and if so, the type of line.
 */
 enum PangoOverline
 {
@@ -766,14 +767,14 @@ enum PangoOverline
 
   /**
       Draw a single line above the ink
-      extents of the text being underlined.
+        extents of the text being underlined.
   */
   Single = 1,
 }
 
 /**
     [pango.types.RenderPart] defines different items to render for such
-  purposes as setting colors.
+    purposes as setting colors.
 */
 enum PangoRenderPart
 {
@@ -805,15 +806,15 @@ enum PangoRenderPart
 
 /**
     The [pango.types.Script] enumeration identifies different writing
-  systems.
-  
-  The values correspond to the names as defined in the Unicode standard. See
-  [Unicode Standard Annex 24: Script names](http://www.unicode.org/reports/tr24/)
-  
-  Note that this enumeration is deprecated and will not be updated to include values
-  in newer versions of the Unicode standard. Applications should use the
-  [glib.types.UnicodeScript] enumeration instead,
-  whose values are interchangeable with [pango.types.Script].
+    systems.
+    
+    The values correspond to the names as defined in the Unicode standard. See
+    [Unicode Standard Annex 24: Script names](http://www.unicode.org/reports/tr24/)
+    
+    Note that this enumeration is deprecated and will not be updated to include values
+    in newer versions of the Unicode standard. Applications should use the
+    [glib.types.UnicodeScript] enumeration instead,
+    whose values are interchangeable with [pango.types.Script].
 */
 enum PangoScript
 {
@@ -829,7 +830,7 @@ enum PangoScript
 
   /**
       a mark glyph that takes its script from the
-    base glyph to which it is attached
+      base glyph to which it is attached
   */
   Inherited = 1,
 
@@ -1411,8 +1412,8 @@ enum PangoScript
 
 /**
     Flags influencing the shaping process.
-  
-  [pango.types.ShapeFlags] can be passed to `func@Pango.shape_with_flags`.
+    
+    [pango.types.ShapeFlags] can be passed to `func@Pango.shape_with_flags`.
 */
 enum PangoShapeFlags : uint
 {
@@ -1423,14 +1424,14 @@ enum PangoShapeFlags : uint
 
   /**
       Round glyph positions and widths to whole device units
-      This option should be set if the target renderer can't do subpixel positioning of glyphs
+        This option should be set if the target renderer can't do subpixel positioning of glyphs
   */
   RoundPositions = 1,
 }
 
 /**
     These flags affect how Pango treats characters that are normally
-  not visible in the output.
+    not visible in the output.
 */
 enum PangoShowFlags : uint
 {
@@ -1451,14 +1452,14 @@ enum PangoShowFlags : uint
 
   /**
       Render default-ignorable Unicode
-      characters visibly
+        characters visibly
   */
   Ignorables = 4,
 }
 
 /**
     An enumeration specifying the width of the font relative to other designs
-  within a family.
+    within a family.
 */
 enum PangoStretch
 {
@@ -1531,7 +1532,7 @@ enum PangoStyle
 
 /**
     [pango.types.TabAlign] specifies where the text appears relative to the tab stop
-  position.
+    position.
 */
 enum PangoTabAlign
 {
@@ -1542,20 +1543,20 @@ enum PangoTabAlign
 
   /**
       the text appears to the left of the tab stop position
-      until the available space is filled. Since: 1.50
+        until the available space is filled. Since: 1.50
   */
   Right = 1,
 
   /**
       the text is centered at the tab stop position
-      until the available space is filled. Since: 1.50
+        until the available space is filled. Since: 1.50
   */
   Center = 2,
 
   /**
       text before the first occurrence of the decimal point
-      character appears to the left of the tab stop position (until the available
-      space is filled), the rest to the right. Since: 1.50
+        character appears to the left of the tab stop position (until the available
+        space is filled), the rest to the right. Since: 1.50
   */
   Decimal = 3,
 }
@@ -1582,14 +1583,14 @@ enum PangoTextTransform
 
   /**
       Display the first character of a word
-      in titlecase
+        in titlecase
   */
   Capitalize = 3,
 }
 
 /**
     The [pango.types.Underline] enumeration is used to specify whether text
-  should be underlined, and if so, the type of underlining.
+    should be underlined, and if so, the type of underlining.
 */
 enum PangoUnderline
 {
@@ -1610,44 +1611,44 @@ enum PangoUnderline
 
   /**
       a single underline should be drawn at a
-      position beneath the ink extents of the text being
-      underlined. This should be used only for underlining
-      single characters, such as for keyboard accelerators.
-      [pango.types.Underline.Single] should be used for extended
-      portions of text.
+        position beneath the ink extents of the text being
+        underlined. This should be used only for underlining
+        single characters, such as for keyboard accelerators.
+        [pango.types.Underline.Single] should be used for extended
+        portions of text.
   */
   Low = 3,
 
   /**
       an underline indicating an error should
-      be drawn below. The exact style of rendering is up to the
-      [pango.renderer.Renderer] in use, but typical styles include wavy
-      or dotted lines.
-      This underline is typically used to indicate an error such
-      as a possible mispelling; in some cases a contrasting color
-      may automatically be used. This type of underlining is
-      available since Pango 1.4.
+        be drawn below. The exact style of rendering is up to the
+        [pango.renderer.Renderer] in use, but typical styles include wavy
+        or dotted lines.
+        This underline is typically used to indicate an error such
+        as a possible mispelling; in some cases a contrasting color
+        may automatically be used. This type of underlining is
+        available since Pango 1.4.
   */
   Error = 4,
 
   /**
       Like @PANGO_UNDERLINE_SINGLE, but
-      drawn continuously across multiple runs. This type
-      of underlining is available since Pango 1.46.
+        drawn continuously across multiple runs. This type
+        of underlining is available since Pango 1.46.
   */
   SingleLine = 5,
 
   /**
       Like @PANGO_UNDERLINE_DOUBLE, but
-      drawn continuously across multiple runs. This type
-      of underlining is available since Pango 1.46.
+        drawn continuously across multiple runs. This type
+        of underlining is available since Pango 1.46.
   */
   DoubleLine = 6,
 
   /**
       Like @PANGO_UNDERLINE_ERROR, but
-      drawn continuously across multiple runs. This type
-      of underlining is available since Pango 1.46.
+        drawn continuously across multiple runs. This type
+        of underlining is available since Pango 1.46.
   */
   ErrorLine = 7,
 }
@@ -1664,48 +1665,48 @@ enum PangoVariant
 
   /**
       A font with the lower case characters
-      replaced by smaller variants of the capital characters.
+        replaced by smaller variants of the capital characters.
   */
   SmallCaps = 1,
 
   /**
       A font with all characters
-      replaced by smaller variants of the capital characters. Since: 1.50
+        replaced by smaller variants of the capital characters. Since: 1.50
   */
   AllSmallCaps = 2,
 
   /**
       A font with the lower case characters
-      replaced by smaller variants of the capital characters.
-      Petite Caps can be even smaller than Small Caps. Since: 1.50
+        replaced by smaller variants of the capital characters.
+        Petite Caps can be even smaller than Small Caps. Since: 1.50
   */
   PetiteCaps = 3,
 
   /**
       A font with all characters
-      replaced by smaller variants of the capital characters.
-      Petite Caps can be even smaller than Small Caps. Since: 1.50
+        replaced by smaller variants of the capital characters.
+        Petite Caps can be even smaller than Small Caps. Since: 1.50
   */
   AllPetiteCaps = 4,
 
   /**
       A font with the upper case characters
-      replaced by smaller variants of the capital letters. Since: 1.50
+        replaced by smaller variants of the capital letters. Since: 1.50
   */
   Unicase = 5,
 
   /**
       A font with capital letters that
-      are more suitable for all-uppercase titles. Since: 1.50
+        are more suitable for all-uppercase titles. Since: 1.50
   */
   TitleCaps = 6,
 }
 
 /**
     An enumeration specifying the weight (boldness) of a font.
-  
-  Weight is specified as a numeric value ranging from 100 to 1000.
-  This enumeration simply provides some common, predefined values.
+    
+    Weight is specified as a numeric value ranging from 100 to 1000.
+    This enumeration simply provides some common, predefined values.
 */
 enum PangoWeight
 {
@@ -1772,12 +1773,12 @@ enum PangoWeight
 
 /**
     [pango.types.WrapMode] describes how to wrap the lines of a [pango.layout.Layout]
-  to the desired width.
-  
-  For @PANGO_WRAP_WORD, Pango uses break opportunities that are determined
-  by the Unicode line breaking algorithm. For @PANGO_WRAP_CHAR, Pango allows
-  breaking at grapheme boundaries that are determined by the Unicode text
-  segmentation algorithm.
+    to the desired width.
+    
+    For @PANGO_WRAP_WORD, Pango uses break opportunities that are determined
+    by the Unicode line breaking algorithm. For @PANGO_WRAP_CHAR, Pango allows
+    breaking at grapheme boundaries that are determined by the Unicode text
+    segmentation algorithm.
 */
 enum PangoWrapMode
 {
@@ -1793,14 +1794,14 @@ enum PangoWrapMode
 
   /**
       wrap lines at word boundaries, but fall back to
-      character boundaries if there is not enough space for a full word.
+        character boundaries if there is not enough space for a full word.
   */
   WordChar = 2,
 }
 
 /**
     The [pango.analysis.Analysis] structure stores information about
-  the properties of a segment of text.
+    the properties of a segment of text.
 */
 struct PangoAnalysis
 {
@@ -1852,10 +1853,10 @@ struct PangoAnalysis
 
 /**
     The [pango.types.AttrClass] structure stores the type and operations for
-  a particular type of attribute.
-  
-  The functions in this structure should not be called directly. Instead,
-  one should use the wrapper functions provided for [pango.attribute.Attribute].
+    a particular type of attribute.
+    
+    The functions in this structure should not be called directly. Instead,
+    one should use the wrapper functions provided for [pango.attribute.Attribute].
 */
 struct PangoAttrClass
 {
@@ -1876,7 +1877,7 @@ struct PangoAttrClass
 
 /**
     The [pango.attr_color.AttrColor] structure is used to represent attributes that
-  are colors.
+    are colors.
 */
 struct PangoAttrColor
 {
@@ -1893,7 +1894,7 @@ struct PangoAttrColor
 
 /**
     The [pango.attr_float.AttrFloat] structure is used to represent attributes with
-  a float or double value.
+    a float or double value.
 */
 struct PangoAttrFloat
 {
@@ -1910,7 +1911,7 @@ struct PangoAttrFloat
 
 /**
     The [pango.attr_font_desc.AttrFontDesc] structure is used to store an attribute that
-  sets all aspects of the font description at once.
+    sets all aspects of the font description at once.
 */
 struct PangoAttrFontDesc
 {
@@ -1927,7 +1928,7 @@ struct PangoAttrFontDesc
 
 /**
     The [pango.attr_font_features.AttrFontFeatures] structure is used to represent OpenType
-  font features as an attribute.
+    font features as an attribute.
 */
 struct PangoAttrFontFeatures
 {
@@ -1944,7 +1945,7 @@ struct PangoAttrFontFeatures
 
 /**
     The [pango.attr_int.AttrInt] structure is used to represent attributes with
-  an integer or enumeration value.
+    an integer or enumeration value.
 */
 struct PangoAttrInt
 {
@@ -1961,18 +1962,18 @@ struct PangoAttrInt
 
 /**
     A [pango.attr_iterator.AttrIterator] is used to iterate through a [pango.attr_list.AttrList].
-  
-  A new iterator is created with [pango.attr_list.AttrList.getIterator].
-  Once the iterator is created, it can be advanced through the style
-  changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
-  style change, the range of the current style segment and the attributes
-  currently in effect can be queried.
+    
+    A new iterator is created with [pango.attr_list.AttrList.getIterator].
+    Once the iterator is created, it can be advanced through the style
+    changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
+    style change, the range of the current style segment and the attributes
+    currently in effect can be queried.
 */
 struct PangoAttrIterator;
 
 /**
     The [pango.attr_language.AttrLanguage] structure is used to represent attributes that
-  are languages.
+    are languages.
 */
 struct PangoAttrLanguage
 {
@@ -1989,22 +1990,22 @@ struct PangoAttrLanguage
 
 /**
     A [pango.attr_list.AttrList] represents a list of attributes that apply to a section
-  of text.
-  
-  The attributes in a [pango.attr_list.AttrList] are, in general, allowed to overlap in
-  an arbitrary fashion. However, if the attributes are manipulated only through
-  [pango.attr_list.AttrList.change], the overlap between properties will meet
-  stricter criteria.
-  
-  Since the [pango.attr_list.AttrList] structure is stored as a linear list, it is not
-  suitable for storing attributes for large amounts of text. In general, you
-  should not use a single [pango.attr_list.AttrList] for more than one paragraph of text.
+    of text.
+    
+    The attributes in a [pango.attr_list.AttrList] are, in general, allowed to overlap in
+    an arbitrary fashion. However, if the attributes are manipulated only through
+    [pango.attr_list.AttrList.change], the overlap between properties will meet
+    stricter criteria.
+    
+    Since the [pango.attr_list.AttrList] structure is stored as a linear list, it is not
+    suitable for storing attributes for large amounts of text. In general, you
+    should not use a single [pango.attr_list.AttrList] for more than one paragraph of text.
 */
 struct PangoAttrList;
 
 /**
     The [pango.attr_shape.AttrShape] structure is used to represent attributes which
-  impose shape restrictions.
+    impose shape restrictions.
 */
 struct PangoAttrShape
 {
@@ -2041,7 +2042,7 @@ struct PangoAttrShape
 
 /**
     The [pango.attr_size.AttrSize] structure is used to represent attributes which
-  set font size.
+    set font size.
 */
 struct PangoAttrSize
 {
@@ -2052,22 +2053,22 @@ struct PangoAttrSize
 
   /**
       size of font, in units of 1/`PANGO_SCALE` of a point (for
-      [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
+        [pango.types.AttrType.Size]) or of a device unit (for [pango.types.AttrType.AbsoluteSize])
   */
   int size;
 
   /**
       whether the font size is in device units or points.
-      This field is only present for compatibility with Pango-1.8.0
-      ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
-      be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
+        This field is only present for compatibility with Pango-1.8.0
+        ([pango.types.AttrType.AbsoluteSize] was added in 1.8.1); and always will
+        be false for [pango.types.AttrType.Size] and true for [pango.types.AttrType.AbsoluteSize].
   */
   uint absolute;
 }
 
 /**
     The [pango.attr_string.AttrString] structure is used to represent attributes with
-  a string value.
+    a string value.
 */
 struct PangoAttrString
 {
@@ -2084,13 +2085,13 @@ struct PangoAttrString
 
 /**
     The [pango.attribute.Attribute] structure represents the common portions of all
-  attributes.
-  
-  Particular types of attributes include this structure as their initial
-  portion. The common portion of the attribute holds the range to which
-  the value in the type-specific part of the attribute applies and should
-  be initialized using [pango.attribute.Attribute.init_]. By default, an attribute
-  will have an all-inclusive range of [0,`G_MAXUINT`].
+    attributes.
+    
+    Particular types of attributes include this structure as their initial
+    portion. The common portion of the attribute holds the range to which
+    the value in the type-specific part of the attribute applies and should
+    be initialized using [pango.attribute.Attribute.init_]. By default, an attribute
+    will have an all-inclusive range of [0,`G_MAXUINT`].
 */
 struct PangoAttribute
 {
@@ -2106,14 +2107,14 @@ struct PangoAttribute
 
   /**
       end index of the range (in bytes). The character at this index
-      is not included in the range.
+        is not included in the range.
   */
   uint endIndex;
 }
 
 /**
     The [pango.color.Color] structure is used to
-  represent a color in an uncalibrated RGB color-space.
+    represent a color in an uncalibrated RGB color-space.
 */
 struct PangoColor
 {
@@ -2135,13 +2136,13 @@ struct PangoColor
 
 /**
     A [pango.context.Context] stores global information used to control the
-  itemization process.
-  
-  The information stored by [pango.context.Context] includes the fontmap used
-  to look up fonts, and default values such as the default language,
-  default gravity, or default font.
-  
-  To obtain a [pango.context.Context], use [pango.font_map.FontMap.createContext].
+    itemization process.
+    
+    The information stored by [pango.context.Context] includes the fontmap used
+    to look up fonts, and default values such as the default language,
+    default gravity, or default font.
+    
+    To obtain a [pango.context.Context], use [pango.font_map.FontMap.createContext].
 */
 struct PangoContext;
 
@@ -2150,19 +2151,19 @@ struct PangoContextClass;
 
 /**
     A [pango.coverage.Coverage] structure is a map from Unicode characters
-  to [pango.types.CoverageLevel] values.
-  
-  It is often necessary in Pango to determine if a particular
-  font can represent a particular character, and also how well
-  it can represent that character. The [pango.coverage.Coverage] is a data
-  structure that is used to represent that information. It is an
-  opaque structure with no public fields.
+    to [pango.types.CoverageLevel] values.
+    
+    It is often necessary in Pango to determine if a particular
+    font can represent a particular character, and also how well
+    it can represent that character. The [pango.coverage.Coverage] is a data
+    structure that is used to represent that information. It is an
+    opaque structure with no public fields.
 */
 struct PangoCoverage;
 
 /**
     A [pango.font.Font] is used to represent a font in a
-  rendering-system-independent manner.
+    rendering-system-independent manner.
 */
 struct PangoFont
 {
@@ -2203,17 +2204,17 @@ struct PangoFontClass
 
 /**
     A [pango.font_description.FontDescription] describes a font in an implementation-independent
-  manner.
-  
-  [pango.font_description.FontDescription] structures are used both to list what fonts are
-  available on the system and also for specifying the characteristics of
-  a font to load.
+    manner.
+    
+    [pango.font_description.FontDescription] structures are used both to list what fonts are
+    available on the system and also for specifying the characteristics of
+    a font to load.
 */
 struct PangoFontDescription;
 
 /**
     A [pango.font_face.FontFace] is used to represent a group of fonts with
-  the same family, slant, weight, and width, but varying sizes.
+    the same family, slant, weight, and width, but varying sizes.
 */
 struct PangoFontFace
 {
@@ -2251,10 +2252,10 @@ struct PangoFontFaceClass
 
 /**
     A [pango.font_family.FontFamily] is used to represent a family of related
-  font faces.
-  
-  The font faces in a family share a common design, but differ in
-  slant, weight, width or other aspects.
+    font faces.
+    
+    The font faces in a family share a common design, but differ in
+    slant, weight, width or other aspects.
 */
 struct PangoFontFamily
 {
@@ -2289,10 +2290,10 @@ struct PangoFontFamilyClass
 
 /**
     A [pango.font_map.FontMap] represents the set of fonts available for a
-  particular rendering system.
-  
-  This is a virtual object with implementations being specific to
-  particular rendering systems.
+    particular rendering system.
+    
+    This is a virtual object with implementations being specific to
+    particular rendering systems.
 */
 struct PangoFontMap
 {
@@ -2302,7 +2303,7 @@ struct PangoFontMap
 
 /**
     The [pango.font_map_class.FontMapClass] structure holds the virtual functions for
-  a particular [pango.font_map.FontMap] implementation.
+    a particular [pango.font_map.FontMap] implementation.
 */
 struct PangoFontMapClass
 {
@@ -2322,7 +2323,7 @@ struct PangoFontMapClass
 
   /**
       the type of rendering-system-dependent engines that
-    can handle fonts of this fonts loaded with this fontmap.
+      can handle fonts of this fonts loaded with this fontmap.
   */
   const(char)* shapeEngineType;
 
@@ -2341,19 +2342,19 @@ struct PangoFontMapClass
 
 /**
     A [pango.font_metrics.FontMetrics] structure holds the overall metric information
-  for a font.
-  
-  The information in a [pango.font_metrics.FontMetrics] structure may be restricted
-  to a script. The fields of this structure are private to implementations
-  of a font backend. See the documentation of the corresponding getters
-  for documentation of their meaning.
-  
-  For an overview of the most important metrics, see:
-  
-  <picture>
-    <source srcset="fontmetrics-dark.png" media="(prefers-color-scheme: dark)">
-    <img alt="Font metrics" src="fontmetrics-light.png">
-  </picture>
+    for a font.
+    
+    The information in a [pango.font_metrics.FontMetrics] structure may be restricted
+    to a script. The fields of this structure are private to implementations
+    of a font backend. See the documentation of the corresponding getters
+    for documentation of their meaning.
+    
+    For an overview of the most important metrics, see:
+    
+    <picture>
+      <source srcset="fontmetrics-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Font metrics" src="fontmetrics-light.png">
+    </picture>
 */
 struct PangoFontMetrics
 {
@@ -2390,11 +2391,11 @@ struct PangoFontMetrics
 
 /**
     A [pango.fontset.Fontset] represents a set of [pango.font.Font] to use when rendering text.
-  
-  A [pango.fontset.Fontset] is the result of resolving a [pango.font_description.FontDescription]
-  against a particular [pango.context.Context]. It has operations for finding the
-  component font for a particular Unicode character, and for finding a
-  composite set of metrics for the entire fontset.
+    
+    A [pango.fontset.Fontset] is the result of resolving a [pango.font_description.FontDescription]
+    against a particular [pango.context.Context]. It has operations for finding the
+    component font for a particular Unicode character, and for finding a
+    composite set of metrics for the entire fontset.
 */
 struct PangoFontset
 {
@@ -2404,7 +2405,7 @@ struct PangoFontset
 
 /**
     The [pango.fontset_class.FontsetClass] structure holds the virtual functions for
-  a particular [pango.fontset.Fontset] implementation.
+    a particular [pango.fontset.Fontset] implementation.
 */
 struct PangoFontsetClass
 {
@@ -2440,10 +2441,10 @@ struct PangoFontsetClass
 
 /**
     [pango.fontset_simple.FontsetSimple] is a implementation of the abstract
-  [pango.fontset.Fontset] base class as an array of fonts.
-  
-  When creating a [pango.fontset_simple.FontsetSimple], you have to provide
-  the array of fonts that make up the fontset.
+    [pango.fontset.Fontset] base class as an array of fonts.
+    
+    When creating a [pango.fontset_simple.FontsetSimple], you have to provide
+    the array of fonts that make up the fontset.
 */
 struct PangoFontsetSimple;
 
@@ -2452,20 +2453,20 @@ struct PangoFontsetSimpleClass;
 
 /**
     The [pango.types.GlyphGeometry] structure contains width and positioning
-  information for a single glyph.
-  
-  Note that @width is not guaranteed to be the same as the glyph
-  extents. Kerning and other positioning applied during shaping will
-  affect both the @width and the @x_offset for the glyphs in the
-  glyph string that results from shaping.
-  
-  The information in this struct is intended for rendering the glyphs,
-  as follows:
-  
-  1. Assume the current point is (x, y)
-  2. Render the current glyph at (x + x_offset, y + y_offset),
-  3. Advance the current point to (x + width, y)
-  4. Render the next glyph
+    information for a single glyph.
+    
+    Note that @width is not guaranteed to be the same as the glyph
+    extents. Kerning and other positioning applied during shaping will
+    affect both the @width and the @x_offset for the glyphs in the
+    glyph string that results from shaping.
+    
+    The information in this struct is intended for rendering the glyphs,
+    as follows:
+    
+    1. Assume the current point is (x, y)
+    2. Render the current glyph at (x + x_offset, y + y_offset),
+    3. Advance the current point to (x + width, y)
+    4. Render the next glyph
 */
 struct PangoGlyphGeometry
 {
@@ -2487,7 +2488,7 @@ struct PangoGlyphGeometry
 
 /**
     A [pango.glyph_info.GlyphInfo] structure represents a single glyph with
-  positioning information and visual attributes.
+    positioning information and visual attributes.
 */
 struct PangoGlyphInfo
 {
@@ -2509,11 +2510,11 @@ struct PangoGlyphInfo
 
 /**
     A [pango.glyph_item.GlyphItem] is a pair of a [pango.item.Item] and the glyphs
-  resulting from shaping the items text.
-  
-  As an example of the usage of [pango.glyph_item.GlyphItem], the results
-  of shaping text with [pango.layout.Layout] is a list of [pango.layout_line.LayoutLine],
-  each of which contains a list of [pango.glyph_item.GlyphItem].
+    resulting from shaping the items text.
+    
+    As an example of the usage of [pango.glyph_item.GlyphItem], the results
+    of shaping text with [pango.layout.Layout] is a list of [pango.layout_line.LayoutLine],
+    each of which contains a list of [pango.glyph_item.GlyphItem].
 */
 struct PangoGlyphItem
 {
@@ -2529,64 +2530,64 @@ struct PangoGlyphItem
 
   /**
       shift of the baseline, relative to the baseline
-      of the containing line. Positive values shift upwards
+        of the containing line. Positive values shift upwards
   */
   int yOffset;
 
   /**
       horizontal displacement to apply before the
-      glyph item. Positive values shift right
+        glyph item. Positive values shift right
   */
   int startXOffset;
 
   /**
       horizontal displacement to apply after th
-      glyph item. Positive values shift right
+        glyph item. Positive values shift right
   */
   int endXOffset;
 }
 
 /**
     A [pango.glyph_item_iter.GlyphItemIter] is an iterator over the clusters in a
-  [pango.glyph_item.GlyphItem].
-  
-  The *forward direction* of the iterator is the logical direction of text.
-  That is, with increasing @start_index and @start_char values. If @glyph_item
-  is right-to-left (that is, if `glyph_item->item->analysis.level` is odd),
-  then @start_glyph decreases as the iterator moves forward.  Moreover,
-  in right-to-left cases, @start_glyph is greater than @end_glyph.
-  
-  An iterator should be initialized using either
-  [pango.glyph_item_iter.GlyphItemIter.initStart] or
-  [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
-  respectively, and walked over using any desired mixture of
-  [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
-  [pango.glyph_item_iter.GlyphItemIter.prevCluster].
-  
-  A common idiom for doing a forward iteration over the clusters is:
-  
-  ```
-  PangoGlyphItemIter cluster_iter;
-  gboolean have_cluster;
-  
-  for (have_cluster = pango_glyph_item_iter_init_start (&cluster_iter,
-                                                        glyph_item, text);
-       have_cluster;
-       have_cluster = pango_glyph_item_iter_next_cluster (&cluster_iter))
-  {
-    ...
-  }
-  ```
-  
-  Note that @text is the start of the text for layout, which is then
-  indexed by `glyph_item->item->offset` to get to the text of @glyph_item.
-  The @start_index and @end_index values can directly index into @text. The
-  @start_glyph, @end_glyph, @start_char, and @end_char values however are
-  zero-based for the @glyph_item.  For each cluster, the item pointed at by
-  the start variables is included in the cluster while the one pointed at by
-  end variables is not.
-  
-  None of the members of a [pango.glyph_item_iter.GlyphItemIter] should be modified manually.
+    [pango.glyph_item.GlyphItem].
+    
+    The *forward direction* of the iterator is the logical direction of text.
+    That is, with increasing @start_index and @start_char values. If @glyph_item
+    is right-to-left (that is, if `glyph_item->item->analysis.level` is odd),
+    then @start_glyph decreases as the iterator moves forward.  Moreover,
+    in right-to-left cases, @start_glyph is greater than @end_glyph.
+    
+    An iterator should be initialized using either
+    [pango.glyph_item_iter.GlyphItemIter.initStart] or
+    [pango.glyph_item_iter.GlyphItemIter.initEnd], for forward and backward iteration
+    respectively, and walked over using any desired mixture of
+    [pango.glyph_item_iter.GlyphItemIter.nextCluster] and
+    [pango.glyph_item_iter.GlyphItemIter.prevCluster].
+    
+    A common idiom for doing a forward iteration over the clusters is:
+    
+    ```
+    PangoGlyphItemIter cluster_iter;
+    gboolean have_cluster;
+    
+    for (have_cluster = pango_glyph_item_iter_init_start (&cluster_iter,
+                                                          glyph_item, text);
+         have_cluster;
+         have_cluster = pango_glyph_item_iter_next_cluster (&cluster_iter))
+    {
+      ...
+    }
+    ```
+    
+    Note that @text is the start of the text for layout, which is then
+    indexed by `glyph_item->item->offset` to get to the text of @glyph_item.
+    The @start_index and @end_index values can directly index into @text. The
+    @start_glyph, @end_glyph, @start_char, and @end_char values however are
+    zero-based for the @glyph_item.  For each cluster, the item pointed at by
+    the start variables is included in the cluster while the one pointed at by
+    end variables is not.
+    
+    None of the members of a [pango.glyph_item_iter.GlyphItemIter] should be modified manually.
 */
 struct PangoGlyphItemIter
 {
@@ -2617,10 +2618,10 @@ struct PangoGlyphItemIter
 
 /**
     A [pango.glyph_string.GlyphString] is used to store strings of glyphs with geometry
-  and visual attribute information.
-  
-  The storage for the glyph information is owned by the structure
-  which simplifies memory management.
+    and visual attribute information.
+    
+    The storage for the glyph information is owned by the structure
+    which simplifies memory management.
 */
 struct PangoGlyphString
 {
@@ -2636,7 +2637,7 @@ struct PangoGlyphString
 
   /**
       logical cluster info, indexed by the byte index
-      within the text corresponding to the glyph string
+        within the text corresponding to the glyph string
   */
   int* logClusters;
 
@@ -2646,15 +2647,15 @@ struct PangoGlyphString
 
 /**
     A [pango.types.GlyphVisAttr] structure communicates information between
-  the shaping and rendering phases.
-  
-  Currently, it contains cluster start and color information.
-  More attributes may be added in the future.
-  
-  Clusters are stored in visual order, within the cluster, glyphs
-  are always ordered in logical order, since visual order is meaningless;
-  that is, in Arabic text, accent glyphs follow the glyphs for the
-  base character.
+    the shaping and rendering phases.
+    
+    Currently, it contains cluster start and color information.
+    More attributes may be added in the future.
+    
+    Clusters are stored in visual order, within the cluster, glyphs
+    are always ordered in logical order, since visual order is meaningless;
+    that is, in Arabic text, accent glyphs follow the glyphs for the
+    base character.
 */
 struct PangoGlyphVisAttr
 {
@@ -2671,9 +2672,9 @@ struct PangoGlyphVisAttr
 
 /**
     The [pango.item.Item] structure stores information about a segment of text.
-  
-  You typically obtain `PangoItems` by itemizing a piece of text
-  with `func@itemize`.
+    
+    You typically obtain `PangoItems` by itemizing a piece of text
+    with `func@itemize`.
 */
 struct PangoItem
 {
@@ -2700,52 +2701,52 @@ struct PangoItem
 
 /**
     The [pango.language.Language] structure is used to
-  represent a language.
-  
-  [pango.language.Language] pointers can be efficiently
-  copied and compared with each other.
+    represent a language.
+    
+    [pango.language.Language] pointers can be efficiently
+    copied and compared with each other.
 */
 struct PangoLanguage;
 
 /**
     A [pango.layout.Layout] structure represents an entire paragraph of text.
-  
-  While complete access to the layout capabilities of Pango is provided
-  using the detailed interfaces for itemization and shaping, using
-  that functionality directly involves writing a fairly large amount
-  of code. [pango.layout.Layout] provides a high-level driver for formatting
-  entire paragraphs of text at once. This includes paragraph-level
-  functionality such as line breaking, justification, alignment and
-  ellipsization.
-  
-  A [pango.layout.Layout] is initialized with a [pango.context.Context], UTF-8 string
-  and set of attributes for that string. Once that is done, the set of
-  formatted lines can be extracted from the object, the layout can be
-  rendered, and conversion between logical character positions within
-  the layout's text, and the physical position of the resulting glyphs
-  can be made.
-  
-  There are a number of parameters to adjust the formatting of a
-  [pango.layout.Layout]. The following image shows adjustable parameters
-  (on the left) and font metrics (on the right):
-  
-  <picture>
-    <source srcset="layout-dark.png" media="(prefers-color-scheme: dark)">
-    <img alt="Pango Layout Parameters" src="layout-light.png">
-  </picture>
-  
-  The following images demonstrate the effect of alignment and
-  justification on the layout of text:
-  
-  | | |
-  | --- | --- |
-  | ![align=left](align-left.png) | ![align=left, justify](align-left-justify.png) |
-  | ![align=center](align-center.png) | ![align=center, justify](align-center-justify.png) |
-  | ![align=right](align-right.png) | ![align=right, justify](align-right-justify.png) |
-  
-  
-  It is possible, as well, to ignore the 2-D setup,
-  and simply treat the results of a [pango.layout.Layout] as a list of lines.
+    
+    While complete access to the layout capabilities of Pango is provided
+    using the detailed interfaces for itemization and shaping, using
+    that functionality directly involves writing a fairly large amount
+    of code. [pango.layout.Layout] provides a high-level driver for formatting
+    entire paragraphs of text at once. This includes paragraph-level
+    functionality such as line breaking, justification, alignment and
+    ellipsization.
+    
+    A [pango.layout.Layout] is initialized with a [pango.context.Context], UTF-8 string
+    and set of attributes for that string. Once that is done, the set of
+    formatted lines can be extracted from the object, the layout can be
+    rendered, and conversion between logical character positions within
+    the layout's text, and the physical position of the resulting glyphs
+    can be made.
+    
+    There are a number of parameters to adjust the formatting of a
+    [pango.layout.Layout]. The following image shows adjustable parameters
+    (on the left) and font metrics (on the right):
+    
+    <picture>
+      <source srcset="layout-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Pango Layout Parameters" src="layout-light.png">
+    </picture>
+    
+    The following images demonstrate the effect of alignment and
+    justification on the layout of text:
+    
+    | | |
+    | --- | --- |
+    | ![align=left](align-left.png) | ![align=left, justify](align-left-justify.png) |
+    | ![align=center](align-center.png) | ![align=center, justify](align-center-justify.png) |
+    | ![align=right](align-right.png) | ![align=right, justify](align-right-justify.png) |
+    
+    
+    It is possible, as well, to ignore the 2-D setup,
+    and simply treat the results of a [pango.layout.Layout] as a list of lines.
 */
 struct PangoLayout;
 
@@ -2754,21 +2755,21 @@ struct PangoLayoutClass;
 
 /**
     A [pango.layout_iter.LayoutIter] can be used to iterate over the visual
-  extents of a [pango.layout.Layout].
-  
-  To obtain a [pango.layout_iter.LayoutIter], use [pango.layout.Layout.getIter].
-  
-  The [pango.layout_iter.LayoutIter] structure is opaque, and has no user-visible fields.
+    extents of a [pango.layout.Layout].
+    
+    To obtain a [pango.layout_iter.LayoutIter], use [pango.layout.Layout.getIter].
+    
+    The [pango.layout_iter.LayoutIter] structure is opaque, and has no user-visible fields.
 */
 struct PangoLayoutIter;
 
 /**
     A [pango.layout_line.LayoutLine] represents one of the lines resulting from laying
-  out a paragraph via [pango.layout.Layout].
-  
-  [pango.layout_line.LayoutLine] structures are obtained by calling
-  [pango.layout.Layout.getLine] and are only valid until the text,
-  attributes, or settings of the parent [pango.layout.Layout] are modified.
+    out a paragraph via [pango.layout.Layout].
+    
+    [pango.layout_line.LayoutLine] structures are obtained by calling
+    [pango.layout.Layout.getLine] and are only valid until the text,
+    attributes, or settings of the parent [pango.layout.Layout] are modified.
 */
 struct PangoLayoutLine
 {
@@ -2789,7 +2790,7 @@ struct PangoLayoutLine
 
   /**
       list of runs in the
-      line, from left to right
+        line, from left to right
   */
   GSList* runs;
 
@@ -2806,7 +2807,7 @@ struct PangoLayoutLine
 
 /**
     The [pango.types.LogAttr] structure stores information about the attributes of a
-  single character.
+    single character.
 */
 struct PangoLogAttr
 {
@@ -2832,10 +2833,10 @@ struct PangoLogAttr
 
   /**
       if set, cursor can appear in front of character.
-      i.e. this is a grapheme boundary, or the first character in the text.
-      This flag implements Unicode's
-      [Grapheme Cluster Boundaries](http://www.unicode.org/reports/tr29/)
-      semantics.
+        i.e. this is a grapheme boundary, or the first character in the text.
+        This flag implements Unicode's
+        [Grapheme Cluster Boundaries](http://www.unicode.org/reports/tr29/)
+        semantics.
   */
   uint isCursorPosition;
 
@@ -2846,19 +2847,19 @@ struct PangoLogAttr
 
   /**
       is first non-word char after a word
-      Note that in degenerate cases, you could have both @is_word_start
-      and @is_word_end set for some character.
+        Note that in degenerate cases, you could have both @is_word_start
+        and @is_word_end set for some character.
   */
   uint isWordEnd;
 
   /**
       is a sentence boundary.
-      There are two ways to divide sentences. The first assigns all
-      inter-sentence whitespace/control/format chars to some sentence,
-      so all chars are in some sentence; @is_sentence_boundary denotes
-      the boundaries there. The second way doesn't assign
-      between-sentence spaces, etc. to any sentence, so
-      @is_sentence_start/@is_sentence_end mark the boundaries of those sentences.
+        There are two ways to divide sentences. The first assigns all
+        inter-sentence whitespace/control/format chars to some sentence,
+        so all chars are in some sentence; @is_sentence_boundary denotes
+        the boundaries there. The second way doesn't assign
+        between-sentence spaces, etc. to any sentence, so
+        @is_sentence_start/@is_sentence_end mark the boundaries of those sentences.
   */
   uint isSentenceBoundary;
 
@@ -2869,48 +2870,48 @@ struct PangoLogAttr
 
   /**
       is first char after a sentence.
-      Note that in degenerate cases, you could have both @is_sentence_start
-      and @is_sentence_end set for some character. (e.g. no space after a
-      period, so the next sentence starts right away)
+        Note that in degenerate cases, you could have both @is_sentence_start
+        and @is_sentence_end set for some character. (e.g. no space after a
+        period, so the next sentence starts right away)
   */
   uint isSentenceEnd;
 
   /**
       if set, backspace deletes one character
-      rather than the entire grapheme cluster. This field is only meaningful
-      on grapheme boundaries (where @is_cursor_position is set). In some languages,
-      the full grapheme (e.g. letter + diacritics) is considered a unit, while in
-      others, each decomposed character in the grapheme is a unit. In the default
-      implementation of `func@break`, this bit is set on all grapheme boundaries
-      except those following Latin, Cyrillic or Greek base characters.
+        rather than the entire grapheme cluster. This field is only meaningful
+        on grapheme boundaries (where @is_cursor_position is set). In some languages,
+        the full grapheme (e.g. letter + diacritics) is considered a unit, while in
+        others, each decomposed character in the grapheme is a unit. In the default
+        implementation of `func@break`, this bit is set on all grapheme boundaries
+        except those following Latin, Cyrillic or Greek base characters.
   */
   uint backspaceDeletesCharacter;
 
   /**
       is a whitespace character that can possibly be
-      expanded for justification purposes. (Since: 1.18)
+        expanded for justification purposes. (Since: 1.18)
   */
   uint isExpandableSpace;
 
   /**
       is a word boundary, as defined by UAX#29.
-      More specifically, means that this is not a position in the middle of a word.
-      For example, both sides of a punctuation mark are considered word boundaries.
-      This flag is particularly useful when selecting text word-by-word. This flag
-      implements Unicode's [Word Boundaries](http://www.unicode.org/reports/tr29/)
-      semantics. (Since: 1.22)
+        More specifically, means that this is not a position in the middle of a word.
+        For example, both sides of a punctuation mark are considered word boundaries.
+        This flag is particularly useful when selecting text word-by-word. This flag
+        implements Unicode's [Word Boundaries](http://www.unicode.org/reports/tr29/)
+        semantics. (Since: 1.22)
   */
   uint isWordBoundary;
 
   /**
       when breaking lines before this char, insert a hyphen.
-      Since: 1.50
+        Since: 1.50
   */
   uint breakInsertsHyphen;
 
   /**
       when breaking lines before this char, remove the
-      preceding char. Since 1.50
+        preceding char. Since 1.50
   */
   uint breakRemovesPreceding;
 
@@ -2920,14 +2921,14 @@ struct PangoLogAttr
 
 /**
     A [pango.matrix.Matrix] specifies a transformation between user-space
-  and device coordinates.
-  
-  The transformation is given by
-  
-  ```
-  x_device = x_user * matrix->xx + y_user * matrix->xy + matrix->x0;
-  y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;
-  ```
+    and device coordinates.
+    
+    The transformation is given by
+    
+    ```
+    x_device = x_user * matrix->xx + y_user * matrix->xy + matrix->x0;
+    y_device = x_user * matrix->yx + y_user * matrix->yy + matrix->y0;
+    ```
 */
 struct PangoMatrix
 {
@@ -2964,10 +2965,10 @@ struct PangoMatrix
 
 /**
     The [pango.types.Rectangle] structure represents a rectangle.
-  
-  [pango.types.Rectangle] is frequently used to represent the logical or ink
-  extents of a single glyph or section of text. (See, for instance,
-  [pango.font.Font.getGlyphExtents].)
+    
+    [pango.types.Rectangle] is frequently used to represent the logical or ink
+    extents of a single glyph or section of text. (See, for instance,
+    [pango.font.Font.getGlyphExtents].)
 */
 struct PangoRectangle
 {
@@ -2994,11 +2995,11 @@ struct PangoRectangle
 
 /**
     [pango.renderer.Renderer] is a base class for objects that can render text
-  provided as [pango.glyph_string.GlyphString] or [pango.layout.Layout].
-  
-  By subclassing [pango.renderer.Renderer] and overriding operations such as
-  @draw_glyphs and @draw_rectangle, renderers for particular font
-  backends and destinations can be created.
+    provided as [pango.glyph_string.GlyphString] or [pango.layout.Layout].
+    
+    By subclassing [pango.renderer.Renderer] and overriding operations such as
+    @draw_glyphs and @draw_rectangle, renderers for particular font
+    backends and destinations can be created.
 */
 struct PangoRenderer
 {
@@ -3016,8 +3017,8 @@ struct PangoRenderer
 
   /**
       the current transformation matrix for
-      the Renderer; may be null, which should be treated the
-      same as the identity matrix.
+        the Renderer; may be null, which should be treated the
+        same as the identity matrix.
   */
   PangoMatrix* matrix;
 
@@ -3027,25 +3028,25 @@ struct PangoRenderer
 
 /**
     Class structure for [pango.renderer.Renderer].
-  
-  The following vfuncs take user space coordinates in Pango units
-  and have default implementations:
-  $(LIST
-    * draw_glyphs
-    * draw_rectangle
-    * draw_error_underline
-    * draw_shape
-    * draw_glyph_item
-  )
     
-  The default draw_shape implementation draws nothing.
-  
-  The following vfuncs take device space coordinates as doubles
-  and must be implemented:
-  $(LIST
-    * draw_trapezoid
-    * draw_glyph
-  )
+    The following vfuncs take user space coordinates in Pango units
+    and have default implementations:
+    $(LIST
+      * draw_glyphs
+      * draw_rectangle
+      * draw_error_underline
+      * draw_shape
+      * draw_glyph_item
+    )
+      
+    The default draw_shape implementation draws nothing.
+    
+    The following vfuncs take device space coordinates as doubles
+    and must be implemented:
+    $(LIST
+      * draw_trapezoid
+      * draw_glyph
+    )
 */
 struct PangoRendererClass
 {
@@ -3100,16 +3101,16 @@ struct PangoRendererPrivate;
 
 /**
     A [pango.script_iter.ScriptIter] is used to iterate through a string
-  and identify ranges in different scripts.
+    and identify ranges in different scripts.
 */
 struct PangoScriptIter;
 
 /**
     A [pango.tab_array.TabArray] contains an array of tab stops.
-  
-  [pango.tab_array.TabArray] can be used to set tab stops in a [pango.layout.Layout].
-  Each tab stop has an alignment, a position, and optionally
-  a character to use as decimal point.
+    
+    [pango.tab_array.TabArray] can be used to set tab stops in a [pango.layout.Layout].
+    Each tab stop has an alignment, a position, and optionally
+    a character to use as decimal point.
 */
 struct PangoTabArray;
 

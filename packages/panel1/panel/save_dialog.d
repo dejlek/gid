@@ -1,3 +1,4 @@
+/// Module for [SaveDialog] class
 module panel.save_dialog;
 
 import adw.message_dialog;
@@ -28,17 +29,20 @@ import panel.types;
 class SaveDialog : adw.message_dialog.MessageDialog
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_dialog_get_type != &gidSymbolNotFound ? panel_save_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

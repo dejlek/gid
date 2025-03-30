@@ -1,3 +1,4 @@
+/// Module for [Pattern] class
 module cairo.pattern;
 
 import cairo.c.functions;
@@ -10,41 +11,45 @@ import gobject.boxed;
 
 /**
     A #cairo_pattern_t represents a source when drawing onto a
-  surface. There are different subtypes of #cairo_pattern_t,
-  for different types of sources; for example,
-  [cairo.global.patternCreateRgb] creates a pattern for a solid
-  opaque color.
-  
-  Other than various
-  <function>cairo_pattern_create_<emphasis>type</emphasis>()</function>
-  functions, some of the pattern types can be implicitly created using various
-  <function>cairo_set_source_<emphasis>type</emphasis>()</function> functions;
-  for example [cairo.context.Context.setSourceRgb].
-  
-  The type of a pattern can be queried with [cairo.pattern.Pattern.getPatternType].
-  
-  Memory management of #cairo_pattern_t is done with
-  [cairo.pattern.Pattern.reference] and [cairo.pattern.Pattern.destroy].
+    surface. There are different subtypes of #cairo_pattern_t,
+    for different types of sources; for example,
+    [cairo.global.patternCreateRgb] creates a pattern for a solid
+    opaque color.
+    
+    Other than various
+    <function>cairo_pattern_create_<emphasis>type</emphasis>()</function>
+    functions, some of the pattern types can be implicitly created using various
+    <function>cairo_set_source_<emphasis>type</emphasis>()</function> functions;
+    for example [cairo.context.Context.setSourceRgb].
+    
+    The type of a pattern can be queried with [cairo.pattern.Pattern.getPatternType].
+    
+    Memory management of #cairo_pattern_t is done with
+    [cairo.pattern.Pattern.reference] and [cairo.pattern.Pattern.destroy].
 */
 class Pattern : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_pattern_get_type != &gidSymbolNotFound ? cairo_gobject_pattern_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -57,28 +62,29 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Adds an opaque color stop to a gradient pattern. The offset
-    specifies the location along the gradient's control vector. For
-    example, a linear gradient's control vector is from (x0,y0) to
-    (x1,y1) while a radial gradient's control vector is from any point
-    on the start circle to the corresponding point on the end circle.
-    
-    The color is specified in the same way as in [cairo.context.Context.setSourceRgb].
-    
-    If two (or more) stops are specified with identical offset values,
-    they will be sorted according to the order in which the stops are
-    added, (stops added earlier will compare less than stops added
-    later). This can be useful for reliably making sharp color
-    transitions instead of the typical blend.
-    
-    
-    Note: If the pattern is not a gradient pattern, (eg. a linear or
-    radial pattern), then the pattern will be put into an error status
-    with a status of [cairo.types.Status.PatternTypeMismatch].
-    Params:
-      offset =       an offset in the range [0.0 .. 1.0]
-      red =       red component of color
-      green =       green component of color
-      blue =       blue component of color
+      specifies the location along the gradient's control vector. For
+      example, a linear gradient's control vector is from (x0,y0) to
+      (x1,y1) while a radial gradient's control vector is from any point
+      on the start circle to the corresponding point on the end circle.
+      
+      The color is specified in the same way as in [cairo.context.Context.setSourceRgb].
+      
+      If two (or more) stops are specified with identical offset values,
+      they will be sorted according to the order in which the stops are
+      added, (stops added earlier will compare less than stops added
+      later). This can be useful for reliably making sharp color
+      transitions instead of the typical blend.
+      
+      
+      Note: If the pattern is not a gradient pattern, (eg. a linear or
+      radial pattern), then the pattern will be put into an error status
+      with a status of [cairo.types.Status.PatternTypeMismatch].
+  
+      Params:
+        offset = an offset in the range [0.0 .. 1.0]
+        red = red component of color
+        green = green component of color
+        blue = blue component of color
   */
   void addColorStopRgb(double offset, double red, double green, double blue)
   {
@@ -87,28 +93,29 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Adds a translucent color stop to a gradient pattern. The offset
-    specifies the location along the gradient's control vector. For
-    example, a linear gradient's control vector is from (x0,y0) to
-    (x1,y1) while a radial gradient's control vector is from any point
-    on the start circle to the corresponding point on the end circle.
-    
-    The color is specified in the same way as in [cairo.context.Context.setSourceRgba].
-    
-    If two (or more) stops are specified with identical offset values,
-    they will be sorted according to the order in which the stops are
-    added, (stops added earlier will compare less than stops added
-    later). This can be useful for reliably making sharp color
-    transitions instead of the typical blend.
-    
-    Note: If the pattern is not a gradient pattern, (eg. a linear or
-    radial pattern), then the pattern will be put into an error status
-    with a status of [cairo.types.Status.PatternTypeMismatch].
-    Params:
-      offset =       an offset in the range [0.0 .. 1.0]
-      red =       red component of color
-      green =       green component of color
-      blue =       blue component of color
-      alpha =       alpha component of color
+      specifies the location along the gradient's control vector. For
+      example, a linear gradient's control vector is from (x0,y0) to
+      (x1,y1) while a radial gradient's control vector is from any point
+      on the start circle to the corresponding point on the end circle.
+      
+      The color is specified in the same way as in [cairo.context.Context.setSourceRgba].
+      
+      If two (or more) stops are specified with identical offset values,
+      they will be sorted according to the order in which the stops are
+      added, (stops added earlier will compare less than stops added
+      later). This can be useful for reliably making sharp color
+      transitions instead of the typical blend.
+      
+      Note: If the pattern is not a gradient pattern, (eg. a linear or
+      radial pattern), then the pattern will be put into an error status
+      with a status of [cairo.types.Status.PatternTypeMismatch].
+  
+      Params:
+        offset = an offset in the range [0.0 .. 1.0]
+        red = red component of color
+        green = green component of color
+        blue = blue component of color
+        alpha = alpha component of color
   */
   void addColorStopRgba(double offset, double red, double green, double blue, double alpha)
   {
@@ -117,12 +124,13 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the number of color stops specified in the given gradient
-    pattern.
-    Params:
-      count =       return value for the number of color stops, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a gradient
       pattern.
+  
+      Params:
+        count = return value for the number of color stops, or null
+      Returns: [cairo.types.Status.Success], or
+        [cairo.types.Status.PatternTypeMismatch] if pattern is not a gradient
+        pattern.
   */
   cairo.types.Status getColorStopCount(out int count)
   {
@@ -134,22 +142,23 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the color and offset information at the given index for a
-    gradient pattern.  Values of index range from 0 to n-1
-    where n is the number returned
-    by [cairo.pattern.Pattern.getColorStopCount].
-    
-    Note that the color and alpha values are not premultiplied.
-    Params:
-      index =       index of the stop to return data for
-      offset =       return value for the offset of the stop, or null
-      red =       return value for red component of color, or null
-      green =       return value for green component of color, or null
-      blue =       return value for blue component of color, or null
-      alpha =       return value for alpha component of color, or null
-    Returns:     [cairo.types.Status.Success], or [cairo.types.Status.InvalidIndex]
-      if index is not valid for the given pattern.  If the pattern is
-      not a gradient pattern, [cairo.types.Status.PatternTypeMismatch] is
-      returned.
+      gradient pattern.  Values of index range from 0 to n-1
+      where n is the number returned
+      by [cairo.pattern.Pattern.getColorStopCount].
+      
+      Note that the color and alpha values are not premultiplied.
+  
+      Params:
+        index = index of the stop to return data for
+        offset = return value for the offset of the stop, or null
+        red = return value for red component of color, or null
+        green = return value for green component of color, or null
+        blue = return value for blue component of color, or null
+        alpha = return value for alpha component of color, or null
+      Returns: [cairo.types.Status.Success], or [cairo.types.Status.InvalidIndex]
+        if index is not valid for the given pattern.  If the pattern is
+        not a gradient pattern, [cairo.types.Status.PatternTypeMismatch] is
+        returned.
   */
   cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
   {
@@ -161,8 +170,8 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the current dithering mode, as set by
-    [cairo.pattern.Pattern.setDither].
-    Returns:     the current dithering mode.
+      [cairo.pattern.Pattern.setDither].
+      Returns: the current dithering mode.
   */
   cairo.types.Dither getDither()
   {
@@ -174,9 +183,9 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the current extend mode for a pattern.  See #cairo_extend_t
-    for details on the semantics of each extend strategy.
-    Returns:     the current extend strategy used for drawing the
-      pattern.
+      for details on the semantics of each extend strategy.
+      Returns: the current extend strategy used for drawing the
+        pattern.
   */
   cairo.types.Extend getExtend()
   {
@@ -188,8 +197,8 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the current filter for a pattern.  See #cairo_filter_t
-    for details on each filter.
-    Returns:     the current filter used for resizing the pattern.
+      for details on each filter.
+      Returns: the current filter used for resizing the pattern.
   */
   cairo.types.Filter getFilter()
   {
@@ -201,14 +210,15 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the gradient endpoints for a linear gradient.
-    Params:
-      x0 =       return value for the x coordinate of the first point, or null
-      y0 =       return value for the y coordinate of the first point, or null
-      x1 =       return value for the x coordinate of the second point, or null
-      y1 =       return value for the y coordinate of the second point, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a linear
-      gradient pattern.
+  
+      Params:
+        x0 = return value for the x coordinate of the first point, or null
+        y0 = return value for the y coordinate of the first point, or null
+        x1 = return value for the x coordinate of the second point, or null
+        y1 = return value for the y coordinate of the second point, or null
+      Returns: [cairo.types.Status.Success], or
+        [cairo.types.Status.PatternTypeMismatch] if pattern is not a linear
+        gradient pattern.
   */
   cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
   {
@@ -220,8 +230,9 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Stores the pattern's transformation matrix into matrix.
-    Params:
-      matrix =       return value for the matrix
+  
+      Params:
+        matrix = return value for the matrix
   */
   void getMatrix(cairo.matrix.Matrix matrix)
   {
@@ -230,17 +241,18 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the gradient endpoint circles for a radial gradient, each
-    specified as a center coordinate and a radius.
-    Params:
-      x0 =       return value for the x coordinate of the center of the first circle, or null
-      y0 =       return value for the y coordinate of the center of the first circle, or null
-      r0 =       return value for the radius of the first circle, or null
-      x1 =       return value for the x coordinate of the center of the second circle, or null
-      y1 =       return value for the y coordinate of the center of the second circle, or null
-      r1 =       return value for the radius of the second circle, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if pattern is not a radial
-      gradient pattern.
+      specified as a center coordinate and a radius.
+  
+      Params:
+        x0 = return value for the x coordinate of the center of the first circle, or null
+        y0 = return value for the y coordinate of the center of the first circle, or null
+        r0 = return value for the radius of the first circle, or null
+        x1 = return value for the x coordinate of the center of the second circle, or null
+        y1 = return value for the y coordinate of the center of the second circle, or null
+        r1 = return value for the radius of the second circle, or null
+      Returns: [cairo.types.Status.Success], or
+        [cairo.types.Status.PatternTypeMismatch] if pattern is not a radial
+        gradient pattern.
   */
   cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
   {
@@ -252,16 +264,17 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the solid color for a solid color pattern.
-    
-    Note that the color and alpha values are not premultiplied.
-    Params:
-      red =       return value for red component of color, or null
-      green =       return value for green component of color, or null
-      blue =       return value for blue component of color, or null
-      alpha =       return value for alpha component of color, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if the pattern is not a solid
-      color pattern.
+      
+      Note that the color and alpha values are not premultiplied.
+  
+      Params:
+        red = return value for red component of color, or null
+        green = return value for green component of color, or null
+        blue = return value for blue component of color, or null
+        alpha = return value for alpha component of color, or null
+      Returns: [cairo.types.Status.Success], or
+        [cairo.types.Status.PatternTypeMismatch] if the pattern is not a solid
+        color pattern.
   */
   cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha)
   {
@@ -273,13 +286,14 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Gets the surface of a surface pattern.  The reference returned in
-    surface is owned by the pattern; the caller should call
-    [cairo.surface.Surface.reference] if the surface is to be retained.
-    Params:
-      surface =       return value for surface of pattern, or null
-    Returns:     [cairo.types.Status.Success], or
-      [cairo.types.Status.PatternTypeMismatch] if the pattern is not a surface
-      pattern.
+      surface is owned by the pattern; the caller should call
+      [cairo.surface.Surface.reference] if the surface is to be retained.
+  
+      Params:
+        surface = return value for surface of pattern, or null
+      Returns: [cairo.types.Status.Success], or
+        [cairo.types.Status.PatternTypeMismatch] if the pattern is not a surface
+        pattern.
   */
   cairo.types.Status getSurface(cairo.surface.Surface surface)
   {
@@ -291,8 +305,8 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Get the pattern's type.  See #cairo_pattern_type_t for available
-    types.
-    Returns:     The type of pattern.
+      types.
+      Returns: The type of pattern.
   */
   cairo.types.PatternType getPatternType()
   {
@@ -304,12 +318,13 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Return user data previously attached to pattern using the
-    specified key.  If no user data has been attached with the given
-    key this function returns null.
-    Params:
-      key =       the address of the #cairo_user_data_key_t the user data was
-        attached to
-    Returns:     the user data previously attached or null.
+      specified key.  If no user data has been attached with the given
+      key this function returns null.
+  
+      Params:
+        key = the address of the #cairo_user_data_key_t the user data was
+          attached to
+      Returns: the user data previously attached or null.
   */
   void* getUserData(cairo.types.UserDataKey key)
   {
@@ -319,10 +334,11 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Set the dithering mode of the rasterizer used for drawing shapes.
-    This value is a hint, and a particular backend may or may not support
-    a particular value.  At the current time, only pixman is supported.
-    Params:
-      dither =       a #cairo_dither_t describing the new dithering mode
+      This value is a hint, and a particular backend may or may not support
+      a particular value.  At the current time, only pixman is supported.
+  
+      Params:
+        dither = a #cairo_dither_t describing the new dithering mode
   */
   void setDither(cairo.types.Dither dither)
   {
@@ -331,14 +347,15 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Sets the mode to be used for drawing outside the area of a pattern.
-    See #cairo_extend_t for details on the semantics of each extend
-    strategy.
-    
-    The default extend mode is [cairo.types.Extend.None] for surface patterns
-    and [cairo.types.Extend.Pad] for gradient patterns.
-    Params:
-      extend =       a #cairo_extend_t describing how the area outside of the
-        pattern will be drawn
+      See #cairo_extend_t for details on the semantics of each extend
+      strategy.
+      
+      The default extend mode is [cairo.types.Extend.None] for surface patterns
+      and [cairo.types.Extend.Pad] for gradient patterns.
+  
+      Params:
+        extend = a #cairo_extend_t describing how the area outside of the
+          pattern will be drawn
   */
   void setExtend(cairo.types.Extend extend)
   {
@@ -347,23 +364,24 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Sets the filter to be used for resizing when using this pattern.
-    See #cairo_filter_t for details on each filter.
-    
-    $(LIST
-      * Note that you might want to control filtering even when you do not
-    )
-    have an explicit #cairo_pattern_t object, (for example when using
-    [cairo.context.Context.setSourceSurface]). In these cases, it is convenient to
-    use [cairo.context.Context.getSource] to get access to the pattern that cairo
-    creates implicitly. For example:
-    
-    <informalexample><programlisting>
-    cairo_set_source_surface (cr, image, x, y);
-    cairo_pattern_set_filter (cairo_get_source (cr), CAIRO_FILTER_NEAREST);
-    </programlisting></informalexample>
-    Params:
-      filter =       a #cairo_filter_t describing the filter to use for resizing
-        the pattern
+      See #cairo_filter_t for details on each filter.
+      
+      $(LIST
+        * Note that you might want to control filtering even when you do not
+      )
+      have an explicit #cairo_pattern_t object, (for example when using
+      [cairo.context.Context.setSourceSurface]). In these cases, it is convenient to
+      use [cairo.context.Context.getSource] to get access to the pattern that cairo
+      creates implicitly. For example:
+      
+      <informalexample><programlisting>
+      cairo_set_source_surface (cr, image, x, y);
+      cairo_pattern_set_filter (cairo_get_source (cr), CAIRO_FILTER_NEAREST);
+      </programlisting></informalexample>
+  
+      Params:
+        filter = a #cairo_filter_t describing the filter to use for resizing
+          the pattern
   */
   void setFilter(cairo.types.Filter filter)
   {
@@ -372,33 +390,34 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Sets the pattern's transformation matrix to matrix. This matrix is
-    a transformation from user space to pattern space.
-    
-    When a pattern is first created it always has the identity matrix
-    for its transformation matrix, which means that pattern space is
-    initially identical to user space.
-    
-    Important: Please note that the direction of this transformation
-    matrix is from user space to pattern space. This means that if you
-    imagine the flow from a pattern to user space (and on to device
-    space), then coordinates in that flow will be transformed by the
-    inverse of the pattern matrix.
-    
-    For example, if you want to make a pattern appear twice as large as
-    it does by default the correct code to use is:
-    
-    <informalexample><programlisting>
-    cairo_matrix_init_scale (&amp;matrix, 0.5, 0.5);
-    cairo_pattern_set_matrix (pattern, &amp;matrix);
-    </programlisting></informalexample>
-    
-    Meanwhile, using values of 2.0 rather than 0.5 in the code above
-    would cause the pattern to appear at half of its default size.
-    
-    Also, please note the discussion of the user-space locking
-    semantics of [cairo.context.Context.setSource].
-    Params:
-      matrix =       a #cairo_matrix_t
+      a transformation from user space to pattern space.
+      
+      When a pattern is first created it always has the identity matrix
+      for its transformation matrix, which means that pattern space is
+      initially identical to user space.
+      
+      Important: Please note that the direction of this transformation
+      matrix is from user space to pattern space. This means that if you
+      imagine the flow from a pattern to user space (and on to device
+      space), then coordinates in that flow will be transformed by the
+      inverse of the pattern matrix.
+      
+      For example, if you want to make a pattern appear twice as large as
+      it does by default the correct code to use is:
+      
+      <informalexample><programlisting>
+      cairo_matrix_init_scale (&amp;matrix, 0.5, 0.5);
+      cairo_pattern_set_matrix (pattern, &amp;matrix);
+      </programlisting></informalexample>
+      
+      Meanwhile, using values of 2.0 rather than 0.5 in the code above
+      would cause the pattern to appear at half of its default size.
+      
+      Also, please note the discussion of the user-space locking
+      semantics of [cairo.context.Context.setSource].
+  
+      Params:
+        matrix = a #cairo_matrix_t
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
@@ -407,10 +426,10 @@ class Pattern : gobject.boxed.Boxed
 
   /**
       Checks whether an error has previously occurred for this
-    pattern.
-    Returns:     [cairo.types.Status.Success], [cairo.types.Status.NoMemory],
-      [cairo.types.Status.InvalidMatrix], [cairo.types.Status.PatternTypeMismatch],
-      or [cairo.types.Status.InvalidMeshConstruction].
+      pattern.
+      Returns: [cairo.types.Status.Success], [cairo.types.Status.NoMemory],
+        [cairo.types.Status.InvalidMatrix], [cairo.types.Status.PatternTypeMismatch],
+        or [cairo.types.Status.InvalidMeshConstruction].
   */
   cairo.types.Status status()
   {

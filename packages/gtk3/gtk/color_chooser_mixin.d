@@ -1,3 +1,4 @@
+/// Module for [ColorChooser] interface mixin
 module gtk.color_chooser_mixin;
 
 public import gtk.color_chooser_iface_proxy;
@@ -10,38 +11,39 @@ public import gtk.types;
 
 /**
     #GtkColorChooser is an interface that is implemented by widgets
-  for choosing colors. Depending on the situation, colors may be
-  allowed to have alpha (translucency).
-  
-  In GTK+, the main widgets that implement this interface are
-  #GtkColorChooserWidget, #GtkColorChooserDialog and #GtkColorButton.
+    for choosing colors. Depending on the situation, colors may be
+    allowed to have alpha (translucency).
+    
+    In GTK+, the main widgets that implement this interface are
+    #GtkColorChooserWidget, #GtkColorChooserDialog and #GtkColorButton.
 */
 template ColorChooserT()
 {
 
   /**
       Adds a palette to the color chooser. If orientation is horizontal,
-    the colors are grouped in rows, with colors_per_line colors
-    in each row. If horizontal is false, the colors are grouped
-    in columns instead.
-    
-    The default color palette of #GtkColorChooserWidget has
-    27 colors, organized in columns of 3 colors. The default gray
-    palette has 9 grays in a single row.
-    
-    The layout of the color chooser widget works best when the
-    palettes have 9-10 columns.
-    
-    Calling this function for the first time has the
-    side effect of removing the default color and gray palettes
-    from the color chooser.
-    
-    If colors is null, removes all previously added palettes.
-    Params:
-      orientation =       [gtk.types.Orientation.Horizontal] if the palette should
-            be displayed in rows, [gtk.types.Orientation.Vertical] for columns
-      colorsPerLine =       the number of colors to show in each row/column
-      colors =       the colors of the palette, or null
+      the colors are grouped in rows, with colors_per_line colors
+      in each row. If horizontal is false, the colors are grouped
+      in columns instead.
+      
+      The default color palette of #GtkColorChooserWidget has
+      27 colors, organized in columns of 3 colors. The default gray
+      palette has 9 grays in a single row.
+      
+      The layout of the color chooser widget works best when the
+      palettes have 9-10 columns.
+      
+      Calling this function for the first time has the
+      side effect of removing the default color and gray palettes
+      from the color chooser.
+      
+      If colors is null, removes all previously added palettes.
+  
+      Params:
+        orientation = [gtk.types.Orientation.Horizontal] if the palette should
+              be displayed in rows, [gtk.types.Orientation.Vertical] for columns
+        colorsPerLine = the number of colors to show in each row/column
+        colors = the colors of the palette, or null
   */
   override void addPalette(gtk.types.Orientation orientation, int colorsPerLine, gdk.rgba.RGBA[] colors = null)
   {
@@ -58,8 +60,9 @@ template ColorChooserT()
 
   /**
       Gets the currently-selected color.
-    Params:
-      color =       a #GdkRGBA to fill in with the current color
+  
+      Params:
+        color = a #GdkRGBA to fill in with the current color
   */
   override void getRgba(out gdk.rgba.RGBA color)
   {
@@ -70,8 +73,8 @@ template ColorChooserT()
 
   /**
       Returns whether the color chooser shows the alpha channel.
-    Returns:     true if the color chooser uses the alpha channel,
-          false if not
+      Returns: true if the color chooser uses the alpha channel,
+            false if not
   */
   override bool getUseAlpha()
   {
@@ -82,8 +85,9 @@ template ColorChooserT()
 
   /**
       Sets the color.
-    Params:
-      color =       the new color
+  
+      Params:
+        color = the new color
   */
   override void setRgba(gdk.rgba.RGBA color)
   {
@@ -92,8 +96,9 @@ template ColorChooserT()
 
   /**
       Sets whether or not the color chooser should use the alpha channel.
-    Params:
-      useAlpha =       true if color chooser should use alpha channel, false if not
+  
+      Params:
+        useAlpha = true if color chooser should use alpha channel, false if not
   */
   override void setUseAlpha(bool useAlpha)
   {
@@ -101,39 +106,46 @@ template ColorChooserT()
   }
 
   /**
-      Emitted when a color is activated from the color chooser.
-    This usually happens when the user clicks a color swatch,
-    or a color is selected and the user presses one of the keys
-    Space, Shift+Space, Return or Enter.
+      Connect to `ColorActivated` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B color)       the color
-      * $(B colorChooser) the instance the signal is connected to
-    )
-  */
-  alias ColorActivatedCallbackDlg = void delegate(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
-
-  /** ditto */
-  alias ColorActivatedCallbackFunc = void function(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser);
-
-  /**
-    Connect to ColorActivated signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a color is activated from the color chooser.
+      This usually happens when the user clicks a color swatch,
+      or a color is selected and the user presses one of the keys
+      Space, Shift+Space, Return or Enter.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.rgba.RGBA color, gtk.color_chooser.ColorChooser colorChooser))
+  
+          `color` the color (optional)
+  
+          `colorChooser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectColorActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ColorActivatedCallbackDlg) || is(T : ColorActivatedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.rgba.RGBA)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.color_chooser.ColorChooser)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto colorChooser = getVal!(gtk.color_chooser.ColorChooser)(_paramVals);
-      auto color = getVal!(gdk.rgba.RGBA)(&_paramVals[1]);
-      _dClosure.dlg(color, colorChooser);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

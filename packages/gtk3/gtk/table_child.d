@@ -1,3 +1,4 @@
+/// Module for [TableChild] class
 module gtk.table_child;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class TableChild
 {
   GtkTableChild cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,6 +24,7 @@ class TableChild
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

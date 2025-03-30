@@ -1,3 +1,4 @@
+/// Module for [SpaceDrawer] class
 module gtksource.space_drawer;
 
 import gid.gid;
@@ -11,67 +12,70 @@ import gtksource.types;
 
 /**
     Represent white space characters with symbols.
-  
-  #GtkSourceSpaceDrawer provides a way to visualize white spaces, by drawing
-  symbols.
-  
-  Call [gtksource.view.View.getSpaceDrawer] to get the [gtksource.space_drawer.SpaceDrawer]
-  instance of a certain `class@View`.
-  
-  By default, no white spaces are drawn because the
-  `property@SpaceDrawer:enable-matrix` is false.
-  
-  To draw white spaces, [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] can
-  be called to set the `property@SpaceDrawer:matrix` property (by default all
-  space types are enabled at all locations). Then call
-  [gtksource.space_drawer.SpaceDrawer.setEnableMatrix].
-  
-  For a finer-grained method, there is also the `class@Tag`'s
-  `property@Tag:draw-spaces` property.
-  
-  # Example
-  
-  To draw non-breaking spaces everywhere and draw all types of trailing spaces
-  except newlines:
-  ```c
-  gtk_source_space_drawer_set_types_for_locations (space_drawer,
-                                                   GTK_SOURCE_SPACE_LOCATION_ALL,
-                                                   GTK_SOURCE_SPACE_TYPE_NBSP);
-  
-  gtk_source_space_drawer_set_types_for_locations (space_drawer,
-                                                   GTK_SOURCE_SPACE_LOCATION_TRAILING,
-                                                   GTK_SOURCE_SPACE_TYPE_ALL &
-                                                   ~GTK_SOURCE_SPACE_TYPE_NEWLINE);
-  
-  gtk_source_space_drawer_set_enable_matrix (space_drawer, TRUE);
-  ```
-  
-  # Use-case: draw unwanted white spaces
-  
-  A possible use-case is to draw only unwanted white spaces. Examples:
-  
-  $(LIST
-    * Draw all trailing spaces.
-    * If the indentation and alignment must be done with spaces, draw tabs.
-  )
     
-  And non-breaking spaces can always be drawn, everywhere, to distinguish them
-  from normal spaces.
+    #GtkSourceSpaceDrawer provides a way to visualize white spaces, by drawing
+    symbols.
+    
+    Call [gtksource.view.View.getSpaceDrawer] to get the [gtksource.space_drawer.SpaceDrawer]
+    instance of a certain `class@View`.
+    
+    By default, no white spaces are drawn because the
+    `property@SpaceDrawer:enable-matrix` is false.
+    
+    To draw white spaces, [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] can
+    be called to set the `property@SpaceDrawer:matrix` property (by default all
+    space types are enabled at all locations). Then call
+    [gtksource.space_drawer.SpaceDrawer.setEnableMatrix].
+    
+    For a finer-grained method, there is also the `class@Tag`'s
+    `property@Tag:draw-spaces` property.
+    
+    # Example
+    
+    To draw non-breaking spaces everywhere and draw all types of trailing spaces
+    except newlines:
+    ```c
+    gtk_source_space_drawer_set_types_for_locations (space_drawer,
+                                                     GTK_SOURCE_SPACE_LOCATION_ALL,
+                                                     GTK_SOURCE_SPACE_TYPE_NBSP);
+    
+    gtk_source_space_drawer_set_types_for_locations (space_drawer,
+                                                     GTK_SOURCE_SPACE_LOCATION_TRAILING,
+                                                     GTK_SOURCE_SPACE_TYPE_ALL &
+                                                     ~GTK_SOURCE_SPACE_TYPE_NEWLINE);
+    
+    gtk_source_space_drawer_set_enable_matrix (space_drawer, TRUE);
+    ```
+    
+    # Use-case: draw unwanted white spaces
+    
+    A possible use-case is to draw only unwanted white spaces. Examples:
+    
+    $(LIST
+      * Draw all trailing spaces.
+      * If the indentation and alignment must be done with spaces, draw tabs.
+    )
+      
+    And non-breaking spaces can always be drawn, everywhere, to distinguish them
+    from normal spaces.
 */
 class SpaceDrawer : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_space_drawer_get_type != &gidSymbolNotFound ? gtk_source_space_drawer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -84,9 +88,9 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceSpaceDrawer object.
-    
-    Useful for storing space drawing settings independently of a `classView`.
-    Returns:     a new #GtkSourceSpaceDrawer.
+      
+      Useful for storing space drawing settings independently of a `classView`.
+      Returns: a new #GtkSourceSpaceDrawer.
   */
   this()
   {
@@ -97,18 +101,19 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Binds the `propertySpaceDrawer:matrix` property to a [gio.settings.Settings] key.
-    
-    The [gio.settings.Settings] key must be of the same type as the
-    `propertySpaceDrawer:matrix` property, that is, `"au"`.
-    
-    The [gio.settings.Settings.bind] function cannot be used, because the default GIO
-    mapping functions don't support [glib.variant.VariantG] properties (maybe it will be
-    supported by a future GIO version, in which case this function can be
-    deprecated).
-    Params:
-      settings =       a #GSettings object.
-      key =       the settings key to bind.
-      flags =       flags for the binding.
+      
+      The [gio.settings.Settings] key must be of the same type as the
+      `propertySpaceDrawer:matrix` property, that is, `"au"`.
+      
+      The [gio.settings.Settings.bind] function cannot be used, because the default GIO
+      mapping functions don't support [glib.variant.VariantG] properties (maybe it will be
+      supported by a future GIO version, in which case this function can be
+      deprecated).
+  
+      Params:
+        settings = a #GSettings object.
+        key = the settings key to bind.
+        flags = flags for the binding.
   */
   void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
   {
@@ -126,13 +131,13 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Gets the value of the `propertySpaceDrawer:matrix` property, as a [glib.variant.VariantG].
-    
-    An empty array can be returned in case the matrix is a zero matrix.
-    
-    The [gtksource.space_drawer.SpaceDrawer.getTypesForLocations] function may be more
-    convenient to use.
-    Returns:     the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
-        instance.
+      
+      An empty array can be returned in case the matrix is a zero matrix.
+      
+      The [gtksource.space_drawer.SpaceDrawer.getTypesForLocations] function may be more
+      convenient to use.
+      Returns: the #GtkSourceSpaceDrawer:matrix value as a new floating #GVariant
+          instance.
   */
   glib.variant.VariantG getMatrix()
   {
@@ -144,17 +149,18 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       If only one location is specified, this function returns what kind of
-    white spaces are drawn at that location.
-    
-    The value is retrieved from the `propertySpaceDrawer:matrix` property.
-    
-    If several locations are specified, this function returns the logical AND for
-    those locations. Which means that if a certain kind of white space is present
-    in the return value, then that kind of white space is drawn at all the
-    specified locations.
-    Params:
-      locations =       one or several #GtkSourceSpaceLocationFlags.
-    Returns:     a combination of #GtkSourceSpaceTypeFlags.
+      white spaces are drawn at that location.
+      
+      The value is retrieved from the `propertySpaceDrawer:matrix` property.
+      
+      If several locations are specified, this function returns the logical AND for
+      those locations. Which means that if a certain kind of white space is present
+      in the return value, then that kind of white space is drawn at all the
+      specified locations.
+  
+      Params:
+        locations = one or several #GtkSourceSpaceLocationFlags.
+      Returns: a combination of #GtkSourceSpaceTypeFlags.
   */
   gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations)
   {
@@ -166,8 +172,9 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Sets whether the `propertySpaceDrawer:matrix` property is enabled.
-    Params:
-      enableMatrix =       the new value.
+  
+      Params:
+        enableMatrix = the new value.
   */
   void setEnableMatrix(bool enableMatrix)
   {
@@ -176,15 +183,16 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Sets a new value to the `propertySpaceDrawer:matrix` property, as a [glib.variant.VariantG].
-    
-    If matrix is null, then an empty array is set.
-    
-    If matrix is floating, it is consumed.
-    
-    The [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] function may be more
-    convenient to use.
-    Params:
-      matrix =       the new matrix value, or null.
+      
+      If matrix is null, then an empty array is set.
+      
+      If matrix is floating, it is consumed.
+      
+      The [gtksource.space_drawer.SpaceDrawer.setTypesForLocations] function may be more
+      convenient to use.
+  
+      Params:
+        matrix = the new matrix value, or null.
   */
   void setMatrix(glib.variant.VariantG matrix = null)
   {
@@ -193,10 +201,11 @@ class SpaceDrawer : gobject.object.ObjectG
 
   /**
       Modifies the `propertySpaceDrawer:matrix` property at the specified
-    locations.
-    Params:
-      locations =       one or several #GtkSourceSpaceLocationFlags.
-      types =       a combination of #GtkSourceSpaceTypeFlags.
+      locations.
+  
+      Params:
+        locations = one or several #GtkSourceSpaceLocationFlags.
+        types = a combination of #GtkSourceSpaceTypeFlags.
   */
   void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
   {

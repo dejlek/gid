@@ -1,3 +1,4 @@
+/// Module for [AllocationParams] class
 module gst.allocation_params;
 
 import gid.gid;
@@ -12,22 +13,26 @@ import gst.types;
 class AllocationParams : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_allocation_params_get_type != &gidSymbolNotFound ? gst_allocation_params_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -80,13 +85,13 @@ class AllocationParams : gobject.boxed.Boxed
 
   /**
       Create a new #GstAllocationParams on the heap.  This function is for
-    use in GStreamer language bindings.  In your own code, you can just
-    declare a #GstAllocationParams on the stack or in a struct, and
-    call [gst.allocation_params.AllocationParams.init_] to initialize it.
-    
-    You do not need to call [gst.allocation_params.AllocationParams.init_] on the instance
-    returned by this function.
-    Returns:     a new #GstAllocationParams
+      use in GStreamer language bindings.  In your own code, you can just
+      declare a #GstAllocationParams on the stack or in a struct, and
+      call [gst.allocation_params.AllocationParams.init_] to initialize it.
+      
+      You do not need to call [gst.allocation_params.AllocationParams.init_] on the instance
+      returned by this function.
+      Returns: a new #GstAllocationParams
   */
   this()
   {
@@ -97,7 +102,7 @@ class AllocationParams : gobject.boxed.Boxed
 
   /**
       Create a copy of params.
-    Returns:     a new #GstAllocationParams.
+      Returns: a new #GstAllocationParams.
   */
   gst.allocation_params.AllocationParams copy()
   {

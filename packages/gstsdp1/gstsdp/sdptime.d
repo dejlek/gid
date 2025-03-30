@@ -1,3 +1,4 @@
+/// Module for [SDPTime] class
 module gstsdp.sdptime;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gstsdp.types;
 
 /**
     The contents of the SDP "t=" field which specify the start and stop times for
-  a conference session.
+    a conference session.
 */
 class SDPTime
 {
   GstSDPTime cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class SDPTime
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -52,8 +55,8 @@ class SDPTime
   }
 
   /**
-      Reset the time information in t.
-    Returns:     a #GstSDPResult.
+      Reset the time information in `t`.
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult clear()
   {
@@ -64,12 +67,13 @@ class SDPTime
   }
 
   /**
-      Set time information start, stop and repeat in t.
-    Params:
-      start =       the start time
-      stop =       the stop time
-      repeat =       the repeat times
-    Returns:     a #GstSDPResult.
+      Set time information start, stop and repeat in `t`.
+  
+      Params:
+        start = the start time
+        stop = the stop time
+        repeat = the repeat times
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult set(string start, string stop, string[] repeat)
   {

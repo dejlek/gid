@@ -1,3 +1,4 @@
+/// Module for [Map] class
 module gtksource.map;
 
 import atk.implementor_iface;
@@ -17,17 +18,20 @@ import gtksource.view;
 class Map : gtksource.view.View
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_map_get_type != &gidSymbolNotFound ? gtk_source_map_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,7 +44,7 @@ class Map : gtksource.view.View
 
   /**
       Creates a new #GtkSourceMap.
-    Returns:     a new #GtkSourceMap.
+      Returns: a new #GtkSourceMap.
   */
   this()
   {
@@ -51,7 +55,7 @@ class Map : gtksource.view.View
 
   /**
       Gets the #GtkSourceMap:view property, which is the view this widget is mapping.
-    Returns:     a #GtkSourceView or null.
+      Returns: a #GtkSourceView or null.
   */
   gtksource.view.View getView()
   {
@@ -63,8 +67,9 @@ class Map : gtksource.view.View
 
   /**
       Sets the view that map will be doing the mapping to.
-    Params:
-      view =       a #GtkSourceView
+  
+      Params:
+        view = a #GtkSourceView
   */
   void setView(gtksource.view.View view)
   {

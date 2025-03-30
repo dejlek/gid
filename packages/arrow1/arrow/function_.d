@@ -1,3 +1,4 @@
+/// Module for [Function] class
 module arrow.function_;
 
 import arrow.c.functions;
@@ -16,17 +17,20 @@ import gobject.types;
 class Function : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_function_get_type != &gidSymbolNotFound ? garrow_function_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

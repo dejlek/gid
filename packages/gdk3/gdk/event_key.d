@@ -1,3 +1,4 @@
+/// Module for [EventKey] class
 module gdk.event_key;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventKey
 {
   GdkEventKey cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventKey
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

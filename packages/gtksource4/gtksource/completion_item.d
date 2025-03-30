@@ -1,3 +1,4 @@
+/// Module for [CompletionItem] class
 module gtksource.completion_item;
 
 import gdkpixbuf.pixbuf;
@@ -14,17 +15,20 @@ import gtksource.types;
 class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.CompletionProposal
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_item_get_type != &gidSymbolNotFound ? gtk_source_completion_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,8 +43,8 @@ class CompletionItem : gobject.object.ObjectG, gtksource.completion_proposal.Com
 
   /**
       Creates a new #GtkSourceCompletionItem. The desired properties need to be set
-    afterwards.
-    Returns:     a new #GtkSourceCompletionItem.
+      afterwards.
+      Returns: a new #GtkSourceCompletionItem.
   */
   this()
   {

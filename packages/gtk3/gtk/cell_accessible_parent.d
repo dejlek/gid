@@ -1,3 +1,4 @@
+/// Module for [CellAccessibleParent] interface
 module gtk.cell_accessible_parent;
 
 public import gtk.cell_accessible_parent_iface_proxy;
@@ -15,6 +16,7 @@ import gtk.types;
 interface CellAccessibleParent
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

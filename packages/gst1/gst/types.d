@@ -1,3 +1,4 @@
+/// D types for gst1 library
 module gst.types;
 
 import gid.gid;
@@ -335,883 +336,771 @@ alias ValueTable = GstValueTable;
 
 /**
     A function that will be called from [gst.buffer.Buffer.foreachMeta]. The meta
-  field will point to a the reference of the meta.
-  
-  buffer should not be modified from this callback.
-  
-  When this function returns true, the next meta will be
-  returned. When false is returned, [gst.buffer.Buffer.foreachMeta] will return.
-  
-  When meta is set to null, the item will be removed from the buffer.
+    field will point to a the reference of the meta.
+    
+    buffer should not be modified from this callback.
+    
+    When this function returns true, the next meta will be
+    returned. When false is returned, [gst.buffer.Buffer.foreachMeta] will return.
+    
+    When meta is set to null, the item will be removed from the buffer.
 
-  ## Parameters
-  $(LIST
-    * $(B buffer)       a #GstBuffer
-    * $(B meta)       a pointer to a #GstMeta
-  )
-  Returns:     false when [gst.buffer.Buffer.foreachMeta] should stop
+    Params:
+      buffer = a #GstBuffer
+      meta = a pointer to a #GstMeta
+    Returns: false when [gst.buffer.Buffer.foreachMeta] should stop
 */
 alias BufferForeachMetaFunc = bool delegate(gst.buffer.Buffer buffer, out gst.meta.Meta meta);
 
 /**
     A function that will be called from [gst.buffer_list.BufferList.foreach_]. The buffer
-  field will point to a the reference of the buffer at idx.
-  
-  When this function returns true, the next buffer will be
-  returned. When false is returned, [gst.buffer_list.BufferList.foreach_] will return.
-  
-  When buffer is set to null, the item will be removed from the bufferlist.
-  When buffer has been made writable, the new buffer reference can be assigned
-  to buffer. This function is responsible for unreffing the old buffer when
-  removing or modifying.
+    field will point to a the reference of the buffer at idx.
+    
+    When this function returns true, the next buffer will be
+    returned. When false is returned, [gst.buffer_list.BufferList.foreach_] will return.
+    
+    When buffer is set to null, the item will be removed from the bufferlist.
+    When buffer has been made writable, the new buffer reference can be assigned
+    to buffer. This function is responsible for unreffing the old buffer when
+    removing or modifying.
 
-  ## Parameters
-  $(LIST
-    * $(B buffer)       pointer to the buffer
-    * $(B idx)       the index of buffer
-  )
-  Returns:     false when [gst.buffer_list.BufferList.foreach_] should stop
+    Params:
+      buffer = pointer to the buffer
+      idx = the index of buffer
+    Returns: false when [gst.buffer_list.BufferList.foreach_] should stop
 */
 alias BufferListFunc = bool delegate(out gst.buffer.Buffer buffer, uint idx);
 
 /**
     Specifies the type of function passed to [gst.bus.Bus.addWatch] or
-  [gst.bus.Bus.addWatchFull], which is called from the mainloop when a message
-  is available on the bus.
-  
-  The message passed to the function will be unreffed after execution of this
-  function so it should not be freed in the function.
-  
-  Note that this function is used as a #GSourceFunc which means that returning
-  false will remove the #GSource from the mainloop.
+    [gst.bus.Bus.addWatchFull], which is called from the mainloop when a message
+    is available on the bus.
+    
+    The message passed to the function will be unreffed after execution of this
+    function so it should not be freed in the function.
+    
+    Note that this function is used as a #GSourceFunc which means that returning
+    false will remove the #GSource from the mainloop.
 
-  ## Parameters
-  $(LIST
-    * $(B bus)       the #GstBus that sent the message
-    * $(B message)       the #GstMessage
-  )
-  Returns:     false if the event source should be removed.
+    Params:
+      bus = the #GstBus that sent the message
+      message = the #GstMessage
+    Returns: false if the event source should be removed.
 */
 alias BusFunc = bool delegate(gst.bus.Bus bus, gst.message.Message message);
 
 /**
     Handler will be invoked synchronously, when a new message has been injected
-  into the bus. This function is mostly used internally. Only one sync handler
-  can be attached to a given bus.
-  
-  If the handler returns [gst.types.BusSyncReply.Drop], it should unref the message, else the
-  message should not be unreffed by the sync handler.
+    into the bus. This function is mostly used internally. Only one sync handler
+    can be attached to a given bus.
+    
+    If the handler returns [gst.types.BusSyncReply.Drop], it should unref the message, else the
+    message should not be unreffed by the sync handler.
 
-  ## Parameters
-  $(LIST
-    * $(B bus)       the #GstBus that sent the message
-    * $(B message)       the #GstMessage
-  )
-  Returns:     #GstBusSyncReply stating what to do with the message
+    Params:
+      bus = the #GstBus that sent the message
+      message = the #GstMessage
+    Returns: #GstBusSyncReply stating what to do with the message
 */
 alias BusSyncHandler = gst.types.BusSyncReply delegate(gst.bus.Bus bus, gst.message.Message message);
 
 /**
     A function that will be called in [gst.caps.Caps.filterAndMapInPlace].
-  The function may modify features and structure, and both will be
-  removed from the caps if false is returned.
+    The function may modify features and structure, and both will be
+    removed from the caps if false is returned.
 
-  ## Parameters
-  $(LIST
-    * $(B features)       the #GstCapsFeatures
-    * $(B structure)       the #GstStructure
-  )
-  Returns:     true if the features and structure should be preserved,
-    false if it should be removed.
+    Params:
+      features = the #GstCapsFeatures
+      structure = the #GstStructure
+    Returns: true if the features and structure should be preserved,
+      false if it should be removed.
 */
 alias CapsFilterMapFunc = bool delegate(gst.caps_features.CapsFeatures features, gst.structure.Structure structure);
 
 /**
     A function that will be called in [gst.caps.Caps.foreach_]. The function may
-  not modify features or structure.
+    not modify features or structure.
 
-  ## Parameters
-  $(LIST
-    * $(B features)       the #GstCapsFeatures
-    * $(B structure)       the #GstStructure
-  )
-  Returns:     true if the foreach operation should continue, false if
-    the foreach operation should stop with false.
+    Params:
+      features = the #GstCapsFeatures
+      structure = the #GstStructure
+    Returns: true if the foreach operation should continue, false if
+      the foreach operation should stop with false.
 */
 alias CapsForeachFunc = bool delegate(gst.caps_features.CapsFeatures features, gst.structure.Structure structure);
 
 /**
     A function that will be called in [gst.caps.Caps.mapInPlace]. The function
-  may modify features and structure.
+    may modify features and structure.
 
-  ## Parameters
-  $(LIST
-    * $(B features)       the #GstCapsFeatures
-    * $(B structure)       the #GstStructure
-  )
-  Returns:     true if the map operation should continue, false if
-    the map operation should stop with false.
+    Params:
+      features = the #GstCapsFeatures
+      structure = the #GstStructure
+    Returns: true if the map operation should continue, false if
+      the map operation should stop with false.
 */
 alias CapsMapFunc = bool delegate(gst.caps_features.CapsFeatures features, gst.structure.Structure structure);
 
 /**
     The function prototype of the callback.
 
-  ## Parameters
-  $(LIST
-    * $(B clock)       The clock that triggered the callback
-    * $(B time)       The time it was triggered
-    * $(B id)       The #GstClockID that expired
-  )
-  Returns:     true or false (currently unused)
+    Params:
+      clock = The clock that triggered the callback
+      time = The time it was triggered
+      id = The #GstClockID that expired
+    Returns: true or false (currently unused)
 */
 alias ClockCallback = bool delegate(gst.clock.Clock clock, gst.types.ClockTime time, gst.types.ClockID id);
 
 /**
     FIXME(2.0): remove, this is unused
 
-  ## Parameters
-  $(LIST
-    * $(B binding) 
-    * $(B srcValue) 
-    * $(B destValue) 
-  )
+    Params:
+      binding = 
+      srcValue = 
+      destValue = 
 */
 alias ControlBindingConvert = void delegate(gst.control_binding.ControlBinding binding, double srcValue, gobject.value.Value destValue);
 
 /**
     Function for returning a value for a given timestamp.
 
-  ## Parameters
-  $(LIST
-    * $(B self)       the #GstControlSource instance
-    * $(B timestamp)       timestamp for which a value should be calculated
-    * $(B value)       a value which will be set to the result.
-  )
-  Returns:     true if the value was successfully calculated.
+    Params:
+      self = the #GstControlSource instance
+      timestamp = timestamp for which a value should be calculated
+      value = a value which will be set to the result.
+    Returns: true if the value was successfully calculated.
 */
 alias ControlSourceGetValue = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, out double value);
 
 /**
     Function for returning an array of values starting at a given timestamp.
 
-  ## Parameters
-  $(LIST
-    * $(B self)       the #GstControlSource instance
-    * $(B timestamp)       timestamp for which a value should be calculated
-    * $(B interval)       the time spacing between subsequent values
-    * $(B values)       array to put control-values in
-  )
-  Returns:     true if the values were successfully calculated.
+    Params:
+      self = the #GstControlSource instance
+      timestamp = timestamp for which a value should be calculated
+      interval = the time spacing between subsequent values
+      values = array to put control-values in
+    Returns: true if the values were successfully calculated.
 */
 alias ControlSourceGetValueArray = bool delegate(gst.control_source.ControlSource self, gst.types.ClockTime timestamp, gst.types.ClockTime interval, ref double[] values);
 
 /**
     Function called for each meta in buffer as a result of performing a
-  transformation that yields transbuf. Additional type specific transform
-  data is passed to the function as data.
-  
-  Implementations should check the type of the transform and parse
-  additional type specific fields in data that should be used to update
-  the metadata on transbuf.
+    transformation that yields transbuf. Additional type specific transform
+    data is passed to the function as data.
+    
+    Implementations should check the type of the transform and parse
+    additional type specific fields in data that should be used to update
+    the metadata on transbuf.
 
-  ## Parameters
-  $(LIST
-    * $(B transbuf)       a #GstBuffer
-    * $(B meta)       a #GstCustomMeta
-    * $(B buffer)       a #GstBuffer
-    * $(B type)       the transform type
-    * $(B data)       transform specific data.
-  )
-  Returns:     true if the transform could be performed
+    Params:
+      transbuf = a #GstBuffer
+      meta = a #GstCustomMeta
+      buffer = a #GstBuffer
+      type = the transform type
+      data = transform specific data.
+    Returns: true if the transform could be performed
 */
 alias CustomMetaTransformFunction = bool delegate(gst.buffer.Buffer transbuf, gst.custom_meta.CustomMeta meta, gst.buffer.Buffer buffer, glib.types.Quark type, void* data);
 
 /**
     we define this to avoid a compiler warning regarding a cast from a function
-  pointer to a void pointer
-  (see https://bugzilla.gnome.org/show_bug.cgi?id=309253)
+    pointer to a void pointer
+    (see https://bugzilla.gnome.org/show_bug.cgi?id=309253)
 */
 alias DebugFuncPtr = void delegate();
 
 /**
     Callback prototype used in #gst_element_call_async
 
-  ## Parameters
-  $(LIST
-    * $(B element)       The #GstElement this function has been called against
-  )
+    Params:
+      element = The #GstElement this function has been called against
 */
 alias ElementCallAsyncFunc = void delegate(gst.element.Element element);
 
 /**
     Function called for each pad when using [gst.element.Element.foreachSinkPad],
-  [gst.element.Element.foreachSrcPad], or [gst.element.Element.foreachPad].
+    [gst.element.Element.foreachSrcPad], or [gst.element.Element.foreachPad].
 
-  ## Parameters
-  $(LIST
-    * $(B element)       the #GstElement
-    * $(B pad)       a #GstPad
-  )
-  Returns:     false to stop iterating pads, true to continue
+    Params:
+      element = the #GstElement
+      pad = a #GstPad
+    Returns: false to stop iterating pads, true to continue
 */
 alias ElementForeachPadFunc = bool delegate(gst.element.Element element, gst.pad.Pad pad);
 
 /**
     This function will be called when creating a copy of it and should
-  create a copy of all custom iterator fields or increase their
-  reference counts.
+    create a copy of all custom iterator fields or increase their
+    reference counts.
 
-  ## Parameters
-  $(LIST
-    * $(B it)       The original iterator
-    * $(B copy)       The copied iterator
-  )
+    Params:
+      it = The original iterator
+      copy = The copied iterator
 */
 alias IteratorCopyFunction = void delegate(gst.iterator.Iterator it, gst.iterator.Iterator copy);
 
 /**
     A function to be passed to [gst.iterator.Iterator.fold].
 
-  ## Parameters
-  $(LIST
-    * $(B item)       the item to fold
-    * $(B ret)       a #GValue collecting the result
-  )
-  Returns:     true if the fold should continue, false if it should stop.
+    Params:
+      item = the item to fold
+      ret = a #GValue collecting the result
+    Returns: true if the fold should continue, false if it should stop.
 */
 alias IteratorFoldFunction = bool delegate(gobject.value.Value item, gobject.value.Value ret);
 
 /**
     A function that is called by [gst.iterator.Iterator.foreach_] for every element.
 
-  ## Parameters
-  $(LIST
-    * $(B item)       The item
-  )
+    Params:
+      item = The item
 */
 alias IteratorForeachFunction = void delegate(gobject.value.Value item);
 
 /**
     This function will be called when the iterator is freed.
-  
-  Implementors of a #GstIterator should implement this
-  function and pass it to the constructor of the custom iterator.
-  The function will be called with the iterator lock held.
+    
+    Implementors of a #GstIterator should implement this
+    function and pass it to the constructor of the custom iterator.
+    The function will be called with the iterator lock held.
 
-  ## Parameters
-  $(LIST
-    * $(B it)       the iterator
-  )
+    Params:
+      it = the iterator
 */
 alias IteratorFreeFunction = void delegate(gst.iterator.Iterator it);
 
 /**
     The function that will be called after the next item of the iterator
-  has been retrieved. This function can be used to skip items or stop
-  the iterator.
-  
-  The function will be called with the iterator lock held.
+    has been retrieved. This function can be used to skip items or stop
+    the iterator.
+    
+    The function will be called with the iterator lock held.
 
-  ## Parameters
-  $(LIST
-    * $(B it)       the iterator
-    * $(B item)       the item being retrieved.
-  )
-  Returns:     the result of the operation.
+    Params:
+      it = the iterator
+      item = the item being retrieved.
+    Returns: the result of the operation.
 */
 alias IteratorItemFunction = gst.types.IteratorItem delegate(gst.iterator.Iterator it, gobject.value.Value item);
 
 /**
     The function that will be called when the next element of the iterator
-  should be retrieved.
-  
-  Implementors of a #GstIterator should implement this
-  function and pass it to the constructor of the custom iterator.
-  The function will be called with the iterator lock held.
+    should be retrieved.
+    
+    Implementors of a #GstIterator should implement this
+    function and pass it to the constructor of the custom iterator.
+    The function will be called with the iterator lock held.
 
-  ## Parameters
-  $(LIST
-    * $(B it)       the iterator
-    * $(B result)       a pointer to hold the next item
-  )
-  Returns:     the result of the operation.
+    Params:
+      it = the iterator
+      result = a pointer to hold the next item
+    Returns: the result of the operation.
 */
 alias IteratorNextFunction = gst.types.IteratorResult delegate(gst.iterator.Iterator it, gobject.value.Value result);
 
 /**
     This function will be called whenever a concurrent update happened
-  to the iterated datastructure. The implementor of the iterator should
-  restart the iterator from the beginning and clean up any state it might
-  have.
-  
-  Implementors of a #GstIterator should implement this
-  function and pass it to the constructor of the custom iterator.
-  The function will be called with the iterator lock held.
+    to the iterated datastructure. The implementor of the iterator should
+    restart the iterator from the beginning and clean up any state it might
+    have.
+    
+    Implementors of a #GstIterator should implement this
+    function and pass it to the constructor of the custom iterator.
+    The function will be called with the iterator lock held.
 
-  ## Parameters
-  $(LIST
-    * $(B it)       the iterator
-  )
+    Params:
+      it = the iterator
 */
 alias IteratorResyncFunction = void delegate(gst.iterator.Iterator it);
 
 /**
     Function prototype for a logging function that can be registered with
-  [gst.global.debugAddLogFunction].
-  Use G_GNUC_NO_INSTRUMENT on that function.
+    [gst.global.debugAddLogFunction].
+    Use G_GNUC_NO_INSTRUMENT on that function.
 
-  ## Parameters
-  $(LIST
-    * $(B category)       a #GstDebugCategory
-    * $(B level)       a #GstDebugLevel
-    * $(B file)       file name
-    * $(B function_)       function name
-    * $(B line)       line number
-    * $(B object)       a #GObject
-    * $(B message)       the message
-  )
+    Params:
+      category = a #GstDebugCategory
+      level = a #GstDebugLevel
+      file = file name
+      function_ = function name
+      line = line number
+      object = a #GObject
+      message = the message
 */
 alias LogFunction = void delegate(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message);
 
 /**
     Copy size bytes from mem starting at offset and return them wrapped in a
-  new GstMemory object.
-  If size is set to -1, all bytes starting at offset are copied.
+    new GstMemory object.
+    If size is set to -1, all bytes starting at offset are copied.
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-    * $(B offset)       an offset
-    * $(B size)       a size or -1
-  )
-  Returns:     a new #GstMemory object wrapping a copy of the requested region in
-    mem.
+    Params:
+      mem = a #GstMemory
+      offset = an offset
+      size = a size or -1
+    Returns: a new #GstMemory object wrapping a copy of the requested region in
+      mem.
 */
 alias MemoryCopyFunction = gst.memory.Memory delegate(gst.memory.Memory mem, ptrdiff_t offset, ptrdiff_t size);
 
 /**
     Check if mem1 and mem2 occupy contiguous memory and return the offset of
-  mem1 in the parent buffer in offset.
+    mem1 in the parent buffer in offset.
 
-  ## Parameters
-  $(LIST
-    * $(B mem1)       a #GstMemory
-    * $(B mem2)       a #GstMemory
-    * $(B offset)       a result offset
-  )
-  Returns:     true if mem1 and mem2 are in contiguous memory.
+    Params:
+      mem1 = a #GstMemory
+      mem2 = a #GstMemory
+      offset = a result offset
+    Returns: true if mem1 and mem2 are in contiguous memory.
 */
 alias MemoryIsSpanFunction = bool delegate(gst.memory.Memory mem1, gst.memory.Memory mem2, out size_t offset);
 
 /**
     Get the memory of mem that can be accessed according to the mode specified
-  in info's flags. The function should return a pointer that contains at least
-  maxsize bytes.
+    in info's flags. The function should return a pointer that contains at least
+    maxsize bytes.
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-    * $(B info)       the #GstMapInfo to map with
-    * $(B maxsize)       size to map
-  )
-  Returns:     a pointer to memory of which at least maxsize bytes can be
-    accessed according to the access pattern in info's flags.
+    Params:
+      mem = a #GstMemory
+      info = the #GstMapInfo to map with
+      maxsize = size to map
+    Returns: a pointer to memory of which at least maxsize bytes can be
+      accessed according to the access pattern in info's flags.
 */
 alias MemoryMapFullFunction = void* delegate(gst.memory.Memory mem, gst.map_info.MapInfo info, size_t maxsize);
 
 /**
     Get the memory of mem that can be accessed according to the mode specified
-  in flags. The function should return a pointer that contains at least
-  maxsize bytes.
+    in flags. The function should return a pointer that contains at least
+    maxsize bytes.
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-    * $(B maxsize)       size to map
-    * $(B flags)       access mode for the memory
-  )
-  Returns:     a pointer to memory of which at least maxsize bytes can be
-    accessed according to the access pattern in flags.
+    Params:
+      mem = a #GstMemory
+      maxsize = size to map
+      flags = access mode for the memory
+    Returns: a pointer to memory of which at least maxsize bytes can be
+      accessed according to the access pattern in flags.
 */
 alias MemoryMapFunction = void* delegate(gst.memory.Memory mem, size_t maxsize, gst.types.MapFlags flags);
 
 /**
     Share size bytes from mem starting at offset and return them wrapped in a
-  new GstMemory object. If size is set to -1, all bytes starting at offset are
-  shared. This function does not make a copy of the bytes in mem.
+    new GstMemory object. If size is set to -1, all bytes starting at offset are
+    shared. This function does not make a copy of the bytes in mem.
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-    * $(B offset)       an offset
-    * $(B size)       a size or -1
-  )
-  Returns:     a new #GstMemory object sharing the requested region in mem.
+    Params:
+      mem = a #GstMemory
+      offset = an offset
+      size = a size or -1
+    Returns: a new #GstMemory object sharing the requested region in mem.
 */
 alias MemoryShareFunction = gst.memory.Memory delegate(gst.memory.Memory mem, ptrdiff_t offset, ptrdiff_t size);
 
 /**
     Release the pointer previously retrieved with [gst.memory.Memory.map] with info.
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-    * $(B info)       a #GstMapInfo
-  )
+    Params:
+      mem = a #GstMemory
+      info = a #GstMapInfo
 */
 alias MemoryUnmapFullFunction = void delegate(gst.memory.Memory mem, gst.map_info.MapInfo info);
 
 /**
     Release the pointer previously retrieved with [gst.memory.Memory.map].
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstMemory
-  )
+    Params:
+      mem = a #GstMemory
 */
 alias MemoryUnmapFunction = void delegate(gst.memory.Memory mem);
 
 /**
     Clears the content of the meta. This will be called by the GstBufferPool
-  when a pooled buffer is returned.
+    when a pooled buffer is returned.
 
-  ## Parameters
-  $(LIST
-    * $(B buffer)       a #GstBuffer
-    * $(B meta)       a #GstMeta
-  )
+    Params:
+      buffer = a #GstBuffer
+      meta = a #GstMeta
 */
 alias MetaClearFunction = void delegate(gst.buffer.Buffer buffer, gst.meta.Meta meta);
 
 /**
     Recreate a #GstMeta from serialized data returned by
-  #GstMetaSerializeFunction and add it to buffer.
+    #GstMetaSerializeFunction and add it to buffer.
 
-  ## Parameters
-  $(LIST
-    * $(B info)       #GstMetaInfo of the meta
-    * $(B buffer)       a #GstBuffer
-    * $(B data)       data obtained from #GstMetaSerializeFunction
-    * $(B version_) 
-  )
-  Returns:     the metadata owned by buffer, or null.
+    Params:
+      info = #GstMetaInfo of the meta
+      buffer = a #GstBuffer
+      data = data obtained from #GstMetaSerializeFunction
+      version_ = 
+    Returns: the metadata owned by buffer, or null.
 */
 alias MetaDeserializeFunction = gst.meta.Meta delegate(gst.meta_info.MetaInfo info, gst.buffer.Buffer buffer, ubyte[] data, ubyte version_);
 
 /**
     Function called when meta is freed in buffer.
 
-  ## Parameters
-  $(LIST
-    * $(B meta)       a #GstMeta
-    * $(B buffer)       a #GstBuffer
-  )
+    Params:
+      meta = a #GstMeta
+      buffer = a #GstBuffer
 */
 alias MetaFreeFunction = void delegate(gst.meta.Meta meta, gst.buffer.Buffer buffer);
 
 /**
     Function called when meta is initialized in buffer.
 
-  ## Parameters
-  $(LIST
-    * $(B meta)       a #GstMeta
-    * $(B params)       parameters passed to the init function
-    * $(B buffer)       a #GstBuffer
-  )
-  Returns: 
+    Params:
+      meta = a #GstMeta
+      params = parameters passed to the init function
+      buffer = a #GstBuffer
+    Returns: 
 */
 alias MetaInitFunction = bool delegate(gst.meta.Meta meta, void* params, gst.buffer.Buffer buffer);
 
 /**
     Function called for each meta in buffer as a result of performing a
-  transformation on transbuf. Additional type specific transform data
-  is passed to the function as data.
-  
-  Implementations should check the type of the transform and parse
-  additional type specific fields in data that should be used to update
-  the metadata on transbuf.
+    transformation on transbuf. Additional type specific transform data
+    is passed to the function as data.
+    
+    Implementations should check the type of the transform and parse
+    additional type specific fields in data that should be used to update
+    the metadata on transbuf.
 
-  ## Parameters
-  $(LIST
-    * $(B transbuf)       a #GstBuffer
-    * $(B meta)       a #GstMeta
-    * $(B buffer)       a #GstBuffer
-    * $(B type)       the transform type
-  )
-  Returns:     true if the transform could be performed
+    Params:
+      transbuf = a #GstBuffer
+      meta = a #GstMeta
+      buffer = a #GstBuffer
+      type = the transform type
+    Returns: true if the transform could be performed
 */
 alias MetaTransformFunction = bool delegate(gst.buffer.Buffer transbuf, gst.meta.Meta meta, gst.buffer.Buffer buffer, glib.types.Quark type);
 
 /**
     Function prototype for methods to create copies of instances.
 
-  ## Parameters
-  $(LIST
-    * $(B obj)       MiniObject to copy
-  )
-  Returns:     reference to cloned instance.
+    Params:
+      obj = MiniObject to copy
+    Returns: reference to cloned instance.
 */
 alias MiniObjectCopyFunction = gst.mini_object.MiniObject delegate(gst.mini_object.MiniObject obj);
 
 /**
     Function prototype for when a miniobject has lost its last refcount.
-  Implementation of the mini object are allowed to revive the
-  passed object by doing a [gst.mini_object.MiniObject.ref_]. If the object is not
-  revived after the dispose function, the function should return true
-  and the memory associated with the object is freed.
+    Implementation of the mini object are allowed to revive the
+    passed object by doing a [gst.mini_object.MiniObject.ref_]. If the object is not
+    revived after the dispose function, the function should return true
+    and the memory associated with the object is freed.
 
-  ## Parameters
-  $(LIST
-    * $(B obj)       MiniObject to dispose
-  )
-  Returns:     true if the object should be cleaned up.
+    Params:
+      obj = MiniObject to dispose
+    Returns: true if the object should be cleaned up.
 */
 alias MiniObjectDisposeFunction = bool delegate(gst.mini_object.MiniObject obj);
 
 /**
     Virtual function prototype for methods to free resources used by
-  mini-objects.
+    mini-objects.
 
-  ## Parameters
-  $(LIST
-    * $(B obj)       MiniObject to free
-  )
+    Params:
+      obj = MiniObject to free
 */
 alias MiniObjectFreeFunction = void delegate(gst.mini_object.MiniObject obj);
 
 /**
     A #GstMiniObjectNotify function can be added to a mini object as a
-  callback that gets triggered when [gst.mini_object.MiniObject.unref] drops the
-  last ref and obj is about to be freed.
+    callback that gets triggered when [gst.mini_object.MiniObject.unref] drops the
+    last ref and obj is about to be freed.
 
-  ## Parameters
-  $(LIST
-    * $(B obj)       the mini object
-  )
+    Params:
+      obj = the mini object
 */
 alias MiniObjectNotify = void delegate(gst.mini_object.MiniObject obj);
 
 /**
     This function is called when the pad is activated during the element
-  READY to PAUSED state change. By default this function will call the
-  activate function that puts the pad in push mode but elements can
-  override this function to activate the pad in pull mode if they wish.
+    READY to PAUSED state change. By default this function will call the
+    activate function that puts the pad in push mode but elements can
+    override this function to activate the pad in pull mode if they wish.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       a #GstPad
-    * $(B parent)       the parent of pad
-  )
-  Returns:     true if the pad could be activated.
+    Params:
+      pad = a #GstPad
+      parent = the parent of pad
+    Returns: true if the pad could be activated.
 */
 alias PadActivateFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
 
 /**
     The prototype of the push and pull activate functions.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       a #GstPad
-    * $(B parent)       the parent of pad
-    * $(B mode)       the requested activation mode of pad
-    * $(B active)       activate or deactivate the pad.
-  )
-  Returns:     true if the pad could be activated or deactivated.
+    Params:
+      pad = a #GstPad
+      parent = the parent of pad
+      mode = the requested activation mode of pad
+      active = activate or deactivate the pad.
+    Returns: true if the pad could be activated or deactivated.
 */
 alias PadActivateModeFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active);
 
 /**
     A function that will be called on sinkpads when chaining buffers.
-  The function typically processes the data contained in the buffer and
-  either consumes the data or passes it on to the internally linked pad(s).
-  
-  The implementer of this function receives a refcount to buffer and should
-  gst_buffer_unref() when the buffer is no longer needed.
-  
-  When a chain function detects an error in the data stream, it must post an
-  error on the bus and return an appropriate #GstFlowReturn value.
+    The function typically processes the data contained in the buffer and
+    either consumes the data or passes it on to the internally linked pad(s).
+    
+    The implementer of this function receives a refcount to buffer and should
+    gst_buffer_unref() when the buffer is no longer needed.
+    
+    When a chain function detects an error in the data stream, it must post an
+    error on the bus and return an appropriate #GstFlowReturn value.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the sink #GstPad that performed the chain.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B buffer)       the #GstBuffer that is chained, not null.
-  )
-  Returns:     #GST_FLOW_OK for success
+    Params:
+      pad = the sink #GstPad that performed the chain.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      buffer = the #GstBuffer that is chained, not null.
+    Returns: #GST_FLOW_OK for success
 */
 alias PadChainFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer.Buffer buffer);
 
 /**
     A function that will be called on sinkpads when chaining buffer lists.
-  The function typically processes the data contained in the buffer list and
-  either consumes the data or passes it on to the internally linked pad(s).
-  
-  The implementer of this function receives a refcount to list and
-  should gst_buffer_list_unref() when the list is no longer needed.
-  
-  When a chainlist function detects an error in the data stream, it must
-  post an error on the bus and return an appropriate #GstFlowReturn value.
+    The function typically processes the data contained in the buffer list and
+    either consumes the data or passes it on to the internally linked pad(s).
+    
+    The implementer of this function receives a refcount to list and
+    should gst_buffer_list_unref() when the list is no longer needed.
+    
+    When a chainlist function detects an error in the data stream, it must
+    post an error on the bus and return an appropriate #GstFlowReturn value.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the sink #GstPad that performed the chain.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B list)       the #GstBufferList that is chained, not null.
-  )
-  Returns:     #GST_FLOW_OK for success
+    Params:
+      pad = the sink #GstPad that performed the chain.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      list = the #GstBufferList that is chained, not null.
+    Returns: #GST_FLOW_OK for success
 */
 alias PadChainListFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.buffer_list.BufferList list);
 
 /**
     Function signature to handle an event for the pad.
-  
-  This variant is for specific elements that will take into account the
-  last downstream flow return (from a pad push), in which case they can
-  return it.
+    
+    This variant is for specific elements that will take into account the
+    last downstream flow return (from a pad push), in which case they can
+    return it.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad to handle the event.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B event)       the #GstEvent to handle.
-  )
-  Returns:     [gst.types.FlowReturn.Ok] if the event was handled properly, or any other
-    #GstFlowReturn dependent on downstream state.
+    Params:
+      pad = the #GstPad to handle the event.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      event = the #GstEvent to handle.
+    Returns: [gst.types.FlowReturn.Ok] if the event was handled properly, or any other
+      #GstFlowReturn dependent on downstream state.
 */
 alias PadEventFullFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.event.Event event);
 
 /**
     Function signature to handle an event for the pad.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad to handle the event.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B event)       the #GstEvent to handle.
-  )
-  Returns:     true if the pad could handle the event.
+    Params:
+      pad = the #GstPad to handle the event.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      event = the #GstEvent to handle.
+    Returns: true if the pad could handle the event.
 */
 alias PadEventFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.event.Event event);
 
 /**
     A forward function is called for all internally linked pads, see
-  [gst.pad.Pad.forward].
+    [gst.pad.Pad.forward].
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad that is forwarded.
-  )
-  Returns:     true if the dispatching procedure has to be stopped.
+    Params:
+      pad = the #GstPad that is forwarded.
+    Returns: true if the dispatching procedure has to be stopped.
 */
 alias PadForwardFunction = bool delegate(gst.pad.Pad pad);
 
 /**
     This function will be called on source pads when a peer element
-  request a buffer at the specified offset and length. If this function
-  returns #GST_FLOW_OK, the result buffer will be stored in buffer. The
-  contents of buffer is invalid for any other return value.
-  
-  This function is installed on a source pad with
-  gst_pad_set_getrange_function() and can only be called on source pads after
-  they are successfully activated with [gst.pad.Pad.activateMode] with the
-  #GST_PAD_MODE_PULL.
-  
-  offset and length are always given in byte units. offset must normally be a value
-  between 0 and the length in bytes of the data available on pad. The
-  length (duration in bytes) can be retrieved with a #GST_QUERY_DURATION or with a
-  #GST_QUERY_SEEKING.
-  
-  Any offset larger or equal than the length will make the function return
-  #GST_FLOW_EOS, which corresponds to EOS. In this case buffer does not
-  contain a valid buffer.
-  
-  The buffer size of buffer will only be smaller than length when offset is
-  near the end of the stream. In all other cases, the size of buffer must be
-  exactly the requested size.
-  
-  It is allowed to call this function with a 0 length and valid offset, in
-  which case buffer will contain a 0-sized buffer and the function returns
-  #GST_FLOW_OK.
-  
-  When this function is called with a -1 offset, the sequentially next buffer
-  of length length in the stream is returned.
-  
-  When this function is called with a -1 length, a buffer with a default
-  optimal length is returned in buffer. The length might depend on the value
-  of offset.
+    request a buffer at the specified offset and length. If this function
+    returns #GST_FLOW_OK, the result buffer will be stored in buffer. The
+    contents of buffer is invalid for any other return value.
+    
+    This function is installed on a source pad with
+    gst_pad_set_getrange_function() and can only be called on source pads after
+    they are successfully activated with [gst.pad.Pad.activateMode] with the
+    #GST_PAD_MODE_PULL.
+    
+    offset and length are always given in byte units. offset must normally be a value
+    between 0 and the length in bytes of the data available on pad. The
+    length (duration in bytes) can be retrieved with a #GST_QUERY_DURATION or with a
+    #GST_QUERY_SEEKING.
+    
+    Any offset larger or equal than the length will make the function return
+    #GST_FLOW_EOS, which corresponds to EOS. In this case buffer does not
+    contain a valid buffer.
+    
+    The buffer size of buffer will only be smaller than length when offset is
+    near the end of the stream. In all other cases, the size of buffer must be
+    exactly the requested size.
+    
+    It is allowed to call this function with a 0 length and valid offset, in
+    which case buffer will contain a 0-sized buffer and the function returns
+    #GST_FLOW_OK.
+    
+    When this function is called with a -1 offset, the sequentially next buffer
+    of length length in the stream is returned.
+    
+    When this function is called with a -1 length, a buffer with a default
+    optimal length is returned in buffer. The length might depend on the value
+    of offset.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the src #GstPad to perform the getrange on.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B offset)       the offset of the range
-    * $(B length)       the length of the range
-    * $(B buffer)       a memory location to hold the result buffer, cannot be null.
-  )
-  Returns:     #GST_FLOW_OK for success and a valid buffer in buffer. Any other
-    return value leaves buffer undefined.
+    Params:
+      pad = the src #GstPad to perform the getrange on.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      offset = the offset of the range
+      length = the length of the range
+      buffer = a memory location to hold the result buffer, cannot be null.
+    Returns: #GST_FLOW_OK for success and a valid buffer in buffer. Any other
+      return value leaves buffer undefined.
 */
 alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, ulong offset, uint length, gst.buffer.Buffer buffer);
 
 /**
     The signature of the internal pad link iterator function.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       The #GstPad to query.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-  )
-  Returns:     a new #GstIterator that will iterate over all pads that are
-    linked to the given pad on the inside of the parent element.
-    
-    the caller must call [gst.iterator.Iterator.free] after usage.
+    Params:
+      pad = The #GstPad to query.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+    Returns: a new #GstIterator that will iterate over all pads that are
+      linked to the given pad on the inside of the parent element.
+      
+      the caller must call [gst.iterator.Iterator.free] after usage.
 */
 alias PadIterIntLinkFunction = gst.iterator.Iterator delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
 
 /**
     Function signature to handle a new link on the pad.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad that is linked.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B peer)       the peer #GstPad of the link
-  )
-  Returns:     the result of the link with the specified peer.
+    Params:
+      pad = the #GstPad that is linked.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      peer = the peer #GstPad of the link
+    Returns: the result of the link with the specified peer.
 */
 alias PadLinkFunction = gst.types.PadLinkReturn delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.pad.Pad peer);
 
 /**
     Callback used by [gst.pad.Pad.addProbe]. Gets called to notify about the current
-  blocking type.
-  
-  The callback is allowed to modify the data pointer in info.
+    blocking type.
+    
+    The callback is allowed to modify the data pointer in info.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad that is blocked
-    * $(B info)       #GstPadProbeInfo
-  )
-  Returns:     a #GstPadProbeReturn
+    Params:
+      pad = the #GstPad that is blocked
+      info = #GstPadProbeInfo
+    Returns: a #GstPadProbeReturn
 */
 alias PadProbeCallback = gst.types.PadProbeReturn delegate(gst.pad.Pad pad, gst.pad_probe_info.PadProbeInfo info);
 
 /**
     The signature of the query function.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad to query.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-    * $(B query)       the #GstQuery object to execute
-  )
-  Returns:     true if the query could be performed.
+    Params:
+      pad = the #GstPad to query.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
+      query = the #GstQuery object to execute
+    Returns: true if the query could be performed.
 */
 alias PadQueryFunction = bool delegate(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.query.Query query);
 
 /**
     Callback used by [gst.pad.Pad.stickyEventsForeach].
-  
-  When this function returns true, the next event will be
-  returned. When false is returned, [gst.pad.Pad.stickyEventsForeach] will return.
-  
-  When event is set to null, the item will be removed from the list of sticky events.
-  event can be replaced by assigning a new reference to it.
-  This function is responsible for unreffing the old event when
-  removing or modifying.
+    
+    When this function returns true, the next event will be
+    returned. When false is returned, [gst.pad.Pad.stickyEventsForeach] will return.
+    
+    When event is set to null, the item will be removed from the list of sticky events.
+    event can be replaced by assigning a new reference to it.
+    This function is responsible for unreffing the old event when
+    removing or modifying.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad.
-    * $(B event)       a sticky #GstEvent.
-  )
-  Returns:     true if the iteration should continue
+    Params:
+      pad = the #GstPad.
+      event = a sticky #GstEvent.
+    Returns: true if the iteration should continue
 */
 alias PadStickyEventsForeachFunction = bool delegate(gst.pad.Pad pad, gst.event.Event event);
 
 /**
     Function signature to handle a unlinking the pad prom its peer.
-  
-  The pad's lock is already held when the unlink function is called, so most
-  pad functions cannot be called from within the callback.
+    
+    The pad's lock is already held when the unlink function is called, so most
+    pad functions cannot be called from within the callback.
 
-  ## Parameters
-  $(LIST
-    * $(B pad)       the #GstPad that is linked.
-    * $(B parent)       the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
-               flag is set, parent is guaranteed to be not-null and remain valid
-               during the execution of this function.
-  )
+    Params:
+      pad = the #GstPad that is linked.
+      parent = the parent of pad. If the #GST_PAD_FLAG_NEED_PARENT
+                 flag is set, parent is guaranteed to be not-null and remain valid
+                 during the execution of this function.
 */
 alias PadUnlinkFunction = void delegate(gst.pad.Pad pad, gst.object.ObjectGst parent);
 
 /**
     A function that can be used with e.g. [gst.registry.Registry.featureFilter]
-  to get a list of pluginfeature that match certain criteria.
+    to get a list of pluginfeature that match certain criteria.
 
-  ## Parameters
-  $(LIST
-    * $(B feature)       the pluginfeature to check
-  )
-  Returns:     true for a positive match, false otherwise
+    Params:
+      feature = the pluginfeature to check
+    Returns: true for a positive match, false otherwise
 */
 alias PluginFeatureFilter = bool delegate(gst.plugin_feature.PluginFeature feature);
 
 /**
     A function that can be used with e.g. [gst.registry.Registry.pluginFilter]
-  to get a list of plugins that match certain criteria.
+    to get a list of plugins that match certain criteria.
 
-  ## Parameters
-  $(LIST
-    * $(B plugin)       the plugin to check
-  )
-  Returns:     true for a positive match, false otherwise
+    Params:
+      plugin = the plugin to check
+    Returns: true for a positive match, false otherwise
 */
 alias PluginFilter = bool delegate(gst.plugin.Plugin plugin);
 
 /**
     A plugin should provide a pointer to a function of either #GstPluginInitFunc
-  or this type in the plugin_desc struct.
-  The function will be called by the loader at startup. One would then
-  register each #GstPluginFeature. This version allows
-  user data to be passed to init function (useful for bindings).
+    or this type in the plugin_desc struct.
+    The function will be called by the loader at startup. One would then
+    register each #GstPluginFeature. This version allows
+    user data to be passed to init function (useful for bindings).
 
-  ## Parameters
-  $(LIST
-    * $(B plugin)       The plugin object
-  )
-  Returns:     true if plugin initialised successfully
+    Params:
+      plugin = The plugin object
+    Returns: true if plugin initialised successfully
 */
 alias PluginInitFullFunc = bool delegate(gst.plugin.Plugin plugin);
 
 /**
     A plugin should provide a pointer to a function of this type in the
-  plugin_desc struct.
-  This function will be called by the loader at startup. One would then
-  register each #GstPluginFeature.
+    plugin_desc struct.
+    This function will be called by the loader at startup. One would then
+    register each #GstPluginFeature.
 
-  ## Parameters
-  $(LIST
-    * $(B plugin)       The plugin object
-  )
-  Returns:     true if plugin initialised successfully
+    Params:
+      plugin = The plugin object
+    Returns: true if plugin initialised successfully
 */
 alias PluginInitFunc = bool delegate(gst.plugin.Plugin plugin);
 
@@ -1220,74 +1109,64 @@ alias PromiseChangeFunc = void delegate(gst.promise.Promise promise);
 
 /**
     A function that will be called in [gst.structure.Structure.filterAndMapInPlace].
-  The function may modify value, and the value will be removed from
-  the structure if false is returned.
+    The function may modify value, and the value will be removed from
+    the structure if false is returned.
 
-  ## Parameters
-  $(LIST
-    * $(B fieldId)       the #GQuark of the field name
-    * $(B value)       the #GValue of the field
-  )
-  Returns:     true if the field should be preserved, false if it
-    should be removed.
+    Params:
+      fieldId = the #GQuark of the field name
+      value = the #GValue of the field
+    Returns: true if the field should be preserved, false if it
+      should be removed.
 */
 alias StructureFilterMapFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
 
 /**
     A function that will be called in [gst.structure.Structure.foreach_]. The function may
-  not modify value.
+    not modify value.
 
-  ## Parameters
-  $(LIST
-    * $(B fieldId)       the #GQuark of the field name
-    * $(B value)       the #GValue of the field
-  )
-  Returns:     true if the foreach operation should continue, false if
-    the foreach operation should stop with false.
+    Params:
+      fieldId = the #GQuark of the field name
+      value = the #GValue of the field
+    Returns: true if the foreach operation should continue, false if
+      the foreach operation should stop with false.
 */
 alias StructureForeachFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
 
 /**
     A function that will be called in [gst.structure.Structure.mapInPlace]. The function
-  may modify value.
+    may modify value.
 
-  ## Parameters
-  $(LIST
-    * $(B fieldId)       the #GQuark of the field name
-    * $(B value)       the #GValue of the field
-  )
-  Returns:     true if the map operation should continue, false if
-    the map operation should stop with false.
+    Params:
+      fieldId = the #GQuark of the field name
+      value = the #GValue of the field
+    Returns: true if the map operation should continue, false if
+      the map operation should stop with false.
 */
 alias StructureMapFunc = bool delegate(glib.types.Quark fieldId, gobject.value.Value value);
 
 /**
     A function that will be called in [gst.tag_list.TagList.foreach_]. The function may
-  not modify the tag list.
+    not modify the tag list.
 
-  ## Parameters
-  $(LIST
-    * $(B list)       the #GstTagList
-    * $(B tag)       a name of a tag in list
-  )
+    Params:
+      list = the #GstTagList
+      tag = a name of a tag in list
 */
 alias TagForeachFunc = void delegate(gst.tag_list.TagList list, string tag);
 
 /**
     A function for merging multiple values of a tag used when registering
-  tags.
+    tags.
 
-  ## Parameters
-  $(LIST
-    * $(B dest)       the destination #GValue
-    * $(B src)       the source #GValue
-  )
+    Params:
+      dest = the destination #GValue
+      src = the source #GValue
 */
 alias TagMergeFunc = void delegate(gobject.value.Value dest, gobject.value.Value src);
 
 /**
     A function that will repeatedly be called in the thread created by
-  a #GstTask.
+    a #GstTask.
 */
 alias TaskFunction = void delegate();
 
@@ -1299,72 +1178,60 @@ alias TaskPoolFunction = void delegate();
 /**
     Custom GstTask thread callback functions that can be installed.
 
-  ## Parameters
-  $(LIST
-    * $(B task)       The #GstTask
-    * $(B thread)       The #GThread
-  )
+    Params:
+      task = The #GstTask
+      thread = The #GThread
 */
 alias TaskThreadFunc = void delegate(gst.task.Task task, glib.thread.Thread thread);
 
 /**
     A function that will be called by typefinding.
 
-  ## Parameters
-  $(LIST
-    * $(B find)       A #GstTypeFind structure
-  )
+    Params:
+      find = A #GstTypeFind structure
 */
 alias TypeFindFunction = void delegate(gst.type_find.TypeFind find);
 
 /**
     Used together with [gst.global.valueCompare] to compare #GValue items.
 
-  ## Parameters
-  $(LIST
-    * $(B value1)       first value for comparison
-    * $(B value2)       second value for comparison
-  )
-  Returns:     one of GST_VALUE_LESS_THAN, GST_VALUE_EQUAL, GST_VALUE_GREATER_THAN
-    or GST_VALUE_UNORDERED
+    Params:
+      value1 = first value for comparison
+      value2 = second value for comparison
+    Returns: one of GST_VALUE_LESS_THAN, GST_VALUE_EQUAL, GST_VALUE_GREATER_THAN
+      or GST_VALUE_UNORDERED
 */
 alias ValueCompareFunc = int delegate(gobject.value.Value value1, gobject.value.Value value2);
 
 /**
     Used by [gst.global.valueDeserialize] to parse a non-binary form into the #GValue.
 
-  ## Parameters
-  $(LIST
-    * $(B dest)       a #GValue
-    * $(B s)       a string
-  )
-  Returns:     true for success
+    Params:
+      dest = a #GValue
+      s = a string
+    Returns: true for success
 */
 alias ValueDeserializeFunc = bool delegate(gobject.value.Value dest, string s);
 
 /**
     Used by [gst.global.valueDeserializeWithPspec] to parse a non-binary form into the #GValue.
 
-  ## Parameters
-  $(LIST
-    * $(B dest)       a #GValue
-    * $(B s)       a string
-    * $(B pspec)       a #GParamSpec describing the expected value
-  )
-  Returns:     true for success
+    Params:
+      dest = a #GValue
+      s = a string
+      pspec = a #GParamSpec describing the expected value
+    Returns: true for success
 */
 alias ValueDeserializeWithPSpecFunc = bool delegate(gobject.value.Value dest, string s, gobject.param_spec.ParamSpec pspec);
 
 /**
     Used by [gst.global.valueSerialize] to obtain a non-binary form of the #GValue.
-  
-  Free-function: g_free
+    
+    Free-function: g_free
 
-  ## Parameters
-  $(LIST
-    * $(B value1)       a #GValue
-  )
-  Returns:     the string representation of the value
+    Params:
+      value1 = a #GValue
+    Returns: the string representation of the value
 */
 alias ValueSerializeFunc = string delegate(gobject.value.Value value1);
 
@@ -1375,13 +1242,13 @@ enum ALLOCATOR_SYSMEM = "SystemMemory";
 
 /**
     Combination of all possible fields that can be copied with
-  [gst.buffer.Buffer.copyInto].
+    [gst.buffer.Buffer.copyInto].
 */
 enum BUFFER_COPY_ALL = 15;
 
 /**
     Combination of all possible metadata fields that can be copied with
-  [gst.buffer.Buffer.copyInto].
+    [gst.buffer.Buffer.copyInto].
 */
 enum BUFFER_COPY_METADATA = 7;
 
@@ -1433,8 +1300,8 @@ enum ELEMENT_FACTORY_KLASS_FORMATTER = "Formatter";
 
 /**
     Elements interacting with hardware devices should specify this classifier in
-  their metadata. You may need to put the element in "READY" state to test if
-  the hardware is present in the system.
+    their metadata. You may need to put the element in "READY" state to test if
+    the hardware is present in the system.
 */
 enum ELEMENT_FACTORY_KLASS_HARDWARE = "Hardware";
 
@@ -1517,10 +1384,10 @@ enum ELEMENT_FACTORY_TYPE_MAX_ELEMENTS = 281474976710656;
 
 /**
     Elements matching any of the defined GST_ELEMENT_FACTORY_TYPE_MEDIA types
-  
-  Note: Do not use this if you wish to not filter against any of the defined
-  media types. If you wish to do this, simply don't specify any
-  GST_ELEMENT_FACTORY_TYPE_MEDIA flag.
+    
+    Note: Do not use this if you wish to not filter against any of the defined
+    media types. If you wish to do this, simply don't specify any
+    GST_ELEMENT_FACTORY_TYPE_MEDIA flag.
 */
 enum ELEMENT_FACTORY_TYPE_MEDIA_ANY = 18446462598732840960;
 
@@ -1566,34 +1433,34 @@ enum ELEMENT_FACTORY_TYPE_VIDEO_ENCODER = 2814749767106562;
 
 /**
     Name and contact details of the author(s). Use \n to separate
-  multiple author details.
-  E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
+    multiple author details.
+    E.g: "Joe Bloggs &lt;joe.blogs at foo.com&gt;"
 */
 enum ELEMENT_METADATA_AUTHOR = "author";
 
 /**
     Sentence describing the purpose of the element.
-  E.g: "Write stream to a file"
+    E.g: "Write stream to a file"
 */
 enum ELEMENT_METADATA_DESCRIPTION = "description";
 
 /**
     Set uri pointing to user documentation. Applications can use this to show
-  help for e.g. effects to users.
+    help for e.g. effects to users.
 */
 enum ELEMENT_METADATA_DOC_URI = "doc-uri";
 
 /**
     Elements that bridge to certain other products can include an icon of that
-  used product. Application can show the icon in menus/selectors to help
-  identifying specific elements.
+    used product. Application can show the icon in menus/selectors to help
+    identifying specific elements.
 */
 enum ELEMENT_METADATA_ICON_NAME = "icon-name";
 
 /**
     String describing the type of element, as an unordered list
-  separated with slashes ('/'). See draft-klass.txt of the design docs
-  for more details and common types. E.g: "Sink/File"
+    separated with slashes ('/'). See draft-klass.txt of the design docs
+    for more details and common types. E.g: "Sink/File"
 */
 enum ELEMENT_METADATA_KLASS = "klass";
 
@@ -1604,7 +1471,7 @@ enum ELEMENT_METADATA_LONGNAME = "long-name";
 
 /**
     Builds a string using errno describing the previously failed system
-  call.  To be used as the debug argument in #GST_ELEMENT_ERROR.
+    call.  To be used as the debug argument in #GST_ELEMENT_ERROR.
 */
 enum ERROR_SYSTEM = "system error: %s";
 
@@ -1618,8 +1485,8 @@ enum EVENT_TYPE_BOTH = 3;
 
 /**
     A mask value with all bits set, for use as a
-  GstFlagSet mask where all flag bits must match
-  exactly
+    GstFlagSet mask where all flag bits must match
+    exactly
 */
 enum FLAG_SET_MASK_EXACT = 4294967295;
 
@@ -1630,25 +1497,25 @@ enum FORMAT_PERCENT_MAX = 1000000;
 
 /**
     The value used to scale down the reported PERCENT format value to
-  its real value.
+    its real value.
 */
 enum FORMAT_PERCENT_SCALE = 10000;
 
 /**
     Can be used together with #GST_FOURCC_ARGS to properly output a
-  #guint32 fourcc value in a printf\()-style text message.
-  
-  ```
-  printf ("fourcc: %" GST_FOURCC_FORMAT "\n", GST_FOURCC_ARGS (fcc));
-  ```
+    #guint32 fourcc value in a printf\()-style text message.
+    
+    ```
+    printf ("fourcc: %" GST_FOURCC_FORMAT "\n", GST_FOURCC_ARGS (fcc));
+    ```
 */
 enum FOURCC_FORMAT = "c%c%c%c";
 
 /**
     A value which is guaranteed to never be returned by
-  [gst.global.utilGroupIdNext].
-  
-  Can be used as a default value in variables used to store group_id.
+    [gst.global.utilGroupIdNext].
+    
+    Can be used as a default value in variables used to store group_id.
 */
 enum GROUP_ID_INVALID = 0;
 
@@ -1674,7 +1541,7 @@ enum META_TAG_MEMORY_REFERENCE_STR = "memory-reference";
 
 /**
     This metadata stays relevant as long as memory layout is unchanged.
-  In hindsight, this tag should have been called "memory-layout".
+    In hindsight, this tag should have been called "memory-layout".
 */
 enum META_TAG_MEMORY_STR = "memory";
 
@@ -1690,42 +1557,42 @@ enum NSECOND = 1;
 
 /**
     Use this flag on GObject properties of GstObject to indicate that
-  they might not be available depending on environment such as OS, device, etc,
-  so such properties will be installed conditionally only if the GstObject is
-  able to support it.
+    they might not be available depending on environment such as OS, device, etc,
+    so such properties will be installed conditionally only if the GstObject is
+    able to support it.
 */
 enum PARAM_CONDITIONALLY_AVAILABLE = 16384;
 
 /**
     Use this flag on GObject properties to signal they can make sense to be.
-  controlled over time. This hint is used by the GstController.
+    controlled over time. This hint is used by the GstController.
 */
 enum PARAM_CONTROLLABLE = 512;
 
 /**
     Use this flag on GObject properties of GstObject to indicate that
-  during `gst-inspect` and friends, the default value should be used
-  as default instead of the current value.
+    during `gst-inspect` and friends, the default value should be used
+    as default instead of the current value.
 */
 enum PARAM_DOC_SHOW_DEFAULT = 8192;
 
 /**
     Use this flag on GObject properties of GstElements to indicate that
-  they can be changed when the element is in the PAUSED or lower state.
-  This flag implies GST_PARAM_MUTABLE_READY.
+    they can be changed when the element is in the PAUSED or lower state.
+    This flag implies GST_PARAM_MUTABLE_READY.
 */
 enum PARAM_MUTABLE_PAUSED = 2048;
 
 /**
     Use this flag on GObject properties of GstElements to indicate that
-  they can be changed when the element is in the PLAYING or lower state.
-  This flag implies GST_PARAM_MUTABLE_PAUSED.
+    they can be changed when the element is in the PLAYING or lower state.
+    This flag implies GST_PARAM_MUTABLE_PAUSED.
 */
 enum PARAM_MUTABLE_PLAYING = 4096;
 
 /**
     Use this flag on GObject properties of GstElements to indicate that
-  they can be changed when the element is in the READY or lower state.
+    they can be changed when the element is in the READY or lower state.
 */
 enum PARAM_MUTABLE_READY = 1024;
 
@@ -1736,35 +1603,35 @@ enum PARAM_USER_SHIFT = 65536;
 
 /**
     The field name in a GstCaps that is used to signal the UUID of the protection
-  system.
+    system.
 */
 enum PROTECTION_SYSTEM_ID_CAPS_FIELD = "protection-system";
 
 /**
     The protection system value of the unspecified UUID.
-  In some cases the system protection ID is not present in the contents or in their
-  metadata, as encrypted WebM.
-  This define is used to set the value of the "system_id" field in GstProtectionEvent,
-  with this value, the application will use an external information to choose which
-  protection system to use.
-  
-  Example: The matroskademux uses this value in the case of encrypted WebM,
-  the application will choose the appropriate protection system based on the information
-  received through EME API.
+    In some cases the system protection ID is not present in the contents or in their
+    metadata, as encrypted WebM.
+    This define is used to set the value of the "system_id" field in GstProtectionEvent,
+    with this value, the application will use an external information to choose which
+    protection system to use.
+    
+    Example: The matroskademux uses this value in the case of encrypted WebM,
+    the application will choose the appropriate protection system based on the information
+    received through EME API.
 */
 enum PROTECTION_UNSPECIFIED_SYSTEM_ID = "unspecified-system-id";
 
 /**
     printf format type used to debug GStreamer types. You can use this in
-  combination with GStreamer's debug logging system as well as the functions
-  [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and [gst.global.infoStrdupPrintf]
-  to pretty-print the following types: #GstCaps, #GstStructure,
-  #GstCapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,
-  #GstMessage, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All
-  #GObject types will be printed as typename plus pointer, and everything
-  else will simply be printed as pointer address.
-  
-  This can only be used on types whose size is >= sizeof(gpointer).
+    combination with GStreamer's debug logging system as well as the functions
+    [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and [gst.global.infoStrdupPrintf]
+    to pretty-print the following types: #GstCaps, #GstStructure,
+    #GstCapsFeatures, #GstTagList, #GstDateTime, #GstBuffer, #GstBufferList,
+    #GstMessage, #GstEvent, #GstQuery, #GstContext, #GstPad, #GstObject. All
+    #GObject types will be printed as typename plus pointer, and everything
+    else will simply be printed as pointer address.
+    
+    This can only be used on types whose size is >= sizeof(gpointer).
 */
 enum PTR_FORMAT = "paA";
 
@@ -1783,10 +1650,10 @@ enum SECOND = 1000000000;
 
 /**
     printf format type used to debug GStreamer segments. You can use this in
-  combination with GStreamer's debug logging system as well as the functions
-  [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and [gst.global.infoStrdupPrintf]
-  to pretty-print #GstSegment structures.
-  This can only be used on pointers to GstSegment structures.
+    combination with GStreamer's debug logging system as well as the functions
+    [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and [gst.global.infoStrdupPrintf]
+    to pretty-print #GstSegment structures.
+    This can only be used on pointers to GstSegment structures.
 */
 enum SEGMENT_FORMAT = "paB";
 
@@ -1795,38 +1662,38 @@ enum SEGMENT_INSTANT_FLAGS = 912;
 
 /**
     A value which is guaranteed to never be returned by
-  [gst.global.utilSeqnumNext].
-  
-  Can be used as a default value in variables used to store seqnum.
+    [gst.global.utilSeqnumNext].
+    
+    Can be used as a default value in variables used to store seqnum.
 */
 enum SEQNUM_INVALID = 0;
 
 /**
     printf format type used to debug GStreamer signed time value pointers. You
-  can use this in combination with GStreamer's debug logging system as well as
-  the functions [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and
-  [gst.global.infoStrdupPrintf] to pretty-print signed time (pointers to
-  #GstClockTimeDiff or #gint64).
+    can use this in combination with GStreamer's debug logging system as well as
+    the functions [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and
+    [gst.global.infoStrdupPrintf] to pretty-print signed time (pointers to
+    #GstClockTimeDiff or #gint64).
 */
 enum STIMEP_FORMAT = "paS";
 
 /**
     A string that can be used in printf-like format strings to display a signed
-  #GstClockTimeDiff or #gint64 value in `h:m:s` format.  Use GST_TIME_ARGS() to
-  construct the matching arguments.
-  
-  Example:
-  
-  ``` C
-  printf("%" GST_STIME_FORMAT "\n", GST_STIME_ARGS(ts));
-  ```
+    #GstClockTimeDiff or #gint64 value in `h:m:s` format.  Use GST_TIME_ARGS() to
+    construct the matching arguments.
+    
+    Example:
+    
+    ``` C
+    printf("%" GST_STIME_FORMAT "\n", GST_STIME_ARGS(ts));
+    ```
 */
 enum STIME_FORMAT = "c%";
 
 /**
     album containing this data (string)
-  
-  The album name as it should be displayed, e.g. 'The Jazz Guitar'
+    
+    The album name as it should be displayed, e.g. 'The Jazz Guitar'
 */
 enum TAG_ALBUM = "album";
 
@@ -1852,8 +1719,8 @@ enum TAG_ALBUM_PEAK = "replaygain-album-peak";
 
 /**
     album containing this data, as used for sorting (string)
-  
-  The album name as it should be sorted, e.g. 'Jazz Guitar, The'
+    
+    The album name as it should be sorted, e.g. 'Jazz Guitar, The'
 */
 enum TAG_ALBUM_SORTNAME = "album-sortname";
 
@@ -1869,9 +1736,9 @@ enum TAG_ALBUM_VOLUME_NUMBER = "album-disc-number";
 
 /**
     Arbitrary application data (sample)
-  
-  Some formats allow applications to add their own arbitrary data
-  into files. This data is application dependent.
+    
+    Some formats allow applications to add their own arbitrary data
+    into files. This data is application dependent.
 */
 enum TAG_APPLICATION_DATA = "application-data";
 
@@ -1882,24 +1749,24 @@ enum TAG_APPLICATION_NAME = "application-name";
 
 /**
     person(s) responsible for the recording (string)
-  
-  The artist name as it should be displayed, e.g. 'Jimi Hendrix' or
-  'The Guitar Heroes'
+    
+    The artist name as it should be displayed, e.g. 'Jimi Hendrix' or
+    'The Guitar Heroes'
 */
 enum TAG_ARTIST = "artist";
 
 /**
     person(s) responsible for the recording, as used for sorting (string)
-  
-  The artist name as it should be sorted, e.g. 'Hendrix, Jimi' or
-  'Guitar Heroes, The'
+    
+    The artist name as it should be sorted, e.g. 'Hendrix, Jimi' or
+    'Guitar Heroes, The'
 */
 enum TAG_ARTIST_SORTNAME = "artist-sortname";
 
 /**
     generic file attachment (sample) (sample taglist should specify the content
-  type and if possible set "filename" to the file name of the
-  attachment)
+    type and if possible set "filename" to the file name of the
+    attachment)
 */
 enum TAG_ATTACHMENT = "attachment";
 
@@ -1955,9 +1822,9 @@ enum TAG_CONTAINER_FORMAT = "container-format";
 
 /**
     Unique identifier for the audio, video or text track this tag is associated
-  with. The mappings for several container formats are defined in the [Sourcing
-  In-band Media Resource Tracks from Media Containers into HTML
-  specification](https://dev.w3.org/html5/html-sourcing-inband-tracks/).
+    with. The mappings for several container formats are defined in the [Sourcing
+    In-band Media Resource Tracks from Media Containers into HTML
+    specification](https://dev.w3.org/html5/html-sourcing-inband-tracks/).
 */
 enum TAG_CONTAINER_SPECIFIC_TRACK_ID = "container-specific-track-id";
 
@@ -2003,11 +1870,11 @@ enum TAG_DURATION = "duration";
 
 /**
     name of the person or organisation that encoded the file. May contain a
-  copyright message if the person or organisation also holds the copyright
-  (string)
-  
-  Note: do not use this field to describe the encoding application. Use
-  #GST_TAG_APPLICATION_NAME or #GST_TAG_COMMENT for that.
+    copyright message if the person or organisation also holds the copyright
+    (string)
+    
+    Note: do not use this field to describe the encoding application. Use
+    #GST_TAG_APPLICATION_NAME or #GST_TAG_COMMENT for that.
 */
 enum TAG_ENCODED_BY = "encoded-by";
 
@@ -2023,13 +1890,13 @@ enum TAG_ENCODER_VERSION = "encoder-version";
 
 /**
     key/value text commenting the data (string)
-  
-  Must be in the form of 'key=comment' or
-  'key[lc]=comment' where 'lc' is an ISO-639
-  language code.
-  
-  This tag is used for unknown Vorbis comment tags,
-  unknown APE tags and certain ID3v2 comment fields.
+    
+    Must be in the form of 'key=comment' or
+    'key[lc]=comment' where 'lc' is an ISO-639
+    language code.
+    
+    This tag is used for unknown Vorbis comment tags,
+    unknown APE tags and certain ID3v2 comment fields.
 */
 enum TAG_EXTENDED_COMMENT = "extended-comment";
 
@@ -2040,10 +1907,10 @@ enum TAG_GENRE = "genre";
 
 /**
     Indicates the direction the device is pointing to when capturing
-  a media. It is represented as degrees in floating point representation,
-  0 means the geographic north, and increases clockwise (double from 0 to 360)
-  
-  See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION
+    a media. It is represented as degrees in floating point representation,
+    0 means the geographic north, and increases clockwise (double from 0 to 360)
+    
+    See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION
 */
 enum TAG_GEO_LOCATION_CAPTURE_DIRECTION = "geo-location-capture-direction";
 
@@ -2059,65 +1926,65 @@ enum TAG_GEO_LOCATION_COUNTRY = "geo-location-country";
 
 /**
     geo elevation of where the media has been recorded or produced in meters
-  according to WGS84 (zero is average sea level) (double).
+    according to WGS84 (zero is average sea level) (double).
 */
 enum TAG_GEO_LOCATION_ELEVATION = "geo-location-elevation";
 
 /**
     Represents the expected error on the horizontal positioning in
-  meters (double).
+    meters (double).
 */
 enum TAG_GEO_LOCATION_HORIZONTAL_ERROR = "geo-location-horizontal-error";
 
 /**
     geo latitude location of where the media has been recorded or produced in
-  degrees according to WGS84 (zero at the equator, negative values for southern
-  latitudes) (double).
+    degrees according to WGS84 (zero at the equator, negative values for southern
+    latitudes) (double).
 */
 enum TAG_GEO_LOCATION_LATITUDE = "geo-location-latitude";
 
 /**
     geo longitude location of where the media has been recorded or produced in
-  degrees according to WGS84 (zero at the prime meridian in Greenwich/UK,
-  negative values for western longitudes). (double).
+    degrees according to WGS84 (zero at the prime meridian in Greenwich/UK,
+    negative values for western longitudes). (double).
 */
 enum TAG_GEO_LOCATION_LONGITUDE = "geo-location-longitude";
 
 /**
     Indicates the movement direction of the device performing the capture
-  of a media. It is represented as degrees in floating point representation,
-  0 means the geographic north, and increases clockwise (double from 0 to 360)
-  
-  See also #GST_TAG_GEO_LOCATION_CAPTURE_DIRECTION
+    of a media. It is represented as degrees in floating point representation,
+    0 means the geographic north, and increases clockwise (double from 0 to 360)
+    
+    See also #GST_TAG_GEO_LOCATION_CAPTURE_DIRECTION
 */
 enum TAG_GEO_LOCATION_MOVEMENT_DIRECTION = "geo-location-movement-direction";
 
 /**
     Speed of the capturing device when performing the capture.
-  Represented in m/s. (double)
-  
-  See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION
+    Represented in m/s. (double)
+    
+    See also #GST_TAG_GEO_LOCATION_MOVEMENT_DIRECTION
 */
 enum TAG_GEO_LOCATION_MOVEMENT_SPEED = "geo-location-movement-speed";
 
 /**
     human readable descriptive location of where the media has been recorded or
-  produced. (string).
+    produced. (string).
 */
 enum TAG_GEO_LOCATION_NAME = "geo-location-name";
 
 /**
     A location 'smaller' than GST_TAG_GEO_LOCATION_CITY that specifies better
-  where the media has been produced. (e.g. the neighborhood) (string).
-  
-  This tag has been added as this is how it is handled/named in XMP's
-  Iptc4xmpcore schema.
+    where the media has been produced. (e.g. the neighborhood) (string).
+    
+    This tag has been added as this is how it is handled/named in XMP's
+    Iptc4xmpcore schema.
 */
 enum TAG_GEO_LOCATION_SUBLOCATION = "geo-location-sublocation";
 
 /**
     Groups together media that are related and spans multiple tracks. An
-  example are multiple pieces of a concerto. (string)
+    example are multiple pieces of a concerto. (string)
 */
 enum TAG_GROUPING = "grouping";
 
@@ -2128,36 +1995,36 @@ enum TAG_HOMEPAGE = "homepage";
 
 /**
     image (sample) (sample taglist should specify the content type and preferably
-  also set "image-type" field as [gsttag.types.TagImageType])
+    also set "image-type" field as [gsttag.types.TagImageType])
 */
 enum TAG_IMAGE = "image";
 
 /**
     Represents the 'Orientation' tag from EXIF. Defines how the image
-  should be rotated and mirrored for display. (string)
-  
-  This tag has a predefined set of allowed values:
-    "rotate-0"
-    "rotate-90"
-    "rotate-180"
-    "rotate-270"
-    "flip-rotate-0"
-    "flip-rotate-90"
-    "flip-rotate-180"
-    "flip-rotate-270"
-  
-  The naming is adopted according to a possible transformation to perform
-  on the image to fix its orientation, obviously equivalent operations will
-  yield the same result.
-  
-  Rotations indicated by the values are in clockwise direction and
-  'flip' means an horizontal mirroring.
+    should be rotated and mirrored for display. (string)
+    
+    This tag has a predefined set of allowed values:
+      "rotate-0"
+      "rotate-90"
+      "rotate-180"
+      "rotate-270"
+      "flip-rotate-0"
+      "flip-rotate-90"
+      "flip-rotate-180"
+      "flip-rotate-270"
+    
+    The naming is adopted according to a possible transformation to perform
+    on the image to fix its orientation, obviously equivalent operations will
+    yield the same result.
+    
+    Rotations indicated by the values are in clockwise direction and
+    'flip' means an horizontal mirroring.
 */
 enum TAG_IMAGE_ORIENTATION = "image-orientation";
 
 /**
     Information about the people behind a remix and similar
-  interpretations of another existing piece (string)
+    interpretations of another existing piece (string)
 */
 enum TAG_INTERPRETED_BY = "interpreted-by";
 
@@ -2173,18 +2040,18 @@ enum TAG_KEYWORDS = "keywords";
 
 /**
     ISO-639-2 or ISO-639-1 code for the language the content is in (string)
-  
-  There is utility API in libgsttag in gst-plugins-base to obtain a translated
-  language name from the language code: `[gsttag.global.tagGetLanguageName]`
+    
+    There is utility API in libgsttag in gst-plugins-base to obtain a translated
+    language name from the language code: `[gsttag.global.tagGetLanguageName]`
 */
 enum TAG_LANGUAGE_CODE = "language-code";
 
 /**
     Name of the language the content is in (string)
-  
-  Free-form name of the language the content is in, if a language code
-  is not available. This tag should not be set in addition to a language
-  code. It is undefined what language or locale the language name is in.
+    
+    Free-form name of the language the content is in, if a language code
+    is not available. This tag should not be set in addition to a language
+    code. It is undefined what language or locale the language name is in.
 */
 enum TAG_LANGUAGE_NAME = "language-name";
 
@@ -2200,7 +2067,7 @@ enum TAG_LICENSE_URI = "license-uri";
 
 /**
     Origin of media as a URI (location, where the original of the file or stream
-  is hosted) (string)
+    is hosted) (string)
 */
 enum TAG_LOCATION = "location";
 
@@ -2216,8 +2083,8 @@ enum TAG_MAXIMUM_BITRATE = "maximum-bitrate";
 
 /**
     [Midi note number](http://en.wikipedia.org/wiki/Note#Note_designation_in_accordance_with_octave_name)
-  of the audio track. This is useful for sample instruments and in particular
-  for multi-samples.
+    of the audio track. This is useful for sample instruments and in particular
+    for multi-samples.
 */
 enum TAG_MIDI_BASE_NOTE = "midi-base-note";
 
@@ -2228,7 +2095,7 @@ enum TAG_MINIMUM_BITRATE = "minimum-bitrate";
 
 /**
     nominal bitrate in bits/s (unsigned integer). The actual bitrate might be
-  different from this target bitrate.
+    different from this target bitrate.
 */
 enum TAG_NOMINAL_BITRATE = "nominal-bitrate";
 
@@ -2244,21 +2111,21 @@ enum TAG_PERFORMER = "performer";
 
 /**
     image that is meant for preview purposes, e.g. small icon-sized version
-  (sample) (sample taglist should specify the content type)
+    (sample) (sample taglist should specify the content type)
 */
 enum TAG_PREVIEW_IMAGE = "preview-image";
 
 /**
     Any private data that may be contained in tags (sample).
-  
-  It is represented by #GstSample in which #GstBuffer contains the
-  binary data and the sample's info #GstStructure may contain any
-  extra information that identifies the origin or meaning of the data.
-  
-  Private frames in ID3v2 tags ('PRIV' frames) will be represented
-  using this tag, in which case the GstStructure will be named
-  "ID3PrivateFrame" and contain a field named "owner" of type string
-  which contains the owner-identification string from the tag.
+    
+    It is represented by #GstSample in which #GstBuffer contains the
+    binary data and the sample's info #GstStructure may contain any
+    extra information that identifies the origin or meaning of the data.
+    
+    Private frames in ID3v2 tags ('PRIV' frames) will be represented
+    using this tag, in which case the GstStructure will be named
+    "ID3PrivateFrame" and contain a field named "owner" of type string
+    which contains the owner-identification string from the tag.
 */
 enum TAG_PRIVATE_DATA = "private-data";
 
@@ -2304,15 +2171,15 @@ enum TAG_SUBTITLE_CODEC = "subtitle-codec";
 
 /**
     commonly used title (string)
-  
-  The title as it should be displayed, e.g. 'The Doll House'
+    
+    The title as it should be displayed, e.g. 'The Doll House'
 */
 enum TAG_TITLE = "title";
 
 /**
     commonly used title, as used for sorting (string)
-  
-  The title as it should be sorted, e.g. 'Doll House, The'
+    
+    The title as it should be sorted, e.g. 'Doll House, The'
 */
 enum TAG_TITLE_SORTNAME = "title-sortname";
 
@@ -2338,8 +2205,8 @@ enum TAG_TRACK_PEAK = "replaygain-track-peak";
 
 /**
     Rating attributed by a person (likely the application user).
-  The higher the value, the more the user likes this media
-  (unsigned int from 0 to 100)
+    The higher the value, the more the user likes this media
+    (unsigned int from 0 to 100)
 */
 enum TAG_USER_RATING = "user-rating";
 
@@ -2355,29 +2222,29 @@ enum TAG_VIDEO_CODEC = "video-codec";
 
 /**
     printf format type used to debug GStreamer ClockTime pointers. You can use
-  this in combination with GStreamer's debug logging system as well as the
-  functions [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and
-  [gst.global.infoStrdupPrintf] to pretty-print #GstClockTime pointers. This can
-  only be used on pointers to GstClockTime values.
+    this in combination with GStreamer's debug logging system as well as the
+    functions [gst.global.infoVasprintf], [gst.global.infoStrdupVprintf] and
+    [gst.global.infoStrdupPrintf] to pretty-print #GstClockTime pointers. This can
+    only be used on pointers to GstClockTime values.
 */
 enum TIMEP_FORMAT = "paT";
 
 /**
     A string that can be used in printf-like format strings to display a
-  #GstClockTime value in `h:m:s` format.  Use GST_TIME_ARGS() to construct
-  the matching arguments.
-  
-  Example:
-  
-  ``` C
-  printf("%" GST_TIME_FORMAT "\n", GST_TIME_ARGS(ts));
-  ```
+    #GstClockTime value in `h:m:s` format.  Use GST_TIME_ARGS() to construct
+    the matching arguments.
+    
+    Example:
+    
+    ``` C
+    printf("%" GST_TIME_FORMAT "\n", GST_TIME_ARGS(ts));
+    ```
 */
 enum TIME_FORMAT = "u:%02u:%02u.%09u";
 
 /**
     Special value for the repeat_count set in [gst.toc_entry.TocEntry.setLoop] or
-  returned by [gst.toc_entry.TocEntry.setLoop] to indicate infinite looping.
+    returned by [gst.toc_entry.TocEntry.setLoop] to indicate infinite looping.
 */
 enum TOC_REPEAT_COUNT_INFINITE = -1;
 
@@ -2393,25 +2260,25 @@ enum USECOND = 1000;
 
 /**
     Indicates that the first value provided to a comparison function
-  ([gst.global.valueCompare]) is equal to the second one.
+    ([gst.global.valueCompare]) is equal to the second one.
 */
 enum VALUE_EQUAL = 0;
 
 /**
     Indicates that the first value provided to a comparison function
-  ([gst.global.valueCompare]) is greater than the second one.
+    ([gst.global.valueCompare]) is greater than the second one.
 */
 enum VALUE_GREATER_THAN = 1;
 
 /**
     Indicates that the first value provided to a comparison function
-  ([gst.global.valueCompare]) is lesser than the second one.
+    ([gst.global.valueCompare]) is lesser than the second one.
 */
 enum VALUE_LESS_THAN = -1;
 
 /**
     Indicates that the comparison function ([gst.global.valueCompare]) can not
-  determine a order for the two provided values.
+    determine a order for the two provided values.
 */
 enum VALUE_UNORDERED = 2;
 
@@ -2432,6 +2299,6 @@ enum VERSION_MINOR = 24;
 
 /**
     The nano version of GStreamer at compile time:
-  Actual releases have 0, GIT versions have 1, prerelease versions have 2-...
+    Actual releases have 0, GIT versions have 1, prerelease versions have 2-...
 */
 enum VERSION_NANO = 0;

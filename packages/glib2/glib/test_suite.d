@@ -1,3 +1,4 @@
+/// Module for [TestSuite] class
 module glib.test_suite;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class TestSuite
   GTestSuite* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class TestSuite
       g_test_suite_free(cInstancePtr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -36,8 +39,9 @@ class TestSuite
 
   /**
       Adds test_case to suite.
-    Params:
-      testCase =       a #GTestCase
+  
+      Params:
+        testCase = a #GTestCase
   */
   void add(glib.types.TestCase testCase)
   {
@@ -46,8 +50,9 @@ class TestSuite
 
   /**
       Adds nestedsuite to suite.
-    Params:
-      nestedsuite =       another #GTestSuite
+  
+      Params:
+        nestedsuite = another #GTestSuite
   */
   void addSuite(glib.test_suite.TestSuite nestedsuite)
   {

@@ -1,3 +1,4 @@
+/// Module for [AtomicQueue] class
 module gst.atomic_queue;
 
 import gid.gid;
@@ -8,27 +9,31 @@ import gst.types;
 
 /**
     The #GstAtomicQueue object implements a queue that can be used from multiple
-  threads without performing any blocking operations.
+    threads without performing any blocking operations.
 */
 class AtomicQueue : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_atomic_queue_get_type != &gidSymbolNotFound ? gst_atomic_queue_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,10 +46,11 @@ class AtomicQueue : gobject.boxed.Boxed
 
   /**
       Create a new atomic queue instance. initial_size will be rounded up to the
-    nearest power of 2 and used as the initial size of the queue.
-    Params:
-      initialSize =       initial queue size
-    Returns:     a new #GstAtomicQueue
+      nearest power of 2 and used as the initial size of the queue.
+  
+      Params:
+        initialSize = initial queue size
+      Returns: a new #GstAtomicQueue
   */
   this(uint initialSize)
   {
@@ -55,7 +61,7 @@ class AtomicQueue : gobject.boxed.Boxed
 
   /**
       Get the amount of items in the queue.
-    Returns:     the number of elements in the queue.
+      Returns: the number of elements in the queue.
   */
   uint length()
   {
@@ -66,8 +72,8 @@ class AtomicQueue : gobject.boxed.Boxed
 
   /**
       Peek the head element of the queue without removing it from the queue.
-    Returns:     the head element of queue or
-      null when the queue is empty.
+      Returns: the head element of queue or
+        null when the queue is empty.
   */
   void* peek()
   {
@@ -77,8 +83,8 @@ class AtomicQueue : gobject.boxed.Boxed
 
   /**
       Get the head element of the queue.
-    Returns:     the head element of queue or null when
-      the queue is empty.
+      Returns: the head element of queue or null when
+        the queue is empty.
   */
   void* pop()
   {
@@ -88,8 +94,9 @@ class AtomicQueue : gobject.boxed.Boxed
 
   /**
       Append data to the tail of the queue.
-    Params:
-      data =       the data
+  
+      Params:
+        data = the data
   */
   void push(void* data = null)
   {

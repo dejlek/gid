@@ -1,3 +1,4 @@
+/// Module for [GLViewConvert] class
 module gstgl.glview_convert;
 
 import gid.gid;
@@ -16,17 +17,20 @@ import gstgl.types;
 class GLViewConvert : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_view_convert_get_type != &gidSymbolNotFound ? gst_gl_view_convert_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,11 +51,12 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Provides an implementation of #GstBaseTransformClass.fixate_caps()
-    Params:
-      direction =       a #GstPadDirection
-      caps =       the #GstCaps of direction
-      othercaps =       the #GstCaps to fixate
-    Returns:     the fixated #GstCaps
+  
+      Params:
+        direction = a #GstPadDirection
+        caps = the #GstCaps of direction
+        othercaps = the #GstCaps to fixate
+      Returns: the fixated #GstCaps
   */
   gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
   {
@@ -63,9 +68,10 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Retrieve the processed output buffer placing the output in outbuf_ptr.
-    Params:
-      outbufPtr =       a #GstBuffer
-    Returns:     a #GstFlowReturn
+  
+      Params:
+        outbufPtr = a #GstBuffer
+      Returns: a #GstFlowReturn
   */
   gst.types.FlowReturn getOutput(out gst.buffer.Buffer outbufPtr)
   {
@@ -79,10 +85,11 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Converts the data contained by inbuf using the formats specified by the
-    #GstCaps passed to [gstgl.glview_convert.GLViewConvert.setCaps]
-    Params:
-      inbuf =       the #GstGLMemory filled #GstBuffer to convert
-    Returns:     a converted #GstBuffer or null
+      #GstCaps passed to [gstgl.glview_convert.GLViewConvert.setCaps]
+  
+      Params:
+        inbuf = the #GstGLMemory filled #GstBuffer to convert
+      Returns: a converted #GstBuffer or null
   */
   gst.buffer.Buffer perform(gst.buffer.Buffer inbuf)
   {
@@ -94,7 +101,7 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Reset viewconvert to the default state.  Further operation will require
-    setting the caps with [gstgl.glview_convert.GLViewConvert.setCaps].
+      setting the caps with [gstgl.glview_convert.GLViewConvert.setCaps].
   */
   void reset()
   {
@@ -103,10 +110,11 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Initializes viewconvert with the information required for conversion.
-    Params:
-      inCaps =       input #GstCaps
-      outCaps =       output #GstCaps
-    Returns: 
+  
+      Params:
+        inCaps = input #GstCaps
+        outCaps = output #GstCaps
+      Returns: 
   */
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
@@ -117,8 +125,9 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Set context on viewconvert
-    Params:
-      context =       the #GstGLContext to set
+  
+      Params:
+        context = the #GstGLContext to set
   */
   void setContext(gstgl.glcontext.GLContext context)
   {
@@ -127,10 +136,11 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Submit input to be processed by viewconvert
-    Params:
-      isDiscont =       true if we have a discontinuity
-      input =       a #GstBuffer
-    Returns:     a #GstFlowReturn
+  
+      Params:
+        isDiscont = true if we have a discontinuity
+        input = a #GstBuffer
+      Returns: a #GstFlowReturn
   */
   gst.types.FlowReturn submitInputBuffer(bool isDiscont, gst.buffer.Buffer input)
   {
@@ -142,11 +152,12 @@ class GLViewConvert : gst.object.ObjectGst
 
   /**
       Provides an implementation of #GstBaseTransformClass.transform_caps()
-    Params:
-      direction =       a #GstPadDirection
-      caps =       the #GstCaps to transform
-      filter =       a set of filter #GstCaps
-    Returns:     the converted #GstCaps
+  
+      Params:
+        direction = a #GstPadDirection
+        caps = the #GstCaps to transform
+        filter = a set of filter #GstCaps
+      Returns: the converted #GstCaps
   */
   gst.caps.Caps transformCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {

@@ -1,3 +1,4 @@
+/// Module for [FixedLayoutChild] class
 module gtk.fixed_layout_child;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class FixedLayoutChild : gtk.layout_child.LayoutChild
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_layout_child_get_type != &gidSymbolNotFound ? gtk_fixed_layout_child_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,7 +40,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves the transformation of the child.
-    Returns:     a [gsk.transform.Transform]
+      Returns: a [gsk.transform.Transform]
   */
   gsk.transform.Transform getTransform()
   {
@@ -48,8 +52,9 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets the transformation of the child of a [gtk.fixed_layout.FixedLayout].
-    Params:
-      transform =       a [gsk.transform.Transform]
+  
+      Params:
+        transform = a [gsk.transform.Transform]
   */
   void setTransform(gsk.transform.Transform transform)
   {

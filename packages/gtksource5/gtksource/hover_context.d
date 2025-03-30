@@ -1,3 +1,4 @@
+/// Module for [HoverContext] class
 module gtksource.hover_context;
 
 import gid.gid;
@@ -11,31 +12,34 @@ import gtksource.view;
 
 /**
     Context for populating `class@HoverDisplay` contents.
-  
-  [gtksource.hover_context.HoverContext] contains information about the request to populate
-  contents for a `class@HoverDisplay`.
-  
-  It can be used to retrieve the `class@View`, `class@Buffer`, and
-  [gtk.text_iter.TextIter] for the regions of text which are being displayed.
-  
-  Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
-  requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
-  of the pointer when the request was made.
+    
+    [gtksource.hover_context.HoverContext] contains information about the request to populate
+    contents for a `class@HoverDisplay`.
+    
+    It can be used to retrieve the `class@View`, `class@Buffer`, and
+    [gtk.text_iter.TextIter] for the regions of text which are being displayed.
+    
+    Use [gtksource.hover_context.HoverContext.getBounds] to get the word that was
+    requested. [gtksource.hover_context.HoverContext.getIter] will get you the location
+    of the pointer when the request was made.
 */
 class HoverContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_context_get_type != &gidSymbolNotFound ? gtk_source_hover_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,16 +52,17 @@ class HoverContext : gobject.object.ObjectG
 
   /**
       Gets the current word bounds of the hover.
-    
-    If begin is non-null, it will be set to the start position of the
-    current word being hovered.
-    
-    If end is non-null, it will be set to the end position for the
-    current word being hovered.
-    Params:
-      begin =       a #GtkTextIter
-      end =       a #GtkTextIter
-    Returns:     true if the marks are still valid and begin or end was set.
+      
+      If begin is non-null, it will be set to the start position of the
+      current word being hovered.
+      
+      If end is non-null, it will be set to the end position for the
+      current word being hovered.
+  
+      Params:
+        begin = a #GtkTextIter
+        end = a #GtkTextIter
+      Returns: true if the marks are still valid and begin or end was set.
   */
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
@@ -72,7 +77,7 @@ class HoverContext : gobject.object.ObjectG
 
   /**
       A convenience function to get the buffer.
-    Returns:     The #GtkSourceBuffer for the view
+      Returns: The #GtkSourceBuffer for the view
   */
   gtksource.buffer.Buffer getBuffer()
   {

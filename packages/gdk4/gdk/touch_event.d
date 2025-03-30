@@ -1,3 +1,4 @@
+/// Module for [TouchEvent] class
 module gdk.touch_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class TouchEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,7 +24,7 @@ class TouchEvent : gdk.event.Event
 
   /**
       Extracts whether a touch event is emulating a pointer event.
-    Returns:     true if event is emulating
+      Returns: true if event is emulating
   */
   bool getEmulatingPointer()
   {

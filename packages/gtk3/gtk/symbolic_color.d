@@ -1,3 +1,4 @@
+/// Module for [SymbolicColor] class
 module gtk.symbolic_color;
 
 import gdk.rgba;
@@ -10,40 +11,44 @@ import gtk.types;
 
 /**
     GtkSymbolicColor is a boxed type that represents a symbolic color.
-  It is the result of parsing a
-  [color expression][gtkcssprovider-symbolic-colors].
-  To obtain the color represented by a GtkSymbolicColor, it has to
-  be resolved with [gtk.symbolic_color.SymbolicColor.resolve], which replaces all
-  symbolic color references by the colors they refer to (in a given
-  context) and evaluates mix, shade and other expressions, resulting
-  in a #GdkRGBA value.
-  
-  It is not normally necessary to deal directly with #GtkSymbolicColors,
-  since they are mostly used behind the scenes by #GtkStyleContext and
-  #GtkCssProvider.
-  
-  #GtkSymbolicColor is deprecated. Symbolic colors are considered an
-  implementation detail of GTK+.
+    It is the result of parsing a
+    [color expression][gtkcssprovider-symbolic-colors].
+    To obtain the color represented by a GtkSymbolicColor, it has to
+    be resolved with [gtk.symbolic_color.SymbolicColor.resolve], which replaces all
+    symbolic color references by the colors they refer to (in a given
+    context) and evaluates mix, shade and other expressions, resulting
+    in a #GdkRGBA value.
+    
+    It is not normally necessary to deal directly with #GtkSymbolicColors,
+    since they are mostly used behind the scenes by #GtkStyleContext and
+    #GtkCssProvider.
+    
+    #GtkSymbolicColor is deprecated. Symbolic colors are considered an
+    implementation detail of GTK+.
 */
 class SymbolicColor : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_symbolic_color_get_type != &gidSymbolNotFound ? gtk_symbolic_color_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,15 +61,16 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color by modifying the relative alpha
-    value of color. A factor < 1.0 would resolve to a more
-    transparent color, while > 1.0 would resolve to a more
-    opaque color.
-    Params:
-      color =       another #GtkSymbolicColor
-      factor =       factor to apply to color alpha
-    Returns:     A newly created #GtkSymbolicColor
+      value of color. A factor < 1.0 would resolve to a more
+      transparent color, while > 1.0 would resolve to a more
+      opaque color.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        color = another #GtkSymbolicColor
+        factor = factor to apply to color alpha
+      Returns: A newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newAlpha(gtk.symbolic_color.SymbolicColor color, double factor)
   {
@@ -76,11 +82,12 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color pointing to a literal color.
-    Params:
-      color =       a #GdkRGBA
-    Returns:     a newly created #GtkSymbolicColor
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        color = a #GdkRGBA
+      Returns: a newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newLiteral(gdk.rgba.RGBA color)
   {
@@ -92,15 +99,16 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color defined as a mix of another
-    two colors. a mix factor of 0 would resolve to color1,
-    while a factor of 1 would resolve to color2.
-    Params:
-      color1 =       color to mix
-      color2 =       another color to mix
-      factor =       mix factor
-    Returns:     A newly created #GtkSymbolicColor
+      two colors. a mix factor of 0 would resolve to color1,
+      while a factor of 1 would resolve to color2.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        color1 = color to mix
+        color2 = another color to mix
+        factor = mix factor
+      Returns: A newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newMix(gtk.symbolic_color.SymbolicColor color1, gtk.symbolic_color.SymbolicColor color2, double factor)
   {
@@ -112,13 +120,14 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color pointing to an unresolved named
-    color. See [gtk.style_context.StyleContext.lookupColor] and
-    [gtk.style_properties.StyleProperties.lookupColor].
-    Params:
-      name =       color name
-    Returns:     a newly created #GtkSymbolicColor
+      color. See [gtk.style_context.StyleContext.lookupColor] and
+      [gtk.style_properties.StyleProperties.lookupColor].
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        name = color name
+      Returns: a newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newName(string name)
   {
@@ -131,15 +140,16 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color defined as a shade of
-    another color. A factor > 1.0 would resolve to
-    a brighter color, while < 1.0 would resolve to
-    a darker color.
-    Params:
-      color =       another #GtkSymbolicColor
-      factor =       shading factor to apply to color
-    Returns:     A newly created #GtkSymbolicColor
+      another color. A factor > 1.0 would resolve to
+      a brighter color, while < 1.0 would resolve to
+      a darker color.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        color = another #GtkSymbolicColor
+        factor = shading factor to apply to color
+      Returns: A newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newShade(gtk.symbolic_color.SymbolicColor color, double factor)
   {
@@ -151,17 +161,18 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Creates a symbolic color based on the current win32
-    theme.
-    
-    Note that while this call is available on all platforms
-    the actual value returned is not reliable on non-win32
-    platforms.
-    Params:
-      themeClass =       The theme class to pull color from
-      id =       The color id
-    Returns:     A newly created #GtkSymbolicColor
+      theme.
+      
+      Note that while this call is available on all platforms
+      the actual value returned is not reliable on non-win32
+      platforms.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        themeClass = The theme class to pull color from
+        id = The color id
+      Returns: A newly created #GtkSymbolicColor
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   static gtk.symbolic_color.SymbolicColor newWin32(string themeClass, int id)
   {
@@ -174,20 +185,21 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       If color is resolvable, resolved_color will be filled in
-    with the resolved color, and true will be returned. Generally,
-    if color can’t be resolved, it is due to it being defined on
-    top of a named color that doesn’t exist in props.
-    
-    When props is null, resolving of named colors will fail, so if
-    your color is or references such a color, this function will
-    return false.
-    Params:
-      props =       #GtkStyleProperties to use when resolving
-           named colors, or null
-      resolvedColor =       return location for the resolved color
-    Returns:     true if the color has been resolved
+      with the resolved color, and true will be returned. Generally,
+      if color can’t be resolved, it is due to it being defined on
+      top of a named color that doesn’t exist in props.
+      
+      When props is null, resolving of named colors will fail, so if
+      your color is or references such a color, this function will
+      return false.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        props = #GtkStyleProperties to use when resolving
+             named colors, or null
+        resolvedColor = return location for the resolved color
+      Returns: true if the color has been resolved
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   bool resolve(gtk.style_properties.StyleProperties props, out gdk.rgba.RGBA resolvedColor)
   {
@@ -200,13 +212,13 @@ class SymbolicColor : gobject.boxed.Boxed
 
   /**
       Converts the given color to a string representation. This is useful
-    both for debugging and for serialization of strings. The format of
-    the string may change between different versions of GTK, but it is
-    guaranteed that the GTK css parser is able to read the string and
-    create the same symbolic color from it.
-    Returns:     a new string representing color
+      both for debugging and for serialization of strings. The format of
+      the string may change between different versions of GTK, but it is
+      guaranteed that the GTK css parser is able to read the string and
+      create the same symbolic color from it.
+      Returns: a new string representing color
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   string toString_()
   {

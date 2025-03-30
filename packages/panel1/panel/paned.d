@@ -1,3 +1,4 @@
+/// Module for [Paned] class
 module panel.paned;
 
 import gid.gid;
@@ -21,17 +22,20 @@ import panel.types;
 class Paned : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_paned_get_type != &gidSymbolNotFound ? panel_paned_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

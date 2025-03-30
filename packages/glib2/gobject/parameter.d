@@ -1,3 +1,4 @@
+/// Module for [Parameter] class
 module gobject.parameter;
 
 import gid.gid;
@@ -8,14 +9,15 @@ import gobject.value;
 
 /**
     The GParameter struct is an auxiliary structure used
-  to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
+    to hand parameter name/value pairs to [gobject.object.ObjectG.newv].
 
-  Deprecated:     This type is not introspectable.
+    Deprecated: This type is not introspectable.
 */
 class Parameter
 {
   GParameter cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class Parameter
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

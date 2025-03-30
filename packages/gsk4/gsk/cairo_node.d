@@ -1,3 +1,4 @@
+/// Module for [CairoNode] class
 module gsk.cairo_node;
 
 import cairo.context;
@@ -15,6 +16,7 @@ import gsk.types;
 class CairoNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,12 +27,13 @@ class CairoNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will render a cairo surface
-    into the area given by bounds.
-    
-    You can draw to the cairo surface using [gsk.cairo_node.CairoNode.getDrawContext].
-    Params:
-      bounds =       the rectangle to render to
-    Returns:     A new [gsk.render_node.RenderNode]
+      into the area given by bounds.
+      
+      You can draw to the cairo surface using [gsk.cairo_node.CairoNode.getDrawContext].
+  
+      Params:
+        bounds = the rectangle to render to
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(graphene.rect.Rect bounds)
   {
@@ -41,12 +44,12 @@ class CairoNode : gsk.render_node.RenderNode
 
   /**
       Creates a Cairo context for drawing using the surface associated
-    to the render node.
-    
-    If no surface exists yet, a surface will be created optimized for
-    rendering to renderer.
-    Returns:     a Cairo context used for drawing; use
-        [cairo.global.destroy] when done drawing
+      to the render node.
+      
+      If no surface exists yet, a surface will be created optimized for
+      rendering to renderer.
+      Returns: a Cairo context used for drawing; use
+          [cairo.global.destroy] when done drawing
   */
   cairo.context.Context getDrawContext()
   {
@@ -58,7 +61,7 @@ class CairoNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the Cairo surface used by the render node.
-    Returns:     a Cairo surface
+      Returns: a Cairo surface
   */
   cairo.surface.Surface getSurface()
   {

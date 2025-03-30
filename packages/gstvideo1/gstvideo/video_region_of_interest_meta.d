@@ -1,3 +1,4 @@
+/// Module for [VideoRegionOfInterestMeta] class
 module gstvideo.video_region_of_interest_meta;
 
 import gid.gid;
@@ -16,6 +17,7 @@ class VideoRegionOfInterestMeta
 {
   GstVideoRegionOfInterestMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class VideoRegionOfInterestMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -109,16 +112,17 @@ class VideoRegionOfInterestMeta
 
   /**
       Attach element-specific parameters to meta meant to be used by downstream
-    elements which may handle this ROI.
-    The name of s is used to identify the element these parameters are meant for.
-    
-    This is typically used to tell encoders how they should encode this specific region.
-    For example, a structure named "roi/x264enc" could be used to give the
-    QP offsets this encoder should use when encoding the region described in meta.
-    Multiple parameters can be defined for the same meta so different encoders
-    can be supported by cross platform applications).
-    Params:
-      s =       a #GstStructure
+      elements which may handle this ROI.
+      The name of `s` is used to identify the element these parameters are meant for.
+      
+      This is typically used to tell encoders how they should encode this specific region.
+      For example, a structure named "roi/x264enc" could be used to give the
+      QP offsets this encoder should use when encoding the region described in meta.
+      Multiple parameters can be defined for the same meta so different encoders
+      can be supported by cross platform applications).
+  
+      Params:
+        s = a #GstStructure
   */
   void addParam(gst.structure.Structure s)
   {
@@ -127,12 +131,13 @@ class VideoRegionOfInterestMeta
 
   /**
       Retrieve the parameter for meta having name as structure name,
-    or null if there is none.
-    Params:
-      name =       a name.
-    Returns:     a #GstStructure
+      or null if there is none.
   
-    Version: See also: gst_video_region_of_interest_meta_add_param()
+      Params:
+        name = a name.
+      Returns: a #GstStructure
+  
+      Version: See also: gst_video_region_of_interest_meta_add_param()
   */
   gst.structure.Structure getParam(string name)
   {

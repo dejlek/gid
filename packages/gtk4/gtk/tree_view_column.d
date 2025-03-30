@@ -1,3 +1,4 @@
+/// Module for [TreeViewColumn] class
 module gtk.tree_view_column;
 
 import gid.gid;
@@ -19,33 +20,36 @@ import gtk.widget;
 
 /**
     A visible column in a [gtk.tree_view.TreeView] widget
-  
-  The [gtk.tree_view_column.TreeViewColumn] object represents a visible column in a [gtk.tree_view.TreeView] widget.
-  It allows to set properties of the column header, and functions as a holding pen
-  for the cell renderers which determine how the data in the column is displayed.
-  
-  Please refer to the [tree widget conceptual overview](section-tree-widget.html)
-  for an overview of all the objects and data types related to the tree widget and
-  how they work together, and to the [gtk.tree_view.TreeView] documentation for specifics
-  about the CSS node structure for treeviews and their headers.
+    
+    The [gtk.tree_view_column.TreeViewColumn] object represents a visible column in a [gtk.tree_view.TreeView] widget.
+    It allows to set properties of the column header, and functions as a holding pen
+    for the cell renderers which determine how the data in the column is displayed.
+    
+    Please refer to the [tree widget conceptual overview](section-tree-widget.html)
+    for an overview of all the objects and data types related to the tree widget and
+    how they work together, and to the [gtk.tree_view.TreeView] documentation for specifics
+    about the CSS node structure for treeviews and their headers.
 
-  Deprecated:     Use [gtk.column_view.ColumnView] and [gtk.column_view_column.ColumnViewColumn]
-      instead of [gtk.tree_view.TreeView] to show a tabular list
+    Deprecated: Use [gtk.column_view.ColumnView] and [gtk.column_view_column.ColumnViewColumn]
+        instead of [gtk.tree_view.TreeView] to show a tabular list
 */
 class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Buildable, gtk.cell_layout.CellLayout
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_view_column_get_type != &gidSymbolNotFound ? gtk_tree_view_column_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,9 +65,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Creates a new [gtk.tree_view_column.TreeViewColumn].
-    Returns:     A newly created [gtk.tree_view_column.TreeViewColumn].
+      Returns: A newly created [gtk.tree_view_column.TreeViewColumn].
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   this()
   {
@@ -74,11 +78,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Creates a new [gtk.tree_view_column.TreeViewColumn] using area to render its cells.
-    Params:
-      area =       the [gtk.cell_area.CellArea] that the newly created column should use to layout cells.
-    Returns:     A newly created [gtk.tree_view_column.TreeViewColumn].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        area = the [gtk.cell_area.CellArea] that the newly created column should use to layout cells.
+      Returns: A newly created [gtk.tree_view_column.TreeViewColumn].
+  
+      Deprecated: Use GtkColumnView instead
   */
   static gtk.tree_view_column.TreeViewColumn newWithArea(gtk.cell_area.CellArea area)
   {
@@ -90,19 +95,20 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Adds an attribute mapping to the list in tree_column.
-    
-    The column is the
-    column of the model to get a value from, and the attribute is the
-    parameter on cell_renderer to be set from the value. So for example
-    if column 2 of the model contains strings, you could have the
-    “text” attribute of a [gtk.cell_renderer_text.CellRendererText] get its values from
-    column 2.
-    Params:
-      cellRenderer =       the [gtk.cell_renderer.CellRenderer] to set attributes on
-      attribute =       An attribute on the renderer
-      column =       The column position on the model to get the attribute from.
+      
+      The column is the
+      column of the model to get a value from, and the attribute is the
+      parameter on cell_renderer to be set from the value. So for example
+      if column 2 of the model contains strings, you could have the
+      “text” attribute of a [gtk.cell_renderer_text.CellRendererText] get its values from
+      column 2.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cellRenderer = the [gtk.cell_renderer.CellRenderer] to set attributes on
+        attribute = An attribute on the renderer
+        column = The column position on the model to get the attribute from.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void addAttribute(gtk.cell_renderer.CellRenderer cellRenderer, string attribute, int column)
   {
@@ -112,17 +118,18 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Obtains the horizontal position and size of a cell in a column.
-    
-    If the  cell is not found in the column, start_pos and width
-    are not changed and false is returned.
-    Params:
-      cellRenderer =       a [gtk.cell_renderer.CellRenderer]
-      xOffset =       return location for the horizontal
-          position of cell within tree_column
-      width =       return location for the width of cell
-    Returns:     true if cell belongs to tree_column
+      
+      If the  cell is not found in the column, start_pos and width
+      are not changed and false is returned.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cellRenderer = a [gtk.cell_renderer.CellRenderer]
+        xOffset = return location for the horizontal
+            position of cell within tree_column
+        width = return location for the width of cell
+      Returns: true if cell belongs to tree_column
+  
+      Deprecated: Use GtkColumnView instead
   */
   bool cellGetPosition(gtk.cell_renderer.CellRenderer cellRenderer, out int xOffset, out int width)
   {
@@ -133,14 +140,15 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Obtains the width and height needed to render the column.  This is used
-    primarily by the [gtk.tree_view.TreeView].
-    Params:
-      xOffset =       location to return x offset of a cell relative to cell_area
-      yOffset =       location to return y offset of a cell relative to cell_area
-      width =       location to return width needed to render a cell
-      height =       location to return height needed to render a cell
+      primarily by the [gtk.tree_view.TreeView].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        xOffset = location to return x offset of a cell relative to cell_area
+        yOffset = location to return y offset of a cell relative to cell_area
+        width = location to return width needed to render a cell
+        height = location to return height needed to render a cell
+  
+      Deprecated: Use GtkColumnView instead
   */
   void cellGetSize(out int xOffset, out int yOffset, out int width, out int height)
   {
@@ -149,11 +157,11 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if any of the cells packed into the tree_column are visible.
-    For this to be meaningful, you must first initialize the cells with
-    [gtk.tree_view_column.TreeViewColumn.cellSetCellData]
-    Returns:     true, if any of the cells packed into the tree_column are currently visible
+      For this to be meaningful, you must first initialize the cells with
+      [gtk.tree_view_column.TreeViewColumn.cellSetCellData]
+      Returns: true, if any of the cells packed into the tree_column are currently visible
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool cellIsVisible()
   {
@@ -164,16 +172,17 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the cell renderer based on the tree_model and iter.  That is, for
-    every attribute mapping in tree_column, it will get a value from the set
-    column on the iter, and use that value to set the attribute on the cell
-    renderer.  This is used primarily by the [gtk.tree_view.TreeView].
-    Params:
-      treeModel =       The [gtk.tree_model.TreeModel] to get the cell renderers attributes from.
-      iter =       The [gtk.tree_iter.TreeIter] to get the cell renderer’s attributes from.
-      isExpander =       true, if the row has children
-      isExpanded =       true, if the row has visible children
+      every attribute mapping in tree_column, it will get a value from the set
+      column on the iter, and use that value to set the attribute on the cell
+      renderer.  This is used primarily by the [gtk.tree_view.TreeView].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        treeModel = The [gtk.tree_model.TreeModel] to get the cell renderers attributes from.
+        iter = The [gtk.tree_iter.TreeIter] to get the cell renderer’s attributes from.
+        isExpander = true, if the row has children
+        isExpanded = true, if the row has visible children
+  
+      Deprecated: Use GtkColumnView instead
   */
   void cellSetCellData(gtk.tree_model.TreeModel treeModel, gtk.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
@@ -183,7 +192,7 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   /**
       Unsets all the mappings on all renderers on the tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   void clear()
   {
@@ -192,11 +201,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Clears all existing attributes previously set with
-    [gtk.tree_view_column.TreeViewColumn.setAttributes].
-    Params:
-      cellRenderer =       a [gtk.cell_renderer.CellRenderer] to clear the attribute mapping on.
+      [gtk.tree_view_column.TreeViewColumn.setAttributes].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cellRenderer = a [gtk.cell_renderer.CellRenderer] to clear the attribute mapping on.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void clearAttributes(gtk.cell_renderer.CellRenderer cellRenderer)
   {
@@ -205,9 +215,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Emits the “clicked” signal on the column.  This function will only work if
-    tree_column is clickable.
+      tree_column is clickable.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   void clicked()
   {
@@ -216,11 +226,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the current keyboard focus to be at cell, if the column contains
-    2 or more editable and activatable cells.
-    Params:
-      cell =       A [gtk.cell_renderer.CellRenderer]
+      2 or more editable and activatable cells.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cell = A [gtk.cell_renderer.CellRenderer]
+  
+      Deprecated: Use GtkColumnView instead
   */
   void focusCell(gtk.cell_renderer.CellRenderer cell)
   {
@@ -229,10 +240,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the current x alignment of tree_column.  This value can range
-    between 0.0 and 1.0.
-    Returns:     The current alignent of tree_column.
+      between 0.0 and 1.0.
+      Returns: The current alignent of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   float getAlignment()
   {
@@ -243,9 +254,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the button used in the treeview column header
-    Returns:     The button for the column header.
+      Returns: The button for the column header.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   gtk.widget.Widget getButton()
   {
@@ -257,9 +268,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if the user can click on the header for the column.
-    Returns:     true if user can click the column header.
+      Returns: true if user can click the column header.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getClickable()
   {
@@ -270,9 +281,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if the column expands to fill available space.
-    Returns:     true if the column expands to fill available space.
+      Returns: true if the column expands to fill available space.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getExpand()
   {
@@ -283,10 +294,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Gets the fixed width of the column.  This may not be the actual displayed
-    width of the column; for that, use [gtk.tree_view_column.TreeViewColumn.getWidth].
-    Returns:     The fixed width of the column.
+      width of the column; for that, use [gtk.tree_view_column.TreeViewColumn.getWidth].
+      Returns: The fixed width of the column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getFixedWidth()
   {
@@ -297,10 +308,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the maximum width in pixels of the tree_column, or -1 if no maximum
-    width is set.
-    Returns:     The maximum width of the tree_column.
+      width is set.
+      Returns: The maximum width of the tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getMaxWidth()
   {
@@ -311,10 +322,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the minimum width in pixels of the tree_column, or -1 if no minimum
-    width is set.
-    Returns:     The minimum width of the tree_column.
+      width is set.
+      Returns: The minimum width of the tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getMinWidth()
   {
@@ -325,9 +336,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if the tree_column can be reordered by the user.
-    Returns:     true if the tree_column can be reordered by the user.
+      Returns: true if the tree_column can be reordered by the user.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getReorderable()
   {
@@ -338,9 +349,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if the tree_column can be resized by the end user.
-    Returns:     true, if the tree_column can be resized.
+      Returns: true, if the tree_column can be resized.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getResizable()
   {
@@ -351,9 +362,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the current type of tree_column.
-    Returns:     The type of tree_column.
+      Returns: The type of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   gtk.types.TreeViewColumnSizing getSizing()
   {
@@ -365,13 +376,13 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Gets the logical sort_column_id that the model sorts on
-    when this column is selected for sorting.
-    
-    See [gtk.tree_view_column.TreeViewColumn.setSortColumnId].
-    Returns:     the current sort_column_id for this column, or -1 if
-        this column can’t be used for sorting
+      when this column is selected for sorting.
+      
+      See [gtk.tree_view_column.TreeViewColumn.setSortColumnId].
+      Returns: the current sort_column_id for this column, or -1 if
+          this column can’t be used for sorting
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getSortColumnId()
   {
@@ -382,9 +393,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Gets the value set by [gtk.tree_view_column.TreeViewColumn.setSortIndicator].
-    Returns:     whether the sort indicator arrow is displayed
+      Returns: whether the sort indicator arrow is displayed
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getSortIndicator()
   {
@@ -395,9 +406,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Gets the value set by [gtk.tree_view_column.TreeViewColumn.setSortOrder].
-    Returns:     the sort order the sort indicator is indicating
+      Returns: the sort order the sort indicator is indicating
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   gtk.types.SortType getSortOrder()
   {
@@ -409,9 +420,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the spacing of tree_column.
-    Returns:     the spacing of tree_column.
+      Returns: the spacing of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getSpacing()
   {
@@ -422,10 +433,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the title of the widget.
-    Returns:     the title of the column. This string should not be
-      modified or freed.
+      Returns: the title of the column. This string should not be
+        modified or freed.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   string getTitle()
   {
@@ -437,12 +448,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the [gtk.tree_view.TreeView] wherein tree_column has been inserted.
-    If column is currently not inserted in any tree view, null is
-    returned.
-    Returns:     The tree view wherein column
-        has been inserted
+      If column is currently not inserted in any tree view, null is
+      returned.
+      Returns: The tree view wherein column
+          has been inserted
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   gtk.widget.Widget getTreeView()
   {
@@ -454,10 +465,10 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns true if tree_column is visible.
-    Returns:     whether the column is visible or not.  If it is visible, then
-      the tree will show the column.
+      Returns: whether the column is visible or not.  If it is visible, then
+        the tree will show the column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   bool getVisible()
   {
@@ -468,11 +479,11 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the [gtk.widget.Widget] in the button on the column header.
-    
-    If a custom widget has not been set then null is returned.
-    Returns:     The [gtk.widget.Widget] in the column header
+      
+      If a custom widget has not been set then null is returned.
+      Returns: The [gtk.widget.Widget] in the column header
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   gtk.widget.Widget getWidget()
   {
@@ -484,9 +495,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the current size of tree_column in pixels.
-    Returns:     The current width of tree_column.
+      Returns: The current width of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getWidth()
   {
@@ -497,9 +508,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Returns the current X offset of tree_column in pixels.
-    Returns:     The current X offset of tree_column.
+      Returns: The current X offset of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   int getXOffset()
   {
@@ -510,13 +521,14 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Adds the cell to end of the column. If expand is false, then the cell
-    is allocated no more space than it needs. Any unused space is divided
-    evenly between cells for which expand is true.
-    Params:
-      cell =       The [gtk.cell_renderer.CellRenderer]
-      expand =       true if cell is to be given extra space allocated to tree_column.
+      is allocated no more space than it needs. Any unused space is divided
+      evenly between cells for which expand is true.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cell = The [gtk.cell_renderer.CellRenderer]
+        expand = true if cell is to be given extra space allocated to tree_column.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void packEnd(gtk.cell_renderer.CellRenderer cell, bool expand)
   {
@@ -525,13 +537,14 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Packs the cell into the beginning of the column. If expand is false, then
-    the cell is allocated no more space than it needs. Any unused space is divided
-    evenly between cells for which expand is true.
-    Params:
-      cell =       The [gtk.cell_renderer.CellRenderer]
-      expand =       true if cell is to be given extra space allocated to tree_column.
+      the cell is allocated no more space than it needs. Any unused space is divided
+      evenly between cells for which expand is true.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cell = The [gtk.cell_renderer.CellRenderer]
+        expand = true if cell is to be given extra space allocated to tree_column.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void packStart(gtk.cell_renderer.CellRenderer cell, bool expand)
   {
@@ -540,9 +553,9 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Flags the column, and the cell renderers added to this column, to have
-    their sizes renegotiated.
+      their sizes renegotiated.
   
-    Deprecated:     Use GtkColumnView instead
+      Deprecated: Use GtkColumnView instead
   */
   void queueResize()
   {
@@ -551,12 +564,13 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the alignment of the title or custom widget inside the column header.
-    The alignment determines its location inside the button -- 0.0 for left, 0.5
-    for center, 1.0 for right.
-    Params:
-      xalign =       The alignment, which is between [0.0 and 1.0] inclusive.
+      The alignment determines its location inside the button -- 0.0 for left, 0.5
+      for center, 1.0 for right.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        xalign = The alignment, which is between [0.0 and 1.0] inclusive.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setAlignment(float xalign)
   {
@@ -565,17 +579,18 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the [gtk.types.TreeCellDataFunc] to use for the column.
-    
-    This
-    function is used instead of the standard attributes mapping for
-    setting the column value, and should set the value of tree_column's
-    cell renderer as appropriate.  func may be null to remove an
-    older one.
-    Params:
-      cellRenderer =       A [gtk.cell_renderer.CellRenderer]
-      func =       The [gtk.types.TreeCellDataFunc] to use.
+      
+      This
+      function is used instead of the standard attributes mapping for
+      setting the column value, and should set the value of tree_column's
+      cell renderer as appropriate.  func may be null to remove an
+      older one.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        cellRenderer = A [gtk.cell_renderer.CellRenderer]
+        func = The [gtk.types.TreeCellDataFunc] to use.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setCellDataFunc(gtk.cell_renderer.CellRenderer cellRenderer, gtk.types.TreeCellDataFunc func = null)
   {
@@ -594,11 +609,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the header to be active if clickable is true.  When the header is
-    active, then it can take keyboard focus, and can be clicked.
-    Params:
-      clickable =       true if the header is active.
+      active, then it can take keyboard focus, and can be clicked.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        clickable = true if the header is active.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setClickable(bool clickable)
   {
@@ -607,16 +623,17 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the column to take available extra space.  This space is shared equally
-    amongst all columns that have the expand set to true.  If no column has this
-    option set, then the last column gets all extra space.  By default, every
-    column is created with this false.
-    
-    Along with “fixed-width”, the “expand” property changes when the column is
-    resized by the user.
-    Params:
-      expand =       true if the column should expand to fill available space.
+      amongst all columns that have the expand set to true.  If no column has this
+      option set, then the last column gets all extra space.  By default, every
+      column is created with this false.
+      
+      Along with “fixed-width”, the “expand” property changes when the column is
+      resized by the user.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        expand = true if the column should expand to fill available space.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setExpand(bool expand)
   {
@@ -625,20 +642,21 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       If fixed_width is not -1, sets the fixed width of tree_column; otherwise
-    unsets it.  The effective value of fixed_width is clamped between the
-    minimum and maximum width of the column; however, the value stored in the
-    “fixed-width” property is not clamped.  If the column sizing is
-    [gtk.types.TreeViewColumnSizing.GrowOnly] or [gtk.types.TreeViewColumnSizing.Autosize], setting
-    a fixed width overrides the automatically calculated width.  Note that
-    fixed_width is only a hint to GTK; the width actually allocated to the
-    column may be greater or less than requested.
-    
-    Along with “expand”, the “fixed-width” property changes when the column is
-    resized by the user.
-    Params:
-      fixedWidth =       The new fixed width, in pixels, or -1.
+      unsets it.  The effective value of fixed_width is clamped between the
+      minimum and maximum width of the column; however, the value stored in the
+      “fixed-width” property is not clamped.  If the column sizing is
+      [gtk.types.TreeViewColumnSizing.GrowOnly] or [gtk.types.TreeViewColumnSizing.Autosize], setting
+      a fixed width overrides the automatically calculated width.  Note that
+      fixed_width is only a hint to GTK; the width actually allocated to the
+      column may be greater or less than requested.
+      
+      Along with “expand”, the “fixed-width” property changes when the column is
+      resized by the user.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        fixedWidth = The new fixed width, in pixels, or -1.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setFixedWidth(int fixedWidth)
   {
@@ -647,13 +665,14 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the maximum width of the tree_column.  If max_width is -1, then the
-    maximum width is unset.  Note, the column can actually be wider than max
-    width if it’s the last column in a view.  In this case, the column expands to
-    fill any extra space.
-    Params:
-      maxWidth =       The maximum width of the column in pixels, or -1.
+      maximum width is unset.  Note, the column can actually be wider than max
+      width if it’s the last column in a view.  In this case, the column expands to
+      fill any extra space.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        maxWidth = The maximum width of the column in pixels, or -1.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setMaxWidth(int maxWidth)
   {
@@ -662,11 +681,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the minimum width of the tree_column.  If min_width is -1, then the
-    minimum width is unset.
-    Params:
-      minWidth =       The minimum width of the column in pixels, or -1.
+      minimum width is unset.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        minWidth = The minimum width of the column in pixels, or -1.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setMinWidth(int minWidth)
   {
@@ -675,11 +695,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       If reorderable is true, then the column can be reordered by the end user
-    dragging the header.
-    Params:
-      reorderable =       true, if the column can be reordered.
+      dragging the header.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        reorderable = true, if the column can be reordered.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setReorderable(bool reorderable)
   {
@@ -688,15 +709,16 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       If resizable is true, then the user can explicitly resize the column by
-    grabbing the outer edge of the column button.
-    
-    If resizable is true and
-    sizing mode of the column is [gtk.types.TreeViewColumnSizing.Autosize], then the sizing
-    mode is changed to [gtk.types.TreeViewColumnSizing.GrowOnly].
-    Params:
-      resizable =       true, if the column can be resized
+      grabbing the outer edge of the column button.
+      
+      If resizable is true and
+      sizing mode of the column is [gtk.types.TreeViewColumnSizing.Autosize], then the sizing
+      mode is changed to [gtk.types.TreeViewColumnSizing.GrowOnly].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        resizable = true, if the column can be resized
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setResizable(bool resizable)
   {
@@ -705,10 +727,11 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the growth behavior of tree_column to type.
-    Params:
-      type =       The [gtk.tree_view_column.TreeViewColumn]Sizing.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        type = The [gtk.tree_view_column.TreeViewColumn]Sizing.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setSizing(gtk.types.TreeViewColumnSizing type)
   {
@@ -717,11 +740,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the logical sort_column_id that this column sorts on when this column
-    is selected for sorting.  Doing so makes the column header clickable.
-    Params:
-      sortColumnId =       The sort_column_id of the model to sort on.
+      is selected for sorting.  Doing so makes the column header clickable.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        sortColumnId = The sort_column_id of the model to sort on.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setSortColumnId(int sortColumnId)
   {
@@ -730,13 +754,14 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Call this function with a setting of true to display an arrow in
-    the header button indicating the column is sorted. Call
-    [gtk.tree_view_column.TreeViewColumn.setSortOrder] to change the direction of
-    the arrow.
-    Params:
-      setting =       true to display an indicator that the column is sorted
+      the header button indicating the column is sorted. Call
+      [gtk.tree_view_column.TreeViewColumn.setSortOrder] to change the direction of
+      the arrow.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        setting = true to display an indicator that the column is sorted
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setSortIndicator(bool setting)
   {
@@ -745,20 +770,21 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Changes the appearance of the sort indicator.
-    
-    This does not actually sort the model.  Use
-    [gtk.tree_view_column.TreeViewColumn.setSortColumnId] if you want automatic sorting
-    support.  This function is primarily for custom sorting behavior, and should
-    be used in conjunction with [gtk.tree_sortable.TreeSortable.setSortColumnId] to do
-    that. For custom models, the mechanism will vary.
-    
-    The sort indicator changes direction to indicate normal sort or reverse sort.
-    Note that you must have the sort indicator enabled to see anything when
-    calling this function; see [gtk.tree_view_column.TreeViewColumn.setSortIndicator].
-    Params:
-      order =       sort order that the sort indicator should indicate
+      
+      This does not actually sort the model.  Use
+      [gtk.tree_view_column.TreeViewColumn.setSortColumnId] if you want automatic sorting
+      support.  This function is primarily for custom sorting behavior, and should
+      be used in conjunction with [gtk.tree_sortable.TreeSortable.setSortColumnId] to do
+      that. For custom models, the mechanism will vary.
+      
+      The sort indicator changes direction to indicate normal sort or reverse sort.
+      Note that you must have the sort indicator enabled to see anything when
+      calling this function; see [gtk.tree_view_column.TreeViewColumn.setSortIndicator].
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        order = sort order that the sort indicator should indicate
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setSortOrder(gtk.types.SortType order)
   {
@@ -767,11 +793,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the spacing field of tree_column, which is the number of pixels to
-    place between cell renderers packed into it.
-    Params:
-      spacing =       distance between cell renderers in pixels.
+      place between cell renderers packed into it.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        spacing = distance between cell renderers in pixels.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setSpacing(int spacing)
   {
@@ -780,11 +807,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the title of the tree_column.  If a custom widget has been set, then
-    this value is ignored.
-    Params:
-      title =       The title of the tree_column.
+      this value is ignored.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        title = The title of the tree_column.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setTitle(string title)
   {
@@ -794,10 +822,11 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the visibility of tree_column.
-    Params:
-      visible =       true if the tree_column is visible.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        visible = true if the tree_column is visible.
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setVisible(bool visible)
   {
@@ -806,11 +835,12 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
 
   /**
       Sets the widget in the header to be widget.  If widget is null, then the
-    header button is set with a [gtk.label.Label] set to the title of tree_column.
-    Params:
-      widget =       A child [gtk.widget.Widget]
+      header button is set with a [gtk.label.Label] set to the title of tree_column.
   
-    Deprecated:     Use GtkColumnView instead
+      Params:
+        widget = A child [gtk.widget.Widget]
+  
+      Deprecated: Use GtkColumnView instead
   */
   void setWidget(gtk.widget.Widget widget = null)
   {
@@ -818,34 +848,36 @@ class TreeViewColumn : gobject.initially_unowned.InitiallyUnowned, gtk.buildable
   }
 
   /**
+      Connect to `Clicked` signal.
+  
       Emitted when the column's header has been clicked.
   
-    ## Parameters
-    $(LIST
-      * $(B treeViewColumn) the instance the signal is connected to
-    )
-  */
-  alias ClickedCallbackDlg = void delegate(gtk.tree_view_column.TreeViewColumn treeViewColumn);
-
-  /** ditto */
-  alias ClickedCallbackFunc = void function(gtk.tree_view_column.TreeViewColumn treeViewColumn);
-
-  /**
-    Connect to Clicked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.tree_view_column.TreeViewColumn treeViewColumn))
+  
+          `treeViewColumn` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.tree_view_column.TreeViewColumn)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto treeViewColumn = getVal!(gtk.tree_view_column.TreeViewColumn)(_paramVals);
-      _dClosure.dlg(treeViewColumn);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

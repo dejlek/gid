@@ -1,3 +1,4 @@
+/// Module for [SocketAddressEnumerator] class
 module gio.socket_address_enumerator;
 
 import gid.gid;
@@ -12,35 +13,38 @@ import gobject.object;
 
 /**
     [gio.socket_address_enumerator.SocketAddressEnumerator] is an enumerator type for
-  [gio.socket_address.SocketAddress] instances. It is returned by enumeration functions
-  such as [gio.socket_connectable.SocketConnectable.enumerate], which returns a
-  [gio.socket_address_enumerator.SocketAddressEnumerator] to list each [gio.socket_address.SocketAddress] which could
-  be used to connect to that [gio.socket_connectable.SocketConnectable].
-  
-  Enumeration is typically a blocking operation, so the asynchronous methods
-  [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync] and
-  [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish] should be used where
-  possible.
-  
-  Each [gio.socket_address_enumerator.SocketAddressEnumerator] can only be enumerated once. Once
-  [gio.socket_address_enumerator.SocketAddressEnumerator.next] has returned `NULL`, further
-  enumeration with that [gio.socket_address_enumerator.SocketAddressEnumerator] is not possible, and it can
-  be unreffed.
+    [gio.socket_address.SocketAddress] instances. It is returned by enumeration functions
+    such as [gio.socket_connectable.SocketConnectable.enumerate], which returns a
+    [gio.socket_address_enumerator.SocketAddressEnumerator] to list each [gio.socket_address.SocketAddress] which could
+    be used to connect to that [gio.socket_connectable.SocketConnectable].
+    
+    Enumeration is typically a blocking operation, so the asynchronous methods
+    [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync] and
+    [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish] should be used where
+    possible.
+    
+    Each [gio.socket_address_enumerator.SocketAddressEnumerator] can only be enumerated once. Once
+    [gio.socket_address_enumerator.SocketAddressEnumerator.next] has returned `NULL`, further
+    enumeration with that [gio.socket_address_enumerator.SocketAddressEnumerator] is not possible, and it can
+    be unreffed.
 */
 class SocketAddressEnumerator : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_enumerator_get_type != &gidSymbolNotFound ? g_socket_address_enumerator_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,23 +57,24 @@ class SocketAddressEnumerator : gobject.object.ObjectG
 
   /**
       Retrieves the next #GSocketAddress from enumerator. Note that this
-    may block for some amount of time. (Eg, a #GNetworkAddress may need
-    to do a DNS lookup before it can return an address.) Use
-    [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync] if you need to avoid
-    blocking.
-    
-    If enumerator is expected to yield addresses, but for some reason
-    is unable to (eg, because of a DNS error), then the first call to
-    [gio.socket_address_enumerator.SocketAddressEnumerator.next] will return an appropriate error
-    in *error. However, if the first call to
-    [gio.socket_address_enumerator.SocketAddressEnumerator.next] succeeds, then any further
-    internal errors (other than cancellable being triggered) will be
-    ignored.
-    Params:
-      cancellable =       optional #GCancellable object, null to ignore.
-    Returns:     a #GSocketAddress (owned by the caller), or null on
-          error (in which case *error will be set) or if there are no
-          more addresses.
+      may block for some amount of time. (Eg, a #GNetworkAddress may need
+      to do a DNS lookup before it can return an address.) Use
+      [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync] if you need to avoid
+      blocking.
+      
+      If enumerator is expected to yield addresses, but for some reason
+      is unable to (eg, because of a DNS error), then the first call to
+      [gio.socket_address_enumerator.SocketAddressEnumerator.next] will return an appropriate error
+      in *error. However, if the first call to
+      [gio.socket_address_enumerator.SocketAddressEnumerator.next] succeeds, then any further
+      internal errors (other than cancellable being triggered) will be
+      ignored.
+  
+      Params:
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a #GSocketAddress (owned by the caller), or null on
+            error (in which case *error will be set) or if there are no
+            more addresses.
   */
   gio.socket_address.SocketAddress next(gio.cancellable.Cancellable cancellable = null)
   {
@@ -84,14 +89,15 @@ class SocketAddressEnumerator : gobject.object.ObjectG
 
   /**
       Asynchronously retrieves the next #GSocketAddress from enumerator
-    and then calls callback, which must call
-    [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish] to get the result.
-    
-    It is an error to call this multiple times before the previous callback has finished.
-    Params:
-      cancellable =       optional #GCancellable object, null to ignore.
-      callback =       a #GAsyncReadyCallback to call
-          when the request is satisfied
+      and then calls callback, which must call
+      [gio.socket_address_enumerator.SocketAddressEnumerator.nextFinish] to get the result.
+      
+      It is an error to call this multiple times before the previous callback has finished.
+  
+      Params:
+        cancellable = optional #GCancellable object, null to ignore.
+        callback = a #GAsyncReadyCallback to call
+            when the request is satisfied
   */
   void nextAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -110,14 +116,15 @@ class SocketAddressEnumerator : gobject.object.ObjectG
 
   /**
       Retrieves the result of a completed call to
-    [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync]. See
-    [gio.socket_address_enumerator.SocketAddressEnumerator.next] for more information about
-    error handling.
-    Params:
-      result =       a #GAsyncResult
-    Returns:     a #GSocketAddress (owned by the caller), or null on
-          error (in which case *error will be set) or if there are no
-          more addresses.
+      [gio.socket_address_enumerator.SocketAddressEnumerator.nextAsync]. See
+      [gio.socket_address_enumerator.SocketAddressEnumerator.next] for more information about
+      error handling.
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: a #GSocketAddress (owned by the caller), or null on
+            error (in which case *error will be set) or if there are no
+            more addresses.
   */
   gio.socket_address.SocketAddress nextFinish(gio.async_result.AsyncResult result)
   {

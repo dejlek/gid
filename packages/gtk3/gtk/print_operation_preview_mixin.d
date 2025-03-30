@@ -1,3 +1,4 @@
+/// Module for [PrintOperationPreview] interface mixin
 module gtk.print_operation_preview_mixin;
 
 public import gtk.print_operation_preview_iface_proxy;
@@ -15,8 +16,8 @@ template PrintOperationPreviewT()
 
   /**
       Ends a preview.
-    
-    This function must be called to finish a custom print preview.
+      
+      This function must be called to finish a custom print preview.
   */
   override void endPreview()
   {
@@ -25,10 +26,11 @@ template PrintOperationPreviewT()
 
   /**
       Returns whether the given page is included in the set of pages that
-    have been selected for printing.
-    Params:
-      pageNr =       a page number
-    Returns:     true if the page has been selected for printing
+      have been selected for printing.
+  
+      Params:
+        pageNr = a page number
+      Returns: true if the page has been selected for printing
   */
   override bool isSelected(int pageNr)
   {
@@ -39,16 +41,17 @@ template PrintOperationPreviewT()
 
   /**
       Renders a page to the preview, using the print context that
-    was passed to the #GtkPrintOperation::preview handler together
-    with preview.
-    
-    A custom iprint preview should use this function in its ::expose
-    handler to render the currently selected page.
-    
-    Note that this function requires a suitable cairo context to
-    be associated with the print context.
-    Params:
-      pageNr =       the page to render
+      was passed to the #GtkPrintOperation::preview handler together
+      with preview.
+      
+      A custom iprint preview should use this function in its ::expose
+      handler to render the currently selected page.
+      
+      Note that this function requires a suitable cairo context to
+      be associated with the print context.
+  
+      Params:
+        pageNr = the page to render
   */
   override void renderPage(int pageNr)
   {
@@ -56,43 +59,55 @@ template PrintOperationPreviewT()
   }
 
   /**
-      The ::got-page-size signal is emitted once for each page
-    that gets rendered to the preview.
-    
-    A handler for this signal should update the context
-    according to page_setup and set up a suitable cairo
-    context, using [gtk.print_context.PrintContext.setCairoContext].
+      Connect to `GotPageSize` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B context)       the current #GtkPrintContext
-      * $(B pageSetup)       the #GtkPageSetup for the current page
-      * $(B printOperationPreview) the instance the signal is connected to
-    )
-  */
-  alias GotPageSizeCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /** ditto */
-  alias GotPageSizeCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /**
-    Connect to GotPageSize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::got-page-size signal is emitted once for each page
+      that gets rendered to the preview.
+      
+      A handler for this signal should update the context
+      according to page_setup and set up a suitable cairo
+      context, using [gtk.print_context.PrintContext.setCairoContext].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.print_context.PrintContext context, gtk.page_setup.PageSetup pageSetup, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+  
+          `context` the current #GtkPrintContext (optional)
+  
+          `pageSetup` the #GtkPageSetup for the current page (optional)
+  
+          `printOperationPreview` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectGotPageSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : GotPageSizeCallbackDlg) || is(T : GotPageSizeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.page_setup.PageSetup)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.print_operation_preview.PrintOperationPreview)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperationPreview = getVal!(gtk.print_operation_preview.PrintOperationPreview)(_paramVals);
-      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
-      auto pageSetup = getVal!(gtk.page_setup.PageSetup)(&_paramVals[2]);
-      _dClosure.dlg(context, pageSetup, printOperationPreview);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -100,39 +115,46 @@ template PrintOperationPreviewT()
   }
 
   /**
-      The ::ready signal gets emitted once per preview operation,
-    before the first page is rendered.
-    
-    A handler for this signal can be used for setup tasks.
+      Connect to `Ready` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B context)       the current #GtkPrintContext
-      * $(B printOperationPreview) the instance the signal is connected to
-    )
-  */
-  alias ReadyCallbackDlg = void delegate(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /** ditto */
-  alias ReadyCallbackFunc = void function(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview);
-
-  /**
-    Connect to Ready signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::ready signal gets emitted once per preview operation,
+      before the first page is rendered.
+      
+      A handler for this signal can be used for setup tasks.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.print_context.PrintContext context, gtk.print_operation_preview.PrintOperationPreview printOperationPreview))
+  
+          `context` the current #GtkPrintContext (optional)
+  
+          `printOperationPreview` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectReady(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ReadyCallbackDlg) || is(T : ReadyCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.print_context.PrintContext)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.print_operation_preview.PrintOperationPreview)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto printOperationPreview = getVal!(gtk.print_operation_preview.PrintOperationPreview)(_paramVals);
-      auto context = getVal!(gtk.print_context.PrintContext)(&_paramVals[1]);
-      _dClosure.dlg(context, printOperationPreview);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

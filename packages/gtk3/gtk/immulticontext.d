@@ -1,3 +1,4 @@
+/// Module for [IMMulticontext] class
 module gtk.immulticontext;
 
 import gid.gid;
@@ -11,17 +12,20 @@ import gtk.types;
 class IMMulticontext : gtk.imcontext.IMContext
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_multicontext_get_type != &gidSymbolNotFound ? gtk_im_multicontext_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -34,7 +38,7 @@ class IMMulticontext : gtk.imcontext.IMContext
 
   /**
       Creates a new #GtkIMMulticontext.
-    Returns:     a new #GtkIMMulticontext.
+      Returns: a new #GtkIMMulticontext.
   */
   this()
   {
@@ -45,15 +49,16 @@ class IMMulticontext : gtk.imcontext.IMContext
 
   /**
       Add menuitems for various available input methods to a menu;
-    the menuitems, when selected, will switch the input method
-    for the context and the global default input method.
-    Params:
-      menushell =       a #GtkMenuShell
+      the menuitems, when selected, will switch the input method
+      for the context and the global default input method.
   
-    Deprecated:     It is better to use the system-wide input
-          method framework for changing input methods. Modern
-          desktop shells offer on-screen displays for this that
-          can triggered with a keyboard shortcut, e.g. Super-Space.
+      Params:
+        menushell = a #GtkMenuShell
+  
+      Deprecated: It is better to use the system-wide input
+            method framework for changing input methods. Modern
+            desktop shells offer on-screen displays for this that
+            can triggered with a keyboard shortcut, e.g. Super-Space.
   */
   void appendMenuitems(gtk.menu_shell.MenuShell menushell)
   {
@@ -62,7 +67,7 @@ class IMMulticontext : gtk.imcontext.IMContext
 
   /**
       Gets the id of the currently active slave of the context.
-    Returns:     the id of the currently active slave
+      Returns: the id of the currently active slave
   */
   string getContextId()
   {
@@ -74,11 +79,12 @@ class IMMulticontext : gtk.imcontext.IMContext
 
   /**
       Sets the context id for context.
-    
-    This causes the currently active slave of context to be
-    replaced by the slave corresponding to the new context id.
-    Params:
-      contextId =       the id to use
+      
+      This causes the currently active slave of context to be
+      replaced by the slave corresponding to the new context id.
+  
+      Params:
+        contextId = the id to use
   */
   void setContextId(string contextId)
   {

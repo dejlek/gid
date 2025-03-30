@@ -1,3 +1,4 @@
+/// Module for [InMemoryFragment] class
 module arrowdataset.in_memory_fragment;
 
 import arrow.record_batch;
@@ -12,17 +13,20 @@ import gid.gid;
 class InMemoryFragment : arrowdataset.fragment.Fragment
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_in_memory_fragment_get_type != &gidSymbolNotFound ? gadataset_in_memory_fragment_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

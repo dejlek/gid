@@ -1,3 +1,4 @@
+/// Module for [ParamSpecExpression] class
 module gtk.param_spec_expression;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gtk.types;
 class ParamSpecExpression : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

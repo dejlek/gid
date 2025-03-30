@@ -1,3 +1,4 @@
+/// Module for [TextureNode] class
 module gsk.texture_node;
 
 import gdk.texture;
@@ -15,6 +16,7 @@ import gsk.types;
 class TextureNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,15 +27,16 @@ class TextureNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will render the given
-    texture into the area given by bounds.
-    
-    Note that GSK applies linear filtering when textures are
-    scaled and transformed. See [gsk.texture_scale_node.TextureScaleNode]
-    for a way to influence filtering.
-    Params:
-      texture =       the [gdk.texture.Texture]
-      bounds =       the rectangle to render the texture into
-    Returns:     A new [gsk.render_node.RenderNode]
+      texture into the area given by bounds.
+      
+      Note that GSK applies linear filtering when textures are
+      scaled and transformed. See [gsk.texture_scale_node.TextureScaleNode]
+      for a way to influence filtering.
+  
+      Params:
+        texture = the [gdk.texture.Texture]
+        bounds = the rectangle to render the texture into
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gdk.texture.Texture texture, graphene.rect.Rect bounds)
   {
@@ -44,7 +47,7 @@ class TextureNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the [gdk.texture.Texture] used when creating this [gsk.render_node.RenderNode].
-    Returns:     the [gdk.texture.Texture]
+      Returns: the [gdk.texture.Texture]
   */
   gdk.texture.Texture getTexture()
   {

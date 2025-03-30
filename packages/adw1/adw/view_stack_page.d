@@ -1,3 +1,4 @@
+/// Module for [ViewStackPage] class
 module adw.view_stack_page;
 
 import adw.c.functions;
@@ -15,17 +16,20 @@ import gtk.widget;
 class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_page_get_type != &gidSymbolNotFound ? adw_view_stack_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,7 +44,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the badge number for this page.
-    Returns:     the badge number for this page
+      Returns: the badge number for this page
   */
   uint getBadgeNumber()
   {
@@ -51,7 +55,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the stack child to which self belongs.
-    Returns:     the child to which self belongs
+      Returns: the child to which self belongs
   */
   gtk.widget.Widget getChild()
   {
@@ -63,7 +67,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the icon name of the page.
-    Returns:     the icon name of the page
+      Returns: the icon name of the page
   */
   string getIconName()
   {
@@ -75,7 +79,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the name of the page.
-    Returns:     the name of the page
+      Returns: the name of the page
   */
   string getName()
   {
@@ -87,7 +91,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets whether the page requires the user attention.
-    Returns:     whether the page needs attention
+      Returns: whether the page needs attention
   */
   bool getNeedsAttention()
   {
@@ -98,7 +102,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets the page title.
-    Returns:     the page title
+      Returns: the page title
   */
   string getTitle()
   {
@@ -110,7 +114,7 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets whether underlines in the page title indicate mnemonics.
-    Returns:     whether underlines in the page title indicate mnemonics
+      Returns: whether underlines in the page title indicate mnemonics
   */
   bool getUseUnderline()
   {
@@ -121,10 +125,10 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Gets whether self is visible in its [adw.view_stack.ViewStack].
-    
-    This is independent from the [gtk.widget.Widget.gboolean]
-    property of its widget.
-    Returns:     whether self is visible
+      
+      This is independent from the [gtk.widget.Widget.gboolean]
+      property of its widget.
+      Returns: whether self is visible
   */
   bool getVisible()
   {
@@ -135,13 +139,14 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets the badge number for this page.
-    
-    `classViewSwitcher` can display it as a badge next to the page icon. It is
-    commonly used to display a number of unread items within the page.
-    
-    It can be used together with `propertyViewStack{age}:needs-attention`.
-    Params:
-      badgeNumber =       the new value to set
+      
+      `classViewSwitcher` can display it as a badge next to the page icon. It is
+      commonly used to display a number of unread items within the page.
+      
+      It can be used together with `propertyViewStack{age}:needs-attention`.
+  
+      Params:
+        badgeNumber = the new value to set
   */
   void setBadgeNumber(uint badgeNumber)
   {
@@ -150,8 +155,9 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets the icon name of the page.
-    Params:
-      iconName =       the icon name
+  
+      Params:
+        iconName = the icon name
   */
   void setIconName(string iconName = null)
   {
@@ -161,8 +167,9 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets the name of the page.
-    Params:
-      name =       the page name
+  
+      Params:
+        name = the page name
   */
   void setName(string name = null)
   {
@@ -172,10 +179,11 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets whether the page requires the user attention.
-    
-    `classViewSwitcher` will display it as a dot next to the page icon.
-    Params:
-      needsAttention =       the new value to set
+      
+      `classViewSwitcher` will display it as a dot next to the page icon.
+  
+      Params:
+        needsAttention = the new value to set
   */
   void setNeedsAttention(bool needsAttention)
   {
@@ -184,8 +192,9 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets the page title.
-    Params:
-      title =       the page title
+  
+      Params:
+        title = the page title
   */
   void setTitle(string title = null)
   {
@@ -195,8 +204,9 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets whether underlines in the page title indicate mnemonics.
-    Params:
-      useUnderline =       the new value to set
+  
+      Params:
+        useUnderline = the new value to set
   */
   void setUseUnderline(bool useUnderline)
   {
@@ -205,11 +215,12 @@ class ViewStackPage : gobject.object.ObjectG, gtk.accessible.Accessible
 
   /**
       Sets whether page is visible in its [adw.view_stack.ViewStack].
-    
-    This is independent from the [gtk.widget.Widget.gboolean] property of
-    `propertyViewStackPage:child`.
-    Params:
-      visible =       whether self is visible
+      
+      This is independent from the [gtk.widget.Widget.gboolean] property of
+      `propertyViewStackPage:child`.
+  
+      Params:
+        visible = whether self is visible
   */
   void setVisible(bool visible)
   {

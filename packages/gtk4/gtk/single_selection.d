@@ -1,3 +1,4 @@
+/// Module for [SingleSelection] class
 module gtk.single_selection;
 
 import gid.gid;
@@ -14,27 +15,30 @@ import gtk.types;
 
 /**
     [gtk.single_selection.SingleSelection] is a [gtk.selection_model.SelectionModel] that allows selecting a single
-  item.
-  
-  Note that the selection is *persistent* -- if the selected item is removed
-  and re-added in the same `signal@Gio.ListModel::items-changed` emission, it
-  stays selected. In particular, this means that changing the sort order of an
-  underlying sort model will preserve the selection.
+    item.
+    
+    Note that the selection is *persistent* -- if the selected item is removed
+    and re-added in the same `signal@Gio.ListModel::items-changed` emission, it
+    stays selected. In particular, this means that changing the sort order of an
+    underlying sort model will preserve the selection.
 */
 class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_single_selection_get_type != &gidSymbolNotFound ? gtk_single_selection_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,9 +55,10 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Creates a new selection to handle model.
-    Params:
-      model =       the [gio.list_model.ListModel] to manage
-    Returns:     a new [gtk.single_selection.SingleSelection]
+  
+      Params:
+        model = the [gio.list_model.ListModel] to manage
+      Returns: a new [gtk.single_selection.SingleSelection]
   */
   this(gio.list_model.ListModel model = null)
   {
@@ -64,8 +69,8 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Checks if autoselect has been enabled or disabled via
-    [gtk.single_selection.SingleSelection.setAutoselect].
-    Returns:     true if autoselect is enabled
+      [gtk.single_selection.SingleSelection.setAutoselect].
+      Returns: true if autoselect is enabled
   */
   bool getAutoselect()
   {
@@ -76,8 +81,8 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       If true, [gtk.selection_model.SelectionModel.unselectItem] is supported and allows
-    unselecting the selected item.
-    Returns:     true to support unselecting
+      unselecting the selected item.
+      Returns: true to support unselecting
   */
   bool getCanUnselect()
   {
@@ -88,7 +93,7 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Gets the model that self is wrapping.
-    Returns:     The model being wrapped
+      Returns: The model being wrapped
   */
   gio.list_model.ListModel getModel()
   {
@@ -100,9 +105,9 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Gets the position of the selected item.
-    
-    If no item is selected, `GTK_INVALID_LIST_POSITION` is returned.
-    Returns:     The position of the selected item
+      
+      If no item is selected, `GTK_INVALID_LIST_POSITION` is returned.
+      Returns: The position of the selected item
   */
   uint getSelected()
   {
@@ -113,9 +118,9 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Gets the selected item.
-    
-    If no item is selected, null is returned.
-    Returns:     The selected item
+      
+      If no item is selected, null is returned.
+      Returns: The selected item
   */
   gobject.object.ObjectG getSelectedItem()
   {
@@ -127,12 +132,13 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Enables or disables autoselect.
-    
-    If autoselect is true, self will enforce that an item is always
-    selected. It will select a new item when the currently selected
-    item is deleted and it will disallow unselecting the current item.
-    Params:
-      autoselect =       true to always select an item
+      
+      If autoselect is true, self will enforce that an item is always
+      selected. It will select a new item when the currently selected
+      item is deleted and it will disallow unselecting the current item.
+  
+      Params:
+        autoselect = true to always select an item
   */
   void setAutoselect(bool autoselect)
   {
@@ -141,13 +147,14 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       If true, unselecting the current item via
-    [gtk.selection_model.SelectionModel.unselectItem] is supported.
-    
-    Note that setting [gtk.single_selection.SingleSelection.gboolean] will
-    cause unselecting to not work, so it practically makes no sense
-    to set both at the same time the same time.
-    Params:
-      canUnselect =       true to allow unselecting
+      [gtk.selection_model.SelectionModel.unselectItem] is supported.
+      
+      Note that setting [gtk.single_selection.SingleSelection.gboolean] will
+      cause unselecting to not work, so it practically makes no sense
+      to set both at the same time the same time.
+  
+      Params:
+        canUnselect = true to allow unselecting
   */
   void setCanUnselect(bool canUnselect)
   {
@@ -156,10 +163,11 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Sets the model that self should wrap.
-    
-    If model is null, self will be empty.
-    Params:
-      model =       A [gio.list_model.ListModel] to wrap
+      
+      If model is null, self will be empty.
+  
+      Params:
+        model = A [gio.list_model.ListModel] to wrap
   */
   void setModel(gio.list_model.ListModel model = null)
   {
@@ -168,15 +176,16 @@ class SingleSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.se
 
   /**
       Selects the item at the given position.
-    
-    If the list does not have an item at position or
-    `GTK_INVALID_LIST_POSITION` is given, the behavior depends on the
-    value of the [gtk.single_selection.SingleSelection.gboolean] property:
-    If it is set, no change will occur and the old item will stay
-    selected. If it is unset, the selection will be unset and no item
-    will be selected.
-    Params:
-      position =       the item to select or `GTK_INVALID_LIST_POSITION`
+      
+      If the list does not have an item at position or
+      `GTK_INVALID_LIST_POSITION` is given, the behavior depends on the
+      value of the [gtk.single_selection.SingleSelection.gboolean] property:
+      If it is set, no change will occur and the old item will stay
+      selected. If it is unset, the selection will be unset and no item
+      will be selected.
+  
+      Params:
+        position = the item to select or `GTK_INVALID_LIST_POSITION`
   */
   void setSelected(uint position)
   {

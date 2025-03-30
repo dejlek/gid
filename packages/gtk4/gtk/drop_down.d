@@ -1,3 +1,4 @@
+/// Module for [DropDown] class
 module gtk.drop_down;
 
 import gid.gid;
@@ -19,76 +20,79 @@ import gtk.widget;
 
 /**
     [gtk.drop_down.DropDown] is a widget that allows the user to choose an item
-  from a list of options.
-  
-  ![An example GtkDropDown](drop-down.png)
-  
-  The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.guint]
-  choice.
-  
-  The options are given to [gtk.drop_down.DropDown] in the form of [gio.list_model.ListModel]
-  and how the individual options are represented is determined by
-  a [gtk.list_item_factory.ListItemFactory]. The default factory displays simple strings,
-  and adds a checkmark to the selected item in the popup.
-  
-  To set your own factory, use [gtk.drop_down.DropDown.setFactory]. It is
-  possible to use a separate factory for the items in the popup, with
-  [gtk.drop_down.DropDown.setListFactory].
-  
-  [gtk.drop_down.DropDown] knows how to obtain strings from the items in a
-  [gtk.string_list.StringList]; for other models, you have to provide an expression
-  to find the strings via [gtk.drop_down.DropDown.setExpression].
-  
-  [gtk.drop_down.DropDown] can optionally allow search in the popup, which is
-  useful if the list of options is long. To enable the search entry,
-  use [gtk.drop_down.DropDown.setEnableSearch].
-  
-  Here is a UI definition example for [gtk.drop_down.DropDown] with a simple model:
-  
-  ```xml
-  <object class="GtkDropDown">
-    <property name="model">
-      <object class="GtkStringList">
-        <items>
-          <item translatable="yes">Factory</item>
-          <item translatable="yes">Home</item>
-          <item translatable="yes">Subway</item>
-        </items>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  If a [gtk.drop_down.DropDown] is created in this manner, or with
-  [gtk.drop_down.DropDown.newFromStrings], for instance, the object returned from
-  [gtk.drop_down.DropDown.getSelectedItem] will be a [gtk.string_object.StringObject].
-  
-  To learn more about the list widget framework, see the
-  [overview](section-list-widget.html).
-  
-  ## CSS nodes
-  
-  [gtk.drop_down.DropDown] has a single CSS node with name dropdown,
-  with the button and popover nodes as children.
-  
-  ## Accessibility
-  
-  [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.ComboBox] role.
+    from a list of options.
+    
+    ![An example GtkDropDown](drop-down.png)
+    
+    The [gtk.drop_down.DropDown] displays the [selected][gtk.drop_down.DropDown.guint]
+    choice.
+    
+    The options are given to [gtk.drop_down.DropDown] in the form of [gio.list_model.ListModel]
+    and how the individual options are represented is determined by
+    a [gtk.list_item_factory.ListItemFactory]. The default factory displays simple strings,
+    and adds a checkmark to the selected item in the popup.
+    
+    To set your own factory, use [gtk.drop_down.DropDown.setFactory]. It is
+    possible to use a separate factory for the items in the popup, with
+    [gtk.drop_down.DropDown.setListFactory].
+    
+    [gtk.drop_down.DropDown] knows how to obtain strings from the items in a
+    [gtk.string_list.StringList]; for other models, you have to provide an expression
+    to find the strings via [gtk.drop_down.DropDown.setExpression].
+    
+    [gtk.drop_down.DropDown] can optionally allow search in the popup, which is
+    useful if the list of options is long. To enable the search entry,
+    use [gtk.drop_down.DropDown.setEnableSearch].
+    
+    Here is a UI definition example for [gtk.drop_down.DropDown] with a simple model:
+    
+    ```xml
+    <object class="GtkDropDown">
+      <property name="model">
+        <object class="GtkStringList">
+          <items>
+            <item translatable="yes">Factory</item>
+            <item translatable="yes">Home</item>
+            <item translatable="yes">Subway</item>
+          </items>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    If a [gtk.drop_down.DropDown] is created in this manner, or with
+    [gtk.drop_down.DropDown.newFromStrings], for instance, the object returned from
+    [gtk.drop_down.DropDown.getSelectedItem] will be a [gtk.string_object.StringObject].
+    
+    To learn more about the list widget framework, see the
+    [overview](section-list-widget.html).
+    
+    ## CSS nodes
+    
+    [gtk.drop_down.DropDown] has a single CSS node with name dropdown,
+    with the button and popover nodes as children.
+    
+    ## Accessibility
+    
+    [gtk.drop_down.DropDown] uses the [gtk.types.AccessibleRole.ComboBox] role.
 */
 class DropDown : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_down_get_type != &gidSymbolNotFound ? gtk_drop_down_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -101,13 +105,14 @@ class DropDown : gtk.widget.Widget
 
   /**
       Creates a new [gtk.drop_down.DropDown].
-    
-    You may want to call [gtk.drop_down.DropDown.setFactory]
-    to set up a way to map its items to widgets.
-    Params:
-      model =       the model to use
-      expression =       the expression to use
-    Returns:     a new [gtk.drop_down.DropDown]
+      
+      You may want to call [gtk.drop_down.DropDown.setFactory]
+      to set up a way to map its items to widgets.
+  
+      Params:
+        model = the model to use
+        expression = the expression to use
+      Returns: a new [gtk.drop_down.DropDown]
   */
   this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null)
   {
@@ -118,10 +123,11 @@ class DropDown : gtk.widget.Widget
 
   /**
       Creates a new [gtk.drop_down.DropDown] that is populated with
-    the strings.
-    Params:
-      strings =       The strings to put in the dropdown
-    Returns:     a new [gtk.drop_down.DropDown]
+      the strings.
+  
+      Params:
+        strings = The strings to put in the dropdown
+      Returns: a new [gtk.drop_down.DropDown]
   */
   static gtk.drop_down.DropDown newFromStrings(string[] strings)
   {
@@ -138,7 +144,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Returns whether search is enabled.
-    Returns:     true if the popup includes a search entry
+      Returns: true if the popup includes a search entry
   */
   bool getEnableSearch()
   {
@@ -149,9 +155,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the expression set that is used to obtain strings from items.
-    
-    See [gtk.drop_down.DropDown.setExpression].
-    Returns:     a [gtk.expression.Expression]
+      
+      See [gtk.drop_down.DropDown.setExpression].
+      Returns: a [gtk.expression.Expression]
   */
   gtk.expression.Expression getExpression()
   {
@@ -163,11 +169,11 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the factory that's currently used to populate list items.
-    
-    The factory returned by this function is always used for the
-    item in the button. It is also used for items in the popup
-    if `propertyGtk.DropDown:list-factory` is not set.
-    Returns:     The factory in use
+      
+      The factory returned by this function is always used for the
+      item in the button. It is also used for items in the popup
+      if `propertyGtk.DropDown:list-factory` is not set.
+      Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getFactory()
   {
@@ -179,7 +185,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the factory that's currently used to create header widgets for the popup.
-    Returns:     The factory in use
+      Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
@@ -191,7 +197,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the factory that's currently used to populate list items in the popup.
-    Returns:     The factory in use
+      Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getListFactory()
   {
@@ -203,7 +209,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the model that provides the displayed items.
-    Returns:     The model in use
+      Returns: The model in use
   */
   gio.list_model.ListModel getModel()
   {
@@ -215,7 +221,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Returns the match mode that the search filter is using.
-    Returns:     the match mode of the search filter
+      Returns: the match mode of the search filter
   */
   gtk.types.StringFilterMatchMode getSearchMatchMode()
   {
@@ -227,8 +233,8 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the position of the selected item.
-    Returns:     the position of the selected item, or `GTK_INVALID_LIST_POSITION`
-        if not item is selected
+      Returns: the position of the selected item, or `GTK_INVALID_LIST_POSITION`
+          if not item is selected
   */
   uint getSelected()
   {
@@ -239,7 +245,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Gets the selected item. If no item is selected, null is returned.
-    Returns:     The selected item
+      Returns: The selected item
   */
   gobject.object.ObjectG getSelectedItem()
   {
@@ -251,7 +257,7 @@ class DropDown : gtk.widget.Widget
 
   /**
       Returns whether to show an arrow within the widget.
-    Returns:     true if an arrow will be shown.
+      Returns: true if an arrow will be shown.
   */
   bool getShowArrow()
   {
@@ -262,12 +268,13 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets whether a search entry will be shown in the popup that
-    allows to search for items in the list.
-    
-    Note that [gtk.drop_down.DropDown.Expression] must be set for
-    search to work.
-    Params:
-      enableSearch =       whether to enable search
+      allows to search for items in the list.
+      
+      Note that [gtk.drop_down.DropDown.Expression] must be set for
+      search to work.
+  
+      Params:
+        enableSearch = whether to enable search
   */
   void setEnableSearch(bool enableSearch)
   {
@@ -276,11 +283,12 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the expression that gets evaluated to obtain strings from items.
-    
-    This is used for search in the popup. The expression must have
-    a value type of `G_TYPE_STRING`.
-    Params:
-      expression =       a [gtk.expression.Expression]
+      
+      This is used for search in the popup. The expression must have
+      a value type of `G_TYPE_STRING`.
+  
+      Params:
+        expression = a [gtk.expression.Expression]
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
@@ -289,8 +297,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the [gtk.list_item_factory.ListItemFactory] to use for populating list items.
-    Params:
-      factory =       the factory to use
+  
+      Params:
+        factory = the factory to use
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
@@ -299,8 +308,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the [gtk.list_item_factory.ListItemFactory] to use for creating header widgets for the popup.
-    Params:
-      factory =       the factory to use
+  
+      Params:
+        factory = the factory to use
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
@@ -309,8 +319,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the [gtk.list_item_factory.ListItemFactory] to use for populating list items in the popup.
-    Params:
-      factory =       the factory to use
+  
+      Params:
+        factory = the factory to use
   */
   void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
@@ -319,8 +330,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the [gio.list_model.ListModel] to use.
-    Params:
-      model =       the model to use
+  
+      Params:
+        model = the model to use
   */
   void setModel(gio.list_model.ListModel model = null)
   {
@@ -329,8 +341,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets the match mode for the search filter.
-    Params:
-      searchMatchMode =       the new match mode
+  
+      Params:
+        searchMatchMode = the new match mode
   */
   void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode)
   {
@@ -339,8 +352,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Selects the item at the given position.
-    Params:
-      position =       the position of the item to select, or `GTK_INVALID_LIST_POSITION`
+  
+      Params:
+        position = the position of the item to select, or `GTK_INVALID_LIST_POSITION`
   */
   void setSelected(uint position)
   {
@@ -349,8 +363,9 @@ class DropDown : gtk.widget.Widget
 
   /**
       Sets whether an arrow will be displayed within the widget.
-    Params:
-      showArrow =       whether to show an arrow within the widget
+  
+      Params:
+        showArrow = whether to show an arrow within the widget
   */
   void setShowArrow(bool showArrow)
   {
@@ -358,37 +373,39 @@ class DropDown : gtk.widget.Widget
   }
 
   /**
-      Emitted to when the drop down is activated.
-    
-    The `::activate` signal on [gtk.drop_down.DropDown] is an action signal and
-    emitting it causes the drop down to pop up its dropdown.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B dropDown) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.drop_down.DropDown dropDown);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.drop_down.DropDown dropDown);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to when the drop down is activated.
+      
+      The `::activate` signal on [gtk.drop_down.DropDown] is an action signal and
+      emitting it causes the drop down to pop up its dropdown.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.drop_down.DropDown dropDown))
+  
+          `dropDown` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_down.DropDown)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropDown = getVal!(gtk.drop_down.DropDown)(_paramVals);
-      _dClosure.dlg(dropDown);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [OptionGroup] class
 module glib.option_group;
 
 import gid.gid;
@@ -8,32 +9,36 @@ import gobject.boxed;
 
 /**
     A [glib.option_group.OptionGroup] struct defines the options in a single
-  group. The struct has only private fields and should not be directly accessed.
-  
-  All options in a group share the same translation function. Libraries which
-  need to parse commandline options are expected to provide a function for
-  getting a [glib.option_group.OptionGroup] holding their options, which
-  the application can then add to its #GOptionContext.
+    group. The struct has only private fields and should not be directly accessed.
+    
+    All options in a group share the same translation function. Libraries which
+    need to parse commandline options are expected to provide a function for
+    getting a [glib.option_group.OptionGroup] holding their options, which
+    the application can then add to its #GOptionContext.
 */
 class OptionGroup : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_option_group_get_type != &gidSymbolNotFound ? g_option_group_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,6 +49,7 @@ class OptionGroup : gobject.boxed.Boxed
     return this;
   }
 
+  /** */
   this(string name, string description, string helpDescription)
   {
     GOptionGroup* _cretval;
@@ -57,8 +63,9 @@ class OptionGroup : gobject.boxed.Boxed
 
   /**
       Adds the options specified in entries to group.
-    Params:
-      entries =       a null-terminated array of #GOptionEntrys
+  
+      Params:
+        entries = a null-terminated array of #GOptionEntrys
   */
   void addEntries(glib.types.OptionEntry[] entries)
   {
@@ -68,13 +75,14 @@ class OptionGroup : gobject.boxed.Boxed
 
   /**
       Sets the function which is used to translate user-visible strings,
-    for `--help` output. Different groups can use different
-    #GTranslateFuncs. If func is null, strings are not translated.
-    
-    If you are using gettext(), you only need to set the translation
-    domain, see [glib.option_group.OptionGroup.setTranslationDomain].
-    Params:
-      func =       the #GTranslateFunc, or null
+      for `--help` output. Different groups can use different
+      #GTranslateFuncs. If func is null, strings are not translated.
+      
+      If you are using gettext(), you only need to set the translation
+      domain, see [glib.option_group.OptionGroup.setTranslationDomain].
+  
+      Params:
+        func = the #GTranslateFunc, or null
   */
   void setTranslateFunc(glib.types.TranslateFunc func = null)
   {
@@ -98,9 +106,10 @@ class OptionGroup : gobject.boxed.Boxed
 
   /**
       A convenience function to use gettext() for translating
-    user-visible strings.
-    Params:
-      domain =       the domain to use
+      user-visible strings.
+  
+      Params:
+        domain = the domain to use
   */
   void setTranslationDomain(string domain)
   {

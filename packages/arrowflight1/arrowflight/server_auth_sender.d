@@ -1,3 +1,4 @@
+/// Module for [ServerAuthSender] class
 module arrowflight.server_auth_sender;
 
 import arrowflight.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class ServerAuthSender : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_auth_sender_get_type != &gidSymbolNotFound ? gaflight_server_auth_sender_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,9 +39,10 @@ class ServerAuthSender : gobject.object.ObjectG
 
   /**
       Writes a message to the client.
-    Params:
-      message =       A #GBytes to be sent.
-    Returns:     true on success, false on error.
+  
+      Params:
+        message = A #GBytes to be sent.
+      Returns: true on success, false on error.
   */
   bool write(glib.bytes.Bytes message)
   {

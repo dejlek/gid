@@ -1,3 +1,4 @@
+/// Module for [StyleProvider] interface mixin
 module gtk.style_provider_mixin;
 
 public import gtk.style_provider_iface_proxy;
@@ -14,19 +15,20 @@ public import gtk.widget_path;
 
 /**
     GtkStyleProvider is an interface used to provide style information to a #GtkStyleContext.
-  See [gtk.style_context.StyleContext.addProvider] and [gtk.style_context.StyleContext.addProviderForScreen].
+    See [gtk.style_context.StyleContext.addProvider] and [gtk.style_context.StyleContext.addProviderForScreen].
 */
 template StyleProviderT()
 {
 
   /**
       Returns the #GtkIconFactory defined to be in use for path, or null if none
-    is defined.
-    Params:
-      path =       #GtkWidgetPath to query
-    Returns:     The icon factory to use for path, or null
+      is defined.
   
-    Deprecated:     Will always return null for all GTK-provided style providers.
+      Params:
+        path = #GtkWidgetPath to query
+      Returns: The icon factory to use for path, or null
+  
+      Deprecated: Will always return null for all GTK-provided style providers.
   */
   override gtk.icon_factory.IconFactory getIconFactory(gtk.widget_path.WidgetPath path)
   {
@@ -38,14 +40,15 @@ template StyleProviderT()
 
   /**
       Returns the style settings affecting a widget defined by path, or null if
-    provider doesn’t contemplate styling path.
-    Params:
-      path =       #GtkWidgetPath to query
-    Returns:     a #GtkStyleProperties containing the
-      style settings affecting path
+      provider doesn’t contemplate styling path.
   
-    Deprecated:     Will always return null for all GTK-provided style providers
-          as the interface cannot correctly work the way CSS is specified.
+      Params:
+        path = #GtkWidgetPath to query
+      Returns: a #GtkStyleProperties containing the
+        style settings affecting path
+  
+      Deprecated: Will always return null for all GTK-provided style providers
+            as the interface cannot correctly work the way CSS is specified.
   */
   override gtk.style_properties.StyleProperties getStyle(gtk.widget_path.WidgetPath path)
   {
@@ -57,13 +60,14 @@ template StyleProviderT()
 
   /**
       Looks up a widget style property as defined by provider for
-    the widget represented by path.
-    Params:
-      path =       #GtkWidgetPath to query
-      state =       state to query the style property for
-      pspec =       The #GParamSpec to query
-      value =       return location for the property value
-    Returns:     true if the property was found and has a value, false otherwise
+      the widget represented by path.
+  
+      Params:
+        path = #GtkWidgetPath to query
+        state = state to query the style property for
+        pspec = The #GParamSpec to query
+        value = return location for the property value
+      Returns: true if the property was found and has a value, false otherwise
   */
   override bool getStyleProperty(gtk.widget_path.WidgetPath path, gtk.types.StateFlags state, gobject.param_spec.ParamSpec pspec, out gobject.value.Value value)
   {

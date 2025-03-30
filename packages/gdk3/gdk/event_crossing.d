@@ -1,3 +1,4 @@
+/// Module for [EventCrossing] class
 module gdk.event_crossing;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventCrossing
 {
   GdkEventCrossing cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventCrossing
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

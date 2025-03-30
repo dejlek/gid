@@ -1,3 +1,4 @@
+/// Module for [SDPZone] class
 module gstsdp.sdpzone;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gstsdp.types;
 
 /**
     The contents of the SDP "z=" field which allows the sender to
-  specify a list of time zone adjustments and offsets from the base
-  time.
+    specify a list of time zone adjustments and offsets from the base
+    time.
 */
 class SDPZone
 {
   GstSDPZone cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class SDPZone
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -54,7 +57,7 @@ class SDPZone
 
   /**
       Reset the zone information in zone.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult clear()
   {
@@ -66,10 +69,11 @@ class SDPZone
 
   /**
       Set zone information in zone.
-    Params:
-      adjTime =       the NTP time that a time zone adjustment happens
-      typedTime =       the offset from the time when the session was first scheduled
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        adjTime = the NTP time that a time zone adjustment happens
+        typedTime = the offset from the time when the session was first scheduled
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult set(string adjTime, string typedTime)
   {

@@ -1,3 +1,4 @@
+/// Module for [CompletionWords] class
 module gtksource.completion_words;
 
 import gdkpixbuf.pixbuf;
@@ -14,17 +15,20 @@ import gtksource.types;
 class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.CompletionProvider
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_words_get_type != &gidSymbolNotFound ? gtk_source_completion_words_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,8 +52,9 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   /**
       Registers buffer in the words provider.
-    Params:
-      buffer =       a #GtkTextBuffer
+  
+      Params:
+        buffer = a #GtkTextBuffer
   */
   void register(gtk.text_buffer.TextBuffer buffer)
   {
@@ -58,8 +63,9 @@ class CompletionWords : gobject.object.ObjectG, gtksource.completion_provider.Co
 
   /**
       Unregisters buffer from the words provider.
-    Params:
-      buffer =       a #GtkTextBuffer
+  
+      Params:
+        buffer = a #GtkTextBuffer
   */
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {

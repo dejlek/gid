@@ -1,3 +1,4 @@
+/// Module for [EventSelection] class
 module gdk.event_selection;
 
 import gdk.atom;
@@ -9,12 +10,13 @@ import gid.gid;
 
 /**
     Generated when a selection is requested or ownership of a selection
-  is taken over by another client application.
+    is taken over by another client application.
 */
 class EventSelection
 {
   GdkEventSelection cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class EventSelection
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

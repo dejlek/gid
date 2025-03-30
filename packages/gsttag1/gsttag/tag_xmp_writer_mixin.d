@@ -1,3 +1,4 @@
+/// Module for [TagXmpWriter] interface mixin
 module gsttag.tag_xmp_writer_mixin;
 
 public import gsttag.tag_xmp_writer_iface_proxy;
@@ -10,18 +11,18 @@ public import gsttag.types;
 
 /**
     This interface is implemented by elements that are able to do XMP serialization. Examples for
-  such elements are #jifmux and #qtmux.
-  
-  Applications can use this interface to configure which XMP schemas should be used when serializing
-  tags into XMP. Schemas are represented by their names, a full list of the supported schemas can be
-  obtained from [gsttag.global.tagXmpListSchemas]. By default, all schemas are used.
+    such elements are #jifmux and #qtmux.
+    
+    Applications can use this interface to configure which XMP schemas should be used when serializing
+    tags into XMP. Schemas are represented by their names, a full list of the supported schemas can be
+    obtained from [gsttag.global.tagXmpListSchemas]. By default, all schemas are used.
 */
 template TagXmpWriterT()
 {
 
   /**
       Adds all available XMP schemas to the configuration. Meaning that
-    all will be used.
+      all will be used.
   */
   override void addAllSchemas()
   {
@@ -30,8 +31,9 @@ template TagXmpWriterT()
 
   /**
       Adds schema to the list schemas
-    Params:
-      schema =       the schema to be added
+  
+      Params:
+        schema = the schema to be added
   */
   override void addSchema(string schema)
   {
@@ -41,9 +43,10 @@ template TagXmpWriterT()
 
   /**
       Checks if schema is going to be used
-    Params:
-      schema =       the schema to test
-    Returns:     true if it is going to be used
+  
+      Params:
+        schema = the schema to test
+      Returns: true if it is going to be used
   */
   override bool hasSchema(string schema)
   {
@@ -55,7 +58,7 @@ template TagXmpWriterT()
 
   /**
       Removes all schemas from the list of schemas to use. Meaning that no
-    XMP will be generated.
+      XMP will be generated.
   */
   override void removeAllSchemas()
   {
@@ -64,9 +67,10 @@ template TagXmpWriterT()
 
   /**
       Removes a schema from the list of schemas to use. Nothing is done if
-    the schema wasn't in the list
-    Params:
-      schema =       the schema to remove
+      the schema wasn't in the list
+  
+      Params:
+        schema = the schema to remove
   */
   override void removeSchema(string schema)
   {

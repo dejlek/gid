@@ -1,3 +1,4 @@
+/// Module for [MaskNode] class
 module gsk.mask_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class MaskNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,15 +24,16 @@ class MaskNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will mask a given node by another.
-    
-    The mask_mode determines how the 'mask values' are derived from
-    the colors of the mask. Applying the mask consists of multiplying
-    the 'mask value' with the alpha of the source.
-    Params:
-      source =       The source node to be drawn
-      mask =       The node to be used as mask
-      maskMode =       The mask mode to use
-    Returns:     A new [gsk.render_node.RenderNode]
+      
+      The mask_mode determines how the 'mask values' are derived from
+      the colors of the mask. Applying the mask consists of multiplying
+      the 'mask value' with the alpha of the source.
+  
+      Params:
+        source = The source node to be drawn
+        mask = The node to be used as mask
+        maskMode = The mask mode to use
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode)
   {
@@ -41,7 +44,7 @@ class MaskNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the mask [gsk.render_node.RenderNode] child of the node.
-    Returns:     the mask child node
+      Returns: the mask child node
   */
   gsk.render_node.RenderNode getMask()
   {
@@ -53,7 +56,7 @@ class MaskNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the mask mode used by node.
-    Returns:     the mask mode
+      Returns: the mask mode
   */
   gsk.types.MaskMode getMaskMode()
   {
@@ -65,7 +68,7 @@ class MaskNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the source [gsk.render_node.RenderNode] child of the node.
-    Returns:     the source child node
+      Returns: the source child node
   */
   gsk.render_node.RenderNode getSource()
   {

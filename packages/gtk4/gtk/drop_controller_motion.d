@@ -1,3 +1,4 @@
+/// Module for [DropControllerMotion] class
 module gtk.drop_controller_motion;
 
 import gdk.drop;
@@ -11,28 +12,31 @@ import gtk.types;
 
 /**
     [gtk.drop_controller_motion.DropControllerMotion] is an event controller tracking
-  the pointer during Drag-and-Drop operations.
-  
-  It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
-  have used that, this should feel really familiar.
-  
-  This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
-  for that purpose.
+    the pointer during Drag-and-Drop operations.
+    
+    It is modeled after [gtk.event_controller_motion.EventControllerMotion] so if you
+    have used that, this should feel really familiar.
+    
+    This controller is not able to accept drops, use [gtk.drop_target.DropTarget]
+    for that purpose.
 */
 class DropControllerMotion : gtk.event_controller.EventController
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_controller_motion_get_type != &gidSymbolNotFound ? gtk_drop_controller_motion_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,8 +49,8 @@ class DropControllerMotion : gtk.event_controller.EventController
 
   /**
       Creates a new event controller that will handle pointer motion
-    events during drag and drop.
-    Returns:     a new [gtk.drop_controller_motion.DropControllerMotion]
+      events during drag and drop.
+      Returns: a new [gtk.drop_controller_motion.DropControllerMotion]
   */
   this()
   {
@@ -57,8 +61,8 @@ class DropControllerMotion : gtk.event_controller.EventController
 
   /**
       Returns if a Drag-and-Drop operation is within the widget
-    self or one of its children.
-    Returns:     true if a dragging pointer is within self or one of its children.
+      self or one of its children.
+      Returns: true if a dragging pointer is within self or one of its children.
   */
   bool containsPointer()
   {
@@ -69,9 +73,9 @@ class DropControllerMotion : gtk.event_controller.EventController
 
   /**
       Returns the [gdk.drop.Drop] of a current Drag-and-Drop operation
-    over the widget of self.
-    Returns:     The [gdk.drop.Drop] currently
-        happening within self
+      over the widget of self.
+      Returns: The [gdk.drop.Drop] currently
+          happening within self
   */
   gdk.drop.Drop getDrop()
   {
@@ -83,9 +87,9 @@ class DropControllerMotion : gtk.event_controller.EventController
 
   /**
       Returns if a Drag-and-Drop operation is within the widget
-    self, not one of its children.
-    Returns:     true if a dragging pointer is within self but
-        not one of its children
+      self, not one of its children.
+      Returns: true if a dragging pointer is within self but
+          not one of its children
   */
   bool isPointer()
   {
@@ -95,38 +99,50 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
+      Connect to `Enter` signal.
+  
       Signals that the pointer has entered the widget.
   
-    ## Parameters
-    $(LIST
-      * $(B x)       coordinates of pointer location
-      * $(B y)       coordinates of pointer location
-      * $(B dropControllerMotion) the instance the signal is connected to
-    )
-  */
-  alias EnterCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /** ditto */
-  alias EnterCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /**
-    Connect to Enter signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+  
+          `x` coordinates of pointer location (optional)
+  
+          `y` coordinates of pointer location (optional)
+  
+          `dropControllerMotion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectEnter(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : EnterCallbackDlg) || is(T : EnterCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_controller_motion.DropControllerMotion)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
-      auto x = getVal!(double)(&_paramVals[1]);
-      auto y = getVal!(double)(&_paramVals[2]);
-      _dClosure.dlg(x, y, dropControllerMotion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -134,34 +150,36 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
+      Connect to `Leave` signal.
+  
       Signals that the pointer has left the widget.
   
-    ## Parameters
-    $(LIST
-      * $(B dropControllerMotion) the instance the signal is connected to
-    )
-  */
-  alias LeaveCallbackDlg = void delegate(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /** ditto */
-  alias LeaveCallbackFunc = void function(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /**
-    Connect to Leave signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+  
+          `dropControllerMotion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectLeave(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : LeaveCallbackDlg) || is(T : LeaveCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.drop_controller_motion.DropControllerMotion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
-      _dClosure.dlg(dropControllerMotion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -169,38 +187,50 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /**
+      Connect to `Motion` signal.
+  
       Emitted when the pointer moves inside the widget.
   
-    ## Parameters
-    $(LIST
-      * $(B x)       the x coordinate
-      * $(B y)       the y coordinate
-      * $(B dropControllerMotion) the instance the signal is connected to
-    )
-  */
-  alias MotionCallbackDlg = void delegate(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /** ditto */
-  alias MotionCallbackFunc = void function(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion);
-
-  /**
-    Connect to Motion signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double x, double y, gtk.drop_controller_motion.DropControllerMotion dropControllerMotion))
+  
+          `x` the x coordinate (optional)
+  
+          `y` the y coordinate (optional)
+  
+          `dropControllerMotion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMotion(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MotionCallbackDlg) || is(T : MotionCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.drop_controller_motion.DropControllerMotion)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto dropControllerMotion = getVal!(gtk.drop_controller_motion.DropControllerMotion)(_paramVals);
-      auto x = getVal!(double)(&_paramVals[1]);
-      auto y = getVal!(double)(&_paramVals[2]);
-      _dClosure.dlg(x, y, dropControllerMotion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

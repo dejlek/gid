@@ -1,3 +1,4 @@
+/// Module for [BindingSet] class
 module gtk.binding_set;
 
 import gdk.types;
@@ -10,16 +11,17 @@ import gtk.types;
 
 /**
     A binding set maintains a list of activatable key bindings.
-  A single binding set can match multiple types of widgets.
-  Similar to style contexts, can be matched by any information contained
-  in a widgets #GtkWidgetPath. When a binding within a set is matched upon
-  activation, an action signal is emitted on the target widget to carry out
-  the actual activation.
+    A single binding set can match multiple types of widgets.
+    Similar to style contexts, can be matched by any information contained
+    in a widgets #GtkWidgetPath. When a binding within a set is matched upon
+    activation, an action signal is emitted on the target widget to carry out
+    the actual activation.
 */
 class BindingSet
 {
   GtkBindingSet cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -31,6 +33,7 @@ class BindingSet
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -79,12 +82,13 @@ class BindingSet
 
   /**
       Find a key binding matching keyval and modifiers within
-    binding_set and activate the binding on object.
-    Params:
-      keyval =       key value of the binding
-      modifiers =       key modifier of the binding
-      object =       object to activate when binding found
-    Returns:     true if a binding was found and activated
+      binding_set and activate the binding on object.
+  
+      Params:
+        keyval = key value of the binding
+        modifiers = key modifier of the binding
+        object = object to activate when binding found
+      Returns: true if a binding was found and activated
   */
   bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectG object)
   {
@@ -95,13 +99,14 @@ class BindingSet
 
   /**
       This function was used internally by the GtkRC parsing mechanism
-    to assign match patterns to #GtkBindingSet structures.
-    
-    In GTK+ 3, these match patterns are unused.
-    Params:
-      pathType =       path type the pattern applies to
-      pathPattern =       the actual match pattern
-      priority =       binding priority
+      to assign match patterns to #GtkBindingSet structures.
+      
+      In GTK+ 3, these match patterns are unused.
+  
+      Params:
+        pathType = path type the pattern applies to
+        pathPattern = the actual match pattern
+        priority = binding priority
   */
   void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority)
   {
@@ -111,12 +116,13 @@ class BindingSet
 
   /**
       Find a binding set by its globally unique name.
-    
-    The set_name can either be a name used for [gtk.binding_set.BindingSet.new_]
-    or the type name of a class used in [gtk.binding_set.BindingSet.byClass].
-    Params:
-      setName =       unique binding set name
-    Returns:     null or the specified binding set
+      
+      The set_name can either be a name used for [gtk.binding_set.BindingSet.new_]
+      or the type name of a class used in [gtk.binding_set.BindingSet.byClass].
+  
+      Params:
+        setName = unique binding set name
+      Returns: null or the specified binding set
   */
   static gtk.binding_set.BindingSet find(string setName)
   {

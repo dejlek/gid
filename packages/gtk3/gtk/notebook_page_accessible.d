@@ -1,8 +1,10 @@
+/// Module for [NotebookPageAccessible] class
 module gtk.notebook_page_accessible;
 
 import atk.component;
 import atk.component_mixin;
 import atk.object;
+import atk.types;
 import gid.gid;
 import gtk.c.functions;
 import gtk.c.types;
@@ -14,17 +16,20 @@ import gtk.widget;
 class NotebookPageAccessible : atk.object.ObjectAtk, atk.component.Component
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_page_accessible_get_type != &gidSymbolNotFound ? gtk_notebook_page_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

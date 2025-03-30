@@ -1,3 +1,4 @@
+/// Module for [Decimal64] class
 module arrow.decimal64;
 
 import arrow.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class Decimal64 : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_get_type != &gidSymbolNotFound ? garrow_decimal64_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

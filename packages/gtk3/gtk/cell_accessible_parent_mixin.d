@@ -1,3 +1,4 @@
+/// Module for [CellAccessibleParent] interface mixin
 module gtk.cell_accessible_parent_mixin;
 
 public import gtk.cell_accessible_parent_iface_proxy;

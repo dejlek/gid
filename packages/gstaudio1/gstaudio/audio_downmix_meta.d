@@ -1,3 +1,4 @@
+/// Module for [AudioDownmixMeta] class
 module gstaudio.audio_downmix_meta;
 
 import gid.gid;
@@ -9,18 +10,19 @@ import gstaudio.types;
 
 /**
     Extra buffer metadata describing audio downmixing matrix. This metadata is
-  attached to audio buffers and contains a matrix to downmix the buffer number
-  of channels to @channels.
-  
-  @matrix is an two-dimensional array of @to_channels times @from_channels
-  coefficients, i.e. the i-th output channels is constructed by multiplicating
-  the input channels with the coefficients in @matrix[i] and taking the sum
-  of the results.
+    attached to audio buffers and contains a matrix to downmix the buffer number
+    of channels to @channels.
+    
+    @matrix is an two-dimensional array of @to_channels times @from_channels
+    coefficients, i.e. the i-th output channels is constructed by multiplicating
+    the input channels with the coefficients in @matrix[i] and taking the sum
+    of the results.
 */
 class AudioDownmixMeta
 {
   GstAudioDownmixMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -32,6 +34,7 @@ class AudioDownmixMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

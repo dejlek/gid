@@ -1,3 +1,4 @@
+/// Module for [ListBoxAccessible] class
 module gtk.list_box_accessible;
 
 import atk.component;
@@ -14,17 +15,20 @@ import gtk.types;
 class ListBoxAccessible : gtk.container_accessible.ContainerAccessible, atk.selection.Selection
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_accessible_get_type != &gidSymbolNotFound ? gtk_list_box_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

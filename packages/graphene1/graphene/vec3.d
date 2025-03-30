@@ -1,3 +1,4 @@
+/// Module for [Vec3] class
 module graphene.vec3;
 
 import gid.gid;
@@ -10,34 +11,39 @@ import graphene.vec4;
 
 /**
     A structure capable of holding a vector with three dimensions: x, y, and z.
-  
-  The contents of the #graphene_vec3_t structure are private and should
-  never be accessed directly.
+    
+    The contents of the #graphene_vec3_t structure are private and should
+    never be accessed directly.
 */
 class Vec3 : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_vec3_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_vec3_get_type != &gidSymbolNotFound ? graphene_vec3_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,13 +56,13 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_vec3_t structure.
-    
-    The contents of the returned structure are undefined.
-    
-    Use [graphene.vec3.Vec3.init_] to initialize the vector.
-    Returns:     the newly allocated #graphene_vec3_t
-        structure. Use [graphene.vec3.Vec3.free] to free the resources allocated
-        by this function.
+      
+      The contents of the returned structure are undefined.
+      
+      Use [graphene.vec3.Vec3.init_] to initialize the vector.
+      Returns: the newly allocated #graphene_vec3_t
+          structure. Use [graphene.vec3.Vec3.free] to free the resources allocated
+          by this function.
   */
   static graphene.vec3.Vec3 alloc()
   {
@@ -68,9 +74,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Adds each component of the two given vectors.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the resulting vector
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
   */
   void add(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -81,9 +88,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Computes the cross product of the two given vectors.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the resulting vector
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
   */
   void cross(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -93,12 +101,13 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Divides each component of the first operand a by the corresponding
-    component of the second operand b, and places the results into the
-    vector res.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the resulting vector
+      Divides each component of the first operand `a` by the corresponding
+      component of the second operand `b`, and places the results into the
+      vector res.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
   */
   void divide(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -109,9 +118,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Computes the dot product of the two given vectors.
-    Params:
-      b =       a #graphene_vec3_t
-    Returns:     the value of the dot product
+  
+      Params:
+        b = a #graphene_vec3_t
+      Returns: the value of the dot product
   */
   float dot(graphene.vec3.Vec3 b)
   {
@@ -122,9 +132,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Checks whether the two given #graphene_vec3_t are equal.
-    Params:
-      v2 =       a #graphene_vec3_t
-    Returns:     `true` if the two vectors are equal, and false otherwise
+  
+      Params:
+        v2 = a #graphene_vec3_t
+      Returns: `true` if the two vectors are equal, and false otherwise
   */
   bool equal(graphene.vec3.Vec3 v2)
   {
@@ -134,8 +145,8 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Retrieves the first component of the given vector v.
-    Returns:     the value of the first component of the vector
+      Retrieves the first component of the given vector `v`.
+      Returns: the value of the first component of the vector
   */
   float getX()
   {
@@ -146,9 +157,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Creates a #graphene_vec2_t that contains the first and second
-    components of the given #graphene_vec3_t.
-    Params:
-      res =       return location for a #graphene_vec2_t
+      components of the given #graphene_vec3_t.
+  
+      Params:
+        res = return location for a #graphene_vec2_t
   */
   void getXy(out graphene.vec2.Vec2 res)
   {
@@ -159,9 +171,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Creates a #graphene_vec3_t that contains the first two components of
-    the given #graphene_vec3_t, and the third component set to 0.
-    Params:
-      res =       return location for a #graphene_vec3_t
+      the given #graphene_vec3_t, and the third component set to 0.
+  
+      Params:
+        res = return location for a #graphene_vec3_t
   */
   void getXy0(out graphene.vec3.Vec3 res)
   {
@@ -172,9 +185,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Converts a #graphene_vec3_t in a #graphene_vec4_t using 0.0
-    as the value for the fourth component of the resulting vector.
-    Params:
-      res =       return location for the vector
+      as the value for the fourth component of the resulting vector.
+  
+      Params:
+        res = return location for the vector
   */
   void getXyz0(out graphene.vec4.Vec4 res)
   {
@@ -185,9 +199,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Converts a #graphene_vec3_t in a #graphene_vec4_t using 1.0
-    as the value for the fourth component of the resulting vector.
-    Params:
-      res =       return location for the vector
+      as the value for the fourth component of the resulting vector.
+  
+      Params:
+        res = return location for the vector
   */
   void getXyz1(out graphene.vec4.Vec4 res)
   {
@@ -197,11 +212,12 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Converts a #graphene_vec3_t in a #graphene_vec4_t using w as
-    the value of the fourth component of the resulting vector.
-    Params:
-      w =       the value of the W component
-      res =       return location for the vector
+      Converts a #graphene_vec3_t in a #graphene_vec4_t using `w` as
+      the value of the fourth component of the resulting vector.
+  
+      Params:
+        w = the value of the W component
+        res = return location for the vector
   */
   void getXyzw(float w, out graphene.vec4.Vec4 res)
   {
@@ -211,8 +227,8 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Retrieves the second component of the given vector v.
-    Returns:     the value of the second component of the vector
+      Retrieves the second component of the given vector `v`.
+      Returns: the value of the second component of the vector
   */
   float getY()
   {
@@ -222,8 +238,8 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Retrieves the third component of the given vector v.
-    Returns:     the value of the third component of the vector
+      Retrieves the third component of the given vector `v`.
+      Returns: the value of the third component of the vector
   */
   float getZ()
   {
@@ -234,14 +250,15 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_vec3_t using the given values.
-    
-    This function can be called multiple times.
-    Params:
-      x =       the X field of the vector
-      y =       the Y field of the vector
-      z =       the Z field of the vector
-    Returns:     a pointer to the initialized
-        vector
+      
+      This function can be called multiple times.
+  
+      Params:
+        x = the X field of the vector
+        y = the Y field of the vector
+        z = the Z field of the vector
+      Returns: a pointer to the initialized
+          vector
   */
   graphene.vec3.Vec3 init_(float x, float y, float z)
   {
@@ -253,9 +270,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_vec3_t with the values from an array.
-    Params:
-      src =       an array of 3 floating point values
-    Returns:     the initialized vector
+  
+      Params:
+        src = an array of 3 floating point values
+      Returns: the initialized vector
   */
   graphene.vec3.Vec3 initFromFloat(float[] src)
   {
@@ -269,10 +287,11 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_vec3_t with the values of another
-    #graphene_vec3_t.
-    Params:
-      src =       a #graphene_vec3_t
-    Returns:     the initialized vector
+      #graphene_vec3_t.
+  
+      Params:
+        src = a #graphene_vec3_t
+      Returns: the initialized vector
   */
   graphene.vec3.Vec3 initFromVec3(graphene.vec3.Vec3 src)
   {
@@ -284,10 +303,11 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Linearly interpolates v1 and v2 using the given factor.
-    Params:
-      v2 =       a #graphene_vec3_t
-      factor =       the interpolation factor
-      res =       the interpolated vector
+  
+      Params:
+        v2 = a #graphene_vec3_t
+        factor = the interpolation factor
+        res = the interpolated vector
   */
   void interpolate(graphene.vec3.Vec3 v2, double factor, out graphene.vec3.Vec3 res)
   {
@@ -297,8 +317,8 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Retrieves the length of the given vector v.
-    Returns:     the value of the length of the vector
+      Retrieves the length of the given vector `v`.
+      Returns: the value of the length of the vector
   */
   float length()
   {
@@ -309,10 +329,11 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Compares each component of the two given vectors and creates a
-    vector that contains the maximum values.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the result vector
+      vector that contains the maximum values.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the result vector
   */
   void max(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -323,10 +344,11 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Compares each component of the two given vectors and creates a
-    vector that contains the minimum values.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the result vector
+      vector that contains the minimum values.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the result vector
   */
   void min(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -337,9 +359,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Multiplies each component of the two given vectors.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the resulting vector
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
   */
   void multiply(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -350,11 +373,12 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Compares the two given #graphene_vec3_t vectors and checks
-    whether their values are within the given epsilon.
-    Params:
-      v2 =       a #graphene_vec3_t
-      epsilon =       the threshold between the two vectors
-    Returns:     `true` if the two vectors are near each other
+      whether their values are within the given epsilon.
+  
+      Params:
+        v2 = a #graphene_vec3_t
+        epsilon = the threshold between the two vectors
+      Returns: `true` if the two vectors are near each other
   */
   bool near(graphene.vec3.Vec3 v2, float epsilon)
   {
@@ -365,8 +389,9 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Negates the given #graphene_vec3_t.
-    Params:
-      res =       return location for the result vector
+  
+      Params:
+        res = return location for the result vector
   */
   void negate(out graphene.vec3.Vec3 res)
   {
@@ -377,8 +402,9 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Normalizes the given #graphene_vec3_t.
-    Params:
-      res =       return location for the normalized vector
+  
+      Params:
+        res = return location for the normalized vector
   */
   void normalize(out graphene.vec3.Vec3 res)
   {
@@ -389,9 +415,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Multiplies all components of the given vector with the given scalar factor.
-    Params:
-      factor =       the scalar factor
-      res =       return location for the result vector
+  
+      Params:
+        factor = the scalar factor
+        res = return location for the result vector
   */
   void scale(float factor, out graphene.vec3.Vec3 res)
   {
@@ -401,12 +428,13 @@ class Vec3 : gobject.boxed.Boxed
   }
 
   /**
-      Subtracts from each component of the first operand a the
-    corresponding component of the second operand b and places
-    each result into the components of res.
-    Params:
-      b =       a #graphene_vec3_t
-      res =       return location for the resulting vector
+      Subtracts from each component of the first operand `a` the
+      corresponding component of the second operand `b` and places
+      each result into the components of res.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
   */
   void subtract(graphene.vec3.Vec3 b, out graphene.vec3.Vec3 res)
   {
@@ -417,9 +445,10 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Copies the components of a #graphene_vec3_t into the given array.
-    Params:
-      dest =       return location for
-          an array of floating point values
+  
+      Params:
+        dest = return location for
+            an array of floating point values
   */
   void toFloat(ref float[] dest)
   {
@@ -428,8 +457,8 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Provides a constant pointer to a vector with three components,
-    all sets to 1.
-    Returns:     a constant vector
+      all sets to 1.
+      Returns: a constant vector
   */
   static graphene.vec3.Vec3 one()
   {
@@ -441,8 +470,8 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Provides a constant pointer to a vector with three components
-    with values set to (1, 0, 0).
-    Returns:     a constant vector
+      with values set to (1, 0, 0).
+      Returns: a constant vector
   */
   static graphene.vec3.Vec3 xAxis()
   {
@@ -454,8 +483,8 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Provides a constant pointer to a vector with three components
-    with values set to (0, 1, 0).
-    Returns:     a constant vector
+      with values set to (0, 1, 0).
+      Returns: a constant vector
   */
   static graphene.vec3.Vec3 yAxis()
   {
@@ -467,8 +496,8 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Provides a constant pointer to a vector with three components
-    with values set to (0, 0, 1).
-    Returns:     a constant vector
+      with values set to (0, 0, 1).
+      Returns: a constant vector
   */
   static graphene.vec3.Vec3 zAxis()
   {
@@ -480,8 +509,8 @@ class Vec3 : gobject.boxed.Boxed
 
   /**
       Provides a constant pointer to a vector with three components,
-    all sets to 0.
-    Returns:     a constant vector
+      all sets to 0.
+      Returns: a constant vector
   */
   static graphene.vec3.Vec3 zero()
   {

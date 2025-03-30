@@ -1,3 +1,4 @@
+/// Module for [CellRendererAccel] class
 module gtk.cell_renderer_accel;
 
 import gdk.types;
@@ -10,29 +11,32 @@ import gtk.types;
 
 /**
     Renders a keyboard accelerator in a cell
-  
-  [gtk.cell_renderer_accel.CellRendererAccel] displays a keyboard accelerator (i.e. a key
-  combination like `Control + a`). If the cell renderer is editable,
-  the accelerator can be changed by simply typing the new combination.
+    
+    [gtk.cell_renderer_accel.CellRendererAccel] displays a keyboard accelerator (i.e. a key
+    combination like `Control + a`). If the cell renderer is editable,
+    the accelerator can be changed by simply typing the new combination.
 
-  Deprecated:     Applications editing keyboard accelerators should
-      provide their own implementation according to platform design
-      guidelines
+    Deprecated: Applications editing keyboard accelerators should
+        provide their own implementation according to platform design
+        guidelines
 */
 class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_accel_get_type != &gidSymbolNotFound ? gtk_cell_renderer_accel_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,7 +49,7 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
 
   /**
       Creates a new [gtk.cell_renderer_accel.CellRendererAccel].
-    Returns:     the new cell renderer
+      Returns: the new cell renderer
   */
   this()
   {
@@ -55,36 +59,43 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
+      Connect to `AccelCleared` signal.
+  
       Gets emitted when the user has removed the accelerator.
   
-    ## Parameters
-    $(LIST
-      * $(B pathString)       the path identifying the row of the edited cell
-      * $(B cellRendererAccel) the instance the signal is connected to
-    )
-  */
-  alias AccelClearedCallbackDlg = void delegate(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
-
-  /** ditto */
-  alias AccelClearedCallbackFunc = void function(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
-
-  /**
-    Connect to AccelCleared signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string pathString, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel))
+  
+          `pathString` the path identifying the row of the edited cell (optional)
+  
+          `cellRendererAccel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAccelCleared(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AccelClearedCallbackDlg) || is(T : AccelClearedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.cell_renderer_accel.CellRendererAccel)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererAccel = getVal!(gtk.cell_renderer_accel.CellRendererAccel)(_paramVals);
-      auto pathString = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(pathString, cellRendererAccel);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -92,42 +103,64 @@ class CellRendererAccel : gtk.cell_renderer_text.CellRendererText
   }
 
   /**
+      Connect to `AccelEdited` signal.
+  
       Gets emitted when the user has selected a new accelerator.
   
-    ## Parameters
-    $(LIST
-      * $(B pathString)       the path identifying the row of the edited cell
-      * $(B accelKey)       the new accelerator keyval
-      * $(B accelMods)       the new accelerator modifier mask
-      * $(B hardwareKeycode)       the keycode of the new accelerator
-      * $(B cellRendererAccel) the instance the signal is connected to
-    )
-  */
-  alias AccelEditedCallbackDlg = void delegate(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
-
-  /** ditto */
-  alias AccelEditedCallbackFunc = void function(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel);
-
-  /**
-    Connect to AccelEdited signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string pathString, uint accelKey, gdk.types.ModifierType accelMods, uint hardwareKeycode, gtk.cell_renderer_accel.CellRendererAccel cellRendererAccel))
+  
+          `pathString` the path identifying the row of the edited cell (optional)
+  
+          `accelKey` the new accelerator keyval (optional)
+  
+          `accelMods` the new accelerator modifier mask (optional)
+  
+          `hardwareKeycode` the keycode of the new accelerator (optional)
+  
+          `cellRendererAccel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAccelEdited(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AccelEditedCallbackDlg) || is(T : AccelEditedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gdk.types.ModifierType)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == uint)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.cell_renderer_accel.CellRendererAccel)))
+  && Parameters!T.length < 6)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererAccel = getVal!(gtk.cell_renderer_accel.CellRendererAccel)(_paramVals);
-      auto pathString = getVal!(string)(&_paramVals[1]);
-      auto accelKey = getVal!(uint)(&_paramVals[2]);
-      auto accelMods = getVal!(gdk.types.ModifierType)(&_paramVals[3]);
-      auto hardwareKeycode = getVal!(uint)(&_paramVals[4]);
-      _dClosure.dlg(pathString, accelKey, accelMods, hardwareKeycode, cellRendererAccel);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

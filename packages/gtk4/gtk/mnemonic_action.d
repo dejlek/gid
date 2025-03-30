@@ -1,3 +1,4 @@
+/// Module for [MnemonicAction] class
 module gtk.mnemonic_action;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class MnemonicAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mnemonic_action_get_type != &gidSymbolNotFound ? gtk_mnemonic_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,10 @@ class MnemonicAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Gets the mnemonic action.
-    
-    This is an action that calls [gtk.widget.Widget.mnemonicActivate]
-    on the given widget upon activation.
-    Returns:     The mnemonic action
+      
+      This is an action that calls [gtk.widget.Widget.mnemonicActivate]
+      on the given widget upon activation.
+      Returns: The mnemonic action
   */
   static gtk.mnemonic_action.MnemonicAction get()
   {

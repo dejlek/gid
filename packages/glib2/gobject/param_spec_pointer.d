@@ -1,3 +1,4 @@
+/// Module for [ParamSpecPointer] class
 module gobject.param_spec_pointer;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gobject.types;
 class ParamSpecPointer : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

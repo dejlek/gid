@@ -1,3 +1,4 @@
+/// Module for [VideoCaptionMeta] class
 module gstvideo.video_caption_meta;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class VideoCaptionMeta
 {
   GstVideoCaptionMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoCaptionMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

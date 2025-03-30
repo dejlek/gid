@@ -1,3 +1,4 @@
+/// Module for [GLDisplayEGLDevice] class
 module gstglegl.gldisplay_egldevice;
 
 import gid.gid;
@@ -9,22 +10,25 @@ import gstglegl.types;
 
 /**
     the contents of a #GstGLDisplayEGLDevice are private and should only be accessed
-  through the provided API
+    through the provided API
 */
 class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_egl_device_get_type != &gidSymbolNotFound ? gst_gl_display_egl_device_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,9 +41,10 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
 
   /**
       Create a new #GstGLDisplayEGLDevice with an EGLDevice supported device
-    Params:
-      deviceIndex =       the index of device to use
-    Returns:     a new #GstGLDisplayEGLDevice or null
+  
+      Params:
+        deviceIndex = the index of device to use
+      Returns: a new #GstGLDisplayEGLDevice or null
   */
   this(uint deviceIndex)
   {
@@ -50,10 +55,11 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
 
   /**
       Creates a new #GstGLDisplayEGLDevice with EGLDeviceEXT .
-    The device must be created using EGLDevice enumeration.
-    Params:
-      device =       an existing EGLDeviceEXT
-    Returns:     a new #GstGLDisplayEGLDevice
+      The device must be created using EGLDevice enumeration.
+  
+      Params:
+        device = an existing EGLDeviceEXT
+      Returns: a new #GstGLDisplayEGLDevice
   */
   static gstglegl.gldisplay_egldevice.GLDisplayEGLDevice newWithEglDevice(void* device = null)
   {

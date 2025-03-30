@@ -1,3 +1,4 @@
+/// Module for [Snippet] class
 module gtksource.snippet;
 
 import gid.gid;
@@ -11,32 +12,35 @@ import gtksource.types;
 
 /**
     Quick insertion code snippets.
-  
-  The [gtksource.snippet.Snippet] represents a series of chunks that can quickly be
-  inserted into the `class@View`.
-  
-  Snippets are defined in XML files which are loaded by the
-  `class@SnippetManager`. Alternatively, applications can create snippets
-  on demand and insert them into the `class@View` using
-  [gtksource.view.View.pushSnippet].
-  
-  Snippet chunks can reference other snippet chunks as well as post-process
-  the values from other chunks such as capitalization.
+    
+    The [gtksource.snippet.Snippet] represents a series of chunks that can quickly be
+    inserted into the `class@View`.
+    
+    Snippets are defined in XML files which are loaded by the
+    `class@SnippetManager`. Alternatively, applications can create snippets
+    on demand and insert them into the `class@View` using
+    [gtksource.view.View.pushSnippet].
+    
+    Snippet chunks can reference other snippet chunks as well as post-process
+    the values from other chunks such as capitalization.
 */
 class Snippet : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_get_type != &gidSymbolNotFound ? gtk_source_snippet_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,10 +53,11 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceSnippet
-    Params:
-      trigger =       the trigger word
-      languageId =       the source language
-    Returns:     A new #GtkSourceSnippet
+  
+      Params:
+        trigger = the trigger word
+        languageId = the source language
+      Returns: A new #GtkSourceSnippet
   */
   this(string trigger = null, string languageId = null)
   {
@@ -65,11 +70,12 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Parses the snippet formatted text into a series of chunks and adds them
-    to a new #GtkSourceSnippet.
-    Params:
-      text =       the formatted snippet text to parse
-    Returns:     the newly parsed #GtkSourceSnippet, or null upon
-        failure and error is set.
+      to a new #GtkSourceSnippet.
+  
+      Params:
+        text = the formatted snippet text to parse
+      Returns: the newly parsed #GtkSourceSnippet, or null upon
+          failure and error is set.
   */
   static gtksource.snippet.Snippet newParsed(string text)
   {
@@ -85,10 +91,11 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Appends chunk to the snippet.
-    
-    This may only be called before the snippet has been expanded.
-    Params:
-      chunk =       a #GtkSourceSnippetChunk
+      
+      This may only be called before the snippet has been expanded.
+  
+      Params:
+        chunk = a #GtkSourceSnippetChunk
   */
   void addChunk(gtksource.snippet_chunk.SnippetChunk chunk)
   {
@@ -97,7 +104,7 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Does a deep copy of the snippet.
-    Returns:     A new #GtkSourceSnippet
+      Returns: A new #GtkSourceSnippet
   */
   gtksource.snippet.Snippet copy()
   {
@@ -109,7 +116,7 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the context used for expanding the snippet.
-    Returns:     an #GtkSourceSnippetContext
+      Returns: an #GtkSourceSnippetContext
   */
   gtksource.snippet_context.SnippetContext getContext()
   {
@@ -121,7 +128,7 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the description for the snippet.
-    Returns: 
+      Returns: 
   */
   string getDescription()
   {
@@ -133,9 +140,9 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the current focus for the snippet.
-    
-    This is changed as the user tabs through focus locations.
-    Returns:     The focus position, or -1 if unset.
+      
+      This is changed as the user tabs through focus locations.
+      Returns: The focus position, or -1 if unset.
   */
   int getFocusPosition()
   {
@@ -146,10 +153,10 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the language-id used for the source snippet.
-    
-    The language identifier should be one that matches a
-    source language `propertyLanguage:id` property.
-    Returns:     the language identifier
+      
+      The language identifier should be one that matches a
+      source language `propertyLanguage:id` property.
+      Returns: the language identifier
   */
   string getLanguageId()
   {
@@ -161,9 +168,9 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the number of chunks in the snippet.
-    
-    Note that not all chunks are editable.
-    Returns:     The number of chunks.
+      
+      Note that not all chunks are editable.
+      Returns: The number of chunks.
   */
   uint getNChunks()
   {
@@ -174,7 +181,7 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the name for the snippet.
-    Returns: 
+      Returns: 
   */
   string getName()
   {
@@ -186,9 +193,10 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the chunk at nth.
-    Params:
-      nth =       the nth chunk to get
-    Returns:     an #GtkSourceSnippetChunk
+  
+      Params:
+        nth = the nth chunk to get
+      Returns: an #GtkSourceSnippetChunk
   */
   gtksource.snippet_chunk.SnippetChunk getNthChunk(uint nth)
   {
@@ -200,10 +208,10 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Gets the trigger for the source snippet.
-    
-    A trigger is a word that can be expanded into the full snippet when
-    the user presses Tab.
-    Returns:     A string or null
+      
+      A trigger is a word that can be expanded into the full snippet when
+      the user presses Tab.
+      Returns: A string or null
   */
   string getTrigger()
   {
@@ -215,8 +223,9 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Sets the description for the snippet.
-    Params:
-      description =       the snippet description
+  
+      Params:
+        description = the snippet description
   */
   void setDescription(string description)
   {
@@ -226,10 +235,11 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Sets the language identifier for the snippet.
-    
-    This should match the `propertyLanguage:id` identifier.
-    Params:
-      languageId =       the language identifier for the snippet
+      
+      This should match the `propertyLanguage:id` identifier.
+  
+      Params:
+        languageId = the language identifier for the snippet
   */
   void setLanguageId(string languageId)
   {
@@ -239,8 +249,9 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Sets the name for the snippet.
-    Params:
-      name =       the snippet name
+  
+      Params:
+        name = the snippet name
   */
   void setName(string name)
   {
@@ -250,8 +261,9 @@ class Snippet : gobject.object.ObjectG
 
   /**
       Sets the trigger for the snippet.
-    Params:
-      trigger =       the trigger word
+  
+      Params:
+        trigger = the trigger word
   */
   void setTrigger(string trigger)
   {

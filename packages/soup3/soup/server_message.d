@@ -1,3 +1,4 @@
+/// Module for [ServerMessage] class
 module soup.server_message;
 
 import gid.gid;
@@ -18,32 +19,35 @@ import soup.types;
 
 /**
     An HTTP server request and response pair.
-  
-  A SoupServerMessage represents an HTTP message that is being sent or
-  received on a `class@Server`.
-  
-  `class@Server` will create [soup.server_message.ServerMessage]s automatically for
-  incoming requests, which your application will receive via handlers.
-  
-  Note that libsoup's terminology here does not quite match the HTTP
-  specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
-  Response. In libsoup, a #SoupServerMessage combines both the request and the
-  response.
+    
+    A SoupServerMessage represents an HTTP message that is being sent or
+    received on a `class@Server`.
+    
+    `class@Server` will create [soup.server_message.ServerMessage]s automatically for
+    incoming requests, which your application will receive via handlers.
+    
+    Note that libsoup's terminology here does not quite match the HTTP
+    specification: in RFC 2616, an "HTTP-message" is *either* a Request, *or* a
+    Response. In libsoup, a #SoupServerMessage combines both the request and the
+    response.
 */
 class ServerMessage : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_server_message_get_type != &gidSymbolNotFound ? soup_server_message_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,7 +60,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the HTTP version of msg.
-    Returns:     a #SoupHTTPVersion.
+      Returns: a #SoupHTTPVersion.
   */
   soup.types.HTTPVersion getHttpVersion()
   {
@@ -68,10 +72,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Retrieves the [gio.socket_address.SocketAddress] associated with the local end
-    of a connection.
-    Returns:     the #GSocketAddress
-        associated with the local end of a connection, it may be
-        null if you used [soup.server.Server.acceptIostream].
+      of a connection.
+      Returns: the #GSocketAddress
+          associated with the local end of a connection, it may be
+          null if you used [soup.server.Server.acceptIostream].
   */
   gio.socket_address.SocketAddress getLocalAddress()
   {
@@ -83,7 +87,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the HTTP method of msg.
-    Returns:     the HTTP method.
+      Returns: the HTTP method.
   */
   string getMethod()
   {
@@ -95,7 +99,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the HTTP reason phrase of msg.
-    Returns:     the reason phrase.
+      Returns: the reason phrase.
   */
   string getReasonPhrase()
   {
@@ -107,10 +111,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Retrieves the [gio.socket_address.SocketAddress] associated with the remote end
-    of a connection.
-    Returns:     the #GSocketAddress
-        associated with the remote end of a connection, it may be
-        null if you used `classServer.accept_iostream`.
+      of a connection.
+      Returns: the #GSocketAddress
+          associated with the remote end of a connection, it may be
+          null if you used `classServer.accept_iostream`.
   */
   gio.socket_address.SocketAddress getRemoteAddress()
   {
@@ -122,10 +126,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Retrieves the IP address associated with the remote end of a
-    connection.
-    Returns:     the IP address associated with the remote
-        end of a connection, it may be null if you used
-        [soup.server.Server.acceptIostream].
+      connection.
+      Returns: the IP address associated with the remote
+          end of a connection, it may be null if you used
+          [soup.server.Server.acceptIostream].
   */
   string getRemoteHost()
   {
@@ -137,7 +141,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the request body of msg.
-    Returns:     a #SoupMessageBody.
+      Returns: a #SoupMessageBody.
   */
   soup.message_body.MessageBody getRequestBody()
   {
@@ -149,7 +153,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the request headers of msg.
-    Returns:     a #SoupMessageHeaders with the request headers.
+      Returns: a #SoupMessageHeaders with the request headers.
   */
   soup.message_headers.MessageHeaders getRequestHeaders()
   {
@@ -161,7 +165,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the response body of msg.
-    Returns:     a #SoupMessageBody.
+      Returns: a #SoupMessageBody.
   */
   soup.message_body.MessageBody getResponseBody()
   {
@@ -173,7 +177,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the response headers of msg.
-    Returns:     a #SoupMessageHeaders with the response headers.
+      Returns: a #SoupMessageHeaders with the response headers.
   */
   soup.message_headers.MessageHeaders getResponseHeaders()
   {
@@ -185,15 +189,15 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Retrieves the [gio.socket.Socket] that msg is associated with.
-    
-    If you are using this method to observe when multiple requests are
-    made on the same persistent HTTP connection (eg, as the ntlm-test
-    test program does), you will need to pay attention to socket
-    destruction as well (eg, by using weak references), so that you do
-    not get fooled when the allocator reuses the memory address of a
-    previously-destroyed socket to represent a new socket.
-    Returns:     the #GSocket that msg is
-        associated with, null if you used [soup.server.Server.acceptIostream].
+      
+      If you are using this method to observe when multiple requests are
+      made on the same persistent HTTP connection (eg, as the ntlm-test
+      test program does), you will need to pay attention to socket
+      destruction as well (eg, by using weak references), so that you do
+      not get fooled when the allocator reuses the memory address of a
+      previously-destroyed socket to represent a new socket.
+      Returns: the #GSocket that msg is
+          associated with, null if you used [soup.server.Server.acceptIostream].
   */
   gio.socket.Socket getSocket()
   {
@@ -205,7 +209,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get the HTTP status code of msg.
-    Returns:     the HTTP status code.
+      Returns: the HTTP status code.
   */
   uint getStatus()
   {
@@ -216,10 +220,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Gets the peer's #GTlsCertificate associated with msg's connection.
-    Note that this is not set yet during the emission of
-    SoupServerMessage::accept-certificate signal.
-    Returns:     msg's TLS peer certificate,
-         or null if msg's connection is not SSL.
+      Note that this is not set yet during the emission of
+      SoupServerMessage::accept-certificate signal.
+      Returns: msg's TLS peer certificate,
+           or null if msg's connection is not SSL.
   */
   gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
   {
@@ -231,9 +235,9 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Gets the errors associated with validating msg's TLS peer certificate.
-    Note that this is not set yet during the emission of
-    SoupServerMessage::accept-certificate signal.
-    Returns:     a #GTlsCertificateFlags with msg's TLS peer certificate errors.
+      Note that this is not set yet during the emission of
+      SoupServerMessage::accept-certificate signal.
+      Returns: a #GTlsCertificateFlags with msg's TLS peer certificate errors.
   */
   gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
   {
@@ -245,7 +249,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Get msg's URI.
-    Returns:     a #GUri
+      Returns: a #GUri
   */
   glib.uri.Uri getUri()
   {
@@ -257,7 +261,7 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Gets if msg represents an OPTIONS message with the path `*`.
-    Returns:     true if is an OPTIONS ping
+      Returns: true if is an OPTIONS ping
   */
   bool isOptionsPing()
   {
@@ -268,10 +272,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Pauses I/O on msg.
-    
-    This can be used when you need to return from the server handler without
-    having the full response ready yet. Use [soup.server_message.ServerMessage.unpause] to
-    resume I/O.
+      
+      This can be used when you need to return from the server handler without
+      having the full response ready yet. Use [soup.server_message.ServerMessage.unpause] to
+      resume I/O.
   */
   void pause()
   {
@@ -280,8 +284,9 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Set the HTTP version of msg.
-    Params:
-      version_ =       a #SoupHTTPVersion
+  
+      Params:
+        version_ = a #SoupHTTPVersion
   */
   void setHttpVersion(soup.types.HTTPVersion version_)
   {
@@ -290,16 +295,17 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Sets msg's status_code to status_code and adds a Location header
-    pointing to redirect_uri. Use this from a `classServer` when you
-    want to redirect the client to another URI.
-    
-    redirect_uri can be a relative URI, in which case it is
-    interpreted relative to msg's current URI. In particular, if
-    redirect_uri is just a path, it will replace the path
-    *and query* of msg's URI.
-    Params:
-      statusCode =       a 3xx status code
-      redirectUri =       the URI to redirect msg to
+      pointing to redirect_uri. Use this from a `classServer` when you
+      want to redirect the client to another URI.
+      
+      redirect_uri can be a relative URI, in which case it is
+      interpreted relative to msg's current URI. In particular, if
+      redirect_uri is just a path, it will replace the path
+      *and query* of msg's URI.
+  
+      Params:
+        statusCode = a 3xx status code
+        redirectUri = the URI to redirect msg to
   */
   void setRedirect(uint statusCode, string redirectUri)
   {
@@ -309,11 +315,12 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Convenience function to set the response body of a #SoupServerMessage. If
-    content_type is null, the response body must be empty as well.
-    Params:
-      contentType =       MIME Content-Type of the body
-      respUse =       a #SoupMemoryUse describing how to handle resp_body
-      respBody =       a data buffer containing the body of the message response.
+      content_type is null, the response body must be empty as well.
+  
+      Params:
+        contentType = MIME Content-Type of the body
+        respUse = a #SoupMemoryUse describing how to handle resp_body
+        respBody = a data buffer containing the body of the message response.
   */
   void setResponse(string contentType, soup.types.MemoryUse respUse, ubyte[] respBody = null)
   {
@@ -328,12 +335,13 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Sets msg's status code to status_code.
-    
-    If status_code is a known value and reason_phrase is null, the
-    reason_phrase will be set automatically.
-    Params:
-      statusCode =       an HTTP status code
-      reasonPhrase =       a reason phrase
+      
+      If status_code is a known value and reason_phrase is null, the
+      reason_phrase will be set automatically.
+  
+      Params:
+        statusCode = an HTTP status code
+        reasonPhrase = a reason phrase
   */
   void setStatus(uint statusCode, string reasonPhrase = null)
   {
@@ -343,19 +351,19 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       "Steals" the HTTP connection associated with msg from its #SoupServer. This
-    happens immediately, regardless of the current state of the connection; if
-    the response to msg has not yet finished being sent, then it will be
-    discarded; you can steal the connection from a
-    `signalServerMessage::wrote-informational` or
-    `signalServerMessage::wrote-body` signal handler if you need to wait for
-    part or all of the response to be sent.
-    
-    Note that when calling this function from C, msg will most
-    likely be freed as a side effect.
-    Returns:     the #GIOStream formerly associated
-        with msg (or null if msg was no longer associated with a
-        connection). No guarantees are made about what kind of #GIOStream
-        is returned.
+      happens immediately, regardless of the current state of the connection; if
+      the response to msg has not yet finished being sent, then it will be
+      discarded; you can steal the connection from a
+      `signalServerMessage::wrote-informational` or
+      `signalServerMessage::wrote-body` signal handler if you need to wait for
+      part or all of the response to be sent.
+      
+      Note that when calling this function from C, msg will most
+      likely be freed as a side effect.
+      Returns: the #GIOStream formerly associated
+          with msg (or null if msg was no longer associated with a
+          connection). No guarantees are made about what kind of #GIOStream
+          is returned.
   */
   gio.iostream.IOStream stealConnection()
   {
@@ -367,10 +375,10 @@ class ServerMessage : gobject.object.ObjectG
 
   /**
       Resumes I/O on msg.
-    
-    Use this to resume after calling [soup.server_message.ServerMessage.pause], or after
-    adding a new chunk to a chunked response. I/O won't actually resume until you
-    return to the main loop.
+      
+      Use this to resume after calling [soup.server_message.ServerMessage.pause], or after
+      adding a new chunk to a chunked response. I/O won't actually resume until you
+      return to the main loop.
   */
   void unpause()
   {
@@ -378,45 +386,56 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted during the msg's connection TLS handshake
-    after client TLS certificate has been received.
-    You can return true to accept tls_certificate despite
-    tls_errors.
+      Connect to `AcceptCertificate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B tlsPeerCertificate)       the peer's #GTlsCertificate
-      * $(B tlsPeerErrors)       the tls errors of tls_certificate
-      * $(B serverMessage) the instance the signal is connected to
-    )
-    Returns:     true to accept the TLS certificate and stop other
-        handlers from being invoked, or false to propagate the
-        event further.
-  */
-  alias AcceptCertificateCallbackDlg = bool delegate(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias AcceptCertificateCallbackFunc = bool function(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to AcceptCertificate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted during the msg's connection TLS handshake
+      after client TLS certificate has been received.
+      You can return true to accept tls_certificate despite
+      tls_errors.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gio.tls_certificate.TlsCertificate tlsPeerCertificate, gio.types.TlsCertificateFlags tlsPeerErrors, soup.server_message.ServerMessage serverMessage))
+  
+          `tlsPeerCertificate` the peer's #GTlsCertificate (optional)
+  
+          `tlsPeerErrors` the tls errors of tls_certificate (optional)
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+          `Returns` true to accept the TLS certificate and stop other
+            handlers from being invoked, or false to propagate the
+            event further.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAcceptCertificate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AcceptCertificateCallbackDlg) || is(T : AcceptCertificateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.tls_certificate.TlsCertificate)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gio.types.TlsCertificateFlags)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      auto tlsPeerCertificate = getVal!(gio.tls_certificate.TlsCertificate)(&_paramVals[1]);
-      auto tlsPeerErrors = getVal!(gio.types.TlsCertificateFlags)(&_paramVals[2]);
-      _retval = _dClosure.dlg(tlsPeerCertificate, tlsPeerErrors, serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -425,34 +444,36 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
+      Connect to `Connected` signal.
+  
       Emitted when the msg's socket is connected and the TLS handshake completed.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias ConnectedCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias ConnectedCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to Connected signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectConnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ConnectedCallbackDlg) || is(T : ConnectedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -460,34 +481,36 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
+      Connect to `Disconnected` signal.
+  
       Emitted when the msg's socket is disconnected.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias DisconnectedCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias DisconnectedCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to Disconnected signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDisconnected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DisconnectedCallbackDlg) || is(T : DisconnectedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -495,35 +518,37 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted when all HTTP processing is finished for a message.
-    (After `signalServerMessage::wrote-body`).
+      Connect to `Finished` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias FinishedCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias FinishedCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to Finished signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when all HTTP processing is finished for a message.
+      (After `signalServerMessage::wrote-body`).
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectFinished(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : FinishedCallbackDlg) || is(T : FinishedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -531,34 +556,36 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
+      Connect to `GotBody` signal.
+  
       Emitted after receiving the complete request body.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias GotBodyCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias GotBodyCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to GotBody signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectGotBody(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : GotBodyCallbackDlg) || is(T : GotBodyCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -566,39 +593,46 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted after receiving a chunk of a message body.
-    
-    Note that "chunk" in this context means any subpiece of the body, not
-    necessarily the specific HTTP 1.1 chunks sent by the other side.
+      Connect to `GotChunk` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B chunk)       the just-read chunk
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias GotChunkCallbackDlg = void delegate(glib.bytes.Bytes chunk, soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias GotChunkCallbackFunc = void function(glib.bytes.Bytes chunk, soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to GotChunk signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted after receiving a chunk of a message body.
+      
+      Note that "chunk" in this context means any subpiece of the body, not
+      necessarily the specific HTTP 1.1 chunks sent by the other side.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(glib.bytes.Bytes chunk, soup.server_message.ServerMessage serverMessage))
+  
+          `chunk` the just-read chunk (optional)
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectGotChunk(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : GotChunkCallbackDlg) || is(T : GotChunkCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == glib.bytes.Bytes)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      auto chunk = getVal!(glib.bytes.Bytes)(&_paramVals[1]);
-      _dClosure.dlg(chunk, serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -606,34 +640,36 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
+      Connect to `GotHeaders` signal.
+  
       Emitted after receiving the Request-Line and request headers.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias GotHeadersCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias GotHeadersCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to GotHeaders signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectGotHeaders(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : GotHeadersCallbackDlg) || is(T : GotHeadersCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -641,35 +677,37 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted immediately after writing the complete response body for a
-    message.
+      Connect to `WroteBody` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias WroteBodyCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias WroteBodyCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to WroteBody signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted immediately after writing the complete response body for a
+      message.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWroteBody(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WroteBodyCallbackDlg) || is(T : WroteBodyCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -677,37 +715,44 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted immediately after writing a portion of the message
-    body to the network.
+      Connect to `WroteBodyData` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B chunkSize)       the number of bytes written
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias WroteBodyDataCallbackDlg = void delegate(uint chunkSize, soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias WroteBodyDataCallbackFunc = void function(uint chunkSize, soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to WroteBodyData signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted immediately after writing a portion of the message
+      body to the network.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(uint chunkSize, soup.server_message.ServerMessage serverMessage))
+  
+          `chunkSize` the number of bytes written (optional)
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWroteBodyData(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WroteBodyDataCallbackDlg) || is(T : WroteBodyDataCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      auto chunkSize = getVal!(uint)(&_paramVals[1]);
-      _dClosure.dlg(chunkSize, serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -715,41 +760,43 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted immediately after writing a body chunk for a message.
-    
-    Note that this signal is not parallel to
-    `signalServerMessage::got-chunk`; it is emitted only when a complete
-    chunk (added with [soup.message_body.MessageBody.append] or
-    [soup.message_body.MessageBody.appendBytes] has been written. To get
-    more useful continuous progress information, use
-    `signalServerMessage::wrote-body-data`.
+      Connect to `WroteChunk` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias WroteChunkCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias WroteChunkCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to WroteChunk signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted immediately after writing a body chunk for a message.
+      
+      Note that this signal is not parallel to
+      `signalServerMessage::got-chunk`; it is emitted only when a complete
+      chunk (added with [soup.message_body.MessageBody.append] or
+      [soup.message_body.MessageBody.appendBytes] has been written. To get
+      more useful continuous progress information, use
+      `signalServerMessage::wrote-body-data`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWroteChunk(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WroteChunkCallbackDlg) || is(T : WroteChunkCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -757,35 +804,37 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
-      Emitted immediately after writing the response headers for a
-    message.
+      Connect to `WroteHeaders` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias WroteHeadersCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias WroteHeadersCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to WroteHeaders signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted immediately after writing the response headers for a
+      message.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWroteHeaders(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WroteHeadersCallbackDlg) || is(T : WroteHeadersCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -793,34 +842,36 @@ class ServerMessage : gobject.object.ObjectG
   }
 
   /**
+      Connect to `WroteInformational` signal.
+  
       Emitted immediately after writing a 1xx (Informational) response.
   
-    ## Parameters
-    $(LIST
-      * $(B serverMessage) the instance the signal is connected to
-    )
-  */
-  alias WroteInformationalCallbackDlg = void delegate(soup.server_message.ServerMessage serverMessage);
-
-  /** ditto */
-  alias WroteInformationalCallbackFunc = void function(soup.server_message.ServerMessage serverMessage);
-
-  /**
-    Connect to WroteInformational signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.server_message.ServerMessage serverMessage))
+  
+          `serverMessage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWroteInformational(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WroteInformationalCallbackDlg) || is(T : WroteInformationalCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.server_message.ServerMessage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto serverMessage = getVal!(soup.server_message.ServerMessage)(_paramVals);
-      _dClosure.dlg(serverMessage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

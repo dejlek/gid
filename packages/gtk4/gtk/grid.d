@@ -1,3 +1,4 @@
+/// Module for [Grid] class
 module gtk.grid;
 
 import gid.gid;
@@ -17,104 +18,107 @@ import gtk.widget;
 
 /**
     [gtk.grid.Grid] is a container which arranges its child widgets in
-  rows and columns.
-  
-  ![An example GtkGrid](grid.png)
-  
-  It supports arbitrary positions and horizontal/vertical spans.
-  
-  Children are added using [gtk.grid.Grid.attach]. They can span multiple
-  rows or columns. It is also possible to add a child next to an existing
-  child, using [gtk.grid.Grid.attachNextTo]. To remove a child from the
-  grid, use [gtk.grid.Grid.remove].
-  
-  The behaviour of [gtk.grid.Grid] when several children occupy the same grid
-  cell is undefined.
-  
-  # GtkGrid as GtkBuildable
-  
-  Every child in a [gtk.grid.Grid] has access to a custom [gtk.buildable.Buildable]
-  element, called `<layout>`. It can by used to specify a position in the
-  grid and optionally spans. All properties that can be used in the `<layout>`
-  element are implemented by [gtk.grid_layout_child.GridLayoutChild].
-  
-  It is implemented by [gtk.widget.Widget] using [gtk.layout_manager.LayoutManager].
-  
-  To showcase it, here is a simple example:
-  
-  ```xml
-  <object class="GtkGrid" id="my_grid">
-    <child>
-      <object class="GtkButton" id="button1">
-        <property name="label">Button 1</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="row">0</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="button2">
-        <property name="label">Button 2</property>
-        <layout>
-          <property name="column">1</property>
-          <property name="row">0</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="button3">
-        <property name="label">Button 3</property>
-        <layout>
-          <property name="column">2</property>
-          <property name="row">0</property>
-          <property name="row-span">2</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="button4">
-        <property name="label">Button 4</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="row">1</property>
-          <property name="column-span">2</property>
-        </layout>
-      </object>
-    </child>
-  </object>
-  ```
-  
-  It organizes the first two buttons side-by-side in one cell each.
-  The third button is in the last column but spans across two rows.
-  This is defined by the `row-span` property. The last button is
-  located in the second row and spans across two columns, which is
-  defined by the `column-span` property.
-  
-  # CSS nodes
-  
-  [gtk.grid.Grid] uses a single CSS node with name `grid`.
-  
-  # Accessibility
-  
-  Until GTK 4.10, [gtk.grid.Grid] used the [gtk.types.AccessibleRole.Group] role.
-  
-  Starting from GTK 4.12, [gtk.grid.Grid] uses the [gtk.types.AccessibleRole.Generic] role.
+    rows and columns.
+    
+    ![An example GtkGrid](grid.png)
+    
+    It supports arbitrary positions and horizontal/vertical spans.
+    
+    Children are added using [gtk.grid.Grid.attach]. They can span multiple
+    rows or columns. It is also possible to add a child next to an existing
+    child, using [gtk.grid.Grid.attachNextTo]. To remove a child from the
+    grid, use [gtk.grid.Grid.remove].
+    
+    The behaviour of [gtk.grid.Grid] when several children occupy the same grid
+    cell is undefined.
+    
+    # GtkGrid as GtkBuildable
+    
+    Every child in a [gtk.grid.Grid] has access to a custom [gtk.buildable.Buildable]
+    element, called `<layout>`. It can by used to specify a position in the
+    grid and optionally spans. All properties that can be used in the `<layout>`
+    element are implemented by [gtk.grid_layout_child.GridLayoutChild].
+    
+    It is implemented by [gtk.widget.Widget] using [gtk.layout_manager.LayoutManager].
+    
+    To showcase it, here is a simple example:
+    
+    ```xml
+    <object class="GtkGrid" id="my_grid">
+      <child>
+        <object class="GtkButton" id="button1">
+          <property name="label">Button 1</property>
+          <layout>
+            <property name="column">0</property>
+            <property name="row">0</property>
+          </layout>
+        </object>
+      </child>
+      <child>
+        <object class="GtkButton" id="button2">
+          <property name="label">Button 2</property>
+          <layout>
+            <property name="column">1</property>
+            <property name="row">0</property>
+          </layout>
+        </object>
+      </child>
+      <child>
+        <object class="GtkButton" id="button3">
+          <property name="label">Button 3</property>
+          <layout>
+            <property name="column">2</property>
+            <property name="row">0</property>
+            <property name="row-span">2</property>
+          </layout>
+        </object>
+      </child>
+      <child>
+        <object class="GtkButton" id="button4">
+          <property name="label">Button 4</property>
+          <layout>
+            <property name="column">0</property>
+            <property name="row">1</property>
+            <property name="column-span">2</property>
+          </layout>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    It organizes the first two buttons side-by-side in one cell each.
+    The third button is in the last column but spans across two rows.
+    This is defined by the `row-span` property. The last button is
+    located in the second row and spans across two columns, which is
+    defined by the `column-span` property.
+    
+    # CSS nodes
+    
+    [gtk.grid.Grid] uses a single CSS node with name `grid`.
+    
+    # Accessibility
+    
+    Until GTK 4.10, [gtk.grid.Grid] used the [gtk.types.AccessibleRole.Group] role.
+    
+    Starting from GTK 4.12, [gtk.grid.Grid] uses the [gtk.types.AccessibleRole.Generic] role.
 */
 class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_get_type != &gidSymbolNotFound ? gtk_grid_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -129,7 +133,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Creates a new grid widget.
-    Returns:     the new [gtk.grid.Grid]
+      Returns: the new [gtk.grid.Grid]
   */
   this()
   {
@@ -140,16 +144,17 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Adds a widget to the grid.
-    
-    The position of child is determined by column and row.
-    The number of “cells” that child will occupy is determined
-    by width and height.
-    Params:
-      child =       the widget to add
-      column =       the column number to attach the left side of child to
-      row =       the row number to attach the top side of child to
-      width =       the number of columns that child will span
-      height =       the number of rows that child will span
+      
+      The position of child is determined by column and row.
+      The number of “cells” that child will occupy is determined
+      by width and height.
+  
+      Params:
+        child = the widget to add
+        column = the column number to attach the left side of child to
+        row = the row number to attach the top side of child to
+        width = the number of columns that child will span
+        height = the number of rows that child will span
   */
   void attach(gtk.widget.Widget child, int column, int row, int width, int height)
   {
@@ -158,21 +163,22 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Adds a widget to the grid.
-    
-    The widget is placed next to sibling, on the side determined by
-    side. When sibling is null, the widget is placed in row (for
-    left or right placement) or column 0 (for top or bottom placement),
-    at the end indicated by side.
-    
-    Attaching widgets labeled `[1]`, `[2]`, `[3]` with `sibling == null` and
-    `side == [gtk.types.PositionType.Left]` yields a layout of `[3][2][1]`.
-    Params:
-      child =       the widget to add
-      sibling =       the child of grid that child will be placed
-          next to, or null to place child at the beginning or end
-      side =       the side of sibling that child is positioned next to
-      width =       the number of columns that child will span
-      height =       the number of rows that child will span
+      
+      The widget is placed next to sibling, on the side determined by
+      side. When sibling is null, the widget is placed in row (for
+      left or right placement) or column 0 (for top or bottom placement),
+      at the end indicated by side.
+      
+      Attaching widgets labeled `[1]`, `[2]`, `[3]` with `sibling == null` and
+      `side == [gtk.types.PositionType.Left]` yields a layout of `[3][2][1]`.
+  
+      Params:
+        child = the widget to add
+        sibling = the child of grid that child will be placed
+            next to, or null to place child at the beginning or end
+        side = the side of sibling that child is positioned next to
+        width = the number of columns that child will span
+        height = the number of rows that child will span
   */
   void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height)
   {
@@ -181,7 +187,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns which row defines the global baseline of grid.
-    Returns:     the row index defining the global baseline
+      Returns: the row index defining the global baseline
   */
   int getBaselineRow()
   {
@@ -192,11 +198,12 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Gets the child of grid whose area covers the grid
-    cell at column, row.
-    Params:
-      column =       the left edge of the cell
-      row =       the top edge of the cell
-    Returns:     the child at the given position
+      cell at column, row.
+  
+      Params:
+        column = the left edge of the cell
+        row = the top edge of the cell
+      Returns: the child at the given position
   */
   gtk.widget.Widget getChildAt(int column, int row)
   {
@@ -208,7 +215,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns whether all columns of grid have the same width.
-    Returns:     whether all columns of grid have the same width.
+      Returns: whether all columns of grid have the same width.
   */
   bool getColumnHomogeneous()
   {
@@ -219,7 +226,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns the amount of space between the columns of grid.
-    Returns:     the column spacing of grid
+      Returns: the column spacing of grid
   */
   uint getColumnSpacing()
   {
@@ -230,11 +237,12 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns the baseline position of row.
-    
-    See [gtk.grid.Grid.setRowBaselinePosition].
-    Params:
-      row =       a row index
-    Returns:     the baseline position of row
+      
+      See [gtk.grid.Grid.setRowBaselinePosition].
+  
+      Params:
+        row = a row index
+      Returns: the baseline position of row
   */
   gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
@@ -246,7 +254,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns whether all rows of grid have the same height.
-    Returns:     whether all rows of grid have the same height.
+      Returns: whether all rows of grid have the same height.
   */
   bool getRowHomogeneous()
   {
@@ -257,7 +265,7 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Returns the amount of space between the rows of grid.
-    Returns:     the row spacing of grid
+      Returns: the row spacing of grid
   */
   uint getRowSpacing()
   {
@@ -268,12 +276,13 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Inserts a column at the specified position.
-    
-    Children which are attached at or to the right of this position
-    are moved one column to the right. Children which span across this
-    position are grown to span the new column.
-    Params:
-      position =       the position to insert the column at
+      
+      Children which are attached at or to the right of this position
+      are moved one column to the right. Children which span across this
+      position are grown to span the new column.
+  
+      Params:
+        position = the position to insert the column at
   */
   void insertColumn(int position)
   {
@@ -282,15 +291,16 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Inserts a row or column at the specified position.
-    
-    The new row or column is placed next to sibling, on the side
-    determined by side. If side is [gtk.types.PositionType.Top] or [gtk.types.PositionType.Bottom],
-    a row is inserted. If side is [gtk.types.PositionType.Left] of [gtk.types.PositionType.Right],
-    a column is inserted.
-    Params:
-      sibling =       the child of grid that the new row or column will be
-          placed next to
-      side =       the side of sibling that child is positioned next to
+      
+      The new row or column is placed next to sibling, on the side
+      determined by side. If side is [gtk.types.PositionType.Top] or [gtk.types.PositionType.Bottom],
+      a row is inserted. If side is [gtk.types.PositionType.Left] of [gtk.types.PositionType.Right],
+      a column is inserted.
+  
+      Params:
+        sibling = the child of grid that the new row or column will be
+            placed next to
+        side = the side of sibling that child is positioned next to
   */
   void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side)
   {
@@ -299,12 +309,13 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Inserts a row at the specified position.
-    
-    Children which are attached at or below this position
-    are moved one row down. Children which span across this
-    position are grown to span the new row.
-    Params:
-      position =       the position to insert the row at
+      
+      Children which are attached at or below this position
+      are moved one row down. Children which span across this
+      position are grown to span the new row.
+  
+      Params:
+        position = the position to insert the row at
   */
   void insertRow(int position)
   {
@@ -313,12 +324,13 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Queries the attach points and spans of child inside the given [gtk.grid.Grid].
-    Params:
-      child =       a [gtk.widget.Widget] child of grid
-      column =       the column used to attach the left side of child
-      row =       the row used to attach the top side of child
-      width =       the number of columns child spans
-      height =       the number of rows child spans
+  
+      Params:
+        child = a [gtk.widget.Widget] child of grid
+        column = the column used to attach the left side of child
+        row = the row used to attach the top side of child
+        width = the number of columns child spans
+        height = the number of rows child spans
   */
   void queryChild(gtk.widget.Widget child, out int column, out int row, out int width, out int height)
   {
@@ -327,11 +339,12 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Removes a child from grid.
-    
-    The child must have been added with
-    [gtk.grid.Grid.attach] or [gtk.grid.Grid.attachNextTo].
-    Params:
-      child =       the child widget to remove
+      
+      The child must have been added with
+      [gtk.grid.Grid.attach] or [gtk.grid.Grid.attachNextTo].
+  
+      Params:
+        child = the child widget to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -340,13 +353,14 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Removes a column from the grid.
-    
-    Children that are placed in this column are removed,
-    spanning children that overlap this column have their
-    width reduced by one, and children after the column
-    are moved to the left.
-    Params:
-      position =       the position of the column to remove
+      
+      Children that are placed in this column are removed,
+      spanning children that overlap this column have their
+      width reduced by one, and children after the column
+      are moved to the left.
+  
+      Params:
+        position = the position of the column to remove
   */
   void removeColumn(int position)
   {
@@ -355,13 +369,14 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Removes a row from the grid.
-    
-    Children that are placed in this row are removed,
-    spanning children that overlap this row have their
-    height reduced by one, and children below the row
-    are moved up.
-    Params:
-      position =       the position of the row to remove
+      
+      Children that are placed in this row are removed,
+      spanning children that overlap this row have their
+      height reduced by one, and children below the row
+      are moved up.
+  
+      Params:
+        position = the position of the row to remove
   */
   void removeRow(int position)
   {
@@ -370,12 +385,13 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets which row defines the global baseline for the entire grid.
-    
-    Each row in the grid can have its own local baseline, but only
-    one of those is global, meaning it will be the baseline in the
-    parent of the grid.
-    Params:
-      row =       the row index
+      
+      Each row in the grid can have its own local baseline, but only
+      one of those is global, meaning it will be the baseline in the
+      parent of the grid.
+  
+      Params:
+        row = the row index
   */
   void setBaselineRow(int row)
   {
@@ -384,8 +400,9 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets whether all columns of grid will have the same width.
-    Params:
-      homogeneous =       true to make columns homogeneous
+  
+      Params:
+        homogeneous = true to make columns homogeneous
   */
   void setColumnHomogeneous(bool homogeneous)
   {
@@ -394,8 +411,9 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the amount of space between columns of grid.
-    Params:
-      spacing =       the amount of space to insert between columns
+  
+      Params:
+        spacing = the amount of space to insert between columns
   */
   void setColumnSpacing(uint spacing)
   {
@@ -404,12 +422,13 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets how the baseline should be positioned on row of the
-    grid, in case that row is assigned more space than is requested.
-    
-    The default baseline position is [gtk.types.BaselinePosition.Center].
-    Params:
-      row =       a row index
-      pos =       a [gtk.types.BaselinePosition]
+      grid, in case that row is assigned more space than is requested.
+      
+      The default baseline position is [gtk.types.BaselinePosition.Center].
+  
+      Params:
+        row = a row index
+        pos = a [gtk.types.BaselinePosition]
   */
   void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
@@ -418,8 +437,9 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets whether all rows of grid will have the same height.
-    Params:
-      homogeneous =       true to make rows homogeneous
+  
+      Params:
+        homogeneous = true to make rows homogeneous
   */
   void setRowHomogeneous(bool homogeneous)
   {
@@ -428,8 +448,9 @@ class Grid : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the amount of space between rows of grid.
-    Params:
-      spacing =       the amount of space to insert between rows
+  
+      Params:
+        spacing = the amount of space to insert between rows
   */
   void setRowSpacing(uint spacing)
   {

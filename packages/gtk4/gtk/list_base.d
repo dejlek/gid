@@ -1,3 +1,4 @@
+/// Module for [ListBase] class
 module gtk.list_base;
 
 import gid.gid;
@@ -22,17 +23,20 @@ import gtk.widget;
 class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Scrollable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_base_get_type != &gidSymbolNotFound ? gtk_list_base_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

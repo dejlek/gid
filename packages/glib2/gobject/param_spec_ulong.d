@@ -1,3 +1,4 @@
+/// Module for [ParamSpecULong] class
 module gobject.param_spec_ulong;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gobject.types;
 class ParamSpecULong : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

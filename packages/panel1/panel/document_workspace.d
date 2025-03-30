@@ -1,3 +1,4 @@
+/// Module for [DocumentWorkspace] class
 module panel.document_workspace;
 
 import gid.gid;
@@ -35,17 +36,20 @@ import panel.workspace;
 class DocumentWorkspace : panel.workspace.Workspace
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_document_workspace_get_type != &gidSymbolNotFound ? panel_document_workspace_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

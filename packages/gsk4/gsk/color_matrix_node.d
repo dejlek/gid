@@ -1,3 +1,4 @@
+/// Module for [ColorMatrixNode] class
 module gsk.color_matrix_node;
 
 import gid.gid;
@@ -14,6 +15,7 @@ import gsk.types;
 class ColorMatrixNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,19 +26,20 @@ class ColorMatrixNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will drawn the child with
-    color_matrix.
-    
-    In particular, the node will transform colors by applying
-    
-        pixel = transpose(color_matrix) * pixel + color_offset
-    
-    for every pixel. The transformation operates on unpremultiplied
-    colors, with color components ordered R, G, B, A.
-    Params:
-      child =       The node to draw
-      colorMatrix =       The matrix to apply
-      colorOffset =       Values to add to the color
-    Returns:     A new [gsk.render_node.RenderNode]
+      color_matrix.
+      
+      In particular, the node will transform colors by applying
+      
+          pixel = transpose(color_matrix) * pixel + color_offset
+      
+      for every pixel. The transformation operates on unpremultiplied
+      colors, with color components ordered R, G, B, A.
+  
+      Params:
+        child = The node to draw
+        colorMatrix = The matrix to apply
+        colorOffset = Values to add to the color
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
   {
@@ -47,7 +50,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting its colors modified by the given node.
-    Returns:     The child that is getting its colors modified
+      Returns: The child that is getting its colors modified
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -59,7 +62,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color matrix used by the node.
-    Returns:     a 4x4 color matrix
+      Returns: a 4x4 color matrix
   */
   graphene.matrix.Matrix getColorMatrix()
   {
@@ -71,7 +74,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color offset used by the node.
-    Returns:     a color vector
+      Returns: a color vector
   */
   graphene.vec4.Vec4 getColorOffset()
   {

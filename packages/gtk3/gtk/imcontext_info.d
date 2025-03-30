@@ -1,3 +1,4 @@
+/// Module for [IMContextInfo] class
 module gtk.imcontext_info;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class IMContextInfo
 {
   GtkIMContextInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class IMContextInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

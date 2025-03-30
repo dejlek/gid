@@ -1,3 +1,4 @@
+/// Module for [Box] class
 module graphene.box;
 
 import gid.gid;
@@ -11,32 +12,37 @@ import graphene.vec3;
 
 /**
     A 3D box, described as the volume between a minimum and
-  a maximum vertices.
+    a maximum vertices.
 */
 class Box : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_box_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_box_get_type != &gidSymbolNotFound ? graphene_box_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,10 +55,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_box_t.
-    
-    The contents of the returned structure are undefined.
-    Returns:     the newly allocated #graphene_box_t structure.
-        Use [graphene.box.Box.free] to free the resources allocated by this function
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_box_t structure.
+          Use [graphene.box.Box.free] to free the resources allocated by this function
   */
   static graphene.box.Box alloc()
   {
@@ -63,11 +69,12 @@ class Box : gobject.boxed.Boxed
   }
 
   /**
-      Checks whether the #graphene_box_t a contains the given
-    #graphene_box_t b.
-    Params:
-      b =       a #graphene_box_t
-    Returns:     `true` if the box is contained in the given box
+      Checks whether the #graphene_box_t `a` contains the given
+      #graphene_box_t `b`.
+  
+      Params:
+        b = a #graphene_box_t
+      Returns: `true` if the box is contained in the given box
   */
   bool containsBox(graphene.box.Box b)
   {
@@ -78,9 +85,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Checks whether box contains the given point.
-    Params:
-      point =       the coordinates to check
-    Returns:     `true` if the point is contained in the given box
+  
+      Params:
+        point = the coordinates to check
+      Returns: `true` if the point is contained in the given box
   */
   bool containsPoint(graphene.point3_d.Point3D point)
   {
@@ -91,9 +99,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Checks whether the two given boxes are equal.
-    Params:
-      b =       a #graphene_box_t
-    Returns:     `true` if the boxes are equal
+  
+      Params:
+        b = a #graphene_box_t
+      Returns: `true` if the boxes are equal
   */
   bool equal(graphene.box.Box b)
   {
@@ -104,9 +113,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Expands the dimensions of box to include the coordinates at point.
-    Params:
-      point =       the coordinates of the point to include
-      res =       return location for the expanded box
+  
+      Params:
+        point = the coordinates of the point to include
+        res = return location for the expanded box
   */
   void expand(graphene.point3_d.Point3D point, out graphene.box.Box res)
   {
@@ -117,12 +127,13 @@ class Box : gobject.boxed.Boxed
 
   /**
       Expands the dimensions of box by the given scalar value.
-    
-    If scalar is positive, the #graphene_box_t will grow; if scalar is
-    negative, the #graphene_box_t will shrink.
-    Params:
-      scalar =       a scalar value
-      res =       return location for the expanded box
+      
+      If scalar is positive, the #graphene_box_t will grow; if scalar is
+      negative, the #graphene_box_t will shrink.
+  
+      Params:
+        scalar = a scalar value
+        res = return location for the expanded box
   */
   void expandScalar(float scalar, out graphene.box.Box res)
   {
@@ -133,10 +144,11 @@ class Box : gobject.boxed.Boxed
 
   /**
       Expands the dimensions of box to include the coordinates of the
-    given vector.
-    Params:
-      vec =       the coordinates of the point to include, as a #graphene_vec3_t
-      res =       return location for the expanded box
+      given vector.
+  
+      Params:
+        vec = the coordinates of the point to include, as a #graphene_vec3_t
+        res = return location for the expanded box
   */
   void expandVec3(graphene.vec3.Vec3 vec, out graphene.box.Box res)
   {
@@ -147,9 +159,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Computes the bounding #graphene_sphere_t capable of containing the given
-    #graphene_box_t.
-    Params:
-      sphere =       return location for the bounding sphere
+      #graphene_box_t.
+  
+      Params:
+        sphere = return location for the bounding sphere
   */
   void getBoundingSphere(out graphene.sphere.Sphere sphere)
   {
@@ -160,9 +173,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the coordinates of the center of a #graphene_box_t.
-    Params:
-      center =       return location for the coordinates of
-          the center
+  
+      Params:
+        center = return location for the coordinates of
+            the center
   */
   void getCenter(out graphene.point3_d.Point3D center)
   {
@@ -173,7 +187,7 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the size of the box on the Z axis.
-    Returns:     the depth of the box
+      Returns: the depth of the box
   */
   float getDepth()
   {
@@ -184,7 +198,7 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the size of the box on the Y axis.
-    Returns:     the height of the box
+      Returns: the height of the box
   */
   float getHeight()
   {
@@ -195,9 +209,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the coordinates of the maximum point of the given
-    #graphene_box_t.
-    Params:
-      max =       return location for the maximum point
+      #graphene_box_t.
+  
+      Params:
+        max = return location for the maximum point
   */
   void getMax(out graphene.point3_d.Point3D max)
   {
@@ -208,9 +223,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the coordinates of the minimum point of the given
-    #graphene_box_t.
-    Params:
-      min =       return location for the minimum point
+      #graphene_box_t.
+  
+      Params:
+        min = return location for the minimum point
   */
   void getMin(out graphene.point3_d.Point3D min)
   {
@@ -221,9 +237,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the size of the box on all three axes, and stores
-    it into the given size vector.
-    Params:
-      size =       return location for the size
+      it into the given size vector.
+  
+      Params:
+        size = return location for the size
   */
   void getSize(out graphene.vec3.Vec3 size)
   {
@@ -234,9 +251,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Computes the vertices of the given #graphene_box_t.
-    Params:
-      vertices =       return location for an array
-          of 8 #graphene_vec3_t
+  
+      Params:
+        vertices = return location for an array
+            of 8 #graphene_vec3_t
   */
   void getVertices(ref graphene.vec3.Vec3[] vertices)
   {
@@ -250,7 +268,7 @@ class Box : gobject.boxed.Boxed
 
   /**
       Retrieves the size of the box on the X axis.
-    Returns:     the width of the box
+      Returns: the width of the box
   */
   float getWidth()
   {
@@ -261,10 +279,11 @@ class Box : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_box_t with two vertices.
-    Params:
-      min =       the coordinates of the minimum vertex
-      max =       the coordinates of the maximum vertex
-    Returns:     the initialized #graphene_box_t
+  
+      Params:
+        min = the coordinates of the minimum vertex
+        max = the coordinates of the maximum vertex
+      Returns: the initialized #graphene_box_t
   */
   graphene.box.Box init_(graphene.point3_d.Point3D min = null, graphene.point3_d.Point3D max = null)
   {
@@ -276,10 +295,11 @@ class Box : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_box_t with the vertices of
-    another #graphene_box_t.
-    Params:
-      src =       a #graphene_box_t
-    Returns:     the initialized #graphene_box_t
+      another #graphene_box_t.
+  
+      Params:
+        src = a #graphene_box_t
+      Returns: the initialized #graphene_box_t
   */
   graphene.box.Box initFromBox(graphene.box.Box src)
   {
@@ -291,13 +311,14 @@ class Box : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_box_t with the given array
-    of vertices.
-    
-    If n_points is 0, the returned box is initialized with
-    [graphene.box.Box.empty].
-    Params:
-      points =       an array of #graphene_point3d_t
-    Returns:     the initialized #graphene_box_t
+      of vertices.
+      
+      If n_points is 0, the returned box is initialized with
+      [graphene.box.Box.empty].
+  
+      Params:
+        points = an array of #graphene_point3d_t
+      Returns: the initialized #graphene_box_t
   */
   graphene.box.Box initFromPoints(graphene.point3_d.Point3D[] points)
   {
@@ -317,11 +338,12 @@ class Box : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_box_t with two vertices
-    stored inside #graphene_vec3_t.
-    Params:
-      min =       the coordinates of the minimum vertex
-      max =       the coordinates of the maximum vertex
-    Returns:     the initialized #graphene_box_t
+      stored inside #graphene_vec3_t.
+  
+      Params:
+        min = the coordinates of the minimum vertex
+        max = the coordinates of the maximum vertex
+      Returns: the initialized #graphene_box_t
   */
   graphene.box.Box initFromVec3(graphene.vec3.Vec3 min = null, graphene.vec3.Vec3 max = null)
   {
@@ -333,13 +355,14 @@ class Box : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_box_t with the given array
-    of vertices.
-    
-    If n_vectors is 0, the returned box is initialized with
-    [graphene.box.Box.empty].
-    Params:
-      vectors =       an array of #graphene_vec3_t
-    Returns:     the initialized #graphene_box_t
+      of vertices.
+      
+      If n_vectors is 0, the returned box is initialized with
+      [graphene.box.Box.empty].
+  
+      Params:
+        vectors = an array of #graphene_vec3_t
+      Returns: the initialized #graphene_box_t
   */
   graphene.box.Box initFromVectors(graphene.vec3.Vec3[] vectors)
   {
@@ -359,13 +382,14 @@ class Box : gobject.boxed.Boxed
 
   /**
       Intersects the two given #graphene_box_t.
-    
-    If the two boxes do not intersect, res will contain a degenerate box
-    initialized with [graphene.box.Box.empty].
-    Params:
-      b =       a #graphene_box_t
-      res =       return location for the result
-    Returns:     true if the two boxes intersect
+      
+      If the two boxes do not intersect, res will contain a degenerate box
+      initialized with [graphene.box.Box.empty].
+  
+      Params:
+        b = a #graphene_box_t
+        res = return location for the result
+      Returns: true if the two boxes intersect
   */
   bool intersection(graphene.box.Box b, out graphene.box.Box res)
   {
@@ -378,9 +402,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       Unions the two given #graphene_box_t.
-    Params:
-      b =       the box to union to a
-      res =       return location for the result
+  
+      Params:
+        b = the box to union to `a`
+        res = return location for the result
   */
   void union_(graphene.box.Box b, out graphene.box.Box res)
   {
@@ -391,9 +416,9 @@ class Box : gobject.boxed.Boxed
 
   /**
       A degenerate #graphene_box_t that can only be expanded.
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box empty()
   {
@@ -405,9 +430,9 @@ class Box : gobject.boxed.Boxed
 
   /**
       A degenerate #graphene_box_t that cannot be expanded.
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box infinite()
   {
@@ -419,10 +444,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
-    maximum vertex set at (0, 0, 0).
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      maximum vertex set at (0, 0, 0).
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box minusOne()
   {
@@ -434,10 +459,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       A #graphene_box_t with the minimum vertex set at (0, 0, 0) and the
-    maximum vertex set at (1, 1, 1).
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      maximum vertex set at (1, 1, 1).
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box one()
   {
@@ -449,10 +474,10 @@ class Box : gobject.boxed.Boxed
 
   /**
       A #graphene_box_t with the minimum vertex set at (-1, -1, -1) and the
-    maximum vertex set at (1, 1, 1).
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      maximum vertex set at (1, 1, 1).
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box oneMinusOne()
   {
@@ -464,9 +489,9 @@ class Box : gobject.boxed.Boxed
 
   /**
       A #graphene_box_t with both the minimum and maximum vertices set at (0, 0, 0).
-    
-    The returned value is owned by Graphene and should not be modified or freed.
-    Returns:     a #graphene_box_t
+      
+      The returned value is owned by Graphene and should not be modified or freed.
+      Returns: a #graphene_box_t
   */
   static graphene.box.Box zero()
   {

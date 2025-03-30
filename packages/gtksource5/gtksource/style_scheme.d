@@ -1,3 +1,4 @@
+/// Module for [StyleScheme] class
 module gtksource.style_scheme;
 
 import gid.gid;
@@ -9,33 +10,36 @@ import gtksource.types;
 
 /**
     Controls the appearance of `class@View`.
-  
-  #GtkSourceStyleScheme contains all the text styles to be used in
-  `class@View` and `class@Buffer`. For instance, it contains text styles
-  for syntax highlighting, it may contain foreground and background color for
-  non-highlighted text, color for the line numbers, current line highlighting,
-  bracket matching, etc.
-  
-  Style schemes are stored in XML files. The format of a scheme file is
-  documented in the [style scheme reference](./style-reference.html).
-  
-  The two style schemes with IDs "classic" and "tango" follow more closely the
-  GTK theme (for example for the background color).
+    
+    #GtkSourceStyleScheme contains all the text styles to be used in
+    `class@View` and `class@Buffer`. For instance, it contains text styles
+    for syntax highlighting, it may contain foreground and background color for
+    non-highlighted text, color for the line numbers, current line highlighting,
+    bracket matching, etc.
+    
+    Style schemes are stored in XML files. The format of a scheme file is
+    documented in the [style scheme reference](./style-reference.html).
+    
+    The two style schemes with IDs "classic" and "tango" follow more closely the
+    GTK theme (for example for the background color).
 */
 class StyleScheme : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -94,11 +98,12 @@ class StyleScheme : gobject.object.ObjectG
 
   /**
       Gets a metadata property from the style scheme.
-    Params:
-      name =       metadata property name.
-    Returns:     value of property name stored in
-        the metadata of scheme or null if scheme does not contain the
-        specified metadata property.
+  
+      Params:
+        name = metadata property name.
+      Returns: value of property name stored in
+          the metadata of scheme or null if scheme does not contain the
+          specified metadata property.
   */
   string getMetadata(string name)
   {

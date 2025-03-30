@@ -1,3 +1,4 @@
+/// Module for [Analysis] class
 module pango.analysis;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import pango.types;
 
 /**
     The [pango.analysis.Analysis] structure stores information about
-  the properties of a segment of text.
+    the properties of a segment of text.
 */
 class Analysis
 {
   PangoAnalysis cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class Analysis
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

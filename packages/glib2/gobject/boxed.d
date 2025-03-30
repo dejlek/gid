@@ -1,3 +1,4 @@
+/// Module for [Boxed] class
 module gobject.boxed;
 
 import gid.gid;

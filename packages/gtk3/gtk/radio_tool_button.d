@@ -1,3 +1,4 @@
+/// Module for [RadioToolButton] class
 module gtk.radio_tool_button;
 
 import atk.implementor_iface;
@@ -18,31 +19,34 @@ import gtk.types;
 
 /**
     A #GtkRadioToolButton is a #GtkToolItem that contains a radio button,
-  that is, a button that is part of a group of toggle buttons where only
-  one button can be active at a time.
-  
-  Use [gtk.radio_tool_button.RadioToolButton.new_] to create a new GtkRadioToolButton. Use
-  [gtk.radio_tool_button.RadioToolButton.newFromWidget] to create a new GtkRadioToolButton
-  that is part of the same group as an existing GtkRadioToolButton.
-  
-  # CSS nodes
-  
-  GtkRadioToolButton has a single CSS node with name toolbutton.
+    that is, a button that is part of a group of toggle buttons where only
+    one button can be active at a time.
+    
+    Use [gtk.radio_tool_button.RadioToolButton.new_] to create a new GtkRadioToolButton. Use
+    [gtk.radio_tool_button.RadioToolButton.newFromWidget] to create a new GtkRadioToolButton
+    that is part of the same group as an existing GtkRadioToolButton.
+    
+    # CSS nodes
+    
+    GtkRadioToolButton has a single CSS node with name toolbutton.
 */
 class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_tool_button_get_type != &gidSymbolNotFound ? gtk_radio_tool_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,10 +59,11 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Creates a new #GtkRadioToolButton, adding it to group.
-    Params:
-      group =       An
-          existing radio button group, or null if you are creating a new group
-    Returns:     The new #GtkRadioToolButton
+  
+      Params:
+        group = An
+            existing radio button group, or null if you are creating a new group
+      Returns: The new #GtkRadioToolButton
   */
   this(gtk.radio_button.RadioButton[] group = null)
   {
@@ -71,15 +76,16 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Creates a new #GtkRadioToolButton, adding it to group.
-    The new #GtkRadioToolButton will contain an icon and label from the
-    stock item indicated by stock_id.
-    Params:
-      group =       an existing radio button
-          group, or null if you are creating a new group
-      stockId =       the name of a stock item
-    Returns:     The new #GtkRadioToolButton
+      The new #GtkRadioToolButton will contain an icon and label from the
+      stock item indicated by stock_id.
   
-    Deprecated:     Use [gtk.radio_tool_button.RadioToolButton.new_] instead.
+      Params:
+        group = an existing radio button
+            group, or null if you are creating a new group
+        stockId = the name of a stock item
+      Returns: The new #GtkRadioToolButton
+  
+      Deprecated: Use [gtk.radio_tool_button.RadioToolButton.new_] instead.
   */
   static gtk.radio_tool_button.RadioToolButton newFromStock(gtk.radio_button.RadioButton[] group, string stockId)
   {
@@ -94,9 +100,10 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Creates a new #GtkRadioToolButton adding it to the same group as gruup
-    Params:
-      group =       An existing #GtkRadioToolButton, or null
-    Returns:     The new #GtkRadioToolButton
+  
+      Params:
+        group = An existing #GtkRadioToolButton, or null
+      Returns: The new #GtkRadioToolButton
   */
   static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group = null)
   {
@@ -108,14 +115,15 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Creates a new #GtkRadioToolButton adding it to the same group as group.
-    The new #GtkRadioToolButton will contain an icon and label from the
-    stock item indicated by stock_id.
-    Params:
-      group =       An existing #GtkRadioToolButton.
-      stockId =       the name of a stock item
-    Returns:     A new #GtkRadioToolButton
+      The new #GtkRadioToolButton will contain an icon and label from the
+      stock item indicated by stock_id.
   
-    Deprecated:     gtk_radio_tool_button_new_from_widget
+      Params:
+        group = An existing #GtkRadioToolButton.
+        stockId = the name of a stock item
+      Returns: A new #GtkRadioToolButton
+  
+      Deprecated: gtk_radio_tool_button_new_from_widget
   */
   static gtk.radio_tool_button.RadioToolButton newWithStockFromWidget(gtk.radio_tool_button.RadioToolButton group, string stockId)
   {
@@ -128,7 +136,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Returns the radio button group button belongs to.
-    Returns:     The group button belongs to.
+      Returns: The group button belongs to.
   */
   gtk.radio_button.RadioButton[] getGroup()
   {
@@ -140,8 +148,9 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 
   /**
       Adds button to group, removing it from the group it belonged to before.
-    Params:
-      group =       an existing radio button group, or null
+  
+      Params:
+        group = an existing radio button group, or null
   */
   void setGroup(gtk.radio_button.RadioButton[] group = null)
   {

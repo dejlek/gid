@@ -1,3 +1,4 @@
+/// Global functions for gstnet1 library
 module gstnet.global;
 
 import gid.gid;
@@ -16,10 +17,11 @@ import gstnet.types;
 
 /**
     Attaches addr as metadata in a #GstNetAddressMeta to buffer.
-  Params:
-    buffer =       a #GstBuffer
-    addr =       a GSocketAddress to connect to buffer
-  Returns:     a #GstNetAddressMeta connected to buffer
+
+    Params:
+      buffer = a #GstBuffer
+      addr = a GSocketAddress to connect to buffer
+    Returns: a #GstNetAddressMeta connected to buffer
 */
 gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer buffer, gio.socket_address.SocketAddress addr)
 {
@@ -31,10 +33,11 @@ gstnet.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gst.buffer.Buffer
 
 /**
     Attaches message as metadata in a #GstNetControlMessageMeta to buffer.
-  Params:
-    buffer =       a #GstBuffer
-    message =       a GSocketControlMessage to attach to buffer
-  Returns:     a #GstNetControlMessageMeta connected to buffer
+
+    Params:
+      buffer = a #GstBuffer
+      message = a GSocketControlMessage to attach to buffer
+    Returns: a #GstNetControlMessageMeta connected to buffer
 */
 gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessageMeta(gst.buffer.Buffer buffer, gio.socket_control_message.SocketControlMessage message)
 {
@@ -46,10 +49,11 @@ gstnet.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessage
 
 /**
     Find the #GstNetAddressMeta on buffer.
-  Params:
-    buffer =       a #GstBuffer
-  Returns:     the #GstNetAddressMeta or null when there
-    is no such metadata on buffer.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstNetAddressMeta or null when there
+      is no such metadata on buffer.
 */
 gstnet.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gst.buffer.Buffer buffer)
 {
@@ -77,10 +81,11 @@ gobject.types.GType netControlMessageMetaApiGetType()
 
 /**
     Configures IP_TOS value of socket, i.e. sets QoS DSCP.
-  Params:
-    socket =       Socket to configure
-    qosDscp =       QoS DSCP value
-  Returns:     TRUE if successful, FALSE in case an error occurred.
+
+    Params:
+      socket = Socket to configure
+      qosDscp = QoS DSCP value
+    Returns: TRUE if successful, FALSE in case an error occurred.
 */
 bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
 {
@@ -91,8 +96,8 @@ bool netUtilsSetSocketTos(gio.socket.Socket socket, int qosDscp)
 
 /**
     Deinitialize the GStreamer PTP subsystem and stop the PTP clock. If there
-  are any remaining GstPtpClock instances, they won't be further synchronized
-  to the PTP network clock.
+    are any remaining GstPtpClock instances, they won't be further synchronized
+    to the PTP network clock.
 */
 void ptpDeinit()
 {
@@ -101,18 +106,19 @@ void ptpDeinit()
 
 /**
     Initialize the GStreamer PTP subsystem and create a PTP ordinary clock in
-  slave-only mode for all domains on the given interfaces with the
-  given clock_id.
-  
-  If clock_id is `GST_PTP_CLOCK_ID_NONE`, a clock id is automatically
-  generated from the MAC address of the first network interface.
-  
-  This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
-  parameters if it wasn't called before.
-  Params:
-    clockId =       PTP clock id of this process' clock or `GST_PTP_CLOCK_ID_NONE`
-    interfaces =       network interfaces to run the clock on
-  Returns:     true if the GStreamer PTP clock subsystem could be initialized.
+    slave-only mode for all domains on the given interfaces with the
+    given clock_id.
+    
+    If clock_id is `GST_PTP_CLOCK_ID_NONE`, a clock id is automatically
+    generated from the MAC address of the first network interface.
+    
+    This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
+    parameters if it wasn't called before.
+
+    Params:
+      clockId = PTP clock id of this process' clock or `GST_PTP_CLOCK_ID_NONE`
+      interfaces = network interfaces to run the clock on
+    Returns: true if the GStreamer PTP clock subsystem could be initialized.
 */
 bool ptpInit(ulong clockId, string[] interfaces = null)
 {
@@ -128,25 +134,26 @@ bool ptpInit(ulong clockId, string[] interfaces = null)
 
 /**
     Initialize the GStreamer PTP subsystem and create a PTP ordinary clock in
-  slave-only mode according to the config.
-  
-  config is a #GstStructure with the following optional fields:
-  $(LIST
-    * #guint64 `clock-id`: The clock ID to use for the local clock. If the
-        clock-id is not provided or `GST_PTP_CLOCK_ID_NONE` is provided, a clock
-        id is automatically generated from the MAC address of the first network
-        interface.
-    * #GStrv `interfaces`: The interface names to listen on for PTP packets. If
-        none are provided then all compatible interfaces will be used.
-    * #guint `ttl`: The TTL to use for multicast packets sent out by GStreamer.
-        This defaults to 1, i.e. packets will not leave the local network.
-  )
+    slave-only mode according to the config.
     
-  This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
-  parameters if it wasn't called before.
-  Params:
-    config =       Configuration for initializing the GStreamer PTP subsystem
-  Returns:     true if the GStreamer PTP clock subsystem could be initialized.
+    config is a #GstStructure with the following optional fields:
+    $(LIST
+      * #guint64 `clock-id`: The clock ID to use for the local clock. If the
+          clock-id is not provided or `GST_PTP_CLOCK_ID_NONE` is provided, a clock
+          id is automatically generated from the MAC address of the first network
+          interface.
+      * #GStrv `interfaces`: The interface names to listen on for PTP packets. If
+          none are provided then all compatible interfaces will be used.
+      * #guint `ttl`: The TTL to use for multicast packets sent out by GStreamer.
+          This defaults to 1, i.e. packets will not leave the local network.
+    )
+      
+    This function is automatically called by [gstnet.ptp_clock.PtpClock.new_] with default
+    parameters if it wasn't called before.
+
+    Params:
+      config = Configuration for initializing the GStreamer PTP subsystem
+    Returns: true if the GStreamer PTP clock subsystem could be initialized.
 */
 bool ptpInitFull(gst.structure.Structure config)
 {
@@ -157,7 +164,7 @@ bool ptpInitFull(gst.structure.Structure config)
 
 /**
     Check if the GStreamer PTP clock subsystem is initialized.
-  Returns:     true if the GStreamer PTP clock subsystem is initialized.
+    Returns: true if the GStreamer PTP clock subsystem is initialized.
 */
 bool ptpIsInitialized()
 {
@@ -168,9 +175,9 @@ bool ptpIsInitialized()
 
 /**
     Check if PTP clocks are generally supported on this system, and if previous
-  initializations did not fail.
-  Returns:     true if PTP clocks are generally supported on this system, and
-    previous initializations did not fail.
+    initializations did not fail.
+    Returns: true if PTP clocks are generally supported on this system, and
+      previous initializations did not fail.
 */
 bool ptpIsSupported()
 {
@@ -181,11 +188,12 @@ bool ptpIsSupported()
 
 /**
     Installs a new statistics callback for gathering PTP statistics. See
-  GstPtpStatisticsCallback for a list of statistics that are provided.
-  Params:
-    callback =       GstPtpStatisticsCallback to call
-  Returns:     Id for the callback that can be passed to
-    [gstnet.global.ptpStatisticsCallbackRemove]
+    GstPtpStatisticsCallback for a list of statistics that are provided.
+
+    Params:
+      callback = GstPtpStatisticsCallback to call
+    Returns: Id for the callback that can be passed to
+      [gstnet.global.ptpStatisticsCallbackRemove]
 */
 gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
 {
@@ -207,9 +215,10 @@ gulong ptpStatisticsCallbackAdd(gstnet.types.PtpStatisticsCallback callback)
 
 /**
     Removes a PTP statistics callback that was previously added with
-  [gstnet.global.ptpStatisticsCallbackAdd].
-  Params:
-    id =       Callback id to remove
+    [gstnet.global.ptpStatisticsCallbackAdd].
+
+    Params:
+      id = Callback id to remove
 */
 void ptpStatisticsCallbackRemove(gulong id)
 {

@@ -1,3 +1,4 @@
+/// C types for vte3 library
 module vte.c.types;
 
 public import gid.basictypes;
@@ -10,7 +11,7 @@ public import cairo.c.types;
 
 /**
     An enumeration type that can be used to specify how the terminal
-  uses extra allocated space.
+    uses extra allocated space.
 */
 enum VteAlign
 {
@@ -32,7 +33,7 @@ enum VteAlign
 
 /**
     An enumerated type which can be used to indicate the cursor blink mode
-  for the terminal.
+    for the terminal.
 */
 enum VteCursorBlinkMode
 {
@@ -54,7 +55,7 @@ enum VteCursorBlinkMode
 
 /**
     An enumerated type which can be used to indicate what should the terminal
-  draw at the cursor position.
+    draw at the cursor position.
 */
 enum VteCursorShape
 {
@@ -65,7 +66,7 @@ enum VteCursorShape
 
   /**
       Draw a vertical bar on the left side of character.
-    This is similar to the default cursor for other GTK+ widgets.
+      This is similar to the default cursor for other GTK+ widgets.
   */
   Ibeam = 1,
 
@@ -77,8 +78,8 @@ enum VteCursorShape
 
 /**
     An enumerated type which can be used to indicate which string the terminal
-  should send to an application when the user presses the Delete or Backspace
-  keys.
+    should send to an application when the user presses the Delete or Backspace
+    keys.
 */
 enum VteEraseBinding
 {
@@ -141,7 +142,7 @@ enum VteFeatureFlags : uint
 
 /**
     An enumeration type that can be used to specify the format the selection
-  should be copied to the clipboard in.
+    should be copied to the clipboard in.
 */
 enum VteFormat
 {
@@ -200,13 +201,13 @@ enum VtePtyFlags : uint
 
   /**
       Do not start a new session for the child in
-      [vte.pty.Pty.childSetup]. See man:setsid(2) for more information. Since: 0.58
+        [vte.pty.Pty.childSetup]. See man:setsid(2) for more information. Since: 0.58
   */
   NoSession = 32,
 
   /**
       Do not set the PTY as the controlling TTY for the child
-      in [vte.pty.Pty.childSetup]. See man:tty_ioctl(4) for more information. Since: 0.58
+        in [vte.pty.Pty.childSetup]. See man:tty_ioctl(4) for more information. Since: 0.58
   */
   NoCtty = 64,
 
@@ -218,26 +219,26 @@ enum VtePtyFlags : uint
 
 /**
     An enum type for regex errors. In addition to the values listed above,
-  any PCRE2 error values may occur.
+    any PCRE2 error values may occur.
 */
 enum VteRegexError
 {
   /**
       The PCRE2 library was built without
-      Unicode support which is required for VTE
+        Unicode support which is required for VTE
   */
   Incompatible = 2147483646,
 
   /**
       Regexes are not supported because VTE was
-      built without PCRE2 support
+        built without PCRE2 support
   */
   NotSupported = 2147483647,
 }
 
 /**
     An enumerated type which can be used to indicate whether the terminal allows
-  the text contents to be blinked.
+    the text contents to be blinked.
 */
 enum VteTextBlinkMode
 {
@@ -264,7 +265,7 @@ enum VteTextBlinkMode
 
 /**
     A flag type to determine how terminal contents should be written
-  to an output stream.
+    to an output stream.
 */
 enum VteWriteFlags
 {

@@ -1,3 +1,4 @@
+/// Module for [DBusPropertyInfo] class
 module gio.dbus_property_info;
 
 import gid.gid;
@@ -12,27 +13,32 @@ import gobject.boxed;
 class DBusPropertyInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GDBusPropertyInfo.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_property_info_get_type != &gidSymbolNotFound ? g_dbus_property_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

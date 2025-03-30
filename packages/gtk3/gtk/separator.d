@@ -1,3 +1,4 @@
+/// Module for [Separator] class
 module gtk.separator;
 
 import atk.implementor_iface;
@@ -14,29 +15,32 @@ import gtk.widget;
 
 /**
     GtkSeparator is a horizontal or vertical separator widget, depending on the
-  value of the #GtkOrientable:orientation property, used to group the widgets
-  within a window. It displays a line with a shadow to make it appear sunken
-  into the interface.
-  
-  # CSS nodes
-  
-  GtkSeparator has a single CSS node with name separator. The node
-  gets one of the .horizontal or .vertical style classes.
+    value of the #GtkOrientable:orientation property, used to group the widgets
+    within a window. It displays a line with a shadow to make it appear sunken
+    into the interface.
+    
+    # CSS nodes
+    
+    GtkSeparator has a single CSS node with name separator. The node
+    gets one of the .horizontal or .vertical style classes.
 */
 class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_get_type != &gidSymbolNotFound ? gtk_separator_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,9 +55,10 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Creates a new #GtkSeparator with the given orientation.
-    Params:
-      orientation =       the separator’s orientation.
-    Returns:     a new #GtkSeparator.
+  
+      Params:
+        orientation = the separator’s orientation.
+      Returns: a new #GtkSeparator.
   */
   this(gtk.types.Orientation orientation)
   {

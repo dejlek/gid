@@ -1,3 +1,4 @@
+/// Module for [ButtonContent] class
 module adw.button_content;
 
 import adw.c.functions;
@@ -14,67 +15,70 @@ import gtk.widget;
 
 /**
     A helper widget for creating buttons.
-  
-  <picture>
-    <source srcset="button-content-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="button-content.png" alt="button-content">
-  </picture>
-  
-  [adw.button_content.ButtonContent] is a box-like widget with an icon and a label.
-  
-  It's intended to be used as a direct child of [gtk.button.Button],
-  [gtk.menu_button.MenuButton] or `class@SplitButton`, when they need to have both an
-  icon and a label, as follows:
-  
-  ```xml
-  <object class="GtkButton">
-    <property name="child">
-      <object class="AdwButtonContent">
-        <property name="icon-name">document-open-symbolic</property>
-        <property name="label" translatable="yes">_Open</property>
-        <property name="use-underline">True</property>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  [adw.button_content.ButtonContent] handles style classes and connecting the mnemonic to the
-  button automatically.
-  
-  ## CSS nodes
-  
-  ```
-  buttoncontent
-  ╰── box
-      ├── image
-      ╰── label
-  ```
-  
-  [adw.button_content.ButtonContent]'s CSS node is called `buttoncontent`. It contains a `box`
-  subnode that serves as a container for the  `image` and `label` nodes.
-  
-  When inside a [gtk.button.Button] or [adw.split_button.SplitButton], the button will receive the
-  `.image-text-button` style class. When inside a [gtk.menu_button.MenuButton], the
-  internal [gtk.button.Button] will receive it instead.
-  
-  ## Accessibility
-  
-  [adw.button_content.ButtonContent] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    <picture>
+      <source srcset="button-content-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="button-content.png" alt="button-content">
+    </picture>
+    
+    [adw.button_content.ButtonContent] is a box-like widget with an icon and a label.
+    
+    It's intended to be used as a direct child of [gtk.button.Button],
+    [gtk.menu_button.MenuButton] or `class@SplitButton`, when they need to have both an
+    icon and a label, as follows:
+    
+    ```xml
+    <object class="GtkButton">
+      <property name="child">
+        <object class="AdwButtonContent">
+          <property name="icon-name">document-open-symbolic</property>
+          <property name="label" translatable="yes">_Open</property>
+          <property name="use-underline">True</property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    [adw.button_content.ButtonContent] handles style classes and connecting the mnemonic to the
+    button automatically.
+    
+    ## CSS nodes
+    
+    ```
+    buttoncontent
+    ╰── box
+        ├── image
+        ╰── label
+    ```
+    
+    [adw.button_content.ButtonContent]'s CSS node is called `buttoncontent`. It contains a `box`
+    subnode that serves as a container for the  `image` and `label` nodes.
+    
+    When inside a [gtk.button.Button] or [adw.split_button.SplitButton], the button will receive the
+    `.image-text-button` style class. When inside a [gtk.menu_button.MenuButton], the
+    internal [gtk.button.Button] will receive it instead.
+    
+    ## Accessibility
+    
+    [adw.button_content.ButtonContent] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class ButtonContent : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_button_content_get_type != &gidSymbolNotFound ? adw_button_content_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -87,7 +91,7 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Creates a new [adw.button_content.ButtonContent].
-    Returns:     the new created [adw.button_content.ButtonContent]
+      Returns: the new created [adw.button_content.ButtonContent]
   */
   this()
   {
@@ -98,7 +102,7 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       gets whether the button can be smaller than the natural size of its contents.
-    Returns:     whether the button can shrink
+      Returns: whether the button can shrink
   */
   bool getCanShrink()
   {
@@ -109,7 +113,7 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Gets the name of the displayed icon.
-    Returns:     the icon name
+      Returns: the icon name
   */
   string getIconName()
   {
@@ -121,7 +125,7 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Gets the displayed label.
-    Returns:     the label
+      Returns: the label
   */
   string getLabel()
   {
@@ -133,7 +137,7 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Gets whether an underline in the text indicates a mnemonic.
-    Returns:     whether an underline in the text indicates a mnemonic
+      Returns: whether an underline in the text indicates a mnemonic
   */
   bool getUseUnderline()
   {
@@ -144,12 +148,13 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Sets whether the button can be smaller than the natural size of its contents.
-    
-    If set to `TRUE`, the label will ellipsize.
-    
-    See [gtk.button.Button.setCanShrink].
-    Params:
-      canShrink =       whether the button can shrink
+      
+      If set to `TRUE`, the label will ellipsize.
+      
+      See [gtk.button.Button.setCanShrink].
+  
+      Params:
+        canShrink = whether the button can shrink
   */
   void setCanShrink(bool canShrink)
   {
@@ -158,10 +163,11 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Sets the name of the displayed icon.
-    
-    If empty, the icon is not shown.
-    Params:
-      iconName =       the new icon name
+      
+      If empty, the icon is not shown.
+  
+      Params:
+        iconName = the new icon name
   */
   void setIconName(string iconName)
   {
@@ -171,8 +177,9 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Sets the displayed label.
-    Params:
-      label =       the new label
+  
+      Params:
+        label = the new label
   */
   void setLabel(string label)
   {
@@ -182,12 +189,13 @@ class ButtonContent : gtk.widget.Widget
 
   /**
       Sets whether an underline in the text indicates a mnemonic.
-    
-    The mnemonic can be used to activate the parent button.
-    
-    See `propertyButtonContent:label`.
-    Params:
-      useUnderline =       whether an underline in the text indicates a mnemonic
+      
+      The mnemonic can be used to activate the parent button.
+      
+      See `propertyButtonContent:label`.
+  
+      Params:
+        useUnderline = whether an underline in the text indicates a mnemonic
   */
   void setUseUnderline(bool useUnderline)
   {

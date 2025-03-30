@@ -1,3 +1,4 @@
+/// Module for [MediaControls] class
 module gtk.media_controls;
 
 import gid.gid;
@@ -16,25 +17,28 @@ import gtk.widget;
 
 /**
     [gtk.media_controls.MediaControls] is a widget to show controls for a video.
-  
-  ![An example GtkMediaControls](media-controls.png)
-  
-  Usually, [gtk.media_controls.MediaControls] is used as part of [gtk.video.Video].
+    
+    ![An example GtkMediaControls](media-controls.png)
+    
+    Usually, [gtk.media_controls.MediaControls] is used as part of [gtk.video.Video].
 */
 class MediaControls : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_controls_get_type != &gidSymbolNotFound ? gtk_media_controls_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,9 +51,10 @@ class MediaControls : gtk.widget.Widget
 
   /**
       Creates a new [gtk.media_controls.MediaControls] managing the stream passed to it.
-    Params:
-      stream =       a [gtk.media_stream.MediaStream] to manage
-    Returns:     a new [gtk.media_controls.MediaControls]
+  
+      Params:
+        stream = a [gtk.media_stream.MediaStream] to manage
+      Returns: a new [gtk.media_controls.MediaControls]
   */
   this(gtk.media_stream.MediaStream stream = null)
   {
@@ -60,7 +65,7 @@ class MediaControls : gtk.widget.Widget
 
   /**
       Gets the media stream managed by controls or null if none.
-    Returns:     The media stream managed by controls
+      Returns: The media stream managed by controls
   */
   gtk.media_stream.MediaStream getMediaStream()
   {
@@ -72,8 +77,9 @@ class MediaControls : gtk.widget.Widget
 
   /**
       Sets the stream that is controlled by controls.
-    Params:
-      stream =       a [gtk.media_stream.MediaStream]
+  
+      Params:
+        stream = a [gtk.media_stream.MediaStream]
   */
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {

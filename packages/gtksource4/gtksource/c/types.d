@@ -1,3 +1,4 @@
+/// C types for gtksource4 library
 module gtksource.c.types;
 
 public import gid.basictypes;
@@ -28,7 +29,7 @@ enum GtkSourceBracketMatchType
 
   /**
       matching a bracket
-     failed because the maximum range was reached.
+       failed because the maximum range was reached.
   */
   OutOfRange = 1,
 
@@ -77,34 +78,34 @@ enum GtkSourceCompletionActivation : uint
 
   /**
       Interactive activation. By
-    default, it occurs on each insertion in the #GtkTextBuffer. This can be
-    blocked temporarily with [gtksource.completion.Completion.blockInteractive].
+      default, it occurs on each insertion in the #GtkTextBuffer. This can be
+      blocked temporarily with [gtksource.completion.Completion.blockInteractive].
   */
   Interactive = 1,
 
   /**
       User requested activation.
-    By default, it occurs when the user presses
-    <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
+      By default, it occurs when the user presses
+      <keycombo><keycap>Control</keycap><keycap>space</keycap></keycombo>.
   */
   UserRequested = 2,
 }
 
 /**
     An error code used with `GTK_SOURCE_COMPLETION_ERROR` in a #GError returned
-  from a completion-related function.
+    from a completion-related function.
 */
 enum GtkSourceCompletionError
 {
   /**
       The #GtkSourceCompletionProvider
-    is already bound to the #GtkSourceCompletion object.
+      is already bound to the #GtkSourceCompletion object.
   */
   AlreadyBound = 0,
 
   /**
       The #GtkSourceCompletionProvider is
-    not bound to the #GtkSourceCompletion object.
+      not bound to the #GtkSourceCompletion object.
   */
   NotBound = 1,
 }
@@ -135,13 +136,13 @@ enum GtkSourceFileLoaderError
 
   /**
       It is not
-    possible to detect the encoding automatically.
+      possible to detect the encoding automatically.
   */
   EncodingAutoDetectionFailed = 1,
 
   /**
       There was an encoding
-    conversion error and it was needed to use a fallback character.
+      conversion error and it was needed to use a fallback character.
   */
   ConversionFallback = 2,
 }
@@ -153,13 +154,13 @@ enum GtkSourceFileSaverError
 {
   /**
       The buffer contains invalid
-      characters.
+        characters.
   */
   InvalidChars = 0,
 
   /**
       The file is externally
-      modified.
+        modified.
   */
   ExternallyModified = 1,
 }
@@ -192,7 +193,7 @@ enum GtkSourceFileSaverFlags : uint
 
 /**
     The alignment mode of the renderer, when a cell spans multiple lines (due to
-  text wrapping).
+    text wrapping).
 */
 enum GtkSourceGutterRendererAlignmentMode
 {
@@ -222,19 +223,19 @@ enum GtkSourceGutterRendererState : uint
 
   /**
       area in the renderer represents the
-    line on which the insert cursor is currently positioned
+      line on which the insert cursor is currently positioned
   */
   Cursor = 1,
 
   /**
       the mouse pointer is currently
-    over the activatable area of the renderer
+      over the activatable area of the renderer
   */
   Prelit = 2,
 
   /**
       area in the renderer represents
-    a line in the buffer which contains part of the selection
+      a line in the buffer which contains part of the selection
   */
   Selected = 4,
 }
@@ -254,7 +255,7 @@ enum GtkSourceNewlineType
 
   /**
       carriage return followed by a line feed, used
-      on Windows.
+        on Windows.
   */
   CrLf = 2,
 }
@@ -269,21 +270,21 @@ enum GtkSourceSmartHomeEndType
 
   /**
       move to the first/last
-    non-whitespace character on the first press of the HOME/END keys and
-    to the beginning/end of the line on the second press.
+      non-whitespace character on the first press of the HOME/END keys and
+      to the beginning/end of the line on the second press.
   */
   Before = 1,
 
   /**
       move to the beginning/end of the
-    line on the first press of the HOME/END keys and to the first/last
-    non-whitespace character on the second press.
+      line on the first press of the HOME/END keys and to the first/last
+      non-whitespace character on the second press.
   */
   After = 2,
 
   /**
       always move to the first/last
-    non-whitespace character when the HOME/END keys are pressed.
+      non-whitespace character when the HOME/END keys are pressed.
   */
   Always = 3,
 }
@@ -314,9 +315,9 @@ enum GtkSourceSortFlags : uint
 
 /**
     #GtkSourceSpaceLocationFlags contains flags for white space locations.
-  
-  If a line contains only white spaces (no text), the white spaces match both
-  [gtksource.types.SpaceLocationFlags.Leading] and [gtksource.types.SpaceLocationFlags.Trailing].
+    
+    If a line contains only white spaces (no text), the white spaces match both
+    [gtksource.types.SpaceLocationFlags.Leading] and [gtksource.types.SpaceLocationFlags.Trailing].
 */
 enum GtkSourceSpaceLocationFlags : uint
 {
@@ -327,7 +328,7 @@ enum GtkSourceSpaceLocationFlags : uint
 
   /**
       Leading white spaces on a line, i.e. the
-      indentation.
+        indentation.
   */
   Leading = 1,
 
@@ -369,8 +370,8 @@ enum GtkSourceSpaceTypeFlags : uint
 
   /**
       Line break character. If the
-      #GtkSourceBuffer:implicit-trailing-newline property is true,
-      #GtkSourceSpaceDrawer also draws a line break at the end of the buffer.
+        #GtkSourceBuffer:implicit-trailing-newline property is true,
+        #GtkSourceSpaceDrawer also draws a line break at the end of the buffer.
   */
   Newline = 4,
 
@@ -390,13 +391,13 @@ enum GtkSourceViewGutterPosition
 {
   /**
       the gutter position of the lines
-    renderer
+      renderer
   */
   Lines = -30,
 
   /**
       the gutter position of the marks
-    renderer
+      renderer
   */
   Marks = -20,
 }
@@ -1011,7 +1012,7 @@ struct GtkSourceRegionClass
 
 /**
     #GtkSourceRegionIter is an opaque datatype; ignore all its fields.
-  Initialize the iter with [gtksource.region.Region.getStartRegionIter].
+    Initialize the iter with [gtksource.region.Region.getStartRegionIter].
 */
 struct GtkSourceRegionIter
 {

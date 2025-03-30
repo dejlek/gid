@@ -1,3 +1,4 @@
+/// Module for [Cookie] class
 module soup.cookie;
 
 import gid.gid;
@@ -10,49 +11,53 @@ import soup.types;
 
 /**
     Implements HTTP cookies, as described by
-  [RFC 6265](http://tools.ietf.org/html/rfc6265.txt).
-  
-  To have a `class@Session` handle cookies for your appliction
-  automatically, use a `class@CookieJar`.
-  
-  @name and @value will be set for all cookies. If the cookie is
-  generated from a string that appears to have no name, then @name
-  will be the empty string.
-  
-  @domain and @path give the host or domain, and path within that
-  host/domain, to restrict this cookie to. If @domain starts with
-  ".", that indicates a domain (which matches the string after the
-  ".", or any hostname that has @domain as a suffix). Otherwise, it
-  is a hostname and must match exactly.
-  
-  @expires will be non-null if the cookie uses either the original
-  "expires" attribute, or the newer "max-age" attribute. If @expires
-  is null, it indicates that neither "expires" nor "max-age" was
-  specified, and the cookie expires at the end of the session.
-  
-  If @http_only is set, the cookie should not be exposed to untrusted
-  code (eg, javascript), so as to minimize the danger posed by
-  cross-site scripting attacks.
+    [RFC 6265](http://tools.ietf.org/html/rfc6265.txt).
+    
+    To have a `class@Session` handle cookies for your appliction
+    automatically, use a `class@CookieJar`.
+    
+    @name and @value will be set for all cookies. If the cookie is
+    generated from a string that appears to have no name, then @name
+    will be the empty string.
+    
+    @domain and @path give the host or domain, and path within that
+    host/domain, to restrict this cookie to. If @domain starts with
+    ".", that indicates a domain (which matches the string after the
+    ".", or any hostname that has @domain as a suffix). Otherwise, it
+    is a hostname and must match exactly.
+    
+    @expires will be non-null if the cookie uses either the original
+    "expires" attribute, or the newer "max-age" attribute. If @expires
+    is null, it indicates that neither "expires" nor "max-age" was
+    specified, and the cookie expires at the end of the session.
+    
+    If @http_only is set, the cookie should not be exposed to untrusted
+    code (eg, javascript), so as to minimize the danger posed by
+    cross-site scripting attacks.
 */
 class Cookie : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_get_type != &gidSymbolNotFound ? soup_cookie_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -65,33 +70,34 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Creates a new #SoupCookie with the given attributes.
-    
-    Use [soup.cookie.Cookie.setSecure] and [soup.cookie.Cookie.setHttpOnly] if you
-    need to set those attributes on the returned cookie.
-    
-    If domain starts with ".", that indicates a domain (which matches
-    the string after the ".", or any hostname that has domain as a
-    suffix). Otherwise, it is a hostname and must match exactly.
-    
-    max_age is used to set the "expires" attribute on the cookie; pass
-    -1 to not include the attribute (indicating that the cookie expires
-    with the current session), 0 for an already-expired cookie, or a
-    lifetime in seconds. You can use the constants
-    `SOUP_COOKIE_MAX_AGE_ONE_HOUR`, `SOUP_COOKIE_MAX_AGE_ONE_DAY`,
-    `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or
-    multiples thereof) to calculate this value. (If you really care
-    about setting the exact time that the cookie will expire, use
-    [soup.cookie.Cookie.setExpires].)
-    
-    As of version 3.4.0 the default value of a cookie's same-site-policy
-    is [soup.types.SameSitePolicy.Lax].
-    Params:
-      name =       cookie name
-      value =       cookie value
-      domain =       cookie domain or hostname
-      path =       cookie path, or null
-      maxAge =       max age of the cookie, or -1 for a session cookie
-    Returns:     a new #SoupCookie.
+      
+      Use [soup.cookie.Cookie.setSecure] and [soup.cookie.Cookie.setHttpOnly] if you
+      need to set those attributes on the returned cookie.
+      
+      If domain starts with ".", that indicates a domain (which matches
+      the string after the ".", or any hostname that has domain as a
+      suffix). Otherwise, it is a hostname and must match exactly.
+      
+      max_age is used to set the "expires" attribute on the cookie; pass
+      -1 to not include the attribute (indicating that the cookie expires
+      with the current session), 0 for an already-expired cookie, or a
+      lifetime in seconds. You can use the constants
+      `SOUP_COOKIE_MAX_AGE_ONE_HOUR`, `SOUP_COOKIE_MAX_AGE_ONE_DAY`,
+      `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or
+      multiples thereof) to calculate this value. (If you really care
+      about setting the exact time that the cookie will expire, use
+      [soup.cookie.Cookie.setExpires].)
+      
+      As of version 3.4.0 the default value of a cookie's same-site-policy
+      is [soup.types.SameSitePolicy.Lax].
+  
+      Params:
+        name = cookie name
+        value = cookie value
+        domain = cookie domain or hostname
+        path = cookie path, or null
+        maxAge = max age of the cookie, or -1 for a session cookie
+      Returns: a new #SoupCookie.
   */
   this(string name, string value, string domain, string path, int maxAge)
   {
@@ -106,13 +112,14 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Tests if cookie should be sent to uri.
-    
-    (At the moment, this does not check that cookie's domain matches
-    uri, because it assumes that the caller has already done that.
-    But don't rely on that; it may change in the future.)
-    Params:
-      uri =       a #GUri
-    Returns:     true if cookie should be sent to uri, false if not
+      
+      (At the moment, this does not check that cookie's domain matches
+      uri, because it assumes that the caller has already done that.
+      But don't rely on that; it may change in the future.)
+  
+      Params:
+        uri = a #GUri
+      Returns: true if cookie should be sent to uri, false if not
   */
   bool appliesToUri(glib.uri.Uri uri)
   {
@@ -123,7 +130,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Copies cookie.
-    Returns:     a copy of cookie
+      Returns: a copy of cookie
   */
   soup.cookie.Cookie copy()
   {
@@ -135,12 +142,13 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Checks if the cookie's domain and host match.
-    
-    The domains match if cookie should be sent when making a request to host,
-    or that cookie should be accepted when receiving a response from host.
-    Params:
-      host =       a URI
-    Returns:     true if the domains match, false otherwise
+      
+      The domains match if cookie should be sent when making a request to host,
+      or that cookie should be accepted when receiving a response from host.
+  
+      Params:
+        host = a URI
+      Returns: true if the domains match, false otherwise
   */
   bool domainMatches(string host)
   {
@@ -152,12 +160,13 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Tests if cookie1 and cookie2 are equal.
-    
-    Note that currently, this does not check that the cookie domains
-    match. This may change in the future.
-    Params:
-      cookie2 =       a #SoupCookie
-    Returns:     whether the cookies are equal.
+      
+      Note that currently, this does not check that the cookie domains
+      match. This may change in the future.
+  
+      Params:
+        cookie2 = a #SoupCookie
+      Returns: whether the cookies are equal.
   */
   bool equal(soup.cookie.Cookie cookie2)
   {
@@ -168,7 +177,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's domain.
-    Returns:     cookie's domain
+      Returns: cookie's domain
   */
   string getDomain()
   {
@@ -180,8 +189,8 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's expiration time.
-    Returns:     cookie's expiration time, which is
-        owned by cookie and should not be modified or freed.
+      Returns: cookie's expiration time, which is
+          owned by cookie and should not be modified or freed.
   */
   glib.date_time.DateTime getExpires()
   {
@@ -193,7 +202,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's HttpOnly attribute.
-    Returns:     cookie's HttpOnly attribute
+      Returns: cookie's HttpOnly attribute
   */
   bool getHttpOnly()
   {
@@ -204,7 +213,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's name.
-    Returns:     cookie's name
+      Returns: cookie's name
   */
   string getName()
   {
@@ -216,7 +225,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's path.
-    Returns:     cookie's path
+      Returns: cookie's path
   */
   string getPath()
   {
@@ -228,7 +237,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Returns the same-site policy for this cookie.
-    Returns:     a #SoupSameSitePolicy
+      Returns: a #SoupSameSitePolicy
   */
   soup.types.SameSitePolicy getSameSitePolicy()
   {
@@ -240,7 +249,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's secure attribute.
-    Returns:     cookie's secure attribute
+      Returns: cookie's secure attribute
   */
   bool getSecure()
   {
@@ -251,7 +260,7 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Gets cookie's value.
-    Returns:     cookie's value
+      Returns: cookie's value
   */
   string getValue()
   {
@@ -263,8 +272,9 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's domain to domain.
-    Params:
-      domain =       the new domain
+  
+      Params:
+        domain = the new domain
   */
   void setDomain(string domain)
   {
@@ -274,13 +284,14 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's expiration time to expires.
-    
-    If expires is null, cookie will be a session cookie and will expire at the
-    end of the client's session.
-    
-    (This sets the same property as [soup.cookie.Cookie.setMaxAge].)
-    Params:
-      expires =       the new expiration time, or null
+      
+      If expires is null, cookie will be a session cookie and will expire at the
+      end of the client's session.
+      
+      (This sets the same property as [soup.cookie.Cookie.setMaxAge].)
+  
+      Params:
+        expires = the new expiration time, or null
   */
   void setExpires(glib.date_time.DateTime expires)
   {
@@ -289,11 +300,12 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's HttpOnly attribute to http_only.
-    
-    If true, cookie will be marked as "http only", meaning it should not be
-    exposed to web page scripts or other untrusted code.
-    Params:
-      httpOnly =       the new value for the HttpOnly attribute
+      
+      If true, cookie will be marked as "http only", meaning it should not be
+      exposed to web page scripts or other untrusted code.
+  
+      Params:
+        httpOnly = the new value for the HttpOnly attribute
   */
   void setHttpOnly(bool httpOnly)
   {
@@ -302,18 +314,19 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's max age to max_age.
-    
-    If max_age is -1, the cookie is a session cookie, and will expire at the end
-    of the client's session. Otherwise, it is the number of seconds until the
-    cookie expires. You can use the constants `SOUP_COOKIE_MAX_AGE_ONE_HOUR`,
-    `SOUP_COOKIE_MAX_AGE_ONE_DAY`, `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and
-    `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or multiples thereof) to calculate this value.
-    (A value of 0 indicates that the cookie should be considered
-    already-expired.)
-    
-    This sets the same property as [soup.cookie.Cookie.setExpires].
-    Params:
-      maxAge =       the new max age
+      
+      If max_age is -1, the cookie is a session cookie, and will expire at the end
+      of the client's session. Otherwise, it is the number of seconds until the
+      cookie expires. You can use the constants `SOUP_COOKIE_MAX_AGE_ONE_HOUR`,
+      `SOUP_COOKIE_MAX_AGE_ONE_DAY`, `SOUP_COOKIE_MAX_AGE_ONE_WEEK` and
+      `SOUP_COOKIE_MAX_AGE_ONE_YEAR` (or multiples thereof) to calculate this value.
+      (A value of 0 indicates that the cookie should be considered
+      already-expired.)
+      
+      This sets the same property as [soup.cookie.Cookie.setExpires].
+  
+      Params:
+        maxAge = the new max age
   */
   void setMaxAge(int maxAge)
   {
@@ -322,8 +335,9 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's name to name.
-    Params:
-      name =       the new name
+  
+      Params:
+        name = the new name
   */
   void setName(string name)
   {
@@ -333,8 +347,9 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's path to path.
-    Params:
-      path =       the new path
+  
+      Params:
+        path = the new path
   */
   void setPath(string path)
   {
@@ -344,10 +359,11 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       When used in conjunction with
-    [soup.cookie_jar.CookieJar.getCookieListWithSameSiteInfo] this sets the policy
-    of when this cookie should be exposed.
-    Params:
-      policy =       a #SoupSameSitePolicy
+      [soup.cookie_jar.CookieJar.getCookieListWithSameSiteInfo] this sets the policy
+      of when this cookie should be exposed.
+  
+      Params:
+        policy = a #SoupSameSitePolicy
   */
   void setSameSitePolicy(soup.types.SameSitePolicy policy)
   {
@@ -356,11 +372,12 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's secure attribute to secure.
-    
-    If true, cookie will only be transmitted from the client to the server over
-    secure (https) connections.
-    Params:
-      secure =       the new value for the secure attribute
+      
+      If true, cookie will only be transmitted from the client to the server over
+      secure (https) connections.
+  
+      Params:
+        secure = the new value for the secure attribute
   */
   void setSecure(bool secure)
   {
@@ -369,8 +386,9 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Sets cookie's value to value.
-    Params:
-      value =       the new value
+  
+      Params:
+        value = the new value
   */
   void setValue(string value)
   {
@@ -380,8 +398,8 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Serializes cookie in the format used by the Cookie header (ie, for
-    returning a cookie from a `classSession` to a server).
-    Returns:     the header
+      returning a cookie from a `classSession` to a server).
+      Returns: the header
   */
   string toCookieHeader()
   {
@@ -393,9 +411,9 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Serializes cookie in the format used by the Set-Cookie header.
-    
-    i.e. for sending a cookie from a `classServer` to a client.
-    Returns:     the header
+      
+      i.e. for sending a cookie from a `classServer` to a client.
+      Returns: the header
   */
   string toSetCookieHeader()
   {
@@ -407,24 +425,25 @@ class Cookie : gobject.boxed.Boxed
 
   /**
       Parses header and returns a #SoupCookie.
-    
-    If header contains multiple cookies, only the first one will be parsed.
-    
-    If header does not have "path" or "domain" attributes, they will
-    be defaulted from origin. If origin is null, path will default
-    to "/", but domain will be left as null. Note that this is not a
-    valid state for a #SoupCookie, and you will need to fill in some
-    appropriate string for the domain if you want to actually make use
-    of the cookie.
-    
-    As of version 3.4.0 the default value of a cookie's same-site-policy
-    is [soup.types.SameSitePolicy.Lax].
-    Params:
-      header =       a cookie string (eg, the value of a Set-Cookie header)
-      origin =       origin of the cookie
-    Returns:     a new #SoupCookie, or null if it could
-        not be parsed, or contained an illegal "domain" attribute for a
-        cookie originating from origin.
+      
+      If header contains multiple cookies, only the first one will be parsed.
+      
+      If header does not have "path" or "domain" attributes, they will
+      be defaulted from origin. If origin is null, path will default
+      to "/", but domain will be left as null. Note that this is not a
+      valid state for a #SoupCookie, and you will need to fill in some
+      appropriate string for the domain if you want to actually make use
+      of the cookie.
+      
+      As of version 3.4.0 the default value of a cookie's same-site-policy
+      is [soup.types.SameSitePolicy.Lax].
+  
+      Params:
+        header = a cookie string (eg, the value of a Set-Cookie header)
+        origin = origin of the cookie
+      Returns: a new #SoupCookie, or null if it could
+          not be parsed, or contained an illegal "domain" attribute for a
+          cookie originating from origin.
   */
   static soup.cookie.Cookie parse(string header, glib.uri.Uri origin = null)
   {

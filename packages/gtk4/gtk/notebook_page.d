@@ -1,3 +1,4 @@
+/// Module for [NotebookPage] class
 module gtk.notebook_page;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.widget;
 class NotebookPage : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_page_get_type != &gidSymbolNotFound ? gtk_notebook_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,7 +40,7 @@ class NotebookPage : gobject.object.ObjectG
 
   /**
       Returns the notebook child to which page belongs.
-    Returns:     the child to which page belongs
+      Returns: the child to which page belongs
   */
   gtk.widget.Widget getChild()
   {

@@ -1,3 +1,4 @@
+/// Module for [SortKey] class
 module arrow.sort_key;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import gobject.object;
 class SortKey : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sort_key_get_type != &gidSymbolNotFound ? garrow_sort_key_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

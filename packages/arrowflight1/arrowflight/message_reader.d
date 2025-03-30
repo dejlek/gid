@@ -1,3 +1,4 @@
+/// Module for [MessageReader] class
 module arrowflight.message_reader;
 
 import arrowflight.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_message_reader_get_type != &gidSymbolNotFound ? gaflight_message_reader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

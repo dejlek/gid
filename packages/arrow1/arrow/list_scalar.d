@@ -1,3 +1,4 @@
+/// Module for [ListScalar] class
 module arrow.list_scalar;
 
 import arrow.base_list_scalar;
@@ -11,17 +12,20 @@ import gid.gid;
 class ListScalar : arrow.base_list_scalar.BaseListScalar
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_scalar_get_type != &gidSymbolNotFound ? garrow_list_scalar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

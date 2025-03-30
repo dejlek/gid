@@ -1,3 +1,4 @@
+/// Module for [ShaderArgsBuilder] class
 module gsk.shader_args_builder;
 
 import gid.gid;
@@ -17,22 +18,26 @@ import gsk.types;
 class ShaderArgsBuilder : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_shader_args_builder_get_type != &gidSymbolNotFound ? gsk_shader_args_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,12 +50,13 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Allocates a builder that can be used to construct a new uniform data
-    chunk.
-    Params:
-      shader =       a [gsk.glshader.GLShader]
-      initialValues =       optional [glib.bytes.Bytes] with initial values
-    Returns:     The newly allocated builder, free with
-          [gsk.shader_args_builder.ShaderArgsBuilder.unref]
+      chunk.
+  
+      Params:
+        shader = a [gsk.glshader.GLShader]
+        initialValues = optional [glib.bytes.Bytes] with initial values
+      Returns: The newly allocated builder, free with
+            [gsk.shader_args_builder.ShaderArgsBuilder.unref]
   */
   this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
   {
@@ -61,11 +67,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of bool type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform to
+      
+      The uniform must be of bool type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform to
   */
   void setBool(int idx, bool value)
   {
@@ -74,11 +81,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of float type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform to
+      
+      The uniform must be of float type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform to
   */
   void setFloat(int idx, float value)
   {
@@ -87,11 +95,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of int type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform to
+      
+      The uniform must be of int type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform to
   */
   void setInt(int idx, int value)
   {
@@ -100,11 +109,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of uint type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform to
+      
+      The uniform must be of uint type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform to
   */
   void setUint(int idx, uint value)
   {
@@ -113,11 +123,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of vec2 type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform too
+      
+      The uniform must be of vec2 type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform too
   */
   void setVec2(int idx, graphene.vec2.Vec2 value)
   {
@@ -126,11 +137,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of vec3 type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform too
+      
+      The uniform must be of vec3 type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform too
   */
   void setVec3(int idx, graphene.vec3.Vec3 value)
   {
@@ -139,11 +151,12 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Sets the value of the uniform idx.
-    
-    The uniform must be of vec4 type.
-    Params:
-      idx =       index of the uniform
-      value =       value to set the uniform too
+      
+      The uniform must be of vec4 type.
+  
+      Params:
+        idx = index of the uniform
+        value = value to set the uniform too
   */
   void setVec4(int idx, graphene.vec4.Vec4 value)
   {
@@ -152,18 +165,18 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
 
   /**
       Creates a new [glib.bytes.Bytes] args from the current state of the
-    given builder.
-    
-    Any uniforms of the shader that have not been explicitly set on
-    the builder are zero-initialized.
-    
-    The given [gsk.shader_args_builder.ShaderArgsBuilder] is reset once this function returns;
-    you cannot call this function multiple times on the same builder instance.
-    
-    This function is intended primarily for bindings. C code should use
-    [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
-    Returns:     the newly allocated buffer with
-        all the args added to builder
+      given builder.
+      
+      Any uniforms of the shader that have not been explicitly set on
+      the builder are zero-initialized.
+      
+      The given [gsk.shader_args_builder.ShaderArgsBuilder] is reset once this function returns;
+      you cannot call this function multiple times on the same builder instance.
+      
+      This function is intended primarily for bindings. C code should use
+      [gsk.shader_args_builder.ShaderArgsBuilder.freeToArgs].
+      Returns: the newly allocated buffer with
+          all the args added to builder
   */
   glib.bytes.Bytes toArgs()
   {

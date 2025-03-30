@@ -1,3 +1,4 @@
+/// Module for [GLMixer] class
 module gstgl.glmixer;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gstgl.types;
 class GLMixer : gstgl.glbase_mixer.GLBaseMixer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_mixer_get_type != &gidSymbolNotFound ? gst_gl_mixer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,11 +51,12 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
 
   /**
       Perform processing required and call #GstGLMixerClass::process_textures().
-    Intended for use within implementations of
-    #GstGLMixerClass::process_buffers().
-    Params:
-      outbuf =       output GstBuffer
-    Returns:     whether processing of textures succeeded
+      Intended for use within implementations of
+      #GstGLMixerClass::process_buffers().
+  
+      Params:
+        outbuf = output GstBuffer
+      Returns: whether processing of textures succeeded
   */
   bool processTextures(gst.buffer.Buffer outbuf)
   {

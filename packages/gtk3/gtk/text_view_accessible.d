@@ -1,3 +1,4 @@
+/// Module for [TextViewAccessible] class
 module gtk.text_view_accessible;
 
 import atk.component;
@@ -18,17 +19,20 @@ import gtk.types;
 class TextViewAccessible : gtk.container_accessible.ContainerAccessible, atk.editable_text.EditableText, atk.streamable_content.StreamableContent, atk.text.Text
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_view_accessible_get_type != &gidSymbolNotFound ? gtk_text_view_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

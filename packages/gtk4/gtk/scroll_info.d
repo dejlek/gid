@@ -1,3 +1,4 @@
+/// Module for [ScrollInfo] class
 module gtk.scroll_info;
 
 import gid.gid;
@@ -8,30 +9,34 @@ import gtk.types;
 
 /**
     The [gtk.scroll_info.ScrollInfo] can be used to provide more accurate data on how a scroll
-  operation should be performed.
-  
-  Scrolling functions usually allow passing a null scroll info which will cause
-  the default values to be used and just scroll the element into view.
+    operation should be performed.
+    
+    Scrolling functions usually allow passing a null scroll info which will cause
+    the default values to be used and just scroll the element into view.
 */
 class ScrollInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scroll_info_get_type != &gidSymbolNotFound ? gtk_scroll_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,7 +49,7 @@ class ScrollInfo : gobject.boxed.Boxed
 
   /**
       Creates a new scroll info for scrolling an element into view.
-    Returns:     A new scroll info
+      Returns: A new scroll info
   */
   this()
   {
@@ -55,7 +60,7 @@ class ScrollInfo : gobject.boxed.Boxed
 
   /**
       Checks if horizontal scrolling is enabled.
-    Returns:     true if horizontal scrolling is enabled.
+      Returns: true if horizontal scrolling is enabled.
   */
   bool getEnableHorizontal()
   {
@@ -66,7 +71,7 @@ class ScrollInfo : gobject.boxed.Boxed
 
   /**
       Checks if vertical scrolling is enabled.
-    Returns:     true if vertical scrolling is enabled.
+      Returns: true if vertical scrolling is enabled.
   */
   bool getEnableVertical()
   {
@@ -77,9 +82,10 @@ class ScrollInfo : gobject.boxed.Boxed
 
   /**
       Turns horizontal scrolling on or off.
-    Params:
-      horizontal =       if scrolling in the horizontal direction
-            should happen
+  
+      Params:
+        horizontal = if scrolling in the horizontal direction
+              should happen
   */
   void setEnableHorizontal(bool horizontal)
   {
@@ -88,9 +94,10 @@ class ScrollInfo : gobject.boxed.Boxed
 
   /**
       Turns vertical scrolling on or off.
-    Params:
-      vertical =       if scrolling in the vertical direction
-            should happen
+  
+      Params:
+        vertical = if scrolling in the vertical direction
+              should happen
   */
   void setEnableVertical(bool vertical)
   {

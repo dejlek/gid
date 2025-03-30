@@ -1,3 +1,4 @@
+/// Module for [Array] class
 module json.array;
 
 import gid.gid;
@@ -10,41 +11,45 @@ import json.types;
 
 /**
     [json.array.Array] is the representation of the array type inside JSON.
-  
-  A [json.array.Array] contains [json.node.Node] elements, which may contain
-  fundamental types, other arrays or objects.
-  
-  Since arrays can be arbitrarily big, copying them can be expensive; for
-  this reason, they are reference counted. You can control the lifetime of
-  a [json.array.Array] using [json.array.Array.ref_] and [json.array.Array.unref].
-  
-  To append an element, use [json.array.Array.addElement].
-  
-  To extract an element at a given index, use [json.array.Array.getElement].
-  
-  To retrieve the entire array in list form, use [json.array.Array.getElements].
-  
-  To retrieve the length of the array, use [json.array.Array.getLength].
+    
+    A [json.array.Array] contains [json.node.Node] elements, which may contain
+    fundamental types, other arrays or objects.
+    
+    Since arrays can be arbitrarily big, copying them can be expensive; for
+    this reason, they are reference counted. You can control the lifetime of
+    a [json.array.Array] using [json.array.Array.ref_] and [json.array.Array.unref].
+    
+    To append an element, use [json.array.Array.addElement].
+    
+    To extract an element at a given index, use [json.array.Array.getElement].
+    
+    To retrieve the entire array in list form, use [json.array.Array.getElements].
+    
+    To retrieve the length of the array, use [json.array.Array.getLength].
 */
 class Array : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_array_get_type != &gidSymbolNotFound ? json_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -57,7 +62,7 @@ class Array : gobject.boxed.Boxed
 
   /**
       Creates a new array.
-    Returns:     the newly created array
+      Returns: the newly created array
   */
   this()
   {
@@ -68,9 +73,10 @@ class Array : gobject.boxed.Boxed
 
   /**
       Creates a new array with `n_elements` slots already allocated.
-    Params:
-      nElements =       number of slots to pre-allocate
-    Returns:     the newly created array
+  
+      Params:
+        nElements = number of slots to pre-allocate
+      Returns: the newly created array
   */
   static json.array.Array sizedNew(uint nElements)
   {
@@ -82,12 +88,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds an array element into an array.
-    
-    If `value` is `NULL`, a `null` element will be added instead.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.takeArray]
-    Params:
-      value =       the array to add
+      
+      If `value` is `NULL`, a `null` element will be added instead.
+      
+      See also: [json.array.Array.addElement], [json.node.Node.takeArray]
+  
+      Params:
+        value = the array to add
   */
   void addArrayElement(json.array.Array value = null)
   {
@@ -96,10 +103,11 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds the given boolean value into an array.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.setBoolean]
-    Params:
-      value =       the boolean value to add
+      
+      See also: [json.array.Array.addElement], [json.node.Node.setBoolean]
+  
+      Params:
+        value = the boolean value to add
   */
   void addBooleanElement(bool value)
   {
@@ -108,10 +116,11 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds the given floating point value into an array.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.setDouble]
-    Params:
-      value =       the floating point value to add
+      
+      See also: [json.array.Array.addElement], [json.node.Node.setDouble]
+  
+      Params:
+        value = the floating point value to add
   */
   void addDoubleElement(double value)
   {
@@ -120,8 +129,9 @@ class Array : gobject.boxed.Boxed
 
   /**
       Appends the given `node` inside an array.
-    Params:
-      node =       the element to add
+  
+      Params:
+        node = the element to add
   */
   void addElement(json.node.Node node)
   {
@@ -130,10 +140,11 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds the given integer value into an array.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.setInt]
-    Params:
-      value =       the integer value to add
+      
+      See also: [json.array.Array.addElement], [json.node.Node.setInt]
+  
+      Params:
+        value = the integer value to add
   */
   void addIntElement(long value)
   {
@@ -142,8 +153,8 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds a `null` element into an array
-    
-    See also: [json.array.Array.addElement], [json.types.NodeType.Null]
+      
+      See also: [json.array.Array.addElement], [json.types.NodeType.Null]
   */
   void addNullElement()
   {
@@ -152,12 +163,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds an object into an array.
-    
-    If `value` is `NULL`, a `null` element will be added instead.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.takeObject]
-    Params:
-      value =       the object to add
+      
+      If `value` is `NULL`, a `null` element will be added instead.
+      
+      See also: [json.array.Array.addElement], [json.node.Node.takeObject]
+  
+      Params:
+        value = the object to add
   */
   void addObjectElement(json.object.ObjectJson value = null)
   {
@@ -166,10 +178,11 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently adds the given string value into an array.
-    
-    See also: [json.array.Array.addElement], [json.node.Node.setString]
-    Params:
-      value =       the string value to add
+      
+      See also: [json.array.Array.addElement], [json.node.Node.setString]
+  
+      Params:
+        value = the string value to add
   */
   void addStringElement(string value)
   {
@@ -179,9 +192,10 @@ class Array : gobject.boxed.Boxed
 
   /**
       Retrieves a copy of the element at the given position in the array.
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     a copy of the element at the given position
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: a copy of the element at the given position
   */
   json.node.Node dupElement(uint index)
   {
@@ -193,16 +207,17 @@ class Array : gobject.boxed.Boxed
 
   /**
       Check whether two arrays are equal.
-    
-    Equality is defined as:
-    
-     $(LIST
-        * the array have the same number of elements
-        * the values of elements in corresponding positions are equal
-     )
-    Params:
-      b =       another JSON array
-    Returns:     `TRUE` if the arrays are equal, and `FALSE` otherwise
+      
+      Equality is defined as:
+      
+       $(LIST
+          * the array have the same number of elements
+          * the values of elements in corresponding positions are equal
+       )
+  
+      Params:
+        b = another JSON array
+      Returns: `TRUE` if the arrays are equal, and `FALSE` otherwise
   */
   bool equal(json.array.Array b)
   {
@@ -213,13 +228,14 @@ class Array : gobject.boxed.Boxed
 
   /**
       Iterates over all elements of an array, and calls a function on
-    each one of them.
-    
-    It is safe to change the value of an element of the array while
-    iterating over it, but it is not safe to add or remove elements
-    from the array.
-    Params:
-      func =       the function to be called on each element
+      each one of them.
+      
+      It is safe to change the value of an element of the array while
+      iterating over it, but it is not safe to add or remove elements
+      from the array.
+  
+      Params:
+        func = the function to be called on each element
   */
   void foreachElement(json.types.ArrayForeach func)
   {
@@ -237,11 +253,12 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the array at the given position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getArray]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the array
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getArray]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the array
   */
   json.array.Array getArrayElement(uint index)
   {
@@ -253,12 +270,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the boolean value of the element at the given
-    position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getBoolean]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the boolean value
+      position inside an array.
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getBoolean]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the boolean value
   */
   bool getBooleanElement(uint index)
   {
@@ -269,12 +287,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the floating point value of the element at
-    the given position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getDouble]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the floating point value
+      the given position inside an array.
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getDouble]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the floating point value
   */
   double getDoubleElement(uint index)
   {
@@ -285,9 +304,10 @@ class Array : gobject.boxed.Boxed
 
   /**
       Retrieves the element at the given position in the array.
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the element at the given position
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the element at the given position
   */
   json.node.Node getElement(uint index)
   {
@@ -299,8 +319,8 @@ class Array : gobject.boxed.Boxed
 
   /**
       Retrieves all the elements of an array as a list of nodes.
-    Returns:     the elements
-        of the array
+      Returns: the elements
+          of the array
   */
   json.node.Node[] getElements()
   {
@@ -312,12 +332,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the integer value of the element at the given
-    position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getInt]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the integer value
+      position inside an array.
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getInt]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the integer value
   */
   long getIntElement(uint index)
   {
@@ -328,7 +349,7 @@ class Array : gobject.boxed.Boxed
 
   /**
       Retrieves the length of the given array
-    Returns:     the length of the array
+      Returns: the length of the array
   */
   uint getLength()
   {
@@ -339,12 +360,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently checks whether the element at the given position inside the
-    array contains a `null` value.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.isNull]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     `TRUE` if the element is `null`
+      array contains a `null` value.
+      
+      See also: [json.array.Array.getElement], [json.node.Node.isNull]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: `TRUE` if the element is `null`
   */
   bool getNullElement(uint index)
   {
@@ -355,11 +377,12 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the object at the given position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getObject]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the object
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getObject]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the object
   */
   json.object.ObjectJson getObjectElement(uint index)
   {
@@ -371,12 +394,13 @@ class Array : gobject.boxed.Boxed
 
   /**
       Conveniently retrieves the string value of the element at the given
-    position inside an array.
-    
-    See also: [json.array.Array.getElement], [json.node.Node.getString]
-    Params:
-      index =       the index of the element to retrieve
-    Returns:     the string value
+      position inside an array.
+      
+      See also: [json.array.Array.getElement], [json.node.Node.getString]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the string value
   */
   string getStringElement(uint index)
   {
@@ -388,12 +412,12 @@ class Array : gobject.boxed.Boxed
 
   /**
       Calculates a hash value for the given `key`.
-    
-    The hash is calculated over the array and all its elements, recursively.
-    
-    If the array is immutable, this is a fast operation; otherwise, it scales
-    proportionally with the length of the array.
-    Returns:     hash value for the key
+      
+      The hash is calculated over the array and all its elements, recursively.
+      
+      If the array is immutable, this is a fast operation; otherwise, it scales
+      proportionally with the length of the array.
+      Returns: hash value for the key
   */
   uint hash()
   {
@@ -404,8 +428,8 @@ class Array : gobject.boxed.Boxed
 
   /**
       Check whether the given `array` has been marked as immutable by calling
-    [json.array.Array.seal] on it.
-    Returns:     true if the array is immutable
+      [json.array.Array.seal] on it.
+      Returns: true if the array is immutable
   */
   bool isImmutable()
   {
@@ -416,10 +440,11 @@ class Array : gobject.boxed.Boxed
 
   /**
       Removes the element at the given position inside an array.
-    
-    This function will release the reference held on the element.
-    Params:
-      index =       the position of the element to be removed
+      
+      This function will release the reference held on the element.
+  
+      Params:
+        index = the position of the element to be removed
   */
   void removeElement(uint index)
   {
@@ -428,10 +453,10 @@ class Array : gobject.boxed.Boxed
 
   /**
       Seals the given array, making it immutable to further changes.
-    
-    This function will recursively seal all elements in the array too.
-    
-    If the `array` is already immutable, this is a no-op.
+      
+      This function will recursively seal all elements in the array too.
+      
+      If the `array` is already immutable, this is a no-op.
   */
   void seal()
   {

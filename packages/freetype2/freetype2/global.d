@@ -1,3 +1,4 @@
+/// Global functions for freetype2 library
 module freetype2.global;
 
 import freetype2.c.functions;

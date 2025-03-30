@@ -1,3 +1,4 @@
+/// Module for [Revealer] class
 module gtk.revealer;
 
 import atk.implementor_iface;
@@ -12,34 +13,37 @@ import gtk.types;
 
 /**
     The GtkRevealer widget is a container which animates
-  the transition of its child from invisible to visible.
-  
-  The style of transition can be controlled with
-  [gtk.revealer.Revealer.setTransitionType].
-  
-  These animations respect the #GtkSettings:gtk-enable-animations
-  setting.
-  
-  # CSS nodes
-  
-  GtkRevealer has a single CSS node with name revealer.
-  
-  The GtkRevealer widget was added in GTK+ 3.10.
+    the transition of its child from invisible to visible.
+    
+    The style of transition can be controlled with
+    [gtk.revealer.Revealer.setTransitionType].
+    
+    These animations respect the #GtkSettings:gtk-enable-animations
+    setting.
+    
+    # CSS nodes
+    
+    GtkRevealer has a single CSS node with name revealer.
+    
+    The GtkRevealer widget was added in GTK+ 3.10.
 */
 class Revealer : gtk.bin.Bin
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_revealer_get_type != &gidSymbolNotFound ? gtk_revealer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,7 +56,7 @@ class Revealer : gtk.bin.Bin
 
   /**
       Creates a new #GtkRevealer.
-    Returns:     a newly created #GtkRevealer
+      Returns: a newly created #GtkRevealer
   */
   this()
   {
@@ -63,8 +67,8 @@ class Revealer : gtk.bin.Bin
 
   /**
       Returns whether the child is fully revealed, in other words whether
-    the transition to the revealed state is completed.
-    Returns:     true if the child is fully revealed
+      the transition to the revealed state is completed.
+      Returns: true if the child is fully revealed
   */
   bool getChildRevealed()
   {
@@ -75,13 +79,13 @@ class Revealer : gtk.bin.Bin
 
   /**
       Returns whether the child is currently
-    revealed. See [gtk.revealer.Revealer.setRevealChild].
-    
-    This function returns true as soon as the transition
-    is to the revealed state is started. To learn whether
-    the child is fully revealed (ie the transition is completed),
-    use [gtk.revealer.Revealer.getChildRevealed].
-    Returns:     true if the child is revealed.
+      revealed. See [gtk.revealer.Revealer.setRevealChild].
+      
+      This function returns true as soon as the transition
+      is to the revealed state is started. To learn whether
+      the child is fully revealed (ie the transition is completed),
+      use [gtk.revealer.Revealer.getChildRevealed].
+      Returns: true if the child is revealed.
   */
   bool getRevealChild()
   {
@@ -92,8 +96,8 @@ class Revealer : gtk.bin.Bin
 
   /**
       Returns the amount of time (in milliseconds) that
-    transitions will take.
-    Returns:     the transition duration
+      transitions will take.
+      Returns: the transition duration
   */
   uint getTransitionDuration()
   {
@@ -104,8 +108,8 @@ class Revealer : gtk.bin.Bin
 
   /**
       Gets the type of animation that will be used
-    for transitions in revealer.
-    Returns:     the current transition type of revealer
+      for transitions in revealer.
+      Returns: the current transition type of revealer
   */
   gtk.types.RevealerTransitionType getTransitionType()
   {
@@ -117,11 +121,12 @@ class Revealer : gtk.bin.Bin
 
   /**
       Tells the #GtkRevealer to reveal or conceal its child.
-    
-    The transition will be animated with the current
-    transition type of revealer.
-    Params:
-      revealChild =       true to reveal the child
+      
+      The transition will be animated with the current
+      transition type of revealer.
+  
+      Params:
+        revealChild = true to reveal the child
   */
   void setRevealChild(bool revealChild)
   {
@@ -130,8 +135,9 @@ class Revealer : gtk.bin.Bin
 
   /**
       Sets the duration that transitions will take.
-    Params:
-      duration =       the new duration, in milliseconds
+  
+      Params:
+        duration = the new duration, in milliseconds
   */
   void setTransitionDuration(uint duration)
   {
@@ -140,10 +146,11 @@ class Revealer : gtk.bin.Bin
 
   /**
       Sets the type of animation that will be used for
-    transitions in revealer. Available types include
-    various kinds of fades and slides.
-    Params:
-      transition =       the new transition type
+      transitions in revealer. Available types include
+      various kinds of fades and slides.
+  
+      Params:
+        transition = the new transition type
   */
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {

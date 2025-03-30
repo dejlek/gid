@@ -1,3 +1,4 @@
+/// Module for [SpringAnimation] class
 module adw.spring_animation;
 
 import adw.animation;
@@ -11,51 +12,54 @@ import gtk.widget;
 
 /**
     A spring-based `class@Animation`.
-  
-  [adw.spring_animation.SpringAnimation] implements an animation driven by a physical model of a
-  spring described by `struct@SpringParams`, with a resting position in
-  `property@SpringAnimation:value-to`, stretched to
-  `property@SpringAnimation:value-from`.
-  
-  Since the animation is physically simulated, spring animations don't have a
-  fixed duration. The animation will stop when the simulated spring comes to a
-  rest - when the amplitude of the oscillations becomes smaller than
-  `property@SpringAnimation:epsilon`, or immediately when it reaches
-  `property@SpringAnimation:value-to` if
-  `property@SpringAnimation:clamp` is set to `TRUE`. The estimated duration can
-  be obtained with `property@SpringAnimation:estimated-duration`.
-  
-  Due to the nature of spring-driven motion the animation can overshoot
-  `property@SpringAnimation:value-to` before coming to a rest. Whether the
-  animation will overshoot or not depends on the damping ratio of the spring.
-  See `struct@SpringParams` for more information about specific damping ratio
-  values.
-  
-  If `property@SpringAnimation:clamp` is `TRUE`, the animation will abruptly
-  end as soon as it reaches the final value, preventing overshooting.
-  
-  Animations can have an initial velocity value, set via
-  `property@SpringAnimation:initial-velocity`, which adjusts the curve without
-  changing the duration. This makes spring animations useful for deceleration
-  at the end of gestures.
-  
-  If the initial and final values are equal, and the initial velocity is not 0,
-  the animation value will bounce and return to its resting position.
+    
+    [adw.spring_animation.SpringAnimation] implements an animation driven by a physical model of a
+    spring described by `struct@SpringParams`, with a resting position in
+    `property@SpringAnimation:value-to`, stretched to
+    `property@SpringAnimation:value-from`.
+    
+    Since the animation is physically simulated, spring animations don't have a
+    fixed duration. The animation will stop when the simulated spring comes to a
+    rest - when the amplitude of the oscillations becomes smaller than
+    `property@SpringAnimation:epsilon`, or immediately when it reaches
+    `property@SpringAnimation:value-to` if
+    `property@SpringAnimation:clamp` is set to `TRUE`. The estimated duration can
+    be obtained with `property@SpringAnimation:estimated-duration`.
+    
+    Due to the nature of spring-driven motion the animation can overshoot
+    `property@SpringAnimation:value-to` before coming to a rest. Whether the
+    animation will overshoot or not depends on the damping ratio of the spring.
+    See `struct@SpringParams` for more information about specific damping ratio
+    values.
+    
+    If `property@SpringAnimation:clamp` is `TRUE`, the animation will abruptly
+    end as soon as it reaches the final value, preventing overshooting.
+    
+    Animations can have an initial velocity value, set via
+    `property@SpringAnimation:initial-velocity`, which adjusts the curve without
+    changing the duration. This makes spring animations useful for deceleration
+    at the end of gestures.
+    
+    If the initial and final values are equal, and the initial velocity is not 0,
+    the animation value will bounce and return to its resting position.
 */
 class SpringAnimation : adw.animation.Animation
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spring_animation_get_type != &gidSymbolNotFound ? adw_spring_animation_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -68,16 +72,17 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Creates a new [adw.spring_animation.SpringAnimation] on widget.
-    
-    The animation will animate target from from to to with the dynamics of a
-    spring described by spring_params.
-    Params:
-      widget =       a widget to create animation on
-      from =       a value to animate from
-      to =       a value to animate to
-      springParams =       physical parameters of the spring
-      target =       a target value to animate
-    Returns:     the newly created animation
+      
+      The animation will animate target from from to to with the dynamics of a
+      spring described by spring_params.
+  
+      Params:
+        widget = a widget to create animation on
+        from = a value to animate from
+        to = a value to animate to
+        springParams = physical parameters of the spring
+        target = a target value to animate
+      Returns: the newly created animation
   */
   this(gtk.widget.Widget widget, double from, double to, adw.spring_params.SpringParams springParams, adw.animation_target.AnimationTarget target)
   {
@@ -88,14 +93,15 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Calculates the value self will have at time.
-    
-    The time starts at 0 and ends at
-    `propertySpringAnimation:estimated_duration`.
-    
-    See also [adw.spring_animation.SpringAnimation.calculateVelocity].
-    Params:
-      time =       elapsed time, in milliseconds
-    Returns:     the value at time
+      
+      The time starts at 0 and ends at
+      `propertySpringAnimation:estimated_duration`.
+      
+      See also [adw.spring_animation.SpringAnimation.calculateVelocity].
+  
+      Params:
+        time = elapsed time, in milliseconds
+      Returns: the value at time
   */
   double calculateValue(uint time)
   {
@@ -106,14 +112,15 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Calculates the velocity self will have at time.
-    
-    The time starts at 0 and ends at
-    `propertySpringAnimation:estimated_duration`.
-    
-    See also [adw.spring_animation.SpringAnimation.calculateValue].
-    Params:
-      time =       elapsed time, in milliseconds
-    Returns:     the velocity at time
+      
+      The time starts at 0 and ends at
+      `propertySpringAnimation:estimated_duration`.
+      
+      See also [adw.spring_animation.SpringAnimation.calculateValue].
+  
+      Params:
+        time = elapsed time, in milliseconds
+      Returns: the velocity at time
   */
   double calculateVelocity(uint time)
   {
@@ -124,7 +131,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets whether self should be clamped.
-    Returns:     whether self is clamped
+      Returns: whether self is clamped
   */
   bool getClamp()
   {
@@ -135,7 +142,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the precision of the spring.
-    Returns:     the epsilon value
+      Returns: the epsilon value
   */
   double getEpsilon()
   {
@@ -146,9 +153,9 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the estimated duration of self, in milliseconds.
-    
-    Can be `constDURATION_INFINITE` if the spring damping is set to 0.
-    Returns:     the estimated duration
+      
+      Can be `constDURATION_INFINITE` if the spring damping is set to 0.
+      Returns: the estimated duration
   */
   uint getEstimatedDuration()
   {
@@ -159,7 +166,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the initial velocity of self.
-    Returns:     the initial velocity
+      Returns: the initial velocity
   */
   double getInitialVelocity()
   {
@@ -170,7 +177,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the physical parameters of the spring of self.
-    Returns:     the spring parameters
+      Returns: the spring parameters
   */
   adw.spring_params.SpringParams getSpringParams()
   {
@@ -182,7 +189,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the value self will animate from.
-    Returns:     the value to animate from
+      Returns: the value to animate from
   */
   double getValueFrom()
   {
@@ -193,7 +200,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the value self will animate to.
-    Returns:     the value to animate to
+      Returns: the value to animate to
   */
   double getValueTo()
   {
@@ -204,7 +211,7 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Gets the current velocity of self.
-    Returns:     the current velocity
+      Returns: the current velocity
   */
   double getVelocity()
   {
@@ -215,14 +222,15 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets whether self should be clamped.
-    
-    If set to `TRUE`, the animation will abruptly end as soon as it reaches the
-    final value, preventing overshooting.
-    
-    It won't prevent overshooting `propertySpringAnimation:value-from` if a
-    relative negative `propertySpringAnimation:initial-velocity` is set.
-    Params:
-      clamp =       the new value
+      
+      If set to `TRUE`, the animation will abruptly end as soon as it reaches the
+      final value, preventing overshooting.
+      
+      It won't prevent overshooting `propertySpringAnimation:value-from` if a
+      relative negative `propertySpringAnimation:initial-velocity` is set.
+  
+      Params:
+        clamp = the new value
   */
   void setClamp(bool clamp)
   {
@@ -231,19 +239,20 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets the precision of the spring.
-    
-    The level of precision used to determine when the animation has come to a
-    rest, that is, when the amplitude of the oscillations becomes smaller than
-    this value.
-    
-    If the epsilon value is too small, the animation will take a long time to
-    stop after the animated value has stopped visibly changing.
-    
-    If the epsilon value is too large, the animation will end prematurely.
-    
-    The default value is 0.001.
-    Params:
-      epsilon =       the new value
+      
+      The level of precision used to determine when the animation has come to a
+      rest, that is, when the amplitude of the oscillations becomes smaller than
+      this value.
+      
+      If the epsilon value is too small, the animation will take a long time to
+      stop after the animated value has stopped visibly changing.
+      
+      If the epsilon value is too large, the animation will end prematurely.
+      
+      The default value is 0.001.
+  
+      Params:
+        epsilon = the new value
   */
   void setEpsilon(double epsilon)
   {
@@ -252,10 +261,11 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets the initial velocity of self.
-    
-    Initial velocity affects only the animation curve, but not its duration.
-    Params:
-      velocity =       the initial velocity
+      
+      Initial velocity affects only the animation curve, but not its duration.
+  
+      Params:
+        velocity = the initial velocity
   */
   void setInitialVelocity(double velocity)
   {
@@ -264,8 +274,9 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets the physical parameters of the spring of self.
-    Params:
-      springParams =       the new spring parameters
+  
+      Params:
+        springParams = the new spring parameters
   */
   void setSpringParams(adw.spring_params.SpringParams springParams)
   {
@@ -274,11 +285,12 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets the value self will animate from.
-    
-    The animation will start at this value and end at
-    `propertySpringAnimation:value-to`.
-    Params:
-      value =       the value to animate from
+      
+      The animation will start at this value and end at
+      `propertySpringAnimation:value-to`.
+  
+      Params:
+        value = the value to animate from
   */
   void setValueFrom(double value)
   {
@@ -287,11 +299,12 @@ class SpringAnimation : adw.animation.Animation
 
   /**
       Sets the value self will animate to.
-    
-    The animation will start at `propertySpringAnimation:value-from` and end at
-    this value.
-    Params:
-      value =       the value to animate to
+      
+      The animation will start at `propertySpringAnimation:value-from` and end at
+      this value.
+  
+      Params:
+        value = the value to animate to
   */
   void setValueTo(double value)
   {

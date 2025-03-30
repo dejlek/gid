@@ -1,3 +1,4 @@
+/// Module for [ConstantExpression] class
 module gtk.constant_expression;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gtk.types;
 class ConstantExpression : gtk.expression.Expression
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,9 +25,10 @@ class ConstantExpression : gtk.expression.Expression
 
   /**
       Creates an expression that always evaluates to the given `value`.
-    Params:
-      value =       a [gobject.value.Value]
-    Returns:     a new [gtk.expression.Expression]
+  
+      Params:
+        value = a [gobject.value.Value]
+      Returns: a new [gtk.expression.Expression]
   */
   static gtk.constant_expression.ConstantExpression newForValue(gobject.value.Value value)
   {
@@ -37,7 +40,7 @@ class ConstantExpression : gtk.expression.Expression
 
   /**
       Gets the value that a constant expression evaluates to.
-    Returns:     the value
+      Returns: the value
   */
   gobject.value.Value getValue()
   {

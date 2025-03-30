@@ -1,3 +1,4 @@
+/// Module for [Separator] class
 module gtk.separator;
 
 import gid.gid;
@@ -16,36 +17,39 @@ import gtk.widget;
 
 /**
     [gtk.separator.Separator] is a horizontal or vertical separator widget.
-  
-  ![An example GtkSeparator](separator.png)
-  
-  A [gtk.separator.Separator] can be used to group the widgets within a window.
-  It displays a line with a shadow to make it appear sunken into the
-  interface.
-  
-  # CSS nodes
-  
-  [gtk.separator.Separator] has a single CSS node with name separator. The node
-  gets one of the .horizontal or .vertical style classes.
-  
-  # Accessibility
-  
-  [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.Separator] role.
+    
+    ![An example GtkSeparator](separator.png)
+    
+    A [gtk.separator.Separator] can be used to group the widgets within a window.
+    It displays a line with a shadow to make it appear sunken into the
+    interface.
+    
+    # CSS nodes
+    
+    [gtk.separator.Separator] has a single CSS node with name separator. The node
+    gets one of the .horizontal or .vertical style classes.
+    
+    # Accessibility
+    
+    [gtk.separator.Separator] uses the [gtk.types.AccessibleRole.Separator] role.
 */
 class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_get_type != &gidSymbolNotFound ? gtk_separator_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -60,9 +64,10 @@ class Separator : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Creates a new [gtk.separator.Separator] with the given orientation.
-    Params:
-      orientation =       the separator’s orientation.
-    Returns:     a new [gtk.separator.Separator].
+  
+      Params:
+        orientation = the separator’s orientation.
+      Returns: a new [gtk.separator.Separator].
   */
   this(gtk.types.Orientation orientation)
   {

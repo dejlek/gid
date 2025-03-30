@@ -1,3 +1,4 @@
+/// Module for [SortOptions] class
 module arrow.sort_options;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import gid.gid;
 class SortOptions : arrow.function_options.FunctionOptions
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sort_options_get_type != &gidSymbolNotFound ? garrow_sort_options_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,8 +48,9 @@ class SortOptions : arrow.function_options.FunctionOptions
 
   /**
       Add a sort key to be used.
-    Params:
-      sortKey =       The sort key to be added.
+  
+      Params:
+        sortKey = The sort key to be added.
   */
   void addSortKey(arrow.sort_key.SortKey sortKey)
   {
@@ -73,8 +78,9 @@ class SortOptions : arrow.function_options.FunctionOptions
 
   /**
       Set sort keys to be used.
-    Params:
-      sortKeys =       The sort keys to be used.
+  
+      Params:
+        sortKeys = The sort keys to be used.
   */
   void setSortKeys(arrow.sort_key.SortKey[] sortKeys)
   {

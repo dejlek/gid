@@ -1,3 +1,4 @@
+/// Module for [SnippetContext] class
 module gtksource.snippet_context;
 
 import gid.gid;
@@ -9,29 +10,32 @@ import gtksource.types;
 
 /**
     Context for expanding `class@SnippetChunk`.
-  
-  This class is currently used primary as a hashtable. However, the longer
-  term goal is to have it hold onto a `GjsContext` as well as other languages
-  so that `class@SnippetChunk` can expand themselves by executing
-  script within the context.
-  
-  The `class@Snippet` will build the context and then expand each of the
-  chunks during the insertion/edit phase.
+    
+    This class is currently used primary as a hashtable. However, the longer
+    term goal is to have it hold onto a `GjsContext` as well as other languages
+    so that `class@SnippetChunk` can expand themselves by executing
+    script within the context.
+    
+    The `class@Snippet` will build the context and then expand each of the
+    chunks during the insertion/edit phase.
 */
 class SnippetContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_context_get_type != &gidSymbolNotFound ? gtk_source_snippet_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,10 +48,10 @@ class SnippetContext : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceSnippetContext.
-    
-    Generally, this isn't needed unless you are controlling the
-    expansion of snippets manually.
-    Returns:     a #GtkSourceSnippetContext
+      
+      Generally, this isn't needed unless you are controlling the
+      expansion of snippets manually.
+      Returns: a #GtkSourceSnippetContext
   */
   this()
   {
@@ -76,9 +80,10 @@ class SnippetContext : gobject.object.ObjectG
 
   /**
       Gets the current value for a variable named key.
-    Params:
-      key =       the name of the variable
-    Returns:     the value for the variable, or null
+  
+      Params:
+        key = the name of the variable
+      Returns: the value for the variable, or null
   */
   string getVariable(string key)
   {
@@ -91,14 +96,15 @@ class SnippetContext : gobject.object.ObjectG
 
   /**
       Sets a constatnt within the context.
-    
-    This is similar to a variable set with [gtksource.snippet_context.SnippetContext.setVariable]
-    but is expected to not change during use of the snippet.
-    
-    Examples would be the date or users name.
-    Params:
-      key =       the constant name
-      value =       the value of the constant
+      
+      This is similar to a variable set with [gtksource.snippet_context.SnippetContext.setVariable]
+      but is expected to not change during use of the snippet.
+      
+      Examples would be the date or users name.
+  
+      Params:
+        key = the constant name
+        value = the value of the constant
   */
   void setConstant(string key, string value)
   {
@@ -128,12 +134,13 @@ class SnippetContext : gobject.object.ObjectG
 
   /**
       Sets a variable within the context.
-    
-    This variable may be overridden by future updates to the
-    context.
-    Params:
-      key =       the variable name
-      value =       the value for the variable
+      
+      This variable may be overridden by future updates to the
+      context.
+  
+      Params:
+        key = the variable name
+        value = the value for the variable
   */
   void setVariable(string key, string value)
   {
@@ -143,37 +150,39 @@ class SnippetContext : gobject.object.ObjectG
   }
 
   /**
-      The signal is emitted when a change has been
-    discovered in one of the chunks of the snippet which has
-    caused a variable or other dynamic data within the context
-    to have changed.
+      Connect to `Changed` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B snippetContext) the instance the signal is connected to
-    )
-  */
-  alias ChangedCallbackDlg = void delegate(gtksource.snippet_context.SnippetContext snippetContext);
-
-  /** ditto */
-  alias ChangedCallbackFunc = void function(gtksource.snippet_context.SnippetContext snippetContext);
-
-  /**
-    Connect to Changed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The signal is emitted when a change has been
+      discovered in one of the chunks of the snippet which has
+      caused a variable or other dynamic data within the context
+      to have changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.snippet_context.SnippetContext snippetContext))
+  
+          `snippetContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ChangedCallbackDlg) || is(T : ChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.snippet_context.SnippetContext)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto snippetContext = getVal!(gtksource.snippet_context.SnippetContext)(_paramVals);
-      _dClosure.dlg(snippetContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [MountOperationHandlerProxy] class
 module gtk.__mount_operation_handler_proxy;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class MountOperationHandlerProxy
 {
   _GtkMountOperationHandlerProxy cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class MountOperationHandlerProxy
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

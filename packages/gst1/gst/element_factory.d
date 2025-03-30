@@ -1,3 +1,4 @@
+/// Module for [ElementFactory] class
 module gst.element_factory;
 
 import gid.gid;
@@ -13,45 +14,48 @@ import gst.types;
 
 /**
     #GstElementFactory is used to create instances of elements. A
-  GstElementFactory can be added to a #GstPlugin as it is also a
-  #GstPluginFeature.
-  
-  Use the [gst.element_factory.ElementFactory.find] and [gst.element_factory.ElementFactory.create]
-  functions to create element instances or use [gst.element_factory.ElementFactory.make] as a
-  convenient shortcut.
-  
-  The following code example shows you how to create a GstFileSrc element.
-  
-  ## Using an element factory
-  ```c
-    #include <gst/gst.h>
-  
-    GstElement *src;
-    GstElementFactory *srcfactory;
-  
-    gst_init (&argc, &argv);
-  
-    srcfactory = gst_element_factory_find ("filesrc");
-    g_return_if_fail (srcfactory != NULL);
-    src = gst_element_factory_create (srcfactory, "src");
-    g_return_if_fail (src != NULL);
-    ...
-  ```
+    GstElementFactory can be added to a #GstPlugin as it is also a
+    #GstPluginFeature.
+    
+    Use the [gst.element_factory.ElementFactory.find] and [gst.element_factory.ElementFactory.create]
+    functions to create element instances or use [gst.element_factory.ElementFactory.make] as a
+    convenient shortcut.
+    
+    The following code example shows you how to create a GstFileSrc element.
+    
+    ## Using an element factory
+    ```c
+      #include <gst/gst.h>
+    
+      GstElement *src;
+      GstElementFactory *srcfactory;
+    
+      gst_init (&argc, &argv);
+    
+      srcfactory = gst_element_factory_find ("filesrc");
+      g_return_if_fail (srcfactory != NULL);
+      src = gst_element_factory_create (srcfactory, "src");
+      g_return_if_fail (src != NULL);
+      ...
+    ```
 */
 class ElementFactory : gst.plugin_feature.PluginFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_element_factory_get_type != &gidSymbolNotFound ? gst_element_factory_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -64,11 +68,12 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Search for an element factory of the given name. Refs the returned
-    element factory; caller is responsible for unreffing.
-    Params:
-      name =       name of factory to find
-    Returns:     #GstElementFactory if found,
-      null otherwise
+      element factory; caller is responsible for unreffing.
+  
+      Params:
+        name = name of factory to find
+      Returns: #GstElementFactory if found,
+        null otherwise
   */
   static gst.element_factory.ElementFactory find(string name)
   {
@@ -81,20 +86,21 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Filter out all the elementfactories in list that can handle caps in
-    the given direction.
-    
-    If subsetonly is true, then only the elements whose pads templates
-    are a complete superset of caps will be returned. Else any element
-    whose pad templates caps can intersect with caps will be returned.
-    Params:
-      list =       a #GList of
-            #GstElementFactory to filter
-      caps =       a #GstCaps
-      direction =       a #GstPadDirection to filter on
-      subsetonly =       whether to filter on caps subsets or not.
-    Returns:     a #GList of
-          #GstElementFactory elements that match the given requisites.
-          Use #gst_plugin_feature_list_free after usage.
+      the given direction.
+      
+      If subsetonly is true, then only the elements whose pads templates
+      are a complete superset of caps will be returned. Else any element
+      whose pad templates caps can intersect with caps will be returned.
+  
+      Params:
+        list = a #GList of
+              #GstElementFactory to filter
+        caps = a #GstCaps
+        direction = a #GstPadDirection to filter on
+        subsetonly = whether to filter on caps subsets or not.
+      Returns: a #GList of
+            #GstElementFactory elements that match the given requisites.
+            Use #gst_plugin_feature_list_free after usage.
   */
   static gst.element_factory.ElementFactory[] listFilter(gst.element_factory.ElementFactory[] list, gst.caps.Caps caps, gst.types.PadDirection direction, bool subsetonly)
   {
@@ -108,14 +114,15 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get a list of factories that match the given type. Only elements
-    with a rank greater or equal to minrank will be returned.
-    The list of factories is returned by decreasing rank.
-    Params:
-      type =       a #GstElementFactoryListType
-      minrank =       Minimum rank
-    Returns:     a #GList of
-          #GstElementFactory elements. Use [gst.plugin_feature.PluginFeature.listFree] after
-          usage.
+      with a rank greater or equal to minrank will be returned.
+      The list of factories is returned by decreasing rank.
+  
+      Params:
+        type = a #GstElementFactoryListType
+        minrank = Minimum rank
+      Returns: a #GList of
+            #GstElementFactory elements. Use [gst.plugin_feature.PluginFeature.listFree] after
+            usage.
   */
   static gst.element_factory.ElementFactory[] listGetElements(gst.types.ElementFactoryListType type, gst.types.Rank minrank)
   {
@@ -127,15 +134,16 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Create a new element of the type defined by the given element factory.
-    If name is null, then the element will receive a guaranteed unique name,
-    consisting of the element factory name and a number.
-    If name is given, it will be given the name supplied.
-    Params:
-      factoryname =       a named factory to instantiate
-      name =       name of new element, or null to automatically create
-           a unique name
-    Returns:     new #GstElement or null
-      if unable to create element
+      If name is null, then the element will receive a guaranteed unique name,
+      consisting of the element factory name and a number.
+      If name is given, it will be given the name supplied.
+  
+      Params:
+        factoryname = a named factory to instantiate
+        name = name of new element, or null to automatically create
+             a unique name
+      Returns: new #GstElement or null
+        if unable to create element
   */
   static gst.element.Element make(string factoryname, string name = null)
   {
@@ -149,13 +157,14 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Create a new element of the type defined by the given elementfactory.
-    The supplied list of properties, will be passed at object construction.
-    Params:
-      factoryname =       a named factory to instantiate
-      names =       array of properties names
-      values =       array of associated properties values
-    Returns:     new #GstElement or null
-          if the element couldn't be created
+      The supplied list of properties, will be passed at object construction.
+  
+      Params:
+        factoryname = a named factory to instantiate
+        names = array of properties names
+        values = array of associated properties values
+      Returns: new #GstElement or null
+            if the element couldn't be created
   */
   static gst.element.Element makeWithProperties(string factoryname, string[] names = null, gobject.value.Value[] values = null)
   {
@@ -184,9 +193,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Checks if the factory can sink all possible capabilities.
-    Params:
-      caps =       the caps to check
-    Returns:     true if the caps are fully compatible.
+  
+      Params:
+        caps = the caps to check
+      Returns: true if the caps are fully compatible.
   */
   bool canSinkAllCaps(gst.caps.Caps caps)
   {
@@ -197,9 +207,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Checks if the factory can sink any possible capability.
-    Params:
-      caps =       the caps to check
-    Returns:     true if the caps have a common subset.
+  
+      Params:
+        caps = the caps to check
+      Returns: true if the caps have a common subset.
   */
   bool canSinkAnyCaps(gst.caps.Caps caps)
   {
@@ -210,9 +221,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Checks if the factory can src all possible capabilities.
-    Params:
-      caps =       the caps to check
-    Returns:     true if the caps are fully compatible.
+  
+      Params:
+        caps = the caps to check
+      Returns: true if the caps are fully compatible.
   */
   bool canSrcAllCaps(gst.caps.Caps caps)
   {
@@ -223,9 +235,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Checks if the factory can src any possible capability.
-    Params:
-      caps =       the caps to check
-    Returns:     true if the caps have a common subset.
+  
+      Params:
+        caps = the caps to check
+      Returns: true if the caps have a common subset.
   */
   bool canSrcAnyCaps(gst.caps.Caps caps)
   {
@@ -236,13 +249,14 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Create a new element of the type defined by the given elementfactory.
-    It will be given the name supplied, since all elements require a name as
-    their first argument.
-    Params:
-      name =       name of new element, or null to automatically create
-           a unique name
-    Returns:     new #GstElement or null
-          if the element couldn't be created
+      It will be given the name supplied, since all elements require a name as
+      their first argument.
+  
+      Params:
+        name = name of new element, or null to automatically create
+             a unique name
+      Returns: new #GstElement or null
+            if the element couldn't be created
   */
   gst.element.Element create(string name = null)
   {
@@ -255,12 +269,13 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Create a new element of the type defined by the given elementfactory.
-    The supplied list of properties, will be passed at object construction.
-    Params:
-      names =       array of properties names
-      values =       array of associated properties values
-    Returns:     new #GstElement or null
-          if the element couldn't be created
+      The supplied list of properties, will be passed at object construction.
+  
+      Params:
+        names = array of properties names
+        values = array of associated properties values
+      Returns: new #GstElement or null
+            if the element couldn't be created
   */
   gst.element.Element createWithProperties(string[] names = null, gobject.value.Value[] values = null)
   {
@@ -288,10 +303,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the #GType for elements managed by this factory. The type can
-    only be retrieved if the element factory is loaded, which can be
-    assured with [gst.plugin_feature.PluginFeature.load].
-    Returns:     the #GType for elements managed by this factory or 0 if
-      the factory is not loaded.
+      only be retrieved if the element factory is loaded, which can be
+      assured with [gst.plugin_feature.PluginFeature.load].
+      Returns: the #GType for elements managed by this factory or 0 if
+        the factory is not loaded.
   */
   gobject.types.GType getElementType()
   {
@@ -302,10 +317,11 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the metadata on factory with key.
-    Params:
-      key =       a key
-    Returns:     the metadata with key on factory or null
-      when there was no metadata with the given key.
+  
+      Params:
+        key = a key
+      Returns: the metadata with key on factory or null
+        when there was no metadata with the given key.
   */
   string getMetadata(string key)
   {
@@ -318,8 +334,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the available keys for the metadata on factory.
-    Returns:     a null-terminated array of key strings, or null when there is no
-      metadata. Free with [glib.global.strfreev] when no longer needed.
+      Returns: a null-terminated array of key strings, or null when there is no
+        metadata. Free with [glib.global.strfreev] when no longer needed.
   */
   string[] getMetadataKeys()
   {
@@ -341,7 +357,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Gets the number of pad_templates in this factory.
-    Returns:     the number of pad_templates
+      Returns: the number of pad_templates
   */
   uint getNumPadTemplates()
   {
@@ -352,8 +368,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Queries whether registered element managed by factory needs to
-    be excluded from documentation system or not.
-    Returns:     true if documentation should be skipped
+      be excluded from documentation system or not.
+      Returns: true if documentation should be skipped
   */
   bool getSkipDocumentation()
   {
@@ -364,11 +380,11 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Gets a null-terminated array of protocols this element supports or null if
-    no protocols are supported. You may not change the contents of the returned
-    array, as it is still owned by the element factory. Use [glib.global.strdupv] to
-    make a copy of the protocol string array if you need to.
-    Returns:     the supported protocols
-          or null
+      no protocols are supported. You may not change the contents of the returned
+      array, as it is still owned by the element factory. Use [glib.global.strdupv] to
+      make a copy of the protocol string array if you need to.
+      Returns: the supported protocols
+            or null
   */
   string[] getUriProtocols()
   {
@@ -390,7 +406,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Gets the type of URIs the element supports or #GST_URI_UNKNOWN if none.
-    Returns:     type of URIs this element supports
+      Returns: type of URIs this element supports
   */
   gst.types.URIType getUriType()
   {
@@ -402,9 +418,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Check if factory implements the interface with name interfacename.
-    Params:
-      interfacename =       an interface name
-    Returns:     true when factory implement the interface.
+  
+      Params:
+        interfacename = an interface name
+      Returns: true when factory implement the interface.
   */
   bool hasInterface(string interfacename)
   {
@@ -416,9 +433,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
   /**
       Check if factory is of the given types.
-    Params:
-      type =       a #GstElementFactoryListType
-    Returns:     true if factory is of type.
+  
+      Params:
+        type = a #GstElementFactoryListType
+      Returns: true if factory is of type.
   */
   bool listIsType(gst.types.ElementFactoryListType type)
   {

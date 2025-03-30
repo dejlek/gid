@@ -1,3 +1,4 @@
+/// Module for [ClosureExpression] class
 module gtk.closure_expression;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gtk.types;
 
 /**
     An expression using a custom [gobject.closure.Closure] to compute the value from
-  its parameters.
+    its parameters.
 */
 class ClosureExpression : gtk.expression.Expression
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

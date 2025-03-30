@@ -1,3 +1,4 @@
+/// Module for [RecentData] class
 module gtk.recent_data;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     Meta-data to be passed to [gtk.recent_manager.RecentManager.addFull] when
-  registering a recently used resource.
+    registering a recently used resource.
 */
 class RecentData
 {
   GtkRecentData cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class RecentData
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

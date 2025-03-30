@@ -1,3 +1,4 @@
+/// Module for [ToolShell] interface mixin
 module gtk.tool_shell_mixin;
 
 public import gtk.tool_shell_iface_proxy;
@@ -11,16 +12,16 @@ public import pango.types;
 
 /**
     The #GtkToolShell interface allows container widgets to provide additional
-  information when embedding #GtkToolItem widgets.
+    information when embedding #GtkToolItem widgets.
 */
 template ToolShellT()
 {
 
   /**
       Retrieves the current ellipsize mode for the tool shell. Tool items must not
-    call this function directly, but rely on [gtk.tool_item.ToolItem.getEllipsizeMode]
-    instead.
-    Returns:     the current ellipsize mode of shell
+      call this function directly, but rely on [gtk.tool_item.ToolItem.getEllipsizeMode]
+      instead.
+      Returns: the current ellipsize mode of shell
   */
   override pango.types.EllipsizeMode getEllipsizeMode()
   {
@@ -32,8 +33,8 @@ template ToolShellT()
 
   /**
       Retrieves the icon size for the tool shell. Tool items must not call this
-    function directly, but rely on [gtk.tool_item.ToolItem.getIconSize] instead.
-    Returns:     the current size (#GtkIconSize) for icons of shell
+      function directly, but rely on [gtk.tool_item.ToolItem.getIconSize] instead.
+      Returns: the current size (#GtkIconSize) for icons of shell
   */
   override gtk.types.IconSize getIconSize()
   {
@@ -45,9 +46,9 @@ template ToolShellT()
 
   /**
       Retrieves the current orientation for the tool shell. Tool items must not
-    call this function directly, but rely on [gtk.tool_item.ToolItem.getOrientation]
-    instead.
-    Returns:     the current orientation of shell
+      call this function directly, but rely on [gtk.tool_item.ToolItem.getOrientation]
+      instead.
+      Returns: the current orientation of shell
   */
   override gtk.types.Orientation toolShellGetOrientation()
   {
@@ -59,8 +60,8 @@ template ToolShellT()
 
   /**
       Returns the relief style of buttons on shell. Tool items must not call this
-    function directly, but rely on [gtk.tool_item.ToolItem.getReliefStyle] instead.
-    Returns:     The relief style of buttons on shell.
+      function directly, but rely on [gtk.tool_item.ToolItem.getReliefStyle] instead.
+      Returns: The relief style of buttons on shell.
   */
   override gtk.types.ReliefStyle getReliefStyle()
   {
@@ -72,9 +73,9 @@ template ToolShellT()
 
   /**
       Retrieves whether the tool shell has text, icons, or both. Tool items must
-    not call this function directly, but rely on [gtk.tool_item.ToolItem.getToolbarStyle]
-    instead.
-    Returns:     the current style of shell
+      not call this function directly, but rely on [gtk.tool_item.ToolItem.getToolbarStyle]
+      instead.
+      Returns: the current style of shell
   */
   override gtk.types.ToolbarStyle getStyle()
   {
@@ -86,9 +87,9 @@ template ToolShellT()
 
   /**
       Retrieves the current text alignment for the tool shell. Tool items must not
-    call this function directly, but rely on [gtk.tool_item.ToolItem.getTextAlignment]
-    instead.
-    Returns:     the current text alignment of shell
+      call this function directly, but rely on [gtk.tool_item.ToolItem.getTextAlignment]
+      instead.
+      Returns: the current text alignment of shell
   */
   override float getTextAlignment()
   {
@@ -99,9 +100,9 @@ template ToolShellT()
 
   /**
       Retrieves the current text orientation for the tool shell. Tool items must not
-    call this function directly, but rely on [gtk.tool_item.ToolItem.getTextOrientation]
-    instead.
-    Returns:     the current text orientation of shell
+      call this function directly, but rely on [gtk.tool_item.ToolItem.getTextOrientation]
+      instead.
+      Returns: the current text orientation of shell
   */
   override gtk.types.Orientation getTextOrientation()
   {
@@ -113,9 +114,9 @@ template ToolShellT()
 
   /**
       Retrieves the current text size group for the tool shell. Tool items must not
-    call this function directly, but rely on [gtk.tool_item.ToolItem.getTextSizeGroup]
-    instead.
-    Returns:     the current text size group of shell
+      call this function directly, but rely on [gtk.tool_item.ToolItem.getTextSizeGroup]
+      instead.
+      Returns: the current text size group of shell
   */
   override gtk.size_group.SizeGroup getTextSizeGroup()
   {
@@ -127,11 +128,11 @@ template ToolShellT()
 
   /**
       Calling this function signals the tool shell that the overflow menu item for
-    tool items have changed. If there is an overflow menu and if it is visible
-    when this function it called, the menu will be rebuilt.
-    
-    Tool items must not call this function directly, but rely on
-    [gtk.tool_item.ToolItem.rebuildMenu] instead.
+      tool items have changed. If there is an overflow menu and if it is visible
+      when this function it called, the menu will be rebuilt.
+      
+      Tool items must not call this function directly, but rely on
+      [gtk.tool_item.ToolItem.rebuildMenu] instead.
   */
   override void rebuildMenu()
   {

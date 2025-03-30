@@ -1,3 +1,4 @@
+/// Module for [ConstraintTarget] interface
 module gtk.constraint_target;
 
 public import gtk.constraint_target_iface_proxy;
@@ -8,13 +9,14 @@ import gtk.types;
 
 /**
     The [gtk.constraint_target.ConstraintTarget] interface is implemented by objects that
-  can be used as source or target in [gtk.constraint.Constraint]s.
-  
-  Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
+    can be used as source or target in [gtk.constraint.Constraint]s.
+    
+    Besides [gtk.widget.Widget], it is also implemented by [gtk.constraint_guide.ConstraintGuide].
 */
 interface ConstraintTarget
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

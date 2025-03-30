@@ -1,3 +1,4 @@
+/// Module for [ObjectExpression] class
 module gtk.object_expression;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gtk.types;
 class ObjectExpression : gtk.expression.Expression
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,15 +25,16 @@ class ObjectExpression : gtk.expression.Expression
 
   /**
       Creates an expression evaluating to the given `object` with a weak reference.
-    
-    Once the `object` is disposed, it will fail to evaluate.
-    
-    This expression is meant to break reference cycles.
-    
-    If you want to keep a reference to `object`, use [gtk.constant_expression.ConstantExpression.new_].
-    Params:
-      object =       object to watch
-    Returns:     a new [gtk.expression.Expression]
+      
+      Once the `object` is disposed, it will fail to evaluate.
+      
+      This expression is meant to break reference cycles.
+      
+      If you want to keep a reference to `object`, use [gtk.constant_expression.ConstantExpression.new_].
+  
+      Params:
+        object = object to watch
+      Returns: a new [gtk.expression.Expression]
   */
   this(gobject.object.ObjectG object)
   {
@@ -42,7 +45,7 @@ class ObjectExpression : gtk.expression.Expression
 
   /**
       Gets the object that the expression evaluates to.
-    Returns:     the object, or `NULL`
+      Returns: the object, or `NULL`
   */
   gobject.object.ObjectG getObject()
   {

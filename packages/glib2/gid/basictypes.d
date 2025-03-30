@@ -1,3 +1,4 @@
+/// Module for [basictypes] class
 module gid.basictypes;
 
 

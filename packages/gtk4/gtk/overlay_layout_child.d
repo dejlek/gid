@@ -1,3 +1,4 @@
+/// Module for [OverlayLayoutChild] class
 module gtk.overlay_layout_child;
 
 import gid.gid;
@@ -12,17 +13,20 @@ import gtk.types;
 class OverlayLayoutChild : gtk.layout_child.LayoutChild
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_layout_child_get_type != &gidSymbolNotFound ? gtk_overlay_layout_child_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,7 +39,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves whether the child is clipped.
-    Returns:     whether the child is clipped
+      Returns: whether the child is clipped
   */
   bool getClipOverlay()
   {
@@ -46,7 +50,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves whether the child is measured.
-    Returns:     whether the child is measured
+      Returns: whether the child is measured
   */
   bool getMeasure()
   {
@@ -57,8 +61,9 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets whether to clip this child.
-    Params:
-      clipOverlay =       whether to clip this child
+  
+      Params:
+        clipOverlay = whether to clip this child
   */
   void setClipOverlay(bool clipOverlay)
   {
@@ -67,8 +72,9 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets whether to measure this child.
-    Params:
-      measure =       whether to measure this child
+  
+      Params:
+        measure = whether to measure this child
   */
   void setMeasure(bool measure)
   {

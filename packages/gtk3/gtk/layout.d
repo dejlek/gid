@@ -1,3 +1,4 @@
+/// Module for [Layout] class
 module gtk.layout;
 
 import atk.implementor_iface;
@@ -18,32 +19,35 @@ import gtk.widget;
 
 /**
     #GtkLayout is similar to #GtkDrawingArea in that it’s a “blank slate” and
-  doesn’t do anything except paint a blank background by default. It’s
-  different in that it supports scrolling natively due to implementing
-  #GtkScrollable, and can contain child widgets since it’s a #GtkContainer.
-  
-  If you just want to draw, a #GtkDrawingArea is a better choice since it has
-  lower overhead. If you just need to position child widgets at specific
-  points, then #GtkFixed provides that functionality on its own.
-  
-  When handling expose events on a #GtkLayout, you must draw to the #GdkWindow
-  returned by [gtk.layout.Layout.getBinWindow], rather than to the one returned by
-  [gtk.widget.Widget.getWindow] as you would for a #GtkDrawingArea.
+    doesn’t do anything except paint a blank background by default. It’s
+    different in that it supports scrolling natively due to implementing
+    #GtkScrollable, and can contain child widgets since it’s a #GtkContainer.
+    
+    If you just want to draw, a #GtkDrawingArea is a better choice since it has
+    lower overhead. If you just need to position child widgets at specific
+    points, then #GtkFixed provides that functionality on its own.
+    
+    When handling expose events on a #GtkLayout, you must draw to the #GdkWindow
+    returned by [gtk.layout.Layout.getBinWindow], rather than to the one returned by
+    [gtk.widget.Widget.getWindow] as you would for a #GtkDrawingArea.
 */
 class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_get_type != &gidSymbolNotFound ? gtk_layout_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -58,12 +62,13 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Creates a new #GtkLayout. Unless you have a specific adjustment
-    you’d like the layout to use for scrolling, pass null for
-    hadjustment and vadjustment.
-    Params:
-      hadjustment =       horizontal scroll adjustment, or null
-      vadjustment =       vertical scroll adjustment, or null
-    Returns:     a new #GtkLayout
+      you’d like the layout to use for scrolling, pass null for
+      hadjustment and vadjustment.
+  
+      Params:
+        hadjustment = horizontal scroll adjustment, or null
+        vadjustment = vertical scroll adjustment, or null
+      Returns: a new #GtkLayout
   */
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
@@ -74,7 +79,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Retrieve the bin window of the layout used for drawing operations.
-    Returns:     a #GdkWindow
+      Returns: a #GdkWindow
   */
   gdk.window.Window getBinWindow()
   {
@@ -86,14 +91,14 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       This function should only be called after the layout has been
-    placed in a #GtkScrolledWindow or otherwise configured for
-    scrolling. It returns the #GtkAdjustment used for communication
-    between the horizontal scrollbar and layout.
-    
-    See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-    Returns:     horizontal scroll adjustment
+      placed in a #GtkScrolledWindow or otherwise configured for
+      scrolling. It returns the #GtkAdjustment used for communication
+      between the horizontal scrollbar and layout.
+      
+      See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
+      Returns: horizontal scroll adjustment
   
-    Deprecated:     Use [gtk.scrollable.Scrollable.getHadjustment]
+      Deprecated: Use [gtk.scrollable.Scrollable.getHadjustment]
   */
   gtk.adjustment.Adjustment getHadjustment()
   {
@@ -105,13 +110,14 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Gets the size that has been set on the layout, and that determines
-    the total extents of the layout’s scrollbar area. See
-    gtk_layout_set_size ().
-    Params:
-      width =       location to store the width set on
-            layout, or null
-      height =       location to store the height set on
-            layout, or null
+      the total extents of the layout’s scrollbar area. See
+      gtk_layout_set_size ().
+  
+      Params:
+        width = location to store the width set on
+              layout, or null
+        height = location to store the height set on
+              layout, or null
   */
   void getSize(out uint width, out uint height)
   {
@@ -120,14 +126,14 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       This function should only be called after the layout has been
-    placed in a #GtkScrolledWindow or otherwise configured for
-    scrolling. It returns the #GtkAdjustment used for communication
-    between the vertical scrollbar and layout.
-    
-    See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-    Returns:     vertical scroll adjustment
+      placed in a #GtkScrolledWindow or otherwise configured for
+      scrolling. It returns the #GtkAdjustment used for communication
+      between the vertical scrollbar and layout.
+      
+      See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
+      Returns: vertical scroll adjustment
   
-    Deprecated:     Use [gtk.scrollable.Scrollable.getVadjustment]
+      Deprecated: Use [gtk.scrollable.Scrollable.getVadjustment]
   */
   gtk.adjustment.Adjustment getVadjustment()
   {
@@ -139,10 +145,11 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Moves a current child of layout to a new position.
-    Params:
-      childWidget =       a current child of layout
-      x =       X position to move to
-      y =       Y position to move to
+  
+      Params:
+        childWidget = a current child of layout
+        x = X position to move to
+        y = Y position to move to
   */
   void move(gtk.widget.Widget childWidget, int x, int y)
   {
@@ -150,12 +157,13 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   }
 
   /**
-      Adds child_widget to layout, at position (x,y).
-    layout becomes the new parent container of child_widget.
-    Params:
-      childWidget =       child widget
-      x =       X position of child widget
-      y =       Y position of child widget
+      Adds child_widget to layout, at position (`x`,`y`).
+      layout becomes the new parent container of child_widget.
+  
+      Params:
+        childWidget = child widget
+        x = X position of child widget
+        y = Y position of child widget
   */
   void put(gtk.widget.Widget childWidget, int x, int y)
   {
@@ -164,12 +172,13 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Sets the horizontal scroll adjustment for the layout.
-    
-    See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-    Params:
-      adjustment =       new scroll adjustment
+      
+      See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
   
-    Deprecated:     Use [gtk.scrollable.Scrollable.setHadjustment]
+      Params:
+        adjustment = new scroll adjustment
+  
+      Deprecated: Use [gtk.scrollable.Scrollable.setHadjustment]
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
@@ -178,9 +187,10 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Sets the size of the scrollable area of the layout.
-    Params:
-      width =       width of entire scrollable area
-      height =       height of entire scrollable area
+  
+      Params:
+        width = width of entire scrollable area
+        height = height of entire scrollable area
   */
   void setSize(uint width, uint height)
   {
@@ -189,12 +199,13 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 
   /**
       Sets the vertical scroll adjustment for the layout.
-    
-    See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
-    Params:
-      adjustment =       new scroll adjustment
+      
+      See #GtkScrolledWindow, #GtkScrollbar, #GtkAdjustment for details.
   
-    Deprecated:     Use [gtk.scrollable.Scrollable.setVadjustment]
+      Params:
+        adjustment = new scroll adjustment
+  
+      Deprecated: Use [gtk.scrollable.Scrollable.setVadjustment]
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {

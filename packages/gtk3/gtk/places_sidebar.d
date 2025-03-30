@@ -1,3 +1,4 @@
+/// Module for [PlacesSidebar] class
 module gtk.places_sidebar;
 
 import atk.implementor_iface;
@@ -19,55 +20,58 @@ import gtk.widget;
 
 /**
     #GtkPlacesSidebar is a widget that displays a list of frequently-used places in the
-  file system:  the user’s home directory, the user’s bookmarks, and volumes and drives.
-  This widget is used as a sidebar in #GtkFileChooser and may be used by file managers
-  and similar programs.
-  
-  The places sidebar displays drives and volumes, and will automatically mount
-  or unmount them when the user selects them.
-  
-  Applications can hook to various signals in the places sidebar to customize
-  its behavior.  For example, they can add extra commands to the context menu
-  of the sidebar.
-  
-  While bookmarks are completely in control of the user, the places sidebar also
-  allows individual applications to provide extra shortcut folders that are unique
-  to each application.  For example, a Paint program may want to add a shortcut
-  for a Clipart folder.  You can do this with [gtk.places_sidebar.PlacesSidebar.addShortcut].
-  
-  To make use of the places sidebar, an application at least needs to connect
-  to the #GtkPlacesSidebar::open-location signal.  This is emitted when the
-  user selects in the sidebar a location to open.  The application should also
-  call [gtk.places_sidebar.PlacesSidebar.setLocation] when it changes the currently-viewed
-  location.
-  
-  # CSS nodes
-  
-  GtkPlacesSidebar uses a single CSS node with name placessidebar and style
-  class .sidebar.
-  
-  Among the children of the places sidebar, the following style classes can
-  be used:
-  $(LIST
-    * .sidebar-new-bookmark-row for the 'Add new bookmark' row
-    * .sidebar-placeholder-row for a row that is a placeholder
-    * .has-open-popup when a popup is open for a row
-  )
+    file system:  the user’s home directory, the user’s bookmarks, and volumes and drives.
+    This widget is used as a sidebar in #GtkFileChooser and may be used by file managers
+    and similar programs.
+    
+    The places sidebar displays drives and volumes, and will automatically mount
+    or unmount them when the user selects them.
+    
+    Applications can hook to various signals in the places sidebar to customize
+    its behavior.  For example, they can add extra commands to the context menu
+    of the sidebar.
+    
+    While bookmarks are completely in control of the user, the places sidebar also
+    allows individual applications to provide extra shortcut folders that are unique
+    to each application.  For example, a Paint program may want to add a shortcut
+    for a Clipart folder.  You can do this with [gtk.places_sidebar.PlacesSidebar.addShortcut].
+    
+    To make use of the places sidebar, an application at least needs to connect
+    to the #GtkPlacesSidebar::open-location signal.  This is emitted when the
+    user selects in the sidebar a location to open.  The application should also
+    call [gtk.places_sidebar.PlacesSidebar.setLocation] when it changes the currently-viewed
+    location.
+    
+    # CSS nodes
+    
+    GtkPlacesSidebar uses a single CSS node with name placessidebar and style
+    class .sidebar.
+    
+    Among the children of the places sidebar, the following style classes can
+    be used:
+    $(LIST
+      * .sidebar-new-bookmark-row for the 'Add new bookmark' row
+      * .sidebar-placeholder-row for a row that is a placeholder
+      * .has-open-popup when a popup is open for a row
+    )
 */
 class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_places_sidebar_get_type != &gidSymbolNotFound ? gtk_places_sidebar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -80,11 +84,11 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Creates a new #GtkPlacesSidebar widget.
-    
-    The application should connect to at least the
-    #GtkPlacesSidebar::open-location signal to be notified
-    when the user makes a selection in the sidebar.
-    Returns:     a newly created #GtkPlacesSidebar
+      
+      The application should connect to at least the
+      #GtkPlacesSidebar::open-location signal to be notified
+      when the user makes a selection in the sidebar.
+      Returns: a newly created #GtkPlacesSidebar
   */
   this()
   {
@@ -95,17 +99,18 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Applications may want to present some folders in the places sidebar if
-    they could be immediately useful to users.  For example, a drawing
-    program could add a “/usr/share/clipart” location when the sidebar is
-    being used in an “Insert Clipart” dialog box.
-    
-    This function adds the specified location to a special place for immutable
-    shortcuts.  The shortcuts are application-specific; they are not shared
-    across applications, and they are not persistent.  If this function
-    is called multiple times with different locations, then they are added
-    to the sidebar’s list in the same order as the function is called.
-    Params:
-      location =       location to add as an application-specific shortcut
+      they could be immediately useful to users.  For example, a drawing
+      program could add a “/usr/share/clipart” location when the sidebar is
+      being used in an “Insert Clipart” dialog box.
+      
+      This function adds the specified location to a special place for immutable
+      shortcuts.  The shortcuts are application-specific; they are not shared
+      across applications, and they are not persistent.  If this function
+      is called multiple times with different locations, then they are added
+      to the sidebar’s list in the same order as the function is called.
+  
+      Params:
+        location = location to add as an application-specific shortcut
   */
   void addShortcut(gio.file.File location)
   {
@@ -114,7 +119,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setLocalOnly].
-    Returns:     true if the sidebar will only show local files.
+      Returns: true if the sidebar will only show local files.
   */
   bool getLocalOnly()
   {
@@ -125,16 +130,16 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Gets the currently selected location in the sidebar. This can be null when
-    nothing is selected, for example, when [gtk.places_sidebar.PlacesSidebar.setLocation] has
-    been called with a location that is not among the sidebar’s list of places to
-    show.
-    
-    You can use this function to get the selection in the sidebar.  Also, if you
-    connect to the #GtkPlacesSidebar::populate-popup signal, you can use this
-    function to get the location that is being referred to during the callbacks
-    for your menu items.
-    Returns:     a #GFile with the selected location, or
-      null if nothing is visually selected.
+      nothing is selected, for example, when [gtk.places_sidebar.PlacesSidebar.setLocation] has
+      been called with a location that is not among the sidebar’s list of places to
+      show.
+      
+      You can use this function to get the selection in the sidebar.  Also, if you
+      connect to the #GtkPlacesSidebar::populate-popup signal, you can use this
+      function to get the location that is being referred to during the callbacks
+      for your menu items.
+      Returns: a #GFile with the selected location, or
+        null if nothing is visually selected.
   */
   gio.file.File getLocation()
   {
@@ -146,13 +151,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       This function queries the bookmarks added by the user to the places sidebar,
-    and returns one of them.  This function is used by #GtkFileChooser to implement
-    the “Alt-1”, “Alt-2”, etc. shortcuts, which activate the cooresponding bookmark.
-    Params:
-      n =       index of the bookmark to query
-    Returns:     The bookmark specified by the index n, or
-      null if no such index exist.  Note that the indices start at 0, even though
-      the file chooser starts them with the keyboard shortcut "Alt-1".
+      and returns one of them.  This function is used by #GtkFileChooser to implement
+      the “Alt-1”, “Alt-2”, etc. shortcuts, which activate the cooresponding bookmark.
+  
+      Params:
+        n = index of the bookmark to query
+      Returns: The bookmark specified by the index `n`, or
+        null if no such index exist.  Note that the indices start at 0, even though
+        the file chooser starts them with the keyboard shortcut "Alt-1".
   */
   gio.file.File getNthBookmark(int n)
   {
@@ -164,7 +170,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Gets the open flags.
-    Returns:     the #GtkPlacesOpenFlags of sidebar
+      Returns: the #GtkPlacesOpenFlags of sidebar
   */
   gtk.types.PlacesOpenFlags getOpenFlags()
   {
@@ -176,10 +182,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowConnectToServer]
-    Returns:     true if the sidebar will display a “Connect to Server” item.
+      Returns: true if the sidebar will display a “Connect to Server” item.
   
-    Deprecated:     It is recommended to group this functionality with the drives
-          and network location under the new 'Other Location' item
+      Deprecated: It is recommended to group this functionality with the drives
+            and network location under the new 'Other Location' item
   */
   bool getShowConnectToServer()
   {
@@ -190,7 +196,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowDesktop]
-    Returns:     true if the sidebar will display a builtin shortcut to the desktop folder.
+      Returns: true if the sidebar will display a builtin shortcut to the desktop folder.
   */
   bool getShowDesktop()
   {
@@ -201,7 +207,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowEnterLocation]
-    Returns:     true if the sidebar will display an “Enter Location” item.
+      Returns: true if the sidebar will display an “Enter Location” item.
   */
   bool getShowEnterLocation()
   {
@@ -212,7 +218,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowOtherLocations]
-    Returns:     true if the sidebar will display an “Other Locations” item.
+      Returns: true if the sidebar will display an “Other Locations” item.
   */
   bool getShowOtherLocations()
   {
@@ -223,7 +229,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowRecent]
-    Returns:     true if the sidebar will display a builtin shortcut for recent files
+      Returns: true if the sidebar will display a builtin shortcut for recent files
   */
   bool getShowRecent()
   {
@@ -234,7 +240,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowStarredLocation]
-    Returns:     true if the sidebar will display a Starred item.
+      Returns: true if the sidebar will display a Starred item.
   */
   bool getShowStarredLocation()
   {
@@ -245,7 +251,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Returns the value previously set with [gtk.places_sidebar.PlacesSidebar.setShowTrash]
-    Returns:     true if the sidebar will display a “Trash” item.
+      Returns: true if the sidebar will display a “Trash” item.
   */
   bool getShowTrash()
   {
@@ -256,12 +262,12 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Gets the list of shortcuts.
-    Returns:     A #GSList of #GFile of the locations that have been added as
-          application-specific shortcuts with [gtk.places_sidebar.PlacesSidebar.addShortcut].
-          To free this list, you can use
-      ```c
-      g_slist_free_full (list, (GDestroyNotify) g_object_unref);
-      ```
+      Returns: A #GSList of #GFile of the locations that have been added as
+            application-specific shortcuts with [gtk.places_sidebar.PlacesSidebar.addShortcut].
+            To free this list, you can use
+        ```c
+        g_slist_free_full (list, (GDestroyNotify) g_object_unref);
+        ```
   */
   gio.file.File[] listShortcuts()
   {
@@ -273,10 +279,11 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Removes an application-specific shortcut that has been previously been
-    inserted with [gtk.places_sidebar.PlacesSidebar.addShortcut].  If the location is not a
-    shortcut in the sidebar, then nothing is done.
-    Params:
-      location =       location to remove
+      inserted with [gtk.places_sidebar.PlacesSidebar.addShortcut].  If the location is not a
+      shortcut in the sidebar, then nothing is done.
+  
+      Params:
+        location = location to remove
   */
   void removeShortcut(gio.file.File location)
   {
@@ -285,18 +292,19 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Make the GtkPlacesSidebar show drop targets, so it can show the available
-    drop targets and a "new bookmark" row. This improves the Drag-and-Drop
-    experience of the user and allows applications to show all available
-    drop targets at once.
-    
-    This needs to be called when the application is aware of an ongoing drag
-    that might target the sidebar. The drop-targets-visible state will be unset
-    automatically if the drag finishes in the GtkPlacesSidebar. You only need
-    to unset the state when the drag ends on some other widget on your application.
-    Params:
-      visible =       whether to show the valid targets or not.
-      context =       drag context used to ask the source about the action that wants to
-            perform, so hints are more accurate.
+      drop targets and a "new bookmark" row. This improves the Drag-and-Drop
+      experience of the user and allows applications to show all available
+      drop targets at once.
+      
+      This needs to be called when the application is aware of an ongoing drag
+      that might target the sidebar. The drop-targets-visible state will be unset
+      automatically if the drag finishes in the GtkPlacesSidebar. You only need
+      to unset the state when the drag ends on some other widget on your application.
+  
+      Params:
+        visible = whether to show the valid targets or not.
+        context = drag context used to ask the source about the action that wants to
+              perform, so hints are more accurate.
   */
   void setDropTargetsVisible(bool visible, gdk.drag_context.DragContext context)
   {
@@ -305,8 +313,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should only show local files.
-    Params:
-      localOnly =       whether to show only local files
+  
+      Params:
+        localOnly = whether to show only local files
   */
   void setLocalOnly(bool localOnly)
   {
@@ -315,12 +324,13 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets the location that is being shown in the widgets surrounding the
-    sidebar, for example, in a folder view in a file manager.  In turn, the
-    sidebar will highlight that location if it is being shown in the list of
-    places, or it will unhighlight everything if the location is not among the
-    places in the list.
-    Params:
-      location =       location to select, or null for no current path
+      sidebar, for example, in a folder view in a file manager.  In turn, the
+      sidebar will highlight that location if it is being shown in the list of
+      places, or it will unhighlight everything if the location is not among the
+      places in the list.
+  
+      Params:
+        location = location to select, or null for no current path
   */
   void setLocation(gio.file.File location = null)
   {
@@ -329,22 +339,23 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets the way in which the calling application can open new locations from
-    the places sidebar.  For example, some applications only open locations
-    “directly” into their main view, while others may support opening locations
-    in a new notebook tab or a new window.
-    
-    This function is used to tell the places sidebar about the ways in which the
-    application can open new locations, so that the sidebar can display (or not)
-    the “Open in new tab” and “Open in new window” menu items as appropriate.
-    
-    When the #GtkPlacesSidebar::open-location signal is emitted, its flags
-    argument will be set to one of the flags that was passed in
-    [gtk.places_sidebar.PlacesSidebar.setOpenFlags].
-    
-    Passing 0 for flags will cause #GTK_PLACES_OPEN_NORMAL to always be sent
-    to callbacks for the “open-location” signal.
-    Params:
-      flags =       Bitmask of modes in which the calling application can open locations
+      the places sidebar.  For example, some applications only open locations
+      “directly” into their main view, while others may support opening locations
+      in a new notebook tab or a new window.
+      
+      This function is used to tell the places sidebar about the ways in which the
+      application can open new locations, so that the sidebar can display (or not)
+      the “Open in new tab” and “Open in new window” menu items as appropriate.
+      
+      When the #GtkPlacesSidebar::open-location signal is emitted, its flags
+      argument will be set to one of the flags that was passed in
+      [gtk.places_sidebar.PlacesSidebar.setOpenFlags].
+      
+      Passing 0 for flags will cause #GTK_PLACES_OPEN_NORMAL to always be sent
+      to callbacks for the “open-location” signal.
+  
+      Params:
+        flags = Bitmask of modes in which the calling application can open locations
   */
   void setOpenFlags(gtk.types.PlacesOpenFlags flags)
   {
@@ -353,16 +364,17 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for connecting to a network server;
-    this is off by default. An application may want to turn this on if it implements
-    a way for the user to connect to network servers directly.
-    
-    If you enable this, you should connect to the
-    #GtkPlacesSidebar::show-connect-to-server signal.
-    Params:
-      showConnectToServer =       whether to show an item for the Connect to Server command
+      this is off by default. An application may want to turn this on if it implements
+      a way for the user to connect to network servers directly.
+      
+      If you enable this, you should connect to the
+      #GtkPlacesSidebar::show-connect-to-server signal.
   
-    Deprecated:     It is recommended to group this functionality with the drives
-          and network location under the new 'Other Location' item
+      Params:
+        showConnectToServer = whether to show an item for the Connect to Server command
+  
+      Deprecated: It is recommended to group this functionality with the drives
+            and network location under the new 'Other Location' item
   */
   void setShowConnectToServer(bool showConnectToServer)
   {
@@ -371,11 +383,12 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for the Desktop folder.
-    The default value for this option is determined by the desktop
-    environment and the user’s configuration, but this function can be
-    used to override it on a per-application basis.
-    Params:
-      showDesktop =       whether to show an item for the Desktop folder
+      The default value for this option is determined by the desktop
+      environment and the user’s configuration, but this function can be
+      used to override it on a per-application basis.
+  
+      Params:
+        showDesktop = whether to show an item for the Desktop folder
   */
   void setShowDesktop(bool showDesktop)
   {
@@ -384,13 +397,14 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for entering a location;
-    this is off by default. An application may want to turn this on if manually
-    entering URLs is an expected user action.
-    
-    If you enable this, you should connect to the
-    #GtkPlacesSidebar::show-enter-location signal.
-    Params:
-      showEnterLocation =       whether to show an item to enter a location
+      this is off by default. An application may want to turn this on if manually
+      entering URLs is an expected user action.
+      
+      If you enable this, you should connect to the
+      #GtkPlacesSidebar::show-enter-location signal.
+  
+      Params:
+        showEnterLocation = whether to show an item to enter a location
   */
   void setShowEnterLocation(bool showEnterLocation)
   {
@@ -399,15 +413,16 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for the application to show
-    an Other Locations view; this is off by default. When set to true, persistent
-    devices such as hard drives are hidden, otherwise they are shown in the sidebar.
-    An application may want to turn this on if it implements a way for the user to
-    see and interact with drives and network servers directly.
-    
-    If you enable this, you should connect to the
-    #GtkPlacesSidebar::show-other-locations signal.
-    Params:
-      showOtherLocations =       whether to show an item for the Other Locations view
+      an Other Locations view; this is off by default. When set to true, persistent
+      devices such as hard drives are hidden, otherwise they are shown in the sidebar.
+      An application may want to turn this on if it implements a way for the user to
+      see and interact with drives and network servers directly.
+      
+      If you enable this, you should connect to the
+      #GtkPlacesSidebar::show-other-locations signal.
+  
+      Params:
+        showOtherLocations = whether to show an item for the Other Locations view
   */
   void setShowOtherLocations(bool showOtherLocations)
   {
@@ -416,11 +431,12 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for recent files.
-    The default value for this option is determined by the desktop
-    environment, but this function can be used to override it on a
-    per-application basis.
-    Params:
-      showRecent =       whether to show an item for recent files
+      The default value for this option is determined by the desktop
+      environment, but this function can be used to override it on a
+      per-application basis.
+  
+      Params:
+        showRecent = whether to show an item for recent files
   */
   void setShowRecent(bool showRecent)
   {
@@ -429,9 +445,10 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       If you enable this, you should connect to the
-    #GtkPlacesSidebar::show-starred-location signal.
-    Params:
-      showStarredLocation =       whether to show an item for Starred files
+      #GtkPlacesSidebar::show-starred-location signal.
+  
+      Params:
+        showStarredLocation = whether to show an item for Starred files
   */
   void setShowStarredLocation(bool showStarredLocation)
   {
@@ -440,8 +457,9 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 
   /**
       Sets whether the sidebar should show an item for the Trash location.
-    Params:
-      showTrash =       whether to show an item for the Trash location
+  
+      Params:
+        showTrash = whether to show an item for the Trash location
   */
   void setShowTrash(bool showTrash)
   {
@@ -449,40 +467,46 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it needs to ask the application
-    to pop up a menu to ask the user for which drag action to perform.
+      Connect to `DragActionAsk` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B actions)       Possible drag actions that need to be asked for.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-    Returns:     the final drag action that the sidebar should pass to the drag side
-      of the drag-and-drop operation.
-  */
-  alias DragActionAskCallbackDlg = int delegate(int actions, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias DragActionAskCallbackFunc = int function(int actions, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to DragActionAsk signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it needs to ask the application
+      to pop up a menu to ask the user for which drag action to perform.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D int callback(int actions, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `actions` Possible drag actions that need to be asked for. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+          `Returns` the final drag action that the sidebar should pass to the drag side
+          of the drag-and-drop operation.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDragActionAsk(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DragActionAskCallbackDlg) || is(T : DragActionAskCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == int)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      int _retval;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto actions = getVal!(int)(&_paramVals[1]);
-      _retval = _dClosure.dlg(actions, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!int(_returnValue, _retval);
     }
 
@@ -491,39 +515,176 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it starts a new operation
-    because the user clicked on some location that needs mounting.
-    In this way the application using the #GtkPlacesSidebar can track the
-    progress of the operation and, for example, show a notification.
+      Connect to `DragActionRequested` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B mountOperation)       the #GMountOperation that is going to start.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
+      When the user starts a drag-and-drop operation and the sidebar needs
+      to ask the application for which drag action to perform, then the
+      sidebar will emit this signal.
+      
+      The application can evaluate the context for customary actions, or
+      it can check the type of the files indicated by source_file_list against the
+      possible actions for the destination dest_file.
+      
+      The drag action to use must be the return value of the signal handler.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D int callback(gdk.drag_context.DragContext context, gio.file.File destFile, gio.file.File[] sourceFileList, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `context` #GdkDragContext with information about the drag operation (optional)
+  
+          `destFile` #GFile with the tentative location that is being hovered for a drop (optional)
+  
+          `sourceFileList` List of #GFile that are being dragged (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+          `Returns` The drag action to use, for example, #GDK_ACTION_COPY
+          or #GDK_ACTION_MOVE, or 0 if no action is allowed here (i.e. drops
+          are not allowed in the specified dest_file).
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias MountCallbackDlg = void delegate(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar);
+  ulong connectDragActionRequested(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == int)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.drag_context.DragContext)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.file.File)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gio.file.File[])))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 5)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
 
-  /** ditto */
-  alias MountCallbackFunc = void function(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar);
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = gListToD!(gio.file.File, GidOwnership.None)(cast(GList*)getVal!(void*)(&_paramVals[3]));
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
+      setVal!int(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drag-action-requested", closure, after);
+  }
 
   /**
-    Connect to Mount signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `DragPerformDrop` signal.
+  
+      The places sidebar emits this signal when the user completes a
+      drag-and-drop operation and one of the sidebar's items is the
+      destination.  This item is in the dest_file, and the
+      source_file_list has the list of files that are dropped into it and
+      which should be copied/moved/etc. based on the specified action.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gio.file.File destFile, gio.file.File[] sourceFileList, int action, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `destFile` Destination #GFile. (optional)
+  
+          `sourceFileList` #GList of #GFile that got dropped. (optional)
+  
+          `action` Drop action to perform. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectDragPerformDrop(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gio.file.File[])))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 5)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = gListToD!(gio.file.File, GidOwnership.None)(cast(GList*)getVal!(void*)(&_paramVals[2]));
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drag-perform-drop", closure, after);
+  }
+
+  /**
+      Connect to `Mount` signal.
+  
+      The places sidebar emits this signal when it starts a new operation
+      because the user clicked on some location that needs mounting.
+      In this way the application using the #GtkPlacesSidebar can track the
+      progress of the operation and, for example, show a notification.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `mountOperation` the #GMountOperation that is going to start. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMount(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MountCallbackDlg) || is(T : MountCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(&_paramVals[1]);
-      _dClosure.dlg(mountOperation, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -531,41 +692,53 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when the user selects a location
-    in it.  The calling application should display the contents of that
-    location; for example, a file manager should show a list of files in
-    the specified location.
+      Connect to `OpenLocation` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B location)       #GFile to which the caller should switch.
-      * $(B openFlags)       a single value from #GtkPlacesOpenFlags specifying how the location should be opened.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias OpenLocationCallbackDlg = void delegate(gio.file.File location, gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias OpenLocationCallbackFunc = void function(gio.file.File location, gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to OpenLocation signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when the user selects a location
+      in it.  The calling application should display the contents of that
+      location; for example, a file manager should show a list of files in
+      the specified location.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gio.file.File location, gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `location` #GFile to which the caller should switch. (optional)
+  
+          `openFlags` a single value from #GtkPlacesOpenFlags specifying how the location should be opened. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectOpenLocation(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : OpenLocationCallbackDlg) || is(T : OpenLocationCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.file.File)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.types.PlacesOpenFlags)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto location = getVal!(gio.file.File)(&_paramVals[1]);
-      auto openFlags = getVal!(gtk.types.PlacesOpenFlags)(&_paramVals[2]);
-      _dClosure.dlg(location, openFlags, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -573,66 +746,83 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when the user invokes a contextual
-    popup on one of its items. In the signal handler, the application may
-    add extra items to the menu as appropriate. For example, a file manager
-    may want to add a "Properties" command to the menu.
-    
-    It is not necessary to store the selected_item for each menu item;
-    during their callbacks, the application can use [gtk.places_sidebar.PlacesSidebar.getLocation]
-    to get the file to which the item refers.
-    
-    The selected_item argument may be null in case the selection refers to
-    a volume. In this case, selected_volume will be non-null. In this case,
-    the calling application will have to [gobject.object.ObjectG.ref_] the selected_volume and
-    keep it around to use it in the callback.
-    
-    The container and all its contents are destroyed after the user
-    dismisses the popup. The popup is re-created (and thus, this signal is
-    emitted) every time the user activates the contextual menu.
-    
-    Before 3.18, the container always was a #GtkMenu, and you were expected
-    to add your items as #GtkMenuItems. Since 3.18, the popup may be implemented
-    as a #GtkPopover, in which case container will be something else, e.g. a
-    #GtkBox, to which you may add #GtkModelButtons or other widgets, such as
-    #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
-    situation, you can set #GtkPlacesSidebar::populate-all to true to request
-    that this signal is emitted for populating popovers as well.
+      Connect to `PopulatePopup` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B container)       a #GtkMenu or another #GtkContainer
-      * $(B selectedItem)       #GFile with the item to which
-            the popup should refer, or null in the case of a selected_volume.
-      * $(B selectedVolume)       #GVolume if the selected
-            item is a volume, or null if it is a file.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias PopulatePopupCallbackDlg = void delegate(gtk.widget.Widget container, gio.file.File selectedItem, gio.volume.Volume selectedVolume, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias PopulatePopupCallbackFunc = void function(gtk.widget.Widget container, gio.file.File selectedItem, gio.volume.Volume selectedVolume, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to PopulatePopup signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when the user invokes a contextual
+      popup on one of its items. In the signal handler, the application may
+      add extra items to the menu as appropriate. For example, a file manager
+      may want to add a "Properties" command to the menu.
+      
+      It is not necessary to store the selected_item for each menu item;
+      during their callbacks, the application can use [gtk.places_sidebar.PlacesSidebar.getLocation]
+      to get the file to which the item refers.
+      
+      The selected_item argument may be null in case the selection refers to
+      a volume. In this case, selected_volume will be non-null. In this case,
+      the calling application will have to [gobject.object.ObjectG.ref_] the selected_volume and
+      keep it around to use it in the callback.
+      
+      The container and all its contents are destroyed after the user
+      dismisses the popup. The popup is re-created (and thus, this signal is
+      emitted) every time the user activates the contextual menu.
+      
+      Before 3.18, the container always was a #GtkMenu, and you were expected
+      to add your items as #GtkMenuItems. Since 3.18, the popup may be implemented
+      as a #GtkPopover, in which case container will be something else, e.g. a
+      #GtkBox, to which you may add #GtkModelButtons or other widgets, such as
+      #GtkEntries, #GtkSpinButtons, etc. If your application can deal with this
+      situation, you can set #GtkPlacesSidebar::populate-all to true to request
+      that this signal is emitted for populating popovers as well.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.widget.Widget container, gio.file.File selectedItem, gio.volume.Volume selectedVolume, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `container` a #GtkMenu or another #GtkContainer (optional)
+  
+          `selectedItem` #GFile with the item to which
+              the popup should refer, or null in the case of a selected_volume. (optional)
+  
+          `selectedVolume` #GVolume if the selected
+              item is a volume, or null if it is a file. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPopulatePopup(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PopulatePopupCallbackDlg) || is(T : PopulatePopupCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.widget.Widget)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.file.File)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gio.volume.Volume)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 5)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto container = getVal!(gtk.widget.Widget)(&_paramVals[1]);
-      auto selectedItem = getVal!(gio.file.File)(&_paramVals[2]);
-      auto selectedVolume = getVal!(gio.volume.Volume)(&_paramVals[3]);
-      _dClosure.dlg(container, selectedItem, selectedVolume, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -640,41 +830,43 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
+      Connect to `ShowConnectToServer` signal.
+  
       The places sidebar emits this signal when it needs the calling
-    application to present an way to connect directly to a network server.
-    For example, the application may bring up a dialog box asking for
-    a URL like "sftp://ftp.example.com".  It is up to the application to create
-    the corresponding mount by using, for example, [gio.file.File.mountEnclosingVolume].
+      application to present an way to connect directly to a network server.
+      For example, the application may bring up a dialog box asking for
+      a URL like "sftp://ftp.example.com".  It is up to the application to create
+      the corresponding mount by using, for example, [gio.file.File.mountEnclosingVolume].
   
-    ## Parameters
-    $(LIST
-      * $(B placesSidebar) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
   
-    Deprecated:     use the #GtkPlacesSidebar::show-other-locations signal
+          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: use the #GtkPlacesSidebar::show-other-locations signal
           to connect to network servers.
   */
-  alias ShowConnectToServerCallbackDlg = void delegate(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowConnectToServerCallbackFunc = void function(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowConnectToServer signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
   ulong connectShowConnectToServer(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowConnectToServerCallbackDlg) || is(T : ShowConnectToServerCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      _dClosure.dlg(placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -682,37 +874,39 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it needs the calling
-    application to present an way to directly enter a location.
-    For example, the application may bring up a dialog box asking for
-    a URL like "http://http.example.com".
+      Connect to `ShowEnterLocation` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias ShowEnterLocationCallbackDlg = void delegate(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowEnterLocationCallbackFunc = void function(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowEnterLocation signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it needs the calling
+      application to present an way to directly enter a location.
+      For example, the application may bring up a dialog box asking for
+      a URL like "http://http.example.com".
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowEnterLocation(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowEnterLocationCallbackDlg) || is(T : ShowEnterLocationCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      _dClosure.dlg(placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -720,41 +914,53 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it needs the calling
-    application to present an error message.  Most of these messages
-    refer to mounting or unmounting media, for example, when a drive
-    cannot be started for some reason.
+      Connect to `ShowErrorMessage` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B primary)       primary message with a summary of the error to show.
-      * $(B secondary)       secondary message with details of the error to show.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias ShowErrorMessageCallbackDlg = void delegate(string primary, string secondary, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowErrorMessageCallbackFunc = void function(string primary, string secondary, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowErrorMessage signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it needs the calling
+      application to present an error message.  Most of these messages
+      refer to mounting or unmounting media, for example, when a drive
+      cannot be started for some reason.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string primary, string secondary, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `primary` primary message with a summary of the error to show. (optional)
+  
+          `secondary` secondary message with details of the error to show. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowErrorMessage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowErrorMessageCallbackDlg) || is(T : ShowErrorMessageCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto primary = getVal!(string)(&_paramVals[1]);
-      auto secondary = getVal!(string)(&_paramVals[2]);
-      _dClosure.dlg(primary, secondary, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -762,42 +968,44 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
+      Connect to `ShowOtherLocations` signal.
+  
       The places sidebar emits this signal when it needs the calling
-    application to present a way to show other locations e.g. drives
-    and network access points.
-    For example, the application may bring up a page showing persistent
-    volumes and discovered network addresses.
+      application to present a way to show other locations e.g. drives
+      and network access points.
+      For example, the application may bring up a page showing persistent
+      volumes and discovered network addresses.
   
-    ## Parameters
-    $(LIST
-      * $(B placesSidebar) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
   
-    Deprecated:     use the #GtkPlacesSidebar::show-other-locations-with-flags
+          $(D void callback(gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: use the #GtkPlacesSidebar::show-other-locations-with-flags
       which includes the open flags in order to allow the user to specify to open
       in a new tab or window, in a similar way than #GtkPlacesSidebar::open-location
   */
-  alias ShowOtherLocationsCallbackDlg = void delegate(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowOtherLocationsCallbackFunc = void function(gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowOtherLocations signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
   ulong connectShowOtherLocations(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowOtherLocationsCallbackDlg) || is(T : ShowOtherLocationsCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      _dClosure.dlg(placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -805,40 +1013,47 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it needs the calling
-    application to present a way to show other locations e.g. drives
-    and network access points.
-    For example, the application may bring up a page showing persistent
-    volumes and discovered network addresses.
+      Connect to `ShowOtherLocationsWithFlags` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B openFlags)       a single value from #GtkPlacesOpenFlags specifying how it should be opened.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias ShowOtherLocationsWithFlagsCallbackDlg = void delegate(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowOtherLocationsWithFlagsCallbackFunc = void function(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowOtherLocationsWithFlags signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it needs the calling
+      application to present a way to show other locations e.g. drives
+      and network access points.
+      For example, the application may bring up a page showing persistent
+      volumes and discovered network addresses.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `openFlags` a single value from #GtkPlacesOpenFlags specifying how it should be opened. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowOtherLocationsWithFlags(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowOtherLocationsWithFlagsCallbackDlg) || is(T : ShowOtherLocationsWithFlagsCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto openFlags = getVal!(gtk.types.PlacesOpenFlags)(&_paramVals[1]);
-      _dClosure.dlg(openFlags, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -846,40 +1061,47 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it needs the calling
-    application to present a way to show the starred files. In GNOME,
-    starred files are implemented by setting the nao:predefined-tag-favorite
-    tag in the tracker database.
+      Connect to `ShowStarredLocation` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B openFlags)       a single value from #GtkPlacesOpenFlags specifying how the
-          starred file should be opened.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias ShowStarredLocationCallbackDlg = void delegate(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias ShowStarredLocationCallbackFunc = void function(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to ShowStarredLocation signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it needs the calling
+      application to present a way to show the starred files. In GNOME,
+      starred files are implemented by setting the nao:predefined-tag-favorite
+      tag in the tracker database.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.PlacesOpenFlags openFlags, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `openFlags` a single value from #GtkPlacesOpenFlags specifying how the
+            starred file should be opened. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowStarredLocation(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowStarredLocationCallbackDlg) || is(T : ShowStarredLocationCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.PlacesOpenFlags)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto openFlags = getVal!(gtk.types.PlacesOpenFlags)(&_paramVals[1]);
-      _dClosure.dlg(openFlags, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -887,39 +1109,46 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /**
-      The places sidebar emits this signal when it starts a new operation
-    because the user for example ejected some drive or unmounted a mount.
-    In this way the application using the #GtkPlacesSidebar can track the
-    progress of the operation and, for example, show a notification.
+      Connect to `Unmount` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B mountOperation)       the #GMountOperation that is going to start.
-      * $(B placesSidebar) the instance the signal is connected to
-    )
-  */
-  alias UnmountCallbackDlg = void delegate(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /** ditto */
-  alias UnmountCallbackFunc = void function(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar);
-
-  /**
-    Connect to Unmount signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The places sidebar emits this signal when it starts a new operation
+      because the user for example ejected some drive or unmounted a mount.
+      In this way the application using the #GtkPlacesSidebar can track the
+      progress of the operation and, for example, show a notification.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gio.mount_operation.MountOperation mountOperation, gtk.places_sidebar.PlacesSidebar placesSidebar))
+  
+          `mountOperation` the #GMountOperation that is going to start. (optional)
+  
+          `placesSidebar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectUnmount(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : UnmountCallbackDlg) || is(T : UnmountCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.mount_operation.MountOperation)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.places_sidebar.PlacesSidebar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto placesSidebar = getVal!(gtk.places_sidebar.PlacesSidebar)(_paramVals);
-      auto mountOperation = getVal!(gio.mount_operation.MountOperation)(&_paramVals[1]);
-      _dClosure.dlg(mountOperation, placesSidebar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

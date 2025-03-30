@@ -1,3 +1,4 @@
+/// Module for [GLAsyncDebug] class
 module gstgl.glasync_debug;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gstgl.types;
 
 /**
     #GstGLAsyncDebug an opaque structure and should only be accessed through the
-  provided API.
+    provided API.
 */
 class GLAsyncDebug
 {
   GstGLAsyncDebug cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class GLAsyncDebug
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -31,9 +34,9 @@ class GLAsyncDebug
 
   /**
       freeze the debug output.  While frozen, any call to
-    [gstgl.glasync_debug.GLAsyncDebug.outputLogMsg] will not output any messages but
-    subsequent calls to [gstgl.glasync_debug.GLAsyncDebug.storeLogMsg] will overwrite previous
-    messages.
+      [gstgl.glasync_debug.GLAsyncDebug.outputLogMsg] will not output any messages but
+      subsequent calls to [gstgl.glasync_debug.GLAsyncDebug.storeLogMsg] will overwrite previous
+      messages.
   */
   void freeze()
   {
@@ -42,7 +45,7 @@ class GLAsyncDebug
 
   /**
       Initialize ad.  Intended for use with #GstGLAsyncDebug's that are embedded
-    in other structs.
+      in other structs.
   */
   void init_()
   {
@@ -67,7 +70,7 @@ class GLAsyncDebug
 
   /**
       Unset any dynamically allocated data.  Intended for use with
-    #GstGLAsyncDebug's that are embedded in other structs.
+      #GstGLAsyncDebug's that are embedded in other structs.
   */
   void unset()
   {

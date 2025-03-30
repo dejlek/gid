@@ -1,3 +1,4 @@
+/// Module for [Paned] class
 module gtk.paned;
 
 import atk.implementor_iface;
@@ -18,84 +19,87 @@ import gtk.widget;
 
 /**
     #GtkPaned has two panes, arranged either
-  horizontally or vertically. The division between
-  the two panes is adjustable by the user by dragging
-  a handle.
-  
-  Child widgets are
-  added to the panes of the widget with [gtk.paned.Paned.pack1] and
-  [gtk.paned.Paned.pack2]. The division between the two children is set by default
-  from the size requests of the children, but it can be adjusted by the
-  user.
-  
-  A paned widget draws a separator between the two child widgets and a
-  small handle that the user can drag to adjust the division. It does not
-  draw any relief around the children or around the separator. (The space
-  in which the separator is called the gutter.) Often, it is useful to put
-  each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.In]
-  so that the gutter appears as a ridge. No separator is drawn if one of
-  the children is missing.
-  
-  Each child has two options that can be set, @resize and @shrink. If
-  @resize is true, then when the #GtkPaned is resized, that child will
-  expand or shrink along with the paned widget. If @shrink is true, then
-  that child can be made smaller than its requisition by the user.
-  Setting @shrink to false allows the application to set a minimum size.
-  If @resize is false for both children, then this is treated as if
-  @resize is true for both children.
-  
-  The application can set the position of the slider as if it were set
-  by the user, by calling [gtk.paned.Paned.setPosition].
-  
-  # CSS nodes
-  
-  ```plain
-  paned
-  ├── <child>
-  ├── separator[.wide]
-  ╰── <child>
-  ```
-  
-  GtkPaned has a main CSS node with name paned, and a subnode for
-  the separator with name separator. The subnode gets a .wide style
-  class when the paned is supposed to be wide.
-  
-  In horizontal orientation, the nodes of the children are always arranged
-  from left to right. So :first-child will always select the leftmost child,
-  regardless of text direction.
-  
-  ## Creating a paned widget with minimum sizes.
-  
-  ```c
-  GtkWidget *hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-  GtkWidget *frame1 = gtk_frame_new (NULL);
-  GtkWidget *frame2 = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame1), GTK_SHADOW_IN);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame2), GTK_SHADOW_IN);
-  
-  gtk_widget_set_size_request (hpaned, 200, -1);
-  
-  gtk_paned_pack1 (GTK_PANED (hpaned), frame1, TRUE, FALSE);
-  gtk_widget_set_size_request (frame1, 50, -1);
-  
-  gtk_paned_pack2 (GTK_PANED (hpaned), frame2, FALSE, FALSE);
-  gtk_widget_set_size_request (frame2, 50, -1);
-  ```
+    horizontally or vertically. The division between
+    the two panes is adjustable by the user by dragging
+    a handle.
+    
+    Child widgets are
+    added to the panes of the widget with [gtk.paned.Paned.pack1] and
+    [gtk.paned.Paned.pack2]. The division between the two children is set by default
+    from the size requests of the children, but it can be adjusted by the
+    user.
+    
+    A paned widget draws a separator between the two child widgets and a
+    small handle that the user can drag to adjust the division. It does not
+    draw any relief around the children or around the separator. (The space
+    in which the separator is called the gutter.) Often, it is useful to put
+    each child inside a #GtkFrame with the shadow type set to [gtk.types.ShadowType.In]
+    so that the gutter appears as a ridge. No separator is drawn if one of
+    the children is missing.
+    
+    Each child has two options that can be set, @resize and @shrink. If
+    @resize is true, then when the #GtkPaned is resized, that child will
+    expand or shrink along with the paned widget. If @shrink is true, then
+    that child can be made smaller than its requisition by the user.
+    Setting @shrink to false allows the application to set a minimum size.
+    If @resize is false for both children, then this is treated as if
+    @resize is true for both children.
+    
+    The application can set the position of the slider as if it were set
+    by the user, by calling [gtk.paned.Paned.setPosition].
+    
+    # CSS nodes
+    
+    ```plain
+    paned
+    ├── <child>
+    ├── separator[.wide]
+    ╰── <child>
+    ```
+    
+    GtkPaned has a main CSS node with name paned, and a subnode for
+    the separator with name separator. The subnode gets a .wide style
+    class when the paned is supposed to be wide.
+    
+    In horizontal orientation, the nodes of the children are always arranged
+    from left to right. So :first-child will always select the leftmost child,
+    regardless of text direction.
+    
+    ## Creating a paned widget with minimum sizes.
+    
+    ```c
+    GtkWidget *hpaned = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
+    GtkWidget *frame1 = gtk_frame_new (NULL);
+    GtkWidget *frame2 = gtk_frame_new (NULL);
+    gtk_frame_set_shadow_type (GTK_FRAME (frame1), GTK_SHADOW_IN);
+    gtk_frame_set_shadow_type (GTK_FRAME (frame2), GTK_SHADOW_IN);
+    
+    gtk_widget_set_size_request (hpaned, 200, -1);
+    
+    gtk_paned_pack1 (GTK_PANED (hpaned), frame1, TRUE, FALSE);
+    gtk_widget_set_size_request (frame1, 50, -1);
+    
+    gtk_paned_pack2 (GTK_PANED (hpaned), frame2, FALSE, FALSE);
+    gtk_widget_set_size_request (frame2, 50, -1);
+    ```
 */
 class Paned : gtk.container.Container, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_get_type != &gidSymbolNotFound ? gtk_paned_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -110,9 +114,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Creates a new #GtkPaned widget.
-    Params:
-      orientation =       the paned’s orientation.
-    Returns:     a new #GtkPaned.
+  
+      Params:
+        orientation = the paned’s orientation.
+      Returns: a new #GtkPaned.
   */
   this(gtk.types.Orientation orientation)
   {
@@ -123,10 +128,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Adds a child to the top or left pane with default parameters. This is
-    equivalent to
-    `gtk_paned_pack1 (paned, child, FALSE, TRUE)`.
-    Params:
-      child =       the child to add
+      equivalent to
+      `gtk_paned_pack1 (paned, child, FALSE, TRUE)`.
+  
+      Params:
+        child = the child to add
   */
   void add1(gtk.widget.Widget child)
   {
@@ -135,10 +141,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Adds a child to the bottom or right pane with default parameters. This
-    is equivalent to
-    `gtk_paned_pack2 (paned, child, TRUE, TRUE)`.
-    Params:
-      child =       the child to add
+      is equivalent to
+      `gtk_paned_pack2 (paned, child, TRUE, TRUE)`.
+  
+      Params:
+        child = the child to add
   */
   void add2(gtk.widget.Widget child)
   {
@@ -147,7 +154,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Obtains the first child of the paned widget.
-    Returns:     first child, or null if it is not set.
+      Returns: first child, or null if it is not set.
   */
   gtk.widget.Widget getChild1()
   {
@@ -159,7 +166,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Obtains the second child of the paned widget.
-    Returns:     second child, or null if it is not set.
+      Returns: second child, or null if it is not set.
   */
   gtk.widget.Widget getChild2()
   {
@@ -171,10 +178,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Returns the #GdkWindow of the handle. This function is
-    useful when handling button or motion events because it
-    enables the callback to distinguish between the window
-    of the paned, a child and the handle.
-    Returns:     the paned’s handle window.
+      useful when handling button or motion events because it
+      enables the callback to distinguish between the window
+      of the paned, a child and the handle.
+      Returns: the paned’s handle window.
   */
   gdk.window.Window getHandleWindow()
   {
@@ -186,7 +193,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Obtains the position of the divider between the two panes.
-    Returns:     position of the divider
+      Returns: position of the divider
   */
   int getPosition()
   {
@@ -197,7 +204,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Gets the #GtkPaned:wide-handle property.
-    Returns:     true if the paned should have a wide handle
+      Returns: true if the paned should have a wide handle
   */
   bool getWideHandle()
   {
@@ -208,10 +215,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Adds a child to the top or left pane.
-    Params:
-      child =       the child to add
-      resize =       should this child expand when the paned widget is resized.
-      shrink =       can this child be made smaller than its requisition.
+  
+      Params:
+        child = the child to add
+        resize = should this child expand when the paned widget is resized.
+        shrink = can this child be made smaller than its requisition.
   */
   void pack1(gtk.widget.Widget child, bool resize, bool shrink)
   {
@@ -220,10 +228,11 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Adds a child to the bottom or right pane.
-    Params:
-      child =       the child to add
-      resize =       should this child expand when the paned widget is resized.
-      shrink =       can this child be made smaller than its requisition.
+  
+      Params:
+        child = the child to add
+        resize = should this child expand when the paned widget is resized.
+        shrink = can this child be made smaller than its requisition.
   */
   void pack2(gtk.widget.Widget child, bool resize, bool shrink)
   {
@@ -232,9 +241,10 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Sets the position of the divider between the two panes.
-    Params:
-      position =       pixel position of divider, a negative value means that the position
-                   is unset.
+  
+      Params:
+        position = pixel position of divider, a negative value means that the position
+                     is unset.
   */
   void setPosition(int position)
   {
@@ -243,8 +253,9 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
 
   /**
       Sets the #GtkPaned:wide-handle property.
-    Params:
-      wide =       the new value for the #GtkPaned:wide-handle property
+  
+      Params:
+        wide = the new value for the #GtkPaned:wide-handle property
   */
   void setWideHandle(bool wide)
   {
@@ -252,41 +263,42 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::accept-position signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to accept the current position of the handle when
-    moving it using key bindings.
-    
-    The default binding for this signal is Return or Space.
+      Connect to `AcceptPosition` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias AcceptPositionCallbackDlg = bool delegate(gtk.paned.Paned paned);
-
-  /** ditto */
-  alias AcceptPositionCallbackFunc = bool function(gtk.paned.Paned paned);
-
-  /**
-    Connect to AcceptPosition signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::accept-position signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to accept the current position of the handle when
+      moving it using key bindings.
+      
+      The default binding for this signal is Return or Space.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gtk.paned.Paned paned))
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectAcceptPosition(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : AcceptPositionCallbackDlg) || is(T : AcceptPositionCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      _retval = _dClosure.dlg(paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -295,42 +307,43 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::cancel-position signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to cancel moving the position of the handle using key
-    bindings. The position of the handle will be reset to the value prior to
-    moving it.
-    
-    The default binding for this signal is Escape.
+      Connect to `CancelPosition` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias CancelPositionCallbackDlg = bool delegate(gtk.paned.Paned paned);
-
-  /** ditto */
-  alias CancelPositionCallbackFunc = bool function(gtk.paned.Paned paned);
-
-  /**
-    Connect to CancelPosition signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::cancel-position signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to cancel moving the position of the handle using key
+      bindings. The position of the handle will be reset to the value prior to
+      moving it.
+      
+      The default binding for this signal is Escape.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gtk.paned.Paned paned))
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCancelPosition(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CancelPositionCallbackDlg) || is(T : CancelPositionCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      _retval = _dClosure.dlg(paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -339,42 +352,48 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::cycle-child-focus signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to cycle the focus between the children of the paned.
-    
-    The default binding is f6.
+      Connect to `CycleChildFocus` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B reversed)       whether cycling backward or forward
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias CycleChildFocusCallbackDlg = bool delegate(bool reversed, gtk.paned.Paned paned);
-
-  /** ditto */
-  alias CycleChildFocusCallbackFunc = bool function(bool reversed, gtk.paned.Paned paned);
-
-  /**
-    Connect to CycleChildFocus signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::cycle-child-focus signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to cycle the focus between the children of the paned.
+      
+      The default binding is f6.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(bool reversed, gtk.paned.Paned paned))
+  
+          `reversed` whether cycling backward or forward (optional)
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCycleChildFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CycleChildFocusCallbackDlg) || is(T : CycleChildFocusCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      auto reversed = getVal!(bool)(&_paramVals[1]);
-      _retval = _dClosure.dlg(reversed, paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -383,43 +402,49 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::cycle-handle-focus signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to cycle whether the paned should grab focus to allow
-    the user to change position of the handle by using key bindings.
-    
-    The default binding for this signal is f8.
+      Connect to `CycleHandleFocus` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B reversed)       whether cycling backward or forward
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias CycleHandleFocusCallbackDlg = bool delegate(bool reversed, gtk.paned.Paned paned);
-
-  /** ditto */
-  alias CycleHandleFocusCallbackFunc = bool function(bool reversed, gtk.paned.Paned paned);
-
-  /**
-    Connect to CycleHandleFocus signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::cycle-handle-focus signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to cycle whether the paned should grab focus to allow
+      the user to change position of the handle by using key bindings.
+      
+      The default binding for this signal is f8.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(bool reversed, gtk.paned.Paned paned))
+  
+          `reversed` whether cycling backward or forward (optional)
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCycleHandleFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CycleHandleFocusCallbackDlg) || is(T : CycleHandleFocusCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      auto reversed = getVal!(bool)(&_paramVals[1]);
-      _retval = _dClosure.dlg(reversed, paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -428,41 +453,47 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::move-handle signal is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to move the handle when the user is using key bindings
-    to move it.
+      Connect to `MoveHandle` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B scrollType)       a #GtkScrollType
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias MoveHandleCallbackDlg = bool delegate(gtk.types.ScrollType scrollType, gtk.paned.Paned paned);
-
-  /** ditto */
-  alias MoveHandleCallbackFunc = bool function(gtk.types.ScrollType scrollType, gtk.paned.Paned paned);
-
-  /**
-    Connect to MoveHandle signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::move-handle signal is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to move the handle when the user is using key bindings
+      to move it.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gtk.types.ScrollType scrollType, gtk.paned.Paned paned))
+  
+          `scrollType` a #GtkScrollType (optional)
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMoveHandle(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveHandleCallbackDlg) || is(T : MoveHandleCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.paned.Paned)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      auto scrollType = getVal!(gtk.types.ScrollType)(&_paramVals[1]);
-      _retval = _dClosure.dlg(scrollType, paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -471,41 +502,42 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /**
-      The ::toggle-handle-focus is a
-    [keybinding signal][GtkBindingSignal]
-    which gets emitted to accept the current position of the handle and then
-    move focus to the next widget in the focus chain.
-    
-    The default binding is Tab.
+      Connect to `ToggleHandleFocus` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B paned) the instance the signal is connected to
-    )
-    Returns: 
-  */
-  alias ToggleHandleFocusCallbackDlg = bool delegate(gtk.paned.Paned paned);
-
-  /** ditto */
-  alias ToggleHandleFocusCallbackFunc = bool function(gtk.paned.Paned paned);
-
-  /**
-    Connect to ToggleHandleFocus signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::toggle-handle-focus is a
+      [keybinding signal][GtkBindingSignal]
+      which gets emitted to accept the current position of the handle and then
+      move focus to the next widget in the focus chain.
+      
+      The default binding is Tab.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gtk.paned.Paned paned))
+  
+          `paned` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleHandleFocus(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleHandleFocusCallbackDlg) || is(T : ToggleHandleFocusCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.paned.Paned)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto paned = getVal!(gtk.paned.Paned)(_paramVals);
-      _retval = _dClosure.dlg(paned);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 

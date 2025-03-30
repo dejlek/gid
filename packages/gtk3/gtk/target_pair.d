@@ -1,3 +1,4 @@
+/// Module for [TargetPair] class
 module gtk.target_pair;
 
 import gdk.atom;
@@ -8,13 +9,14 @@ import gtk.types;
 
 /**
     A #GtkTargetPair is used to represent the same
-  information as a table of #GtkTargetEntry, but in
-  an efficient form.
+    information as a table of #GtkTargetEntry, but in
+    an efficient form.
 */
 class TargetPair
 {
   GtkTargetPair cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class TargetPair
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

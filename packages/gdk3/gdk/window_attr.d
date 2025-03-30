@@ -1,3 +1,4 @@
+/// Module for [WindowAttr] class
 module gdk.window_attr;
 
 import gdk.c.functions;
@@ -14,6 +15,7 @@ class WindowAttr
 {
   GdkWindowAttr cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class WindowAttr
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

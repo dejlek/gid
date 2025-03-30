@@ -1,3 +1,4 @@
+/// Module for [SrvTarget] class
 module gio.srv_target;
 
 import gid.gid;
@@ -8,41 +9,45 @@ import gobject.boxed;
 
 /**
     A single target host/port that a network service is running on.
-  
-  SRV (service) records are used by some network protocols to provide
-  service-specific aliasing and load-balancing. For example, XMPP
-  (Jabber) uses SRV records to locate the XMPP server for a domain;
-  rather than connecting directly to ‘example.com’ or assuming a
-  specific server hostname like ‘xmpp.example.com’, an XMPP client
-  would look up the `xmpp-client` SRV record for ‘example.com’, and
-  then connect to whatever host was pointed to by that record.
-  
-  You can use [gio.resolver.Resolver.lookupService] or
-  [gio.resolver.Resolver.lookupServiceAsync] to find the [gio.srv_target.SrvTarget]s
-  for a given service. However, if you are simply planning to connect
-  to the remote service, you can use [gio.network_service.NetworkService]’s
-  [gio.socket_connectable.SocketConnectable] interface and not need to worry about
-  [gio.srv_target.SrvTarget] at all.
+    
+    SRV (service) records are used by some network protocols to provide
+    service-specific aliasing and load-balancing. For example, XMPP
+    (Jabber) uses SRV records to locate the XMPP server for a domain;
+    rather than connecting directly to ‘example.com’ or assuming a
+    specific server hostname like ‘xmpp.example.com’, an XMPP client
+    would look up the `xmpp-client` SRV record for ‘example.com’, and
+    then connect to whatever host was pointed to by that record.
+    
+    You can use [gio.resolver.Resolver.lookupService] or
+    [gio.resolver.Resolver.lookupServiceAsync] to find the [gio.srv_target.SrvTarget]s
+    for a given service. However, if you are simply planning to connect
+    to the remote service, you can use [gio.network_service.NetworkService]’s
+    [gio.socket_connectable.SocketConnectable] interface and not need to worry about
+    [gio.srv_target.SrvTarget] at all.
 */
 class SrvTarget : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_srv_target_get_type != &gidSymbolNotFound ? g_srv_target_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,15 +60,16 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Creates a new #GSrvTarget with the given parameters.
-    
-    You should not need to use this; normally #GSrvTargets are
-    created by #GResolver.
-    Params:
-      hostname =       the host that the service is running on
-      port =       the port that the service is running on
-      priority =       the target's priority
-      weight =       the target's weight
-    Returns:     a new #GSrvTarget.
+      
+      You should not need to use this; normally #GSrvTargets are
+      created by #GResolver.
+  
+      Params:
+        hostname = the host that the service is running on
+        port = the port that the service is running on
+        priority = the target's priority
+        weight = the target's weight
+      Returns: a new #GSrvTarget.
   */
   this(string hostname, ushort port, ushort priority, ushort weight)
   {
@@ -75,7 +81,7 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Copies target
-    Returns:     a copy of target
+      Returns: a copy of target
   */
   gio.srv_target.SrvTarget copy()
   {
@@ -87,10 +93,10 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Gets target's hostname (in ASCII form; if you are going to present
-    this to the user, you should use [glib.global.hostnameIsAsciiEncoded] to
-    check if it contains encoded Unicode segments, and use
-    [glib.global.hostnameToUnicode] to convert it if it does.)
-    Returns:     target's hostname
+      this to the user, you should use [glib.global.hostnameIsAsciiEncoded] to
+      check if it contains encoded Unicode segments, and use
+      [glib.global.hostnameToUnicode] to convert it if it does.)
+      Returns: target's hostname
   */
   string getHostname()
   {
@@ -102,7 +108,7 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Gets target's port
-    Returns:     target's port
+      Returns: target's port
   */
   ushort getPort()
   {
@@ -113,9 +119,9 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Gets target's priority. You should not need to look at this;
-    #GResolver already sorts the targets according to the algorithm in
-    RFC 2782.
-    Returns:     target's priority
+      #GResolver already sorts the targets according to the algorithm in
+      RFC 2782.
+      Returns: target's priority
   */
   ushort getPriority()
   {
@@ -126,9 +132,9 @@ class SrvTarget : gobject.boxed.Boxed
 
   /**
       Gets target's weight. You should not need to look at this;
-    #GResolver already sorts the targets according to the algorithm in
-    RFC 2782.
-    Returns:     target's weight
+      #GResolver already sorts the targets according to the algorithm in
+      RFC 2782.
+      Returns: target's weight
   */
   ushort getWeight()
   {

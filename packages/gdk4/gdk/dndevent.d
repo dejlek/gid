@@ -1,3 +1,4 @@
+/// Module for [DNDEvent] class
 module gdk.dndevent;
 
 import gdk.c.functions;
@@ -14,6 +15,7 @@ import gobject.object;
 class DNDEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,7 +26,7 @@ class DNDEvent : gdk.event.Event
 
   /**
       Gets the [gdk.drop.Drop] object from a DND event.
-    Returns:     the drop
+      Returns: the drop
   */
   gdk.drop.Drop getDrop()
   {

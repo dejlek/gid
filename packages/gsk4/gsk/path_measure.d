@@ -1,3 +1,4 @@
+/// Module for [PathMeasure] class
 module gsk.path_measure;
 
 import gid.gid;
@@ -9,35 +10,39 @@ import gsk.types;
 
 /**
     [gsk.path_measure.PathMeasure] is an object that allows measurements
-  on [gsk.path.Path]s such as determining the length of the path.
-  
-  Many measuring operations require sampling the path length
-  at intermediate points. Therefore, a [gsk.path_measure.PathMeasure] has
-  a tolerance that determines what precision is required
-  for such approximations.
-  
-  A [gsk.path_measure.PathMeasure] struct is a reference counted struct
-  and should be treated as opaque.
+    on [gsk.path.Path]s such as determining the length of the path.
+    
+    Many measuring operations require sampling the path length
+    at intermediate points. Therefore, a [gsk.path_measure.PathMeasure] has
+    a tolerance that determines what precision is required
+    for such approximations.
+    
+    A [gsk.path_measure.PathMeasure] struct is a reference counted struct
+    and should be treated as opaque.
 */
 class PathMeasure : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_measure_get_type != &gidSymbolNotFound ? gsk_path_measure_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,10 +55,11 @@ class PathMeasure : gobject.boxed.Boxed
 
   /**
       Creates a measure object for the given path with the
-    default tolerance.
-    Params:
-      path =       the path to measure
-    Returns:     a new [gsk.path_measure.PathMeasure] representing path
+      default tolerance.
+  
+      Params:
+        path = the path to measure
+      Returns: a new [gsk.path_measure.PathMeasure] representing path
   */
   this(gsk.path.Path path)
   {
@@ -64,10 +70,11 @@ class PathMeasure : gobject.boxed.Boxed
 
   /**
       Creates a measure object for the given path and tolerance.
-    Params:
-      path =       the path to measure
-      tolerance =       the tolerance for measuring operations
-    Returns:     a new [gsk.path_measure.PathMeasure] representing path
+  
+      Params:
+        path = the path to measure
+        tolerance = the tolerance for measuring operations
+      Returns: a new [gsk.path_measure.PathMeasure] representing path
   */
   static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
   {
@@ -79,9 +86,9 @@ class PathMeasure : gobject.boxed.Boxed
 
   /**
       Gets the length of the path being measured.
-    
-    The length is cached, so this function does not do any work.
-    Returns:     The length of the path measured by self
+      
+      The length is cached, so this function does not do any work.
+      Returns: The length of the path measured by self
   */
   float getLength()
   {
@@ -92,7 +99,7 @@ class PathMeasure : gobject.boxed.Boxed
 
   /**
       Returns the path that the measure was created for.
-    Returns:     the path of self
+      Returns: the path of self
   */
   gsk.path.Path getPath()
   {
@@ -104,7 +111,7 @@ class PathMeasure : gobject.boxed.Boxed
 
   /**
       Returns the tolerance that the measure was created with.
-    Returns:     the tolerance of self
+      Returns: the tolerance of self
   */
   float getTolerance()
   {

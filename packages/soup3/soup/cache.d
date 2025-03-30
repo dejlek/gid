@@ -1,3 +1,4 @@
+/// Module for [Cache] class
 module soup.cache;
 
 import gid.gid;
@@ -14,17 +15,20 @@ import soup.types;
 class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cache_get_type != &gidSymbolNotFound ? soup_cache_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,13 +43,14 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Creates a new #SoupCache.
-    Params:
-      cacheDir =       the directory to store the cached data, or null
-          to use the default one. Note that since the cache isn't safe to access for
-          multiple processes at once, and the default directory isn't namespaced by
-          process, clients are strongly discouraged from passing null.
-      cacheType =       the #SoupCacheType of the cache
-    Returns:     a new #SoupCache
+  
+      Params:
+        cacheDir = the directory to store the cached data, or null
+            to use the default one. Note that since the cache isn't safe to access for
+            multiple processes at once, and the default directory isn't namespaced by
+            process, clients are strongly discouraged from passing null.
+        cacheType = the #SoupCacheType of the cache
+      Returns: a new #SoupCache
   */
   this(string cacheDir, soup.types.CacheType cacheType)
   {
@@ -57,8 +62,8 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Will remove all entries in the cache plus all the cache files.
-    
-    This is not thread safe and must be called only from the thread that created the #SoupCache
+      
+      This is not thread safe and must be called only from the thread that created the #SoupCache
   */
   void clear()
   {
@@ -67,14 +72,14 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Synchronously writes the cache index out to disk.
-    
-    Contrast with [soup.cache.Cache.flush], which writes pending cache *entries* to
-    disk.
-    
-    You must call this before exiting if you want your cache data to
-    persist between sessions.
-    
-    This is not thread safe and must be called only from the thread that created the #SoupCache
+      
+      Contrast with [soup.cache.Cache.flush], which writes pending cache *entries* to
+      disk.
+      
+      You must call this before exiting if you want your cache data to
+      persist between sessions.
+      
+      This is not thread safe and must be called only from the thread that created the #SoupCache
   */
   void dump()
   {
@@ -83,12 +88,12 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Forces all pending writes in the cache to be
-    committed to disk.
-    
-    For doing so it will iterate the [glib.main_context.MainContext] associated with
-    cache's session as long as needed.
-    
-    Contrast with [soup.cache.Cache.dump], which writes out the cache index file.
+      committed to disk.
+      
+      For doing so it will iterate the [glib.main_context.MainContext] associated with
+      cache's session as long as needed.
+      
+      Contrast with [soup.cache.Cache.dump], which writes out the cache index file.
   */
   void flush()
   {
@@ -97,7 +102,7 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Gets the maximum size of the cache.
-    Returns:     the maximum size of the cache, in bytes.
+      Returns: the maximum size of the cache, in bytes.
   */
   uint getMaxSize()
   {
@@ -108,8 +113,8 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Loads the contents of cache's index into memory.
-    
-    This is not thread safe and must be called only from the thread that created the #SoupCache
+      
+      This is not thread safe and must be called only from the thread that created the #SoupCache
   */
   void load()
   {
@@ -118,8 +123,9 @@ class Cache : gobject.object.ObjectG, soup.session_feature.SessionFeature
 
   /**
       Sets the maximum size of the cache.
-    Params:
-      maxSize =       the maximum size of the cache, in bytes
+  
+      Params:
+        maxSize = the maximum size of the cache, in bytes
   */
   void setMaxSize(uint maxSize)
   {

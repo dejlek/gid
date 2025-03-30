@@ -1,3 +1,4 @@
+/// Module for [TextCellAccessible] class
 module gtk.text_cell_accessible;
 
 import atk.action;
@@ -18,17 +19,20 @@ import gtk.types;
 class TextCellAccessible : gtk.renderer_cell_accessible.RendererCellAccessible, atk.text.Text
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_cell_accessible_get_type != &gidSymbolNotFound ? gtk_text_cell_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

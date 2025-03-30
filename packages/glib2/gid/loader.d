@@ -1,3 +1,4 @@
+/// Module for [loader] class
 module gid.loader;
 
 

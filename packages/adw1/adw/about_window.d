@@ -1,3 +1,4 @@
+/// Module for [AboutWindow] class
 module adw.about_window;
 
 import adw.c.functions;
@@ -23,191 +24,194 @@ import gtk.types;
 
 /**
     A window showing information about the application.
-  
-  <picture>
-    <source srcset="about-window-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="about-window.png" alt="about-window">
-  </picture>
-  
-  An about window is typically opened when the user activates the `About …`
-  item in the application's primary menu. All parts of the window are optional.
-  
-  ## Main page
-  
-  [adw.about_window.AboutWindow] prominently displays the application's icon, name, developer
-  name and version. They can be set with the `property@AboutWindow:application-icon`,
-  `property@AboutWindow:application-name`,
-  `property@AboutWindow:developer-name` and `property@AboutWindow:version`
-  respectively.
-  
-  ## What's New
-  
-  [adw.about_window.AboutWindow] provides a way for applications to display their release
-  notes, set with the `property@AboutWindow:release-notes` property.
-  
-  Release notes are formatted the same way as
-  [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
-  
-  The supported formatting options are:
-  
-  $(LIST
-    * Paragraph (`<p>`)
-    * Ordered list (`<ol>`), with list items (`<li>`)
-    * Unordered list (`<ul>`), with list items (`<li>`)
-  )
     
-  Within paragraphs and list items, emphasis (`<em>`) and inline code
-  (`<code>`) text styles are supported. The emphasis is rendered in italic,
-  while inline code is shown in a monospaced font.
-  
-  Any text outside paragraphs or list items is ignored.
-  
-  Nested lists are not supported.
-  
-  Only one version can be shown at a time. By default, the displayed version
-  number matches `property@AboutWindow:version`. Use
-  `property@AboutWindow:release-notes-version` to override it.
-  
-  ## Details
-  
-  The Details page displays the application comments and links.
-  
-  The comments can be set with the `property@AboutWindow:comments` property.
-  Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
-  detailed. It can also contain links and Pango markup.
-  
-  To set the application website, use `property@AboutWindow:website`.
-  To add extra links below the website, use [adw.about_window.AboutWindow.addLink].
-  
-  If the Details page doesn't have any other content besides website, the
-  website will be displayed on the main page instead.
-  
-  ## Troubleshooting
-  
-  [adw.about_window.AboutWindow] displays the following two links on the main page:
-  
-  $(LIST
-    * Support Questions, set with the `property@AboutWindow:support-url` property,
-    * Report an Issue, set with the `property@AboutWindow:issue-url` property.
-  )
+    <picture>
+      <source srcset="about-window-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="about-window.png" alt="about-window">
+    </picture>
     
-  Additionally, applications can provide debugging information. It will be
-  shown separately on the Troubleshooting page. Use the
-  `property@AboutWindow:debug-info` property to specify it.
-  
-  It's intended to be attached to issue reports when reporting issues against
-  the application. As such, it cannot contain markup or links.
-  
-  [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-  When saving, `property@AboutWindow:debug-info-filename` would be used as
-  the suggested filename.
-  
-  ## Credits and Acknowledgements
-  
-  The Credits page has the following default sections:
-  
-  $(LIST
-    * Developers, set with the `property@AboutWindow:developers` property,
-    * Designers, set with the `property@AboutWindow:designers` property,
-    * Artists, set with the `property@AboutWindow:artists` property,
-    * Documenters, set with the `property@AboutWindow:documenters` property,
-    * Translators, set with the `property@AboutWindow:translator-credits` property.
-  )
+    An about window is typically opened when the user activates the `About …`
+    item in the application's primary menu. All parts of the window are optional.
     
-  When setting translator credits, use the strings `"translator-credits"` or
-  `"translator_credits"` and mark them as translatable.
-  
-  The default sections that don't contain any names won't be displayed.
-  
-  The Credits page can also contain an arbitrary number of extra sections below
-  the default ones. Use [adw.about_window.AboutWindow.addCreditSection] to add them.
-  
-  The Acknowledgements page can be used to acknowledge additional people and
-  organizations for their non-development contributions. Use
-  [adw.about_window.AboutWindow.addAcknowledgementSection] to add sections to it. For
-  example, it can be used to list backers in a crowdfunded project or to give
-  special thanks.
-  
-  Each of the people or organizations can have an email address or a website
-  specified. To add a email address, use a string like
-  `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title, use a
-  string like `The GNOME Project https://www.gnome.org`:
-  
-  <picture>
-    <source srcset="about-window-credits-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="about-window-credits.png" alt="about-window-credits">
-  </picture>
-  
-  ## Legal
-  
-  The Legal page displays the copyright and licensing information for the
-  application and other modules.
-  
-  The copyright string is set with the `property@AboutWindow:copyright`
-  property and should be a short string of one or two lines, for example:
-  `© 2022 Example`.
-  
-  Licensing information can be quickly set from a list of known licenses with
-  the `property@AboutWindow:license-type` property. If the application's
-  license is not in the list, `property@AboutWindow:license` can be used
-  instead.
-  
-  To add information about other modules, such as application dependencies or
-  data, use [adw.about_window.AboutWindow.addLegalSection].
-  
-  ## Constructing
-  
-  To make constructing an [adw.about_window.AboutWindow] as convenient as possible, you can
-  use the function `func@show_about_window` which constructs and shows a
-  window.
-  
-  ```c
-  static void
-  show_about (GtkApplication *app)
-  {
-    const char *developers[] = {
-      "Angela Avery",
-      NULL
-    };
-  
-    const char *designers[] = {
-      "GNOME Design Team",
-      NULL
-    };
-  
-    adw_show_about_window (gtk_application_get_active_window (app),
-                           "application-name", _("Example"),
-                           "application-icon", "org.example.App",
-                           "version", "1.2.3",
-                           "copyright", "© 2022 Angela Avery",
-                           "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
-                           "license-type", GTK_LICENSE_GPL_3_0,
-                           "developers", developers,
-                           "designers", designers,
-                           "translator-credits", _("translator-credits"),
-                           NULL);
-  }
-  ```
-  
-  ## CSS nodes
-  
-  [adw.about_window.AboutWindow] has a main CSS node with the name `window` and the
-  style class `.about`.
+    ## Main page
+    
+    [adw.about_window.AboutWindow] prominently displays the application's icon, name, developer
+    name and version. They can be set with the `property@AboutWindow:application-icon`,
+    `property@AboutWindow:application-name`,
+    `property@AboutWindow:developer-name` and `property@AboutWindow:version`
+    respectively.
+    
+    ## What's New
+    
+    [adw.about_window.AboutWindow] provides a way for applications to display their release
+    notes, set with the `property@AboutWindow:release-notes` property.
+    
+    Release notes are formatted the same way as
+    [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
+    
+    The supported formatting options are:
+    
+    $(LIST
+      * Paragraph (`<p>`)
+      * Ordered list (`<ol>`), with list items (`<li>`)
+      * Unordered list (`<ul>`), with list items (`<li>`)
+    )
+      
+    Within paragraphs and list items, emphasis (`<em>`) and inline code
+    (`<code>`) text styles are supported. The emphasis is rendered in italic,
+    while inline code is shown in a monospaced font.
+    
+    Any text outside paragraphs or list items is ignored.
+    
+    Nested lists are not supported.
+    
+    Only one version can be shown at a time. By default, the displayed version
+    number matches `property@AboutWindow:version`. Use
+    `property@AboutWindow:release-notes-version` to override it.
+    
+    ## Details
+    
+    The Details page displays the application comments and links.
+    
+    The comments can be set with the `property@AboutWindow:comments` property.
+    Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+    detailed. It can also contain links and Pango markup.
+    
+    To set the application website, use `property@AboutWindow:website`.
+    To add extra links below the website, use [adw.about_window.AboutWindow.addLink].
+    
+    If the Details page doesn't have any other content besides website, the
+    website will be displayed on the main page instead.
+    
+    ## Troubleshooting
+    
+    [adw.about_window.AboutWindow] displays the following two links on the main page:
+    
+    $(LIST
+      * Support Questions, set with the `property@AboutWindow:support-url` property,
+      * Report an Issue, set with the `property@AboutWindow:issue-url` property.
+    )
+      
+    Additionally, applications can provide debugging information. It will be
+    shown separately on the Troubleshooting page. Use the
+    `property@AboutWindow:debug-info` property to specify it.
+    
+    It's intended to be attached to issue reports when reporting issues against
+    the application. As such, it cannot contain markup or links.
+    
+    [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
+    When saving, `property@AboutWindow:debug-info-filename` would be used as
+    the suggested filename.
+    
+    ## Credits and Acknowledgements
+    
+    The Credits page has the following default sections:
+    
+    $(LIST
+      * Developers, set with the `property@AboutWindow:developers` property,
+      * Designers, set with the `property@AboutWindow:designers` property,
+      * Artists, set with the `property@AboutWindow:artists` property,
+      * Documenters, set with the `property@AboutWindow:documenters` property,
+      * Translators, set with the `property@AboutWindow:translator-credits` property.
+    )
+      
+    When setting translator credits, use the strings `"translator-credits"` or
+    `"translator_credits"` and mark them as translatable.
+    
+    The default sections that don't contain any names won't be displayed.
+    
+    The Credits page can also contain an arbitrary number of extra sections below
+    the default ones. Use [adw.about_window.AboutWindow.addCreditSection] to add them.
+    
+    The Acknowledgements page can be used to acknowledge additional people and
+    organizations for their non-development contributions. Use
+    [adw.about_window.AboutWindow.addAcknowledgementSection] to add sections to it. For
+    example, it can be used to list backers in a crowdfunded project or to give
+    special thanks.
+    
+    Each of the people or organizations can have an email address or a website
+    specified. To add a email address, use a string like
+    `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title, use a
+    string like `The GNOME Project https://www.gnome.org`:
+    
+    <picture>
+      <source srcset="about-window-credits-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="about-window-credits.png" alt="about-window-credits">
+    </picture>
+    
+    ## Legal
+    
+    The Legal page displays the copyright and licensing information for the
+    application and other modules.
+    
+    The copyright string is set with the `property@AboutWindow:copyright`
+    property and should be a short string of one or two lines, for example:
+    `© 2022 Example`.
+    
+    Licensing information can be quickly set from a list of known licenses with
+    the `property@AboutWindow:license-type` property. If the application's
+    license is not in the list, `property@AboutWindow:license` can be used
+    instead.
+    
+    To add information about other modules, such as application dependencies or
+    data, use [adw.about_window.AboutWindow.addLegalSection].
+    
+    ## Constructing
+    
+    To make constructing an [adw.about_window.AboutWindow] as convenient as possible, you can
+    use the function `func@show_about_window` which constructs and shows a
+    window.
+    
+    ```c
+    static void
+    show_about (GtkApplication *app)
+    {
+      const char *developers[] = {
+        "Angela Avery",
+        NULL
+      };
+    
+      const char *designers[] = {
+        "GNOME Design Team",
+        NULL
+      };
+    
+      adw_show_about_window (gtk_application_get_active_window (app),
+                             "application-name", _("Example"),
+                             "application-icon", "org.example.App",
+                             "version", "1.2.3",
+                             "copyright", "© 2022 Angela Avery",
+                             "issue-url", "https://gitlab.gnome.org/example/example/-/issues/new",
+                             "license-type", GTK_LICENSE_GPL_3_0,
+                             "developers", developers,
+                             "designers", designers,
+                             "translator-credits", _("translator-credits"),
+                             NULL);
+    }
+    ```
+    
+    ## CSS nodes
+    
+    [adw.about_window.AboutWindow] has a main CSS node with the name `window` and the
+    style class `.about`.
 */
 class AboutWindow : adw.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_about_window_get_type != &gidSymbolNotFound ? adw_about_window_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -220,7 +224,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Creates a new [adw.about_window.AboutWindow].
-    Returns:     the newly created [adw.about_window.AboutWindow]
+      Returns: the newly created [adw.about_window.AboutWindow]
   */
   this()
   {
@@ -231,32 +235,33 @@ class AboutWindow : adw.window.Window
 
   /**
       Creates a new [adw.about_window.AboutWindow] using AppStream metadata.
-    
-    This automatically sets the following properties with the following AppStream
-    values:
-    
-    $(LIST
-      * `propertyAboutWindow:application-icon` is set from the `<id>`
-      * `propertyAboutWindow:application-name` is set from the `<name>`
-      * `propertyAboutWindow:developer-name` is set from the `<name>` within
-           `<developer>`
-      * `propertyAboutWindow:version` is set from the version of the latest release
-      * `propertyAboutWindow:website` is set from the `<url type="homepage">`
-      * `propertyAboutWindow:support-url` is set from the `<url type="help">`
-      * `propertyAboutWindow:issue-url` is set from the `<url type="bugtracker">`
-      * `propertyAboutWindow:license-type` is set from the `<project_license>`.
-          If the license type retrieved from AppStream is not listed in
-          [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
-    )
       
-    If release_notes_version is not `NULL`,
-    `propertyAboutWindow:release-notes-version` is set to match it, while
-    `propertyAboutWindow:release-notes` is set from the AppStream release
-    description for that version.
-    Params:
-      resourcePath =       The resource to use
-      releaseNotesVersion =       The version to retrieve release notes for
-    Returns:     the newly created [adw.about_window.AboutWindow]
+      This automatically sets the following properties with the following AppStream
+      values:
+      
+      $(LIST
+        * `propertyAboutWindow:application-icon` is set from the `<id>`
+        * `propertyAboutWindow:application-name` is set from the `<name>`
+        * `propertyAboutWindow:developer-name` is set from the `<name>` within
+             `<developer>`
+        * `propertyAboutWindow:version` is set from the version of the latest release
+        * `propertyAboutWindow:website` is set from the `<url type="homepage">`
+        * `propertyAboutWindow:support-url` is set from the `<url type="help">`
+        * `propertyAboutWindow:issue-url` is set from the `<url type="bugtracker">`
+        * `propertyAboutWindow:license-type` is set from the `<project_license>`.
+            If the license type retrieved from AppStream is not listed in
+            [gtk.types.License], it will be set to `GTK_LICENCE_CUSTOM`.
+      )
+        
+      If release_notes_version is not `NULL`,
+      `propertyAboutWindow:release-notes-version` is set to match it, while
+      `propertyAboutWindow:release-notes` is set from the AppStream release
+      description for that version.
+  
+      Params:
+        resourcePath = The resource to use
+        releaseNotesVersion = The version to retrieve release notes for
+      Returns: the newly created [adw.about_window.AboutWindow]
   */
   static adw.about_window.AboutWindow newFromAppdata(string resourcePath, string releaseNotesVersion = null)
   {
@@ -270,27 +275,28 @@ class AboutWindow : adw.window.Window
 
   /**
       Adds a section to the Acknowledgements page.
-    
-    This can be used to acknowledge additional people and organizations for their
-    non-development contributions - for example, backers in a crowdfunded
-    project.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addCreditSection]
-    )
-    Params:
-      name =       the section name
-      people =       the list of names
+      
+      This can be used to acknowledge additional people and organizations for their
+      non-development contributions - for example, backers in a crowdfunded
+      project.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:documenters`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addCreditSection]
+      )
+  
+      Params:
+        name = the section name
+        people = the list of names
   */
   void addAcknowledgementSection(string name, string[] people)
   {
@@ -305,25 +311,26 @@ class AboutWindow : adw.window.Window
 
   /**
       Adds an extra section to the Credits page.
-    
-    Extra sections are displayed below the standard categories.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      name =       the section name
-      people =       the list of names
+      
+      Extra sections are displayed below the standard categories.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:documenters`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        name = the section name
+        people = the list of names
   */
   void addCreditSection(string name, string[] people)
   {
@@ -338,50 +345,51 @@ class AboutWindow : adw.window.Window
 
   /**
       Adds an extra section to the Legal page.
-    
-    Extra sections will be displayed below the application's own information.
-    
-    The parameters copyright, license_type and license will be used to present
-    the it the same way as `propertyAboutWindow:copyright`,
-    `propertyAboutWindow:license-type` and `propertyAboutWindow:license` are
-    for the application's own information.
-    
-    See those properties for more details.
-    
-    This can be useful to attribute the application dependencies or data.
-    
-    Examples:
-    
-    ```c
-    adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
-                                        _("Copyright and a known license"),
-                                        "© 2022 Example",
-                                        GTK_LICENSE_LGPL_2_1,
-                                        NULL);
-    
-    adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
-                                        _("Copyright and custom license"),
-                                        "© 2022 Example",
-                                        GTK_LICENSE_CUSTOM,
-                                        "Custom license text");
-    
-    adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
-                                        _("Copyright only"),
-                                        "© 2022 Example",
-                                        GTK_LICENSE_UNKNOWN,
-                                        NULL);
-    
-    adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
-                                        _("Custom license only"),
-                                        NULL,
-                                        GTK_LICENSE_CUSTOM,
-                                        "Something completely custom here.");
-    ```
-    Params:
-      title =       the name of the section
-      copyright =       a copyright string
-      licenseType =       the type of license
-      license =       custom license information
+      
+      Extra sections will be displayed below the application's own information.
+      
+      The parameters copyright, license_type and license will be used to present
+      the it the same way as `propertyAboutWindow:copyright`,
+      `propertyAboutWindow:license-type` and `propertyAboutWindow:license` are
+      for the application's own information.
+      
+      See those properties for more details.
+      
+      This can be useful to attribute the application dependencies or data.
+      
+      Examples:
+      
+      ```c
+      adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
+                                          _("Copyright and a known license"),
+                                          "© 2022 Example",
+                                          GTK_LICENSE_LGPL_2_1,
+                                          NULL);
+      
+      adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
+                                          _("Copyright and custom license"),
+                                          "© 2022 Example",
+                                          GTK_LICENSE_CUSTOM,
+                                          "Custom license text");
+      
+      adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
+                                          _("Copyright only"),
+                                          "© 2022 Example",
+                                          GTK_LICENSE_UNKNOWN,
+                                          NULL);
+      
+      adw_about_window_add_legal_section (ADW_ABOUT_WINDOW (about),
+                                          _("Custom license only"),
+                                          NULL,
+                                          GTK_LICENSE_CUSTOM,
+                                          "Something completely custom here.");
+      ```
+  
+      Params:
+        title = the name of the section
+        copyright = a copyright string
+        licenseType = the type of license
+        license = custom license information
   */
   void addLegalSection(string title, string copyright, gtk.types.License licenseType, string license = null)
   {
@@ -393,15 +401,16 @@ class AboutWindow : adw.window.Window
 
   /**
       Adds an extra link to the Details page.
-    
-    Extra links are displayed under the comment and website.
-    
-    Underlines in title will be interpreted as indicating a mnemonic.
-    
-    See `propertyAboutWindow:website`.
-    Params:
-      title =       the link title
-      url =       the link URL
+      
+      Extra links are displayed under the comment and website.
+      
+      Underlines in title will be interpreted as indicating a mnemonic.
+      
+      See `propertyAboutWindow:website`.
+  
+      Params:
+        title = the link title
+        url = the link URL
   */
   void addLink(string title, string url)
   {
@@ -412,7 +421,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the name of the application icon for self.
-    Returns:     the application icon name
+      Returns: the application icon name
   */
   string getApplicationIcon()
   {
@@ -424,7 +433,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the application name for self.
-    Returns:     the application name
+      Returns: the application name
   */
   string getApplicationName()
   {
@@ -436,7 +445,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the list of artists of the application.
-    Returns:     The list of artists
+      Returns: The list of artists
   */
   string[] getArtists()
   {
@@ -458,7 +467,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the comments about the application.
-    Returns:     the comments
+      Returns: the comments
   */
   string getComments()
   {
@@ -470,7 +479,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the copyright information for self.
-    Returns:     the copyright information
+      Returns: the copyright information
   */
   string getCopyright()
   {
@@ -482,7 +491,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the debug information for self.
-    Returns:     the debug information
+      Returns: the debug information
   */
   string getDebugInfo()
   {
@@ -494,7 +503,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the debug information filename for self.
-    Returns:     the debug information filename
+      Returns: the debug information filename
   */
   string getDebugInfoFilename()
   {
@@ -506,7 +515,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the list of designers of the application.
-    Returns:     The list of designers
+      Returns: The list of designers
   */
   string[] getDesigners()
   {
@@ -528,7 +537,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the developer name for self.
-    Returns:     the developer_name
+      Returns: the developer_name
   */
   string getDeveloperName()
   {
@@ -540,7 +549,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the list of developers of the application.
-    Returns:     The list of developers
+      Returns: The list of developers
   */
   string[] getDevelopers()
   {
@@ -562,7 +571,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the list of documenters of the application.
-    Returns:     The list of documenters
+      Returns: The list of documenters
   */
   string[] getDocumenters()
   {
@@ -584,7 +593,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the issue tracker URL for self.
-    Returns:     the issue tracker URL
+      Returns: the issue tracker URL
   */
   string getIssueUrl()
   {
@@ -596,7 +605,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the license for self.
-    Returns:     the license
+      Returns: the license
   */
   string getLicense()
   {
@@ -608,7 +617,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the license type for self.
-    Returns:     the license type
+      Returns: the license type
   */
   gtk.types.License getLicenseType()
   {
@@ -620,7 +629,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the release notes for self.
-    Returns:     the release notes
+      Returns: the release notes
   */
   string getReleaseNotes()
   {
@@ -632,7 +641,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the version described by the application's release notes.
-    Returns:     the release notes version
+      Returns: the release notes version
   */
   string getReleaseNotesVersion()
   {
@@ -644,7 +653,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the URL of the support page for self.
-    Returns:     the support page URL
+      Returns: the support page URL
   */
   string getSupportUrl()
   {
@@ -656,7 +665,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the translator credits string.
-    Returns:     The translator credits string
+      Returns: The translator credits string
   */
   string getTranslatorCredits()
   {
@@ -668,7 +677,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the version for self.
-    Returns:     the version
+      Returns: the version
   */
   string getVersion()
   {
@@ -680,7 +689,7 @@ class AboutWindow : adw.window.Window
 
   /**
       Gets the application website URL for self.
-    Returns:     the website URL
+      Returns: the website URL
   */
   string getWebsite()
   {
@@ -692,10 +701,11 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the name of the application icon for self.
-    
-    The icon is displayed at the top of the main page.
-    Params:
-      applicationIcon =       the application icon name
+      
+      The icon is displayed at the top of the main page.
+  
+      Params:
+        applicationIcon = the application icon name
   */
   void setApplicationIcon(string applicationIcon)
   {
@@ -705,10 +715,11 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the application name for self.
-    
-    The name is displayed at the top of the main page.
-    Params:
-      applicationName =       the application name
+      
+      The name is displayed at the top of the main page.
+  
+      Params:
+        applicationName = the application name
   */
   void setApplicationName(string applicationName)
   {
@@ -718,24 +729,25 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the list of artists of the application.
-    
-    It will be displayed on the Credits page.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addCreditSection]
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      artists =       the list of artists
+      
+      It will be displayed on the Credits page.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:documenters`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        artists = the list of artists
   */
   void setArtists(string[] artists = null)
   {
@@ -749,13 +761,14 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the comments about the application.
-    
-    Comments will be shown on the Details page, above links.
-    
-    Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
-    detailed. It can also contain links and Pango markup.
-    Params:
-      comments =       the comments
+      
+      Comments will be shown on the Details page, above links.
+      
+      Unlike [gtk.about_dialog.AboutDialog.utf8], this string can be long and
+      detailed. It can also contain links and Pango markup.
+  
+      Params:
+        comments = the comments
   */
   void setComments(string comments)
   {
@@ -765,17 +778,18 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the copyright information for self.
-    
-    This should be a short string of one or two lines, for example:
-    `© 2022 Example`.
-    
-    The copyright information will be displayed on the Legal page, before the
-    application license.
-    
-    [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
-    information for the application dependencies or other components.
-    Params:
-      copyright =       the copyright information
+      
+      This should be a short string of one or two lines, for example:
+      `© 2022 Example`.
+      
+      The copyright information will be displayed on the Legal page, before the
+      application license.
+      
+      [adw.about_window.AboutWindow.addLegalSection] can be used to add copyright
+      information for the application dependencies or other components.
+  
+      Params:
+        copyright = the copyright information
   */
   void setCopyright(string copyright)
   {
@@ -785,18 +799,19 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the debug information for self.
-    
-    Debug information will be shown on the Troubleshooting page. It's intended
-    to be attached to issue reports when reporting issues against the
-    application.
-    
-    [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
-    When saving, `propertyAboutWindow:debug-info-filename` would be used as
-    the suggested filename.
-    
-    Debug information cannot contain markup or links.
-    Params:
-      debugInfo =       the debug information
+      
+      Debug information will be shown on the Troubleshooting page. It's intended
+      to be attached to issue reports when reporting issues against the
+      application.
+      
+      [adw.about_window.AboutWindow] provides a quick way to save debug information to a file.
+      When saving, `propertyAboutWindow:debug-info-filename` would be used as
+      the suggested filename.
+      
+      Debug information cannot contain markup or links.
+  
+      Params:
+        debugInfo = the debug information
   */
   void setDebugInfo(string debugInfo)
   {
@@ -806,13 +821,14 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the debug information filename for self.
-    
-    It will be used as the suggested filename when saving debug information to a
-    file.
-    
-    See `propertyAboutWindow:debug-info`.
-    Params:
-      filename =       the debug info filename
+      
+      It will be used as the suggested filename when saving debug information to a
+      file.
+      
+      See `propertyAboutWindow:debug-info`.
+  
+      Params:
+        filename = the debug info filename
   */
   void setDebugInfoFilename(string filename)
   {
@@ -822,24 +838,25 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the list of designers of the application.
-    
-    It will be displayed on the Credits page.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addCreditSection]
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      designers =       the list of designers
+      
+      It will be displayed on the Credits page.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:documenters`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        designers = the list of designers
   */
   void setDesigners(string[] designers = null)
   {
@@ -853,15 +870,16 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the developer name for self.
-    
-    The developer name is displayed on the main page, under the application name.
-    
-    If the application is developed by multiple people, the developer name can be
-    set to values like "AppName team", "AppName developers" or
-    "The AppName project", and the individual contributors can be listed on the
-    Credits page, with `propertyAboutWindow:developers` and related properties.
-    Params:
-      developerName =       the developer name
+      
+      The developer name is displayed on the main page, under the application name.
+      
+      If the application is developed by multiple people, the developer name can be
+      set to values like "AppName team", "AppName developers" or
+      "The AppName project", and the individual contributors can be listed on the
+      Credits page, with `propertyAboutWindow:developers` and related properties.
+  
+      Params:
+        developerName = the developer name
   */
   void setDeveloperName(string developerName)
   {
@@ -871,24 +889,25 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the list of developers of the application.
-    
-    It will be displayed on the Credits page.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addCreditSection]
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      developers =       the list of developers
+      
+      It will be displayed on the Credits page.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:documenters`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        developers = the list of developers
   */
   void setDevelopers(string[] developers = null)
   {
@@ -902,24 +921,25 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the list of documenters of the application.
-    
-    It will be displayed on the Credits page.
-    
-    Each name may contain email addresses and URLs, see the introduction for more
-    details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:translator-credits`
-      * [adw.about_window.AboutWindow.addCreditSection]
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      documenters =       the list of documenters
+      
+      It will be displayed on the Credits page.
+      
+      Each name may contain email addresses and URLs, see the introduction for more
+      details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:translator-credits`
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        documenters = the list of documenters
   */
   void setDocumenters(string[] documenters = null)
   {
@@ -933,10 +953,11 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the issue tracker URL for self.
-    
-    The issue tracker link is displayed on the main page.
-    Params:
-      issueUrl =       the issue tracker URL
+      
+      The issue tracker link is displayed on the main page.
+  
+      Params:
+        issueUrl = the issue tracker URL
   */
   void setIssueUrl(string issueUrl)
   {
@@ -946,22 +967,23 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the license for self.
-    
-    This can be used to set a custom text for the license if it can't be set via
-    `propertyAboutWindow:license-type`.
-    
-    When set, `propertyAboutWindow:license-type` will be set to
-    [gtk.types.License.Custom].
-    
-    The license text will be displayed on the Legal page, below the copyright
-    information.
-    
-    License text can contain Pango markup and links.
-    
-    [adw.about_window.AboutWindow.addLegalSection] can be used to add license information
-    for the application dependencies or other components.
-    Params:
-      license =       the license
+      
+      This can be used to set a custom text for the license if it can't be set via
+      `propertyAboutWindow:license-type`.
+      
+      When set, `propertyAboutWindow:license-type` will be set to
+      [gtk.types.License.Custom].
+      
+      The license text will be displayed on the Legal page, below the copyright
+      information.
+      
+      License text can contain Pango markup and links.
+      
+      [adw.about_window.AboutWindow.addLegalSection] can be used to add license information
+      for the application dependencies or other components.
+  
+      Params:
+        license = the license
   */
   void setLicense(string license)
   {
@@ -971,23 +993,24 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the license for self from a list of known licenses.
-    
-    If the application's license is not in the list,
-    `propertyAboutWindow:license` can be used instead. The license type will be
-    automatically set to [gtk.types.License.Custom] in that case.
-    
-    If license_type is [gtk.types.License.Unknown], no information will be displayed.
-    
-    If license_type is different from [gtk.types.License.Custom].
-    `propertyAboutWindow:license` will be cleared out.
-    
-    The license description will be displayed on the Legal page, below the
-    copyright information.
-    
-    [adw.about_window.AboutWindow.addLegalSection] can be used to add license information
-    for the application dependencies or other components.
-    Params:
-      licenseType =       the license type
+      
+      If the application's license is not in the list,
+      `propertyAboutWindow:license` can be used instead. The license type will be
+      automatically set to [gtk.types.License.Custom] in that case.
+      
+      If license_type is [gtk.types.License.Unknown], no information will be displayed.
+      
+      If license_type is different from [gtk.types.License.Custom].
+      `propertyAboutWindow:license` will be cleared out.
+      
+      The license description will be displayed on the Legal page, below the
+      copyright information.
+      
+      [adw.about_window.AboutWindow.addLegalSection] can be used to add license information
+      for the application dependencies or other components.
+  
+      Params:
+        licenseType = the license type
   */
   void setLicenseType(gtk.types.License licenseType)
   {
@@ -996,33 +1019,34 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the release notes for self.
-    
-    Release notes are displayed on the the What's New page.
-    
-    Release notes are formatted the same way as
-    [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
-    
-    The supported formatting options are:
-    
-    $(LIST
-      * Paragraph (`<p>`)
-      * Ordered list (`<ol>`), with list items (`<li>`)
-      * Unordered list (`<ul>`), with list items (`<li>`)
-    )
       
-    Within paragraphs and list items, emphasis (`<em>`) and inline code
-    (`<code>`) text styles are supported. The emphasis is rendered in italic,
-    while inline code is shown in a monospaced font.
-    
-    Any text outside paragraphs or list items is ignored.
-    
-    Nested lists are not supported.
-    
-    [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
-    `propertyAboutWindow:release-notes-version` of the property will be used
-    as the version; otherwise, `propertyAboutWindow:version` is used.
-    Params:
-      releaseNotes =       the release notes
+      Release notes are displayed on the the What's New page.
+      
+      Release notes are formatted the same way as
+      [AppStream descriptions](https://freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-description).
+      
+      The supported formatting options are:
+      
+      $(LIST
+        * Paragraph (`<p>`)
+        * Ordered list (`<ol>`), with list items (`<li>`)
+        * Unordered list (`<ul>`), with list items (`<li>`)
+      )
+        
+      Within paragraphs and list items, emphasis (`<em>`) and inline code
+      (`<code>`) text styles are supported. The emphasis is rendered in italic,
+      while inline code is shown in a monospaced font.
+      
+      Any text outside paragraphs or list items is ignored.
+      
+      Nested lists are not supported.
+      
+      [adw.about_window.AboutWindow] displays the version above the release notes. If set, the
+      `propertyAboutWindow:release-notes-version` of the property will be used
+      as the version; otherwise, `propertyAboutWindow:version` is used.
+  
+      Params:
+        releaseNotes = the release notes
   */
   void setReleaseNotes(string releaseNotes)
   {
@@ -1032,19 +1056,20 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the version described by the application's release notes.
-    
-    The release notes version is displayed on the What's New page, above the
-    release notes.
-    
-    If not set, `propertyAboutWindow:version` will be used instead.
-    
-    For example, an application with the current version 2.0.2 might want to
-    keep the release notes from 2.0.0, and set the release notes version
-    accordingly.
-    
-    See `propertyAboutWindow:release-notes`.
-    Params:
-      version_ =       the release notes version
+      
+      The release notes version is displayed on the What's New page, above the
+      release notes.
+      
+      If not set, `propertyAboutWindow:version` will be used instead.
+      
+      For example, an application with the current version 2.0.2 might want to
+      keep the release notes from 2.0.0, and set the release notes version
+      accordingly.
+      
+      See `propertyAboutWindow:release-notes`.
+  
+      Params:
+        version_ = the release notes version
   */
   void setReleaseNotesVersion(string version_)
   {
@@ -1054,10 +1079,11 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the URL of the support page for self.
-    
-    The support page link is displayed on the main page.
-    Params:
-      supportUrl =       the support page URL
+      
+      The support page link is displayed on the main page.
+  
+      Params:
+        supportUrl = the support page URL
   */
   void setSupportUrl(string supportUrl)
   {
@@ -1067,27 +1093,28 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the translator credits string.
-    
-    It will be displayed on the Credits page.
-    
-    This string should be `"translator-credits"` or `"translator_credits"` and
-    should be marked as translatable.
-    
-    The string may contain email addresses and URLs, see the introduction for
-    more details.
-    
-    See also:
-    
-    $(LIST
-      * `propertyAboutWindow:developers`
-      * `propertyAboutWindow:designers`
-      * `propertyAboutWindow:artists`
-      * `propertyAboutWindow:documenters`
-      * [adw.about_window.AboutWindow.addCreditSection]
-      * [adw.about_window.AboutWindow.addAcknowledgementSection]
-    )
-    Params:
-      translatorCredits =       the translator credits
+      
+      It will be displayed on the Credits page.
+      
+      This string should be `"translator-credits"` or `"translator_credits"` and
+      should be marked as translatable.
+      
+      The string may contain email addresses and URLs, see the introduction for
+      more details.
+      
+      See also:
+      
+      $(LIST
+        * `propertyAboutWindow:developers`
+        * `propertyAboutWindow:designers`
+        * `propertyAboutWindow:artists`
+        * `propertyAboutWindow:documenters`
+        * [adw.about_window.AboutWindow.addCreditSection]
+        * [adw.about_window.AboutWindow.addAcknowledgementSection]
+      )
+  
+      Params:
+        translatorCredits = the translator credits
   */
   void setTranslatorCredits(string translatorCredits)
   {
@@ -1097,13 +1124,14 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the version for self.
-    
-    The version is displayed on the main page.
-    
-    If `propertyAboutWindow:release-notes-version` is not set, the version will
-    also be displayed above the release notes on the What's New page.
-    Params:
-      version_ =       the version
+      
+      The version is displayed on the main page.
+      
+      If `propertyAboutWindow:release-notes-version` is not set, the version will
+      also be displayed above the release notes on the What's New page.
+  
+      Params:
+        version_ = the version
   */
   void setVersion(string version_)
   {
@@ -1113,13 +1141,14 @@ class AboutWindow : adw.window.Window
 
   /**
       Sets the application website URL for self.
-    
-    Website is displayed on the Details page, below comments, or on the main page
-    if the Details page doesn't have any other content.
-    
-    Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
-    Params:
-      website =       the website URL
+      
+      Website is displayed on the Details page, below comments, or on the main page
+      if the Details page doesn't have any other content.
+      
+      Applications can add other links below, see [adw.about_window.AboutWindow.addLink].
+  
+      Params:
+        website = the website URL
   */
   void setWebsite(string website)
   {
@@ -1128,41 +1157,47 @@ class AboutWindow : adw.window.Window
   }
 
   /**
-      Emitted when a URL is activated.
-    
-    Applications may connect to it to override the default behavior, which is
-    to call `funcGtk.show_uri`.
+      Connect to `ActivateLink` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B uri)       the URI to activate
-      * $(B aboutWindow) the instance the signal is connected to
-    )
-    Returns:     `TRUE` if the link has been activated
-  */
-  alias ActivateLinkCallbackDlg = bool delegate(string uri, adw.about_window.AboutWindow aboutWindow);
-
-  /** ditto */
-  alias ActivateLinkCallbackFunc = bool function(string uri, adw.about_window.AboutWindow aboutWindow);
-
-  /**
-    Connect to ActivateLink signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a URL is activated.
+      
+      Applications may connect to it to override the default behavior, which is
+      to call `funcGtk.show_uri`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(string uri, adw.about_window.AboutWindow aboutWindow))
+  
+          `uri` the URI to activate (optional)
+  
+          `aboutWindow` the instance the signal is connected to (optional)
+  
+          `Returns` `TRUE` if the link has been activated
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateLinkCallbackDlg) || is(T : ActivateLinkCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.about_window.AboutWindow)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto aboutWindow = getVal!(adw.about_window.AboutWindow)(_paramVals);
-      auto uri = getVal!(string)(&_paramVals[1]);
-      _retval = _dClosure.dlg(uri, aboutWindow);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 

@@ -1,3 +1,4 @@
+/// Module for [EventGrabBroken] class
 module gdk.event_grab_broken;
 
 import gdk.c.functions;
@@ -8,15 +9,16 @@ import gid.gid;
 
 /**
     Generated when a pointer or keyboard grab is broken. On X11, this happens
-  when the grab window becomes unviewable (i.e. it or one of its ancestors
-  is unmapped), or if the same application grabs the pointer or keyboard
-  again. Note that implicit grabs (which are initiated by button presses)
-  can also cause #GdkEventGrabBroken events.
+    when the grab window becomes unviewable (i.e. it or one of its ancestors
+    is unmapped), or if the same application grabs the pointer or keyboard
+    again. Note that implicit grabs (which are initiated by button presses)
+    can also cause #GdkEventGrabBroken events.
 */
 class EventGrabBroken
 {
   GdkEventGrabBroken cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class EventGrabBroken
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

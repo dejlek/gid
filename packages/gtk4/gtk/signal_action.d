@@ -1,3 +1,4 @@
+/// Module for [SignalAction] class
 module gtk.signal_action;
 
 import gid.gid;
@@ -8,24 +9,27 @@ import gtk.types;
 
 /**
     A [gtk.shortcut.Shortcut]Action that emits a signal.
-  
-  Signals that are used in this way are referred to as keybinding signals,
-  and they are expected to be defined with the `G_SIGNAL_ACTION` flag.
+    
+    Signals that are used in this way are referred to as keybinding signals,
+    and they are expected to be defined with the `G_SIGNAL_ACTION` flag.
 */
 class SignalAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_signal_action_get_type != &gidSymbolNotFound ? gtk_signal_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,12 +42,13 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Creates an action that when activated, emits the given action signal
-    on the provided widget.
-    
-    It will also unpack the args into arguments passed to the signal.
-    Params:
-      signalName =       name of the signal to emit
-    Returns:     a new [gtk.shortcut_action.ShortcutAction]
+      on the provided widget.
+      
+      It will also unpack the args into arguments passed to the signal.
+  
+      Params:
+        signalName = name of the signal to emit
+      Returns: a new [gtk.shortcut_action.ShortcutAction]
   */
   this(string signalName)
   {
@@ -55,7 +60,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Returns the name of the signal that will be emitted.
-    Returns:     the name of the signal to emit
+      Returns: the name of the signal to emit
   */
   string getSignalName()
   {

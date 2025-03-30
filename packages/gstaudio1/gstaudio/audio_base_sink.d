@@ -1,3 +1,4 @@
+/// Module for [AudioBaseSink] class
 module gstaudio.audio_base_sink;
 
 import gid.gid;
@@ -11,23 +12,26 @@ import gstbase.base_sink;
 
 /**
     This is the base class for audio sinks. Subclasses need to implement the
-  ::create_ringbuffer vmethod. This base class will then take care of
-  writing samples to the ringbuffer, synchronisation, clipping and flushing.
+    ::create_ringbuffer vmethod. This base class will then take care of
+    writing samples to the ringbuffer, synchronisation, clipping and flushing.
 */
 class AudioBaseSink : gstbase.base_sink.BaseSink
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_base_sink_get_type != &gidSymbolNotFound ? gst_audio_base_sink_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,9 +44,9 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Create and return the #GstAudioRingBuffer for sink. This function will
-    call the ::create_ringbuffer vmethod and will set sink as the parent of
-    the returned buffer (see [gst.object.ObjectGst.setParent]).
-    Returns:     The new ringbuffer of sink.
+      call the ::create_ringbuffer vmethod and will set sink as the parent of
+      the returned buffer (see [gst.object.ObjectGst.setParent]).
+      Returns: The new ringbuffer of sink.
   */
   gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
   {
@@ -54,7 +58,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Get the current alignment threshold, in nanoseconds, used by sink.
-    Returns:     The current alignment threshold used by sink.
+      Returns: The current alignment threshold used by sink.
   */
   gst.types.ClockTime getAlignmentThreshold()
   {
@@ -65,7 +69,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Get the current discont wait, in nanoseconds, used by sink.
-    Returns:     The current discont wait used by sink.
+      Returns: The current discont wait used by sink.
   */
   gst.types.ClockTime getDiscontWait()
   {
@@ -76,7 +80,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Get the current drift tolerance, in microseconds, used by sink.
-    Returns:     The current drift tolerance used by sink.
+      Returns: The current drift tolerance used by sink.
   */
   long getDriftTolerance()
   {
@@ -87,8 +91,8 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Queries whether sink will provide a clock or not. See also
-    gst_audio_base_sink_set_provide_clock.
-    Returns:     true if sink will provide a clock.
+      gst_audio_base_sink_set_provide_clock.
+      Returns: true if sink will provide a clock.
   */
   bool getProvideClock()
   {
@@ -99,7 +103,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Get the current slave method used by sink.
-    Returns:     The current slave method used by sink.
+      Returns: The current slave method used by sink.
   */
   gstaudio.types.AudioBaseSinkSlaveMethod getSlaveMethod()
   {
@@ -111,10 +115,10 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Informs this base class that the audio output device has failed for
-    some reason, causing a discontinuity (for example, because the device
-    recovered from the error, but lost all contents of its ring buffer).
-    This function is typically called by derived classes, and is useful
-    for the custom slave method.
+      some reason, causing a discontinuity (for example, because the device
+      recovered from the error, but lost all contents of its ring buffer).
+      This function is typically called by derived classes, and is useful
+      for the custom slave method.
   */
   void reportDeviceFailure()
   {
@@ -123,8 +127,9 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Controls the sink's alignment threshold.
-    Params:
-      alignmentThreshold =       the new alignment threshold in nanoseconds
+  
+      Params:
+        alignmentThreshold = the new alignment threshold in nanoseconds
   */
   void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold)
   {
@@ -133,15 +138,16 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Sets the custom slaving callback. This callback will
-    be invoked if the slave-method property is set to
-    GST_AUDIO_BASE_SINK_SLAVE_CUSTOM and the audio sink
-    receives and plays samples.
-    
-    Setting the callback to NULL causes the sink to
-    behave as if the GST_AUDIO_BASE_SINK_SLAVE_NONE
-    method were used.
-    Params:
-      callback =       a #GstAudioBaseSinkCustomSlavingCallback
+      be invoked if the slave-method property is set to
+      GST_AUDIO_BASE_SINK_SLAVE_CUSTOM and the audio sink
+      receives and plays samples.
+      
+      Setting the callback to NULL causes the sink to
+      behave as if the GST_AUDIO_BASE_SINK_SLAVE_NONE
+      method were used.
+  
+      Params:
+        callback = a #GstAudioBaseSinkCustomSlavingCallback
   */
   void setCustomSlavingCallback(gstaudio.types.AudioBaseSinkCustomSlavingCallback callback)
   {
@@ -160,8 +166,9 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Controls how long the sink will wait before creating a discontinuity.
-    Params:
-      discontWait =       the new discont wait in nanoseconds
+  
+      Params:
+        discontWait = the new discont wait in nanoseconds
   */
   void setDiscontWait(gst.types.ClockTime discontWait)
   {
@@ -170,8 +177,9 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Controls the sink's drift tolerance.
-    Params:
-      driftTolerance =       the new drift tolerance in microseconds
+  
+      Params:
+        driftTolerance = the new drift tolerance in microseconds
   */
   void setDriftTolerance(long driftTolerance)
   {
@@ -180,11 +188,12 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Controls whether sink will provide a clock or not. If provide is true,
-    [gst.element.Element.provideClock] will return a clock that reflects the datarate
-    of sink. If provide is false, [gst.element.Element.provideClock] will return
-    NULL.
-    Params:
-      provide =       new state
+      [gst.element.Element.provideClock] will return a clock that reflects the datarate
+      of sink. If provide is false, [gst.element.Element.provideClock] will return
+      NULL.
+  
+      Params:
+        provide = new state
   */
   void setProvideClock(bool provide)
   {
@@ -193,8 +202,9 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
 
   /**
       Controls how clock slaving will be performed in sink.
-    Params:
-      method =       the new slave method
+  
+      Params:
+        method = the new slave method
   */
   void setSlaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod method)
   {

@@ -1,10 +1,11 @@
+/// Module for [AccessibleRangeIfaceProxy] interface proxy object
 module gtk.accessible_range_iface_proxy;
 
 import gobject.object;
 import gtk.accessible_range;
 import gtk.accessible_range_mixin;
 
-/// Proxy object for Gtk.AccessibleRange interface when a GObject has no applicable D binding
+/// Proxy object for [Gtk.AccessibleRange] interface when a GObject has no applicable D binding
 class AccessibleRangeIfaceProxy : IfaceProxy, gtk.accessible_range.AccessibleRange
 {
   this(void* ptr, Flag!"Take" take = No.Take)

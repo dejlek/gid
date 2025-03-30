@@ -1,3 +1,4 @@
+/// Module for [NamedAction] class
 module gtk.named_action;
 
 import gid.gid;
@@ -12,17 +13,20 @@ import gtk.types;
 class NamedAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_named_action_get_type != &gidSymbolNotFound ? gtk_named_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,15 +39,16 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Creates an action that when activated, activates
-    the named action on the widget.
-    
-    It also passes the given arguments to it.
-    
-    See [gtk.widget.Widget.insertActionGroup] for
-    how to add actions to widgets.
-    Params:
-      name =       the detailed name of the action
-    Returns:     a new [gtk.shortcut_action.ShortcutAction]
+      the named action on the widget.
+      
+      It also passes the given arguments to it.
+      
+      See [gtk.widget.Widget.insertActionGroup] for
+      how to add actions to widgets.
+  
+      Params:
+        name = the detailed name of the action
+      Returns: a new [gtk.shortcut_action.ShortcutAction]
   */
   this(string name)
   {
@@ -55,7 +60,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Returns the name of the action that will be activated.
-    Returns:     the name of the action to activate
+      Returns: the name of the action to activate
   */
   string getActionName()
   {

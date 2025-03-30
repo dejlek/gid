@@ -1,3 +1,4 @@
+/// Module for [TocEntry] class
 module gst.toc_entry;
 
 import gid.gid;
@@ -12,22 +13,26 @@ import gst.types;
 class TocEntry : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_toc_entry_get_type != &gidSymbolNotFound ? gst_toc_entry_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,10 +45,11 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Create new #GstTocEntry structure.
-    Params:
-      type =       entry type.
-      uid =       unique ID (UID) in the whole TOC.
-    Returns:     newly allocated #GstTocEntry structure, free it with gst_toc_entry_unref().
+  
+      Params:
+        type = entry type.
+        uid = unique ID (UID) in the whole TOC.
+      Returns: newly allocated #GstTocEntry structure, free it with gst_toc_entry_unref().
   */
   this(gst.types.TocEntryType type, string uid)
   {
@@ -55,8 +61,9 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Appends the #GstTocEntry subentry to entry.
-    Params:
-      subentry =       A #GstTocEntry
+  
+      Params:
+        subentry = A #GstTocEntry
   */
   void appendSubEntry(gst.toc_entry.TocEntry subentry)
   {
@@ -74,16 +81,17 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Get loop_type and repeat_count values from the entry and write them into
-    appropriate storages. Loops are e.g. used by sampled instruments. GStreamer
-    is not automatically applying the loop. The application can process this
-    meta data and use it e.g. to send a seek-event to loop a section.
-    Params:
-      loopType =       the storage for the loop_type
-                    value, leave null if not need.
-      repeatCount =       the storage for the repeat_count
-                       value, leave null if not need.
-    Returns:     true if all non-null storage pointers were filled with appropriate
-      values, false otherwise.
+      appropriate storages. Loops are e.g. used by sampled instruments. GStreamer
+      is not automatically applying the loop. The application can process this
+      meta data and use it e.g. to send a seek-event to loop a section.
+  
+      Params:
+        loopType = the storage for the loop_type
+                      value, leave null if not need.
+        repeatCount = the storage for the repeat_count
+                         value, leave null if not need.
+      Returns: true if all non-null storage pointers were filled with appropriate
+        values, false otherwise.
   */
   bool getLoop(out gst.types.TocLoopType loopType, out int repeatCount)
   {
@@ -94,7 +102,7 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Gets the parent #GstTocEntry of entry.
-    Returns:     The parent #GstTocEntry of entry
+      Returns: The parent #GstTocEntry of entry
   */
   gst.toc_entry.TocEntry getParent()
   {
@@ -106,14 +114,15 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Get start and stop values from the entry and write them into appropriate
-    storages.
-    Params:
-      start =       the storage for the start value, leave
-          null if not need.
-      stop =       the storage for the stop value, leave
-          null if not need.
-    Returns:     true if all non-null storage pointers were filled with appropriate
-      values, false otherwise.
+      storages.
+  
+      Params:
+        start = the storage for the start value, leave
+            null if not need.
+        stop = the storage for the stop value, leave
+            null if not need.
+      Returns: true if all non-null storage pointers were filled with appropriate
+        values, false otherwise.
   */
   bool getStartStopTimes(out long start, out long stop)
   {
@@ -124,7 +133,7 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Gets the sub-entries of entry.
-    Returns:     A #GList of #GstTocEntry of entry
+      Returns: A #GList of #GstTocEntry of entry
   */
   gst.toc_entry.TocEntry[] getSubEntries()
   {
@@ -136,7 +145,7 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Gets the tags for entry.
-    Returns:     A #GstTagList for entry
+      Returns: A #GstTagList for entry
   */
   gst.tag_list.TagList getTags()
   {
@@ -148,7 +157,7 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Gets the parent #GstToc of entry.
-    Returns:     The parent #GstToc of entry
+      Returns: The parent #GstToc of entry
   */
   gst.toc.Toc getToc()
   {
@@ -160,7 +169,7 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Gets the UID of entry.
-    Returns:     The UID of entry
+      Returns: The UID of entry
   */
   string getUid()
   {
@@ -188,9 +197,10 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Merge tags into the existing tags of entry using mode.
-    Params:
-      tags =       A #GstTagList or null
-      mode =       A #GstTagMergeMode
+  
+      Params:
+        tags = A #GstTagList or null
+        mode = A #GstTagMergeMode
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
@@ -199,9 +209,10 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Set loop_type and repeat_count values for the entry.
-    Params:
-      loopType =       loop_type value to set.
-      repeatCount =       repeat_count value to set.
+  
+      Params:
+        loopType = loop_type value to set.
+        repeatCount = repeat_count value to set.
   */
   void setLoop(gst.types.TocLoopType loopType, int repeatCount)
   {
@@ -210,9 +221,10 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Set start and stop values for the entry.
-    Params:
-      start =       start value to set.
-      stop =       stop value to set.
+  
+      Params:
+        start = start value to set.
+        stop = stop value to set.
   */
   void setStartStopTimes(long start, long stop)
   {
@@ -221,8 +233,9 @@ class TocEntry : gobject.boxed.Boxed
 
   /**
       Set a #GstTagList with tags for the complete entry.
-    Params:
-      tags =       A #GstTagList or null
+  
+      Params:
+        tags = A #GstTagList or null
   */
   void setTags(gst.tag_list.TagList tags = null)
   {

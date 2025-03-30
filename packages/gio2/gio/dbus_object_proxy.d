@@ -1,3 +1,4 @@
+/// Module for [DBusObjectProxy] class
 module gio.dbus_object_proxy;
 
 import gid.gid;
@@ -11,24 +12,27 @@ import gobject.object;
 
 /**
     A [gio.dbus_object_proxy.DBusObjectProxy] is an object used to represent a remote object
-  with one or more D-Bus interfaces. Normally, you don’t instantiate
-  a [gio.dbus_object_proxy.DBusObjectProxy] yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
-  is used to obtain it.
+    with one or more D-Bus interfaces. Normally, you don’t instantiate
+    a [gio.dbus_object_proxy.DBusObjectProxy] yourself — typically [gio.dbus_object_manager_client.DBusObjectManagerClient]
+    is used to obtain it.
 */
 class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_proxy_get_type != &gidSymbolNotFound ? g_dbus_object_proxy_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,11 +47,12 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 
   /**
       Creates a new #GDBusObjectProxy for the given connection and
-    object path.
-    Params:
-      connection =       a #GDBusConnection
-      objectPath =       the object path
-    Returns:     a new #GDBusObjectProxy
+      object path.
+  
+      Params:
+        connection = a #GDBusConnection
+        objectPath = the object path
+      Returns: a new #GDBusObjectProxy
   */
   this(gio.dbus_connection.DBusConnection connection, string objectPath)
   {
@@ -59,8 +64,8 @@ class DBusObjectProxy : gobject.object.ObjectG, gio.dbus_object.DBusObject
 
   /**
       Gets the connection that proxy is for.
-    Returns:     A #GDBusConnection. Do not free, the
-        object is owned by proxy.
+      Returns: A #GDBusConnection. Do not free, the
+          object is owned by proxy.
   */
   gio.dbus_connection.DBusConnection getConnection()
   {

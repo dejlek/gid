@@ -1,3 +1,4 @@
+/// Module for [ContainerNode] class
 module gsk.container_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class ContainerNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,11 +24,12 @@ class ContainerNode : gsk.render_node.RenderNode
 
   /**
       Creates a new [gsk.render_node.RenderNode] instance for holding the given children.
-    
-    The new node will acquire a reference to each of the children.
-    Params:
-      children =       The children of the node
-    Returns:     the new [gsk.render_node.RenderNode]
+      
+      The new node will acquire a reference to each of the children.
+  
+      Params:
+        children = The children of the node
+      Returns: the new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode[] children)
   {
@@ -45,9 +48,10 @@ class ContainerNode : gsk.render_node.RenderNode
 
   /**
       Gets one of the children of container.
-    Params:
-      idx =       the position of the child to get
-    Returns:     the idx'th child of container
+  
+      Params:
+        idx = the position of the child to get
+      Returns: the idx'th child of container
   */
   gsk.render_node.RenderNode getChild(uint idx)
   {
@@ -59,7 +63,7 @@ class ContainerNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of direct children of node.
-    Returns:     the number of children of the [gsk.render_node.RenderNode]
+      Returns: the number of children of the [gsk.render_node.RenderNode]
   */
   uint getNChildren()
   {

@@ -1,3 +1,4 @@
+/// Module for [ConverterInputStream] class
 module gio.converter_input_stream;
 
 import gid.gid;
@@ -13,25 +14,28 @@ import gobject.object;
 
 /**
     Converter input stream implements [gio.input_stream.InputStream] and allows
-  conversion of data of various types during reading.
-  
-  As of GLib 2.34, [gio.converter_input_stream.ConverterInputStream] implements
-  [gio.pollable_input_stream.PollableInputStream].
+    conversion of data of various types during reading.
+    
+    As of GLib 2.34, [gio.converter_input_stream.ConverterInputStream] implements
+    [gio.pollable_input_stream.PollableInputStream].
 */
 class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.pollable_input_stream.PollableInputStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_input_stream_get_type != &gidSymbolNotFound ? g_converter_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,10 +50,11 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 
   /**
       Creates a new converter input stream for the base_stream.
-    Params:
-      baseStream =       a #GInputStream
-      converter =       a #GConverter
-    Returns:     a new #GInputStream.
+  
+      Params:
+        baseStream = a #GInputStream
+        converter = a #GConverter
+      Returns: a new #GInputStream.
   */
   this(gio.input_stream.InputStream baseStream, gio.converter.Converter converter)
   {
@@ -60,7 +65,7 @@ class ConverterInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
 
   /**
       Gets the #GConverter that is used by converter_stream.
-    Returns:     the converter of the converter input stream
+      Returns: the converter of the converter input stream
   */
   gio.converter.Converter getConverter()
   {

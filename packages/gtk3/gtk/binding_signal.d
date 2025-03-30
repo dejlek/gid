@@ -1,3 +1,4 @@
+/// Module for [BindingSignal] class
 module gtk.binding_signal;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gtk.types;
 
 /**
     A GtkBindingSignal stores the necessary information to
-  activate a widget in response to a key press via a signal
-  emission.
+    activate a widget in response to a key press via a signal
+    emission.
 */
 class BindingSignal
 {
   GtkBindingSignal cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class BindingSignal
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

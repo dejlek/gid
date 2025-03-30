@@ -1,3 +1,4 @@
+/// Module for [RTSPWatch] class
 module gstrtsp.rtspwatch;
 
 import gid.gid;
@@ -10,13 +11,14 @@ import gstrtsp.types;
 
 /**
     Opaque RTSP watch object that can be used for asynchronous RTSP
-  operations.
+    operations.
 */
 class RTSPWatch
 {
   GstRTSPWatch* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class RTSPWatch
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -34,9 +37,10 @@ class RTSPWatch
 
   /**
       Adds a #GstRTSPWatch to a context so that it will be executed within that context.
-    Params:
-      context =       a GMainContext (if NULL, the default context will be used)
-    Returns:     the ID (greater than 0) for the watch within the GMainContext.
+  
+      Params:
+        context = a GMainContext (if NULL, the default context will be used)
+      Returns: the ID (greater than 0) for the watch within the GMainContext.
   */
   uint attach(glib.main_context.MainContext context = null)
   {
@@ -47,10 +51,11 @@ class RTSPWatch
 
   /**
       Get the maximum amount of bytes and messages that will be queued in watch.
-    See [gstrtsp.rtspwatch.RTSPWatch.setSendBacklog].
-    Params:
-      bytes =       maximum bytes
-      messages =       maximum messages
+      See [gstrtsp.rtspwatch.RTSPWatch.setSendBacklog].
+  
+      Params:
+        bytes = maximum bytes
+        messages = maximum messages
   */
   void getSendBacklog(out size_t bytes, out uint messages)
   {
@@ -59,7 +64,7 @@ class RTSPWatch
 
   /**
       Reset watch, this is usually called after [gstrtsp.rtspconnection.RTSPConnection.doTunnel]
-    when the file descriptors of the connection might have changed.
+      when the file descriptors of the connection might have changed.
   */
   void reset()
   {
@@ -68,15 +73,16 @@ class RTSPWatch
 
   /**
       Send a message using the connection of the watch. If it cannot be sent
-    immediately, it will be queued for transmission in watch. The contents of
-    message will then be serialized and transmitted when the connection of the
-    watch becomes writable. In case the message is queued, the ID returned in
-    id will be non-zero and used as the ID argument in the message_sent
-    callback.
-    Params:
-      message =       a #GstRTSPMessage
-      id =       location for a message ID or null
-    Returns:     #GST_RTSP_OK on success.
+      immediately, it will be queued for transmission in watch. The contents of
+      message will then be serialized and transmitted when the connection of the
+      watch becomes writable. In case the message is queued, the ID returned in
+      id will be non-zero and used as the ID argument in the message_sent
+      callback.
+  
+      Params:
+        message = a #GstRTSPMessage
+        id = location for a message ID or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult sendMessage(gstrtsp.rtspmessage.RTSPMessage message, out uint id)
   {
@@ -88,16 +94,17 @@ class RTSPWatch
 
   /**
       Sends messages using the connection of the watch. If they cannot be sent
-    immediately, they will be queued for transmission in watch. The contents of
-    messages will then be serialized and transmitted when the connection of the
-    watch becomes writable. In case the messages are queued, the ID returned in
-    id will be non-zero and used as the ID argument in the message_sent
-    callback once the last message is sent. The callback will only be called
-    once for the last message.
-    Params:
-      messages =       the messages to send
-      id =       location for a message ID or null
-    Returns:     #GST_RTSP_OK on success.
+      immediately, they will be queued for transmission in watch. The contents of
+      messages will then be serialized and transmitted when the connection of the
+      watch becomes writable. In case the messages are queued, the ID returned in
+      id will be non-zero and used as the ID argument in the message_sent
+      callback once the last message is sent. The callback will only be called
+      once for the last message.
+  
+      Params:
+        messages = the messages to send
+        id = location for a message ID or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, out uint id)
   {
@@ -117,10 +124,11 @@ class RTSPWatch
 
   /**
       When flushing is true, abort a call to [gstrtsp.rtspwatch.RTSPWatch.waitBacklog]
-    and make sure [gstrtsp.rtspwatch.RTSPWatch.writeData] returns immediately with
-    #GST_RTSP_EINTR. And empty the queue.
-    Params:
-      flushing =       new flushing state
+      and make sure [gstrtsp.rtspwatch.RTSPWatch.writeData] returns immediately with
+      #GST_RTSP_EINTR. And empty the queue.
+  
+      Params:
+        flushing = new flushing state
   */
   void setFlushing(bool flushing)
   {
@@ -129,13 +137,14 @@ class RTSPWatch
 
   /**
       Set the maximum amount of bytes and messages that will be queued in watch.
-    When the maximum amounts are exceeded, [gstrtsp.rtspwatch.RTSPWatch.writeData] and
-    [gstrtsp.rtspwatch.RTSPWatch.sendMessage] will return #GST_RTSP_ENOMEM.
-    
-    A value of 0 for bytes or messages means no limits.
-    Params:
-      bytes =       maximum bytes
-      messages =       maximum messages
+      When the maximum amounts are exceeded, [gstrtsp.rtspwatch.RTSPWatch.writeData] and
+      [gstrtsp.rtspwatch.RTSPWatch.sendMessage] will return #GST_RTSP_ENOMEM.
+      
+      A value of 0 for bytes or messages means no limits.
+  
+      Params:
+        bytes = maximum bytes
+        messages = maximum messages
   */
   void setSendBacklog(size_t bytes, uint messages)
   {
@@ -144,21 +153,22 @@ class RTSPWatch
 
   /**
       Wait until there is place in the backlog queue, timeout is reached
-    or watch is set to flushing.
-    
-    If timeout is null this function can block forever. If timeout
-    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
-    after the timeout expired.
-    
-    The typically use of this function is when gst_rtsp_watch_write_data
-    returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
-    free space in the backlog queue and try again.
-    Params:
-      timeout =       a GTimeVal timeout
-    Returns:     [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
-               [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
-               [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
-               [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
+      or watch is set to flushing.
+      
+      If timeout is null this function can block forever. If timeout
+      contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
+      after the timeout expired.
+      
+      The typically use of this function is when gst_rtsp_watch_write_data
+      returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
+      free space in the backlog queue and try again.
+  
+      Params:
+        timeout = a GTimeVal timeout
+      Returns: [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
+                 [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
+                 [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
+                 [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
   gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout)
   {
@@ -170,21 +180,22 @@ class RTSPWatch
 
   /**
       Wait until there is place in the backlog queue, timeout is reached
-    or watch is set to flushing.
-    
-    If timeout is 0 this function can block forever. If timeout
-    contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
-    after the timeout expired.
-    
-    The typically use of this function is when gst_rtsp_watch_write_data
-    returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
-    free space in the backlog queue and try again.
-    Params:
-      timeout =       a timeout in microseconds
-    Returns:     [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
-               [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
-               [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
-               [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
+      or watch is set to flushing.
+      
+      If timeout is 0 this function can block forever. If timeout
+      contains a valid timeout, this function will return [gstrtsp.types.RTSPResult.Etimeout]
+      after the timeout expired.
+      
+      The typically use of this function is when gst_rtsp_watch_write_data
+      returns [gstrtsp.types.RTSPResult.Enomem]. The caller then calls this function to wait for
+      free space in the backlog queue and try again.
+  
+      Params:
+        timeout = a timeout in microseconds
+      Returns: [gstrtsp.types.RTSPResult.Ok] when if there is room in queue.
+                 [gstrtsp.types.RTSPResult.Etimeout] when timeout was reached.
+                 [gstrtsp.types.RTSPResult.Eintr] when watch is flushing
+                 [gstrtsp.types.RTSPResult.Einval] when called with invalid parameters.
   */
   gstrtsp.types.RTSPResult waitBacklogUsec(long timeout)
   {

@@ -1,3 +1,4 @@
+/// Module for [ExpanderRow] class
 module adw.expander_row;
 
 import adw.c.functions;
@@ -17,48 +18,51 @@ import gtk.widget;
 
 /**
     A [gtk.list_box_row.ListBoxRow] used to reveal widgets.
-  
-  <picture>
-    <source srcset="expander-row-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="expander-row.png" alt="expander-row">
-  </picture>
-  
-  The [adw.expander_row.ExpanderRow] widget allows the user to reveal or hide widgets below
-  it. It also allows the user to enable the expansion of the row, allowing to
-  disable all that the row contains.
-  
-  ## AdwExpanderRow as GtkBuildable
-  
-  The [adw.expander_row.ExpanderRow] implementation of the [gtk.buildable.Buildable] interface
-  supports adding a child as an suffix widget by specifying “suffix” as the
-  “type” attribute of a <child> element.
-  
-  It also supports adding it as a prefix widget by specifying “prefix” as the
-  “type” attribute of a <child> element.
-  
-  ## CSS nodes
-  
-  [adw.expander_row.ExpanderRow] has a main CSS node with name `row` and the `.expander`
-  style class. It has the `.empty` style class when it contains no children.
-  
-  It contains the subnodes `row.header` for its main embedded row,
-  `list.nested` for the list it can expand, and `image.expander-row-arrow` for
-  its arrow.
+    
+    <picture>
+      <source srcset="expander-row-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="expander-row.png" alt="expander-row">
+    </picture>
+    
+    The [adw.expander_row.ExpanderRow] widget allows the user to reveal or hide widgets below
+    it. It also allows the user to enable the expansion of the row, allowing to
+    disable all that the row contains.
+    
+    ## AdwExpanderRow as GtkBuildable
+    
+    The [adw.expander_row.ExpanderRow] implementation of the [gtk.buildable.Buildable] interface
+    supports adding a child as an suffix widget by specifying “suffix” as the
+    “type” attribute of a <child> element.
+    
+    It also supports adding it as a prefix widget by specifying “prefix” as the
+    “type” attribute of a <child> element.
+    
+    ## CSS nodes
+    
+    [adw.expander_row.ExpanderRow] has a main CSS node with name `row` and the `.expander`
+    style class. It has the `.empty` style class when it contains no children.
+    
+    It contains the subnodes `row.header` for its main embedded row,
+    `list.nested` for the list it can expand, and `image.expander-row-arrow` for
+    its arrow.
 */
 class ExpanderRow : adw.preferences_row.PreferencesRow
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_expander_row_get_type != &gidSymbolNotFound ? adw_expander_row_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -71,7 +75,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Creates a new [adw.expander_row.ExpanderRow].
-    Returns:     the newly created [adw.expander_row.ExpanderRow]
+      Returns: the newly created [adw.expander_row.ExpanderRow]
   */
   this()
   {
@@ -82,10 +86,11 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Adds an action widget to self.
-    Params:
-      widget =       a widget
   
-    Deprecated:     Use [adw.expander_row.ExpanderRow.addSuffix] to add a suffix.
+      Params:
+        widget = a widget
+  
+      Deprecated: Use [adw.expander_row.ExpanderRow.addSuffix] to add a suffix.
   */
   void addAction(gtk.widget.Widget widget)
   {
@@ -94,8 +99,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Adds a prefix widget to self.
-    Params:
-      widget =       a widget
+  
+      Params:
+        widget = a widget
   */
   void addPrefix(gtk.widget.Widget widget)
   {
@@ -104,10 +110,11 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Adds a widget to self.
-    
-    The widget will appear in the expanding list below self.
-    Params:
-      child =       a widget
+      
+      The widget will appear in the expanding list below self.
+  
+      Params:
+        child = a widget
   */
   void addRow(gtk.widget.Widget child)
   {
@@ -116,8 +123,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Adds an suffix widget to self.
-    Params:
-      widget =       a widget
+  
+      Params:
+        widget = a widget
   */
   void addSuffix(gtk.widget.Widget widget)
   {
@@ -126,7 +134,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets whether the expansion of self is enabled.
-    Returns:     whether the expansion of self is enabled.
+      Returns: whether the expansion of self is enabled.
   */
   bool getEnableExpansion()
   {
@@ -137,7 +145,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets whether self is expanded.
-    Returns:     whether self is expanded
+      Returns: whether self is expanded
   */
   bool getExpanded()
   {
@@ -148,9 +156,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets the icon name for self.
-    Returns:     the icon name for self
+      Returns: the icon name for self
   
-    Deprecated:     Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
+      Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
   string getIconName()
   {
@@ -162,7 +170,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets whether the switch enabling the expansion of self is visible.
-    Returns:     whether the switch enabling the expansion is visible
+      Returns: whether the switch enabling the expansion is visible
   */
   bool getShowEnableSwitch()
   {
@@ -173,7 +181,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets the subtitle for self.
-    Returns:     the subtitle for self
+      Returns: the subtitle for self
   */
   string getSubtitle()
   {
@@ -185,9 +193,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets the number of lines at the end of which the subtitle label will be
-    ellipsized.
-    Returns:     the number of lines at the end of which the subtitle label will be
-        ellipsized
+      ellipsized.
+      Returns: the number of lines at the end of which the subtitle label will be
+          ellipsized
   */
   int getSubtitleLines()
   {
@@ -198,9 +206,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Gets the number of lines at the end of which the title label will be
-    ellipsized.
-    Returns:     the number of lines at the end of which the title label will be
-        ellipsized
+      ellipsized.
+      Returns: the number of lines at the end of which the title label will be
+          ellipsized
   */
   int getTitleLines()
   {
@@ -211,8 +219,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Removes a child from self.
-    Params:
-      child =       the child to be removed
+  
+      Params:
+        child = the child to be removed
   */
   void remove(gtk.widget.Widget child)
   {
@@ -221,8 +230,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets whether the expansion of self is enabled.
-    Params:
-      enableExpansion =       whether to enable the expansion
+  
+      Params:
+        enableExpansion = whether to enable the expansion
   */
   void setEnableExpansion(bool enableExpansion)
   {
@@ -231,8 +241,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets whether self is expanded.
-    Params:
-      expanded =       whether to expand the row
+  
+      Params:
+        expanded = whether to expand the row
   */
   void setExpanded(bool expanded)
   {
@@ -241,10 +252,11 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets the icon name for self.
-    Params:
-      iconName =       the icon name
   
-    Deprecated:     Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
+      Params:
+        iconName = the icon name
+  
+      Deprecated: Use [adw.expander_row.ExpanderRow.addPrefix] to add an icon.
   */
   void setIconName(string iconName = null)
   {
@@ -254,8 +266,9 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets whether the switch enabling the expansion of self is visible.
-    Params:
-      showEnableSwitch =       whether to show the switch enabling the expansion
+  
+      Params:
+        showEnableSwitch = whether to show the switch enabling the expansion
   */
   void setShowEnableSwitch(bool showEnableSwitch)
   {
@@ -264,11 +277,12 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets the subtitle for self.
-    
-    The subtitle is interpreted as Pango markup unless
-    `propertyPreferencesRow:use-markup` is set to `FALSE`.
-    Params:
-      subtitle =       the subtitle
+      
+      The subtitle is interpreted as Pango markup unless
+      `propertyPreferencesRow:use-markup` is set to `FALSE`.
+  
+      Params:
+        subtitle = the subtitle
   */
   void setSubtitle(string subtitle)
   {
@@ -278,11 +292,12 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets the number of lines at the end of which the subtitle label will be
-    ellipsized.
-    
-    If the value is 0, the number of lines won't be limited.
-    Params:
-      subtitleLines =       the number of lines at the end of which the subtitle label will be ellipsized
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  
+      Params:
+        subtitleLines = the number of lines at the end of which the subtitle label will be ellipsized
   */
   void setSubtitleLines(int subtitleLines)
   {
@@ -291,11 +306,12 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
 
   /**
       Sets the number of lines at the end of which the title label will be
-    ellipsized.
-    
-    If the value is 0, the number of lines won't be limited.
-    Params:
-      titleLines =       the number of lines at the end of which the title label will be ellipsized
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  
+      Params:
+        titleLines = the number of lines at the end of which the title label will be ellipsized
   */
   void setTitleLines(int titleLines)
   {

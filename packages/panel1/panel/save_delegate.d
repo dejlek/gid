@@ -1,3 +1,4 @@
+/// Module for [SaveDelegate] class
 module panel.save_delegate;
 
 import gid.gid;
@@ -17,17 +18,20 @@ import panel.types;
 class SaveDelegate : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_delegate_get_type != &gidSymbolNotFound ? panel_save_delegate_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

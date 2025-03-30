@@ -1,3 +1,4 @@
+/// Module for [GridView] class
 module gtk.grid_view;
 
 import gid.gid;
@@ -23,55 +24,58 @@ import gtk.types;
 
 /**
     [gtk.grid_view.GridView] presents a large dynamic grid of items.
-  
-  [gtk.grid_view.GridView] uses its factory to generate one child widget for each
-  visible item and shows them in a grid. The orientation of the grid view
-  determines if the grid reflows vertically or horizontally.
-  
-  [gtk.grid_view.GridView] allows the user to select items according to the selection
-  characteristics of the model. For models that allow multiple selected items,
-  it is possible to turn on _rubberband selection_, using
-  `property@Gtk.GridView:enable-rubberband`.
-  
-  To learn more about the list widget framework, see the
-  [overview](section-list-widget.html).
-  
-  # CSS nodes
-  
-  ```
-  gridview
-  ├── child[.activatable]
-  │
-  ├── child[.activatable]
-  │
-  ┊
-  ╰── [rubberband]
-  ```
-  
-  [gtk.grid_view.GridView] uses a single CSS node with name `gridview`. Each child uses
-  a single CSS node with name `child`. If the [gtk.list_item.ListItem.gboolean]
-  property is set, the corresponding row will have the `.activatable` style
-  class. For rubberband selection, a subnode with name `rubberband` is used.
-  
-  # Accessibility
-  
-  [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.Grid] role, and the items
-  use the [gtk.types.AccessibleRole.GridCell] role.
+    
+    [gtk.grid_view.GridView] uses its factory to generate one child widget for each
+    visible item and shows them in a grid. The orientation of the grid view
+    determines if the grid reflows vertically or horizontally.
+    
+    [gtk.grid_view.GridView] allows the user to select items according to the selection
+    characteristics of the model. For models that allow multiple selected items,
+    it is possible to turn on _rubberband selection_, using
+    `property@Gtk.GridView:enable-rubberband`.
+    
+    To learn more about the list widget framework, see the
+    [overview](section-list-widget.html).
+    
+    # CSS nodes
+    
+    ```
+    gridview
+    ├── child[.activatable]
+    │
+    ├── child[.activatable]
+    │
+    ┊
+    ╰── [rubberband]
+    ```
+    
+    [gtk.grid_view.GridView] uses a single CSS node with name `gridview`. Each child uses
+    a single CSS node with name `child`. If the [gtk.list_item.ListItem.gboolean]
+    property is set, the corresponding row will have the `.activatable` style
+    class. For rubberband selection, a subnode with name `rubberband` is used.
+    
+    # Accessibility
+    
+    [gtk.grid_view.GridView] uses the [gtk.types.AccessibleRole.Grid] role, and the items
+    use the [gtk.types.AccessibleRole.GridCell] role.
 */
 class GridView : gtk.list_base.ListBase
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_view_get_type != &gidSymbolNotFound ? gtk_grid_view_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -84,18 +88,19 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Creates a new [gtk.grid_view.GridView] that uses the given factory for
-    mapping items to widgets.
-    
-    The function takes ownership of the
-    arguments, so you can write code like
-    ```c
-    grid_view = gtk_grid_view_new (create_model (),
-      gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
-    ```
-    Params:
-      model =       the model to use
-      factory =       The factory to populate items with
-    Returns:     a new [gtk.grid_view.GridView] using the given model and factory
+      mapping items to widgets.
+      
+      The function takes ownership of the
+      arguments, so you can write code like
+      ```c
+      grid_view = gtk_grid_view_new (create_model (),
+        gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
+      ```
+  
+      Params:
+        model = the model to use
+        factory = The factory to populate items with
+      Returns: a new [gtk.grid_view.GridView] using the given model and factory
   */
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
@@ -106,7 +111,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Returns whether rows can be selected by dragging with the mouse.
-    Returns:     true if rubberband selection is enabled
+      Returns: true if rubberband selection is enabled
   */
   bool getEnableRubberband()
   {
@@ -117,7 +122,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Gets the factory that's currently used to populate list items.
-    Returns:     The factory in use
+      Returns: The factory in use
   */
   gtk.list_item_factory.ListItemFactory getFactory()
   {
@@ -129,7 +134,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Gets the maximum number of columns that the grid will use.
-    Returns:     The maximum number of columns
+      Returns: The maximum number of columns
   */
   uint getMaxColumns()
   {
@@ -140,7 +145,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Gets the minimum number of columns that the grid will use.
-    Returns:     The minimum number of columns
+      Returns: The minimum number of columns
   */
   uint getMinColumns()
   {
@@ -151,7 +156,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Gets the model that's currently used to read the items displayed.
-    Returns:     The model in use
+      Returns: The model in use
   */
   gtk.selection_model.SelectionModel getModel()
   {
@@ -163,8 +168,8 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Returns whether items will be activated on single click and
-    selected on hover.
-    Returns:     true if items are activated on single click
+      selected on hover.
+      Returns: true if items are activated on single click
   */
   bool getSingleClickActivate()
   {
@@ -175,7 +180,7 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Gets the behavior set for the <kbd>Tab</kbd> key.
-    Returns:     The behavior of the <kbd>Tab</kbd> key
+      Returns: The behavior of the <kbd>Tab</kbd> key
   */
   gtk.types.ListTabBehavior getTabBehavior()
   {
@@ -187,15 +192,16 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Scrolls to the item at the given position and performs the actions
-    specified in flags.
-    
-    This function works no matter if the gridview is shown or focused.
-    If it isn't, then the changes will take effect once that happens.
-    Params:
-      pos =       position of the item
-      flags =       actions to perform
-      scroll =       details of how to perform
-          the scroll operation or null to scroll into view
+      specified in flags.
+      
+      This function works no matter if the gridview is shown or focused.
+      If it isn't, then the changes will take effect once that happens.
+  
+      Params:
+        pos = position of the item
+        flags = actions to perform
+        scroll = details of how to perform
+            the scroll operation or null to scroll into view
   */
   void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
@@ -204,8 +210,9 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets whether selections can be changed by dragging with the mouse.
-    Params:
-      enableRubberband =       true to enable rubberband selection
+  
+      Params:
+        enableRubberband = true to enable rubberband selection
   */
   void setEnableRubberband(bool enableRubberband)
   {
@@ -214,8 +221,9 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets the [gtk.list_item_factory.ListItemFactory] to use for populating list items.
-    Params:
-      factory =       the factory to use
+  
+      Params:
+        factory = the factory to use
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
@@ -224,13 +232,14 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets the maximum number of columns to use.
-    
-    This number must be at least 1.
-    
-    If max_columns is smaller than the minimum set via
-    [gtk.grid_view.GridView.setMinColumns], that value is used instead.
-    Params:
-      maxColumns =       The maximum number of columns
+      
+      This number must be at least 1.
+      
+      If max_columns is smaller than the minimum set via
+      [gtk.grid_view.GridView.setMinColumns], that value is used instead.
+  
+      Params:
+        maxColumns = The maximum number of columns
   */
   void setMaxColumns(uint maxColumns)
   {
@@ -239,13 +248,14 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets the minimum number of columns to use.
-    
-    This number must be at least 1.
-    
-    If min_columns is smaller than the minimum set via
-    [gtk.grid_view.GridView.setMaxColumns], that value is ignored.
-    Params:
-      minColumns =       The minimum number of columns
+      
+      This number must be at least 1.
+      
+      If min_columns is smaller than the minimum set via
+      [gtk.grid_view.GridView.setMaxColumns], that value is ignored.
+  
+      Params:
+        minColumns = The minimum number of columns
   */
   void setMinColumns(uint minColumns)
   {
@@ -254,10 +264,11 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets the model to use.
-    
-    This must be a [gtk.selection_model.SelectionModel].
-    Params:
-      model =       the model to use
+      
+      This must be a [gtk.selection_model.SelectionModel].
+  
+      Params:
+        model = the model to use
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
@@ -266,9 +277,10 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets whether items should be activated on single click and
-    selected on hover.
-    Params:
-      singleClickActivate =       true to activate items on single click
+      selected on hover.
+  
+      Params:
+        singleClickActivate = true to activate items on single click
   */
   void setSingleClickActivate(bool singleClickActivate)
   {
@@ -277,8 +289,9 @@ class GridView : gtk.list_base.ListBase
 
   /**
       Sets the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
-    Params:
-      tabBehavior =       The desired tab behavior
+  
+      Params:
+        tabBehavior = The desired tab behavior
   */
   void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
@@ -286,41 +299,48 @@ class GridView : gtk.list_base.ListBase
   }
 
   /**
-      Emitted when a cell has been activated by the user,
-    usually via activating the GtkGridView|list.activate-item action.
-    
-    This allows for a convenient way to handle activation in a gridview.
-    See [gtk.list_item.ListItem.gboolean] for details on how to use
-    this signal.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B position)       position of item to activate
-      * $(B gridView) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(uint position, gtk.grid_view.GridView gridView);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(uint position, gtk.grid_view.GridView gridView);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a cell has been activated by the user,
+      usually via activating the GtkGridView|list.activate-item action.
+      
+      This allows for a convenient way to handle activation in a gridview.
+      See [gtk.list_item.ListItem.gboolean] for details on how to use
+      this signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(uint position, gtk.grid_view.GridView gridView))
+  
+          `position` position of item to activate (optional)
+  
+          `gridView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.grid_view.GridView)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gridView = getVal!(gtk.grid_view.GridView)(_paramVals);
-      auto position = getVal!(uint)(&_paramVals[1]);
-      _dClosure.dlg(position, gridView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

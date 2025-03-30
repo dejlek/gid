@@ -1,3 +1,4 @@
+/// Module for [CapsFeatures] class
 module gst.caps_features;
 
 import gid.gid;
@@ -9,43 +10,47 @@ import gst.types;
 
 /**
     #GstCapsFeatures can optionally be set on a #GstCaps to add requirements
-  for additional features for a specific #GstStructure. Caps structures with
-  the same name but with a non-equal set of caps features are not compatible.
-  If a pad supports multiple sets of features it has to add multiple equal
-  structures with different feature sets to the caps.
-  
-  Empty #GstCapsFeatures are equivalent with the #GstCapsFeatures that only
-  contain #GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY. ANY #GstCapsFeatures as
-  created by [gst.caps_features.CapsFeatures.newAny] are equal to any other #GstCapsFeatures
-  and can be used to specify that any #GstCapsFeatures would be supported, e.g.
-  for elements that don't touch buffer memory. #GstCaps with ANY #GstCapsFeatures
-  are considered non-fixed and during negotiation some #GstCapsFeatures have
-  to be selected.
-  
-  Examples for caps features would be the requirement of a specific #GstMemory
-  types or the requirement of having a specific #GstMeta on the buffer. Features
-  are given as a string of the format `memory:GstMemoryTypeName` or
-  `meta:GstMetaAPIName`.
+    for additional features for a specific #GstStructure. Caps structures with
+    the same name but with a non-equal set of caps features are not compatible.
+    If a pad supports multiple sets of features it has to add multiple equal
+    structures with different feature sets to the caps.
+    
+    Empty #GstCapsFeatures are equivalent with the #GstCapsFeatures that only
+    contain #GST_CAPS_FEATURE_MEMORY_SYSTEM_MEMORY. ANY #GstCapsFeatures as
+    created by [gst.caps_features.CapsFeatures.newAny] are equal to any other #GstCapsFeatures
+    and can be used to specify that any #GstCapsFeatures would be supported, e.g.
+    for elements that don't touch buffer memory. #GstCaps with ANY #GstCapsFeatures
+    are considered non-fixed and during negotiation some #GstCapsFeatures have
+    to be selected.
+    
+    Examples for caps features would be the requirement of a specific #GstMemory
+    types or the requirement of having a specific #GstMeta on the buffer. Features
+    are given as a string of the format `memory:GstMemoryTypeName` or
+    `meta:GstMetaAPIName`.
 */
 class CapsFeatures : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_caps_features_get_type != &gidSymbolNotFound ? gst_caps_features_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -58,9 +63,9 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Creates a new, ANY #GstCapsFeatures. This will be equal
-    to any other #GstCapsFeatures but caps with these are
-    unfixed.
-    Returns:     a new, ANY #GstCapsFeatures
+      to any other #GstCapsFeatures but caps with these are
+      unfixed.
+      Returns: a new, ANY #GstCapsFeatures
   */
   static gst.caps_features.CapsFeatures newAny()
   {
@@ -72,7 +77,7 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Creates a new, empty #GstCapsFeatures.
-    Returns:     a new, empty #GstCapsFeatures
+      Returns: a new, empty #GstCapsFeatures
   */
   static gst.caps_features.CapsFeatures newEmpty()
   {
@@ -84,9 +89,10 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Creates a new #GstCapsFeatures with a single feature.
-    Params:
-      feature =       The feature
-    Returns:     a new #GstCapsFeatures
+  
+      Params:
+        feature = The feature
+      Returns: a new #GstCapsFeatures
   */
   static gst.caps_features.CapsFeatures newSingle(string feature)
   {
@@ -99,8 +105,9 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Adds feature to features.
-    Params:
-      feature =       a feature.
+  
+      Params:
+        feature = a feature.
   */
   void add(string feature)
   {
@@ -110,8 +117,9 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Adds feature to features.
-    Params:
-      feature =       a feature.
+  
+      Params:
+        feature = a feature.
   */
   void addId(glib.types.Quark feature)
   {
@@ -120,9 +128,10 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Checks if features contains feature.
-    Params:
-      feature =       a feature
-    Returns:     true if features contains feature.
+  
+      Params:
+        feature = a feature
+      Returns: true if features contains feature.
   */
   bool contains(string feature)
   {
@@ -134,9 +143,10 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Checks if features contains feature.
-    Params:
-      feature =       a feature
-    Returns:     true if features contains feature.
+  
+      Params:
+        feature = a feature
+      Returns: true if features contains feature.
   */
   bool containsId(glib.types.Quark feature)
   {
@@ -147,7 +157,7 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Duplicates a #GstCapsFeatures and all its values.
-    Returns:     a new #GstCapsFeatures.
+      Returns: a new #GstCapsFeatures.
   */
   gst.caps_features.CapsFeatures copy()
   {
@@ -158,10 +168,11 @@ class CapsFeatures : gobject.boxed.Boxed
   }
 
   /**
-      Returns the i-th feature of features.
-    Params:
-      i =       index of the feature
-    Returns:     The i-th feature of features.
+      Returns the `i`-th feature of features.
+  
+      Params:
+        i = index of the feature
+      Returns: The `i`-th feature of features.
   */
   string getNth(uint i)
   {
@@ -172,10 +183,11 @@ class CapsFeatures : gobject.boxed.Boxed
   }
 
   /**
-      Returns the i-th feature of features.
-    Params:
-      i =       index of the feature
-    Returns:     The i-th feature of features.
+      Returns the `i`-th feature of features.
+  
+      Params:
+        i = index of the feature
+      Returns: The `i`-th feature of features.
   */
   glib.types.Quark getNthId(uint i)
   {
@@ -186,7 +198,7 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Returns the number of features in features.
-    Returns:     The number of features in features.
+      Returns: The number of features in features.
   */
   uint getSize()
   {
@@ -197,7 +209,7 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Checks if features is `GST_CAPS_FEATURES_ANY`.
-    Returns:     true if features is `GST_CAPS_FEATURES_ANY`.
+      Returns: true if features is `GST_CAPS_FEATURES_ANY`.
   */
   bool isAny()
   {
@@ -208,9 +220,10 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Checks if features1 and features2 are equal.
-    Params:
-      features2 =       a #GstCapsFeatures.
-    Returns:     true if features1 and features2 are equal.
+  
+      Params:
+        features2 = a #GstCapsFeatures.
+      Returns: true if features1 and features2 are equal.
   */
   bool isEqual(gst.caps_features.CapsFeatures features2)
   {
@@ -221,8 +234,9 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Removes feature from features.
-    Params:
-      feature =       a feature.
+  
+      Params:
+        feature = a feature.
   */
   void remove(string feature)
   {
@@ -232,8 +246,9 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Removes feature from features.
-    Params:
-      feature =       a feature.
+  
+      Params:
+        feature = a feature.
   */
   void removeId(glib.types.Quark feature)
   {
@@ -242,15 +257,15 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Converts features to a human-readable string representation.
-    
-    For debugging purposes its easier to do something like this:
-    
-    ``` C
-    GST_LOG ("features is %" GST_PTR_FORMAT, features);
-    ```
-    
-    This prints the features in human readable form.
-    Returns:     a pointer to string allocated by [glib.global.gmalloc].
+      
+      For debugging purposes its easier to do something like this:
+      
+      ``` C
+      GST_LOG ("features is %" GST_PTR_FORMAT, features);
+      ```
+      
+      This prints the features in human readable form.
+      Returns: a pointer to string allocated by [glib.global.gmalloc].
   */
   string toString_()
   {
@@ -262,10 +277,11 @@ class CapsFeatures : gobject.boxed.Boxed
 
   /**
       Creates a #GstCapsFeatures from a string representation.
-    Params:
-      features =       a string representation of a #GstCapsFeatures.
-    Returns:     a new #GstCapsFeatures or
-          null when the string could not be parsed.
+  
+      Params:
+        features = a string representation of a #GstCapsFeatures.
+      Returns: a new #GstCapsFeatures or
+            null when the string could not be parsed.
   */
   static gst.caps_features.CapsFeatures fromString(string features)
   {

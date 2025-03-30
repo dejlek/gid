@@ -1,3 +1,4 @@
+/// Module for [Rectangle] class
 module atk.rectangle;
 
 import atk.c.functions;
@@ -8,32 +9,37 @@ import gobject.boxed;
 
 /**
     A data structure for holding a rectangle. Those coordinates are
-  relative to the component top-level parent.
+    relative to the component top-level parent.
 */
 class Rectangle : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(AtkRectangle.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_rectangle_get_type != &gidSymbolNotFound ? atk_rectangle_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

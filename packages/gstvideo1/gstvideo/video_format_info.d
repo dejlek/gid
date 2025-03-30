@@ -1,3 +1,4 @@
+/// Module for [VideoFormatInfo] class
 module gstvideo.video_format_info;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class VideoFormatInfo
 {
   GstVideoFormatInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class VideoFormatInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -152,11 +155,12 @@ class VideoFormatInfo
 
   /**
       Fill components with the number of all the components packed in plane p
-    for the format info. A value of -1 in components indicates that no more
-    components are packed in the plane.
-    Params:
-      plane =       a plane number
-      components =       array used to store component numbers
+      for the format info. A value of -1 in components indicates that no more
+      components are packed in the plane.
+  
+      Params:
+        plane = a plane number
+        components = array used to store component numbers
   */
   void component(uint plane, out int components)
   {
@@ -165,11 +169,12 @@ class VideoFormatInfo
 
   /**
       Extrapolate plane stride from the first stride of an image. This helper is
-    useful to support legacy API were only one stride is supported.
-    Params:
-      plane =       a plane number
-      stride =       The fist plane stride
-    Returns:     The extrapolated stride for plane
+      useful to support legacy API were only one stride is supported.
+  
+      Params:
+        plane = a plane number
+        stride = The fist plane stride
+      Returns: The extrapolated stride for plane
   */
   int extrapolateStride(int plane, int stride)
   {

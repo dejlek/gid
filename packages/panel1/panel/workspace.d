@@ -1,3 +1,4 @@
+/// Module for [Workspace] class
 module panel.workspace;
 
 import adw.application_window;
@@ -32,17 +33,20 @@ import panel.workbench;
 class Workspace : adw.application_window.ApplicationWindow
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_workspace_get_type != &gidSymbolNotFound ? panel_workspace_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

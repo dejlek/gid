@@ -1,3 +1,4 @@
+/// Module for [ShortcutsShortcut] class
 module gtk.shortcuts_shortcut;
 
 import gid.gid;
@@ -14,24 +15,27 @@ import gtk.widget;
 
 /**
     A [gtk.shortcuts_shortcut.ShortcutsShortcut] represents a single keyboard shortcut or gesture
-  with a short text.
-  
-  This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
+    with a short text.
+    
+    This widget is only meant to be used with [gtk.shortcuts_window.ShortcutsWindow].
 */
 class ShortcutsShortcut : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_shortcut_get_type != &gidSymbolNotFound ? gtk_shortcuts_shortcut_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

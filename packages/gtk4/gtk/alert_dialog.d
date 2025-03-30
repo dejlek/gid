@@ -1,3 +1,4 @@
+/// Module for [AlertDialog] class
 module gtk.alert_dialog;
 
 import gid.gid;
@@ -13,29 +14,32 @@ import gtk.window;
 
 /**
     A [gtk.alert_dialog.AlertDialog] object collects the arguments that
-  are needed to present a message to the user.
-  
-  The message is shown with the [gtk.alert_dialog.AlertDialog.choose]
-  function. This API follows the GIO async pattern, and the result can
-  be obtained by calling [gtk.alert_dialog.AlertDialog.chooseFinish].
-  
-  If you don't need to wait for a button to be clicked, you can use
-  [gtk.alert_dialog.AlertDialog.show].
+    are needed to present a message to the user.
+    
+    The message is shown with the [gtk.alert_dialog.AlertDialog.choose]
+    function. This API follows the GIO async pattern, and the result can
+    be obtained by calling [gtk.alert_dialog.AlertDialog.chooseFinish].
+    
+    If you don't need to wait for a button to be clicked, you can use
+    [gtk.alert_dialog.AlertDialog.show].
 */
 class AlertDialog : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alert_dialog_get_type != &gidSymbolNotFound ? gtk_alert_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,18 +52,19 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       This function shows the alert to the user.
-    
-    The callback will be called when the alert is dismissed.
-    It should call [gtk.alert_dialog.AlertDialog.chooseFinish]
-    to obtain the result.
-    
-    It is ok to pass `NULL` for the callback if the alert
-    does not have more than one button. A simpler API for
-    this case is [gtk.alert_dialog.AlertDialog.show].
-    Params:
-      parent =       the parent [gtk.window.Window]
-      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
-      callback =       a callback to call when the operation is complete
+      
+      The callback will be called when the alert is dismissed.
+      It should call [gtk.alert_dialog.AlertDialog.chooseFinish]
+      to obtain the result.
+      
+      It is ok to pass `NULL` for the callback if the alert
+      does not have more than one button. A simpler API for
+      this case is [gtk.alert_dialog.AlertDialog.show].
+  
+      Params:
+        parent = the parent [gtk.window.Window]
+        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
   */
   void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -78,12 +83,13 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Finishes the [gtk.alert_dialog.AlertDialog.choose] call
-    and returns the index of the button that was clicked.
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     the index of the button that was clicked, or -1 if
-        the dialog was cancelled and `propertyGtk.AlertDialog:cancel-button`
-        is not set
+      and returns the index of the button that was clicked.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: the index of the button that was clicked, or -1 if
+          the dialog was cancelled and `propertyGtk.AlertDialog:cancel-button`
+          is not set
   */
   int chooseFinish(gio.async_result.AsyncResult result)
   {
@@ -97,7 +103,7 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns the button labels for the alert.
-    Returns:     the button labels
+      Returns: the button labels
   */
   string[] getButtons()
   {
@@ -119,7 +125,7 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns the index of the cancel button.
-    Returns:     the index of the cancel button, or -1
+      Returns: the index of the cancel button, or -1
   */
   int getCancelButton()
   {
@@ -130,7 +136,7 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns the index of the default button.
-    Returns:     the index of the default button, or -1
+      Returns: the index of the default button, or -1
   */
   int getDefaultButton()
   {
@@ -141,7 +147,7 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns the detail text that will be shown in the alert.
-    Returns:     the detail text
+      Returns: the detail text
   */
   string getDetail()
   {
@@ -153,7 +159,7 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns the message that will be shown in the alert.
-    Returns:     the message
+      Returns: the message
   */
   string getMessage()
   {
@@ -165,8 +171,8 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Returns whether the alert blocks interaction
-    with the parent window while it is presented.
-    Returns:     `TRUE` if the alert is modal
+      with the parent window while it is presented.
+      Returns: `TRUE` if the alert is modal
   */
   bool getModal()
   {
@@ -177,8 +183,9 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets the button labels for the alert.
-    Params:
-      labels =       the new button labels
+  
+      Params:
+        labels = the new button labels
   */
   void setButtons(string[] labels)
   {
@@ -192,11 +199,12 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets the index of the cancel button.
-    
-    See `propertyGtk.AlertDialog:cancel-button` for
-    details of how this value is used.
-    Params:
-      button =       the new cancel button
+      
+      See `propertyGtk.AlertDialog:cancel-button` for
+      details of how this value is used.
+  
+      Params:
+        button = the new cancel button
   */
   void setCancelButton(int button)
   {
@@ -205,11 +213,12 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets the index of the default button.
-    
-    See `propertyGtk.AlertDialog:default-button` for
-    details of how this value is used.
-    Params:
-      button =       the new default button
+      
+      See `propertyGtk.AlertDialog:default-button` for
+      details of how this value is used.
+  
+      Params:
+        button = the new default button
   */
   void setDefaultButton(int button)
   {
@@ -218,8 +227,9 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets the detail text that will be shown in the alert.
-    Params:
-      detail =       the new detail text
+  
+      Params:
+        detail = the new detail text
   */
   void setDetail(string detail)
   {
@@ -229,8 +239,9 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets the message that will be shown in the alert.
-    Params:
-      message =       the new message
+  
+      Params:
+        message = the new message
   */
   void setMessage(string message)
   {
@@ -240,9 +251,10 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Sets whether the alert blocks interaction
-    with the parent window while it is presented.
-    Params:
-      modal =       the new value
+      with the parent window while it is presented.
+  
+      Params:
+        modal = the new value
   */
   void setModal(bool modal)
   {
@@ -251,14 +263,15 @@ class AlertDialog : gobject.object.ObjectG
 
   /**
       Show the alert to the user.
-    
-    This function is a simple version of [gtk.alert_dialog.AlertDialog.choose]
-    intended for dialogs with a single button.
-    If you want to cancel the dialog or if the alert has more than one button,
-    you should use that function instead and provide it with a #GCancellable or
-    callback respectively.
-    Params:
-      parent =       the parent [gtk.window.Window]
+      
+      This function is a simple version of [gtk.alert_dialog.AlertDialog.choose]
+      intended for dialogs with a single button.
+      If you want to cancel the dialog or if the alert has more than one button,
+      you should use that function instead and provide it with a #GCancellable or
+      callback respectively.
+  
+      Params:
+        parent = the parent [gtk.window.Window]
   */
   void show(gtk.window.Window parent = null)
   {

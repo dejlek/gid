@@ -1,3 +1,4 @@
+/// Module for [ViewStack] class
 module adw.view_stack;
 
 import adw.c.functions;
@@ -17,74 +18,77 @@ import gtk.widget;
 
 /**
     A view container for `class@ViewSwitcher`.
-  
-  [adw.view_stack.ViewStack] is a container which only shows one page at a time.
-  It is typically used to hold an application's main views.
-  
-  It doesn't provide a way to transition between pages.
-  Instead, a separate widget such as `class@ViewSwitcher` can be used with
-  [adw.view_stack.ViewStack] to provide this functionality.
-  
-  [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
-  numbered badge that `class@ViewSwitcher` will use to let users identify which
-  page is which. Set them using the `property@ViewStackPage:title`,
-  `property@ViewStackPage:icon-name`,
-  `property@ViewStackPage:needs-attention`, and
-  `property@ViewStackPage:badge-number` properties.
-  
-  Unlike [gtk.stack.Stack], transitions between views are not animated.
-  
-  [adw.view_stack.ViewStack] maintains a `class@ViewStackPage` object for each added child,
-  which holds additional per-child properties. You obtain the
-  `class@ViewStackPage` for a child with [adw.view_stack.ViewStack.getPage] and you
-  can obtain a [gtk.selection_model.SelectionModel] containing all the pages with
-  [adw.view_stack.ViewStack.getPages].
-  
-  ## AdwViewStack as GtkBuildable
-  
-  To set child-specific properties in a .ui file, create
-  `class@ViewStackPage` objects explicitly, and set the child widget as a
-  property on it:
-  
-  ```xml
-    <object class="AdwViewStack" id="stack">
-      <child>
-        <object class="AdwViewStackPage">
-          <property name="name">overview</property>
-          <property name="title">Overview</property>
-          <property name="child">
-            <object class="AdwStatusPage">
-              <property name="title">Welcome!</property>
-            </object>
-          </property>
-        </object>
-      </child>
-    </object>
-  ```
-  
-  ## CSS nodes
-  
-  [adw.view_stack.ViewStack] has a single CSS node named `stack`.
-  
-  ## Accessibility
-  
-  [adw.view_stack.ViewStack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack pages
-  which are the accessible parent objects of the child widgets.
+    
+    [adw.view_stack.ViewStack] is a container which only shows one page at a time.
+    It is typically used to hold an application's main views.
+    
+    It doesn't provide a way to transition between pages.
+    Instead, a separate widget such as `class@ViewSwitcher` can be used with
+    [adw.view_stack.ViewStack] to provide this functionality.
+    
+    [adw.view_stack.ViewStack] pages can have a title, an icon, an attention request, and a
+    numbered badge that `class@ViewSwitcher` will use to let users identify which
+    page is which. Set them using the `property@ViewStackPage:title`,
+    `property@ViewStackPage:icon-name`,
+    `property@ViewStackPage:needs-attention`, and
+    `property@ViewStackPage:badge-number` properties.
+    
+    Unlike [gtk.stack.Stack], transitions between views are not animated.
+    
+    [adw.view_stack.ViewStack] maintains a `class@ViewStackPage` object for each added child,
+    which holds additional per-child properties. You obtain the
+    `class@ViewStackPage` for a child with [adw.view_stack.ViewStack.getPage] and you
+    can obtain a [gtk.selection_model.SelectionModel] containing all the pages with
+    [adw.view_stack.ViewStack.getPages].
+    
+    ## AdwViewStack as GtkBuildable
+    
+    To set child-specific properties in a .ui file, create
+    `class@ViewStackPage` objects explicitly, and set the child widget as a
+    property on it:
+    
+    ```xml
+      <object class="AdwViewStack" id="stack">
+        <child>
+          <object class="AdwViewStackPage">
+            <property name="name">overview</property>
+            <property name="title">Overview</property>
+            <property name="child">
+              <object class="AdwStatusPage">
+                <property name="title">Welcome!</property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    ```
+    
+    ## CSS nodes
+    
+    [adw.view_stack.ViewStack] has a single CSS node named `stack`.
+    
+    ## Accessibility
+    
+    [adw.view_stack.ViewStack] uses the [gtk.types.AccessibleRole.TabPanel] for the stack pages
+    which are the accessible parent objects of the child widgets.
 */
 class ViewStack : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_get_type != &gidSymbolNotFound ? adw_view_stack_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -97,7 +101,7 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Creates a new [adw.view_stack.ViewStack].
-    Returns:     the newly created [adw.view_stack.ViewStack]
+      Returns: the newly created [adw.view_stack.ViewStack]
   */
   this()
   {
@@ -108,9 +112,10 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Adds a child to self.
-    Params:
-      child =       the widget to add
-    Returns:     the `classViewStackPage` for child
+  
+      Params:
+        child = the widget to add
+      Returns: the `classViewStackPage` for child
   */
   adw.view_stack_page.ViewStackPage add(gtk.widget.Widget child)
   {
@@ -122,12 +127,13 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Adds a child to self.
-    
-    The child is identified by the name.
-    Params:
-      child =       the widget to add
-      name =       the name for child
-    Returns:     the [adw.view_stack_page.ViewStackPage] for child
+      
+      The child is identified by the name.
+  
+      Params:
+        child = the widget to add
+        name = the name for child
+      Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
   adw.view_stack_page.ViewStackPage addNamed(gtk.widget.Widget child, string name = null)
   {
@@ -140,14 +146,15 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Adds a child to self.
-    
-    The child is identified by the name. The title will be used by
-    `classViewSwitcher` to represent child, so it should be short.
-    Params:
-      child =       the widget to add
-      name =       the name for child
-      title =       a human-readable title for child
-    Returns:     the [adw.view_stack_page.ViewStackPage] for child
+      
+      The child is identified by the name. The title will be used by
+      `classViewSwitcher` to represent child, so it should be short.
+  
+      Params:
+        child = the widget to add
+        name = the name for child
+        title = a human-readable title for child
+      Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
   adw.view_stack_page.ViewStackPage addTitled(gtk.widget.Widget child, string name, string title)
   {
@@ -161,15 +168,16 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Adds a child to self.
-    
-    The child is identified by the name. The title and icon_name will be used
-    by `classViewSwitcher` to represent child.
-    Params:
-      child =       the widget to add
-      name =       the name for child
-      title =       a human-readable title for child
-      iconName =       an icon name for child
-    Returns:     the [adw.view_stack_page.ViewStackPage] for child
+      
+      The child is identified by the name. The title and icon_name will be used
+      by `classViewSwitcher` to represent child.
+  
+      Params:
+        child = the widget to add
+        name = the name for child
+        title = a human-readable title for child
+        iconName = an icon name for child
+      Returns: the [adw.view_stack_page.ViewStackPage] for child
   */
   adw.view_stack_page.ViewStackPage addTitledWithIcon(gtk.widget.Widget child, string name, string title, string iconName)
   {
@@ -184,9 +192,10 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Finds the child with name in self.
-    Params:
-      name =       the name of the child to find
-    Returns:     the requested child
+  
+      Params:
+        name = the name of the child to find
+      Returns: the requested child
   */
   gtk.widget.Widget getChildByName(string name)
   {
@@ -199,7 +208,7 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Gets whether self is horizontally homogeneous.
-    Returns:     whether self is horizontally homogeneous
+      Returns: whether self is horizontally homogeneous
   */
   bool getHhomogeneous()
   {
@@ -210,9 +219,10 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Gets the `classViewStackPage` object for child.
-    Params:
-      child =       a child of self
-    Returns:     the page object for child
+  
+      Params:
+        child = a child of self
+      Returns: the page object for child
   */
   adw.view_stack_page.ViewStackPage getPage(gtk.widget.Widget child)
   {
@@ -224,11 +234,11 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Returns a [gio.list_model.ListModel] that contains the pages of the stack.
-    
-    This can be used to keep an up-to-date view. The model also implements
-    [gtk.selection_model.SelectionModel] and can be used to track and change the visible
-    page.
-    Returns:     a [gtk.selection_model.SelectionModel] for the stack's children
+      
+      This can be used to keep an up-to-date view. The model also implements
+      [gtk.selection_model.SelectionModel] and can be used to track and change the visible
+      page.
+      Returns: a [gtk.selection_model.SelectionModel] for the stack's children
   */
   gtk.selection_model.SelectionModel getPages()
   {
@@ -240,7 +250,7 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Gets whether self is vertically homogeneous.
-    Returns:     whether self is vertically homogeneous
+      Returns: whether self is vertically homogeneous
   */
   bool getVhomogeneous()
   {
@@ -251,7 +261,7 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Gets the currently visible child of self.
-    Returns:     the visible child
+      Returns: the visible child
   */
   gtk.widget.Widget getVisibleChild()
   {
@@ -263,7 +273,7 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Returns the name of the currently visible child of self.
-    Returns:     the name of the visible child
+      Returns: the name of the visible child
   */
   string getVisibleChildName()
   {
@@ -275,8 +285,9 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Removes a child widget from self.
-    Params:
-      child =       the child to remove
+  
+      Params:
+        child = the child to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -285,14 +296,15 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Sets self to be horizontally homogeneous or not.
-    
-    If the stack is horizontally homogeneous, it allocates the same width for
-    all children.
-    
-    If it's `FALSE`, the stack may change width when a different child becomes
-    visible.
-    Params:
-      hhomogeneous =       whether to make self horizontally homogeneous
+      
+      If the stack is horizontally homogeneous, it allocates the same width for
+      all children.
+      
+      If it's `FALSE`, the stack may change width when a different child becomes
+      visible.
+  
+      Params:
+        hhomogeneous = whether to make self horizontally homogeneous
   */
   void setHhomogeneous(bool hhomogeneous)
   {
@@ -301,14 +313,15 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Sets self to be vertically homogeneous or not.
-    
-    If the stack is vertically homogeneous, it allocates the same height for
-    all children.
-    
-    If it's `FALSE`, the stack may change height when a different child becomes
-    visible.
-    Params:
-      vhomogeneous =       whether to make self vertically homogeneous
+      
+      If the stack is vertically homogeneous, it allocates the same height for
+      all children.
+      
+      If it's `FALSE`, the stack may change height when a different child becomes
+      visible.
+  
+      Params:
+        vhomogeneous = whether to make self vertically homogeneous
   */
   void setVhomogeneous(bool vhomogeneous)
   {
@@ -317,8 +330,9 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Makes child the visible child of self.
-    Params:
-      child =       a child of self
+  
+      Params:
+        child = a child of self
   */
   void setVisibleChild(gtk.widget.Widget child)
   {
@@ -327,10 +341,11 @@ class ViewStack : gtk.widget.Widget
 
   /**
       Makes the child with name visible.
-    
-    See `propertyViewStack:visible-child`.
-    Params:
-      name =       the name of the child
+      
+      See `propertyViewStack:visible-child`.
+  
+      Params:
+        name = the name of the child
   */
   void setVisibleChildName(string name)
   {

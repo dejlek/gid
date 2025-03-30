@@ -1,3 +1,4 @@
+/// Module for [Emblem] class
 module gio.emblem;
 
 import gid.gid;
@@ -10,26 +11,29 @@ import gobject.object;
 
 /**
     [gio.emblem.Emblem] is an implementation of [gio.icon.Icon] that supports
-  having an emblem, which is an icon with additional properties.
-  It can than be added to a [gio.emblemed_icon.EmblemedIcon].
-  
-  Currently, only metainformation about the emblem's origin is
-  supported. More may be added in the future.
+    having an emblem, which is an icon with additional properties.
+    It can than be added to a [gio.emblemed_icon.EmblemedIcon].
+    
+    Currently, only metainformation about the emblem's origin is
+    supported. More may be added in the future.
 */
 class Emblem : gobject.object.ObjectG, gio.icon.Icon
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblem_get_type != &gidSymbolNotFound ? g_emblem_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,9 +48,10 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new emblem for icon.
-    Params:
-      icon =       a GIcon containing the icon.
-    Returns:     a new #GEmblem.
+  
+      Params:
+        icon = a GIcon containing the icon.
+      Returns: a new #GEmblem.
   */
   this(gio.icon.Icon icon)
   {
@@ -57,10 +62,11 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new emblem for icon.
-    Params:
-      icon =       a GIcon containing the icon.
-      origin =       a GEmblemOrigin enum defining the emblem's origin
-    Returns:     a new #GEmblem.
+  
+      Params:
+        icon = a GIcon containing the icon.
+        origin = a GEmblemOrigin enum defining the emblem's origin
+      Returns: a new #GEmblem.
   */
   static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin)
   {
@@ -72,8 +78,8 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Gives back the icon from emblem.
-    Returns:     a #GIcon. The returned object belongs to
-               the emblem and should not be modified or freed.
+      Returns: a #GIcon. The returned object belongs to
+                 the emblem and should not be modified or freed.
   */
   gio.icon.Icon getIcon()
   {
@@ -85,7 +91,7 @@ class Emblem : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Gets the origin of the emblem.
-    Returns:     the origin of the emblem
+      Returns: the origin of the emblem
   */
   gio.types.EmblemOrigin getOrigin()
   {

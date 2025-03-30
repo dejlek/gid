@@ -1,3 +1,4 @@
+/// Module for [AudioFormatInfo] class
 module gstaudio.audio_format_info;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class AudioFormatInfo
 {
   GstAudioFormatInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class AudioFormatInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -112,9 +115,10 @@ class AudioFormatInfo
 
   /**
       Fill length bytes in dest with silence samples for info.
-    Params:
-      dest =       a destination
-          to fill
+  
+      Params:
+        dest = a destination
+            to fill
   */
   void fillSilence(ubyte[] dest)
   {

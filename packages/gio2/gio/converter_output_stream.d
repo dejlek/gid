@@ -1,3 +1,4 @@
+/// Module for [ConverterOutputStream] class
 module gio.converter_output_stream;
 
 import gid.gid;
@@ -13,25 +14,28 @@ import gobject.object;
 
 /**
     Converter output stream implements [gio.output_stream.OutputStream] and allows
-  conversion of data of various types during reading.
-  
-  As of GLib 2.34, [gio.converter_output_stream.ConverterOutputStream] implements
-  [gio.pollable_output_stream.PollableOutputStream].
+    conversion of data of various types during reading.
+    
+    As of GLib 2.34, [gio.converter_output_stream.ConverterOutputStream] implements
+    [gio.pollable_output_stream.PollableOutputStream].
 */
 class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.pollable_output_stream.PollableOutputStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_output_stream_get_type != &gidSymbolNotFound ? g_converter_output_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,10 +50,11 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
 
   /**
       Creates a new converter output stream for the base_stream.
-    Params:
-      baseStream =       a #GOutputStream
-      converter =       a #GConverter
-    Returns:     a new #GOutputStream.
+  
+      Params:
+        baseStream = a #GOutputStream
+        converter = a #GConverter
+      Returns: a new #GOutputStream.
   */
   this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
   {
@@ -60,7 +65,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
 
   /**
       Gets the #GConverter that is used by converter_stream.
-    Returns:     the converter of the converter output stream
+      Returns: the converter of the converter output stream
   */
   gio.converter.Converter getConverter()
   {

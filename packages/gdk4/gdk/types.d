@@ -1,3 +1,4 @@
+/// D types for gdk4 library
 module gdk.types;
 
 import gdk.c.functions;
@@ -114,37 +115,33 @@ alias TimeCoord = GdkTimeCoord;
 
 /**
     The type of a function that can be registered with [gdk.global.contentRegisterDeserializer].
-  
-  When the function gets called to operate on content, it can call functions on the
-  deserializer object to obtain the mime type, input stream, user data, etc. for its
-  operation.
+    
+    When the function gets called to operate on content, it can call functions on the
+    deserializer object to obtain the mime type, input stream, user data, etc. for its
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B deserializer)       a [gdk.content_deserializer.ContentDeserializer]
-  )
+    Params:
+      deserializer = a [gdk.content_deserializer.ContentDeserializer]
 */
 alias ContentDeserializeFunc = void delegate(gdk.content_deserializer.ContentDeserializer deserializer);
 
 /**
     The type of a function that can be registered with [gdk.global.contentRegisterSerializer].
-  
-  When the function gets called to operate on content, it can call functions on the
-  serializer object to obtain the mime type, output stream, user data, etc. for its
-  operation.
+    
+    When the function gets called to operate on content, it can call functions on the
+    serializer object to obtain the mime type, output stream, user data, etc. for its
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B serializer)       a [gdk.content_serializer.ContentSerializer]
-  )
+    Params:
+      serializer = a [gdk.content_serializer.ContentSerializer]
 */
 alias ContentSerializeFunc = void delegate(gdk.content_serializer.ContentSerializer serializer);
 
 /**
     Defines all possible DND actions.
-  
-  This can be used in [gdk.drop.Drop.status] messages when any drop
-  can be accepted or a more specific drop method is not yet known.
+    
+    This can be used in [gdk.drop.Drop.status] messages when any drop
+    can be accepted or a more specific drop method is not yet known.
 */
 enum ACTION_ALL = 7;
 
@@ -155,13 +152,13 @@ enum BUTTON_MIDDLE = 2;
 
 /**
     The primary button. This is typically the left mouse button, or the
-  right button in a left-handed setup.
+    right button in a left-handed setup.
 */
 enum BUTTON_PRIMARY = 1;
 
 /**
     The secondary button. This is typically the right mouse button, or the
-  left button in a left-handed setup.
+    left button in a left-handed setup.
 */
 enum BUTTON_SECONDARY = 3;
 
@@ -172,13 +169,13 @@ enum CURRENT_TIME = 0;
 
 /**
     Use this macro as the return value for continuing the propagation of
-  an event handler.
+    an event handler.
 */
 enum EVENT_PROPAGATE = false;
 
 /**
     Use this macro as the return value for stopping the propagation of
-  an event handler.
+    an event handler.
 */
 enum EVENT_STOP = true;
 
@@ -7023,6 +7020,6 @@ enum MODIFIER_MASK = 469769999;
 
 /**
     This is the priority that the idle handler processing surface updates
-  is given in the main loop.
+    is given in the main loop.
 */
 enum PRIORITY_REDRAW = 120;

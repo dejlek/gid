@@ -1,3 +1,4 @@
+/// Global functions for gst1 library
 module gst.global;
 
 import gid.gid;
@@ -26,9 +27,10 @@ import gst.types;
 
 /**
     Adds the logging function to the list of logging functions.
-  Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.
-  Params:
-    func =       the function to use
+    Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.
+
+    Params:
+      func = the function to use
 */
 void debugAddLogFunction(gst.types.LogFunction func)
 {
@@ -49,15 +51,16 @@ void debugAddLogFunction(gst.types.LogFunction func)
 
 /**
     Adds a memory ringbuffer based debug logger that stores up to
-  max_size_per_thread bytes of logs per thread and times out threads after
-  thread_timeout seconds of inactivity.
-  
-  Logs can be fetched with [gst.global.debugRingBufferLoggerGetLogs] and the
-  logger can be removed again with [gst.global.debugRemoveRingBufferLogger].
-  Only one logger at a time is possible.
-  Params:
-    maxSizePerThread =       Maximum size of log per thread in bytes
-    threadTimeout =       Timeout for threads in seconds
+    max_size_per_thread bytes of logs per thread and times out threads after
+    thread_timeout seconds of inactivity.
+    
+    Logs can be fetched with [gst.global.debugRingBufferLoggerGetLogs] and the
+    logger can be removed again with [gst.global.debugRemoveRingBufferLogger].
+    Only one logger at a time is possible.
+
+    Params:
+      maxSizePerThread = Maximum size of log per thread in bytes
+      threadTimeout = Timeout for threads in seconds
 */
 void debugAddRingBufferLogger(uint maxSizePerThread, uint threadTimeout)
 {
@@ -66,13 +69,14 @@ void debugAddRingBufferLogger(uint maxSizePerThread, uint threadTimeout)
 
 /**
     To aid debugging applications one can use this method to obtain the whole
-  network of gstreamer elements that form the pipeline into a dot file.
-  This data can be processed with graphviz to get an image.
-  Params:
-    bin =       the top-level pipeline that should be analyzed
-    details =       type of #GstDebugGraphDetails to use
-  Returns:     a string containing the pipeline in graphviz
-    dot format.
+    network of gstreamer elements that form the pipeline into a dot file.
+    This data can be processed with graphviz to get an image.
+
+    Params:
+      bin = the top-level pipeline that should be analyzed
+      details = type of #GstDebugGraphDetails to use
+    Returns: a string containing the pipeline in graphviz
+      dot format.
 */
 string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details)
 {
@@ -84,16 +88,17 @@ string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details)
 
 /**
     To aid debugging applications one can use this method to write out the whole
-  network of gstreamer elements that form the pipeline into a dot file.
-  This file can be processed with graphviz to get an image.
-  
-  ``` shell
-   dot -Tpng -oimage.png graph_lowlevel.dot
-  ```
-  Params:
-    bin =       the top-level pipeline that should be analyzed
-    details =       type of #GstDebugGraphDetails to use
-    fileName =       output base filename (e.g. "myplayer")
+    network of gstreamer elements that form the pipeline into a dot file.
+    This file can be processed with graphviz to get an image.
+    
+    ``` shell
+     dot -Tpng -oimage.png graph_lowlevel.dot
+    ```
+
+    Params:
+      bin = the top-level pipeline that should be analyzed
+      details = type of #GstDebugGraphDetails to use
+      fileName = output base filename (e.g. "myplayer")
 */
 void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName)
 {
@@ -103,11 +108,12 @@ void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, str
 
 /**
     This works like [gst.global.debugBinToDotFile], but adds the current timestamp
-  to the filename, so that it can be used to take multiple snapshots.
-  Params:
-    bin =       the top-level pipeline that should be analyzed
-    details =       type of #GstDebugGraphDetails to use
-    fileName =       output base filename (e.g. "myplayer")
+    to the filename, so that it can be used to take multiple snapshots.
+
+    Params:
+      bin = the top-level pipeline that should be analyzed
+      details = type of #GstDebugGraphDetails to use
+      fileName = output base filename (e.g. "myplayer")
 */
 void debugBinToDotFileWithTs(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName)
 {
@@ -117,12 +123,13 @@ void debugBinToDotFileWithTs(gst.bin.Bin bin, gst.types.DebugGraphDetails detail
 
 /**
     Constructs a string that can be used for getting the desired color in color
-  terminals.
-  You need to free the string after use.
-  Params:
-    colorinfo =       the color info
-  Returns:     a string containing the color
-        definition
+    terminals.
+    You need to free the string after use.
+
+    Params:
+      colorinfo = the color info
+    Returns: a string containing the color
+          definition
 */
 string debugConstructTermColor(uint colorinfo)
 {
@@ -134,13 +141,14 @@ string debugConstructTermColor(uint colorinfo)
 
 /**
     Constructs an integer that can be used for getting the desired color in
-  windows' terminals (cmd.exe). As there is no mean to underline, we simply
-  ignore this attribute.
-  
-  This function returns 0 on non-windows machines.
-  Params:
-    colorinfo =       the color info
-  Returns:     an integer containing the color definition
+    windows' terminals (cmd.exe). As there is no mean to underline, we simply
+    ignore this attribute.
+    
+    This function returns 0 on non-windows machines.
+
+    Params:
+      colorinfo = the color info
+    Returns: an integer containing the color definition
 */
 int debugConstructWinColor(uint colorinfo)
 {
@@ -151,7 +159,7 @@ int debugConstructWinColor(uint colorinfo)
 
 /**
     Changes the coloring mode for debug output.
-  Returns:     see GstDebugColorMode for possible values.
+    Returns: see GstDebugColorMode for possible values.
 */
 gst.types.DebugColorMode debugGetColorMode()
 {
@@ -163,7 +171,7 @@ gst.types.DebugColorMode debugGetColorMode()
 
 /**
     Returns the default threshold that is used for new categories.
-  Returns:     the default threshold level
+    Returns: the default threshold level
 */
 gst.types.DebugLevel debugGetDefaultThreshold()
 {
@@ -184,7 +192,7 @@ string debugGetStackTrace(gst.types.StackTraceFlags flags)
 
 /**
     Checks if debugging output is activated.
-  Returns:     true, if debugging is activated
+    Returns: true, if debugging is activated
 */
 bool debugIsActive()
 {
@@ -195,7 +203,7 @@ bool debugIsActive()
 
 /**
     Checks if the debugging output should be colored.
-  Returns:     true, if the debug output should be colored.
+    Returns: true, if the debug output should be colored.
 */
 bool debugIsColored()
 {
@@ -206,24 +214,25 @@ bool debugIsColored()
 
 /**
     The default logging handler used by GStreamer. Logging functions get called
-  whenever a macro like GST_DEBUG or similar is used. By default this function
-  is setup to output the message and additional info to stderr (or the log file
-  specified via the GST_DEBUG_FILE environment variable) as received via
-  user_data.
-  
-  You can add other handlers by using [gst.global.debugAddLogFunction].
-  And you can remove this handler by calling
-  gst_debug_remove_log_function(gst_debug_log_default);
-  Params:
-    category =       category to log
-    level =       level of the message
-    file =       the file that emitted the message, usually the __FILE__ identifier
-    function_ =       the function that emitted the message
-    line =       the line from that the message was emitted, usually __LINE__
-    object =       the object this message relates to,
-          or null if none
-    message =       the actual message
-    userData =       the FILE* to log to
+    whenever a macro like GST_DEBUG or similar is used. By default this function
+    is setup to output the message and additional info to stderr (or the log file
+    specified via the GST_DEBUG_FILE environment variable) as received via
+    user_data.
+    
+    You can add other handlers by using [gst.global.debugAddLogFunction].
+    And you can remove this handler by calling
+    gst_debug_remove_log_function(gst_debug_log_default);
+
+    Params:
+      category = category to log
+      level = level of the message
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line from that the message was emitted, usually __LINE__
+      object = the object this message relates to,
+            or null if none
+      message = the actual message
+      userData = the FILE* to log to
 */
 void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message, void* userData = null)
 {
@@ -234,20 +243,21 @@ void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugL
 
 /**
     Returns the string representation for the specified debug log message
-  formatted in the same way as [gst.global.debugLogDefault] (the default handler),
-  without color. The purpose is to make it easy for custom log output
-  handlers to get a log output that is identical to what the default handler
-  would write out.
-  Params:
-    category =       category to log
-    level =       level of the message
-    file =       the file that emitted the message, usually the __FILE__ identifier
-    function_ =       the function that emitted the message
-    line =       the line from that the message was emitted, usually __LINE__
-    object =       the object this message relates to,
-          or null if none
-    message =       the actual message
-  Returns: 
+    formatted in the same way as [gst.global.debugLogDefault] (the default handler),
+    without color. The purpose is to make it easy for custom log output
+    handlers to get a log output that is identical to what the default handler
+    would write out.
+
+    Params:
+      category = category to log
+      level = level of the message
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line from that the message was emitted, usually __LINE__
+      object = the object this message relates to,
+            or null if none
+      message = the actual message
+    Returns: 
 */
 string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, gst.debug_message.DebugMessage message)
 {
@@ -261,15 +271,16 @@ string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.Debu
 
 /**
     Logs the given message using the currently registered debugging handlers.
-  Params:
-    category =       category to log
-    level =       level of the message is in
-    file =       the file that emitted the message, usually the __FILE__ identifier
-    function_ =       the function that emitted the message
-    line =       the line from that the message was emitted, usually __LINE__
-    id =       the identifier of the object this message relates to
-         or null if none
-    messageString =       a message string
+
+    Params:
+      category = category to log
+      level = level of the message is in
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line from that the message was emitted, usually __LINE__
+      id = the identifier of the object this message relates to
+           or null if none
+      messageString = a message string
 */
 void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, string id, string messageString)
 {
@@ -282,15 +293,16 @@ void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.Debu
 
 /**
     Logs the given message using the currently registered debugging handlers.
-  Params:
-    category =       category to log
-    level =       level of the message is in
-    file =       the file that emitted the message, usually the __FILE__ identifier
-    function_ =       the function that emitted the message
-    line =       the line from that the message was emitted, usually __LINE__
-    object =       the object this message relates to,
-          or null if none
-    messageString =       a message string
+
+    Params:
+      category = category to log
+      level = level of the message is in
+      file = the file that emitted the message, usually the __FILE__ identifier
+      function_ = the function that emitted the message
+      line = the line from that the message was emitted, usually __LINE__
+      object = the object this message relates to,
+            or null if none
+      messageString = a message string
 */
 void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugLevel level, string file, string function_, int line, gobject.object.ObjectG object, string messageString)
 {
@@ -302,7 +314,7 @@ void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugL
 
 /**
     If libunwind, glibc backtrace or DbgHelp are present
-  a stack trace is printed.
+    a stack trace is printed.
 */
 void debugPrintStackTrace()
 {
@@ -311,10 +323,11 @@ void debugPrintStackTrace()
 
 /**
     Removes all registered instances of the given logging functions.
-  Params:
-    func =       the log function to remove, or null to
-          remove the default log function
-  Returns:     How many instances of the function were removed
+
+    Params:
+      func = the log function to remove, or null to
+            remove the default log function
+    Returns: How many instances of the function were removed
 */
 uint debugRemoveLogFunction(gst.types.LogFunction func = null)
 {
@@ -335,9 +348,10 @@ uint debugRemoveLogFunction(gst.types.LogFunction func = null)
 
 /**
     Removes all registered instances of log functions with the given user data.
-  Params:
-    data =       user data of the log function to remove
-  Returns:     How many instances of the function were removed
+
+    Params:
+      data = user data of the log function to remove
+    Returns: How many instances of the function were removed
 */
 uint debugRemoveLogFunctionByData(void* data = null)
 {
@@ -348,7 +362,7 @@ uint debugRemoveLogFunctionByData(void* data = null)
 
 /**
     Removes any previously added ring buffer logger with
-  [gst.global.debugAddRingBufferLogger].
+    [gst.global.debugAddRingBufferLogger].
 */
 void debugRemoveRingBufferLogger()
 {
@@ -357,9 +371,9 @@ void debugRemoveRingBufferLogger()
 
 /**
     Fetches the current logs per thread from the ring buffer logger. See
-  [gst.global.debugAddRingBufferLogger] for details.
-  Returns:     NULL-terminated array of
-    strings with the debug output per thread
+    [gst.global.debugAddRingBufferLogger] for details.
+    Returns: NULL-terminated array of
+      strings with the debug output per thread
 */
 string[] debugRingBufferLoggerGetLogs()
 {
@@ -381,12 +395,13 @@ string[] debugRingBufferLoggerGetLogs()
 
 /**
     If activated, debugging messages are sent to the debugging
-  handlers.
-  It makes sense to deactivate it for speed issues.
-  > This function is not threadsafe. It makes sense to only call it
-  during initialization.
-  Params:
-    active =       Whether to use debugging output or not
+    handlers.
+    It makes sense to deactivate it for speed issues.
+    > This function is not threadsafe. It makes sense to only call it
+    during initialization.
+
+    Params:
+      active = Whether to use debugging output or not
 */
 void debugSetActive(bool active)
 {
@@ -395,10 +410,11 @@ void debugSetActive(bool active)
 
 /**
     Changes the coloring mode for debug output.
-  
-  This function may be called before [gst.global.init_].
-  Params:
-    mode =       The coloring mode for debug output. See GstDebugColorMode.
+    
+    This function may be called before [gst.global.init_].
+
+    Params:
+      mode = The coloring mode for debug output. See GstDebugColorMode.
 */
 void debugSetColorMode(gst.types.DebugColorMode mode)
 {
@@ -407,11 +423,12 @@ void debugSetColorMode(gst.types.DebugColorMode mode)
 
 /**
     Changes the coloring mode for debug output.
-  
-  This function may be called before [gst.global.init_].
-  Params:
-    mode =       The coloring mode for debug output. One of the following:
-      "on", "auto", "off", "disable", "unix".
+    
+    This function may be called before [gst.global.init_].
+
+    Params:
+      mode = The coloring mode for debug output. One of the following:
+        "on", "auto", "off", "disable", "unix".
 */
 void debugSetColorModeFromString(string mode)
 {
@@ -421,12 +438,13 @@ void debugSetColorModeFromString(string mode)
 
 /**
     Sets or unsets the use of coloured debugging output.
-  Same as gst_debug_set_color_mode () with the argument being
-  being GST_DEBUG_COLOR_MODE_ON or GST_DEBUG_COLOR_MODE_OFF.
-  
-  This function may be called before [gst.global.init_].
-  Params:
-    colored =       Whether to use colored output or not
+    Same as gst_debug_set_color_mode () with the argument being
+    being GST_DEBUG_COLOR_MODE_ON or GST_DEBUG_COLOR_MODE_OFF.
+    
+    This function may be called before [gst.global.init_].
+
+    Params:
+      colored = Whether to use colored output or not
 */
 void debugSetColored(bool colored)
 {
@@ -435,11 +453,12 @@ void debugSetColored(bool colored)
 
 /**
     Sets the default threshold to the given level and updates all categories to
-  use this threshold.
-  
-  This function may be called before [gst.global.init_].
-  Params:
-    level =       level to set
+    use this threshold.
+    
+    This function may be called before [gst.global.init_].
+
+    Params:
+      level = level to set
 */
 void debugSetDefaultThreshold(gst.types.DebugLevel level)
 {
@@ -448,10 +467,11 @@ void debugSetDefaultThreshold(gst.types.DebugLevel level)
 
 /**
     Sets all categories which match the given glob style pattern to the given
-  level.
-  Params:
-    name =       name of the categories to set
-    level =       level to set them to
+    level.
+
+    Params:
+      name = name of the categories to set
+      level = level to set them to
 */
 void debugSetThresholdForName(string name, gst.types.DebugLevel level)
 {
@@ -461,15 +481,16 @@ void debugSetThresholdForName(string name, gst.types.DebugLevel level)
 
 /**
     Sets the debug logging wanted in the same form as with the GST_DEBUG
-  environment variable. You can use wildcards such as `*`, but note that
-  the order matters when you use wild cards, e.g. `foosrc:6,*src:3,*:2` sets
-  everything to log level 2.
-  Params:
-    list =       comma-separated list of "category:level" pairs to be used
-          as debug logging levels
-    reset =       true to clear all previously-set debug levels before setting
-          new thresholds
-      false if adding the threshold described by list to the one already set.
+    environment variable. You can use wildcards such as `*`, but note that
+    the order matters when you use wild cards, e.g. `foosrc:6,*src:3,*:2` sets
+    everything to log level 2.
+
+    Params:
+      list = comma-separated list of "category:level" pairs to be used
+            as debug logging levels
+      reset = true to clear all previously-set debug levels before setting
+            new thresholds
+        false if adding the threshold described by list to the one already set.
 */
 void debugSetThresholdFromString(string list, bool reset)
 {
@@ -479,8 +500,9 @@ void debugSetThresholdFromString(string list, bool reset)
 
 /**
     Resets all categories with the given name back to the default level.
-  Params:
-    name =       name of the categories to set
+
+    Params:
+      name = name of the categories to set
 */
 void debugUnsetThresholdForName(string name)
 {
@@ -490,13 +512,13 @@ void debugUnsetThresholdForName(string name)
 
 /**
     Clean up any resources created by GStreamer in [gst.global.init_].
-  
-  It is normally not needed to call this function in a normal application
-  as the resources will automatically be freed when the program terminates.
-  This function is therefore mostly used by testsuites and other memory
-  profiling tools.
-  
-  After this call GStreamer (including this method) should not be used anymore.
+    
+    It is normally not needed to call this function in a normal application
+    as the resources will automatically be freed when the program terminates.
+    This function is therefore mostly used by testsuites and other memory
+    profiling tools.
+    
+    After this call GStreamer (including this method) should not be used anymore.
 */
 void deinit()
 {
@@ -505,10 +527,11 @@ void deinit()
 
 /**
     Registers a new #GstDynamicTypeFactory in the registry
-  Params:
-    plugin =       The #GstPlugin to register dyn_type for
-    type =       The #GType to register dynamically
-  Returns: 
+
+    Params:
+      plugin = The #GstPlugin to register dyn_type for
+      type = The #GType to register dynamically
+    Returns: 
 */
 bool dynamicTypeRegister(gst.plugin.Plugin plugin, gobject.types.GType type)
 {
@@ -519,11 +542,12 @@ bool dynamicTypeRegister(gst.plugin.Plugin plugin, gobject.types.GType type)
 
 /**
     Get a string describing the error message in the current locale.
-  Params:
-    domain =       the GStreamer error domain this error belongs to.
-    code =       the error code belonging to the domain.
-  Returns:     a newly allocated string describing
-        the error message (in UTF-8 encoding)
+
+    Params:
+      domain = the GStreamer error domain this error belongs to.
+      code = the error code belonging to the domain.
+    Returns: a newly allocated string describing
+          the error message (in UTF-8 encoding)
 */
 string errorGetMessage(glib.types.Quark domain, int code)
 {
@@ -535,15 +559,16 @@ string errorGetMessage(glib.types.Quark domain, int code)
 
 /**
     Similar to [glib.global.filenameToUri], but attempts to handle relative file paths
-  as well. Before converting filename into an URI, it will be prefixed by
-  the current working directory if it is a relative path, and then the path
-  will be canonicalised so that it doesn't contain any './' or '../' segments.
-  
-  On Windows filename should be in UTF-8 encoding.
-  Params:
-    filename =       absolute or relative file name path
-  Returns:     newly-allocated URI string, or NULL on error. The caller must
-      free the URI string with [glib.global.gfree] when no longer needed.
+    as well. Before converting filename into an URI, it will be prefixed by
+    the current working directory if it is a relative path, and then the path
+    will be canonicalised so that it doesn't contain any './' or '../' segments.
+    
+    On Windows filename should be in UTF-8 encoding.
+
+    Params:
+      filename = absolute or relative file name path
+    Returns: newly-allocated URI string, or NULL on error. The caller must
+        free the URI string with [glib.global.gfree] when no longer needed.
 */
 string filenameToUri(string filename)
 {
@@ -559,9 +584,10 @@ string filenameToUri(string filename)
 
 /**
     Gets a string representing the given flow return.
-  Params:
-    ret =       a #GstFlowReturn to get the name of.
-  Returns:     a static string with the name of the flow return.
+
+    Params:
+      ret = a #GstFlowReturn to get the name of.
+    Returns: a static string with the name of the flow return.
 */
 string flowGetName(gst.types.FlowReturn ret)
 {
@@ -573,10 +599,11 @@ string flowGetName(gst.types.FlowReturn ret)
 
 /**
     Get the unique quark for the given GstFlowReturn.
-  Params:
-    ret =       a #GstFlowReturn to get the quark of.
-  Returns:     the quark associated with the flow return or 0 if an
-    invalid return was specified.
+
+    Params:
+      ret = a #GstFlowReturn to get the quark of.
+    Returns: the quark associated with the flow return or 0 if an
+      invalid return was specified.
 */
 glib.types.Quark flowToQuark(gst.types.FlowReturn ret)
 {
@@ -587,10 +614,11 @@ glib.types.Quark flowToQuark(gst.types.FlowReturn ret)
 
 /**
     See if the given format is inside the format array.
-  Params:
-    formats =       The format array to search
-    format =       the format to find
-  Returns:     true if the format is found inside the array
+
+    Params:
+      formats = The format array to search
+      format = the format to find
+    Returns: true if the format is found inside the array
 */
 bool formatsContains(gst.types.Format[] formats, gst.types.Format format)
 {
@@ -602,14 +630,14 @@ bool formatsContains(gst.types.Format[] formats, gst.types.Format format)
 
 /**
     This helper is mostly helpful for plugins that need to
-  inspect the folder of the main executable to determine
-  their set of features.
-  
-  When a plugin is initialized from the gst-plugin-scanner
-  external process, the returned path will be the same as from the
-  parent process.
-  Returns:     The path of the executable that
-      initialized GStreamer, or null if it could not be determined.
+    inspect the folder of the main executable to determine
+    their set of features.
+    
+    When a plugin is initialized from the gst-plugin-scanner
+    external process, the returned path will be the same as from the
+    parent process.
+    Returns: The path of the executable that
+        initialized GStreamer, or null if it could not be determined.
 */
 string getMainExecutablePath()
 {
@@ -621,9 +649,10 @@ string getMainExecutablePath()
 
 /**
     Checks if obj is a #GstCapsFeatures
-  Params:
-    obj = 
-  Returns:     true if obj is a #GstCapsFeatures false otherwise
+
+    Params:
+      obj = 
+    Returns: true if obj is a #GstCapsFeatures false otherwise
 */
 bool isCapsFeatures(const(void)* obj = null)
 {
@@ -634,8 +663,8 @@ bool isCapsFeatures(const(void)* obj = null)
 
 /**
     Use this function to check if GStreamer has been initialized with [gst.global.init_]
-  or [gst.global.initCheck].
-  Returns:     true if initialization has been done, false otherwise.
+    or [gst.global.initCheck].
+    Returns: true if initialization has been done, false otherwise.
 */
 bool isInitialized()
 {
@@ -646,16 +675,17 @@ bool isInitialized()
 
 /**
     This function creates a GstArray GParamSpec for use by objects/elements
-  that want to expose properties of GstArray type. This function is
-  typically * used in connection with [gobject.object_class.ObjectClass.installProperty] in a
-  GObjects's instance_init function.
-  Params:
-    name =       canonical name of the property specified
-    nick =       nick name for the property specified
-    blurb =       description of the property specified
-    elementSpec =       GParamSpec of the array
-    flags =       flags for the property specified
-  Returns:     a newly created parameter specification
+    that want to expose properties of GstArray type. This function is
+    typically * used in connection with [gobject.object_class.ObjectClass.installProperty] in a
+    GObjects's instance_init function.
+
+    Params:
+      name = canonical name of the property specified
+      nick = nick name for the property specified
+      blurb = description of the property specified
+      elementSpec = GParamSpec of the array
+      flags = flags for the property specified
+    Returns: a newly created parameter specification
 */
 gobject.param_spec.ParamSpec paramSpecArray(string name, string nick, string blurb, gobject.param_spec.ParamSpec elementSpec, gobject.types.ParamFlags flags)
 {
@@ -670,21 +700,22 @@ gobject.param_spec.ParamSpec paramSpecArray(string name, string nick, string blu
 
 /**
     This function creates a fraction GParamSpec for use by objects/elements
-  that want to expose properties of fraction type. This function is typically
-  used in connection with [gobject.object_class.ObjectClass.installProperty] in a GObjects's
-  instance_init function.
-  Params:
-    name =       canonical name of the property specified
-    nick =       nick name for the property specified
-    blurb =       description of the property specified
-    minNum =       minimum value (fraction numerator)
-    minDenom =       minimum value (fraction denominator)
-    maxNum =       maximum value (fraction numerator)
-    maxDenom =       maximum value (fraction denominator)
-    defaultNum =       default value (fraction numerator)
-    defaultDenom =       default value (fraction denominator)
-    flags =       flags for the property specified
-  Returns:     a newly created parameter specification
+    that want to expose properties of fraction type. This function is typically
+    used in connection with [gobject.object_class.ObjectClass.installProperty] in a GObjects's
+    instance_init function.
+
+    Params:
+      name = canonical name of the property specified
+      nick = nick name for the property specified
+      blurb = description of the property specified
+      minNum = minimum value (fraction numerator)
+      minDenom = minimum value (fraction denominator)
+      maxNum = maximum value (fraction numerator)
+      maxDenom = maximum value (fraction denominator)
+      defaultNum = default value (fraction numerator)
+      defaultDenom = default value (fraction denominator)
+      flags = flags for the property specified
+    Returns: a newly created parameter specification
 */
 gobject.param_spec.ParamSpec paramSpecFraction(string name, string nick, string blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, gobject.types.ParamFlags flags)
 {
@@ -707,20 +738,21 @@ gobject.types.GType parentBufferMetaApiGetType()
 
 /**
     This is a convenience wrapper around [gst.global.parseLaunch] to create a
-  #GstBin from a gst-launch-style pipeline description. See
-  [gst.global.parseLaunch] and the gst-launch man page for details about the
-  syntax. Ghost pads on the bin for unlinked source or sink pads
-  within the bin can automatically be created (but only a maximum of
-  one ghost pad for each direction will be created; if you expect
-  multiple unlinked source pads or multiple unlinked sink pads
-  and want them all ghosted, you will have to create the ghost pads
-  yourself).
-  Params:
-    binDescription =       command line describing the bin
-    ghostUnlinkedPads =       whether to automatically create ghost pads
-          for unlinked source or sink pads within the bin
-  Returns:     a
-      newly-created bin, or null if an error occurred.
+    #GstBin from a gst-launch-style pipeline description. See
+    [gst.global.parseLaunch] and the gst-launch man page for details about the
+    syntax. Ghost pads on the bin for unlinked source or sink pads
+    within the bin can automatically be created (but only a maximum of
+    one ghost pad for each direction will be created; if you expect
+    multiple unlinked source pads or multiple unlinked sink pads
+    and want them all ghosted, you will have to create the ghost pads
+    yourself).
+
+    Params:
+      binDescription = command line describing the bin
+      ghostUnlinkedPads = whether to automatically create ghost pads
+            for unlinked source or sink pads within the bin
+    Returns: a
+        newly-created bin, or null if an error occurred.
 */
 gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPads)
 {
@@ -736,25 +768,26 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
 
 /**
     This is a convenience wrapper around [gst.global.parseLaunch] to create a
-  #GstBin from a gst-launch-style pipeline description. See
-  [gst.global.parseLaunch] and the gst-launch man page for details about the
-  syntax. Ghost pads on the bin for unlinked source or sink pads
-  within the bin can automatically be created (but only a maximum of
-  one ghost pad for each direction will be created; if you expect
-  multiple unlinked source pads or multiple unlinked sink pads
-  and want them all ghosted, you will have to create the ghost pads
-  yourself).
-  Params:
-    binDescription =       command line describing the bin
-    ghostUnlinkedPads =       whether to automatically create ghost pads
-          for unlinked source or sink pads within the bin
-    context =       a parse context allocated with
-          [gst.parse_context.ParseContext.new_], or null
-    flags =       parsing options, or #GST_PARSE_FLAG_NONE
-  Returns:     a newly-created
-      element, which is guaranteed to be a bin unless
-      #GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or null if an error
-      occurred.
+    #GstBin from a gst-launch-style pipeline description. See
+    [gst.global.parseLaunch] and the gst-launch man page for details about the
+    syntax. Ghost pads on the bin for unlinked source or sink pads
+    within the bin can automatically be created (but only a maximum of
+    one ghost pad for each direction will be created; if you expect
+    multiple unlinked source pads or multiple unlinked sink pads
+    and want them all ghosted, you will have to create the ghost pads
+    yourself).
+
+    Params:
+      binDescription = command line describing the bin
+      ghostUnlinkedPads = whether to automatically create ghost pads
+            for unlinked source or sink pads within the bin
+      context = a parse context allocated with
+            [gst.parse_context.ParseContext.new_], or null
+      flags = parsing options, or #GST_PARSE_FLAG_NONE
+    Returns: a newly-created
+        element, which is guaranteed to be a bin unless
+        #GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or null if an error
+        occurred.
 */
 gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghostUnlinkedPads, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -770,18 +803,19 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
 
 /**
     Create a new pipeline based on command line syntax.
-  Please note that you might get a return value that is not null even though
-  the error is set. In this case there was a recoverable parsing error and you
-  can try to play the pipeline.
-  
-  To create a sub-pipeline (bin) for embedding into an existing pipeline
-  use [gst.global.parseBinFromDescription].
-  Params:
-    pipelineDescription =       the command line describing the pipeline
-  Returns:     a new element on success, null on
-      failure. If more than one toplevel element is specified by the
-      pipeline_description, all elements are put into a #GstPipeline, which
-      than is returned.
+    Please note that you might get a return value that is not null even though
+    the error is set. In this case there was a recoverable parsing error and you
+    can try to play the pipeline.
+    
+    To create a sub-pipeline (bin) for embedding into an existing pipeline
+    use [gst.global.parseBinFromDescription].
+
+    Params:
+      pipelineDescription = the command line describing the pipeline
+    Returns: a new element on success, null on
+        failure. If more than one toplevel element is specified by the
+        pipeline_description, all elements are put into a #GstPipeline, which
+        than is returned.
 */
 gst.element.Element parseLaunch(string pipelineDescription)
 {
@@ -797,22 +831,23 @@ gst.element.Element parseLaunch(string pipelineDescription)
 
 /**
     Create a new pipeline based on command line syntax.
-  Please note that you might get a return value that is not null even though
-  the error is set. In this case there was a recoverable parsing error and you
-  can try to play the pipeline.
-  
-  To create a sub-pipeline (bin) for embedding into an existing pipeline
-  use [gst.global.parseBinFromDescriptionFull].
-  Params:
-    pipelineDescription =       the command line describing the pipeline
-    context =       a parse context allocated with
-           [gst.parse_context.ParseContext.new_], or null
-    flags =       parsing options, or #GST_PARSE_FLAG_NONE
-  Returns:     a new element on success, null on
-       failure. If more than one toplevel element is specified by the
-       pipeline_description, all elements are put into a #GstPipeline, which
-       then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in
-       which case they are put in a #GstBin instead).
+    Please note that you might get a return value that is not null even though
+    the error is set. In this case there was a recoverable parsing error and you
+    can try to play the pipeline.
+    
+    To create a sub-pipeline (bin) for embedding into an existing pipeline
+    use [gst.global.parseBinFromDescriptionFull].
+
+    Params:
+      pipelineDescription = the command line describing the pipeline
+      context = a parse context allocated with
+             [gst.parse_context.ParseContext.new_], or null
+      flags = parsing options, or #GST_PARSE_FLAG_NONE
+    Returns: a new element on success, null on
+         failure. If more than one toplevel element is specified by the
+         pipeline_description, all elements are put into a #GstPipeline, which
+         then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in
+         which case they are put in a #GstBin instead).
 */
 gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -828,12 +863,13 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
 
 /**
     Create a new element based on command line syntax.
-  error will contain an error message if an erroneous pipeline is specified.
-  An error does not mean that the pipeline could not be constructed.
-  Params:
-    argv =       null-terminated array of arguments
-  Returns:     a new element on success and null
-    on failure.
+    error will contain an error message if an erroneous pipeline is specified.
+    An error does not mean that the pipeline could not be constructed.
+
+    Params:
+      argv = null-terminated array of arguments
+    Returns: a new element on success and null
+      on failure.
 */
 gst.element.Element parseLaunchv(string[] argv)
 {
@@ -854,18 +890,19 @@ gst.element.Element parseLaunchv(string[] argv)
 
 /**
     Create a new element based on command line syntax.
-  error will contain an error message if an erroneous pipeline is specified.
-  An error does not mean that the pipeline could not be constructed.
-  Params:
-    argv =       null-terminated array of arguments
-    context =       a parse context allocated with
-          [gst.parse_context.ParseContext.new_], or null
-    flags =       parsing options, or #GST_PARSE_FLAG_NONE
-  Returns:     a new element on success; on
-      failure, either null or a partially-constructed bin or element will be
-      returned and error will be set (unless you passed
-      #GST_PARSE_FLAG_FATAL_ERRORS in flags, then null will always be returned
-      on failure)
+    error will contain an error message if an erroneous pipeline is specified.
+    An error does not mean that the pipeline could not be constructed.
+
+    Params:
+      argv = null-terminated array of arguments
+      context = a parse context allocated with
+            [gst.parse_context.ParseContext.new_], or null
+      flags = parsing options, or #GST_PARSE_FLAG_NONE
+    Returns: a new element on success; on
+        failure, either null or a partially-constructed bin or element will be
+        returned and error will be set (unless you passed
+        #GST_PARSE_FLAG_FATAL_ERRORS in flags, then null will always be returned
+        on failure)
 */
 gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -886,13 +923,14 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
 
 /**
     Iterates the supplied list of UUIDs and checks the GstRegistry for
-  all the decryptors supporting one of the supplied UUIDs.
-  Params:
-    systemIdentifiers =       A null terminated array of strings that contains the UUID values of each
-      protection system that is to be checked.
-  Returns:     A null terminated array containing all
-    the system_identifiers supported by the set of available decryptors, or
-    null if no matches were found.
+    all the decryptors supporting one of the supplied UUIDs.
+
+    Params:
+      systemIdentifiers = A null terminated array of strings that contains the UUID values of each
+        protection system that is to be checked.
+    Returns: A null terminated array containing all
+      the system_identifiers supported by the set of available decryptors, or
+      null if no matches were found.
 */
 string[] protectionFilterSystemsByAvailableDecryptors(string[] systemIdentifiers)
 {
@@ -927,16 +965,17 @@ gobject.types.GType protectionMetaApiGetType()
 
 /**
     Iterates the supplied list of UUIDs and checks the GstRegistry for
-  an element that supports one of the supplied UUIDs. If more than one
-  element matches, the system ID of the highest ranked element is selected.
-  Params:
-    systemIdentifiers =       A null terminated array of strings
-      that contains the UUID values of each protection system that is to be
-      checked.
-  Returns:     One of the strings from
-    system_identifiers that indicates the highest ranked element that
-    implements the protection system indicated by that system ID, or null if no
-    element has been found.
+    an element that supports one of the supplied UUIDs. If more than one
+    element matches, the system ID of the highest ranked element is selected.
+
+    Params:
+      systemIdentifiers = A null terminated array of strings
+        that contains the UUID values of each protection system that is to be
+        checked.
+    Returns: One of the strings from
+      system_identifiers that indicates the highest ranked element that
+      implements the protection system indicated by that system ID, or null if no
+      element has been found.
 */
 string protectionSelectSystem(string[] systemIdentifiers)
 {
@@ -961,13 +1000,13 @@ gobject.types.GType referenceTimestampMetaApiGetType()
 
 /**
     Some functions in the GStreamer core might install a custom SIGSEGV handler
-  to better catch and report errors to the application. Currently this feature
-  is enabled by default when loading plugins.
-  
-  Applications might want to disable this behaviour with the
-  [gst.global.segtrapSetEnabled] function. This is typically done if the application
-  wants to install its own handler without GStreamer interfering.
-  Returns:     true if GStreamer is allowed to install a custom SIGSEGV handler.
+    to better catch and report errors to the application. Currently this feature
+    is enabled by default when loading plugins.
+    
+    Applications might want to disable this behaviour with the
+    [gst.global.segtrapSetEnabled] function. This is typically done if the application
+    wants to install its own handler without GStreamer interfering.
+    Returns: true if GStreamer is allowed to install a custom SIGSEGV handler.
 */
 bool segtrapIsEnabled()
 {
@@ -978,9 +1017,10 @@ bool segtrapIsEnabled()
 
 /**
     Applications might want to disable/enable the SIGSEGV handling of
-  the GStreamer core. See [gst.global.segtrapIsEnabled] for more information.
-  Params:
-    enabled =       whether a custom SIGSEGV handler should be installed.
+    the GStreamer core. See [gst.global.segtrapIsEnabled] for more information.
+
+    Params:
+      enabled = whether a custom SIGSEGV handler should be installed.
 */
 void segtrapSetEnabled(bool enabled)
 {
@@ -1005,9 +1045,10 @@ gobject.types.GType staticPadTemplateGetType()
 
 /**
     Checks if the given type is already registered.
-  Params:
-    tag =       name of the tag
-  Returns:     true if the type is already registered
+
+    Params:
+      tag = name of the tag
+    Returns: true if the type is already registered
 */
 bool tagExists(string tag)
 {
@@ -1019,10 +1060,11 @@ bool tagExists(string tag)
 
 /**
     Returns the human-readable description of this tag, You must not change or
-  free this string.
-  Params:
-    tag =       the tag
-  Returns:     the human-readable description of this tag
+    free this string.
+
+    Params:
+      tag = the tag
+    Returns: the human-readable description of this tag
 */
 string tagGetDescription(string tag)
 {
@@ -1035,9 +1077,10 @@ string tagGetDescription(string tag)
 
 /**
     Gets the flag of tag.
-  Params:
-    tag =       the tag
-  Returns:     the flag of this tag.
+
+    Params:
+      tag = the tag
+    Returns: the flag of this tag.
 */
 gst.types.TagFlag tagGetFlag(string tag)
 {
@@ -1050,10 +1093,11 @@ gst.types.TagFlag tagGetFlag(string tag)
 
 /**
     Returns the human-readable name of this tag, You must not change or free
-  this string.
-  Params:
-    tag =       the tag
-  Returns:     the human-readable name of this tag
+    this string.
+
+    Params:
+      tag = the tag
+    Returns: the human-readable name of this tag
 */
 string tagGetNick(string tag)
 {
@@ -1066,9 +1110,10 @@ string tagGetNick(string tag)
 
 /**
     Gets the #GType used for this tag.
-  Params:
-    tag =       the tag
-  Returns:     the #GType of this tag
+
+    Params:
+      tag = the tag
+    Returns: the #GType of this tag
 */
 gobject.types.GType tagGetType(string tag)
 {
@@ -1080,10 +1125,11 @@ gobject.types.GType tagGetType(string tag)
 
 /**
     Checks if the given tag is fixed. A fixed tag can only contain one value.
-  Unfixed tags can contain lists of values.
-  Params:
-    tag =       tag to check
-  Returns:     true, if the given tag is fixed.
+    Unfixed tags can contain lists of values.
+
+    Params:
+      tag = tag to check
+    Returns: true, if the given tag is fixed.
 */
 bool tagIsFixed(string tag)
 {
@@ -1095,11 +1141,12 @@ bool tagIsFixed(string tag)
 
 /**
     This is a convenience function for the func argument of [gst.global.tagRegister].
-  It concatenates all given strings using a comma. The tag must be registered
-  as a G_TYPE_STRING or this function will fail.
-  Params:
-    dest =       uninitialized GValue to store result in
-    src =       GValue to copy from
+    It concatenates all given strings using a comma. The tag must be registered
+    as a G_TYPE_STRING or this function will fail.
+
+    Params:
+      dest = uninitialized GValue to store result in
+      src = GValue to copy from
 */
 void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value src)
 {
@@ -1110,10 +1157,11 @@ void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value 
 
 /**
     This is a convenience function for the func argument of [gst.global.tagRegister].
-  It creates a copy of the first value from the list.
-  Params:
-    dest =       uninitialized GValue to store result in
-    src =       GValue to copy from
+    It creates a copy of the first value from the list.
+
+    Params:
+      dest = uninitialized GValue to store result in
+      src = GValue to copy from
 */
 void tagMergeUseFirst(out gobject.value.Value dest, gobject.value.Value src)
 {
@@ -1124,9 +1172,9 @@ void tagMergeUseFirst(out gobject.value.Value dest, gobject.value.Value src)
 
 /**
     Get a list of all active tracer objects owned by the tracing framework for
-  the entirety of the run-time of the process or till [gst.global.deinit] is called.
-  Returns:     A #GList of
-    #GstTracer objects
+    the entirety of the run-time of the process or till [gst.global.deinit] is called.
+    Returns: A #GList of
+      #GstTracer objects
 */
 gst.tracer.Tracer[] tracingGetActiveTracers()
 {
@@ -1146,11 +1194,12 @@ gobject.types.GType typeFindGetType()
 
 /**
     Checks if type is plugin API. See [gst.global.typeMarkAsPluginApi] for
-  details.
-  Params:
-    type =       a GType
-    flags =       What #GstPluginAPIFlags the plugin was marked with
-  Returns:     true if type is plugin API or false otherwise.
+    details.
+
+    Params:
+      type = a GType
+      flags = What #GstPluginAPIFlags the plugin was marked with
+    Returns: true if type is plugin API or false otherwise.
 */
 bool typeIsPluginApi(gobject.types.GType type, out gst.types.PluginAPIFlags flags)
 {
@@ -1161,18 +1210,19 @@ bool typeIsPluginApi(gobject.types.GType type, out gst.types.PluginAPIFlags flag
 
 /**
     Marks type as plugin API. This should be called in `class_init` of
-  elements that expose new types (i.e. enums, flags or internal GObjects) via
-  properties, signals or pad templates.
-  
-  Types exposed by plugins are not automatically added to the documentation
-  as they might originate from another library and should in that case be
-  documented via that library instead.
-  
-  By marking a type as plugin API it will be included in the documentation of
-  the plugin that defines it.
-  Params:
-    type =       a GType
-    flags =       a set of #GstPluginAPIFlags to further inform cache generation.
+    elements that expose new types (i.e. enums, flags or internal GObjects) via
+    properties, signals or pad templates.
+    
+    Types exposed by plugins are not automatically added to the documentation
+    as they might originate from another library and should in that case be
+    documented via that library instead.
+    
+    By marking a type as plugin API it will be included in the documentation of
+    the plugin that defines it.
+
+    Params:
+      type = a GType
+      flags = a set of #GstPluginAPIFlags to further inform cache generation.
 */
 void typeMarkAsPluginApi(gobject.types.GType type, gst.types.PluginAPIFlags flags)
 {
@@ -1181,23 +1231,23 @@ void typeMarkAsPluginApi(gobject.types.GType type, gst.types.PluginAPIFlags flag
 
 /**
     Forces GStreamer to re-scan its plugin paths and update the default
-  plugin registry.
-  
-  Applications will almost never need to call this function, it is only
-  useful if the application knows new plugins have been installed (or old
-  ones removed) since the start of the application (or, to be precise, the
-  first call to [gst.global.init_]) and the application wants to make use of any
-  newly-installed plugins without restarting the application.
-  
-  Applications should assume that the registry update is neither atomic nor
-  thread-safe and should therefore not have any dynamic pipelines running
-  (including the playbin and decodebin elements) and should also not create
-  any elements or access the GStreamer registry while the update is in
-  progress.
-  
-  Note that this function may block for a significant amount of time.
-  Returns:     true if the registry has been updated successfully (does not
-             imply that there were changes), otherwise false.
+    plugin registry.
+    
+    Applications will almost never need to call this function, it is only
+    useful if the application knows new plugins have been installed (or old
+    ones removed) since the start of the application (or, to be precise, the
+    first call to [gst.global.init_]) and the application wants to make use of any
+    newly-installed plugins without restarting the application.
+    
+    Applications should assume that the registry update is neither atomic nor
+    thread-safe and should therefore not have any dynamic pipelines running
+    (including the playbin and decodebin elements) and should also not create
+    any elements or access the GStreamer registry while the update is in
+    progress.
+    
+    Note that this function may block for a significant amount of time.
+    Returns: true if the registry has been updated successfully (does not
+               imply that there were changes), otherwise false.
 */
 bool updateRegistry()
 {
@@ -1208,21 +1258,22 @@ bool updateRegistry()
 
 /**
     Searches inside array for search_data by using the comparison function
-  search_func. array must be sorted ascending.
-  
-  As search_data is always passed as second argument to search_func it's
-  not required that search_data has the same type as the array elements.
-  
-  The complexity of this search function is O(log (num_elements)).
-  Params:
-    array =       the sorted input array
-    numElements =       number of elements in the array
-    elementSize =       size of every element in bytes
-    searchFunc =       function to compare two elements, search_data will always be passed as second argument
-    mode =       search mode that should be used
-    searchData =       element that should be found
-  Returns:     The address of the found
-    element or null if nothing was found
+    search_func. array must be sorted ascending.
+    
+    As search_data is always passed as second argument to search_func it's
+    not required that search_data has the same type as the array elements.
+    
+    The complexity of this search function is O(log (num_elements)).
+
+    Params:
+      array = the sorted input array
+      numElements = number of elements in the array
+      elementSize = size of every element in bytes
+      searchFunc = function to compare two elements, search_data will always be passed as second argument
+      mode = search mode that should be used
+      searchData = element that should be found
+    Returns: The address of the found
+      element or null if nothing was found
 */
 void* utilArrayBinarySearch(void* array, uint numElements, size_t elementSize, glib.types.CompareDataFunc searchFunc, gst.types.SearchMode mode, const(void)* searchData = null)
 {
@@ -1242,9 +1293,10 @@ void* utilArrayBinarySearch(void* array, uint numElements, size_t elementSize, g
 
 /**
     Return a max num of log2.
-  Params:
-    v =       a #guint32 value.
-  Returns:     a computed #guint val.
+
+    Params:
+      v = a #guint32 value.
+    Returns: a computed #guint val.
 */
 uint utilCeilLog2(uint v)
 {
@@ -1255,11 +1307,12 @@ uint utilCeilLog2(uint v)
 
 /**
     Transforms a #gdouble to a fraction and simplifies
-  the result.
-  Params:
-    src =       #gdouble to transform
-    destN =       pointer to a #gint to hold the result numerator
-    destD =       pointer to a #gint to hold the result denominator
+    the result.
+
+    Params:
+      src = #gdouble to transform
+      destN = pointer to a #gint to hold the result numerator
+      destD = pointer to a #gint to hold the result denominator
 */
 void utilDoubleToFraction(double src, out int destN, out int destD)
 {
@@ -1268,8 +1321,9 @@ void utilDoubleToFraction(double src, out int destN, out int destD)
 
 /**
     Dumps the buffer memory into a hex representation. Useful for debugging.
-  Params:
-    buf =       a #GstBuffer whose memory to dump
+
+    Params:
+      buf = a #GstBuffer whose memory to dump
 */
 void utilDumpBuffer(gst.buffer.Buffer buf)
 {
@@ -1278,8 +1332,9 @@ void utilDumpBuffer(gst.buffer.Buffer buf)
 
 /**
     Dumps the memory block into a hex representation. Useful for debugging.
-  Params:
-    mem =       a pointer to the memory to dump
+
+    Params:
+      mem = a pointer to the memory to dump
 */
 void utilDumpMem(ubyte[] mem)
 {
@@ -1293,10 +1348,11 @@ void utilDumpMem(ubyte[] mem)
 
 /**
     Compares the given filenames using natural ordering.
-  Params:
-    a =       a filename to compare with b
-    b =       a filename to compare with a
-  Returns: 
+
+    Params:
+      a = a filename to compare with `b`
+      b = a filename to compare with `a`
+    Returns: 
 */
 int utilFilenameCompare(string a, string b)
 {
@@ -1309,15 +1365,16 @@ int utilFilenameCompare(string a, string b)
 
 /**
     Adds the fractions a_n/a_d and b_n/b_d and stores
-  the result in res_n and res_d.
-  Params:
-    aN =       Numerator of first value
-    aD =       Denominator of first value
-    bN =       Numerator of second value
-    bD =       Denominator of second value
-    resN =       Pointer to #gint to hold the result numerator
-    resD =       Pointer to #gint to hold the result denominator
-  Returns:     false on overflow, true otherwise.
+    the result in res_n and res_d.
+
+    Params:
+      aN = Numerator of first value
+      aD = Denominator of first value
+      bN = Numerator of second value
+      bD = Denominator of second value
+      resN = Pointer to #gint to hold the result numerator
+      resD = Pointer to #gint to hold the result denominator
+    Returns: false on overflow, true otherwise.
 */
 bool utilFractionAdd(int aN, int aD, int bN, int bD, out int resN, out int resD)
 {
@@ -1328,13 +1385,14 @@ bool utilFractionAdd(int aN, int aD, int bN, int bD, out int resN, out int resD)
 
 /**
     Compares the fractions a_n/a_d and b_n/b_d and returns
-  -1 if a < b, 0 if a = b and 1 if a > b.
-  Params:
-    aN =       Numerator of first value
-    aD =       Denominator of first value
-    bN =       Numerator of second value
-    bD =       Denominator of second value
-  Returns:     -1 if a < b; 0 if a = b; 1 if a > b.
+    -1 if a < b, 0 if a = b and 1 if a > b.
+
+    Params:
+      aN = Numerator of first value
+      aD = Denominator of first value
+      bN = Numerator of second value
+      bD = Denominator of second value
+    Returns: -1 if a < b; 0 if a = b; 1 if a > b.
 */
 int utilFractionCompare(int aN, int aD, int bN, int bD)
 {
@@ -1345,15 +1403,16 @@ int utilFractionCompare(int aN, int aD, int bN, int bD)
 
 /**
     Multiplies the fractions a_n/a_d and b_n/b_d and stores
-  the result in res_n and res_d.
-  Params:
-    aN =       Numerator of first value
-    aD =       Denominator of first value
-    bN =       Numerator of second value
-    bD =       Denominator of second value
-    resN =       Pointer to #gint to hold the result numerator
-    resD =       Pointer to #gint to hold the result denominator
-  Returns:     false on overflow, true otherwise.
+    the result in res_n and res_d.
+
+    Params:
+      aN = Numerator of first value
+      aD = Denominator of first value
+      bN = Numerator of second value
+      bD = Denominator of second value
+      resN = Pointer to #gint to hold the result numerator
+      resD = Pointer to #gint to hold the result denominator
+    Returns: false on overflow, true otherwise.
 */
 bool utilFractionMultiply(int aN, int aD, int bN, int bD, out int resN, out int resD)
 {
@@ -1364,10 +1423,11 @@ bool utilFractionMultiply(int aN, int aD, int bN, int bD, out int resN, out int 
 
 /**
     Transforms a fraction to a #gdouble.
-  Params:
-    srcN =       Fraction numerator as #gint
-    srcD =       Fraction denominator #gint
-    dest =       pointer to a #gdouble for the result
+
+    Params:
+      srcN = Fraction numerator as #gint
+      srcD = Fraction denominator #gint
+      dest = pointer to a #gdouble for the result
 */
 void utilFractionToDouble(int srcN, int srcD, out double dest)
 {
@@ -1384,13 +1444,14 @@ ulong utilGdoubleToGuint64(double value)
 
 /**
     Get a property of type `GST_TYPE_ARRAY` and transform it into a
-  #GValueArray. This allow language bindings to get GST_TYPE_ARRAY
-  properties which are otherwise not an accessible type.
-  Params:
-    object =       the object to set the array to
-    name =       the name of the property to set
-    array =       a return #GValueArray
-  Returns: 
+    #GValueArray. This allow language bindings to get GST_TYPE_ARRAY
+    properties which are otherwise not an accessible type.
+
+    Params:
+      object = the object to set the array to
+      name = the name of the property to set
+      array = a return #GValueArray
+    Returns: 
 */
 bool utilGetObjectArray(gobject.object.ObjectG object, string name, out gobject.value_array.ValueArray array)
 {
@@ -1404,8 +1465,8 @@ bool utilGetObjectArray(gobject.object.ObjectG object, string name, out gobject.
 
 /**
     Get a timestamp as GstClockTime to be used for interval measurements.
-  The timestamp should not be interpreted in any other way.
-  Returns:     the timestamp
+    The timestamp should not be interpreted in any other way.
+    Returns: the timestamp
 */
 gst.types.ClockTime utilGetTimestamp()
 {
@@ -1415,12 +1476,13 @@ gst.types.ClockTime utilGetTimestamp()
 }
 
 /**
-    Calculates the greatest common divisor of a
-  and b.
-  Params:
-    a =       First value as #gint
-    b =       Second value as #gint
-  Returns:     Greatest common divisor of a and b
+    Calculates the greatest common divisor of `a`
+    and `b`.
+
+    Params:
+      a = First value as #gint
+      b = Second value as #gint
+    Returns: Greatest common divisor of `a` and `b`
 */
 int utilGreatestCommonDivisor(int a, int b)
 {
@@ -1430,12 +1492,13 @@ int utilGreatestCommonDivisor(int a, int b)
 }
 
 /**
-    Calculates the greatest common divisor of a
-  and b.
-  Params:
-    a =       First value as #gint64
-    b =       Second value as #gint64
-  Returns:     Greatest common divisor of a and b
+    Calculates the greatest common divisor of `a`
+    and `b`.
+
+    Params:
+      a = First value as #gint64
+      b = Second value as #gint64
+    Returns: Greatest common divisor of `a` and `b`
 */
 long utilGreatestCommonDivisorInt64(long a, long b)
 {
@@ -1446,13 +1509,13 @@ long utilGreatestCommonDivisorInt64(long a, long b)
 
 /**
     Return a constantly incrementing group id.
-  
-  This function is used to generate a new group-id for the
-  stream-start event.
-  
-  This function never returns `GST_GROUP_ID_INVALID` (which is 0)
-  Returns:     A constantly incrementing unsigned integer, which might
-    overflow back to 0 at some point.
+    
+    This function is used to generate a new group-id for the
+    stream-start event.
+    
+    This function never returns `GST_GROUP_ID_INVALID` (which is 0)
+    Returns: A constantly incrementing unsigned integer, which might
+      overflow back to 0 at some point.
 */
 uint utilGroupIdNext()
 {
@@ -1471,13 +1534,14 @@ double utilGuint64ToGdouble(ulong value)
 
 /**
     Compare two sequence numbers, handling wraparound.
-  
-  The current implementation just returns (gint32)(s1 - s2).
-  Params:
-    s1 =       A sequence number.
-    s2 =       Another sequence number.
-  Returns:     A negative number if s1 is before s2, 0 if they are equal, or a
-    positive number if s1 is after s2.
+    
+    The current implementation just returns (gint32)(s1 - s2).
+
+    Params:
+      s1 = A sequence number.
+      s2 = Another sequence number.
+    Returns: A negative number if s1 is before s2, 0 if they are equal, or a
+      positive number if s1 is after s2.
 */
 int utilSeqnumCompare(uint s1, uint s2)
 {
@@ -1488,16 +1552,16 @@ int utilSeqnumCompare(uint s1, uint s2)
 
 /**
     Return a constantly incrementing sequence number.
-  
-  This function is used internally to GStreamer to be able to determine which
-  events and messages are "the same". For example, elements may set the seqnum
-  on a segment-done message to be the same as that of the last seek event, to
-  indicate that event and the message correspond to the same segment.
-  
-  This function never returns `GST_SEQNUM_INVALID` (which is 0).
-  Returns:     A constantly incrementing 32-bit unsigned integer, which might
-    overflow at some point. Use [gst.global.utilSeqnumCompare] to make sure
-    you handle wraparound correctly.
+    
+    This function is used internally to GStreamer to be able to determine which
+    events and messages are "the same". For example, elements may set the seqnum
+    on a segment-done message to be the same as that of the last seek event, to
+    indicate that event and the message correspond to the same segment.
+    
+    This function never returns `GST_SEQNUM_INVALID` (which is 0).
+    Returns: A constantly incrementing 32-bit unsigned integer, which might
+      overflow at some point. Use [gst.global.utilSeqnumCompare] to make sure
+      you handle wraparound correctly.
 */
 uint utilSeqnumNext()
 {
@@ -1508,14 +1572,15 @@ uint utilSeqnumNext()
 
 /**
     Converts the string value to the type of the objects argument and
-  sets the argument with it.
-  
-  Note that this function silently returns if object has no property named
-  name or when value cannot be converted to the type of the property.
-  Params:
-    object =       the object to set the argument of
-    name =       the name of the argument to set
-    value =       the string value to set
+    sets the argument with it.
+    
+    Note that this function silently returns if object has no property named
+    name or when value cannot be converted to the type of the property.
+
+    Params:
+      object = the object to set the argument of
+      name = the name of the argument to set
+      value = the string value to set
 */
 void utilSetObjectArg(gobject.object.ObjectG object, string name, string value)
 {
@@ -1526,13 +1591,14 @@ void utilSetObjectArg(gobject.object.ObjectG object, string name, string value)
 
 /**
     Transfer a #GValueArray to `GST_TYPE_ARRAY` and set this value on the
-  specified property name. This allow language bindings to set GST_TYPE_ARRAY
-  properties which are otherwise not an accessible type.
-  Params:
-    object =       the object to set the array to
-    name =       the name of the property to set
-    array =       a #GValueArray containing the values
-  Returns: 
+    specified property name. This allow language bindings to set GST_TYPE_ARRAY
+    properties which are otherwise not an accessible type.
+
+    Params:
+      object = the object to set the array to
+      name = the name of the property to set
+      array = a #GValueArray containing the values
+    Returns: 
 */
 bool utilSetObjectArray(gobject.object.ObjectG object, string name, gobject.value_array.ValueArray array)
 {
@@ -1544,13 +1610,14 @@ bool utilSetObjectArray(gobject.object.ObjectG object, string name, gobject.valu
 
 /**
     Converts the string to the type of the value and
-  sets the value with it.
-  
-  Note that this function is dangerous as it does not return any indication
-  if the conversion worked or not.
-  Params:
-    value =       the value to set
-    valueStr =       the string to get the value from
+    sets the value with it.
+    
+    Note that this function is dangerous as it does not return any indication
+    if the conversion worked or not.
+
+    Params:
+      value = the value to set
+      valueStr = the string to get the value from
 */
 void utilSetValueFromString(out gobject.value.Value value, string valueStr)
 {
@@ -1562,19 +1629,20 @@ void utilSetValueFromString(out gobject.value.Value value, string valueStr)
 
 /**
     Calculates the simpler representation of numerator and denominator and
-  update both values with the resulting simplified fraction.
-  
-  Simplify a fraction using a simple continued fraction decomposition.
-  The idea here is to convert fractions such as 333333/10000000 to 1/30
-  using 32 bit arithmetic only. The algorithm is not perfect and relies
-  upon two arbitrary parameters to remove non-significative terms from
-  the simple continued fraction decomposition. Using 8 and 333 for
-  n_terms and threshold respectively seems to give nice results.
-  Params:
-    numerator =       First value as #gint
-    denominator =       Second value as #gint
-    nTerms =       non-significative terms (typical value: 8)
-    threshold =       threshold (typical value: 333)
+    update both values with the resulting simplified fraction.
+    
+    Simplify a fraction using a simple continued fraction decomposition.
+    The idea here is to convert fractions such as 333333/10000000 to 1/30
+    using 32 bit arithmetic only. The algorithm is not perfect and relies
+    upon two arbitrary parameters to remove non-significative terms from
+    the simple continued fraction decomposition. Using 8 and 333 for
+    n_terms and threshold respectively seems to give nice results.
+
+    Params:
+      numerator = First value as #gint
+      denominator = Second value as #gint
+      nTerms = non-significative terms (typical value: 8)
+      threshold = threshold (typical value: 333)
 */
 void utilSimplifyFraction(ref int numerator, ref int denominator, uint nTerms, uint threshold)
 {
@@ -1583,20 +1651,21 @@ void utilSimplifyFraction(ref int numerator, ref int denominator, uint nTerms, u
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.
-  
-  This function can potentially be very slow if val and num are both
-  greater than G_MAXUINT32.
-  Params:
-    val =       the number to scale
-    num =       the numerator of the scale ratio
-    denom =       the denominator of the scale ratio
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer it is truncated.  See also
-    [gst.global.utilUint64ScaleRound], [gst.global.utilUint64ScaleCeil],
-    [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
-    [gst.global.utilUint64ScaleIntCeil].
+    underflows and without loss of precision.
+    
+    This function can potentially be very slow if val and num are both
+    greater than G_MAXUINT32.
+
+    Params:
+      val = the number to scale
+      num = the numerator of the scale ratio
+      denom = the denominator of the scale ratio
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer it is truncated.  See also
+      [gst.global.utilUint64ScaleRound], [gst.global.utilUint64ScaleCeil],
+      [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
+      [gst.global.utilUint64ScaleIntCeil].
 */
 ulong utilUint64Scale(ulong val, ulong num, ulong denom)
 {
@@ -1607,20 +1676,21 @@ ulong utilUint64Scale(ulong val, ulong num, ulong denom)
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.
-  
-  This function can potentially be very slow if val and num are both
-  greater than G_MAXUINT32.
-  Params:
-    val =       the number to scale
-    num =       the numerator of the scale ratio
-    denom =       the denominator of the scale ratio
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer, it is rounded up.  See also
-    [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
-    [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
-    [gst.global.utilUint64ScaleIntCeil].
+    underflows and without loss of precision.
+    
+    This function can potentially be very slow if val and num are both
+    greater than G_MAXUINT32.
+
+    Params:
+      val = the number to scale
+      num = the numerator of the scale ratio
+      denom = the denominator of the scale ratio
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer, it is rounded up.  See also
+      [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
+      [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
+      [gst.global.utilUint64ScaleIntCeil].
 */
 ulong utilUint64ScaleCeil(ulong val, ulong num, ulong denom)
 {
@@ -1631,18 +1701,19 @@ ulong utilUint64ScaleCeil(ulong val, ulong num, ulong denom)
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.  num must be non-negative and
-  denom must be positive.
-  Params:
-    val =       guint64 (such as a #GstClockTime) to scale.
-    num =       numerator of the scale factor.
-    denom =       denominator of the scale factor.
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer, it is truncated.  See also
-    [gst.global.utilUint64ScaleIntRound], [gst.global.utilUint64ScaleIntCeil],
-    [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
-    [gst.global.utilUint64ScaleCeil].
+    underflows and without loss of precision.  num must be non-negative and
+    denom must be positive.
+
+    Params:
+      val = guint64 (such as a #GstClockTime) to scale.
+      num = numerator of the scale factor.
+      denom = denominator of the scale factor.
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer, it is truncated.  See also
+      [gst.global.utilUint64ScaleIntRound], [gst.global.utilUint64ScaleIntCeil],
+      [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
+      [gst.global.utilUint64ScaleCeil].
 */
 ulong utilUint64ScaleInt(ulong val, int num, int denom)
 {
@@ -1653,18 +1724,19 @@ ulong utilUint64ScaleInt(ulong val, int num, int denom)
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.  num must be non-negative and
-  denom must be positive.
-  Params:
-    val =       guint64 (such as a #GstClockTime) to scale.
-    num =       numerator of the scale factor.
-    denom =       denominator of the scale factor.
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer, it is rounded up.  See also
-    [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
-    [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
-    [gst.global.utilUint64ScaleCeil].
+    underflows and without loss of precision.  num must be non-negative and
+    denom must be positive.
+
+    Params:
+      val = guint64 (such as a #GstClockTime) to scale.
+      num = numerator of the scale factor.
+      denom = denominator of the scale factor.
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer, it is rounded up.  See also
+      [gst.global.utilUint64ScaleInt], [gst.global.utilUint64ScaleIntRound],
+      [gst.global.utilUint64Scale], [gst.global.utilUint64ScaleRound],
+      [gst.global.utilUint64ScaleCeil].
 */
 ulong utilUint64ScaleIntCeil(ulong val, int num, int denom)
 {
@@ -1675,18 +1747,19 @@ ulong utilUint64ScaleIntCeil(ulong val, int num, int denom)
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.  num must be non-negative and
-  denom must be positive.
-  Params:
-    val =       guint64 (such as a #GstClockTime) to scale.
-    num =       numerator of the scale factor.
-    denom =       denominator of the scale factor.
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer, it is rounded to the nearest integer
-    (half-way cases are rounded up).  See also [gst.global.utilUint64ScaleInt],
-    [gst.global.utilUint64ScaleIntCeil], [gst.global.utilUint64Scale],
-    [gst.global.utilUint64ScaleRound], [gst.global.utilUint64ScaleCeil].
+    underflows and without loss of precision.  num must be non-negative and
+    denom must be positive.
+
+    Params:
+      val = guint64 (such as a #GstClockTime) to scale.
+      num = numerator of the scale factor.
+      denom = denominator of the scale factor.
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer, it is rounded to the nearest integer
+      (half-way cases are rounded up).  See also [gst.global.utilUint64ScaleInt],
+      [gst.global.utilUint64ScaleIntCeil], [gst.global.utilUint64Scale],
+      [gst.global.utilUint64ScaleRound], [gst.global.utilUint64ScaleCeil].
 */
 ulong utilUint64ScaleIntRound(ulong val, int num, int denom)
 {
@@ -1697,20 +1770,21 @@ ulong utilUint64ScaleIntRound(ulong val, int num, int denom)
 
 /**
     Scale val by the rational number num / denom, avoiding overflows and
-  underflows and without loss of precision.
-  
-  This function can potentially be very slow if val and num are both
-  greater than G_MAXUINT32.
-  Params:
-    val =       the number to scale
-    num =       the numerator of the scale ratio
-    denom =       the denominator of the scale ratio
-  Returns:     val * num / denom.  In the case of an overflow, this
-    function returns G_MAXUINT64.  If the result is not exactly
-    representable as an integer, it is rounded to the nearest integer
-    (half-way cases are rounded up).  See also [gst.global.utilUint64Scale],
-    [gst.global.utilUint64ScaleCeil], [gst.global.utilUint64ScaleInt],
-    [gst.global.utilUint64ScaleIntRound], [gst.global.utilUint64ScaleIntCeil].
+    underflows and without loss of precision.
+    
+    This function can potentially be very slow if val and num are both
+    greater than G_MAXUINT32.
+
+    Params:
+      val = the number to scale
+      num = the numerator of the scale ratio
+      denom = the denominator of the scale ratio
+    Returns: val * num / denom.  In the case of an overflow, this
+      function returns G_MAXUINT64.  If the result is not exactly
+      representable as an integer, it is rounded to the nearest integer
+      (half-way cases are rounded up).  See also [gst.global.utilUint64Scale],
+      [gst.global.utilUint64ScaleCeil], [gst.global.utilUint64ScaleInt],
+      [gst.global.utilUint64ScaleIntRound], [gst.global.utilUint64ScaleIntCeil].
 */
 ulong utilUint64ScaleRound(ulong val, ulong num, ulong denom)
 {
@@ -1721,10 +1795,11 @@ ulong utilUint64ScaleRound(ulong val, ulong num, ulong denom)
 
 /**
     Determines if value1 and value2 can be compared.
-  Params:
-    value1 =       a value to compare
-    value2 =       another value to compare
-  Returns:     true if the values can be compared
+
+    Params:
+      value1 = a value to compare
+      value2 = another value to compare
+    Returns: true if the values can be compared
 */
 bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -1735,12 +1810,13 @@ bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 
 /**
     Determines if intersecting two values will produce a valid result.
-  Two values will produce a valid intersection if they have the same
-  type.
-  Params:
-    value1 =       a value to intersect
-    value2 =       another value to intersect
-  Returns:     true if the values can intersect
+    Two values will produce a valid intersection if they have the same
+    type.
+
+    Params:
+      value1 = a value to intersect
+      value2 = another value to intersect
+    Returns: true if the values can intersect
 */
 bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -1751,10 +1827,11 @@ bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 
 /**
     Checks if it's possible to subtract subtrahend from minuend.
-  Params:
-    minuend =       the value to subtract from
-    subtrahend =       the value to subtract
-  Returns:     true if a subtraction is possible
+
+    Params:
+      minuend = the value to subtract from
+      subtrahend = the value to subtract
+    Returns: true if a subtraction is possible
 */
 bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
@@ -1765,17 +1842,18 @@ bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahen
 
 /**
     Determines if value1 and value2 can be non-trivially unioned.
-  Any two values can be trivially unioned by adding both of them
-  to a GstValueList.  However, certain types have the possibility
-  to be unioned in a simpler way.  For example, an integer range
-  and an integer can be unioned if the integer is a subset of the
-  integer range.  If there is the possibility that two values can
-  be unioned, this function returns true.
-  Params:
-    value1 =       a value to union
-    value2 =       another value to union
-  Returns:     true if there is a function allowing the two values to
-    be unioned.
+    Any two values can be trivially unioned by adding both of them
+    to a GstValueList.  However, certain types have the possibility
+    to be unioned in a simpler way.  For example, an integer range
+    and an integer can be unioned if the integer is a subset of the
+    integer range.  If there is the possibility that two values can
+    be unioned, this function returns true.
+
+    Params:
+      value1 = a value to union
+      value2 = another value to union
+    Returns: true if there is a function allowing the two values to
+      be unioned.
 */
 bool valueCanUnion(gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -1786,14 +1864,15 @@ bool valueCanUnion(gobject.value.Value value1, gobject.value.Value value2)
 
 /**
     Compares value1 and value2.  If value1 and value2 cannot be
-  compared, the function returns GST_VALUE_UNORDERED.  Otherwise,
-  if value1 is greater than value2, GST_VALUE_GREATER_THAN is returned.
-  If value1 is less than value2, GST_VALUE_LESS_THAN is returned.
-  If the values are equal, GST_VALUE_EQUAL is returned.
-  Params:
-    value1 =       a value to compare
-    value2 =       another value to compare
-  Returns:     comparison result
+    compared, the function returns GST_VALUE_UNORDERED.  Otherwise,
+    if value1 is greater than value2, GST_VALUE_GREATER_THAN is returned.
+    If value1 is less than value2, GST_VALUE_LESS_THAN is returned.
+    If the values are equal, GST_VALUE_EQUAL is returned.
+
+    Params:
+      value1 = a value to compare
+      value2 = another value to compare
+    Returns: comparison result
 */
 int valueCompare(gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -1804,12 +1883,13 @@ int valueCompare(gobject.value.Value value1, gobject.value.Value value2)
 
 /**
     Tries to deserialize a string into the type specified by the given GValue.
-  If the operation succeeds, true is returned, false otherwise.
-  Params:
-    dest =       #GValue to fill with contents of
-          deserialization
-    src =       string to deserialize
-  Returns:     true on success
+    If the operation succeeds, true is returned, false otherwise.
+
+    Params:
+      dest = #GValue to fill with contents of
+            deserialization
+      src = string to deserialize
+    Returns: true on success
 */
 bool valueDeserialize(out gobject.value.Value dest, string src)
 {
@@ -1823,14 +1903,15 @@ bool valueDeserialize(out gobject.value.Value dest, string src)
 
 /**
     Tries to deserialize a string into the type specified by the given GValue.
-  pspec may be used to guide the deserializing of nested members.
-  If the operation succeeds, true is returned, false otherwise.
-  Params:
-    dest =       #GValue to fill with contents of
-          deserialization
-    src =       string to deserialize
-    pspec =       the #GParamSpec describing the expected value
-  Returns:     true on success
+    pspec may be used to guide the deserializing of nested members.
+    If the operation succeeds, true is returned, false otherwise.
+
+    Params:
+      dest = #GValue to fill with contents of
+            deserialization
+      src = string to deserialize
+      pspec = the #GParamSpec describing the expected value
+    Returns: true on success
 */
 bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject.param_spec.ParamSpec pspec = null)
 {
@@ -1844,13 +1925,14 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
 
 /**
     Fixate src into a new value dest.
-  For ranges, the first element is taken. For lists and arrays, the
-  first item is fixated and returned.
-  If src is already fixed, this function returns false.
-  Params:
-    dest =       the #GValue destination
-    src =       the #GValue to fixate
-  Returns:     true if dest contains a fixated version of src.
+    For ranges, the first element is taken. For lists and arrays, the
+    first item is fixated and returned.
+    If src is already fixed, this function returns false.
+
+    Params:
+      dest = the #GValue destination
+      src = the #GValue to fixate
+    Returns: true if dest contains a fixated version of src.
 */
 bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 {
@@ -1861,12 +1943,13 @@ bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 
 /**
     Multiplies the two #GValue items containing a #GST_TYPE_FRACTION and sets
-  product to the product of the two fractions.
-  Params:
-    product =       a GValue initialized to #GST_TYPE_FRACTION
-    factor1 =       a GValue initialized to #GST_TYPE_FRACTION
-    factor2 =       a GValue initialized to #GST_TYPE_FRACTION
-  Returns:     false in case of an error (like integer overflow), true otherwise.
+    product to the product of the two fractions.
+
+    Params:
+      product = a GValue initialized to #GST_TYPE_FRACTION
+      factor1 = a GValue initialized to #GST_TYPE_FRACTION
+      factor2 = a GValue initialized to #GST_TYPE_FRACTION
+    Returns: false in case of an error (like integer overflow), true otherwise.
 */
 bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value factor1, gobject.value.Value factor2)
 {
@@ -1877,11 +1960,12 @@ bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value fact
 
 /**
     Subtracts the subtrahend from the minuend and sets dest to the result.
-  Params:
-    dest =       a GValue initialized to #GST_TYPE_FRACTION
-    minuend =       a GValue initialized to #GST_TYPE_FRACTION
-    subtrahend =       a GValue initialized to #GST_TYPE_FRACTION
-  Returns:     false in case of an error (like integer overflow), true otherwise.
+
+    Params:
+      dest = a GValue initialized to #GST_TYPE_FRACTION
+      minuend = a GValue initialized to #GST_TYPE_FRACTION
+      subtrahend = a GValue initialized to #GST_TYPE_FRACTION
+    Returns: false in case of an error (like integer overflow), true otherwise.
 */
 bool valueFractionSubtract(gobject.value.Value dest, gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
@@ -1892,9 +1976,10 @@ bool valueFractionSubtract(gobject.value.Value dest, gobject.value.Value minuend
 
 /**
     Gets the bitmask specified by value.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_BITMASK
-  Returns:     the bitmask.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_BITMASK
+    Returns: the bitmask.
 */
 ulong valueGetBitmask(gobject.value.Value value)
 {
@@ -1905,11 +1990,12 @@ ulong valueGetBitmask(gobject.value.Value value)
 
 /**
     Gets the contents of value. The reference count of the returned
-  #GstCaps will not be modified, therefore the caller must take one
-  before getting rid of the value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_CAPS
-  Returns:     the contents of value
+    #GstCaps will not be modified, therefore the caller must take one
+    before getting rid of the value.
+
+    Params:
+      value = a GValue initialized to GST_TYPE_CAPS
+    Returns: the contents of value
 */
 gst.caps.Caps valueGetCaps(gobject.value.Value value)
 {
@@ -1921,9 +2007,10 @@ gst.caps.Caps valueGetCaps(gobject.value.Value value)
 
 /**
     Gets the contents of value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_CAPS_FEATURES
-  Returns:     the contents of value
+
+    Params:
+      value = a GValue initialized to GST_TYPE_CAPS_FEATURES
+    Returns: the contents of value
 */
 gst.caps_features.CapsFeatures valueGetCapsFeatures(gobject.value.Value value)
 {
@@ -1935,9 +2022,10 @@ gst.caps_features.CapsFeatures valueGetCapsFeatures(gobject.value.Value value)
 
 /**
     Gets the maximum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_DOUBLE_RANGE
-  Returns:     the maximum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_DOUBLE_RANGE
+    Returns: the maximum of the range
 */
 double valueGetDoubleRangeMax(gobject.value.Value value)
 {
@@ -1948,9 +2036,10 @@ double valueGetDoubleRangeMax(gobject.value.Value value)
 
 /**
     Gets the minimum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_DOUBLE_RANGE
-  Returns:     the minimum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_DOUBLE_RANGE
+    Returns: the minimum of the range
 */
 double valueGetDoubleRangeMin(gobject.value.Value value)
 {
@@ -1961,9 +2050,10 @@ double valueGetDoubleRangeMin(gobject.value.Value value)
 
 /**
     Retrieve the flags field of a GstFlagSet value.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_FLAG_SET
-  Returns:     the flags field of the flagset instance.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_FLAG_SET
+    Returns: the flags field of the flagset instance.
 */
 uint valueGetFlagsetFlags(gobject.value.Value value)
 {
@@ -1974,9 +2064,10 @@ uint valueGetFlagsetFlags(gobject.value.Value value)
 
 /**
     Retrieve the mask field of a GstFlagSet value.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_FLAG_SET
-  Returns:     the mask field of the flagset instance.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_FLAG_SET
+    Returns: the mask field of the flagset instance.
 */
 uint valueGetFlagsetMask(gobject.value.Value value)
 {
@@ -1987,9 +2078,10 @@ uint valueGetFlagsetMask(gobject.value.Value value)
 
 /**
     Gets the denominator of the fraction specified by value.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_FRACTION
-  Returns:     the denominator of the fraction.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_FRACTION
+    Returns: the denominator of the fraction.
 */
 int valueGetFractionDenominator(gobject.value.Value value)
 {
@@ -2000,9 +2092,10 @@ int valueGetFractionDenominator(gobject.value.Value value)
 
 /**
     Gets the numerator of the fraction specified by value.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_FRACTION
-  Returns:     the numerator of the fraction.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_FRACTION
+    Returns: the numerator of the fraction.
 */
 int valueGetFractionNumerator(gobject.value.Value value)
 {
@@ -2013,9 +2106,10 @@ int valueGetFractionNumerator(gobject.value.Value value)
 
 /**
     Gets the maximum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_FRACTION_RANGE
-  Returns:     the maximum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_FRACTION_RANGE
+    Returns: the maximum of the range
 */
 gobject.value.Value valueGetFractionRangeMax(gobject.value.Value value)
 {
@@ -2027,9 +2121,10 @@ gobject.value.Value valueGetFractionRangeMax(gobject.value.Value value)
 
 /**
     Gets the minimum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_FRACTION_RANGE
-  Returns:     the minimum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_FRACTION_RANGE
+    Returns: the minimum of the range
 */
 gobject.value.Value valueGetFractionRangeMin(gobject.value.Value value)
 {
@@ -2041,9 +2136,10 @@ gobject.value.Value valueGetFractionRangeMin(gobject.value.Value value)
 
 /**
     Gets the maximum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT64_RANGE
-  Returns:     the maximum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT64_RANGE
+    Returns: the maximum of the range
 */
 long valueGetInt64RangeMax(gobject.value.Value value)
 {
@@ -2054,9 +2150,10 @@ long valueGetInt64RangeMax(gobject.value.Value value)
 
 /**
     Gets the minimum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT64_RANGE
-  Returns:     the minimum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT64_RANGE
+    Returns: the minimum of the range
 */
 long valueGetInt64RangeMin(gobject.value.Value value)
 {
@@ -2067,9 +2164,10 @@ long valueGetInt64RangeMin(gobject.value.Value value)
 
 /**
     Gets the step of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT64_RANGE
-  Returns:     the step of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT64_RANGE
+    Returns: the step of the range
 */
 long valueGetInt64RangeStep(gobject.value.Value value)
 {
@@ -2080,9 +2178,10 @@ long valueGetInt64RangeStep(gobject.value.Value value)
 
 /**
     Gets the maximum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT_RANGE
-  Returns:     the maximum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT_RANGE
+    Returns: the maximum of the range
 */
 int valueGetIntRangeMax(gobject.value.Value value)
 {
@@ -2093,9 +2192,10 @@ int valueGetIntRangeMax(gobject.value.Value value)
 
 /**
     Gets the minimum of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT_RANGE
-  Returns:     the minimum of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT_RANGE
+    Returns: the minimum of the range
 */
 int valueGetIntRangeMin(gobject.value.Value value)
 {
@@ -2106,9 +2206,10 @@ int valueGetIntRangeMin(gobject.value.Value value)
 
 /**
     Gets the step of the range specified by value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT_RANGE
-  Returns:     the step of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT_RANGE
+    Returns: the step of the range
 */
 int valueGetIntRangeStep(gobject.value.Value value)
 {
@@ -2119,9 +2220,10 @@ int valueGetIntRangeStep(gobject.value.Value value)
 
 /**
     Gets the contents of value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_STRUCTURE
-  Returns:     the contents of value
+
+    Params:
+      value = a GValue initialized to GST_TYPE_STRUCTURE
+    Returns: the contents of value
 */
 gst.structure.Structure valueGetStructure(gobject.value.Value value)
 {
@@ -2133,10 +2235,11 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value)
 
 /**
     Initialises the target value to be of the same type as source and then copies
-  the contents from source to target.
-  Params:
-    dest =       the target value
-    src =       the source value
+    the contents from source to target.
+
+    Params:
+      dest = the target value
+      src = the source value
 */
 void valueInitAndCopy(out gobject.value.Value dest, gobject.value.Value src)
 {
@@ -2147,16 +2250,17 @@ void valueInitAndCopy(out gobject.value.Value dest, gobject.value.Value src)
 
 /**
     Calculates the intersection of two values.  If the values have
-  a non-empty intersection, the value representing the intersection
-  is placed in dest, unless null.  If the intersection is non-empty,
-  dest is not modified.
-  Params:
-    dest =       a uninitialized #GValue that will hold the calculated
-        intersection value. May be null if the resulting set if not
-        needed.
-    value1 =       a value to intersect
-    value2 =       another value to intersect
-  Returns:     true if the intersection is non-empty
+    a non-empty intersection, the value representing the intersection
+    is placed in dest, unless null.  If the intersection is non-empty,
+    dest is not modified.
+
+    Params:
+      dest = a uninitialized #GValue that will hold the calculated
+          intersection value. May be null if the resulting set if not
+          needed.
+      value1 = a value to intersect
+      value2 = another value to intersect
+    Returns: true if the intersection is non-empty
 */
 bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -2169,12 +2273,13 @@ bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, go
 
 /**
     Tests if the given GValue, if available in a GstStructure (or any other
-  container) contains a "fixed" (which means: one value) or an "unfixed"
-  (which means: multiple possible values, such as data lists or data
-  ranges) value.
-  Params:
-    value =       the #GValue to check
-  Returns:     true if the value is "fixed".
+    container) contains a "fixed" (which means: one value) or an "unfixed"
+    (which means: multiple possible values, such as data lists or data
+    ranges) value.
+
+    Params:
+      value = the #GValue to check
+    Returns: true if the value is "fixed".
 */
 bool valueIsFixed(gobject.value.Value value)
 {
@@ -2185,10 +2290,11 @@ bool valueIsFixed(gobject.value.Value value)
 
 /**
     Check that value1 is a subset of value2.
-  Params:
-    value1 =       a #GValue
-    value2 =       a #GValue
-  Returns:     true is value1 is a subset of value2
+
+    Params:
+      value1 = a #GValue
+      value2 = a #GValue
+    Returns: true is value1 is a subset of value2
 */
 bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -2199,9 +2305,10 @@ bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2)
 
 /**
     Registers functions to perform calculations on #GValue items of a given
-  type. Each type can only be added once.
-  Params:
-    table =       structure containing functions to register
+    type. Each type can only be added once.
+
+    Params:
+      table = structure containing functions to register
 */
 void valueRegister(gst.types.ValueTable table)
 {
@@ -2210,13 +2317,14 @@ void valueRegister(gst.types.ValueTable table)
 
 /**
     tries to transform the given value into a string representation that allows
-  getting back this string later on using [gst.global.valueDeserialize].
-  
-  Free-function: g_free
-  Params:
-    value =       a #GValue to serialize
-  Returns:     the serialization for value
-    or null if none exists
+    getting back this string later on using [gst.global.valueDeserialize].
+    
+    Free-function: g_free
+
+    Params:
+      value = a #GValue to serialize
+    Returns: the serialization for value
+      or null if none exists
 */
 string valueSerialize(gobject.value.Value value)
 {
@@ -2228,9 +2336,10 @@ string valueSerialize(gobject.value.Value value)
 
 /**
     Sets value to the bitmask specified by bitmask.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_BITMASK
-    bitmask =       the bitmask
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_BITMASK
+      bitmask = the bitmask
 */
 void valueSetBitmask(gobject.value.Value value, ulong bitmask)
 {
@@ -2239,10 +2348,11 @@ void valueSetBitmask(gobject.value.Value value, ulong bitmask)
 
 /**
     Sets the contents of value to caps. A reference to the
-  provided caps will be taken by the value.
-  Params:
-    value =       a GValue initialized to GST_TYPE_CAPS
-    caps =       the caps to set the value to
+    provided caps will be taken by the value.
+
+    Params:
+      value = a GValue initialized to GST_TYPE_CAPS
+      caps = the caps to set the value to
 */
 void valueSetCaps(gobject.value.Value value, gst.caps.Caps caps)
 {
@@ -2251,9 +2361,10 @@ void valueSetCaps(gobject.value.Value value, gst.caps.Caps caps)
 
 /**
     Sets the contents of value to features.
-  Params:
-    value =       a GValue initialized to GST_TYPE_CAPS_FEATURES
-    features =       the features to set the value to
+
+    Params:
+      value = a GValue initialized to GST_TYPE_CAPS_FEATURES
+      features = the features to set the value to
 */
 void valueSetCapsFeatures(gobject.value.Value value, gst.caps_features.CapsFeatures features)
 {
@@ -2262,10 +2373,11 @@ void valueSetCapsFeatures(gobject.value.Value value, gst.caps_features.CapsFeatu
 
 /**
     Sets value to the range specified by start and end.
-  Params:
-    value =       a GValue initialized to GST_TYPE_DOUBLE_RANGE
-    start =       the start of the range
-    end =       the end of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_DOUBLE_RANGE
+      start = the start of the range
+      end = the end of the range
 */
 void valueSetDoubleRange(gobject.value.Value value, double start, double end)
 {
@@ -2274,12 +2386,13 @@ void valueSetDoubleRange(gobject.value.Value value, double start, double end)
 
 /**
     Sets value to the flags and mask values provided in flags and mask.
-  The flags value indicates the values of flags, the mask represents
-  which bits in the flag value have been set, and which are "don't care"
-  Params:
-    value =       a GValue initialized to `GST_TYPE_FLAG_SET`
-    flags =       The value of the flags set or unset
-    mask =       The mask indicate which flags bits must match for comparisons
+    The flags value indicates the values of flags, the mask represents
+    which bits in the flag value have been set, and which are "don't care"
+
+    Params:
+      value = a GValue initialized to `GST_TYPE_FLAG_SET`
+      flags = The value of the flags set or unset
+      mask = The mask indicate which flags bits must match for comparisons
 */
 void valueSetFlagset(gobject.value.Value value, uint flags, uint mask)
 {
@@ -2288,12 +2401,13 @@ void valueSetFlagset(gobject.value.Value value, uint flags, uint mask)
 
 /**
     Sets value to the fraction specified by numerator over denominator.
-  The fraction gets reduced to the smallest numerator and denominator,
-  and if necessary the sign is moved to the numerator.
-  Params:
-    value =       a GValue initialized to #GST_TYPE_FRACTION
-    numerator =       the numerator of the fraction
-    denominator =       the denominator of the fraction
+    The fraction gets reduced to the smallest numerator and denominator,
+    and if necessary the sign is moved to the numerator.
+
+    Params:
+      value = a GValue initialized to #GST_TYPE_FRACTION
+      numerator = the numerator of the fraction
+      denominator = the denominator of the fraction
 */
 void valueSetFraction(gobject.value.Value value, int numerator, int denominator)
 {
@@ -2302,10 +2416,11 @@ void valueSetFraction(gobject.value.Value value, int numerator, int denominator)
 
 /**
     Sets value to the range specified by start and end.
-  Params:
-    value =       a GValue initialized to GST_TYPE_FRACTION_RANGE
-    start =       the start of the range (a GST_TYPE_FRACTION GValue)
-    end =       the end of the range (a GST_TYPE_FRACTION GValue)
+
+    Params:
+      value = a GValue initialized to GST_TYPE_FRACTION_RANGE
+      start = the start of the range (a GST_TYPE_FRACTION GValue)
+      end = the end of the range (a GST_TYPE_FRACTION GValue)
 */
 void valueSetFractionRange(gobject.value.Value value, gobject.value.Value start, gobject.value.Value end)
 {
@@ -2314,13 +2429,14 @@ void valueSetFractionRange(gobject.value.Value value, gobject.value.Value start,
 
 /**
     Sets value to the range specified by numerator_start/denominator_start
-  and numerator_end/denominator_end.
-  Params:
-    value =       a GValue initialized to GST_TYPE_FRACTION_RANGE
-    numeratorStart =       the numerator start of the range
-    denominatorStart =       the denominator start of the range
-    numeratorEnd =       the numerator end of the range
-    denominatorEnd =       the denominator end of the range
+    and numerator_end/denominator_end.
+
+    Params:
+      value = a GValue initialized to GST_TYPE_FRACTION_RANGE
+      numeratorStart = the numerator start of the range
+      denominatorStart = the denominator start of the range
+      numeratorEnd = the numerator end of the range
+      denominatorEnd = the denominator end of the range
 */
 void valueSetFractionRangeFull(gobject.value.Value value, int numeratorStart, int denominatorStart, int numeratorEnd, int denominatorEnd)
 {
@@ -2329,10 +2445,11 @@ void valueSetFractionRangeFull(gobject.value.Value value, int numeratorStart, in
 
 /**
     Sets value to the range specified by start and end.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT64_RANGE
-    start =       the start of the range
-    end =       the end of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT64_RANGE
+      start = the start of the range
+      end = the end of the range
 */
 void valueSetInt64Range(gobject.value.Value value, long start, long end)
 {
@@ -2341,11 +2458,12 @@ void valueSetInt64Range(gobject.value.Value value, long start, long end)
 
 /**
     Sets value to the range specified by start, end and step.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT64_RANGE
-    start =       the start of the range
-    end =       the end of the range
-    step =       the step of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT64_RANGE
+      start = the start of the range
+      end = the end of the range
+      step = the step of the range
 */
 void valueSetInt64RangeStep(gobject.value.Value value, long start, long end, long step)
 {
@@ -2354,10 +2472,11 @@ void valueSetInt64RangeStep(gobject.value.Value value, long start, long end, lon
 
 /**
     Sets value to the range specified by start and end.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT_RANGE
-    start =       the start of the range
-    end =       the end of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT_RANGE
+      start = the start of the range
+      end = the end of the range
 */
 void valueSetIntRange(gobject.value.Value value, int start, int end)
 {
@@ -2366,11 +2485,12 @@ void valueSetIntRange(gobject.value.Value value, int start, int end)
 
 /**
     Sets value to the range specified by start, end and step.
-  Params:
-    value =       a GValue initialized to GST_TYPE_INT_RANGE
-    start =       the start of the range
-    end =       the end of the range
-    step =       the step of the range
+
+    Params:
+      value = a GValue initialized to GST_TYPE_INT_RANGE
+      start = the start of the range
+      end = the end of the range
+      step = the step of the range
 */
 void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int step)
 {
@@ -2379,9 +2499,10 @@ void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int ste
 
 /**
     Sets the contents of value to structure.
-  Params:
-    value =       a GValue initialized to GST_TYPE_STRUCTURE
-    structure =       the structure to set the value to
+
+    Params:
+      value = a GValue initialized to GST_TYPE_STRUCTURE
+      structure = the structure to set the value to
 */
 void valueSetStructure(gobject.value.Value value, gst.structure.Structure structure)
 {
@@ -2390,15 +2511,16 @@ void valueSetStructure(gobject.value.Value value, gst.structure.Structure struct
 
 /**
     Subtracts subtrahend from minuend and stores the result in dest.
-  Note that this means subtraction as in sets, not as in mathematics.
-  Params:
-    dest =       the destination value
-          for the result if the subtraction is not empty. May be null,
-          in which case the resulting set will not be computed, which can
-          give a fair speedup.
-    minuend =       the value to subtract from
-    subtrahend =       the value to subtract
-  Returns:     true if the subtraction is not empty
+    Note that this means subtraction as in sets, not as in mathematics.
+
+    Params:
+      dest = the destination value
+            for the result if the subtraction is not empty. May be null,
+            in which case the resulting set will not be computed, which can
+            give a fair speedup.
+      minuend = the value to subtract from
+      subtrahend = the value to subtract
+    Returns: true if the subtraction is not empty
 */
 bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
@@ -2411,11 +2533,12 @@ bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, go
 
 /**
     Creates a GValue corresponding to the union of value1 and value2.
-  Params:
-    dest =       the destination value
-    value1 =       a value to union
-    value2 =       another value to union
-  Returns:     true if the union succeeded.
+
+    Params:
+      dest = the destination value
+      value1 = a value to union
+      value2 = another value to union
+    Returns: true if the union succeeded.
 */
 bool valueUnion(out gobject.value.Value dest, gobject.value.Value value1, gobject.value.Value value2)
 {
@@ -2428,11 +2551,12 @@ bool valueUnion(out gobject.value.Value dest, gobject.value.Value value1, gobjec
 
 /**
     Gets the version number of the GStreamer library.
-  Params:
-    major =       pointer to a guint to store the major version number
-    minor =       pointer to a guint to store the minor version number
-    micro =       pointer to a guint to store the micro version number
-    nano =       pointer to a guint to store the nano version number
+
+    Params:
+      major = pointer to a guint to store the major version number
+      minor = pointer to a guint to store the minor version number
+      micro = pointer to a guint to store the micro version number
+      nano = pointer to a guint to store the nano version number
 */
 void version_(out uint major, out uint minor, out uint micro, out uint nano)
 {
@@ -2441,9 +2565,9 @@ void version_(out uint major, out uint minor, out uint micro, out uint nano)
 
 /**
     This function returns a string that is useful for describing this version
-  of GStreamer to the outside world: user agent strings, logging, ...
-  Returns:     a newly allocated string describing this version
-        of GStreamer.
+    of GStreamer to the outside world: user agent strings, logging, ...
+    Returns: a newly allocated string describing this version
+          of GStreamer.
 */
 string versionString()
 {

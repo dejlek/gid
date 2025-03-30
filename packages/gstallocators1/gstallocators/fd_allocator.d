@@ -1,3 +1,4 @@
+/// Module for [FdAllocator] class
 module gstallocators.fd_allocator;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gstallocators.types;
 class FdAllocator : gst.allocator.Allocator
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_fd_allocator_get_type != &gidSymbolNotFound ? gst_fd_allocator_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,8 +40,8 @@ class FdAllocator : gst.allocator.Allocator
 
   /**
       Return a new fd allocator.
-    Returns:     a new fd allocator. Use [gst.object.ObjectGst.unref] to
-      release the allocator after usage
+      Returns: a new fd allocator. Use [gst.object.ObjectGst.unref] to
+        release the allocator after usage
   */
   this()
   {
@@ -48,15 +52,16 @@ class FdAllocator : gst.allocator.Allocator
 
   /**
       Return a [gst.memory.Memory] that wraps a generic file descriptor.
-    Params:
-      allocator =       allocator to be used for this memory
-      fd =       file descriptor
-      size =       memory size
-      flags =       extra #GstFdMemoryFlags
-    Returns:     a GstMemory based on allocator.
-      When the buffer will be released the allocator will close the fd unless
-      the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
-      The memory is only mmapped on [gst.buffer.Buffer.map] request.
+  
+      Params:
+        allocator = allocator to be used for this memory
+        fd = file descriptor
+        size = memory size
+        flags = extra #GstFdMemoryFlags
+      Returns: a GstMemory based on allocator.
+        When the buffer will be released the allocator will close the fd unless
+        the `GST_FD_MEMORY_FLAG_DONT_CLOSE` flag is specified.
+        The memory is only mmapped on [gst.buffer.Buffer.map] request.
   */
   static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
   {

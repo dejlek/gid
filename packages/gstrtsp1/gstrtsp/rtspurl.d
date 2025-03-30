@@ -1,3 +1,4 @@
+/// Module for [RTSPUrl] class
 module gstrtsp.rtspurl;
 
 import gid.gid;
@@ -12,27 +13,32 @@ import gstrtsp.types;
 class RTSPUrl : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstRTSPUrl.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_url_get_type != &gidSymbolNotFound ? gst_rtsp_url_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -130,7 +136,7 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Make a copy of url.
-    Returns:     a copy of url. Free with gst_rtsp_url_free () after usage.
+      Returns: a copy of url. Free with gst_rtsp_url_free () after usage.
   */
   gstrtsp.rtspurl.RTSPUrl copy()
   {
@@ -142,18 +148,18 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Splits the path of url on '/' boundaries, decoding the resulting components,
-    
-    The decoding performed by this routine is "URI decoding", as defined in RFC
-    3986, commonly known as percent-decoding. For example, a string "foo\`2fbar`"
-    will decode to "foo/bar" -- the \`2f` being replaced by the corresponding byte
-    with hex value 0x2f. Note that there is no guarantee that the resulting byte
-    sequence is valid in any given encoding. As a special case, \`00` is not
-    unescaped to NUL, as that would prematurely terminate the string.
-    
-    Also note that since paths usually start with a slash, the first component
-    will usually be the empty string.
-    Returns:     null-terminated array of URL components. Free with
-      [glib.global.strfreev] when no longer needed.
+      
+      The decoding performed by this routine is "URI decoding", as defined in RFC
+      3986, commonly known as percent-decoding. For example, a string "foo\`2fbar`"
+      will decode to "foo/bar" -- the \`2f` being replaced by the corresponding byte
+      with hex value 0x2f. Note that there is no guarantee that the resulting byte
+      sequence is valid in any given encoding. As a special case, \`00` is not
+      unescaped to NUL, as that would prematurely terminate the string.
+      
+      Also note that since paths usually start with a slash, the first component
+      will usually be the empty string.
+      Returns: null-terminated array of URL components. Free with
+        [glib.global.strfreev] when no longer needed.
   */
   string[] decodePathComponents()
   {
@@ -175,9 +181,10 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Get the port number of url.
-    Params:
-      port =       location to hold the port
-    Returns:     #GST_RTSP_OK.
+  
+      Params:
+        port = location to hold the port
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult getPort(out ushort port)
   {
@@ -189,7 +196,7 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Get a newly allocated string describing the request URI for url.
-    Returns:     a string with the request URI. [glib.global.gfree] after usage.
+      Returns: a string with the request URI. [glib.global.gfree] after usage.
   */
   string getRequestUri()
   {
@@ -201,11 +208,12 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Get a newly allocated string describing the request URI for url
-    combined with the control path for control_path
-    Params:
-      controlPath =       an RTSP aggregate control path
-    Returns:     a string with the request URI combined with the control path.
-      [glib.global.gfree] after usage.
+      combined with the control path for control_path
+  
+      Params:
+        controlPath = an RTSP aggregate control path
+      Returns: a string with the request URI combined with the control path.
+        [glib.global.gfree] after usage.
   */
   string getRequestUriWithControl(string controlPath)
   {
@@ -218,9 +226,10 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Set the port number in url to port.
-    Params:
-      port =       the port
-    Returns:     #GST_RTSP_OK.
+  
+      Params:
+        port = the port
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult setPort(ushort port)
   {
@@ -232,11 +241,12 @@ class RTSPUrl : gobject.boxed.Boxed
 
   /**
       Parse the RTSP urlstr into a newly allocated #GstRTSPUrl. Free after usage
-    with [gstrtsp.rtspurl.RTSPUrl.free].
-    Params:
-      urlstr =       the url string to parse
-      url =       location to hold the result.
-    Returns:     a #GstRTSPResult.
+      with [gstrtsp.rtspurl.RTSPUrl.free].
+  
+      Params:
+        urlstr = the url string to parse
+        url = location to hold the result.
+      Returns: a #GstRTSPResult.
   */
   static gstrtsp.types.RTSPResult parse(string urlstr, out gstrtsp.rtspurl.RTSPUrl url)
   {

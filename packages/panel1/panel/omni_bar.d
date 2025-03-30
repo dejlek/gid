@@ -1,3 +1,4 @@
+/// Module for [OmniBar] class
 module panel.omni_bar;
 
 import gid.gid;
@@ -32,17 +33,20 @@ import panel.types;
 class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_omni_bar_get_type != &gidSymbolNotFound ? panel_omni_bar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

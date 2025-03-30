@@ -1,3 +1,4 @@
+/// Module for [PlugAccessible] class
 module gtk.plug_accessible;
 
 import atk.component;
@@ -14,17 +15,20 @@ import gtk.window_accessible;
 class PlugAccessible : gtk.window_accessible.WindowAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_accessible_get_type != &gidSymbolNotFound ? gtk_plug_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

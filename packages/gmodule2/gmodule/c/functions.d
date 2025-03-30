@@ -1,3 +1,4 @@
+/// C functions for gmodule2 library
 module gmodule.c.functions;
 
 public import gid.basictypes;
@@ -15,28 +16,48 @@ else
 __gshared extern(C)
 {
   // Module
-  bool function(ModuleC* module_) c_g_module_close;
-  void function(ModuleC* module_) c_g_module_make_resident;
-  const(char)* function(ModuleC* module_) c_g_module_name;
-  bool function(ModuleC* module_, const(char)* symbolName, void** symbol) c_g_module_symbol;
-  char* function(const(char)* directory, const(char)* moduleName) c_g_module_build_path;
-  const(char)* function() c_g_module_error;
-  GQuark function() c_g_module_error_quark;
-  ModuleC* function(const(char)* fileName, GModuleFlags flags) c_g_module_open;
-  ModuleC* function(const(char)* fileName, GModuleFlags flags, GError** _err) c_g_module_open_full;
-  bool function() c_g_module_supported;
+  bool function(ModuleC* module_) c_g_module_close; ///
+  void function(ModuleC* module_) c_g_module_make_resident; ///
+  const(char)* function(ModuleC* module_) c_g_module_name; ///
+  bool function(ModuleC* module_, const(char)* symbolName, void** symbol) c_g_module_symbol; ///
+  char* function(const(char)* directory, const(char)* moduleName) c_g_module_build_path; ///
+  const(char)* function() c_g_module_error; ///
+  GQuark function() c_g_module_error_quark; ///
+  ModuleC* function(const(char)* fileName, GModuleFlags flags) c_g_module_open; ///
+  ModuleC* function(const(char)* fileName, GModuleFlags flags, GError** _err) c_g_module_open_full; ///
+  bool function() c_g_module_supported; ///
 }
 
 // Module
+
+/** */
 alias g_module_close = c_g_module_close;
+
+/** */
 alias g_module_make_resident = c_g_module_make_resident;
+
+/** */
 alias g_module_name = c_g_module_name;
+
+/** */
 alias g_module_symbol = c_g_module_symbol;
+
+/** */
 alias g_module_build_path = c_g_module_build_path;
+
+/** */
 alias g_module_error = c_g_module_error;
+
+/** */
 alias g_module_error_quark = c_g_module_error_quark;
+
+/** */
 alias g_module_open = c_g_module_open;
+
+/** */
 alias g_module_open_full = c_g_module_open_full;
+
+/** */
 alias g_module_supported = c_g_module_supported;
 
 shared static this()

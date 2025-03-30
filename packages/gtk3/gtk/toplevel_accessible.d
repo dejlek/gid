@@ -1,3 +1,4 @@
+/// Module for [ToplevelAccessible] class
 module gtk.toplevel_accessible;
 
 import atk.object;
@@ -11,17 +12,20 @@ import gtk.window;
 class ToplevelAccessible : atk.object.ObjectAtk
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toplevel_accessible_get_type != &gidSymbolNotFound ? gtk_toplevel_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

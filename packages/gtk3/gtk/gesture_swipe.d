@@ -1,3 +1,4 @@
+/// Module for [GestureSwipe] class
 module gtk.gesture_swipe;
 
 import gid.gid;
@@ -10,30 +11,33 @@ import gtk.widget;
 
 /**
     #GtkGestureSwipe is a #GtkGesture implementation able to recognize
-  swipes, after a press/move/.../move/release sequence happens, the
-  #GtkGestureSwipe::swipe signal will be emitted, providing the velocity
-  and directionality of the sequence at the time it was lifted.
-  
-  If the velocity is desired in intermediate points,
-  [gtk.gesture_swipe.GestureSwipe.getVelocity] can be called on eg. a
-  #GtkGesture::update handler.
-  
-  All velocities are reported in pixels/sec units.
+    swipes, after a press/move/.../move/release sequence happens, the
+    #GtkGestureSwipe::swipe signal will be emitted, providing the velocity
+    and directionality of the sequence at the time it was lifted.
+    
+    If the velocity is desired in intermediate points,
+    [gtk.gesture_swipe.GestureSwipe.getVelocity] can be called on eg. a
+    #GtkGesture::update handler.
+    
+    All velocities are reported in pixels/sec units.
 */
 class GestureSwipe : gtk.gesture_single.GestureSingle
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_swipe_get_type != &gidSymbolNotFound ? gtk_gesture_swipe_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,9 +50,10 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
 
   /**
       Returns a newly created #GtkGesture that recognizes swipes.
-    Params:
-      widget =       a #GtkWidget
-    Returns:     a newly created #GtkGestureSwipe
+  
+      Params:
+        widget = a #GtkWidget
+      Returns: a newly created #GtkGestureSwipe
   */
   this(gtk.widget.Widget widget)
   {
@@ -59,12 +64,13 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
 
   /**
       If the gesture is recognized, this function returns true and fill in
-    velocity_x and velocity_y with the recorded velocity, as per the
-    last event(s) processed.
-    Params:
-      velocityX =       return value for the velocity in the X axis, in pixels/sec
-      velocityY =       return value for the velocity in the Y axis, in pixels/sec
-    Returns:     whether velocity could be calculated
+      velocity_x and velocity_y with the recorded velocity, as per the
+      last event(s) processed.
+  
+      Params:
+        velocityX = return value for the velocity in the X axis, in pixels/sec
+        velocityY = return value for the velocity in the Y axis, in pixels/sec
+      Returns: whether velocity could be calculated
   */
   bool getVelocity(out double velocityX, out double velocityY)
   {
@@ -74,39 +80,51 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /**
-      This signal is emitted when the recognized gesture is finished, velocity
-    and direction are a product of previously recorded events.
+      Connect to `Swipe` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B velocityX)       velocity in the X axis, in pixels/sec
-      * $(B velocityY)       velocity in the Y axis, in pixels/sec
-      * $(B gestureSwipe) the instance the signal is connected to
-    )
-  */
-  alias SwipeCallbackDlg = void delegate(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
-
-  /** ditto */
-  alias SwipeCallbackFunc = void function(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe);
-
-  /**
-    Connect to Swipe signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted when the recognized gesture is finished, velocity
+      and direction are a product of previously recorded events.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double velocityX, double velocityY, gtk.gesture_swipe.GestureSwipe gestureSwipe))
+  
+          `velocityX` velocity in the X axis, in pixels/sec (optional)
+  
+          `velocityY` velocity in the Y axis, in pixels/sec (optional)
+  
+          `gestureSwipe` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSwipe(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SwipeCallbackDlg) || is(T : SwipeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.gesture_swipe.GestureSwipe)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gestureSwipe = getVal!(gtk.gesture_swipe.GestureSwipe)(_paramVals);
-      auto velocityX = getVal!(double)(&_paramVals[1]);
-      auto velocityY = getVal!(double)(&_paramVals[2]);
-      _dClosure.dlg(velocityX, velocityY, gestureSwipe);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

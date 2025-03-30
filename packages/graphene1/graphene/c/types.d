@@ -1,3 +1,4 @@
+/// C types for graphene1 library
 module graphene.c.types;
 
 public import gid.basictypes;
@@ -5,51 +6,51 @@ public import gobject.c.types;
 
 /**
     Specify the order of the rotations on each axis.
-  
-  The `GRAPHENE_EULER_ORDER_DEFAULT` value is special, and is used
-  as an alias for one of the other orders.
+    
+    The `GRAPHENE_EULER_ORDER_DEFAULT` value is special, and is used
+    as an alias for one of the other orders.
 */
 enum graphene_euler_order_t
 {
   /**
       Rotate in the default order; the
-      default order is one of the following enumeration values
+        default order is one of the following enumeration values
   */
   Default = -1,
 
   /**
       Rotate in the X, Y, and Z order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXYZ`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXYZ`
   */
   Xyz = 0,
 
   /**
       Rotate in the Y, Z, and X order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYZX`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYZX`
   */
   Yzx = 1,
 
   /**
       Rotate in the Z, X, and Y order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZXY`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZXY`
   */
   Zxy = 2,
 
   /**
       Rotate in the X, Z, and Y order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXZY`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SXZY`
   */
   Xzy = 3,
 
   /**
       Rotate in the Y, X, and Z order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYXZ`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SYXZ`
   */
   Yxz = 4,
 
   /**
       Rotate in the Z, Y, and X order. Deprecated in
-      Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZYX`
+        Graphene 1.10, it's an alias for `GRAPHENE_EULER_ORDER_SZYX`
   */
   Zyx = 5,
 
@@ -186,20 +187,20 @@ enum graphene_ray_intersection_kind_t
 
   /**
       The ray is entering the intersected
-      object
+        object
   */
   Enter = 1,
 
   /**
       The ray is leaving the intersected
-      object
+        object
   */
   Leave = 2,
 }
 
 /**
     A 3D box, described as the volume between a minimum and
-  a maximum vertices.
+    a maximum vertices.
 */
 struct graphene_box_t
 {
@@ -212,9 +213,9 @@ struct graphene_box_t
 
 /**
     Describe a rotation using Euler angles.
-  
-  The contents of the #graphene_euler_t structure are private
-  and should never be accessed directly.
+    
+    The contents of the #graphene_euler_t structure are private
+    and should never be accessed directly.
 */
 struct graphene_euler_t
 {
@@ -227,9 +228,9 @@ struct graphene_euler_t
 
 /**
     A 3D volume delimited by 2D clip planes.
-  
-  The contents of the [graphene.frustum.Frustum] are private, and should not be
-  modified directly.
+    
+    The contents of the [graphene.frustum.Frustum] are private, and should not be
+    modified directly.
 */
 struct graphene_frustum_t
 {
@@ -239,9 +240,9 @@ struct graphene_frustum_t
 
 /**
     A structure capable of holding a 4x4 matrix.
-  
-  The contents of the #graphene_matrix_t structure are private and
-  should never be accessed directly.
+    
+    The contents of the #graphene_matrix_t structure are private and
+    should never be accessed directly.
 */
 struct graphene_matrix_t
 {
@@ -251,9 +252,9 @@ struct graphene_matrix_t
 
 /**
     A 2D plane that extends infinitely in a 3D volume.
-  
-  The contents of the [graphene.plane.Plane] are private, and should not be
-  modified directly.
+    
+    The contents of the [graphene.plane.Plane] are private, and should not be
+    modified directly.
 */
 struct graphene_plane_t
 {
@@ -303,9 +304,9 @@ struct graphene_point3d_t
 
 /**
     A 4 vertex quadrilateral, as represented by four #graphene_point_t.
-  
-  The contents of a #graphene_quad_t are private and should never be
-  accessed directly.
+    
+    The contents of a #graphene_quad_t are private and should never be
+    accessed directly.
 */
 struct graphene_quad_t
 {
@@ -315,9 +316,9 @@ struct graphene_quad_t
 
 /**
     A quaternion.
-  
-  The contents of the #graphene_quaternion_t structure are private
-  and should never be accessed directly.
+    
+    The contents of the #graphene_quaternion_t structure are private
+    and should never be accessed directly.
 */
 struct graphene_quaternion_t
 {
@@ -336,9 +337,9 @@ struct graphene_quaternion_t
 
 /**
     A ray emitted from an origin in a given direction.
-  
-  The contents of the [graphene.ray.Ray] structure are private, and should not
-  be modified directly.
+    
+    The contents of the [graphene.ray.Ray] structure are private, and should not
+    be modified directly.
 */
 struct graphene_ray_t
 {
@@ -351,17 +352,17 @@ struct graphene_ray_t
 
 /**
     The location and size of a rectangle region.
-  
-  The width and height of a #graphene_rect_t can be negative; for instance,
-  a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
-  equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
-  of [ -10, -10 ].
-  
-  Application code can normalize rectangles using [graphene.rect.Rect.normalize];
-  this function will ensure that the width and height of a rectangle are
-  positive values. All functions taking a #graphene_rect_t as an argument
-  will internally operate on a normalized copy; all functions returning a
-  #graphene_rect_t will always return a normalized rectangle.
+    
+    The width and height of a #graphene_rect_t can be negative; for instance,
+    a #graphene_rect_t with an origin of [ 0, 0 ] and a size of [ 10, 10 ] is
+    equivalent to a #graphene_rect_t with an origin of [ 10, 10 ] and a size
+    of [ -10, -10 ].
+    
+    Application code can normalize rectangles using [graphene.rect.Rect.normalize];
+    this function will ensure that the width and height of a rectangle are
+    positive values. All functions taking a #graphene_rect_t as an argument
+    will internally operate on a normalized copy; all functions returning a
+    #graphene_rect_t will always return a normalized rectangle.
 */
 struct graphene_rect_t
 {
@@ -453,9 +454,9 @@ struct graphene_triangle_t
 
 /**
     A structure capable of holding a vector with two dimensions, x and y.
-  
-  The contents of the #graphene_vec2_t structure are private and should
-  never be accessed directly.
+    
+    The contents of the #graphene_vec2_t structure are private and should
+    never be accessed directly.
 */
 struct graphene_vec2_t
 {
@@ -465,9 +466,9 @@ struct graphene_vec2_t
 
 /**
     A structure capable of holding a vector with three dimensions: x, y, and z.
-  
-  The contents of the #graphene_vec3_t structure are private and should
-  never be accessed directly.
+    
+    The contents of the #graphene_vec3_t structure are private and should
+    never be accessed directly.
 */
 struct graphene_vec3_t
 {
@@ -477,9 +478,9 @@ struct graphene_vec3_t
 
 /**
     A structure capable of holding a vector with four dimensions: x, y, z, and w.
-  
-  The contents of the #graphene_vec4_t structure are private and should
-  never be accessed directly.
+    
+    The contents of the #graphene_vec4_t structure are private and should
+    never be accessed directly.
 */
 struct graphene_vec4_t
 {

@@ -1,3 +1,4 @@
+/// Module for [Frame] class
 module panel.frame;
 
 import gid.gid;
@@ -31,17 +32,20 @@ import panel.widget;
 class Frame : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_get_type != &gidSymbolNotFound ? panel_frame_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// C functions for gstnet1 library
 module gstnet.c.functions;
 
 public import gid.basictypes;
@@ -19,96 +20,156 @@ else
 __gshared extern(C)
 {
   // NetAddressMeta
-  const(GstMetaInfo)* function() c_gst_net_address_meta_get_info;
+  const(GstMetaInfo)* function() c_gst_net_address_meta_get_info; ///
 
   // NetClientClock
-  extern(C) GType function() c_gst_net_client_clock_get_type;
-  GstClock* function(const(char)* name, const(char)* remoteAddress, int remotePort, GstClockTime baseTime) c_gst_net_client_clock_new;
+  GType function() c_gst_net_client_clock_get_type; ///
+  GstClock* function(const(char)* name, const(char)* remoteAddress, int remotePort, GstClockTime baseTime) c_gst_net_client_clock_new; ///
 
   // NetControlMessageMeta
-  const(GstMetaInfo)* function() c_gst_net_control_message_meta_get_info;
+  const(GstMetaInfo)* function() c_gst_net_control_message_meta_get_info; ///
 
   // NetTimePacket
-  extern(C) GType function() c_gst_net_time_packet_get_type;
-  GstNetTimePacket* function(const(ubyte)* buffer) c_gst_net_time_packet_new;
-  GstNetTimePacket* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_copy;
-  void function(GstNetTimePacket* packet) c_gst_net_time_packet_free;
-  bool function(const(GstNetTimePacket)* packet, GSocket* socket, GSocketAddress* destAddress, GError** _err) c_gst_net_time_packet_send;
-  ubyte* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_serialize;
-  GstNetTimePacket* function(GSocket* socket, GSocketAddress** srcAddress, GError** _err) c_gst_net_time_packet_receive;
+  GType function() c_gst_net_time_packet_get_type; ///
+  GstNetTimePacket* function(const(ubyte)* buffer) c_gst_net_time_packet_new; ///
+  GstNetTimePacket* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_copy; ///
+  void function(GstNetTimePacket* packet) c_gst_net_time_packet_free; ///
+  bool function(const(GstNetTimePacket)* packet, GSocket* socket, GSocketAddress* destAddress, GError** _err) c_gst_net_time_packet_send; ///
+  ubyte* function(const(GstNetTimePacket)* packet) c_gst_net_time_packet_serialize; ///
+  GstNetTimePacket* function(GSocket* socket, GSocketAddress** srcAddress, GError** _err) c_gst_net_time_packet_receive; ///
 
   // NetTimeProvider
-  extern(C) GType function() c_gst_net_time_provider_get_type;
-  GstNetTimeProvider* function(GstClock* clock, const(char)* address, int port) c_gst_net_time_provider_new;
+  GType function() c_gst_net_time_provider_get_type; ///
+  GstNetTimeProvider* function(GstClock* clock, const(char)* address, int port) c_gst_net_time_provider_new; ///
 
   // NtpClock
-  extern(C) GType function() c_gst_ntp_clock_get_type;
-  GstClock* function(const(char)* name, const(char)* remoteAddress, int remotePort, GstClockTime baseTime) c_gst_ntp_clock_new;
+  GType function() c_gst_ntp_clock_get_type; ///
+  GstClock* function(const(char)* name, const(char)* remoteAddress, int remotePort, GstClockTime baseTime) c_gst_ntp_clock_new; ///
 
   // PtpClock
-  extern(C) GType function() c_gst_ptp_clock_get_type;
-  GstClock* function(const(char)* name, uint domain) c_gst_ptp_clock_new;
+  GType function() c_gst_ptp_clock_get_type; ///
+  GstClock* function(const(char)* name, uint domain) c_gst_ptp_clock_new; ///
 
   // global
-  GstNetAddressMeta* function(GstBuffer* buffer, GSocketAddress* addr) c_gst_buffer_add_net_address_meta;
-  GstNetControlMessageMeta* function(GstBuffer* buffer, GSocketControlMessage* message) c_gst_buffer_add_net_control_message_meta;
-  GstNetAddressMeta* function(GstBuffer* buffer) c_gst_buffer_get_net_address_meta;
-  GType function() c_gst_net_address_meta_api_get_type;
-  GType function() c_gst_net_control_message_meta_api_get_type;
-  bool function(GSocket* socket, int qosDscp) c_gst_net_utils_set_socket_tos;
-  void function() c_gst_ptp_deinit;
-  bool function(ulong clockId, char** interfaces) c_gst_ptp_init;
-  bool function(const(GstStructure)* config) c_gst_ptp_init_full;
-  bool function() c_gst_ptp_is_initialized;
-  bool function() c_gst_ptp_is_supported;
-  gulong function(GstPtpStatisticsCallback callback, void* userData, GDestroyNotify destroyData) c_gst_ptp_statistics_callback_add;
-  void function(gulong id) c_gst_ptp_statistics_callback_remove;
+  GstNetAddressMeta* function(GstBuffer* buffer, GSocketAddress* addr) c_gst_buffer_add_net_address_meta; ///
+  GstNetControlMessageMeta* function(GstBuffer* buffer, GSocketControlMessage* message) c_gst_buffer_add_net_control_message_meta; ///
+  GstNetAddressMeta* function(GstBuffer* buffer) c_gst_buffer_get_net_address_meta; ///
+  GType function() c_gst_net_address_meta_api_get_type; ///
+  GType function() c_gst_net_control_message_meta_api_get_type; ///
+  bool function(GSocket* socket, int qosDscp) c_gst_net_utils_set_socket_tos; ///
+  void function() c_gst_ptp_deinit; ///
+  bool function(ulong clockId, char** interfaces) c_gst_ptp_init; ///
+  bool function(const(GstStructure)* config) c_gst_ptp_init_full; ///
+  bool function() c_gst_ptp_is_initialized; ///
+  bool function() c_gst_ptp_is_supported; ///
+  gulong function(GstPtpStatisticsCallback callback, void* userData, GDestroyNotify destroyData) c_gst_ptp_statistics_callback_add; ///
+  void function(gulong id) c_gst_ptp_statistics_callback_remove; ///
 }
 
 // NetAddressMeta
+
+/** */
 alias gst_net_address_meta_get_info = c_gst_net_address_meta_get_info;
 
 // NetClientClock
+
+/** */
 alias gst_net_client_clock_get_type = c_gst_net_client_clock_get_type;
+
+/** */
 alias gst_net_client_clock_new = c_gst_net_client_clock_new;
 
 // NetControlMessageMeta
+
+/** */
 alias gst_net_control_message_meta_get_info = c_gst_net_control_message_meta_get_info;
 
 // NetTimePacket
+
+/** */
 alias gst_net_time_packet_get_type = c_gst_net_time_packet_get_type;
+
+/** */
 alias gst_net_time_packet_new = c_gst_net_time_packet_new;
+
+/** */
 alias gst_net_time_packet_copy = c_gst_net_time_packet_copy;
+
+/** */
 alias gst_net_time_packet_free = c_gst_net_time_packet_free;
+
+/** */
 alias gst_net_time_packet_send = c_gst_net_time_packet_send;
+
+/** */
 alias gst_net_time_packet_serialize = c_gst_net_time_packet_serialize;
+
+/** */
 alias gst_net_time_packet_receive = c_gst_net_time_packet_receive;
 
 // NetTimeProvider
+
+/** */
 alias gst_net_time_provider_get_type = c_gst_net_time_provider_get_type;
+
+/** */
 alias gst_net_time_provider_new = c_gst_net_time_provider_new;
 
 // NtpClock
+
+/** */
 alias gst_ntp_clock_get_type = c_gst_ntp_clock_get_type;
+
+/** */
 alias gst_ntp_clock_new = c_gst_ntp_clock_new;
 
 // PtpClock
+
+/** */
 alias gst_ptp_clock_get_type = c_gst_ptp_clock_get_type;
+
+/** */
 alias gst_ptp_clock_new = c_gst_ptp_clock_new;
 
 // global
+
+/** */
 alias gst_buffer_add_net_address_meta = c_gst_buffer_add_net_address_meta;
+
+/** */
 alias gst_buffer_add_net_control_message_meta = c_gst_buffer_add_net_control_message_meta;
+
+/** */
 alias gst_buffer_get_net_address_meta = c_gst_buffer_get_net_address_meta;
+
+/** */
 alias gst_net_address_meta_api_get_type = c_gst_net_address_meta_api_get_type;
+
+/** */
 alias gst_net_control_message_meta_api_get_type = c_gst_net_control_message_meta_api_get_type;
+
+/** */
 alias gst_net_utils_set_socket_tos = c_gst_net_utils_set_socket_tos;
+
+/** */
 alias gst_ptp_deinit = c_gst_ptp_deinit;
+
+/** */
 alias gst_ptp_init = c_gst_ptp_init;
+
+/** */
 alias gst_ptp_init_full = c_gst_ptp_init_full;
+
+/** */
 alias gst_ptp_is_initialized = c_gst_ptp_is_initialized;
+
+/** */
 alias gst_ptp_is_supported = c_gst_ptp_is_supported;
+
+/** */
 alias gst_ptp_statistics_callback_add = c_gst_ptp_statistics_callback_add;
+
+/** */
 alias gst_ptp_statistics_callback_remove = c_gst_ptp_statistics_callback_remove;
 
 shared static this()

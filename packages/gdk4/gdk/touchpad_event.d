@@ -1,3 +1,4 @@
+/// Module for [TouchpadEvent] class
 module gdk.touchpad_event;
 
 import gdk.c.functions;
@@ -8,15 +9,16 @@ import gid.gid;
 
 /**
     An event related to a gesture on a touchpad device.
-  
-  Unlike touchscreens, where the windowing system sends basic
-  sequences of begin, update, end events, and leaves gesture
-  recognition to the clients, touchpad gestures are typically
-  processed by the system, resulting in these events.
+    
+    Unlike touchscreens, where the windowing system sends basic
+    sequences of begin, update, end events, and leaves gesture
+    recognition to the clients, touchpad gestures are typically
+    processed by the system, resulting in these events.
 */
 class TouchpadEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,9 +29,10 @@ class TouchpadEvent : gdk.event.Event
 
   /**
       Extracts delta information from a touchpad event.
-    Params:
-      dx =       return location for x
-      dy =       return location for y
+  
+      Params:
+        dx = return location for x
+        dy = return location for y
   */
   void getDeltas(out double dx, out double dy)
   {
@@ -38,7 +41,7 @@ class TouchpadEvent : gdk.event.Event
 
   /**
       Extracts the touchpad gesture phase from a touchpad event.
-    Returns:     the gesture phase of event
+      Returns: the gesture phase of event
   */
   gdk.types.TouchpadGesturePhase getGesturePhase()
   {
@@ -50,7 +53,7 @@ class TouchpadEvent : gdk.event.Event
 
   /**
       Extracts the number of fingers from a touchpad event.
-    Returns:     the number of fingers for event
+      Returns: the number of fingers for event
   */
   uint getNFingers()
   {
@@ -61,7 +64,7 @@ class TouchpadEvent : gdk.event.Event
 
   /**
       Extracts the angle delta from a touchpad pinch event.
-    Returns:     the angle delta of event
+      Returns: the angle delta of event
   */
   double getPinchAngleDelta()
   {
@@ -72,7 +75,7 @@ class TouchpadEvent : gdk.event.Event
 
   /**
       Extracts the scale from a touchpad pinch event.
-    Returns:     the scale of event
+      Returns: the scale of event
   */
   double getPinchScale()
   {

@@ -1,3 +1,4 @@
+/// Global functions for gstglwayland1 library
 module gstglwayland.global;
 
 import gid.gid;

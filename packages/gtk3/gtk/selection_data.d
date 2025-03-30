@@ -1,3 +1,4 @@
+/// Module for [SelectionData] class
 module gtk.selection_data;
 
 import gdk.atom;
@@ -15,22 +16,26 @@ import gtk.types;
 class SelectionData : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_data_get_type != &gidSymbolNotFound ? gtk_selection_data_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,7 +48,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Makes a copy of a #GtkSelectionData-struct and its data.
-    Returns:     a pointer to a copy of data.
+      Returns: a pointer to a copy of data.
   */
   gtk.selection_data.SelectionData copy()
   {
@@ -55,7 +60,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the data type of the selection.
-    Returns:     the data type of the selection.
+      Returns: the data type of the selection.
   */
   gdk.atom.Atom getDataType()
   {
@@ -67,7 +72,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the raw data of the selection along with its length.
-    Returns:     the raw data of the selection
+      Returns: the raw data of the selection
   */
   ubyte[] getData()
   {
@@ -85,7 +90,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the display of the selection.
-    Returns:     the display of the selection.
+      Returns: the display of the selection.
   */
   gdk.display.Display getDisplay()
   {
@@ -97,7 +102,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the format of the selection.
-    Returns:     the format of the selection.
+      Returns: the format of the selection.
   */
   int getFormat()
   {
@@ -108,7 +113,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the length of the raw data of the selection.
-    Returns:     the length of the data of the selection.
+      Returns: the length of the data of the selection.
   */
   int getLength()
   {
@@ -119,11 +124,11 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Gets the contents of the selection data as a #GdkPixbuf.
-    Returns:     if the selection data
-        contained a recognized image type and it could be converted to a
-        #GdkPixbuf, a newly allocated pixbuf is returned, otherwise
-        null.  If the result is non-null it must be freed with
-        [gobject.object.ObjectG.unref].
+      Returns: if the selection data
+          contained a recognized image type and it could be converted to a
+          #GdkPixbuf, a newly allocated pixbuf is returned, otherwise
+          null.  If the result is non-null it must be freed with
+          [gobject.object.ObjectG.unref].
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
@@ -135,7 +140,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the selection #GdkAtom of the selection data.
-    Returns:     the selection #GdkAtom of the selection data.
+      Returns: the selection #GdkAtom of the selection data.
   */
   gdk.atom.Atom getSelection()
   {
@@ -147,7 +152,7 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Retrieves the target of the selection.
-    Returns:     the target of the selection.
+      Returns: the target of the selection.
   */
   gdk.atom.Atom getTarget()
   {
@@ -159,10 +164,10 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Gets the contents of the selection data as a UTF-8 string.
-    Returns:     if the selection data contained a
-        recognized text type and it could be converted to UTF-8, a newly
-        allocated string containing the converted text, otherwise null.
-        If the result is non-null it must be freed with [glib.global.gfree].
+      Returns: if the selection data contained a
+          recognized text type and it could be converted to UTF-8, a newly
+          allocated string containing the converted text, otherwise null.
+          If the result is non-null it must be freed with [glib.global.gfree].
   */
   string getText()
   {
@@ -174,14 +179,14 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Gets the contents of the selection data as array of URIs.
-    
-    Since 3.24.37, this may involve using the FileTransfer
-    portal to send files between sandboxed apps.
-    Returns:     if
-        the selection data contains a list of
-        URIs, a newly allocated null-terminated string array
-        containing the URIs, otherwise null. If the result is
-        non-null it must be freed with [glib.global.strfreev].
+      
+      Since 3.24.37, this may involve using the FileTransfer
+      portal to send files between sandboxed apps.
+      Returns: if
+          the selection data contains a list of
+          URIs, a newly allocated null-terminated string array
+          containing the URIs, otherwise null. If the result is
+          non-null it must be freed with [glib.global.strfreev].
   */
   string[] getUris()
   {
@@ -203,12 +208,13 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Stores new data into a #GtkSelectionData object. Should
-    only be called from a selection handler callback.
-    Zero-terminates the stored data.
-    Params:
-      type =       the type of selection data
-      format =       format (number of bits in a unit)
-      data =       pointer to the data (will be copied)
+      only be called from a selection handler callback.
+      Zero-terminates the stored data.
+  
+      Params:
+        type = the type of selection data
+        format = format (number of bits in a unit)
+        data = pointer to the data (will be copied)
   */
   void set(gdk.atom.Atom type, int format, ubyte[] data)
   {
@@ -222,12 +228,13 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Sets the contents of the selection from a #GdkPixbuf
-    The pixbuf is converted to the form determined by
-    selection_data->target.
-    Params:
-      pixbuf =       a #GdkPixbuf
-    Returns:     true if the selection was successfully set,
-        otherwise false.
+      The pixbuf is converted to the form determined by
+      selection_data->target.
+  
+      Params:
+        pixbuf = a #GdkPixbuf
+      Returns: true if the selection was successfully set,
+          otherwise false.
   */
   bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
@@ -238,13 +245,14 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Sets the contents of the selection from a UTF-8 encoded string.
-    The string is converted to the form determined by
-    selection_data->target.
-    Params:
-      str =       a UTF-8 string
-      len =       the length of str, or -1 if str is nul-terminated.
-    Returns:     true if the selection was successfully set,
-        otherwise false.
+      The string is converted to the form determined by
+      selection_data->target.
+  
+      Params:
+        str = a UTF-8 string
+        len = the length of str, or -1 if str is nul-terminated.
+      Returns: true if the selection was successfully set,
+          otherwise false.
   */
   bool setText(string str, int len)
   {
@@ -256,16 +264,17 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Sets the contents of the selection from a list of URIs.
-    The string is converted to the form determined by
-    selection_data->target.
-    
-    Since 3.24.37, this may involve using the FileTransfer
-    portal to send files between sandboxed apps.
-    Params:
-      uris =       a null-terminated array of
-            strings holding URIs
-    Returns:     true if the selection was successfully set,
-        otherwise false.
+      The string is converted to the form determined by
+      selection_data->target.
+      
+      Since 3.24.37, this may involve using the FileTransfer
+      portal to send files between sandboxed apps.
+  
+      Params:
+        uris = a null-terminated array of
+              strings holding URIs
+      Returns: true if the selection was successfully set,
+          otherwise false.
   */
   bool setUris(string[] uris)
   {
@@ -281,13 +290,14 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Given a #GtkSelectionData object holding a list of targets,
-    determines if any of the targets in targets can be used to
-    provide a #GdkPixbuf.
-    Params:
-      writable =       whether to accept only targets for which GTK+ knows
-          how to convert a pixbuf into the format
-    Returns:     true if selection_data holds a list of targets,
-        and a suitable target for images is included, otherwise false.
+      determines if any of the targets in targets can be used to
+      provide a #GdkPixbuf.
+  
+      Params:
+        writable = whether to accept only targets for which GTK+ knows
+            how to convert a pixbuf into the format
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for images is included, otherwise false.
   */
   bool targetsIncludeImage(bool writable)
   {
@@ -298,13 +308,14 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Given a #GtkSelectionData object holding a list of targets,
-    determines if any of the targets in targets can be used to
-    provide rich text.
-    Params:
-      buffer =       a #GtkTextBuffer
-    Returns:     true if selection_data holds a list of targets,
-                    and a suitable target for rich text is included,
-                    otherwise false.
+      determines if any of the targets in targets can be used to
+      provide rich text.
+  
+      Params:
+        buffer = a #GtkTextBuffer
+      Returns: true if selection_data holds a list of targets,
+                      and a suitable target for rich text is included,
+                      otherwise false.
   */
   bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer)
   {
@@ -315,10 +326,10 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Given a #GtkSelectionData object holding a list of targets,
-    determines if any of the targets in targets can be used to
-    provide text.
-    Returns:     true if selection_data holds a list of targets,
-        and a suitable target for text is included, otherwise false.
+      determines if any of the targets in targets can be used to
+      provide text.
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for text is included, otherwise false.
   */
   bool targetsIncludeText()
   {
@@ -329,10 +340,10 @@ class SelectionData : gobject.boxed.Boxed
 
   /**
       Given a #GtkSelectionData object holding a list of targets,
-    determines if any of the targets in targets can be used to
-    provide a list or URIs.
-    Returns:     true if selection_data holds a list of targets,
-        and a suitable target for URI lists is included, otherwise false.
+      determines if any of the targets in targets can be used to
+      provide a list or URIs.
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for URI lists is included, otherwise false.
   */
   bool targetsIncludeUri()
   {

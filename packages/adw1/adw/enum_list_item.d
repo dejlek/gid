@@ -1,3 +1,4 @@
+/// Module for [EnumListItem] class
 module adw.enum_list_item;
 
 import adw.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class EnumListItem : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_item_get_type != &gidSymbolNotFound ? adw_enum_list_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,7 +39,7 @@ class EnumListItem : gobject.object.ObjectG
 
   /**
       Gets the enum value name.
-    Returns:     the enum value name
+      Returns: the enum value name
   */
   string getName()
   {
@@ -47,7 +51,7 @@ class EnumListItem : gobject.object.ObjectG
 
   /**
       Gets the enum value nick.
-    Returns:     the enum value nick
+      Returns: the enum value nick
   */
   string getNick()
   {
@@ -59,7 +63,7 @@ class EnumListItem : gobject.object.ObjectG
 
   /**
       Gets the enum value.
-    Returns:     the enum value
+      Returns: the enum value
   */
   int getValue()
   {

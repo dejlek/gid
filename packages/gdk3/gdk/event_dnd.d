@@ -1,3 +1,4 @@
+/// Module for [EventDND] class
 module gdk.event_dnd;
 
 import gdk.c.functions;
@@ -14,6 +15,7 @@ class EventDND
 {
   GdkEventDND cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class EventDND
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [VideoCodecAlphaMeta] class
 module gstvideo.video_codec_alpha_meta;
 
 import gid.gid;
@@ -10,16 +11,17 @@ import gstvideo.types;
 
 /**
     This meta is primarily for internal use in GStreamer elements to support
-  VP8/VP9 transparent video stored into WebM or Matroska containers, or
-  transparent static AV1 images. Nothing prevents you from using this meta
-  for custom purposes, but it generally can't be used to easily to add support
-  for alpha channels to CODECs or formats that don't support that out of the
-  box.
+    VP8/VP9 transparent video stored into WebM or Matroska containers, or
+    transparent static AV1 images. Nothing prevents you from using this meta
+    for custom purposes, but it generally can't be used to easily to add support
+    for alpha channels to CODECs or formats that don't support that out of the
+    box.
 */
 class VideoCodecAlphaMeta
 {
   GstVideoCodecAlphaMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -31,6 +33,7 @@ class VideoCodecAlphaMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

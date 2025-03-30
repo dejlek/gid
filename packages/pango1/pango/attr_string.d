@@ -1,3 +1,4 @@
+/// Module for [AttrString] class
 module pango.attr_string;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import pango.types;
 
 /**
     The [pango.attr_string.AttrString] structure is used to represent attributes with
-  a string value.
+    a string value.
 */
 class AttrString
 {
   PangoAttrString cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AttrString
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

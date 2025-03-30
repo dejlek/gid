@@ -1,3 +1,4 @@
+/// Module for [BytesIcon] class
 module gio.bytes_icon;
 
 import gid.gid;
@@ -13,22 +14,25 @@ import gobject.object;
 
 /**
     [gio.bytes_icon.BytesIcon] specifies an image held in memory in a common format (usually
-  PNG) to be used as icon.
+    PNG) to be used as icon.
 */
 class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_icon_get_type != &gidSymbolNotFound ? g_bytes_icon_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,13 +48,14 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
 
   /**
       Creates a new icon for a bytes.
-    
-    This cannot fail, but loading and interpreting the bytes may fail later on
-    (for example, if [gio.loadable_icon.LoadableIcon.load] is called) if the image is invalid.
-    Params:
-      bytes =       a #GBytes.
-    Returns:     a #GIcon for the given
-        bytes.
+      
+      This cannot fail, but loading and interpreting the bytes may fail later on
+      (for example, if [gio.loadable_icon.LoadableIcon.load] is called) if the image is invalid.
+  
+      Params:
+        bytes = a #GBytes.
+      Returns: a #GIcon for the given
+          bytes.
   */
   this(glib.bytes.Bytes bytes)
   {
@@ -61,7 +66,7 @@ class BytesIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loada
 
   /**
       Gets the #GBytes associated with the given icon.
-    Returns:     a #GBytes.
+      Returns: a #GBytes.
   */
   glib.bytes.Bytes getBytes()
   {

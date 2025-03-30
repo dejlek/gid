@@ -1,3 +1,4 @@
+/// Module for [ContainerCellAccessible] class
 module gtk.container_cell_accessible;
 
 import atk.action;
@@ -16,17 +17,20 @@ import gtk.types;
 class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_cell_accessible_get_type != &gidSymbolNotFound ? gtk_container_cell_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,7 +57,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
 
   /**
       Get a list of children.
-    Returns: 
+      Returns: 
   */
   gtk.cell_accessible.CellAccessible[] getChildren()
   {

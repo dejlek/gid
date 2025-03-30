@@ -1,3 +1,4 @@
+/// Module for [NetAddressMeta] class
 module gstnet.net_address_meta;
 
 import gid.gid;
@@ -10,13 +11,14 @@ import gstnet.types;
 
 /**
     #GstNetAddressMeta can be used to store a network address (a #GSocketAddress)
-  in a #GstBuffer so that it network elements can track the to and from address
-  of the buffer.
+    in a #GstBuffer so that it network elements can track the to and from address
+    of the buffer.
 */
 class NetAddressMeta
 {
   GstNetAddressMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class NetAddressMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [TreeRowReference] class
 module gtk.tree_row_reference;
 
 import gid.gid;
@@ -11,28 +12,32 @@ import gtk.types;
 
 /**
     A GtkTreeRowReference tracks model changes so that it always refers to the
-  same row (a #GtkTreePath refers to a position, not a fixed row). Create a
-  new GtkTreeRowReference with [gtk.tree_row_reference.TreeRowReference.new_].
+    same row (a #GtkTreePath refers to a position, not a fixed row). Create a
+    new GtkTreeRowReference with [gtk.tree_row_reference.TreeRowReference.new_].
 */
 class TreeRowReference : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_row_reference_get_type != &gidSymbolNotFound ? gtk_tree_row_reference_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,15 +50,16 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Creates a row reference based on path.
-    
-    This reference will keep pointing to the node pointed to
-    by path, so long as it exists. Any changes that occur on model are
-    propagated, and the path is updated appropriately. If
-    path isn’t a valid path in model, then null is returned.
-    Params:
-      model =       a #GtkTreeModel
-      path =       a valid #GtkTreePath-struct to monitor
-    Returns:     a newly allocated #GtkTreeRowReference, or null
+      
+      This reference will keep pointing to the node pointed to
+      by path, so long as it exists. Any changes that occur on model are
+      propagated, and the path is updated appropriately. If
+      path isn’t a valid path in model, then null is returned.
+  
+      Params:
+        model = a #GtkTreeModel
+        path = a valid #GtkTreePath-struct to monitor
+      Returns: a newly allocated #GtkTreeRowReference, or null
   */
   this(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
   {
@@ -64,34 +70,35 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       You do not need to use this function.
-    
-    Creates a row reference based on path.
-    
-    This reference will keep pointing to the node pointed to
-    by path, so long as it exists. If path isn’t a valid
-    path in model, then null is returned. However, unlike
-    references created with [gtk.tree_row_reference.TreeRowReference.new_], it
-    does not listen to the model for changes. The creator of
-    the row reference must do this explicitly using
-    [gtk.tree_row_reference.TreeRowReference.inserted], [gtk.tree_row_reference.TreeRowReference.deleted],
-    [gtk.tree_row_reference.TreeRowReference.reordered].
-    
-    These functions must be called exactly once per proxy when the
-    corresponding signal on the model is emitted. This single call
-    updates all row references for that proxy. Since built-in GTK+
-    objects like #GtkTreeView already use this mechanism internally,
-    using them as the proxy object will produce unpredictable results.
-    Further more, passing the same object as model and proxy
-    doesn’t work for reasons of internal implementation.
-    
-    This type of row reference is primarily meant by structures that
-    need to carefully monitor exactly when a row reference updates
-    itself, and is not generally needed by most applications.
-    Params:
-      proxy =       a proxy #GObject
-      model =       a #GtkTreeModel
-      path =       a valid #GtkTreePath-struct to monitor
-    Returns:     a newly allocated #GtkTreeRowReference, or null
+      
+      Creates a row reference based on path.
+      
+      This reference will keep pointing to the node pointed to
+      by path, so long as it exists. If path isn’t a valid
+      path in model, then null is returned. However, unlike
+      references created with [gtk.tree_row_reference.TreeRowReference.new_], it
+      does not listen to the model for changes. The creator of
+      the row reference must do this explicitly using
+      [gtk.tree_row_reference.TreeRowReference.inserted], [gtk.tree_row_reference.TreeRowReference.deleted],
+      [gtk.tree_row_reference.TreeRowReference.reordered].
+      
+      These functions must be called exactly once per proxy when the
+      corresponding signal on the model is emitted. This single call
+      updates all row references for that proxy. Since built-in GTK+
+      objects like #GtkTreeView already use this mechanism internally,
+      using them as the proxy object will produce unpredictable results.
+      Further more, passing the same object as model and proxy
+      doesn’t work for reasons of internal implementation.
+      
+      This type of row reference is primarily meant by structures that
+      need to carefully monitor exactly when a row reference updates
+      itself, and is not generally needed by most applications.
+  
+      Params:
+        proxy = a proxy #GObject
+        model = a #GtkTreeModel
+        path = a valid #GtkTreePath-struct to monitor
+      Returns: a newly allocated #GtkTreeRowReference, or null
   */
   static gtk.tree_row_reference.TreeRowReference newProxy(gobject.object.ObjectG proxy, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
   {
@@ -103,7 +110,7 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Copies a #GtkTreeRowReference.
-    Returns:     a copy of reference
+      Returns: a copy of reference
   */
   gtk.tree_row_reference.TreeRowReference copy()
   {
@@ -115,7 +122,7 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Returns the model that the row reference is monitoring.
-    Returns:     the model
+      Returns: the model
   */
   gtk.tree_model.TreeModel getModel()
   {
@@ -127,8 +134,8 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Returns a path that the row reference currently points to,
-    or null if the path pointed to is no longer valid.
-    Returns:     a current path, or null
+      or null if the path pointed to is no longer valid.
+      Returns: a current path, or null
   */
   gtk.tree_path.TreePath getPath()
   {
@@ -140,8 +147,8 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Returns true if the reference is non-null and refers to
-    a current valid path.
-    Returns:     true if reference points to a valid path
+      a current valid path.
+      Returns: true if reference points to a valid path
   */
   bool valid()
   {
@@ -152,11 +159,12 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Lets a set of row reference created by
-    [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
-    model emitted the #GtkTreeModel::row-deleted signal.
-    Params:
-      proxy =       a #GObject
-      path =       the path position that was deleted
+      [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
+      model emitted the #GtkTreeModel::row-deleted signal.
+  
+      Params:
+        proxy = a #GObject
+        path = the path position that was deleted
   */
   static void deleted(gobject.object.ObjectG proxy, gtk.tree_path.TreePath path)
   {
@@ -165,11 +173,12 @@ class TreeRowReference : gobject.boxed.Boxed
 
   /**
       Lets a set of row reference created by
-    [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
-    model emitted the #GtkTreeModel::row-inserted signal.
-    Params:
-      proxy =       a #GObject
-      path =       the row position that was inserted
+      [gtk.tree_row_reference.TreeRowReference.newProxy] know that the
+      model emitted the #GtkTreeModel::row-inserted signal.
+  
+      Params:
+        proxy = a #GObject
+        path = the row position that was inserted
   */
   static void inserted(gobject.object.ObjectG proxy, gtk.tree_path.TreePath path)
   {

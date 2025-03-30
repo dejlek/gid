@@ -1,3 +1,4 @@
+/// Module for [ControlBinding] class
 module gst.control_binding;
 
 import gid.gid;
@@ -9,24 +10,27 @@ import gst.types;
 
 /**
     A base class for value mapping objects that attaches control sources to #GObject
-  properties. Such an object is taking one or more #GstControlSource instances,
-  combines them and maps the resulting value to the type and value range of the
-  bound property.
+    properties. Such an object is taking one or more #GstControlSource instances,
+    combines them and maps the resulting value to the type and value range of the
+    bound property.
 */
 class ControlBinding : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_binding_get_type != &gidSymbolNotFound ? gst_control_binding_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,16 +45,17 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       Gets a number of #GValues for the given controlled property starting at the
-    requested time. The array values need to hold enough space for n_values of
-    #GValue.
-    
-    This function is useful if one wants to e.g. draw a graph of the control
-    curve or apply a control curve sample by sample.
-    Params:
-      timestamp =       the time that should be processed
-      interval =       the time spacing between subsequent values
-      values =       array to put control-values in
-    Returns:     true if the given array could be filled, false otherwise
+      requested time. The array values need to hold enough space for n_values of
+      #GValue.
+      
+      This function is useful if one wants to e.g. draw a graph of the control
+      curve or apply a control curve sample by sample.
+  
+      Params:
+        timestamp = the time that should be processed
+        interval = the time spacing between subsequent values
+        values = array to put control-values in
+      Returns: true if the given array could be filled, false otherwise
   */
   bool getGValueArray(gst.types.ClockTime timestamp, gst.types.ClockTime interval, gobject.value.Value[] values)
   {
@@ -71,10 +76,11 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       Gets the value for the given controlled property at the requested time.
-    Params:
-      timestamp =       the time the control-change should be read from
-    Returns:     the GValue of the property at the given time,
-      or null if the property isn't controlled.
+  
+      Params:
+        timestamp = the time the control-change should be read from
+      Returns: the GValue of the property at the given time,
+        or null if the property isn't controlled.
   */
   gobject.value.Value getValue(gst.types.ClockTime timestamp)
   {
@@ -86,7 +92,7 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       Checks if the control binding is disabled.
-    Returns:     true if the binding is inactive
+      Returns: true if the binding is inactive
   */
   bool isDisabled()
   {
@@ -97,10 +103,11 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       This function is used to disable a control binding for some time, i.e.
-    [gst.object.ObjectGst.syncValues] will do nothing.
-    Params:
-      disabled =       boolean that specifies whether to disable the controller
-        or not.
+      [gst.object.ObjectGst.syncValues] will do nothing.
+  
+      Params:
+        disabled = boolean that specifies whether to disable the controller
+          or not.
   */
   void setDisabled(bool disabled)
   {
@@ -111,16 +118,17 @@ class ControlBinding : gst.object.ObjectGst
 
   /**
       Sets the property of the object, according to the #GstControlSources that
-    handles it and for the given timestamp.
-    
-    If this function fails, it is most likely the application developers fault.
-    Most probably the control sources are not setup correctly.
-    Params:
-      object =       the object that has controlled properties
-      timestamp =       the time that should be processed
-      lastSync =       the last time this was called
-    Returns:     true if the controller value could be applied to the object
-      property, false otherwise
+      handles it and for the given timestamp.
+      
+      If this function fails, it is most likely the application developers fault.
+      Most probably the control sources are not setup correctly.
+  
+      Params:
+        object = the object that has controlled properties
+        timestamp = the time that should be processed
+        lastSync = the last time this was called
+      Returns: true if the controller value could be applied to the object
+        property, false otherwise
   */
   bool syncValues(gst.object.ObjectGst object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
   {

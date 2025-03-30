@@ -1,3 +1,4 @@
+/// Module for [Hook] class
 module glib.hook;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class Hook
 {
   GHook cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class Hook
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -81,10 +84,11 @@ class Hook
 
   /**
       Compares the ids of two #GHook elements, returning a negative value
-    if the second id is greater than the first.
-    Params:
-      sibling =       a #GHook to compare with new_hook
-    Returns:     a value <= 0 if the id of sibling is >= the id of new_hook
+      if the second id is greater than the first.
+  
+      Params:
+        sibling = a #GHook to compare with new_hook
+      Returns: a value <= 0 if the id of sibling is >= the id of new_hook
   */
   int compareIds(glib.hook.Hook sibling)
   {
@@ -95,10 +99,11 @@ class Hook
 
   /**
       Destroys a #GHook, given its ID.
-    Params:
-      hookList =       a #GHookList
-      hookId =       a hook ID
-    Returns:     true if the #GHook was found in the #GHookList and destroyed
+  
+      Params:
+        hookList = a #GHookList
+        hookId = a hook ID
+      Returns: true if the #GHook was found in the #GHookList and destroyed
   */
   static bool destroy(glib.hook_list.HookList hookList, gulong hookId)
   {
@@ -109,10 +114,11 @@ class Hook
 
   /**
       Removes one #GHook from a #GHookList, marking it
-    inactive and calling [glib.hook.Hook.unref] on it.
-    Params:
-      hookList =       a #GHookList
-      hook =       the #GHook to remove
+      inactive and calling [glib.hook.Hook.unref] on it.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to remove
   */
   static void destroyLink(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
@@ -121,10 +127,11 @@ class Hook
 
   /**
       Calls the #GHookList finalize_hook function if it exists,
-    and frees the memory allocated for the #GHook.
-    Params:
-      hookList =       a #GHookList
-      hook =       the #GHook to free
+      and frees the memory allocated for the #GHook.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to free
   */
   static void free(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
@@ -133,10 +140,11 @@ class Hook
 
   /**
       Inserts a #GHook into a #GHookList, before a given #GHook.
-    Params:
-      hookList =       a #GHookList
-      sibling =       the #GHook to insert the new #GHook before
-      hook =       the #GHook to insert
+  
+      Params:
+        hookList = a #GHookList
+        sibling = the #GHook to insert the new #GHook before
+        hook = the #GHook to insert
   */
   static void insertBefore(glib.hook_list.HookList hookList, glib.hook.Hook sibling, glib.hook.Hook hook)
   {
@@ -145,10 +153,11 @@ class Hook
 
   /**
       Inserts a #GHook into a #GHookList, sorted by the given function.
-    Params:
-      hookList =       a #GHookList
-      hook =       the #GHook to insert
-      func =       the comparison function used to sort the #GHook elements
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to insert
+        func = the comparison function used to sort the #GHook elements
   */
   static void insertSorted(glib.hook_list.HookList hookList, glib.hook.Hook hook, glib.types.HookCompareFunc func)
   {
@@ -168,9 +177,10 @@ class Hook
 
   /**
       Prepends a #GHook on the start of a #GHookList.
-    Params:
-      hookList =       a #GHookList
-      hook =       the #GHook to add to the start of hook_list
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to add to the start of hook_list
   */
   static void prepend(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
@@ -179,11 +189,12 @@ class Hook
 
   /**
       Decrements the reference count of a #GHook.
-    If the reference count falls to 0, the #GHook is removed
-    from the #GHookList and [glib.hook.Hook.free] is called to free it.
-    Params:
-      hookList =       a #GHookList
-      hook =       the #GHook to unref
+      If the reference count falls to 0, the #GHook is removed
+      from the #GHookList and [glib.hook.Hook.free] is called to free it.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to unref
   */
   static void unref(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {

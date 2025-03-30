@@ -1,3 +1,4 @@
+/// Module for [MapInfo] class
 module gst.map_info;
 
 import gid.gid;
@@ -8,16 +9,17 @@ import gst.types;
 
 /**
     A structure containing the result of a map operation such as
-  [gst.memory.Memory.map]. It contains the data and size.
-  
-  #GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
-  needs to be unmapped using [gst.buffer.Buffer.unmap] or [gst.memory.Memory.unmap]. Instead,
-  #GstBufferMapInfo and #GstMemoryMapInfo can be used in that case.
+    [gst.memory.Memory.map]. It contains the data and size.
+    
+    #GstMapInfo cannot be used with g_auto() because it is ambiguous whether it
+    needs to be unmapped using [gst.buffer.Buffer.unmap] or [gst.memory.Memory.unmap]. Instead,
+    #GstBufferMapInfo and #GstMemoryMapInfo can be used in that case.
 */
 class MapInfo
 {
   GstMapInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class MapInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [RTSPMessage] class
 module gstrtsp.rtspmessage;
 
 import gid.gid;
@@ -15,27 +16,32 @@ import gstrtsp.types;
 class RTSPMessage : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstRTSPMessage.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_msg_get_type != &gidSymbolNotFound ? gst_rtsp_msg_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -58,11 +64,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Add a header with key field and value to msg. This function takes a copy
-    of value.
-    Params:
-      field =       a #GstRTSPHeaderField
-      value =       the value of the header
-    Returns:     a #GstRTSPResult.
+      of value.
+  
+      Params:
+        field = a #GstRTSPHeaderField
+        value = the value of the header
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult addHeader(gstrtsp.types.RTSPHeaderField field, string value)
   {
@@ -75,11 +82,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Add a header with key header and value to msg. This function takes a copy
-    of value.
-    Params:
-      header =       header string
-      value =       the value of the header
-    Returns:     a #GstRTSPResult.
+      of value.
+  
+      Params:
+        header = header string
+        value = the value of the header
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult addHeaderByName(string header, string value)
   {
@@ -93,10 +101,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Append the currently configured headers in msg to the #GString str suitable
-    for transmission.
-    Params:
-      str =       a string
-    Returns:     #GST_RTSP_OK.
+      for transmission.
+  
+      Params:
+        str = a string
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult appendHeaders(glib.string_.String str)
   {
@@ -108,10 +117,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Allocate a new copy of msg and store the result in copy. The value in
-    copy should be release with gst_rtsp_message_free function.
-    Params:
-      copy =       pointer to new #GstRTSPMessage
-    Returns:     a #GstRTSPResult
+      copy should be release with gst_rtsp_message_free function.
+  
+      Params:
+        copy = pointer to new #GstRTSPMessage
+      Returns: a #GstRTSPResult
   */
   gstrtsp.types.RTSPResult copy(out gstrtsp.rtspmessage.RTSPMessage copy)
   {
@@ -125,7 +135,7 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Dump the contents of msg to stdout.
-    Returns:     #GST_RTSP_OK.
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult dump()
   {
@@ -137,14 +147,15 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Get the body of msg. data remains valid for as long as msg is valid and
-    unchanged.
-    
-    If the message body was set as a #GstBuffer before this will cause the data
-    to be copied and stored in the message. The #GstBuffer will no longer be
-    kept in the message.
-    Params:
-      data =       location for the data
-    Returns:     #GST_RTSP_OK.
+      unchanged.
+      
+      If the message body was set as a #GstBuffer before this will cause the data
+      to be copied and stored in the message. The #GstBuffer will no longer be
+      kept in the message.
+  
+      Params:
+        data = location for the data
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult getBody(out ubyte[] data)
   {
@@ -160,14 +171,15 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Get the body of msg. buffer remains valid for as long as msg is valid and
-    unchanged.
-    
-    If body data was set from raw memory instead of a #GstBuffer this function
-    will always return null. The caller can check if there is a body buffer by
-    calling [gstrtsp.rtspmessage.RTSPMessage.hasBodyBuffer].
-    Params:
-      buffer =       location for the buffer
-    Returns:     #GST_RTSP_OK.
+      unchanged.
+      
+      If body data was set from raw memory instead of a #GstBuffer this function
+      will always return null. The caller can check if there is a body buffer by
+      calling [gstrtsp.rtspmessage.RTSPMessage.hasBodyBuffer].
+  
+      Params:
+        buffer = location for the buffer
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult getBodyBuffer(out gst.buffer.Buffer buffer)
   {
@@ -181,13 +193,14 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Get the indx header value with key field from msg. The result in value
-    stays valid as long as it remains present in msg.
-    Params:
-      field =       a #GstRTSPHeaderField
-      value =       pointer to hold the result
-      indx =       the index of the header
-    Returns:     #GST_RTSP_OK when field was found, #GST_RTSP_ENOTIMPL if the key
-      was not found.
+      stays valid as long as it remains present in msg.
+  
+      Params:
+        field = a #GstRTSPHeaderField
+        value = pointer to hold the result
+        indx = the index of the header
+      Returns: #GST_RTSP_OK when field was found, #GST_RTSP_ENOTIMPL if the key
+        was not found.
   */
   gstrtsp.types.RTSPResult getHeader(gstrtsp.types.RTSPHeaderField field, out string value, int indx)
   {
@@ -201,13 +214,14 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Get the index header value with key header from msg. The result in value
-    stays valid as long as it remains present in msg.
-    Params:
-      header =       a #GstRTSPHeaderField
-      value =       pointer to hold the result
-      index =       the index of the header
-    Returns:     #GST_RTSP_OK when field was found, #GST_RTSP_ENOTIMPL if the key
-      was not found.
+      stays valid as long as it remains present in msg.
+  
+      Params:
+        header = a #GstRTSPHeaderField
+        value = pointer to hold the result
+        index = the index of the header
+      Returns: #GST_RTSP_OK when field was found, #GST_RTSP_ENOTIMPL if the key
+        was not found.
   */
   gstrtsp.types.RTSPResult getHeaderByName(string header, out string value, int index)
   {
@@ -222,7 +236,7 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Get the message type of msg.
-    Returns:     the message type.
+      Returns: the message type.
   */
   gstrtsp.types.RTSPMsgType getType()
   {
@@ -234,8 +248,8 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Checks if msg has a body and the body is stored as #GstBuffer.
-    Returns:     true if msg has a body and it's stored as #GstBuffer, false
-      otherwise.
+      Returns: true if msg has a body and it's stored as #GstBuffer, false
+        otherwise.
   */
   bool hasBodyBuffer()
   {
@@ -246,8 +260,8 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Initialize msg. This function is mostly used when msg is allocated on the
-    stack. The reverse operation of this is [gstrtsp.rtspmessage.RTSPMessage.unset].
-    Returns:     a #GstRTSPResult.
+      stack. The reverse operation of this is [gstrtsp.rtspmessage.RTSPMessage.unset].
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult init_()
   {
@@ -259,9 +273,10 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Initialize a new data #GstRTSPMessage for channel.
-    Params:
-      channel =       a channel
-    Returns:     a #GstRTSPResult.
+  
+      Params:
+        channel = a channel
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult initData(ubyte channel)
   {
@@ -273,11 +288,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Initialize msg as a request message with method and uri. To clear msg
-    again, use [gstrtsp.rtspmessage.RTSPMessage.unset].
-    Params:
-      method =       the request method to use
-      uri =       the uri of the request
-    Returns:     a #GstRTSPResult.
+      again, use [gstrtsp.rtspmessage.RTSPMessage.unset].
+  
+      Params:
+        method = the request method to use
+        uri = the uri of the request
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult initRequest(gstrtsp.types.RTSPMethod method, string uri)
   {
@@ -290,16 +306,17 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Initialize msg with code and reason.
-    
-    When reason is null, the default reason for code will be used.
-    
-    When request is not null, the relevant headers will be copied to the new
-    response message.
-    Params:
-      code =       the status code
-      reason =       the status reason or null
-      request =       the request that triggered the response or null
-    Returns:     a #GstRTSPResult.
+      
+      When reason is null, the default reason for code will be used.
+      
+      When request is not null, the relevant headers will be copied to the new
+      response message.
+  
+      Params:
+        code = the status code
+        reason = the status reason or null
+        request = the request that triggered the response or null
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult initResponse(gstrtsp.types.RTSPStatusCode code, string reason = null, gstrtsp.rtspmessage.RTSPMessage request = null)
   {
@@ -312,9 +329,10 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Parses the credentials given in a WWW-Authenticate or Authorization header.
-    Params:
-      field =       a #GstRTSPHeaderField
-    Returns:     null-terminated array of GstRTSPAuthCredential or null.
+  
+      Params:
+        field = a #GstRTSPHeaderField
+      Returns: null-terminated array of GstRTSPAuthCredential or null.
   */
   gstrtsp.rtspauth_credential.RTSPAuthCredential[] parseAuthCredentials(gstrtsp.types.RTSPHeaderField field)
   {
@@ -336,9 +354,10 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Parse the data message msg and store the channel in channel.
-    Params:
-      channel =       location to hold the channel
-    Returns:     a #GstRTSPResult.
+  
+      Params:
+        channel = location to hold the channel
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult parseData(out ubyte channel)
   {
@@ -350,15 +369,16 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Parse the request message msg and store the values method, uri and
-    version. The result locations can be null if one is not interested in its
-    value.
-    
-    uri remains valid for as long as msg is valid and unchanged.
-    Params:
-      method =       location to hold the method
-      uri =       location to hold the uri
-      version_ =       location to hold the version
-    Returns:     a #GstRTSPResult.
+      version. The result locations can be null if one is not interested in its
+      value.
+      
+      uri remains valid for as long as msg is valid and unchanged.
+  
+      Params:
+        method = location to hold the method
+        uri = location to hold the uri
+        version_ = location to hold the version
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult parseRequest(out gstrtsp.types.RTSPMethod method, out string uri, out gstrtsp.types.RTSPVersion version_)
   {
@@ -372,15 +392,16 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Parse the response message msg and store the values code, reason and
-    version. The result locations can be null if one is not interested in its
-    value.
-    
-    reason remains valid for as long as msg is valid and unchanged.
-    Params:
-      code =       location to hold the status code
-      reason =       location to hold the status reason
-      version_ =       location to hold the version
-    Returns:     a #GstRTSPResult.
+      version. The result locations can be null if one is not interested in its
+      value.
+      
+      reason remains valid for as long as msg is valid and unchanged.
+  
+      Params:
+        code = location to hold the status code
+        reason = location to hold the status reason
+        version_ = location to hold the version
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult parseResponse(out gstrtsp.types.RTSPStatusCode code, out string reason, out gstrtsp.types.RTSPVersion version_)
   {
@@ -394,11 +415,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Remove the indx header with key field from msg. If indx equals -1, all
-    headers will be removed.
-    Params:
-      field =       a #GstRTSPHeaderField
-      indx =       the index of the header
-    Returns:     a #GstRTSPResult.
+      headers will be removed.
+  
+      Params:
+        field = a #GstRTSPHeaderField
+        indx = the index of the header
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult removeHeader(gstrtsp.types.RTSPHeaderField field, int indx)
   {
@@ -410,11 +432,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Remove the index header with key header from msg. If index equals -1,
-    all matching headers will be removed.
-    Params:
-      header =       the header string
-      index =       the index of the header
-    Returns:     a #GstRTSPResult
+      all matching headers will be removed.
+  
+      Params:
+        header = the header string
+        index = the index of the header
+      Returns: a #GstRTSPResult
   */
   gstrtsp.types.RTSPResult removeHeaderByName(string header, int index)
   {
@@ -427,10 +450,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Set the body of msg to a copy of data. Any existing body or body buffer
-    will be replaced by the new body.
-    Params:
-      data =       the data
-    Returns:     #GST_RTSP_OK.
+      will be replaced by the new body.
+  
+      Params:
+        data = the data
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult setBody(ubyte[] data)
   {
@@ -447,10 +471,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Set the body of msg to buffer. Any existing body or body buffer
-    will be replaced by the new body.
-    Params:
-      buffer =       a #GstBuffer
-    Returns:     #GST_RTSP_OK.
+      will be replaced by the new body.
+  
+      Params:
+        buffer = a #GstBuffer
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult setBodyBuffer(gst.buffer.Buffer buffer)
   {
@@ -462,10 +487,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Take the body of msg and store it in data and size. After this method,
-    the body and size of msg will be set to null and 0 respectively.
-    Params:
-      data =       location for the data
-    Returns:     #GST_RTSP_OK.
+      the body and size of msg will be set to null and 0 respectively.
+  
+      Params:
+        data = location for the data
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult stealBody(out ubyte[] data)
   {
@@ -482,14 +508,15 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Take the body of msg and store it in buffer. After this method,
-    the body and size of msg will be set to null and 0 respectively.
-    
-    If body data was set from raw memory instead of a #GstBuffer this function
-    will always return null. The caller can check if there is a body buffer by
-    calling [gstrtsp.rtspmessage.RTSPMessage.hasBodyBuffer].
-    Params:
-      buffer =       location for the buffer
-    Returns:     #GST_RTSP_OK.
+      the body and size of msg will be set to null and 0 respectively.
+      
+      If body data was set from raw memory instead of a #GstBuffer this function
+      will always return null. The caller can check if there is a body buffer by
+      calling [gstrtsp.rtspmessage.RTSPMessage.hasBodyBuffer].
+  
+      Params:
+        buffer = location for the buffer
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult stealBodyBuffer(out gst.buffer.Buffer buffer)
   {
@@ -503,10 +530,11 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Set the body of msg to buffer. This method takes ownership of buffer.
-    Any existing body or body buffer will be replaced by the new body.
-    Params:
-      buffer =       a #GstBuffer
-    Returns:     #GST_RTSP_OK.
+      Any existing body or body buffer will be replaced by the new body.
+  
+      Params:
+        buffer = a #GstBuffer
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult takeBodyBuffer(gst.buffer.Buffer buffer)
   {
@@ -518,11 +546,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Add a header with key field and value to msg. This function takes
-    ownership of value.
-    Params:
-      field =       a #GstRTSPHeaderField
-      value =       the value of the header
-    Returns:     a #GstRTSPResult.
+      ownership of value.
+  
+      Params:
+        field = a #GstRTSPHeaderField
+        value = the value of the header
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult takeHeader(gstrtsp.types.RTSPHeaderField field, string value)
   {
@@ -535,11 +564,12 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Add a header with key header and value to msg. This function takes
-    ownership of value, but not of header.
-    Params:
-      header =       a header string
-      value =       the value of the header
-    Returns:     a #GstRTSPResult.
+      ownership of value, but not of header.
+  
+      Params:
+        header = a header string
+        value = the value of the header
+      Returns: a #GstRTSPResult.
   */
   gstrtsp.types.RTSPResult takeHeaderByName(string header, string value)
   {
@@ -553,10 +583,10 @@ class RTSPMessage : gobject.boxed.Boxed
 
   /**
       Unset the contents of msg so that it becomes an uninitialized
-    #GstRTSPMessage again. This function is mostly used in combination with
-    [gstrtsp.rtspmessage.RTSPMessage.initRequest], [gstrtsp.rtspmessage.RTSPMessage.initResponse] and
-    [gstrtsp.rtspmessage.RTSPMessage.initData] on stack allocated #GstRTSPMessage structures.
-    Returns:     #GST_RTSP_OK.
+      #GstRTSPMessage again. This function is mostly used in combination with
+      [gstrtsp.rtspmessage.RTSPMessage.initRequest], [gstrtsp.rtspmessage.RTSPMessage.initResponse] and
+      [gstrtsp.rtspmessage.RTSPMessage.initData] on stack allocated #GstRTSPMessage structures.
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult unset()
   {

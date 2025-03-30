@@ -1,3 +1,4 @@
+/// Module for [RecordBatchFileWriter] class
 module arrow.record_batch_file_writer;
 
 import arrow.c.functions;
@@ -13,17 +14,20 @@ import glib.error;
 class RecordBatchFileWriter : arrow.record_batch_stream_writer.RecordBatchStreamWriter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_file_writer_get_type != &gidSymbolNotFound ? garrow_record_batch_file_writer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

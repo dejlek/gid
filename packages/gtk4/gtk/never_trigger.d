@@ -1,3 +1,4 @@
+/// Module for [NeverTrigger] class
 module gtk.never_trigger;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_never_trigger_get_type != &gidSymbolNotFound ? gtk_never_trigger_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,11 +40,11 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
 
   /**
       Gets the never trigger.
-    
-    This is a singleton for a trigger that never triggers.
-    Use this trigger instead of null because it implements
-    all virtual functions.
-    Returns:     The never trigger
+      
+      This is a singleton for a trigger that never triggers.
+      Use this trigger instead of null because it implements
+      all virtual functions.
+      Returns: The never trigger
   */
   static gtk.never_trigger.NeverTrigger get()
   {

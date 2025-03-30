@@ -1,3 +1,4 @@
+/// Module for [EventController] class
 module gtk.event_controller;
 
 import gdk.event;
@@ -10,23 +11,26 @@ import gtk.widget;
 
 /**
     #GtkEventController is a base, low-level implementation for event
-  controllers. Those react to a series of #GdkEvents, and possibly trigger
-  actions as a consequence of those.
+    controllers. Those react to a series of #GdkEvents, and possibly trigger
+    actions as a consequence of those.
 */
 class EventController : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_get_type != &gidSymbolNotFound ? gtk_event_controller_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,7 +43,7 @@ class EventController : gobject.object.ObjectG
 
   /**
       Gets the propagation phase at which controller handles events.
-    Returns:     the propagation phase
+      Returns: the propagation phase
   */
   gtk.types.PropagationPhase getPropagationPhase()
   {
@@ -51,7 +55,7 @@ class EventController : gobject.object.ObjectG
 
   /**
       Returns the #GtkWidget this controller relates to.
-    Returns:     a #GtkWidget
+      Returns: a #GtkWidget
   */
   gtk.widget.Widget getWidget()
   {
@@ -63,11 +67,12 @@ class EventController : gobject.object.ObjectG
 
   /**
       Feeds an events into controller, so it can be interpreted
-    and the controller actions triggered.
-    Params:
-      event =       a #GdkEvent
-    Returns:     true if the event was potentially useful to trigger the
-               controller action
+      and the controller actions triggered.
+  
+      Params:
+        event = a #GdkEvent
+      Returns: true if the event was potentially useful to trigger the
+                 controller action
   */
   bool handleEvent(gdk.event.Event event)
   {
@@ -78,8 +83,8 @@ class EventController : gobject.object.ObjectG
 
   /**
       Resets the controller to a clean state. Every interaction
-    the controller did through #GtkEventController::handle-event
-    will be dropped at this point.
+      the controller did through #GtkEventController::handle-event
+      will be dropped at this point.
   */
   void reset()
   {
@@ -88,12 +93,13 @@ class EventController : gobject.object.ObjectG
 
   /**
       Sets the propagation phase at which a controller handles events.
-    
-    If phase is [gtk.types.PropagationPhase.None], no automatic event handling will be
-    performed, but other additional gesture maintenance will. In that phase,
-    the events can be managed by calling [gtk.event_controller.EventController.handleEvent].
-    Params:
-      phase =       a propagation phase
+      
+      If phase is [gtk.types.PropagationPhase.None], no automatic event handling will be
+      performed, but other additional gesture maintenance will. In that phase,
+      the events can be managed by calling [gtk.event_controller.EventController.handleEvent].
+  
+      Params:
+        phase = a propagation phase
   */
   void setPropagationPhase(gtk.types.PropagationPhase phase)
   {

@@ -1,3 +1,4 @@
+/// D types for gstsdp1 library
 module gstsdp.types;
 
 import gid.gid;

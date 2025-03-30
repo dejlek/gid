@@ -1,3 +1,4 @@
+/// Module for [Completion] class
 module gtksource.completion;
 
 import gid.gid;
@@ -20,17 +21,20 @@ import gtksource.view;
 class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,12 +49,13 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Add a new #GtkSourceCompletionProvider to the completion object. This will
-    add a reference provider, so make sure to unref your own copy when you
-    no longer need it.
-    Params:
-      provider =       a #GtkSourceCompletionProvider.
-    Returns:     true if provider was successfully added, otherwise if error
-               is provided, it will be set with the error and false is returned.
+      add a reference provider, so make sure to unref your own copy when you
+      no longer need it.
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider.
+      Returns: true if provider was successfully added, otherwise if error
+                 is provided, it will be set with the error and false is returned.
   */
   bool addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -64,13 +69,13 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Block interactive completion. This can be used to disable interactive
-    completion when inserting or deleting text from the buffer associated with
-    the completion. Use [gtksource.completion.Completion.unblockInteractive] to enable
-    interactive completion again.
-    
-    This function may be called multiple times. It will continue to block
-    interactive completion until [gtksource.completion.Completion.unblockInteractive]
-    has been called the same number of times.
+      completion when inserting or deleting text from the buffer associated with
+      the completion. Use [gtksource.completion.Completion.unblockInteractive] to enable
+      interactive completion again.
+      
+      This function may be called multiple times. It will continue to block
+      interactive completion until [gtksource.completion.Completion.unblockInteractive]
+      has been called the same number of times.
   */
   void blockInteractive()
   {
@@ -79,14 +84,15 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Create a new #GtkSourceCompletionContext for completion. The position where
-    the completion occurs can be specified by position. If position is null,
-    the current cursor position will be used.
-    Params:
-      position =       a #GtkTextIter, or null.
-    Returns:     a new #GtkSourceCompletionContext.
-      The reference being returned is a 'floating' reference,
-      so if you invoke [gtksource.completion.Completion.start] with this context
-      you don't need to unref it.
+      the completion occurs can be specified by position. If position is null,
+      the current cursor position will be used.
+  
+      Params:
+        position = a #GtkTextIter, or null.
+      Returns: a new #GtkSourceCompletionContext.
+        The reference being returned is a 'floating' reference,
+        so if you invoke [gtksource.completion.Completion.start] with this context
+        you don't need to unref it.
   */
   gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
   {
@@ -98,9 +104,9 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       The info widget is the window where the completion displays optional extra
-    information of the proposal.
-    Returns:     The #GtkSourceCompletionInfo window
-                                associated with completion.
+      information of the proposal.
+      Returns: The #GtkSourceCompletionInfo window
+                                  associated with completion.
   */
   gtksource.completion_info.CompletionInfo getInfoWindow()
   {
@@ -112,8 +118,8 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Get list of providers registered on completion. The returned list is owned
-    by the completion and should not be freed.
-    Returns:     list of #GtkSourceCompletionProvider.
+      by the completion and should not be freed.
+      Returns: list of #GtkSourceCompletionProvider.
   */
   gtksource.completion_provider.CompletionProvider[] getProviders()
   {
@@ -125,9 +131,9 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       The #GtkSourceView associated with completion, or null if the view has been
-    destroyed.
-    Returns:     The #GtkSourceView associated with
-      completion, or null.
+      destroyed.
+      Returns: The #GtkSourceView associated with
+        completion, or null.
   */
   gtksource.view.View getView()
   {
@@ -147,10 +153,11 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Remove provider from the completion.
-    Params:
-      provider =       a #GtkSourceCompletionProvider.
-    Returns:     true if provider was successfully removed, otherwise if error
-               is provided, it will be set with the error and false is returned.
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider.
+      Returns: true if provider was successfully removed, otherwise if error
+                 is provided, it will be set with the error and false is returned.
   */
   bool removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -164,19 +171,20 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Starts a new completion with the specified #GtkSourceCompletionContext and
-    a list of potential candidate providers for completion.
-    
-    It can be convenient for showing a completion on-the-fly, without the need to
-    add or remove providers to the #GtkSourceCompletion.
-    
-    Another solution is to add providers with
-    [gtksource.completion.Completion.addProvider], and implement
-    [gtksource.completion_provider.CompletionProvider.match] for each provider.
-    Params:
-      providers =       a list of #GtkSourceCompletionProvider, or null.
-      context =       The #GtkSourceCompletionContext
-        with which to start the completion.
-    Returns:     true if it was possible to the show completion window.
+      a list of potential candidate providers for completion.
+      
+      It can be convenient for showing a completion on-the-fly, without the need to
+      add or remove providers to the #GtkSourceCompletion.
+      
+      Another solution is to add providers with
+      [gtksource.completion.Completion.addProvider], and implement
+      [gtksource.completion_provider.CompletionProvider.match] for each provider.
+  
+      Params:
+        providers = a list of #GtkSourceCompletionProvider, or null.
+        context = The #GtkSourceCompletionContext
+          with which to start the completion.
+      Returns: true if it was possible to the show completion window.
   */
   bool start(gtksource.completion_provider.CompletionProvider[] providers, gtksource.completion_context.CompletionContext context)
   {
@@ -189,8 +197,8 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
 
   /**
       Unblock interactive completion. This can be used after using
-    [gtksource.completion.Completion.blockInteractive] to enable interactive completion
-    again.
+      [gtksource.completion.Completion.blockInteractive] to enable interactive completion
+      again.
   */
   void unblockInteractive()
   {
@@ -198,40 +206,42 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      The #GtkSourceCompletion::activate-proposal signal is a
-    keybinding signal which gets emitted when the user initiates
-    a proposal activation.
-    
-    Applications should not connect to it, but may emit it with
-    [gobject.global.signalEmitByName] if they need to control the proposal
-    activation programmatically.
+      Connect to `ActivateProposal` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias ActivateProposalCallbackDlg = void delegate(gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias ActivateProposalCallbackFunc = void function(gtksource.completion.Completion completion);
-
-  /**
-    Connect to ActivateProposal signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The #GtkSourceCompletion::activate-proposal signal is a
+      keybinding signal which gets emitted when the user initiates
+      a proposal activation.
+      
+      Applications should not connect to it, but may emit it with
+      [gobject.global.signalEmitByName] if they need to control the proposal
+      activation programmatically.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion.Completion completion))
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivateProposal(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateProposalCallbackDlg) || is(T : ActivateProposalCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      _dClosure.dlg(completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -239,35 +249,37 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      Emitted when the completion window is hidden. The default handler
-    will actually hide the window.
+      Connect to `Hide` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias HideCallbackDlg = void delegate(gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias HideCallbackFunc = void function(gtksource.completion.Completion completion);
-
-  /**
-    Connect to Hide signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the completion window is hidden. The default handler
+      will actually hide the window.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion.Completion completion))
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectHide(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      _dClosure.dlg(completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -275,53 +287,65 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      The #GtkSourceCompletion::move-cursor signal is a keybinding
-    signal which gets emitted when the user initiates a cursor
-    movement.
-    
-    The <keycap>Up</keycap>, <keycap>Down</keycap>,
-    <keycap>PageUp</keycap>, <keycap>PageDown</keycap>,
-    <keycap>Home</keycap> and <keycap>End</keycap> keys are bound to the
-    normal behavior expected by those keys.
-    
-    When step is equal to [gtk.types.ScrollStep.Pages], the page size is defined by
-    the #GtkSourceCompletion:proposal-page-size property. It is used for
-    the <keycap>PageDown</keycap> and <keycap>PageUp</keycap> keys.
-    
-    Applications should not connect to it, but may emit it with
-    [gobject.global.signalEmitByName] if they need to control the cursor
-    programmatically.
+      Connect to `MoveCursor` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B step)       The #GtkScrollStep by which to move the cursor
-      * $(B num)       The amount of steps to move the cursor
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias MoveCursorCallbackDlg = void delegate(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias MoveCursorCallbackFunc = void function(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion);
-
-  /**
-    Connect to MoveCursor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The #GtkSourceCompletion::move-cursor signal is a keybinding
+      signal which gets emitted when the user initiates a cursor
+      movement.
+      
+      The <keycap>Up</keycap>, <keycap>Down</keycap>,
+      <keycap>PageUp</keycap>, <keycap>PageDown</keycap>,
+      <keycap>Home</keycap> and <keycap>End</keycap> keys are bound to the
+      normal behavior expected by those keys.
+      
+      When step is equal to [gtk.types.ScrollStep.Pages], the page size is defined by
+      the #GtkSourceCompletion:proposal-page-size property. It is used for
+      the <keycap>PageDown</keycap> and <keycap>PageUp</keycap> keys.
+      
+      Applications should not connect to it, but may emit it with
+      [gobject.global.signalEmitByName] if they need to control the cursor
+      programmatically.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion))
+  
+          `step` The #GtkScrollStep by which to move the cursor (optional)
+  
+          `num` The amount of steps to move the cursor (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion.Completion)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      auto step = getVal!(gtk.types.ScrollStep)(&_paramVals[1]);
-      auto num = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(step, num, completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -329,56 +353,68 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      The #GtkSourceCompletion::move-page signal is a keybinding
-    signal which gets emitted when the user initiates a page
-    movement (i.e. switches between provider pages).
-    
-    <keycombo><keycap>Control</keycap><keycap>Left</keycap></keycombo>
-    is for going to the previous provider.
-    <keycombo><keycap>Control</keycap><keycap>Right</keycap></keycombo>
-    is for going to the next provider.
-    <keycombo><keycap>Control</keycap><keycap>Home</keycap></keycombo>
-    is for displaying all the providers.
-    <keycombo><keycap>Control</keycap><keycap>End</keycap></keycombo>
-    is for going to the last provider.
-    
-    When step is equal to #GTK_SCROLL_PAGES, the page size is defined by
-    the #GtkSourceCompletion:provider-page-size property.
-    
-    Applications should not connect to it, but may emit it with
-    [gobject.global.signalEmitByName] if they need to control the page selection
-    programmatically.
+      Connect to `MovePage` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B step)       The #GtkScrollStep by which to move the page
-      * $(B num)       The amount of steps to move the page
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias MovePageCallbackDlg = void delegate(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias MovePageCallbackFunc = void function(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion);
-
-  /**
-    Connect to MovePage signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The #GtkSourceCompletion::move-page signal is a keybinding
+      signal which gets emitted when the user initiates a page
+      movement (i.e. switches between provider pages).
+      
+      <keycombo><keycap>Control</keycap><keycap>Left</keycap></keycombo>
+      is for going to the previous provider.
+      <keycombo><keycap>Control</keycap><keycap>Right</keycap></keycombo>
+      is for going to the next provider.
+      <keycombo><keycap>Control</keycap><keycap>Home</keycap></keycombo>
+      is for displaying all the providers.
+      <keycombo><keycap>Control</keycap><keycap>End</keycap></keycombo>
+      is for going to the last provider.
+      
+      When step is equal to #GTK_SCROLL_PAGES, the page size is defined by
+      the #GtkSourceCompletion:provider-page-size property.
+      
+      Applications should not connect to it, but may emit it with
+      [gobject.global.signalEmitByName] if they need to control the page selection
+      programmatically.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.ScrollStep step, int num, gtksource.completion.Completion completion))
+  
+          `step` The #GtkScrollStep by which to move the page (optional)
+  
+          `num` The amount of steps to move the page (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMovePage(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MovePageCallbackDlg) || is(T : MovePageCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion.Completion)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      auto step = getVal!(gtk.types.ScrollStep)(&_paramVals[1]);
-      auto num = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(step, num, completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -386,37 +422,44 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      Emitted just before starting to populate the completion with providers.
-    You can use this signal to add additional attributes in the context.
+      Connect to `PopulateContext` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B context)       The #GtkSourceCompletionContext for the current completion
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias PopulateContextCallbackDlg = void delegate(gtksource.completion_context.CompletionContext context, gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias PopulateContextCallbackFunc = void function(gtksource.completion_context.CompletionContext context, gtksource.completion.Completion completion);
-
-  /**
-    Connect to PopulateContext signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted just before starting to populate the completion with providers.
+      You can use this signal to add additional attributes in the context.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion_context.CompletionContext context, gtksource.completion.Completion completion))
+  
+          `context` The #GtkSourceCompletionContext for the current completion (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPopulateContext(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PopulateContextCallbackDlg) || is(T : PopulateContextCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_context.CompletionContext)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      auto context = getVal!(gtksource.completion_context.CompletionContext)(&_paramVals[1]);
-      _dClosure.dlg(context, completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -424,35 +467,37 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
   }
 
   /**
-      Emitted when the completion window is shown. The default handler
-    will actually show the window.
+      Connect to `Show` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias ShowCallbackDlg = void delegate(gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias ShowCallbackFunc = void function(gtksource.completion.Completion completion);
-
-  /**
-    Connect to Show signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the completion window is shown. The default handler
+      will actually show the window.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion.Completion completion))
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      _dClosure.dlg(completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

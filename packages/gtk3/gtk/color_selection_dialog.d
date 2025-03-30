@@ -1,3 +1,4 @@
+/// Module for [ColorSelectionDialog] class
 module gtk.color_selection_dialog;
 
 import atk.implementor_iface;
@@ -16,17 +17,20 @@ import gtk.widget;
 class ColorSelectionDialog : gtk.dialog.Dialog
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_selection_dialog_get_type != &gidSymbolNotFound ? gtk_color_selection_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,9 +43,10 @@ class ColorSelectionDialog : gtk.dialog.Dialog
 
   /**
       Creates a new #GtkColorSelectionDialog.
-    Params:
-      title =       a string containing the title text for the dialog.
-    Returns:     a #GtkColorSelectionDialog.
+  
+      Params:
+        title = a string containing the title text for the dialog.
+      Returns: a #GtkColorSelectionDialog.
   */
   this(string title)
   {
@@ -53,7 +58,7 @@ class ColorSelectionDialog : gtk.dialog.Dialog
 
   /**
       Retrieves the #GtkColorSelection widget embedded in the dialog.
-    Returns:     the embedded #GtkColorSelection
+      Returns: the embedded #GtkColorSelection
   */
   gtk.widget.Widget getColorSelection()
   {

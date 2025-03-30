@@ -1,3 +1,4 @@
+/// Module for [Root] interface mixin
 module gtk.root_mixin;
 
 public import gtk.root_iface_proxy;
@@ -11,25 +12,25 @@ public import gtk.widget;
 
 /**
     [gtk.root.Root] is the interface implemented by all widgets that can act as a toplevel
-  widget.
-  
-  The root widget takes care of providing the connection to the windowing system
-  and manages layout, drawing and event delivery for its widget hierarchy.
-  
-  The obvious example of a [gtk.root.Root] is [gtk.window.Window].
-  
-  To get the display to which a [gtk.root.Root] belongs, use
-  [gtk.root.Root.getDisplay].
-  
-  [gtk.root.Root] also maintains the location of keyboard focus inside its widget
-  hierarchy, with [gtk.root.Root.setFocus] and [gtk.root.Root.getFocus].
+    widget.
+    
+    The root widget takes care of providing the connection to the windowing system
+    and manages layout, drawing and event delivery for its widget hierarchy.
+    
+    The obvious example of a [gtk.root.Root] is [gtk.window.Window].
+    
+    To get the display to which a [gtk.root.Root] belongs, use
+    [gtk.root.Root.getDisplay].
+    
+    [gtk.root.Root] also maintains the location of keyboard focus inside its widget
+    hierarchy, with [gtk.root.Root.setFocus] and [gtk.root.Root.getFocus].
 */
 template RootT()
 {
 
   /**
       Returns the display that this [gtk.root.Root] is on.
-    Returns:     the display of root
+      Returns: the display of root
   */
   override gdk.display.Display getDisplay()
   {
@@ -41,12 +42,12 @@ template RootT()
 
   /**
       Retrieves the current focused widget within the root.
-    
-    Note that this is the widget that would have the focus
-    if the root is active; if the root is not focused then
-    `gtk_widget_has_focus (widget)` will be false for the
-    widget.
-    Returns:     the currently focused widget
+      
+      Note that this is the widget that would have the focus
+      if the root is active; if the root is not focused then
+      `gtk_widget_has_focus (widget)` will be false for the
+      widget.
+      Returns: the currently focused widget
   */
   override gtk.widget.Widget getFocus()
   {
@@ -58,16 +59,17 @@ template RootT()
 
   /**
       If focus is not the current focus widget, and is focusable, sets
-    it as the focus widget for the root.
-    
-    If focus is null, unsets the focus widget for the root.
-    
-    To set the focus to a particular widget in the root, it is usually
-    more convenient to use [gtk.widget.Widget.grabFocus] instead of
-    this function.
-    Params:
-      focus =       widget to be the new focus widget, or null
-           to unset the focus widget
+      it as the focus widget for the root.
+      
+      If focus is null, unsets the focus widget for the root.
+      
+      To set the focus to a particular widget in the root, it is usually
+      more convenient to use [gtk.widget.Widget.grabFocus] instead of
+      this function.
+  
+      Params:
+        focus = widget to be the new focus widget, or null
+             to unset the focus widget
   */
   override void setFocus(gtk.widget.Widget focus = null)
   {

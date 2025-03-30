@@ -1,3 +1,4 @@
+/// Module for [IconPaintable] class
 module gtk.icon_paintable;
 
 import gdk.paintable;
@@ -13,23 +14,26 @@ import gtk.types;
 
 /**
     Contains information found when looking up an icon in [gtk.icon_theme.IconTheme].
-  
-  [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable].
+    
+    [gtk.icon_paintable.IconPaintable] implements [gdk.paintable.Paintable].
 */
 class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbolic_paintable.SymbolicPaintable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_paintable_get_type != &gidSymbolNotFound ? gtk_icon_paintable_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,14 +49,15 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
 
   /**
       Creates a [gtk.icon_paintable.IconPaintable] for a file with a given size and scale.
-    
-    The icon can then be rendered by using it as a [gdk.paintable.Paintable].
-    Params:
-      file =       a [gio.file.File]
-      size =       desired icon size
-      scale =       the desired scale
-    Returns:     a [gtk.icon_paintable.IconPaintable] containing
-        for the icon. Unref with [gobject.object.ObjectG.unref]
+      
+      The icon can then be rendered by using it as a [gdk.paintable.Paintable].
+  
+      Params:
+        file = a [gio.file.File]
+        size = desired icon size
+        scale = the desired scale
+      Returns: a [gtk.icon_paintable.IconPaintable] containing
+          for the icon. Unref with [gobject.object.ObjectG.unref]
   */
   static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
   {
@@ -64,9 +69,9 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
 
   /**
       Gets the [gio.file.File] that was used to load the icon.
-    
-    Returns null if the icon was not loaded from a file.
-    Returns:     the [gio.file.File] for the icon
+      
+      Returns null if the icon was not loaded from a file.
+      Returns: the [gio.file.File] for the icon
   */
   gio.file.File getFile()
   {
@@ -78,16 +83,16 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
 
   /**
       Get the icon name being used for this icon.
-    
-    When an icon looked up in the icon theme was not available, the
-    icon theme may use fallback icons - either those specified to
-    [gtk.icon_theme.IconTheme.lookupIcon] or the always-available
-    "image-missing". The icon chosen is returned by this function.
-    
-    If the icon was created without an icon theme, this function
-    returns null.
-    Returns:     the themed icon-name for the
-        icon, or null if its not a themed icon.
+      
+      When an icon looked up in the icon theme was not available, the
+      icon theme may use fallback icons - either those specified to
+      [gtk.icon_theme.IconTheme.lookupIcon] or the always-available
+      "image-missing". The icon chosen is returned by this function.
+      
+      If the icon was created without an icon theme, this function
+      returns null.
+      Returns: the themed icon-name for the
+          icon, or null if its not a themed icon.
   */
   string getIconName()
   {
@@ -99,13 +104,13 @@ class IconPaintable : gobject.object.ObjectG, gdk.paintable.Paintable, gtk.symbo
 
   /**
       Checks if the icon is symbolic or not.
-    
-    This currently uses only the file name and not the file contents
-    for determining this. This behaviour may change in the future.
-    
-    Note that to render a symbolic [gtk.icon_paintable.IconPaintable] properly (with
-    recoloring), you have to set its icon name on a [gtk.image.Image].
-    Returns:     true if the icon is symbolic, false otherwise
+      
+      This currently uses only the file name and not the file contents
+      for determining this. This behaviour may change in the future.
+      
+      Note that to render a symbolic [gtk.icon_paintable.IconPaintable] properly (with
+      recoloring), you have to set its icon name on a [gtk.image.Image].
+      Returns: true if the icon is symbolic, false otherwise
   */
   bool isSymbolic()
   {

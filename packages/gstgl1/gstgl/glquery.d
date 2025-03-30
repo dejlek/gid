@@ -1,3 +1,4 @@
+/// Module for [GLQuery] class
 module gstgl.glquery;
 
 import gid.gid;
@@ -10,12 +11,13 @@ import gstgl.types;
 
 /**
     A #GstGLQuery represents and holds an OpenGL query object.  Various types of
-  queries can be run or counters retrieved.
+    queries can be run or counters retrieved.
 */
 class GLQuery
 {
   GstGLQuery cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class GLQuery
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -80,14 +83,15 @@ class GLQuery
 
   /**
       Performs a GST_QUERY_CONTEXT query of type "gst.gl.local_context" on all
-    #GstPads in element of direction for the local OpenGL context used by
-    GStreamer elements.
-    Params:
-      element =       a #GstElement to query from
-      direction =       the #GstPadDirection to query
-      contextPtr =       location containing the current and/or resulting
-                             #GstGLContext
-    Returns:     whether context_ptr contains a #GstGLContext
+      #GstPads in element of direction for the local OpenGL context used by
+      GStreamer elements.
+  
+      Params:
+        element = a #GstElement to query from
+        direction = the #GstPadDirection to query
+        contextPtr = location containing the current and/or resulting
+                               #GstGLContext
+      Returns: whether context_ptr contains a #GstGLContext
   */
   static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr)
   {

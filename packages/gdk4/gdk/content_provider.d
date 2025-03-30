@@ -1,3 +1,4 @@
+/// Module for [ContentProvider] class
 module gdk.content_provider;
 
 import gdk.c.functions;
@@ -17,29 +18,32 @@ import gobject.value;
 
 /**
     A [gdk.content_provider.ContentProvider] is used to provide content for the clipboard or
-  for drag-and-drop operations in a number of formats.
-  
-  To create a [gdk.content_provider.ContentProvider], use [gdk.content_provider.ContentProvider.newForValue]
-  or [gdk.content_provider.ContentProvider.newForBytes].
-  
-  GDK knows how to handle common text and image formats out-of-the-box. See
-  [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
-  to add support for application-specific data formats.
+    for drag-and-drop operations in a number of formats.
+    
+    To create a [gdk.content_provider.ContentProvider], use [gdk.content_provider.ContentProvider.newForValue]
+    or [gdk.content_provider.ContentProvider.newForBytes].
+    
+    GDK knows how to handle common text and image formats out-of-the-box. See
+    [gdk.content_serializer.ContentSerializer] and [gdk.content_deserializer.ContentDeserializer] if you want
+    to add support for application-specific data formats.
 */
 class ContentProvider : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_provider_get_type != &gidSymbolNotFound ? gdk_content_provider_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,11 +56,12 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Create a content provider that provides the given bytes as data for
-    the given mime_type.
-    Params:
-      mimeType =       the mime type
-      bytes =       a [glib.bytes.Bytes] with the data for mime_type
-    Returns:     a new [gdk.content_provider.ContentProvider]
+      the given mime_type.
+  
+      Params:
+        mimeType = the mime type
+        bytes = a [glib.bytes.Bytes] with the data for mime_type
+      Returns: a new [gdk.content_provider.ContentProvider]
   */
   static gdk.content_provider.ContentProvider newForBytes(string mimeType, glib.bytes.Bytes bytes)
   {
@@ -69,9 +74,10 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Create a content provider that provides the given value.
-    Params:
-      value =       a [gobject.value.Value]
-    Returns:     a new [gdk.content_provider.ContentProvider]
+  
+      Params:
+        value = a [gobject.value.Value]
+      Returns: a new [gdk.content_provider.ContentProvider]
   */
   static gdk.content_provider.ContentProvider newForValue(gobject.value.Value value)
   {
@@ -91,16 +97,17 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Gets the contents of provider stored in value.
-    
-    The value will have been initialized to the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] the value should be
-    provided in. This given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] does not need to be listed in the formats
-    returned by [gdk.content_provider.ContentProvider.refFormats]. However, if the
-    given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is not supported, this operation can fail and
-    [gio.types.IOErrorEnum.NotSupported] will be reported.
-    Params:
-      value =       the [gobject.value.Value] to fill
-    Returns:     true if the value was set successfully. Otherwise
-        error will be set to describe the failure.
+      
+      The value will have been initialized to the [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] the value should be
+      provided in. This given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] does not need to be listed in the formats
+      returned by [gdk.content_provider.ContentProvider.refFormats]. However, if the
+      given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is not supported, this operation can fail and
+      [gio.types.IOErrorEnum.NotSupported] will be reported.
+  
+      Params:
+        value = the [gobject.value.Value] to fill
+      Returns: true if the value was set successfully. Otherwise
+          error will be set to describe the failure.
   */
   bool getValue(out gobject.value.Value value)
   {
@@ -116,7 +123,7 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Gets the formats that the provider can provide its current contents in.
-    Returns:     The formats of the provider
+      Returns: The formats of the provider
   */
   gdk.content_formats.ContentFormats refFormats()
   {
@@ -128,12 +135,12 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Gets the formats that the provider suggests other applications to store
-    the data in.
-    
-    An example of such an application would be a clipboard manager.
-    
-    This can be assumed to be a subset of [gdk.content_provider.ContentProvider.refFormats].
-    Returns:     The storable formats of the provider
+      the data in.
+      
+      An example of such an application would be a clipboard manager.
+      
+      This can be assumed to be a subset of [gdk.content_provider.ContentProvider.refFormats].
+      Returns: The storable formats of the provider
   */
   gdk.content_formats.ContentFormats refStorableFormats()
   {
@@ -145,23 +152,24 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Asynchronously writes the contents of provider to stream in the given
-    mime_type.
-    
-    When the operation is finished callback will be called. You must then call
-    [gdk.content_provider.ContentProvider.writeMimeTypeFinish] to get the result
-    of the operation.
-    
-    The given mime type does not need to be listed in the formats returned by
-    [gdk.content_provider.ContentProvider.refFormats]. However, if the given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is
-    not supported, [gio.types.IOErrorEnum.NotSupported] will be reported.
-    
-    The given stream will not be closed.
-    Params:
-      mimeType =       the mime type to provide the data in
-      stream =       the [gio.output_stream.OutputStream] to write to
-      ioPriority =       I/O priority of the request.
-      cancellable =       optional [gio.cancellable.Cancellable] object, null to ignore.
-      callback =       callback to call when the request is satisfied
+      mime_type.
+      
+      When the operation is finished callback will be called. You must then call
+      [gdk.content_provider.ContentProvider.writeMimeTypeFinish] to get the result
+      of the operation.
+      
+      The given mime type does not need to be listed in the formats returned by
+      [gdk.content_provider.ContentProvider.refFormats]. However, if the given [gobject.types.TYPE_FLAG_RESERVED_ID_BIT] is
+      not supported, [gio.types.IOErrorEnum.NotSupported] will be reported.
+      
+      The given stream will not be closed.
+  
+      Params:
+        mimeType = the mime type to provide the data in
+        stream = the [gio.output_stream.OutputStream] to write to
+        ioPriority = I/O priority of the request.
+        cancellable = optional [gio.cancellable.Cancellable] object, null to ignore.
+        callback = callback to call when the request is satisfied
   */
   void writeMimeTypeAsync(string mimeType, gio.output_stream.OutputStream stream, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -181,12 +189,13 @@ class ContentProvider : gobject.object.ObjectG
 
   /**
       Finishes an asynchronous write operation.
-    
-    See [gdk.content_provider.ContentProvider.writeMimeTypeAsync].
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     true if the operation was completed successfully. Otherwise
-        error will be set to describe the failure.
+      
+      See [gdk.content_provider.ContentProvider.writeMimeTypeAsync].
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: true if the operation was completed successfully. Otherwise
+          error will be set to describe the failure.
   */
   bool writeMimeTypeFinish(gio.async_result.AsyncResult result)
   {
@@ -199,34 +208,36 @@ class ContentProvider : gobject.object.ObjectG
   }
 
   /**
+      Connect to `ContentChanged` signal.
+  
       Emitted whenever the content provided by this provider has changed.
   
-    ## Parameters
-    $(LIST
-      * $(B contentProvider) the instance the signal is connected to
-    )
-  */
-  alias ContentChangedCallbackDlg = void delegate(gdk.content_provider.ContentProvider contentProvider);
-
-  /** ditto */
-  alias ContentChangedCallbackFunc = void function(gdk.content_provider.ContentProvider contentProvider);
-
-  /**
-    Connect to ContentChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.content_provider.ContentProvider contentProvider))
+  
+          `contentProvider` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectContentChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ContentChangedCallbackDlg) || is(T : ContentChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.content_provider.ContentProvider)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto contentProvider = getVal!(gdk.content_provider.ContentProvider)(_paramVals);
-      _dClosure.dlg(contentProvider);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

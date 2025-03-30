@@ -1,3 +1,4 @@
+/// Module for [NavigationPage] class
 module adw.navigation_page;
 
 import adw.c.functions;
@@ -16,46 +17,49 @@ import gtk.widget;
 
 /**
     A page within `class@NavigationView` or `class@NavigationSplitView`.
-  
-  Each page has a child widget, a title and optionally a tag.
-  
-  The `signal@NavigationPage::showing`, `signal@NavigationPage::shown`,
-  `signal@NavigationPage::hiding` and `signal@NavigationPage::hidden` signals
-  can be used to track the page's visibility within its [adw.navigation_view.NavigationView].
-  
-  ## Header Bar Integration
-  
-  When placed inside [adw.navigation_page.NavigationPage], `class@HeaderBar` will display the
-  page title instead of window title.
-  
-  When used together with `class@NavigationView`, it will also display a back
-  button that can be used to go back to the previous page. Set
-  `property@HeaderBar:show-back-button` to `FALSE` to disable that behavior if
-  it's unwanted.
-  
-  ## CSS Nodes
-  
-  [adw.navigation_page.NavigationPage] has a single CSS node with name
-  `navigation-view-page`.
-  
-  ## Accessibility
-  
-  [adw.navigation_page.NavigationPage] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    Each page has a child widget, a title and optionally a tag.
+    
+    The `signal@NavigationPage::showing`, `signal@NavigationPage::shown`,
+    `signal@NavigationPage::hiding` and `signal@NavigationPage::hidden` signals
+    can be used to track the page's visibility within its [adw.navigation_view.NavigationView].
+    
+    ## Header Bar Integration
+    
+    When placed inside [adw.navigation_page.NavigationPage], `class@HeaderBar` will display the
+    page title instead of window title.
+    
+    When used together with `class@NavigationView`, it will also display a back
+    button that can be used to go back to the previous page. Set
+    `property@HeaderBar:show-back-button` to `FALSE` to disable that behavior if
+    it's unwanted.
+    
+    ## CSS Nodes
+    
+    [adw.navigation_page.NavigationPage] has a single CSS node with name
+    `navigation-view-page`.
+    
+    ## Accessibility
+    
+    [adw.navigation_page.NavigationPage] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class NavigationPage : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_page_get_type != &gidSymbolNotFound ? adw_navigation_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -68,10 +72,11 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Creates a new [adw.navigation_page.NavigationPage].
-    Params:
-      child =       the child widget
-      title =       the page title
-    Returns:     the new created [adw.navigation_page.NavigationPage]
+  
+      Params:
+        child = the child widget
+        title = the page title
+      Returns: the new created [adw.navigation_page.NavigationPage]
   */
   this(gtk.widget.Widget child, string title)
   {
@@ -83,11 +88,12 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Creates a new [adw.navigation_page.NavigationPage] with provided tag.
-    Params:
-      child =       the child widget
-      title =       the page title
-      tag =       the page tag
-    Returns:     the new created [adw.navigation_page.NavigationPage]
+  
+      Params:
+        child = the child widget
+        title = the page title
+        tag = the page tag
+      Returns: the new created [adw.navigation_page.NavigationPage]
   */
   static adw.navigation_page.NavigationPage newWithTag(gtk.widget.Widget child, string title, string tag)
   {
@@ -101,7 +107,7 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Gets whether self can be popped from navigation stack.
-    Returns:     whether the page can be popped from navigation stack
+      Returns: whether the page can be popped from navigation stack
   */
   bool getCanPop()
   {
@@ -112,7 +118,7 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Gets the child widget of self.
-    Returns:     the child widget of self
+      Returns: the child widget of self
   */
   gtk.widget.Widget getChild()
   {
@@ -124,7 +130,7 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Gets the tag of self.
-    Returns:     the page tag
+      Returns: the page tag
   */
   string getTag()
   {
@@ -136,7 +142,7 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Gets the title of self.
-    Returns:     the title of self
+      Returns: the title of self
   */
   string getTitle()
   {
@@ -148,17 +154,18 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Sets whether self can be popped from navigation stack.
-    
-    Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
-    back button from `classHeaderBar`.
-    
-    Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
-    action will still work.
-    
-    See `propertyHeaderBar:show-back-button` for removing only the back button,
-    but not shortcuts.
-    Params:
-      canPop =       whether the page can be popped from navigation stack
+      
+      Set it to `FALSE` to disable shortcuts and gestures, as well as remove the
+      back button from `classHeaderBar`.
+      
+      Manually calling [adw.navigation_view.NavigationView.pop] or using the `navigation.pop`
+      action will still work.
+      
+      See `propertyHeaderBar:show-back-button` for removing only the back button,
+      but not shortcuts.
+  
+      Params:
+        canPop = whether the page can be popped from navigation stack
   */
   void setCanPop(bool canPop)
   {
@@ -167,8 +174,9 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Sets the child widget of self.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -177,17 +185,18 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Sets the tag for self.
-    
-    The tag can be used to retrieve the page with
-    [adw.navigation_view.NavigationView.findPage], as well as with
-    [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
-    [adw.navigation_view.NavigationView.replaceWithTags].
-    
-    Tags must be unique within each `classNavigationView`.
-    
-    The tag also must be set to use the `navigation.push` action.
-    Params:
-      tag =       the page tag
+      
+      The tag can be used to retrieve the page with
+      [adw.navigation_view.NavigationView.findPage], as well as with
+      [adw.navigation_view.NavigationView.pushByTag], [adw.navigation_view.NavigationView.popToTag] or
+      [adw.navigation_view.NavigationView.replaceWithTags].
+      
+      Tags must be unique within each `classNavigationView`.
+      
+      The tag also must be set to use the `navigation.push` action.
+  
+      Params:
+        tag = the page tag
   */
   void setTag(string tag = null)
   {
@@ -197,11 +206,12 @@ class NavigationPage : gtk.widget.Widget
 
   /**
       Sets the title of self.
-    
-    It's displayed in `classHeaderBar` instead of the window title, and used as
-    the tooltip on the next page's back button, as well as by screen reader.
-    Params:
-      title =       the title
+      
+      It's displayed in `classHeaderBar` instead of the window title, and used as
+      the tooltip on the next page's back button, as well as by screen reader.
+  
+      Params:
+        title = the title
   */
   void setTitle(string title)
   {
@@ -210,38 +220,40 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
-      Emitted when the navigation view transition has been completed and the page
-    is fully hidden.
-    
-    It will always be preceded by `signalNavigationPage::hiding` or
-    `signalNavigationPage::showing`.
+      Connect to `Hidden` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B navigationPage) the instance the signal is connected to
-    )
-  */
-  alias HiddenCallbackDlg = void delegate(adw.navigation_page.NavigationPage navigationPage);
-
-  /** ditto */
-  alias HiddenCallbackFunc = void function(adw.navigation_page.NavigationPage navigationPage);
-
-  /**
-    Connect to Hidden signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the navigation view transition has been completed and the page
+      is fully hidden.
+      
+      It will always be preceded by `signalNavigationPage::hiding` or
+      `signalNavigationPage::showing`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+  
+          `navigationPage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectHidden(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : HiddenCallbackDlg) || is(T : HiddenCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto navigationPage = getVal!(adw.navigation_page.NavigationPage)(_paramVals);
-      _dClosure.dlg(navigationPage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -249,38 +261,40 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
-      Emitted when the page starts hiding at the beginning of the navigation view
-    transition.
-    
-    It will always be followed by `signalNavigationPage::hidden` or
-    `signalNavigationPage::shown`.
+      Connect to `Hiding` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B navigationPage) the instance the signal is connected to
-    )
-  */
-  alias HidingCallbackDlg = void delegate(adw.navigation_page.NavigationPage navigationPage);
-
-  /** ditto */
-  alias HidingCallbackFunc = void function(adw.navigation_page.NavigationPage navigationPage);
-
-  /**
-    Connect to Hiding signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the page starts hiding at the beginning of the navigation view
+      transition.
+      
+      It will always be followed by `signalNavigationPage::hidden` or
+      `signalNavigationPage::shown`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+  
+          `navigationPage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectHiding(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : HidingCallbackDlg) || is(T : HidingCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto navigationPage = getVal!(adw.navigation_page.NavigationPage)(_paramVals);
-      _dClosure.dlg(navigationPage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -288,38 +302,40 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
-      Emitted when the page shows at the beginning of the navigation view
-    transition.
-    
-    It will always be followed by `signalNavigationPage::shown` or
-    `signalNavigationPage::hidden`.
+      Connect to `Showing` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B navigationPage) the instance the signal is connected to
-    )
-  */
-  alias ShowingCallbackDlg = void delegate(adw.navigation_page.NavigationPage navigationPage);
-
-  /** ditto */
-  alias ShowingCallbackFunc = void function(adw.navigation_page.NavigationPage navigationPage);
-
-  /**
-    Connect to Showing signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the page shows at the beginning of the navigation view
+      transition.
+      
+      It will always be followed by `signalNavigationPage::shown` or
+      `signalNavigationPage::hidden`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+  
+          `navigationPage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShowing(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowingCallbackDlg) || is(T : ShowingCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto navigationPage = getVal!(adw.navigation_page.NavigationPage)(_paramVals);
-      _dClosure.dlg(navigationPage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -327,38 +343,40 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /**
-      Emitted when the navigation view transition has been completed and the page
-    is fully shown.
-    
-    It will always be preceded by `signalNavigationPage::showing` or
-    `signalNavigationPage::hiding`.
+      Connect to `Shown` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B navigationPage) the instance the signal is connected to
-    )
-  */
-  alias ShownCallbackDlg = void delegate(adw.navigation_page.NavigationPage navigationPage);
-
-  /** ditto */
-  alias ShownCallbackFunc = void function(adw.navigation_page.NavigationPage navigationPage);
-
-  /**
-    Connect to Shown signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the navigation view transition has been completed and the page
+      is fully shown.
+      
+      It will always be preceded by `signalNavigationPage::showing` or
+      `signalNavigationPage::hiding`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.navigation_page.NavigationPage navigationPage))
+  
+          `navigationPage` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShown(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShownCallbackDlg) || is(T : ShownCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.navigation_page.NavigationPage)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto navigationPage = getVal!(adw.navigation_page.NavigationPage)(_paramVals);
-      _dClosure.dlg(navigationPage);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

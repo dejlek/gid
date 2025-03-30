@@ -1,3 +1,4 @@
+/// Module for [AppChooserDialog] class
 module gtk.app_chooser_dialog;
 
 import atk.implementor_iface;
@@ -18,29 +19,32 @@ import gtk.window;
 
 /**
     #GtkAppChooserDialog shows a #GtkAppChooserWidget inside a #GtkDialog.
-  
-  Note that #GtkAppChooserDialog does not have any interesting methods
-  of its own. Instead, you should get the embedded #GtkAppChooserWidget
-  using [gtk.app_chooser_dialog.AppChooserDialog.getWidget] and call its methods if
-  the generic #GtkAppChooser interface is not sufficient for your needs.
-  
-  To set the heading that is shown above the #GtkAppChooserWidget,
-  use [gtk.app_chooser_dialog.AppChooserDialog.setHeading].
+    
+    Note that #GtkAppChooserDialog does not have any interesting methods
+    of its own. Instead, you should get the embedded #GtkAppChooserWidget
+    using [gtk.app_chooser_dialog.AppChooserDialog.getWidget] and call its methods if
+    the generic #GtkAppChooser interface is not sufficient for your needs.
+    
+    To set the heading that is shown above the #GtkAppChooserWidget,
+    use [gtk.app_chooser_dialog.AppChooserDialog.setHeading].
 */
 class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_app_chooser_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,12 +59,13 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 
   /**
       Creates a new #GtkAppChooserDialog for the provided #GFile,
-    to allow the user to select an application for it.
-    Params:
-      parent =       a #GtkWindow, or null
-      flags =       flags for this dialog
-      file =       a #GFile
-    Returns:     a newly created #GtkAppChooserDialog
+      to allow the user to select an application for it.
+  
+      Params:
+        parent = a #GtkWindow, or null
+        flags = flags for this dialog
+        file = a #GFile
+      Returns: a newly created #GtkAppChooserDialog
   */
   this(gtk.window.Window parent, gtk.types.DialogFlags flags, gio.file.File file)
   {
@@ -71,12 +76,13 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 
   /**
       Creates a new #GtkAppChooserDialog for the provided content type,
-    to allow the user to select an application for it.
-    Params:
-      parent =       a #GtkWindow, or null
-      flags =       flags for this dialog
-      contentType =       a content type string
-    Returns:     a newly created #GtkAppChooserDialog
+      to allow the user to select an application for it.
+  
+      Params:
+        parent = a #GtkWindow, or null
+        flags = flags for this dialog
+        contentType = a content type string
+      Returns: a newly created #GtkAppChooserDialog
   */
   static gtk.app_chooser_dialog.AppChooserDialog newForContentType(gtk.window.Window parent, gtk.types.DialogFlags flags, string contentType)
   {
@@ -89,8 +95,8 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 
   /**
       Returns the text to display at the top of the dialog.
-    Returns:     the text to display at the top of the dialog, or null, in which
-          case a default text is displayed
+      Returns: the text to display at the top of the dialog, or null, in which
+            case a default text is displayed
   */
   string getHeading()
   {
@@ -102,7 +108,7 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 
   /**
       Returns the #GtkAppChooserWidget of this dialog.
-    Returns:     the #GtkAppChooserWidget of self
+      Returns: the #GtkAppChooserWidget of self
   */
   gtk.widget.Widget getWidget()
   {
@@ -114,9 +120,10 @@ class AppChooserDialog : gtk.dialog.Dialog, gtk.app_chooser.AppChooser
 
   /**
       Sets the text to display at the top of the dialog.
-    If the heading is not set, the dialog displays a default text.
-    Params:
-      heading =       a string containing Pango markup
+      If the heading is not set, the dialog displays a default text.
+  
+      Params:
+        heading = a string containing Pango markup
   */
   void setHeading(string heading)
   {

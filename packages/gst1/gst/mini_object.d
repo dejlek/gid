@@ -1,3 +1,4 @@
+/// Module for [MiniObject] class
 module gst.mini_object;
 
 import gid.gid;
@@ -10,56 +11,61 @@ import gst.types;
 
 /**
     #GstMiniObject is a simple structure that can be used to implement refcounted
-  types.
-  
-  Subclasses will include #GstMiniObject as the first member in their structure
-  and then call [gst.mini_object.MiniObject.init_] to initialize the #GstMiniObject fields.
-  
-  [gst.mini_object.MiniObject.ref_] and [gst.mini_object.MiniObject.unref] increment and decrement the
-  refcount respectively. When the refcount of a mini-object reaches 0, the
-  dispose function is called first and when this returns true, the free
-  function of the miniobject is called.
-  
-  A copy can be made with [gst.mini_object.MiniObject.copy].
-  
-  [gst.mini_object.MiniObject.isWritable] will return true when the refcount of the
-  object is exactly 1 and there is no parent or a single parent exists and is
-  writable itself, meaning the current caller has the only reference to the
-  object. [gst.mini_object.MiniObject.makeWritable] will return a writable version of
-  the object, which might be a new copy when the refcount was not 1.
-  
-  Opaque data can be associated with a #GstMiniObject with
-  [gst.mini_object.MiniObject.setQdata] and [gst.mini_object.MiniObject.getQdata]. The data is
-  meant to be specific to the particular object and is not automatically copied
-  with [gst.mini_object.MiniObject.copy] or similar methods.
-  
-  A weak reference can be added and remove with [gst.mini_object.MiniObject.weakRef]
-  and [gst.mini_object.MiniObject.weakUnref] respectively.
+    types.
+    
+    Subclasses will include #GstMiniObject as the first member in their structure
+    and then call [gst.mini_object.MiniObject.init_] to initialize the #GstMiniObject fields.
+    
+    [gst.mini_object.MiniObject.ref_] and [gst.mini_object.MiniObject.unref] increment and decrement the
+    refcount respectively. When the refcount of a mini-object reaches 0, the
+    dispose function is called first and when this returns true, the free
+    function of the miniobject is called.
+    
+    A copy can be made with [gst.mini_object.MiniObject.copy].
+    
+    [gst.mini_object.MiniObject.isWritable] will return true when the refcount of the
+    object is exactly 1 and there is no parent or a single parent exists and is
+    writable itself, meaning the current caller has the only reference to the
+    object. [gst.mini_object.MiniObject.makeWritable] will return a writable version of
+    the object, which might be a new copy when the refcount was not 1.
+    
+    Opaque data can be associated with a #GstMiniObject with
+    [gst.mini_object.MiniObject.setQdata] and [gst.mini_object.MiniObject.getQdata]. The data is
+    meant to be specific to the particular object and is not automatically copied
+    with [gst.mini_object.MiniObject.copy] or similar methods.
+    
+    A weak reference can be added and remove with [gst.mini_object.MiniObject.weakRef]
+    and [gst.mini_object.MiniObject.weakUnref] respectively.
 */
 class MiniObject : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstMiniObject.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mini_object_get_type != &gidSymbolNotFound ? gst_mini_object_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -142,15 +148,16 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       This adds parent as a parent for object. Having one ore more parents affects the
-    writability of object: if a parent is not writable, object is also not
-    writable, regardless of its refcount. object is only writable if all
-    the parents are writable and its own refcount is exactly 1.
-    
-    Note: This function does not take ownership of parent and also does not
-    take an additional reference. It is the responsibility of the caller to
-    remove the parent again at a later time.
-    Params:
-      parent =       a parent #GstMiniObject
+      writability of object: if a parent is not writable, object is also not
+      writable, regardless of its refcount. object is only writable if all
+      the parents are writable and its own refcount is exactly 1.
+      
+      Note: This function does not take ownership of parent and also does not
+      take an additional reference. It is the responsibility of the caller to
+      remove the parent again at a later time.
+  
+      Params:
+        parent = a parent #GstMiniObject
   */
   void addParent(gst.mini_object.MiniObject parent)
   {
@@ -159,11 +166,12 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       This function gets back user data pointers stored via
-    [gst.mini_object.MiniObject.setQdata].
-    Params:
-      quark =       A #GQuark, naming the user data pointer
-    Returns:     The user data pointer set, or
-      null
+      [gst.mini_object.MiniObject.setQdata].
+  
+      Params:
+        quark = A #GQuark, naming the user data pointer
+      Returns: The user data pointer set, or
+        null
   */
   void* getQdata(glib.types.Quark quark)
   {
@@ -173,16 +181,16 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       If mini_object has the LOCKABLE flag set, check if the current EXCLUSIVE
-    lock on object is the only one, this means that changes to the object will
-    not be visible to any other object.
-    
-    If the LOCKABLE flag is not set, check if the refcount of mini_object is
-    exactly 1, meaning that no other reference exists to the object and that the
-    object is therefore writable.
-    
-    Modification of a mini-object should only be done after verifying that it
-    is writable.
-    Returns:     true if the object is writable.
+      lock on object is the only one, this means that changes to the object will
+      not be visible to any other object.
+      
+      If the LOCKABLE flag is not set, check if the refcount of mini_object is
+      exactly 1, meaning that no other reference exists to the object and that the
+      object is therefore writable.
+      
+      Modification of a mini-object should only be done after verifying that it
+      is writable.
+      Returns: true if the object is writable.
   */
   bool isWritable()
   {
@@ -193,9 +201,10 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       Lock the mini-object with the specified access mode in flags.
-    Params:
-      flags =       #GstLockFlags
-    Returns:     true if object could be locked.
+  
+      Params:
+        flags = #GstLockFlags
+      Returns: true if object could be locked.
   */
   bool lock(gst.types.LockFlags flags)
   {
@@ -206,9 +215,10 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       This removes parent as a parent for object. See
-    [gst.mini_object.MiniObject.addParent].
-    Params:
-      parent =       a parent #GstMiniObject
+      [gst.mini_object.MiniObject.addParent].
+  
+      Params:
+        parent = a parent #GstMiniObject
   */
   void removeParent(gst.mini_object.MiniObject parent)
   {
@@ -217,22 +227,23 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       This sets an opaque, named pointer on a miniobject.
-    The name is specified through a #GQuark (retrieved e.g. via
-    [glib.global.quarkFromStaticString]), and the pointer
-    can be gotten back from the object with [gst.mini_object.MiniObject.getQdata]
-    until the object is disposed.
-    Setting a previously set user data pointer, overrides (frees)
-    the old pointer set, using null as pointer essentially
-    removes the data stored.
-    
-    destroy may be specified which is called with data as argument
-    when the object is disposed, or the data is being overwritten by
-    a call to [gst.mini_object.MiniObject.setQdata] with the same quark.
-    Params:
-      quark =       A #GQuark, naming the user data pointer
-      data =       An opaque user data pointer
-      destroy =       Function to invoke with data as argument, when data
-                  needs to be freed
+      The name is specified through a #GQuark (retrieved e.g. via
+      [glib.global.quarkFromStaticString]), and the pointer
+      can be gotten back from the object with [gst.mini_object.MiniObject.getQdata]
+      until the object is disposed.
+      Setting a previously set user data pointer, overrides (frees)
+      the old pointer set, using null as pointer essentially
+      removes the data stored.
+      
+      destroy may be specified which is called with data as argument
+      when the object is disposed, or the data is being overwritten by
+      a call to [gst.mini_object.MiniObject.setQdata] with the same quark.
+  
+      Params:
+        quark = A #GQuark, naming the user data pointer
+        data = An opaque user data pointer
+        destroy = Function to invoke with data as argument, when data
+                    needs to be freed
   */
   void setQdata(glib.types.Quark quark, void* data, glib.types.DestroyNotify destroy)
   {
@@ -249,12 +260,13 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       This function gets back user data pointers stored via [gst.mini_object.MiniObject.setQdata]
-    and removes the data from object without invoking its `destroy()` function (if
-    any was set).
-    Params:
-      quark =       A #GQuark, naming the user data pointer
-    Returns:     The user data pointer set, or
-      null
+      and removes the data from object without invoking its `destroy()` function (if
+      any was set).
+  
+      Params:
+        quark = A #GQuark, naming the user data pointer
+      Returns: The user data pointer set, or
+        null
   */
   void* stealQdata(glib.types.Quark quark)
   {
@@ -264,8 +276,9 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       Unlock the mini-object with the specified access mode in flags.
-    Params:
-      flags =       #GstLockFlags
+  
+      Params:
+        flags = #GstLockFlags
   */
   void unlock(gst.types.LockFlags flags)
   {
@@ -274,15 +287,16 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       Atomically modifies a pointer to point to a new mini-object.
-    The reference count of olddata is decreased and the reference count of
-    newdata is increased.
-    
-    Either newdata and the value pointed to by olddata may be null.
-    Params:
-      olddata =       pointer to a pointer to a
-            mini-object to be replaced
-      newdata =       pointer to new mini-object
-    Returns:     true if newdata was different from olddata
+      The reference count of olddata is decreased and the reference count of
+      newdata is increased.
+      
+      Either newdata and the value pointed to by olddata may be null.
+  
+      Params:
+        olddata = pointer to a pointer to a
+              mini-object to be replaced
+        newdata = pointer to new mini-object
+      Returns: true if newdata was different from olddata
   */
   static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
   {
@@ -293,16 +307,17 @@ class MiniObject : gobject.boxed.Boxed
 
   /**
       Modifies a pointer to point to a new mini-object. The modification
-    is done atomically. This version is similar to [gst.mini_object.MiniObject.replace]
-    except that it does not increase the refcount of newdata and thus
-    takes ownership of newdata.
-    
-    Either newdata and the value pointed to by olddata may be null.
-    Params:
-      olddata =       pointer to a pointer to a mini-object to
-            be replaced
-      newdata =       pointer to new mini-object
-    Returns:     true if newdata was different from olddata
+      is done atomically. This version is similar to [gst.mini_object.MiniObject.replace]
+      except that it does not increase the refcount of newdata and thus
+      takes ownership of newdata.
+      
+      Either newdata and the value pointed to by olddata may be null.
+  
+      Params:
+        olddata = pointer to a pointer to a mini-object to
+              be replaced
+        newdata = pointer to new mini-object
+      Returns: true if newdata was different from olddata
   */
   static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
   {

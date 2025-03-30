@@ -1,3 +1,4 @@
+/// Module for [RepeatingRadialGradientNode] class
 module gsk.repeating_radial_gradient_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class RepeatingRadialGradientNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

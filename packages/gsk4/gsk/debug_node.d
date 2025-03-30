@@ -1,3 +1,4 @@
+/// Module for [DebugNode] class
 module gsk.debug_node;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gsk.types;
 
 /**
     A render node that emits a debugging message when drawing its
-  child node.
+    child node.
 */
 class DebugNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,13 +25,14 @@ class DebugNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will add debug information about
-    the given child.
-    
-    Adding this node has no visual effect.
-    Params:
-      child =       The child to add debug info for
-      message =       The debug message
-    Returns:     A new [gsk.render_node.RenderNode]
+      the given child.
+      
+      Adding this node has no visual effect.
+  
+      Params:
+        child = The child to add debug info for
+        message = The debug message
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, string message)
   {
@@ -41,7 +44,7 @@ class DebugNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting drawn by the given node.
-    Returns:     the child [gsk.render_node.RenderNode]
+      Returns: the child [gsk.render_node.RenderNode]
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -53,7 +56,7 @@ class DebugNode : gsk.render_node.RenderNode
 
   /**
       Gets the debug message that was set on this node
-    Returns:     The debug message
+      Returns: The debug message
   */
   string getMessage()
   {

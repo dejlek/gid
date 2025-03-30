@@ -1,3 +1,4 @@
+/// Module for [Misc] class
 module atk.misc;
 
 import atk.c.functions;
@@ -8,24 +9,27 @@ import gobject.object;
 
 /**
     A set of ATK utility functions for thread locking
-  
-  A set of utility functions for thread locking. This interface and
-  all his related methods are deprecated since 2.12.
+    
+    A set of utility functions for thread locking. This interface and
+    all his related methods are deprecated since 2.12.
 */
 class Misc : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_misc_get_type != &gidSymbolNotFound ? atk_misc_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,9 +42,9 @@ class Misc : gobject.object.ObjectG
 
   /**
       Obtain the singleton instance of AtkMisc for this application.
-    Returns:     The singleton instance of AtkMisc for this application.
+      Returns: The singleton instance of AtkMisc for this application.
   
-    Deprecated:     Since 2.12.
+      Deprecated: Since 2.12.
   */
   static atk.misc.Misc getInstance()
   {
@@ -52,11 +56,11 @@ class Misc : gobject.object.ObjectG
 
   /**
       Take the thread mutex for the GUI toolkit,
-    if one exists.
-    (This method is implemented by the toolkit ATK implementation layer;
-     for instance, for GTK+, GAIL implements this via GDK_THREADS_ENTER).
+      if one exists.
+      (This method is implemented by the toolkit ATK implementation layer;
+       for instance, for GTK+, GAIL implements this via GDK_THREADS_ENTER).
   
-    Deprecated:     Since 2.12.
+      Deprecated: Since 2.12.
   */
   void threadsEnter()
   {
@@ -65,16 +69,16 @@ class Misc : gobject.object.ObjectG
 
   /**
       Release the thread mutex for the GUI toolkit,
-    if one exists. This method, and atk_misc_threads_enter,
-    are needed in some situations by threaded application code which
-    services ATK requests, since fulfilling ATK requests often
-    requires calling into the GUI toolkit.  If a long-running or
-    potentially blocking call takes place inside such a block, it should
-    be bracketed by atk_misc_threads_leave/atk_misc_threads_enter calls.
-    (This method is implemented by the toolkit ATK implementation layer;
-     for instance, for GTK+, GAIL implements this via GDK_THREADS_LEAVE).
+      if one exists. This method, and atk_misc_threads_enter,
+      are needed in some situations by threaded application code which
+      services ATK requests, since fulfilling ATK requests often
+      requires calling into the GUI toolkit.  If a long-running or
+      potentially blocking call takes place inside such a block, it should
+      be bracketed by atk_misc_threads_leave/atk_misc_threads_enter calls.
+      (This method is implemented by the toolkit ATK implementation layer;
+       for instance, for GTK+, GAIL implements this via GDK_THREADS_LEAVE).
   
-    Deprecated:     Since 2.12.
+      Deprecated: Since 2.12.
   */
   void threadsLeave()
   {

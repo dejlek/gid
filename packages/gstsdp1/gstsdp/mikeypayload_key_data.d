@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadKeyData] class
 module gstsdp.mikeypayload_key_data;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstsdp.types;
 
 /**
     The Key data payload contains key material. It should be added as sub
-  payload to the KEMAC.
+    payload to the KEMAC.
 */
 class MIKEYPayloadKeyData
 {
   GstMIKEYPayloadKeyData cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class MIKEYPayloadKeyData
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

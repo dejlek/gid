@@ -1,3 +1,4 @@
+/// Global functions for gstcontroller1 library
 module gstcontroller.global;
 
 import gid.gid;
@@ -9,8 +10,9 @@ import gstcontroller.types;
 
 /**
     Reset the controlled value cache.
-  Params:
-    self =       the #GstTimedValueControlSource
+
+    Params:
+      self = the #GstTimedValueControlSource
 */
 void timedValueControlInvalidateCache(gstcontroller.timed_value_control_source.TimedValueControlSource self)
 {

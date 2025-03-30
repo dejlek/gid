@@ -1,3 +1,4 @@
+/// Module for [Fontset] class
 module pango.fontset;
 
 import gid.gid;
@@ -10,26 +11,29 @@ import pango.types;
 
 /**
     A [pango.fontset.Fontset] represents a set of [pango.font.Font] to use when rendering text.
-  
-  A [pango.fontset.Fontset] is the result of resolving a [pango.font_description.FontDescription]
-  against a particular [pango.context.Context]. It has operations for finding the
-  component font for a particular Unicode character, and for finding a
-  composite set of metrics for the entire fontset.
+    
+    A [pango.fontset.Fontset] is the result of resolving a [pango.font_description.FontDescription]
+    against a particular [pango.context.Context]. It has operations for finding the
+    component font for a particular Unicode character, and for finding a
+    composite set of metrics for the entire fontset.
 */
 class Fontset : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_get_type != &gidSymbolNotFound ? pango_fontset_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,11 +46,12 @@ class Fontset : gobject.object.ObjectG
 
   /**
       Iterates through all the fonts in a fontset, calling func for
-    each one.
-    
-    If func returns true, that stops the iteration.
-    Params:
-      func =       Callback function
+      each one.
+      
+      If func returns true, that stops the iteration.
+  
+      Params:
+        func = Callback function
   */
   void foreach_(pango.types.FontsetForeachFunc func)
   {
@@ -65,10 +70,11 @@ class Fontset : gobject.object.ObjectG
 
   /**
       Returns the font in the fontset that contains the best
-    glyph for a Unicode character.
-    Params:
-      wc =       a Unicode character
-    Returns:     a [pango.font.Font]
+      glyph for a Unicode character.
+  
+      Params:
+        wc = a Unicode character
+      Returns: a [pango.font.Font]
   */
   pango.font.Font getFont(uint wc)
   {
@@ -80,7 +86,7 @@ class Fontset : gobject.object.ObjectG
 
   /**
       Get overall metric information for the fonts in the fontset.
-    Returns:     a [pango.font_metrics.FontMetrics] object
+      Returns: a [pango.font_metrics.FontMetrics] object
   */
   pango.font_metrics.FontMetrics getMetrics()
   {

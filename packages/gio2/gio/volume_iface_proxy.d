@@ -1,10 +1,11 @@
+/// Module for [VolumeIfaceProxy] interface proxy object
 module gio.volume_iface_proxy;
 
 import gobject.object;
 import gio.volume;
 import gio.volume_mixin;
 
-/// Proxy object for Gio.Volume interface when a GObject has no applicable D binding
+/// Proxy object for [Gio.Volume] interface when a GObject has no applicable D binding
 class VolumeIfaceProxy : IfaceProxy, gio.volume.Volume
 {
   this(void* ptr, Flag!"Take" take = No.Take)

@@ -1,3 +1,4 @@
+/// Module for [RTCPPacket] class
 module gstrtp.rtcppacket;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstrtp.types;
 
 /**
     Data structure that points to a packet at @offset in @buffer.
-  The size of the structure is made public to allow stack allocations.
+    The size of the structure is made public to allow stack allocations.
 */
 class RTCPPacket
 {
   GstRTCPPacket cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class RTCPPacket
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -47,11 +50,12 @@ class RTCPPacket
 
   /**
       Add profile-specific extension data to packet. If packet already
-    contains profile-specific extension data will be appended to the existing
-    extension.
-    Params:
-      data =       profile-specific data
-    Returns:     true if the profile specific extension data was added.
+      contains profile-specific extension data will be appended to the existing
+      extension.
+  
+      Params:
+        data = profile-specific data
+      Returns: true if the profile specific extension data was added.
   */
   bool addProfileSpecificExt(ubyte[] data)
   {
@@ -67,17 +71,18 @@ class RTCPPacket
 
   /**
       Add a new report block to packet with the given values.
-    Params:
-      ssrc =       data source being reported
-      fractionlost =       fraction lost since last SR/RR
-      packetslost =       the cumululative number of packets lost
-      exthighestseq =       the extended last sequence number received
-      jitter =       the interarrival jitter
-      lsr =       the last SR packet from this source
-      dlsr =       the delay since last SR packet
-    Returns:     true if the packet was created. This function can return false if
-      the max MTU is exceeded or the number of report blocks is greater than
-      #GST_RTCP_MAX_RB_COUNT.
+  
+      Params:
+        ssrc = data source being reported
+        fractionlost = fraction lost since last SR/RR
+        packetslost = the cumululative number of packets lost
+        exthighestseq = the extended last sequence number received
+        jitter = the interarrival jitter
+        lsr = the last SR packet from this source
+        dlsr = the delay since last SR packet
+      Returns: true if the packet was created. This function can return false if
+        the max MTU is exceeded or the number of report blocks is greater than
+        #GST_RTCP_MAX_RB_COUNT.
   */
   bool addRb(uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr)
   {
@@ -88,7 +93,7 @@ class RTCPPacket
 
   /**
       Get the application-dependent data attached to a RTPFB or PSFB packet.
-    Returns:     A pointer to the data
+      Returns: A pointer to the data
   */
   ubyte* appGetData()
   {
@@ -98,8 +103,8 @@ class RTCPPacket
 
   /**
       Get the length of the application-dependent data attached to an APP
-    packet.
-    Returns:     The length of data in 32-bit words.
+      packet.
+      Returns: The length of data in 32-bit words.
   */
   ushort appGetDataLength()
   {
@@ -110,7 +115,7 @@ class RTCPPacket
 
   /**
       Get the name field of the APP packet.
-    Returns:     The 4-byte name field, not zero-terminated.
+      Returns: The 4-byte name field, not zero-terminated.
   */
   string appGetName()
   {
@@ -122,7 +127,7 @@ class RTCPPacket
 
   /**
       Get the SSRC/CSRC field of the APP packet.
-    Returns:     The SSRC/CSRC.
+      Returns: The SSRC/CSRC.
   */
   uint appGetSsrc()
   {
@@ -133,7 +138,7 @@ class RTCPPacket
 
   /**
       Get the subtype field of the APP packet.
-    Returns:     The subtype.
+      Returns: The subtype.
   */
   ubyte appGetSubtype()
   {
@@ -144,11 +149,12 @@ class RTCPPacket
 
   /**
       Set the length of the application-dependent data attached to an APP
-    packet.
-    Params:
-      wordlen =       Length of the data in 32-bit words
-    Returns:     true if there was enough space in the packet to add this much
-      data.
+      packet.
+  
+      Params:
+        wordlen = Length of the data in 32-bit words
+      Returns: true if there was enough space in the packet to add this much
+        data.
   */
   bool appSetDataLength(ushort wordlen)
   {
@@ -159,8 +165,9 @@ class RTCPPacket
 
   /**
       Set the name field of the APP packet.
-    Params:
-      name =       4-byte ASCII name
+  
+      Params:
+        name = 4-byte ASCII name
   */
   void appSetName(string name)
   {
@@ -170,8 +177,9 @@ class RTCPPacket
 
   /**
       Set the SSRC/CSRC field of the APP packet.
-    Params:
-      ssrc =       SSRC/CSRC of the packet
+  
+      Params:
+        ssrc = SSRC/CSRC of the packet
   */
   void appSetSsrc(uint ssrc)
   {
@@ -180,8 +188,9 @@ class RTCPPacket
 
   /**
       Set the subtype field of the APP packet.
-    Params:
-      subtype =       subtype of the packet
+  
+      Params:
+        subtype = subtype of the packet
   */
   void appSetSubtype(ubyte subtype)
   {
@@ -190,11 +199,12 @@ class RTCPPacket
 
   /**
       Add ssrc to the BYE packet.
-    Params:
-      ssrc =       an SSRC to add
-    Returns:     true if the ssrc was added. This function can return false if
-      the max MTU is exceeded or the number of sources blocks is greater than
-      #GST_RTCP_MAX_BYE_SSRC_COUNT.
+  
+      Params:
+        ssrc = an SSRC to add
+      Returns: true if the ssrc was added. This function can return false if
+        the max MTU is exceeded or the number of sources blocks is greater than
+        #GST_RTCP_MAX_BYE_SSRC_COUNT.
   */
   bool byeAddSsrc(uint ssrc)
   {
@@ -205,11 +215,12 @@ class RTCPPacket
 
   /**
       Adds len SSRCs in ssrc to BYE packet.
-    Params:
-      ssrc =       an array of SSRCs to add
-    Returns:     true if the all the SSRCs were added. This function can return false if
-      the max MTU is exceeded or the number of sources blocks is greater than
-      #GST_RTCP_MAX_BYE_SSRC_COUNT.
+  
+      Params:
+        ssrc = an array of SSRCs to add
+      Returns: true if the all the SSRCs were added. This function can return false if
+        the max MTU is exceeded or the number of sources blocks is greater than
+        #GST_RTCP_MAX_BYE_SSRC_COUNT.
   */
   bool byeAddSsrcs(uint[] ssrc)
   {
@@ -225,9 +236,10 @@ class RTCPPacket
 
   /**
       Get the nth SSRC of the BYE packet.
-    Params:
-      nth =       the nth SSRC to get
-    Returns:     The nth SSRC of packet.
+  
+      Params:
+        nth = the nth SSRC to get
+      Returns: The nth SSRC of packet.
   */
   uint byeGetNthSsrc(uint nth)
   {
@@ -238,8 +250,8 @@ class RTCPPacket
 
   /**
       Get the reason in packet.
-    Returns:     The reason for the BYE packet or NULL if the packet did not contain
-      a reason string. The string must be freed with [glib.global.gfree] after usage.
+      Returns: The reason for the BYE packet or NULL if the packet did not contain
+        a reason string. The string must be freed with [glib.global.gfree] after usage.
   */
   string byeGetReason()
   {
@@ -251,8 +263,8 @@ class RTCPPacket
 
   /**
       Get the length of the reason string.
-    Returns:     The length of the reason string or 0 when there is no reason string
-      present.
+      Returns: The length of the reason string or 0 when there is no reason string
+        present.
   */
   ubyte byeGetReasonLen()
   {
@@ -263,7 +275,7 @@ class RTCPPacket
 
   /**
       Get the number of SSRC fields in packet.
-    Returns:     The number of SSRC fields in packet.
+      Returns: The number of SSRC fields in packet.
   */
   uint byeGetSsrcCount()
   {
@@ -274,9 +286,10 @@ class RTCPPacket
 
   /**
       Set the reason string to reason in packet.
-    Params:
-      reason =       a reason string
-    Returns:     TRUE if the string could be set.
+  
+      Params:
+        reason = a reason string
+      Returns: TRUE if the string could be set.
   */
   bool byeSetReason(string reason)
   {
@@ -288,10 +301,11 @@ class RTCPPacket
 
   /**
       The profile-specific extension data is copied into a new allocated
-    memory area data. This must be freed with [glib.global.gfree] after usage.
-    Params:
-      data =       result profile-specific data
-    Returns:     true if there was valid data.
+      memory area data. This must be freed with [glib.global.gfree] after usage.
+  
+      Params:
+        data = result profile-specific data
+      Returns: true if there was valid data.
   */
   bool copyProfileSpecificExt(out ubyte[] data)
   {
@@ -307,7 +321,7 @@ class RTCPPacket
 
   /**
       Get the Feedback Control Information attached to a RTPFB or PSFB packet.
-    Returns:     a pointer to the FCI
+      Returns: a pointer to the FCI
   */
   ubyte* fbGetFci()
   {
@@ -317,8 +331,8 @@ class RTCPPacket
 
   /**
       Get the length of the Feedback Control Information attached to a
-    RTPFB or PSFB packet.
-    Returns:     The length of the FCI in 32-bit words.
+      RTPFB or PSFB packet.
+      Returns: The length of the FCI in 32-bit words.
   */
   ushort fbGetFciLength()
   {
@@ -329,7 +343,7 @@ class RTCPPacket
 
   /**
       Get the media SSRC field of the RTPFB or PSFB packet.
-    Returns:     the media SSRC.
+      Returns: the media SSRC.
   */
   uint fbGetMediaSsrc()
   {
@@ -340,7 +354,7 @@ class RTCPPacket
 
   /**
       Get the sender SSRC field of the RTPFB or PSFB packet.
-    Returns:     the sender SSRC.
+      Returns: the sender SSRC.
   */
   uint fbGetSenderSsrc()
   {
@@ -351,7 +365,7 @@ class RTCPPacket
 
   /**
       Get the feedback message type of the FB packet.
-    Returns:     The feedback message type.
+      Returns: The feedback message type.
   */
   gstrtp.types.RTCPFBType fbGetType()
   {
@@ -363,10 +377,11 @@ class RTCPPacket
 
   /**
       Set the length of the Feedback Control Information attached to a
-    RTPFB or PSFB packet.
-    Params:
-      wordlen =       Length of the FCI in 32-bit words
-    Returns:     true if there was enough space in the packet to add this much FCI
+      RTPFB or PSFB packet.
+  
+      Params:
+        wordlen = Length of the FCI in 32-bit words
+      Returns: true if there was enough space in the packet to add this much FCI
   */
   bool fbSetFciLength(ushort wordlen)
   {
@@ -377,8 +392,9 @@ class RTCPPacket
 
   /**
       Set the media SSRC field of the RTPFB or PSFB packet.
-    Params:
-      ssrc =       a media SSRC
+  
+      Params:
+        ssrc = a media SSRC
   */
   void fbSetMediaSsrc(uint ssrc)
   {
@@ -387,8 +403,9 @@ class RTCPPacket
 
   /**
       Set the sender SSRC field of the RTPFB or PSFB packet.
-    Params:
-      ssrc =       a sender SSRC
+  
+      Params:
+        ssrc = a sender SSRC
   */
   void fbSetSenderSsrc(uint ssrc)
   {
@@ -397,8 +414,9 @@ class RTCPPacket
 
   /**
       Set the feedback message type of the FB packet.
-    Params:
-      type =       the #GstRTCPFBType to set
+  
+      Params:
+        type = the #GstRTCPFBType to set
   */
   void fbSetType(gstrtp.types.RTCPFBType type)
   {
@@ -407,8 +425,8 @@ class RTCPPacket
 
   /**
       Get the count field in packet.
-    Returns:     The count field in packet or -1 if packet does not point to a
-      valid packet.
+      Returns: The count field in packet or -1 if packet does not point to a
+        valid packet.
   */
   ubyte getCount()
   {
@@ -419,8 +437,8 @@ class RTCPPacket
 
   /**
       Get the length field of packet. This is the length of the packet in
-    32-bit words minus one.
-    Returns:     The length field of packet.
+      32-bit words minus one.
+      Returns: The length field of packet.
   */
   ushort getLength()
   {
@@ -431,7 +449,7 @@ class RTCPPacket
 
   /**
       Get the packet padding of the packet pointed to by packet.
-    Returns:     If the packet has the padding bit set.
+      Returns: If the packet has the padding bit set.
   */
   bool getPadding()
   {
@@ -462,16 +480,17 @@ class RTCPPacket
 
   /**
       Parse the values of the nth report block in packet and store the result in
-    the values.
-    Params:
-      nth =       the nth report block in packet
-      ssrc =       result for data source being reported
-      fractionlost =       result for fraction lost since last SR/RR
-      packetslost =       result for the cumululative number of packets lost
-      exthighestseq =       result for the extended last sequence number received
-      jitter =       result for the interarrival jitter
-      lsr =       result for the last SR packet from this source
-      dlsr =       result for the delay since last SR packet
+      the values.
+  
+      Params:
+        nth = the nth report block in packet
+        ssrc = result for data source being reported
+        fractionlost = result for fraction lost since last SR/RR
+        packetslost = result for the cumululative number of packets lost
+        exthighestseq = result for the extended last sequence number received
+        jitter = result for the interarrival jitter
+        lsr = result for the last SR packet from this source
+        dlsr = result for the delay since last SR packet
   */
   void getRb(uint nth, out uint ssrc, out ubyte fractionlost, out int packetslost, out uint exthighestseq, out uint jitter, out uint lsr, out uint dlsr)
   {
@@ -480,7 +499,7 @@ class RTCPPacket
 
   /**
       Get the number of report blocks in packet.
-    Returns:     The number of report blocks in packet.
+      Returns: The number of report blocks in packet.
   */
   uint getRbCount()
   {
@@ -491,8 +510,8 @@ class RTCPPacket
 
   /**
       Get the packet type of the packet pointed to by packet.
-    Returns:     The packet type or GST_RTCP_TYPE_INVALID when packet is not
-      pointing to a valid packet.
+      Returns: The packet type or GST_RTCP_TYPE_INVALID when packet is not
+        pointing to a valid packet.
   */
   gstrtp.types.RTCPType getType()
   {
@@ -504,9 +523,9 @@ class RTCPPacket
 
   /**
       Move the packet pointer packet to the next packet in the payload.
-    Use [gstrtp.rtcpbuffer.RTCPBuffer.getFirstPacket] to initialize packet.
-    Returns:     TRUE if packet is pointing to a valid packet after calling this
-      function.
+      Use [gstrtp.rtcpbuffer.RTCPBuffer.getFirstPacket] to initialize packet.
+      Returns: TRUE if packet is pointing to a valid packet after calling this
+        function.
   */
   bool moveToNext()
   {
@@ -517,8 +536,8 @@ class RTCPPacket
 
   /**
       Removes the packet pointed to by packet and moves pointer to the next one
-    Returns:     TRUE if packet is pointing to a valid packet after calling this
-      function.
+      Returns: TRUE if packet is pointing to a valid packet after calling this
+        function.
   */
   bool remove()
   {
@@ -529,7 +548,7 @@ class RTCPPacket
 
   /**
       Get the ssrc field of the RR packet.
-    Returns:     the ssrc.
+      Returns: the ssrc.
   */
   uint rrGetSsrc()
   {
@@ -540,8 +559,9 @@ class RTCPPacket
 
   /**
       Set the ssrc field of the RR packet.
-    Params:
-      ssrc =       the SSRC to set
+  
+      Params:
+        ssrc = the SSRC to set
   */
   void rrSetSsrc(uint ssrc)
   {
@@ -550,11 +570,12 @@ class RTCPPacket
 
   /**
       Add a new SDES entry to the current item in packet.
-    Params:
-      type =       the #GstRTCPSDESType of the SDES entry
-      data =       the data
-    Returns:     true if the item could be added, false if the MTU has been
-      reached.
+  
+      Params:
+        type = the #GstRTCPSDESType of the SDES entry
+        data = the data
+      Returns: true if the item could be added, false if the MTU has been
+        reached.
   */
   bool sdesAddEntry(gstrtp.types.RTCPSDESType type, ubyte[] data)
   {
@@ -570,10 +591,11 @@ class RTCPPacket
 
   /**
       Add a new SDES item for ssrc to packet.
-    Params:
-      ssrc =       the SSRC of the new item to add
-    Returns:     true if the item could be added, false if the maximum amount of
-      items has been exceeded for the SDES packet or the MTU has been reached.
+  
+      Params:
+        ssrc = the SSRC of the new item to add
+      Returns: true if the item could be added, false if the maximum amount of
+        items has been exceeded for the SDES packet or the MTU has been reached.
   */
   bool sdesAddItem(uint ssrc)
   {
@@ -584,11 +606,12 @@ class RTCPPacket
 
   /**
       This function is like [gstrtp.rtcppacket.RTCPPacket.sdesGetEntry] but it returns a
-    null-terminated copy of the data instead. use [glib.global.gfree] after usage.
-    Params:
-      type =       result of the entry type
-      data =       result entry data
-    Returns:     true if there was valid data.
+      null-terminated copy of the data instead. use [glib.global.gfree] after usage.
+  
+      Params:
+        type = result of the entry type
+        data = result entry data
+      Returns: true if there was valid data.
   */
   bool sdesCopyEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
   {
@@ -604,7 +627,7 @@ class RTCPPacket
 
   /**
       Move to the first SDES entry in the current item.
-    Returns:     true if there was a first entry.
+      Returns: true if there was a first entry.
   */
   bool sdesFirstEntry()
   {
@@ -615,7 +638,7 @@ class RTCPPacket
 
   /**
       Move to the first SDES item in packet.
-    Returns:     TRUE if there was a first item.
+      Returns: TRUE if there was a first item.
   */
   bool sdesFirstItem()
   {
@@ -626,16 +649,17 @@ class RTCPPacket
 
   /**
       Get the data of the current SDES item entry. type (when not NULL) will
-    contain the type of the entry. data (when not NULL) will point to len
-    bytes.
-    
-    When type refers to a text item, data will point to a UTF8 string. Note
-    that this UTF8 string is NOT null-terminated. Use
-    [gstrtp.rtcppacket.RTCPPacket.sdesCopyEntry] to get a null-terminated copy of the entry.
-    Params:
-      type =       result of the entry type
-      data =       result entry data
-    Returns:     true if there was valid data.
+      contain the type of the entry. data (when not NULL) will point to len
+      bytes.
+      
+      When type refers to a text item, data will point to a UTF8 string. Note
+      that this UTF8 string is NOT null-terminated. Use
+      [gstrtp.rtcppacket.RTCPPacket.sdesCopyEntry] to get a null-terminated copy of the entry.
+  
+      Params:
+        type = result of the entry type
+        data = result entry data
+      Returns: true if there was valid data.
   */
   bool sdesGetEntry(out gstrtp.types.RTCPSDESType type, out ubyte[] data)
   {
@@ -650,7 +674,7 @@ class RTCPPacket
 
   /**
       Get the number of items in the SDES packet packet.
-    Returns:     The number of items in packet.
+      Returns: The number of items in packet.
   */
   uint sdesGetItemCount()
   {
@@ -661,7 +685,7 @@ class RTCPPacket
 
   /**
       Get the SSRC of the current SDES item.
-    Returns:     the SSRC of the current item.
+      Returns: the SSRC of the current item.
   */
   uint sdesGetSsrc()
   {
@@ -672,7 +696,7 @@ class RTCPPacket
 
   /**
       Move to the next SDES entry in the current item.
-    Returns:     true if there was a next entry.
+      Returns: true if there was a next entry.
   */
   bool sdesNextEntry()
   {
@@ -683,7 +707,7 @@ class RTCPPacket
 
   /**
       Move to the next SDES item in packet.
-    Returns:     TRUE if there was a next item.
+      Returns: TRUE if there was a next item.
   */
   bool sdesNextItem()
   {
@@ -694,17 +718,18 @@ class RTCPPacket
 
   /**
       Set the nth new report block in packet with the given values.
-    
-    Note: Not implemented.
-    Params:
-      nth =       the nth report block to set
-      ssrc =       data source being reported
-      fractionlost =       fraction lost since last SR/RR
-      packetslost =       the cumululative number of packets lost
-      exthighestseq =       the extended last sequence number received
-      jitter =       the interarrival jitter
-      lsr =       the last SR packet from this source
-      dlsr =       the delay since last SR packet
+      
+      Note: Not implemented.
+  
+      Params:
+        nth = the nth report block to set
+        ssrc = data source being reported
+        fractionlost = fraction lost since last SR/RR
+        packetslost = the cumululative number of packets lost
+        exthighestseq = the extended last sequence number received
+        jitter = the interarrival jitter
+        lsr = the last SR packet from this source
+        dlsr = the delay since last SR packet
   */
   void setRb(uint nth, uint ssrc, ubyte fractionlost, int packetslost, uint exthighestseq, uint jitter, uint lsr, uint dlsr)
   {
@@ -713,12 +738,13 @@ class RTCPPacket
 
   /**
       Parse the SR sender info and store the values.
-    Params:
-      ssrc =       result SSRC
-      ntptime =       result NTP time
-      rtptime =       result RTP time
-      packetCount =       result packet count
-      octetCount =       result octet count
+  
+      Params:
+        ssrc = result SSRC
+        ntptime = result NTP time
+        rtptime = result RTP time
+        packetCount = result packet count
+        octetCount = result octet count
   */
   void srGetSenderInfo(out uint ssrc, out ulong ntptime, out uint rtptime, out uint packetCount, out uint octetCount)
   {
@@ -727,12 +753,13 @@ class RTCPPacket
 
   /**
       Set the given values in the SR packet packet.
-    Params:
-      ssrc =       the SSRC
-      ntptime =       the NTP time
-      rtptime =       the RTP time
-      packetCount =       the packet count
-      octetCount =       the octet count
+  
+      Params:
+        ssrc = the SSRC
+        ntptime = the NTP time
+        rtptime = the RTP time
+        packetCount = the packet count
+        octetCount = the octet count
   */
   void srSetSenderInfo(uint ssrc, ulong ntptime, uint rtptime, uint packetCount, uint octetCount)
   {
@@ -741,7 +768,7 @@ class RTCPPacket
 
   /**
       Move to the first extended report block in XR packet.
-    Returns:     TRUE if there was a first extended report block.
+      Returns: TRUE if there was a first extended report block.
   */
   bool xrFirstRb()
   {
@@ -760,7 +787,7 @@ class RTCPPacket
 
   /**
       Get the extended report block type of the XR packet.
-    Returns:     The extended report block type.
+      Returns: The extended report block type.
   */
   gstrtp.types.RTCPXRType xrGetBlockType()
   {
@@ -772,12 +799,13 @@ class RTCPPacket
 
   /**
       Parse the extended report block for DLRR report block type.
-    Params:
-      nth =       the index of sub-block to retrieve.
-      ssrc =       the SSRC of the receiver.
-      lastRr =       the last receiver reference timestamp of ssrc.
-      delay =       the delay since last_rr.
-    Returns:     true if the report block is correctly parsed.
+  
+      Params:
+        nth = the index of sub-block to retrieve.
+        ssrc = the SSRC of the receiver.
+        lastRr = the last receiver reference timestamp of ssrc.
+        delay = the delay since last_rr.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetDlrrBlock(uint nth, out uint ssrc, out uint lastRr, out uint delay)
   {
@@ -788,10 +816,11 @@ class RTCPPacket
 
   /**
       Retrieve the packet receipt time of seq which ranges in [begin_seq, end_seq).
-    Params:
-      seq =       the sequence to retrieve the time.
-      receiptTime =       the packet receipt time of seq.
-    Returns:     true if the report block returns the receipt time correctly.
+  
+      Params:
+        seq = the sequence to retrieve the time.
+        receiptTime = the packet receipt time of seq.
+      Returns: true if the report block returns the receipt time correctly.
   */
   bool xrGetPrtBySeq(ushort seq, out uint receiptTime)
   {
@@ -802,12 +831,13 @@ class RTCPPacket
 
   /**
       Parse the Packet Recept Times Report Block from a XR packet
-    Params:
-      ssrc =       the SSRC of the RTP data packet source being reported upon by this report block.
-      thinning =       the amount of thinning performed on the sequence number space.
-      beginSeq =       the first sequence number that this block reports on.
-      endSeq =       the last sequence number that this block reports on plus one.
-    Returns:     true if the report block is correctly parsed.
+  
+      Params:
+        ssrc = the SSRC of the RTP data packet source being reported upon by this report block.
+        thinning = the amount of thinning performed on the sequence number space.
+        beginSeq = the first sequence number that this block reports on.
+        endSeq = the last sequence number that this block reports on plus one.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetPrtInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq)
   {
@@ -818,13 +848,14 @@ class RTCPPacket
 
   /**
       Parse the extended report block for Loss RLE and Duplicated LRE block type.
-    Params:
-      ssrc =       the SSRC of the RTP data packet source being reported upon by this report block.
-      thinning =       the amount of thinning performed on the sequence number space.
-      beginSeq =       the first sequence number that this block reports on.
-      endSeq =       the last sequence number that this block reports on plus one.
-      chunkCount =       the number of chunks calculated by block length.
-    Returns:     true if the report block is correctly parsed.
+  
+      Params:
+        ssrc = the SSRC of the RTP data packet source being reported upon by this report block.
+        thinning = the amount of thinning performed on the sequence number space.
+        beginSeq = the first sequence number that this block reports on.
+        endSeq = the last sequence number that this block reports on plus one.
+        chunkCount = the number of chunks calculated by block length.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetRleInfo(out uint ssrc, out ubyte thinning, out ushort beginSeq, out ushort endSeq, out uint chunkCount)
   {
@@ -835,10 +866,11 @@ class RTCPPacket
 
   /**
       Retrieve actual chunk data.
-    Params:
-      nth =       the index of chunk to retrieve.
-      chunk =       the nth chunk.
-    Returns:     true if the report block returns chunk correctly.
+  
+      Params:
+        nth = the index of chunk to retrieve.
+        chunk = the nth chunk.
+      Returns: true if the report block returns chunk correctly.
   */
   bool xrGetRleNthChunk(uint nth, out ushort chunk)
   {
@@ -857,7 +889,7 @@ class RTCPPacket
 
   /**
       Get the ssrc field of the XR packet.
-    Returns:     the ssrc.
+      Returns: the ssrc.
   */
   uint xrGetSsrc()
   {
@@ -868,11 +900,12 @@ class RTCPPacket
 
   /**
       Extract a basic information from static summary report block of XR packet.
-    Params:
-      ssrc =       the SSRC of the source.
-      beginSeq =       the first sequence number that this block reports on.
-      endSeq =       the last sequence number that this block reports on plus one.
-    Returns:     true if the report block is correctly parsed.
+  
+      Params:
+        ssrc = the SSRC of the source.
+        beginSeq = the first sequence number that this block reports on.
+        endSeq = the last sequence number that this block reports on plus one.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetSummaryInfo(out uint ssrc, out ushort beginSeq, out ushort endSeq)
   {
@@ -883,13 +916,14 @@ class RTCPPacket
 
   /**
       Extract jitter information from the statistics summary. If the jitter flag in
-    a block header is set as zero, all of jitters will be zero.
-    Params:
-      minJitter =       the minimum relative transit time between two sequences.
-      maxJitter =       the maximum relative transit time between two sequences.
-      meanJitter =       the mean relative transit time between two sequences.
-      devJitter =       the standard deviation of the relative transit time between two sequences.
-    Returns:     true if the report block is correctly parsed.
+      a block header is set as zero, all of jitters will be zero.
+  
+      Params:
+        minJitter = the minimum relative transit time between two sequences.
+        maxJitter = the maximum relative transit time between two sequences.
+        meanJitter = the mean relative transit time between two sequences.
+        devJitter = the standard deviation of the relative transit time between two sequences.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetSummaryJitter(out uint minJitter, out uint maxJitter, out uint meanJitter, out uint devJitter)
   {
@@ -900,11 +934,12 @@ class RTCPPacket
 
   /**
       Get the number of lost or duplicate packets. If the flag in a block header
-    is set as zero, lost_packets or dup_packets will be zero.
-    Params:
-      lostPackets =       the number of lost packets between begin_seq and end_seq.
-      dupPackets =       the number of duplicate packets between begin_seq and end_seq.
-    Returns:     true if the report block is correctly parsed.
+      is set as zero, lost_packets or dup_packets will be zero.
+  
+      Params:
+        lostPackets = the number of lost packets between begin_seq and end_seq.
+        dupPackets = the number of duplicate packets between begin_seq and end_seq.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetSummaryPkt(out uint lostPackets, out uint dupPackets)
   {
@@ -915,13 +950,14 @@ class RTCPPacket
 
   /**
       Extract the value of ttl for ipv4, or hop limit for ipv6.
-    Params:
-      isIpv4 =       the flag to indicate that the return values are ipv4 ttl or ipv6 hop limits.
-      minTtl =       the minimum TTL or Hop Limit value of data packets between two sequences.
-      maxTtl =       the maximum TTL or Hop Limit value of data packets between two sequences.
-      meanTtl =       the mean TTL or Hop Limit value of data packets between two sequences.
-      devTtl =       the standard deviation of the TTL or Hop Limit value of data packets between two sequences.
-    Returns:     true if the report block is correctly parsed.
+  
+      Params:
+        isIpv4 = the flag to indicate that the return values are ipv4 ttl or ipv6 hop limits.
+        minTtl = the minimum TTL or Hop Limit value of data packets between two sequences.
+        maxTtl = the maximum TTL or Hop Limit value of data packets between two sequences.
+        meanTtl = the mean TTL or Hop Limit value of data packets between two sequences.
+        devTtl = the standard deviation of the TTL or Hop Limit value of data packets between two sequences.
+      Returns: true if the report block is correctly parsed.
   */
   bool xrGetSummaryTtl(out bool isIpv4, out ubyte minTtl, out ubyte maxTtl, out ubyte meanTtl, out ubyte devTtl)
   {
@@ -996,7 +1032,7 @@ class RTCPPacket
 
   /**
       Move to the next extended report block in XR packet.
-    Returns:     TRUE if there was a next extended report block.
+      Returns: TRUE if there was a next extended report block.
   */
   bool xrNextRb()
   {

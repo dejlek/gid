@@ -1,3 +1,4 @@
+/// Module for [SDPAttribute] class
 module gstsdp.sdpattribute;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class SDPAttribute
 {
   GstSDPAttribute cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class SDPAttribute
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -52,7 +55,7 @@ class SDPAttribute
 
   /**
       Clear the attribute.
-    Returns:     GST_SDP_OK.
+      Returns: GST_SDP_OK.
   */
   gstsdp.types.SDPResult clear()
   {
@@ -64,10 +67,11 @@ class SDPAttribute
 
   /**
       Set the attribute with key and value.
-    Params:
-      key =       the key
-      value =       the value
-    Returns:     GST_SDP_OK.
+  
+      Params:
+        key = the key
+        value = the value
+      Returns: GST_SDP_OK.
   */
   gstsdp.types.SDPResult set(string key, string value = null)
   {

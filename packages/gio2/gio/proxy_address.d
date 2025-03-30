@@ -1,3 +1,4 @@
+/// Module for [ProxyAddress] class
 module gio.proxy_address;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gio.types;
 class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_address_get_type != &gidSymbolNotFound ? g_proxy_address_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,22 +42,23 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Creates a new #GProxyAddress for inetaddr with protocol that should
-    tunnel through dest_hostname and dest_port.
-    
-    (Note that this method doesn't set the #GProxyAddress:uri or
-    #GProxyAddress:destination-protocol fields; use [gobject.object.ObjectG.new_]
-    directly if you want to set those.)
-    Params:
-      inetaddr =       The proxy server #GInetAddress.
-      port =       The proxy server port.
-      protocol =       The proxy protocol to support, in lower case (e.g. socks, http).
-      destHostname =       The destination hostname the proxy should tunnel to.
-      destPort =       The destination port to tunnel to.
-      username =       The username to authenticate to the proxy server
-            (or null).
-      password =       The password to authenticate to the proxy server
-            (or null).
-    Returns:     a new #GProxyAddress
+      tunnel through dest_hostname and dest_port.
+      
+      (Note that this method doesn't set the #GProxyAddress:uri or
+      #GProxyAddress:destination-protocol fields; use [gobject.object.ObjectG.new_]
+      directly if you want to set those.)
+  
+      Params:
+        inetaddr = The proxy server #GInetAddress.
+        port = The proxy server port.
+        protocol = The proxy protocol to support, in lower case (e.g. socks, http).
+        destHostname = The destination hostname the proxy should tunnel to.
+        destPort = The destination port to tunnel to.
+        username = The username to authenticate to the proxy server
+              (or null).
+        password = The password to authenticate to the proxy server
+              (or null).
+      Returns: a new #GProxyAddress
   */
   this(gio.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username = null, string password = null)
   {
@@ -68,9 +73,9 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets proxy's destination hostname; that is, the name of the host
-    that will be connected to via the proxy, not the name of the proxy
-    itself.
-    Returns:     the proxy's destination hostname
+      that will be connected to via the proxy, not the name of the proxy
+      itself.
+      Returns: the proxy's destination hostname
   */
   string getDestinationHostname()
   {
@@ -82,9 +87,9 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets proxy's destination port; that is, the port on the
-    destination host that will be connected to via the proxy, not the
-    port number of the proxy itself.
-    Returns:     the proxy's destination port
+      destination host that will be connected to via the proxy, not the
+      port number of the proxy itself.
+      Returns: the proxy's destination port
   */
   ushort getDestinationPort()
   {
@@ -95,8 +100,8 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets the protocol that is being spoken to the destination
-    server; eg, "http" or "ftp".
-    Returns:     the proxy's destination protocol
+      server; eg, "http" or "ftp".
+      Returns: the proxy's destination protocol
   */
   string getDestinationProtocol()
   {
@@ -108,7 +113,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets proxy's password.
-    Returns:     the proxy's password
+      Returns: the proxy's password
   */
   string getPassword()
   {
@@ -120,7 +125,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets proxy's protocol. eg, "socks" or "http"
-    Returns:     the proxy's protocol
+      Returns: the proxy's protocol
   */
   string getProtocol()
   {
@@ -132,7 +137,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets the proxy URI that proxy was constructed from.
-    Returns:     the proxy's URI, or null if unknown
+      Returns: the proxy's URI, or null if unknown
   */
   string getUri()
   {
@@ -144,7 +149,7 @@ class ProxyAddress : gio.inet_socket_address.InetSocketAddress
 
   /**
       Gets proxy's username.
-    Returns:     the proxy's username
+      Returns: the proxy's username
   */
   string getUsername()
   {

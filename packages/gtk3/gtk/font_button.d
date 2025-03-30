@@ -1,3 +1,4 @@
+/// Module for [FontButton] class
 module gtk.font_button;
 
 import atk.implementor_iface;
@@ -17,30 +18,34 @@ import gtk.c.types;
 import gtk.font_chooser;
 import gtk.font_chooser_mixin;
 import gtk.types;
+import pango.font_map;
 
 /**
     The #GtkFontButton is a button which displays the currently selected
-  font an allows to open a font chooser dialog to change the font.
-  It is suitable widget for selecting a font in a preference dialog.
-  
-  # CSS nodes
-  
-  GtkFontButton has a single CSS node with name button and style class .font.
+    font an allows to open a font chooser dialog to change the font.
+    It is suitable widget for selecting a font in a preference dialog.
+    
+    # CSS nodes
+    
+    GtkFontButton has a single CSS node with name button and style class .font.
 */
 class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_button_get_type != &gidSymbolNotFound ? gtk_font_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,7 +60,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Creates a new font picker widget.
-    Returns:     a new font picker widget.
+      Returns: a new font picker widget.
   */
   this()
   {
@@ -66,9 +71,10 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Creates a new font picker widget.
-    Params:
-      fontname =       Name of font to display in font chooser dialog
-    Returns:     a new font picker widget.
+  
+      Params:
+        fontname = Name of font to display in font chooser dialog
+      Returns: a new font picker widget.
   */
   static gtk.font_button.FontButton newWithFont(string fontname)
   {
@@ -81,14 +87,14 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Retrieves the name of the currently selected font. This name includes
-    style and size information as well. If you want to render something
-    with the font, use this string with [pango.font_description.FontDescription.fromString] .
-    If you’re interested in peeking certain values (family name,
-    style, size, weight) just query these properties from the
-    #PangoFontDescription object.
-    Returns:     an internal copy of the font name which must not be freed.
+      style and size information as well. If you want to render something
+      with the font, use this string with [pango.font_description.FontDescription.fromString] .
+      If you’re interested in peeking certain values (family name,
+      style, size, weight) just query these properties from the
+      #PangoFontDescription object.
+      Returns: an internal copy of the font name which must not be freed.
   
-    Deprecated:     Use [gtk.font_chooser.FontChooser.getFont] instead
+      Deprecated: Use [gtk.font_chooser.FontChooser.getFont] instead
   */
   string getFontName()
   {
@@ -100,7 +106,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Returns whether the font size will be shown in the label.
-    Returns:     whether the font size will be shown in the label.
+      Returns: whether the font size will be shown in the label.
   */
   bool getShowSize()
   {
@@ -111,7 +117,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Returns whether the name of the font style will be shown in the label.
-    Returns:     whether the font style will be shown in the label.
+      Returns: whether the font style will be shown in the label.
   */
   bool getShowStyle()
   {
@@ -122,7 +128,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Retrieves the title of the font chooser dialog.
-    Returns:     an internal copy of the title string which must not be freed.
+      Returns: an internal copy of the title string which must not be freed.
   */
   string getTitle()
   {
@@ -134,7 +140,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Returns whether the selected font is used in the label.
-    Returns:     whether the selected font is used in the label.
+      Returns: whether the selected font is used in the label.
   */
   bool getUseFont()
   {
@@ -145,7 +151,7 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Returns whether the selected size is used in the label.
-    Returns:     whether the selected size is used in the label.
+      Returns: whether the selected size is used in the label.
   */
   bool getUseSize()
   {
@@ -156,11 +162,12 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Sets or updates the currently-displayed font in font picker dialog.
-    Params:
-      fontname =       Name of font to display in font chooser dialog
-    Returns:     true
   
-    Deprecated:     Use [gtk.font_chooser.FontChooser.setFont] instead
+      Params:
+        fontname = Name of font to display in font chooser dialog
+      Returns: true
+  
+      Deprecated: Use [gtk.font_chooser.FontChooser.setFont] instead
   */
   bool setFontName(string fontname)
   {
@@ -172,8 +179,9 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       If show_size is true, the font size will be displayed along with the name of the selected font.
-    Params:
-      showSize =       true if font size should be displayed in dialog.
+  
+      Params:
+        showSize = true if font size should be displayed in dialog.
   */
   void setShowSize(bool showSize)
   {
@@ -182,8 +190,9 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       If show_style is true, the font style will be displayed along with name of the selected font.
-    Params:
-      showStyle =       true if font style should be displayed in label.
+  
+      Params:
+        showStyle = true if font style should be displayed in label.
   */
   void setShowStyle(bool showStyle)
   {
@@ -192,8 +201,9 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       Sets the title for the font chooser dialog.
-    Params:
-      title =       a string containing the font chooser dialog title
+  
+      Params:
+        title = a string containing the font chooser dialog title
   */
   void setTitle(string title)
   {
@@ -203,8 +213,9 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       If use_font is true, the font name will be written using the selected font.
-    Params:
-      useFont =       If true, font name will be written using font chosen.
+  
+      Params:
+        useFont = If true, font name will be written using font chosen.
   */
   void setUseFont(bool useFont)
   {
@@ -213,8 +224,9 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
 
   /**
       If use_size is true, the font name will be written using the selected size.
-    Params:
-      useSize =       If true, font name will be written using the selected size.
+  
+      Params:
+        useSize = If true, font name will be written using the selected size.
   */
   void setUseSize(bool useSize)
   {
@@ -222,40 +234,42 @@ class FontButton : gtk.button.Button, gtk.font_chooser.FontChooser
   }
 
   /**
-      The ::font-set signal is emitted when the user selects a font.
-    When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
-    to find out which font was just selected.
-    
-    Note that this signal is only emitted when the user
-    changes the font. If you need to react to programmatic font changes
-    as well, use the notify::font signal.
+      Connect to `FontSet` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B fontButton) the instance the signal is connected to
-    )
-  */
-  alias FontSetCallbackDlg = void delegate(gtk.font_button.FontButton fontButton);
-
-  /** ditto */
-  alias FontSetCallbackFunc = void function(gtk.font_button.FontButton fontButton);
-
-  /**
-    Connect to FontSet signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::font-set signal is emitted when the user selects a font.
+      When handling this signal, use [gtk.font_chooser.FontChooser.getFont]
+      to find out which font was just selected.
+      
+      Note that this signal is only emitted when the user
+      changes the font. If you need to react to programmatic font changes
+      as well, use the notify::font signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.font_button.FontButton fontButton))
+  
+          `fontButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectFontSet(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : FontSetCallbackDlg) || is(T : FontSetCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.font_button.FontButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto fontButton = getVal!(gtk.font_button.FontButton)(_paramVals);
-      _dClosure.dlg(fontButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

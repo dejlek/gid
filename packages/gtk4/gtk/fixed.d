@@ -1,3 +1,4 @@
+/// Module for [Fixed] class
 module gtk.fixed;
 
 import gid.gid;
@@ -15,59 +16,62 @@ import gtk.widget;
 
 /**
     [gtk.fixed.Fixed] places its child widgets at fixed positions and with fixed sizes.
-  
-  [gtk.fixed.Fixed] performs no automatic layout management.
-  
-  For most applications, you should not use this container! It keeps
-  you from having to learn about the other GTK containers, but it
-  results in broken applications.  With [gtk.fixed.Fixed], the following
-  things will result in truncated text, overlapping widgets, and
-  other display bugs:
-  
-  $(LIST
-    * Themes, which may change widget sizes.
     
-    * Fonts other than the one you used to write the app will of course
-      change the size of widgets containing text; keep in mind that
-      users may use a larger font because of difficulty reading the
-      default, or they may be using a different OS that provides different fonts.
+    [gtk.fixed.Fixed] performs no automatic layout management.
     
-    * Translation of text into other languages changes its size. Also,
-      display of non-English text will use a different font in many
-      cases.
-  )
+    For most applications, you should not use this container! It keeps
+    you from having to learn about the other GTK containers, but it
+    results in broken applications.  With [gtk.fixed.Fixed], the following
+    things will result in truncated text, overlapping widgets, and
+    other display bugs:
     
-  In addition, [gtk.fixed.Fixed] does not pay attention to text direction and
-  thus may produce unwanted results if your app is run under right-to-left
-  languages such as Hebrew or Arabic. That is: normally GTK will order
-  containers appropriately for the text direction, e.g. to put labels to
-  the right of the thing they label when using an RTL language, but it can’t
-  do that with [gtk.fixed.Fixed]. So if you need to reorder widgets depending on
-  the text direction, you would need to manually detect it and adjust child
-  positions accordingly.
-  
-  Finally, fixed positioning makes it kind of annoying to add/remove
-  UI elements, since you have to reposition all the other elements. This
-  is a long-term maintenance problem for your application.
-  
-  If you know none of these things are an issue for your application,
-  and prefer the simplicity of [gtk.fixed.Fixed], by all means use the
-  widget. But you should be aware of the tradeoffs.
+    $(LIST
+      * Themes, which may change widget sizes.
+      
+      * Fonts other than the one you used to write the app will of course
+        change the size of widgets containing text; keep in mind that
+        users may use a larger font because of difficulty reading the
+        default, or they may be using a different OS that provides different fonts.
+      
+      * Translation of text into other languages changes its size. Also,
+        display of non-English text will use a different font in many
+        cases.
+    )
+      
+    In addition, [gtk.fixed.Fixed] does not pay attention to text direction and
+    thus may produce unwanted results if your app is run under right-to-left
+    languages such as Hebrew or Arabic. That is: normally GTK will order
+    containers appropriately for the text direction, e.g. to put labels to
+    the right of the thing they label when using an RTL language, but it can’t
+    do that with [gtk.fixed.Fixed]. So if you need to reorder widgets depending on
+    the text direction, you would need to manually detect it and adjust child
+    positions accordingly.
+    
+    Finally, fixed positioning makes it kind of annoying to add/remove
+    UI elements, since you have to reposition all the other elements. This
+    is a long-term maintenance problem for your application.
+    
+    If you know none of these things are an issue for your application,
+    and prefer the simplicity of [gtk.fixed.Fixed], by all means use the
+    widget. But you should be aware of the tradeoffs.
 */
 class Fixed : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_get_type != &gidSymbolNotFound ? gtk_fixed_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -80,7 +84,7 @@ class Fixed : gtk.widget.Widget
 
   /**
       Creates a new [gtk.fixed.Fixed].
-    Returns:     a new [gtk.fixed.Fixed].
+      Returns: a new [gtk.fixed.Fixed].
   */
   this()
   {
@@ -91,13 +95,14 @@ class Fixed : gtk.widget.Widget
 
   /**
       Retrieves the translation transformation of the
-    given child [gtk.widget.Widget] in the [gtk.fixed.Fixed].
-    
-    See also: [gtk.fixed.Fixed.getChildTransform].
-    Params:
-      widget =       a child of fixed
-      x =       the horizontal position of the widget
-      y =       the vertical position of the widget
+      given child [gtk.widget.Widget] in the [gtk.fixed.Fixed].
+      
+      See also: [gtk.fixed.Fixed.getChildTransform].
+  
+      Params:
+        widget = a child of fixed
+        x = the horizontal position of the widget
+        y = the vertical position of the widget
   */
   void getChildPosition(gtk.widget.Widget widget, out double x, out double y)
   {
@@ -106,10 +111,11 @@ class Fixed : gtk.widget.Widget
 
   /**
       Retrieves the transformation for widget set using
-    [gtk.fixed.Fixed.setChildTransform].
-    Params:
-      widget =       a [gtk.widget.Widget], child of fixed
-    Returns:     a [gsk.transform.Transform]
+      [gtk.fixed.Fixed.setChildTransform].
+  
+      Params:
+        widget = a [gtk.widget.Widget], child of fixed
+      Returns: a [gsk.transform.Transform]
   */
   gsk.transform.Transform getChildTransform(gtk.widget.Widget widget)
   {
@@ -120,12 +126,13 @@ class Fixed : gtk.widget.Widget
   }
 
   /**
-      Sets a translation transformation to the given x and y
-    coordinates to the child widget of the [gtk.fixed.Fixed].
-    Params:
-      widget =       the child widget
-      x =       the horizontal position to move the widget to
-      y =       the vertical position to move the widget to
+      Sets a translation transformation to the given `x` and `y`
+      coordinates to the child widget of the [gtk.fixed.Fixed].
+  
+      Params:
+        widget = the child widget
+        x = the horizontal position to move the widget to
+        y = the vertical position to move the widget to
   */
   void move(gtk.widget.Widget widget, double x, double y)
   {
@@ -134,10 +141,11 @@ class Fixed : gtk.widget.Widget
 
   /**
       Adds a widget to a [gtk.fixed.Fixed] at the given position.
-    Params:
-      widget =       the widget to add
-      x =       the horizontal position to place the widget at
-      y =       the vertical position to place the widget at
+  
+      Params:
+        widget = the widget to add
+        x = the horizontal position to place the widget at
+        y = the vertical position to place the widget at
   */
   void put(gtk.widget.Widget widget, double x, double y)
   {
@@ -146,8 +154,9 @@ class Fixed : gtk.widget.Widget
 
   /**
       Removes a child from fixed.
-    Params:
-      widget =       the child widget to remove
+  
+      Params:
+        widget = the child widget to remove
   */
   void remove(gtk.widget.Widget widget)
   {
@@ -156,14 +165,15 @@ class Fixed : gtk.widget.Widget
 
   /**
       Sets the transformation for widget.
-    
-    This is a convenience function that retrieves the
-    [gtk.fixed_layout_child.FixedLayoutChild] instance associated to
-    widget and calls [gtk.fixed_layout_child.FixedLayoutChild.setTransform].
-    Params:
-      widget =       a [gtk.widget.Widget], child of fixed
-      transform =       the transformation assigned to widget
-          to reset widget's transform
+      
+      This is a convenience function that retrieves the
+      [gtk.fixed_layout_child.FixedLayoutChild] instance associated to
+      widget and calls [gtk.fixed_layout_child.FixedLayoutChild.setTransform].
+  
+      Params:
+        widget = a [gtk.widget.Widget], child of fixed
+        transform = the transformation assigned to widget
+            to reset widget's transform
   */
   void setChildTransform(gtk.widget.Widget widget, gsk.transform.Transform transform = null)
   {

@@ -1,3 +1,4 @@
+/// Module for [Expander] class
 module gtk.expander;
 
 import gid.gid;
@@ -16,112 +17,115 @@ import gtk.widget;
 
 /**
     [gtk.expander.Expander] allows the user to reveal its child by clicking
-  on an expander triangle.
-  
-  ![An example GtkExpander](expander.png)
-  
-  This is similar to the triangles used in a [gtk.tree_view.TreeView].
-  
-  Normally you use an expander as you would use a frame; you create
-  the child widget and use [gtk.expander.Expander.setChild] to add it
-  to the expander. When the expander is toggled, it will take care of
-  showing and hiding the child automatically.
-  
-  # Special Usage
-  
-  There are situations in which you may prefer to show and hide the
-  expanded widget yourself, such as when you want to actually create
-  the widget at expansion time. In this case, create a [gtk.expander.Expander]
-  but do not add a child to it. The expander widget has an
-  [gtk.expander.Expander.gboolean] property which can be used to
-  monitor its expansion state. You should watch this property with
-  a signal connection as follows:
-  
-  ```c
-  static void
-  expander_callback (GObject    *object,
-                     GParamSpec *param_spec,
-                     gpointer    user_data)
-  {
-    GtkExpander *expander;
-  
-    expander = GTK_EXPANDER (object);
-  
-    if (gtk_expander_get_expanded (expander))
-      {
-        // Show or create widgets
-      }
-    else
-      {
-        // Hide or destroy widgets
-      }
-  }
-  
-  static void
-  create_expander (void)
-  {
-    GtkWidget *expander = gtk_expander_new_with_mnemonic ("_More Options");
-    g_signal_connect (expander, "notify::expanded",
-                      G_CALLBACK (expander_callback), NULL);
-  
-    // ...
-  }
-  ```
-  
-  # GtkExpander as GtkBuildable
-  
-  The [gtk.expander.Expander] implementation of the [gtk.buildable.Buildable] interface supports
-  placing a child in the label position by specifying “label” as the
-  “type” attribute of a `<child>` element. A normal content child can be
-  specified without specifying a `<child>` type attribute.
-  
-  An example of a UI definition fragment with GtkExpander:
-  
-  ```xml
-  <object class="GtkExpander">
-    <child type="label">
-      <object class="GtkLabel" id="expander-label"/>
-    </child>
-    <child>
-      <object class="GtkEntry" id="expander-content"/>
-    </child>
-  </object>
-  ```
-  
-  # CSS nodes
-  
-  ```
-  expander-widget
-  ╰── box
-      ├── title
-      │   ├── expander
-      │   ╰── <label widget>
-      ╰── <child>
-  ```
-  
-  [gtk.expander.Expander] has a main node `expander-widget`, and subnode `box` containing
-  the title and child widget. The box subnode `title` contains node `expander`,
-  i.e. the expand/collapse arrow; then the label widget if any. The arrow of an
-  expander that is showing its child gets the `:checked` pseudoclass set on it.
-  
-  # Accessibility
-  
-  [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.Button] role.
+    on an expander triangle.
+    
+    ![An example GtkExpander](expander.png)
+    
+    This is similar to the triangles used in a [gtk.tree_view.TreeView].
+    
+    Normally you use an expander as you would use a frame; you create
+    the child widget and use [gtk.expander.Expander.setChild] to add it
+    to the expander. When the expander is toggled, it will take care of
+    showing and hiding the child automatically.
+    
+    # Special Usage
+    
+    There are situations in which you may prefer to show and hide the
+    expanded widget yourself, such as when you want to actually create
+    the widget at expansion time. In this case, create a [gtk.expander.Expander]
+    but do not add a child to it. The expander widget has an
+    [gtk.expander.Expander.gboolean] property which can be used to
+    monitor its expansion state. You should watch this property with
+    a signal connection as follows:
+    
+    ```c
+    static void
+    expander_callback (GObject    *object,
+                       GParamSpec *param_spec,
+                       gpointer    user_data)
+    {
+      GtkExpander *expander;
+    
+      expander = GTK_EXPANDER (object);
+    
+      if (gtk_expander_get_expanded (expander))
+        {
+          // Show or create widgets
+        }
+      else
+        {
+          // Hide or destroy widgets
+        }
+    }
+    
+    static void
+    create_expander (void)
+    {
+      GtkWidget *expander = gtk_expander_new_with_mnemonic ("_More Options");
+      g_signal_connect (expander, "notify::expanded",
+                        G_CALLBACK (expander_callback), NULL);
+    
+      // ...
+    }
+    ```
+    
+    # GtkExpander as GtkBuildable
+    
+    The [gtk.expander.Expander] implementation of the [gtk.buildable.Buildable] interface supports
+    placing a child in the label position by specifying “label” as the
+    “type” attribute of a `<child>` element. A normal content child can be
+    specified without specifying a `<child>` type attribute.
+    
+    An example of a UI definition fragment with GtkExpander:
+    
+    ```xml
+    <object class="GtkExpander">
+      <child type="label">
+        <object class="GtkLabel" id="expander-label"/>
+      </child>
+      <child>
+        <object class="GtkEntry" id="expander-content"/>
+      </child>
+    </object>
+    ```
+    
+    # CSS nodes
+    
+    ```
+    expander-widget
+    ╰── box
+        ├── title
+        │   ├── expander
+        │   ╰── <label widget>
+        ╰── <child>
+    ```
+    
+    [gtk.expander.Expander] has a main node `expander-widget`, and subnode `box` containing
+    the title and child widget. The box subnode `title` contains node `expander`,
+    i.e. the expand/collapse arrow; then the label widget if any. The arrow of an
+    expander that is showing its child gets the `:checked` pseudoclass set on it.
+    
+    # Accessibility
+    
+    [gtk.expander.Expander] uses the [gtk.types.AccessibleRole.Button] role.
 */
 class Expander : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expander_get_type != &gidSymbolNotFound ? gtk_expander_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -134,9 +138,10 @@ class Expander : gtk.widget.Widget
 
   /**
       Creates a new expander using label as the text of the label.
-    Params:
-      label =       the text of the label
-    Returns:     a new [gtk.expander.Expander] widget.
+  
+      Params:
+        label = the text of the label
+      Returns: a new [gtk.expander.Expander] widget.
   */
   this(string label = null)
   {
@@ -148,17 +153,18 @@ class Expander : gtk.widget.Widget
 
   /**
       Creates a new expander using label as the text of the label.
-    
-    If characters in label are preceded by an underscore, they are
-    underlined. If you need a literal underscore character in a label,
-    use “__” (two underscores). The first underlined character represents
-    a keyboard accelerator called a mnemonic.
-    
-    Pressing Alt and that key activates the button.
-    Params:
-      label =       the text of the label with an underscore
-          in front of the mnemonic character
-    Returns:     a new [gtk.expander.Expander] widget.
+      
+      If characters in label are preceded by an underscore, they are
+      underlined. If you need a literal underscore character in a label,
+      use “__” (two underscores). The first underlined character represents
+      a keyboard accelerator called a mnemonic.
+      
+      Pressing Alt and that key activates the button.
+  
+      Params:
+        label = the text of the label with an underscore
+            in front of the mnemonic character
+      Returns: a new [gtk.expander.Expander] widget.
   */
   static gtk.expander.Expander newWithMnemonic(string label = null)
   {
@@ -171,7 +177,7 @@ class Expander : gtk.widget.Widget
 
   /**
       Gets the child widget of expander.
-    Returns:     the child widget of expander
+      Returns: the child widget of expander
   */
   gtk.widget.Widget getChild()
   {
@@ -183,9 +189,9 @@ class Expander : gtk.widget.Widget
 
   /**
       Queries a [gtk.expander.Expander] and returns its current state.
-    
-    Returns true if the child widget is revealed.
-    Returns:     the current state of the expander
+      
+      Returns true if the child widget is revealed.
+      Returns: the current state of the expander
   */
   bool getExpanded()
   {
@@ -196,14 +202,14 @@ class Expander : gtk.widget.Widget
 
   /**
       Fetches the text from a label widget.
-    
-    This is including any embedded underlines indicating mnemonics and
-    Pango markup, as set by [gtk.expander.Expander.setLabel]. If the label
-    text has not been set the return value will be null. This will be the
-    case if you create an empty button with [gtk.button.Button.new_] to use as a
-    container.
-    Returns:     The text of the label widget. This string is owned
-        by the widget and must not be modified or freed.
+      
+      This is including any embedded underlines indicating mnemonics and
+      Pango markup, as set by [gtk.expander.Expander.setLabel]. If the label
+      text has not been set the return value will be null. This will be the
+      case if you create an empty button with [gtk.button.Button.new_] to use as a
+      container.
+      Returns: The text of the label widget. This string is owned
+          by the widget and must not be modified or freed.
   */
   string getLabel()
   {
@@ -215,7 +221,7 @@ class Expander : gtk.widget.Widget
 
   /**
       Retrieves the label widget for the frame.
-    Returns:     the label widget
+      Returns: the label widget
   */
   gtk.widget.Widget getLabelWidget()
   {
@@ -227,8 +233,8 @@ class Expander : gtk.widget.Widget
 
   /**
       Returns whether the expander will resize the toplevel widget
-    containing the expander upon resizing and collapsing.
-    Returns:     the “resize toplevel” setting.
+      containing the expander upon resizing and collapsing.
+      Returns: the “resize toplevel” setting.
   */
   bool getResizeToplevel()
   {
@@ -239,7 +245,7 @@ class Expander : gtk.widget.Widget
 
   /**
       Returns whether the label’s text is interpreted as Pango markup.
-    Returns:     true if the label’s text will be parsed for markup
+      Returns: true if the label’s text will be parsed for markup
   */
   bool getUseMarkup()
   {
@@ -250,8 +256,8 @@ class Expander : gtk.widget.Widget
 
   /**
       Returns whether an underline in the text indicates a mnemonic.
-    Returns:     true if an embedded underline in the expander
-        label indicates the mnemonic accelerator keys
+      Returns: true if an embedded underline in the expander
+          label indicates the mnemonic accelerator keys
   */
   bool getUseUnderline()
   {
@@ -262,8 +268,9 @@ class Expander : gtk.widget.Widget
 
   /**
       Sets the child widget of expander.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -272,11 +279,12 @@ class Expander : gtk.widget.Widget
 
   /**
       Sets the state of the expander.
-    
-    Set to true, if you want the child widget to be revealed,
-    and false if you want the child widget to be hidden.
-    Params:
-      expanded =       whether the child widget is revealed
+      
+      Set to true, if you want the child widget to be revealed,
+      and false if you want the child widget to be hidden.
+  
+      Params:
+        expanded = whether the child widget is revealed
   */
   void setExpanded(bool expanded)
   {
@@ -285,10 +293,11 @@ class Expander : gtk.widget.Widget
 
   /**
       Sets the text of the label of the expander to label.
-    
-    This will also clear any previously set labels.
-    Params:
-      label =       a string
+      
+      This will also clear any previously set labels.
+  
+      Params:
+        label = a string
   */
   void setLabel(string label = null)
   {
@@ -298,11 +307,12 @@ class Expander : gtk.widget.Widget
 
   /**
       Set the label widget for the expander.
-    
-    This is the widget that will appear embedded alongside
-    the expander arrow.
-    Params:
-      labelWidget =       the new label widget
+      
+      This is the widget that will appear embedded alongside
+      the expander arrow.
+  
+      Params:
+        labelWidget = the new label widget
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
@@ -311,9 +321,10 @@ class Expander : gtk.widget.Widget
 
   /**
       Sets whether the expander will resize the toplevel widget
-    containing the expander upon resizing and collapsing.
-    Params:
-      resizeToplevel =       whether to resize the toplevel
+      containing the expander upon resizing and collapsing.
+  
+      Params:
+        resizeToplevel = whether to resize the toplevel
   */
   void setResizeToplevel(bool resizeToplevel)
   {
@@ -322,8 +333,9 @@ class Expander : gtk.widget.Widget
 
   /**
       Sets whether the text of the label contains Pango markup.
-    Params:
-      useMarkup =       true if the label’s text should be parsed for markup
+  
+      Params:
+        useMarkup = true if the label’s text should be parsed for markup
   */
   void setUseMarkup(bool useMarkup)
   {
@@ -332,8 +344,9 @@ class Expander : gtk.widget.Widget
 
   /**
       If true, an underline in the text indicates a mnemonic.
-    Params:
-      useUnderline =       true if underlines in the text indicate mnemonics
+  
+      Params:
+        useUnderline = true if underlines in the text indicate mnemonics
   */
   void setUseUnderline(bool useUnderline)
   {
@@ -341,34 +354,36 @@ class Expander : gtk.widget.Widget
   }
 
   /**
+      Connect to `Activate` signal.
+  
       Activates the [gtk.expander.Expander].
   
-    ## Parameters
-    $(LIST
-      * $(B expander) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.expander.Expander expander);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.expander.Expander expander);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.expander.Expander expander))
+  
+          `expander` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.expander.Expander)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto expander = getVal!(gtk.expander.Expander)(_paramVals);
-      _dClosure.dlg(expander);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [VideoBarMeta] class
 module gstvideo.video_bar_meta;
 
 import gid.gid;
@@ -9,22 +10,23 @@ import gstvideo.types;
 
 /**
     Bar data should be included in video user data
-  whenever the rectangular picture area containing useful information
-  does not extend to the full height or width of the coded frame
-  and AFD alone is insufficient to describe the extent of the image.
-  
-  Note: either vertical or horizontal bars are specified, but not both.
-  
-  For more details, see:
-  
-  https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
-  
-  and SMPTE ST2016-1
+    whenever the rectangular picture area containing useful information
+    does not extend to the full height or width of the coded frame
+    and AFD alone is insufficient to describe the extent of the image.
+    
+    Note: either vertical or horizontal bars are specified, but not both.
+    
+    For more details, see:
+    
+    https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
+    
+    and SMPTE ST2016-1
 */
 class VideoBarMeta
 {
   GstVideoBarMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -36,6 +38,7 @@ class VideoBarMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

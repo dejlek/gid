@@ -1,3 +1,4 @@
+/// Module for [NoSelection] class
 module gtk.no_selection;
 
 import gid.gid;
@@ -14,27 +15,30 @@ import gtk.types;
 
 /**
     [gtk.no_selection.NoSelection] is a [gtk.selection_model.SelectionModel] that does not allow selecting
-  anything.
-  
-  This model is meant to be used as a simple wrapper around a [gio.list_model.ListModel]
-  when a [gtk.selection_model.SelectionModel] is required.
-  
-  [gtk.no_selection.NoSelection] passes through sections from the underlying model.
+    anything.
+    
+    This model is meant to be used as a simple wrapper around a [gio.list_model.ListModel]
+    when a [gtk.selection_model.SelectionModel] is required.
+    
+    [gtk.no_selection.NoSelection] passes through sections from the underlying model.
 */
 class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel, gtk.selection_model.SelectionModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_no_selection_get_type != &gidSymbolNotFound ? gtk_no_selection_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,9 +55,10 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
 
   /**
       Creates a new selection to handle model.
-    Params:
-      model =       the [gio.list_model.ListModel] to manage
-    Returns:     a new [gtk.no_selection.NoSelection]
+  
+      Params:
+        model = the [gio.list_model.ListModel] to manage
+      Returns: a new [gtk.no_selection.NoSelection]
   */
   this(gio.list_model.ListModel model = null)
   {
@@ -64,7 +69,7 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
 
   /**
       Gets the model that self is wrapping.
-    Returns:     The model being wrapped
+      Returns: The model being wrapped
   */
   gio.list_model.ListModel getModel()
   {
@@ -76,10 +81,11 @@ class NoSelection : gobject.object.ObjectG, gio.list_model.ListModel, gtk.sectio
 
   /**
       Sets the model that self should wrap.
-    
-    If model is null, this model will be empty.
-    Params:
-      model =       A [gio.list_model.ListModel] to wrap
+      
+      If model is null, this model will be empty.
+  
+      Params:
+        model = A [gio.list_model.ListModel] to wrap
   */
   void setModel(gio.list_model.ListModel model = null)
   {

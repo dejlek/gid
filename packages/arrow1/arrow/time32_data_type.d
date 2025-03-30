@@ -1,3 +1,4 @@
+/// Module for [Time32DataType] class
 module arrow.time32_data_type;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import glib.error;
 class Time32DataType : arrow.time_data_type.TimeDataType
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_data_type_get_type != &gidSymbolNotFound ? garrow_time32_data_type_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

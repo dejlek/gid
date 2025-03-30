@@ -1,3 +1,4 @@
+/// Module for [DtlsClientConnection] interface mixin
 module gio.dtls_client_connection_mixin;
 
 public import gio.dtls_client_connection_iface_proxy;
@@ -12,7 +13,7 @@ public import gobject.object;
 
 /**
     [gio.dtls_client_connection.DtlsClientConnection] is the client-side subclass of
-  [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
+    [gio.dtls_connection.DtlsConnection], representing a client-side DTLS connection.
 */
 template DtlsClientConnectionT()
 {
@@ -20,9 +21,9 @@ template DtlsClientConnectionT()
 
   /**
       Gets conn's expected server identity
-    Returns:     a #GSocketConnectable describing the
-      expected server identity, or null if the expected identity is not
-      known.
+      Returns: a #GSocketConnectable describing the
+        expected server identity, or null if the expected identity is not
+        known.
   */
   override gio.socket_connectable.SocketConnectable getServerIdentity()
   {
@@ -34,13 +35,13 @@ template DtlsClientConnectionT()
 
   /**
       Gets conn's validation flags
-    
-    This function does not work as originally designed and is impossible
-    to use correctly. See #GDtlsClientConnection:validation-flags for more
-    information.
-    Returns:     the validation flags
+      
+      This function does not work as originally designed and is impossible
+      to use correctly. See #GDtlsClientConnection:validation-flags for more
+      information.
+      Returns: the validation flags
   
-    Deprecated:     Do not attempt to ignore validation errors.
+      Deprecated: Do not attempt to ignore validation errors.
   */
   override gio.types.TlsCertificateFlags getValidationFlags()
   {
@@ -52,11 +53,12 @@ template DtlsClientConnectionT()
 
   /**
       Sets conn's expected server identity, which is used both to tell
-    servers on virtual hosts which certificate to present, and also
-    to let conn know what name to look for in the certificate when
-    performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
-    Params:
-      identity =       a #GSocketConnectable describing the expected server identity
+      servers on virtual hosts which certificate to present, and also
+      to let conn know what name to look for in the certificate when
+      performing [gio.types.TlsCertificateFlags.BadIdentity] validation, if enabled.
+  
+      Params:
+        identity = a #GSocketConnectable describing the expected server identity
   */
   override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
@@ -65,16 +67,17 @@ template DtlsClientConnectionT()
 
   /**
       Sets conn's validation flags, to override the default set of
-    checks performed when validating a server certificate. By default,
-    [gio.types.TlsCertificateFlags.ValidateAll] is used.
-    
-    This function does not work as originally designed and is impossible
-    to use correctly. See #GDtlsClientConnection:validation-flags for more
-    information.
-    Params:
-      flags =       the #GTlsCertificateFlags to use
+      checks performed when validating a server certificate. By default,
+      [gio.types.TlsCertificateFlags.ValidateAll] is used.
+      
+      This function does not work as originally designed and is impossible
+      to use correctly. See #GDtlsClientConnection:validation-flags for more
+      information.
   
-    Deprecated:     Do not attempt to ignore validation errors.
+      Params:
+        flags = the #GTlsCertificateFlags to use
+  
+      Deprecated: Do not attempt to ignore validation errors.
   */
   override void setValidationFlags(gio.types.TlsCertificateFlags flags)
   {

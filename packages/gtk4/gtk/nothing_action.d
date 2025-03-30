@@ -1,3 +1,4 @@
+/// Module for [NothingAction] class
 module gtk.nothing_action;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class NothingAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_nothing_action_get_type != &gidSymbolNotFound ? gtk_nothing_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,10 @@ class NothingAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Gets the nothing action.
-    
-    This is an action that does nothing and where
-    activating it always fails.
-    Returns:     The nothing action
+      
+      This is an action that does nothing and where
+      activating it always fails.
+      Returns: The nothing action
   */
   static gtk.nothing_action.NothingAction get()
   {

@@ -1,3 +1,4 @@
+/// Module for [EventOwnerChange] class
 module gdk.event_owner_change;
 
 import gdk.atom;
@@ -9,13 +10,14 @@ import gid.gid;
 
 /**
     Generated when the owner of a selection changes. On X11, this
-  information is only available if the X server supports the XFIXES
-  extension.
+    information is only available if the X server supports the XFIXES
+    extension.
 */
 class EventOwnerChange
 {
   GdkEventOwnerChange cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class EventOwnerChange
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [AudioCdSrcTrack] class
 module gstaudio.audio_cd_src_track;
 
 import gid.gid;
@@ -8,17 +9,18 @@ import gstaudio.types;
 
 /**
     CD track abstraction to communicate TOC entries to the base class.
-  
-  This structure is only for use by sub-classed in connection with
-  [gstaudio.audio_cd_src.AudioCdSrc.addTrack].
-  
-  Applications will be informed of the available tracks via a TOC message
-  on the pipeline's #GstBus instead.
+    
+    This structure is only for use by sub-classed in connection with
+    [gstaudio.audio_cd_src.AudioCdSrc.addTrack].
+    
+    Applications will be informed of the available tracks via a TOC message
+    on the pipeline's #GstBus instead.
 */
 class AudioCdSrcTrack
 {
   GstAudioCdSrcTrack cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -30,6 +32,7 @@ class AudioCdSrcTrack
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [TextChildAnchor] class
 module gtk.text_child_anchor;
 
 import gid.gid;
@@ -9,23 +10,26 @@ import gtk.widget;
 
 /**
     A #GtkTextChildAnchor is a spot in the buffer where child widgets can
-  be “anchored” (inserted inline, as if they were characters). The anchor
-  can have multiple widgets anchored, to allow for multiple views.
+    be “anchored” (inserted inline, as if they were characters). The anchor
+    can have multiple widgets anchored, to allow for multiple views.
 */
 class TextChildAnchor : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_child_anchor_get_type != &gidSymbolNotFound ? gtk_text_child_anchor_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,10 +42,10 @@ class TextChildAnchor : gobject.object.ObjectG
 
   /**
       Creates a new #GtkTextChildAnchor. Usually you would then insert
-    it into a #GtkTextBuffer with [gtk.text_buffer.TextBuffer.insertChildAnchor].
-    To perform the creation and insertion in one step, use the
-    convenience function [gtk.text_buffer.TextBuffer.createChildAnchor].
-    Returns:     a new #GtkTextChildAnchor
+      it into a #GtkTextBuffer with [gtk.text_buffer.TextBuffer.insertChildAnchor].
+      To perform the creation and insertion in one step, use the
+      convenience function [gtk.text_buffer.TextBuffer.createChildAnchor].
+      Returns: a new #GtkTextChildAnchor
   */
   this()
   {
@@ -52,12 +56,12 @@ class TextChildAnchor : gobject.object.ObjectG
 
   /**
       Determines whether a child anchor has been deleted from
-    the buffer. Keep in mind that the child anchor will be
-    unreferenced when removed from the buffer, so you need to
-    hold your own reference (with [gobject.object.ObjectG.ref_]) if you plan
-    to use this function — otherwise all deleted child anchors
-    will also be finalized.
-    Returns:     true if the child anchor has been deleted from its buffer
+      the buffer. Keep in mind that the child anchor will be
+      unreferenced when removed from the buffer, so you need to
+      hold your own reference (with [gobject.object.ObjectG.ref_]) if you plan
+      to use this function — otherwise all deleted child anchors
+      will also be finalized.
+      Returns: true if the child anchor has been deleted from its buffer
   */
   bool getDeleted()
   {
@@ -68,8 +72,8 @@ class TextChildAnchor : gobject.object.ObjectG
 
   /**
       Gets a list of all widgets anchored at this child anchor.
-    The returned list should be freed with [glib.list.List.free].
-    Returns:     list of widgets anchored at anchor
+      The returned list should be freed with [glib.list.List.free].
+      Returns: list of widgets anchored at anchor
   */
   gtk.widget.Widget[] getWidgets()
   {

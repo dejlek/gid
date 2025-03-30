@@ -1,3 +1,4 @@
+/// Module for [ParamSpecFloat] class
 module gobject.param_spec_float;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gobject.types;
 class ParamSpecFloat : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

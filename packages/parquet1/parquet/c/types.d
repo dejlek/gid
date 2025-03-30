@@ -1,3 +1,4 @@
+/// C types for parquet1 library
 module parquet.c.types;
 
 public import gid.basictypes;

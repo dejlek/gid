@@ -1,3 +1,4 @@
+/// Module for [AuthDomainBasic] class
 module soup.auth_domain_basic;
 
 import gid.gid;
@@ -10,24 +11,27 @@ import soup.types;
 
 /**
     Server-side "Basic" authentication.
-  
-  #SoupAuthDomainBasic handles the server side of HTTP "Basic" (ie,
-  cleartext password) authentication.
+    
+    #SoupAuthDomainBasic handles the server side of HTTP "Basic" (ie,
+    cleartext password) authentication.
 */
 class AuthDomainBasic : soup.auth_domain.AuthDomain
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_basic_get_type != &gidSymbolNotFound ? soup_auth_domain_basic_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,18 +44,19 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
 
   /**
       Sets the callback that domain will use to authenticate incoming
-    requests.
-    
-    For each request containing authorization, domain will invoke the callback,
-    and then either accept or reject the request based on callback's return
-    value.
-    
-    You can also set the auth callback by setting the
-    `propertyAuthDomainBasic:auth-callback` and
-    `propertyAuthDomainBasic:auth-data` properties, which can also be used to
-    set the callback at construct time.
-    Params:
-      callback =       the callback
+      requests.
+      
+      For each request containing authorization, domain will invoke the callback,
+      and then either accept or reject the request based on callback's return
+      value.
+      
+      You can also set the auth callback by setting the
+      `propertyAuthDomainBasic:auth-callback` and
+      `propertyAuthDomainBasic:auth-data` properties, which can also be used to
+      set the callback at construct time.
+  
+      Params:
+        callback = the callback
   */
   void setAuthCallback(soup.types.AuthDomainBasicAuthCallback callback)
   {

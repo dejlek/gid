@@ -1,3 +1,4 @@
+/// Module for [AuthNegotiate] class
 module soup.auth_negotiate;
 
 import gid.gid;
@@ -8,30 +9,33 @@ import soup.types;
 
 /**
     HTTP-based GSS-Negotiate authentication, as defined by
-  [RFC 4559](https://datatracker.ietf.org/doc/html/rfc4559).
-  
-  `class@Session`s do not support this type by default; if you want to
-  enable support for it, call [soup.session.Session.addFeatureByType],
-  passing `SOUP_TYPE_AUTH_NEGOTIATE`.
-  
-  This auth type will only work if libsoup was compiled with GSSAPI
-  support; you can check [soup.auth_negotiate.AuthNegotiate.supported] to see if it
-  was.
+    [RFC 4559](https://datatracker.ietf.org/doc/html/rfc4559).
+    
+    `class@Session`s do not support this type by default; if you want to
+    enable support for it, call [soup.session.Session.addFeatureByType],
+    passing `SOUP_TYPE_AUTH_NEGOTIATE`.
+    
+    This auth type will only work if libsoup was compiled with GSSAPI
+    support; you can check [soup.auth_negotiate.AuthNegotiate.supported] to see if it
+    was.
 */
 class AuthNegotiate : soup.auth.Auth
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_negotiate_get_type != &gidSymbolNotFound ? soup_auth_negotiate_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,11 +48,11 @@ class AuthNegotiate : soup.auth.Auth
 
   /**
       Indicates whether libsoup was built with GSSAPI support.
-    
-    If this is false, `SOUP_TYPE_AUTH_NEGOTIATE` will still be defined and can
-    still be added to a `classSession`, but libsoup will never attempt to
-    actually use this auth type.
-    Returns:     true if supported otherwise false
+      
+      If this is false, `SOUP_TYPE_AUTH_NEGOTIATE` will still be defined and can
+      still be added to a `classSession`, but libsoup will never attempt to
+      actually use this auth type.
+      Returns: true if supported otherwise false
   */
   static bool supported()
   {

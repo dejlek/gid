@@ -1,3 +1,4 @@
+/// Module for [VideoTimeCodeInterval] class
 module gstvideo.video_time_code_interval;
 
 import gid.gid;
@@ -8,27 +9,31 @@ import gstvideo.types;
 
 /**
     A representation of a difference between two #GstVideoTimeCode instances.
-  Will not necessarily correspond to a real timecode (e.g. 00:00:10;00)
+    Will not necessarily correspond to a real timecode (e.g. 00:00:10;00)
 */
 class VideoTimeCodeInterval : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_time_code_interval_get_type != &gidSymbolNotFound ? gst_video_time_code_interval_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -89,10 +94,11 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
 
   /**
       tc_inter_str must only have ":" as separators.
-    Params:
-      tcInterStr =       The string that represents the #GstVideoTimeCodeInterval
-    Returns:     a new #GstVideoTimeCodeInterval from the given string
-        or null if the string could not be passed.
+  
+      Params:
+        tcInterStr = The string that represents the #GstVideoTimeCodeInterval
+      Returns: a new #GstVideoTimeCodeInterval from the given string
+          or null if the string could not be passed.
   */
   static gstvideo.video_time_code_interval.VideoTimeCodeInterval newFromString(string tcInterStr)
   {
@@ -122,11 +128,12 @@ class VideoTimeCodeInterval : gobject.boxed.Boxed
 
   /**
       Initializes tc with the given values.
-    Params:
-      hours =       the hours field of #GstVideoTimeCodeInterval
-      minutes =       the minutes field of #GstVideoTimeCodeInterval
-      seconds =       the seconds field of #GstVideoTimeCodeInterval
-      frames =       the frames field of #GstVideoTimeCodeInterval
+  
+      Params:
+        hours = the hours field of #GstVideoTimeCodeInterval
+        minutes = the minutes field of #GstVideoTimeCodeInterval
+        seconds = the seconds field of #GstVideoTimeCodeInterval
+        frames = the frames field of #GstVideoTimeCodeInterval
   */
   void init_(uint hours, uint minutes, uint seconds, uint frames)
   {

@@ -1,3 +1,4 @@
+/// Module for [FixedLengthByteArrayStatistics] class
 module parquet.fixed_length_byte_array_statistics;
 
 import gid.gid;
@@ -11,17 +12,20 @@ import parquet.types;
 class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_fixed_length_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_fixed_length_byte_array_statistics_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
