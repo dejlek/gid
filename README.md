@@ -1,7 +1,7 @@
 # GObject Instrospection D Package Repository
 
 This is the GObject Introspection D Language Package Repository for the **giD** project (pronounced *giddy*).
-The intention of this project is to create high quality D language (AKA Dlang) bindings for libraries with
+The intention of this project is to create high quality [D language](https://dlang.org/) (AKA Dlang) bindings for libraries with
 [GObject Introspection](https://gi.readthedocs.io/en/latest/) APIs.
 
 The D language bindings hosted in this repository were generated with [gidgen](https://github.com/Kymorphia/gidgen/).
@@ -20,7 +20,7 @@ This package repository currently contains bindings for the following libraries:
  * [libsoup](https://github.com/GNOME/libsoup) - An HTTP client/server library
  * [Rsvg](https://github.com/GNOME/librsvg) - SVG graphics rendering library
  * [json-glib](https://github.com/GNOME/json-glib) - JSON library
- * And more!
+ * And [more](packages)!
 
 Additional useful libraries with GObject Introspection interfaces will be added based on interest.
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
