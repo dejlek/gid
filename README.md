@@ -8,7 +8,7 @@ The D language bindings hosted in this repository were generated with [gidgen](h
 This utility takes XML GObject Introspection Repository (GIR) files and generates D binding packages which can be used with [dub](https://dub.pm/).
 
 This package repository currently contains bindings for the following libraries:
-Gtk4, Gtk3, Vte terminal library, GtkSource code viewer widget, Apache Arrow, GtkSource, libsoup, and more.
+Gtk4, Gtk3, GStreamer, Adw, Panel, Vte terminal library, GtkSource code viewer widget, Apache Arrow, GtkSource, libsoup, Rsvg, and more.
 Additional useful libraries with GObject Introspection interfaces will be added based on interest.
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
 
@@ -29,20 +29,20 @@ The API may break on each 0.9.x release and therefore any applications depending
 Once v1.0.0 is released, an increment in the micro version will be backwards compatible, and minor version increments may break backwards compatibility.
 
 
-## API Reference
+## API Reference Documentation
 
 Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at [https://www.kymorphia.com/gid/](https://www.kymorphia.com/gid/).
 
 **NOTE:** Currently only the newest versions of the following libraries are generated: gtk4, gdk4, vte3, and gtksource5.
-This is due to existing limitations with adrdox.
+This is due to existing limitations with adrdox with multiple versions of libraries using the same module path.
 
 The C API reference docs can also be used with some added understanding of the D binding differences.
-And finally the D binding source code itself can be used as a referenced.
+And finally the D binding source code itself can be used as a reference.
 
 
 ### C API Library Reference
 
-See the doc/C_API_Library_Reference.md file for the comprehensive list.
+See the [doc/C_API_Library_Reference.md](doc/C_API_Library_Reference.md) file for the comprehensive list.
 
 ## Dub Packages
 
@@ -72,7 +72,7 @@ Additionally there are the following built-in modules for each package:
  * **namespace.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
    These pointers have the same name as the C API functions, for example `g_object_ref`, and can be called like any other C function.
  * **namespace.c.types** - Contains all C API types, including: enum aliases, flags, structs, unions, and function callback types.
- * **namespace.global** - Contains package global functions which aren't associated with a class or structure instance.
+ * **namespace.global** - Contains package global D functions which aren't associated with a class or structure instance.
  * **namespace.types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
    Many D types are simply aliases to the underlying C types with a different D symbol name.
 
@@ -207,28 +207,43 @@ For getting the GLib GType for the underlying C GObject. There is also a static 
 
 ### Signals
 
-For each GObject signal a `SignalNameCallbackDlg` delegate alias and `SignalNameCallbackFunc` alias is defined and a `connectSignalName` template is added.
-The delegate and function arguments are the C signal arguments marshalled to D and the object instance is the last argument (instead of the first).
+GObject signals are connected using method templates with names of the form **connectSignalName**,
+where **SignalName** is the TitleCase form of the GObject signal-name.
+The first argument to the template will be a signal "detail" string for signals which use details
+(GObject **notify** for example, for specifying the property name).
+The next template argument is the callable to call, which can be a delegate or function, more on that below.
+The last argument `after` is optional and can be set to `Yes.After`,
+to execute the signal callback after other callbacks (defaults to No).
 
-Here is an example of what the [command-line](https://docs.gtk.org/gio/signal.Application.command-line.html) signal of Gio.Application looks like:
+The callback callable can have a varying number of arguments which conform to the signal arguments,
+from no arguments up to all of the signal arguments including the object instance which is the last argument.
+This added convenience allows for only those arguments to be specified, so long as they are in sequence.
+
+The other useful feature that signal connection method templates provide is the ability to use a derived class for object parameters.
+This avoids having to cast an argument of the expected object type to the desired type.
+For example, a ApplicationWindow argument could be used in place of a Window argument expected by the CloseRequest signal of Window.
+
+Here is an example of what the [command-line](https://www.kymorphia.com/gid/gio.application.Application.connectCommandLine.html)
+signal of [Gio.Application](https://www.kymorphia.com/gid/gio.application.Application.html) looks like:
 
 ```D
-alias CommandLineCallbackDlg = int delegate(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
-alias CommandLineCallbackFunc = int function(ApplicationCommandLine commandLine, ApplicationGio applicationGio);
-
 ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
-if (is(T : CommandLineCallbackDlg) || is(T : CommandLineCallbackFunc))
+if (isCallable!T &&
+  is(ReturnType!T == int)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application_command_line.ApplicationCommandLine)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
+  && Parameters!T.length < 3
+)
 ```
 
 The return value from the connect template is a signal handle,
-which can be passed to functions in GObject.Global such as: `signalHandlerBlock`, `signalHandlerDisconnect`, etc.
-
-The `after` argument can be set to `Yes.After` to execute the signal callback after other callbacks (defaults to No).
+which can be passed to functions in GObject.Global such as: [signalHandlerBlock](https://www.kymorphia.com/gid/gobject.global.signalHandlerBlock.html),
+[signalHandlerDisconnect](https://www.kymorphia.com/gid/gobject.global.signalHandlerDisconnect.html), etc.
 
 
 ## Interfaces
 
-Interfaces result in 3 modules being written in the form of: interface, interface_mixin, and interface_iface_proxy.
+Interfaces result in an interface D module and two additional modules `interface_mixin` and `interface_iface_proxy` which are primarily used internally.
 Where **interface** is the interface type name in **snake_case**.
 For example, the Gio.File interface would have **file**, **file_mixin**, and **file_iface_proxy** modules.
 The first one defines the interface and static methods,
@@ -238,7 +253,7 @@ and the third defines an interface proxy wrapper object that is used when a C GO
 
 ## Boxed Types
 
-GBoxed types are wrapped with an object derived from the abstract `GObject.Boxed` object.
+GBoxed types are wrapped with an object derived from the abstract [gobject.boxed.Boxed](https://www.kymorphia.com/gid/gobject.boxed.Boxed.html) object.
 
 
 ### Built-in Boxed Methods
@@ -283,15 +298,18 @@ Some non-trivial GIR structure types are not GObject or boxed types but have ref
 These are wrapped in D objects, but may lack the ability to copy the underlying C object if no methods are provided to do so.
 These types can also inherit from others.
 
-One notable example is `Gtk.Expression` which is an abstract type that several others like `Gtk.ProperyExpression` are derived from.
+One notable example is [gtk.expression.Expression](https://www.kymorphia.com/gid/gtk.expression.Expression.html)
+which is an abstract type that several others like
+[gtk.property_expression.ProperyExpression](https://www.kymorphia.com/gid/gtk.property_expression.PropertyExpression.html) are derived from.
 The only useful built-in method is `cPtr` which behaves similar to other uses in the giD API,
-with an `addRef` argument for adding a reference (defaults to false).
+with a `Flag!Dup` argument for adding a reference (defaults to No.Dup).
 
 
 ## Wrapped Structures With Fields
 
 Structures or unions which are not simple types and have accessible fields are wrapped by a D object with accessor properties,
-which perform data conversion and memory management as needed. The field names are converted from **snake_case** to D @property names with **camelCase**.
+which perform data conversion and memory management as needed.
+The field names are converted from **snake_case** to D `@property` names with **camelCase**.
 
 
 ## Opaque Structures
@@ -301,7 +319,8 @@ Opaque structures which have methods are also wrapped in order to provide conven
 
 ## Value
 
-The GLib GValue wildcard type is wrapped as a boxed type with some additional templates and methods for converting betweeen D types.
+The [gobject.value.Value](https://www.kymorphia.com/gid/gobject.value.Value.html)
+wildcard type is wrapped as a boxed type with some additional templates and methods for converting between D types.
 
 
 ### Built-in Value Methods
@@ -332,9 +351,10 @@ The `setVal` template is also available for setting a GValue directly without a 
 
 ## VariantG
 
-The GLib GVariant type provides a way to store structured data of varying types
-and is very similar to the functionality offered by D [std.variant](https://dlang.org/phobos/std_variant.html)
-and the giD binding uses VariantG in order to not conflict with it.
+The [glib.variant.VariantG](https://www.kymorphia.com/gid/glib.variant.VariantG.html)
+type provides a way to store structured data of varying types and is very similar to the functionality offered by D
+[std.variant](https://dlang.org/phobos/std_variant.html)
+and the giD binding uses the name `VariantG` in order to not conflict with it.
 
 
 ### Built-in VariantG Methods
@@ -389,7 +409,8 @@ Usually only used internally. For getting the GVariant C instance from a Variant
 
 ## VariantType
 
-GVariantType describes the type of data assigned to a GVariant. It is a boxed type and thus inherits the methods for Boxed.
+[glib.variant_type.VariantType](https://www.kymorphia.com/gid/glib.variant_type.VariantType.html)
+describes the type of data assigned to a GVariant. It is a boxed type and thus inherits the methods for Boxed.
 
 
 ### Built-in VariantType Methods
@@ -415,3 +436,106 @@ C callback functions are translated to D delegates.
 The use of delegates makes `void* data` values, which are typically passed to C callbacks for user defined data, unnecessary.
 This is because any variables can be accessed within the context where the delegate was declared.
 Additionally destroy callbacks for data are also unnecessary and are managed automatically by the giD bindings.
+
+
+## Troubleshooting
+
+giD object construction, destruction, and references can be logged, when built with debugging enabled (`--debug debug` dub option),
+by setting the `GID_OBJECT_DEBUG` environment variable to 1:
+
+```sh
+export GID_OBJECT_DEBUG=1
+```
+
+It can also be useful to add a periodic garbage collection cycle, when troubleshooting memory leaks.
+The following can be added to your application to run GC.collect once a second for example:
+
+```D
+import glib.global : timeoutAddSeconds;
+import glib.types : PRIORITY_DEFAULT, SOURCE_CONTINUE;
+import core.memory : GC;
+import std.stdio : writeln;
+
+timeoutAddSeconds(PRIORITY_DEFAULT, 1, () {
+  writeln("GC.collect");
+  GC.collect;
+  return SOURCE_CONTINUE;
+});
+```
+
+
+### Memory Leaks
+
+Currently there are a number of potential memory issues when using giD.
+Many of these involve GObject C and D reference cycles.
+The D garbage collector (GC) is able to properly collect reference cycles when they involve GC managed memory only.
+However, when C and D memory management is involved, interdependencies can cause data from both to become unrecoverable.
+
+
+#### Object Reference Details
+
+* C GObject structures are wrapped with D wrapper objects.
+* Wrapper objects maintain a GObject toggle reference using `g_object_add_toggle_ref` which holds a strong reference on the C GObject,
+  and a "weak" callback based reference from the C GObject to the D wrapper. This ensures one is not freed until the other is no longer used.
+* The toggle reference callback is called when the reference count of the GObject transitions from 1 to 2 or 2 to 1,
+  indicating there are now additional C references or now there is only the toggle reference, respectively.
+* When there are references to the GObject other than the D wrapper toggle reference (refCount > 1),
+  the D object is added as a GC "root" to ensure it is not collected even if there are no D pointers to it in GC scanned memory.
+* When the toggle reference is the only reference (refCount == 1), then the D object is removed as a root from the GC,
+  allowing it to be collected when there are no more D memory pointers to it.
+* When the D object destructor is called it removes the toggle reference which will cause the C object to be freed.
+* Signal and function callback delegates usually also contain D wrapper object pointers.
+* A reference cycle stalemate occurs when there are C GObject references
+  where those references are being held by other GObjects or D toggle references.
+* Gtk Widgets use a parent/child tree architecture where parents add GObject references to their children.
+* The general way to free all widgets is to remove the toplevel parent (usually a Window or a derived type),
+  which causes it's immediate children to be unreferenced, which in turn are freed, etc.
+* Problems arise when there are still other references to objects, often from a callback delegate or other Widget.
+
+
+#### Example Leak Scenarios
+
+**Problem**
+
+Gtk4 changed the way in which Window (and derived objects like ApplicationWindow) are handled compared to Gtk3.
+When Window objects are displayed they are referenced by a global window list. When they are closed, this reference is removed,
+which if it was the last reference would cause the recursive destruction of all of its children.
+However, signal or other delegate callbacks which are connected to a child object and reference an ancestor object in the delegate context,
+results in reference cycles. Gtk3 would call g_object_run_despose() on the window in response to a delete event when closed.
+
+**Solution**
+
+One solution to this is to connect to the `CloseRequest` signal of the Window and call
+[runDispose](https://www.kymorphia.com/gid/gobject.object.ObjectG.runDispose.html) on the Window.
+Here is an [example](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/app_tree.d#L145) of this.
+This causes the tree of C GObjects to remove references to each-other, allowing for D to clean up the wrapper objects.
+Even though there still may be reference cycles, they will only be found in D memory which is properly handled.
+
+
+**Problem**
+
+A callback delegate has a reference to a parent Widget that results in a reference cycle. Can be either a delegate passed to a method or a signal callback.
+One example is when using a `DrawingArea` and using `setDrawFunc` to assign a drawing callback delegate that has a pointer to the parent widget.
+
+**Solution**
+
+A potential workaround is to unset the callback delegate when the widget is going to be destroyed, by connecting to the `unrealize` signal for example.
+Here is a [demonstration](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/flow_box.d#L85)
+of a solution for this issue. By clearing the drawing function the reference cycle is broken.
+
+
+**Problem**
+
+D object has member pointers to child widgets and the D object is used in the context of signals or other delegate callbacks.
+
+**Solution**
+
+A potential solution for this is to connect to a signal that can be used as an indication of the object being destroyed,
+such as `CloseRequst` for Window objects or `Unrealize`, and then clearing the member pointers.
+Here is an [example](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/text_view.d#L52) of this.
+
+
+#### Gtk4 Notebook Tab Widget Leaks
+
+It appears that the widgets added as Notebook tab "labels" leak.
+It is suspected that this might be a Gtk [bug](https://gitlab.gnome.org/GNOME/gtk/-/issues/5930) which also affects C.
