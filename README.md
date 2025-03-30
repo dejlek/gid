@@ -8,7 +8,20 @@ The D language bindings hosted in this repository were generated with [gidgen](h
 This utility takes XML GObject Introspection Repository (GIR) files and generates D binding packages which can be used with [dub](https://dub.pm/).
 
 This package repository currently contains bindings for the following libraries:
-Gtk4, Gtk3, GStreamer, Adw, Panel, Vte terminal library, GtkSource code viewer widget, Apache Arrow, GtkSource, libsoup, Rsvg, and more.
+
+ * [Gtk4](https://gtk.org/) - Popular cross-platform graphics toolkit
+ * Gtk3 - Previous version of Gtk
+ * [GStreamer](https://gstreamer.freedesktop.org/) - Powerful multimedia streaming library
+ * [Adw](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/) - Building blocks for modern Gnome applications
+ * [Panel](https://github.com/GNOME/libpanel) - Dock/panel library for Gtk4 and Adw (for use with IDEs and other applications benefiting from dynamic interfaces)
+ * [Vte](https://github.com/GNOME/vte) - Virtual terminal widget library for Gtk (supports versions for Gtk3 and Gtk4)
+ * [GtkSource](https://gitlab.gnome.org/GNOME/gtksourceview/) - Source code viewer widget for Gtk (supports versions for Gtk3 and Gtk4)
+ * [Apache Arrow](https://arrow.apache.org/) - The universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics
+ * [libsoup](https://github.com/GNOME/libsoup) - An HTTP client/server library
+ * [Rsvg](https://github.com/GNOME/librsvg) - SVG graphics rendering library
+ * [json-glib](https://github.com/GNOME/json-glib) - JSON library
+ * And more!
+
 Additional useful libraries with GObject Introspection interfaces will be added based on interest.
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
 
@@ -169,11 +182,14 @@ GHashTable arguments and return values are converted between D associative array
 
 ## Objects
 
-C `GObject` types are wrapped as `ObjectG` classes.
+C `GObject` types are wrapped as [gobject.object.ObjectG](https://www.kymorphia.com/gid/gobject.object.ObjectG.html) classes.
 This rename was done instead of `Object` so as not to conflict with D's native Object type.
 
 
-### Built-in Object Methods
+### ObjectG Methods
+
+The following are some of the more prominent built-in giD `ObjectG` methods.
+Please consult the API documentation for a more extensive list.
 
 ```D
 void setProperty(T)(string propertyName, T val)
@@ -186,23 +202,6 @@ T getProperty(T)(string propertyName) const
 ```
 A template for getting an ObjectG property as a D static type value. Currently the D type must match the expected property type.
 For example an `int` cannot be used where a `uint` is expected.  Most GIR APIs have get methods for each property which are preferable.
-
-```D
-static T getDObject(T)(void* cptr, bool owned = false)
-```
-This static template is used for looking up a D wrapper object for a given C GObject instance pointer.
-If one exists already it is returned, otherwise a new D object is created wrapping the C GObject.
-The `owned` argument is used in this case to determine whether a GObject reference is owned or not.
-
-```D
-void* cPtr(bool addRef = false)
-```
-For accessing the C GObject instance. The `addRef` argument is used for adding a GObject reference if `true` (defaults to `false`).
-
-```D
-@property GType gType()
-```
-For getting the GLib GType for the underlying C GObject. There is also a static method `getType` which can be used without an instance.
 
 
 ### Signals
@@ -245,7 +244,8 @@ which can be passed to functions in GObject.Global such as: [signalHandlerBlock]
 
 Interfaces result in an interface D module and two additional modules `interface_mixin` and `interface_iface_proxy` which are primarily used internally.
 Where **interface** is the interface type name in **snake_case**.
-For example, the Gio.File interface would have **file**, **file_mixin**, and **file_iface_proxy** modules.
+For example, the [gio.file.File](https://www.kymorphia.com/gid/gio.file.File.html)
+interface would have **file**, **file_mixin**, and **file_iface_proxy** modules.
 The first one defines the interface and static methods,
 the second defines a mixin template that contains method implementations which is mixed into objects implementing the interface,
 and the third defines an interface proxy wrapper object that is used when a C GObject with an unknown type is cast as the interface.
@@ -254,36 +254,7 @@ and the third defines an interface proxy wrapper object that is used when a C GO
 ## Boxed Types
 
 GBoxed types are wrapped with an object derived from the abstract [gobject.boxed.Boxed](https://www.kymorphia.com/gid/gobject.boxed.Boxed.html) object.
-
-
-### Built-in Boxed Methods
-
-```D
-@property GType gType()
-```
-Gets the GLib C GType of a boxed type. The static `getType` method can also be used without an instance.
-
-```D
-void* copy_()
-```
-Usually only used internally. Creates a copy of the underlying C boxed type, which should be freed with `boxedFree` if ownership isn't taken by C code.
-The `boxedCopy` static method can also be used to copy an arbitrary C boxed value (without a D object instance).
-
-```D
-static void boxedFree(T)(void* cBoxed)
-```
-Usually only used internally. A static method used to free a C boxed type value.
-
- ```D
- this(void* boxPtr, bool owned)
- ```
-Usually only used internally.  or wrapping a C boxed pointer `boxPtr`.
-The `owned` argument indicates if the ownership of the boxed type should be taken, it is copied otherwise.
-
-```D
-this(Boxed boxed)
-```
-Usually only used internally. For creating a copy of a D Boxed object. The underlying C boxed value is copied.
+Consult the API documentation for more details on methods specific to these types.
 
 
 ## Simple Structures and Unions
@@ -323,7 +294,7 @@ The [gobject.value.Value](https://www.kymorphia.com/gid/gobject.value.Value.html
 wildcard type is wrapped as a boxed type with some additional templates and methods for converting between D types.
 
 
-### Built-in Value Methods
+### Value Methods
 
 ```D
 static Value create(T)(T val)
@@ -357,7 +328,10 @@ type provides a way to store structured data of varying types and is very simila
 and the giD binding uses the name `VariantG` in order to not conflict with it.
 
 
-### Built-in VariantG Methods
+### VariantG Methods
+
+The following are some of the more prominent giD `VariantG` methods.
+Please consult the API documentation for a more extensive list.
 
 ```D
 static VariantG create(T)(T val)
@@ -378,33 +352,6 @@ Get a single value from a VariantG as a static D type. The type must match the V
 auto get(T...)()
 ```
 Get multiple values from a VariantG as static D types. The types must match the VariantG value types.
-
-```D
-override bool opEquals(Object other)
-```
-Equivalency operator overload to be able to compare VariantG objects.
-
-```D
-override int opCmp(Object other)
-```
-Comparison operator overload to be able to compare and sort VariantG objects.
-
-```D
-override string toString()
-```
-For rendering a VariantG as a string.
-
-```D
-this(void* ptr, bool ownedRef = false)
-```
-Usually only used internally. For wrapping a GVariant into a VariantG object.
-`ownedRef` can be set to true to take ownership of the GVariant instance (defaults to false).
-
-```D
-void* cPtr(bool addRef = false)
-```
-Usually only used internally. For getting the GVariant C instance from a VariantG object.
-`addRef` can be set to true to add a reference (defaults to false).
 
 
 ## VariantType
@@ -464,7 +411,7 @@ timeoutAddSeconds(PRIORITY_DEFAULT, 1, () {
 ```
 
 
-### Memory Leaks
+## Memory Leaks
 
 Currently there are a number of potential memory issues when using giD.
 Many of these involve GObject C and D reference cycles.
@@ -472,7 +419,7 @@ The D garbage collector (GC) is able to properly collect reference cycles when t
 However, when C and D memory management is involved, interdependencies can cause data from both to become unrecoverable.
 
 
-#### Object Reference Details
+### Object Reference Details
 
 * C GObject structures are wrapped with D wrapper objects.
 * Wrapper objects maintain a GObject toggle reference using `g_object_add_toggle_ref` which holds a strong reference on the C GObject,
@@ -493,17 +440,13 @@ However, when C and D memory management is involved, interdependencies can cause
 * Problems arise when there are still other references to objects, often from a callback delegate or other Widget.
 
 
-#### Example Leak Scenarios
-
-**Problem**
+### Gtk4 Window Leaks
 
 Gtk4 changed the way in which Window (and derived objects like ApplicationWindow) are handled compared to Gtk3.
 When Window objects are displayed they are referenced by a global window list. When they are closed, this reference is removed,
 which if it was the last reference would cause the recursive destruction of all of its children.
 However, signal or other delegate callbacks which are connected to a child object and reference an ancestor object in the delegate context,
 results in reference cycles. Gtk3 would call g_object_run_despose() on the window in response to a delete event when closed.
-
-**Solution**
 
 One solution to this is to connect to the `CloseRequest` signal of the Window and call
 [runDispose](https://www.kymorphia.com/gid/gobject.object.ObjectG.runDispose.html) on the Window.
@@ -512,30 +455,26 @@ This causes the tree of C GObjects to remove references to each-other, allowing 
 Even though there still may be reference cycles, they will only be found in D memory which is properly handled.
 
 
-**Problem**
+### Callback Delegate Leaks
 
 A callback delegate has a reference to a parent Widget that results in a reference cycle. Can be either a delegate passed to a method or a signal callback.
 One example is when using a `DrawingArea` and using `setDrawFunc` to assign a drawing callback delegate that has a pointer to the parent widget.
-
-**Solution**
 
 A potential workaround is to unset the callback delegate when the widget is going to be destroyed, by connecting to the `unrealize` signal for example.
 Here is a [demonstration](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/flow_box.d#L85)
 of a solution for this issue. By clearing the drawing function the reference cycle is broken.
 
 
-**Problem**
+### Leaks Caused By Object Class Members
 
 D object has member pointers to child widgets and the D object is used in the context of signals or other delegate callbacks.
-
-**Solution**
 
 A potential solution for this is to connect to a signal that can be used as an indication of the object being destroyed,
 such as `CloseRequst` for Window objects or `Unrealize`, and then clearing the member pointers.
 Here is an [example](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/text_view.d#L52) of this.
 
 
-#### Gtk4 Notebook Tab Widget Leaks
+### Gtk4 Notebook Tab Widget Leaks
 
 It appears that the widgets added as Notebook tab "labels" leak.
-It is suspected that this might be a Gtk [bug](https://gitlab.gnome.org/GNOME/gtk/-/issues/5930) which also affects C.
+It is suspected that this is a Gtk [bug](https://gitlab.gnome.org/GNOME/gtk/-/issues/5930) which also affects C.
