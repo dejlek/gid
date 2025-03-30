@@ -203,6 +203,7 @@ template FileChooserT()
         folder = filename of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
+      Throws: [ErrorG]
   */
   override bool addShortcutFolder(string folder)
   {
@@ -225,6 +226,7 @@ template FileChooserT()
         uri = URI of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
+      Throws: [ErrorG]
   */
   override bool addShortcutFolderUri(string uri)
   {
@@ -706,6 +708,7 @@ template FileChooserT()
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolder]
+      Throws: [ErrorG]
   */
   override bool removeShortcutFolder(string folder)
   {
@@ -727,6 +730,7 @@ template FileChooserT()
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolderUri]
+      Throws: [ErrorG]
   */
   override bool removeShortcutFolderUri(string uri)
   {
@@ -754,6 +758,7 @@ template FileChooserT()
       Params:
         file = the file to select
       Returns: Not useful.
+      Throws: [ErrorG]
   */
   override bool selectFile(gio.file.File file)
   {
@@ -874,6 +879,7 @@ template FileChooserT()
         file = the #GFile for the new folder
       Returns: true if the folder could be changed successfully, false
         otherwise.
+      Throws: [ErrorG]
   */
   override bool setCurrentFolderFile(gio.file.File file)
   {
@@ -998,6 +1004,7 @@ template FileChooserT()
       Params:
         file = the #GFile to set as current
       Returns: Not useful.
+      Throws: [ErrorG]
   */
   override bool setFile(gio.file.File file)
   {

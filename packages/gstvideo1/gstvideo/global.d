@@ -637,6 +637,7 @@ double videoColorTransferEncode(gstvideo.types.VideoTransferFunction func, doubl
       timeout = the maximum amount of time allowed for the processing.
     Returns: The converted #GstSample, or null if an error happened (in which case err
       will point to the #GError).
+    Throws: [ErrorG]
 */
 gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout)
 {

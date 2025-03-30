@@ -740,6 +740,7 @@ alias NodeTraverseFunc = bool delegate(glib.node.Node node);
       value = The value to be parsed.
     Returns: true if the option was successfully parsed, false if an error
        occurred, in which case error should be set with [glib.global.setError]
+    Throws: [ErrorG]
 */
 alias OptionArgFunc = bool delegate(string optionName, string value, GError **_err);
 
@@ -749,6 +750,7 @@ alias OptionArgFunc = bool delegate(string optionName, string value, GError **_e
     Params:
       context = The active #GOptionContext
       group = The group to which the function belongs
+    Throws: [ErrorG]
 */
 alias OptionErrorFunc = void delegate(glib.option_context.OptionContext context, glib.option_group.OptionGroup group, GError **_err);
 
@@ -760,6 +762,7 @@ alias OptionErrorFunc = void delegate(glib.option_context.OptionContext context,
       group = The group to which the function belongs
     Returns: true if the function completed successfully, false if an error
        occurred, in which case error should be set with [glib.global.setError]
+    Throws: [ErrorG]
 */
 alias OptionParseFunc = bool delegate(glib.option_context.OptionContext context, glib.option_group.OptionGroup group, GError **_err);
 

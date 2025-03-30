@@ -107,6 +107,7 @@ interface PollableOutputStream
         cancellable = a #GCancellable, or null
       Returns: the number of bytes written, or -1 on error (including
           [gio.types.IOErrorEnum.WouldBlock]).
+      Throws: [ErrorG]
   */
   ptrdiff_t writeNonblocking(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 
@@ -140,6 +141,7 @@ interface PollableOutputStream
         if the stream is not currently writable (and error is *not* set), or
         [gio.types.PollableReturn.Failed] if there was an error in which case error will
         be set.
+      Throws: [ErrorG]
   */
   gio.types.PollableReturn writevNonblocking(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null);
 }

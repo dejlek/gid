@@ -113,6 +113,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         flags = flags that define the behaviour of the subprocess
       Returns: A newly created #GSubprocess, or null on error (and error
           will be set)
+      Throws: [ErrorG]
   */
   static gio.subprocess.Subprocess new_(string[] argv, gio.types.SubprocessFlags flags)
   {
@@ -180,6 +181,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         stdoutBuf = data read from the subprocess stdout
         stderrBuf = data read from the subprocess stderr
       Returns: true if successful
+      Throws: [ErrorG]
   */
   bool communicate(glib.bytes.Bytes stdinBuf, gio.cancellable.Cancellable cancellable, out glib.bytes.Bytes stdoutBuf, out glib.bytes.Bytes stderrBuf)
   {
@@ -227,6 +229,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         stdoutBuf = Return location for stdout data
         stderrBuf = Return location for stderr data
       Returns: 
+      Throws: [ErrorG]
   */
   bool communicateFinish(gio.async_result.AsyncResult result, out glib.bytes.Bytes stdoutBuf, out glib.bytes.Bytes stderrBuf)
   {
@@ -255,6 +258,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         stdoutBuf = data read from the subprocess stdout
         stderrBuf = data read from the subprocess stderr
       Returns: 
+      Throws: [ErrorG]
   */
   bool communicateUtf8(string stdinBuf, gio.cancellable.Cancellable cancellable, out string stdoutBuf, out string stderrBuf)
   {
@@ -304,6 +308,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         stdoutBuf = Return location for stdout data
         stderrBuf = Return location for stderr data
       Returns: 
+      Throws: [ErrorG]
   */
   bool communicateUtf8Finish(gio.async_result.AsyncResult result, out string stdoutBuf, out string stderrBuf)
   {
@@ -534,6 +539,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
       Params:
         cancellable = a #GCancellable
       Returns: true on success, false if cancellable was cancelled
+      Throws: [ErrorG]
   */
   bool wait(gio.cancellable.Cancellable cancellable = null)
   {
@@ -576,6 +582,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
         cancellable = a #GCancellable
       Returns: true on success, false if process exited abnormally, or
         cancellable was cancelled
+      Throws: [ErrorG]
   */
   bool waitCheck(gio.cancellable.Cancellable cancellable = null)
   {
@@ -618,6 +625,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
       Params:
         result = the #GAsyncResult passed to your #GAsyncReadyCallback
       Returns: true if successful, or false with error set
+      Throws: [ErrorG]
   */
   bool waitCheckFinish(gio.async_result.AsyncResult result)
   {
@@ -636,6 +644,7 @@ class Subprocess : gobject.object.ObjectG, gio.initable.Initable
       Params:
         result = the #GAsyncResult passed to your #GAsyncReadyCallback
       Returns: true if successful, or false with error set
+      Throws: [ErrorG]
   */
   bool waitFinish(gio.async_result.AsyncResult result)
   {

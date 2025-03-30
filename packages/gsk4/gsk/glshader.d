@@ -204,6 +204,7 @@ class GLShader : gobject.object.ObjectG
       Params:
         renderer = a [gsk.renderer.Renderer]
       Returns: true on success, false if an error occurred
+      Throws: [ErrorG]
   */
   bool compile(gsk.renderer.Renderer renderer)
   {

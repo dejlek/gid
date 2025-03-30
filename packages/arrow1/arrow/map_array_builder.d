@@ -71,6 +71,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValues(int[] offsets, bool[] isValids = null)
   {

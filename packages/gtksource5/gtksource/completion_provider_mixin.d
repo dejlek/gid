@@ -204,6 +204,7 @@ template CompletionProviderT()
       Params:
         result = a #GAsyncResult provided to callback
       Returns: a #GListModel of #GtkSourceCompletionProposal
+      Throws: [ErrorG]
   */
   override gio.list_model.ListModel populateFinish(gio.async_result.AsyncResult result)
   {

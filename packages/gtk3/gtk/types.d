@@ -905,6 +905,7 @@ alias StylePropertyParser = bool delegate(string string_, gobject.value.Value va
       data = data to deserialize
       createTags = true if deserializing may create tags
     Returns: true on success, false otherwise
+    Throws: [ErrorG]
 */
 alias TextBufferDeserializeFunc = bool delegate(gtk.text_buffer.TextBuffer registerBuffer, gtk.text_buffer.TextBuffer contentBuffer, gtk.text_iter.TextIter iter, ubyte[] data, bool createTags, GError **_err);
 

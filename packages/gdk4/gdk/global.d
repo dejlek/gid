@@ -181,6 +181,7 @@ void contentDeserializeAsync(gio.input_stream.InputStream stream, string mimeTyp
     Returns: true if the operation was successful. In this case,
         value is set. false if an error occurred. In this case,
         error is set
+    Throws: [ErrorG]
 */
 bool contentDeserializeFinish(gio.async_result.AsyncResult result, out gobject.value.Value value)
 {
@@ -234,6 +235,7 @@ void contentSerializeAsync(gio.output_stream.OutputStream stream, string mimeTyp
       result = the [gio.async_result.AsyncResult]
     Returns: true if the operation was successful, false if an
         error occurred. In this case, error is set
+    Throws: [ErrorG]
 */
 bool contentSerializeFinish(gio.async_result.AsyncResult result)
 {

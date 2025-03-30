@@ -119,6 +119,7 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
   */
@@ -166,6 +167,7 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true if the volume was successfully ejected. false otherwise
+      Throws: [ErrorG]
   */
   override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
@@ -396,6 +398,7 @@ template VolumeT()
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
+      Throws: [ErrorG]
   */
   override bool mountFinish(gio.async_result.AsyncResult result)
   {

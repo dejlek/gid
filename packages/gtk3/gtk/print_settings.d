@@ -72,6 +72,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the filename to read the settings from
       Returns: the restored #GtkPrintSettings
+      Throws: [ErrorG]
   */
   static gtk.print_settings.PrintSettings newFromFile(string fileName)
   {
@@ -112,6 +113,7 @@ class PrintSettings : gobject.object.ObjectG
         groupName = the name of the group to use, or null to use
               the default “Print Settings”
       Returns: the restored #GtkPrintSettings
+      Throws: [ErrorG]
   */
   static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -624,6 +626,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the filename to read the settings from
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadFile(string fileName)
   {
@@ -646,6 +649,7 @@ class PrintSettings : gobject.object.ObjectG
         groupName = the name of the group to use, or null to use the default
               “Print Settings”
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -1031,6 +1035,7 @@ class PrintSettings : gobject.object.ObjectG
       Params:
         fileName = the file to save to
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool toFile(string fileName)
   {

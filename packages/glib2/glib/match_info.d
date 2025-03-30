@@ -68,6 +68,7 @@ class MatchInfo : gobject.boxed.Boxed
       Params:
         stringToExpand = the string to expand
       Returns: the expanded string, or null if an error occurred
+      Throws: [ErrorG]
   */
   string expandReferences(string stringToExpand)
   {
@@ -341,6 +342,7 @@ class MatchInfo : gobject.boxed.Boxed
       The match is done on the string passed to the match function, so you
       cannot free it before calling this function.
       Returns: true is the string matched, false otherwise
+      Throws: [ErrorG]
   */
   bool next()
   {

@@ -191,6 +191,7 @@ class SearchContext : gobject.object.ObjectG
         hasWrappedAround = return location to know whether the
             search has wrapped around, or null.
       Returns: whether a match was found.
+      Throws: [ErrorG]
   */
   bool backwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
@@ -280,6 +281,7 @@ class SearchContext : gobject.object.ObjectG
         hasWrappedAround = return location to know whether the
             search has wrapped around, or null.
       Returns: whether a match was found.
+      Throws: [ErrorG]
   */
   bool forwardFinish(gio.async_result.AsyncResult result, out gtk.text_iter.TextIter matchStart, out gtk.text_iter.TextIter matchEnd, out bool hasWrappedAround)
   {
@@ -401,6 +403,7 @@ class SearchContext : gobject.object.ObjectG
         replace = the replacement text.
         replaceLength = the length of replace in bytes, or -1.
       Returns: whether the match has been replaced.
+      Throws: [ErrorG]
   */
   bool replace(gtk.text_iter.TextIter matchStart, gtk.text_iter.TextIter matchEnd, string replace, int replaceLength)
   {
@@ -426,6 +429,7 @@ class SearchContext : gobject.object.ObjectG
         replace = the replacement text.
         replaceLength = the length of replace in bytes, or -1.
       Returns: the number of replaced matches.
+      Throws: [ErrorG]
   */
   uint replaceAll(string replace, int replaceLength)
   {

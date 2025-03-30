@@ -88,6 +88,7 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = location where #GObject pointer will be stored, or null
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection accept(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
@@ -135,6 +136,7 @@ class SocketListener : gobject.object.ObjectG
         result = a #GAsyncResult.
         sourceObject = Optional #GObject identifying this source
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection acceptFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectG sourceObject)
   {
@@ -169,6 +171,7 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = location where #GObject pointer will be stored, or null.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocket on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket.Socket acceptSocket(out gobject.object.ObjectG sourceObject, gio.cancellable.Cancellable cancellable = null)
   {
@@ -216,6 +219,7 @@ class SocketListener : gobject.object.ObjectG
         result = a #GAsyncResult.
         sourceObject = Optional #GObject identifying this source
       Returns: a #GSocket on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket.Socket acceptSocketFinish(gio.async_result.AsyncResult result, out gobject.object.ObjectG sourceObject)
   {
@@ -262,6 +266,7 @@ class SocketListener : gobject.object.ObjectG
         sourceObject = Optional #GObject identifying this source
         effectiveAddress = location to store the address that was bound to, or null.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool addAddress(gio.socket_address.SocketAddress address, gio.types.SocketType type, gio.types.SocketProtocol protocol, gobject.object.ObjectG sourceObject, out gio.socket_address.SocketAddress effectiveAddress)
   {
@@ -290,6 +295,7 @@ class SocketListener : gobject.object.ObjectG
       Params:
         sourceObject = Optional #GObject identifying this source
       Returns: the port number, or 0 in case of failure.
+      Throws: [ErrorG]
   */
   ushort addAnyInetPort(gobject.object.ObjectG sourceObject = null)
   {
@@ -319,6 +325,7 @@ class SocketListener : gobject.object.ObjectG
         port = an IP port number (non-zero)
         sourceObject = Optional #GObject identifying this source
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool addInetPort(ushort port, gobject.object.ObjectG sourceObject = null)
   {
@@ -349,6 +356,7 @@ class SocketListener : gobject.object.ObjectG
         socket = a listening #GSocket
         sourceObject = Optional #GObject identifying this source
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool addSocket(gio.socket.Socket socket, gobject.object.ObjectG sourceObject = null)
   {

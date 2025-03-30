@@ -65,6 +65,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
         attributes = a file attribute query string.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GFileInfo, or null on error.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -120,6 +121,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
       Params:
         result = a #GAsyncResult.
       Returns: #GFileInfo.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {

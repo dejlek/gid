@@ -43,6 +43,7 @@ class ServerAuthSender : gobject.object.ObjectG
       Params:
         message = A #GBytes to be sent.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool write(glib.bytes.Bytes message)
   {

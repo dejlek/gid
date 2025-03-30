@@ -90,6 +90,7 @@ class AlertDialog : gobject.object.ObjectG
       Returns: the index of the button that was clicked, or -1 if
           the dialog was cancelled and `propertyGtk.AlertDialog:cancel-button`
           is not set
+      Throws: [ErrorG]
   */
   int chooseFinish(gio.async_result.AsyncResult result)
   {

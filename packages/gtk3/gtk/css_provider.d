@@ -124,6 +124,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
+      Throws: [ErrorG]
   */
   bool loadFromData(ubyte[] data)
   {
@@ -150,6 +151,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
+      Throws: [ErrorG]
   */
   bool loadFromFile(gio.file.File file)
   {
@@ -171,6 +173,7 @@ class CssProvider : gobject.object.ObjectG, gtk.style_provider.StyleProvider
             returned for backwards compatibility reasons if an error is not
             null and a loading error occurred. To track errors while loading
             CSS, connect to the #GtkCssProvider::parsing-error signal.
+      Throws: [ErrorG]
   */
   bool loadFromPath(string path)
   {

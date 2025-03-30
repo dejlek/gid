@@ -112,6 +112,7 @@ class Element : gst.object.ObjectGst
         elementname = Name of created element, can be null.
       Returns: a new element or null if none
         could be created
+      Throws: [ErrorG]
   */
   static gst.element.Element makeFromUri(gst.types.URIType type, string uri, string elementname = null)
   {

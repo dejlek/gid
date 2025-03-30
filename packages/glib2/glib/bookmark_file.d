@@ -173,6 +173,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a timestamp
+      Throws: [BookmarkFileException]
   
       Deprecated: Use [glib.bookmark_file.BookmarkFile.getAddedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
@@ -197,6 +198,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a #GDateTime
+      Throws: [BookmarkFileException]
   */
   glib.date_time.DateTime getAddedDateTime(string uri)
   {
@@ -232,6 +234,7 @@ class BookmarkFile : gobject.boxed.Boxed
         count = return location for the registration count, or null
         stamp = return location for the last registration time, or null
       Returns: true on success.
+      Throws: [BookmarkFileException]
   
       Deprecated: Use [glib.bookmark_file.BookmarkFile.getApplicationInfo] instead, as
            `time_t` is deprecated due to the year 2038 problem.
@@ -272,6 +275,7 @@ class BookmarkFile : gobject.boxed.Boxed
         count = return location for the registration count, or null
         stamp = return location for the last registration time, or null
       Returns: true on success.
+      Throws: [BookmarkFileException]
   */
   bool getApplicationInfo(string uri, string name, out string exec, out uint count, out glib.date_time.DateTime stamp)
   {
@@ -300,6 +304,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
       Returns: a newly allocated null-terminated array of strings.
           Use [glib.global.strfreev] to free it.
+      Throws: [BookmarkFileException]
   */
   string[] getApplications(string uri)
   {
@@ -331,6 +336,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
       Returns: a newly allocated string or null if the specified
           URI cannot be found.
+      Throws: [BookmarkFileException]
   */
   string getDescription(string uri)
   {
@@ -357,6 +363,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
       Returns: a newly allocated null-terminated array of group names.
           Use [glib.global.strfreev] to free it.
+      Throws: [BookmarkFileException]
   */
   string[] getGroups(string uri)
   {
@@ -390,6 +397,7 @@ class BookmarkFile : gobject.boxed.Boxed
         mimeType = return location for the icon's MIME type or null
       Returns: true if the icon for the bookmark for the URI was found.
           You should free the returned strings.
+      Throws: [BookmarkFileException]
   */
   bool getIcon(string uri, out string href, out string mimeType)
   {
@@ -417,6 +425,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: true if the private flag is set, false otherwise.
+      Throws: [BookmarkFileException]
   */
   bool getIsPrivate(string uri)
   {
@@ -441,6 +450,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
       Returns: a newly allocated string or null if the specified
           URI cannot be found.
+      Throws: [BookmarkFileException]
   */
   string getMimeType(string uri)
   {
@@ -463,6 +473,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a timestamp
+      Throws: [BookmarkFileException]
   
       Deprecated: Use [glib.bookmark_file.BookmarkFile.getModifiedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
@@ -487,6 +498,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a #GDateTime
+      Throws: [BookmarkFileException]
   */
   glib.date_time.DateTime getModifiedDateTime(string uri)
   {
@@ -523,6 +535,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI or null
       Returns: a newly allocated string or null if the specified
           URI cannot be found.
+      Throws: [BookmarkFileException]
   */
   string getTitle(string uri = null)
   {
@@ -568,6 +581,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a timestamp.
+      Throws: [BookmarkFileException]
   
       Deprecated: Use [glib.bookmark_file.BookmarkFile.getVisitedDateTime] instead, as
            `time_t` is deprecated due to the year 2038 problem.
@@ -592,6 +606,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: a #GDateTime
+      Throws: [BookmarkFileException]
   */
   glib.date_time.DateTime getVisitedDateTime(string uri)
   {
@@ -616,6 +631,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         name = the name of the application
       Returns: true if the application name was found
+      Throws: [BookmarkFileException]
   */
   bool hasApplication(string uri, string name)
   {
@@ -640,6 +656,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         group = the group name to be searched
       Returns: true if group was found.
+      Throws: [BookmarkFileException]
   */
   bool hasGroup(string uri, string group)
   {
@@ -677,6 +694,7 @@ class BookmarkFile : gobject.boxed.Boxed
         data = desktop bookmarks
              loaded in memory
       Returns: true if a desktop bookmark could be loaded.
+      Throws: [BookmarkFileException]
   */
   bool loadFromData(ubyte[] data)
   {
@@ -705,6 +723,7 @@ class BookmarkFile : gobject.boxed.Boxed
         fullPath = return location for a string
              containing the full path of the file, or null
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [BookmarkFileException]
   */
   bool loadFromDataDirs(string file, out string fullPath)
   {
@@ -728,6 +747,7 @@ class BookmarkFile : gobject.boxed.Boxed
         filename = the path of a filename to load, in the
               GLib file name encoding
       Returns: true if a desktop bookmark file could be loaded
+      Throws: [BookmarkFileException]
   */
   bool loadFromFile(string filename)
   {
@@ -752,6 +772,7 @@ class BookmarkFile : gobject.boxed.Boxed
         oldUri = a valid URI
         newUri = a valid URI, or null
       Returns: true if the URI was successfully changed
+      Throws: [BookmarkFileException]
   */
   bool moveItem(string oldUri, string newUri = null)
   {
@@ -779,6 +800,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         name = the name of the application
       Returns: true if the application was successfully removed.
+      Throws: [BookmarkFileException]
   */
   bool removeApplication(string uri, string name)
   {
@@ -805,6 +827,7 @@ class BookmarkFile : gobject.boxed.Boxed
         uri = a valid URI
         group = the group name to be removed
       Returns: true if group was successfully removed.
+      Throws: [BookmarkFileException]
   */
   bool removeGroup(string uri, string group)
   {
@@ -824,6 +847,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         uri = a valid URI
       Returns: true if the bookmark was removed successfully.
+      Throws: [BookmarkFileException]
   */
   bool removeItem(string uri)
   {
@@ -907,6 +931,7 @@ class BookmarkFile : gobject.boxed.Boxed
         stamp = the time of the last registration for this application
       Returns: true if the application's meta-data was successfully
           changed.
+      Throws: [BookmarkFileException]
   
       Deprecated: Use [glib.bookmark_file.BookmarkFile.setApplicationInfo] instead, as
            `time_t` is deprecated due to the year 2038 problem.
@@ -962,6 +987,7 @@ class BookmarkFile : gobject.boxed.Boxed
              which may be null if count is 0
       Returns: true if the application's meta-data was successfully
           changed.
+      Throws: [BookmarkFileException]
   */
   bool setApplicationInfo(string uri, string name, string exec, int count, glib.date_time.DateTime stamp = null)
   {
@@ -1180,6 +1206,7 @@ class BookmarkFile : gobject.boxed.Boxed
   /**
       This function outputs bookmark as a string.
       Returns: a newly allocated string holding the contents of the #GBookmarkFile
+      Throws: [BookmarkFileException]
   */
   ubyte[] toData()
   {
@@ -1205,6 +1232,7 @@ class BookmarkFile : gobject.boxed.Boxed
       Params:
         filename = path of the output file
       Returns: true if the file was successfully written.
+      Throws: [BookmarkFileException]
   */
   bool toFile(string filename)
   {

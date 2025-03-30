@@ -78,6 +78,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guchar.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putByte(ubyte data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -96,6 +97,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint16.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putInt16(short data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -114,6 +116,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint32.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putInt32(int data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -132,6 +135,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #gint64.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putInt64(long data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -150,6 +154,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         str = a string.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if string was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putString(string str, gio.cancellable.Cancellable cancellable = null)
   {
@@ -169,6 +174,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint16.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putUint16(ushort data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -187,6 +193,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint32.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putUint32(uint data, gio.cancellable.Cancellable cancellable = null)
   {
@@ -205,6 +212,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
         data = a #guint64.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if data was successfully added to the stream.
+      Throws: [ErrorG]
   */
   bool putUint64(ulong data, gio.cancellable.Cancellable cancellable = null)
   {

@@ -103,6 +103,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.volume.Volume.ejectWithOperationFinish] instead.
   */
@@ -129,6 +130,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true if the volume was successfully ejected. false otherwise
+      Throws: [ErrorG]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -267,6 +269,7 @@ interface Volume
       Params:
         result = a #GAsyncResult
       Returns: true, false if operation failed
+      Throws: [ErrorG]
   */
   bool mountFinish(gio.async_result.AsyncResult result);
 

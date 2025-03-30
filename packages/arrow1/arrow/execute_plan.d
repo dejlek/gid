@@ -64,6 +64,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowAggregateNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for aggregation on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildAggregateNode(arrow.execute_node.ExecuteNode input, arrow.aggregate_node_options.AggregateNodeOptions options)
   {
@@ -85,6 +86,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowFilterNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for filter on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildFilterNode(arrow.execute_node.ExecuteNode input, arrow.filter_node_options.FilterNodeOptions options)
   {
@@ -107,6 +109,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowHashJoinNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for hash join on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildHashJoinNode(arrow.execute_node.ExecuteNode left, arrow.execute_node.ExecuteNode right, arrow.hash_join_node_options.HashJoinNodeOptions options)
   {
@@ -143,6 +146,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowProjectNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for project on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildProjectNode(arrow.execute_node.ExecuteNode input, arrow.project_node_options.ProjectNodeOptions options)
   {
@@ -164,6 +168,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowSinkNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for sink on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildSinkNode(arrow.execute_node.ExecuteNode input, arrow.sink_node_options.SinkNodeOptions options)
   {
@@ -184,6 +189,7 @@ class ExecutePlan : gobject.object.ObjectG
         options = A #GArrowSourceNodeOptions.
       Returns: A newly built and added #GArrowExecuteNode
           for source on success, null on error.
+      Throws: [ErrorG]
   */
   arrow.execute_node.ExecuteNode buildSourceNode(arrow.source_node_options.SourceNodeOptions options)
   {
@@ -235,6 +241,7 @@ class ExecutePlan : gobject.object.ObjectG
   /**
       Waits for finishing this plan.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool wait()
   {

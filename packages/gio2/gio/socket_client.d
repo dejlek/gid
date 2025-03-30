@@ -124,6 +124,7 @@ class SocketClient : gobject.object.ObjectG
         connectable = a #GSocketConnectable specifying the remote address.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connect(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
@@ -178,6 +179,7 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectFinish(gio.async_result.AsyncResult result)
   {
@@ -227,6 +229,7 @@ class SocketClient : gobject.object.ObjectG
         defaultPort = the default port to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
@@ -275,6 +278,7 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToHostFinish(gio.async_result.AsyncResult result)
   {
@@ -308,6 +312,7 @@ class SocketClient : gobject.object.ObjectG
         service = the name of the service to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection if successful, or null on error
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToService(string domain, string service, gio.cancellable.Cancellable cancellable = null)
   {
@@ -355,6 +360,7 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToServiceFinish(gio.async_result.AsyncResult result)
   {
@@ -395,6 +401,7 @@ class SocketClient : gobject.object.ObjectG
         defaultPort = the default port to connect to
         cancellable = a #GCancellable, or null
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gio.cancellable.Cancellable cancellable = null)
   {
@@ -443,6 +450,7 @@ class SocketClient : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorG]
   */
   gio.socket_connection.SocketConnection connectToUriFinish(gio.async_result.AsyncResult result)
   {

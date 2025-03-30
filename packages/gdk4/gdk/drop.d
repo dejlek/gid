@@ -211,6 +211,7 @@ class Drop : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
         outMimeType = return location for the used mime type
       Returns: the [gio.input_stream.InputStream]
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream readFinish(gio.async_result.AsyncResult result, out string outMimeType)
   {
@@ -266,6 +267,7 @@ class Drop : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a [gobject.value.Value] containing the result.
+      Throws: [ErrorG]
   */
   gobject.value.Value readValueFinish(gio.async_result.AsyncResult result)
   {

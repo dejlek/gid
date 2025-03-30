@@ -84,6 +84,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValues(glib.bytes.Bytes[] values, bool[] isValids = null)
   {
@@ -123,6 +124,7 @@ class FixedSizeBinaryArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValuesPacked(glib.bytes.Bytes values, bool[] isValids = null)
   {

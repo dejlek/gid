@@ -79,6 +79,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
         cancellable = A #GCancellable or null.
       Returns: Received credentials on success (free with
         [gobject.object.ObjectG.unref]), null if error is set.
+      Throws: [ErrorG]
   */
   gio.credentials.Credentials receiveCredentials(gio.cancellable.Cancellable cancellable = null)
   {
@@ -128,6 +129,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
         result = a #GAsyncResult.
       Returns: a #GCredentials, or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.credentials.Credentials receiveCredentialsFinish(gio.async_result.AsyncResult result)
   {
@@ -152,6 +154,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
       Params:
         cancellable = optional #GCancellable object, null to ignore
       Returns: a file descriptor on success, -1 on error.
+      Throws: [ErrorG]
   */
   int receiveFd(gio.cancellable.Cancellable cancellable = null)
   {
@@ -189,6 +192,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
       Params:
         cancellable = A #GCancellable or null.
       Returns: true on success, false if error is set.
+      Throws: [ErrorG]
   */
   bool sendCredentials(gio.cancellable.Cancellable cancellable = null)
   {
@@ -236,6 +240,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
       Params:
         result = a #GAsyncResult.
       Returns: true if the operation was successful, otherwise false.
+      Throws: [ErrorG]
   */
   bool sendCredentialsFinish(gio.async_result.AsyncResult result)
   {
@@ -260,6 +265,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
         fd = a file descriptor
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a true on success, null on error.
+      Throws: [ErrorG]
   */
   bool sendFd(int fd, gio.cancellable.Cancellable cancellable = null)
   {

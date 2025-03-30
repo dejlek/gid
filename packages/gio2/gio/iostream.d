@@ -95,6 +95,7 @@ class IOStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true on success, false otherwise.
+      Throws: [ErrorG]
   */
   static bool spliceFinish(gio.async_result.AsyncResult result)
   {
@@ -152,6 +153,7 @@ class IOStream : gobject.object.ObjectG
       Params:
         cancellable = optional #GCancellable object, null to ignore
       Returns: true on success, false on failure
+      Throws: [ErrorG]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -202,6 +204,7 @@ class IOStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult
       Returns: true if stream was successfully closed, false otherwise.
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
@@ -268,6 +271,7 @@ class IOStream : gobject.object.ObjectG
       already set or stream is closed, it will return false and set
       error.
       Returns: true if pending was previously unset and is now set.
+      Throws: [ErrorG]
   */
   bool setPending()
   {

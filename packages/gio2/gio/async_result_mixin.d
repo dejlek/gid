@@ -151,6 +151,7 @@ template AsyncResultT()
       to enable subclasses to chain up correctly.
       Returns: true if error is has been filled in with an error from
           res, false if not.
+      Throws: [ErrorG]
   */
   override bool legacyPropagateError()
   {

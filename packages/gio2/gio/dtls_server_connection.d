@@ -33,6 +33,7 @@ interface DtlsServerConnection
         certificate = the default server certificate, or null
       Returns: the new
           #GDtlsServerConnection, or null on error
+      Throws: [ErrorG]
   */
   static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate = null)
   {

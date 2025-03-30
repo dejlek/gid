@@ -108,6 +108,7 @@ class ContentProvider : gobject.object.ObjectG
         value = the [gobject.value.Value] to fill
       Returns: true if the value was set successfully. Otherwise
           error will be set to describe the failure.
+      Throws: [ErrorG]
   */
   bool getValue(out gobject.value.Value value)
   {
@@ -196,6 +197,7 @@ class ContentProvider : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: true if the operation was completed successfully. Otherwise
           error will be set to describe the failure.
+      Throws: [ErrorG]
   */
   bool writeMimeTypeFinish(gio.async_result.AsyncResult result)
   {

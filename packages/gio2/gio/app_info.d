@@ -91,6 +91,7 @@ interface AppInfo
         applicationName = the application name, or null to use commandline
         flags = flags that can specify details of the created #GAppInfo
       Returns: new #GAppInfo for given command.
+      Throws: [ErrorG]
   */
   static gio.app_info.AppInfo createFromCommandline(string commandline, string applicationName, gio.types.AppInfoCreateFlags flags)
   {
@@ -199,6 +200,7 @@ interface AppInfo
         result = a #GAsyncResult
       Returns: #GAppInfo for given content_type or
             null on error.
+      Throws: [ErrorG]
   */
   static gio.app_info.AppInfo getDefaultForTypeFinish(gio.async_result.AsyncResult result)
   {
@@ -268,6 +270,7 @@ interface AppInfo
         result = a #GAsyncResult
       Returns: #GAppInfo for given uri_scheme or
             null on error.
+      Throws: [ErrorG]
   */
   static gio.app_info.AppInfo getDefaultForUriSchemeFinish(gio.async_result.AsyncResult result)
   {
@@ -335,6 +338,7 @@ interface AppInfo
         uri = the uri to show
         context = an optional #GAppLaunchContext
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   static bool launchDefaultForUri(string uri, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -387,6 +391,7 @@ interface AppInfo
       Params:
         result = a #GAsyncResult
       Returns: true if the launch was successful, false if error is set
+      Throws: [ErrorG]
   */
   static bool launchDefaultForUriFinish(gio.async_result.AsyncResult result)
   {
@@ -421,6 +426,7 @@ interface AppInfo
       Params:
         contentType = a string.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool addSupportsType(string contentType);
 
@@ -570,6 +576,7 @@ interface AppInfo
         files = a #GList of #GFile objects
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null);
 
@@ -591,6 +598,7 @@ interface AppInfo
         uris = a #GList containing URIs to launch.
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null);
 
@@ -616,6 +624,7 @@ interface AppInfo
       Params:
         result = a #GAsyncResult
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   bool launchUrisFinish(gio.async_result.AsyncResult result);
 
@@ -625,6 +634,7 @@ interface AppInfo
       Params:
         contentType = a string.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool removeSupportsType(string contentType);
 
@@ -635,6 +645,7 @@ interface AppInfo
         extension = a string containing the file extension
               (without the dot).
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool setAsDefaultForExtension(string extension);
 
@@ -644,6 +655,7 @@ interface AppInfo
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool setAsDefaultForType(string contentType);
 
@@ -656,6 +668,7 @@ interface AppInfo
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool setAsLastUsedForType(string contentType);
 

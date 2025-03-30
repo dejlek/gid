@@ -1010,6 +1010,7 @@ void showUriFull(gtk.window.Window parent, string uri, uint timestamp, gio.cance
       result = [gio.async_result.AsyncResult] that was passed to callback
     Returns: true if the URI was shown successfully.
         Otherwise, false is returned and error is set
+    Throws: [ErrorG]
 
     Deprecated: Use [gtk.file_launcher.FileLauncher.launchFinish] or
         [gtk.uri_launcher.UriLauncher.launchFinish] instead

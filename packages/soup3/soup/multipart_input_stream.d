@@ -118,6 +118,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
         cancellable = a #GCancellable
       Returns: a new #GInputStream, or
           null if there are no more parts
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream nextPart(gio.cancellable.Cancellable cancellable = null)
   {
@@ -163,6 +164,7 @@ class MultipartInputStream : gio.filter_input_stream.FilterInputStream, gio.poll
       Returns: a newly created
           [gio.input_stream.InputStream] for reading the next part or null if there are no
           more parts.
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream nextPartFinish(gio.async_result.AsyncResult result)
   {

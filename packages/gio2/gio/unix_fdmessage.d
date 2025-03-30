@@ -92,6 +92,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
       Params:
         fd = a valid open file descriptor
       Returns: true in case of success, else false (and error is set)
+      Throws: [ErrorG]
   */
   bool appendFd(int fd)
   {

@@ -169,6 +169,7 @@ class Clipboard : gobject.object.ObjectG
         outMimeType = location to store
             the chosen mime type
       Returns: a [gio.input_stream.InputStream]
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream readFinish(gio.async_result.AsyncResult result, out string outMimeType)
   {
@@ -220,6 +221,7 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a new string
+      Throws: [ErrorG]
   */
   string readTextFinish(gio.async_result.AsyncResult result)
   {
@@ -269,6 +271,7 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a new [gdk.texture.Texture]
+      Throws: [ErrorG]
   */
   gdk.texture.Texture readTextureFinish(gio.async_result.AsyncResult result)
   {
@@ -321,6 +324,7 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a [gobject.value.Value] containing the result.
+      Throws: [ErrorG]
   */
   gobject.value.Value readValueFinish(gio.async_result.AsyncResult result)
   {
@@ -414,6 +418,7 @@ class Clipboard : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: true if storing was successful.
+      Throws: [ErrorG]
   */
   bool storeFinish(gio.async_result.AsyncResult result)
   {

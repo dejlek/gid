@@ -90,6 +90,7 @@ class ArrowFileWriter : gobject.object.ObjectG
   /**
       Start a new buffered row group.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool newBufferedRowGroup()
   {
@@ -107,6 +108,7 @@ class ArrowFileWriter : gobject.object.ObjectG
       Params:
         chunkSize = The max number of rows in a row group.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool newRowGroup(size_t chunkSize)
   {
@@ -124,6 +126,7 @@ class ArrowFileWriter : gobject.object.ObjectG
       Params:
         chunkedArray = A #GArrowChunkedArray to be written.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool writeChunkedArray(arrow.chunked_array.ChunkedArray chunkedArray)
   {
@@ -152,6 +155,7 @@ class ArrowFileWriter : gobject.object.ObjectG
       Params:
         recordBatch = A record batch to be written.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {

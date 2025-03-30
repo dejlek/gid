@@ -67,6 +67,7 @@ interface NetworkMonitor
         connectable = a #GSocketConnectable
         cancellable = a #GCancellable, or null
       Returns: true if connectable is reachable, false if not.
+      Throws: [ErrorG]
   */
   bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null);
 
@@ -96,6 +97,7 @@ interface NetworkMonitor
       Params:
         result = a #GAsyncResult
       Returns: true if network is reachable, false if not.
+      Throws: [ErrorG]
   */
   bool canReachFinish(gio.async_result.AsyncResult result);
 

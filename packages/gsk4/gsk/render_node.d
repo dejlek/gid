@@ -160,6 +160,7 @@ class RenderNode
       Params:
         filename = the file to save it to.
       Returns: true if saving was successful
+      Throws: [ErrorG]
   */
   bool writeToFile(string filename)
   {

@@ -38,6 +38,7 @@ void init_()
     Params:
       filename = A file name
     Returns: A pixbuf, or null on error.
+    Throws: [ErrorG]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -64,6 +65,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFile(string filename)
       maxWidth = The requested max width
       maxHeight = The requested max height
     Returns: A pixbuf, or null on error.
+    Throws: [ErrorG]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -91,6 +93,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtMaxSize(string filename, int maxWidth, i
       width = The new width, or -1
       height = The new height, or -1
     Returns: A pixbuf, or null on error.
+    Throws: [ErrorG]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -117,6 +120,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtSize(string filename, int width, int hei
       xZoom = The horizontal zoom factor
       yZoom = The vertical zoom factor
     Returns: A pixbuf, or null on error.
+    Throws: [ErrorG]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */
@@ -146,6 +150,7 @@ gdkpixbuf.pixbuf.Pixbuf pixbufFromFileAtZoom(string filename, double xZoom, doub
       maxWidth = The requested max width
       maxHeight = The requested max height
     Returns: A pixbuf, or null on error.
+    Throws: [ErrorG]
 
     Deprecated: Use [rsvg.handle.Handle.newFromFile] and [rsvg.handle.Handle.renderDocument] instead.
 */

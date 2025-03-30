@@ -73,6 +73,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValues(arrow.decimal64.Decimal64[] values, bool[] isValids = null)
   {

@@ -226,6 +226,7 @@ class Resource : gobject.boxed.Boxed
       Params:
         data = A #GBytes
       Returns: a new #GResource, or null on error
+      Throws: [ErrorG]
   */
   static gio.resource.Resource newFromData(glib.bytes.Bytes data)
   {
@@ -252,6 +253,7 @@ class Resource : gobject.boxed.Boxed
         path = A pathname inside the resource
         lookupFlags = A #GResourceLookupFlags
       Returns: an array of constant strings
+      Throws: [ErrorG]
   */
   string[] enumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -289,6 +291,7 @@ class Resource : gobject.boxed.Boxed
         flags = a location to place the flags about the file,
              or null if the length is not needed
       Returns: true if the file was found. false if there were errors
+      Throws: [ErrorG]
   */
   bool getInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
   {
@@ -322,6 +325,7 @@ class Resource : gobject.boxed.Boxed
         lookupFlags = A #GResourceLookupFlags
       Returns: #GBytes or null on error.
             Free the returned object with [glib.bytes.Bytes.unref]
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes lookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -346,6 +350,7 @@ class Resource : gobject.boxed.Boxed
         lookupFlags = A #GResourceLookupFlags
       Returns: #GInputStream or null on error.
             Free the returned object with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream openStream(string path, gio.types.ResourceLookupFlags lookupFlags)
   {
@@ -374,6 +379,7 @@ class Resource : gobject.boxed.Boxed
       Params:
         filename = the path of a filename to load, in the GLib filename encoding
       Returns: a new #GResource, or null on error
+      Throws: [ErrorG]
   */
   static gio.resource.Resource load(string filename)
   {

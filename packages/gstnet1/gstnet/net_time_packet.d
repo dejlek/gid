@@ -112,6 +112,7 @@ class NetTimePacket : gobject.boxed.Boxed
         socket = socket to send the time packet on
         destAddress = address to send the time packet to
       Returns: TRUE if successful, FALSE in case an error occurred.
+      Throws: [ErrorG]
   */
   bool send(gio.socket.Socket socket, gio.socket_address.SocketAddress destAddress)
   {
@@ -154,6 +155,7 @@ class NetTimePacket : gobject.boxed.Boxed
         srcAddress = address of variable to return sender address
       Returns: a new #GstNetTimePacket, or NULL on error. Free
            with [gstnet.net_time_packet.NetTimePacket.free] when done.
+      Throws: [ErrorG]
   */
   static gstnet.net_time_packet.NetTimePacket receive(gio.socket.Socket socket, out gio.socket_address.SocketAddress srcAddress)
   {

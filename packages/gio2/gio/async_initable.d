@@ -214,6 +214,7 @@ interface AsyncInitable
         res = a #GAsyncResult.
       Returns: true if successful. If an error has occurred, this function
         will return false and set error appropriately if present.
+      Throws: [ErrorG]
   */
   bool initFinish(gio.async_result.AsyncResult res);
 
@@ -225,6 +226,7 @@ interface AsyncInitable
         res = the #GAsyncResult from the callback
       Returns: a newly created #GObject,
              or null on error. Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gobject.object.ObjectG newFinish(gio.async_result.AsyncResult res);
 }

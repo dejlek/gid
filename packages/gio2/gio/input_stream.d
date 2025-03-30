@@ -89,6 +89,7 @@ class InputStream : gobject.object.ObjectG
       Params:
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false on failure
+      Throws: [ErrorG]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -139,6 +140,7 @@ class InputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true if the stream was closed successfully.
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
@@ -199,6 +201,7 @@ class InputStream : gobject.object.ObjectG
         buffer = a buffer to read data into (which should be at least count bytes long).
         cancellable = optional #GCancellable object, null to ignore.
       Returns: Number of bytes read, or -1 on error, or 0 on end of file.
+      Throws: [ErrorG]
   */
   ptrdiff_t read(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -237,6 +240,7 @@ class InputStream : gobject.object.ObjectG
         bytesRead = location to store the number of bytes that was read from the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool readAll(ref ubyte[] buffer, out size_t bytesRead, gio.cancellable.Cancellable cancellable = null)
   {
@@ -299,6 +303,7 @@ class InputStream : gobject.object.ObjectG
         result = a #GAsyncResult
         bytesRead = location to store the number of bytes that was read from the stream
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool readAllFinish(gio.async_result.AsyncResult result, out size_t bytesRead)
   {
@@ -389,6 +394,7 @@ class InputStream : gobject.object.ObjectG
           values include 4096 and 8192.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a new #GBytes, or null on error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes readBytes(size_t count, gio.cancellable.Cancellable cancellable = null)
   {
@@ -451,6 +457,7 @@ class InputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: the newly-allocated #GBytes, or null on error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes readBytesFinish(gio.async_result.AsyncResult result)
   {
@@ -469,6 +476,7 @@ class InputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: number of bytes read in, or -1 on error, or 0 on end of file.
+      Throws: [ErrorG]
   */
   ptrdiff_t readFinish(gio.async_result.AsyncResult result)
   {
@@ -485,6 +493,7 @@ class InputStream : gobject.object.ObjectG
       already set or stream is closed, it will return false and set
       error.
       Returns: true if pending was previously unset and is now set.
+      Throws: [ErrorG]
   */
   bool setPending()
   {
@@ -516,6 +525,7 @@ class InputStream : gobject.object.ObjectG
         count = the number of bytes that will be skipped from the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: Number of bytes skipped, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t skip(size_t count, gio.cancellable.Cancellable cancellable = null)
   {
@@ -580,6 +590,7 @@ class InputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: the size of the bytes skipped, or `-1` on error.
+      Throws: [ErrorG]
   */
   ptrdiff_t skipFinish(gio.async_result.AsyncResult result)
   {

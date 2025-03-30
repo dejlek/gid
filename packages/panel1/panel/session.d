@@ -55,6 +55,7 @@ class Session : gobject.object.ObjectG
       Params:
         variant = a #GVariant from [panel.session.Session.toVariant]
       Returns: a #PanelSession
+      Throws: [ErrorG]
   */
   static panel.session.Session newFromVariant(glib.variant.VariantG variant)
   {

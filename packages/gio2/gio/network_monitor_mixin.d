@@ -48,6 +48,7 @@ template NetworkMonitorT()
         connectable = a #GSocketConnectable
         cancellable = a #GCancellable, or null
       Returns: true if connectable is reachable, false if not.
+      Throws: [ErrorG]
   */
   override bool canReach(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null)
   {
@@ -98,6 +99,7 @@ template NetworkMonitorT()
       Params:
         result = a #GAsyncResult
       Returns: true if network is reachable, false if not.
+      Throws: [ErrorG]
   */
   override bool canReachFinish(gio.async_result.AsyncResult result)
   {

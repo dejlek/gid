@@ -904,6 +904,7 @@ pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.
       text = address of return location for text with tags stripped
       accelChar = address of return location for accelerator char
     Returns: false if error is set, otherwise true
+    Throws: [ErrorG]
 */
 bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, out pango.attr_list.AttrList attrList, out string text, out dchar accelChar)
 {
@@ -1013,6 +1014,7 @@ bool parseEnum(gobject.types.GType type, string str, out int value, bool warn, o
       text = address of return location for text with tags stripped
       accelChar = address of return location for accelerator char
     Returns: false if error is set, otherwise true
+    Throws: [ErrorG]
 */
 bool parseMarkup(string markupText, dchar accelMarker, out pango.attr_list.AttrList attrList, out string text, out dchar accelChar)
 {

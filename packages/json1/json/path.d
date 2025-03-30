@@ -194,6 +194,7 @@ class Path : gobject.object.ObjectG
         root = the root of a JSON tree
       Returns: a newly-created node of type
           [json.types.NodeType.Array] containing the array of matching nodes
+      Throws: [ErrorG]
   */
   static json.node.Node query(string expression, json.node.Node root)
   {
@@ -217,6 +218,7 @@ class Path : gobject.object.ObjectG
         expression = a JSONPath expression
       Returns: `TRUE` if the compilation was successful, and `FALSE`
           otherwise
+      Throws: [ErrorG]
   */
   bool compile(string expression)
   {

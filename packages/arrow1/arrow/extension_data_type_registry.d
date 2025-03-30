@@ -62,6 +62,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
       Params:
         dataType = A #GArrowExtensionDataType to be registered.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool register(arrow.extension_data_type.ExtensionDataType dataType)
   {
@@ -80,6 +81,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
       Params:
         name = An extension data type name to be unregistered.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool unregister(string name)
   {

@@ -241,6 +241,7 @@ class Handle : gobject.object.ObjectG
       Params:
         data = The SVG data
       Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
+      Throws: [ErrorG]
   */
   static rsvg.handle.Handle newFromData(ubyte[] data)
   {
@@ -267,6 +268,7 @@ class Handle : gobject.object.ObjectG
       Params:
         filename = The file name to load, or a URI.
       Returns: A [rsvg.handle.Handle] or `NULL` if an error occurs.
+      Throws: [ErrorG]
   */
   static rsvg.handle.Handle newFromFile(string filename)
   {
@@ -297,6 +299,7 @@ class Handle : gobject.object.ObjectG
         flags = flags from [rsvg.types.HandleFlags]
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
+      Throws: [ErrorG]
   */
   static rsvg.handle.Handle newFromGfileSync(gio.file.File file, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -327,6 +330,7 @@ class Handle : gobject.object.ObjectG
         flags = flags from [rsvg.types.HandleFlags]
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: a new [rsvg.handle.Handle] on success, or `NULL` with error filled in
+      Throws: [ErrorG]
   */
   static rsvg.handle.Handle newFromStreamSync(gio.input_stream.InputStream inputStream, gio.file.File baseFile, rsvg.types.HandleFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -367,6 +371,7 @@ class Handle : gobject.object.ObjectG
       SVG data was parsed correctly.  Note that handle isn't freed until
       [gobject.object.ObjectG.unref] is called.
       Returns: `TRUE` on success, or `FALSE` on error.
+      Throws: [ErrorG]
   
       Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
         functions [rsvg.handle.Handle.newFromGfileSync] or
@@ -495,6 +500,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
+      Throws: [ErrorG]
   */
   bool getGeometryForElement(string id, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
@@ -546,6 +552,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
+      Throws: [ErrorG]
   */
   bool getGeometryForLayer(string id, rsvg.types.Rectangle viewport, out rsvg.types.Rectangle outInkRect, out rsvg.types.Rectangle outLogicalRect)
   {
@@ -840,6 +847,7 @@ class Handle : gobject.object.ObjectG
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: `TRUE` if reading stream succeeded, or `FALSE` otherwise
           with error filled in
+      Throws: [ErrorG]
   */
   bool readStreamSync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -998,6 +1006,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
+      Throws: [ErrorG]
   */
   bool renderDocument(cairo.context.Context cr, rsvg.types.Rectangle viewport)
   {
@@ -1041,6 +1050,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
+      Throws: [ErrorG]
   */
   bool renderElement(cairo.context.Context cr, string id, rsvg.types.Rectangle elementViewport)
   {
@@ -1088,6 +1098,7 @@ class Handle : gobject.object.ObjectG
         the section "[API ordering](class.Handle.html#api-ordering)" for details.
         
         Panics: this function will panic if the handle is not fully-loaded.
+      Throws: [ErrorG]
   */
   bool renderLayer(cairo.context.Context cr, string id, rsvg.types.Rectangle viewport)
   {
@@ -1220,6 +1231,7 @@ class Handle : gobject.object.ObjectG
         css = String with CSS data; must be valid UTF-8.
       Returns: `TRUE` on success, `FALSE` on error.  Errors are returned
         in the error argument.
+      Throws: [ErrorG]
   */
   bool setStylesheet(ubyte[] css)
   {
@@ -1250,6 +1262,7 @@ class Handle : gobject.object.ObjectG
       Params:
         buf = pointer to svg data
       Returns: `TRUE` on success, or `FALSE` on error.
+      Throws: [ErrorG]
   
       Deprecated: Use [rsvg.handle.Handle.readStreamSync] or the constructor
         functions [rsvg.handle.Handle.newFromGfileSync] or

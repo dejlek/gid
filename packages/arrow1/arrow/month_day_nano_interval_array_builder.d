@@ -67,6 +67,7 @@ class MonthDayNanoIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
             Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValues(arrow.month_day_nano.MonthDayNano[] values, bool[] isValids = null)
   {

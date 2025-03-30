@@ -60,6 +60,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
       Params:
         value = A type ID value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValue(byte value)
   {

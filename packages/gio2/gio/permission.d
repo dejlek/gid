@@ -74,6 +74,7 @@ class Permission : gobject.object.ObjectG
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if the permission was successfully acquired
+      Throws: [ErrorG]
   */
   bool acquire(gio.cancellable.Cancellable cancellable = null)
   {
@@ -120,6 +121,7 @@ class Permission : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult given to the #GAsyncReadyCallback
       Returns: true if the permission was successfully acquired
+      Throws: [ErrorG]
   */
   bool acquireFinish(gio.async_result.AsyncResult result)
   {
@@ -207,6 +209,7 @@ class Permission : gobject.object.ObjectG
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if the permission was successfully released
+      Throws: [ErrorG]
   */
   bool release(gio.cancellable.Cancellable cancellable = null)
   {
@@ -253,6 +256,7 @@ class Permission : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult given to the #GAsyncReadyCallback
       Returns: true if the permission was successfully released
+      Throws: [ErrorG]
   */
   bool releaseFinish(gio.async_result.AsyncResult result)
   {

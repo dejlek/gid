@@ -140,6 +140,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
       Returns: A
           #GDBusObjectManagerClient object or null if error is set. Free
           with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_object_manager_client.DBusObjectManagerClient newFinish(gio.async_result.AsyncResult res)
   {
@@ -160,6 +161,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
       Returns: A
           #GDBusObjectManagerClient object or null if error is set. Free
           with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_object_manager_client.DBusObjectManagerClient newForBusFinish(gio.async_result.AsyncResult res)
   {
@@ -190,6 +192,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
       Returns: A
           #GDBusObjectManagerClient object or null if error is set. Free
           with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_object_manager_client.DBusObjectManagerClient newForBusSync(gio.types.BusType busType, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -234,6 +237,7 @@ class DBusObjectManagerClient : gobject.object.ObjectG, gio.async_initable.Async
       Returns: A
           #GDBusObjectManagerClient object or null if error is set. Free
           with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_object_manager_client.DBusObjectManagerClient newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusObjectManagerClientFlags flags, string name, string objectPath, gio.types.DBusProxyTypeFunc getProxyTypeFunc = null, gio.cancellable.Cancellable cancellable = null)
   {

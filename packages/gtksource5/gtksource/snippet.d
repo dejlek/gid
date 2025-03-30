@@ -76,6 +76,7 @@ class Snippet : gobject.object.ObjectG
         text = the formatted snippet text to parse
       Returns: the newly parsed #GtkSourceSnippet, or null upon
           failure and error is set.
+      Throws: [ErrorG]
   */
   static gtksource.snippet.Snippet newParsed(string text)
   {

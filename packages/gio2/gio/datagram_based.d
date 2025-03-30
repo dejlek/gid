@@ -130,6 +130,7 @@ interface DatagramBased
             to block indefinitely
         cancellable = a #GCancellable
       Returns: true if the condition was met, false otherwise
+      Throws: [ErrorG]
   */
   bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable = null);
 

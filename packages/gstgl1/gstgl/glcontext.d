@@ -295,6 +295,7 @@ class GLContext : gst.object.ObjectGst
       Params:
         otherContext = a #GstGLContext to share OpenGL objects with
       Returns: whether the context could successfully be created
+      Throws: [ErrorG]
   */
   bool create(gstgl.glcontext.GLContext otherContext = null)
   {
@@ -322,6 +323,7 @@ class GLContext : gst.object.ObjectGst
       context in the current thread.  Typically used with wrapped contexts to
       allow wrapped contexts to be used as regular #GstGLContext's.
       Returns: 
+      Throws: [ErrorG]
   */
   bool fillInfo()
   {

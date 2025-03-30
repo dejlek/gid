@@ -177,6 +177,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
       handler.
       
       The returned [glib.error.ErrorG] will contain more details on what went wrong.
+      Throws: [ErrorG]
   */
   void getError()
   {
@@ -366,6 +367,7 @@ class PrintOperation : gobject.object.ObjectG, gtk.print_operation_preview.Print
           [gtk.types.PrintOperationResult.InProgress] means the operation is running
           asynchronously, and will emit the [gtk.print_operation.PrintOperation.done]
           signal when done.
+      Throws: [ErrorG]
   */
   gtk.types.PrintOperationResult run(gtk.types.PrintOperationAction action, gtk.window.Window parent = null)
   {

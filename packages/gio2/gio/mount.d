@@ -83,6 +83,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
   */
@@ -109,6 +110,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -225,6 +227,7 @@ interface Mount
         result = a #GAsyncResult
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
+      Throws: [ErrorG]
   */
   string[] guessContentTypeFinish(gio.async_result.AsyncResult result);
 
@@ -245,6 +248,7 @@ interface Mount
         cancellable = optional #GCancellable object, null to ignore
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
+      Throws: [ErrorG]
   */
   string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable = null);
 
@@ -303,6 +307,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully remounted. false otherwise.
+      Throws: [ErrorG]
   */
   bool remountFinish(gio.async_result.AsyncResult result);
 
@@ -335,6 +340,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
   */
@@ -361,6 +367,7 @@ interface Mount
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
+      Throws: [ErrorG]
   */
   bool unmountWithOperationFinish(gio.async_result.AsyncResult result);
 

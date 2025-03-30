@@ -56,6 +56,7 @@ class ArrayBuilder : gobject.object.ObjectG
       Params:
         n = The number of null values to be appended.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendEmptyValues(long n)
   {
@@ -85,6 +86,7 @@ class ArrayBuilder : gobject.object.ObjectG
       Params:
         n = The number of null values to be appended.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendNulls(long n)
   {

@@ -149,6 +149,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = the asynchronous result passed to the callback
       Returns: a new reference to a #SecretService proxy, which
           should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service getFinish(gio.async_result.AsyncResult result)
   {
@@ -177,6 +178,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
       Returns: a new reference to a #SecretService proxy, which
           should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service getSync(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -235,6 +237,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = the asynchronous result passed to the callback
       Returns: a new reference to a #SecretService proxy, which
           should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service openFinish(gio.async_result.AsyncResult result)
   {
@@ -270,6 +273,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
       Returns: a new reference to a #SecretService proxy, which
           should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service openSync(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -323,6 +327,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether items were removed or not
+      Throws: [ErrorG]
   */
   bool clearFinish(gio.async_result.AsyncResult result)
   {
@@ -350,6 +355,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         attributes = the attribute keys and values
         cancellable = optional cancellation object
       Returns: whether items were removed or not
+      Throws: [ErrorG]
   */
   bool clearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -443,6 +449,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether a session is established or not
+      Throws: [ErrorG]
   */
   bool ensureSessionFinish(gio.async_result.AsyncResult result)
   {
@@ -471,6 +478,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         cancellable = optional cancellation object
       Returns: whether a session is established or not
+      Throws: [ErrorG]
   */
   bool ensureSessionSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -616,6 +624,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadCollectionsFinish(gio.async_result.AsyncResult result)
   {
@@ -643,6 +652,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         cancellable = optional cancellation object
       Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadCollectionsSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -700,6 +710,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = asynchronous result passed to the callback
         locked = location to place list of items or collections that were locked
       Returns: the number of items or collections that were locked
+      Throws: [ErrorG]
   */
   int lockFinish(gio.async_result.AsyncResult result, out gio.dbus_proxy.DBusProxy[] locked)
   {
@@ -731,6 +742,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         locked = location to place list of items or collections that were locked
       Returns: the number of items or collections that were locked
+      Throws: [ErrorG]
   */
   int lockSync(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, out gio.dbus_proxy.DBusProxy[] locked)
   {
@@ -788,6 +800,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = the asynchronous result passed to the callback
       Returns: a newly allocated `structValue`, which should be
           released with [secret.value.Value.unref], or null if no secret found
+      Throws: [ErrorG]
   */
   secret.value.Value lookupFinish(gio.async_result.AsyncResult result)
   {
@@ -817,6 +830,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
       Returns: a newly allocated `structValue`, which should be
           released with [secret.value.Value.unref], or null if no secret found
+      Throws: [ErrorG]
   */
   secret.value.Value lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -873,6 +887,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = the asynchronous result passed to the callback
       Returns: null if the prompt was dismissed or an error occurred,
           a variant result if the prompt was successful
+      Throws: [ErrorG]
   */
   glib.variant.VariantG promptFinish(gio.async_result.AsyncResult result)
   {
@@ -906,6 +921,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         returnType = the variant type of the prompt result
       Returns: null if the prompt was dismissed or an error occurred,
           a variant result if the prompt was successful
+      Throws: [ErrorG]
   */
   glib.variant.VariantG promptSync(secret.prompt.Prompt prompt, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
@@ -970,6 +986,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = asynchronous result passed to callback
       Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchFinish(gio.async_result.AsyncResult result)
   {
@@ -1013,6 +1030,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         flags = search option flags
         cancellable = optional cancellation object
       Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1065,6 +1083,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = asynchronous result passed to callback
       Returns: true if successful
+      Throws: [ErrorG]
   */
   bool setAliasFinish(gio.async_result.AsyncResult result)
   {
@@ -1090,6 +1109,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         collection = the collection to assign to the alias
         cancellable = optional cancellation object
       Returns: true if successful
+      Throws: [ErrorG]
   */
   bool setAliasSync(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1154,6 +1174,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether the storage was successful or not
+      Throws: [ErrorG]
   */
   bool storeFinish(gio.async_result.AsyncResult result)
   {
@@ -1192,6 +1213,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         value = the secret value
         cancellable = optional cancellation object
       Returns: whether the storage was successful or not
+      Throws: [ErrorG]
   */
   bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1253,6 +1275,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         result = asynchronous result passed to the callback
         unlocked = location to place list of items or collections that were unlocked
       Returns: the number of items or collections that were unlocked
+      Throws: [ErrorG]
   */
   int unlockFinish(gio.async_result.AsyncResult result, out gio.dbus_proxy.DBusProxy[] unlocked)
   {
@@ -1284,6 +1307,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
         cancellable = optional cancellation object
         unlocked = location to place list of items or collections that were unlocked
       Returns: the number of items or collections that were unlocked
+      Throws: [ErrorG]
   */
   int unlockSync(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, out gio.dbus_proxy.DBusProxy[] unlocked)
   {

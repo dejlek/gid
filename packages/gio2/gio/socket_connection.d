@@ -102,6 +102,7 @@ class SocketConnection : gio.iostream.IOStream
         address = a #GSocketAddress specifying the remote address.
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: true if the connection succeeded, false on error
+      Throws: [ErrorG]
   */
   bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null)
   {
@@ -151,6 +152,7 @@ class SocketConnection : gio.iostream.IOStream
       Params:
         result = the #GAsyncResult
       Returns: true if the connection succeeded, false on error
+      Throws: [ErrorG]
   */
   bool connectFinish(gio.async_result.AsyncResult result)
   {
@@ -166,6 +168,7 @@ class SocketConnection : gio.iostream.IOStream
       Try to get the local address of a socket connection.
       Returns: a #GSocketAddress or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress getLocalAddress()
   {
@@ -189,6 +192,7 @@ class SocketConnection : gio.iostream.IOStream
       (10.42.77.3)...".
       Returns: a #GSocketAddress or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress getRemoteAddress()
   {

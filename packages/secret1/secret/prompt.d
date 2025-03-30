@@ -109,6 +109,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
         result = the asynchronous result passed to the callback
       Returns: null if the prompt was dismissed or an error occurred,
           a variant result if the prompt was successful
+      Throws: [ErrorG]
   */
   glib.variant.VariantG performFinish(gio.async_result.AsyncResult result)
   {
@@ -142,6 +143,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         returnType = the variant type of the prompt result
       Returns: null if the prompt was dismissed or an error occurred
+      Throws: [ErrorG]
   */
   glib.variant.VariantG performSync(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
@@ -178,6 +180,7 @@ class Prompt : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
         returnType = the variant type of the prompt result
       Returns: null if the prompt was dismissed or an error occurred
+      Throws: [ErrorG]
   */
   glib.variant.VariantG run(string windowId, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {

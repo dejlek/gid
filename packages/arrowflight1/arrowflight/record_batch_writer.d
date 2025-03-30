@@ -48,6 +48,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
         schema = A #GArrowSchema.
         options = A #GArrowWriteOptions.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool begin(arrow.schema.Schema schema, arrow.write_options.WriteOptions options = null)
   {
@@ -65,6 +66,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
       Params:
         metadata = A #GArrowBuffer.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool writeMetadata(arrow.buffer.Buffer metadata)
   {
@@ -85,6 +87,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
         recordBatch = A #GArrowRecordBatch.
         metadata = A #GArrowBuffer.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch, arrow.buffer.Buffer metadata = null)
   {

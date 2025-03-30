@@ -102,6 +102,7 @@ class ColorDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the selected color, or
           `NULL` and error is set
+      Throws: [ErrorG]
   */
   gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
   {

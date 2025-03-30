@@ -102,6 +102,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the filename to read the page setup from
       Returns: the restored #GtkPageSetup
+      Throws: [ErrorG]
   */
   static gtk.page_setup.PageSetup newFromFile(string fileName)
   {
@@ -141,6 +142,7 @@ class PageSetup : gobject.object.ObjectG
         groupName = the name of the group in the key_file to read, or null
                        to use the default name “Page Setup”
       Returns: the restored #GtkPageSetup
+      Throws: [ErrorG]
   */
   static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -325,6 +327,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the filename to read the page setup from
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadFile(string fileName)
   {
@@ -346,6 +349,7 @@ class PageSetup : gobject.object.ObjectG
         groupName = the name of the group in the key_file to read, or null
                        to use the default name “Page Setup”
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -448,6 +452,7 @@ class PageSetup : gobject.object.ObjectG
       Params:
         fileName = the file to save to
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool toFile(string fileName)
   {

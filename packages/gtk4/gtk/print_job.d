@@ -233,6 +233,7 @@ class PrintJob : gobject.object.ObjectG
       Gets a cairo surface onto which the pages of
       the print job should be rendered.
       Returns: the cairo surface of job
+      Throws: [ErrorG]
   */
   cairo.surface.Surface getSurface()
   {
@@ -408,6 +409,7 @@ class PrintJob : gobject.object.ObjectG
       Params:
         fd = a file descriptor
       Returns: false if an error occurred
+      Throws: [ErrorG]
   */
   bool setSourceFd(int fd)
   {
@@ -431,6 +433,7 @@ class PrintJob : gobject.object.ObjectG
       Params:
         filename = the file to be printed
       Returns: false if an error occurred
+      Throws: [ErrorG]
   */
   bool setSourceFile(string filename)
   {

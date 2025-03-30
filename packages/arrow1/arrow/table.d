@@ -312,6 +312,7 @@ class Table : gobject.object.ObjectG
         sink = The output.
         properties = The properties for this write.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool writeAsFeather(arrow.output_stream.OutputStream sink, arrow.feather_write_properties.FeatherWriteProperties properties = null)
   {

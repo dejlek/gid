@@ -75,6 +75,7 @@ interface ProxyResolver
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
+      Throws: [ErrorG]
   */
   string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null);
 
@@ -99,6 +100,7 @@ interface ProxyResolver
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
+      Throws: [ErrorG]
   */
   string[] lookupFinish(gio.async_result.AsyncResult result);
 }

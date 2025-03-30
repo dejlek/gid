@@ -196,6 +196,7 @@ class PrintDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: Whether the call was successful
+      Throws: [ErrorG]
   */
   bool printFileFinish(gio.async_result.AsyncResult result)
   {
@@ -224,6 +225,7 @@ class PrintDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: a [gio.output_stream.OutputStream]
+      Throws: [ErrorG]
   */
   gio.output_stream.OutputStream printFinish(gio.async_result.AsyncResult result)
   {
@@ -343,6 +345,7 @@ class PrintDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: The [gtk.print_setup.PrintSetup] object that resulted from the call,
           or `NULL` if the call was not successful
+      Throws: [ErrorG]
   */
   gtk.print_setup.PrintSetup setupFinish(gio.async_result.AsyncResult result)
   {

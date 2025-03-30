@@ -228,6 +228,7 @@ class Window : gtk.bin.Bin
       Params:
         filename = location of icon file
       Returns: true if setting the icon succeeded.
+      Throws: [ErrorG]
   */
   static bool setDefaultIconFromFile(string filename)
   {
@@ -1784,6 +1785,7 @@ class Window : gtk.bin.Bin
       Params:
         filename = location of icon file
       Returns: true if setting the icon succeeded.
+      Throws: [ErrorG]
   */
   bool setIconFromFile(string filename)
   {

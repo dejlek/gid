@@ -101,6 +101,7 @@ class FileIOStream : gio.iostream.IOStream, gio.seekable.Seekable
         attributes = a file attribute query string.
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a #GFileInfo for the stream, or null on error.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -153,6 +154,7 @@ class FileIOStream : gio.iostream.IOStream, gio.seekable.Seekable
       Params:
         result = a #GAsyncResult.
       Returns: A #GFileInfo for the finished query.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {

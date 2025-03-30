@@ -60,6 +60,7 @@ class RecentInfo : gobject.boxed.Boxed
             be mapped to a [gio.app_info.AppInfo]; if null is used then the default
             application for the MIME type is used
       Returns: the newly created [gio.app_info.AppInfo]
+      Throws: [ErrorG]
   */
   gio.app_info.AppInfo createAppInfo(string appName = null)
   {

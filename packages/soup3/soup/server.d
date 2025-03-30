@@ -145,6 +145,7 @@ class Server : gobject.object.ObjectG
       Returns: true on success, false if the stream could not be
           accepted or any other error occurred (in which case error will be
           set).
+      Throws: [ErrorG]
   */
   bool acceptIostream(gio.iostream.IOStream stream, gio.socket_address.SocketAddress localAddr = null, gio.socket_address.SocketAddress remoteAddr = null)
   {
@@ -491,6 +492,7 @@ class Server : gobject.object.ObjectG
       Returns: true on success, false if address could not be
           bound or any other error occurred (in which case error will be
           set).
+      Throws: [ErrorG]
   */
   bool listen(gio.socket_address.SocketAddress address, soup.types.ServerListenOptions options)
   {
@@ -520,6 +522,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if port could not be bound
           or any other error occurred (in which case error will be set).
+      Throws: [ErrorG]
   */
   bool listenAll(uint port, soup.types.ServerListenOptions options)
   {
@@ -547,6 +550,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if port could not be bound
           or any other error occurred (in which case error will be set).
+      Throws: [ErrorG]
   */
   bool listenLocal(uint port, soup.types.ServerListenOptions options)
   {
@@ -568,6 +572,7 @@ class Server : gobject.object.ObjectG
         options = listening options for this server
       Returns: true on success, false if an error occurred (in
           which case error will be set).
+      Throws: [ErrorG]
   */
   bool listenSocket(gio.socket.Socket socket, soup.types.ServerListenOptions options)
   {

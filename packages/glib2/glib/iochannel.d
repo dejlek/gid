@@ -92,6 +92,7 @@ class IOChannel : gobject.boxed.Boxed
         mode = One of "r", "w", "a", "r+", "w+", "a+". These have
                  the same meaning as in fopen()
       Returns: A #GIOChannel on success, null on failure.
+      Throws: [IOChannelException]
   */
   static glib.iochannel.IOChannel newFile(string filename, string mode)
   {
@@ -159,6 +160,7 @@ class IOChannel : gobject.boxed.Boxed
       Returns: the status of the operation: One of
           `G_IO_STATUS_NORMAL`, `G_IO_STATUS_AGAIN`, or
           `G_IO_STATUS_ERROR`.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus flush()
   {
@@ -316,6 +318,7 @@ class IOChannel : gobject.boxed.Boxed
               is non-null. This indicates that the next UTF-8 character is
               too wide for the buffer.
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus readChars(ref ubyte[] buf, out size_t bytesRead)
   {
@@ -343,6 +346,7 @@ class IOChannel : gobject.boxed.Boxed
         length = location to store length of the read data, or null
         terminatorPos = location to store position of line terminator, or null
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus readLine(out string strReturn, out size_t length, out size_t terminatorPos)
   {
@@ -366,6 +370,7 @@ class IOChannel : gobject.boxed.Boxed
                    be overwritten.
         terminatorPos = location to store position of line terminator, or null
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus readLineString(glib.string_.String buffer, out size_t terminatorPos)
   {
@@ -389,6 +394,7 @@ class IOChannel : gobject.boxed.Boxed
                        character, but there may be other nuls in the intervening data.
       Returns: `G_IO_STATUS_NORMAL` on success.
             This function never returns `G_IO_STATUS_EOF`.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus readToEnd(out ubyte[] strReturn)
   {
@@ -413,6 +419,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         thechar = a location to return a character
       Returns: a #GIOStatus
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus readUnichar(out dchar thechar)
   {
@@ -457,6 +464,7 @@ class IOChannel : gobject.boxed.Boxed
                                is allowed. See the documentation for
                                g_io_channel_set_encoding () for details.
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus seekPosition(long offset, glib.types.SeekType type)
   {
@@ -567,6 +575,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         encoding = the encoding type
       Returns: `G_IO_STATUS_NORMAL` if the encoding was successfully set
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus setEncoding(string encoding = null)
   {
@@ -586,6 +595,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         flags = the flags to set on the IO channel
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus setFlags(glib.types.IOFlags flags)
   {
@@ -626,6 +636,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         flush = if true, flush pending
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus shutdown(bool flush)
   {
@@ -688,6 +699,7 @@ class IOChannel : gobject.boxed.Boxed
                           channel is blocking, this will always be equal
                           to count if count >= 0.
       Returns: the status of the operation.
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus writeChars(ubyte[] buf, out size_t bytesWritten)
   {
@@ -712,6 +724,7 @@ class IOChannel : gobject.boxed.Boxed
       Params:
         thechar = a character
       Returns: a #GIOStatus
+      Throws: [IOChannelException]
   */
   glib.types.IOStatus writeUnichar(dchar thechar)
   {

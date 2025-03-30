@@ -103,6 +103,7 @@ class Resolver : gobject.object.ObjectG
         cancellable = a #GCancellable, or null
       Returns: a hostname (either ASCII-only, or in ASCII-encoded
             form), or null on error.
+      Throws: [ErrorG]
   */
   string lookupByAddress(gio.inet_address.InetAddress address, gio.cancellable.Cancellable cancellable = null)
   {
@@ -152,6 +153,7 @@ class Resolver : gobject.object.ObjectG
         result = the result passed to your #GAsyncReadyCallback
       Returns: a hostname (either ASCII-only, or in ASCII-encoded
         form), or null on error.
+      Throws: [ErrorG]
   */
   string lookupByAddressFinish(gio.async_result.AsyncResult result)
   {
@@ -196,6 +198,7 @@ class Resolver : gobject.object.ObjectG
         of #GInetAddress, or null on error. You
         must unref each of the addresses and free the list when you are
         done with it. (You can use [gio.resolver.Resolver.freeAddresses] to do this.)
+      Throws: [ErrorG]
   */
   gio.inet_address.InetAddress[] lookupByName(string hostname, gio.cancellable.Cancellable cancellable = null)
   {
@@ -249,6 +252,7 @@ class Resolver : gobject.object.ObjectG
       Returns: a #GList
         of #GInetAddress, or null on error. See [gio.resolver.Resolver.lookupByName]
         for more details.
+      Throws: [ErrorG]
   */
   gio.inet_address.InetAddress[] lookupByNameFinish(gio.async_result.AsyncResult result)
   {
@@ -274,6 +278,7 @@ class Resolver : gobject.object.ObjectG
         of #GInetAddress, or null on error. You
         must unref each of the addresses and free the list when you are
         done with it. (You can use [gio.resolver.Resolver.freeAddresses] to do this.)
+      Throws: [ErrorG]
   */
   gio.inet_address.InetAddress[] lookupByNameWithFlags(string hostname, gio.types.ResolverNameLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -328,6 +333,7 @@ class Resolver : gobject.object.ObjectG
       Returns: a #GList
         of #GInetAddress, or null on error. See [gio.resolver.Resolver.lookupByName]
         for more details.
+      Throws: [ErrorG]
   */
   gio.inet_address.InetAddress[] lookupByNameWithFlagsFinish(gio.async_result.AsyncResult result)
   {
@@ -360,6 +366,7 @@ class Resolver : gobject.object.ObjectG
         #GVariant, or null on error. You must free each of the records and the list
         when you are done with it. (You can use [glib.list.List.freeFull] with
         [glib.variant.VariantG.unref] to do this.)
+      Throws: [ErrorG]
   */
   glib.variant.VariantG[] lookupRecords(string rrname, gio.types.ResolverRecordType recordType, gio.cancellable.Cancellable cancellable = null)
   {
@@ -417,6 +424,7 @@ class Resolver : gobject.object.ObjectG
         #GVariant, or null on error. You must free each of the records and the list
         when you are done with it. (You can use [glib.list.List.freeFull] with
         [glib.variant.VariantG.unref] to do this.)
+      Throws: [ErrorG]
   */
   glib.variant.VariantG[] lookupRecordsFinish(gio.async_result.AsyncResult result)
   {
@@ -461,6 +469,7 @@ class Resolver : gobject.object.ObjectG
         #GSrvTarget, or null on error. You must free each of the targets and the
         list when you are done with it. (You can use [gio.resolver.Resolver.freeTargets] to do
         this.)
+      Throws: [ErrorG]
   */
   gio.srv_target.SrvTarget[] lookupService(string service, string protocol, string domain, gio.cancellable.Cancellable cancellable = null)
   {
@@ -521,6 +530,7 @@ class Resolver : gobject.object.ObjectG
       Returns: a non-empty #GList of
         #GSrvTarget, or null on error. See [gio.resolver.Resolver.lookupService] for more
         details.
+      Throws: [ErrorG]
   */
   gio.srv_target.SrvTarget[] lookupServiceFinish(gio.async_result.AsyncResult result)
   {

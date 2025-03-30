@@ -112,6 +112,7 @@ interface FileChooser
         folder = a [gio.file.File] for the folder to add
       Returns: true if the folder could be added successfully,
           false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -264,6 +265,7 @@ interface FileChooser
         folder = a [gio.file.File] for the folder to remove
       Returns: true if the folder could be removed successfully,
           false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -319,6 +321,7 @@ interface FileChooser
         file = the [gio.file.File] for the new folder
       Returns: true if the folder could be changed successfully, false
           otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */
@@ -393,6 +396,7 @@ interface FileChooser
       Params:
         file = the [gio.file.File] to set as current
       Returns: Not useful
+      Throws: [ErrorG]
   
       Deprecated: Use [gtk.file_dialog.FileDialog] instead
   */

@@ -93,6 +93,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
             Nth is_valids is true, the Nth values is valid value. Otherwise
             the Nth value is null value.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendStrings(string[] values, bool[] isValids = null)
   {

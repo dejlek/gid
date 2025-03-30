@@ -108,6 +108,7 @@ class Regex : gobject.boxed.Boxed
         matchOptions = match options for the regular expression, or 0
       Returns: a #GRegex structure or null if an error occurred. Call
           [glib.regex.Regex.unref] when you are done with it
+      Throws: [RegexException]
   */
   this(string pattern, glib.types.RegexCompileFlags compileOptions, glib.types.RegexMatchFlags matchOptions)
   {
@@ -364,6 +365,7 @@ class Regex : gobject.boxed.Boxed
         matchInfo = pointer to location where to store
               the #GMatchInfo, or null if you do not need it
       Returns: true is the string matched, false otherwise
+      Throws: [RegexException]
   */
   bool matchAllFull(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo)
   {
@@ -442,6 +444,7 @@ class Regex : gobject.boxed.Boxed
         matchInfo = pointer to location where to store
               the #GMatchInfo, or null if you do not need it
       Returns: true is the string matched, false otherwise
+      Throws: [RegexException]
   */
   bool matchFull(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, out glib.match_info.MatchInfo matchInfo)
   {
@@ -496,6 +499,7 @@ class Regex : gobject.boxed.Boxed
         replacement = text to replace each match with
         matchOptions = options for the match
       Returns: a newly allocated string containing the replacements
+      Throws: [RegexException]
   */
   string replace(string string_, int startPosition, string replacement, glib.types.RegexMatchFlags matchOptions)
   {
@@ -567,6 +571,7 @@ class Regex : gobject.boxed.Boxed
         matchOptions = options for the match
         eval = a function to call for each match
       Returns: a newly allocated string containing the replacements
+      Throws: [RegexException]
   */
   string replaceEval(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, glib.types.RegexEvalCallback eval)
   {
@@ -610,6 +615,7 @@ class Regex : gobject.boxed.Boxed
         replacement = text to replace each match with
         matchOptions = options for the match
       Returns: a newly allocated string containing the replacements
+      Throws: [RegexException]
   */
   string replaceLiteral(string string_, int startPosition, string replacement, glib.types.RegexMatchFlags matchOptions)
   {
@@ -703,6 +709,7 @@ class Regex : gobject.boxed.Boxed
             If this is less than 1, the string is split completely
       Returns: a null-terminated gchar ** array. Free
         it using [glib.global.strfreev]
+      Throws: [RegexException]
   */
   string[] splitFull(string string_, int startPosition, glib.types.RegexMatchFlags matchOptions, int maxTokens)
   {
@@ -746,6 +753,7 @@ class Regex : gobject.boxed.Boxed
         hasReferences = location to store information about
             references in replacement or null
       Returns: whether replacement is a valid replacement string
+      Throws: [RegexException]
   */
   static bool checkReplacement(string replacement, out bool hasReferences)
   {

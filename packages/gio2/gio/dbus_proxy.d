@@ -107,6 +107,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         res = A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.new_].
       Returns: A #GDBusProxy or null if error is set.
            Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_proxy.DBusProxy newFinish(gio.async_result.AsyncResult res)
   {
@@ -126,6 +127,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         res = A #GAsyncResult obtained from the #GAsyncReadyCallback function passed to [gio.dbus_proxy.DBusProxy.newForBus].
       Returns: A #GDBusProxy or null if error is set.
            Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_proxy.DBusProxy newForBusFinish(gio.async_result.AsyncResult res)
   {
@@ -154,6 +156,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         cancellable = A #GCancellable or null.
       Returns: A #GDBusProxy or null if error is set.
            Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_proxy.DBusProxy newForBusSync(gio.types.BusType busType, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
@@ -203,6 +206,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         cancellable = A #GCancellable or null.
       Returns: A #GDBusProxy or null if error is set.
            Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_proxy.DBusProxy newSync(gio.dbus_connection.DBusConnection connection, gio.types.DBusProxyFlags flags, gio.dbus_interface_info.DBusInterfaceInfo info, string name, string objectPath, string interfaceName, gio.cancellable.Cancellable cancellable = null)
   {
@@ -385,6 +389,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         res = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.call].
       Returns: null if error is set. Otherwise a #GVariant tuple with
         return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callFinish(gio.async_result.AsyncResult res)
   {
@@ -443,6 +448,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         cancellable = A #GCancellable or null.
       Returns: null if error is set. Otherwise a #GVariant tuple with
         return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callSync(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
@@ -496,6 +502,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         res = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_proxy.DBusProxy.callWithUnixFdList].
       Returns: null if error is set. Otherwise a #GVariant tuple with
         return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callWithUnixFdListFinish(out gio.unix_fdlist.UnixFDList outFdList, gio.async_result.AsyncResult res)
   {
@@ -527,6 +534,7 @@ class DBusProxy : gobject.object.ObjectG, gio.async_initable.AsyncInitable, gio.
         cancellable = A #GCancellable or null.
       Returns: null if error is set. Otherwise a #GVariant tuple with
         return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callWithUnixFdListSync(string methodName, glib.variant.VariantG parameters, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {

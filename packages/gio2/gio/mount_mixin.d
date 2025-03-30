@@ -99,6 +99,7 @@ template MountT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.mount.Mount.ejectWithOperationFinish] instead.
   */
@@ -146,6 +147,7 @@ template MountT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   */
   override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
@@ -337,6 +339,7 @@ template MountT()
         result = a #GAsyncResult
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
+      Throws: [ErrorG]
   */
   override string[] guessContentTypeFinish(gio.async_result.AsyncResult result)
   {
@@ -376,6 +379,7 @@ template MountT()
         cancellable = optional #GCancellable object, null to ignore
       Returns: a null-terminated array of content types or null on error.
             Caller should free this array with [glib.global.strfreev] when done with it.
+      Throws: [ErrorG]
   */
   override string[] guessContentTypeSync(bool forceRescan, gio.cancellable.Cancellable cancellable = null)
   {
@@ -471,6 +475,7 @@ template MountT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully remounted. false otherwise.
+      Throws: [ErrorG]
   */
   override bool remountFinish(gio.async_result.AsyncResult result)
   {
@@ -527,6 +532,7 @@ template MountT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.mount.Mount.unmountWithOperationFinish] instead.
   */
@@ -574,6 +580,7 @@ template MountT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the mount was successfully unmounted. false otherwise.
+      Throws: [ErrorG]
   */
   override bool unmountWithOperationFinish(gio.async_result.AsyncResult result)
   {

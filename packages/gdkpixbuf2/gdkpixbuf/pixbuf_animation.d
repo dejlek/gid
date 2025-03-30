@@ -71,6 +71,7 @@ class PixbufAnimation : gobject.object.ObjectG
         filename = Name of file to load, in the GLib file
             name encoding
       Returns: A newly-created animation
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromFile(string filename)
   {
@@ -93,6 +94,7 @@ class PixbufAnimation : gobject.object.ObjectG
       Params:
         resourcePath = the path of the resource file
       Returns: A newly-created animation
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromResource(string resourcePath)
   {
@@ -124,6 +126,7 @@ class PixbufAnimation : gobject.object.ObjectG
         stream = a [gio.input_stream.InputStream] to load the pixbuf from
         cancellable = optional [gio.cancellable.Cancellable] object
       Returns: A newly-created animation
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -143,6 +146,7 @@ class PixbufAnimation : gobject.object.ObjectG
       Params:
         asyncResult = a #GAsyncResult
       Returns: the newly created animation
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_animation.PixbufAnimation newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {

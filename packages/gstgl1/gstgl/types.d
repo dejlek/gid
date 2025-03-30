@@ -123,6 +123,7 @@ alias GLBaseMemoryAllocatorCopyFunction = gstgl.glbase_memory.GLBaseMemory deleg
     Params:
       mem = a #GstGLBaseMemory
     Returns: whether the creation succeeded
+    Throws: [ErrorG]
 */
 alias GLBaseMemoryAllocatorCreateFunction = bool delegate(gstgl.glbase_memory.GLBaseMemory mem, GError **_err);
 

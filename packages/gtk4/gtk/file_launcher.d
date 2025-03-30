@@ -139,6 +139,7 @@ class FileLauncher : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if an application was launched,
             or `FALSE` and error is set
+      Throws: [ErrorG]
   */
   bool launchFinish(gio.async_result.AsyncResult result)
   {
@@ -188,6 +189,7 @@ class FileLauncher : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if an application was launched,
             or `FALSE` and error is set
+      Throws: [ErrorG]
   */
   bool openContainingFolderFinish(gio.async_result.AsyncResult result)
   {

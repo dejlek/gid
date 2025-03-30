@@ -120,6 +120,7 @@ class Thread : gobject.boxed.Boxed
         name = an (optional) name for the new thread
         func = a function to execute in the new thread
       Returns: the new #GThread, or null if an error occurred
+      Throws: [ThreadException]
   */
   static glib.thread.Thread tryNew(string name, glib.types.ThreadFunc func)
   {

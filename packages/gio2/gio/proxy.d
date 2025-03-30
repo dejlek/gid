@@ -62,6 +62,7 @@ interface Proxy
       Returns: a #GIOStream that will replace connection. This might
                       be the same as connection, in which case a reference
                       will be added.
+      Throws: [ErrorG]
   */
   gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null);
 
@@ -82,6 +83,7 @@ interface Proxy
       Params:
         result = a #GAsyncResult
       Returns: a #GIOStream.
+      Throws: [ErrorG]
   */
   gio.iostream.IOStream connectFinish(gio.async_result.AsyncResult result);
 

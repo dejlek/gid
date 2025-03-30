@@ -75,6 +75,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
       Returns: a #GSocketAddress (owned by the caller), or null on
             error (in which case *error will be set) or if there are no
             more addresses.
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress next(gio.cancellable.Cancellable cancellable = null)
   {
@@ -125,6 +126,7 @@ class SocketAddressEnumerator : gobject.object.ObjectG
       Returns: a #GSocketAddress (owned by the caller), or null on
             error (in which case *error will be set) or if there are no
             more addresses.
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress nextFinish(gio.async_result.AsyncResult result)
   {

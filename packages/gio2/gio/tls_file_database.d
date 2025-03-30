@@ -34,6 +34,7 @@ interface TlsFileDatabase
         anchors = filename of anchor certificate authorities.
       Returns: the new
         #GTlsFileDatabase, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_file_database.TlsFileDatabase new_(string anchors)
   {

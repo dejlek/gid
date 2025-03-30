@@ -95,6 +95,7 @@ class TlsDatabase : gobject.object.ObjectG
         cancellable = a #GCancellable, or null
       Returns: a newly allocated
         #GTlsCertificate, or null. Use [gobject.object.ObjectG.unref] to release the certificate.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate lookupCertificateForHandle(string handle, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -146,6 +147,7 @@ class TlsDatabase : gobject.object.ObjectG
         result = a #GAsyncResult.
       Returns: a newly allocated #GTlsCertificate object.
         Use [gobject.object.ObjectG.unref] to release the certificate.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate lookupCertificateForHandleFinish(gio.async_result.AsyncResult result)
   {
@@ -187,6 +189,7 @@ class TlsDatabase : gobject.object.ObjectG
         cancellable = a #GCancellable, or null
       Returns: a newly allocated issuer #GTlsCertificate,
         or null. Use [gobject.object.ObjectG.unref] to release the certificate.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate lookupCertificateIssuer(gio.tls_certificate.TlsCertificate certificate, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -233,6 +236,7 @@ class TlsDatabase : gobject.object.ObjectG
         result = a #GAsyncResult.
       Returns: a newly allocated issuer #GTlsCertificate,
         or null. Use [gobject.object.ObjectG.unref] to release the certificate.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate lookupCertificateIssuerFinish(gio.async_result.AsyncResult result)
   {
@@ -258,6 +262,7 @@ class TlsDatabase : gobject.object.ObjectG
         cancellable = a #GCancellable, or null
       Returns: a newly allocated list of #GTlsCertificate
         objects. Use [gobject.object.ObjectG.unref] on each certificate, and [glib.list.List.free] on the release the list.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate[] lookupCertificatesIssuedBy(ubyte[] issuerRawDn, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseLookupFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -312,6 +317,7 @@ class TlsDatabase : gobject.object.ObjectG
         result = a #GAsyncResult.
       Returns: a newly allocated list of #GTlsCertificate
         objects. Use [gobject.object.ObjectG.unref] on each certificate, and [glib.list.List.free] on the release the list.
+      Throws: [ErrorG]
   */
   gio.tls_certificate.TlsCertificate[] lookupCertificatesIssuedByFinish(gio.async_result.AsyncResult result)
   {
@@ -395,6 +401,7 @@ class TlsDatabase : gobject.object.ObjectG
         cancellable = a #GCancellable, or null
       Returns: the appropriate #GTlsCertificateFlags which represents the
         result of verification.
+      Throws: [ErrorG]
   */
   gio.types.TlsCertificateFlags verifyChain(gio.tls_certificate.TlsCertificate chain, string purpose, gio.socket_connectable.SocketConnectable identity, gio.tls_interaction.TlsInteraction interaction, gio.types.TlsDatabaseVerifyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -455,6 +462,7 @@ class TlsDatabase : gobject.object.ObjectG
         result = a #GAsyncResult.
       Returns: the appropriate #GTlsCertificateFlags which represents the
         result of verification.
+      Throws: [ErrorG]
   */
   gio.types.TlsCertificateFlags verifyChainFinish(gio.async_result.AsyncResult result)
   {

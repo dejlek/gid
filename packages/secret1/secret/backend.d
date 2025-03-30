@@ -63,6 +63,7 @@ interface Backend
         result = the asynchronous result passed to the callback
       Returns: a new reference to a #SecretBackend proxy, which
           should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.backend.Backend getFinish(gio.async_result.AsyncResult result)
   {

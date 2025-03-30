@@ -119,6 +119,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
               passed to [gio.dbus_connection.DBusConnection.new_].
       Returns: a #GDBusConnection or null if error is set. Free
             with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_connection.DBusConnection newFinish(gio.async_result.AsyncResult res)
   {
@@ -139,6 +140,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
               to [gio.dbus_connection.DBusConnection.new_]
       Returns: a #GDBusConnection or null if error is set.
             Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_connection.DBusConnection newForAddressFinish(gio.async_result.AsyncResult res)
   {
@@ -177,6 +179,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         cancellable = a #GCancellable or null
       Returns: a #GDBusConnection or null if error is set.
             Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_connection.DBusConnection newForAddressSync(string address, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -215,6 +218,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         cancellable = a #GCancellable or null
       Returns: a #GDBusConnection or null if error is set.
             Free with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_connection.DBusConnection newSync(gio.iostream.IOStream stream, string guid, gio.types.DBusConnectionFlags flags, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -467,6 +471,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to [gio.dbus_connection.DBusConnection.call]
       Returns: null if error is set. Otherwise a non-floating
             #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callFinish(gio.async_result.AsyncResult res)
   {
@@ -532,6 +537,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         cancellable = a #GCancellable or null
       Returns: null if error is set. Otherwise a non-floating
             #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.cancellable.Cancellable cancellable = null)
   {
@@ -622,6 +628,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
               [gio.dbus_connection.DBusConnection.callWithUnixFdList]
       Returns: null if error is set. Otherwise a non-floating
             #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callWithUnixFdListFinish(out gio.unix_fdlist.UnixFDList outFdList, gio.async_result.AsyncResult res)
   {
@@ -660,6 +667,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         cancellable = a #GCancellable or null
       Returns: null if error is set. Otherwise a non-floating
             #GVariant tuple with return values. Free with [glib.variant.VariantG.unref].
+      Throws: [ErrorG]
   */
   glib.variant.VariantG callWithUnixFdListSync(string busName, string objectPath, string interfaceName, string methodName, glib.variant.VariantG parameters, glib.variant_type.VariantType replyType, gio.types.DBusCallFlags flags, int timeoutMsec, gio.unix_fdlist.UnixFDList fdList, out gio.unix_fdlist.UnixFDList outFdList, gio.cancellable.Cancellable cancellable = null)
   {
@@ -731,6 +739,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
               to [gio.dbus_connection.DBusConnection.close]
       Returns: true if the operation succeeded, false if error is set
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult res)
   {
@@ -751,6 +760,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
       Params:
         cancellable = a #GCancellable or null
       Returns: true if the operation succeeded, false if error is set
+      Throws: [ErrorG]
   */
   bool closeSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -780,6 +790,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         parameters = a #GVariant tuple with parameters for the signal
                        or null if not passing parameters
       Returns: true unless error is set
+      Throws: [ErrorG]
   */
   bool emitSignal(string destinationBusName, string objectPath, string interfaceName, string signalName, glib.variant.VariantG parameters = null)
   {
@@ -822,6 +833,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         objectPath = a D-Bus object path
         actionGroup = a #GActionGroup
       Returns: the ID of the export (never zero), or 0 in case of failure
+      Throws: [ErrorG]
   */
   uint exportActionGroup(string objectPath, gio.action_group.ActionGroup actionGroup)
   {
@@ -856,6 +868,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         objectPath = a D-Bus object path
         menu = a #GMenuModel
       Returns: the ID of the export (never zero), or 0 in case of failure
+      Throws: [ErrorG]
   */
   uint exportMenuModel(string objectPath, gio.menu_model.MenuModel menu)
   {
@@ -911,6 +924,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed
               to [gio.dbus_connection.DBusConnection.flush]
       Returns: true if the operation succeeded, false if error is set
+      Throws: [ErrorG]
   */
   bool flushFinish(gio.async_result.AsyncResult res)
   {
@@ -931,6 +945,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
       Params:
         cancellable = a #GCancellable or null
       Returns: true if the operation succeeded, false if error is set
+      Throws: [ErrorG]
   */
   bool flushSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1086,6 +1101,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         setPropertyClosure = #GClosure for setting a property.
       Returns: 0 if error is set, otherwise a registration ID (never 0)
         that can be used with [gio.dbus_connection.DBusConnection.unregisterObject] .
+      Throws: [ErrorG]
   */
   uint registerObject(string objectPath, gio.dbus_interface_info.DBusInterfaceInfo interfaceInfo, gobject.closure.Closure methodCallClosure = null, gobject.closure.Closure getPropertyClosure = null, gobject.closure.Closure setPropertyClosure = null)
   {
@@ -1143,6 +1159,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         userDataFreeFunc = function to call when the subtree is unregistered
       Returns: 0 if error is set, otherwise a subtree registration ID (never 0)
         that can be used with [gio.dbus_connection.DBusConnection.unregisterSubtree]
+      Throws: [ErrorG]
   */
   uint registerSubtree(string objectPath, gio.types.DBusSubtreeVTable vtable, gio.types.DBusSubtreeFlags flags, void* userData, glib.types.DestroyNotify userDataFreeFunc)
   {
@@ -1212,6 +1229,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
               to message when sending it or null
       Returns: true if the message was well-formed and queued for
             transmission, false if error is set
+      Throws: [ErrorG]
   */
   bool sendMessage(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, out uint outSerial)
   {
@@ -1296,6 +1314,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         res = a #GAsyncResult obtained from the #GAsyncReadyCallback passed to
               [gio.dbus_connection.DBusConnection.sendMessageWithReply]
       Returns: a locked #GDBusMessage or null if error is set
+      Throws: [ErrorG]
   */
   gio.dbus_message.DBusMessage sendMessageWithReplyFinish(gio.async_result.AsyncResult res)
   {
@@ -1350,6 +1369,7 @@ class DBusConnection : gobject.object.ObjectG, gio.async_initable.AsyncInitable,
         cancellable = a #GCancellable or null
       Returns: a locked #GDBusMessage that is the reply
             to message or null if error is set
+      Throws: [ErrorG]
   */
   gio.dbus_message.DBusMessage sendMessageWithReplySync(gio.dbus_message.DBusMessage message, gio.types.DBusSendMessageFlags flags, int timeoutMsec, out uint outSerial, gio.cancellable.Cancellable cancellable = null)
   {

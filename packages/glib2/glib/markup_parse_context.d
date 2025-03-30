@@ -65,6 +65,7 @@ class MarkupParseContext : gobject.boxed.Boxed
       This function reports an error if the document isn't complete,
       for example if elements are still open.
       Returns: true on success, false if an error was set
+      Throws: [ErrorG]
   */
   bool endParse()
   {
@@ -161,6 +162,7 @@ class MarkupParseContext : gobject.boxed.Boxed
         text = chunk of text to parse
         textLen = length of text in bytes
       Returns: false if an error occurred, true on success
+      Throws: [ErrorG]
   */
   bool parse(string text, ptrdiff_t textLen)
   {

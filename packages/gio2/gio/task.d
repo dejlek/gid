@@ -807,6 +807,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or false on error
+      Throws: [ErrorG]
   */
   bool propagateBoolean()
   {
@@ -827,6 +828,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t propagateInt()
   {
@@ -848,6 +850,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Since this method transfers ownership of the return value (or
       error) to the caller, you may only call it once.
       Returns: the task result, or null on error
+      Throws: [ErrorG]
   */
   void* propagatePointer()
   {
@@ -873,6 +876,7 @@ class Task : gobject.object.ObjectG, gio.async_result.AsyncResult
       Params:
         value = return location for the #GValue
       Returns: true if task succeeded, false on error.
+      Throws: [ErrorG]
   */
   bool propagateValue(out gobject.value.Value value)
   {

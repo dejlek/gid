@@ -128,6 +128,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
         defaultPort = the default port if not in host_and_port
       Returns: the new
           #GNetworkAddress, or null on error
+      Throws: [ErrorG]
   */
   static gio.network_address.NetworkAddress parse(string hostAndPort, ushort defaultPort)
   {
@@ -154,6 +155,7 @@ class NetworkAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConn
         defaultPort = The default port if none is found in the URI
       Returns: the new
           #GNetworkAddress, or null on error
+      Throws: [ErrorG]
   */
   static gio.network_address.NetworkAddress parseUri(string uri, ushort defaultPort)
   {

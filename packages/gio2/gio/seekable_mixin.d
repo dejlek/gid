@@ -75,6 +75,7 @@ template SeekableT()
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
+      Throws: [ErrorG]
   */
   override bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable = null)
   {
@@ -115,6 +116,7 @@ template SeekableT()
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
+      Throws: [ErrorG]
   */
   override bool truncate(long offset, gio.cancellable.Cancellable cancellable = null)
   {

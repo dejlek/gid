@@ -192,6 +192,7 @@ class FileLoader : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: whether the contents has been loaded successfully.
+      Throws: [ErrorG]
   */
   bool loadFinish(gio.async_result.AsyncResult result)
   {

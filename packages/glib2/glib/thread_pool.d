@@ -145,6 +145,7 @@ class ThreadPool
       Params:
         data = a new task for pool
       Returns: true on success, false if an error occurred
+      Throws: [ErrorG]
   */
   bool push(void* data = null)
   {
@@ -182,6 +183,7 @@ class ThreadPool
         maxThreads = a new maximal number of threads for pool,
               or -1 for unlimited
       Returns: true on success, false if an error occurred
+      Throws: [ErrorG]
   */
   bool setMaxThreads(int maxThreads)
   {

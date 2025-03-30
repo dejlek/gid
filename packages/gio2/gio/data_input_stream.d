@@ -90,6 +90,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 8-bit/1-byte value read from the stream or `0`
         if an error occurred.
+      Throws: [ErrorG]
   */
   ubyte readByteData(gio.cancellable.Cancellable cancellable = null)
   {
@@ -111,6 +112,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 16-bit/2-byte value read from stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   short readInt16(gio.cancellable.Cancellable cancellable = null)
   {
@@ -136,6 +138,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 32-bit/4-byte value read from the stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   int readInt32(gio.cancellable.Cancellable cancellable = null)
   {
@@ -161,6 +164,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: a signed 64-bit/8-byte value read from stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   long readInt64(gio.cancellable.Cancellable cancellable = null)
   {
@@ -213,6 +217,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
          null and error will be set. For UTF-8 conversion errors, the set
          error domain is `G_CONVERT_ERROR`.  If there's no content to read,
          it will still return null, but error won't be set.
+      Throws: [ErrorG]
   */
   string readLineFinishUtf8(gio.async_result.AsyncResult result, out size_t length)
   {
@@ -242,6 +247,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
          conversion errors, the set error domain is `G_CONVERT_ERROR`.  If
          there's no content to read, it will still return null, but error
          won't be set.
+      Throws: [ErrorG]
   */
   string readLineUtf8(out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
@@ -264,6 +270,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 16-bit/2-byte value read from the stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   ushort readUint16(gio.cancellable.Cancellable cancellable = null)
   {
@@ -289,6 +296,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 32-bit/4-byte value read from the stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   uint readUint32(gio.cancellable.Cancellable cancellable = null)
   {
@@ -314,6 +322,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: an unsigned 64-bit/8-byte read from stream or `0` if
         an error occurred.
+      Throws: [ErrorG]
   */
   ulong readUint64(gio.cancellable.Cancellable cancellable = null)
   {
@@ -346,6 +355,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.data_input_stream.DataInputStream.readUpto] instead, which has more
             consistent behaviour regarding the stop character.
@@ -415,6 +425,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.data_input_stream.DataInputStream.readUptoFinish] instead, which
             has more consistent behaviour regarding the stop character.
@@ -454,6 +465,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error
+      Throws: [ErrorG]
   */
   string readUpto(string stopChars, ptrdiff_t stopCharsLen, out size_t length, gio.cancellable.Cancellable cancellable = null)
   {
@@ -524,6 +536,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
             before encountering any of the stop characters. Set length to
             a #gsize to get the length of the string. This function will
             return null on an error.
+      Throws: [ErrorG]
   */
   string readUptoFinish(gio.async_result.AsyncResult result, out size_t length)
   {

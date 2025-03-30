@@ -78,6 +78,7 @@ void busGet(gio.types.BusType busType, gio.cancellable.Cancellable cancellable =
             to [gio.global.busGet]
     Returns: a #GDBusConnection or null if error is set.
           Free with [gobject.object.ObjectG.unref].
+    Throws: [ErrorG]
 */
 gio.dbus_connection.DBusConnection busGetFinish(gio.async_result.AsyncResult res)
 {
@@ -115,6 +116,7 @@ gio.dbus_connection.DBusConnection busGetFinish(gio.async_result.AsyncResult res
       cancellable = a #GCancellable or null
     Returns: a #GDBusConnection or null if error is set.
           Free with [gobject.object.ObjectG.unref].
+    Throws: [ErrorG]
 */
 gio.dbus_connection.DBusConnection busGetSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null)
 {
@@ -637,6 +639,7 @@ string dbusAddressEscapeValue(string string_)
       cancellable = a #GCancellable or null
     Returns: a valid D-Bus address string for bus_type or
           null if error is set
+    Throws: [ErrorG]
 */
 string dbusAddressGetForBusSync(gio.types.BusType busType, gio.cancellable.Cancellable cancellable = null)
 {
@@ -693,6 +696,7 @@ void dbusAddressGetStream(string address, gio.cancellable.Cancellable cancellabl
       res = A #GAsyncResult obtained from the GAsyncReadyCallback passed to [gio.global.dbusAddressGetStream].
       outGuid = null or return location to store the GUID extracted from address, if any.
     Returns: A #GIOStream or null if error is set.
+    Throws: [ErrorG]
 */
 gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult res, out string outGuid)
 {
@@ -724,6 +728,7 @@ gio.iostream.IOStream dbusAddressGetStreamFinish(gio.async_result.AsyncResult re
       outGuid = null or return location to store the GUID extracted from address, if any.
       cancellable = A #GCancellable or null.
     Returns: A #GIOStream or null if error is set.
+    Throws: [ErrorG]
 */
 gio.iostream.IOStream dbusAddressGetStreamSync(string address, out string outGuid, gio.cancellable.Cancellable cancellable = null)
 {
@@ -991,6 +996,7 @@ bool dbusIsName(string string_)
       string_ = A string.
     Returns: true if string is a valid D-Bus address that is
       supported by this library, false if error is set.
+    Throws: [ErrorG]
 */
 bool dbusIsSupportedAddress(string string_)
 {
@@ -1375,6 +1381,7 @@ glib.source.Source pollableSourceNewFull(gobject.object.ObjectG pollableStream, 
       blocking = whether to do blocking I/O
       cancellable = optional #GCancellable object, null to ignore.
     Returns: the number of bytes read, or -1 on error.
+    Throws: [ErrorG]
 */
 ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
 {
@@ -1410,6 +1417,7 @@ ptrdiff_t pollableStreamRead(gio.input_stream.InputStream stream, ubyte[] buffer
       blocking = whether to do blocking I/O
       cancellable = optional #GCancellable object, null to ignore.
     Returns: the number of bytes written, or -1 on error.
+    Throws: [ErrorG]
 */
 ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
 {
@@ -1455,6 +1463,7 @@ ptrdiff_t pollableStreamWrite(gio.output_stream.OutputStream stream, ubyte[] buf
           written to the stream
       cancellable = optional #GCancellable object, null to ignore.
     Returns: true on success, false if there was an error
+    Throws: [ErrorG]
 */
 bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffer, bool blocking, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
 {
@@ -1483,6 +1492,7 @@ bool pollableStreamWriteAll(gio.output_stream.OutputStream stream, ubyte[] buffe
       path = A pathname inside the resource
       lookupFlags = A #GResourceLookupFlags
     Returns: an array of constant strings
+    Throws: [ErrorG]
 */
 string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags lookupFlags)
 {
@@ -1520,6 +1530,7 @@ string[] resourcesEnumerateChildren(string path, gio.types.ResourceLookupFlags l
       flags = a location to place the #GResourceFlags about the file,
            or null if the flags are not needed
     Returns: true if the file was found. false if there were errors
+    Throws: [ErrorG]
 */
 bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, out size_t size, out uint flags)
 {
@@ -1553,6 +1564,7 @@ bool resourcesGetInfo(string path, gio.types.ResourceLookupFlags lookupFlags, ou
       lookupFlags = A #GResourceLookupFlags
     Returns: #GBytes or null on error.
           Free the returned object with [glib.bytes.Bytes.unref]
+    Throws: [ErrorG]
 */
 glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags lookupFlags)
 {
@@ -1578,6 +1590,7 @@ glib.bytes.Bytes resourcesLookupData(string path, gio.types.ResourceLookupFlags 
       lookupFlags = A #GResourceLookupFlags
     Returns: #GInputStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref]
+    Throws: [ErrorG]
 */
 gio.input_stream.InputStream resourcesOpenStream(string path, gio.types.ResourceLookupFlags lookupFlags)
 {

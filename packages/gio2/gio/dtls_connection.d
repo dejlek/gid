@@ -72,6 +72,7 @@ interface DtlsConnection
       Params:
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
+      Throws: [ErrorG]
   */
   bool close(gio.cancellable.Cancellable cancellable = null);
 
@@ -94,6 +95,7 @@ interface DtlsConnection
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult result);
 
@@ -231,6 +233,7 @@ interface DtlsConnection
       Params:
         cancellable = a #GCancellable, or null
       Returns: success or failure
+      Throws: [ErrorG]
   */
   bool handshake(gio.cancellable.Cancellable cancellable = null);
 
@@ -253,6 +256,7 @@ interface DtlsConnection
         result = a #GAsyncResult.
       Returns: true on success, false on failure, in which
         case error will be set.
+      Throws: [ErrorG]
   */
   bool handshakeFinish(gio.async_result.AsyncResult result);
 
@@ -400,6 +404,7 @@ interface DtlsConnection
         shutdownWrite = true to stop sending outgoing datagrams
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
+      Throws: [ErrorG]
   */
   bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable = null);
 
@@ -424,6 +429,7 @@ interface DtlsConnection
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
+      Throws: [ErrorG]
   */
   bool shutdownFinish(gio.async_result.AsyncResult result);
 

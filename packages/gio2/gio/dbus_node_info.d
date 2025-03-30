@@ -87,6 +87,7 @@ class DBusNodeInfo : gobject.boxed.Boxed
         xmlData = Valid D-Bus introspection XML.
       Returns: A #GDBusNodeInfo structure or null if error is set. Free
         with [gio.dbus_node_info.DBusNodeInfo.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {

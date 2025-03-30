@@ -339,6 +339,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
             or guides
       Returns: the list of
           [gtk.constraint.Constraint] instances that were added to the layout
+      Throws: [ErrorG]
   */
   gtk.constraint.Constraint[] addConstraintsFromDescription(string[] lines, int hspacing, int vspacing, gtk.constraint_target.ConstraintTarget[string] views)
   {

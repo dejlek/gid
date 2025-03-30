@@ -83,6 +83,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
         parent = a #GSettingsSchemaSource, or null
         trusted = true, if the directory is trusted
       Returns: 
+      Throws: [ErrorG]
   */
   static gio.settings_schema_source.SettingsSchemaSource newFromDirectory(string directory, gio.settings_schema_source.SettingsSchemaSource parent, bool trusted)
   {

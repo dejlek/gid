@@ -111,6 +111,7 @@ class Layout : gobject.object.ObjectG
         bytes = the bytes containing the data
         flags = [pango.types.LayoutDeserializeFlags]
       Returns: a new [pango.layout.Layout]
+      Throws: [ErrorG]
   */
   static pango.layout.Layout deserialize(pango.context.Context context, glib.bytes.Bytes bytes, pango.types.LayoutDeserializeFlags flags)
   {
@@ -1296,6 +1297,7 @@ class Layout : gobject.object.ObjectG
         flags = [pango.types.LayoutSerializeFlags]
         filename = the file to save it to
       Returns: true if saving was successful
+      Throws: [ErrorG]
   */
   bool writeToFile(pango.types.LayoutSerializeFlags flags, string filename)
   {

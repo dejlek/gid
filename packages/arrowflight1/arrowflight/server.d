@@ -69,6 +69,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
         reader = A #GAFlightMessageReader.
         writer = A #GAFlightMetadataWriter.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool doPut(arrowflight.server_call_context.ServerCallContext context, arrowflight.message_reader.MessageReader reader, arrowflight.metadata_writer.MetadataWriter writer)
   {
@@ -127,6 +128,7 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
       Shuts down the serve. This function can be called from signal
       handler or another thread.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool shutdown()
   {

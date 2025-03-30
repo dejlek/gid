@@ -139,6 +139,7 @@ class DmabufTextureBuilder : gobject.object.ObjectG
         data = user data to pass to the destroy function
       Returns: a newly built [gdk.texture.Texture] or `NULL`
           if the format is not supported
+      Throws: [ErrorG]
   */
   gdk.texture.Texture build(glib.types.DestroyNotify destroy = null, void* data = null)
   {

@@ -100,6 +100,7 @@ json.node.Node boxedSerialize(gobject.types.GType gboxedType, const(void)* boxed
       length = length of the data stream (unused)
     Returns: a new object instance of the given
         type
+    Throws: [ErrorG]
 
     Deprecated: Use `funcJson.gobject_from_data` instead
 */
@@ -126,6 +127,7 @@ gobject.object.ObjectG constructGobject(gobject.types.GType gtype, string data, 
     Params:
       str = a valid UTF-8 string containing JSON data
     Returns: the root node of the JSON tree
+    Throws: [ErrorG]
 */
 json.node.Node fromString(string str)
 {
@@ -173,6 +175,7 @@ gobject.object.ObjectG gobjectDeserialize(gobject.types.GType gtype, json.node.N
       data = a JSON data stream
       length = length of the data stream, or -1 if it is `NUL`-terminated
     Returns: a new object instance of the given type
+    Throws: [ErrorG]
 */
 gobject.object.ObjectG gobjectFromData(gobject.types.GType gtype, string data, ptrdiff_t length)
 {
@@ -255,6 +258,7 @@ string gobjectToData(gobject.object.ObjectG gobject, out size_t length)
       jsonNode = the node to convert
       signature = a valid [glib.variant.VariantG] type string
     Returns: A newly created [glib.variant.VariantG]
+    Throws: [ErrorG]
 */
 glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signature = null)
 {
@@ -286,6 +290,7 @@ glib.variant.VariantG gvariantDeserialize(json.node.Node jsonNode, string signat
       length = The length of json, or -1 if `NUL`-terminated
       signature = A valid [glib.variant.VariantG] type string
     Returns: A newly created [glib.variant.VariantG]D compliant
+    Throws: [ErrorG]
 */
 glib.variant.VariantG gvariantDeserializeData(string json, ptrdiff_t length, string signature = null)
 {

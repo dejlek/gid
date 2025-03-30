@@ -62,6 +62,7 @@ class RecentInfo : gobject.boxed.Boxed
       Returns: the newly created #GAppInfo, or null.
           In case of error, error will be set either with a
           `GTK_RECENT_MANAGER_ERROR` or a `G_IO_ERROR`
+      Throws: [ErrorG]
   */
   gio.app_info.AppInfo createAppInfo(string appName = null)
   {

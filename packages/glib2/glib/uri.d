@@ -373,6 +373,7 @@ class Uri : gobject.boxed.Boxed
         uriRef = a string representing a relative or absolute URI
         flags = flags describing how to parse uri_ref
       Returns: a new #GUri, or NULL on error.
+      Throws: [UriException]
   */
   glib.uri.Uri parseRelative(string uriRef, glib.types.UriFlags flags)
   {
@@ -581,6 +582,7 @@ class Uri : gobject.boxed.Boxed
         uriString = a string containing an absolute URI
         flags = flags for parsing uri_string
       Returns: true if uri_string is a valid absolute URI, false on error.
+      Throws: [UriException]
   */
   static bool isValid(string uriString, glib.types.UriFlags flags)
   {
@@ -715,6 +717,7 @@ class Uri : gobject.boxed.Boxed
         uriString = a string representing an absolute URI
         flags = flags describing how to parse uri_string
       Returns: a new #GUri, or NULL on error.
+      Throws: [UriException]
   */
   static glib.uri.Uri parse(string uriString, glib.types.UriFlags flags)
   {
@@ -766,6 +769,7 @@ class Uri : gobject.boxed.Boxed
         flags = flags to modify the way the parameters are handled.
       Returns: A hash table of attribute/value pairs, with both names and values
             fully-decoded; or null on error.
+      Throws: [UriException]
   */
   static string[string] parseParams(string params, ptrdiff_t length, string separators, glib.types.UriParamsFlags flags)
   {
@@ -845,6 +849,7 @@ class Uri : gobject.boxed.Boxed
         flags = flags describing how to parse uri_ref
       Returns: the resolved URI string,
         or NULL on error.
+      Throws: [UriException]
   */
   static string resolveRelative(string baseUriString, string uriRef, glib.types.UriFlags flags)
   {
@@ -896,6 +901,7 @@ class Uri : gobject.boxed.Boxed
              the fragment, or null
       Returns: true if uri_ref parsed successfully, false
           on error.
+      Throws: [UriException]
   */
   static bool split(string uriRef, glib.types.UriFlags flags, out string scheme, out string userinfo, out string host, out int port, out string path, out string query, out string fragment)
   {
@@ -939,6 +945,7 @@ class Uri : gobject.boxed.Boxed
              port, or `-1`
       Returns: true if uri_string parsed successfully,
           false on error.
+      Throws: [UriException]
   */
   static bool splitNetwork(string uriString, glib.types.UriFlags flags, out string scheme, out string host, out int port)
   {
@@ -991,6 +998,7 @@ class Uri : gobject.boxed.Boxed
              the fragment, or null
       Returns: true if uri_ref parsed successfully, false
           on error.
+      Throws: [UriException]
   */
   static bool splitWithUser(string uriRef, glib.types.UriFlags flags, out string scheme, out string user, out string password, out string authParams, out string host, out int port, out string path, out string query, out string fragment)
   {
@@ -1040,6 +1048,7 @@ class Uri : gobject.boxed.Boxed
       Returns: an unescaped version of escaped_string
             or null on error (if decoding failed, using `G_URI_ERROR_FAILED` error
             code). The returned #GBytes should be unreffed when no longer needed.
+      Throws: [UriException]
   */
   static glib.bytes.Bytes unescapeBytes(string escapedString, ptrdiff_t length, string illegalCharacters = null)
   {

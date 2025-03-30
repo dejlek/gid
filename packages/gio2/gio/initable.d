@@ -89,6 +89,7 @@ interface Initable
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true if successful. If an error has occurred, this function will
             return false and set error appropriately if present.
+      Throws: [ErrorG]
   */
   bool init_(gio.cancellable.Cancellable cancellable = null);
 }

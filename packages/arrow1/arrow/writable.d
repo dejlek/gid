@@ -22,6 +22,7 @@ interface Writable
   /**
       It ensures writing all data on memory to storage.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool flush();
 

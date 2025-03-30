@@ -41,6 +41,7 @@ class StreamListener : gobject.object.ObjectG
   /**
       Processes an EOS event.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onEos()
   {
@@ -59,6 +60,7 @@ class StreamListener : gobject.object.ObjectG
         recordBatch = A decoded #GArrowRecordBatch.
         metadata = A decoded metadata.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata = null)
   {
@@ -79,6 +81,7 @@ class StreamListener : gobject.object.ObjectG
         schema = A decoded #GArrowSchema.
         filteredSchema = A decoded #GArrowSchema that only has read fields.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onSchemaDecoded(arrow.schema.Schema schema, arrow.schema.Schema filteredSchema)
   {

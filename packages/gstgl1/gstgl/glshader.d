@@ -59,6 +59,7 @@ class GLShader : gst.object.ObjectGst
       Params:
         context = a #GstGLContext
       Returns: a default shader or null on failure
+      Throws: [ErrorG]
   */
   static gstgl.glshader.GLShader newDefault(gstgl.glcontext.GLContext context)
   {
@@ -183,6 +184,7 @@ class GLShader : gst.object.ObjectGst
       Params:
         stage = a #GstGLSLStage to attach
       Returns: whether stage could be compiled and attached to shader
+      Throws: [ErrorG]
   */
   bool compileAttachStage(gstgl.glslstage.GLSLStage stage)
   {
@@ -255,6 +257,7 @@ class GLShader : gst.object.ObjectGst
       
       Note: must be called in the GL thread
       Returns: whether shader could be linked together.
+      Throws: [ErrorG]
   */
   bool link()
   {

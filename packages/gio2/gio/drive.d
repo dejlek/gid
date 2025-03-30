@@ -107,6 +107,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been ejected successfully,
             false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.drive.Drive.ejectWithOperationFinish] instead.
   */
@@ -133,6 +134,7 @@ interface Drive
       Params:
         result = a #GAsyncResult.
       Returns: true if the drive was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   */
   bool ejectWithOperationFinish(gio.async_result.AsyncResult result);
 
@@ -255,6 +257,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been poll_for_mediaed successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   bool pollForMediaFinish(gio.async_result.AsyncResult result);
 
@@ -281,6 +284,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been started successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   bool startFinish(gio.async_result.AsyncResult result);
 
@@ -307,6 +311,7 @@ interface Drive
         result = a #GAsyncResult.
       Returns: true if the drive has been stopped successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   bool stopFinish(gio.async_result.AsyncResult result);
 

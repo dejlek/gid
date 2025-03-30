@@ -100,6 +100,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         cancellable = optional cancellable object
       Returns: true on success, false on failure
+      Throws: [ErrorG]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -150,6 +151,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true if stream was successfully closed, false otherwise.
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
@@ -175,6 +177,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         cancellable = optional cancellable object
       Returns: true on success, false on error
+      Throws: [ErrorG]
   */
   bool flush(gio.cancellable.Cancellable cancellable = null)
   {
@@ -222,6 +225,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a GAsyncResult.
       Returns: true if flush operation succeeded, false otherwise.
+      Throws: [ErrorG]
   */
   bool flushFinish(gio.async_result.AsyncResult result)
   {
@@ -274,6 +278,7 @@ class OutputStream : gobject.object.ObjectG
       already set or stream is closed, it will return false and set
       error.
       Returns: true if pending was previously unset and is now set.
+      Throws: [ErrorG]
   */
   bool setPending()
   {
@@ -297,6 +302,7 @@ class OutputStream : gobject.object.ObjectG
             spliced is greater than `G_MAXSSIZE`, then that will be
             returned, and there is no way to determine the actual number
             of bytes spliced.
+      Throws: [ErrorG]
   */
   ptrdiff_t splice(gio.input_stream.InputStream source, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -349,6 +355,7 @@ class OutputStream : gobject.object.ObjectG
             number of bytes spliced is greater than `G_MAXSSIZE`, then that
             will be returned, and there is no way to determine the actual
             number of bytes spliced.
+      Throws: [ErrorG]
   */
   ptrdiff_t spliceFinish(gio.async_result.AsyncResult result)
   {
@@ -386,6 +393,7 @@ class OutputStream : gobject.object.ObjectG
         buffer = the buffer containing the data to write.
         cancellable = optional cancellable object
       Returns: Number of bytes written, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t write(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -429,6 +437,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writeAll(ubyte[] buffer, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -505,6 +514,7 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult
         bytesWritten = location to store the number of bytes that was written to the stream
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writeAllFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {
@@ -597,6 +607,7 @@ class OutputStream : gobject.object.ObjectG
         bytes = the #GBytes to write
         cancellable = optional cancellable object
       Returns: Number of bytes written, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t writeBytes(glib.bytes.Bytes bytes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -651,6 +662,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #gssize containing the number of bytes written to the stream.
+      Throws: [ErrorG]
   */
   ptrdiff_t writeBytesFinish(gio.async_result.AsyncResult result)
   {
@@ -668,6 +680,7 @@ class OutputStream : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: a #gssize containing the number of bytes written to the stream.
+      Throws: [ErrorG]
   */
   ptrdiff_t writeFinish(gio.async_result.AsyncResult result)
   {
@@ -710,6 +723,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional cancellable object
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writev(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -756,6 +770,7 @@ class OutputStream : gobject.object.ObjectG
               written to the stream
         cancellable = optional #GCancellable object, null to ignore.
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writevAll(gio.types.OutputVector[] vectors, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -833,6 +848,7 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult
         bytesWritten = location to store the number of bytes that were written to the stream
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writevAllFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {
@@ -910,6 +926,7 @@ class OutputStream : gobject.object.ObjectG
         result = a #GAsyncResult.
         bytesWritten = location to store the number of bytes that were written to the stream
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writevFinish(gio.async_result.AsyncResult result, out size_t bytesWritten)
   {

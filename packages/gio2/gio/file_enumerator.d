@@ -78,6 +78,7 @@ class FileEnumerator : gobject.object.ObjectG
       Params:
         cancellable = optional #GCancellable object, null to ignore.
       Returns: #TRUE on success or #FALSE on error.
+      Throws: [ErrorG]
   */
   bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -133,6 +134,7 @@ class FileEnumerator : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: true if the close operation has finished successfully.
+      Throws: [ErrorG]
   */
   bool closeFinish(gio.async_result.AsyncResult result)
   {
@@ -251,6 +253,7 @@ class FileEnumerator : gobject.object.ObjectG
         outChild = Output location for the next #GFile, or null
         cancellable = a #GCancellable
       Returns: 
+      Throws: [ErrorG]
   */
   bool iterate(out gio.file_info.FileInfo outInfo, out gio.file.File outChild, gio.cancellable.Cancellable cancellable = null)
   {
@@ -284,6 +287,7 @@ class FileEnumerator : gobject.object.ObjectG
       Returns: A #GFileInfo or null on error
            or end of enumerator.  Free the returned object with
            [gobject.object.ObjectG.unref] when no longer needed.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo nextFile(gio.cancellable.Cancellable cancellable = null)
   {
@@ -392,6 +396,7 @@ class FileEnumerator : gobject.object.ObjectG
       Returns: a #GList of #GFileInfos. You must free the list with
             [glib.list.List.free] and unref the infos with [gobject.object.ObjectG.unref] when you're
             done with them.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo[] nextFilesFinish(gio.async_result.AsyncResult result)
   {

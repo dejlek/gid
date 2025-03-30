@@ -38,6 +38,7 @@ template ProxyT()
       Returns: a #GIOStream that will replace connection. This might
                       be the same as connection, in which case a reference
                       will be added.
+      Throws: [ErrorG]
   */
   override gio.iostream.IOStream connect(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null)
   {
@@ -80,6 +81,7 @@ template ProxyT()
       Params:
         result = a #GAsyncResult
       Returns: a #GIOStream.
+      Throws: [ErrorG]
   */
   override gio.iostream.IOStream connectFinish(gio.async_result.AsyncResult result)
   {

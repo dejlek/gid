@@ -99,6 +99,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         bytes = a [glib.bytes.Bytes] containing the data to load
       Returns: A newly-created [gdk.texture.Texture]
+      Throws: [ErrorG]
   */
   static gdk.texture.Texture newFromBytes(glib.bytes.Bytes bytes)
   {
@@ -126,6 +127,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         file = [gio.file.File] to load
       Returns: A newly-created [gdk.texture.Texture]
+      Throws: [ErrorG]
   */
   static gdk.texture.Texture newFromFile(gio.file.File file)
   {
@@ -153,6 +155,7 @@ class Texture : gobject.object.ObjectG, gdk.paintable.Paintable, gio.icon.Icon, 
       Params:
         path = the filename to load
       Returns: A newly-created [gdk.texture.Texture]
+      Throws: [ErrorG]
   */
   static gdk.texture.Texture newFromFilename(string path)
   {

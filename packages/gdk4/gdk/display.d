@@ -129,6 +129,7 @@ class Display : gobject.object.ObjectG
       Before using the returned [gdk.glcontext.GLContext], you will need to
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created [gdk.glcontext.GLContext]
+      Throws: [ErrorG]
   */
   gdk.glcontext.GLContext createGlContext()
   {
@@ -501,6 +502,7 @@ class Display : gobject.object.ObjectG
       as needed. But you can use it as a check when setting up code that
       might make use of OpenGL.
       Returns: true if the display supports OpenGL
+      Throws: [ErrorG]
   */
   bool prepareGl()
   {

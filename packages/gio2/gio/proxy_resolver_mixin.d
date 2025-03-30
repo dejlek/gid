@@ -61,6 +61,7 @@ template ProxyResolverT()
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
+      Throws: [ErrorG]
   */
   override string[] lookup(string uri, gio.cancellable.Cancellable cancellable = null)
   {
@@ -119,6 +120,7 @@ template ProxyResolverT()
       Returns: A
                       NULL-terminated array of proxy URIs. Must be freed
                       with [glib.global.strfreev].
+      Throws: [ErrorG]
   */
   override string[] lookupFinish(gio.async_result.AsyncResult result)
   {

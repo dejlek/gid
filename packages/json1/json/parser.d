@@ -192,6 +192,7 @@ class Parser : gobject.object.ObjectG
         data = the buffer to parse
         length = the length of the buffer, or -1 if it is `NUL` terminated
       Returns: `TRUE` if the buffer was succesfully parsed
+      Throws: [ErrorG]
   */
   bool loadFromData(string data, ptrdiff_t length)
   {
@@ -216,6 +217,7 @@ class Parser : gobject.object.ObjectG
       Params:
         filename = the path for the file to parse
       Returns: `TRUE` if the file was successfully loaded and parsed.
+      Throws: [ErrorG]
   */
   bool loadFromFile(string filename)
   {
@@ -240,6 +242,7 @@ class Parser : gobject.object.ObjectG
       Params:
         filename = the path for the file to parse
       Returns: `TRUE` if the file was successfully loaded and parsed.
+      Throws: [ErrorG]
   */
   bool loadFromMappedFile(string filename)
   {
@@ -265,6 +268,7 @@ class Parser : gobject.object.ObjectG
         cancellable = a #GCancellable
       Returns: `TRUE` if the data stream was successfully read and
           parsed, and `FALSE` otherwise
+      Throws: [ErrorG]
   */
   bool loadFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -314,6 +318,7 @@ class Parser : gobject.object.ObjectG
         result = the result of the asynchronous operation
       Returns: `TRUE` if the content of the stream was successfully retrieved
           and parsed, and `FALSE` otherwise
+      Throws: [ErrorG]
   */
   bool loadFromStreamFinish(gio.async_result.AsyncResult result)
   {

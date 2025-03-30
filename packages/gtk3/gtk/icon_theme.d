@@ -450,6 +450,7 @@ class IconTheme : gobject.object.ObjectG
             a newly created icon or a new reference to an internal icon, so
             you must not modify the icon. Use [gobject.object.ObjectG.unref] to release
             your reference to the icon. null if the icon isn’t found.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIcon(string iconName, int size, gtk.types.IconLookupFlags flags)
   {
@@ -488,6 +489,7 @@ class IconTheme : gobject.object.ObjectG
             a newly created icon or a new reference to an internal icon, so
             you must not modify the icon. Use [gobject.object.ObjectG.unref] to release
             your reference to the icon. null if the icon isn’t found.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIconForScale(string iconName, int size, int scale, gtk.types.IconLookupFlags flags)
   {
@@ -524,6 +526,7 @@ class IconTheme : gobject.object.ObjectG
             you must not modify the icon. Use [cairo.surface.Surface.destroy] to
             release your reference to the icon. null if the icon isn’t
             found.
+      Throws: [ErrorG]
   */
   cairo.surface.Surface loadSurface(string iconName, int size, int scale, gdk.window.Window forWindow, gtk.types.IconLookupFlags flags)
   {

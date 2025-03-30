@@ -170,6 +170,7 @@ interface RecentChooser
       Params:
         uri = a URI
       Returns: true if uri was found.
+      Throws: [ErrorG]
   */
   bool selectUri(string uri);
 
@@ -179,6 +180,7 @@ interface RecentChooser
       Params:
         uri = a URI
       Returns: true if the URI was found.
+      Throws: [ErrorG]
   */
   bool setCurrentUri(string uri);
 

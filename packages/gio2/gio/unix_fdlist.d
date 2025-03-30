@@ -107,6 +107,7 @@ class UnixFDList : gobject.object.ObjectG
         fd = a valid open file descriptor
       Returns: the index of the appended fd in case of success, else -1
                  (and error is set)
+      Throws: [ErrorG]
   */
   int append(int fd)
   {
@@ -135,6 +136,7 @@ class UnixFDList : gobject.object.ObjectG
       Params:
         index = the index into the list
       Returns: the file descriptor, or -1 in case of error
+      Throws: [ErrorG]
   */
   int get(int index)
   {

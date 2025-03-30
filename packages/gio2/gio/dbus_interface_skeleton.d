@@ -61,6 +61,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectG, gio.dbus_interface.DBusInt
         objectPath = The path to export the interface at.
       Returns: true if the interface was exported on connection, otherwise false with
         error set.
+      Throws: [ErrorG]
   */
   bool export_(gio.dbus_connection.DBusConnection connection, string objectPath)
   {

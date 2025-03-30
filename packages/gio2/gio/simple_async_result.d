@@ -370,6 +370,7 @@ class SimpleAsyncResult : gobject.object.ObjectG, gio.async_result.AsyncResult
       [gio.simple_async_result.SimpleAsyncResult.setCheckCancellable] is cancelled then this
       function will return true with dest set appropriately.
       Returns: true if the error was propagated to dest. false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use #GTask instead.
   */

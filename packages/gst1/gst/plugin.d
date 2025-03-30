@@ -82,6 +82,7 @@ class Plugin : gst.object.ObjectGst
         filename = the plugin filename to load
       Returns: a reference to the existing loaded GstPlugin, a
         reference to the newly-loaded GstPlugin, or null if an error occurred.
+      Throws: [ErrorG]
   */
   static gst.plugin.Plugin loadFile(string filename)
   {

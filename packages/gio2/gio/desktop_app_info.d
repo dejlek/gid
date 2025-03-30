@@ -452,6 +452,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
               for each process.
         pidCallback = Callback for child processes
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   bool launchUrisAsManager(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup = null, gio.types.DesktopAppLaunchCallback pidCallback = null)
   {
@@ -503,6 +504,7 @@ class DesktopAppInfo : gobject.object.ObjectG, gio.app_info.AppInfo
         stdoutFd = file descriptor to use for child's stdout, or -1
         stderrFd = file descriptor to use for child's stderr, or -1
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   bool launchUrisAsManagerWithFds(string[] uris, gio.app_launch_context.AppLaunchContext launchContext, glib.types.SpawnFlags spawnFlags, glib.types.SpawnChildSetupFunc userSetup, gio.types.DesktopAppLaunchCallback pidCallback, int stdinFd, int stdoutFd, int stderrFd)
   {

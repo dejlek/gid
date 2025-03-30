@@ -731,6 +731,7 @@ class Application : gobject.object.ObjectG, gio.action_group.ActionGroup, gio.ac
       Params:
         cancellable = a #GCancellable, or null
       Returns: true if registration succeeded
+      Throws: [ErrorG]
   */
   bool register(gio.cancellable.Cancellable cancellable = null)
   {

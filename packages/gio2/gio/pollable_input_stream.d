@@ -103,6 +103,7 @@ interface PollableInputStream
         cancellable = a #GCancellable, or null
       Returns: the number of bytes read, or -1 on error (including
           [gio.types.IOErrorEnum.WouldBlock]).
+      Throws: [ErrorG]
   */
   ptrdiff_t readNonblocking(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null);
 }

@@ -71,6 +71,7 @@ class MappedFile : gobject.boxed.Boxed
         writable = whether the mapping should be writable
       Returns: a newly allocated #GMappedFile which must be unref'd
            with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
+      Throws: [ErrorG]
   */
   this(string filename, bool writable)
   {
@@ -101,6 +102,7 @@ class MappedFile : gobject.boxed.Boxed
         writable = whether the mapping should be writable
       Returns: a newly allocated #GMappedFile which must be unref'd
            with [glib.mapped_file.MappedFile.unref], or null if the mapping failed.
+      Throws: [ErrorG]
   */
   static glib.mapped_file.MappedFile newFromFd(int fd, bool writable)
   {

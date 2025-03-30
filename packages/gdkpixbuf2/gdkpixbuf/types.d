@@ -58,6 +58,7 @@ alias PixbufModuleFillVtableFunc = void delegate(gdkpixbuf.pixbuf_module.PixbufM
       context = the state object created by [gdkpixbuf.types.PixbufModuleBeginLoadFunc]
       buf = the data to load
     Returns: `TRUE` if the incremental load was successful
+    Throws: [ErrorG]
 */
 alias PixbufModuleIncrementLoadFunc = bool delegate(void* context, ubyte[] buf, GError **_err);
 
@@ -69,6 +70,7 @@ alias PixbufModuleIncrementLoadFunc = bool delegate(void* context, ubyte[] buf, 
     Params:
       f = the file stream from which the image should be loaded
     Returns: a newly created [gdkpixbuf.pixbuf_animation.PixbufAnimation] for the contents of the file
+    Throws: [ErrorG]
 */
 alias PixbufModuleLoadAnimationFunc = gdkpixbuf.pixbuf_animation.PixbufAnimation delegate(void* f, GError **_err);
 
@@ -80,6 +82,7 @@ alias PixbufModuleLoadAnimationFunc = gdkpixbuf.pixbuf_animation.PixbufAnimation
     Params:
       f = the file stream from which the image should be loaded
     Returns: a newly created [gdkpixbuf.pixbuf.Pixbuf] for the contents of the file
+    Throws: [ErrorG]
 */
 alias PixbufModuleLoadFunc = gdkpixbuf.pixbuf.Pixbuf delegate(void* f, GError **_err);
 
@@ -120,6 +123,7 @@ alias PixbufModulePreparedFunc = void delegate(gdkpixbuf.pixbuf.Pixbuf pixbuf, g
       paramValues = parameter values to save
     Returns: `TRUE` on success; in case of failure, `FALSE` is returned and
         the `error` is set
+    Throws: [ErrorG]
 */
 alias PixbufModuleSaveFunc = bool delegate(void* f, gdkpixbuf.pixbuf.Pixbuf pixbuf, string[] paramKeys, string[] paramValues, GError **_err);
 
@@ -161,6 +165,7 @@ alias PixbufModuleSizeFunc = void delegate(out int width, out int height);
     Params:
       context = the state object created by [gdkpixbuf.types.PixbufModuleBeginLoadFunc]
     Returns: `TRUE` if the loading operation was successful
+    Throws: [ErrorG]
 */
 alias PixbufModuleStopLoadFunc = bool delegate(void* context, GError **_err);
 

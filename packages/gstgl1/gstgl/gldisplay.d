@@ -107,6 +107,7 @@ class GLDisplay : gst.object.ObjectGst
         otherContext = other #GstGLContext to share resources with.
         pContext = resulting #GstGLContext
       Returns: whether a new context could be created.
+      Throws: [ErrorG]
   */
   bool createContext(gstgl.glcontext.GLContext otherContext, out gstgl.glcontext.GLContext pContext)
   {
@@ -137,6 +138,7 @@ class GLDisplay : gst.object.ObjectGst
         otherContext = other #GstGLContext to share resources with.
         context = the resulting #GstGLContext
       Returns: wether context contains a valid context.
+      Throws: [ErrorG]
   */
   bool ensureContext(gstgl.glcontext.GLContext otherContext = null, gstgl.glcontext.GLContext context = null)
   {

@@ -110,6 +110,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         result = the asynchronous result passed to the callback
       Returns: the new collection, which should be unreferenced
           with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   static secret.collection.Collection createFinish(gio.async_result.AsyncResult result)
   {
@@ -146,6 +147,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         cancellable = optional cancellation object
       Returns: the new collection, which should be unreferenced
           with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   static secret.collection.Collection createSync(secret.service.Service service, string label, string alias_, secret.types.CollectionCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -199,6 +201,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: the collection, or null if none assigned to the alias
+      Throws: [ErrorG]
   */
   static secret.collection.Collection forAliasFinish(gio.async_result.AsyncResult result)
   {
@@ -226,6 +229,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         flags = options for the collection initialization
         cancellable = optional cancellation object
       Returns: the collection, or null if none assigned to the alias
+      Throws: [ErrorG]
   */
   static secret.collection.Collection forAliasSync(secret.service.Service service, string alias_, secret.types.CollectionFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -271,6 +275,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the collection was successfully deleted or not
+      Throws: [ErrorG]
   */
   bool deleteFinish(gio.async_result.AsyncResult result)
   {
@@ -292,6 +297,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         cancellable = optional cancellation object
       Returns: whether the collection was successfully deleted or not
+      Throws: [ErrorG]
   */
   bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -439,6 +445,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = the asynchronous result passed to the callback
       Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadItemsFinish(gio.async_result.AsyncResult result)
   {
@@ -464,6 +471,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         cancellable = optional cancellation object
       Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadItemsSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -534,6 +542,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchFinish(gio.async_result.AsyncResult result)
   {
@@ -570,6 +579,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         flags = search option flags
         cancellable = optional cancellation object
       Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -616,6 +626,7 @@ class Collection : gio.dbus_proxy.DBusProxy
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setLabelFinish(gio.async_result.AsyncResult result)
   {
@@ -637,6 +648,7 @@ class Collection : gio.dbus_proxy.DBusProxy
         label = a new label
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {

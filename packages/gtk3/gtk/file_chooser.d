@@ -191,6 +191,7 @@ interface FileChooser
         folder = filename of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
+      Throws: [ErrorG]
   */
   bool addShortcutFolder(string folder);
 
@@ -204,6 +205,7 @@ interface FileChooser
         uri = URI of the folder to add
       Returns: true if the folder could be added successfully, false
         otherwise.  In the latter case, the error will be set as appropriate.
+      Throws: [ErrorG]
   */
   bool addShortcutFolderUri(string uri);
 
@@ -507,6 +509,7 @@ interface FileChooser
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolder]
+      Throws: [ErrorG]
   */
   bool removeShortcutFolder(string folder);
 
@@ -519,6 +522,7 @@ interface FileChooser
         In the latter case, the error will be set as appropriate.
         
         See also: [gtk.file_chooser.FileChooser.addShortcutFolderUri]
+      Throws: [ErrorG]
   */
   bool removeShortcutFolderUri(string uri);
 
@@ -534,6 +538,7 @@ interface FileChooser
       Params:
         file = the file to select
       Returns: Not useful.
+      Throws: [ErrorG]
   */
   bool selectFile(gio.file.File file);
 
@@ -617,6 +622,7 @@ interface FileChooser
         file = the #GFile for the new folder
       Returns: true if the folder could be changed successfully, false
         otherwise.
+      Throws: [ErrorG]
   */
   bool setCurrentFolderFile(gio.file.File file);
 
@@ -717,6 +723,7 @@ interface FileChooser
       Params:
         file = the #GFile to set as current
       Returns: Not useful.
+      Throws: [ErrorG]
   */
   bool setFile(gio.file.File file);
 

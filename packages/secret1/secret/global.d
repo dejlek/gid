@@ -39,6 +39,7 @@ secret.schema.Schema getSchema(secret.types.SchemaType type)
     Params:
       result = the asynchronous result passed to the callback
     Returns: whether any passwords were removed
+    Throws: [ErrorG]
 */
 bool passwordClearFinish(gio.async_result.AsyncResult result)
 {
@@ -65,6 +66,7 @@ bool passwordClearFinish(gio.async_result.AsyncResult result)
       attributes = the attribute keys and values
       cancellable = optional cancellation object
     Returns: whether any passwords were removed
+    Throws: [ErrorG]
 */
 bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -85,6 +87,7 @@ bool passwordClearSync(secret.schema.Schema schema, string[string] attributes, g
       result = the asynchronous result passed to the callback
     Returns: a new password string which should be freed with
         `funcpassword_free` or may be freed with `funcGLib.free` when done
+    Throws: [ErrorG]
 */
 string passwordLookupFinish(gio.async_result.AsyncResult result)
 {
@@ -113,6 +116,7 @@ string passwordLookupFinish(gio.async_result.AsyncResult result)
       cancellable = optional cancellation object
     Returns: a new password string which should be freed with
         `funcpassword_free` or may be freed with `funcGLib.free` when done
+    Throws: [ErrorG]
 */
 string passwordLookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
 {
@@ -134,6 +138,7 @@ string passwordLookupSync(secret.schema.Schema schema, string[string] attributes
       result = the asynchronous result passed to the callback
     Returns: a list of
         `ifaceRetrievable` containing attributes of the matched items
+    Throws: [ErrorG]
 */
 secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResult result)
 {
@@ -163,6 +168,7 @@ secret.retrievable.Retrievable[] passwordSearchFinish(gio.async_result.AsyncResu
       cancellable = optional cancellation object
     Returns: a list of
         `ifaceRetrievable` containing attributes of the matched items
+    Throws: [ErrorG]
 */
 secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
 {
@@ -183,6 +189,7 @@ secret.retrievable.Retrievable[] passwordSearchSync(secret.schema.Schema schema,
     Params:
       result = the asynchronous result passed to the callback
     Returns: whether the storage was successful or not
+    Throws: [ErrorG]
 */
 bool passwordStoreFinish(gio.async_result.AsyncResult result)
 {
@@ -212,6 +219,7 @@ bool passwordStoreFinish(gio.async_result.AsyncResult result)
       value = a `structValue`
       cancellable = optional cancellation object
     Returns: whether the storage was successful or not
+    Throws: [ErrorG]
 */
 bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
 {
@@ -251,6 +259,7 @@ bool passwordStoreBinarySync(secret.schema.Schema schema, string[string] attribu
       password = the null-terminated password to store
       cancellable = optional cancellation object
     Returns: whether the storage was successful or not
+    Throws: [ErrorG]
 */
 bool passwordStoreSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, string password, gio.cancellable.Cancellable cancellable = null)
 {

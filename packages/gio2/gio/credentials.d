@@ -92,6 +92,7 @@ class Credentials : gobject.object.ObjectG
       OS or if the native credentials type does not contain information
       about the UNIX process ID.
       Returns: The UNIX process ID, or `-1` if error is set.
+      Throws: [ErrorG]
   */
   int getUnixPid()
   {
@@ -111,6 +112,7 @@ class Credentials : gobject.object.ObjectG
       OS or if the native credentials type does not contain information
       about the UNIX user.
       Returns: The UNIX user identifier or `-1` if error is set.
+      Throws: [ErrorG]
   */
   uint getUnixUser()
   {
@@ -132,6 +134,7 @@ class Credentials : gobject.object.ObjectG
         otherCredentials = A #GCredentials.
       Returns: true if credentials and other_credentials has the same
         user, false otherwise or if error is set.
+      Throws: [ErrorG]
   */
   bool isSameUser(gio.credentials.Credentials otherCredentials)
   {
@@ -172,6 +175,7 @@ class Credentials : gobject.object.ObjectG
       Params:
         uid = The UNIX user identifier to set.
       Returns: true if uid was set, false if error is set.
+      Throws: [ErrorG]
   */
   bool setUnixUser(uint uid)
   {

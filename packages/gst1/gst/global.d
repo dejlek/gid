@@ -569,6 +569,7 @@ string errorGetMessage(glib.types.Quark domain, int code)
       filename = absolute or relative file name path
     Returns: newly-allocated URI string, or NULL on error. The caller must
         free the URI string with [glib.global.gfree] when no longer needed.
+    Throws: [ErrorG]
 */
 string filenameToUri(string filename)
 {
@@ -753,6 +754,7 @@ gobject.types.GType parentBufferMetaApiGetType()
             for unlinked source or sink pads within the bin
     Returns: a
         newly-created bin, or null if an error occurred.
+    Throws: [ErrorG]
 */
 gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPads)
 {
@@ -788,6 +790,7 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
         element, which is guaranteed to be a bin unless
         #GST_PARSE_FLAG_NO_SINGLE_ELEMENT_BINS was passed, or null if an error
         occurred.
+    Throws: [ErrorG]
 */
 gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghostUnlinkedPads, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -816,6 +819,7 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
         failure. If more than one toplevel element is specified by the
         pipeline_description, all elements are put into a #GstPipeline, which
         than is returned.
+    Throws: [ErrorG]
 */
 gst.element.Element parseLaunch(string pipelineDescription)
 {
@@ -848,6 +852,7 @@ gst.element.Element parseLaunch(string pipelineDescription)
          pipeline_description, all elements are put into a #GstPipeline, which
          then is returned (unless the GST_PARSE_FLAG_PLACE_IN_BIN flag is set, in
          which case they are put in a #GstBin instead).
+    Throws: [ErrorG]
 */
 gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {
@@ -870,6 +875,7 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
       argv = null-terminated array of arguments
     Returns: a new element on success and null
       on failure.
+    Throws: [ErrorG]
 */
 gst.element.Element parseLaunchv(string[] argv)
 {
@@ -903,6 +909,7 @@ gst.element.Element parseLaunchv(string[] argv)
         returned and error will be set (unless you passed
         #GST_PARSE_FLAG_FATAL_ERRORS in flags, then null will always be returned
         on failure)
+    Throws: [ErrorG]
 */
 gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseContext context, gst.types.ParseFlags flags)
 {

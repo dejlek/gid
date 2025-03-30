@@ -107,6 +107,7 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected font face
+      Throws: [ErrorG]
   */
   pango.font_face.FontFace chooseFaceFinish(gio.async_result.AsyncResult result)
   {
@@ -159,6 +160,7 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected family
+      Throws: [ErrorG]
   */
   pango.font_family.FontFamily chooseFamilyFinish(gio.async_result.AsyncResult result)
   {
@@ -247,6 +249,7 @@ class FontDialog : gobject.object.ObjectG
         language = return location for the language
       Returns: `TRUE` if a font was selected. Otherwise `FALSE` is returned
           and error is set
+      Throws: [ErrorG]
   */
   bool chooseFontAndFeaturesFinish(gio.async_result.AsyncResult result, out pango.font_description.FontDescription fontDesc, out string fontFeatures, out pango.language.Language language)
   {
@@ -271,6 +274,7 @@ class FontDialog : gobject.object.ObjectG
       Params:
         result = a [gio.async_result.AsyncResult]
       Returns: the selected font
+      Throws: [ErrorG]
   */
   pango.font_description.FontDescription chooseFontFinish(gio.async_result.AsyncResult result)
   {

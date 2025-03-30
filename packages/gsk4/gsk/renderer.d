@@ -115,6 +115,7 @@ class Renderer : gobject.object.ObjectG
       Params:
         surface = the [gdk.surface.Surface] renderer will be used on
       Returns: Whether the renderer was successfully realized
+      Throws: [ErrorG]
   */
   bool realize(gdk.surface.Surface surface = null)
   {
@@ -136,6 +137,7 @@ class Renderer : gobject.object.ObjectG
       Params:
         display = the [gdk.display.Display] renderer will be used on
       Returns: Whether the renderer was successfully realized
+      Throws: [ErrorG]
   */
   bool realizeForDisplay(gdk.display.Display display)
   {

@@ -84,6 +84,7 @@ class WebsocketExtension : gobject.object.ObjectG
         header = the message header
         payload = the payload data
       Returns: the message payload data, or null in case of error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes processIncomingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {
@@ -109,6 +110,7 @@ class WebsocketExtension : gobject.object.ObjectG
         header = the message header
         payload = the payload data
       Returns: the message payload data, or null in case of error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes processOutgoingMessage(ref ubyte header, glib.bytes.Bytes payload)
   {

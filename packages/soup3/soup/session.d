@@ -399,6 +399,7 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: true if the preconnect succeeded, or false in case of error.
+      Throws: [ErrorG]
   */
   bool preconnectFinish(gio.async_result.AsyncResult result)
   {
@@ -458,6 +459,7 @@ class Session : gobject.object.ObjectG
         cancellable = a #GCancellable
       Returns: a #GInputStream for reading the
           response body, or null on error.
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -483,6 +485,7 @@ class Session : gobject.object.ObjectG
         msg = a #SoupMessage
         cancellable = a #GCancellable
       Returns: a #GBytes, or null on error.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -535,6 +538,7 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: a #GBytes, or null on error.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes sendAndReadFinish(gio.async_result.AsyncResult result)
   {
@@ -558,6 +562,7 @@ class Session : gobject.object.ObjectG
         flags = a set of #GOutputStreamSpliceFlags
         cancellable = a #GCancellable
       Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
+      Throws: [ErrorG]
   */
   ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -605,6 +610,7 @@ class Session : gobject.object.ObjectG
       Params:
         result = the #GAsyncResult passed to your callback
       Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
+      Throws: [ErrorG]
   */
   ptrdiff_t sendAndSpliceFinish(gio.async_result.AsyncResult result)
   {
@@ -657,6 +663,7 @@ class Session : gobject.object.ObjectG
         result = the #GAsyncResult passed to your callback
       Returns: a #GInputStream for reading the
           response body, or null on error.
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream sendFinish(gio.async_result.AsyncResult result)
   {
@@ -851,6 +858,7 @@ class Session : gobject.object.ObjectG
         result = the #GAsyncResult passed to your callback
       Returns: a new #SoupWebsocketConnection, or
           null on error.
+      Throws: [ErrorG]
   */
   soup.websocket_connection.WebsocketConnection websocketConnectFinish(gio.async_result.AsyncResult result)
   {

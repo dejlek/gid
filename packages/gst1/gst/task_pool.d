@@ -103,6 +103,7 @@ class TaskPool : gst.object.ObjectGst
       Prepare the taskpool for accepting [gst.task_pool.TaskPool.push] operations.
       
       MT safe.
+      Throws: [ErrorG]
   */
   void prepare()
   {
@@ -122,6 +123,7 @@ class TaskPool : gst.object.ObjectGst
         must check error to detect errors. If the pointer is not null and
         [gst.task_pool.TaskPool.join] is not used, call [gst.task_pool.TaskPool.disposeHandle]
         instead.
+      Throws: [ErrorG]
   */
   void* push(gst.types.TaskPoolFunction func)
   {

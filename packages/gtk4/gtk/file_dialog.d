@@ -201,6 +201,7 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
+      Throws: [ErrorG]
   */
   gio.file.File openFinish(gio.async_result.AsyncResult result)
   {
@@ -253,6 +254,7 @@ class FileDialog : gobject.object.ObjectG
       Returns: the file that was selected,
           as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
           and error is set
+      Throws: [ErrorG]
   */
   gio.list_model.ListModel openMultipleFinish(gio.async_result.AsyncResult result)
   {
@@ -301,6 +303,7 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
+      Throws: [ErrorG]
   */
   gio.file.File saveFinish(gio.async_result.AsyncResult result)
   {
@@ -353,6 +356,7 @@ class FileDialog : gobject.object.ObjectG
         result = a [gio.async_result.AsyncResult]
       Returns: the file that was selected.
           Otherwise, `NULL` is returned and error is set
+      Throws: [ErrorG]
   */
   gio.file.File selectFolderFinish(gio.async_result.AsyncResult result)
   {
@@ -405,6 +409,7 @@ class FileDialog : gobject.object.ObjectG
       Returns: the file that was selected,
           as a [gio.list_model.ListModel] of `GFiles`. Otherwise, `NULL` is returned
           and error is set
+      Throws: [ErrorG]
   */
   gio.list_model.ListModel selectMultipleFoldersFinish(gio.async_result.AsyncResult result)
   {

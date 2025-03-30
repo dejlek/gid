@@ -433,6 +433,7 @@ class Window : gobject.object.ObjectG
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created #GdkGLContext, or
         null on error
+      Throws: [ErrorG]
   */
   gdk.glcontext.GLContext createGlContext()
   {

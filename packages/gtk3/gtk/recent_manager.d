@@ -232,6 +232,7 @@ class RecentManager : gobject.object.ObjectG
           about the resource pointed by uri, or null if the URI was
           not registered in the recently used resources list. Free with
           [gtk.recent_info.RecentInfo.unref].
+      Throws: [ErrorG]
   */
   gtk.recent_info.RecentInfo lookupItem(string uri)
   {
@@ -256,6 +257,7 @@ class RecentManager : gobject.object.ObjectG
         newUri = the new URI of the recently used resource, or
              null to remove the item pointed by uri in the list
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool moveItem(string uri, string newUri = null)
   {
@@ -273,6 +275,7 @@ class RecentManager : gobject.object.ObjectG
       Purges every item from the recently used resources list.
       Returns: the number of items that have been removed from the
           recently used resources list
+      Throws: [ErrorG]
   */
   int purgeItems()
   {
@@ -292,6 +295,7 @@ class RecentManager : gobject.object.ObjectG
         uri = the URI of the item you wish to remove
       Returns: true if the item pointed by uri has been successfully
           removed by the recently used resources list, and false otherwise
+      Throws: [ErrorG]
   */
   bool removeItem(string uri)
   {

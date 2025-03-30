@@ -95,6 +95,7 @@ class DBusServer : gobject.object.ObjectG, gio.initable.Initable
         cancellable = A #GCancellable or null.
       Returns: A #GDBusServer or null if error is set. Free with
         [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_server.DBusServer newSync(string address, gio.types.DBusServerFlags flags, string guid, gio.dbus_auth_observer.DBusAuthObserver observer = null, gio.cancellable.Cancellable cancellable = null)
   {

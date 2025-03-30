@@ -56,6 +56,7 @@ class Dir : gobject.boxed.Boxed
       Returns: a newly allocated #GDir on success, null on failure.
           If non-null, you must free the result with [glib.dir.Dir.close]
           when you are finished with it.
+      Throws: [ErrorG]
   */
   static glib.dir.Dir open(string path, uint flags)
   {
@@ -124,6 +125,7 @@ class Dir : gobject.boxed.Boxed
           should be freed with [glib.global.gfree] when not needed any longer and is
           is in the GLib file name encoding. In case of errors, null is
           returned and error will be set.
+      Throws: [ErrorG]
   */
   static string makeTmp(string tmpl = null)
   {

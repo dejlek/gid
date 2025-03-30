@@ -92,6 +92,7 @@ template AppInfoT()
       Params:
         contentType = a string.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool addSupportsType(string contentType)
   {
@@ -334,6 +335,7 @@ template AppInfoT()
         files = a #GList of #GFile objects
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -365,6 +367,7 @@ template AppInfoT()
         uris = a #GList containing URIs to launch.
         context = a #GAppLaunchContext or null
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -415,6 +418,7 @@ template AppInfoT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launchUrisFinish(gio.async_result.AsyncResult result)
   {
@@ -432,6 +436,7 @@ template AppInfoT()
       Params:
         contentType = a string.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool removeSupportsType(string contentType)
   {
@@ -451,6 +456,7 @@ template AppInfoT()
         extension = a string containing the file extension
               (without the dot).
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsDefaultForExtension(string extension)
   {
@@ -469,6 +475,7 @@ template AppInfoT()
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsDefaultForType(string contentType)
   {
@@ -490,6 +497,7 @@ template AppInfoT()
       Params:
         contentType = the content type.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsLastUsedForType(string contentType)
   {

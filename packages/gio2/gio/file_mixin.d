@@ -158,6 +158,7 @@ template FileT()
             null to ignore
       Returns: a #GFileOutputStream, or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream appendTo(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -212,6 +213,7 @@ template FileT()
       Returns: a valid #GFileOutputStream
           or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream appendToFinish(gio.async_result.AsyncResult res)
   {
@@ -241,6 +243,7 @@ template FileT()
             null to ignore
       Returns: an attribute query string for [gio.file.File.queryInfo],
           or null if an error occurs.
+      Throws: [ErrorG]
   */
   override string buildAttributeListForCopy(gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -303,6 +306,7 @@ template FileT()
         progressCallback = function to callback with
             progress information, or null if progress information is not needed
       Returns: true on success, false otherwise.
+      Throws: [ErrorG]
   */
   override bool copy(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
@@ -387,6 +391,7 @@ template FileT()
             null to ignore
       Returns: true if the attributes were copied successfully,
           false otherwise.
+      Throws: [ErrorG]
   */
   override bool copyAttributes(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -404,6 +409,7 @@ template FileT()
       Params:
         res = a #GAsyncResult
       Returns: a true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool copyFinish(gio.async_result.AsyncResult res)
   {
@@ -443,6 +449,7 @@ template FileT()
       Returns: a #GFileOutputStream for the newly created
           file, or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream create(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -497,6 +504,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileOutputStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream createFinish(gio.async_result.AsyncResult res)
   {
@@ -541,6 +549,7 @@ template FileT()
       Returns: a #GFileIOStream for the newly created
           file, or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream createReadwrite(gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -595,6 +604,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream createReadwriteFinish(gio.async_result.AsyncResult res)
   {
@@ -634,6 +644,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the file was deleted. false otherwise.
+      Throws: [ErrorG]
   */
   override bool delete_(gio.cancellable.Cancellable cancellable = null)
   {
@@ -678,6 +689,7 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true if the file was deleted. false otherwise.
+      Throws: [ErrorG]
   */
   override bool deleteFinish(gio.async_result.AsyncResult result)
   {
@@ -753,6 +765,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.file.File.ejectMountableWithOperationFinish]
           instead.
@@ -809,6 +822,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the file was ejected successfully.
           false otherwise.
+      Throws: [ErrorG]
   */
   override bool ejectMountableWithOperationFinish(gio.async_result.AsyncResult result)
   {
@@ -854,6 +868,7 @@ template FileT()
             null to ignore
       Returns: A #GFileEnumerator if successful,
           null on error. Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_enumerator.FileEnumerator enumerateChildren(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -913,6 +928,7 @@ template FileT()
       Returns: a #GFileEnumerator or null
           if an error occurred.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_enumerator.FileEnumerator enumerateChildrenFinish(gio.async_result.AsyncResult res)
   {
@@ -962,6 +978,7 @@ template FileT()
       Returns: a #GMount where the file is located
           or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.mount.Mount findEnclosingMount(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1014,6 +1031,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: #GMount for given file or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.mount.Mount findEnclosingMountFinish(gio.async_result.AsyncResult res)
   {
@@ -1090,6 +1108,7 @@ template FileT()
       Returns: a #GFile to the specified child, or
           null if the display name couldn't be converted.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file.File getChildForDisplayName(string displayName)
   {
@@ -1347,6 +1366,7 @@ template FileT()
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
+      Throws: [ErrorG]
   */
   override glib.bytes.Bytes loadBytes(gio.cancellable.Cancellable cancellable, out string etagOut)
   {
@@ -1409,6 +1429,7 @@ template FileT()
         etagOut = a location to place the current
             entity tag for the file, or null if the entity tag is not needed
       Returns: a #GBytes or null and error is set
+      Throws: [ErrorG]
   */
   override glib.bytes.Bytes loadBytesFinish(gio.async_result.AsyncResult result, out string etagOut)
   {
@@ -1440,6 +1461,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the file's contents were successfully loaded.
           false if there were errors.
+      Throws: [ErrorG]
   */
   override bool loadContents(gio.cancellable.Cancellable cancellable, out ubyte[] contents, out string etagOut)
   {
@@ -1506,6 +1528,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
+      Throws: [ErrorG]
   */
   override bool loadContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut)
   {
@@ -1538,6 +1561,7 @@ template FileT()
             or null if the entity tag is not needed
       Returns: true if the load was successful. If false and error is
           present, it will be set appropriately.
+      Throws: [ErrorG]
   */
   override bool loadPartialContentsFinish(gio.async_result.AsyncResult res, out ubyte[] contents, out string etagOut)
   {
@@ -1576,6 +1600,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful creation, false otherwise.
+      Throws: [ErrorG]
   */
   override bool makeDirectory(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1619,6 +1644,7 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
+      Throws: [ErrorG]
   */
   override bool makeDirectoryFinish(gio.async_result.AsyncResult result)
   {
@@ -1650,6 +1676,7 @@ template FileT()
             null to ignore
       Returns: true if all directories have been successfully created, false
         otherwise.
+      Throws: [ErrorG]
   */
   override bool makeDirectoryWithParents(gio.cancellable.Cancellable cancellable = null)
   {
@@ -1675,6 +1702,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on the creation of a new symlink, false otherwise.
+      Throws: [ErrorG]
   */
   override bool makeSymbolicLink(string symlinkValue, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1723,6 +1751,7 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful directory creation, false otherwise.
+      Throws: [ErrorG]
   */
   override bool makeSymbolicLinkFinish(gio.async_result.AsyncResult result)
   {
@@ -1763,6 +1792,7 @@ template FileT()
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
+      Throws: [ErrorG]
   */
   override bool measureDiskUsage(gio.types.FileMeasureFlags flags, gio.cancellable.Cancellable cancellable, gio.types.FileMeasureProgressCallback progressCallback, out ulong diskUsage, out ulong numDirs, out ulong numFiles)
   {
@@ -1795,6 +1825,7 @@ template FileT()
         numFiles = the number of non-directories encountered
       Returns: true if successful, with the out parameters set.
           false otherwise, with error set.
+      Throws: [ErrorG]
   */
   override bool measureDiskUsageFinish(gio.async_result.AsyncResult result, out ulong diskUsage, out ulong numDirs, out ulong numFiles)
   {
@@ -1821,6 +1852,7 @@ template FileT()
       Returns: a #GFileMonitor for the given file,
           or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_monitor.FileMonitor monitor(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1853,6 +1885,7 @@ template FileT()
             null to ignore
       Returns: a #GFileMonitor for the given file,
           or null on error. Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_monitor.FileMonitor monitorDirectory(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1888,6 +1921,7 @@ template FileT()
       Returns: a #GFileMonitor for the given file,
           or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_monitor.FileMonitor monitorFile(gio.types.FileMonitorFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1944,6 +1978,7 @@ template FileT()
       Returns: true if successful. If an error has occurred,
           this function will return false and set error
           appropriately if present.
+      Throws: [ErrorG]
   */
   override bool mountEnclosingVolumeFinish(gio.async_result.AsyncResult result)
   {
@@ -2002,6 +2037,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: a #GFile or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file.File mountMountableFinish(gio.async_result.AsyncResult result)
   {
@@ -2057,6 +2093,7 @@ template FileT()
         progressCallback = #GFileProgressCallback
             function for updates
       Returns: true on successful move, false otherwise.
+      Throws: [ErrorG]
   */
   override bool move(gio.file.File destination, gio.types.FileCopyFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null)
   {
@@ -2129,6 +2166,7 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful file move, false otherwise.
+      Throws: [ErrorG]
   */
   override bool moveFinish(gio.async_result.AsyncResult result)
   {
@@ -2162,6 +2200,7 @@ template FileT()
         cancellable = a #GCancellable
       Returns: #GFileIOStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream openReadwrite(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2214,6 +2253,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileIOStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream openReadwriteFinish(gio.async_result.AsyncResult res)
   {
@@ -2286,6 +2326,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
+      Throws: [ErrorG]
   */
   override bool pollMountableFinish(gio.async_result.AsyncResult result)
   {
@@ -2310,6 +2351,7 @@ template FileT()
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
           When you are done with it, release it with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   override gio.app_info.AppInfo queryDefaultHandler(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2353,6 +2395,7 @@ template FileT()
       Returns: a #GAppInfo if the handle was found,
           null if there were errors.
           When you are done with it, release it with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   override gio.app_info.AppInfo queryDefaultHandlerFinish(gio.async_result.AsyncResult result)
   {
@@ -2457,6 +2500,7 @@ template FileT()
             null to ignore
       Returns: a #GFileInfo or null if there was an error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_info.FileInfo queryFilesystemInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2516,6 +2560,7 @@ template FileT()
       Returns: #GFileInfo for given file
           or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_info.FileInfo queryFilesystemInfoFinish(gio.async_result.AsyncResult res)
   {
@@ -2567,6 +2612,7 @@ template FileT()
             null to ignore
       Returns: a #GFileInfo for the given file, or null
           on error. Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_info.FileInfo queryInfo(string attributes, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2625,6 +2671,7 @@ template FileT()
       Returns: #GFileInfo for given file
           or null on error. Free the returned object with
           [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult res)
   {
@@ -2655,6 +2702,7 @@ template FileT()
       Returns: a #GFileAttributeInfoList describing the settable attributes.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
+      Throws: [ErrorG]
   */
   override gio.file_attribute_info_list.FileAttributeInfoList querySettableAttributes(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2682,6 +2730,7 @@ template FileT()
       Returns: a #GFileAttributeInfoList describing the writable namespaces.
           When you are done with it, release it with
           [gio.file_attribute_info_list.FileAttributeInfoList.unref]
+      Throws: [ErrorG]
   */
   override gio.file_attribute_info_list.FileAttributeInfoList queryWritableNamespaces(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2711,6 +2760,7 @@ template FileT()
         cancellable = a #GCancellable
       Returns: #GFileInputStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_input_stream.FileInputStream read(gio.cancellable.Cancellable cancellable = null)
   {
@@ -2763,6 +2813,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileInputStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_input_stream.FileInputStream readFinish(gio.async_result.AsyncResult res)
   {
@@ -2827,6 +2878,7 @@ template FileT()
             null to ignore
       Returns: a #GFileOutputStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream replace(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -2908,6 +2960,7 @@ template FileT()
         cancellable = optional #GCancellable object, null to ignore
       Returns: true if successful. If an error has occurred, this function
           will return false and set error appropriately if present.
+      Throws: [ErrorG]
   */
   override bool replaceContents(ubyte[] contents, string etag, bool makeBackup, gio.types.FileCreateFlags flags, out string newEtag, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3022,6 +3075,7 @@ template FileT()
             for the document. This should be freed with [glib.global.gfree] when it is no
             longer needed, or null
       Returns: true on success, false on failure.
+      Throws: [ErrorG]
   */
   override bool replaceContentsFinish(gio.async_result.AsyncResult res, out string newEtag)
   {
@@ -3043,6 +3097,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileOutputStream, or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_output_stream.FileOutputStream replaceFinish(gio.async_result.AsyncResult res)
   {
@@ -3076,6 +3131,7 @@ template FileT()
             null to ignore
       Returns: a #GFileIOStream or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream replaceReadwrite(string etag, bool makeBackup, gio.types.FileCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3136,6 +3192,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFileIOStream, or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file_iostream.FileIOStream replaceReadwriteFinish(gio.async_result.AsyncResult res)
   {
@@ -3188,6 +3245,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was set, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3217,6 +3275,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeByteString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3246,6 +3305,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeInt32(string attribute, int value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3273,6 +3333,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeInt64(string attribute, long value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3300,6 +3361,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true if the attribute was successfully set, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeString(string attribute, string value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3329,6 +3391,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeUint32(string attribute, uint value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3357,6 +3420,7 @@ template FileT()
             null to ignore
       Returns: true if the attribute was successfully set to value
           in the file, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributeUint64(string attribute, ulong value, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3410,6 +3474,7 @@ template FileT()
         result = a #GAsyncResult
         info = a #GFileInfo
       Returns: true if the attributes were set correctly, false otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributesFinish(gio.async_result.AsyncResult result, out gio.file_info.FileInfo info)
   {
@@ -3443,6 +3508,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: false if there was any error, true otherwise.
+      Throws: [ErrorG]
   */
   override bool setAttributesFromInfo(gio.file_info.FileInfo info, gio.types.FileQueryInfoFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3478,6 +3544,7 @@ template FileT()
       Returns: a #GFile specifying what file was renamed to,
           or null if there was an error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file.File setDisplayName(string displayName, gio.cancellable.Cancellable cancellable = null)
   {
@@ -3533,6 +3600,7 @@ template FileT()
         res = a #GAsyncResult
       Returns: a #GFile or null on error.
           Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   override gio.file.File setDisplayNameFinish(gio.async_result.AsyncResult res)
   {
@@ -3589,6 +3657,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully. false
         otherwise.
+      Throws: [ErrorG]
   */
   override bool startMountableFinish(gio.async_result.AsyncResult result)
   {
@@ -3645,6 +3714,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
+      Throws: [ErrorG]
   */
   override bool stopMountableFinish(gio.async_result.AsyncResult result)
   {
@@ -3686,6 +3756,7 @@ template FileT()
         cancellable = optional #GCancellable object,
             null to ignore
       Returns: true on successful trash, false otherwise.
+      Throws: [ErrorG]
   */
   override bool trash(gio.cancellable.Cancellable cancellable = null)
   {
@@ -3729,6 +3800,7 @@ template FileT()
       Params:
         result = a #GAsyncResult
       Returns: true on successful trash, false otherwise.
+      Throws: [ErrorG]
   */
   override bool trashFinish(gio.async_result.AsyncResult result)
   {
@@ -3785,6 +3857,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.file.File.unmountMountableWithOperationFinish]
           instead.
@@ -3845,6 +3918,7 @@ template FileT()
         result = a #GAsyncResult
       Returns: true if the operation finished successfully.
           false otherwise.
+      Throws: [ErrorG]
   */
   override bool unmountMountableWithOperationFinish(gio.async_result.AsyncResult result)
   {

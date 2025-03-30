@@ -1020,6 +1020,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         flags = flags from #VtePtyFlags
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty
+      Throws: [ErrorG]
   */
   vte.pty.Pty ptyNewSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1529,6 +1530,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         codeset = target charset, or null to use UTF-8
       Returns: true if the encoding could be changed to the specified one,
          or false with error set to `G_CONVERT_ERROR_NO_CONVERSION`.
+      Throws: [ErrorG]
   
       Deprecated: Support for non-UTF-8 is deprecated.
   */
@@ -1915,6 +1917,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         childPid = a location to store the child PID, or null
         cancellable = a #GCancellable, or null
       Returns: true on success, or false on error with error filled in
+      Throws: [ErrorG]
   
       Deprecated: Use [vte.terminal.Terminal.spawnAsync] instead.
   */
@@ -2107,6 +2110,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
         flags = a set of #VteWriteFlags
         cancellable = a #GCancellable object, or null
       Returns: true on success, false if there was an error
+      Throws: [ErrorG]
   */
   bool writeContentsSync(gio.output_stream.OutputStream stream, vte.types.WriteFlags flags, gio.cancellable.Cancellable cancellable = null)
   {

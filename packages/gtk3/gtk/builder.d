@@ -329,6 +329,7 @@ class Builder : gobject.object.ObjectG
       Params:
         filename = the name of the file to parse
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addFromFile(string filename)
   {
@@ -358,6 +359,7 @@ class Builder : gobject.object.ObjectG
       Params:
         resourcePath = the path of the resource file to parse
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addFromResource(string resourcePath)
   {
@@ -388,6 +390,7 @@ class Builder : gobject.object.ObjectG
         buffer = the string to parse
         length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addFromString(string buffer, size_t length)
   {
@@ -417,6 +420,7 @@ class Builder : gobject.object.ObjectG
         filename = the name of the file to parse
         objectIds = nul-terminated array of objects to build
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addObjectsFromFile(string filename, string[] objectIds)
   {
@@ -452,6 +456,7 @@ class Builder : gobject.object.ObjectG
         resourcePath = the path of the resource file to parse
         objectIds = nul-terminated array of objects to build
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addObjectsFromResource(string resourcePath, string[] objectIds)
   {
@@ -487,6 +492,7 @@ class Builder : gobject.object.ObjectG
         length = the length of buffer (may be -1 if buffer is nul-terminated)
         objectIds = nul-terminated array of objects to build
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint addObjectsFromString(string buffer, size_t length, string[] objectIds)
   {
@@ -587,6 +593,7 @@ class Builder : gobject.object.ObjectG
         buffer = the string to parse
         length = the length of buffer (may be -1 if buffer is nul-terminated)
       Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorG]
   */
   uint extendWithTemplate(gtk.widget.Widget widget, gobject.types.GType templateType, string buffer, size_t length)
   {
@@ -729,6 +736,7 @@ class Builder : gobject.object.ObjectG
         string_ = the string representation of the value
         value = the #GValue to store the result in
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool valueFromString(gobject.param_spec.ParamSpec pspec, string string_, out gobject.value.Value value)
   {
@@ -757,6 +765,7 @@ class Builder : gobject.object.ObjectG
         string_ = the string representation of the value
         value = the #GValue to store the result in
       Returns: true on success
+      Throws: [ErrorG]
   */
   bool valueFromStringType(gobject.types.GType type, string string_, out gobject.value.Value value)
   {

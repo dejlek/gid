@@ -60,6 +60,7 @@ class TlsCertificate : gobject.object.ObjectG
       Params:
         file = file containing a certificate to import
       Returns: the new certificate, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromFile(string file)
   {
@@ -87,6 +88,7 @@ class TlsCertificate : gobject.object.ObjectG
         file = file containing a certificate to import
         password = password for PKCS #12 files
       Returns: the new certificate, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromFileWithPassword(string file, string password)
   {
@@ -123,6 +125,7 @@ class TlsCertificate : gobject.object.ObjectG
         keyFile = file containing a PEM-encoded private key
               to import
       Returns: the new certificate, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromFiles(string certFile, string keyFile)
   {
@@ -157,6 +160,7 @@ class TlsCertificate : gobject.object.ObjectG
         data = PEM-encoded certificate data
         length = the length of data, or -1 if it's 0-terminated.
       Returns: the new certificate, or null if data is invalid
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromPem(string data, ptrdiff_t length)
   {
@@ -200,6 +204,7 @@ class TlsCertificate : gobject.object.ObjectG
         pkcs11Uri = A PKCS \#11 URI
         privateKeyPkcs11Uri = A PKCS \#11 URI
       Returns: the new certificate, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromPkcs11Uris(string pkcs11Uri, string privateKeyPkcs11Uri = null)
   {
@@ -237,6 +242,7 @@ class TlsCertificate : gobject.object.ObjectG
         data = DER-encoded PKCS #12 format certificate data
         password = optional password for encrypted certificate data
       Returns: the new certificate, or null if data is invalid
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate newFromPkcs12(ubyte[] data, string password = null)
   {
@@ -267,6 +273,7 @@ class TlsCertificate : gobject.object.ObjectG
       Returns: a
         #GList containing #GTlsCertificate objects. You must free the list
         and its contents when you are done with it.
+      Throws: [ErrorG]
   */
   static gio.tls_certificate.TlsCertificate[] listNewFromFile(string file)
   {

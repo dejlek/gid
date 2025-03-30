@@ -111,6 +111,7 @@ class UriParamsIter
               the value, or null.
       Returns: false if the end of the parameters has been reached or an error was
             encountered. true otherwise.
+      Throws: [ErrorG]
   */
   bool next(out string attribute, out string value)
   {

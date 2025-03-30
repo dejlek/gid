@@ -278,6 +278,7 @@ string asciiStrdown(string str, ptrdiff_t len)
       max = an upper bound (inclusive)
       outNum = a return location for a number
     Returns: true if str was a number, false otherwise
+    Throws: [ErrorG]
 */
 bool asciiStringToSigned(string str, uint base, long min, long max, out long outNum)
 {
@@ -321,6 +322,7 @@ bool asciiStringToSigned(string str, uint base, long min, long max, out long out
       max = an upper bound (inclusive)
       outNum = a return location for a number
     Returns: true if str was a number, false otherwise
+    Throws: [ErrorG]
 */
 bool asciiStringToUnsigned(string str, uint base, ulong min, ulong max, out ulong outNum)
 {
@@ -1805,6 +1807,7 @@ int chmod(string filename, int mode)
 /**
     If err or *err is null, does nothing. Otherwise,
     calls [glib.error.ErrorG.free] on *err and sets *err to null.
+    Throws: [ErrorG]
 */
 void clearError()
 {
@@ -1836,6 +1839,7 @@ void clearError()
     Params:
       fd = A file descriptor
     Returns: true on success, false if there was an error.
+    Throws: [ErrorG]
 */
 bool close(int fd)
 {
@@ -2061,6 +2065,7 @@ string computeHmacForString(glib.types.ChecksumType digestType, ubyte[] key, str
     Returns: If the conversion was successful, a newly allocated buffer
                containing the converted string, which must be freed with [glib.global.gfree].
                Otherwise null and error will be set.
+    Throws: [ErrorG]
 */
 ubyte[] convert(ubyte[] str, string toCodeset, string fromCodeset, out size_t bytesRead)
 {
@@ -2130,6 +2135,7 @@ glib.types.Quark convertErrorQuark()
     Returns: If the conversion was successful, a newly allocated buffer
                containing the converted string, which must be freed with [glib.global.gfree].
                Otherwise null and error will be set.
+    Throws: [ErrorG]
 */
 ubyte[] convertWithFallback(ubyte[] str, string toCodeset, string fromCodeset, string fallback, out size_t bytesRead)
 {
@@ -2593,6 +2599,7 @@ glib.types.Quark fileErrorQuark()
       contents = location to store an allocated string, use [glib.global.gfree] to free
             the returned string
     Returns: true on success, false if an error occurred
+    Throws: [ErrorG]
 */
 bool fileGetContents(string filename, out ubyte[] contents)
 {
@@ -2637,6 +2644,7 @@ bool fileGetContents(string filename, out ubyte[] contents)
         reading and writing. The file is opened in binary mode on platforms
         where there is a difference. The file handle should be closed with
         close(). In case of errors, -1 is returned and error will be set.
+    Throws: [ErrorG]
 */
 int fileOpenTmp(string tmpl, out string nameUsed)
 {
@@ -2680,6 +2688,7 @@ int fileOpenTmp(string tmpl, out string nameUsed)
       filename = the symbolic link
     Returns: A newly-allocated string with
         the contents of the symbolic link, or null if an error occurred.
+    Throws: [ErrorG]
 */
 string fileReadLink(string filename)
 {
@@ -2704,6 +2713,7 @@ string fileReadLink(string filename)
           encoding
       contents = string to write to the file
     Returns: true on success, false if an error occurred
+    Throws: [ErrorG]
 */
 bool fileSetContents(string filename, ubyte[] contents)
 {
@@ -2786,6 +2796,7 @@ bool fileSetContents(string filename, ubyte[] contents)
       flags = flags controlling the safety vs speed of the operation
       mode = file mode, as passed to `open()`; typically this will be `0666`
     Returns: true on success, false if an error occurred
+    Throws: [ErrorG]
 */
 bool fileSetContentsFull(string filename, ubyte[] contents, glib.types.FileSetContentsFlags flags, int mode)
 {
@@ -2959,6 +2970,7 @@ string filenameDisplayName(string filename)
                    stored in this location.
     Returns: a newly-allocated string holding
                     the resulting filename, or null on an error.
+    Throws: [ErrorG]
 */
 string filenameFromUri(string uri, out string hostname)
 {
@@ -3001,6 +3013,7 @@ string filenameFromUri(string uri, out string hostname)
       bytesWritten = the number of bytes stored in
                         the output buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
+    Throws: [ErrorG]
 */
 string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -3025,6 +3038,7 @@ string filenameFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead, 
       hostname = A UTF-8 encoded hostname, or null for none.
     Returns: a newly-allocated string holding the resulting
                     URI, or null on an error.
+    Throws: [ErrorG]
 */
 string filenameToUri(string filename, string hostname = null)
 {
@@ -3070,6 +3084,7 @@ string filenameToUri(string filename, string hostname = null)
       bytesWritten = the number of bytes stored in the output
                         buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
+    Throws: [ErrorG]
 */
 string filenameToUtf8(string opsysstring, ptrdiff_t len, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -4560,6 +4575,7 @@ string[] listenv()
                         input sequence.
     Returns: A newly-allocated buffer containing the converted string,
                or null on an error, and error will be set.
+    Throws: [ErrorG]
 */
 ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
 {
@@ -4607,6 +4623,7 @@ ubyte[] localeFromUtf8(string utf8string, ptrdiff_t len, out size_t bytesRead)
       bytesWritten = the number of bytes stored in the output
                         buffer (not including the terminating nul).
     Returns: The converted string, or null on an error.
+    Throws: [ErrorG]
 */
 string localeToUtf8(ubyte[] opsysstring, out size_t bytesRead, out size_t bytesWritten)
 {
@@ -6544,6 +6561,7 @@ glib.types.Quark shellErrorQuark()
       commandLine = command line to parse
       argvp = return location for array of args
     Returns: true on success, false if error set
+    Throws: [ErrorG]
 */
 bool shellParseArgv(string commandLine, out string[] argvp)
 {
@@ -6619,6 +6637,7 @@ string shellQuote(string unquotedString)
     Params:
       quotedString = shell-quoted string
     Returns: an unquoted string
+    Throws: [ErrorG]
 */
 string shellUnquote(string quotedString)
 {
@@ -6816,6 +6835,7 @@ uint spacedPrimesClosest(uint num)
             in the child just before `exec()`
       childPid = return location for child process reference, or null
     Returns: true on success, false if error is set
+    Throws: [ErrorG]
 */
 bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid)
 {
@@ -6869,6 +6889,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, glib.type
       stdoutFd = file descriptor to use for child's stdout, or `-1`
       stderrFd = file descriptor to use for child's stderr, or `-1`
     Returns: true on success, false if an error was set
+    Throws: [ErrorG]
 */
 bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, int stdinFd, int stdoutFd, int stderrFd)
 {
@@ -6922,6 +6943,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gl
       standardOutput = return location for file descriptor to read child's stdout, or null
       standardError = return location for file descriptor to read child's stderr, or null
     Returns: true on success, false if an error was set
+    Throws: [ErrorG]
 */
 bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out glib.types.Pid childPid, out int standardInput, out int standardOutput, out int standardError)
 {
@@ -7174,6 +7196,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
       stdoutPipeOut = return location for file descriptor to read child's stdout, or null
       stderrPipeOut = return location for file descriptor to read child's stderr, or null
     Returns: true on success, false if an error was set
+    Throws: [ErrorG]
 */
 bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, int stdinFd, int stdoutFd, int stderrFd, int[] sourceFds, int[] targetFds, out glib.types.Pid childPidOut, out int stdinPipeOut, out int stdoutPipeOut, out int stderrPipeOut)
 {
@@ -7231,6 +7254,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
       waitStatus = A status as returned from [glib.global.spawnSync]
     Returns: true if child exited successfully, false otherwise (and
           error will be set)
+    Throws: [ErrorG]
 
     Deprecated: Use [glib.global.spawnCheckWaitStatus] instead, and check whether your code is conflating wait and exit statuses.
 */
@@ -7289,6 +7313,7 @@ bool spawnCheckExitStatus(int waitStatus)
       waitStatus = A platform-specific wait status as returned from [glib.global.spawnSync]
     Returns: true if child exited successfully, false otherwise (and
         error will be set)
+    Throws: [ErrorG]
 */
 bool spawnCheckWaitStatus(int waitStatus)
 {
@@ -7329,6 +7354,7 @@ void spawnClosePid(glib.types.Pid pid)
     Params:
       commandLine = a command line
     Returns: true on success, false if error is set
+    Throws: [ErrorG]
 */
 bool spawnCommandLineAsync(string commandLine)
 {
@@ -7378,6 +7404,7 @@ bool spawnCommandLineAsync(string commandLine)
       standardError = return location for child errors
       waitStatus = return location for child wait status, as returned by waitpid()
     Returns: true on success, false if an error was set
+    Throws: [ErrorG]
 */
 bool spawnCommandLineSync(string commandLine, out string standardOutput, out string standardError, out int waitStatus)
 {
@@ -7447,6 +7474,7 @@ glib.types.Quark spawnExitErrorQuark()
       standardError = return location for child error messages, or null
       waitStatus = return location for child wait status, as returned by waitpid(), or null
     Returns: true on success, false if an error was set
+    Throws: [ErrorG]
 */
 bool spawnSync(string workingDirectory, string[] argv, string[] envp, glib.types.SpawnFlags flags, glib.types.SpawnChildSetupFunc childSetup, out string standardOutput, out string standardError, out int waitStatus)
 {
@@ -9611,6 +9639,7 @@ void* tryReallocN(void* mem, size_t nBlocks, size_t nBlockBytes)
     Returns: a pointer to a newly allocated UTF-16 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
+    Throws: [ErrorG]
 */
 ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -9651,6 +9680,7 @@ ushort[] ucs4ToUtf16(dchar[] str, out glong itemsRead, out glong itemsWritten)
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set. In that case, items_read
           will be set to the position of the first invalid input character.
+    Throws: [ErrorG]
 */
 string ucs4ToUtf8(dchar[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -10380,6 +10410,7 @@ glib.source.Source unixFdSourceNew(int fd, glib.types.IOCondition condition)
       userName = the username to get the passwd file entry for
     Returns: passwd entry, or null on error; free the returned
          value with [glib.global.gfree]
+    Throws: [ErrorG]
 */
 void* unixGetPasswdEntry(string userName)
 {
@@ -10416,6 +10447,7 @@ void* unixGetPasswdEntry(string userName)
       fds = Array of two integers
       flags = Bitfield of file descriptor flags, as for fcntl()
     Returns: true on success, false if not (and errno will be set).
+    Throws: [ErrorG]
 */
 bool unixOpenPipe(int[] fds, int flags)
 {
@@ -10438,6 +10470,7 @@ bool unixOpenPipe(int[] fds, int flags)
       fd = A file descriptor
       nonblock = If true, set the descriptor to be non-blocking
     Returns: true if successful
+    Throws: [ErrorG]
 */
 bool unixSetFdNonblocking(int fd, bool nonblock)
 {
@@ -10598,6 +10631,7 @@ void usleep(gulong microseconds)
     Returns: a pointer to a newly allocated UCS-4 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
+    Throws: [ErrorG]
 */
 dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
 {
@@ -10649,6 +10683,7 @@ dchar[] utf16ToUcs4(ushort[] str, out glong itemsRead)
     Returns: a pointer to a newly allocated UTF-8 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
+    Throws: [ErrorG]
 */
 string utf16ToUtf8(ushort[] str, out glong itemsRead, out glong itemsWritten)
 {
@@ -11222,6 +11257,7 @@ string utf8Substring(string str, glong startPos, glong endPos)
     Returns: a pointer to a newly allocated UCS-4 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
+    Throws: [ErrorG]
 */
 dchar[] utf8ToUcs4(string str, glong len, out glong itemsRead)
 {
@@ -11287,6 +11323,7 @@ dchar[] utf8ToUcs4Fast(string str)
     Returns: a pointer to a newly allocated UTF-16 string.
           This value must be freed with [glib.global.gfree]. If an error occurs,
           null will be returned and error set.
+    Throws: [ErrorG]
 */
 ushort[] utf8ToUtf16(string str, glong len, out glong itemsRead)
 {

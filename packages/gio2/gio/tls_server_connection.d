@@ -38,6 +38,7 @@ interface TlsServerConnection
         certificate = the default server certificate, or null
       Returns: the new
         #GTlsServerConnection, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_server_connection.TlsServerConnection new_(gio.iostream.IOStream baseIoStream, gio.tls_certificate.TlsCertificate certificate = null)
   {

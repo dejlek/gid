@@ -34,6 +34,7 @@ interface DtlsClientConnection
         serverIdentity = the expected identity of the server
       Returns: the new
           #GDtlsClientConnection, or null on error
+      Throws: [ErrorG]
   */
   static gio.dtls_client_connection.DtlsClientConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.socket_connectable.SocketConnectable serverIdentity = null)
   {

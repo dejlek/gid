@@ -79,6 +79,7 @@ interface Icon
         str = A string obtained via [gio.icon.Icon.toString_].
       Returns: An object implementing the #GIcon
                  interface or null if error is set.
+      Throws: [ErrorG]
   */
   static gio.icon.Icon newForString(string str)
   {

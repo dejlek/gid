@@ -262,6 +262,7 @@ class RTSPConnection
       when called the first time and will return that same connection on subsequent
       calls. The server is then responsible for configuring the TLS connection.
       Returns: the TLS connection for conn.
+      Throws: [ErrorG]
   */
   gio.tls_connection.TlsConnection getTls()
   {

@@ -50,6 +50,7 @@ class FileSystem : gobject.object.ObjectG
             absolute path, [glib.global.filenameToUri] will help you.
       Returns: The newly created file system
           that is an object of a subclass of #GArrowFileSystem.
+      Throws: [ErrorG]
   */
   static arrow.file_system.FileSystem create(string uri)
   {
@@ -72,6 +73,7 @@ class FileSystem : gobject.object.ObjectG
         src = The path of the source file.
         dest = The path of the destination.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool copyFile(string src, string dest)
   {
@@ -93,6 +95,7 @@ class FileSystem : gobject.object.ObjectG
         path = The paths of the directory.
         recursive = Whether creating directory recursively or not.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool createDir(string path, bool recursive)
   {
@@ -111,6 +114,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the directory.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteDir(string path)
   {
@@ -132,6 +136,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the directory.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteDirContents(string path)
   {
@@ -150,6 +155,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The paths of the file to be delete.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteFile(string path)
   {
@@ -168,6 +174,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         paths = The paths of the files to be delete.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteFiles(string[] paths)
   {
@@ -200,6 +207,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         path = The path of the target.
       Returns: A #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo getFileInfo(string path)
   {
@@ -220,6 +228,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         paths = The paths of the targets.
       Returns: A list of #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo[] getFileInfosPaths(string[] paths)
   {
@@ -251,6 +260,7 @@ class FileSystem : gobject.object.ObjectG
       Params:
         fileSelector = A #GArrowFileSelector.
       Returns: A list of #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo[] getFileInfosSelector(arrow.file_selector.FileSelector fileSelector)
   {
@@ -285,6 +295,7 @@ class FileSystem : gobject.object.ObjectG
         src = The path of the source file.
         dest = The path of the destination.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool move(string src, string dest)
   {
@@ -306,6 +317,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the output stream.
       Returns: A newly created #GArrowOutputStream
           for appending.
+      Throws: [ErrorG]
   */
   arrow.output_stream.OutputStream openAppendStream(string path)
   {
@@ -326,6 +338,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the input file.
       Returns: A newly created
           #GArrowSeekableInputStream.
+      Throws: [ErrorG]
   */
   arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
@@ -346,6 +359,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the input stream.
       Returns: A newly created
           #GArrowInputStream.
+      Throws: [ErrorG]
   */
   arrow.input_stream.InputStream openInputStream(string path)
   {
@@ -367,6 +381,7 @@ class FileSystem : gobject.object.ObjectG
         path = The path of the output stream.
       Returns: A newly created
           #GArrowOutputStream.
+      Throws: [ErrorG]
   */
   arrow.output_stream.OutputStream openOutputStream(string path)
   {

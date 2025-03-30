@@ -257,6 +257,7 @@ template RecentChooserT()
       Params:
         uri = a URI
       Returns: true if uri was found.
+      Throws: [ErrorG]
   */
   override bool selectUri(string uri)
   {
@@ -275,6 +276,7 @@ template RecentChooserT()
       Params:
         uri = a URI
       Returns: true if the URI was found.
+      Throws: [ErrorG]
   */
   override bool setCurrentUri(string uri)
   {

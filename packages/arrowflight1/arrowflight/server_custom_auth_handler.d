@@ -48,6 +48,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
         context = A #GAFlightServerCallContext.
         sender = A #GAFlightServerAuthSender.
         reader = A #GAFlightServerAuthReader.
+      Throws: [ErrorG]
   */
   void authenticate(arrowflight.server_call_context.ServerCallContext context, arrowflight.server_auth_sender.ServerAuthSender sender, arrowflight.server_auth_reader.ServerAuthReader reader)
   {
@@ -66,6 +67,7 @@ class ServerCustomAuthHandler : arrowflight.server_auth_handler.ServerAuthHandle
             provide a token.
       Returns: The identity of the peer, if
           this authentication method supports it.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes isValid(arrowflight.server_call_context.ServerCallContext context, glib.bytes.Bytes token)
   {

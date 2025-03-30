@@ -138,6 +138,7 @@ template DriveT()
         result = a #GAsyncResult.
       Returns: true if the drive has been ejected successfully,
             false otherwise.
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.drive.Drive.ejectWithOperationFinish] instead.
   */
@@ -185,6 +186,7 @@ template DriveT()
       Params:
         result = a #GAsyncResult.
       Returns: true if the drive was successfully ejected. false otherwise.
+      Throws: [ErrorG]
   */
   override bool ejectWithOperationFinish(gio.async_result.AsyncResult result)
   {
@@ -412,6 +414,7 @@ template DriveT()
         result = a #GAsyncResult.
       Returns: true if the drive has been poll_for_mediaed successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   override bool pollForMediaFinish(gio.async_result.AsyncResult result)
   {
@@ -459,6 +462,7 @@ template DriveT()
         result = a #GAsyncResult.
       Returns: true if the drive has been started successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   override bool startFinish(gio.async_result.AsyncResult result)
   {
@@ -506,6 +510,7 @@ template DriveT()
         result = a #GAsyncResult.
       Returns: true if the drive has been stopped successfully,
             false otherwise.
+      Throws: [ErrorG]
   */
   override bool stopFinish(gio.async_result.AsyncResult result)
   {

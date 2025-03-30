@@ -59,6 +59,7 @@ class StreamDecoder : gobject.object.ObjectG
       Params:
         buffer = A #GArrowBuffer to be decoded.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool consumeBuffer(arrow.buffer.Buffer buffer)
   {
@@ -80,6 +81,7 @@ class StreamDecoder : gobject.object.ObjectG
       Params:
         bytes = A #GBytes to be decoded.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool consumeBytes(glib.bytes.Bytes bytes)
   {
@@ -171,6 +173,7 @@ class StreamDecoder : gobject.object.ObjectG
       
       You can reuse this decoder for new stream after calling this.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool reset()
   {

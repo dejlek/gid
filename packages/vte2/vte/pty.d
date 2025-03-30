@@ -56,6 +56,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         fd = a file descriptor to the PTY
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty for fd, or null on error with error filled in
+      Throws: [ErrorG]
   */
   static vte.pty.Pty newForeignSync(int fd, gio.cancellable.Cancellable cancellable = null)
   {
@@ -101,6 +102,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         flags = flags from #VtePtyFlags
         cancellable = a #GCancellable, or null
       Returns: a new #VtePty, or null on error with error filled in
+      Throws: [ErrorG]
   */
   static vte.pty.Pty newSync(vte.types.PtyFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -144,6 +146,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         rows = a location to store the number of rows, or null
         columns = a location to store the number of columns, or null
       Returns: true on success, false on failure with error filled in
+      Throws: [ErrorG]
   */
   bool getSize(out int rows, out int columns)
   {
@@ -165,6 +168,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
         rows = the desired number of rows
         columns = the desired number of columns
       Returns: true on success, false on failure with error filled in
+      Throws: [ErrorG]
   */
   bool setSize(int rows, int columns)
   {
@@ -184,6 +188,7 @@ class Pty : gobject.object.ObjectG, gio.initable.Initable
       Params:
         utf8 = whether or not the pty is in UTF-8 mode
       Returns: true on success, false on failure with error filled in
+      Throws: [ErrorG]
   */
   bool setUtf8(bool utf8)
   {

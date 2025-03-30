@@ -121,6 +121,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         result = the asynchronous result passed to the callback
       Returns: the new item, which should be unreferenced
           with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   static secret.item.Item createFinish(gio.async_result.AsyncResult result)
   {
@@ -154,6 +155,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         cancellable = optional cancellation object
       Returns: the new item, which should be unreferenced
           with [gobject.object.ObjectG.unref]
+      Throws: [ErrorG]
   */
   static secret.item.Item createSync(secret.collection.Collection collection, secret.schema.Schema schema, string[string] attributes, string label, secret.value.Value value, secret.types.ItemCreateFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -207,6 +209,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the operation succeeded or not
+      Throws: [ErrorG]
   */
   static bool loadSecretsFinish(gio.async_result.AsyncResult result)
   {
@@ -232,6 +235,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         items = the items to retrieve secrets for
         cancellable = optional cancellation object
       Returns: whether the operation succeeded or not
+      Throws: [ErrorG]
   */
   static bool loadSecretsSync(secret.item.Item[] items, gio.cancellable.Cancellable cancellable = null)
   {
@@ -277,6 +281,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the item was successfully deleted or not
+      Throws: [ErrorG]
   */
   bool deleteFinish(gio.async_result.AsyncResult result)
   {
@@ -298,6 +303,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         cancellable = optional cancellation object
       Returns: whether the item was successfully deleted or not
+      Throws: [ErrorG]
   */
   bool deleteSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -483,6 +489,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the secret item successfully loaded or not
+      Throws: [ErrorG]
   */
   bool loadSecretFinish(gio.async_result.AsyncResult result)
   {
@@ -506,6 +513,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         cancellable = optional cancellation object
       Returns: whether the secret item successfully loaded or not
+      Throws: [ErrorG]
   */
   bool loadSecretSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -569,6 +577,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to the callback
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setAttributesFinish(gio.async_result.AsyncResult result)
   {
@@ -595,6 +604,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         attributes = a new set of attributes
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setAttributesSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -640,6 +650,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setLabelFinish(gio.async_result.AsyncResult result)
   {
@@ -661,6 +672,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         label = a new label
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setLabelSync(string label, gio.cancellable.Cancellable cancellable = null)
   {
@@ -707,6 +719,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
       Params:
         result = asynchronous result passed to callback
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setSecretFinish(gio.async_result.AsyncResult result)
   {
@@ -731,6 +744,7 @@ class Item : gio.dbus_proxy.DBusProxy, secret.retrievable.Retrievable
         value = a new secret value
         cancellable = optional cancellation object
       Returns: whether the change was successful or not
+      Throws: [ErrorG]
   */
   bool setSecretSync(secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {

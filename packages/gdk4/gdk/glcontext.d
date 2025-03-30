@@ -314,6 +314,7 @@ class GLContext : gdk.draw_context.DrawContext
       
       It is safe to call this function on a realized [gdk.glcontext.GLContext].
       Returns: true if the context is realized
+      Throws: [ErrorG]
   */
   bool realize()
   {

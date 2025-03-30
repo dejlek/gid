@@ -271,6 +271,7 @@ class TlsConnection : gio.iostream.IOStream
       Params:
         cancellable = a #GCancellable, or null
       Returns: success or failure
+      Throws: [ErrorG]
   */
   bool handshake(gio.cancellable.Cancellable cancellable = null)
   {
@@ -314,6 +315,7 @@ class TlsConnection : gio.iostream.IOStream
         result = a #GAsyncResult.
       Returns: true on success, false on failure, in which
         case error will be set.
+      Throws: [ErrorG]
   */
   bool handshakeFinish(gio.async_result.AsyncResult result)
   {

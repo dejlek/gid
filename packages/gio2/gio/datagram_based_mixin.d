@@ -129,6 +129,7 @@ template DatagramBasedT()
             to block indefinitely
         cancellable = a #GCancellable
       Returns: true if the condition was met, false otherwise
+      Throws: [ErrorG]
   */
   override bool conditionWait(glib.types.IOCondition condition, long timeout, gio.cancellable.Cancellable cancellable = null)
   {

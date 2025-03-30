@@ -65,6 +65,7 @@ template DtlsConnectionT()
       Params:
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
+      Throws: [ErrorG]
   */
   override bool close(gio.cancellable.Cancellable cancellable = null)
   {
@@ -108,6 +109,7 @@ template DtlsConnectionT()
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
+      Throws: [ErrorG]
   */
   override bool closeFinish(gio.async_result.AsyncResult result)
   {
@@ -317,6 +319,7 @@ template DtlsConnectionT()
       Params:
         cancellable = a #GCancellable, or null
       Returns: success or failure
+      Throws: [ErrorG]
   */
   override bool handshake(gio.cancellable.Cancellable cancellable = null)
   {
@@ -360,6 +363,7 @@ template DtlsConnectionT()
         result = a #GAsyncResult.
       Returns: true on success, false on failure, in which
         case error will be set.
+      Throws: [ErrorG]
   */
   override bool handshakeFinish(gio.async_result.AsyncResult result)
   {
@@ -538,6 +542,7 @@ template DtlsConnectionT()
         shutdownWrite = true to stop sending outgoing datagrams
         cancellable = a #GCancellable, or null
       Returns: true on success, false otherwise
+      Throws: [ErrorG]
   */
   override bool shutdown(bool shutdownRead, bool shutdownWrite, gio.cancellable.Cancellable cancellable = null)
   {
@@ -583,6 +588,7 @@ template DtlsConnectionT()
         result = a #GAsyncResult
       Returns: true on success, false on failure, in which
         case error will be set
+      Throws: [ErrorG]
   */
   override bool shutdownFinish(gio.async_result.AsyncResult result)
   {

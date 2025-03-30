@@ -125,6 +125,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         bytes = a #GBytes
         info = a #GstMIKEYDecryptInfo
       Returns: a new #GstMIKEYMessage
+      Throws: [ErrorG]
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromBytes(glib.bytes.Bytes bytes, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -167,6 +168,7 @@ class MIKEYMessage : gobject.boxed.Boxed
         info = #GstMIKEYDecryptInfo
       Returns: a #GstMIKEYMessage on success or null when parsing failed and
         error will be set.
+      Throws: [ErrorG]
   */
   static gstsdp.mikeymessage.MIKEYMessage newFromData(ubyte[] data, gstsdp.types.MIKEYDecryptInfo info)
   {
@@ -475,6 +477,7 @@ class MIKEYMessage : gobject.boxed.Boxed
       Params:
         info = a #GstMIKEYEncryptInfo
       Returns: a new #GBytes for msg.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes toBytes(gstsdp.types.MIKEYEncryptInfo info)
   {

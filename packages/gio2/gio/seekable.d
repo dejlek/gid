@@ -72,6 +72,7 @@ interface Seekable
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
+      Throws: [ErrorG]
   */
   bool seek(long offset, glib.types.SeekType type, gio.cancellable.Cancellable cancellable = null);
 
@@ -99,6 +100,7 @@ interface Seekable
       Returns: true if successful. If an error
             has occurred, this function will return false and set error
             appropriately if present.
+      Throws: [ErrorG]
   */
   bool truncate(long offset, gio.cancellable.Cancellable cancellable = null);
 }

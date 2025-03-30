@@ -253,6 +253,7 @@ class Cancellable : gobject.object.ObjectG
       If the cancellable is cancelled, sets the error to notify
       that the operation was cancelled.
       Returns: true if cancellable was cancelled, false if it was not
+      Throws: [ErrorG]
   */
   bool setErrorIfCancelled()
   {

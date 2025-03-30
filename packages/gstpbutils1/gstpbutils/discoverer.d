@@ -67,6 +67,7 @@ class Discoverer : gobject.object.ObjectG
         If an error occurred when creating the discoverer, err will be set
         accordingly and null will be returned. If err is set, the caller must
         free it when no longer needed using [glib.error.ErrorG.free].
+      Throws: [ErrorG]
   */
   this(gst.types.ClockTime timeout)
   {
@@ -88,6 +89,7 @@ class Discoverer : gobject.object.ObjectG
         uri = The URI to run on.
       Returns: the result of the scanning. Can be null if an
         error occurred.
+      Throws: [ErrorG]
   */
   gstpbutils.discoverer_info.DiscovererInfo discoverUri(string uri)
   {

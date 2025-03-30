@@ -353,6 +353,7 @@ class TextBuffer : gobject.object.ObjectG
         iter = insertion point for the deserialized text
         data = data to deserialize
       Returns: true on success, false otherwise.
+      Throws: [ErrorG]
   */
   bool deserialize(gtk.text_buffer.TextBuffer contentBuffer, gdk.atom.Atom format, gtk.text_iter.TextIter iter, ubyte[] data)
   {

@@ -120,6 +120,7 @@ class PixbufLoader : gobject.object.ObjectG
       Params:
         mimeType = the mime type to be loaded
       Returns: A newly-created pixbuf loader.
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithMimeType(string mimeType)
   {
@@ -152,6 +153,7 @@ class PixbufLoader : gobject.object.ObjectG
       Params:
         imageType = name of the image format to be loaded with the image
       Returns: A newly-created pixbuf loader.
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_loader.PixbufLoader newWithType(string imageType)
   {
@@ -183,6 +185,7 @@ class PixbufLoader : gobject.object.ObjectG
       you will need to explicitly release any reference you hold.
       Returns: `TRUE` if all image data written so far was successfully
           passed out via the update_area signal
+      Throws: [ErrorG]
   */
   bool close()
   {
@@ -280,6 +283,7 @@ class PixbufLoader : gobject.object.ObjectG
         buf = Pointer to image data.
       Returns: `TRUE` if the write was successful, or
           `FALSE` if the loader cannot parse the buffer
+      Throws: [ErrorG]
   */
   bool write(ubyte[] buf)
   {
@@ -303,6 +307,7 @@ class PixbufLoader : gobject.object.ObjectG
         buffer = The image data as a [glib.bytes.Bytes] buffer.
       Returns: `TRUE` if the write was successful, or `FALSE` if
           the loader cannot parse the buffer
+      Throws: [ErrorG]
   */
   bool writeBytes(glib.bytes.Bytes buffer)
   {

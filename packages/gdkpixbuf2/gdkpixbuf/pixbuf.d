@@ -255,6 +255,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         filename = Name of file to load, in the GLib file
             name encoding
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromFile(string filename)
   {
@@ -301,6 +302,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         height = The height the image should have or -1 to not constrain the height
         preserveAspectRatio = `TRUE` to preserve the image's aspect ratio
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromFileAtScale(string filename, int width, int height, bool preserveAspectRatio)
   {
@@ -342,6 +344,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         width = The width the image should have or -1 to not constrain the width
         height = The height the image should have or -1 to not constrain the height
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromFileAtSize(string filename, int width, int height)
   {
@@ -396,6 +399,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         copyPixels = Whether to copy the pixel data, or use direct pointers
             `data` for the resulting pixbuf
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   
       Deprecated: Use [gio.resource.Resource] instead.
   */
@@ -424,6 +428,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
       Params:
         resourcePath = the path of the resource file
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromResource(string resourcePath)
   {
@@ -458,6 +463,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         height = The height the image should have or -1 to not constrain the height
         preserveAspectRatio = `TRUE` to preserve the image's aspect ratio
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromResourceAtScale(string resourcePath, int width, int height, bool preserveAspectRatio)
   {
@@ -489,6 +495,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         stream = a [gio.input_stream.InputStream] to load the pixbuf from
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromStream(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null)
   {
@@ -531,6 +538,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         preserveAspectRatio = `TRUE` to preserve the image's aspect ratio
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
       Returns: A newly-created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromStreamAtScale(gio.input_stream.InputStream stream, int width, int height, bool preserveAspectRatio, gio.cancellable.Cancellable cancellable = null)
   {
@@ -550,6 +558,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
       Params:
         asyncResult = a [gio.async_result.AsyncResult]
       Returns: the newly created pixbuf
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf.Pixbuf newFromStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
@@ -668,6 +677,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         height = Return location for the height of the image, or `NULL`
       Returns: A [gdkpixbuf.pixbuf_format.PixbufFormat] describing the
           image format of the file
+      Throws: [ErrorG]
   */
   static gdkpixbuf.pixbuf_format.PixbufFormat getFileInfoFinish(gio.async_result.AsyncResult asyncResult, out int width, out int height)
   {
@@ -712,6 +722,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
       Params:
         path = Path to directory where the `loaders.cache` is installed
       Returns: 
+      Throws: [ErrorG]
   */
   static bool initModules(string path)
   {
@@ -793,6 +804,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
       Params:
         asyncResult = a [gio.async_result.AsyncResult]
       Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an error was set.
+      Throws: [ErrorG]
   */
   static bool saveToStreamFinish(gio.async_result.AsyncResult asyncResult)
   {
@@ -1329,6 +1341,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         optionKeys = name of options to set
         optionValues = values for named options
       Returns: whether an error was set
+      Throws: [ErrorG]
   */
   bool saveToBufferv(out ubyte[] buffer, string type, string[] optionKeys = null, string[] optionValues = null)
   {
@@ -1375,6 +1388,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         optionKeys = name of options to set
         optionValues = values for named options
       Returns: whether an error was set
+      Throws: [ErrorG]
   */
   bool saveToCallbackv(gdkpixbuf.types.PixbufSaveFunc saveFunc, string type, string[] optionKeys = null, string[] optionValues = null)
   {
@@ -1431,6 +1445,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         cancellable = optional [gio.cancellable.Cancellable] object, `NULL` to ignore
       Returns: `TRUE` if the pixbuf was saved successfully, `FALSE` if an
           error was set.
+      Throws: [ErrorG]
   */
   bool saveToStreamv(gio.output_stream.OutputStream stream, string type, string[] optionKeys = null, string[] optionValues = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1517,6 +1532,7 @@ class Pixbuf : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadable
         optionKeys = name of options to set
         optionValues = values for named options
       Returns: whether an error was set
+      Throws: [ErrorG]
   */
   bool savev(string filename, string type, string[] optionKeys = null, string[] optionValues = null)
   {

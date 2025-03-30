@@ -103,6 +103,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
         destlen = the size of dest. Must be at least as large as
               [gio.socket_address.SocketAddress.getNativeSize]
       Returns: true if dest was filled in, false on error
+      Throws: [ErrorG]
   */
   bool toNative(void* dest, size_t destlen)
   {

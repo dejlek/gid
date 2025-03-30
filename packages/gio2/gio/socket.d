@@ -143,6 +143,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         protocol = the id of the protocol to use, or 0 for default.
       Returns: a #GSocket or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   this(gio.types.SocketFamily family, gio.types.SocketType type, gio.types.SocketProtocol protocol)
   {
@@ -173,6 +174,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         fd = a native socket file descriptor.
       Returns: a #GSocket or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static gio.socket.Socket newFromFd(int fd)
   {
@@ -201,6 +203,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: a new #GSocket, or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.socket.Socket accept(gio.cancellable.Cancellable cancellable = null)
   {
@@ -242,6 +245,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         address = a #GSocketAddress specifying the local address.
         allowReuse = whether to allow reusing this address
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool bind(gio.socket_address.SocketAddress address, bool allowReuse)
   {
@@ -258,6 +262,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       This is used to check for errors when [gio.socket.Socket.connect] is
       used in non-blocking mode.
       Returns: true if no error, false otherwise, setting error to the error
+      Throws: [ErrorG]
   */
   bool checkConnectResult()
   {
@@ -300,6 +305,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       only works if the client will close its connection after the server
       does.)
       Returns: true on success, false on error
+      Throws: [ErrorG]
   */
   bool close()
   {
@@ -365,6 +371,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         timeoutUs = the maximum time (in microseconds) to wait, or -1
         cancellable = a #GCancellable, or null
       Returns: true if the condition was met, false otherwise
+      Throws: [ErrorG]
   */
   bool conditionTimedWait(glib.types.IOCondition condition, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
@@ -392,6 +399,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         condition = a #GIOCondition mask to wait for
         cancellable = a #GCancellable, or null
       Returns: true if the condition was met, false otherwise
+      Throws: [ErrorG]
   */
   bool conditionWait(glib.types.IOCondition condition, gio.cancellable.Cancellable cancellable = null)
   {
@@ -425,6 +433,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         address = a #GSocketAddress specifying the remote address.
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: true if connected, false on error.
+      Throws: [ErrorG]
   */
   bool connect(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null)
   {
@@ -522,6 +531,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       [gio.unix_connection.UnixConnection.receiveCredentials] functions.
       Returns: null if error is set, otherwise a #GCredentials object
         that must be freed with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.credentials.Credentials getCredentials()
   {
@@ -591,6 +601,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       either explicitly or implicitly when connecting.
       Returns: a #GSocketAddress or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress getLocalAddress()
   {
@@ -650,6 +661,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       Returns: success or failure. On failure, error will be set, and
           the system error value (`errno` or WSAGetLastError()) will still
           be set to the result of the getsockopt() call.
+      Throws: [ErrorG]
   */
   bool getOption(int level, int optname, out int value)
   {
@@ -679,6 +691,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       useful for connection oriented sockets that have been connected.
       Returns: a #GSocketAddress or null on error.
             Free the returned object with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   gio.socket_address.SocketAddress getRemoteAddress()
   {
@@ -776,6 +789,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         sourceSpecific = true if source-specific multicast should be used
         iface = Name of the interface to use, or null
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool joinMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
@@ -811,6 +825,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
           source-specific multicast address or null to ignore.
         iface = Name of the interface to use, or null
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool joinMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
@@ -839,6 +854,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         sourceSpecific = true if source-specific multicast was used
         iface = Interface used
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool leaveMulticastGroup(gio.inet_address.InetAddress group, bool sourceSpecific, string iface = null)
   {
@@ -865,6 +881,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
           source-specific multicast address or null to ignore.
         iface = Name of the interface to use, or null
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool leaveMulticastGroupSsm(gio.inet_address.InetAddress group, gio.inet_address.InetAddress sourceSpecific = null, string iface = null)
   {
@@ -887,6 +904,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       To set the maximum amount of outstanding clients, use
       [gio.socket.Socket.setListenBacklog].
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool listen()
   {
@@ -928,6 +946,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes read, or 0 if the connection was closed by
         the peer, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t receive(ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -958,6 +977,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable], or `NULL`
       Returns: a bytes buffer containing the
           received bytes, or `NULL` on error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes receiveBytes(size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
@@ -994,6 +1014,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a #GCancellable, or `NULL`
       Returns: a bytes buffer containing the
           received bytes, or `NULL` on error
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes receiveBytesFrom(out gio.socket_address.SocketAddress address, size_t size, long timeoutUs, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1024,6 +1045,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes read, or 0 if the connection was closed by
         the peer, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t receiveFrom(out gio.socket_address.SocketAddress address, ref ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1111,6 +1133,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes read, or 0 if the connection was closed by
         the peer, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t receiveMessage(out gio.socket_address.SocketAddress address, gio.types.InputVector[] vectors, out gio.socket_control_message.SocketControlMessage[] messages, ref int flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1146,6 +1169,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes read, or 0 if the connection was closed by
         the peer, or -1 on error
+      Throws: [ErrorG]
   */
   ptrdiff_t receiveWithBlocking(ref ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1180,6 +1204,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes written (which may be less than size), or -1
         on error
+      Throws: [ErrorG]
   */
   ptrdiff_t send(ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1250,6 +1275,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes written (which may be less than size), or -1
         on error
+      Throws: [ErrorG]
   */
   ptrdiff_t sendMessage(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1297,6 +1323,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       Returns: [gio.types.PollableReturn.Ok] if all data was successfully written,
         [gio.types.PollableReturn.WouldBlock] if the socket is currently not writable, or
         [gio.types.PollableReturn.Failed] if an error happened and error is set.
+      Throws: [ErrorG]
   */
   gio.types.PollableReturn sendMessageWithTimeout(gio.socket_address.SocketAddress address, gio.types.OutputVector[] vectors, gio.socket_control_message.SocketControlMessage[] messages, int flags, long timeoutUs, out size_t bytesWritten, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1337,6 +1364,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes written (which may be less than size), or -1
         on error
+      Throws: [ErrorG]
   */
   ptrdiff_t sendTo(gio.socket_address.SocketAddress address, ubyte[] buffer, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1365,6 +1393,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         cancellable = a [gio.cancellable.Cancellable] or null
       Returns: Number of bytes written (which may be less than size), or -1
         on error
+      Throws: [ErrorG]
   */
   ptrdiff_t sendWithBlocking(ubyte[] buffer, bool blocking, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1500,6 +1529,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
       Returns: success or failure. On failure, error will be set, and
           the system error value (`errno` or WSAGetLastError()) will still
           be set to the result of the setsockopt() call.
+      Throws: [ErrorG]
   */
   bool setOption(int level, int optname, int value)
   {
@@ -1573,6 +1603,7 @@ class Socket : gobject.object.ObjectG, gio.datagram_based.DatagramBased, gio.ini
         shutdownRead = whether to shut down the read side
         shutdownWrite = whether to shut down the write side
       Returns: true on success, false on error
+      Throws: [ErrorG]
   */
   bool shutdown(bool shutdownRead, bool shutdownWrite)
   {

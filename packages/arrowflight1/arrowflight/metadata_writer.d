@@ -43,6 +43,7 @@ class MetadataWriter : gobject.object.ObjectG
       Params:
         metadata = A #GArrowBuffer to be sent.
       Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool write(arrow.buffer.Buffer metadata)
   {

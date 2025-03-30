@@ -323,6 +323,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
+      Throws: [ErrorG]
   */
   uint addUiFromFile(string filename)
   {
@@ -344,6 +345,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
+      Throws: [ErrorG]
   */
   uint addUiFromResource(string resourcePath)
   {
@@ -367,6 +369,7 @@ class UIManager : gobject.object.ObjectG, gtk.buildable.Buildable
       Returns: The merge id for the merged UI. The merge id can be used
           to unmerge the UI with [gtk.uimanager.UIManager.removeUi]. If an error occurred,
           the return value is 0.
+      Throws: [ErrorG]
   */
   uint addUiFromString(string buffer, ptrdiff_t length)
   {

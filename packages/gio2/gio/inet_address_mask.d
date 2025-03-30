@@ -54,6 +54,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
         addr = a #GInetAddress
         length = number of bits of addr to use
       Returns: a new #GInetAddressMask, or null on error
+      Throws: [ErrorG]
   */
   this(gio.inet_address.InetAddress addr, uint length)
   {
@@ -75,6 +76,7 @@ class InetAddressMask : gobject.object.ObjectG, gio.initable.Initable
         maskString = an IP address or address/length string
       Returns: a new #GInetAddressMask corresponding to string, or null
         on error.
+      Throws: [ErrorG]
   */
   static gio.inet_address_mask.InetAddressMask newFromString(string maskString)
   {

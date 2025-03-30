@@ -205,6 +205,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: the value associated with the key as a boolean,
            or false if the key was not found or could not be parsed.
+      Throws: [KeyFileException]
   */
   bool getBoolean(string groupName, string key)
   {
@@ -233,6 +234,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: the values associated with the key as a list of booleans, or null if the
            key was not found or could not be parsed. The returned list of booleans
            should be freed with [glib.global.gfree] when no longer needed.
+      Throws: [KeyFileException]
   */
   bool[] getBooleanList(string groupName, string key)
   {
@@ -267,6 +269,7 @@ class KeyFile : gobject.boxed.Boxed
         groupName = a group name, or null
         key = a key
       Returns: a comment that should be freed with [glib.global.gfree]
+      Throws: [KeyFileException]
   */
   string getComment(string groupName = null, string key = null)
   {
@@ -295,6 +298,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: the value associated with the key as a double, or
             0.0 if the key was not found or could not be parsed.
+      Throws: [KeyFileException]
   */
   double getDouble(string groupName, string key)
   {
@@ -323,6 +327,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: the values associated with the key as a list of doubles, or null if the
             key was not found or could not be parsed. The returned list of doubles
             should be freed with [glib.global.gfree] when no longer needed.
+      Throws: [KeyFileException]
   */
   double[] getDoubleList(string groupName, string key)
   {
@@ -381,6 +386,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a non-null key
       Returns: the value associated with the key as a signed 64-bit integer, or
         0 if the key was not found or could not be parsed.
+      Throws: [KeyFileException]
   */
   long getInt64(string groupName, string key)
   {
@@ -409,6 +415,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: the value associated with the key as an integer, or
             0 if the key was not found or could not be parsed.
+      Throws: [KeyFileException]
   */
   int getInteger(string groupName, string key)
   {
@@ -438,6 +445,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: the values associated with the key as a list of integers, or null if
             the key was not found or could not be parsed. The returned list of
             integers should be freed with [glib.global.gfree] when no longer needed.
+      Throws: [KeyFileException]
   */
   int[] getIntegerList(string groupName, string key)
   {
@@ -470,6 +478,7 @@ class KeyFile : gobject.boxed.Boxed
         length = return location for the number of keys returned, or null
       Returns: a newly-allocated null-terminated array of strings.
             Use [glib.global.strfreev] to free it.
+      Throws: [KeyFileException]
   */
   string[] getKeys(string groupName, out size_t length)
   {
@@ -542,6 +551,7 @@ class KeyFile : gobject.boxed.Boxed
         locale = a locale identifier or null
       Returns: a newly allocated string or null if the specified
           key cannot be found.
+      Throws: [KeyFileException]
   */
   string getLocaleString(string groupName, string key, string locale = null)
   {
@@ -580,6 +590,7 @@ class KeyFile : gobject.boxed.Boxed
       Returns: a newly allocated null-terminated string array
           or null if the key isn't found. The string array should be freed
           with [glib.global.strfreev].
+      Throws: [KeyFileException]
   */
   string[] getLocaleStringList(string groupName, string key, string locale = null)
   {
@@ -630,6 +641,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: a newly allocated string or null if the specified
           key cannot be found.
+      Throws: [KeyFileException]
   */
   string getString(string groupName, string key)
   {
@@ -657,6 +669,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: a null-terminated string array or null if the specified
          key cannot be found. The array should be freed with [glib.global.strfreev].
+      Throws: [KeyFileException]
   */
   string[] getStringList(string groupName, string key)
   {
@@ -689,6 +702,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a non-null key
       Returns: the value associated with the key as an unsigned 64-bit integer,
         or 0 if the key was not found or could not be parsed.
+      Throws: [KeyFileException]
   */
   ulong getUint64(string groupName, string key)
   {
@@ -716,6 +730,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
       Returns: a newly allocated string or null if the specified
          key cannot be found.
+      Throws: [KeyFileException]
   */
   string getValue(string groupName, string key)
   {
@@ -754,6 +769,7 @@ class KeyFile : gobject.boxed.Boxed
         bytes = a #GBytes
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [KeyFileException]
   */
   bool loadFromBytes(glib.bytes.Bytes bytes, glib.types.KeyFileFlags flags)
   {
@@ -774,6 +790,7 @@ class KeyFile : gobject.boxed.Boxed
         length = the length of data in bytes (or (gsize)-1 if data is nul-terminated)
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [KeyFileException]
   */
   bool loadFromData(string data, size_t length, glib.types.KeyFileFlags flags)
   {
@@ -799,6 +816,7 @@ class KeyFile : gobject.boxed.Boxed
             of the file, or null
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [KeyFileException]
   */
   bool loadFromDataDirs(string file, out string fullPath, glib.types.KeyFileFlags flags)
   {
@@ -831,6 +849,7 @@ class KeyFile : gobject.boxed.Boxed
             of the file, or null
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [KeyFileException]
   */
   bool loadFromDirs(string file, string[] searchDirs, out string fullPath, glib.types.KeyFileFlags flags)
   {
@@ -865,6 +884,7 @@ class KeyFile : gobject.boxed.Boxed
         file = the path of a filename to load, in the GLib filename encoding
         flags = flags from #GKeyFileFlags
       Returns: true if a key file could be loaded, false otherwise
+      Throws: [KeyFileException]
   */
   bool loadFromFile(string file, glib.types.KeyFileFlags flags)
   {
@@ -887,6 +907,7 @@ class KeyFile : gobject.boxed.Boxed
         groupName = a group name, or null
         key = a key
       Returns: true if the comment was removed, false otherwise
+      Throws: [KeyFileException]
   */
   bool removeComment(string groupName = null, string key = null)
   {
@@ -907,6 +928,7 @@ class KeyFile : gobject.boxed.Boxed
       Params:
         groupName = a group name
       Returns: true if the group was removed, false otherwise
+      Throws: [KeyFileException]
   */
   bool removeGroup(string groupName)
   {
@@ -926,6 +948,7 @@ class KeyFile : gobject.boxed.Boxed
         groupName = a group name
         key = a key name to remove
       Returns: true if the key was removed, false otherwise
+      Throws: [KeyFileException]
   */
   bool removeKey(string groupName, string key)
   {
@@ -951,6 +974,7 @@ class KeyFile : gobject.boxed.Boxed
       Params:
         filename = the name of the file to write to
       Returns: true if successful, else false with error set
+      Throws: [KeyFileException]
   */
   bool saveToFile(string filename)
   {
@@ -1016,6 +1040,7 @@ class KeyFile : gobject.boxed.Boxed
         key = a key
         comment = a comment
       Returns: true if the comment was written, false otherwise
+      Throws: [KeyFileException]
   */
   bool setComment(string groupName, string key, string comment)
   {
@@ -1274,6 +1299,7 @@ class KeyFile : gobject.boxed.Boxed
             returned string, or null
       Returns: a newly allocated string holding
           the contents of the #GKeyFile
+      Throws: [KeyFileException]
   */
   string toData(out size_t length)
   {

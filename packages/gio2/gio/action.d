@@ -110,6 +110,7 @@ interface Action
         targetValue = the target value,
             or null for no target
       Returns: true if successful, else false with error set
+      Throws: [ErrorG]
   */
   static bool parseDetailedName(string detailedName, out string actionName, out glib.variant.VariantG targetValue)
   {

@@ -67,6 +67,7 @@ class Client : gobject.object.ObjectG
         bearerName = Bearer token name on success.
         bearerValue = Bearer token value on success.
       Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
@@ -122,6 +123,7 @@ class Client : gobject.object.ObjectG
         options = A #GAFlightCallOptions.
       Returns: The #GAFlighDoPutResult holding a reader and a writer on success,
           null on error.
+      Throws: [ErrorG]
   */
   arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options = null)
   {

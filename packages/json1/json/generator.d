@@ -185,6 +185,7 @@ class Generator : gobject.object.ObjectG
       Params:
         filename = the path to the target file
       Returns: true if saving was successful.
+      Throws: [ErrorG]
   */
   bool toFile(string filename)
   {
@@ -220,6 +221,7 @@ class Generator : gobject.object.ObjectG
         stream = the output stream used to write the JSON data
         cancellable = a [gio.cancellable.Cancellable]
       Returns: whether the write operation was successful
+      Throws: [ErrorG]
   */
   bool toStream(gio.output_stream.OutputStream stream, gio.cancellable.Cancellable cancellable = null)
   {

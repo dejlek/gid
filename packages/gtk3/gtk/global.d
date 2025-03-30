@@ -2667,6 +2667,7 @@ void setDebugFlags(uint flags)
       uri = the uri to show
       timestamp = a timestamp to prevent focus stealing
     Returns: true on success, false on error
+    Throws: [ErrorG]
 
     Deprecated: Use [gtk.global.showUriOnWindow] instead.
 */
@@ -2705,6 +2706,7 @@ bool showUri(gdk.screen.Screen screen, string uri, uint timestamp)
       uri = the uri to show
       timestamp = a timestamp to prevent focus stealing
     Returns: true on success, false on error
+    Throws: [ErrorG]
 */
 bool showUriOnWindow(gtk.window.Window parent, string uri, uint timestamp)
 {

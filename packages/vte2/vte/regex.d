@@ -60,6 +60,7 @@ class Regex : gobject.boxed.Boxed
            string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
+      Throws: [ErrorG]
   */
   static vte.regex.Regex newForMatch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -96,6 +97,7 @@ class Regex : gobject.boxed.Boxed
         extraFlags = PCRE2 extra compile flags
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
+      Throws: [ErrorG]
   */
   static vte.regex.Regex newForMatchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -126,6 +128,7 @@ class Regex : gobject.boxed.Boxed
            string is NUL-terminated and the length is unknown
         flags = PCRE2 compile flags
       Returns: a newly created #VteRegex, or null with error filled in
+      Throws: [ErrorG]
   */
   static vte.regex.Regex newForSearch(string pattern, ptrdiff_t patternLength, uint flags)
   {
@@ -161,6 +164,7 @@ class Regex : gobject.boxed.Boxed
         extraFlags = 
         errorOffset = return location to store the error offset
       Returns: a newly created #VteRegex, or null
+      Throws: [ErrorG]
   */
   static vte.regex.Regex newForSearchFull(string pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, out size_t errorOffset)
   {
@@ -181,6 +185,7 @@ class Regex : gobject.boxed.Boxed
         flags = PCRE2 JIT flags, or 0
       Returns: true if JITing succeeded (or PCRE2 was built without
           JIT support), or false with error filled in
+      Throws: [ErrorG]
   */
   bool jit(uint flags)
   {
@@ -201,6 +206,7 @@ class Regex : gobject.boxed.Boxed
         flags = PCRE2 match flags
       Returns: the substituted string, or null
           if an error occurred
+      Throws: [ErrorG]
   */
   string substitute(string subject, string replacement, uint flags)
   {

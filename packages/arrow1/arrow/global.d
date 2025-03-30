@@ -12,6 +12,7 @@ import glib.error;
 /**
     Finalize the S3 APIs.
     Returns: true on success, false on error.
+    Throws: [ErrorG]
 */
 bool s3Finalize()
 {
@@ -32,6 +33,7 @@ bool s3Finalize()
     Params:
       options = Options to initialize the S3 APIs.
     Returns: true on success, false on error.
+    Throws: [ErrorG]
 */
 bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 {

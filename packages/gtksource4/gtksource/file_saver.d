@@ -199,6 +199,7 @@ class FileSaver : gobject.object.ObjectG
       Params:
         result = a #GAsyncResult.
       Returns: whether the file was saved successfully.
+      Throws: [ErrorG]
   */
   bool saveFinish(gio.async_result.AsyncResult result)
   {

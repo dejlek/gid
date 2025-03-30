@@ -39,6 +39,7 @@ interface TlsClientConnection
         serverIdentity = the expected identity of the server
       Returns: the new
         #GTlsClientConnection, or null on error
+      Throws: [ErrorG]
   */
   static gio.tls_client_connection.TlsClientConnection new_(gio.iostream.IOStream baseIoStream, gio.socket_connectable.SocketConnectable serverIdentity = null)
   {

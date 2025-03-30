@@ -227,6 +227,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
             to the icon.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIcon()
   {
@@ -275,6 +276,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
             to the icon.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadIconFinish(gio.async_result.AsyncResult res)
   {
@@ -306,6 +308,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [cairo.surface.Surface.destroy] to release your
             reference to the icon.
+      Throws: [ErrorG]
   */
   cairo.surface.Surface loadSurface(gdk.window.Window forWindow = null)
   {
@@ -348,6 +351,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolic(gdk.rgba.RGBA fg, gdk.rgba.RGBA successColor, gdk.rgba.RGBA warningColor, gdk.rgba.RGBA errorColor, out bool wasSymbolic)
   {
@@ -407,6 +411,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
             to the icon.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
@@ -437,6 +442,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContext(gtk.style_context.StyleContext context, out bool wasSymbolic)
   {
@@ -490,6 +496,7 @@ class IconInfo : gobject.object.ObjectG
             created icon or a new reference to an internal icon, so you must
             not modify the icon. Use [gobject.object.ObjectG.unref] to release your reference
             to the icon.
+      Throws: [ErrorG]
   */
   gdkpixbuf.pixbuf.Pixbuf loadSymbolicForContextFinish(gio.async_result.AsyncResult res, out bool wasSymbolic)
   {
@@ -518,6 +525,7 @@ class IconInfo : gobject.object.ObjectG
               loaded icon was a symbolic one and whether the fg color was
               applied to it.
       Returns: a #GdkPixbuf representing the loaded icon
+      Throws: [ErrorG]
   
       Deprecated: Use [gtk.icon_info.IconInfo.loadSymbolicForContext] instead
   */

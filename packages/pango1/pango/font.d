@@ -61,6 +61,7 @@ class Font : gobject.object.ObjectG
         context = a [pango.context.Context]
         bytes = the bytes containing the data
       Returns: a new [pango.font.Font]
+      Throws: [ErrorG]
   */
   static pango.font.Font deserialize(pango.context.Context context, glib.bytes.Bytes bytes)
   {

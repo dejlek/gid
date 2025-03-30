@@ -124,6 +124,7 @@ class Surface : gobject.object.ObjectG
       Before using the returned [gdk.glcontext.GLContext], you will need to
       call [gdk.glcontext.GLContext.makeCurrent] or [gdk.glcontext.GLContext.realize].
       Returns: the newly created [gdk.glcontext.GLContext]
+      Throws: [ErrorG]
   */
   gdk.glcontext.GLContext createGlContext()
   {
@@ -174,6 +175,7 @@ class Surface : gobject.object.ObjectG
   /**
       Sets an error and returns null.
       Returns: null
+      Throws: [ErrorG]
   
       Deprecated: GTK does not expose any Vulkan internals. This
           function is a leftover that was accidentally exposed.

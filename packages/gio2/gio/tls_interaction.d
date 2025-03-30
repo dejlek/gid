@@ -80,6 +80,7 @@ class TlsInteraction : gobject.object.ObjectG
         password = a #GTlsPassword object
         cancellable = an optional #GCancellable cancellation object
       Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult askPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
@@ -143,6 +144,7 @@ class TlsInteraction : gobject.object.ObjectG
       Params:
         result = the result passed to the callback
       Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult askPasswordFinish(gio.async_result.AsyncResult result)
   {
@@ -180,6 +182,7 @@ class TlsInteraction : gobject.object.ObjectG
         password = a #GTlsPassword object
         cancellable = an optional #GCancellable cancellation object
       Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult invokeAskPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
@@ -219,6 +222,7 @@ class TlsInteraction : gobject.object.ObjectG
         flags = flags providing more information about the request
         cancellable = an optional #GCancellable cancellation object
       Returns: The status of the certificate request interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult invokeRequestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -254,6 +258,7 @@ class TlsInteraction : gobject.object.ObjectG
         flags = flags providing more information about the request
         cancellable = an optional #GCancellable cancellation object
       Returns: The status of the request certificate interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult requestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -312,6 +317,7 @@ class TlsInteraction : gobject.object.ObjectG
       Params:
         result = the result passed to the callback
       Returns: The status of the request certificate interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult requestCertificateFinish(gio.async_result.AsyncResult result)
   {

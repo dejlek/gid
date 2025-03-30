@@ -41,6 +41,7 @@ class ServerAuthReader : gobject.object.ObjectG
       Reads a message from the client.
       Returns: Read data as #GBytes on
           success, null on error.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes read()
   {

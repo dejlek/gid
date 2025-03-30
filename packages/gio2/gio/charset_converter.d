@@ -53,6 +53,7 @@ class CharsetConverter : gobject.object.ObjectG, gio.converter.Converter, gio.in
         toCharset = destination charset
         fromCharset = source charset
       Returns: a new #GCharsetConverter or null on error.
+      Throws: [ErrorG]
   */
   this(string toCharset, string fromCharset)
   {

@@ -150,6 +150,7 @@ class PaperSize : gobject.boxed.Boxed
               or null to read the first group
       Returns: a new #GtkPaperSize object with the restored
             paper size, or null if an error occurred
+      Throws: [ErrorG]
   */
   static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {

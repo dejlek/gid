@@ -694,6 +694,7 @@ bool tldDomainIsPublicSuffix(string domain)
       hostname = a hostname
     Returns: a pointer to the start of the base domain in hostname. If
         an error occurs, null will be returned and error set.
+    Throws: [ErrorG]
 */
 string tldGetBaseDomain(string hostname)
 {

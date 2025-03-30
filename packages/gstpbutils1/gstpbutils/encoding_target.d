@@ -91,6 +91,7 @@ class EncodingTarget : gobject.object.ObjectG
         category = the name of the target category, like
           #GST_ENCODING_CATEGORY_DEVICE. Can be null
       Returns: The #GstEncodingTarget if available, else null.
+      Throws: [ErrorG]
   */
   static gstpbutils.encoding_target.EncodingTarget load(string name, string category = null)
   {
@@ -112,6 +113,7 @@ class EncodingTarget : gobject.object.ObjectG
         filepath = The file location to load the #GstEncodingTarget from
       Returns: The #GstEncodingTarget contained in the file, else
         null
+      Throws: [ErrorG]
   */
   static gstpbutils.encoding_target.EncodingTarget loadFromFile(string filepath)
   {
@@ -202,6 +204,7 @@ class EncodingTarget : gobject.object.ObjectG
   /**
       Saves the target to a default user-local directory.
       Returns: true if the target was correctly saved, else false.
+      Throws: [ErrorG]
   */
   bool save()
   {
@@ -219,6 +222,7 @@ class EncodingTarget : gobject.object.ObjectG
       Params:
         filepath = the location to store the target at.
       Returns: true if the target was correctly saved, else false.
+      Throws: [ErrorG]
   */
   bool saveToFile(string filepath)
   {

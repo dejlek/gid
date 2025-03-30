@@ -248,6 +248,7 @@ class GLContext : gobject.object.ObjectG
       
       It is safe to call this function on a realized #GdkGLContext.
       Returns: true if the context is realized
+      Throws: [ErrorG]
   */
   bool realize()
   {

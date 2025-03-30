@@ -269,6 +269,7 @@ class SubprocessLauncher : gobject.object.ObjectG
       Params:
         argv = Command line arguments
       Returns: A new #GSubprocess, or null on error (and error will be set)
+      Throws: [ErrorG]
   */
   gio.subprocess.Subprocess spawnv(string[] argv)
   {

@@ -56,6 +56,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
         provider = a #GtkSourceCompletionProvider.
       Returns: true if provider was successfully added, otherwise if error
                  is provided, it will be set with the error and false is returned.
+      Throws: [ErrorG]
   */
   bool addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -158,6 +159,7 @@ class Completion : gobject.object.ObjectG, gtk.buildable.Buildable
         provider = a #GtkSourceCompletionProvider.
       Returns: true if provider was successfully removed, otherwise if error
                  is provided, it will be set with the error and false is returned.
+      Throws: [ErrorG]
   */
   bool removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
