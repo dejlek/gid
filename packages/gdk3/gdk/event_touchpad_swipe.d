@@ -1,3 +1,4 @@
+/// Module for [EventTouchpadSwipe] class
 module gdk.event_touchpad_swipe;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventTouchpadSwipe
 {
   GdkEventTouchpadSwipe cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventTouchpadSwipe
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

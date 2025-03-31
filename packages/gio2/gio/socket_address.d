@@ -1,3 +1,4 @@
+/// Module for [SocketAddress] class
 module gio.socket_address;
 
 import gid.gid;
@@ -11,24 +12,27 @@ import gobject.object;
 
 /**
     [gio.socket_address.SocketAddress] is the equivalent of
-  [`struct sockaddr`](man:sockaddr(3type)) and its subtypes in the BSD sockets
-  API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
-  internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
+    [`struct sockaddr`](man:sockaddr(3type)) and its subtypes in the BSD sockets
+    API. This is an abstract class; use [gio.inet_socket_address.InetSocketAddress] for
+    internet sockets, or [gio.unix_socket_address.UnixSocketAddress] for UNIX domain sockets.
 */
 class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConnectable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_get_type != &gidSymbolNotFound ? g_socket_address_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,12 +47,13 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
 
   /**
       Creates a #GSocketAddress subclass corresponding to the native
-    struct sockaddr native.
-    Params:
-      native =       a pointer to a struct sockaddr
-      len =       the size of the memory location pointed to by native
-    Returns:     a new #GSocketAddress if native could successfully
-          be converted, otherwise null
+      struct sockaddr native.
+  
+      Params:
+        native = a pointer to a struct sockaddr
+        len = the size of the memory location pointed to by native
+      Returns: a new #GSocketAddress if native could successfully
+            be converted, otherwise null
   */
   static gio.socket_address.SocketAddress newFromNative(void* native, size_t len)
   {
@@ -60,7 +65,7 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
 
   /**
       Gets the socket family type of address.
-    Returns:     the socket family type of address
+      Returns: the socket family type of address
   */
   gio.types.SocketFamily getFamily()
   {
@@ -72,10 +77,10 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
 
   /**
       Gets the size of address's native struct sockaddr.
-    You can use this to allocate memory to pass to
-    [gio.socket_address.SocketAddress.toNative].
-    Returns:     the size of the native struct sockaddr that
-          address represents
+      You can use this to allocate memory to pass to
+      [gio.socket_address.SocketAddress.toNative].
+      Returns: the size of the native struct sockaddr that
+            address represents
   */
   ptrdiff_t getNativeSize()
   {
@@ -86,17 +91,19 @@ class SocketAddress : gobject.object.ObjectG, gio.socket_connectable.SocketConne
 
   /**
       Converts a #GSocketAddress to a native struct sockaddr, which can
-    be passed to low-level functions like connect() or bind().
-    
-    If not enough space is available, a [gio.types.IOErrorEnum.NoSpace] error
-    is returned. If the address type is not known on the system
-    then a [gio.types.IOErrorEnum.NotSupported] error is returned.
-    Params:
-      dest =       a pointer to a memory location that will contain the native
-        struct sockaddr
-      destlen =       the size of dest. Must be at least as large as
-            [gio.socket_address.SocketAddress.getNativeSize]
-    Returns:     true if dest was filled in, false on error
+      be passed to low-level functions like connect() or bind().
+      
+      If not enough space is available, a [gio.types.IOErrorEnum.NoSpace] error
+      is returned. If the address type is not known on the system
+      then a [gio.types.IOErrorEnum.NotSupported] error is returned.
+  
+      Params:
+        dest = a pointer to a memory location that will contain the native
+          struct sockaddr
+        destlen = the size of dest. Must be at least as large as
+              [gio.socket_address.SocketAddress.getNativeSize]
+      Returns: true if dest was filled in, false on error
+      Throws: [ErrorG]
   */
   bool toNative(void* dest, size_t destlen)
   {

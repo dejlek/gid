@@ -1,3 +1,4 @@
+/// Module for [Harness] class
 module gstcheck.harness;
 
 import gid.gid;
@@ -21,100 +22,101 @@ import gstcheck.types;
 
 /**
     #GstHarness is meant to make writing unit test for GStreamer much easier.
-  It can be thought of as a way of treating a #GstElement as a black box,
-  deterministically feeding it data, and controlling what data it outputs.
-  
-  The basic structure of #GstHarness is two "floating" #GstPads that connect
-  to the harnessed #GstElement src and sink #GstPads like so:
-  
-  ```
-            __________________________
-   _____   |  _____            _____  |   _____
-  |     |  | |     |          |     | |  |     |
-  | src |--+-| sink|  Element | src |-+--| sink|
-  |_____|  | |_____|          |_____| |  |_____|
-           |__________________________|
-  
-  ```
-  
-  With this, you can now simulate any environment the #GstElement might find
-  itself in. By specifying the #GstCaps of the harness #GstPads, using
-  functions like [gstcheck.harness.Harness.setSrcCaps] or [gstcheck.harness.Harness.setSinkCapsStr],
-  you can test how the #GstElement interacts with different caps sets.
-  
-  Your harnessed #GstElement can of course also be a bin, and using
-  [gstcheck.harness.Harness.newParse] supporting standard gst-launch syntax, you can
-  easily test a whole pipeline instead of just one element.
-  
-  You can then go on to push #GstBuffers and #GstEvents on to the srcpad,
-  using functions like [gstcheck.harness.Harness.push] and [gstcheck.harness.Harness.pushEvent], and
-  then pull them out to examine them with [gstcheck.harness.Harness.pull] and
-  [gstcheck.harness.Harness.pullEvent].
-  
-  ## A simple buffer-in buffer-out example
-  
-  ```c
-    #include <gst/gst.h>
-    #include <gst/check/gstharness.h>
-    GstHarness *h;
-    GstBuffer *in_buf;
-    GstBuffer *out_buf;
-  
-    // attach the harness to the src and sink pad of GstQueue
-    h = gst_harness_new ("queue");
-  
-    // we must specify a caps before pushing buffers
-    gst_harness_set_src_caps_str (h, "mycaps");
-  
-    // create a buffer of size 42
-    in_buf = gst_harness_create_buffer (h, 42);
-  
-    // push the buffer into the queue
-    gst_harness_push (h, in_buf);
-  
-    // pull the buffer from the queue
-    out_buf = gst_harness_pull (h);
-  
-    // validate the buffer in is the same as buffer out
-    fail_unless (in_buf == out_buf);
-  
-    // cleanup
-    gst_buffer_unref (out_buf);
-    gst_harness_teardown (h);
-  
+    It can be thought of as a way of treating a #GstElement as a black box,
+    deterministically feeding it data, and controlling what data it outputs.
+    
+    The basic structure of #GstHarness is two "floating" #GstPads that connect
+    to the harnessed #GstElement src and sink #GstPads like so:
+    
     ```
-  
-  Another main feature of the #GstHarness is its integration with the
-  #GstTestClock. Operating the #GstTestClock can be very challenging, but
-  #GstHarness simplifies some of the most desired actions a lot, like wanting
-  to manually advance the clock while at the same time releasing a #GstClockID
-  that is waiting, with functions like [gstcheck.harness.Harness.crankSingleClockWait].
-  
-  #GstHarness also supports sub-harnesses, as a way of generating and
-  validating data. A sub-harness is another #GstHarness that is managed by
-  the "parent" harness, and can either be created by using the standard
-  gst_harness_new type functions directly on the (GstHarness *)->src_harness,
-  or using the much more convenient [gstcheck.harness.Harness.addSrc] or
-  [gstcheck.harness.Harness.addSinkParse]. If you have a decoder-element you want to test,
-  (like vp8dec) it can be very useful to add a src-harness with both a
-  src-element (videotestsrc) and an encoder (vp8enc) to feed the decoder data
-  with different configurations, by simply doing:
-  
-  ```c
-    GstHarness * h = gst_harness_new ("vp8dec");
-    gst_harness_add_src_parse (h, "videotestsrc is-live=1 ! vp8enc", TRUE);
-  ```
-  
-  and then feeding it data with:
-  
-  ```c
-  gst_harness_push_from_src (h);
-  ```
+              __________________________
+     _____   |  _____            _____  |   _____
+    |     |  | |     |          |     | |  |     |
+    | src |--+-| sink|  Element | src |-+--| sink|
+    |_____|  | |_____|          |_____| |  |_____|
+             |__________________________|
+    
+    ```
+    
+    With this, you can now simulate any environment the #GstElement might find
+    itself in. By specifying the #GstCaps of the harness #GstPads, using
+    functions like [gstcheck.harness.Harness.setSrcCaps] or [gstcheck.harness.Harness.setSinkCapsStr],
+    you can test how the #GstElement interacts with different caps sets.
+    
+    Your harnessed #GstElement can of course also be a bin, and using
+    [gstcheck.harness.Harness.newParse] supporting standard gst-launch syntax, you can
+    easily test a whole pipeline instead of just one element.
+    
+    You can then go on to push #GstBuffers and #GstEvents on to the srcpad,
+    using functions like [gstcheck.harness.Harness.push] and [gstcheck.harness.Harness.pushEvent], and
+    then pull them out to examine them with [gstcheck.harness.Harness.pull] and
+    [gstcheck.harness.Harness.pullEvent].
+    
+    ## A simple buffer-in buffer-out example
+    
+    ```c
+      #include <gst/gst.h>
+      #include <gst/check/gstharness.h>
+      GstHarness *h;
+      GstBuffer *in_buf;
+      GstBuffer *out_buf;
+    
+      // attach the harness to the src and sink pad of GstQueue
+      h = gst_harness_new ("queue");
+    
+      // we must specify a caps before pushing buffers
+      gst_harness_set_src_caps_str (h, "mycaps");
+    
+      // create a buffer of size 42
+      in_buf = gst_harness_create_buffer (h, 42);
+    
+      // push the buffer into the queue
+      gst_harness_push (h, in_buf);
+    
+      // pull the buffer from the queue
+      out_buf = gst_harness_pull (h);
+    
+      // validate the buffer in is the same as buffer out
+      fail_unless (in_buf == out_buf);
+    
+      // cleanup
+      gst_buffer_unref (out_buf);
+      gst_harness_teardown (h);
+    
+      ```
+    
+    Another main feature of the #GstHarness is its integration with the
+    #GstTestClock. Operating the #GstTestClock can be very challenging, but
+    #GstHarness simplifies some of the most desired actions a lot, like wanting
+    to manually advance the clock while at the same time releasing a #GstClockID
+    that is waiting, with functions like [gstcheck.harness.Harness.crankSingleClockWait].
+    
+    #GstHarness also supports sub-harnesses, as a way of generating and
+    validating data. A sub-harness is another #GstHarness that is managed by
+    the "parent" harness, and can either be created by using the standard
+    gst_harness_new type functions directly on the (GstHarness *)->src_harness,
+    or using the much more convenient [gstcheck.harness.Harness.addSrc] or
+    [gstcheck.harness.Harness.addSinkParse]. If you have a decoder-element you want to test,
+    (like vp8dec) it can be very useful to add a src-harness with both a
+    src-element (videotestsrc) and an encoder (vp8enc) to feed the decoder data
+    with different configurations, by simply doing:
+    
+    ```c
+      GstHarness * h = gst_harness_new ("vp8dec");
+      gst_harness_add_src_parse (h, "videotestsrc is-live=1 ! vp8enc", TRUE);
+    ```
+    
+    and then feeding it data with:
+    
+    ```c
+    gst_harness_push_from_src (h);
+    ```
 */
 class Harness
 {
   GstHarness cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -126,6 +128,7 @@ class Harness
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -176,10 +179,11 @@ class Harness
 
   /**
       Links the specified #GstPad the GstHarness srcpad.
-    
-    MT safe.
-    Params:
-      sinkpad =       a #GstPad to link to the harness srcpad
+      
+      MT safe.
+  
+      Params:
+        sinkpad = a #GstPad to link to the harness srcpad
   */
   void addElementSinkPad(gst.pad.Pad sinkpad)
   {
@@ -188,12 +192,13 @@ class Harness
 
   /**
       Links the specified #GstPad the GstHarness sinkpad. This can be useful if
-    perhaps the srcpad did not exist at the time of creating the harness,
-    like a demuxer that provides a sometimes-pad after receiving data.
-    
-    MT safe.
-    Params:
-      srcpad =       a #GstPad to link to the harness sinkpad
+      perhaps the srcpad did not exist at the time of creating the harness,
+      like a demuxer that provides a sometimes-pad after receiving data.
+      
+      MT safe.
+  
+      Params:
+        srcpad = a #GstPad to link to the harness sinkpad
   */
   void addElementSrcPad(gst.pad.Pad srcpad)
   {
@@ -202,15 +207,16 @@ class Harness
 
   /**
       A convenience function to allows you to call gst_pad_add_probe on a
-    #GstPad of a #GstElement that are residing inside the #GstHarness,
-    by using normal gst_pad_add_probe syntax
-    
-    MT safe.
-    Params:
-      elementName =       a #gchar with a #GstElementFactory name
-      padName =       a #gchar with the name of the pad to attach the probe to
-      mask =       a #GstPadProbeType (see gst_pad_add_probe)
-      callback =       a #GstPadProbeCallback (see gst_pad_add_probe)
+      #GstPad of a #GstElement that are residing inside the #GstHarness,
+      by using normal gst_pad_add_probe syntax
+      
+      MT safe.
+  
+      Params:
+        elementName = a #gchar with a #GstElementFactory name
+        padName = a #gchar with the name of the pad to attach the probe to
+        mask = a #GstPadProbeType (see gst_pad_add_probe)
+        callback = a #GstPadProbeCallback (see gst_pad_add_probe)
   */
   void addProbe(string elementName, string padName, gst.types.PadProbeType mask, gst.types.PadProbeCallback callback)
   {
@@ -235,12 +241,13 @@ class Harness
 
   /**
       Add api with params as one of the supported metadata API to propose when
-    receiving an allocation query.
-    
-    MT safe.
-    Params:
-      api =       a metadata API
-      params =       API specific parameters
+      receiving an allocation query.
+      
+      MT safe.
+  
+      Params:
+        api = a metadata API
+        params = API specific parameters
   */
   void addProposeAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
   {
@@ -249,11 +256,12 @@ class Harness
 
   /**
       Similar to gst_harness_add_sink_harness, this is a convenience to
-    directly create a sink-harness using the sink_element_name name specified.
-    
-    MT safe.
-    Params:
-      sinkElementName =       a #gchar with the name of a #GstElement
+      directly create a sink-harness using the sink_element_name name specified.
+      
+      MT safe.
+  
+      Params:
+        sinkElementName = a #gchar with the name of a #GstElement
   */
   void addSink(string sinkElementName)
   {
@@ -263,17 +271,18 @@ class Harness
 
   /**
       Similar to gst_harness_add_src, this allows you to send the data coming out
-    of your harnessed #GstElement to a sink-element, allowing to test different
-    responses the element output might create in sink elements. An example might
-    be an existing sink providing some analytical data on the input it receives that
-    can be useful to your testing. If the goal is to test a sink-element itself,
-    this is better achieved using gst_harness_new directly on the sink.
-    
-    If a sink-harness already exists it will be replaced.
-    
-    MT safe.
-    Params:
-      sinkHarness =       a #GstHarness to be added as a sink-harness.
+      of your harnessed #GstElement to a sink-element, allowing to test different
+      responses the element output might create in sink elements. An example might
+      be an existing sink providing some analytical data on the input it receives that
+      can be useful to your testing. If the goal is to test a sink-element itself,
+      this is better achieved using gst_harness_new directly on the sink.
+      
+      If a sink-harness already exists it will be replaced.
+      
+      MT safe.
+  
+      Params:
+        sinkHarness = a #GstHarness to be added as a sink-harness.
   */
   void addSinkHarness(gstcheck.harness.Harness sinkHarness)
   {
@@ -282,11 +291,12 @@ class Harness
 
   /**
       Similar to gst_harness_add_sink, this allows you to specify a launch-line
-    instead of just an element name. See gst_harness_add_src_parse for details.
-    
-    MT safe.
-    Params:
-      launchline =       a #gchar with the name of a #GstElement
+      instead of just an element name. See gst_harness_add_src_parse for details.
+      
+      MT safe.
+  
+      Params:
+        launchline = a #gchar with the name of a #GstElement
   */
   void addSinkParse(string launchline)
   {
@@ -296,13 +306,14 @@ class Harness
 
   /**
       Similar to gst_harness_add_src_harness, this is a convenience to
-    directly create a src-harness using the src_element_name name specified.
-    
-    MT safe.
-    Params:
-      srcElementName =       a #gchar with the name of a #GstElement
-      hasClockWait =       a #gboolean specifying if the #GstElement uses
-        gst_clock_wait_id internally.
+      directly create a src-harness using the src_element_name name specified.
+      
+      MT safe.
+  
+      Params:
+        srcElementName = a #gchar with the name of a #GstElement
+        hasClockWait = a #gboolean specifying if the #GstElement uses
+          gst_clock_wait_id internally.
   */
   void addSrc(string srcElementName, bool hasClockWait)
   {
@@ -312,20 +323,21 @@ class Harness
 
   /**
       A src-harness is a great way of providing the #GstHarness with data.
-    By adding a src-type #GstElement, it is then easy to use functions like
-    gst_harness_push_from_src or gst_harness_src_crank_and_push_many
-    to provide your harnessed element with input. The has_clock_wait variable
-    is a great way to control you src-element with, in that you can have it
-    produce a buffer for you by simply cranking the clock, and not have it
-    spin out of control producing buffers as fast as possible.
-    
-    If a src-harness already exists it will be replaced.
-    
-    MT safe.
-    Params:
-      srcHarness =       a #GstHarness to be added as a src-harness.
-      hasClockWait =       a #gboolean specifying if the #GstElement uses
-        gst_clock_wait_id internally.
+      By adding a src-type #GstElement, it is then easy to use functions like
+      gst_harness_push_from_src or gst_harness_src_crank_and_push_many
+      to provide your harnessed element with input. The `h`as_clock_wait variable
+      is a great way to control you src-element with, in that you can have it
+      produce a buffer for you by simply cranking the clock, and not have it
+      spin out of control producing buffers as fast as possible.
+      
+      If a src-harness already exists it will be replaced.
+      
+      MT safe.
+  
+      Params:
+        srcHarness = a #GstHarness to be added as a src-harness.
+        hasClockWait = a #gboolean specifying if the #GstElement uses
+          gst_clock_wait_id internally.
   */
   void addSrcHarness(gstcheck.harness.Harness srcHarness, bool hasClockWait)
   {
@@ -334,16 +346,17 @@ class Harness
 
   /**
       Similar to gst_harness_add_src, this allows you to specify a launch-line,
-    which can be useful for both having more then one #GstElement acting as your
-    src (Like a src producing raw buffers, and then an encoder, providing encoded
-    data), but also by allowing you to set properties like "is-live" directly on
-    the elements.
-    
-    MT safe.
-    Params:
-      launchline =       a #gchar describing a gst-launch type line
-      hasClockWait =       a #gboolean specifying if the #GstElement uses
-        gst_clock_wait_id internally.
+      which can be useful for both having more then one #GstElement acting as your
+      src (Like a src producing raw buffers, and then an encoder, providing encoded
+      data), but also by allowing you to set properties like "is-live" directly on
+      the elements.
+      
+      MT safe.
+  
+      Params:
+        launchline = a #gchar describing a gst-launch type line
+        hasClockWait = a #gboolean specifying if the #GstElement uses
+          gst_clock_wait_id internally.
   */
   void addSrcParse(string launchline, bool hasClockWait)
   {
@@ -353,9 +366,9 @@ class Harness
 
   /**
       The number of #GstBuffers currently in the #GstHarness sinkpad #GAsyncQueue
-    
-    MT safe.
-    Returns:     a #guint number of buffers in the queue
+      
+      MT safe.
+      Returns: a #guint number of buffers in the queue
   */
   uint buffersInQueue()
   {
@@ -366,11 +379,11 @@ class Harness
 
   /**
       The total number of #GstBuffers that has arrived on the #GstHarness sinkpad.
-    This number includes buffers that have been dropped as well as buffers
-    that have already been pulled out.
-    
-    MT safe.
-    Returns:     a #guint number of buffers received
+      This number includes buffers that have been dropped as well as buffers
+      that have already been pulled out.
+      
+      MT safe.
+      Returns: a #guint number of buffers received
   */
   uint buffersReceived()
   {
@@ -381,16 +394,17 @@ class Harness
 
   /**
       Similar to [gstcheck.harness.Harness.crankSingleClockWait], this is the function to use
-    if your harnessed element(s) are using more then one gst_clock_id_wait.
-    Failing to do so can (and will) make it racy which #GstClockID you actually
-    are releasing, where as this function will process all the waits at the
-    same time, ensuring that one thread can't register another wait before
-    both are released.
-    
-    MT safe.
-    Params:
-      waits =       a #guint describing the number of #GstClockIDs to crank
-    Returns:     a gboolean true if the "crank" was successful, false if not.
+      if your harnessed element(s) are using more then one gst_clock_id_wait.
+      Failing to do so can (and will) make it racy which #GstClockID you actually
+      are releasing, where as this function will process all the waits at the
+      same time, ensuring that one thread can't register another wait before
+      both are released.
+      
+      MT safe.
+  
+      Params:
+        waits = a #guint describing the number of #GstClockIDs to crank
+      Returns: a gboolean true if the "crank" was successful, false if not.
   */
   bool crankMultipleClockWaits(uint waits)
   {
@@ -401,16 +415,16 @@ class Harness
 
   /**
       A "crank" consists of three steps:
-    1: Wait for a #GstClockID to be registered with the #GstTestClock.
-    2: Advance the #GstTestClock to the time the #GstClockID is waiting for.
-    3: Release the #GstClockID wait.
-    Together, this provides an easy way to not have to think about the details
-    around clocks and time, but still being able to write deterministic tests
-    that are dependent on this. A "crank" can be though of as the notion of
-    manually driving the clock forward to its next logical step.
-    
-    MT safe.
-    Returns:     a gboolean true if the "crank" was successful, false if not.
+      1: Wait for a #GstClockID to be registered with the #GstTestClock.
+      2: Advance the #GstTestClock to the time the #GstClockID is waiting for.
+      3: Release the #GstClockID wait.
+      Together, this provides an easy way to not have to think about the details
+      around clocks and time, but still being able to write deterministic tests
+      that are dependent on this. A "crank" can be though of as the notion of
+      manually driving the clock forward to its next logical step.
+      
+      MT safe.
+      Returns: a gboolean true if the "crank" was successful, false if not.
   */
   bool crankSingleClockWait()
   {
@@ -421,12 +435,13 @@ class Harness
 
   /**
       Allocates a buffer using a #GstBufferPool if present, or else using the
-    configured #GstAllocator and #GstAllocationParams
-    
-    MT safe.
-    Params:
-      size =       a #gsize specifying the size of the buffer
-    Returns:     a #GstBuffer of size size
+      configured #GstAllocator and #GstAllocationParams
+      
+      MT safe.
+  
+      Params:
+        size = a #gsize specifying the size of the buffer
+      Returns: a #GstBuffer of size size
   */
   gst.buffer.Buffer createBuffer(size_t size)
   {
@@ -438,11 +453,12 @@ class Harness
 
   /**
       Allows you to dump the #GstBuffers the #GstHarness sinkpad #GAsyncQueue
-    to a file.
-    
-    MT safe.
-    Params:
-      filename =       a #gchar with a the name of a file
+      to a file.
+      
+      MT safe.
+  
+      Params:
+        filename = a #gchar with a the name of a file
   */
   void dumpToFile(string filename)
   {
@@ -452,9 +468,9 @@ class Harness
 
   /**
       The number of #GstEvents currently in the #GstHarness sinkpad #GAsyncQueue
-    
-    MT safe.
-    Returns:     a #guint number of events in the queue
+      
+      MT safe.
+      Returns: a #guint number of events in the queue
   */
   uint eventsInQueue()
   {
@@ -465,11 +481,11 @@ class Harness
 
   /**
       The total number of #GstEvents that has arrived on the #GstHarness sinkpad
-    This number includes events handled by the harness as well as events
-    that have already been pulled out.
-    
-    MT safe.
-    Returns:     a #guint number of events received
+      This number includes events handled by the harness as well as events
+      that have already been pulled out.
+      
+      MT safe.
+      Returns: a #guint number of events received
   */
   uint eventsReceived()
   {
@@ -480,14 +496,15 @@ class Harness
 
   /**
       Most useful in conjunction with gst_harness_new_parse, this will scan the
-    #GstElements inside the #GstHarness, and check if any of them matches
-    element_name. Typical usecase being that you need to access one of the
-    harnessed elements for properties and/or signals.
-    
-    MT safe.
-    Params:
-      elementName =       a #gchar with a #GstElementFactory name
-    Returns:     a #GstElement or null if not found
+      #GstElements inside the #GstHarness, and check if any of them matches
+      element_name. Typical usecase being that you need to access one of the
+      harnessed elements for properties and/or signals.
+      
+      MT safe.
+  
+      Params:
+        elementName = a #gchar with a #GstElementFactory name
+      Returns: a #GstElement or null if not found
   */
   gst.element.Element findElement(string elementName)
   {
@@ -500,13 +517,14 @@ class Harness
 
   /**
       Gets the allocator and its params that has been decided to use after an
-    allocation query.
-    
-    MT safe.
-    Params:
-      allocator =       the #GstAllocator used
-      params =       the #GstAllocationParams of
-          allocator
+      allocation query.
+      
+      MT safe.
+  
+      Params:
+        allocator = the #GstAllocator used
+        params = the #GstAllocationParams of
+            allocator
   */
   void getAllocator(out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
@@ -519,11 +537,11 @@ class Harness
 
   /**
       Get the timestamp of the last #GstBuffer pushed on the #GstHarness srcpad,
-    typically with gst_harness_push or gst_harness_push_from_src.
-    
-    MT safe.
-    Returns:     a #GstClockTime with the timestamp or `GST_CLOCK_TIME_NONE` if no
-      #GstBuffer has been pushed on the #GstHarness srcpad
+      typically with gst_harness_push or gst_harness_push_from_src.
+      
+      MT safe.
+      Returns: a #GstClockTime with the timestamp or `GST_CLOCK_TIME_NONE` if no
+        #GstBuffer has been pushed on the #GstHarness srcpad
   */
   gst.types.ClockTime getLastPushedTimestamp()
   {
@@ -534,11 +552,11 @@ class Harness
 
   /**
       Get the #GstTestClock. Useful if specific operations on the testclock is
-    needed.
-    
-    MT safe.
-    Returns:     a #GstTestClock, or null if the testclock is not
-      present.
+      needed.
+      
+      MT safe.
+      Returns: a #GstTestClock, or null if the testclock is not
+        present.
   */
   gstcheck.test_clock.TestClock getTestclock()
   {
@@ -550,14 +568,14 @@ class Harness
 
   /**
       This will set the harnessed #GstElement to [gst.types.State.Playing].
-    #GstElements without a sink-#GstPad and with the [gst.types.ElementFlags.Source]
-    flag set is considered a src #GstElement
-    Non-src #GstElements (like sinks and filters) are automatically set to
-    playing by the #GstHarness, but src #GstElements are not to avoid them
-    starting to produce buffers.
-    Hence, for src #GstElement you must call [gstcheck.harness.Harness.play] explicitly.
-    
-    MT safe.
+      #GstElements without a sink-#GstPad and with the [gst.types.ElementFlags.Source]
+      flag set is considered a src #GstElement
+      Non-src #GstElements (like sinks and filters) are automatically set to
+      playing by the #GstHarness, but src #GstElements are not to avoid them
+      starting to produce buffers.
+      Hence, for src #GstElement you must call [gstcheck.harness.Harness.play] explicitly.
+      
+      MT safe.
   */
   void play()
   {
@@ -566,11 +584,11 @@ class Harness
 
   /**
       Pulls a #GstBuffer from the #GAsyncQueue on the #GstHarness sinkpad. The pull
-    will timeout in 60 seconds. This is the standard way of getting a buffer
-    from a harnessed #GstElement.
-    
-    MT safe.
-    Returns:     a #GstBuffer or null if timed out.
+      will timeout in 60 seconds. This is the standard way of getting a buffer
+      from a harnessed #GstElement.
+      
+      MT safe.
+      Returns: a #GstBuffer or null if timed out.
   */
   gst.buffer.Buffer pull()
   {
@@ -582,10 +600,10 @@ class Harness
 
   /**
       Pulls an #GstEvent from the #GAsyncQueue on the #GstHarness sinkpad.
-    Timeouts after 60 seconds similar to gst_harness_pull.
-    
-    MT safe.
-    Returns:     a #GstEvent or null if timed out.
+      Timeouts after 60 seconds similar to gst_harness_pull.
+      
+      MT safe.
+      Returns: a #GstEvent or null if timed out.
   */
   gst.event.Event pullEvent()
   {
@@ -597,12 +615,13 @@ class Harness
 
   /**
       Pulls a #GstBuffer from the #GAsyncQueue on the #GstHarness sinkpad. The pull
-    will block until an EOS event is received, or timeout in 60 seconds.
-    MT safe.
-    Params:
-      buf =       A #GstBuffer, or null if EOS or timeout occures
-          first.
-    Returns:     true on success, false on timeout.
+      will block until an EOS event is received, or timeout in 60 seconds.
+      MT safe.
+  
+      Params:
+        buf = A #GstBuffer, or null if EOS or timeout occures
+            first.
+      Returns: true on success, false on timeout.
   */
   bool pullUntilEos(out gst.buffer.Buffer buf)
   {
@@ -615,10 +634,10 @@ class Harness
 
   /**
       Pulls an #GstEvent from the #GAsyncQueue on the #GstHarness srcpad.
-    Timeouts after 60 seconds similar to gst_harness_pull.
-    
-    MT safe.
-    Returns:     a #GstEvent or null if timed out.
+      Timeouts after 60 seconds similar to gst_harness_pull.
+      
+      MT safe.
+      Returns: a #GstEvent or null if timed out.
   */
   gst.event.Event pullUpstreamEvent()
   {
@@ -630,12 +649,13 @@ class Harness
 
   /**
       Pushes a #GstBuffer on the #GstHarness srcpad. The standard way of
-    interacting with an harnessed element.
-    
-    MT safe.
-    Params:
-      buffer =       a #GstBuffer to push
-    Returns:     a #GstFlowReturn with the result from the push
+      interacting with an harnessed element.
+      
+      MT safe.
+  
+      Params:
+        buffer = a #GstBuffer to push
+      Returns: a #GstFlowReturn with the result from the push
   */
   gst.types.FlowReturn push(gst.buffer.Buffer buffer)
   {
@@ -647,13 +667,14 @@ class Harness
 
   /**
       Basically a gst_harness_push and a gst_harness_pull in one line. Reflects
-    the fact that you often want to do exactly this in your test: Push one buffer
-    in, and inspect the outcome.
-    
-    MT safe.
-    Params:
-      buffer =       a #GstBuffer to push
-    Returns:     a #GstBuffer or null if timed out.
+      the fact that you often want to do exactly this in your test: Push one buffer
+      in, and inspect the outcome.
+      
+      MT safe.
+  
+      Params:
+        buffer = a #GstBuffer to push
+      Returns: a #GstBuffer or null if timed out.
   */
   gst.buffer.Buffer pushAndPull(gst.buffer.Buffer buffer)
   {
@@ -665,11 +686,12 @@ class Harness
 
   /**
       Pushes an #GstEvent on the #GstHarness srcpad.
-    
-    MT safe.
-    Params:
-      event =       a #GstEvent to push
-    Returns:     a #gboolean with the result from the push
+      
+      MT safe.
+  
+      Params:
+        event = a #GstEvent to push
+      Returns: a #gboolean with the result from the push
   */
   bool pushEvent(gst.event.Event event)
   {
@@ -680,14 +702,14 @@ class Harness
 
   /**
       Transfer data from the src-#GstHarness to the main-#GstHarness. It consists
-    of 4 steps:
-    1: Make sure the src is started. (see: gst_harness_play)
-    2: Crank the clock (see: gst_harness_crank_single_clock_wait)
-    3: Pull a #GstBuffer from the src-#GstHarness (see: gst_harness_pull)
-    4: Push the same #GstBuffer into the main-#GstHarness (see: gst_harness_push)
-    
-    MT safe.
-    Returns:     a #GstFlowReturn with the result of the push
+      of 4 steps:
+      1: Make sure the src is started. (see: gst_harness_play)
+      2: Crank the clock (see: gst_harness_crank_single_clock_wait)
+      3: Pull a #GstBuffer from the src-#GstHarness (see: gst_harness_pull)
+      4: Push the same #GstBuffer into the main-#GstHarness (see: gst_harness_push)
+      
+      MT safe.
+      Returns: a #GstFlowReturn with the result of the push
   */
   gst.types.FlowReturn pushFromSrc()
   {
@@ -699,10 +721,10 @@ class Harness
 
   /**
       Transfer one #GstBuffer from the main-#GstHarness to the sink-#GstHarness.
-    See gst_harness_push_from_src for details.
-    
-    MT safe.
-    Returns:     a #GstFlowReturn with the result of the push
+      See gst_harness_push_from_src for details.
+      
+      MT safe.
+      Returns: a #GstFlowReturn with the result of the push
   */
   gst.types.FlowReturn pushToSink()
   {
@@ -714,11 +736,12 @@ class Harness
 
   /**
       Pushes an #GstEvent on the #GstHarness sinkpad.
-    
-    MT safe.
-    Params:
-      event =       a #GstEvent to push
-    Returns:     a #gboolean with the result from the push
+      
+      MT safe.
+  
+      Params:
+        event = a #GstEvent to push
+      Returns: a #gboolean with the result from the push
   */
   bool pushUpstreamEvent(gst.event.Event event)
   {
@@ -729,9 +752,9 @@ class Harness
 
   /**
       Get the min latency reported by any harnessed #GstElement.
-    
-    MT safe.
-    Returns:     a #GstClockTime with min latency
+      
+      MT safe.
+      Returns: a #GstClockTime with min latency
   */
   gst.types.ClockTime queryLatency()
   {
@@ -742,12 +765,12 @@ class Harness
 
   /**
       Setting this will make the harness block in the chain-function, and
-    then release when [gstcheck.harness.Harness.pull] or [gstcheck.harness.Harness.tryPull] is called.
-    Can be useful when wanting to control a src-element that is not implementing
-    [gst.clock.Clock.idWait] so it can't be controlled by the #GstTestClock, since
-    it otherwise would produce buffers as fast as possible.
-    
-    MT safe.
+      then release when [gstcheck.harness.Harness.pull] or [gstcheck.harness.Harness.tryPull] is called.
+      Can be useful when wanting to control a src-element that is not implementing
+      [gst.clock.Clock.idWait] so it can't be controlled by the #GstTestClock, since
+      it otherwise would produce buffers as fast as possible.
+      
+      MT safe.
   */
   void setBlockingPushMode()
   {
@@ -756,11 +779,12 @@ class Harness
 
   /**
       Sets the GstHarness srcpad and sinkpad caps.
-    
-    MT safe.
-    Params:
-      in_ =       a #GstCaps to set on the harness srcpad
-      out_ =       a #GstCaps to set on the harness sinkpad
+      
+      MT safe.
+  
+      Params:
+        in_ = a #GstCaps to set on the harness srcpad
+        out_ = a #GstCaps to set on the harness sinkpad
   */
   void setCaps(gst.caps.Caps in_, gst.caps.Caps out_)
   {
@@ -769,11 +793,12 @@ class Harness
 
   /**
       Sets the GstHarness srcpad and sinkpad caps using strings.
-    
-    MT safe.
-    Params:
-      in_ =       a gchar describing a #GstCaps to set on the harness srcpad
-      out_ =       a gchar describing a #GstCaps to set on the harness sinkpad
+      
+      MT safe.
+  
+      Params:
+        in_ = a gchar describing a #GstCaps to set on the harness srcpad
+        out_ = a gchar describing a #GstCaps to set on the harness sinkpad
   */
   void setCapsStr(string in_, string out_)
   {
@@ -784,11 +809,12 @@ class Harness
 
   /**
       When set to true, instead of placing the buffers arriving from the harnessed
-    #GstElement inside the sinkpads #GAsyncQueue, they are instead unreffed.
-    
-    MT safe.
-    Params:
-      dropBuffers =       a #gboolean specifying to drop outgoing buffers or not
+      #GstElement inside the sinkpads #GAsyncQueue, they are instead unreffed.
+      
+      MT safe.
+  
+      Params:
+        dropBuffers = a #gboolean specifying to drop outgoing buffers or not
   */
   void setDropBuffers(bool dropBuffers)
   {
@@ -797,22 +823,23 @@ class Harness
 
   /**
       As a convenience, a src-harness will forward [gst.types.EventType.StreamStart],
-    [gst.types.EventType.Caps] and [gst.types.EventType.Segment] to the main-harness if forwarding
-    is enabled, and forward any sticky-events from the main-harness to
-    the sink-harness. It will also forward the [gst.types.QueryType.Allocation].
-    
-    If forwarding is disabled, the user will have to either manually push
-    these events from the src-harness using [gstcheck.harness.Harness.srcPushEvent], or
-    create and push them manually. While this will allow full control and
-    inspection of these events, for the most cases having forwarding enabled
-    will be sufficient when writing a test where the src-harness' main function
-    is providing data for the main-harness.
-    
-    Forwarding is enabled by default.
-    
-    MT safe.
-    Params:
-      forwarding =       a #gboolean to enable/disable forwarding
+      [gst.types.EventType.Caps] and [gst.types.EventType.Segment] to the main-harness if forwarding
+      is enabled, and forward any sticky-events from the main-harness to
+      the sink-harness. It will also forward the [gst.types.QueryType.Allocation].
+      
+      If forwarding is disabled, the user will have to either manually push
+      these events from the src-harness using [gstcheck.harness.Harness.srcPushEvent], or
+      create and push them manually. While this will allow full control and
+      inspection of these events, for the most cases having forwarding enabled
+      will be sufficient when writing a test where the src-harness' main function
+      is providing data for the main-harness.
+      
+      Forwarding is enabled by default.
+      
+      MT safe.
+  
+      Params:
+        forwarding = a #gboolean to enable/disable forwarding
   */
   void setForwarding(bool forwarding)
   {
@@ -821,9 +848,10 @@ class Harness
 
   /**
       Sets the liveness reported by #GstHarness when receiving a latency-query.
-    The default is true.
-    Params:
-      isLive =       true for live, false for non-live
+      The default is true.
+  
+      Params:
+        isLive = true for live, false for non-live
   */
   void setLive(bool isLive)
   {
@@ -832,12 +860,13 @@ class Harness
 
   /**
       Sets the allocator and params to propose when receiving an allocation
-    query.
-    
-    MT safe.
-    Params:
-      allocator =       a #GstAllocator
-      params =       a #GstAllocationParams
+      query.
+      
+      MT safe.
+  
+      Params:
+        allocator = a #GstAllocator
+        params = a #GstAllocationParams
   */
   void setProposeAllocator(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
@@ -846,10 +875,11 @@ class Harness
 
   /**
       Sets the GstHarness sinkpad caps.
-    
-    MT safe.
-    Params:
-      caps =       a #GstCaps to set on the harness sinkpad
+      
+      MT safe.
+  
+      Params:
+        caps = a #GstCaps to set on the harness sinkpad
   */
   void setSinkCaps(gst.caps.Caps caps)
   {
@@ -858,10 +888,11 @@ class Harness
 
   /**
       Sets the GstHarness sinkpad caps using a string.
-    
-    MT safe.
-    Params:
-      str =       a gchar describing a #GstCaps to set on the harness sinkpad
+      
+      MT safe.
+  
+      Params:
+        str = a gchar describing a #GstCaps to set on the harness sinkpad
   */
   void setSinkCapsStr(string str)
   {
@@ -871,11 +902,12 @@ class Harness
 
   /**
       Sets the GstHarness srcpad caps. This must be done before any buffers
-    can legally be pushed from the harness to the element.
-    
-    MT safe.
-    Params:
-      caps =       a #GstCaps to set on the harness srcpad
+      can legally be pushed from the harness to the element.
+      
+      MT safe.
+  
+      Params:
+        caps = a #GstCaps to set on the harness srcpad
   */
   void setSrcCaps(gst.caps.Caps caps)
   {
@@ -884,11 +916,12 @@ class Harness
 
   /**
       Sets the GstHarness srcpad caps using a string. This must be done before
-    any buffers can legally be pushed from the harness to the element.
-    
-    MT safe.
-    Params:
-      str =       a gchar describing a #GstCaps to set on the harness srcpad
+      any buffers can legally be pushed from the harness to the element.
+      
+      MT safe.
+  
+      Params:
+        str = a gchar describing a #GstCaps to set on the harness srcpad
   */
   void setSrcCapsStr(string str)
   {
@@ -898,11 +931,12 @@ class Harness
 
   /**
       Advance the #GstTestClock to a specific time.
-    
-    MT safe.
-    Params:
-      time =       a #GstClockTime to advance the clock to
-    Returns:     a gboolean true if the time could be set. false if not.
+      
+      MT safe.
+  
+      Params:
+        time = a #GstClockTime to advance the clock to
+      Returns: a gboolean true if the time could be set. false if not.
   */
   bool setTime(gst.types.ClockTime time)
   {
@@ -913,8 +947,9 @@ class Harness
 
   /**
       Sets the min latency reported by #GstHarness when receiving a latency-query
-    Params:
-      latency =       a #GstClockTime specifying the latency
+  
+      Params:
+        latency = a #GstClockTime specifying the latency
   */
   void setUpstreamLatency(gst.types.ClockTime latency)
   {
@@ -923,12 +958,13 @@ class Harness
 
   /**
       Convenience that calls gst_harness_push_to_sink pushes number of times.
-    Will abort the pushing if any one push fails.
-    
-    MT safe.
-    Params:
-      pushes =       a #gint with the number of calls to gst_harness_push_to_sink
-    Returns:     a #GstFlowReturn with the result of the push
+      Will abort the pushing if any one push fails.
+      
+      MT safe.
+  
+      Params:
+        pushes = a #gint with the number of calls to gst_harness_push_to_sink
+      Returns: a #GstFlowReturn with the result of the push
   */
   gst.types.FlowReturn sinkPushMany(int pushes)
   {
@@ -940,16 +976,17 @@ class Harness
 
   /**
       Transfer data from the src-#GstHarness to the main-#GstHarness. Similar to
-    gst_harness_push_from_src, this variant allows you to specify how many cranks
-    and how many pushes to perform. This can be useful for both moving a lot
-    of data at the same time, as well as cases when one crank does not equal one
-    buffer to push and v.v.
-    
-    MT safe.
-    Params:
-      cranks =       a #gint with the number of calls to gst_harness_crank_single_clock_wait
-      pushes =       a #gint with the number of calls to gst_harness_push
-    Returns:     a #GstFlowReturn with the result of the push
+      gst_harness_push_from_src, this variant allows you to specify how many cranks
+      and how many pushes to perform. This can be useful for both moving a lot
+      of data at the same time, as well as cases when one crank does not equal one
+      buffer to push and v.v.
+      
+      MT safe.
+  
+      Params:
+        cranks = a #gint with the number of calls to gst_harness_crank_single_clock_wait
+        pushes = a #gint with the number of calls to gst_harness_push
+      Returns: a #GstFlowReturn with the result of the push
   */
   gst.types.FlowReturn srcCrankAndPushMany(int cranks, int pushes)
   {
@@ -961,12 +998,12 @@ class Harness
 
   /**
       Similar to what gst_harness_src_push does with #GstBuffers, this transfers
-    a #GstEvent from the src-#GstHarness to the main-#GstHarness. Note that
-    some #GstEvents are being transferred automagically. Look at sink_forward_pad
-    for details.
-    
-    MT safe.
-    Returns:     a #gboolean with the result of the push
+      a #GstEvent from the src-#GstHarness to the main-#GstHarness. Note that
+      some #GstEvents are being transferred automagically. Look at sink_forward_pad
+      for details.
+      
+      MT safe.
+      Returns: a #gboolean with the result of the push
   */
   bool srcPushEvent()
   {
@@ -977,8 +1014,8 @@ class Harness
 
   /**
       Pulls all pending data from the harness and returns it as a single buffer.
-    Returns:     the data as a buffer. Unref with gst_buffer_unref()
-          when no longer needed.
+      Returns: the data as a buffer. Unref with gst_buffer_unref()
+            when no longer needed.
   */
   gst.buffer.Buffer takeAllDataAsBuffer()
   {
@@ -990,8 +1027,8 @@ class Harness
 
   /**
       Pulls all pending data from the harness and returns it as a single #GBytes.
-    Returns:     a pointer to the data, newly allocated. Free
-          with [glib.global.gfree] when no longer needed.
+      Returns: a pointer to the data, newly allocated. Free
+            with [glib.global.gfree] when no longer needed.
   */
   glib.bytes.Bytes takeAllData()
   {
@@ -1003,8 +1040,8 @@ class Harness
 
   /**
       Tears down a GstHarness, freeing all resources allocated using it.
-    
-    MT safe.
+      
+      MT safe.
   */
   void teardown()
   {
@@ -1013,11 +1050,11 @@ class Harness
 
   /**
       Pulls a #GstBuffer from the #GAsyncQueue on the #GstHarness sinkpad. Unlike
-    gst_harness_pull this will not wait for any buffers if not any are present,
-    and return null straight away.
-    
-    MT safe.
-    Returns:     a #GstBuffer or null if no buffers are present in the #GAsyncQueue
+      gst_harness_pull this will not wait for any buffers if not any are present,
+      and return null straight away.
+      
+      MT safe.
+      Returns: a #GstBuffer or null if no buffers are present in the #GAsyncQueue
   */
   gst.buffer.Buffer tryPull()
   {
@@ -1029,10 +1066,10 @@ class Harness
 
   /**
       Pulls an #GstEvent from the #GAsyncQueue on the #GstHarness sinkpad.
-    See gst_harness_try_pull for details.
-    
-    MT safe.
-    Returns:     a #GstEvent or null if no buffers are present in the #GAsyncQueue
+      See gst_harness_try_pull for details.
+      
+      MT safe.
+      Returns: a #GstEvent or null if no buffers are present in the #GAsyncQueue
   */
   gst.event.Event tryPullEvent()
   {
@@ -1044,10 +1081,10 @@ class Harness
 
   /**
       Pulls an #GstEvent from the #GAsyncQueue on the #GstHarness srcpad.
-    See gst_harness_try_pull for details.
-    
-    MT safe.
-    Returns:     a #GstEvent or null if no buffers are present in the #GAsyncQueue
+      See gst_harness_try_pull for details.
+      
+      MT safe.
+      Returns: a #GstEvent or null if no buffers are present in the #GAsyncQueue
   */
   gst.event.Event tryPullUpstreamEvent()
   {
@@ -1059,9 +1096,9 @@ class Harness
 
   /**
       The number of #GstEvents currently in the #GstHarness srcpad #GAsyncQueue
-    
-    MT safe.
-    Returns:     a #guint number of events in the queue
+      
+      MT safe.
+      Returns: a #guint number of events in the queue
   */
   uint upstreamEventsInQueue()
   {
@@ -1072,11 +1109,11 @@ class Harness
 
   /**
       The total number of #GstEvents that has arrived on the #GstHarness srcpad
-    This number includes events handled by the harness as well as events
-    that have already been pulled out.
-    
-    MT safe.
-    Returns:     a #guint number of events received
+      This number includes events handled by the harness as well as events
+      that have already been pulled out.
+      
+      MT safe.
+      Returns: a #guint number of events received
   */
   uint upstreamEventsReceived()
   {
@@ -1087,8 +1124,8 @@ class Harness
 
   /**
       Sets the system #GstClock on the GstHarness #GstElement
-    
-    MT safe.
+      
+      MT safe.
   */
   void useSystemclock()
   {
@@ -1097,8 +1134,8 @@ class Harness
 
   /**
       Sets the #GstTestClock on the #GstHarness #GstElement
-    
-    MT safe.
+      
+      MT safe.
   */
   void useTestclock()
   {
@@ -1107,17 +1144,18 @@ class Harness
 
   /**
       Waits for timeout seconds until waits number of #GstClockID waits is
-    registered with the #GstTestClock. Useful for writing deterministic tests,
-    where you want to make sure that an expected number of waits have been
-    reached.
-    
-    MT safe.
-    Params:
-      waits =       a #guint describing the numbers of #GstClockID registered with
-        the #GstTestClock
-      timeout =       a #guint describing how many seconds to wait for waits to be true
-    Returns:     a gboolean true if the waits have been registered, false if not.
-      (Could be that it timed out waiting or that more waits than waits was found)
+      registered with the #GstTestClock. Useful for writing deterministic tests,
+      where you want to make sure that an expected number of waits have been
+      reached.
+      
+      MT safe.
+  
+      Params:
+        waits = a #guint describing the numbers of #GstClockID registered with
+          the #GstTestClock
+        timeout = a #guint describing how many seconds to wait for waits to be true
+      Returns: a gboolean true if the waits have been registered, false if not.
+        (Could be that it timed out waiting or that more waits than waits was found)
   */
   bool waitForClockIdWaits(uint waits, uint timeout)
   {
@@ -1128,11 +1166,12 @@ class Harness
 
   /**
       Stop the running #GstHarnessThread
-    
-    MT safe.
-    Params:
-      t =       a #GstHarnessThread
-    Returns: 
+      
+      MT safe.
+  
+      Params:
+        t = a #GstHarnessThread
+      Returns: 
   */
   static uint stressThreadStop(gstcheck.types.HarnessThread t)
   {

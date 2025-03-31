@@ -1,3 +1,4 @@
+/// Module for [PaperSize] class
 module gtk.paper_size;
 
 import gid.gid;
@@ -11,36 +12,40 @@ import gtk.types;
 
 /**
     GtkPaperSize handles paper sizes. It uses the standard called
-  [PWG 5101.1-2002 PWG: Standard for Media Standardized Names](http://www.pwg.org/standards.html)
-  to name the paper sizes (and to get the data for the page sizes).
-  In addition to standard paper sizes, GtkPaperSize allows to
-  construct custom paper sizes with arbitrary dimensions.
-  
-  The #GtkPaperSize object stores not only the dimensions (width
-  and height) of a paper size and its name, it also provides
-  default [print margins][print-margins].
-  
-  Printing support has been added in GTK+ 2.10.
+    [PWG 5101.1-2002 PWG: Standard for Media Standardized Names](http://www.pwg.org/standards.html)
+    to name the paper sizes (and to get the data for the page sizes).
+    In addition to standard paper sizes, GtkPaperSize allows to
+    construct custom paper sizes with arbitrary dimensions.
+    
+    The #GtkPaperSize object stores not only the dimensions (width
+    and height) of a paper size and its name, it also provides
+    default [print margins][print-margins].
+    
+    Printing support has been added in GTK+ 2.10.
 */
 class PaperSize : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paper_size_get_type != &gidSymbolNotFound ? gtk_paper_size_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,15 +58,16 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Creates a new #GtkPaperSize object by parsing a
-    [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)
-    paper name.
-    
-    If name is null, the default paper size is returned,
-    see [gtk.paper_size.PaperSize.getDefault].
-    Params:
-      name =       a paper size name, or null
-    Returns:     a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
-      to free it
+      [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)
+      paper name.
+      
+      If name is null, the default paper size is returned,
+      see [gtk.paper_size.PaperSize.getDefault].
+  
+      Params:
+        name = a paper size name, or null
+      Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
+        to free it
   */
   this(string name = null)
   {
@@ -73,15 +79,16 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Creates a new #GtkPaperSize object with the
-    given parameters.
-    Params:
-      name =       the paper name
-      displayName =       the human-readable name
-      width =       the paper width, in units of unit
-      height =       the paper height, in units of unit
-      unit =       the unit for width and height. not [gtk.types.Unit.None].
-    Returns:     a new #GtkPaperSize object, use [gtk.paper_size.PaperSize.free]
-      to free it
+      given parameters.
+  
+      Params:
+        name = the paper name
+        displayName = the human-readable name
+        width = the paper width, in units of unit
+        height = the paper height, in units of unit
+        unit = the unit for width and height. not [gtk.types.Unit.None].
+      Returns: a new #GtkPaperSize object, use [gtk.paper_size.PaperSize.free]
+        to free it
   */
   static gtk.paper_size.PaperSize newCustom(string name, string displayName, double width, double height, gtk.types.Unit unit)
   {
@@ -95,10 +102,11 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Deserialize a paper size from an a{sv} variant in
-    the format produced by [gtk.paper_size.PaperSize.toGvariant].
-    Params:
-      variant =       an a{sv} #GVariant
-    Returns:     a new #GtkPaperSize object
+      the format produced by [gtk.paper_size.PaperSize.toGvariant].
+  
+      Params:
+        variant = an a{sv} #GVariant
+      Returns: a new #GtkPaperSize object
   */
   static gtk.paper_size.PaperSize newFromGvariant(glib.variant.VariantG variant)
   {
@@ -110,17 +118,18 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Creates a new #GtkPaperSize object by using
-    IPP information.
-    
-    If ipp_name is not a recognized paper name,
-    width and height are used to
-    construct a custom #GtkPaperSize object.
-    Params:
-      ippName =       an IPP paper name
-      width =       the paper width, in points
-      height =       the paper height in points
-    Returns:     a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
-      to free it
+      IPP information.
+      
+      If ipp_name is not a recognized paper name,
+      width and height are used to
+      construct a custom #GtkPaperSize object.
+  
+      Params:
+        ippName = an IPP paper name
+        width = the paper width, in points
+        height = the paper height in points
+      Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
+        to free it
   */
   static gtk.paper_size.PaperSize newFromIpp(string ippName, double width, double height)
   {
@@ -133,13 +142,15 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Reads a paper size from the group group_name in the key file
-    key_file.
-    Params:
-      keyFile =       the #GKeyFile to retrieve the papersize from
-      groupName =       the name of the group in the key file to read,
-            or null to read the first group
-    Returns:     a new #GtkPaperSize object with the restored
-          paper size, or null if an error occurred
+      key_file.
+  
+      Params:
+        keyFile = the #GKeyFile to retrieve the papersize from
+        groupName = the name of the group in the key file to read,
+              or null to read the first group
+      Returns: a new #GtkPaperSize object with the restored
+            paper size, or null if an error occurred
+      Throws: [ErrorG]
   */
   static gtk.paper_size.PaperSize newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -155,18 +166,19 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Creates a new #GtkPaperSize object by using
-    PPD information.
-    
-    If ppd_name is not a recognized PPD paper name,
-    ppd_display_name, width and height are used to
-    construct a custom #GtkPaperSize object.
-    Params:
-      ppdName =       a PPD paper name
-      ppdDisplayName =       the corresponding human-readable name
-      width =       the paper width, in points
-      height =       the paper height in points
-    Returns:     a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
-      to free it
+      PPD information.
+      
+      If ppd_name is not a recognized PPD paper name,
+      ppd_display_name, width and height are used to
+      construct a custom #GtkPaperSize object.
+  
+      Params:
+        ppdName = a PPD paper name
+        ppdDisplayName = the corresponding human-readable name
+        width = the paper width, in points
+        height = the paper height in points
+      Returns: a new #GtkPaperSize, use [gtk.paper_size.PaperSize.free]
+        to free it
   */
   static gtk.paper_size.PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height)
   {
@@ -180,7 +192,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Copies an existing #GtkPaperSize.
-    Returns:     a copy of other
+      Returns: a copy of other
   */
   gtk.paper_size.PaperSize copy()
   {
@@ -192,9 +204,10 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the default bottom margin for the #GtkPaperSize.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the default bottom margin
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the default bottom margin
   */
   double getDefaultBottomMargin(gtk.types.Unit unit)
   {
@@ -205,9 +218,10 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the default left margin for the #GtkPaperSize.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the default left margin
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the default left margin
   */
   double getDefaultLeftMargin(gtk.types.Unit unit)
   {
@@ -218,9 +232,10 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the default right margin for the #GtkPaperSize.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the default right margin
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the default right margin
   */
   double getDefaultRightMargin(gtk.types.Unit unit)
   {
@@ -231,9 +246,10 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the default top margin for the #GtkPaperSize.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the default top margin
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the default top margin
   */
   double getDefaultTopMargin(gtk.types.Unit unit)
   {
@@ -244,7 +260,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the human-readable name of the #GtkPaperSize.
-    Returns:     the human-readable name of size
+      Returns: the human-readable name of size
   */
   string getDisplayName()
   {
@@ -256,10 +272,11 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the paper height of the #GtkPaperSize, in
-    units of unit.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the paper height
+      units of unit.
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the paper height
   */
   double getHeight(gtk.types.Unit unit)
   {
@@ -270,7 +287,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the name of the #GtkPaperSize.
-    Returns:     the name of size
+      Returns: the name of size
   */
   string getName()
   {
@@ -282,8 +299,8 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the PPD name of the #GtkPaperSize, which
-    may be null.
-    Returns:     the PPD name of size
+      may be null.
+      Returns: the PPD name of size
   */
   string getPpdName()
   {
@@ -295,10 +312,11 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Gets the paper width of the #GtkPaperSize, in
-    units of unit.
-    Params:
-      unit =       the unit for the return value, not [gtk.types.Unit.None]
-    Returns:     the paper width
+      units of unit.
+  
+      Params:
+        unit = the unit for the return value, not [gtk.types.Unit.None]
+      Returns: the paper width
   */
   double getWidth(gtk.types.Unit unit)
   {
@@ -309,7 +327,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Returns true if size is not a standard paper size.
-    Returns:     whether size is a custom paper size.
+      Returns: whether size is a custom paper size.
   */
   bool isCustom()
   {
@@ -320,10 +338,11 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Compares two #GtkPaperSize objects.
-    Params:
-      size2 =       another #GtkPaperSize object
-    Returns:     true, if size1 and size2
-      represent the same paper size
+  
+      Params:
+        size2 = another #GtkPaperSize object
+      Returns: true, if size1 and size2
+        represent the same paper size
   */
   bool isEqual(gtk.paper_size.PaperSize size2)
   {
@@ -334,7 +353,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Returns true if size is an IPP standard paper size.
-    Returns:     whether size is not an IPP custom paper size.
+      Returns: whether size is not an IPP custom paper size.
   */
   bool isIpp()
   {
@@ -345,10 +364,11 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Changes the dimensions of a size to width x height.
-    Params:
-      width =       the new width in units of unit
-      height =       the new height in units of unit
-      unit =       the unit for width and height
+  
+      Params:
+        width = the new width in units of unit
+        height = the new height in units of unit
+        unit = the unit for width and height
   */
   void setSize(double width, double height, gtk.types.Unit unit)
   {
@@ -357,7 +377,7 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Serialize a paper size to an a{sv} variant.
-    Returns:     a new, floating, #GVariant
+      Returns: a new, floating, #GVariant
   */
   glib.variant.VariantG toGvariant()
   {
@@ -369,9 +389,10 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       This function adds the paper size from size to key_file.
-    Params:
-      keyFile =       the #GKeyFile to save the paper size to
-      groupName =       the group to add the settings to in key_file
+  
+      Params:
+        keyFile = the #GKeyFile to save the paper size to
+        groupName = the group to add the settings to in key_file
   */
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
@@ -381,9 +402,9 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Returns the name of the default paper size, which
-    depends on the current locale.
-    Returns:     the name of the default paper size. The string
-      is owned by GTK+ and should not be modified.
+      depends on the current locale.
+      Returns: the name of the default paper size. The string
+        is owned by GTK+ and should not be modified.
   */
   static string getDefault()
   {
@@ -395,11 +416,12 @@ class PaperSize : gobject.boxed.Boxed
 
   /**
       Creates a list of known paper sizes.
-    Params:
-      includeCustom =       whether to include custom paper sizes
-            as defined in the page setup dialog
-    Returns:     a newly allocated list of newly
-         allocated #GtkPaperSize objects
+  
+      Params:
+        includeCustom = whether to include custom paper sizes
+              as defined in the page setup dialog
+      Returns: a newly allocated list of newly
+           allocated #GtkPaperSize objects
   */
   static gtk.paper_size.PaperSize[] getPaperSizes(bool includeCustom)
   {

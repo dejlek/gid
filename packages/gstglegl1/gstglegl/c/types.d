@@ -1,3 +1,4 @@
+/// C types for gstglegl1 library
 module gstglegl.c.types;
 
 public import gid.basictypes;
@@ -8,10 +9,10 @@ public import gstvideo.c.types;
 
 /**
     #GstEGLImage represents and holds an `EGLImage` handle.
-  
-  A #GstEGLImage can be created from a dmabuf with [gstglegl.eglimage.EGLImage.fromDmabuf],
-  or [gstglegl.eglimage.EGLImage.fromDmabufDirect], or #GstGLMemoryEGL provides a
-  #GstAllocator to allocate `EGLImage`'s bound to and OpenGL texture.
+    
+    A #GstEGLImage can be created from a dmabuf with [gstglegl.eglimage.EGLImage.fromDmabuf],
+    or [gstglegl.eglimage.EGLImage.fromDmabufDirect], or #GstGLMemoryEGL provides a
+    #GstAllocator to allocate `EGLImage`'s bound to and OpenGL texture.
 */
 struct GstEGLImage
 {
@@ -39,7 +40,7 @@ struct GstEGLImage
 
 /**
     the contents of a #GstGLDisplayEGL are private and should only be accessed
-  through the provided API
+    through the provided API
 */
 struct GstGLDisplayEGL
 {
@@ -68,7 +69,7 @@ struct GstGLDisplayEGLClass
 
 /**
     the contents of a #GstGLDisplayEGLDevice are private and should only be accessed
-  through the provided API
+    through the provided API
 */
 struct GstGLDisplayEGLDevice
 {
@@ -96,7 +97,7 @@ struct GstGLDisplayEGLDeviceClass
 
 /**
     #GstGLMemoryEGL is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
-  with #GstGLVideoAllocationParams.
+    with #GstGLVideoAllocationParams.
 */
 struct GstGLMemoryEGL
 {

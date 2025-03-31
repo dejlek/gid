@@ -1,3 +1,4 @@
+/// Module for [DBusInterfaceInfo] class
 module gio.dbus_interface_info;
 
 import gid.gid;
@@ -16,27 +17,32 @@ import gobject.boxed;
 class DBusInterfaceInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GDBusInterfaceInfo.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_info_get_type != &gidSymbolNotFound ? g_dbus_interface_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -70,15 +76,15 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Builds a lookup-cache to speed up
-    [gio.dbus_interface_info.DBusInterfaceInfo.lookupMethod],
-    [gio.dbus_interface_info.DBusInterfaceInfo.lookupSignal] and
-    [gio.dbus_interface_info.DBusInterfaceInfo.lookupProperty].
-    
-    If this has already been called with info, the existing cache is
-    used and its use count is increased.
-    
-    Note that info cannot be modified until
-    [gio.dbus_interface_info.DBusInterfaceInfo.cacheRelease] is called.
+      [gio.dbus_interface_info.DBusInterfaceInfo.lookupMethod],
+      [gio.dbus_interface_info.DBusInterfaceInfo.lookupSignal] and
+      [gio.dbus_interface_info.DBusInterfaceInfo.lookupProperty].
+      
+      If this has already been called with info, the existing cache is
+      used and its use count is increased.
+      
+      Note that info cannot be modified until
+      [gio.dbus_interface_info.DBusInterfaceInfo.cacheRelease] is called.
   */
   void cacheBuild()
   {
@@ -87,8 +93,8 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Decrements the usage count for the cache for info built by
-    [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] (if any) and frees the
-    resources used by the cache if the usage count drops to zero.
+      [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] (if any) and frees the
+      resources used by the cache if the usage count drops to zero.
   */
   void cacheRelease()
   {
@@ -97,14 +103,15 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Appends an XML representation of info (and its children) to string_builder.
-    
-    This function is typically used for generating introspection XML
-    documents at run-time for handling the
-    `org.freedesktop.DBus.Introspectable.Introspect`
-    method.
-    Params:
-      indent =       Indentation level.
-      stringBuilder =       A #GString to to append XML data to.
+      
+      This function is typically used for generating introspection XML
+      documents at run-time for handling the
+      `org.freedesktop.DBus.Introspectable.Introspect`
+      method.
+  
+      Params:
+        indent = Indentation level.
+        stringBuilder = A #GString to to append XML data to.
   */
   void generateXml(uint indent, glib.string_.String stringBuilder)
   {
@@ -113,12 +120,13 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Looks up information about a method.
-    
-    The cost of this function is O(n) in number of methods unless
-    [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
-    Params:
-      name =       A D-Bus method name (typically in CamelCase)
-    Returns:     A #GDBusMethodInfo or null if not found. Do not free, it is owned by info.
+      
+      The cost of this function is O(n) in number of methods unless
+      [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
+  
+      Params:
+        name = A D-Bus method name (typically in CamelCase)
+      Returns: A #GDBusMethodInfo or null if not found. Do not free, it is owned by info.
   */
   gio.dbus_method_info.DBusMethodInfo lookupMethod(string name)
   {
@@ -131,12 +139,13 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Looks up information about a property.
-    
-    The cost of this function is O(n) in number of properties unless
-    [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
-    Params:
-      name =       A D-Bus property name (typically in CamelCase).
-    Returns:     A #GDBusPropertyInfo or null if not found. Do not free, it is owned by info.
+      
+      The cost of this function is O(n) in number of properties unless
+      [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
+  
+      Params:
+        name = A D-Bus property name (typically in CamelCase).
+      Returns: A #GDBusPropertyInfo or null if not found. Do not free, it is owned by info.
   */
   gio.dbus_property_info.DBusPropertyInfo lookupProperty(string name)
   {
@@ -149,12 +158,13 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
 
   /**
       Looks up information about a signal.
-    
-    The cost of this function is O(n) in number of signals unless
-    [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
-    Params:
-      name =       A D-Bus signal name (typically in CamelCase)
-    Returns:     A #GDBusSignalInfo or null if not found. Do not free, it is owned by info.
+      
+      The cost of this function is O(n) in number of signals unless
+      [gio.dbus_interface_info.DBusInterfaceInfo.cacheBuild] has been used on info.
+  
+      Params:
+        name = A D-Bus signal name (typically in CamelCase)
+      Returns: A #GDBusSignalInfo or null if not found. Do not free, it is owned by info.
   */
   gio.dbus_signal_info.DBusSignalInfo lookupSignal(string name)
   {

@@ -1,3 +1,4 @@
+/// Module for [StrvBuilder] class
 module glib.strv_builder;
 
 import gid.gid;
@@ -8,35 +9,39 @@ import gobject.boxed;
 
 /**
     [glib.strv_builder.StrvBuilder] is a helper object to build a null-terminated string arrays.
-  
-  The following example shows how to build a two element array:
-  
-  ```c
-    g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
-    g_strv_builder_add (builder, "hello");
-    g_strv_builder_add (builder, "world");
-    g_auto(GStrv) array = g_strv_builder_end (builder);
-  ```
+    
+    The following example shows how to build a two element array:
+    
+    ```c
+      g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
+      g_strv_builder_add (builder, "hello");
+      g_strv_builder_add (builder, "world");
+      g_auto(GStrv) array = g_strv_builder_end (builder);
+    ```
 */
 class StrvBuilder : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_strv_builder_get_type != &gidSymbolNotFound ? g_strv_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,8 +54,8 @@ class StrvBuilder : gobject.boxed.Boxed
 
   /**
       Creates a new #GStrvBuilder with a reference count of 1.
-    Use [glib.strv_builder.StrvBuilder.unref] on the returned value when no longer needed.
-    Returns:     the new #GStrvBuilder
+      Use [glib.strv_builder.StrvBuilder.unref] on the returned value when no longer needed.
+      Returns: the new #GStrvBuilder
   */
   this()
   {
@@ -61,10 +66,11 @@ class StrvBuilder : gobject.boxed.Boxed
 
   /**
       Add a string to the end of the array.
-    
-    Since 2.68
-    Params:
-      value =       a string.
+      
+      Since 2.68
+  
+      Params:
+        value = a string.
   */
   void add(string value)
   {
@@ -74,10 +80,11 @@ class StrvBuilder : gobject.boxed.Boxed
 
   /**
       Appends all the strings in the given vector to the builder.
-    
-    Since 2.70
-    Params:
-      value =       the vector of strings to add
+      
+      Since 2.70
+  
+      Params:
+        value = the vector of strings to add
   */
   void addv(string[] value)
   {
@@ -91,11 +98,11 @@ class StrvBuilder : gobject.boxed.Boxed
 
   /**
       Ends the builder process and returns the constructed NULL-terminated string
-    array. The returned value should be freed with [glib.global.strfreev] when no longer
-    needed.
-    Returns:     the constructed string array.
-      
-      Since 2.68
+      array. The returned value should be freed with [glib.global.strfreev] when no longer
+      needed.
+      Returns: the constructed string array.
+        
+        Since 2.68
   */
   string[] end()
   {
@@ -117,12 +124,13 @@ class StrvBuilder : gobject.boxed.Boxed
 
   /**
       Add a string to the end of the array. After value belongs to the
-    #GStrvBuilder and may no longer be modified by the caller.
-    
-    Since 2.80
-    Params:
-      value =       a string.
-            Ownership of the string is transferred to the #GStrvBuilder
+      #GStrvBuilder and may no longer be modified by the caller.
+      
+      Since 2.80
+  
+      Params:
+        value = a string.
+              Ownership of the string is transferred to the #GStrvBuilder
   */
   void take(string value)
   {

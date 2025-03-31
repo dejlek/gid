@@ -1,3 +1,4 @@
+/// Module for [RepeatNode] class
 module gsk.repeat_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class RepeatNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,13 +25,14 @@ class RepeatNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will repeat the drawing of child across
-    the given bounds.
-    Params:
-      bounds =       The bounds of the area to be painted
-      child =       The child to repeat
-      childBounds =       The area of the child to repeat or null to
-            use the child's bounds
-    Returns:     A new [gsk.render_node.RenderNode]
+      the given bounds.
+  
+      Params:
+        bounds = The bounds of the area to be painted
+        child = The child to repeat
+        childBounds = The area of the child to repeat or null to
+              use the child's bounds
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null)
   {
@@ -40,7 +43,7 @@ class RepeatNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the child of node.
-    Returns:     a [gsk.render_node.RenderNode]
+      Returns: a [gsk.render_node.RenderNode]
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -52,7 +55,7 @@ class RepeatNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the bounding rectangle of the child of node.
-    Returns:     a bounding rectangle
+      Returns: a bounding rectangle
   */
   graphene.rect.Rect getChildBounds()
   {

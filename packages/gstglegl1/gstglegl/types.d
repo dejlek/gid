@@ -1,3 +1,4 @@
+/// D types for gstglegl1 library
 module gstglegl.types;
 
 import gid.gid;
@@ -10,12 +11,10 @@ import gstglegl.eglimage;
 
 /**
     Function to be called when the GstEGLImage is destroyed. It should free
-  the associated `EGLImage` if necessary
+    the associated `EGLImage` if necessary
 
-  ## Parameters
-  $(LIST
-    * $(B image)       a #GstEGLImage
-  )
+    Params:
+      image = a #GstEGLImage
 */
 alias EGLImageDestroyNotify = void delegate(gstglegl.eglimage.EGLImage image);
 

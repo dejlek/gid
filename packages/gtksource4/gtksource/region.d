@@ -1,3 +1,4 @@
+/// Module for [Region] class
 module gtksource.region;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtksource.types;
 class Region : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_region_get_type != &gidSymbolNotFound ? gtk_source_region_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,8 +48,9 @@ class Region : gobject.object.ObjectG
 
   /**
       Adds region_to_add to region. region_to_add is not modified.
-    Params:
-      regionToAdd =       the #GtkSourceRegion to add to region, or null.
+  
+      Params:
+        regionToAdd = the #GtkSourceRegion to add to region, or null.
   */
   void addRegion(gtksource.region.Region regionToAdd = null)
   {
@@ -54,9 +59,10 @@ class Region : gobject.object.ObjectG
 
   /**
       Adds the subregion delimited by _start and _end to region.
-    Params:
-      Start =       the start of the subregion.
-      End =       the end of the subregion.
+  
+      Params:
+        Start = the start of the subregion.
+        End = the end of the subregion.
   */
   void addSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
@@ -65,13 +71,14 @@ class Region : gobject.object.ObjectG
 
   /**
       Gets the start and end bounds of the region.
-    Params:
-      start =       iterator to initialize with the start of region,
-          or null.
-      end =       iterator to initialize with the end of region,
-          or null.
-    Returns:     true if start and end have been set successfully (if non-null),
-        or false if the region is empty.
+  
+      Params:
+        start = iterator to initialize with the start of region,
+            or null.
+        end = iterator to initialize with the end of region,
+            or null.
+      Returns: true if start and end have been set successfully (if non-null),
+          or false if the region is empty.
   */
   bool getBounds(out gtk.text_iter.TextIter start, out gtk.text_iter.TextIter end)
   {
@@ -95,9 +102,10 @@ class Region : gobject.object.ObjectG
 
   /**
       Initializes a #GtkSourceRegionIter to the first subregion of region. If
-    region is empty, iter will be initialized to the end iterator.
-    Params:
-      iter =       iterator to initialize to the first subregion.
+      region is empty, iter will be initialized to the end iterator.
+  
+      Params:
+        iter = iterator to initialize to the first subregion.
   */
   void getStartRegionIter(out gtksource.region_iter.RegionIter iter)
   {
@@ -108,11 +116,12 @@ class Region : gobject.object.ObjectG
 
   /**
       Returns the intersection between region1 and region2. region1 and
-    region2 are not modified.
-    Params:
-      region2 =       a #GtkSourceRegion, or null.
-    Returns:     the intersection as a #GtkSourceRegion
-        object.
+      region2 are not modified.
+  
+      Params:
+        region2 = a #GtkSourceRegion, or null.
+      Returns: the intersection as a #GtkSourceRegion
+          object.
   */
   gtksource.region.Region intersectRegion(gtksource.region.Region region2 = null)
   {
@@ -124,12 +133,13 @@ class Region : gobject.object.ObjectG
 
   /**
       Returns the intersection between region and the subregion delimited by
-    _start and _end. region is not modified.
-    Params:
-      Start =       the start of the subregion.
-      End =       the end of the subregion.
-    Returns:     the intersection as a new
-        #GtkSourceRegion.
+      _start and _end. region is not modified.
+  
+      Params:
+        Start = the start of the subregion.
+        End = the end of the subregion.
+      Returns: the intersection as a new
+          #GtkSourceRegion.
   */
   gtksource.region.Region intersectSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
@@ -141,7 +151,7 @@ class Region : gobject.object.ObjectG
 
   /**
       Returns whether the region is empty. A null region is considered empty.
-    Returns:     whether the region is empty.
+      Returns: whether the region is empty.
   */
   bool isEmpty()
   {
@@ -152,10 +162,11 @@ class Region : gobject.object.ObjectG
 
   /**
       Subtracts region_to_subtract from region. region_to_subtract is not
-    modified.
-    Params:
-      regionToSubtract =       the #GtkSourceRegion to subtract from
-          region, or null.
+      modified.
+  
+      Params:
+        regionToSubtract = the #GtkSourceRegion to subtract from
+            region, or null.
   */
   void subtractRegion(gtksource.region.Region regionToSubtract = null)
   {
@@ -164,9 +175,10 @@ class Region : gobject.object.ObjectG
 
   /**
       Subtracts the subregion delimited by _start and _end from region.
-    Params:
-      Start =       the start of the subregion.
-      End =       the end of the subregion.
+  
+      Params:
+        Start = the start of the subregion.
+        End = the end of the subregion.
   */
   void subtractSubregion(gtk.text_iter.TextIter Start, gtk.text_iter.TextIter End)
   {
@@ -175,11 +187,11 @@ class Region : gobject.object.ObjectG
 
   /**
       Gets a string represention of region, for debugging purposes.
-    
-    The returned string contains the character offsets of the subregions. It
-    doesn't include a newline character at the end of the string.
-    Returns:     a string represention of region. Free
-        with [glib.global.gfree] when no longer needed.
+      
+      The returned string contains the character offsets of the subregions. It
+      doesn't include a newline character at the end of the string.
+      Returns: a string represention of region. Free
+          with [glib.global.gfree] when no longer needed.
   */
   string toString_()
   {

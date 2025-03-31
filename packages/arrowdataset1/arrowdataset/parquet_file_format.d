@@ -1,3 +1,4 @@
+/// Module for [ParquetFileFormat] class
 module arrowdataset.parquet_file_format;
 
 import arrowdataset.c.functions;
@@ -10,17 +11,20 @@ import gid.gid;
 class ParquetFileFormat : arrowdataset.file_format.FileFormat
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_parquet_file_format_get_type != &gidSymbolNotFound ? gadataset_parquet_file_format_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadSP] class
 module gstsdp.mikeypayload_sp;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstsdp.types;
 
 /**
     The Security Policy payload defines a set of policies that apply to a
-  specific security protocol
+    specific security protocol
 */
 class MIKEYPayloadSP
 {
   GstMIKEYPayloadSP cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class MIKEYPayloadSP
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

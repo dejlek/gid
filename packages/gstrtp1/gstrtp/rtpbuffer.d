@@ -1,3 +1,4 @@
+/// Module for [RTPBuffer] class
 module gstrtp.rtpbuffer;
 
 import gid.gid;
@@ -10,13 +11,14 @@ import gstrtp.types;
 
 /**
     The GstRTPBuffer helper functions makes it easy to parse and create regular
-  #GstBuffer objects that contain RTP payloads. These buffers are typically of
-  'application/x-rtp' #GstCaps.
+    #GstBuffer objects that contain RTP payloads. These buffers are typically of
+    'application/x-rtp' #GstCaps.
 */
 class RTPBuffer
 {
   GstRTPBuffer cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class RTPBuffer
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -56,16 +59,17 @@ class RTPBuffer
 
   /**
       Adds a RFC 5285 header extension with a one byte header to the end of the
-    RTP header. If there is already a RFC 5285 header extension with a one byte
-    header, the new extension will be appended.
-    It will not work if there is already a header extension that does not follow
-    the mechanism described in RFC 5285 or if there is a header extension with
-    a two bytes header as described in RFC 5285. In that case, use
-    [gstrtp.rtpbuffer.RTPBuffer.addExtensionTwobytesHeader]
-    Params:
-      id =       The ID of the header extension (between 1 and 14).
-      data =       location for data
-    Returns:     true if header extension could be added
+      RTP header. If there is already a RFC 5285 header extension with a one byte
+      header, the new extension will be appended.
+      It will not work if there is already a header extension that does not follow
+      the mechanism described in RFC 5285 or if there is a header extension with
+      a two bytes header as described in RFC 5285. In that case, use
+      [gstrtp.rtpbuffer.RTPBuffer.addExtensionTwobytesHeader]
+  
+      Params:
+        id = The ID of the header extension (between 1 and 14).
+        data = location for data
+      Returns: true if header extension could be added
   */
   bool addExtensionOnebyteHeader(ubyte id, ubyte[] data)
   {
@@ -81,17 +85,18 @@ class RTPBuffer
 
   /**
       Adds a RFC 5285 header extension with a two bytes header to the end of the
-    RTP header. If there is already a RFC 5285 header extension with a two bytes
-    header, the new extension will be appended.
-    It will not work if there is already a header extension that does not follow
-    the mechanism described in RFC 5285 or if there is a header extension with
-    a one byte header as described in RFC 5285. In that case, use
-    [gstrtp.rtpbuffer.RTPBuffer.addExtensionOnebyteHeader]
-    Params:
-      appbits =       Application specific bits
-      id =       The ID of the header extension
-      data =       location for data
-    Returns:     true if header extension could be added
+      RTP header. If there is already a RFC 5285 header extension with a two bytes
+      header, the new extension will be appended.
+      It will not work if there is already a header extension that does not follow
+      the mechanism described in RFC 5285 or if there is a header extension with
+      a one byte header as described in RFC 5285. In that case, use
+      [gstrtp.rtpbuffer.RTPBuffer.addExtensionOnebyteHeader]
+  
+      Params:
+        appbits = Application specific bits
+        id = The ID of the header extension
+        data = location for data
+      Returns: true if header extension could be added
   */
   bool addExtensionTwobytesHeader(ubyte appbits, ubyte id, ubyte[] data)
   {
@@ -107,9 +112,10 @@ class RTPBuffer
 
   /**
       Get the CSRC at index idx in buffer.
-    Params:
-      idx =       the index of the CSRC to get
-    Returns:     the CSRC at index idx in host order.
+  
+      Params:
+        idx = the index of the CSRC to get
+      Returns: the CSRC at index idx in host order.
   */
   uint getCsrc(ubyte idx)
   {
@@ -120,7 +126,7 @@ class RTPBuffer
 
   /**
       Get the CSRC count of the RTP packet in buffer.
-    Returns:     the CSRC count of buffer.
+      Returns: the CSRC count of buffer.
   */
   ubyte getCsrcCount()
   {
@@ -131,7 +137,7 @@ class RTPBuffer
 
   /**
       Check if the extension bit is set on the RTP packet in buffer.
-    Returns:     TRUE if buffer has the extension bit set.
+      Returns: TRUE if buffer has the extension bit set.
   */
   bool getExtension()
   {
@@ -142,17 +148,18 @@ class RTPBuffer
 
   /**
       Similar to gst_rtp_buffer_get_extension_data, but more suitable for language
-    bindings usage. bits will contain the extension 16 bits of custom data and
-    the extension data (not including the extension header) is placed in a new
-    #GBytes structure.
-    
-    If rtp did not contain an extension, this function will return null, with
-    bits unchanged. If there is an extension header but no extension data then
-    an empty #GBytes will be returned.
-    Params:
-      bits =       location for header bits
-    Returns:     A new #GBytes if an extension header was present
-      and null otherwise.
+      bindings usage. bits will contain the extension 16 bits of custom data and
+      the extension data (not including the extension header) is placed in a new
+      #GBytes structure.
+      
+      If rtp did not contain an extension, this function will return null, with
+      bits unchanged. If there is an extension header but no extension data then
+      an empty #GBytes will be returned.
+  
+      Params:
+        bits = location for header bits
+      Returns: A new #GBytes if an extension header was present
+        and null otherwise.
   */
   glib.bytes.Bytes getExtensionData(out ushort bits)
   {
@@ -164,12 +171,13 @@ class RTPBuffer
 
   /**
       Parses RFC 5285 style header extensions with a one byte header. It will
-    return the nth extension with the requested id.
-    Params:
-      id =       The ID of the header extension to be read (between 1 and 14).
-      nth =       Read the nth extension packet with the requested ID
-      data =       location for data
-    Returns:     TRUE if buffer had the requested header extension
+      return the nth extension with the requested id.
+  
+      Params:
+        id = The ID of the header extension to be read (between 1 and 14).
+        nth = Read the nth extension packet with the requested ID
+        data = location for data
+      Returns: TRUE if buffer had the requested header extension
   */
   bool getExtensionOnebyteHeader(ubyte id, uint nth, out ubyte[] data)
   {
@@ -184,13 +192,14 @@ class RTPBuffer
 
   /**
       Parses RFC 5285 style header extensions with a two bytes header. It will
-    return the nth extension with the requested id.
-    Params:
-      appbits =       Application specific bits
-      id =       The ID of the header extension to be read (between 1 and 14).
-      nth =       Read the nth extension packet with the requested ID
-      data =       location for data
-    Returns:     TRUE if buffer had the requested header extension
+      return the nth extension with the requested id.
+  
+      Params:
+        appbits = Application specific bits
+        id = The ID of the header extension to be read (between 1 and 14).
+        nth = Read the nth extension packet with the requested ID
+        data = location for data
+      Returns: TRUE if buffer had the requested header extension
   */
   bool getExtensionTwobytesHeader(out ubyte appbits, ubyte id, uint nth, out ubyte[] data)
   {
@@ -205,8 +214,8 @@ class RTPBuffer
 
   /**
       Return the total length of the header in buffer. This include the length of
-    the fixed header, the CSRC list and the extension header.
-    Returns:     The total length of the header in buffer.
+      the fixed header, the CSRC list and the extension header.
+      Returns: The total length of the header in buffer.
   */
   uint getHeaderLen()
   {
@@ -217,7 +226,7 @@ class RTPBuffer
 
   /**
       Check if the marker bit is set on the RTP packet in buffer.
-    Returns:     TRUE if buffer has the marker bit set.
+      Returns: TRUE if buffer has the marker bit set.
   */
   bool getMarker()
   {
@@ -228,7 +237,7 @@ class RTPBuffer
 
   /**
       Return the total length of the packet in buffer.
-    Returns:     The total length of the packet in buffer.
+      Returns: The total length of the packet in buffer.
   */
   uint getPacketLen()
   {
@@ -239,7 +248,7 @@ class RTPBuffer
 
   /**
       Check if the padding bit is set on the RTP packet in buffer.
-    Returns:     TRUE if buffer has the padding bit set.
+      Returns: TRUE if buffer has the padding bit set.
   */
   bool getPadding()
   {
@@ -250,9 +259,9 @@ class RTPBuffer
 
   /**
       Create a buffer of the payload of the RTP packet in buffer. This function
-    will internally create a subbuffer of buffer so that a memcpy can be
-    avoided.
-    Returns:     A new buffer with the data of the payload.
+      will internally create a subbuffer of buffer so that a memcpy can be
+      avoided.
+      Returns: A new buffer with the data of the payload.
   */
   gst.buffer.Buffer getPayloadBuffer()
   {
@@ -264,9 +273,9 @@ class RTPBuffer
 
   /**
       Similar to gst_rtp_buffer_get_payload, but more suitable for language
-    bindings usage. The return value is a pointer to a #GBytes structure
-    containing the payload data in rtp.
-    Returns:     A new #GBytes containing the payload data in rtp.
+      bindings usage. The return value is a pointer to a #GBytes structure
+      containing the payload data in rtp.
+      Returns: A new #GBytes containing the payload data in rtp.
   */
   glib.bytes.Bytes getPayload()
   {
@@ -278,7 +287,7 @@ class RTPBuffer
 
   /**
       Get the length of the payload of the RTP packet in buffer.
-    Returns:     The length of the payload in buffer.
+      Returns: The length of the payload in buffer.
   */
   uint getPayloadLen()
   {
@@ -289,12 +298,13 @@ class RTPBuffer
 
   /**
       Create a subbuffer of the payload of the RTP packet in buffer. offset bytes
-    are skipped in the payload and the subbuffer will be of size len.
-    If len is -1 the total payload starting from offset is subbuffered.
-    Params:
-      offset =       the offset in the payload
-      len =       the length in the payload
-    Returns:     A new buffer with the specified data of the payload.
+      are skipped in the payload and the subbuffer will be of size len.
+      If len is -1 the total payload starting from offset is subbuffered.
+  
+      Params:
+        offset = the offset in the payload
+        len = the length in the payload
+      Returns: A new buffer with the specified data of the payload.
   */
   gst.buffer.Buffer getPayloadSubbuffer(uint offset, uint len)
   {
@@ -306,7 +316,7 @@ class RTPBuffer
 
   /**
       Get the payload type of the RTP packet in buffer.
-    Returns:     The payload type.
+      Returns: The payload type.
   */
   ubyte getPayloadType()
   {
@@ -317,7 +327,7 @@ class RTPBuffer
 
   /**
       Get the sequence number of the RTP packet in buffer.
-    Returns:     The sequence number in host order.
+      Returns: The sequence number in host order.
   */
   ushort getSeq()
   {
@@ -328,7 +338,7 @@ class RTPBuffer
 
   /**
       Get the SSRC of the RTP packet in buffer.
-    Returns:     the SSRC of buffer in host order.
+      Returns: the SSRC of buffer in host order.
   */
   uint getSsrc()
   {
@@ -339,7 +349,7 @@ class RTPBuffer
 
   /**
       Get the timestamp of the RTP packet in buffer.
-    Returns:     The timestamp in host order.
+      Returns: The timestamp in host order.
   */
   uint getTimestamp()
   {
@@ -350,7 +360,7 @@ class RTPBuffer
 
   /**
       Get the version number of the RTP packet in buffer.
-    Returns:     The version of buffer.
+      Returns: The version of buffer.
   */
   ubyte getVersion()
   {
@@ -361,11 +371,12 @@ class RTPBuffer
 
   /**
       Set the amount of padding in the RTP packet in buffer to
-    len. If len is 0, the padding is removed.
-    
-    NOTE: This function does not work correctly.
-    Params:
-      len =       the new amount of padding
+      len. If len is 0, the padding is removed.
+      
+      NOTE: This function does not work correctly.
+  
+      Params:
+        len = the new amount of padding
   */
   void padTo(uint len)
   {
@@ -374,11 +385,11 @@ class RTPBuffer
 
   /**
       Unsets the extension bit of the RTP buffer and removes the extension header
-    and data.
-    
-    If the RTP buffer has no header extension data, the action has no effect.
-    The RTP buffer must be mapped READWRITE only once and the underlying
-    GstBuffer must be writable.
+      and data.
+      
+      If the RTP buffer has no header extension data, the action has no effect.
+      The RTP buffer must be mapped READWRITE only once and the underlying
+      GstBuffer must be writable.
   */
   void removeExtensionData()
   {
@@ -387,9 +398,10 @@ class RTPBuffer
 
   /**
       Modify the CSRC at index idx in buffer to csrc.
-    Params:
-      idx =       the CSRC index to set
-      csrc =       the CSRC in host order to set at idx
+  
+      Params:
+        idx = the CSRC index to set
+        csrc = the CSRC in host order to set at idx
   */
   void setCsrc(ubyte idx, uint csrc)
   {
@@ -398,8 +410,9 @@ class RTPBuffer
 
   /**
       Set the extension bit on the RTP packet in buffer to extension.
-    Params:
-      extension =       the new extension
+  
+      Params:
+        extension = the new extension
   */
   void setExtension(bool extension)
   {
@@ -408,15 +421,16 @@ class RTPBuffer
 
   /**
       Set the extension bit of the rtp buffer and fill in the bits and length of the
-    extension header. If the existing extension data is not large enough, it will
-    be made larger.
-    
-    Will also shorten the extension data from 1.20.
-    Params:
-      bits =       the bits specific for the extension
-      length =       the length that counts the number of 32-bit words in
-        the extension, excluding the extension header ( therefore zero is a valid length)
-    Returns:     True if done.
+      extension header. If the existing extension data is not large enough, it will
+      be made larger.
+      
+      Will also shorten the extension data from 1.20.
+  
+      Params:
+        bits = the bits specific for the extension
+        length = the length that counts the number of 32-bit words in
+          the extension, excluding the extension header ( therefore zero is a valid length)
+      Returns: True if done.
   */
   bool setExtensionData(ushort bits, ushort length)
   {
@@ -427,8 +441,9 @@ class RTPBuffer
 
   /**
       Set the marker bit on the RTP packet in buffer to marker.
-    Params:
-      marker =       the new marker
+  
+      Params:
+        marker = the new marker
   */
   void setMarker(bool marker)
   {
@@ -437,9 +452,10 @@ class RTPBuffer
 
   /**
       Set the total rtp size to len. The data in the buffer will be made
-    larger if needed. Any padding will be removed from the packet.
-    Params:
-      len =       the new packet length
+      larger if needed. Any padding will be removed from the packet.
+  
+      Params:
+        len = the new packet length
   */
   void setPacketLen(uint len)
   {
@@ -448,8 +464,9 @@ class RTPBuffer
 
   /**
       Set the padding bit on the RTP packet in buffer to padding.
-    Params:
-      padding =       the new padding
+  
+      Params:
+        padding = the new padding
   */
   void setPadding(bool padding)
   {
@@ -458,8 +475,9 @@ class RTPBuffer
 
   /**
       Set the payload type of the RTP packet in buffer to payload_type.
-    Params:
-      payloadType =       the new type
+  
+      Params:
+        payloadType = the new type
   */
   void setPayloadType(ubyte payloadType)
   {
@@ -468,8 +486,9 @@ class RTPBuffer
 
   /**
       Set the sequence number of the RTP packet in buffer to seq.
-    Params:
-      seq =       the new sequence number
+  
+      Params:
+        seq = the new sequence number
   */
   void setSeq(ushort seq)
   {
@@ -478,8 +497,9 @@ class RTPBuffer
 
   /**
       Set the SSRC on the RTP packet in buffer to ssrc.
-    Params:
-      ssrc =       the new SSRC
+  
+      Params:
+        ssrc = the new SSRC
   */
   void setSsrc(uint ssrc)
   {
@@ -488,8 +508,9 @@ class RTPBuffer
 
   /**
       Set the timestamp of the RTP packet in buffer to timestamp.
-    Params:
-      timestamp =       the new timestamp
+  
+      Params:
+        timestamp = the new timestamp
   */
   void setTimestamp(uint timestamp)
   {
@@ -498,8 +519,9 @@ class RTPBuffer
 
   /**
       Set the version of the RTP packet in buffer to version.
-    Params:
-      version_ =       the new version
+  
+      Params:
+        version_ = the new version
   */
   void setVersion(ubyte version_)
   {
@@ -516,15 +538,16 @@ class RTPBuffer
 
   /**
       Allocate enough data in buffer to hold an RTP packet with csrc_count CSRCs,
-    a payload length of payload_len and padding of pad_len.
-    buffer must be writable and all previous memory in buffer will be freed.
-    If pad_len is >0, the padding bit will be set. All other RTP header fields
-    will be set to 0/FALSE.
-    Params:
-      buffer =       a #GstBuffer
-      payloadLen =       the length of the payload
-      padLen =       the amount of padding
-      csrcCount =       the number of CSRC entries
+      a payload length of payload_len and padding of pad_len.
+      buffer must be writable and all previous memory in buffer will be freed.
+      If pad_len is >0, the padding bit will be set. All other RTP header fields
+      will be set to 0/FALSE.
+  
+      Params:
+        buffer = a #GstBuffer
+        payloadLen = the length of the payload
+        padLen = the amount of padding
+        csrcCount = the number of CSRC entries
   */
   static void allocateData(gst.buffer.Buffer buffer, uint payloadLen, ubyte padLen, ubyte csrcCount)
   {
@@ -533,10 +556,11 @@ class RTPBuffer
 
   /**
       Calculate the header length of an RTP packet with csrc_count CSRC entries.
-    An RTP packet can have at most 15 CSRC entries.
-    Params:
-      csrcCount =       the number of CSRC entries
-    Returns:     The length of an RTP header with csrc_count CSRC entries.
+      An RTP packet can have at most 15 CSRC entries.
+  
+      Params:
+        csrcCount = the number of CSRC entries
+      Returns: The length of an RTP header with csrc_count CSRC entries.
   */
   static uint calcHeaderLen(ubyte csrcCount)
   {
@@ -547,12 +571,13 @@ class RTPBuffer
 
   /**
       Calculate the total length of an RTP packet with a payload size of payload_len,
-    a padding of pad_len and a csrc_count CSRC entries.
-    Params:
-      payloadLen =       the length of the payload
-      padLen =       the amount of padding
-      csrcCount =       the number of CSRC entries
-    Returns:     The total length of an RTP header with given parameters.
+      a padding of pad_len and a csrc_count CSRC entries.
+  
+      Params:
+        payloadLen = the length of the payload
+        padLen = the amount of padding
+        csrcCount = the number of CSRC entries
+      Returns: The total length of an RTP header with given parameters.
   */
   static uint calcPacketLen(uint payloadLen, ubyte padLen, ubyte csrcCount)
   {
@@ -563,12 +588,13 @@ class RTPBuffer
 
   /**
       Calculate the length of the payload of an RTP packet with size packet_len,
-    a padding of pad_len and a csrc_count CSRC entries.
-    Params:
-      packetLen =       the length of the total RTP packet
-      padLen =       the amount of padding
-      csrcCount =       the number of CSRC entries
-    Returns:     The length of the payload of an RTP packet  with given parameters.
+      a padding of pad_len and a csrc_count CSRC entries.
+  
+      Params:
+        packetLen = the length of the total RTP packet
+        padLen = the amount of padding
+        csrcCount = the number of CSRC entries
+      Returns: The length of the payload of an RTP packet  with given parameters.
   */
   static uint calcPayloadLen(uint packetLen, ubyte padLen, ubyte csrcCount)
   {
@@ -579,12 +605,13 @@ class RTPBuffer
 
   /**
       Compare two sequence numbers, taking care of wraparounds. This function
-    returns the difference between seqnum1 and seqnum2.
-    Params:
-      seqnum1 =       a sequence number
-      seqnum2 =       a sequence number
-    Returns:     a negative value if seqnum1 is bigger than seqnum2, 0 if they
-      are equal or a positive value if seqnum1 is smaller than segnum2.
+      returns the difference between seqnum1 and seqnum2.
+  
+      Params:
+        seqnum1 = a sequence number
+        seqnum2 = a sequence number
+      Returns: a negative value if seqnum1 is bigger than seqnum2, 0 if they
+        are equal or a positive value if seqnum1 is smaller than segnum2.
   */
   static int compareSeqnum(ushort seqnum1, ushort seqnum2)
   {
@@ -595,10 +622,11 @@ class RTPBuffer
 
   /**
       Get the default clock-rate for the static payload type payload_type.
-    Params:
-      payloadType =       the static payload type
-    Returns:     the default clock rate or -1 if the payload type is not static or
-      the clock-rate is undefined.
+  
+      Params:
+        payloadType = the static payload type
+      Returns: the default clock rate or -1 if the payload type is not static or
+        the clock-rate is undefined.
   */
   static uint defaultClockRate(ubyte payloadType)
   {
@@ -609,19 +637,20 @@ class RTPBuffer
 
   /**
       Update the exttimestamp field with the extended timestamp of timestamp
-    For the first call of the method, exttimestamp should point to a location
-    with a value of -1.
-    
-    This function is able to handle both forward and backward timestamps taking
-    into account:
-      $(LIST
-          * timestamp wraparound making sure that the returned value is properly increased.
-          * timestamp unwraparound making sure that the returned value is properly decreased.
-      )
-    Params:
-      exttimestamp =       a previous extended timestamp
-      timestamp =       a new timestamp
-    Returns:     The extended timestamp of timestamp or 0 if the result can't go anywhere backwards.
+      For the first call of the method, exttimestamp should point to a location
+      with a value of -1.
+      
+      This function is able to handle both forward and backward timestamps taking
+      into account:
+        $(LIST
+            * timestamp wraparound making sure that the returned value is properly increased.
+            * timestamp unwraparound making sure that the returned value is properly decreased.
+        )
+  
+      Params:
+        exttimestamp = a previous extended timestamp
+        timestamp = a new timestamp
+      Returns: The extended timestamp of timestamp or 0 if the result can't go anywhere backwards.
   */
   static ulong extTimestamp(ref ulong exttimestamp, uint timestamp)
   {
@@ -632,16 +661,17 @@ class RTPBuffer
 
   /**
       Similar to gst_rtp_buffer_get_extension_onebyte_header, but working
-    on the #GBytes you get from gst_rtp_buffer_get_extension_bytes.
-    Parses RFC 5285 style header extensions with a one byte header. It will
-    return the nth extension with the requested id.
-    Params:
-      bytes =       #GBytes
-      bitPattern =       The bit-pattern. Anything but 0xBEDE is rejected.
-      id =       The ID of the header extension to be read (between 1 and 14).
-      nth =       Read the nth extension packet with the requested ID
-      data =       location for data
-    Returns:     TRUE if bytes had the requested header extension
+      on the #GBytes you get from gst_rtp_buffer_get_extension_bytes.
+      Parses RFC 5285 style header extensions with a one byte header. It will
+      return the nth extension with the requested id.
+  
+      Params:
+        bytes = #GBytes
+        bitPattern = The bit-pattern. Anything but 0xBEDE is rejected.
+        id = The ID of the header extension to be read (between 1 and 14).
+        nth = Read the nth extension packet with the requested ID
+        data = location for data
+      Returns: TRUE if bytes had the requested header extension
   */
   static bool getExtensionOnebyteHeaderFromBytes(glib.bytes.Bytes bytes, ushort bitPattern, ubyte id, uint nth, out ubyte[] data)
   {
@@ -656,11 +686,12 @@ class RTPBuffer
 
   /**
       Map the contents of buffer into rtp.
-    Params:
-      buffer =       a #GstBuffer
-      flags =       #GstMapFlags
-      rtp =       a #GstRTPBuffer
-    Returns:     true if buffer could be mapped.
+  
+      Params:
+        buffer = a #GstBuffer
+        flags = #GstMapFlags
+        rtp = a #GstRTPBuffer
+      Returns: true if buffer could be mapped.
   */
   static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, out gstrtp.rtpbuffer.RTPBuffer rtp)
   {
@@ -673,14 +704,15 @@ class RTPBuffer
 
   /**
       Allocate a new #GstBuffer with enough data to hold an RTP packet with
-    csrc_count CSRCs, a payload length of payload_len and padding of pad_len.
-    All other RTP header fields will be set to 0/FALSE.
-    Params:
-      payloadLen =       the length of the payload
-      padLen =       the amount of padding
-      csrcCount =       the number of CSRC entries
-    Returns:     A newly allocated buffer that can hold an RTP packet with given
-      parameters.
+      csrc_count CSRCs, a payload length of payload_len and padding of pad_len.
+      All other RTP header fields will be set to 0/FALSE.
+  
+      Params:
+        payloadLen = the length of the payload
+        padLen = the amount of padding
+        csrcCount = the number of CSRC entries
+      Returns: A newly allocated buffer that can hold an RTP packet with given
+        parameters.
   */
   static gst.buffer.Buffer newAllocate(uint payloadLen, ubyte padLen, ubyte csrcCount)
   {
@@ -692,14 +724,15 @@ class RTPBuffer
 
   /**
       Create a new #GstBuffer that can hold an RTP packet that is exactly
-    packet_len long. The length of the payload depends on pad_len and
-    csrc_count and can be calculated with [gstrtp.rtpbuffer.RTPBuffer.calcPayloadLen].
-    All RTP header fields will be set to 0/FALSE.
-    Params:
-      packetLen =       the total length of the packet
-      padLen =       the amount of padding
-      csrcCount =       the number of CSRC entries
-    Returns:     A newly allocated buffer that can hold an RTP packet of packet_len.
+      packet_len long. The length of the payload depends on pad_len and
+      csrc_count and can be calculated with [gstrtp.rtpbuffer.RTPBuffer.calcPayloadLen].
+      All RTP header fields will be set to 0/FALSE.
+  
+      Params:
+        packetLen = the total length of the packet
+        padLen = the amount of padding
+        csrcCount = the number of CSRC entries
+      Returns: A newly allocated buffer that can hold an RTP packet of packet_len.
   */
   static gst.buffer.Buffer newAllocateLen(uint packetLen, ubyte padLen, ubyte csrcCount)
   {
@@ -711,12 +744,13 @@ class RTPBuffer
 
   /**
       Create a new buffer and set the data to a copy of len
-    bytes of data and the size to len. The data will be freed when the buffer
-    is freed.
-    Params:
-      data =       data for the new
-          buffer
-    Returns:     A newly allocated buffer with a copy of data and of size len.
+      bytes of data and the size to len. The data will be freed when the buffer
+      is freed.
+  
+      Params:
+        data = data for the new
+            buffer
+      Returns: A newly allocated buffer with a copy of data and of size len.
   */
   static gst.buffer.Buffer newCopyData(ubyte[] data)
   {

@@ -1,3 +1,4 @@
+/// Module for [OtNameEntry] class
 module harfbuzz.ot_name_entry;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class OtNameEntry
 {
   hb_ot_name_entry_t cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class OtNameEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

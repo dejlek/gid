@@ -1,3 +1,4 @@
+/// Module for [ColorStop] class
 module gsk.color_stop;
 
 import gdk.rgba;
@@ -13,6 +14,7 @@ class ColorStop
 {
   GskColorStop cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class ColorStop
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

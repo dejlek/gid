@@ -1,3 +1,4 @@
+/// Module for [DecimalDataType] class
 module arrow.decimal_data_type;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import glib.error;
 class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataType
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal_data_type_get_type != &gidSymbolNotFound ? garrow_decimal_data_type_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

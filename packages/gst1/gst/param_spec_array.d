@@ -1,3 +1,4 @@
+/// Module for [ParamSpecArray] class
 module gst.param_spec_array;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class ParamSpecArray
 {
   GstParamSpecArray cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class ParamSpecArray
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

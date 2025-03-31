@@ -1,3 +1,4 @@
+/// C types for arrow1 library
 module arrow.c.types;
 
 public import gid.basictypes;
@@ -76,8 +77,8 @@ enum GArrowCountMode
 
 /**
     The error codes are used by all arrow-glib functions.
-  
-  They are corresponding to `arrow::Status` values.
+    
+    They are corresponding to `arrow::Status` values.
 */
 enum GArrowError
 {
@@ -133,19 +134,19 @@ enum GArrowError
 
   /**
       Error generating code for expression evaluation
-      in Gandiva.
+        in Gandiva.
   */
   CodeGeneration = 40,
 
   /**
       Validation errors in expression given for code
-    generation.
+      generation.
   */
   ExpressionValidation = 41,
 
   /**
       Execution error while evaluating the expression against a
-    record batch.
+      record batch.
   */
   Execution = 42,
 
@@ -204,7 +205,7 @@ enum GArrowFileType
 
 /**
     They are corresponding to
-  `arrow::compute::FilterOptions::NullSelectionBehavior` values.
+    `arrow::compute::FilterOptions::NullSelectionBehavior` values.
 */
 enum GArrowFilterNullSelectionBehavior
 {
@@ -221,8 +222,8 @@ enum GArrowFilterNullSelectionBehavior
 
 /**
     They are corresponding to `arrow::IntervalType::type` values.
-  
-  Since 7.0.0
+    
+    Since 7.0.0
 */
 enum GArrowIntervalType
 {
@@ -233,13 +234,13 @@ enum GArrowIntervalType
 
   /**
       A number of days and
-      milliseconds (fraction of day).
+        milliseconds (fraction of day).
   */
   DayTime = 1,
 
   /**
       A number of months, days and
-      nanoseconds between two dates.
+        nanoseconds between two dates.
   */
   MonthDayNano = 2,
 }
@@ -297,7 +298,7 @@ enum GArrowJoinType
 
 /**
     They are corresponding to `arrow::ipc::MetadataVersion::type`
-  values.
+    values.
 */
 enum GArrowMetadataVersion
 {
@@ -324,20 +325,20 @@ enum GArrowNullPlacement
 {
   /**
       Place nulls and NaNs before any non-null values.
-      NaNs will come after nulls.
+        NaNs will come after nulls.
   */
   AtStart = 0,
 
   /**
       Place nulls and NaNs after any non-null values.
-      NaNs will come before nulls.
+        NaNs will come before nulls.
   */
   AtEnd = 1,
 }
 
 /**
     They correspond to the values of
-  `arrow::compute::QuantileOptions::Interpolation`.
+    `arrow::compute::QuantileOptions::Interpolation`.
 */
 enum GArrowQuantileInterpolation
 {
@@ -396,25 +397,25 @@ enum GArrowRoundMode
 
   /**
       Get the integral part without fractional digits (aka "trunc")
-    @GARROW_ROUND_TOWARDS_INFINITY,
-      Round negative values with @GARROW_ROUND_MODE_DOWN rule
-      and positive values with UP rule (aka "away from zero")
-    @GARROW_ROUND_HALF_DOWN,
-      Round ties with @GARROW_ROUND_MODE_DOWN rule
-      (also called "round half towards negative infinity")
-    @GARROW_ROUND_HALF_UP,
-      Round ties with @GARROW_ROUND_MODE_UP rule
-      (also called "round half towards positive infinity")
-    @GARROW_ROUND_HALF_TOWARDS_ZERO,
-      Round ties with GARROW_ROUND_MODE_TOWARDS_ZERO rule
-      (also called "round half away from infinity")
-    @GARROW_ROUND_HALF_TOWARDS_INFINITY,
-      Round ties with GARROW_ROUND_MODE_TOWARDS_INFINITY rule
-      (also called "round half away from zero")
-    @GARROW_ROUND_HALF_TO_EVEN,
-      Round ties to nearest even integer
-    @GARROW_ROUND_HALF_TO_ODD,
-      Round ties to nearest odd integer
+      @GARROW_ROUND_TOWARDS_INFINITY,
+        Round negative values with @GARROW_ROUND_MODE_DOWN rule
+        and positive values with UP rule (aka "away from zero")
+      @GARROW_ROUND_HALF_DOWN,
+        Round ties with @GARROW_ROUND_MODE_DOWN rule
+        (also called "round half towards negative infinity")
+      @GARROW_ROUND_HALF_UP,
+        Round ties with @GARROW_ROUND_MODE_UP rule
+        (also called "round half towards positive infinity")
+      @GARROW_ROUND_HALF_TOWARDS_ZERO,
+        Round ties with GARROW_ROUND_MODE_TOWARDS_ZERO rule
+        (also called "round half away from infinity")
+      @GARROW_ROUND_HALF_TOWARDS_INFINITY,
+        Round ties with GARROW_ROUND_MODE_TOWARDS_INFINITY rule
+        (also called "round half away from zero")
+      @GARROW_ROUND_HALF_TO_EVEN,
+        Round ties to nearest even integer
+      @GARROW_ROUND_HALF_TO_ODD,
+        Round ties to nearest odd integer
   */
   TowardsZero = 2,
 
@@ -605,7 +606,7 @@ enum GArrowType
 
   /**
       Fixed-size binary. Each value occupies
-      the same number of bytes.
+        the same number of bytes.
   */
   FixedSizeBinary = 15,
 
@@ -621,7 +622,7 @@ enum GArrowType
 
   /**
       Exact timestamp encoded with int64 since UNIX epoch.
-      Default unit millisecond.
+        Default unit millisecond.
   */
   Timestamp = 18,
 
@@ -647,13 +648,13 @@ enum GArrowType
 
   /**
       Precision- and scale-based decimal
-      type with 128-bit. Storage type depends on the parameters.
+        type with 128-bit. Storage type depends on the parameters.
   */
   Decimal128 = 23,
 
   /**
       Precision- and scale-based decimal
-      type with 256-bit. Storage type depends on the parameters.
+        type with 256-bit. Storage type depends on the parameters.
   */
   Decimal256 = 24,
 
@@ -699,7 +700,7 @@ enum GArrowType
 
   /**
       Measure of elapsed time in either seconds,
-      milliseconds, microseconds or nanoseconds.
+        milliseconds, microseconds or nanoseconds.
   */
   Duration = 33,
 
@@ -710,7 +711,7 @@ enum GArrowType
 
   /**
       64bit offsets Variable-length bytes (no guarantee of
-    UTF-8-ness).
+      UTF-8-ness).
   */
   LargeBinary = 35,
 
@@ -731,13 +732,13 @@ enum GArrowType
 
   /**
       String (UTF8) view type with 4-byte prefix and inline small
-      string optimization.
+        string optimization.
   */
   StringView = 39,
 
   /**
       Bytes view type with 4-byte prefix and inline small string
-      optimization.
+        optimization.
   */
   BinaryView = 40,
 
@@ -748,7 +749,7 @@ enum GArrowType
 
   /**
       Precision- and scale-based decimal
-      type with 64-bit. Storage type depends on the parameters.
+        type with 64-bit. Storage type depends on the parameters.
   */
   Decimal64 = 44,
 }
@@ -765,7 +766,7 @@ enum GArrowUTF8NormalizeForm
 
   /**
       Normalization Form Compatibility
-      Composition.
+        Composition.
   */
   Nfkc = 1,
 
@@ -776,7 +777,7 @@ enum GArrowUTF8NormalizeForm
 
   /**
       Normalization Form Compatibility
-      Decomposition.
+        Decomposition.
   */
   Nfkd = 3,
 }
@@ -1991,25 +1992,25 @@ struct GArrowExtensionDataTypeClass
 
   /**
       It must returns true only when the both data types equal, false
-      otherwise.
+        otherwise.
   */
   extern(C) bool function(GArrowExtensionDataType* dataType, GArrowExtensionDataType* otherDataType) equal;
 
   /**
       It must returns a serialized #GArrowDataType from the given
-      `serialized_data`.
+        `serialized_data`.
   */
   extern(C) GArrowDataType* function(GArrowExtensionDataType* dataType, GArrowDataType* storageDataType, GBytes* serializedData, GError** _err) deserialize;
 
   /**
       It must returns a serialized data of this extension data type
-      to deserialize later.
+        to deserialize later.
   */
   extern(C) GBytes* function(GArrowExtensionDataType* dataType) serialize;
 
   /**
       It must returns #GType for corresponding extension array
-      class.
+        class.
   */
   extern(C) GType function(GArrowExtensionDataType* dataType) getArrayGtype;
 }

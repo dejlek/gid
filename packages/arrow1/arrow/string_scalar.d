@@ -1,3 +1,4 @@
+/// Module for [StringScalar] class
 module arrow.string_scalar;
 
 import arrow.base_binary_scalar;
@@ -11,17 +12,20 @@ import gid.gid;
 class StringScalar : arrow.base_binary_scalar.BaseBinaryScalar
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_scalar_get_type != &gidSymbolNotFound ? garrow_string_scalar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

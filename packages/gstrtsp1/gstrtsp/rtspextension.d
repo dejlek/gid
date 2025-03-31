@@ -1,3 +1,4 @@
+/// Module for [RTSPExtension] interface
 module gstrtsp.rtspextension;
 
 public import gstrtsp.rtspextension_iface_proxy;
@@ -15,11 +16,12 @@ import gstsdp.sdpmessage;
 
 /**
     This interface is implemented e.g. by the Windows Media Streaming RTSP
-   exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
+     exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
 */
 interface RTSPExtension
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -56,19 +58,25 @@ interface RTSPExtension
   /** */
   gstrtsp.types.RTSPResult streamSelect(gstrtsp.rtspurl.RTSPUrl url);
 
-  /** */
-  alias SendCallbackDlg = gstrtsp.types.RTSPResult delegate(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension);
-
-  /** ditto */
-  alias SendCallbackFunc = gstrtsp.types.RTSPResult function(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension);
-
   /**
-    Connect to Send signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Send` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D gstrtsp.types.RTSPResult callback(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension))
+  
+          `object`  (optional)
+  
+          `p0`  (optional)
+  
+          `rTSPExtension` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  ulong connectSend(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SendCallbackDlg) || is(T : SendCallbackFunc));
-  }
+  ulong connectSend(T)(T callback, Flag!"After" after = No.After);
+}

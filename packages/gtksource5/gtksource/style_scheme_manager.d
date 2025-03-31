@@ -1,3 +1,4 @@
+/// Module for [StyleSchemeManager] class
 module gtksource.style_scheme_manager;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtksource.types;
 class StyleSchemeManager : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_manager_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_manager_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,10 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Creates a new style manager.
-    
-    If you do not need more than one style manager
-    then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.
-    Returns:     a new #GtkSourceStyleSchemeManager.
+      
+      If you do not need more than one style manager
+      then use [gtksource.style_scheme_manager.StyleSchemeManager.getDefault] instead.
+      Returns: a new #GtkSourceStyleSchemeManager.
   */
   this()
   {
@@ -50,8 +54,8 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Returns the default #GtkSourceStyleSchemeManager instance.
-    Returns:     a #GtkSourceStyleSchemeManager. Return value
-      is owned by GtkSourceView library and must not be unref'ed.
+      Returns: a #GtkSourceStyleSchemeManager. Return value
+        is owned by GtkSourceView library and must not be unref'ed.
   */
   static gtksource.style_scheme_manager.StyleSchemeManager getDefault()
   {
@@ -63,11 +67,12 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Appends path to the list of directories where the manager looks for
-    style scheme files.
-    
-    See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
-    Params:
-      path =       a directory or a filename.
+      style scheme files.
+      
+      See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+  
+      Params:
+        path = a directory or a filename.
   */
   void appendSearchPath(string path)
   {
@@ -77,9 +82,9 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Mark any currently cached information about the available style schems
-    as invalid.
-    
-    All the available style schemes will be reloaded next time the manager is accessed.
+      as invalid.
+      
+      All the available style schemes will be reloaded next time the manager is accessed.
   */
   void forceRescan()
   {
@@ -88,10 +93,11 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Looks up style scheme by id.
-    Params:
-      schemeId =       style scheme id to find.
-    Returns:     a #GtkSourceStyleScheme object.
-        The returned value is owned by manager and must not be unref'ed.
+  
+      Params:
+        schemeId = style scheme id to find.
+      Returns: a #GtkSourceStyleScheme object.
+          The returned value is owned by manager and must not be unref'ed.
   */
   gtksource.style_scheme.StyleScheme getScheme(string schemeId)
   {
@@ -104,10 +110,10 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Returns the ids of the available style schemes.
-    Returns:     a null-terminated array of strings containing the ids of the available
-      style schemes or null if no style scheme is available.
-      The array is sorted alphabetically according to the scheme name.
-      The array is owned by the manager and must not be modified.
+      Returns: a null-terminated array of strings containing the ids of the available
+        style schemes or null if no style scheme is available.
+        The array is sorted alphabetically according to the scheme name.
+        The array is owned by the manager and must not be modified.
   */
   string[] getSchemeIds()
   {
@@ -129,11 +135,11 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Returns the current search path for the manager.
-    
-    See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
-    Returns:     a null-terminated array
-      of string containing the search path.
-      The array is owned by the manager and must not be modified.
+      
+      See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+      Returns: a null-terminated array
+        of string containing the search path.
+        The array is owned by the manager and must not be modified.
   */
   string[] getSearchPath()
   {
@@ -155,11 +161,12 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Prepends path to the list of directories where the manager looks
-    for style scheme files.
-    
-    See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
-    Params:
-      path =       a directory or a filename.
+      for style scheme files.
+      
+      See [gtksource.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+  
+      Params:
+        path = a directory or a filename.
   */
   void prependSearchPath(string path)
   {
@@ -169,12 +176,13 @@ class StyleSchemeManager : gobject.object.ObjectG
 
   /**
       Sets the list of directories where the manager looks for
-    style scheme files.
-    
-    If path is null, the search path is reset to default.
-    Params:
-      path =       a null-terminated array of
-          strings or null.
+      style scheme files.
+      
+      If path is null, the search path is reset to default.
+  
+      Params:
+        path = a null-terminated array of
+            strings or null.
   */
   void setSearchPath(string[] path = null)
   {

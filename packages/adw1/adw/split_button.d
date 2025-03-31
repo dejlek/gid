@@ -1,3 +1,4 @@
+/// Module for [SplitButton] class
 module adw.split_button;
 
 import adw.c.functions;
@@ -21,56 +22,59 @@ import gtk.widget;
 
 /**
     A combined button and dropdown widget.
-  
-  <picture>
-    <source srcset="split-button-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="split-button.png" alt="split-button">
-  </picture>
-  
-  [adw.split_button.SplitButton] is typically used to present a set of actions in a menu,
-  but allow access to one of them with a single click.
-  
-  The API is very similar to [gtk.button.Button] and [gtk.menu_button.MenuButton], see
-  their documentation for details.
-  
-  ## CSS nodes
-  
-  ```
-  splitbutton[.image-button][.text-button]
-  ├── button
-  │   ╰── <content>
-  ├── separator
-  ╰── menubutton
-      ╰── button.toggle
-          ╰── arrow
-  ```
-  
-  [adw.split_button.SplitButton]'s CSS node is called `splitbutton`. It contains the css
-  nodes: `button`, `separator`, `menubutton`. See [gtk.menu_button.MenuButton]
-  documentation for the `menubutton` contents.
-  
-  The main CSS node will contain the `.image-button` or `.text-button` style
-  classes matching the button contents. The nested button nodes will never
-  contain them.
-  
-  ## Accessibility
-  
-  [adw.split_button.SplitButton] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    <picture>
+      <source srcset="split-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="split-button.png" alt="split-button">
+    </picture>
+    
+    [adw.split_button.SplitButton] is typically used to present a set of actions in a menu,
+    but allow access to one of them with a single click.
+    
+    The API is very similar to [gtk.button.Button] and [gtk.menu_button.MenuButton], see
+    their documentation for details.
+    
+    ## CSS nodes
+    
+    ```
+    splitbutton[.image-button][.text-button]
+    ├── button
+    │   ╰── <content>
+    ├── separator
+    ╰── menubutton
+        ╰── button.toggle
+            ╰── arrow
+    ```
+    
+    [adw.split_button.SplitButton]'s CSS node is called `splitbutton`. It contains the css
+    nodes: `button`, `separator`, `menubutton`. See [gtk.menu_button.MenuButton]
+    documentation for the `menubutton` contents.
+    
+    The main CSS node will contain the `.image-button` or `.text-button` style
+    classes matching the button contents. The nested button nodes will never
+    contain them.
+    
+    ## Accessibility
+    
+    [adw.split_button.SplitButton] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_split_button_get_type != &gidSymbolNotFound ? adw_split_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -85,7 +89,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [adw.split_button.SplitButton].
-    Returns:     the newly created [adw.split_button.SplitButton]
+      Returns: the newly created [adw.split_button.SplitButton]
   */
   this()
   {
@@ -96,7 +100,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       gets whether the button can be smaller than the natural size of its contents.
-    Returns:     whether the button can shrink
+      Returns: whether the button can shrink
   */
   bool getCanShrink()
   {
@@ -107,7 +111,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the child widget.
-    Returns:     the child widget
+      Returns: the child widget
   */
   gtk.widget.Widget getChild()
   {
@@ -121,7 +125,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the direction in which the popup will be popped up.
-    Returns:     the direction
+      Returns: the direction
   */
   gtk.types.ArrowType getDirection()
   {
@@ -133,7 +137,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the tooltip of the dropdown button of self.
-    Returns:     the dropdown tooltip of self
+      Returns: the dropdown tooltip of self
   */
   string getDropdownTooltip()
   {
@@ -145,7 +149,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the name of the icon used to automatically populate the button.
-    Returns:     the icon name
+      Returns: the icon name
   */
   string getIconName()
   {
@@ -157,7 +161,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the label for self.
-    Returns:     the label for self
+      Returns: the label for self
   */
   string getLabel()
   {
@@ -169,7 +173,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the menu model from which the popup will be created.
-    Returns:     the menu model
+      Returns: the menu model
   */
   gio.menu_model.MenuModel getMenuModel()
   {
@@ -181,7 +185,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the popover that will be popped up when the dropdown is clicked.
-    Returns:     the popover
+      Returns: the popover
   */
   gtk.popover.Popover getPopover()
   {
@@ -193,7 +197,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets whether an underline in the text indicates a mnemonic.
-    Returns:     whether an underline in the text indicates a mnemonic
+      Returns: whether an underline in the text indicates a mnemonic
   */
   bool getUseUnderline()
   {
@@ -220,13 +224,14 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets whether the button can be smaller than the natural size of its contents.
-    
-    If set to `TRUE`, the label will ellipsize.
-    
-    See [gtk.button.Button.setCanShrink] and
-    [gtk.menu_button.MenuButton.setCanShrink].
-    Params:
-      canShrink =       whether the button can shrink
+      
+      If set to `TRUE`, the label will ellipsize.
+      
+      See [gtk.button.Button.setCanShrink] and
+      [gtk.menu_button.MenuButton.setCanShrink].
+  
+      Params:
+        canShrink = whether the button can shrink
   */
   void setCanShrink(bool canShrink)
   {
@@ -235,11 +240,12 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the child widget.
-    
-    Setting the child widget will set `propertySplitButton:label` and
-    `propertySplitButton:icon-name` to `NULL`.
-    Params:
-      child =       the new child widget
+      
+      Setting the child widget will set `propertySplitButton:label` and
+      `propertySplitButton:icon-name` to `NULL`.
+  
+      Params:
+        child = the new child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -250,15 +256,16 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the direction in which the popup will be popped up.
-    
-    The dropdown arrow icon will point at the same direction.
-    
-    If the does not fit in the available space in the given direction, GTK will
-    try its best to keep it inside the screen and fully visible.
-    
-    If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
-    Params:
-      direction =       the direction
+      
+      The dropdown arrow icon will point at the same direction.
+      
+      If the does not fit in the available space in the given direction, GTK will
+      try its best to keep it inside the screen and fully visible.
+      
+      If you pass [gtk.types.ArrowType.None], it's equivalent to [gtk.types.ArrowType.Down].
+  
+      Params:
+        direction = the direction
   */
   void setDirection(gtk.types.ArrowType direction)
   {
@@ -267,10 +274,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the tooltip of the dropdown button of self.
-    
-    The tooltip can be marked up with the Pango text markup language.
-    Params:
-      tooltip =       the dropdown tooltip of self
+      
+      The tooltip can be marked up with the Pango text markup language.
+  
+      Params:
+        tooltip = the dropdown tooltip of self
   */
   void setDropdownTooltip(string tooltip)
   {
@@ -280,11 +288,12 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the name of the icon used to automatically populate the button.
-    
-    Setting the icon name will set `propertySplitButton:label` and
-    `propertySplitButton:child` to `NULL`.
-    Params:
-      iconName =       the icon name to set
+      
+      Setting the icon name will set `propertySplitButton:label` and
+      `propertySplitButton:child` to `NULL`.
+  
+      Params:
+        iconName = the icon name to set
   */
   void setIconName(string iconName)
   {
@@ -294,11 +303,12 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the label for self.
-    
-    Setting the label will set `propertySplitButton:icon-name` and
-    `propertySplitButton:child` to `NULL`.
-    Params:
-      label =       the label to set
+      
+      Setting the label will set `propertySplitButton:icon-name` and
+      `propertySplitButton:child` to `NULL`.
+  
+      Params:
+        label = the label to set
   */
   void setLabel(string label)
   {
@@ -308,17 +318,18 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the menu model from which the popup will be created.
-    
-    If the menu model is `NULL`, the dropdown is disabled.
-    
-    A [gtk.popover.Popover] will be created from the menu model with
-    [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
-    documented for this function.
-    
-    If `propertySplitButton:popover` is already set, it will be dissociated from
-    the button, and the property is set to `NULL`.
-    Params:
-      menuModel =       the menu model
+      
+      If the menu model is `NULL`, the dropdown is disabled.
+      
+      A [gtk.popover.Popover] will be created from the menu model with
+      [gtk.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+      documented for this function.
+      
+      If `propertySplitButton:popover` is already set, it will be dissociated from
+      the button, and the property is set to `NULL`.
+  
+      Params:
+        menuModel = the menu model
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
@@ -327,13 +338,14 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the popover that will be popped up when the dropdown is clicked.
-    
-    If the popover is `NULL`, the dropdown is disabled.
-    
-    If `propertySplitButton:menu-model` is set, the menu model is dissociated
-    from the button, and the property is set to `NULL`.
-    Params:
-      popover =       the popover
+      
+      If the popover is `NULL`, the dropdown is disabled.
+      
+      If `propertySplitButton:menu-model` is set, the menu model is dissociated
+      from the button, and the property is set to `NULL`.
+  
+      Params:
+        popover = the popover
   */
   void setPopover(gtk.popover.Popover popover = null)
   {
@@ -342,10 +354,11 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets whether an underline in the text indicates a mnemonic.
-    
-    See `propertySplitButton:label`.
-    Params:
-      useUnderline =       whether an underline in the text indicates a mnemonic
+      
+      See `propertySplitButton:label`.
+  
+      Params:
+        useUnderline = whether an underline in the text indicates a mnemonic
   */
   void setUseUnderline(bool useUnderline)
   {
@@ -353,37 +366,39 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Emitted to animate press then release.
-    
-    This is an action signal. Applications should never connect to this signal,
-    but use the `signalSplitButton::clicked` signal.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B splitButton) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(adw.split_button.SplitButton splitButton);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(adw.split_button.SplitButton splitButton);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to animate press then release.
+      
+      This is an action signal. Applications should never connect to this signal,
+      but use the `signalSplitButton::clicked` signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.split_button.SplitButton splitButton))
+  
+          `splitButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.split_button.SplitButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto splitButton = getVal!(adw.split_button.SplitButton)(_paramVals);
-      _dClosure.dlg(splitButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -391,34 +406,36 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
+      Connect to `Clicked` signal.
+  
       Emitted when the button has been activated (pressed and released).
   
-    ## Parameters
-    $(LIST
-      * $(B splitButton) the instance the signal is connected to
-    )
-  */
-  alias ClickedCallbackDlg = void delegate(adw.split_button.SplitButton splitButton);
-
-  /** ditto */
-  alias ClickedCallbackFunc = void function(adw.split_button.SplitButton splitButton);
-
-  /**
-    Connect to Clicked signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.split_button.SplitButton splitButton))
+  
+          `splitButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectClicked(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ClickedCallbackDlg) || is(T : ClickedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.split_button.SplitButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto splitButton = getVal!(adw.split_button.SplitButton)(_paramVals);
-      _dClosure.dlg(splitButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

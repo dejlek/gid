@@ -1,3 +1,4 @@
+/// D types for pango1 library
 module pango.types;
 
 import gid.gid;
@@ -121,40 +122,36 @@ alias Rectangle = PangoRectangle;
 
 /**
     Type of a function that can duplicate user data for an attribute.
-  Returns:     new copy of user_data.
+    Returns: new copy of user_data.
 */
 alias AttrDataCopyFunc = void* delegate();
 
 /**
     Type of a function filtering a list of attributes.
 
-  ## Parameters
-  $(LIST
-    * $(B attribute)       a Pango attribute
-  )
-  Returns:     true if the attribute should be selected for
-      filtering, false otherwise.
+    Params:
+      attribute = a Pango attribute
+    Returns: true if the attribute should be selected for
+        filtering, false otherwise.
 */
 alias AttrFilterFunc = bool delegate(pango.attribute.Attribute attribute);
 
 /**
     Callback used when enumerating fonts in a fontset.
-  
-  See [pango.fontset.Fontset.foreach_].
+    
+    See [pango.fontset.Fontset.foreach_].
 
-  ## Parameters
-  $(LIST
-    * $(B fontset)       a [pango.fontset.Fontset]
-    * $(B font)       a font from fontset
-  )
-  Returns:     if true, stop iteration and return immediately.
+    Params:
+      fontset = a [pango.fontset.Fontset]
+      font = a font from fontset
+    Returns: if true, stop iteration and return immediately.
 */
 alias FontsetForeachFunc = bool delegate(pango.fontset.Fontset fontset, pango.font.Font font);
 
 /**
     Whether the segment should be shifted to center around the baseline.
-  
-  This is mainly used in vertical writing directions.
+    
+    This is mainly used in vertical writing directions.
 */
 enum ANALYSIS_FLAG_CENTERED_BASELINE = 1;
 
@@ -170,52 +167,52 @@ enum ANALYSIS_FLAG_NEED_HYPHEN = 4;
 
 /**
     Value for @start_index in [pango.attribute.Attribute] that indicates
-  the beginning of the text.
+    the beginning of the text.
 */
 enum ATTR_INDEX_FROM_TEXT_BEGINNING = 0;
 
 /**
     Value for @end_index in [pango.attribute.Attribute] that indicates
-  the end of the text.
+    the end of the text.
 */
 enum ATTR_INDEX_TO_TEXT_END = 4294967295;
 
 /**
     A [pango.types.GLYPH_UNKNOWN_FLAG] value that indicates a zero-width empty glpyh.
-  
-  This is useful for example in shaper modules, to use as the glyph for
-  various zero-width Unicode characters (those passing `func@is_zero_width`).
+    
+    This is useful for example in shaper modules, to use as the glyph for
+    various zero-width Unicode characters (those passing `func@is_zero_width`).
 */
 enum GLYPH_EMPTY = 268435455;
 
 /**
     A [pango.types.GLYPH_UNKNOWN_FLAG] value for invalid input.
-  
-  [pango.layout.Layout] produces one such glyph per invalid input UTF-8 byte and such
-  a glyph is rendered as a crossed box.
-  
-  Note that this value is defined such that it has the `PANGO_GLYPH_UNKNOWN_FLAG`
-  set.
+    
+    [pango.layout.Layout] produces one such glyph per invalid input UTF-8 byte and such
+    a glyph is rendered as a crossed box.
+    
+    Note that this value is defined such that it has the `PANGO_GLYPH_UNKNOWN_FLAG`
+    set.
 */
 enum GLYPH_INVALID_INPUT = 4294967295;
 
 /**
     Flag used in [pango.types.GLYPH_UNKNOWN_FLAG] to turn a `gunichar` value of a valid Unicode
-  character into an unknown-character glyph for that `gunichar`.
-  
-  Such unknown-character glyphs may be rendered as a 'hex box'.
+    character into an unknown-character glyph for that `gunichar`.
+    
+    Such unknown-character glyphs may be rendered as a 'hex box'.
 */
 enum GLYPH_UNKNOWN_FLAG = 268435456;
 
 /**
     The scale between dimensions used for Pango distances and device units.
-  
-  The definition of device units is dependent on the output device; it will
-  typically be pixels for a screen, and points for a printer. `PANGO_SCALE` is
-  currently 1024, but this may be changed in the future.
-  
-  When setting font sizes, device units are always considered to be
-  points (as in "12 point font"), rather than pixels.
+    
+    The definition of device units is dependent on the output device; it will
+    typically be pixels for a screen, and points for a printer. `PANGO_SCALE` is
+    currently 1024, but this may be changed in the future.
+    
+    When setting font sizes, device units are always considered to be
+    points (as in "12 point font"), rather than pixels.
 */
 enum SCALE = 1024;
 

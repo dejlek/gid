@@ -1,3 +1,4 @@
+/// Module for [ValueArray] class
 module gobject.value_array;
 
 import gid.gid;
@@ -10,51 +11,55 @@ import gobject.value;
 
 /**
     A [gobject.value_array.ValueArray] is a container structure to hold an array of generic values.
-  
-  The prime purpose of a [gobject.value_array.ValueArray] is for it to be used as an
-  object property that holds an array of values. A [gobject.value_array.ValueArray] wraps
-  an array of [gobject.value.Value] elements in order for it to be used as a boxed
-  type through `G_TYPE_VALUE_ARRAY`.
-  
-  [gobject.value_array.ValueArray] is deprecated in favour of [glib.array.Array] since GLib 2.32.
-  It is possible to create a [glib.array.Array] that behaves like a [gobject.value_array.ValueArray]
-  by using the size of [gobject.value.Value] as the element size, and by setting
-  [gobject.value.Value.unset] as the clear function using
-  [glib.array.Array.setClearFunc], for instance, the following code:
-  
-  ```c
-    GValueArray *array = g_value_array_new (10);
-  ```
-  
-  can be replaced by:
-  
-  ```c
-    GArray *array = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 10);
-    g_array_set_clear_func (array, (GDestroyNotify) g_value_unset);
-  ```
+    
+    The prime purpose of a [gobject.value_array.ValueArray] is for it to be used as an
+    object property that holds an array of values. A [gobject.value_array.ValueArray] wraps
+    an array of [gobject.value.Value] elements in order for it to be used as a boxed
+    type through `G_TYPE_VALUE_ARRAY`.
+    
+    [gobject.value_array.ValueArray] is deprecated in favour of [glib.array.Array] since GLib 2.32.
+    It is possible to create a [glib.array.Array] that behaves like a [gobject.value_array.ValueArray]
+    by using the size of [gobject.value.Value] as the element size, and by setting
+    [gobject.value.Value.unset] as the clear function using
+    [glib.array.Array.setClearFunc], for instance, the following code:
+    
+    ```c
+      GValueArray *array = g_value_array_new (10);
+    ```
+    
+    can be replaced by:
+    
+    ```c
+      GArray *array = g_array_sized_new (FALSE, TRUE, sizeof (GValue), 10);
+      g_array_set_clear_func (array, (GDestroyNotify) g_value_unset);
+    ```
 
-  Deprecated:     Use [glib.array.Array] instead, if possible for the given use case,
-       as described above.
+    Deprecated: Use [glib.array.Array] instead, if possible for the given use case,
+         as described above.
 */
 class ValueArray : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_array_get_type != &gidSymbolNotFound ? g_value_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -88,13 +93,14 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Allocate and initialize a new #GValueArray, optionally preserve space
-    for n_prealloced elements. New arrays always contain 0 elements,
-    regardless of the value of n_prealloced.
-    Params:
-      nPrealloced =       number of values to preallocate space for
-    Returns:     a newly allocated #GValueArray with 0 values
+      for n_prealloced elements. New arrays always contain 0 elements,
+      regardless of the value of n_prealloced.
   
-    Deprecated:     Use #GArray and [glib.array.Array.sizedNew] instead.
+      Params:
+        nPrealloced = number of values to preallocate space for
+      Returns: a newly allocated #GValueArray with 0 values
+  
+      Deprecated: Use #GArray and [glib.array.Array.sizedNew] instead.
   */
   this(uint nPrealloced)
   {
@@ -105,12 +111,13 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Insert a copy of value as last element of value_array. If value is
-    null, an uninitialized value is appended.
-    Params:
-      value =       #GValue to copy into #GValueArray, or null
-    Returns:     the #GValueArray passed in as value_array
+      null, an uninitialized value is appended.
   
-    Deprecated:     Use #GArray and g_array_append_val() instead.
+      Params:
+        value = #GValue to copy into #GValueArray, or null
+      Returns: the #GValueArray passed in as value_array
+  
+      Deprecated: Use #GArray and g_array_append_val() instead.
   */
   gobject.value_array.ValueArray append(gobject.value.Value value = null)
   {
@@ -122,10 +129,10 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Construct an exact copy of a #GValueArray by duplicating all its
-    contents.
-    Returns:     Newly allocated copy of #GValueArray
+      contents.
+      Returns: Newly allocated copy of #GValueArray
   
-    Deprecated:     Use #GArray and [glib.array.Array.ref_] instead.
+      Deprecated: Use #GArray and [glib.array.Array.ref_] instead.
   */
   gobject.value_array.ValueArray copy()
   {
@@ -137,11 +144,12 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Return a pointer to the value at index_ containd in value_array.
-    Params:
-      index =       index of the value of interest
-    Returns:     pointer to a value at index_ in value_array
   
-    Deprecated:     Use g_array_index() instead.
+      Params:
+        index = index of the value of interest
+      Returns: pointer to a value at index_ in value_array
+  
+      Deprecated: Use g_array_index() instead.
   */
   gobject.value.Value getNth(uint index)
   {
@@ -153,13 +161,14 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Insert a copy of value at specified position into value_array. If value
-    is null, an uninitialized value is inserted.
-    Params:
-      index =       insertion position, must be <= value_array->;n_values
-      value =       #GValue to copy into #GValueArray, or null
-    Returns:     the #GValueArray passed in as value_array
+      is null, an uninitialized value is inserted.
   
-    Deprecated:     Use #GArray and g_array_insert_val() instead.
+      Params:
+        index = insertion position, must be <= value_array->;n_values
+        value = #GValue to copy into #GValueArray, or null
+      Returns: the #GValueArray passed in as value_array
+  
+      Deprecated: Use #GArray and g_array_insert_val() instead.
   */
   gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null)
   {
@@ -171,12 +180,13 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Insert a copy of value as first element of value_array. If value is
-    null, an uninitialized value is prepended.
-    Params:
-      value =       #GValue to copy into #GValueArray, or null
-    Returns:     the #GValueArray passed in as value_array
+      null, an uninitialized value is prepended.
   
-    Deprecated:     Use #GArray and g_array_prepend_val() instead.
+      Params:
+        value = #GValue to copy into #GValueArray, or null
+      Returns: the #GValueArray passed in as value_array
+  
+      Deprecated: Use #GArray and g_array_prepend_val() instead.
   */
   gobject.value_array.ValueArray prepend(gobject.value.Value value = null)
   {
@@ -188,12 +198,13 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Remove the value at position index_ from value_array.
-    Params:
-      index =       position of value to remove, which must be less than
-            value_array->n_values
-    Returns:     the #GValueArray passed in as value_array
   
-    Deprecated:     Use #GArray and [glib.array.Array.removeIndex] instead.
+      Params:
+        index = position of value to remove, which must be less than
+              value_array->n_values
+      Returns: the #GValueArray passed in as value_array
+  
+      Deprecated: Use #GArray and [glib.array.Array.removeIndex] instead.
   */
   gobject.value_array.ValueArray remove(uint index)
   {
@@ -205,15 +216,16 @@ class ValueArray : gobject.boxed.Boxed
 
   /**
       Sort value_array using compare_func to compare the elements according
-    to the semantics of #GCompareDataFunc.
-    
-    The current implementation uses the same sorting algorithm as standard
-    C qsort() function.
-    Params:
-      compareFunc =       function to compare elements
-    Returns:     the #GValueArray passed in as value_array
+      to the semantics of #GCompareDataFunc.
+      
+      The current implementation uses the same sorting algorithm as standard
+      C qsort() function.
   
-    Deprecated:     Use #GArray and [glib.array.Array.sortWithData].
+      Params:
+        compareFunc = function to compare elements
+      Returns: the #GValueArray passed in as value_array
+  
+      Deprecated: Use #GArray and [glib.array.Array.sortWithData].
   */
   gobject.value_array.ValueArray sort(glib.types.CompareDataFunc compareFunc)
   {

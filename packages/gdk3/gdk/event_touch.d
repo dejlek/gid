@@ -1,3 +1,4 @@
+/// Module for [EventTouch] class
 module gdk.event_touch;
 
 import gdk.c.functions;
@@ -10,20 +11,21 @@ import gid.gid;
 
 /**
     Used for touch events.
-  @type field will be one of [gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
-  [gdk.types.EventType.TouchEnd] or [gdk.types.EventType.TouchCancel].
-  
-  Touch events are grouped into sequences by means of the @sequence
-  field, which can also be obtained with [gdk.event.Event.getEventSequence].
-  Each sequence begins with a [gdk.types.EventType.TouchBegin] event, followed by
-  any number of [gdk.types.EventType.TouchUpdate] events, and ends with a [gdk.types.EventType.TouchEnd]
-  (or [gdk.types.EventType.TouchCancel]) event. With multitouch devices, there may be
-  several active sequences at the same time.
+    @type field will be one of [gdk.types.EventType.TouchBegin], [gdk.types.EventType.TouchUpdate],
+    [gdk.types.EventType.TouchEnd] or [gdk.types.EventType.TouchCancel].
+    
+    Touch events are grouped into sequences by means of the @sequence
+    field, which can also be obtained with [gdk.event.Event.getEventSequence].
+    Each sequence begins with a [gdk.types.EventType.TouchBegin] event, followed by
+    any number of [gdk.types.EventType.TouchUpdate] events, and ends with a [gdk.types.EventType.TouchEnd]
+    (or [gdk.types.EventType.TouchCancel]) event. With multitouch devices, there may be
+    several active sequences at the same time.
 */
 class EventTouch
 {
   GdkEventTouch cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -35,6 +37,7 @@ class EventTouch
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

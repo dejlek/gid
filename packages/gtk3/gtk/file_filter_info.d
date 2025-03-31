@@ -1,3 +1,4 @@
+/// Module for [FileFilterInfo] class
 module gtk.file_filter_info;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     A #GtkFileFilterInfo-struct is used to pass information about the
-  tested file to [gtk.file_filter.FileFilter.filter].
+    tested file to [gtk.file_filter.FileFilter.filter].
 */
 class FileFilterInfo
 {
   GtkFileFilterInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class FileFilterInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

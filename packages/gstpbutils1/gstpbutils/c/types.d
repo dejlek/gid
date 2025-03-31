@@ -1,3 +1,4 @@
+/// C types for gstpbutils1 library
 module gstpbutils.c.types;
 
 public import gid.basictypes;
@@ -121,13 +122,13 @@ enum GstDiscovererResult
 
 /**
     You can use these flags to control what is serialized by
-  [gstpbutils.discoverer_info.DiscovererInfo.toVariant]
+    [gstpbutils.discoverer_info.DiscovererInfo.toVariant]
 */
 enum GstDiscovererSerializeFlags : uint
 {
   /**
       Serialize only basic information, excluding
-    caps, tags and miscellaneous information
+      caps, tags and miscellaneous information
   */
   Basic = 0,
 
@@ -148,45 +149,45 @@ enum GstDiscovererSerializeFlags : uint
 
   /**
       Serialize all the available info, including
-    caps, tags and miscellaneous information
+      caps, tags and miscellaneous information
   */
   All = 7,
 }
 
 /**
     Result codes returned by [gstpbutils.global.installPluginsAsync] and
-  [gstpbutils.global.installPluginsSync], and also the result code passed to the
-  #GstInstallPluginsResultFunc specified with [gstpbutils.global.installPluginsAsync].
-  
-  These codes indicate success or failure of starting an external installer
-  program and to what extent the requested plugins could be installed.
+    [gstpbutils.global.installPluginsSync], and also the result code passed to the
+    #GstInstallPluginsResultFunc specified with [gstpbutils.global.installPluginsAsync].
+    
+    These codes indicate success or failure of starting an external installer
+    program and to what extent the requested plugins could be installed.
 */
 enum GstInstallPluginsReturn
 {
   /**
       all of the requested plugins could be
-        installed
+          installed
   */
   Success = 0,
 
   /**
       no appropriate installation candidate for
-        any of the requested plugins could be found. Only return this if nothing
-        has been installed. Return #GST_INSTALL_PLUGINS_PARTIAL_SUCCESS if
-        some (but not all) of the requested plugins could be installed.
+          any of the requested plugins could be found. Only return this if nothing
+          has been installed. Return #GST_INSTALL_PLUGINS_PARTIAL_SUCCESS if
+          some (but not all) of the requested plugins could be installed.
   */
   NotFound = 1,
 
   /**
       an error occurred during the installation. If
-        this happens, the  user has already seen an error message and another
-        one should not be displayed
+          this happens, the  user has already seen an error message and another
+          one should not be displayed
   */
   Error = 2,
 
   /**
       some of the requested plugins could
-        be installed, but not all
+          be installed, but not all
   */
   PartialSuccess = 3,
 
@@ -197,7 +198,7 @@ enum GstInstallPluginsReturn
 
   /**
       the installer had an unclean exit code
-        (ie. death by signal)
+          (ie. death by signal)
   */
   Crashed = 100,
 
@@ -208,33 +209,33 @@ enum GstInstallPluginsReturn
 
   /**
       returned by [gstpbutils.global.installPluginsAsync] to
-        indicate that everything went fine so far and the provided callback
-        will be called with the result of the installation later
+          indicate that everything went fine so far and the provided callback
+          will be called with the result of the installation later
   */
   StartedOk = 200,
 
   /**
       some internal failure has
-        occurred when trying to start the installer
+          occurred when trying to start the installer
   */
   InternalFailure = 201,
 
   /**
       the helper script to call the
-        actual installer is not installed
+          actual installer is not installed
   */
   HelperMissing = 202,
 
   /**
       a previously-started plugin
-        installation is still in progress, try again later
+          installation is still in progress, try again later
   */
   InstallInProgress = 203,
 }
 
 /**
     Flags that are returned by [gstpbutils.global.pbUtilsGetCapsDescriptionFlags] and
-  describe the format of the caps.
+    describe the format of the caps.
 */
 enum GstPbUtilsCapsDescriptionFlags : uint
 {
@@ -245,25 +246,25 @@ enum GstPbUtilsCapsDescriptionFlags : uint
 
   /**
       Caps describe an audio format, or a
-        container format that can store audio.
+          container format that can store audio.
   */
   Audio = 2,
 
   /**
       Caps describe an video format, or a
-        container format that can store video.
+          container format that can store video.
   */
   Video = 4,
 
   /**
       Caps describe an image format, or a
-        container format that can store image.
+          container format that can store image.
   */
   Image = 8,
 
   /**
       Caps describe an subtitle format, or a
-        container format that can store subtitles.
+          container format that can store subtitles.
   */
   Subtitle = 16,
 
@@ -274,25 +275,25 @@ enum GstPbUtilsCapsDescriptionFlags : uint
 
   /**
       Container format can store any kind of
-        stream type.
+          stream type.
   */
   Generic = 64,
 
   /**
       Caps describe a metadata format, or a container format that can store
-    metadata.
+      metadata.
   */
   Metadata = 128,
 }
 
 /**
     A baseclass for scopes (visualizers). It takes care of re-fitting the
-  audio-rate to video-rate and handles renegotiation (downstream video size
-  changes).
-  
-  It also provides several background shading effects. These effects are
-  applied to a previous picture before the `render()` implementation can draw a
-  new frame.
+    audio-rate to video-rate and handles renegotiation (downstream video size
+    changes).
+    
+    It also provides several background shading effects. These effects are
+    applied to a previous picture before the `render()` implementation can draw a
+    new frame.
 */
 struct GstAudioVisualizer
 {
@@ -333,21 +334,21 @@ struct GstAudioVisualizerPrivate;
 
 /**
     The #GstDiscoverer is a utility object which allows to get as much
-  information as possible from one or many URIs.
-  
-  It provides two APIs, allowing usage in blocking or non-blocking mode.
-  
-  The blocking mode just requires calling [gstpbutils.discoverer.Discoverer.discoverUri]
-  with the URI one wishes to discover.
-  
-  The non-blocking mode requires a running #GMainLoop iterating a
-  #GMainContext, where one connects to the various signals, appends the
-  URIs to be processed (through [gstpbutils.discoverer.Discoverer.discoverUriAsync]) and then
-  asks for the discovery to begin (through [gstpbutils.discoverer.Discoverer.start]).
-  By default this will use the GLib default main context unless you have
-  set a custom context using [glib.main_context.MainContext.pushThreadDefault].
-  
-  All the information is returned in a #GstDiscovererInfo structure.
+    information as possible from one or many URIs.
+    
+    It provides two APIs, allowing usage in blocking or non-blocking mode.
+    
+    The blocking mode just requires calling [gstpbutils.discoverer.Discoverer.discoverUri]
+    with the URI one wishes to discover.
+    
+    The non-blocking mode requires a running #GMainLoop iterating a
+    #GMainContext, where one connects to the various signals, appends the
+    URIs to be processed (through [gstpbutils.discoverer.Discoverer.discoverUriAsync]) and then
+    asks for the discovery to begin (through [gstpbutils.discoverer.Discoverer.start]).
+    By default this will use the GLib default main context unless you have
+    set a custom context using [glib.main_context.MainContext.pushThreadDefault].
+    
+    All the information is returned in a #GstDiscovererInfo structure.
 */
 struct GstDiscoverer
 {
@@ -406,26 +407,26 @@ struct GstDiscovererPrivate;
 
 /**
     Base structure for information concerning a media stream. Depending on the
-  stream type, one can find more media-specific information in
-  #GstDiscovererAudioInfo, #GstDiscovererVideoInfo, and
-  #GstDiscovererContainerInfo.
-  
-  The #GstDiscovererStreamInfo represents the topology of the stream. Siblings
-  can be iterated over with [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getNext] and
-  [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getPrevious]. Children (sub-streams) of a
-  stream can be accessed using the #GstDiscovererContainerInfo API.
-  
-  As a simple example, if you run #GstDiscoverer on an AVI file with one audio
-  and one video stream, you will get a #GstDiscovererContainerInfo
-  corresponding to the AVI container, which in turn will have a
-  #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
-  for the audio and video streams respectively.
+    stream type, one can find more media-specific information in
+    #GstDiscovererAudioInfo, #GstDiscovererVideoInfo, and
+    #GstDiscovererContainerInfo.
+    
+    The #GstDiscovererStreamInfo represents the topology of the stream. Siblings
+    can be iterated over with [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getNext] and
+    [gstpbutils.discoverer_stream_info.DiscovererStreamInfo.getPrevious]. Children (sub-streams) of a
+    stream can be accessed using the #GstDiscovererContainerInfo API.
+    
+    As a simple example, if you run #GstDiscoverer on an AVI file with one audio
+    and one video stream, you will get a #GstDiscovererContainerInfo
+    corresponding to the AVI container, which in turn will have a
+    #GstDiscovererAudioInfo sub-stream and a #GstDiscovererVideoInfo sub-stream
+    for the audio and video streams respectively.
 */
 struct GstDiscovererStreamInfo;
 
 /**
     #GstDiscovererStreamInfo specific to subtitle streams (this includes text and
-  image based ones).
+    image based ones).
 */
 struct GstDiscovererSubtitleInfo;
 
@@ -452,7 +453,7 @@ struct GstEncodingContainerProfileClass;
 
 /**
     The opaque base class object for all encoding profiles. This contains generic
-  information like name, description, format and preset.
+    information like name, description, format and preset.
 */
 struct GstEncodingProfile;
 
@@ -461,9 +462,9 @@ struct GstEncodingProfileClass;
 
 /**
     Collection of #GstEncodingProfile for a specific target or use-case.
-  
-  When being stored/loaded, targets come from a specific category, like
-  #GST_ENCODING_CATEGORY_DEVICE.
+    
+    When being stored/loaded, targets come from a specific category, like
+    #GST_ENCODING_CATEGORY_DEVICE.
 */
 struct GstEncodingTarget;
 
@@ -477,7 +478,7 @@ struct GstEncodingVideoProfileClass;
 
 /**
     Opaque context structure for the plugin installation. Use the provided
-  API to set details on it.
+    API to set details on it.
 */
 struct GstInstallPluginsContext;
 

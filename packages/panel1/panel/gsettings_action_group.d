@@ -1,3 +1,4 @@
+/// Module for [GSettingsActionGroup] class
 module panel.gsettings_action_group;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import panel.types;
 class GSettingsActionGroup : gobject.object.ObjectG, gio.action_group.ActionGroup
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_gsettings_action_group_get_type != &gidSymbolNotFound ? panel_gsettings_action_group_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

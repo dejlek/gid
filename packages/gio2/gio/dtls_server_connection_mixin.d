@@ -1,3 +1,4 @@
+/// Module for [DtlsServerConnection] interface mixin
 module gio.dtls_server_connection_mixin;
 
 public import gio.dtls_server_connection_iface_proxy;
@@ -12,7 +13,7 @@ public import gobject.object;
 
 /**
     [gio.dtls_server_connection.DtlsServerConnection] is the server-side subclass of
-  [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
+    [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
 */
 template DtlsServerConnectionT()
 {

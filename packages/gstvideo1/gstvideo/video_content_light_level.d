@@ -1,3 +1,4 @@
+/// Module for [VideoContentLightLevel] class
 module gstvideo.video_content_light_level;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class VideoContentLightLevel
 {
   GstVideoContentLightLevel cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class VideoContentLightLevel
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -51,9 +54,10 @@ class VideoContentLightLevel
 
   /**
       Parse caps and update linfo
-    Params:
-      caps =       a #GstCaps
-    Returns:     true if linfo was successfully set to caps
+  
+      Params:
+        caps = a #GstCaps
+      Returns: true if linfo was successfully set to caps
   */
   bool addToCaps(gst.caps.Caps caps)
   {
@@ -64,9 +68,10 @@ class VideoContentLightLevel
 
   /**
       Parse caps and update linfo
-    Params:
-      caps =       a #GstCaps
-    Returns:     if caps has #GstVideoContentLightLevel and could be parsed
+  
+      Params:
+        caps = a #GstCaps
+      Returns: if caps has #GstVideoContentLightLevel and could be parsed
   */
   bool fromCaps(gst.caps.Caps caps)
   {
@@ -77,10 +82,11 @@ class VideoContentLightLevel
 
   /**
       Parse the value of content-light-level caps field and update minfo
-    with the parsed values.
-    Params:
-      level =       a content-light-level string from caps
-    Returns:     true if linfo points to valid #GstVideoContentLightLevel.
+      with the parsed values.
+  
+      Params:
+        level = a content-light-level string from caps
+      Returns: true if linfo points to valid #GstVideoContentLightLevel.
   */
   bool fromString(string level)
   {
@@ -100,9 +106,10 @@ class VideoContentLightLevel
 
   /**
       Checks equality between linfo and other.
-    Params:
-      other =       a #GstVideoContentLightLevel
-    Returns:     true if linfo and other are equal.
+  
+      Params:
+        other = a #GstVideoContentLightLevel
+      Returns: true if linfo and other are equal.
   */
   bool isEqual(gstvideo.video_content_light_level.VideoContentLightLevel other)
   {
@@ -113,7 +120,7 @@ class VideoContentLightLevel
 
   /**
       Convert linfo to its string representation.
-    Returns:     a string representation of linfo.
+      Returns: a string representation of linfo.
   */
   string toString_()
   {

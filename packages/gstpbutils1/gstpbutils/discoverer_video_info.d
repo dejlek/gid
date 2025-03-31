@@ -1,3 +1,4 @@
+/// Module for [DiscovererVideoInfo] class
 module gstpbutils.discoverer_video_info;
 
 import gid.gid;
@@ -12,17 +13,20 @@ import gstpbutils.types;
 class DiscovererVideoInfo : gstpbutils.discoverer_stream_info.DiscovererStreamInfo
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_video_info_get_type != &gidSymbolNotFound ? gst_discoverer_video_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

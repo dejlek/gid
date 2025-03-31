@@ -1,3 +1,4 @@
+/// Module for [BindingEntry] class
 module gtk.binding_entry;
 
 import gdk.types;
@@ -11,12 +12,13 @@ import gtk.types;
 
 /**
     Each key binding element of a binding sets binding list is
-  represented by a GtkBindingEntry.
+    represented by a GtkBindingEntry.
 */
 class BindingEntry
 {
   GtkBindingEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class BindingEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -105,29 +108,30 @@ class BindingEntry
 
   /**
       Parses a signal description from signal_desc and incorporates
-    it into binding_set.
-    
-    Signal descriptions may either bind a key combination to
-    one or more signals:
-    ```
-      bind "key" {
-        "signalname" (param, ...)
-        ...
-      }
-    ```
-    
-    Or they may also unbind a key combination:
-    ```
-      unbind "key"
-    ```
-    
-    Key combinations must be in a format that can be parsed by
-    [gtk.global.acceleratorParse].
-    Params:
-      bindingSet =       a #GtkBindingSet
-      signalDesc =       a signal description
-    Returns:     `G_TOKEN_NONE` if the signal was successfully parsed and added,
-          the expected token otherwise
+      it into binding_set.
+      
+      Signal descriptions may either bind a key combination to
+      one or more signals:
+      ```
+        bind "key" {
+          "signalname" (param, ...)
+          ...
+        }
+      ```
+      
+      Or they may also unbind a key combination:
+      ```
+        unbind "key"
+      ```
+      
+      Key combinations must be in a format that can be parsed by
+      [gtk.global.acceleratorParse].
+  
+      Params:
+        bindingSet = a #GtkBindingSet
+        signalDesc = a signal description
+      Returns: `G_TOKEN_NONE` if the signal was successfully parsed and added,
+            the expected token otherwise
   */
   static glib.types.TokenType addSignalFromString(gtk.binding_set.BindingSet bindingSet, string signalDesc)
   {
@@ -140,11 +144,12 @@ class BindingEntry
 
   /**
       Remove a binding previously installed via
-    [gtk.binding_entry.BindingEntry.addSignal] on binding_set.
-    Params:
-      bindingSet =       a #GtkBindingSet to remove an entry of
-      keyval =       key value of binding to remove
-      modifiers =       key modifier of binding to remove
+      [gtk.binding_entry.BindingEntry.addSignal] on binding_set.
+  
+      Params:
+        bindingSet = a #GtkBindingSet to remove an entry of
+        keyval = key value of binding to remove
+        modifiers = key modifier of binding to remove
   */
   static void remove(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
   {
@@ -153,12 +158,13 @@ class BindingEntry
 
   /**
       Install a binding on binding_set which causes key lookups
-    to be aborted, to prevent bindings from lower priority sets
-    to be activated.
-    Params:
-      bindingSet =       a #GtkBindingSet to skip an entry of
-      keyval =       key value of binding to skip
-      modifiers =       key modifier of binding to skip
+      to be aborted, to prevent bindings from lower priority sets
+      to be activated.
+  
+      Params:
+        bindingSet = a #GtkBindingSet to skip an entry of
+        keyval = key value of binding to skip
+        modifiers = key modifier of binding to skip
   */
   static void skip(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
   {

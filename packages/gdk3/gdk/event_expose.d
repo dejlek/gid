@@ -1,3 +1,4 @@
+/// Module for [EventExpose] class
 module gdk.event_expose;
 
 import cairo.region;
@@ -10,12 +11,13 @@ import gid.gid;
 
 /**
     Generated when all or part of a window becomes visible and needs to be
-  redrawn.
+    redrawn.
 */
 class EventExpose
 {
   GdkEventExpose cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class EventExpose
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

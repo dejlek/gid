@@ -1,3 +1,4 @@
+/// Module for [Requisition] class
 module gtk.requisition;
 
 import gid.gid;
@@ -8,28 +9,32 @@ import gtk.types;
 
 /**
     A #GtkRequisition-struct represents the desired size of a widget. See
-  [GtkWidget’s geometry management section][geometry-management] for
-  more information.
+    [GtkWidget’s geometry management section][geometry-management] for
+    more information.
 */
 class Requisition : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_requisition_get_type != &gidSymbolNotFound ? gtk_requisition_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -62,8 +67,8 @@ class Requisition : gobject.boxed.Boxed
 
   /**
       Allocates a new #GtkRequisition-struct and initializes its elements to zero.
-    Returns:     a new empty #GtkRequisition. The newly allocated #GtkRequisition should
-        be freed with [gtk.requisition.Requisition.free].
+      Returns: a new empty #GtkRequisition. The newly allocated #GtkRequisition should
+          be freed with [gtk.requisition.Requisition.free].
   */
   this()
   {
@@ -74,7 +79,7 @@ class Requisition : gobject.boxed.Boxed
 
   /**
       Copies a #GtkRequisition.
-    Returns:     a copy of requisition
+      Returns: a copy of requisition
   */
   gtk.requisition.Requisition copy()
   {

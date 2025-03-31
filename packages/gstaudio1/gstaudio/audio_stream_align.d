@@ -1,3 +1,4 @@
+/// Module for [AudioStreamAlign] class
 module gstaudio.audio_stream_align;
 
 import gid.gid;
@@ -9,31 +10,35 @@ import gstaudio.types;
 
 /**
     #GstAudioStreamAlign provides a helper object that helps tracking audio
-  stream alignment and discontinuities, and detects discontinuities if
-  possible.
-  
-  See [gstaudio.audio_stream_align.AudioStreamAlign.new_] for a description of its parameters and
-  [gstaudio.audio_stream_align.AudioStreamAlign.process] for the details of the processing.
+    stream alignment and discontinuities, and detects discontinuities if
+    possible.
+    
+    See [gstaudio.audio_stream_align.AudioStreamAlign.new_] for a description of its parameters and
+    [gstaudio.audio_stream_align.AudioStreamAlign.process] for the details of the processing.
 */
 class AudioStreamAlign : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_stream_align_get_type != &gidSymbolNotFound ? gst_audio_stream_align_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,21 +51,22 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Allocate a new #GstAudioStreamAlign with the given configuration. All
-    processing happens according to sample rate rate, until
-    [gstaudio.audio_stream_align.AudioStreamAlign.setRate] is called with a new rate.
-    A negative rate can be used for reverse playback.
-    
-    alignment_threshold gives the tolerance in nanoseconds after which a
-    timestamp difference is considered a discontinuity. Once detected,
-    discont_wait nanoseconds have to pass without going below the threshold
-    again until the output buffer is marked as a discontinuity. These can later
-    be re-configured with [gstaudio.audio_stream_align.AudioStreamAlign.setAlignmentThreshold] and
-    [gstaudio.audio_stream_align.AudioStreamAlign.setDiscontWait].
-    Params:
-      rate =       a sample rate
-      alignmentThreshold =       a alignment threshold in nanoseconds
-      discontWait =       discont wait in nanoseconds
-    Returns:     a new #GstAudioStreamAlign. free with [gstaudio.audio_stream_align.AudioStreamAlign.free].
+      processing happens according to sample rate rate, until
+      [gstaudio.audio_stream_align.AudioStreamAlign.setRate] is called with a new rate.
+      A negative rate can be used for reverse playback.
+      
+      alignment_threshold gives the tolerance in nanoseconds after which a
+      timestamp difference is considered a discontinuity. Once detected,
+      discont_wait nanoseconds have to pass without going below the threshold
+      again until the output buffer is marked as a discontinuity. These can later
+      be re-configured with [gstaudio.audio_stream_align.AudioStreamAlign.setAlignmentThreshold] and
+      [gstaudio.audio_stream_align.AudioStreamAlign.setDiscontWait].
+  
+      Params:
+        rate = a sample rate
+        alignmentThreshold = a alignment threshold in nanoseconds
+        discontWait = discont wait in nanoseconds
+      Returns: a new #GstAudioStreamAlign. free with [gstaudio.audio_stream_align.AudioStreamAlign.free].
   */
   this(int rate, gst.types.ClockTime alignmentThreshold, gst.types.ClockTime discontWait)
   {
@@ -71,7 +77,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Copy a GstAudioStreamAlign structure.
-    Returns:     a new #GstAudioStreamAlign. free with gst_audio_stream_align_free.
+      Returns: a new #GstAudioStreamAlign. free with gst_audio_stream_align_free.
   */
   gstaudio.audio_stream_align.AudioStreamAlign copy()
   {
@@ -83,7 +89,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Gets the currently configured alignment threshold.
-    Returns:     The currently configured alignment threshold
+      Returns: The currently configured alignment threshold
   */
   gst.types.ClockTime getAlignmentThreshold()
   {
@@ -94,7 +100,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Gets the currently configured discont wait.
-    Returns:     The currently configured discont wait
+      Returns: The currently configured discont wait
   */
   gst.types.ClockTime getDiscontWait()
   {
@@ -105,7 +111,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Gets the currently configured sample rate.
-    Returns:     The currently configured sample rate
+      Returns: The currently configured sample rate
   */
   int getRate()
   {
@@ -116,8 +122,8 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Returns the number of samples that were processed since the last
-    discontinuity was detected.
-    Returns:     The number of samples processed since the last discontinuity.
+      discontinuity was detected.
+      Returns: The number of samples processed since the last discontinuity.
   */
   ulong getSamplesSinceDiscont()
   {
@@ -128,8 +134,8 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Timestamp that was passed when a discontinuity was detected, i.e. the first
-    timestamp after the discontinuity.
-    Returns:     The last timestamp at when a discontinuity was detected
+      timestamp after the discontinuity.
+      Returns: The last timestamp at when a discontinuity was detected
   */
   gst.types.ClockTime getTimestampAtDiscont()
   {
@@ -148,29 +154,30 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Processes data with timestamp and n_samples, and returns the output
-    timestamp, duration and sample position together with a boolean to signal
-    whether a discontinuity was detected or not. All non-discontinuous data
-    will have perfect timestamps and durations.
-    
-    A discontinuity is detected once the difference between the actual
-    timestamp and the timestamp calculated from the sample count since the last
-    discontinuity differs by more than the alignment threshold for a duration
-    longer than discont wait.
-    
-    Note: In reverse playback, every buffer is considered discontinuous in the
-    context of buffer flags because the last sample of the previous buffer is
-    discontinuous with the first sample of the current one. However for this
-    function they are only considered discontinuous in reverse playback if the
-    first sample of the previous buffer is discontinuous with the last sample
-    of the current one.
-    Params:
-      discont =       if this data is considered to be discontinuous
-      timestamp =       a #GstClockTime of the start of the data
-      nSamples =       number of samples to process
-      outTimestamp =       output timestamp of the data
-      outDuration =       output duration of the data
-      outSamplePosition =       output sample position of the start of the data
-    Returns:     true if a discontinuity was detected, false otherwise.
+      timestamp, duration and sample position together with a boolean to signal
+      whether a discontinuity was detected or not. All non-discontinuous data
+      will have perfect timestamps and durations.
+      
+      A discontinuity is detected once the difference between the actual
+      timestamp and the timestamp calculated from the sample count since the last
+      discontinuity differs by more than the alignment threshold for a duration
+      longer than discont wait.
+      
+      Note: In reverse playback, every buffer is considered discontinuous in the
+      context of buffer flags because the last sample of the previous buffer is
+      discontinuous with the first sample of the current one. However for this
+      function they are only considered discontinuous in reverse playback if the
+      first sample of the previous buffer is discontinuous with the last sample
+      of the current one.
+  
+      Params:
+        discont = if this data is considered to be discontinuous
+        timestamp = a #GstClockTime of the start of the data
+        nSamples = number of samples to process
+        outTimestamp = output timestamp of the data
+        outDuration = output duration of the data
+        outSamplePosition = output sample position of the start of the data
+      Returns: true if a discontinuity was detected, false otherwise.
   */
   bool process(bool discont, gst.types.ClockTime timestamp, uint nSamples, out gst.types.ClockTime outTimestamp, out gst.types.ClockTime outDuration, out ulong outSamplePosition)
   {
@@ -181,8 +188,9 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Sets alignment_treshold as new alignment threshold for the following processing.
-    Params:
-      alignmentThreshold =       a new alignment threshold
+  
+      Params:
+        alignmentThreshold = a new alignment threshold
   */
   void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold)
   {
@@ -191,8 +199,9 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Sets alignment_treshold as new discont wait for the following processing.
-    Params:
-      discontWait =       a new discont wait
+  
+      Params:
+        discontWait = a new discont wait
   */
   void setDiscontWait(gst.types.ClockTime discontWait)
   {
@@ -201,9 +210,10 @@ class AudioStreamAlign : gobject.boxed.Boxed
 
   /**
       Sets rate as new sample rate for the following processing. If the sample
-    rate differs this implicitly marks the next data as discontinuous.
-    Params:
-      rate =       a new sample rate
+      rate differs this implicitly marks the next data as discontinuous.
+  
+      Params:
+        rate = a new sample rate
   */
   void setRate(int rate)
   {

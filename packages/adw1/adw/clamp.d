@@ -1,3 +1,4 @@
+/// Module for [Clamp] class
 module adw.clamp;
 
 import adw.c.functions;
@@ -17,47 +18,50 @@ import gtk.widget;
 
 /**
     A widget constraining its child to a given size.
-  
-  <picture>
-    <source srcset="clamp-wide-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="clamp-wide.png" alt="clamp-wide">
-  </picture>
-  <picture>
-    <source srcset="clamp-narrow-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="clamp-narrow.png" alt="clamp-narrow">
-  </picture>
-  
-  The [adw.clamp.Clamp] widget constrains the size of the widget it contains to a
-  given maximum size. It will constrain the width if it is horizontal, or the
-  height if it is vertical. The expansion of the child from its minimum to its
-  maximum size is eased out for a smooth transition.
-  
-  If the child requires more than the requested maximum size, it will be
-  allocated the minimum size it can fit in instead.
-  
-  [adw.clamp.Clamp] can scale with the text scale factor, use the
-  `property@Clamp:unit` property to enable that behavior.
-  
-  See also: `class@ClampLayout`, `class@ClampScrollable`.
-  
-  ## CSS nodes
-  
-  [adw.clamp.Clamp] has a single CSS node with name `clamp`.
+    
+    <picture>
+      <source srcset="clamp-wide-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="clamp-wide.png" alt="clamp-wide">
+    </picture>
+    <picture>
+      <source srcset="clamp-narrow-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="clamp-narrow.png" alt="clamp-narrow">
+    </picture>
+    
+    The [adw.clamp.Clamp] widget constrains the size of the widget it contains to a
+    given maximum size. It will constrain the width if it is horizontal, or the
+    height if it is vertical. The expansion of the child from its minimum to its
+    maximum size is eased out for a smooth transition.
+    
+    If the child requires more than the requested maximum size, it will be
+    allocated the minimum size it can fit in instead.
+    
+    [adw.clamp.Clamp] can scale with the text scale factor, use the
+    `property@Clamp:unit` property to enable that behavior.
+    
+    See also: `class@ClampLayout`, `class@ClampScrollable`.
+    
+    ## CSS nodes
+    
+    [adw.clamp.Clamp] has a single CSS node with name `clamp`.
 */
 class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_get_type != &gidSymbolNotFound ? adw_clamp_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -72,7 +76,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Creates a new [adw.clamp.Clamp].
-    Returns:     the newly created [adw.clamp.Clamp]
+      Returns: the newly created [adw.clamp.Clamp]
   */
   this()
   {
@@ -83,7 +87,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Gets the child widget of self.
-    Returns:     the child widget of self
+      Returns: the child widget of self
   */
   gtk.widget.Widget getChild()
   {
@@ -95,7 +99,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Gets the maximum size allocated to the child.
-    Returns:     the maximum size to allocate to the child
+      Returns: the maximum size to allocate to the child
   */
   int getMaximumSize()
   {
@@ -106,7 +110,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Gets the size above which the child is clamped.
-    Returns:     the size above which the child is clamped
+      Returns: the size above which the child is clamped
   */
   int getTighteningThreshold()
   {
@@ -117,7 +121,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Gets the length unit for maximum size and tightening threshold.
-    Returns:     the length unit
+      Returns: the length unit
   */
   adw.types.LengthUnit getUnit()
   {
@@ -129,8 +133,9 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the child widget of self.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -139,10 +144,11 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the maximum size allocated to the child.
-    
-    It is the width if the clamp is horizontal, or the height if it is vertical.
-    Params:
-      maximumSize =       the maximum size
+      
+      It is the width if the clamp is horizontal, or the height if it is vertical.
+  
+      Params:
+        maximumSize = the maximum size
   */
   void setMaximumSize(int maximumSize)
   {
@@ -151,21 +157,22 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the size above which the child is clamped.
-    
-    Starting from this size, the clamp will tighten its grip on the child, slowly
-    allocating less and less of the available size up to the maximum allocated
-    size. Below that threshold and below the maximum size, the child will be
-    allocated all the available size.
-    
-    If the threshold is greater than the maximum size to allocate to the child,
-    the child will be allocated all the size up to the maximum. If the threshold
-    is lower than the minimum size to allocate to the child, that size will be
-    used as the tightening threshold.
-    
-    Effectively, tightening the grip on the child before it reaches its maximum
-    size makes transitions to and from the maximum size smoother when resizing.
-    Params:
-      tighteningThreshold =       the tightening threshold
+      
+      Starting from this size, the clamp will tighten its grip on the child, slowly
+      allocating less and less of the available size up to the maximum allocated
+      size. Below that threshold and below the maximum size, the child will be
+      allocated all the available size.
+      
+      If the threshold is greater than the maximum size to allocate to the child,
+      the child will be allocated all the size up to the maximum. If the threshold
+      is lower than the minimum size to allocate to the child, that size will be
+      used as the tightening threshold.
+      
+      Effectively, tightening the grip on the child before it reaches its maximum
+      size makes transitions to and from the maximum size smoother when resizing.
+  
+      Params:
+        tighteningThreshold = the tightening threshold
   */
   void setTighteningThreshold(int tighteningThreshold)
   {
@@ -174,10 +181,11 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
 
   /**
       Sets the length unit for maximum size and tightening threshold.
-    
-    Allows the sizes to vary depending on the text scale factor.
-    Params:
-      unit =       the length unit
+      
+      Allows the sizes to vary depending on the text scale factor.
+  
+      Params:
+        unit = the length unit
   */
   void setUnit(adw.types.LengthUnit unit)
   {

@@ -1,3 +1,4 @@
+/// Module for [MotionEvent] class
 module gdk.motion_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class MotionEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

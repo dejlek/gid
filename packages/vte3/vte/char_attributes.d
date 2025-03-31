@@ -1,3 +1,4 @@
+/// Module for [CharAttributes] class
 module vte.char_attributes;
 
 import gid.gid;
@@ -10,6 +11,7 @@ class CharAttributes
 {
   VteCharAttributes cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class CharAttributes
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// C types for harfbuzz0 library
 module harfbuzz.c.types;
 
 public import gid.basictypes;
@@ -11,99 +12,99 @@ alias hb_bool_t = int;
 
 /**
     Data type for holding Unicode codepoints. Also
-  used to hold glyph IDs.
+    used to hold glyph IDs.
 */
 alias hb_codepoint_t = uint;
 
 /**
     Data type for holding color values. Colors are eight bits per
-  channel RGB plus alpha transparency.
+    channel RGB plus alpha transparency.
 */
 alias hb_color_t = uint;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the extents for a font, for horizontal-direction
-  text segments. Extents must be returned in an #hb_glyph_extents output
-  parameter.
+    
+    This method should retrieve the extents for a font, for horizontal-direction
+    text segments. Extents must be returned in an #hb_glyph_extents output
+    parameter.
 */
 alias hb_font_get_font_h_extents_func_t = hb_font_get_font_extents_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the extents for a font, for vertical-direction
-  text segments. Extents must be returned in an #hb_glyph_extents output
-  parameter.
+    
+    This method should retrieve the extents for a font, for vertical-direction
+    text segments. Extents must be returned in an #hb_glyph_extents output
+    parameter.
 */
 alias hb_font_get_font_v_extents_func_t = hb_font_get_font_extents_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the advance for a specified glyph, in
-  horizontal-direction text segments. Advances must be returned in
-  an #hb_position_t output parameter.
+    
+    This method should retrieve the advance for a specified glyph, in
+    horizontal-direction text segments. Advances must be returned in
+    an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_h_advance_func_t = hb_font_get_glyph_advance_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the advances for a sequence of glyphs, in
-  horizontal-direction text segments.
+    
+    This method should retrieve the advances for a sequence of glyphs, in
+    horizontal-direction text segments.
 */
 alias hb_font_get_glyph_h_advances_func_t = hb_font_get_glyph_advances_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the kerning-adjustment value for a glyph-pair in
-  the specified font, for horizontal text segments.
+    
+    This method should retrieve the kerning-adjustment value for a glyph-pair in
+    the specified font, for horizontal text segments.
 */
 alias hb_font_get_glyph_h_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the (X,Y) coordinates (in font units) of the
-  origin for a glyph, for horizontal-direction text segments. Each
-  coordinate must be returned in an #hb_position_t output parameter.
+    
+    This method should retrieve the (X,Y) coordinates (in font units) of the
+    origin for a glyph, for horizontal-direction text segments. Each
+    coordinate must be returned in an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_h_origin_func_t = hb_font_get_glyph_origin_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the advance for a specified glyph, in
-  vertical-direction text segments. Advances must be returned in
-  an #hb_position_t output parameter.
+    
+    This method should retrieve the advance for a specified glyph, in
+    vertical-direction text segments. Advances must be returned in
+    an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_v_advance_func_t = hb_font_get_glyph_advance_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the advances for a sequence of glyphs, in
-  vertical-direction text segments.
+    
+    This method should retrieve the advances for a sequence of glyphs, in
+    vertical-direction text segments.
 */
 alias hb_font_get_glyph_v_advances_func_t = hb_font_get_glyph_advances_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the kerning-adjustment value for a glyph-pair in
-  the specified font, for vertical text segments.
+    
+    This method should retrieve the kerning-adjustment value for a glyph-pair in
+    the specified font, for vertical text segments.
 */
 alias hb_font_get_glyph_v_kerning_func_t = hb_font_get_glyph_kerning_func_t;
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the (X,Y) coordinates (in font units) of the
-  origin for a glyph, for vertical-direction text segments. Each coordinate
-  must be returned in an #hb_position_t output parameter.
+    
+    This method should retrieve the (X,Y) coordinates (in font units) of the
+    origin for a glyph, for vertical-direction text segments. Each coordinate
+    must be returned in an #hb_position_t output parameter.
 */
 alias hb_font_get_glyph_v_origin_func_t = hb_font_get_glyph_origin_func_t;
 
@@ -114,25 +115,25 @@ alias hb_mask_t = uint;
 
 /**
     An integral type representing an OpenType 'name' table name identifier.
-  There are predefined name IDs, as well as name IDs return from other
-  API.  These can be used to fetch name strings from a font face.
+    There are predefined name IDs, as well as name IDs return from other
+    API.  These can be used to fetch name strings from a font face.
 */
 alias hb_ot_name_id_t = uint;
 
 /**
     Data type for holding a single coordinate value.
-  Contour points and other multi-dimensional data are
-  stored as tuples of #hb_position_t's.
+    Contour points and other multi-dimensional data are
+    stored as tuples of #hb_position_t's.
 */
 alias hb_position_t = int;
 
 /**
     Data type for tag identifiers. Tags are four
-  byte integers, each byte representing a character.
-  
-  Tags are used to identify tables, design-variation axes,
-  scripts, languages, font features, and baselines with
-  human-readable names.
+    byte integers, each byte representing a character.
+    
+    Tags are used to identify tables, design-variation axes,
+    scripts, languages, font features, and baselines with
+    human-readable names.
 */
 alias hb_tag_t = uint;
 
@@ -1605,27 +1606,27 @@ enum hb_aat_layout_feature_type_t
 
 /**
     Data type for holding HarfBuzz's clustering behavior options. The cluster level
-  dictates one aspect of how HarfBuzz will treat non-base characters
-  during shaping.
-  
-  In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES, non-base
-  characters are merged into the cluster of the base character that precedes them.
-  
-  In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS, non-base characters are initially
-  assigned their own cluster values, which are not merged into preceding base
-  clusters. This allows HarfBuzz to perform additional operations like reorder
-  sequences of adjacent marks.
-  
-  @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES is the default, because it maintains
-  backward compatibility with older versions of HarfBuzz. New client programs that
-  do not need to maintain such backward compatibility are recommended to use
-  @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS instead of the default.
+    dictates one aspect of how HarfBuzz will treat non-base characters
+    during shaping.
+    
+    In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES, non-base
+    characters are merged into the cluster of the base character that precedes them.
+    
+    In @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS, non-base characters are initially
+    assigned their own cluster values, which are not merged into preceding base
+    clusters. This allows HarfBuzz to perform additional operations like reorder
+    sequences of adjacent marks.
+    
+    @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES is the default, because it maintains
+    backward compatibility with older versions of HarfBuzz. New client programs that
+    do not need to maintain such backward compatibility are recommended to use
+    @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_CHARACTERS instead of the default.
 */
 enum hb_buffer_cluster_level_t
 {
   /**
       Return cluster values grouped by graphemes into
-      monotone order.
+        monotone order.
   */
   MonotoneGraphemes = 0,
 
@@ -1641,7 +1642,7 @@ enum hb_buffer_cluster_level_t
 
   /**
       Default cluster level,
-      equal to @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES.
+        equal to @HB_BUFFER_CLUSTER_LEVEL_MONOTONE_GRAPHEMES.
   */
   Default = 0,
 }
@@ -1669,16 +1670,16 @@ enum hb_buffer_content_type_t
 
 /**
     Flags from comparing two #hb_buffer_t's.
-  
-  Buffer with different #hb_buffer_content_type_t cannot be meaningfully
-  compared in any further detail.
-  
-  For buffers with differing length, the per-glyph comparison is not
-  attempted, though we do still scan reference buffer for dotted circle and
-  `.notdef` glyphs.
-  
-  If the buffers have the same length, we compare them glyph-by-glyph and
-  report which aspect(s) of the glyph info/position are different.
+    
+    Buffer with different #hb_buffer_content_type_t cannot be meaningfully
+    compared in any further detail.
+    
+    For buffers with differing length, the per-glyph comparison is not
+    attempted, though we do still scan reference buffer for dotted circle and
+    `.notdef` glyphs.
+    
+    If the buffers have the same length, we compare them glyph-by-glyph and
+    report which aspect(s) of the glyph info/position are different.
 */
 enum hb_buffer_diff_flags_t : uint
 {
@@ -1689,7 +1690,7 @@ enum hb_buffer_diff_flags_t : uint
 
   /**
       buffers with different
-        #hb_buffer_content_type_t.
+          #hb_buffer_content_type_t.
   */
   ContentTypeMismatch = 1,
 
@@ -1700,13 +1701,13 @@ enum hb_buffer_diff_flags_t : uint
 
   /**
       `.notdef` glyph is present in the
-        reference buffer.
+          reference buffer.
   */
   NotdefPresent = 4,
 
   /**
       dotted circle glyph is present
-        in the reference buffer.
+          in the reference buffer.
   */
   DottedCirclePresent = 8,
 
@@ -1743,68 +1744,68 @@ enum hb_buffer_flags_t : uint
 
   /**
       flag indicating that special handling of the beginning
-                         of text paragraph can be applied to this buffer. Should usually
-                         be set, unless you are passing to the buffer only part
-                         of the text without the full context.
+                           of text paragraph can be applied to this buffer. Should usually
+                           be set, unless you are passing to the buffer only part
+                           of the text without the full context.
   */
   Bot = 1,
 
   /**
       flag indicating that special handling of the end of text
-                         paragraph can be applied to this buffer, similar to
-                         @HB_BUFFER_FLAG_BOT.
+                           paragraph can be applied to this buffer, similar to
+                           @HB_BUFFER_FLAG_BOT.
   */
   Eot = 2,
 
   /**
       flag indication that character with Default_Ignorable
-                         Unicode property should use the corresponding glyph
-                         from the font, instead of hiding them (done by
-                         replacing them with the space glyph and zeroing the
-                         advance width.)  This flag takes precedence over
-                         @HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES.
+                           Unicode property should use the corresponding glyph
+                           from the font, instead of hiding them (done by
+                           replacing them with the space glyph and zeroing the
+                           advance width.)  This flag takes precedence over
+                           @HB_BUFFER_FLAG_REMOVE_DEFAULT_IGNORABLES.
   */
   PreserveDefaultIgnorables = 4,
 
   /**
       flag indication that character with Default_Ignorable
-                         Unicode property should be removed from glyph string
-                         instead of hiding them (done by replacing them with the
-                         space glyph and zeroing the advance width.)
-                         @HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES takes
-                         precedence over this flag. Since: 1.8.0
+                           Unicode property should be removed from glyph string
+                           instead of hiding them (done by replacing them with the
+                           space glyph and zeroing the advance width.)
+                           @HB_BUFFER_FLAG_PRESERVE_DEFAULT_IGNORABLES takes
+                           precedence over this flag. Since: 1.8.0
   */
   RemoveDefaultIgnorables = 8,
 
   /**
       flag indicating that a dotted circle should
-                         not be inserted in the rendering of incorrect
-                         character sequences (such at <0905 093E>). Since: 2.4.0
+                           not be inserted in the rendering of incorrect
+                           character sequences (such at <0905 093E>). Since: 2.4.0
   */
   DoNotInsertDottedCircle = 16,
 
   /**
       flag indicating that the [harfbuzz.global.shape] call and its variants
-                         should perform various verification processes on the results
-                         of the shaping operation on the buffer.  If the verification
-                         fails, then either a buffer message is sent, if a message
-                         handler is installed on the buffer, or a message is written
-                         to standard error.  In either case, the shaping result might
-                         be modified to show the failed output. Since: 3.4.0
+                           should perform various verification processes on the results
+                           of the shaping operation on the buffer.  If the verification
+                           fails, then either a buffer message is sent, if a message
+                           handler is installed on the buffer, or a message is written
+                           to standard error.  In either case, the shaping result might
+                           be modified to show the failed output. Since: 3.4.0
   */
   Verify = 32,
 
   /**
       flag indicating that the @HB_GLYPH_FLAG_UNSAFE_TO_CONCAT
-                         glyph-flag should be produced by the shaper. By default
-                         it will not be produced since it incurs a cost. Since: 4.0.0
+                           glyph-flag should be produced by the shaper. By default
+                           it will not be produced since it incurs a cost. Since: 4.0.0
   */
   ProduceUnsafeToConcat = 64,
 
   /**
       flag indicating that the @HB_GLYPH_FLAG_SAFE_TO_INSERT_TATWEEL
-                         glyph-flag should be produced by the shaper. By default
-                         it will not be produced. Since: 5.1.0
+                           glyph-flag should be produced by the shaper. By default
+                           it will not be produced. Since: 5.1.0
   */
   ProduceSafeToInsertTatweel = 128,
 
@@ -1851,7 +1852,7 @@ enum hb_buffer_serialize_flags_t : uint
 
   /**
       do not serialize glyph advances,
-     glyph offsets will reflect absolute glyph positions. Since: 1.8.0
+       glyph offsets will reflect absolute glyph positions. Since: 1.8.0
   */
   NoAdvances = 32,
 
@@ -1863,7 +1864,7 @@ enum hb_buffer_serialize_flags_t : uint
 
 /**
     The buffer serialization and de-serialization format used in
-  [harfbuzz.global.bufferSerializeGlyphs] and [harfbuzz.global.bufferDeserializeGlyphs].
+    [harfbuzz.global.bufferSerializeGlyphs] and [harfbuzz.global.bufferDeserializeGlyphs].
 */
 enum hb_buffer_serialize_format_t
 {
@@ -1885,10 +1886,10 @@ enum hb_buffer_serialize_format_t
 
 /**
     The direction of a text segment or buffer.
-  
-  A segment can also be tested for horizontal or vertical
-  orientation (irrespective of specific direction) with
-  HB_DIRECTION_IS_HORIZONTAL() or HB_DIRECTION_IS_VERTICAL().
+    
+    A segment can also be tested for horizontal or vertical
+    orientation (irrespective of specific direction) with
+    HB_DIRECTION_IS_HORIZONTAL() or HB_DIRECTION_IS_VERTICAL().
 */
 enum hb_direction_t
 {
@@ -1925,91 +1926,91 @@ enum hb_glyph_flags_t : uint
 {
   /**
       Indicates that if input text is broken at the
-    				   beginning of the cluster this glyph is part of,
-    				   then both sides need to be re-shaped, as the
-    				   result might be different.
-    				   On the flip side, it means that when this
-    				   flag is not present, then it is safe to break
-    				   the glyph-run at the beginning of this
-    				   cluster, and the two sides will represent the
-    				   exact same result one would get if breaking
-    				   input text at the beginning of this cluster
-    				   and shaping the two sides separately.
-    				   This can be used to optimize paragraph
-    				   layout, by avoiding re-shaping of each line
-    				   after line-breaking.
+      				   beginning of the cluster this glyph is part of,
+      				   then both sides need to be re-shaped, as the
+      				   result might be different.
+      				   On the flip side, it means that when this
+      				   flag is not present, then it is safe to break
+      				   the glyph-run at the beginning of this
+      				   cluster, and the two sides will represent the
+      				   exact same result one would get if breaking
+      				   input text at the beginning of this cluster
+      				   and shaping the two sides separately.
+      				   This can be used to optimize paragraph
+      				   layout, by avoiding re-shaping of each line
+      				   after line-breaking.
   */
   UnsafeToBreak = 1,
 
   /**
       Indicates that if input text is changed on one
-    				   side of the beginning of the cluster this glyph
-    				   is part of, then the shaping results for the
-    				   other side might change.
-    				   Note that the absence of this flag will NOT by
-    				   itself mean that it IS safe to concat text.
-    				   Only two pieces of text both of which clear of
-    				   this flag can be concatenated safely.
-    				   This can be used to optimize paragraph
-    				   layout, by avoiding re-shaping of each line
-    				   after line-breaking, by limiting the
-    				   reshaping to a small piece around the
-    				   breaking position only, even if the breaking
-    				   position carries the
-    				   #HB_GLYPH_FLAG_UNSAFE_TO_BREAK or when
-    				   hyphenation or other text transformation
-    				   happens at line-break position, in the following
-    				   way:
-    				   1. Iterate back from the line-break position
-    				   until the first cluster start position that is
-    				   NOT unsafe-to-concat, 2. shape the segment from
-    				   there till the end of line, 3. check whether the
-    				   resulting glyph-run also is clear of the
-    				   unsafe-to-concat at its start-of-text position;
-    				   if it is, just splice it into place and the line
-    				   is shaped; If not, move on to a position further
-    				   back that is clear of unsafe-to-concat and retry
-    				   from there, and repeat.
-    				   At the start of next line a similar algorithm can
-    				   be implemented. That is: 1. Iterate forward from
-    				   the line-break position until the first cluster
-    				   start position that is NOT unsafe-to-concat, 2.
-    				   shape the segment from beginning of the line to
-    				   that position, 3. check whether the resulting
-    				   glyph-run also is clear of the unsafe-to-concat
-    				   at its end-of-text position; if it is, just splice
-    				   it into place and the beginning is shaped; If not,
-    				   move on to a position further forward that is clear
-    				   of unsafe-to-concat and retry up to there, and repeat.
-    				   A slight complication will arise in the
-    				   implementation of the algorithm above,
-    				   because while our buffer API has a way to
-    				   return flags for position corresponding to
-    				   start-of-text, there is currently no position
-    				   corresponding to end-of-text.  This limitation
-    				   can be alleviated by shaping more text than needed
-    				   and looking for unsafe-to-concat flag within text
-    				   clusters.
-    				   The #HB_GLYPH_FLAG_UNSAFE_TO_BREAK flag will
-    				   always imply this flag.
-    			   To use this flag, you must enable the buffer flag
-    			   @HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT during
-    			   shaping, otherwise the buffer flag will not be
-    			   reliably produced.
-    				   Since: 4.0.0
+      				   side of the beginning of the cluster this glyph
+      				   is part of, then the shaping results for the
+      				   other side might change.
+      				   Note that the absence of this flag will NOT by
+      				   itself mean that it IS safe to concat text.
+      				   Only two pieces of text both of which clear of
+      				   this flag can be concatenated safely.
+      				   This can be used to optimize paragraph
+      				   layout, by avoiding re-shaping of each line
+      				   after line-breaking, by limiting the
+      				   reshaping to a small piece around the
+      				   breaking position only, even if the breaking
+      				   position carries the
+      				   #HB_GLYPH_FLAG_UNSAFE_TO_BREAK or when
+      				   hyphenation or other text transformation
+      				   happens at line-break position, in the following
+      				   way:
+      				   1. Iterate back from the line-break position
+      				   until the first cluster start position that is
+      				   NOT unsafe-to-concat, 2. shape the segment from
+      				   there till the end of line, 3. check whether the
+      				   resulting glyph-run also is clear of the
+      				   unsafe-to-concat at its start-of-text position;
+      				   if it is, just splice it into place and the line
+      				   is shaped; If not, move on to a position further
+      				   back that is clear of unsafe-to-concat and retry
+      				   from there, and repeat.
+      				   At the start of next line a similar algorithm can
+      				   be implemented. That is: 1. Iterate forward from
+      				   the line-break position until the first cluster
+      				   start position that is NOT unsafe-to-concat, 2.
+      				   shape the segment from beginning of the line to
+      				   that position, 3. check whether the resulting
+      				   glyph-run also is clear of the unsafe-to-concat
+      				   at its end-of-text position; if it is, just splice
+      				   it into place and the beginning is shaped; If not,
+      				   move on to a position further forward that is clear
+      				   of unsafe-to-concat and retry up to there, and repeat.
+      				   A slight complication will arise in the
+      				   implementation of the algorithm above,
+      				   because while our buffer API has a way to
+      				   return flags for position corresponding to
+      				   start-of-text, there is currently no position
+      				   corresponding to end-of-text.  This limitation
+      				   can be alleviated by shaping more text than needed
+      				   and looking for unsafe-to-concat flag within text
+      				   clusters.
+      				   The #HB_GLYPH_FLAG_UNSAFE_TO_BREAK flag will
+      				   always imply this flag.
+      			   To use this flag, you must enable the buffer flag
+      			   @HB_BUFFER_FLAG_PRODUCE_UNSAFE_TO_CONCAT during
+      			   shaping, otherwise the buffer flag will not be
+      			   reliably produced.
+      				   Since: 4.0.0
   */
   UnsafeToConcat = 2,
 
   /**
       In scripts that use elongation (Arabic,
-    				   Mongolian, Syriac, etc.), this flag signifies
-    				   that it is safe to insert a U+0640 TATWEEL
-    				   character before this cluster for elongation.
-    				   This flag does not determine the
-    				   script-specific elongation places, but only
-    				   when it is safe to do the elongation without
-    				   interrupting text shaping.
-    				   Since: 5.1.0
+      				   Mongolian, Syriac, etc.), this flag signifies
+      				   that it is safe to insert a U+0640 TATWEEL
+      				   character before this cluster for elongation.
+      				   This flag does not determine the
+      				   script-specific elongation places, but only
+      				   when it is safe to do the elongation without
+      				   interrupting text shaping.
+      				   Since: 5.1.0
   */
   SafeToInsertTatweel = 4,
 
@@ -2021,27 +2022,27 @@ enum hb_glyph_flags_t : uint
 
 /**
     Data type holding the memory modes available to
-  client programs.
-  
-  Regarding these various memory-modes:
-  
-  $(LIST
-    * In no case shall the HarfBuzz client modify memory
-      that is passed to HarfBuzz in a blob.  If there is
-      any such possibility, @HB_MEMORY_MODE_DUPLICATE should be used
-      such that HarfBuzz makes a copy immediately,
+    client programs.
     
-    * Use @HB_MEMORY_MODE_READONLY otherwise, unless you really really
-      really know what you are doing,
+    Regarding these various memory-modes:
     
-    * @HB_MEMORY_MODE_WRITABLE is appropriate if you really made a
-      copy of data solely for the purpose of passing to
-      HarfBuzz and doing that just once (no reuse!),
-    
-    * If the font is mmap()ed, it's okay to use
-      @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE, however, using that mode
-      correctly is very tricky.  Use @HB_MEMORY_MODE_READONLY instead.
-  )
+    $(LIST
+      * In no case shall the HarfBuzz client modify memory
+        that is passed to HarfBuzz in a blob.  If there is
+        any such possibility, @HB_MEMORY_MODE_DUPLICATE should be used
+        such that HarfBuzz makes a copy immediately,
+      
+      * Use @HB_MEMORY_MODE_READONLY otherwise, unless you really really
+        really know what you are doing,
+      
+      * @HB_MEMORY_MODE_WRITABLE is appropriate if you really made a
+        copy of data solely for the purpose of passing to
+        HarfBuzz and doing that just once (no reuse!),
+      
+      * If the font is mmap()ed, it's okay to use
+        @HB_MEMORY_MODE_READONLY_MAY_MAKE_WRITABLE, however, using that mode
+        correctly is very tricky.  Use @HB_MEMORY_MODE_READONLY instead.
+    )
 */
 enum hb_memory_mode_t
 {
@@ -2052,13 +2053,13 @@ enum hb_memory_mode_t
 
   /**
       HarfBuzz client will never modify the data,
-        and HarfBuzz will never modify the data.
+          and HarfBuzz will never modify the data.
   */
   Readonly = 1,
 
   /**
       HarfBuzz client made a copy of the data solely
-        for HarfBuzz, so HarfBuzz may modify the data.
+          for HarfBuzz, so HarfBuzz may modify the data.
   */
   Writable = 2,
 
@@ -2075,19 +2076,19 @@ enum hb_ot_color_palette_flags_t : uint
 {
   /**
       Default indicating that there is nothing special
-      to note about a color palette.
+        to note about a color palette.
   */
   Default = 0,
 
   /**
       Flag indicating that the color
-      palette is appropriate to use when displaying the font on a light background such as white.
+        palette is appropriate to use when displaying the font on a light background such as white.
   */
   UsableWithLightBackground = 1,
 
   /**
       Flag indicating that the color
-      palette is appropriate to use when displaying the font on a dark background such as black.
+        palette is appropriate to use when displaying the font on a dark background such as black.
   */
   UsableWithDarkBackground = 2,
 }
@@ -2099,28 +2100,28 @@ enum hb_ot_layout_baseline_tag_t
 {
   /**
       The baseline used by alphabetic scripts such as Latin, Cyrillic and Greek.
-    In vertical writing mode, the alphabetic baseline for characters rotated 90 degrees clockwise.
-    (This would not apply to alphabetic characters that remain upright in vertical writing mode, since these
-    characters are not rotated.)
+      In vertical writing mode, the alphabetic baseline for characters rotated 90 degrees clockwise.
+      (This would not apply to alphabetic characters that remain upright in vertical writing mode, since these
+      characters are not rotated.)
   */
   Roman = 1919905134,
 
   /**
       The hanging baseline. In horizontal direction, this is the horizontal
-    line from which syllables seem, to hang in Tibetan and other similar scripts. In vertical writing mode,
-    for Tibetan (or some other similar script) characters rotated 90 degrees clockwise.
+      line from which syllables seem, to hang in Tibetan and other similar scripts. In vertical writing mode,
+      for Tibetan (or some other similar script) characters rotated 90 degrees clockwise.
   */
   Hanging = 1751215719,
 
   /**
       Ideographic character face bottom or left edge,
-    if the direction is horizontal or vertical, respectively.
+      if the direction is horizontal or vertical, respectively.
   */
   IdeoFaceBottomOrLeft = 1768121954,
 
   /**
       Ideographic character face top or right edge,
-    if the direction is horizontal or vertical, respectively.
+      if the direction is horizontal or vertical, respectively.
   */
   IdeoFaceTopOrRight = 1768121972,
 
@@ -2131,7 +2132,7 @@ enum hb_ot_layout_baseline_tag_t
 
   /**
       Ideographic em-box bottom or left edge,
-    if the direction is horizontal or vertical, respectively.
+      if the direction is horizontal or vertical, respectively.
   */
   IdeoEmboxBottomOrLeft = 1768187247,
 
@@ -2142,13 +2143,13 @@ enum hb_ot_layout_baseline_tag_t
 
   /**
       The center of the ideographic em-box. Since: 4.0.0
-    if the direction is horizontal or vertical, respectively.
+      if the direction is horizontal or vertical, respectively.
   */
   IdeoEmboxCentral = 1231315813,
 
   /**
       The baseline about which mathematical characters are centered.
-    In vertical writing mode when mathematical characters rotated 90 degrees clockwise, are centered.
+      In vertical writing mode when mathematical characters rotated 90 degrees clockwise, are centered.
   */
   Math = 1835103336,
 }
@@ -2186,8 +2187,8 @@ enum hb_ot_layout_glyph_class_t
 
 /**
     The 'MATH' table constants, refer to
-  [OpenType documentation](https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table)
-  For more explanations.
+    [OpenType documentation](https://docs.microsoft.com/en-us/typography/opentype/spec/math#mathconstants-table)
+    For more explanations.
 */
 enum hb_ot_math_constant_t
 {
@@ -2479,14 +2480,14 @@ enum hb_ot_math_glyph_part_flags_t : uint
 {
   /**
       This is an extender glyph part that
-    can be repeated to reach the desired length.
+      can be repeated to reach the desired length.
   */
   Extender = 1,
 }
 
 /**
     The math kerning-table types defined for the four corners
-  of a glyph.
+    of a glyph.
 */
 enum hb_ot_math_kern_t
 {
@@ -2518,22 +2519,22 @@ enum hb_ot_meta_tag_t
 {
   /**
       Design languages. Text, using only
-    Basic Latin (ASCII) characters. Indicates languages and/or scripts
-    for the user audiences that the font was primarily designed for.
+      Basic Latin (ASCII) characters. Indicates languages and/or scripts
+      for the user audiences that the font was primarily designed for.
   */
   DesignLanguages = 1684827751,
 
   /**
       Supported languages. Text, using
-    only Basic Latin (ASCII) characters. Indicates languages and/or scripts
-    that the font is declared to be capable of supporting.
+      only Basic Latin (ASCII) characters. Indicates languages and/or scripts
+      that the font is declared to be capable of supporting.
   */
   SupportedLanguages = 1936485991,
 }
 
 /**
     Metric tags corresponding to [MVAR Value
-  Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags)
+    Tags](https://docs.microsoft.com/en-us/typography/opentype/spec/mvar#value-tags)
 */
 enum hb_ot_metrics_tag_t
 {
@@ -2680,9 +2681,9 @@ enum hb_ot_metrics_tag_t
 
 /**
     An enum type representing the pre-defined name IDs.
-  
-  For more information on these fields, see the
-  [OpenType spec](https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids).
+    
+    For more information on these fields, see the
+    [OpenType spec](https://docs.microsoft.com/en-us/typography/opentype/spec/name#name-ids).
 */
 enum hb_ot_name_id_predefined_t
 {
@@ -2708,7 +2709,7 @@ enum hb_ot_name_id_predefined_t
 
   /**
       Full font name that reflects
-    all family and relevant subfamily descriptors
+      all family and relevant subfamily descriptors
   */
   FullName = 4,
 
@@ -2759,7 +2760,7 @@ enum hb_ot_name_id_predefined_t
 
   /**
       URL where additional licensing
-    information can be found
+      information can be found
   */
   LicenseUrl = 14,
 
@@ -2832,11 +2833,11 @@ enum hb_ot_var_axis_flags_t : uint
 
 /**
     The values of this enumeration describe the compositing modes
-  that can be used when combining temporary redirected drawing
-  with the backdrop.
-  
-  See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details.
+    that can be used when combining temporary redirected drawing
+    with the backdrop.
+    
+    See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details.
 */
 enum hb_paint_composite_mode_t
 {
@@ -2857,7 +2858,7 @@ enum hb_paint_composite_mode_t
 
   /**
       draw source layer on top of destination layer
-    (bounded)
+      (bounded)
   */
   SrcOver = 3,
 
@@ -2868,43 +2869,43 @@ enum hb_paint_composite_mode_t
 
   /**
       draw source where there was destination content
-    (unbounded)
+      (unbounded)
   */
   SrcIn = 5,
 
   /**
       leave destination only where there was
-    source content (unbounded)
+      source content (unbounded)
   */
   DestIn = 6,
 
   /**
       draw source where there was no destination
-    content (unbounded)
+      content (unbounded)
   */
   SrcOut = 7,
 
   /**
       leave destination only where there was no
-    source content
+      source content
   */
   DestOut = 8,
 
   /**
       draw source on top of destination content and
-    only there
+      only there
   */
   SrcAtop = 9,
 
   /**
       leave destination on top of source content
-    and only there (unbounded)
+      and only there (unbounded)
   */
   DestAtop = 10,
 
   /**
       source and destination are shown where there is only
-    one of them
+      one of them
   */
   Xor = 11,
 
@@ -2915,136 +2916,136 @@ enum hb_paint_composite_mode_t
 
   /**
       source and destination are complemented and
-    multiplied. This causes the result to be at least as light as the lighter
-    inputs.
+      multiplied. This causes the result to be at least as light as the lighter
+      inputs.
   */
   Screen = 13,
 
   /**
       multiplies or screens, depending on the
-    lightness of the destination color.
+      lightness of the destination color.
   */
   Overlay = 14,
 
   /**
       replaces the destination with the source if it
-    is darker, otherwise keeps the source.
+      is darker, otherwise keeps the source.
   */
   Darken = 15,
 
   /**
       replaces the destination with the source if it
-    is lighter, otherwise keeps the source.
+      is lighter, otherwise keeps the source.
   */
   Lighten = 16,
 
   /**
       brightens the destination color to reflect
-    the source color.
+      the source color.
   */
   ColorDodge = 17,
 
   /**
       darkens the destination color to reflect
-    the source color.
+      the source color.
   */
   ColorBurn = 18,
 
   /**
       Multiplies or screens, dependent on source
-    color.
+      color.
   */
   HardLight = 19,
 
   /**
       Darkens or lightens, dependent on source
-    color.
+      color.
   */
   SoftLight = 20,
 
   /**
       Takes the difference of the source and
-    destination color.
+      destination color.
   */
   Difference = 21,
 
   /**
       Produces an effect similar to difference, but
-    with lower contrast.
+      with lower contrast.
   */
   Exclusion = 22,
 
   /**
       source and destination layers are multiplied.
-    This causes the result to be at least as dark as the darker inputs.
+      This causes the result to be at least as dark as the darker inputs.
   */
   Multiply = 23,
 
   /**
       Creates a color with the hue of the source
-    and the saturation and luminosity of the target.
+      and the saturation and luminosity of the target.
   */
   HslHue = 24,
 
   /**
       Creates a color with the saturation
-    of the source and the hue and luminosity of the target. Painting with
-    this mode onto a gray area produces no change.
+      of the source and the hue and luminosity of the target. Painting with
+      this mode onto a gray area produces no change.
   */
   HslSaturation = 25,
 
   /**
       Creates a color with the hue and saturation
-    of the source and the luminosity of the target. This preserves the gray
-    levels of the target and is useful for coloring monochrome images or
-    tinting color images.
+      of the source and the luminosity of the target. This preserves the gray
+      levels of the target and is useful for coloring monochrome images or
+      tinting color images.
   */
   HslColor = 26,
 
   /**
       Creates a color with the luminosity of
-    the source and the hue and saturation of the target. This produces an
-    inverse effect to @HB_PAINT_COMPOSITE_MODE_HSL_COLOR.
+      the source and the hue and saturation of the target. This produces an
+      inverse effect to @HB_PAINT_COMPOSITE_MODE_HSL_COLOR.
   */
   HslLuminosity = 27,
 }
 
 /**
     The values of this enumeration determine how color values
-  outside the minimum and maximum defined offset on a #hb_color_line_t
-  are determined.
-  
-  See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details.
+    outside the minimum and maximum defined offset on a #hb_color_line_t
+    are determined.
+    
+    See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details.
 */
 enum hb_paint_extend_t
 {
   /**
       Outside the defined interval,
-      the color of the closest color stop is used.
+        the color of the closest color stop is used.
   */
   Pad = 0,
 
   /**
       The color line is repeated over
-      repeated multiples of the defined interval
+        repeated multiples of the defined interval
   */
   Repeat = 1,
 
   /**
       The color line is repeated over
-         repeated intervals, as for the repeat mode.
-         However, in each repeated interval, the ordering of
-         color stops is the reverse of the adjacent interval.
+           repeated intervals, as for the repeat mode.
+           However, in each repeated interval, the ordering of
+           color stops is the reverse of the adjacent interval.
   */
   Reflect = 2,
 }
 
 /**
     Data type for scripts. Each #hb_script_t's value is an #hb_tag_t corresponding
-  to the four-letter values defined by [ISO 15924](https://unicode.org/iso15924/).
-  
-  See also the Script (sc) property of the Unicode Character Database.
+    to the four-letter values defined by [ISO 15924](https://unicode.org/iso15924/).
+    
+    See also the Script (sc) property of the Unicode Character Database.
 */
 enum hb_script_t
 {
@@ -3886,55 +3887,55 @@ enum hb_style_tag_t
 {
   /**
       Used to vary between non-italic and italic.
-    A value of 0 can be interpreted as "Roman" (non-italic); a value of 1 can
-    be interpreted as (fully) italic.
+      A value of 0 can be interpreted as "Roman" (non-italic); a value of 1 can
+      be interpreted as (fully) italic.
   */
   Italic = 1769234796,
 
   /**
       Used to vary design to suit different text sizes.
-    Non-zero. Values can be interpreted as text size, in points.
+      Non-zero. Values can be interpreted as text size, in points.
   */
   OpticalSize = 1869640570,
 
   /**
       Used to vary between upright and slanted text. Values
-    must be greater than -90 and less than +90. Values can be interpreted as
-    the angle, in counter-clockwise degrees, of oblique slant from whatever the
-    designer considers to be upright for that font design. Typical right-leaning
-    Italic fonts have a negative slant angle (typically around -12)
+      must be greater than -90 and less than +90. Values can be interpreted as
+      the angle, in counter-clockwise degrees, of oblique slant from whatever the
+      designer considers to be upright for that font design. Typical right-leaning
+      Italic fonts have a negative slant angle (typically around -12)
   */
   SlantAngle = 1936486004,
 
   /**
       same as @HB_STYLE_TAG_SLANT_ANGLE expression as ratio.
-    Typical right-leaning Italic fonts have a positive slant ratio (typically around 0.2)
+      Typical right-leaning Italic fonts have a positive slant ratio (typically around 0.2)
   */
   SlantRatio = 1399615092,
 
   /**
       Used to vary width of text from narrower to wider.
-    Non-zero. Values can be interpreted as a percentage of whatever the font
-    designer considers “normal width” for that font design.
+      Non-zero. Values can be interpreted as a percentage of whatever the font
+      designer considers “normal width” for that font design.
   */
   Width = 2003072104,
 
   /**
       Used to vary stroke thicknesses or other design details
-    to give variation from lighter to blacker. Values can be interpreted in direct
-    comparison to values for usWeightClass in the OS/2 table,
-    or the CSS font-weight property.
+      to give variation from lighter to blacker. Values can be interpreted in direct
+      comparison to values for usWeightClass in the OS/2 table,
+      or the CSS font-weight property.
   */
   Weight = 2003265652,
 }
 
 /**
     Data type for the Canonical_Combining_Class (ccc) property
-  from the Unicode Character Database.
-  
-  <note>Note: newer versions of Unicode may add new values.
-  Client programs should be ready to handle any value in the 0..254 range
-  being returned from [harfbuzz.global.unicodeCombiningClass].</note>
+    from the Unicode Character Database.
+    
+    <note>Note: newer versions of Unicode may add new values.
+    Client programs should be ready to handle any value in the 0..254 range
+    being returned from [harfbuzz.global.unicodeCombiningClass].</note>
 */
 enum hb_unicode_combining_class_t
 {
@@ -4226,7 +4227,7 @@ enum hb_unicode_combining_class_t
 
 /**
     Data type for the "General_Category" (gc) property from
-  the Unicode Character Database.
+    the Unicode Character Database.
 */
 enum hb_unicode_general_category_t
 {
@@ -4407,14 +4408,14 @@ struct hb_aat_layout_feature_selector_info_t
 
 /**
     Data type for blobs. A blob wraps a chunk of binary
-  data and facilitates its lifecycle management between
-  a client program and HarfBuzz.
+    data and facilitates its lifecycle management between
+    a client program and HarfBuzz.
 */
 struct hb_blob_t;
 
 /**
     The main structure holding the input text and its properties before shaping,
-  and output glyphs and their information after shaping.
+    and output glyphs and their information after shaping.
 */
 struct hb_buffer_t;
 
@@ -4465,14 +4466,14 @@ struct hb_color_line_t
 
 /**
     Information about a color stop on a color line.
-  
-  Color lines typically have offsets ranging between 0 and 1,
-  but that is not required.
-  
-  Note: despite @color being unpremultiplied here, interpolation in
-  gradients shall happen in premultiplied space. See the OpenType spec
-  [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details.
+    
+    Color lines typically have offsets ranging between 0 and 1,
+    but that is not required.
+    
+    Note: despite @color being unpremultiplied here, interpolation in
+    gradients shall happen in premultiplied space. See the OpenType spec
+    [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details.
 */
 struct hb_color_stop_t
 {
@@ -4494,11 +4495,11 @@ struct hb_color_stop_t
 
 /**
     Glyph draw callbacks.
-  
-  #hb_draw_move_to_func_t, #hb_draw_line_to_func_t and
-  #hb_draw_cubic_to_func_t calls are necessary to be defined but we translate
-  #hb_draw_quadratic_to_func_t calls to #hb_draw_cubic_to_func_t if the
-  callback isn't defined.
+    
+    #hb_draw_move_to_func_t, #hb_draw_line_to_func_t and
+    #hb_draw_cubic_to_func_t calls are necessary to be defined but we translate
+    #hb_draw_quadratic_to_func_t calls to #hb_draw_cubic_to_func_t if the
+    callback isn't defined.
 */
 struct hb_draw_funcs_t;
 
@@ -4561,10 +4562,10 @@ struct hb_face_t;
 
 /**
     The #hb_feature_t is the structure that holds information about requested
-  feature application. The feature will be applied with the given value to all
-  glyphs which are in clusters between @start (inclusive) and @end (exclusive).
-  Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
-  specifies that the feature always applies to the entire buffer.
+    feature application. The feature will be applied with the given value to all
+    glyphs which are in clusters between @start (inclusive) and @end (exclusive).
+    Setting start to #HB_FEATURE_GLOBAL_START and end to #HB_FEATURE_GLOBAL_END
+    specifies that the feature always applies to the entire buffer.
 */
 struct hb_feature_t
 {
@@ -4575,8 +4576,8 @@ struct hb_feature_t
 
   /**
       The value of the feature. 0 disables the feature, non-zero (usually
-    1) enables the feature.  For features implemented as lookup type 3 (like
-    'salt') the @value is a one based index into the alternates.
+      1) enables the feature.  For features implemented as lookup type 3 (like
+      'salt') the @value is a one based index into the alternates.
   */
   uint value;
 
@@ -4598,9 +4599,9 @@ struct hb_font_t;
 
 /**
     Font-wide extent values, measured in font units.
-  
-  Note that typically @ascender is positive and @descender
-  negative, in coordinate systems that grow up.
+    
+    Note that typically @ascender is positive and @descender
+    negative, in coordinate systems that grow up.
 */
 struct hb_font_extents_t
 {
@@ -4649,20 +4650,20 @@ struct hb_font_extents_t
 
 /**
     Data type containing a set of virtual methods used for
-  working on #hb_font_t font objects.
-  
-  HarfBuzz provides a lightweight default function for each of
-  the methods in #hb_font_funcs_t. Client programs can implement
-  their own replacements for the individual font functions, as
-  needed, and replace the default by calling the setter for a
-  method.
+    working on #hb_font_t font objects.
+    
+    HarfBuzz provides a lightweight default function for each of
+    the methods in #hb_font_funcs_t. Client programs can implement
+    their own replacements for the individual font functions, as
+    needed, and replace the default by calling the setter for a
+    method.
 */
 struct hb_font_funcs_t;
 
 /**
     Glyph extent values, measured in font units.
-  
-  Note that @height is negative, in coordinate systems that grow up.
+    
+    Note that @height is negative, in coordinate systems that grow up.
 */
 struct hb_glyph_extents_t
 {
@@ -4689,13 +4690,13 @@ struct hb_glyph_extents_t
 
 /**
     The #hb_glyph_info_t is the structure that holds information about the
-  glyphs and their relation to input text.
+    glyphs and their relation to input text.
 */
 struct hb_glyph_info_t
 {
   /**
       either a Unicode code point (before shaping) or a glyph index
-                (after shaping).
+                  (after shaping).
   */
   hb_codepoint_t codepoint;
 
@@ -4704,16 +4705,16 @@ struct hb_glyph_info_t
 
   /**
       the index of the character in the original text that corresponds
-              to this #hb_glyph_info_t, or whatever the client passes to
-              [harfbuzz.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
-              @cluster value, if they resulted from the same character (e.g. one
-              to many glyph substitution), and when more than one character gets
-              merged in the same glyph (e.g. many to one glyph substitution) the
-              #hb_glyph_info_t will have the smallest cluster value of them.
-              By default some characters are merged into the same cluster
-              (e.g. combining marks have the same cluster as their bases)
-              even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
-              allow selecting more fine-grained cluster handling.
+                to this #hb_glyph_info_t, or whatever the client passes to
+                [harfbuzz.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+                @cluster value, if they resulted from the same character (e.g. one
+                to many glyph substitution), and when more than one character gets
+                merged in the same glyph (e.g. many to one glyph substitution) the
+                #hb_glyph_info_t will have the smallest cluster value of them.
+                By default some characters are merged into the same cluster
+                (e.g. combining marks have the same cluster as their bases)
+                even if they are separate glyphs, [harfbuzz.global.bufferSetClusterLevel]
+                allow selecting more fine-grained cluster handling.
   */
   uint cluster;
 
@@ -4726,32 +4727,32 @@ struct hb_glyph_info_t
 
 /**
     The #hb_glyph_position_t is the structure that holds the positions of the
-  glyph in both horizontal and vertical directions. All positions in
-  #hb_glyph_position_t are relative to the current point.
+    glyph in both horizontal and vertical directions. All positions in
+    #hb_glyph_position_t are relative to the current point.
 */
 struct hb_glyph_position_t
 {
   /**
       how much the line advances after drawing this glyph when setting
-                text in horizontal direction.
+                  text in horizontal direction.
   */
   hb_position_t xAdvance;
 
   /**
       how much the line advances after drawing this glyph when setting
-                text in vertical direction.
+                  text in vertical direction.
   */
   hb_position_t yAdvance;
 
   /**
       how much the glyph moves on the X-axis before drawing it, this
-               should not affect how much the line advances.
+                 should not affect how much the line advances.
   */
   hb_position_t xOffset;
 
   /**
       how much the glyph moves on the Y-axis before drawing it, this
-               should not affect how much the line advances.
+                 should not affect how much the line advances.
   */
   hb_position_t yOffset;
 
@@ -4761,7 +4762,7 @@ struct hb_glyph_position_t
 
 /**
     Data type for languages. Each #hb_language_t corresponds to a BCP 47
-  language tag.
+    language tag.
 */
 alias hb_language_t = hb_language_t_st*;
 
@@ -4774,10 +4775,10 @@ struct hb_map_t;
 
 /**
     Pairs of glyph and color index.
-  
-  A color index of 0xFFFF does not refer to a palette
-  color, but indicates that the foreground color should
-  be used.
+    
+    A color index of 0xFFFF does not refer to a palette
+    color, but indicates that the foreground color should
+    be used.
 */
 struct hb_ot_color_layer_t
 {
@@ -4794,8 +4795,8 @@ struct hb_ot_color_layer_t
 
 /**
     Data type to hold information for a "part" component of a math-variant glyph.
-  Large variants for stretchable math glyphs (such as parentheses) can be constructed
-  on the fly from parts.
+    Large variants for stretchable math glyphs (such as parentheses) can be constructed
+    on the fly from parts.
 */
 struct hb_ot_math_glyph_part_t
 {
@@ -4909,11 +4910,11 @@ struct hb_ot_var_axis_t
 
 /**
     Data type for holding variation-axis values.
-  
-  The minimum, default, and maximum values are in un-normalized, user scales.
-  
-  <note>Note: at present, the only flag defined for @flags is
-  #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
+    
+    The minimum, default, and maximum values are in un-normalized, user scales.
+    
+    <note>Note: at present, the only flag defined for @flags is
+    #HB_OT_VAR_AXIS_FLAG_HIDDEN.</note>
 */
 struct hb_ot_var_axis_info_t
 {
@@ -4958,32 +4959,32 @@ struct hb_ot_var_axis_info_t
 
 /**
     Glyph paint callbacks.
-  
-  The callbacks assume that the caller maintains a stack
-  of current transforms, clips and intermediate surfaces,
-  as evidenced by the pairs of push/pop callbacks. The
-  push/pop calls will be properly nested, so it is fine
-  to store the different kinds of object on a single stack.
-  
-  Not all callbacks are required for all kinds of glyphs.
-  For rendering COLRv0 or non-color outline glyphs, the
-  gradient callbacks are not needed, and the composite
-  callback only needs to handle simple alpha compositing
-  (#HB_PAINT_COMPOSITE_MODE_SRC_OVER).
-  
-  The paint-image callback is only needed for glyphs
-  with image blobs in the CBDT, sbix or SVG tables.
-  
-  The custom-palette-color callback is only necessary if
-  you want to override colors from the font palette with
-  custom colors.
+    
+    The callbacks assume that the caller maintains a stack
+    of current transforms, clips and intermediate surfaces,
+    as evidenced by the pairs of push/pop callbacks. The
+    push/pop calls will be properly nested, so it is fine
+    to store the different kinds of object on a single stack.
+    
+    Not all callbacks are required for all kinds of glyphs.
+    For rendering COLRv0 or non-color outline glyphs, the
+    gradient callbacks are not needed, and the composite
+    callback only needs to handle simple alpha compositing
+    (#HB_PAINT_COMPOSITE_MODE_SRC_OVER).
+    
+    The paint-image callback is only needed for glyphs
+    with image blobs in the CBDT, sbix or SVG tables.
+    
+    The custom-palette-color callback is only necessary if
+    you want to override colors from the font palette with
+    custom colors.
 */
 struct hb_paint_funcs_t;
 
 /**
     The structure that holds various text properties of an #hb_buffer_t. Can be
-  set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
-  [harfbuzz.global.bufferGetSegmentProperties], respectively.
+    set and retrieved using [harfbuzz.global.bufferSetSegmentProperties] and
+    [harfbuzz.global.bufferGetSegmentProperties], respectively.
 */
 struct hb_segment_properties_t
 {
@@ -5011,34 +5012,34 @@ struct hb_segment_properties_t
 
 /**
     Data type for holding a set of integers. #hb_set_t's are
-  used to gather and contain glyph IDs, Unicode code
-  points, and various other collections of discrete
-  values.
+    used to gather and contain glyph IDs, Unicode code
+    points, and various other collections of discrete
+    values.
 */
 struct hb_set_t;
 
 /**
     Data type for holding a shaping plan.
-  
-  Shape plans contain information about how HarfBuzz will shape a
-  particular text segment, based on the segment's properties and the
-  capabilities in the font face in use.
-  
-  Shape plans can be queried about how shaping will perform, given a set
-  of specific input parameters (script, language, direction, features,
-  etc.).
+    
+    Shape plans contain information about how HarfBuzz will shape a
+    particular text segment, based on the segment's properties and the
+    capabilities in the font face in use.
+    
+    Shape plans can be queried about how shaping will perform, given a set
+    of specific input parameters (script, language, direction, features,
+    etc.).
 */
 struct hb_shape_plan_t;
 
 /**
     Data type containing a set of virtual methods used for
-  accessing various Unicode character properties.
-  
-  HarfBuzz provides a default function for each of the
-  methods in #hb_unicode_funcs_t. Client programs can implement
-  their own replacements for the individual Unicode functions, as
-  needed, and replace the default by calling the setter for a
-  method.
+    accessing various Unicode character properties.
+    
+    HarfBuzz provides a default function for each of the
+    methods in #hb_unicode_funcs_t. Client programs can implement
+    their own replacements for the individual Unicode functions, as
+    needed, and replace the default by calling the setter for a
+    method.
 */
 struct hb_unicode_funcs_t;
 
@@ -5100,8 +5101,8 @@ union hb_var_num_t
 
 /**
     Data type for holding variation data. Registered OpenType
-  variation-axis tags are listed in
-  [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
+    variation-axis tags are listed in
+    [OpenType Axis Tag Registry](https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg).
 */
 struct hb_variation_t
 {

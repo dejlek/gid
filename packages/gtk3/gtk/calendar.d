@@ -1,3 +1,4 @@
+/// Module for [Calendar] class
 module gtk.calendar;
 
 import atk.implementor_iface;
@@ -14,41 +15,44 @@ import gtk.widget;
 
 /**
     #GtkCalendar is a widget that displays a Gregorian calendar, one month
-  at a time. It can be created with [gtk.calendar.Calendar.new_].
-  
-  The month and year currently displayed can be altered with
-  [gtk.calendar.Calendar.selectMonth]. The exact day can be selected from the
-  displayed month using [gtk.calendar.Calendar.selectDay].
-  
-  To place a visual marker on a particular day, use [gtk.calendar.Calendar.markDay]
-  and to remove the marker, [gtk.calendar.Calendar.unmarkDay]. Alternative, all
-  marks can be cleared with [gtk.calendar.Calendar.clearMarks].
-  
-  The way in which the calendar itself is displayed can be altered using
-  [gtk.calendar.Calendar.setDisplayOptions].
-  
-  The selected date can be retrieved from a #GtkCalendar using
-  [gtk.calendar.Calendar.getDate].
-  
-  Users should be aware that, although the Gregorian calendar is the
-  legal calendar in most countries, it was adopted progressively
-  between 1582 and 1929. Display before these dates is likely to be
-  historically incorrect.
+    at a time. It can be created with [gtk.calendar.Calendar.new_].
+    
+    The month and year currently displayed can be altered with
+    [gtk.calendar.Calendar.selectMonth]. The exact day can be selected from the
+    displayed month using [gtk.calendar.Calendar.selectDay].
+    
+    To place a visual marker on a particular day, use [gtk.calendar.Calendar.markDay]
+    and to remove the marker, [gtk.calendar.Calendar.unmarkDay]. Alternative, all
+    marks can be cleared with [gtk.calendar.Calendar.clearMarks].
+    
+    The way in which the calendar itself is displayed can be altered using
+    [gtk.calendar.Calendar.setDisplayOptions].
+    
+    The selected date can be retrieved from a #GtkCalendar using
+    [gtk.calendar.Calendar.getDate].
+    
+    Users should be aware that, although the Gregorian calendar is the
+    legal calendar in most countries, it was adopted progressively
+    between 1582 and 1929. Display before these dates is likely to be
+    historically incorrect.
 */
 class Calendar : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,7 +65,7 @@ class Calendar : gtk.widget.Widget
 
   /**
       Creates a new calendar, with the current date being selected.
-    Returns:     a newly #GtkCalendar widget
+      Returns: a newly #GtkCalendar widget
   */
   this()
   {
@@ -80,13 +84,14 @@ class Calendar : gtk.widget.Widget
 
   /**
       Obtains the selected date from a #GtkCalendar.
-    Params:
-      year =       location to store the year as a decimal
-            number (e.g. 2011), or null
-      month =       location to store the month number
-            (between 0 and 11), or null
-      day =       location to store the day number (between
-            1 and 31), or null
+  
+      Params:
+        year = location to store the year as a decimal
+              number (e.g. 2011), or null
+        month = location to store the month number
+              (between 0 and 11), or null
+        day = location to store the day number (between
+              1 and 31), or null
   */
   void getDate(out uint year, out uint month, out uint day)
   {
@@ -95,9 +100,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Returns if the day of the calendar is already marked.
-    Params:
-      day =       the day number between 1 and 31.
-    Returns:     whether the day is marked.
+  
+      Params:
+        day = the day number between 1 and 31.
+      Returns: whether the day is marked.
   */
   bool getDayIsMarked(uint day)
   {
@@ -108,8 +114,8 @@ class Calendar : gtk.widget.Widget
 
   /**
       Queries the height of detail cells, in rows.
-    See #GtkCalendar:detail-width-chars.
-    Returns:     The height of detail cells, in rows.
+      See #GtkCalendar:detail-width-chars.
+      Returns: The height of detail cells, in rows.
   */
   int getDetailHeightRows()
   {
@@ -120,8 +126,8 @@ class Calendar : gtk.widget.Widget
 
   /**
       Queries the width of detail cells, in characters.
-    See #GtkCalendar:detail-width-chars.
-    Returns:     The width of detail cells, in characters.
+      See #GtkCalendar:detail-width-chars.
+      Returns: The width of detail cells, in characters.
   */
   int getDetailWidthChars()
   {
@@ -132,7 +138,7 @@ class Calendar : gtk.widget.Widget
 
   /**
       Returns the current display options of calendar.
-    Returns:     the display options.
+      Returns: the display options.
   */
   gtk.types.CalendarDisplayOptions getDisplayOptions()
   {
@@ -144,8 +150,9 @@ class Calendar : gtk.widget.Widget
 
   /**
       Places a visual marker on a particular day.
-    Params:
-      day =       the day number to mark between 1 and 31.
+  
+      Params:
+        day = the day number to mark between 1 and 31.
   */
   void markDay(uint day)
   {
@@ -154,9 +161,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Selects a day from the current month.
-    Params:
-      day =       the day number between 1 and 31, or 0 to unselect
-          the currently selected day.
+  
+      Params:
+        day = the day number between 1 and 31, or 0 to unselect
+            the currently selected day.
   */
   void selectDay(uint day)
   {
@@ -165,9 +173,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Shifts the calendar to a different month.
-    Params:
-      month =       a month number between 0 and 11.
-      year =       the year the month is in.
+  
+      Params:
+        month = a month number between 0 and 11.
+        year = the year the month is in.
   */
   void selectMonth(uint month, uint year)
   {
@@ -176,17 +185,18 @@ class Calendar : gtk.widget.Widget
 
   /**
       Installs a function which provides Pango markup with detail information
-    for each day. Examples for such details are holidays or appointments. That
-    information is shown below each day when #GtkCalendar:show-details is set.
-    A tooltip containing with full detail information is provided, if the entire
-    text should not fit into the details area, or if #GtkCalendar:show-details
-    is not set.
-    
-    The size of the details area can be restricted by setting the
-    #GtkCalendar:detail-width-chars and #GtkCalendar:detail-height-rows
-    properties.
-    Params:
-      func =       a function providing details for each day.
+      for each day. Examples for such details are holidays or appointments. That
+      information is shown below each day when #GtkCalendar:show-details is set.
+      A tooltip containing with full detail information is provided, if the entire
+      text should not fit into the details area, or if #GtkCalendar:show-details
+      is not set.
+      
+      The size of the details area can be restricted by setting the
+      #GtkCalendar:detail-width-chars and #GtkCalendar:detail-height-rows
+      properties.
+  
+      Params:
+        func = a function providing details for each day.
   */
   void setDetailFunc(gtk.types.CalendarDetailFunc func)
   {
@@ -209,9 +219,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Updates the height of detail cells.
-    See #GtkCalendar:detail-height-rows.
-    Params:
-      rows =       detail height in rows.
+      See #GtkCalendar:detail-height-rows.
+  
+      Params:
+        rows = detail height in rows.
   */
   void setDetailHeightRows(int rows)
   {
@@ -220,9 +231,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Updates the width of detail cells.
-    See #GtkCalendar:detail-width-chars.
-    Params:
-      chars =       detail width in characters.
+      See #GtkCalendar:detail-width-chars.
+  
+      Params:
+        chars = detail width in characters.
   */
   void setDetailWidthChars(int chars)
   {
@@ -231,9 +243,10 @@ class Calendar : gtk.widget.Widget
 
   /**
       Sets display options (whether to display the heading and the month
-    headings).
-    Params:
-      flags =       the display options to set
+      headings).
+  
+      Params:
+        flags = the display options to set
   */
   void setDisplayOptions(gtk.types.CalendarDisplayOptions flags)
   {
@@ -242,8 +255,9 @@ class Calendar : gtk.widget.Widget
 
   /**
       Removes the visual marker from a particular day.
-    Params:
-      day =       the day number to unmark between 1 and 31.
+  
+      Params:
+        day = the day number to unmark between 1 and 31.
   */
   void unmarkDay(uint day)
   {
@@ -251,34 +265,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `DaySelected` signal.
+  
       Emitted when the user selects a day.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias DaySelectedCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias DaySelectedCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to DaySelected signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDaySelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DaySelectedCallbackDlg) || is(T : DaySelectedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -286,34 +302,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `DaySelectedDoubleClick` signal.
+  
       Emitted when the user double-clicks a day.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias DaySelectedDoubleClickCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias DaySelectedDoubleClickCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to DaySelectedDoubleClick signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDaySelectedDoubleClick(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DaySelectedDoubleClickCallbackDlg) || is(T : DaySelectedDoubleClickCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -321,35 +339,37 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
-      Emitted when the user clicks a button to change the selected month on a
-    calendar.
+      Connect to `MonthChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias MonthChangedCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias MonthChangedCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to MonthChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the user clicks a button to change the selected month on a
+      calendar.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMonthChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MonthChangedCallbackDlg) || is(T : MonthChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -357,34 +377,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `NextMonth` signal.
+  
       Emitted when the user switched to the next month.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias NextMonthCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias NextMonthCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to NextMonth signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectNextMonth(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : NextMonthCallbackDlg) || is(T : NextMonthCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -392,34 +414,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `NextYear` signal.
+  
       Emitted when user switched to the next year.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias NextYearCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias NextYearCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to NextYear signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectNextYear(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : NextYearCallbackDlg) || is(T : NextYearCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -427,34 +451,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `PrevMonth` signal.
+  
       Emitted when the user switched to the previous month.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias PrevMonthCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias PrevMonthCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to PrevMonth signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PrevMonthCallbackDlg) || is(T : PrevMonthCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -462,34 +488,36 @@ class Calendar : gtk.widget.Widget
   }
 
   /**
+      Connect to `PrevYear` signal.
+  
       Emitted when user switched to the previous year.
   
-    ## Parameters
-    $(LIST
-      * $(B calendar) the instance the signal is connected to
-    )
-  */
-  alias PrevYearCallbackDlg = void delegate(gtk.calendar.Calendar calendar);
-
-  /** ditto */
-  alias PrevYearCallbackFunc = void function(gtk.calendar.Calendar calendar);
-
-  /**
-    Connect to PrevYear signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.calendar.Calendar calendar))
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPrevYear(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PrevYearCallbackDlg) || is(T : PrevYearCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.calendar.Calendar)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto calendar = getVal!(gtk.calendar.Calendar)(_paramVals);
-      _dClosure.dlg(calendar);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

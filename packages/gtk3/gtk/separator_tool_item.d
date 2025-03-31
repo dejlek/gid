@@ -1,3 +1,4 @@
+/// Module for [SeparatorToolItem] class
 module gtk.separator_tool_item;
 
 import atk.implementor_iface;
@@ -14,33 +15,36 @@ import gtk.types;
 
 /**
     A #GtkSeparatorToolItem is a #GtkToolItem that separates groups of other
-  #GtkToolItems. Depending on the theme, a #GtkSeparatorToolItem will
-  often look like a vertical line on horizontally docked toolbars.
-  
-  If the #GtkToolbar child property “expand” is true and the property
-  #GtkSeparatorToolItem:draw is false, a #GtkSeparatorToolItem will act as
-  a “spring” that forces other items to the ends of the toolbar.
-  
-  Use [gtk.separator_tool_item.SeparatorToolItem.new_] to create a new #GtkSeparatorToolItem.
-  
-  # CSS nodes
-  
-  GtkSeparatorToolItem has a single CSS node with name separator.
+    #GtkToolItems. Depending on the theme, a #GtkSeparatorToolItem will
+    often look like a vertical line on horizontally docked toolbars.
+    
+    If the #GtkToolbar child property “expand” is true and the property
+    #GtkSeparatorToolItem:draw is false, a #GtkSeparatorToolItem will act as
+    a “spring” that forces other items to the ends of the toolbar.
+    
+    Use [gtk.separator_tool_item.SeparatorToolItem.new_] to create a new #GtkSeparatorToolItem.
+    
+    # CSS nodes
+    
+    GtkSeparatorToolItem has a single CSS node with name separator.
 */
 class SeparatorToolItem : gtk.tool_item.ToolItem
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_tool_item_get_type != &gidSymbolNotFound ? gtk_separator_tool_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,7 +57,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
 
   /**
       Create a new #GtkSeparatorToolItem
-    Returns:     the new #GtkSeparatorToolItem
+      Returns: the new #GtkSeparatorToolItem
   */
   this()
   {
@@ -64,8 +68,8 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
 
   /**
       Returns whether item is drawn as a line, or just blank.
-    See [gtk.separator_tool_item.SeparatorToolItem.setDraw].
-    Returns:     true if item is drawn as a line, or just blank.
+      See [gtk.separator_tool_item.SeparatorToolItem.setDraw].
+      Returns: true if item is drawn as a line, or just blank.
   */
   bool getDraw()
   {
@@ -76,10 +80,11 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
 
   /**
       Whether item is drawn as a vertical line, or just blank.
-    Setting this to false along with [gtk.tool_item.ToolItem.setExpand] is useful
-    to create an item that forces following items to the end of the toolbar.
-    Params:
-      draw =       whether item is drawn as a vertical line
+      Setting this to false along with [gtk.tool_item.ToolItem.setExpand] is useful
+      to create an item that forces following items to the end of the toolbar.
+  
+      Params:
+        draw = whether item is drawn as a vertical line
   */
   void setDraw(bool draw)
   {

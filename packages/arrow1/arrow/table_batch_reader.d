@@ -1,3 +1,4 @@
+/// Module for [TableBatchReader] class
 module arrow.table_batch_reader;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import gid.gid;
 class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_batch_reader_get_type != &gidSymbolNotFound ? garrow_table_batch_reader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,11 +46,12 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
 
   /**
       Set the desired maximum chunk size of record batches.
-    
-    The actual chunk size of each record batch may be smaller,
-    depending on actual chunking characteristics of each table column.
-    Params:
-      maxChunkSize =       The maximum chunk size of record batches.
+      
+      The actual chunk size of each record batch may be smaller,
+      depending on actual chunking characteristics of each table column.
+  
+      Params:
+        maxChunkSize = The maximum chunk size of record batches.
   */
   void setMaxChunkSize(long maxChunkSize)
   {

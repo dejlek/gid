@@ -1,3 +1,4 @@
+/// Module for [ResizableBuffer] class
 module arrow.resizable_buffer;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import glib.error;
 class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_resizable_buffer_get_type != &gidSymbolNotFound ? garrow_resizable_buffer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

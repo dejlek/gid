@@ -1,3 +1,4 @@
+/// Module for [DtlsServerConnection] interface
 module gio.dtls_server_connection;
 
 public import gio.dtls_server_connection_iface_proxy;
@@ -12,11 +13,12 @@ import gobject.object;
 
 /**
     [gio.dtls_server_connection.DtlsServerConnection] is the server-side subclass of
-  [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
+    [gio.dtls_connection.DtlsConnection], representing a server-side DTLS connection.
 */
 interface DtlsServerConnection
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -25,11 +27,13 @@ interface DtlsServerConnection
 
   /**
       Creates a new #GDtlsServerConnection wrapping base_socket.
-    Params:
-      baseSocket =       the #GDatagramBased to wrap
-      certificate =       the default server certificate, or null
-    Returns:     the new
-        #GDtlsServerConnection, or null on error
+  
+      Params:
+        baseSocket = the #GDatagramBased to wrap
+        certificate = the default server certificate, or null
+      Returns: the new
+          #GDtlsServerConnection, or null on error
+      Throws: [ErrorG]
   */
   static gio.dtls_server_connection.DtlsServerConnection new_(gio.datagram_based.DatagramBased baseSocket, gio.tls_certificate.TlsCertificate certificate = null)
   {

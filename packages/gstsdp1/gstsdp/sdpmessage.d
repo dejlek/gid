@@ -1,3 +1,4 @@
+/// Module for [SDPMessage] class
 module gstsdp.sdpmessage;
 
 import gid.gid;
@@ -18,32 +19,37 @@ import gstsdp.types;
 
 /**
     The GstSDPMessage helper functions makes it easy to parse and create SDP
-  messages.
+    messages.
 */
 class SDPMessage : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstSDPMessage.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_sdp_message_get_type != &gidSymbolNotFound ? gst_sdp_message_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -115,10 +121,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add the attribute with key and value to msg.
-    Params:
-      key =       the key
-      value =       the value
-    Returns:     GST_SDP_OK.
+  
+      Params:
+        key = the key
+        value = the value
+      Returns: GST_SDP_OK.
   */
   gstsdp.types.SDPResult addAttribute(string key, string value = null)
   {
@@ -132,10 +139,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add the specified bandwidth information to msg.
-    Params:
-      bwtype =       the bandwidth modifier type
-      bandwidth =       the bandwidth in kilobits per second
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        bwtype = the bandwidth modifier type
+        bandwidth = the bandwidth in kilobits per second
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth)
   {
@@ -148,9 +156,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add email to the list of emails in msg.
-    Params:
-      email =       an email
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        email = an email
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addEmail(string email)
   {
@@ -163,11 +172,12 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Adds media to the array of medias in msg. This function takes ownership of
-    the contents of media so that media will have to be reinitialized with
-    [gstsdp.sdpmedia.SDPMedia.init_] before it can be used again.
-    Params:
-      media =       a #GstSDPMedia to add
-    Returns:     a #GstSDPResult.
+      the contents of media so that media will have to be reinitialized with
+      [gstsdp.sdpmedia.SDPMedia.init_] before it can be used again.
+  
+      Params:
+        media = a #GstSDPMedia to add
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media)
   {
@@ -179,9 +189,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add phone to the list of phones in msg.
-    Params:
-      phone =       a phone
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        phone = a phone
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addPhone(string phone)
   {
@@ -194,11 +205,12 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add time information start and stop to msg.
-    Params:
-      start =       the start time
-      stop =       the stop time
-      repeat =       the repeat times
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        start = the start time
+        stop = the stop time
+        repeat = the repeat times
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addTime(string start, string stop, string[] repeat)
   {
@@ -217,10 +229,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Add time zone information to msg.
-    Params:
-      adjTime =       the NTP time that a time zone adjustment happens
-      typedTime =       the offset from the time when the session was first scheduled
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        adjTime = the NTP time that a time zone adjustment happens
+        typedTime = the offset from the time when the session was first scheduled
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addZone(string adjTime, string typedTime)
   {
@@ -234,7 +247,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Convert the contents of msg to a text string.
-    Returns:     A dynamically allocated string representing the SDP description.
+      Returns: A dynamically allocated string representing the SDP description.
   */
   string asText()
   {
@@ -246,7 +259,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of attributes in msg.
-    Returns:     the number of attributes in msg.
+      Returns: the number of attributes in msg.
   */
   uint attributesLen()
   {
@@ -257,9 +270,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Mapping of attributes of #GstSDPMessage to #GstCaps
-    Params:
-      caps =       a #GstCaps
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        caps = a #GstCaps
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps)
   {
@@ -271,7 +285,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of bandwidth information in msg.
-    Returns:     the number of bandwidth information in msg.
+      Returns: the number of bandwidth information in msg.
   */
   uint bandwidthsLen()
   {
@@ -282,10 +296,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Allocate a new copy of msg and store the result in copy. The value in
-    copy should be release with gst_sdp_message_free function.
-    Params:
-      copy =       pointer to new #GstSDPMessage
-    Returns:     a #GstSDPResult
+      copy should be release with gst_sdp_message_free function.
+  
+      Params:
+        copy = pointer to new #GstSDPMessage
+      Returns: a #GstSDPResult
   */
   gstsdp.types.SDPResult copy(out gstsdp.sdpmessage.SDPMessage copy)
   {
@@ -299,7 +314,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Dump the parsed contents of msg to stdout.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult dump()
   {
@@ -311,7 +326,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of emails in msg.
-    Returns:     the number of emails in msg.
+      Returns: the number of emails in msg.
   */
   uint emailsLen()
   {
@@ -322,9 +337,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the attribute at position idx in msg.
-    Params:
-      idx =       the index
-    Returns:     the #GstSDPAttribute at position idx.
+  
+      Params:
+        idx = the index
+      Returns: the #GstSDPAttribute at position idx.
   */
   gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx)
   {
@@ -336,9 +352,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the first attribute with key key in msg.
-    Params:
-      key =       the key
-    Returns:     the attribute value of the first attribute with key.
+  
+      Params:
+        key = the key
+      Returns: the attribute value of the first attribute with key.
   */
   string getAttributeVal(string key)
   {
@@ -351,10 +368,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the nth attribute with key key in msg.
-    Params:
-      key =       the key
-      nth =       the index
-    Returns:     the attribute value of the nth attribute with key.
+  
+      Params:
+        key = the key
+        nth = the index
+      Returns: the attribute value of the nth attribute with key.
   */
   string getAttributeValN(string key, uint nth)
   {
@@ -367,9 +385,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the bandwidth at index idx from msg.
-    Params:
-      idx =       the bandwidth index
-    Returns:     a #GstSDPBandwidth.
+  
+      Params:
+        idx = the bandwidth index
+      Returns: a #GstSDPBandwidth.
   */
   gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx)
   {
@@ -381,7 +400,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the connection of msg.
-    Returns:     a #GstSDPConnection. The result remains valid as long as msg is valid.
+      Returns: a #GstSDPConnection. The result remains valid as long as msg is valid.
   */
   gstsdp.sdpconnection.SDPConnection getConnection()
   {
@@ -393,9 +412,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the email with number idx from msg.
-    Params:
-      idx =       an email index
-    Returns:     the email at position idx.
+  
+      Params:
+        idx = an email index
+      Returns: the email at position idx.
   */
   string getEmail(uint idx)
   {
@@ -407,7 +427,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the information in msg.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   string getInformation()
   {
@@ -419,7 +439,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the encryption information from msg.
-    Returns:     a #GstSDPKey.
+      Returns: a #GstSDPKey.
   */
   gstsdp.sdpkey.SDPKey getKey()
   {
@@ -431,9 +451,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the media description at index idx in msg.
-    Params:
-      idx =       the index
-    Returns:     a #GstSDPMedia.
+  
+      Params:
+        idx = the index
+      Returns: a #GstSDPMedia.
   */
   gstsdp.sdpmedia.SDPMedia getMedia(uint idx)
   {
@@ -445,7 +466,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the origin of msg.
-    Returns:     a #GstSDPOrigin. The result remains valid as long as msg is valid.
+      Returns: a #GstSDPOrigin. The result remains valid as long as msg is valid.
   */
   gstsdp.sdporigin.SDPOrigin getOrigin()
   {
@@ -457,9 +478,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the phone with number idx from msg.
-    Params:
-      idx =       a phone index
-    Returns:     the phone at position idx.
+  
+      Params:
+        idx = a phone index
+      Returns: the phone at position idx.
   */
   string getPhone(uint idx)
   {
@@ -471,7 +493,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the session name in msg.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   string getSessionName()
   {
@@ -483,9 +505,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get time information with index idx from msg.
-    Params:
-      idx =       the time index
-    Returns:     a #GstSDPTime.
+  
+      Params:
+        idx = the time index
+      Returns: a #GstSDPTime.
   */
   gstsdp.sdptime.SDPTime getTime(uint idx)
   {
@@ -497,7 +520,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the URI in msg.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   string getUri()
   {
@@ -509,7 +532,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the version in msg.
-    Returns:     a #GstSDPResult.
+      Returns: a #GstSDPResult.
   */
   string getVersion()
   {
@@ -521,9 +544,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get time zone information with index idx from msg.
-    Params:
-      idx =       the zone index
-    Returns:     a #GstSDPZone.
+  
+      Params:
+        idx = the zone index
+      Returns: a #GstSDPZone.
   */
   gstsdp.sdpzone.SDPZone getZone(uint idx)
   {
@@ -535,12 +559,13 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert attribute into the array of attributes in msg
-    at index idx.
-    When -1 is given as idx, the attribute is inserted at the end.
-    Params:
-      idx =       an index
-      attr =       a #GstSDPAttribute
-    Returns:     a #GstSDPResult.
+      at index idx.
+      When -1 is given as idx, the attribute is inserted at the end.
+  
+      Params:
+        idx = an index
+        attr = a #GstSDPAttribute
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
@@ -552,12 +577,13 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert bandwidth parameters into the array of bandwidths in msg
-    at index idx.
-    When -1 is given as idx, the bandwidth is inserted at the end.
-    Params:
-      idx =       an index
-      bw =       the bandwidth
-    Returns:     a #GstSDPResult.
+      at index idx.
+      When -1 is given as idx, the bandwidth is inserted at the end.
+  
+      Params:
+        idx = an index
+        bw = the bandwidth
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
@@ -569,11 +595,12 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert email into the array of emails in msg at index idx.
-    When -1 is given as idx, the email is inserted at the end.
-    Params:
-      idx =       an index
-      email =       an email
-    Returns:     a #GstSDPResult.
+      When -1 is given as idx, the email is inserted at the end.
+  
+      Params:
+        idx = an index
+        email = an email
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertEmail(int idx, string email)
   {
@@ -586,11 +613,12 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert phone into the array of phone numbers in msg at index idx.
-    When -1 is given as idx, the phone is inserted at the end.
-    Params:
-      idx =       a phone index
-      phone =       a phone
-    Returns:     a #GstSDPResult.
+      When -1 is given as idx, the phone is inserted at the end.
+  
+      Params:
+        idx = a phone index
+        phone = a phone
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertPhone(int idx, string phone)
   {
@@ -603,12 +631,13 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert time parameters into the array of times in msg
-    at index idx.
-    When -1 is given as idx, the times are inserted at the end.
-    Params:
-      idx =       an index
-      t =       a #GstSDPTime
-    Returns:     a #GstSDPResult.
+      at index idx.
+      When -1 is given as idx, the times are inserted at the end.
+  
+      Params:
+        idx = an index
+        t = a #GstSDPTime
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertTime(int idx, gstsdp.sdptime.SDPTime t)
   {
@@ -620,12 +649,13 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Insert zone parameters into the array of zones in msg
-    at index idx.
-    When -1 is given as idx, the zone is inserted at the end.
-    Params:
-      idx =       an index
-      zone =       a #GstSDPZone
-    Returns:     a #GstSDPResult.
+      at index idx.
+      When -1 is given as idx, the zone is inserted at the end.
+  
+      Params:
+        idx = an index
+        zone = a #GstSDPZone
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult insertZone(int idx, gstsdp.sdpzone.SDPZone zone)
   {
@@ -637,7 +667,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of media descriptions in msg.
-    Returns:     the number of media descriptions in msg.
+      Returns: the number of media descriptions in msg.
   */
   uint mediasLen()
   {
@@ -648,10 +678,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Creates a new #GstMIKEYMessage after parsing the key-mgmt attribute
-    from a #GstSDPMessage.
-    Params:
-      mikey =       pointer to new #GstMIKEYMessage
-    Returns:     a #GstSDPResult.
+      from a #GstSDPMessage.
+  
+      Params:
+        mikey = pointer to new #GstMIKEYMessage
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey)
   {
@@ -665,7 +696,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of phones in msg.
-    Returns:     the number of phones in msg.
+      Returns: the number of phones in msg.
   */
   uint phonesLen()
   {
@@ -676,9 +707,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the attribute in msg at index idx.
-    Params:
-      idx =       the index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removeAttribute(uint idx)
   {
@@ -690,9 +722,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the bandwidth information in msg at index idx.
-    Params:
-      idx =       the bandwidth index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the bandwidth index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removeBandwidth(uint idx)
   {
@@ -704,9 +737,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the email in msg at index idx.
-    Params:
-      idx =       an email index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = an email index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removeEmail(uint idx)
   {
@@ -718,10 +752,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the media at idx from the array of medias in msg if found.
-    Params:
-      idx =       the media index
-    Returns:     #GST_SDP_OK when the specified media is found at idx and removed,
-      #GST_SDP_EINVAL otherwise.
+  
+      Params:
+        idx = the media index
+      Returns: #GST_SDP_OK when the specified media is found at idx and removed,
+        #GST_SDP_EINVAL otherwise.
   */
   gstsdp.types.SDPResult removeMedia(uint idx)
   {
@@ -733,9 +768,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the phone number in msg at index idx.
-    Params:
-      idx =       a phone index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = a phone index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removePhone(uint idx)
   {
@@ -747,9 +783,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the time information in msg at index idx.
-    Params:
-      idx =       the index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removeTime(uint idx)
   {
@@ -761,9 +798,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Remove the zone information in msg at index idx.
-    Params:
-      idx =       the index
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the index
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult removeZone(uint idx)
   {
@@ -775,10 +813,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Replace the attribute in msg at index idx with attr.
-    Params:
-      idx =       the index
-      attr =       a #GstSDPAttribute
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the index
+        attr = a #GstSDPAttribute
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
@@ -790,10 +829,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Replace the bandwidth information in msg at index idx with bw.
-    Params:
-      idx =       the bandwidth index
-      bw =       the bandwidth
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the bandwidth index
+        bw = the bandwidth
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
@@ -805,10 +845,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Replace the email in msg at index idx with email.
-    Params:
-      idx =       an email index
-      email =       an email
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = an email index
+        email = an email
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replaceEmail(uint idx, string email)
   {
@@ -821,10 +862,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Replace the phone number in msg at index idx with phone.
-    Params:
-      idx =       a phone index
-      phone =       a phone
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = a phone index
+        phone = a phone
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replacePhone(uint idx, string phone)
   {
@@ -836,11 +878,12 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /**
-      Replace the time information in msg at index idx with t.
-    Params:
-      idx =       the index
-      t =       a #GstSDPTime
-    Returns:     a #GstSDPResult.
+      Replace the time information in msg at index idx with `t`.
+  
+      Params:
+        idx = the index
+        t = a #GstSDPTime
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replaceTime(uint idx, gstsdp.sdptime.SDPTime t)
   {
@@ -852,10 +895,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Replace the zone information in msg at index idx with zone.
-    Params:
-      idx =       the index
-      zone =       a #GstSDPZone
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        idx = the index
+        zone = a #GstSDPZone
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult replaceZone(uint idx, gstsdp.sdpzone.SDPZone zone)
   {
@@ -867,14 +911,15 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Configure the SDP connection in msg with the given parameters.
-    Params:
-      nettype =       the type of network. "IN" is defined to have the meaning
-        "Internet".
-      addrtype =       the type of address.
-      address =       the address
-      ttl =       the time to live of the address
-      addrNumber =       the number of layers
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+          "Internet".
+        addrtype = the type of address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
   {
@@ -889,9 +934,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Set the information in msg.
-    Params:
-      information =       the information
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        information = the information
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setInformation(string information)
   {
@@ -904,10 +950,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Adds the encryption information to msg.
-    Params:
-      type =       the encryption type
-      data =       the encryption data
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        type = the encryption type
+        data = the encryption data
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setKey(string type, string data)
   {
@@ -921,14 +968,15 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Configure the SDP origin in msg with the given parameters.
-    Params:
-      username =       the user name
-      sessId =       a session id
-      sessVersion =       a session version
-      nettype =       a network type
-      addrtype =       an address type
-      addr =       an address
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        username = the user name
+        sessId = a session id
+        sessVersion = a session version
+        nettype = a network type
+        addrtype = an address type
+        addr = an address
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult setOrigin(string username, string sessId, string sessVersion, string nettype, string addrtype, string addr)
   {
@@ -946,9 +994,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Set the session name in msg.
-    Params:
-      sessionName =       the session name
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        sessionName = the session name
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setSessionName(string sessionName)
   {
@@ -961,9 +1010,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Set the URI in msg.
-    Params:
-      uri =       the URI
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        uri = the URI
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setUri(string uri)
   {
@@ -976,9 +1026,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Set the version in msg.
-    Params:
-      version_ =       the version
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        version_ = the version
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setVersion(string version_)
   {
@@ -991,7 +1042,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of time information entries in msg.
-    Returns:     the number of time information entries in msg.
+      Returns: the number of time information entries in msg.
   */
   uint timesLen()
   {
@@ -1002,9 +1053,9 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Free all resources allocated in msg. msg should not be used anymore after
-    this function. This function should be used when msg was allocated on the
-    stack and initialized with [gstsdp.sdpmessage.SDPMessage.init_].
-    Returns:     a #GstSDPResult.
+      this function. This function should be used when msg was allocated on the
+      stack and initialized with [gstsdp.sdpmessage.SDPMessage.init_].
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult uninit()
   {
@@ -1016,7 +1067,7 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Get the number of time zone information entries in msg.
-    Returns:     the number of time zone information entries in msg.
+      Returns: the number of time zone information entries in msg.
   */
   uint zonesLen()
   {
@@ -1027,14 +1078,15 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Creates a uri from msg with the given scheme. The uri has the format:
-    
-     \scheme:///[#type=value *[&type=value]]
-    
-     Where each value is url encoded.
-    Params:
-      scheme =       the uri scheme
-      msg =       the #GstSDPMessage
-    Returns:     a uri for msg.
+      
+       \scheme:///[#type=value *[&type=value]]
+      
+       Where each value is url encoded.
+  
+      Params:
+        scheme = the uri scheme
+        msg = the #GstSDPMessage
+      Returns: a uri for msg.
   */
   static string asUri(string scheme, gstsdp.sdpmessage.SDPMessage msg)
   {
@@ -1047,14 +1099,15 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Initialize msg so that its contents are as if it was freshly allocated
-    with [gstsdp.sdpmessage.SDPMessage.new_]. This function is mostly used to initialize a message
-    allocated on the stack. [gstsdp.sdpmessage.SDPMessage.uninit] undoes this operation.
-    
-    When this function is invoked on newly allocated data (with malloc or on the
-    stack), its contents should be set to 0 before calling this function.
-    Params:
-      msg =       a #GstSDPMessage
-    Returns:     a #GstSDPResult.
+      with [gstsdp.sdpmessage.SDPMessage.new_]. This function is mostly used to initialize a message
+      allocated on the stack. [gstsdp.sdpmessage.SDPMessage.uninit] undoes this operation.
+      
+      When this function is invoked on newly allocated data (with malloc or on the
+      stack), its contents should be set to 0 before calling this function.
+  
+      Params:
+        msg = a #GstSDPMessage
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult init_(out gstsdp.sdpmessage.SDPMessage msg)
   {
@@ -1068,9 +1121,10 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Allocate a new GstSDPMessage and store the result in msg.
-    Params:
-      msg =       pointer to new #GstSDPMessage
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        msg = pointer to new #GstSDPMessage
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult new_(out gstsdp.sdpmessage.SDPMessage msg)
   {
@@ -1084,10 +1138,11 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Parse text and create a new SDPMessage from these.
-    Params:
-      text =       A dynamically allocated string representing the SDP description
-      msg =       pointer to new #GstSDPMessage
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        text = A dynamically allocated string representing the SDP description
+        msg = pointer to new #GstSDPMessage
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult newFromText(string text, out gstsdp.sdpmessage.SDPMessage msg)
   {
@@ -1102,11 +1157,12 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Parse the contents of size bytes pointed to by data and store the result in
-    msg.
-    Params:
-      data =       the start of the buffer
-      msg =       the result #GstSDPMessage
-    Returns:     #GST_SDP_OK on success.
+      msg.
+  
+      Params:
+        data = the start of the buffer
+        msg = the result #GstSDPMessage
+      Returns: #GST_SDP_OK on success.
   */
   static gstsdp.types.SDPResult parseBuffer(ubyte[] data, gstsdp.sdpmessage.SDPMessage msg)
   {
@@ -1123,18 +1179,19 @@ class SDPMessage : gobject.boxed.Boxed
 
   /**
       Parse the null-terminated uri and store the result in msg.
-    
-    The uri should be of the form:
-    
-     scheme://[address[:ttl=ttl][:noa=noa]]/[sessionname]
-                  [#type=value *[&type=value]]
-    
-     where value is url encoded. This looslely resembles
-     http://tools.ietf.org/html/draft-fujikawa-sdp-url-01
-    Params:
-      uri =       the start of the uri
-      msg =       the result #GstSDPMessage
-    Returns:     #GST_SDP_OK on success.
+      
+      The uri should be of the form:
+      
+       scheme://[address[:ttl=ttl][:noa=noa]]/[sessionname]
+                    [#type=value *[&type=value]]
+      
+       where value is url encoded. This looslely resembles
+       http://tools.ietf.org/html/draft-fujikawa-sdp-url-01
+  
+      Params:
+        uri = the start of the uri
+        msg = the result #GstSDPMessage
+      Returns: #GST_SDP_OK on success.
   */
   static gstsdp.types.SDPResult parseUri(string uri, gstsdp.sdpmessage.SDPMessage msg)
   {

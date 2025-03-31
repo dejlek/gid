@@ -1,3 +1,4 @@
+/// Module for [Gutter] class
 module gtksource.gutter;
 
 import gid.gid;
@@ -17,37 +18,40 @@ import gtksource.view;
 
 /**
     Gutter object for `class@View`.
-  
-  The [gtksource.gutter.Gutter] object represents the left or right gutter of the text
-  view. It is used by `class@View` to draw the line numbers and
-  `class@Mark`s that might be present on a line. By packing
-  additional `class@GutterRenderer` objects in the gutter, you can extend the
-  gutter with your own custom drawings.
-  
-  To get a [gtksource.gutter.Gutter], use the [gtksource.view.View.getGutter] function.
-  
-  The gutter works very much the same way as cells rendered in a [gtk.tree_view.TreeView].
-  The concept is similar, with the exception that the gutter does not have an
-  underlying [gtk.tree_model.TreeModel]. The builtin line number renderer is at position
-  [gtksource.types.ViewGutterPosition.Lines] (-30) and the marks renderer is at
-  [gtksource.types.ViewGutterPosition.Marks] (-20). The gutter sorts the renderers
-  in ascending order, from left to right. So the marks are displayed on the
-  right of the line numbers.
+    
+    The [gtksource.gutter.Gutter] object represents the left or right gutter of the text
+    view. It is used by `class@View` to draw the line numbers and
+    `class@Mark`s that might be present on a line. By packing
+    additional `class@GutterRenderer` objects in the gutter, you can extend the
+    gutter with your own custom drawings.
+    
+    To get a [gtksource.gutter.Gutter], use the [gtksource.view.View.getGutter] function.
+    
+    The gutter works very much the same way as cells rendered in a [gtk.tree_view.TreeView].
+    The concept is similar, with the exception that the gutter does not have an
+    underlying [gtk.tree_model.TreeModel]. The builtin line number renderer is at position
+    [gtksource.types.ViewGutterPosition.Lines] (-30) and the marks renderer is at
+    [gtksource.types.ViewGutterPosition.Marks] (-20). The gutter sorts the renderers
+    in ascending order, from left to right. So the marks are displayed on the
+    right of the line numbers.
 */
 class Gutter : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_get_type != &gidSymbolNotFound ? gtk_source_gutter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -69,12 +73,13 @@ class Gutter : gtk.widget.Widget
 
   /**
       Insert renderer into the gutter. If renderer is yet unowned then gutter
-    claims its ownership. Otherwise just increases renderer's reference count.
-    renderer cannot be already inserted to another gutter.
-    Params:
-      renderer =       a gutter renderer (must inherit from #GtkSourceGutterRenderer).
-      position =       the renderer position.
-    Returns:     true if operation succeeded. Otherwise false.
+      claims its ownership. Otherwise just increases renderer's reference count.
+      renderer cannot be already inserted to another gutter.
+  
+      Params:
+        renderer = a gutter renderer (must inherit from #GtkSourceGutterRenderer).
+        position = the renderer position.
+      Returns: true if operation succeeded. Otherwise false.
   */
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
@@ -91,9 +96,10 @@ class Gutter : gtk.widget.Widget
 
   /**
       Reorders renderer in gutter to new position.
-    Params:
-      renderer =       a #GtkCellRenderer.
-      position =       the new renderer position.
+  
+      Params:
+        renderer = a #GtkCellRenderer.
+        position = the new renderer position.
   */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {

@@ -1,3 +1,4 @@
+/// Module for [GLRenderbuffer] class
 module gstgl.glrenderbuffer;
 
 import gid.gid;
@@ -8,35 +9,40 @@ import gstgl.types;
 
 /**
     GstGLRenderbuffer is a #GstGLBaseMemory subclass providing support for
-  OpenGL renderbuffers.
-  
-  #GstGLRenderbuffer is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
-  with #GstGLRenderbufferAllocationParams.
+    OpenGL renderbuffers.
+    
+    #GstGLRenderbuffer is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
+    with #GstGLRenderbufferAllocationParams.
 */
 class GLRenderbuffer : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstGLRenderbuffer.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_renderbuffer_get_type != &gidSymbolNotFound ? gst_gl_renderbuffer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -132,7 +138,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
 
   /**
       Initializes the GL Base Texture allocator. It is safe to call this function
-    multiple times.  This must be called before any other GstGLRenderbuffer operation.
+      multiple times.  This must be called before any other GstGLRenderbuffer operation.
   */
   static void initOnce()
   {

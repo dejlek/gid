@@ -1,3 +1,4 @@
+/// Module for [SDPMedia] class
 module gstsdp.sdpmedia;
 
 import gid.gid;
@@ -18,6 +19,7 @@ class SDPMedia
 {
   GstSDPMedia cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class SDPMedia
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -94,10 +97,11 @@ class SDPMedia
 
   /**
       Add the attribute with key and value to media.
-    Params:
-      key =       a key
-      value =       a value
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        key = a key
+        value = a value
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult addAttribute(string key, string value = null)
   {
@@ -111,10 +115,11 @@ class SDPMedia
 
   /**
       Add the bandwidth information with bwtype and bandwidth to media.
-    Params:
-      bwtype =       the bandwidth modifier type
-      bandwidth =       the bandwidth in kilobits per second
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        bwtype = the bandwidth modifier type
+        bandwidth = the bandwidth in kilobits per second
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult addBandwidth(string bwtype, uint bandwidth)
   {
@@ -127,14 +132,15 @@ class SDPMedia
 
   /**
       Add the given connection parameters to media.
-    Params:
-      nettype =       the type of network. "IN" is defined to have the meaning
-        "Internet".
-      addrtype =       the type of address.
-      address =       the address
-      ttl =       the time to live of the address
-      addrNumber =       the number of layers
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+          "Internet".
+        addrtype = the type of address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult addConnection(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
   {
@@ -149,9 +155,10 @@ class SDPMedia
 
   /**
       Add the format information to media.
-    Params:
-      format =       the format
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        format = the format
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult addFormat(string format)
   {
@@ -164,7 +171,7 @@ class SDPMedia
 
   /**
       Convert the contents of media to a text string.
-    Returns:     A dynamically allocated string representing the media.
+      Returns: A dynamically allocated string representing the media.
   */
   string asText()
   {
@@ -176,7 +183,7 @@ class SDPMedia
 
   /**
       Get the number of attribute fields in media.
-    Returns:     the number of attributes in media.
+      Returns: the number of attributes in media.
   */
   uint attributesLen()
   {
@@ -187,9 +194,10 @@ class SDPMedia
 
   /**
       Mapping of attributes of #GstSDPMedia to #GstCaps
-    Params:
-      caps =       a #GstCaps
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        caps = a #GstCaps
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps)
   {
@@ -201,7 +209,7 @@ class SDPMedia
 
   /**
       Get the number of bandwidth fields in media.
-    Returns:     the number of bandwidths in media.
+      Returns: the number of bandwidths in media.
   */
   uint bandwidthsLen()
   {
@@ -212,7 +220,7 @@ class SDPMedia
 
   /**
       Get the number of connection fields in media.
-    Returns:     the number of connections in media.
+      Returns: the number of connections in media.
   */
   uint connectionsLen()
   {
@@ -223,10 +231,11 @@ class SDPMedia
 
   /**
       Allocate a new copy of media and store the result in copy. The value in
-    copy should be release with gst_sdp_media_free function.
-    Params:
-      copy =       pointer to new #GstSDPMedia
-    Returns:     a #GstSDPResult
+      copy should be release with gst_sdp_media_free function.
+  
+      Params:
+        copy = pointer to new #GstSDPMedia
+      Returns: a #GstSDPResult
   */
   gstsdp.types.SDPResult copy(out gstsdp.sdpmedia.SDPMedia copy)
   {
@@ -240,7 +249,7 @@ class SDPMedia
 
   /**
       Get the number of formats in media.
-    Returns:     the number of formats in media.
+      Returns: the number of formats in media.
   */
   uint formatsLen()
   {
@@ -251,9 +260,10 @@ class SDPMedia
 
   /**
       Get the attribute at position idx in media.
-    Params:
-      idx =       an index
-    Returns:     the #GstSDPAttribute at position idx.
+  
+      Params:
+        idx = an index
+      Returns: the #GstSDPAttribute at position idx.
   */
   gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx)
   {
@@ -265,9 +275,10 @@ class SDPMedia
 
   /**
       Get the first attribute value for key in media.
-    Params:
-      key =       a key
-    Returns:     the first attribute value for key.
+  
+      Params:
+        key = a key
+      Returns: the first attribute value for key.
   */
   string getAttributeVal(string key)
   {
@@ -280,10 +291,11 @@ class SDPMedia
 
   /**
       Get the nth attribute value for key in media.
-    Params:
-      key =       a key
-      nth =       an index
-    Returns:     the nth attribute value.
+  
+      Params:
+        key = a key
+        nth = an index
+      Returns: the nth attribute value.
   */
   string getAttributeValN(string key, uint nth)
   {
@@ -296,9 +308,10 @@ class SDPMedia
 
   /**
       Get the bandwidth at position idx in media.
-    Params:
-      idx =       an index
-    Returns:     the #GstSDPBandwidth at position idx.
+  
+      Params:
+        idx = an index
+      Returns: the #GstSDPBandwidth at position idx.
   */
   gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx)
   {
@@ -310,17 +323,18 @@ class SDPMedia
 
   /**
       Mapping of caps from SDP fields:
-    
-    a=rtpmap:(payload) (encoding_name)/(clock_rate)[/(encoding_params)]
-    
-    a=framesize:(payload) (width)-(height)
-    
-    a=fmtp:(payload) (param)[=(value)];...
-    
-    Note that the extmap, ssrc and rid attributes are set only by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
-    Params:
-      pt =       a payload type
-    Returns:     a #GstCaps, or null if an error happened
+      
+      a=rtpmap:(payload) (encoding_name)/(clock_rate)[/(encoding_params)]
+      
+      a=framesize:(payload) (width)-(height)
+      
+      a=fmtp:(payload) (param)[=(value)];...
+      
+      Note that the extmap, ssrc and rid attributes are set only by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
+  
+      Params:
+        pt = a payload type
+      Returns: a #GstCaps, or null if an error happened
   */
   gst.caps.Caps getCapsFromMedia(int pt)
   {
@@ -332,9 +346,10 @@ class SDPMedia
 
   /**
       Get the connection at position idx in media.
-    Params:
-      idx =       an index
-    Returns:     the #GstSDPConnection at position idx.
+  
+      Params:
+        idx = an index
+      Returns: the #GstSDPConnection at position idx.
   */
   gstsdp.sdpconnection.SDPConnection getConnection(uint idx)
   {
@@ -346,9 +361,10 @@ class SDPMedia
 
   /**
       Get the format information at position idx in media.
-    Params:
-      idx =       an index
-    Returns:     the format at position idx.
+  
+      Params:
+        idx = an index
+      Returns: the format at position idx.
   */
   string getFormat(uint idx)
   {
@@ -360,7 +376,7 @@ class SDPMedia
 
   /**
       Get the information of media
-    Returns:     the information of media.
+      Returns: the information of media.
   */
   string getInformation()
   {
@@ -372,7 +388,7 @@ class SDPMedia
 
   /**
       Get the encryption information from media.
-    Returns:     a #GstSDPKey.
+      Returns: a #GstSDPKey.
   */
   gstsdp.sdpkey.SDPKey getKey()
   {
@@ -384,7 +400,7 @@ class SDPMedia
 
   /**
       Get the media description of media.
-    Returns:     the media description.
+      Returns: the media description.
   */
   string getMedia()
   {
@@ -396,7 +412,7 @@ class SDPMedia
 
   /**
       Get the number of ports for media.
-    Returns:     the number of ports for media.
+      Returns: the number of ports for media.
   */
   uint getNumPorts()
   {
@@ -407,7 +423,7 @@ class SDPMedia
 
   /**
       Get the port number for media.
-    Returns:     the port number of media.
+      Returns: the port number of media.
   */
   uint getPort()
   {
@@ -418,7 +434,7 @@ class SDPMedia
 
   /**
       Get the transport protocol of media
-    Returns:     the transport protocol of media.
+      Returns: the transport protocol of media.
   */
   string getProto()
   {
@@ -430,11 +446,12 @@ class SDPMedia
 
   /**
       Insert the attribute to media at idx. When idx is -1,
-    the attribute is appended.
-    Params:
-      idx =       an index
-      attr =       a #GstSDPAttribute
-    Returns:     #GST_SDP_OK.
+      the attribute is appended.
+  
+      Params:
+        idx = an index
+        attr = a #GstSDPAttribute
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
@@ -446,11 +463,12 @@ class SDPMedia
 
   /**
       Insert the bandwidth information to media at idx. When idx is -1,
-    the bandwidth is appended.
-    Params:
-      idx =       an index
-      bw =       a #GstSDPBandwidth
-    Returns:     #GST_SDP_OK.
+      the bandwidth is appended.
+  
+      Params:
+        idx = an index
+        bw = a #GstSDPBandwidth
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
@@ -462,11 +480,12 @@ class SDPMedia
 
   /**
       Insert the connection information to media at idx. When idx is -1,
-    the connection is appended.
-    Params:
-      idx =       an index
-      conn =       a #GstSDPConnection
-    Returns:     #GST_SDP_OK.
+      the connection is appended.
+  
+      Params:
+        idx = an index
+        conn = a #GstSDPConnection
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult insertConnection(int idx, gstsdp.sdpconnection.SDPConnection conn)
   {
@@ -478,11 +497,12 @@ class SDPMedia
 
   /**
       Insert the format information to media at idx. When idx is -1,
-    the format is appended.
-    Params:
-      idx =       an index
-      format =       the format
-    Returns:     #GST_SDP_OK.
+      the format is appended.
+  
+      Params:
+        idx = an index
+        format = the format
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult insertFormat(int idx, string format)
   {
@@ -495,10 +515,11 @@ class SDPMedia
 
   /**
       Creates a new #GstMIKEYMessage after parsing the key-mgmt attribute
-    from a #GstSDPMedia.
-    Params:
-      mikey =       pointer to new #GstMIKEYMessage
-    Returns:     a #GstSDPResult.
+      from a #GstSDPMedia.
+  
+      Params:
+        mikey = pointer to new #GstMIKEYMessage
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult parseKeymgmt(out gstsdp.mikeymessage.MIKEYMessage mikey)
   {
@@ -512,9 +533,10 @@ class SDPMedia
 
   /**
       Remove the attribute in media at idx.
-    Params:
-      idx =       an index
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult removeAttribute(uint idx)
   {
@@ -526,9 +548,10 @@ class SDPMedia
 
   /**
       Remove the bandwidth information in media at idx.
-    Params:
-      idx =       an index
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult removeBandwidth(uint idx)
   {
@@ -540,9 +563,10 @@ class SDPMedia
 
   /**
       Remove the connection information in media at idx.
-    Params:
-      idx =       an index
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult removeConnection(uint idx)
   {
@@ -554,9 +578,10 @@ class SDPMedia
 
   /**
       Remove the format information in media at idx.
-    Params:
-      idx =       an index
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult removeFormat(uint idx)
   {
@@ -568,10 +593,11 @@ class SDPMedia
 
   /**
       Replace the attribute in media at idx with attr.
-    Params:
-      idx =       an index
-      attr =       a #GstSDPAttribute
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+        attr = a #GstSDPAttribute
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
@@ -583,10 +609,11 @@ class SDPMedia
 
   /**
       Replace the bandwidth information in media at idx with bw.
-    Params:
-      idx =       an index
-      bw =       a #GstSDPBandwidth
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+        bw = a #GstSDPBandwidth
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
@@ -598,10 +625,11 @@ class SDPMedia
 
   /**
       Replace the connection information in media at idx with conn.
-    Params:
-      idx =       an index
-      conn =       a #GstSDPConnection
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+        conn = a #GstSDPConnection
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult replaceConnection(uint idx, gstsdp.sdpconnection.SDPConnection conn)
   {
@@ -613,10 +641,11 @@ class SDPMedia
 
   /**
       Replace the format information in media at idx with format.
-    Params:
-      idx =       an index
-      format =       the format
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        idx = an index
+        format = the format
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult replaceFormat(uint idx, string format)
   {
@@ -629,9 +658,10 @@ class SDPMedia
 
   /**
       Set the media information of media to information.
-    Params:
-      information =       the media information
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        information = the media information
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult setInformation(string information)
   {
@@ -644,10 +674,11 @@ class SDPMedia
 
   /**
       Adds the encryption information to media.
-    Params:
-      type =       the encryption type
-      data =       the encryption data
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        type = the encryption type
+        data = the encryption data
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult setKey(string type, string data)
   {
@@ -661,9 +692,10 @@ class SDPMedia
 
   /**
       Set the media description of media to med.
-    Params:
-      med =       the media description
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        med = the media description
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult setMedia(string med)
   {
@@ -676,10 +708,11 @@ class SDPMedia
 
   /**
       Set the port information in media.
-    Params:
-      port =       the port number
-      numPorts =       the number of ports
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        port = the port number
+        numPorts = the number of ports
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult setPortInfo(uint port, uint numPorts)
   {
@@ -691,9 +724,10 @@ class SDPMedia
 
   /**
       Set the media transport protocol of media to proto.
-    Params:
-      proto =       the media transport protocol
-    Returns:     #GST_SDP_OK.
+  
+      Params:
+        proto = the media transport protocol
+      Returns: #GST_SDP_OK.
   */
   gstsdp.types.SDPResult setProto(string proto)
   {
@@ -706,9 +740,9 @@ class SDPMedia
 
   /**
       Free all resources allocated in media. media should not be used anymore after
-    this function. This function should be used when media was allocated on the
-    stack and initialized with [gstsdp.sdpmedia.SDPMedia.init_].
-    Returns:     a #GstSDPResult.
+      this function. This function should be used when media was allocated on the
+      stack and initialized with [gstsdp.sdpmedia.SDPMedia.init_].
+      Returns: a #GstSDPResult.
   */
   gstsdp.types.SDPResult uninit()
   {
@@ -720,14 +754,15 @@ class SDPMedia
 
   /**
       Initialize media so that its contents are as if it was freshly allocated
-    with [gstsdp.sdpmedia.SDPMedia.new_]. This function is mostly used to initialize a media
-    allocated on the stack. [gstsdp.sdpmedia.SDPMedia.uninit] undoes this operation.
-    
-    When this function is invoked on newly allocated data (with malloc or on the
-    stack), its contents should be set to 0 before calling this function.
-    Params:
-      media =       a #GstSDPMedia
-    Returns:     a #GstSDPResult.
+      with [gstsdp.sdpmedia.SDPMedia.new_]. This function is mostly used to initialize a media
+      allocated on the stack. [gstsdp.sdpmedia.SDPMedia.uninit] undoes this operation.
+      
+      When this function is invoked on newly allocated data (with malloc or on the
+      stack), its contents should be set to 0 before calling this function.
+  
+      Params:
+        media = a #GstSDPMedia
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult init_(out gstsdp.sdpmedia.SDPMedia media)
   {
@@ -741,9 +776,10 @@ class SDPMedia
 
   /**
       Allocate a new GstSDPMedia and store the result in media.
-    Params:
-      media =       pointer to new #GstSDPMedia
-    Returns:     a #GstSDPResult.
+  
+      Params:
+        media = pointer to new #GstSDPMedia
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult new_(out gstsdp.sdpmedia.SDPMedia media)
   {
@@ -757,20 +793,21 @@ class SDPMedia
 
   /**
       Mapping of caps to SDP fields:
-    
-    a=rtpmap:(payload) (encoding_name) or (clock_rate)[or (encoding_params)]
-    
-    a=framesize:(payload) (width)-(height)
-    
-    a=fmtp:(payload) (param)[=(value)];...
-    
-    a=rtcp-fb:(payload) (param1) [param2]...
-    
-    a=extmap:(id)[/direction] (extensionname) (extensionattributes)
-    Params:
-      caps =       a #GstCaps
-      media =       a #GstSDPMedia
-    Returns:     a #GstSDPResult.
+      
+      a=rtpmap:(payload) (encoding_name) or (clock_rate)[or (encoding_params)]
+      
+      a=framesize:(payload) (width)-(height)
+      
+      a=fmtp:(payload) (param)[=(value)];...
+      
+      a=rtcp-fb:(payload) (param1) [param2]...
+      
+      a=extmap:(id)[/direction] (extensionname) (extensionattributes)
+  
+      Params:
+        caps = a #GstCaps
+        media = a #GstSDPMedia
+      Returns: a #GstSDPResult.
   */
   static gstsdp.types.SDPResult setMediaFromCaps(gst.caps.Caps caps, out gstsdp.sdpmedia.SDPMedia media)
   {

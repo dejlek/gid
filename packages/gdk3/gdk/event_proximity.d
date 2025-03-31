@@ -1,3 +1,4 @@
+/// Module for [EventProximity] class
 module gdk.event_proximity;
 
 import gdk.c.functions;
@@ -9,19 +10,20 @@ import gid.gid;
 
 /**
     Proximity events are generated when using GDK’s wrapper for the
-  XInput extension. The XInput extension is an add-on for standard X
-  that allows you to use nonstandard devices such as graphics tablets.
-  A proximity event indicates that the stylus has moved in or out of
-  contact with the tablet, or perhaps that the user’s finger has moved
-  in or out of contact with a touch screen.
-  
-  This event type will be used pretty rarely. It only is important for
-  XInput aware programs that are drawing their own cursor.
+    XInput extension. The XInput extension is an add-on for standard X
+    that allows you to use nonstandard devices such as graphics tablets.
+    A proximity event indicates that the stylus has moved in or out of
+    contact with the tablet, or perhaps that the user’s finger has moved
+    in or out of contact with a touch screen.
+    
+    This event type will be used pretty rarely. It only is important for
+    XInput aware programs that are drawing their own cursor.
 */
 class EventProximity
 {
   GdkEventProximity cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -33,6 +35,7 @@ class EventProximity
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

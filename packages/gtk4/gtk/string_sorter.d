@@ -1,3 +1,4 @@
+/// Module for [StringSorter] class
 module gtk.string_sorter;
 
 import gid.gid;
@@ -9,28 +10,31 @@ import gtk.types;
 
 /**
     [gtk.string_sorter.StringSorter] is a [gtk.sorter.Sorter] that compares strings.
-  
-  It does the comparison in a linguistically correct way using the
-  current locale by normalizing Unicode strings and possibly case-folding
-  them before performing the comparison.
-  
-  To obtain the strings to compare, this sorter evaluates a
-  [gtk.expression.Expression].
+    
+    It does the comparison in a linguistically correct way using the
+    current locale by normalizing Unicode strings and possibly case-folding
+    them before performing the comparison.
+    
+    To obtain the strings to compare, this sorter evaluates a
+    [gtk.expression.Expression].
 */
 class StringSorter : gtk.sorter.Sorter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_sorter_get_type != &gidSymbolNotFound ? gtk_string_sorter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,13 +47,14 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Creates a new string sorter that compares items using the given
-    expression.
-    
-    Unless an expression is set on it, this sorter will always
-    compare items as invalid.
-    Params:
-      expression =       The expression to evaluate
-    Returns:     a new [gtk.string_sorter.StringSorter]
+      expression.
+      
+      Unless an expression is set on it, this sorter will always
+      compare items as invalid.
+  
+      Params:
+        expression = The expression to evaluate
+      Returns: a new [gtk.string_sorter.StringSorter]
   */
   this(gtk.expression.Expression expression = null)
   {
@@ -60,7 +65,7 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Gets which collation method the sorter uses.
-    Returns:     The collation method
+      Returns: The collation method
   */
   gtk.types.Collation getCollation()
   {
@@ -72,7 +77,7 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Gets the expression that is evaluated to obtain strings from items.
-    Returns:     a [gtk.expression.Expression]
+      Returns: a [gtk.expression.Expression]
   */
   gtk.expression.Expression getExpression()
   {
@@ -84,7 +89,7 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Gets whether the sorter ignores case differences.
-    Returns:     true if self is ignoring case differences
+      Returns: true if self is ignoring case differences
   */
   bool getIgnoreCase()
   {
@@ -95,8 +100,9 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Sets the collation method to use for sorting.
-    Params:
-      collation =       the collation method
+  
+      Params:
+        collation = the collation method
   */
   void setCollation(gtk.types.Collation collation)
   {
@@ -105,10 +111,11 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Sets the expression that is evaluated to obtain strings from items.
-    
-    The expression must have the type `G_TYPE_STRING`.
-    Params:
-      expression =       a [gtk.expression.Expression]
+      
+      The expression must have the type `G_TYPE_STRING`.
+  
+      Params:
+        expression = a [gtk.expression.Expression]
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
@@ -117,8 +124,9 @@ class StringSorter : gtk.sorter.Sorter
 
   /**
       Sets whether the sorter will ignore case differences.
-    Params:
-      ignoreCase =       true to ignore case differences
+  
+      Params:
+        ignoreCase = true to ignore case differences
   */
   void setIgnoreCase(bool ignoreCase)
   {

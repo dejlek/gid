@@ -1,3 +1,4 @@
+/// Module for [TextNode] class
 module gsk.text_node;
 
 import gdk.rgba;
@@ -17,6 +18,7 @@ import pango.glyph_string;
 class TextNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,15 +29,16 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Creates a render node that renders the given glyphs.
-    
-    Note that color may not be used if the font contains
-    color glyphs.
-    Params:
-      font =       the [pango.font.Font] containing the glyphs
-      glyphs =       the [pango.glyph_string.GlyphString] to render
-      color =       the foreground color to render with
-      offset =       offset of the baseline
-    Returns:     a new [gsk.render_node.RenderNode]
+      
+      Note that color may not be used if the font contains
+      color glyphs.
+  
+      Params:
+        font = the [pango.font.Font] containing the glyphs
+        glyphs = the [pango.glyph_string.GlyphString] to render
+        color = the foreground color to render with
+        offset = offset of the baseline
+      Returns: a new [gsk.render_node.RenderNode]
   */
   this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset)
   {
@@ -46,7 +49,7 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the color used by the text node.
-    Returns:     the text color
+      Returns: the text color
   */
   gdk.rgba.RGBA getColor()
   {
@@ -58,7 +61,7 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Returns the font used by the text node.
-    Returns:     the font
+      Returns: the font
   */
   pango.font.Font getFont()
   {
@@ -70,7 +73,7 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of glyphs in the text node.
-    Returns:     the number of glyphs
+      Returns: the number of glyphs
   */
   uint getNumGlyphs()
   {
@@ -81,7 +84,7 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the offset applied to the text.
-    Returns:     a point with the horizontal and vertical offsets
+      Returns: a point with the horizontal and vertical offsets
   */
   graphene.point.Point getOffset()
   {
@@ -93,7 +96,7 @@ class TextNode : gsk.render_node.RenderNode
 
   /**
       Checks whether the text node has color glyphs.
-    Returns:     true if the text node has color glyphs
+      Returns: true if the text node has color glyphs
   */
   bool hasColorGlyphs()
   {

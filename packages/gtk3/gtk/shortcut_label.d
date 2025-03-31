@@ -1,3 +1,4 @@
+/// Module for [ShortcutLabel] class
 module gtk.shortcut_label;
 
 import atk.implementor_iface;
@@ -14,22 +15,25 @@ import gtk.types;
 
 /**
     #GtkShortcutLabel is a widget that represents a single keyboard shortcut or gesture
-  in the user interface.
+    in the user interface.
 */
 class ShortcutLabel : gtk.box.Box
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_label_get_type != &gidSymbolNotFound ? gtk_shortcut_label_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,9 +46,10 @@ class ShortcutLabel : gtk.box.Box
 
   /**
       Creates a new #GtkShortcutLabel with accelerator set.
-    Params:
-      accelerator =       the initial accelerator
-    Returns:     a newly-allocated #GtkShortcutLabel
+  
+      Params:
+        accelerator = the initial accelerator
+      Returns: a newly-allocated #GtkShortcutLabel
   */
   this(string accelerator)
   {
@@ -56,7 +61,7 @@ class ShortcutLabel : gtk.box.Box
 
   /**
       Retrieves the current accelerator of self.
-    Returns:     the current accelerator.
+      Returns: the current accelerator.
   */
   string getAccelerator()
   {
@@ -68,8 +73,8 @@ class ShortcutLabel : gtk.box.Box
 
   /**
       Retrieves the text that is displayed when no accelerator is set.
-    Returns:     the current text displayed when no
-      accelerator is set.
+      Returns: the current text displayed when no
+        accelerator is set.
   */
   string getDisabledText()
   {
@@ -81,8 +86,9 @@ class ShortcutLabel : gtk.box.Box
 
   /**
       Sets the accelerator to be displayed by self.
-    Params:
-      accelerator =       the new accelerator
+  
+      Params:
+        accelerator = the new accelerator
   */
   void setAccelerator(string accelerator)
   {
@@ -92,8 +98,9 @@ class ShortcutLabel : gtk.box.Box
 
   /**
       Sets the text to be displayed by self when no accelerator is set.
-    Params:
-      disabledText =       the text to be displayed when no accelerator is set
+  
+      Params:
+        disabledText = the text to be displayed when no accelerator is set
   */
   void setDisabledText(string disabledText)
   {

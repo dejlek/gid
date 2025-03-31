@@ -1,3 +1,4 @@
+/// C types for panel1 library
 module panel.c.types;
 
 public import gid.basictypes;

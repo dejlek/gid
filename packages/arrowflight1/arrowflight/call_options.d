@@ -1,3 +1,4 @@
+/// Module for [CallOptions] class
 module arrowflight.call_options;
 
 import arrowflight.c.functions;
@@ -10,17 +11,20 @@ import gobject.object;
 class CallOptions : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_call_options_get_type != &gidSymbolNotFound ? gaflight_call_options_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,9 +45,10 @@ class CallOptions : gobject.object.ObjectG
 
   /**
       Add a header.
-    Params:
-      name =       A header name.
-      value =       A header value.
+  
+      Params:
+        name = A header name.
+        value = A header value.
   */
   void addHeader(string name, string value)
   {
@@ -62,8 +67,9 @@ class CallOptions : gobject.object.ObjectG
 
   /**
       Iterates over all headers in the options.
-    Params:
-      func =       The user's callback function.
+  
+      Params:
+        func = The user's callback function.
   */
   void foreachHeader(arrowflight.types.HeaderFunc func)
   {

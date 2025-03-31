@@ -1,3 +1,4 @@
+/// D types for harfbuzz0 library
 module harfbuzz.types;
 
 import gid.gid;
@@ -178,44 +179,38 @@ alias VarNum = hb_var_num_t;
 
 /**
     A callback method for #hb_buffer_t. The method gets called with the
-  #hb_buffer_t it was set on, the #hb_font_t the buffer is shaped with and a
-  message describing what step of the shaping process will be performed.
-  Returning `false` from this method will skip this shaping step and move to
-  the next one.
+    #hb_buffer_t it was set on, the #hb_font_t the buffer is shaped with and a
+    message describing what step of the shaping process will be performed.
+    Returning `false` from this method will skip this shaping step and move to
+    the next one.
 
-  ## Parameters
-  $(LIST
-    * $(B buffer)       An #hb_buffer_t to work upon
-    * $(B font)       The #hb_font_t the buffer is shaped with
-    * $(B message)       `NULL`-terminated message passed to the function
-  )
-  Returns:     `true` to perform the shaping step, `false` to skip it.
+    Params:
+      buffer = An #hb_buffer_t to work upon
+      font = The #hb_font_t the buffer is shaped with
+      message = `NULL`-terminated message passed to the function
+    Returns: `true` to perform the shaping step, `false` to skip it.
 */
 alias BufferMessageFunc = harfbuzz.types.Bool delegate(harfbuzz.buffer.Buffer buffer, harfbuzz.font.Font font, string message);
 
 /**
     A virtual method for the #hb_color_line_t to fetch color stops.
 
-  ## Parameters
-  $(LIST
-    * $(B colorLine)       a #hb_color_line_t object
-    * $(B colorLineData)       the data accompanying color_line
-    * $(B start)       the index of the first color stop to return
-    * $(B colorStops)       Array of #hb_color_stop_t to populate
-  )
-  Returns:     the total number of color stops in color_line
+    Params:
+      colorLine = a #hb_color_line_t object
+      colorLineData = the data accompanying color_line
+      start = the index of the first color stop to return
+      colorStops = Array of #hb_color_stop_t to populate
+    Returns: the total number of color stops in color_line
 */
 alias ColorLineGetColorStopsFunc = uint delegate(harfbuzz.color_line.ColorLine colorLine, void* colorLineData, uint start, ref harfbuzz.color_stop.ColorStop[] colorStops);
 
 /**
     A virtual method for the hb_color_line_t to fetches the extend mode.
 
-  ## Parameters
-  $(LIST
-    * $(B colorLine)       a #hb_color_line_t object
-    * $(B colorLineData)       the data accompanying color_line
-  )
-  Returns:     the extend mode of color_line
+    Params:
+      colorLine = a #hb_color_line_t object
+      colorLineData = the data accompanying color_line
+    Returns: the extend mode of color_line
 */
 alias ColorLineGetExtendFunc = harfbuzz.types.PaintExtend delegate(harfbuzz.color_line.ColorLine colorLine, void* colorLineData);
 
@@ -226,740 +221,658 @@ alias DestroyFunc = void delegate();
 
 /**
     A virtual method for the #hb_draw_funcs_t to perform a "close-path" draw
-  operation.
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B dfuncs)       draw functions object
-    * $(B drawData)       The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-    * $(B st)       current draw state
-  )
+    Params:
+      dfuncs = draw functions object
+      drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
+      st = current draw state
 */
 alias DrawClosePathFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st);
 
 /**
     A virtual method for the #hb_draw_funcs_t to perform a "cubic-to" draw
-  operation.
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B dfuncs)       draw functions object
-    * $(B drawData)       The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-    * $(B st)       current draw state
-    * $(B control1X)       X component of first control point
-    * $(B control1Y)       Y component of first control point
-    * $(B control2X)       X component of second control point
-    * $(B control2Y)       Y component of second control point
-    * $(B toX)       X component of target point
-    * $(B toY)       Y component of target point
-  )
+    Params:
+      dfuncs = draw functions object
+      drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
+      st = current draw state
+      control1X = X component of first control point
+      control1Y = Y component of first control point
+      control2X = X component of second control point
+      control2Y = Y component of second control point
+      toX = X component of target point
+      toY = Y component of target point
 */
 alias DrawCubicToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY);
 
 /**
     A virtual method for the #hb_draw_funcs_t to perform a "line-to" draw
-  operation.
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B dfuncs)       draw functions object
-    * $(B drawData)       The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-    * $(B st)       current draw state
-    * $(B toX)       X component of target point
-    * $(B toY)       Y component of target point
-  )
+    Params:
+      dfuncs = draw functions object
+      drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
+      st = current draw state
+      toX = X component of target point
+      toY = Y component of target point
 */
 alias DrawLineToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY);
 
 /**
     A virtual method for the #hb_draw_funcs_t to perform a "move-to" draw
-  operation.
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B dfuncs)       draw functions object
-    * $(B drawData)       The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-    * $(B st)       current draw state
-    * $(B toX)       X component of target point
-    * $(B toY)       Y component of target point
-  )
+    Params:
+      dfuncs = draw functions object
+      drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
+      st = current draw state
+      toX = X component of target point
+      toY = Y component of target point
 */
 alias DrawMoveToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float toX, float toY);
 
 /**
     A virtual method for the #hb_draw_funcs_t to perform a "quadratic-to" draw
-  operation.
+    operation.
 
-  ## Parameters
-  $(LIST
-    * $(B dfuncs)       draw functions object
-    * $(B drawData)       The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
-    * $(B st)       current draw state
-    * $(B controlX)       X component of control point
-    * $(B controlY)       Y component of control point
-    * $(B toX)       X component of target point
-    * $(B toY)       Y component of target point
-  )
+    Params:
+      dfuncs = draw functions object
+      drawData = The data accompanying the draw functions in [harfbuzz.global.fontDrawGlyph]
+      st = current draw state
+      controlX = X component of control point
+      controlY = Y component of control point
+      toX = X component of target point
+      toY = Y component of target point
 */
 alias DrawQuadraticToFunc = void delegate(harfbuzz.draw_funcs.DrawFuncs dfuncs, void* drawData, harfbuzz.draw_state.DrawState st, float controlX, float controlY, float toX, float toY);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B drawFuncs)       The draw functions to send the shape data to
-    * $(B drawData)       The data accompanying the draw functions
-  )
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      drawFuncs = The draw functions to send the shape data to
+      drawData = The data accompanying the draw functions
 */
 alias FontDrawGlyphFunc = void delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs drawFuncs, void* drawData);
 
 /**
     This method should retrieve the extents for a font.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B extents)       The font extents retrieved
-  )
-  Returns: 
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      extents = The font extents retrieved
+    Returns: 
 */
 alias FontGetFontExtentsFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, out harfbuzz.types.FontExtents extents);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the advance for a specified glyph. The
-  method must return an #hb_position_t.
+    
+    This method should retrieve the advance for a specified glyph. The
+    method must return an #hb_position_t.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-  )
-  Returns:     The advance of glyph within font
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+    Returns: The advance of glyph within font
 */
 alias FontGetGlyphAdvanceFunc = harfbuzz.types.Position delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the (X,Y) coordinates (in font units) for a
-  specified contour point in a glyph. Each coordinate must be returned as
-  an #hb_position_t output parameter.
+    
+    This method should retrieve the (X,Y) coordinates (in font units) for a
+    specified contour point in a glyph. Each coordinate must be returned as
+    an #hb_position_t output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B pointIndex)       The contour-point index to query
-    * $(B x)       The X value retrieved for the contour point
-    * $(B y)       The Y value retrieved for the contour point
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      pointIndex = The contour-point index to query
+      x = The X value retrieved for the contour point
+      y = The Y value retrieved for the contour point
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphContourPointFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, uint pointIndex, out harfbuzz.types.Position x, out harfbuzz.types.Position y);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the extents for a specified glyph. Extents must be
-  returned in an #hb_glyph_extents output parameter.
+    
+    This method should retrieve the extents for a specified glyph. Extents must be
+    returned in an #hb_glyph_extents output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B extents)       The #hb_glyph_extents_t retrieved
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      extents = The #hb_glyph_extents_t retrieved
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphExtentsFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, out harfbuzz.types.GlyphExtents extents);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the glyph ID that corresponds to a glyph-name
-  string.
+    
+    This method should retrieve the glyph ID that corresponds to a glyph-name
+    string.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B name)       The name string to query
-    * $(B glyph)       The glyph ID retrieved
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      name = The name string to query
+      glyph = The glyph ID retrieved
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphFromNameFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, char[] name, out harfbuzz.types.Codepoint glyph);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the glyph ID for a specified Unicode code point
-  font, with an optional variation selector.
+    
+    This method should retrieve the glyph ID for a specified Unicode code point
+    font, with an optional variation selector.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B unicode)       The Unicode code point to query
-    * $(B variationSelector)       The  variation-selector code point to query
-    * $(B glyph)       The glyph ID retrieved
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      unicode = The Unicode code point to query
+      variationSelector = The  variation-selector code point to query
+      glyph = The glyph ID retrieved
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph);
 
 /**
     This method should retrieve the kerning-adjustment value for a glyph-pair in
-  the specified font, for horizontal text segments.
+    the specified font, for horizontal text segments.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B firstGlyph)       The glyph ID of the first glyph in the glyph pair
-    * $(B secondGlyph)       The glyph ID of the second glyph in the glyph pair
-  )
-  Returns: 
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      firstGlyph = The glyph ID of the first glyph in the glyph pair
+      secondGlyph = The glyph ID of the second glyph in the glyph pair
+    Returns: 
 */
 alias FontGetGlyphKerningFunc = harfbuzz.types.Position delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint firstGlyph, harfbuzz.types.Codepoint secondGlyph);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the glyph name that corresponds to a
-  glyph ID. The name should be returned in a string output parameter.
+    
+    This method should retrieve the glyph name that corresponds to a
+    glyph ID. The name should be returned in a string output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B name)       Name string retrieved for the glyph ID
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      name = Name string retrieved for the glyph ID
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphNameFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, ref char[] name);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the (X,Y) coordinates (in font units) of the
-  origin for a glyph. Each coordinate must be returned in an #hb_position_t
-  output parameter.
+    
+    This method should retrieve the (X,Y) coordinates (in font units) of the
+    origin for a glyph. Each coordinate must be returned in an #hb_position_t
+    output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B x)       The X coordinate of the origin
-    * $(B y)       The Y coordinate of the origin
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      x = The X coordinate of the origin
+      y = The Y coordinate of the origin
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetGlyphOriginFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, out harfbuzz.types.Position x, out harfbuzz.types.Position y);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B drawFuncs)       The draw functions to send the shape data to
-    * $(B drawData)       The data accompanying the draw functions
-  )
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      drawFuncs = The draw functions to send the shape data to
+      drawData = The data accompanying the draw functions
 
-  Deprecated:     Use #hb_font_draw_glyph_func_t instead
+    Deprecated: Use #hb_font_draw_glyph_func_t instead
 */
 alias FontGetGlyphShapeFunc = void delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.draw_funcs.DrawFuncs drawFuncs, void* drawData);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the nominal glyph ID for a specified Unicode code
-  point. Glyph IDs must be returned in a #hb_codepoint_t output parameter.
+    
+    This method should retrieve the nominal glyph ID for a specified Unicode code
+    point. Glyph IDs must be returned in a #hb_codepoint_t output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B unicode)       The Unicode code point to query
-    * $(B glyph)       The glyph ID retrieved
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      unicode = The Unicode code point to query
+      glyph = The glyph ID retrieved
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetNominalGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint unicode, out harfbuzz.types.Codepoint glyph);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
-  
-  This method should retrieve the glyph ID for a specified Unicode code point
-  followed by a specified Variation Selector code point. Glyph IDs must be
-  returned in a #hb_codepoint_t output parameter.
+    
+    This method should retrieve the glyph ID for a specified Unicode code point
+    followed by a specified Variation Selector code point. Glyph IDs must be
+    returned in a #hb_codepoint_t output parameter.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B unicode)       The Unicode code point to query
-    * $(B variationSelector)       The  variation-selector code point to query
-    * $(B glyph)       The glyph ID retrieved
-  )
-  Returns:     `true` if data found, `false` otherwise
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      unicode = The Unicode code point to query
+      variationSelector = The  variation-selector code point to query
+      glyph = The glyph ID retrieved
+    Returns: `true` if data found, `false` otherwise
 */
 alias FontGetVariationGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint unicode, harfbuzz.types.Codepoint variationSelector, out harfbuzz.types.Codepoint glyph);
 
 /**
     A virtual method for the #hb_font_funcs_t of an #hb_font_t object.
 
-  ## Parameters
-  $(LIST
-    * $(B font)       #hb_font_t to work upon
-    * $(B fontData)       font user data pointer
-    * $(B glyph)       The glyph ID to query
-    * $(B paintFuncs)       The paint functions to use
-    * $(B paintData)       The data accompanying the paint functions
-    * $(B paletteIndex)       The color palette to use
-    * $(B foreground)       The foreground color
-  )
+    Params:
+      font = #hb_font_t to work upon
+      fontData = font user data pointer
+      glyph = The glyph ID to query
+      paintFuncs = The paint functions to use
+      paintData = The data accompanying the paint functions
+      paletteIndex = The color palette to use
+      foreground = The foreground color
 */
 alias FontPaintGlyphFunc = void delegate(harfbuzz.font.Font font, void* fontData, harfbuzz.types.Codepoint glyph, harfbuzz.paint_funcs.PaintFuncs paintFuncs, void* paintData, uint paletteIndex, harfbuzz.types.Color foreground);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a
-  color everywhere within the current clip.
+    color everywhere within the current clip.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B isForeground)       whether the color is the foreground
-    * $(B color)       The color to use, unpremultiplied
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      isForeground = whether the color is the foreground
+      color = The color to use, unpremultiplied
 */
 alias PaintColorFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Bool isForeground, harfbuzz.types.Color color);
 
 /**
     A virtual method for the #hb_paint_funcs_t to render a color glyph by glyph index.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B glyph)       the glyph ID
-    * $(B font)       the font
-  )
-  Returns:     true if the glyph was painted, false otherwise.
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      glyph = the glyph ID
+      font = the font
+    Returns: true if the glyph was painted, false otherwise.
 */
 alias PaintColorGlyphFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font);
 
 /**
     A virtual method for the #hb_paint_funcs_t to fetch a color from the custom
-  color palette.
-  
-  Custom palette colors override the colors from the fonts selected color
-  palette. It is not necessary to override all palette entries; for entries
-  that should be taken from the font palette, return `false`.
-  
-  This function might get called multiple times, but the custom palette is
-  expected to remain unchanged for duration of a [harfbuzz.global.fontPaintGlyph] call.
+    color palette.
+    
+    Custom palette colors override the colors from the fonts selected color
+    palette. It is not necessary to override all palette entries; for entries
+    that should be taken from the font palette, return `false`.
+    
+    This function might get called multiple times, but the custom palette is
+    expected to remain unchanged for duration of a [harfbuzz.global.fontPaintGlyph] call.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B colorIndex)       the color index
-    * $(B color)       fetched color
-  )
-  Returns:     `true` if found, `false` otherwise
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      colorIndex = the color index
+      color = fetched color
+    Returns: `true` if found, `false` otherwise
 */
 alias PaintCustomPaletteColorFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, uint colorIndex, out harfbuzz.types.Color color);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a glyph image.
-  
-  This method is called for glyphs with image blobs in the CBDT,
-  sbix or SVG tables. The format identifies the kind of data that
-  is contained in image. Possible values include #HB_PAINT_IMAGE_FORMAT_PNG,
-  #HB_PAINT_IMAGE_FORMAT_SVG and #HB_PAINT_IMAGE_FORMAT_BGRA.
-  
-  The image dimensions and glyph extents are provided if available,
-  and should be used to size and position the image.
+    
+    This method is called for glyphs with image blobs in the CBDT,
+    sbix or SVG tables. The format identifies the kind of data that
+    is contained in image. Possible values include #HB_PAINT_IMAGE_FORMAT_PNG,
+    #HB_PAINT_IMAGE_FORMAT_SVG and #HB_PAINT_IMAGE_FORMAT_BGRA.
+    
+    The image dimensions and glyph extents are provided if available,
+    and should be used to size and position the image.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B image)       the image data
-    * $(B width)       width of the raster image in pixels, or 0
-    * $(B height)       height of the raster image in pixels, or 0
-    * $(B format)       the image format as a tag
-    * $(B slant)       the synthetic slant ratio to be applied to the image during rendering
-    * $(B extents)       glyph extents for desired rendering
-  )
-  Returns:     Whether the operation was successful.
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      image = the image data
+      width = width of the raster image in pixels, or 0
+      height = height of the raster image in pixels, or 0
+      format = the image format as a tag
+      slant = the synthetic slant ratio to be applied to the image during rendering
+      extents = glyph extents for desired rendering
+    Returns: Whether the operation was successful.
 */
 alias PaintImageFunc = harfbuzz.types.Bool delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.blob.Blob image, uint width, uint height, harfbuzz.types.Tag format, float slant, harfbuzz.types.GlyphExtents extents);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a linear
-  gradient everywhere within the current clip.
-  
-  The color_line object contains information about the colors of the gradients.
-  It is only valid for the duration of the callback, you cannot keep it around.
-  
-  The coordinates of the points are interpreted according
-  to the current transform.
-  
-  See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details on how the points define the direction
-  of the gradient, and how to interpret the color_line.
+    gradient everywhere within the current clip.
+    
+    The color_line object contains information about the colors of the gradients.
+    It is only valid for the duration of the callback, you cannot keep it around.
+    
+    The coordinates of the points are interpreted according
+    to the current transform.
+    
+    See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details on how the points define the direction
+    of the gradient, and how to interpret the color_line.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B colorLine)       Color information for the gradient
-    * $(B x0)       X coordinate of the first point
-    * $(B y0)       Y coordinate of the first point
-    * $(B x1)       X coordinate of the second point
-    * $(B y1)       Y coordinate of the second point
-    * $(B x2)       X coordinate of the third point
-    * $(B y2)       Y coordinate of the third point
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      colorLine = Color information for the gradient
+      x0 = X coordinate of the first point
+      y0 = Y coordinate of the first point
+      x1 = X coordinate of the second point
+      y1 = Y coordinate of the second point
+      x2 = X coordinate of the third point
+      y2 = Y coordinate of the third point
 */
 alias PaintLinearGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float x1, float y1, float x2, float y2);
 
 /**
     A virtual method for the #hb_paint_funcs_t to undo
-  the effect of a prior call to the #hb_paint_funcs_push_clip_glyph_func_t
-  or #hb_paint_funcs_push_clip_rectangle_func_t vfuncs.
+    the effect of a prior call to the #hb_paint_funcs_push_clip_glyph_func_t
+    or #hb_paint_funcs_push_clip_rectangle_func_t vfuncs.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPopClipFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
 
 /**
     A virtual method for the #hb_paint_funcs_t to undo
-  the effect of a prior call to the #hb_paint_funcs_push_group_func_t
-  vfunc.
-  
-  This call stops the redirection to the intermediate surface,
-  and then composites it on the previous surface, using the
-  compositing mode passed to this call.
+    the effect of a prior call to the #hb_paint_funcs_push_group_func_t
+    vfunc.
+    
+    This call stops the redirection to the intermediate surface,
+    and then composites it on the previous surface, using the
+    compositing mode passed to this call.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B mode)       the compositing mode to use
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      mode = the compositing mode to use
 */
 alias PaintPopGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.PaintCompositeMode mode);
 
 /**
     A virtual method for the #hb_paint_funcs_t to undo
-  the effect of a prior call to the #hb_paint_funcs_push_transform_func_t
-  vfunc.
+    the effect of a prior call to the #hb_paint_funcs_push_transform_func_t
+    vfunc.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPopTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
 
 /**
     A virtual method for the #hb_paint_funcs_t to clip
-  subsequent paint calls to the outline of a glyph.
-  
-  The coordinates of the glyph outline are interpreted according
-  to the current transform.
-  
-  This clip is applied in addition to the current clip,
-  and remains in effect until a matching call to
-  the #hb_paint_funcs_pop_clip_func_t vfunc.
+    subsequent paint calls to the outline of a glyph.
+    
+    The coordinates of the glyph outline are interpreted according
+    to the current transform.
+    
+    This clip is applied in addition to the current clip,
+    and remains in effect until a matching call to
+    the #hb_paint_funcs_pop_clip_func_t vfunc.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B glyph)       the glyph ID
-    * $(B font)       the font
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      glyph = the glyph ID
+      font = the font
 */
 alias PaintPushClipGlyphFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.types.Codepoint glyph, harfbuzz.font.Font font);
 
 /**
     A virtual method for the #hb_paint_funcs_t to clip
-  subsequent paint calls to a rectangle.
-  
-  The coordinates of the rectangle are interpreted according
-  to the current transform.
-  
-  This clip is applied in addition to the current clip,
-  and remains in effect until a matching call to
-  the #hb_paint_funcs_pop_clip_func_t vfunc.
+    subsequent paint calls to a rectangle.
+    
+    The coordinates of the rectangle are interpreted according
+    to the current transform.
+    
+    This clip is applied in addition to the current clip,
+    and remains in effect until a matching call to
+    the #hb_paint_funcs_pop_clip_func_t vfunc.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B xmin)       min X for the rectangle
-    * $(B ymin)       min Y for the rectangle
-    * $(B xmax)       max X for the rectangle
-    * $(B ymax)       max Y for the rectangle
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      xmin = min X for the rectangle
+      ymin = min Y for the rectangle
+      xmax = max X for the rectangle
+      ymax = max Y for the rectangle
 */
 alias PaintPushClipRectangleFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xmin, float ymin, float xmax, float ymax);
 
 /**
     A virtual method for the #hb_paint_funcs_t to use
-  an intermediate surface for subsequent paint calls.
-  
-  The drawing will be redirected to an intermediate surface
-  until a matching call to the #hb_paint_funcs_pop_group_func_t
-  vfunc.
+    an intermediate surface for subsequent paint calls.
+    
+    The drawing will be redirected to an intermediate surface
+    until a matching call to the #hb_paint_funcs_pop_group_func_t
+    vfunc.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
 */
 alias PaintPushGroupFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData);
 
 /**
     A virtual method for the #hb_paint_funcs_t to apply
-  a transform to subsequent paint calls.
-  
-  This transform is applied after the current transform,
-  and remains in effect until a matching call to
-  the #hb_paint_funcs_pop_transform_func_t vfunc.
+    a transform to subsequent paint calls.
+    
+    This transform is applied after the current transform,
+    and remains in effect until a matching call to
+    the #hb_paint_funcs_pop_transform_func_t vfunc.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B xx)       xx component of the transform matrix
-    * $(B yx)       yx component of the transform matrix
-    * $(B xy)       xy component of the transform matrix
-    * $(B yy)       yy component of the transform matrix
-    * $(B dx)       dx component of the transform matrix
-    * $(B dy)       dy component of the transform matrix
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      xx = xx component of the transform matrix
+      yx = yx component of the transform matrix
+      xy = xy component of the transform matrix
+      yy = yy component of the transform matrix
+      dx = dx component of the transform matrix
+      dy = dy component of the transform matrix
 */
 alias PaintPushTransformFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a radial
-  gradient everywhere within the current clip.
-  
-  The color_line object contains information about the colors of the gradients.
-  It is only valid for the duration of the callback, you cannot keep it around.
-  
-  The coordinates of the points are interpreted according
-  to the current transform.
-  
-  See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details on how the points define the direction
-  of the gradient, and how to interpret the color_line.
+    gradient everywhere within the current clip.
+    
+    The color_line object contains information about the colors of the gradients.
+    It is only valid for the duration of the callback, you cannot keep it around.
+    
+    The coordinates of the points are interpreted according
+    to the current transform.
+    
+    See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details on how the points define the direction
+    of the gradient, and how to interpret the color_line.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B colorLine)       Color information for the gradient
-    * $(B x0)       X coordinate of the first circle's center
-    * $(B y0)       Y coordinate of the first circle's center
-    * $(B r0)       radius of the first circle
-    * $(B x1)       X coordinate of the second circle's center
-    * $(B y1)       Y coordinate of the second circle's center
-    * $(B r1)       radius of the second circle
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      colorLine = Color information for the gradient
+      x0 = X coordinate of the first circle's center
+      y0 = Y coordinate of the first circle's center
+      r0 = radius of the first circle
+      x1 = X coordinate of the second circle's center
+      y1 = Y coordinate of the second circle's center
+      r1 = radius of the second circle
 */
 alias PaintRadialGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float r0, float x1, float y1, float r1);
 
 /**
     A virtual method for the #hb_paint_funcs_t to paint a sweep
-  gradient everywhere within the current clip.
-  
-  The color_line object contains information about the colors of the gradients.
-  It is only valid for the duration of the callback, you cannot keep it around.
-  
-  The coordinates of the points are interpreted according
-  to the current transform.
-  
-  See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
-  section for details on how the points define the direction
-  of the gradient, and how to interpret the color_line.
+    gradient everywhere within the current clip.
+    
+    The color_line object contains information about the colors of the gradients.
+    It is only valid for the duration of the callback, you cannot keep it around.
+    
+    The coordinates of the points are interpreted according
+    to the current transform.
+    
+    See the OpenType spec [COLR](https://learn.microsoft.com/en-us/typography/opentype/spec/colr)
+    section for details on how the points define the direction
+    of the gradient, and how to interpret the color_line.
 
-  ## Parameters
-  $(LIST
-    * $(B funcs)       paint functions object
-    * $(B paintData)       The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
-    * $(B colorLine)       Color information for the gradient
-    * $(B x0)       X coordinate of the circle's center
-    * $(B y0)       Y coordinate of the circle's center
-    * $(B startAngle)       the start angle, in radians
-    * $(B endAngle)       the end angle, in radians
-  )
+    Params:
+      funcs = paint functions object
+      paintData = The data accompanying the paint functions in [harfbuzz.global.fontPaintGlyph]
+      colorLine = Color information for the gradient
+      x0 = X coordinate of the circle's center
+      y0 = Y coordinate of the circle's center
+      startAngle = the start angle, in radians
+      endAngle = the end angle, in radians
 */
 alias PaintSweepGradientFunc = void delegate(harfbuzz.paint_funcs.PaintFuncs funcs, void* paintData, harfbuzz.color_line.ColorLine colorLine, float x0, float y0, float startAngle, float endAngle);
 
 /**
     Callback function for [harfbuzz.global.faceCreateForTables].
 
-  ## Parameters
-  $(LIST
-    * $(B face)       an #hb_face_t to reference table for
-    * $(B tag)       the tag of the table to reference
-  )
-  Returns:     A pointer to the tag table within face
+    Params:
+      face = an #hb_face_t to reference table for
+      tag = the tag of the table to reference
+    Returns: A pointer to the tag table within face
 */
 alias ReferenceTableFunc = harfbuzz.blob.Blob delegate(harfbuzz.face.Face face, harfbuzz.types.Tag tag);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should retrieve the Canonical Combining Class (ccc)
-  property for a specified Unicode code point.
+    
+    This method should retrieve the Canonical Combining Class (ccc)
+    property for a specified Unicode code point.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B unicode)       The code point to query
-  )
-  Returns:     The #hb_unicode_combining_class_t of unicode
+    Params:
+      ufuncs = A Unicode-functions structure
+      unicode = The code point to query
+    Returns: The #hb_unicode_combining_class_t of unicode
 */
 alias UnicodeCombiningClassFunc = harfbuzz.types.UnicodeCombiningClass delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should compose a sequence of two input Unicode code
-  points by canonical equivalence, returning the composed code
-  point in a #hb_codepoint_t output parameter (if successful).
-  The method must return an #hb_bool_t indicating the success
-  of the composition.
+    
+    This method should compose a sequence of two input Unicode code
+    points by canonical equivalence, returning the composed code
+    point in a #hb_codepoint_t output parameter (if successful).
+    The method must return an #hb_bool_t indicating the success
+    of the composition.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B a)       The first code point to compose
-    * $(B b)       The second code point to compose
-    * $(B ab)       The composed code point
-  )
-  Returns:     `true` is a,b composed, `false` otherwise
+    Params:
+      ufuncs = A Unicode-functions structure
+      a = The first code point to compose
+      b = The second code point to compose
+      ab = The composed code point
+    Returns: `true` is `a`,`b` composed, `false` otherwise
 */
 alias UnicodeComposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint a, harfbuzz.types.Codepoint b, out harfbuzz.types.Codepoint ab);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should decompose an input Unicode code point,
-  returning the two decomposed code points in #hb_codepoint_t
-  output parameters (if successful). The method must return an
-  #hb_bool_t indicating the success of the composition.
+    
+    This method should decompose an input Unicode code point,
+    returning the two decomposed code points in #hb_codepoint_t
+    output parameters (if successful). The method must return an
+    #hb_bool_t indicating the success of the composition.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B ab)       The code point to decompose
-    * $(B a)       The first decomposed code point
-    * $(B b)       The second decomposed code point
-  )
-  Returns:     `true` if ab decomposed, `false` otherwise
+    Params:
+      ufuncs = A Unicode-functions structure
+      ab = The code point to decompose
+      a = The first decomposed code point
+      b = The second decomposed code point
+    Returns: `true` if `a`b decomposed, `false` otherwise
 */
 alias UnicodeDecomposeFunc = harfbuzz.types.Bool delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint ab, out harfbuzz.types.Codepoint a, out harfbuzz.types.Codepoint b);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B unicode)       The code point to query
-  )
-  Returns: 
+    Params:
+      ufuncs = A Unicode-functions structure
+      unicode = The code point to query
+    Returns: 
 */
 alias UnicodeEastasianWidthFunc = uint delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should retrieve the General Category property for
-  a specified Unicode code point.
+    
+    This method should retrieve the General Category property for
+    a specified Unicode code point.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B unicode)       The code point to query
-  )
-  Returns:     The #hb_unicode_general_category_t of unicode
+    Params:
+      ufuncs = A Unicode-functions structure
+      unicode = The code point to query
+    Returns: The #hb_unicode_general_category_t of unicode
 */
 alias UnicodeGeneralCategoryFunc = harfbuzz.types.UnicodeGeneralCategory delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should retrieve the Bi-Directional Mirroring Glyph
-  code point for a specified Unicode code point.
-  
-  <note>Note: If a code point does not have a specified
-  Bi-Directional Mirroring Glyph defined, the method should
-  return the original code point.</note>
+    
+    This method should retrieve the Bi-Directional Mirroring Glyph
+    code point for a specified Unicode code point.
+    
+    <note>Note: If a code point does not have a specified
+    Bi-Directional Mirroring Glyph defined, the method should
+    return the original code point.</note>
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B unicode)       The code point to query
-  )
-  Returns:     The #hb_codepoint_t of the Mirroring Glyph for unicode
+    Params:
+      ufuncs = A Unicode-functions structure
+      unicode = The code point to query
+    Returns: The #hb_codepoint_t of the Mirroring Glyph for unicode
 */
 alias UnicodeMirroringFunc = harfbuzz.types.Codepoint delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 
 /**
     A virtual method for the #hb_unicode_funcs_t structure.
-  
-  This method should retrieve the Script property for a
-  specified Unicode code point.
+    
+    This method should retrieve the Script property for a
+    specified Unicode code point.
 
-  ## Parameters
-  $(LIST
-    * $(B ufuncs)       A Unicode-functions structure
-    * $(B unicode)       The code point to query
-  )
-  Returns:     The #hb_script_t of unicode
+    Params:
+      ufuncs = A Unicode-functions structure
+      unicode = The code point to query
+    Returns: The #hb_script_t of unicode
 */
 alias UnicodeScriptFunc = harfbuzz.types.Script delegate(harfbuzz.unicode_funcs.UnicodeFuncs ufuncs, harfbuzz.types.Codepoint unicode);
 
 /**
     Used when getting or setting AAT feature selectors. Indicates that
-  there is no selector index corresponding to the selector of interest.
+    there is no selector index corresponding to the selector of interest.
 */
 enum AAT_LAYOUT_NO_SELECTOR_INDEX = 65535;
 
 /**
     The default code point for replacing invalid characters in a given encoding.
-  Set to U+FFFD REPLACEMENT CHARACTER.
+    Set to U+FFFD REPLACEMENT CHARACTER.
 */
 enum BUFFER_REPLACEMENT_CODEPOINT_DEFAULT = 65533;
 
@@ -970,14 +883,14 @@ enum CODEPOINT_INVALID = 4294967295;
 
 /**
     Special setting for #hb_feature_t.start to apply the feature from the start
-  of the buffer.
+    of the buffer.
 */
 enum FEATURE_GLOBAL_START = 0;
 
 /**
     Constant signifying that a font does not have any
-  named-instance index set.  This is the default of
-  a font.
+    named-instance index set.  This is the default of
+    a font.
 */
 enum FONT_NO_VAR_NAMED_INSTANCE = 4294967295;
 

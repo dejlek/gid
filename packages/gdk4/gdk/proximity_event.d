@@ -1,3 +1,4 @@
+/// Module for [ProximityEvent] class
 module gdk.proximity_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class ProximityEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

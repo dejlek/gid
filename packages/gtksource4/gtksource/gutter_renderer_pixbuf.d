@@ -1,3 +1,4 @@
+/// Module for [GutterRendererPixbuf] class
 module gtksource.gutter_renderer_pixbuf;
 
 import gdkpixbuf.pixbuf;
@@ -13,17 +14,20 @@ import gtksource.types;
 class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_pixbuf_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_pixbuf_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,7 +40,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Create a new #GtkSourceGutterRendererPixbuf.
-    Returns:     A #GtkSourceGutterRenderer
+      Returns: A #GtkSourceGutterRenderer
   */
   this()
   {
@@ -47,7 +51,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Get the gicon of the renderer
-    Returns:     a #GIcon
+      Returns: a #GIcon
   */
   gio.icon.Icon getGicon()
   {
@@ -68,7 +72,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Get the pixbuf of the renderer.
-    Returns:     a #GdkPixbuf
+      Returns: a #GdkPixbuf
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {

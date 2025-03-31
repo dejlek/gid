@@ -1,3 +1,4 @@
+/// Module for [AssistantPage] class
 module gtk.assistant_page;
 
 import gid.gid;
@@ -10,22 +11,25 @@ import gtk.widget;
 /**
     [gtk.assistant_page.AssistantPage] is an auxiliary object used by `GtkAssistant.
 
-  Deprecated:     This object will be removed in GTK 5
+    Deprecated: This object will be removed in GTK 5
 */
 class AssistantPage : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_assistant_page_get_type != &gidSymbolNotFound ? gtk_assistant_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,9 +42,9 @@ class AssistantPage : gobject.object.ObjectG
 
   /**
       Returns the child to which page belongs.
-    Returns:     the child to which page belongs
+      Returns: the child to which page belongs
   
-    Deprecated:     This widget will be removed in GTK 5
+      Deprecated: This widget will be removed in GTK 5
   */
   gtk.widget.Widget getChild()
   {

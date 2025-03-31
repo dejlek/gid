@@ -1,3 +1,4 @@
+/// Module for [EncodingProfile] class
 module gstpbutils.encoding_profile;
 
 import gid.gid;
@@ -11,22 +12,25 @@ import gstpbutils.types;
 
 /**
     The opaque base class object for all encoding profiles. This contains generic
-  information like name, description, format and preset.
+    information like name, description, format and preset.
 */
 class EncodingProfile : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_profile_get_type != &gidSymbolNotFound ? gst_encoding_profile_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,12 +43,13 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Find the #GstEncodingProfile with the specified name and category.
-    Params:
-      targetname =       The name of the target
-      profilename =       The name of the profile, if null
-        provided, it will default to the encoding profile called `default`.
-      category =       The target category. Can be null
-    Returns:     The matching #GstEncodingProfile or null.
+  
+      Params:
+        targetname = The name of the target
+        profilename = The name of the profile, if null
+          provided, it will default to the encoding profile called `default`.
+        category = The target category. Can be null
+      Returns: The matching #GstEncodingProfile or null.
   */
   static gstpbutils.encoding_profile.EncodingProfile find(string targetname, string profilename = null, string category = null)
   {
@@ -59,11 +64,12 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Creates a #GstEncodingProfile matching the formats from the given
-    #GstDiscovererInfo. Streams other than audio or video (eg,
-    subtitles), are currently ignored.
-    Params:
-      info =       The #GstDiscovererInfo to read from
-    Returns:     The new #GstEncodingProfile or null.
+      #GstDiscovererInfo. Streams other than audio or video (eg,
+      subtitles), are currently ignored.
+  
+      Params:
+        info = The #GstDiscovererInfo to read from
+      Returns: The new #GstEncodingProfile or null.
   */
   static gstpbutils.encoding_profile.EncodingProfile fromDiscoverer(gstpbutils.discoverer_info.DiscovererInfo info)
   {
@@ -75,7 +81,7 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Makes a deep copy of self
-    Returns:     The copy of self
+      Returns: The copy of self
   */
   gstpbutils.encoding_profile.EncodingProfile copy()
   {
@@ -87,8 +93,8 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Get whether the format that has been negotiated in at some point can be renegotiated
-    later during the encoding.
-    Returns: 
+      later during the encoding.
+      Returns: 
   */
   bool getAllowDynamicOutput()
   {
@@ -135,8 +141,8 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Computes the full output caps that this profile will be able to consume.
-    Returns:     The full caps the given profile can consume. Call
-      gst_caps_unref() when you are done with the caps.
+      Returns: The full caps the given profile can consume. Call
+        gst_caps_unref() when you are done with the caps.
   */
   gst.caps.Caps getInputCaps()
   {
@@ -217,9 +223,10 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Checks whether the two #GstEncodingProfile are equal
-    Params:
-      b =       a #GstEncodingProfile
-    Returns:     true if a and b are equal, else false.
+  
+      Params:
+        b = a #GstEncodingProfile
+      Returns: true if `a` and `b` are equal, else false.
   */
   bool isEqual(gstpbutils.encoding_profile.EncodingProfile b)
   {
@@ -230,10 +237,11 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Sets whether the format that has been negotiated in at some point can be renegotiated
-    later during the encoding.
-    Params:
-      allowDynamicOutput =       Whether the format that has been negotiated first can be renegotiated
-        during the encoding
+      later during the encoding.
+  
+      Params:
+        allowDynamicOutput = Whether the format that has been negotiated first can be renegotiated
+          during the encoding
   */
   void setAllowDynamicOutput(bool allowDynamicOutput)
   {
@@ -242,9 +250,10 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Set description as the given description for the profile. A copy of
-    description will be made internally.
-    Params:
-      description =       the description to set on the profile
+      description will be made internally.
+  
+      Params:
+        description = the description to set on the profile
   */
   void setDescription(string description = null)
   {
@@ -254,24 +263,25 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       This allows setting the muxing/encoding element properties.
-    
-    **Set properties generically**
-    
-    ``` properties
-     [element-properties, boolean-prop=true, string-prop="hi"]
-    ```
-    
-    **Mapping properties with well known element factories**
-    
-    ``` properties
-    element-properties-map, map = {
-         [openh264enc, gop-size=32, ],
-         [x264enc, key-int-max=32, tune=zerolatency],
-     }
-    ```
-    Params:
-      elementProperties =       A #GstStructure defining the properties
-        to be set to the element the profile represents.
+      
+      **Set properties generically**
+      
+      ``` properties
+       [element-properties, boolean-prop=true, string-prop="hi"]
+      ```
+      
+      **Mapping properties with well known element factories**
+      
+      ``` properties
+      element-properties-map, map = {
+           [openh264enc, gop-size=32, ],
+           [x264enc, key-int-max=32, tune=zerolatency],
+       }
+      ```
+  
+      Params:
+        elementProperties = A #GstStructure defining the properties
+          to be set to the element the profile represents.
   */
   void setElementProperties(gst.structure.Structure elementProperties)
   {
@@ -280,8 +290,9 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Set whether the profile should be used or not.
-    Params:
-      enabled =       false to disable profile, true to enable it
+  
+      Params:
+        enabled = false to disable profile, true to enable it
   */
   void setEnabled(bool enabled)
   {
@@ -290,8 +301,9 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Sets the media format used in the profile.
-    Params:
-      format =       the media format to use in the profile.
+  
+      Params:
+        format = the media format to use in the profile.
   */
   void setFormat(gst.caps.Caps format)
   {
@@ -300,9 +312,10 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Set name as the given name for the profile. A copy of name will be made
-    internally.
-    Params:
-      name =       the name to set on the profile
+      internally.
+  
+      Params:
+        name = the name to set on the profile
   */
   void setName(string name = null)
   {
@@ -312,9 +325,10 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Set the number of time the profile is used in its parent
-    container profile. If 0, it is not a mandatory stream
-    Params:
-      presence =       the number of time the profile can be used
+      container profile. If 0, it is not a mandatory stream
+  
+      Params:
+        presence = the number of time the profile can be used
   */
   void setPresence(uint presence)
   {
@@ -323,10 +337,11 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Sets the name of the #GstElement that implements the #GstPreset interface
-    to use for the profile.
-    This is the name that has been set when saving the preset.
-    Params:
-      preset =       the element preset to use
+      to use for the profile.
+      This is the name that has been set when saving the preset.
+  
+      Params:
+        preset = the element preset to use
   */
   void setPreset(string preset = null)
   {
@@ -336,8 +351,9 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Sets the name of the #GstPreset's factory to be used in the profile.
-    Params:
-      presetName =       The name of the preset to use in this profile.
+  
+      Params:
+        presetName = The name of the preset to use in this profile.
   */
   void setPresetName(string presetName = null)
   {
@@ -347,10 +363,11 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       Set the restriction #GstCaps to apply before the encoder
-    that will be used in the profile. See [gstpbutils.encoding_profile.EncodingProfile.getRestriction]
-    for more about restrictions. Does not apply to #GstEncodingContainerProfile.
-    Params:
-      restriction =       the restriction to apply
+      that will be used in the profile. See [gstpbutils.encoding_profile.EncodingProfile.getRestriction]
+      for more about restrictions. Does not apply to #GstEncodingContainerProfile.
+  
+      Params:
+        restriction = the restriction to apply
   */
   void setRestriction(gst.caps.Caps restriction = null)
   {
@@ -359,13 +376,14 @@ class EncodingProfile : gobject.object.ObjectG
 
   /**
       If using a single segment, buffers will be retimestamped and segments will be
-    eat so as to appear as one segment.
-    
-    > *NOTE*: Single segment is not property supported when using
-    > #encodebin:avoid-reencoding
-    Params:
-      singleSegment =       #TRUE if the stream represented by profile should use a
-        single segment before the encoder, #FALSE otherwise.
+      eat so as to appear as one segment.
+      
+      > *NOTE*: Single segment is not property supported when using
+      > #encodebin:avoid-reencoding
+  
+      Params:
+        singleSegment = #TRUE if the stream represented by profile should use a
+          single segment before the encoder, #FALSE otherwise.
   */
   void setSingleSegment(bool singleSegment)
   {

@@ -1,3 +1,4 @@
+/// Module for [VideoOrientation] interface mixin
 module gstvideo.video_orientation_mixin;
 
 public import gstvideo.video_orientation_iface_proxy;
@@ -9,7 +10,7 @@ public import gstvideo.types;
 
 /**
     The interface allows unified access to control flipping and autocenter
-  operation of video-sources or operators.
+    operation of video-sources or operators.
 */
 template VideoOrientationT()
 {
@@ -17,9 +18,10 @@ template VideoOrientationT()
 
   /**
       Get the horizontal centering offset from the given object.
-    Params:
-      center =       return location for the result
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = return location for the result
+      Returns: true in case the element supports centering
   */
   override bool getHcenter(out int center)
   {
@@ -30,9 +32,10 @@ template VideoOrientationT()
 
   /**
       Get the horizontal flipping state (true for flipped) from the given object.
-    Params:
-      flip =       return location for the result
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = return location for the result
+      Returns: true in case the element supports flipping
   */
   override bool getHflip(out bool flip)
   {
@@ -43,9 +46,10 @@ template VideoOrientationT()
 
   /**
       Get the vertical centering offset from the given object.
-    Params:
-      center =       return location for the result
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = return location for the result
+      Returns: true in case the element supports centering
   */
   override bool getVcenter(out int center)
   {
@@ -56,9 +60,10 @@ template VideoOrientationT()
 
   /**
       Get the vertical flipping state (true for flipped) from the given object.
-    Params:
-      flip =       return location for the result
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = return location for the result
+      Returns: true in case the element supports flipping
   */
   override bool getVflip(out bool flip)
   {
@@ -69,9 +74,10 @@ template VideoOrientationT()
 
   /**
       Set the horizontal centering offset for the given object.
-    Params:
-      center =       centering offset
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = centering offset
+      Returns: true in case the element supports centering
   */
   override bool setHcenter(int center)
   {
@@ -82,9 +88,10 @@ template VideoOrientationT()
 
   /**
       Set the horizontal flipping state (true for flipped) for the given object.
-    Params:
-      flip =       use flipping
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = use flipping
+      Returns: true in case the element supports flipping
   */
   override bool setHflip(bool flip)
   {
@@ -95,9 +102,10 @@ template VideoOrientationT()
 
   /**
       Set the vertical centering offset for the given object.
-    Params:
-      center =       centering offset
-    Returns:     true in case the element supports centering
+  
+      Params:
+        center = centering offset
+      Returns: true in case the element supports centering
   */
   override bool setVcenter(int center)
   {
@@ -108,9 +116,10 @@ template VideoOrientationT()
 
   /**
       Set the vertical flipping state (true for flipped) for the given object.
-    Params:
-      flip =       use flipping
-    Returns:     true in case the element supports flipping
+  
+      Params:
+        flip = use flipping
+      Returns: true in case the element supports flipping
   */
   override bool setVflip(bool flip)
   {

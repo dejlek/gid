@@ -1,3 +1,4 @@
+/// Module for [PrintContext] class
 module gtk.print_context;
 
 import cairo.context;
@@ -13,89 +14,92 @@ import pango.layout;
 
 /**
     A [gtk.print_context.PrintContext] encapsulates context information that is required when
-  drawing pages for printing.
-  
-  This includes the cairo context and important parameters like page size
-  and resolution. It also lets you easily create [pango.layout.Layout] and
-  [pango.context.Context] objects that match the font metrics of the cairo surface.
-  
-  [gtk.print_context.PrintContext] objects get passed to the
-  `signal@Gtk.PrintOperation::begin-print`,
-  `signal@Gtk.PrintOperation::end-print`,
-  `signal@Gtk.PrintOperation::request-page-setup` and
-  `signal@Gtk.PrintOperation::draw-page` signals on the
-  [gtk.print_operation.PrintOperation] object.
-  
-  ## Using GtkPrintContext in a ::draw-page callback
-  
-  ```c
-  static void
-  draw_page (GtkPrintOperation *operation,
-             GtkPrintContext   *context,
-             int                page_nr)
-  {
-    cairo_t *cr;
-    PangoLayout *layout;
-    PangoFontDescription *desc;
-  
-    cr = gtk_print_context_get_cairo_context (context);
-  
-    // Draw a red rectangle, as wide as the paper (inside the margins)
-    cairo_set_source_rgb (cr, 1.0, 0, 0);
-    cairo_rectangle (cr, 0, 0, gtk_print_context_get_width (context), 50);
-  
-    cairo_fill (cr);
-  
-    // Draw some lines
-    cairo_move_to (cr, 20, 10);
-    cairo_line_to (cr, 40, 20);
-    cairo_arc (cr, 60, 60, 20, 0, M_PI);
-    cairo_line_to (cr, 80, 20);
-  
-    cairo_set_source_rgb (cr, 0, 0, 0);
-    cairo_set_line_width (cr, 5);
-    cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
-    cairo_set_line_join (cr, CAIRO_LINE_JOIN_ROUND);
-  
-    cairo_stroke (cr);
-  
-    // Draw some text
-    layout = gtk_print_context_create_pango_layout (context);
-    pango_layout_set_text (layout, "Hello World! Printing is easy", -1);
-    desc = pango_font_description_from_string ("sans 28");
-    pango_layout_set_font_description (layout, desc);
-    pango_font_description_free (desc);
-  
-    cairo_move_to (cr, 30, 20);
-    pango_cairo_layout_path (cr, layout);
-  
-    // Font Outline
-    cairo_set_source_rgb (cr, 0.93, 1.0, 0.47);
-    cairo_set_line_width (cr, 0.5);
-    cairo_stroke_preserve (cr);
-  
-    // Font Fill
-    cairo_set_source_rgb (cr, 0, 0.0, 1.0);
-    cairo_fill (cr);
-  
-    g_object_unref (layout);
-  }
-  ```
+    drawing pages for printing.
+    
+    This includes the cairo context and important parameters like page size
+    and resolution. It also lets you easily create [pango.layout.Layout] and
+    [pango.context.Context] objects that match the font metrics of the cairo surface.
+    
+    [gtk.print_context.PrintContext] objects get passed to the
+    `signal@Gtk.PrintOperation::begin-print`,
+    `signal@Gtk.PrintOperation::end-print`,
+    `signal@Gtk.PrintOperation::request-page-setup` and
+    `signal@Gtk.PrintOperation::draw-page` signals on the
+    [gtk.print_operation.PrintOperation] object.
+    
+    ## Using GtkPrintContext in a ::draw-page callback
+    
+    ```c
+    static void
+    draw_page (GtkPrintOperation *operation,
+               GtkPrintContext   *context,
+               int                page_nr)
+    {
+      cairo_t *cr;
+      PangoLayout *layout;
+      PangoFontDescription *desc;
+    
+      cr = gtk_print_context_get_cairo_context (context);
+    
+      // Draw a red rectangle, as wide as the paper (inside the margins)
+      cairo_set_source_rgb (cr, 1.0, 0, 0);
+      cairo_rectangle (cr, 0, 0, gtk_print_context_get_width (context), 50);
+    
+      cairo_fill (cr);
+    
+      // Draw some lines
+      cairo_move_to (cr, 20, 10);
+      cairo_line_to (cr, 40, 20);
+      cairo_arc (cr, 60, 60, 20, 0, M_PI);
+      cairo_line_to (cr, 80, 20);
+    
+      cairo_set_source_rgb (cr, 0, 0, 0);
+      cairo_set_line_width (cr, 5);
+      cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
+      cairo_set_line_join (cr, CAIRO_LINE_JOIN_ROUND);
+    
+      cairo_stroke (cr);
+    
+      // Draw some text
+      layout = gtk_print_context_create_pango_layout (context);
+      pango_layout_set_text (layout, "Hello World! Printing is easy", -1);
+      desc = pango_font_description_from_string ("sans 28");
+      pango_layout_set_font_description (layout, desc);
+      pango_font_description_free (desc);
+    
+      cairo_move_to (cr, 30, 20);
+      pango_cairo_layout_path (cr, layout);
+    
+      // Font Outline
+      cairo_set_source_rgb (cr, 0.93, 1.0, 0.47);
+      cairo_set_line_width (cr, 0.5);
+      cairo_stroke_preserve (cr);
+    
+      // Font Fill
+      cairo_set_source_rgb (cr, 0, 0.0, 1.0);
+      cairo_fill (cr);
+    
+      g_object_unref (layout);
+    }
+    ```
 */
 class PrintContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_context_get_type != &gidSymbolNotFound ? gtk_print_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -108,8 +112,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Creates a new [pango.context.Context] that can be used with the
-    [gtk.print_context.PrintContext].
-    Returns:     a new Pango context for context
+      [gtk.print_context.PrintContext].
+      Returns: a new Pango context for context
   */
   pango.context.Context createPangoContext()
   {
@@ -121,8 +125,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Creates a new [pango.layout.Layout] that is suitable for use
-    with the [gtk.print_context.PrintContext].
-    Returns:     a new Pango layout for context
+      with the [gtk.print_context.PrintContext].
+      Returns: a new Pango layout for context
   */
   pango.layout.Layout createPangoLayout()
   {
@@ -134,8 +138,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the cairo context that is associated with the
-    [gtk.print_context.PrintContext].
-    Returns:     the cairo context of context
+      [gtk.print_context.PrintContext].
+      Returns: the cairo context of context
   */
   cairo.context.Context getCairoContext()
   {
@@ -147,8 +151,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the horizontal resolution of the [gtk.print_context.PrintContext],
-    in dots per inch.
-    Returns:     the horizontal resolution of context
+      in dots per inch.
+      Returns: the horizontal resolution of context
   */
   double getDpiX()
   {
@@ -159,8 +163,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the vertical resolution of the [gtk.print_context.PrintContext],
-    in dots per inch.
-    Returns:     the vertical resolution of context
+      in dots per inch.
+      Returns: the vertical resolution of context
   */
   double getDpiY()
   {
@@ -171,13 +175,14 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the hardware printer margins of the [gtk.print_context.PrintContext],
-    in units.
-    Params:
-      top =       top hardware printer margin
-      bottom =       bottom hardware printer margin
-      left =       left hardware printer margin
-      right =       right hardware printer margin
-    Returns:     true if the hard margins were retrieved
+      in units.
+  
+      Params:
+        top = top hardware printer margin
+        bottom = bottom hardware printer margin
+        left = left hardware printer margin
+        right = right hardware printer margin
+      Returns: true if the hard margins were retrieved
   */
   bool getHardMargins(out double top, out double bottom, out double left, out double right)
   {
@@ -188,7 +193,7 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the height of the [gtk.print_context.PrintContext], in pixels.
-    Returns:     the height of context
+      Returns: the height of context
   */
   double getHeight()
   {
@@ -199,8 +204,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the [gtk.page_setup.PageSetup] that determines the page
-    dimensions of the [gtk.print_context.PrintContext].
-    Returns:     the page setup of context
+      dimensions of the [gtk.print_context.PrintContext].
+      Returns: the page setup of context
   */
   gtk.page_setup.PageSetup getPageSetup()
   {
@@ -212,8 +217,8 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Returns a [pango.font_map.FontMap] that is suitable for use
-    with the [gtk.print_context.PrintContext].
-    Returns:     the font map of context
+      with the [gtk.print_context.PrintContext].
+      Returns: the font map of context
   */
   pango.font_map.FontMap getPangoFontmap()
   {
@@ -225,7 +230,7 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Obtains the width of the [gtk.print_context.PrintContext], in pixels.
-    Returns:     the width of context
+      Returns: the width of context
   */
   double getWidth()
   {
@@ -236,15 +241,16 @@ class PrintContext : gobject.object.ObjectG
 
   /**
       Sets a new cairo context on a print context.
-    
-    This function is intended to be used when implementing
-    an internal print preview, it is not needed for printing,
-    since GTK itself creates a suitable cairo context in that
-    case.
-    Params:
-      cr =       the cairo context
-      dpiX =       the horizontal resolution to use with cr
-      dpiY =       the vertical resolution to use with cr
+      
+      This function is intended to be used when implementing
+      an internal print preview, it is not needed for printing,
+      since GTK itself creates a suitable cairo context in that
+      case.
+  
+      Params:
+        cr = the cairo context
+        dpiX = the horizontal resolution to use with cr
+        dpiY = the vertical resolution to use with cr
   */
   void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
   {

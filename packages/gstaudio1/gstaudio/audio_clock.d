@@ -1,3 +1,4 @@
+/// Module for [AudioClock] class
 module gstaudio.audio_clock;
 
 import gid.gid;
@@ -11,24 +12,27 @@ import gstaudio.types;
 
 /**
     #GstAudioClock makes it easy for elements to implement a #GstClock, they
-  simply need to provide a function that returns the current clock time.
-  
-  This object is internally used to implement the clock in #GstAudioBaseSink.
+    simply need to provide a function that returns the current clock time.
+    
+    This object is internally used to implement the clock in #GstAudioBaseSink.
 */
 class AudioClock : gst.system_clock.SystemClock
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_clock_get_type != &gidSymbolNotFound ? gst_audio_clock_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,12 +45,13 @@ class AudioClock : gst.system_clock.SystemClock
 
   /**
       Create a new #GstAudioClock instance. Whenever the clock time should be
-    calculated it will call func with user_data. When func returns
-    #GST_CLOCK_TIME_NONE, the clock will return the last reported time.
-    Params:
-      name =       the name of the clock
-      func =       a function
-    Returns:     a new #GstAudioClock casted to a #GstClock.
+      calculated it will call func with user_data. When func returns
+      #GST_CLOCK_TIME_NONE, the clock will return the last reported time.
+  
+      Params:
+        name = the name of the clock
+        func = a function
+      Returns: a new #GstAudioClock casted to a #GstClock.
   */
   this(string name, gstaudio.types.AudioClockGetTimeFunc func)
   {
@@ -69,9 +74,10 @@ class AudioClock : gst.system_clock.SystemClock
 
   /**
       Adjust time with the internal offset of the audio clock.
-    Params:
-      time =       a #GstClockTime
-    Returns:     time adjusted with the internal offset.
+  
+      Params:
+        time = a #GstClockTime
+      Returns: time adjusted with the internal offset.
   */
   gst.types.ClockTime adjust(gst.types.ClockTime time)
   {
@@ -82,8 +88,8 @@ class AudioClock : gst.system_clock.SystemClock
 
   /**
       Report the time as returned by the #GstAudioClockGetTimeFunc without applying
-    any offsets.
-    Returns:     the time as reported by the time function of the audio clock
+      any offsets.
+      Returns: the time as reported by the time function of the audio clock
   */
   override gst.types.ClockTime getTime()
   {
@@ -94,11 +100,11 @@ class AudioClock : gst.system_clock.SystemClock
 
   /**
       Invalidate the clock function. Call this function when the provided
-    #GstAudioClockGetTimeFunc cannot be called anymore, for example, when the
-    user_data becomes invalid.
-    
-    After calling this function, clock will return the last returned time for
-    the rest of its lifetime.
+      #GstAudioClockGetTimeFunc cannot be called anymore, for example, when the
+      user_data becomes invalid.
+      
+      After calling this function, clock will return the last returned time for
+      the rest of its lifetime.
   */
   void invalidate()
   {
@@ -107,11 +113,12 @@ class AudioClock : gst.system_clock.SystemClock
 
   /**
       Inform clock that future calls to #GstAudioClockGetTimeFunc will return values
-    starting from time. The clock will update an internal offset to make sure that
-    future calls to internal_time will return an increasing result as required by
-    the #GstClock object.
-    Params:
-      time =       a #GstClockTime
+      starting from time. The clock will update an internal offset to make sure that
+      future calls to internal_time will return an increasing result as required by
+      the #GstClock object.
+  
+      Params:
+        time = a #GstClockTime
   */
   void reset(gst.types.ClockTime time)
   {

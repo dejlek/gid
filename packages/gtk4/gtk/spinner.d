@@ -1,3 +1,4 @@
+/// Module for [Spinner] class
 module gtk.spinner;
 
 import gid.gid;
@@ -14,35 +15,38 @@ import gtk.widget;
 
 /**
     A [gtk.spinner.Spinner] widget displays an icon-size spinning animation.
-  
-  It is often used as an alternative to a [gtk.progress_bar.ProgressBar]
-  for displaying indefinite activity, instead of actual progress.
-  
-  ![An example GtkSpinner](spinner.png)
-  
-  To start the animation, use [gtk.spinner.Spinner.start], to stop it
-  use [gtk.spinner.Spinner.stop].
-  
-  # CSS nodes
-  
-  [gtk.spinner.Spinner] has a single CSS node with the name spinner.
-  When the animation is active, the :checked pseudoclass is
-  added to this node.
+    
+    It is often used as an alternative to a [gtk.progress_bar.ProgressBar]
+    for displaying indefinite activity, instead of actual progress.
+    
+    ![An example GtkSpinner](spinner.png)
+    
+    To start the animation, use [gtk.spinner.Spinner.start], to stop it
+    use [gtk.spinner.Spinner.stop].
+    
+    # CSS nodes
+    
+    [gtk.spinner.Spinner] has a single CSS node with the name spinner.
+    When the animation is active, the :checked pseudoclass is
+    added to this node.
 */
 class Spinner : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_get_type != &gidSymbolNotFound ? gtk_spinner_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,7 +59,7 @@ class Spinner : gtk.widget.Widget
 
   /**
       Returns a new spinner widget. Not yet started.
-    Returns:     a new [gtk.spinner.Spinner]
+      Returns: a new [gtk.spinner.Spinner]
   */
   this()
   {
@@ -66,7 +70,7 @@ class Spinner : gtk.widget.Widget
 
   /**
       Returns whether the spinner is spinning.
-    Returns:     true if the spinner is active
+      Returns: true if the spinner is active
   */
   bool getSpinning()
   {
@@ -77,8 +81,9 @@ class Spinner : gtk.widget.Widget
 
   /**
       Sets the activity of the spinner.
-    Params:
-      spinning =       whether the spinner should be spinning
+  
+      Params:
+        spinning = whether the spinner should be spinning
   */
   void setSpinning(bool spinning)
   {

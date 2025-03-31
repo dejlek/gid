@@ -1,3 +1,4 @@
+/// Module for [FocusEvent] class
 module gdk.focus_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class FocusEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,8 +24,8 @@ class FocusEvent : gdk.event.Event
 
   /**
       Extracts whether this event is about focus entering or
-    leaving the surface.
-    Returns:     true of the focus is entering
+      leaving the surface.
+      Returns: true of the focus is entering
   */
   bool getIn()
   {

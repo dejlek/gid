@@ -1,3 +1,4 @@
+/// Module for [PhysMemoryAllocator] interface mixin
 module gstallocators.phys_memory_allocator_mixin;
 
 public import gstallocators.phys_memory_allocator_iface_proxy;

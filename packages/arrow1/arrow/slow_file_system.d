@@ -1,3 +1,4 @@
+/// Module for [SlowFileSystem] class
 module arrow.slow_file_system;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import gobject.object;
 class SlowFileSystem : arrow.file_system.FileSystem
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_slow_file_system_get_type != &gidSymbolNotFound ? garrow_slow_file_system_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -34,13 +38,14 @@ class SlowFileSystem : arrow.file_system.FileSystem
 
   /**
       The latency is normally distributed with a standard deviation of
-    average_latency * 0.1.
-    
-    The random seed is given by the default random device.
-    Params:
-      baseFileSystem =       A #GArrowFileSystem as the base file system.
-      averageLatency =       The average value of the latency.
-    Returns:     A newly created #GArrowSlowFileSystem.
+      average_latency * 0.1.
+      
+      The random seed is given by the default random device.
+  
+      Params:
+        baseFileSystem = A #GArrowFileSystem as the base file system.
+        averageLatency = The average value of the latency.
+      Returns: A newly created #GArrowSlowFileSystem.
   */
   static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency)
   {
@@ -52,12 +57,13 @@ class SlowFileSystem : arrow.file_system.FileSystem
 
   /**
       The latency is normally distributed with a standard deviation of
-    average_latency * 0.1.
-    Params:
-      baseFileSystem =       A #GArrowFileSystem as the base file system.
-      averageLatency =       The average value of the latency.
-      seed =       A random seed.
-    Returns:     A newly created #GArrowSlowFileSystem.
+      average_latency * 0.1.
+  
+      Params:
+        baseFileSystem = A #GArrowFileSystem as the base file system.
+        averageLatency = The average value of the latency.
+        seed = A random seed.
+      Returns: A newly created #GArrowSlowFileSystem.
   */
   static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed)
   {

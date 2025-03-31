@@ -1,3 +1,4 @@
+/// Module for [AttrSize] class
 module pango.attr_size;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import pango.types;
 
 /**
     The [pango.attr_size.AttrSize] structure is used to represent attributes which
-  set font size.
+    set font size.
 */
 class AttrSize
 {
   PangoAttrSize cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AttrSize
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -57,11 +60,12 @@ class AttrSize
 
   /**
       Create a new font-size attribute in fractional points.
-    Params:
-      size =       the font size, in `PANGO_SCALE`-ths of a point
-    Returns:     the newly allocated
-        [pango.attribute.Attribute], which should be freed with
-        [pango.attribute.Attribute.destroy]
+  
+      Params:
+        size = the font size, in `PANGO_SCALE`-ths of a point
+      Returns: the newly allocated
+          [pango.attribute.Attribute], which should be freed with
+          [pango.attribute.Attribute.destroy]
   */
   static pango.attribute.Attribute new_(int size)
   {
@@ -73,11 +77,12 @@ class AttrSize
 
   /**
       Create a new font-size attribute in device units.
-    Params:
-      size =       the font size, in `PANGO_SCALE`-ths of a device unit
-    Returns:     the newly allocated
-        [pango.attribute.Attribute], which should be freed with
-        [pango.attribute.Attribute.destroy]
+  
+      Params:
+        size = the font size, in `PANGO_SCALE`-ths of a device unit
+      Returns: the newly allocated
+          [pango.attribute.Attribute], which should be freed with
+          [pango.attribute.Attribute.destroy]
   */
   static pango.attribute.Attribute newAbsolute(int size)
   {

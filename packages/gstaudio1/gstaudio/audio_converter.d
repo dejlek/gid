@@ -1,3 +1,4 @@
+/// Module for [AudioConverter] class
 module gstaudio.audio_converter;
 
 import gid.gid;
@@ -10,35 +11,39 @@ import gstaudio.types;
 
 /**
     This object is used to convert audio samples from one format to another.
-  The object can perform conversion of:
-  
-   $(LIST
-      * audio format with optional dithering and noise shaping
-     
-      * audio samplerate
-     
-      * audio channels and channel layout
-   )
+    The object can perform conversion of:
+    
+     $(LIST
+        * audio format with optional dithering and noise shaping
+       
+        * audio samplerate
+       
+        * audio channels and channel layout
+     )
 */
 class AudioConverter : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_converter_get_type != &gidSymbolNotFound ? gst_audio_converter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,16 +56,17 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Create a new #GstAudioConverter that is able to convert between in and out
-    audio formats.
-    
-    config contains extra configuration options, see `GST_AUDIO_CONVERTER_OPT_*`
-    parameters for details about the options and values.
-    Params:
-      flags =       extra #GstAudioConverterFlags
-      inInfo =       a source #GstAudioInfo
-      outInfo =       a destination #GstAudioInfo
-      config =       a #GstStructure with configuration options
-    Returns:     a #GstAudioConverter or null if conversion is not possible.
+      audio formats.
+      
+      config contains extra configuration options, see `GST_AUDIO_CONVERTER_OPT_*`
+      parameters for details about the options and values.
+  
+      Params:
+        flags = extra #GstAudioConverterFlags
+        inInfo = a source #GstAudioInfo
+        outInfo = a destination #GstAudioInfo
+        config = a #GstStructure with configuration options
+      Returns: a #GstAudioConverter or null if conversion is not possible.
   */
   this(gstaudio.types.AudioConverterFlags flags, gstaudio.audio_info.AudioInfo inInfo, gstaudio.audio_info.AudioInfo outInfo, gst.structure.Structure config = null)
   {
@@ -71,14 +77,15 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Convenience wrapper around [gstaudio.audio_converter.AudioConverter.samples], which will
-    perform allocation of the output buffer based on the result from
-    [gstaudio.audio_converter.AudioConverter.getOutFrames].
-    Params:
-      flags =       extra #GstAudioConverterFlags
-      in_ =       input data
-      out_ =       a pointer where
-         the output data will be written
-    Returns:     true is the conversion could be performed.
+      perform allocation of the output buffer based on the result from
+      [gstaudio.audio_converter.AudioConverter.getOutFrames].
+  
+      Params:
+        flags = extra #GstAudioConverterFlags
+        in_ = input data
+        out_ = a pointer where
+           the output data will be written
+      Returns: true is the conversion could be performed.
   */
   bool convert(gstaudio.types.AudioConverterFlags flags, ubyte[] in_, out ubyte[] out_)
   {
@@ -99,11 +106,12 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Get the current configuration of convert.
-    Params:
-      inRate =       result input rate
-      outRate =       result output rate
-    Returns:     a #GstStructure that remains valid for as long as convert is valid
-        or until [gstaudio.audio_converter.AudioConverter.updateConfig] is called.
+  
+      Params:
+        inRate = result input rate
+        outRate = result output rate
+      Returns: a #GstStructure that remains valid for as long as convert is valid
+          or until [gstaudio.audio_converter.AudioConverter.updateConfig] is called.
   */
   gst.structure.Structure getConfig(out int inRate, out int outRate)
   {
@@ -115,10 +123,11 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Calculate how many input frames are currently needed by convert to produce
-    out_frames of output frames.
-    Params:
-      outFrames =       number of output frames
-    Returns:     the number of input frames
+      out_frames of output frames.
+  
+      Params:
+        outFrames = number of output frames
+      Returns: the number of input frames
   */
   size_t getInFrames(size_t outFrames)
   {
@@ -129,9 +138,9 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Get the maximum number of input frames that the converter would
-    need before producing output.
-    Returns:     the latency of convert as expressed in the number of
-      frames.
+      need before producing output.
+      Returns: the latency of convert as expressed in the number of
+        frames.
   */
   size_t getMaxLatency()
   {
@@ -142,10 +151,11 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Calculate how many output frames can be produced when in_frames input
-    frames are given to convert.
-    Params:
-      inFrames =       number of input frames
-    Returns:     the number of output frames
+      frames are given to convert.
+  
+      Params:
+        inFrames = number of input frames
+      Returns: the number of output frames
   */
   size_t getOutFrames(size_t inFrames)
   {
@@ -156,8 +166,8 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Returns whether the audio converter will operate in passthrough mode.
-    The return value would be typically input to [gstbase.base_transform.BaseTransform.setPassthrough]
-    Returns:     true when no conversion will actually occur.
+      The return value would be typically input to [gstbase.base_transform.BaseTransform.setPassthrough]
+      Returns: true when no conversion will actually occur.
   */
   bool isPassthrough()
   {
@@ -168,7 +178,7 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Reset convert to the state it was when it was first created, clearing
-    any history it might currently have.
+      any history it might currently have.
   */
   void reset()
   {
@@ -177,8 +187,8 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Returns whether the audio converter can perform the conversion in-place.
-    The return value would be typically input to [gstbase.base_transform.BaseTransform.setInPlace]
-    Returns:     true when the conversion can be done in place.
+      The return value would be typically input to [gstbase.base_transform.BaseTransform.setInPlace]
+      Returns: true when the conversion can be done in place.
   */
   bool supportsInplace()
   {
@@ -189,24 +199,25 @@ class AudioConverter : gobject.boxed.Boxed
 
   /**
       Set in_rate, out_rate and config as extra configuration for convert.
-    
-    in_rate and out_rate specify the new sample rates of input and output
-    formats. A value of 0 leaves the sample rate unchanged.
-    
-    config can be null, in which case, the current configuration is not
-    changed.
-    
-    If the parameters in config can not be set exactly, this function returns
-    false and will try to update as much state as possible. The new state can
-    then be retrieved and refined with [gstaudio.audio_converter.AudioConverter.getConfig].
-    
-    Look at the `GST_AUDIO_CONVERTER_OPT_*` fields to check valid configuration
-    option and values.
-    Params:
-      inRate =       input rate
-      outRate =       output rate
-      config =       a #GstStructure or null
-    Returns:     true when the new parameters could be set
+      
+      in_rate and out_rate specify the new sample rates of input and output
+      formats. A value of 0 leaves the sample rate unchanged.
+      
+      config can be null, in which case, the current configuration is not
+      changed.
+      
+      If the parameters in config can not be set exactly, this function returns
+      false and will try to update as much state as possible. The new state can
+      then be retrieved and refined with [gstaudio.audio_converter.AudioConverter.getConfig].
+      
+      Look at the `GST_AUDIO_CONVERTER_OPT_*` fields to check valid configuration
+      option and values.
+  
+      Params:
+        inRate = input rate
+        outRate = output rate
+        config = a #GstStructure or null
+      Returns: true when the new parameters could be set
   */
   bool updateConfig(int inRate, int outRate, gst.structure.Structure config = null)
   {

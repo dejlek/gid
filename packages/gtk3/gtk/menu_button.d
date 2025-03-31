@@ -1,3 +1,4 @@
+/// Module for [MenuButton] class
 module gtk.menu_button;
 
 import atk.implementor_iface;
@@ -21,111 +22,114 @@ import gtk.widget;
 
 /**
     The #GtkMenuButton widget is used to display a popup when clicked on.
-  This popup can be provided either as a #GtkMenu, a #GtkPopover or an
-  abstract #GMenuModel.
-  
-  The #GtkMenuButton widget can hold any valid child widget. That is, it
-  can hold almost any other standard #GtkWidget. The most commonly used
-  child is #GtkImage. If no widget is explicitely added to the #GtkMenuButton,
-  a #GtkImage is automatically created, using an arrow image oriented
-  according to #GtkMenuButton:direction or the generic “open-menu-symbolic”
-  icon if the direction is not set.
-  
-  The positioning of the popup is determined by the #GtkMenuButton:direction
-  property of the menu button.
-  
-  For menus, the #GtkWidget:halign and #GtkWidget:valign properties of the
-  menu are also taken into account. For example, when the direction is
-  [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start], the
-  menu will be positioned below the button, with the starting edge
-  (depending on the text direction) of the menu aligned with the starting
-  edge of the button. If there is not enough space below the button, the
-  menu is popped up above the button instead. If the alignment would move
-  part of the menu offscreen, it is “pushed in”.
-  
-  ## Direction = Down
-  
-  $(LIST
-    * halign = start
+    This popup can be provided either as a #GtkMenu, a #GtkPopover or an
+    abstract #GMenuModel.
     
-        ![](down-start.png)
+    The #GtkMenuButton widget can hold any valid child widget. That is, it
+    can hold almost any other standard #GtkWidget. The most commonly used
+    child is #GtkImage. If no widget is explicitely added to the #GtkMenuButton,
+    a #GtkImage is automatically created, using an arrow image oriented
+    according to #GtkMenuButton:direction or the generic “open-menu-symbolic”
+    icon if the direction is not set.
     
-    * halign = center
+    The positioning of the popup is determined by the #GtkMenuButton:direction
+    property of the menu button.
     
-        ![](down-center.png)
+    For menus, the #GtkWidget:halign and #GtkWidget:valign properties of the
+    menu are also taken into account. For example, when the direction is
+    [gtk.types.ArrowType.Down] and the horizontal alignment is [gtk.types.Align.Start], the
+    menu will be positioned below the button, with the starting edge
+    (depending on the text direction) of the menu aligned with the starting
+    edge of the button. If there is not enough space below the button, the
+    menu is popped up above the button instead. If the alignment would move
+    part of the menu offscreen, it is “pushed in”.
     
-    * halign = end
+    ## Direction = Down
     
-        ![](down-end.png)
-  )
+    $(LIST
+      * halign = start
+      
+          ![](down-start.png)
+      
+      * halign = center
+      
+          ![](down-center.png)
+      
+      * halign = end
+      
+          ![](down-end.png)
+    )
+      
+    ## Direction = Up
     
-  ## Direction = Up
-  
-  $(LIST
-    * halign = start
+    $(LIST
+      * halign = start
+      
+          ![](up-start.png)
+      
+      * halign = center
+      
+          ![](up-center.png)
+      
+      * halign = end
+      
+          ![](up-end.png)
+    )
+      
+    ## Direction = Left
     
-        ![](up-start.png)
+    $(LIST
+      * valign = start
+      
+          ![](left-start.png)
+      
+      * valign = center
+      
+          ![](left-center.png)
+      
+      * valign = end
+      
+          ![](left-end.png)
+    )
+      
+    ## Direction = Right
     
-    * halign = center
+    $(LIST
+      * valign = start
+      
+          ![](right-start.png)
+      
+      * valign = center
+      
+          ![](right-center.png)
+      
+      * valign = end
+      
+          ![](right-end.png)
+    )
+      
+    # CSS nodes
     
-        ![](up-center.png)
-    
-    * halign = end
-    
-        ![](up-end.png)
-  )
-    
-  ## Direction = Left
-  
-  $(LIST
-    * valign = start
-    
-        ![](left-start.png)
-    
-    * valign = center
-    
-        ![](left-center.png)
-    
-    * valign = end
-    
-        ![](left-end.png)
-  )
-    
-  ## Direction = Right
-  
-  $(LIST
-    * valign = start
-    
-        ![](right-start.png)
-    
-    * valign = center
-    
-        ![](right-center.png)
-    
-    * valign = end
-    
-        ![](right-end.png)
-  )
-    
-  # CSS nodes
-  
-  GtkMenuButton has a single CSS node with name button. To differentiate
-  it from a plain #GtkButton, it gets the .popup style class.
+    GtkMenuButton has a single CSS node with name button. To differentiate
+    it from a plain #GtkButton, it gets the .popup style class.
 */
 class MenuButton : gtk.toggle_button.ToggleButton
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_get_type != &gidSymbolNotFound ? gtk_menu_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -138,9 +142,9 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Creates a new #GtkMenuButton widget with downwards-pointing
-    arrow as the only child. You can replace the child widget
-    with another #GtkWidget should you wish to.
-    Returns:     The newly created #GtkMenuButton widget
+      arrow as the only child. You can replace the child widget
+      with another #GtkWidget should you wish to.
+      Returns: The newly created #GtkMenuButton widget
   */
   this()
   {
@@ -151,7 +155,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns the parent #GtkWidget to use to line up with menu.
-    Returns:     a #GtkWidget value or null
+      Returns: a #GtkWidget value or null
   */
   gtk.widget.Widget getAlignWidget()
   {
@@ -165,7 +169,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns the direction the popup will be pointing at when popped up.
-    Returns:     a #GtkArrowType value
+      Returns: a #GtkArrowType value
   */
   gtk.types.ArrowType getDirection()
   {
@@ -177,7 +181,7 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns the #GMenuModel used to generate the popup.
-    Returns:     a #GMenuModel or null
+      Returns: a #GMenuModel or null
   */
   gio.menu_model.MenuModel getMenuModel()
   {
@@ -189,9 +193,9 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns the #GtkPopover that pops out of the button.
-    If the button is not using a #GtkPopover, this function
-    returns null.
-    Returns:     a #GtkPopover or null
+      If the button is not using a #GtkPopover, this function
+      returns null.
+      Returns: a #GtkPopover or null
   */
   gtk.popover.Popover getPopover()
   {
@@ -203,9 +207,9 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns the #GtkMenu that pops out of the button.
-    If the button does not use a #GtkMenu, this function
-    returns null.
-    Returns:     a #GtkMenu or null
+      If the button does not use a #GtkMenu, this function
+      returns null.
+      Returns: a #GtkMenu or null
   */
   gtk.menu.Menu getPopup()
   {
@@ -217,8 +221,8 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Returns whether a #GtkPopover or a #GtkMenu will be constructed
-    from the menu model.
-    Returns:     true if using a #GtkPopover
+      from the menu model.
+      Returns: true if using a #GtkPopover
   */
   bool getUsePopover()
   {
@@ -229,15 +233,16 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets the #GtkWidget to use to line the menu with when popped up.
-    Note that the align_widget must contain the #GtkMenuButton itself.
-    
-    Setting it to null means that the menu will be aligned with the
-    button itself.
-    
-    Note that this property is only used with menus currently,
-    and not for popovers.
-    Params:
-      alignWidget =       a #GtkWidget
+      Note that the align_widget must contain the #GtkMenuButton itself.
+      
+      Setting it to null means that the menu will be aligned with the
+      button itself.
+      
+      Note that this property is only used with menus currently,
+      and not for popovers.
+  
+      Params:
+        alignWidget = a #GtkWidget
   */
   void setAlignWidget(gtk.widget.Widget alignWidget = null)
   {
@@ -248,16 +253,17 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets the direction in which the popup will be popped up, as
-    well as changing the arrow’s direction. The child will not
-    be changed to an arrow if it was customized.
-    
-    If the does not fit in the available space in the given direction,
-    GTK+ will its best to keep it inside the screen and fully visible.
-    
-    If you pass [gtk.types.ArrowType.None] for a direction, the popup will behave
-    as if you passed [gtk.types.ArrowType.Down] (although you won’t see any arrows).
-    Params:
-      direction =       a #GtkArrowType
+      well as changing the arrow’s direction. The child will not
+      be changed to an arrow if it was customized.
+      
+      If the does not fit in the available space in the given direction,
+      GTK+ will its best to keep it inside the screen and fully visible.
+      
+      If you pass [gtk.types.ArrowType.None] for a direction, the popup will behave
+      as if you passed [gtk.types.ArrowType.Down] (although you won’t see any arrows).
+  
+      Params:
+        direction = a #GtkArrowType
   */
   void setDirection(gtk.types.ArrowType direction)
   {
@@ -266,19 +272,20 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets the #GMenuModel from which the popup will be constructed,
-    or null to dissociate any existing menu model and disable the button.
-    
-    Depending on the value of #GtkMenuButton:use-popover, either a
-    #GtkMenu will be created with [gtk.menu.Menu.newFromModel], or a
-    #GtkPopover with [gtk.popover.Popover.newFromModel]. In either case,
-    actions will be connected as documented for these functions.
-    
-    If #GtkMenuButton:popup or #GtkMenuButton:popover are already set, those
-    widgets are dissociated from the menu_button, and those properties are set
-    to null.
-    Params:
-      menuModel =       a #GMenuModel, or null to unset and disable the
-          button
+      or null to dissociate any existing menu model and disable the button.
+      
+      Depending on the value of #GtkMenuButton:use-popover, either a
+      #GtkMenu will be created with [gtk.menu.Menu.newFromModel], or a
+      #GtkPopover with [gtk.popover.Popover.newFromModel]. In either case,
+      actions will be connected as documented for these functions.
+      
+      If #GtkMenuButton:popup or #GtkMenuButton:popover are already set, those
+      widgets are dissociated from the menu_button, and those properties are set
+      to null.
+  
+      Params:
+        menuModel = a #GMenuModel, or null to unset and disable the
+            button
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
@@ -287,12 +294,13 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets the #GtkPopover that will be popped up when the menu_button is clicked,
-    or null to dissociate any existing popover and disable the button.
-    
-    If #GtkMenuButton:menu-model or #GtkMenuButton:popup are set, those objects
-    are dissociated from the menu_button, and those properties are set to null.
-    Params:
-      popover =       a #GtkPopover, or null to unset and disable the button
+      or null to dissociate any existing popover and disable the button.
+      
+      If #GtkMenuButton:menu-model or #GtkMenuButton:popup are set, those objects
+      are dissociated from the menu_button, and those properties are set to null.
+  
+      Params:
+        popover = a #GtkPopover, or null to unset and disable the button
   */
   void setPopover(gtk.widget.Widget popover = null)
   {
@@ -301,12 +309,13 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets the #GtkMenu that will be popped up when the menu_button is clicked, or
-    null to dissociate any existing menu and disable the button.
-    
-    If #GtkMenuButton:menu-model or #GtkMenuButton:popover are set, those objects
-    are dissociated from the menu_button, and those properties are set to null.
-    Params:
-      menu =       a #GtkMenu, or null to unset and disable the button
+      null to dissociate any existing menu and disable the button.
+      
+      If #GtkMenuButton:menu-model or #GtkMenuButton:popover are set, those objects
+      are dissociated from the menu_button, and those properties are set to null.
+  
+      Params:
+        menu = a #GtkMenu, or null to unset and disable the button
   */
   void setPopup(gtk.widget.Widget menu = null)
   {
@@ -315,10 +324,11 @@ class MenuButton : gtk.toggle_button.ToggleButton
 
   /**
       Sets whether to construct a #GtkPopover instead of #GtkMenu
-    when [gtk.menu_button.MenuButton.setMenuModel] is called. Note that
-    this property is only consulted when a new menu model is set.
-    Params:
-      usePopover =       true to construct a popover from the menu model
+      when [gtk.menu_button.MenuButton.setMenuModel] is called. Note that
+      this property is only consulted when a new menu model is set.
+  
+      Params:
+        usePopover = true to construct a popover from the menu model
   */
   void setUsePopover(bool usePopover)
   {

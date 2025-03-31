@@ -1,3 +1,4 @@
+/// Module for [NumericSorter] class
 module gtk.numeric_sorter;
 
 import gid.gid;
@@ -9,24 +10,27 @@ import gtk.types;
 
 /**
     [gtk.numeric_sorter.NumericSorter] is a [gtk.sorter.Sorter] that compares numbers.
-  
-  To obtain the numbers to compare, this sorter evaluates a
-  [gtk.expression.Expression].
+    
+    To obtain the numbers to compare, this sorter evaluates a
+    [gtk.expression.Expression].
 */
 class NumericSorter : gtk.sorter.Sorter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_numeric_sorter_get_type != &gidSymbolNotFound ? gtk_numeric_sorter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,12 +43,13 @@ class NumericSorter : gtk.sorter.Sorter
 
   /**
       Creates a new numeric sorter using the given expression.
-    
-    Smaller numbers will be sorted first. You can call
-    [gtk.numeric_sorter.NumericSorter.setSortOrder] to change this.
-    Params:
-      expression =       The expression to evaluate
-    Returns:     a new [gtk.numeric_sorter.NumericSorter]
+      
+      Smaller numbers will be sorted first. You can call
+      [gtk.numeric_sorter.NumericSorter.setSortOrder] to change this.
+  
+      Params:
+        expression = The expression to evaluate
+      Returns: a new [gtk.numeric_sorter.NumericSorter]
   */
   this(gtk.expression.Expression expression = null)
   {
@@ -55,7 +60,7 @@ class NumericSorter : gtk.sorter.Sorter
 
   /**
       Gets the expression that is evaluated to obtain numbers from items.
-    Returns:     a [gtk.expression.Expression]
+      Returns: a [gtk.expression.Expression]
   */
   gtk.expression.Expression getExpression()
   {
@@ -67,7 +72,7 @@ class NumericSorter : gtk.sorter.Sorter
 
   /**
       Gets whether this sorter will sort smaller numbers first.
-    Returns:     the order of the numbers
+      Returns: the order of the numbers
   */
   gtk.types.SortType getSortOrder()
   {
@@ -79,14 +84,15 @@ class NumericSorter : gtk.sorter.Sorter
 
   /**
       Sets the expression that is evaluated to obtain numbers from items.
-    
-    Unless an expression is set on self, the sorter will always
-    compare items as invalid.
-    
-    The expression must have a return type that can be compared
-    numerically, such as `G_TYPE_INT` or `G_TYPE_DOUBLE`.
-    Params:
-      expression =       a [gtk.expression.Expression]
+      
+      Unless an expression is set on self, the sorter will always
+      compare items as invalid.
+      
+      The expression must have a return type that can be compared
+      numerically, such as `G_TYPE_INT` or `G_TYPE_DOUBLE`.
+  
+      Params:
+        expression = a [gtk.expression.Expression]
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
@@ -95,8 +101,9 @@ class NumericSorter : gtk.sorter.Sorter
 
   /**
       Sets whether to sort smaller numbers before larger ones.
-    Params:
-      sortOrder =       whether to sort smaller numbers first
+  
+      Params:
+        sortOrder = whether to sort smaller numbers first
   */
   void setSortOrder(gtk.types.SortType sortOrder)
   {

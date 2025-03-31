@@ -1,3 +1,4 @@
+/// Module for [LinearGradientNode] class
 module gsk.linear_gradient_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class LinearGradientNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,7 +25,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the final point of the linear gradient.
-    Returns:     the final point
+      Returns: the final point
   */
   graphene.point.Point getEnd()
   {
@@ -35,7 +37,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of color stops in the gradient.
-    Returns:     the number of color stops
+      Returns: the number of color stops
   */
   size_t getNColorStops()
   {
@@ -46,7 +48,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the initial point of the linear gradient.
-    Returns:     the initial point
+      Returns: the initial point
   */
   graphene.point.Point getStart()
   {

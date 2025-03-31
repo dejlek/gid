@@ -1,3 +1,4 @@
+/// Module for [Backend] interface
 module secret.backend;
 
 public import secret.backend_iface_proxy;
@@ -13,11 +14,12 @@ import secret.types;
 
 /**
     #SecretBackend represents a backend implementation of password
-  storage.
+    storage.
 */
 interface Backend
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -26,17 +28,18 @@ interface Backend
 
   /**
       Get a #SecretBackend instance.
-    
-    If such a backend already exists, then the same backend is returned.
-    
-    If flags contains any flags of which parts of the secret backend to
-    ensure are initialized, then those will be initialized before completing.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      flags =       flags for which service functionality to ensure is initialized
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      If such a backend already exists, then the same backend is returned.
+      
+      If flags contains any flags of which parts of the secret backend to
+      ensure are initialized, then those will be initialized before completing.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        flags = flags for which service functionality to ensure is initialized
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   static void get(secret.types.BackendFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -55,10 +58,12 @@ interface Backend
 
   /**
       Complete an asynchronous operation to get a #SecretBackend.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     a new reference to a #SecretBackend proxy, which
-        should be released with [gobject.object.ObjectG.unref].
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: a new reference to a #SecretBackend proxy, which
+          should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.backend.Backend getFinish(gio.async_result.AsyncResult result)
   {

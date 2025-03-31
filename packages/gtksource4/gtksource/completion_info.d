@@ -1,3 +1,4 @@
+/// Module for [CompletionInfo] class
 module gtksource.completion_info;
 
 import atk.implementor_iface;
@@ -16,17 +17,20 @@ import gtksource.types;
 class CompletionInfo : gtk.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_info_get_type != &gidSymbolNotFound ? gtk_source_completion_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,12 +51,13 @@ class CompletionInfo : gtk.window.Window
 
   /**
       Moves the #GtkSourceCompletionInfo to iter. If iter is null info is
-    moved to the cursor position. Moving will respect the #GdkGravity setting
-    of the info window and will ensure the line at iter is not occluded by
-    the window.
-    Params:
-      view =       a #GtkTextView on which the info window should be positioned.
-      iter =       a #GtkTextIter.
+      moved to the cursor position. Moving will respect the #GdkGravity setting
+      of the info window and will ensure the line at iter is not occluded by
+      the window.
+  
+      Params:
+        view = a #GtkTextView on which the info window should be positioned.
+        iter = a #GtkTextIter.
   */
   void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {

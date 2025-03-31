@@ -1,3 +1,4 @@
+/// Module for [LargeListArrayBuilder] class
 module arrow.large_list_array_builder;
 
 import arrow.array_builder;
@@ -13,17 +14,20 @@ import gobject.object;
 class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_array_builder_get_type != &gidSymbolNotFound ? garrow_large_list_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

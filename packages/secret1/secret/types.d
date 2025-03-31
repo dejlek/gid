@@ -1,3 +1,4 @@
+/// D types for secret1 library
 module secret.types;
 
 import gid.gid;
@@ -47,17 +48,17 @@ enum BACKEND_EXTENSION_POINT_NAME = "secret-backend";
 
 /**
     An alias to the default collection.
-  
-  This can be passed to `func@password_store` [secret.collection.Collection.forAlias].
+    
+    This can be passed to `func@password_store` [secret.collection.Collection.forAlias].
 */
 enum COLLECTION_DEFAULT = "default";
 
 /**
     An alias to the session collection, which will be cleared when the user ends
-  the session.
-  
-  This can be passed to `func@password_store`, [secret.collection.Collection.forAlias] or
-  similar functions.
+    the session.
+    
+    This can be passed to `func@password_store`, [secret.collection.Collection.forAlias] or
+    similar functions.
 */
 enum COLLECTION_SESSION = "session";
 

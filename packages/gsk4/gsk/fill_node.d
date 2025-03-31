@@ -1,3 +1,4 @@
+/// Module for [FillNode] class
 module gsk.fill_node;
 
 import gid.gid;
@@ -9,11 +10,12 @@ import gsk.types;
 
 /**
     A render node filling the area given by [gsk.path.Path]
-  and [gsk.types.FillRule] with the child node.
+    and [gsk.types.FillRule] with the child node.
 */
 class FillNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,12 +26,13 @@ class FillNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will fill the child in the area
-    given by path and fill_rule.
-    Params:
-      child =       The node to fill the area with
-      path =       The path describing the area to fill
-      fillRule =       The fill rule to use
-    Returns:     A new [gsk.render_node.RenderNode]
+      given by path and fill_rule.
+  
+      Params:
+        child = The node to fill the area with
+        path = The path describing the area to fill
+        fillRule = The fill rule to use
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.types.FillRule fillRule)
   {
@@ -40,7 +43,7 @@ class FillNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting drawn by the given node.
-    Returns:     The child that is getting drawn
+      Returns: The child that is getting drawn
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -52,7 +55,7 @@ class FillNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the fill rule used to determine how the path is filled.
-    Returns:     a [gsk.types.FillRule]
+      Returns: a [gsk.types.FillRule]
   */
   gsk.types.FillRule getFillRule()
   {
@@ -64,8 +67,8 @@ class FillNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the path used to describe the area filled with the contents of
-    the node.
-    Returns:     a [gsk.path.Path]
+      the node.
+      Returns: a [gsk.path.Path]
   */
   gsk.path.Path getPath()
   {

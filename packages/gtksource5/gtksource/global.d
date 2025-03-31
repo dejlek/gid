@@ -1,3 +1,4 @@
+/// Global functions for gtksource5 library
 module gtksource.global;
 
 import gid.gid;
@@ -8,15 +9,16 @@ import gtksource.types;
 
 /**
     Like GTK_SOURCE_CHECK_VERSION, but the check for gtk_source_check_version is
-  at runtime instead of compile time. This is useful for compiling
-  against older versions of GtkSourceView, but using features from newer
-  versions.
-  Params:
-    major =       the major version to check
-    minor =       the minor version to check
-    micro =       the micro version to check
-  Returns:     true if the version of the GtkSourceView currently loaded
-    is the same as or newer than the passed-in version.
+    at runtime instead of compile time. This is useful for compiling
+    against older versions of GtkSourceView, but using features from newer
+    versions.
+
+    Params:
+      major = the major version to check
+      minor = the minor version to check
+      micro = the micro version to check
+    Returns: true if the version of the GtkSourceView currently loaded
+      is the same as or newer than the passed-in version.
 */
 bool checkVersion(uint major, uint minor, uint micro)
 {
@@ -27,11 +29,11 @@ bool checkVersion(uint major, uint minor, uint micro)
 
 /**
     Free the resources allocated by GtkSourceView. For example it unrefs the
-  singleton objects.
-  
-  It is not mandatory to call this function, it's just to be friendlier to
-  memory debugging tools. This function is meant to be called at the end of
-  main(). It can be called several times.
+    singleton objects.
+    
+    It is not mandatory to call this function, it's just to be friendlier to
+    memory debugging tools. This function is meant to be called at the end of
+    main(). It can be called several times.
 */
 void finalize()
 {
@@ -40,13 +42,13 @@ void finalize()
 
 /**
     Returns the major version number of the GtkSourceView library.
-  (e.g. in GtkSourceView version 3.20.0 this is 3.)
-  
-  This function is in the library, so it represents the GtkSourceView library
-  your code is running against. Contrast with the #GTK_SOURCE_MAJOR_VERSION
-  macro, which represents the major version of the GtkSourceView headers you
-  have included when compiling your code.
-  Returns:     the major version number of the GtkSourceView library
+    (e.g. in GtkSourceView version 3.20.0 this is 3.)
+    
+    This function is in the library, so it represents the GtkSourceView library
+    your code is running against. Contrast with the #GTK_SOURCE_MAJOR_VERSION
+    macro, which represents the major version of the GtkSourceView headers you
+    have included when compiling your code.
+    Returns: the major version number of the GtkSourceView library
 */
 uint getMajorVersion()
 {
@@ -57,13 +59,13 @@ uint getMajorVersion()
 
 /**
     Returns the micro version number of the GtkSourceView library.
-  (e.g. in GtkSourceView version 3.20.0 this is 0.)
-  
-  This function is in the library, so it represents the GtkSourceView library
-  your code is running against. Contrast with the #GTK_SOURCE_MICRO_VERSION
-  macro, which represents the micro version of the GtkSourceView headers you
-  have included when compiling your code.
-  Returns:     the micro version number of the GtkSourceView library
+    (e.g. in GtkSourceView version 3.20.0 this is 0.)
+    
+    This function is in the library, so it represents the GtkSourceView library
+    your code is running against. Contrast with the #GTK_SOURCE_MICRO_VERSION
+    macro, which represents the micro version of the GtkSourceView headers you
+    have included when compiling your code.
+    Returns: the micro version number of the GtkSourceView library
 */
 uint getMicroVersion()
 {
@@ -74,13 +76,13 @@ uint getMicroVersion()
 
 /**
     Returns the minor version number of the GtkSourceView library.
-  (e.g. in GtkSourceView version 3.20.0 this is 20.)
-  
-  This function is in the library, so it represents the GtkSourceView library
-  your code is running against. Contrast with the #GTK_SOURCE_MINOR_VERSION
-  macro, which represents the minor version of the GtkSourceView headers you
-  have included when compiling your code.
-  Returns:     the minor version number of the GtkSourceView library
+    (e.g. in GtkSourceView version 3.20.0 this is 20.)
+    
+    This function is in the library, so it represents the GtkSourceView library
+    your code is running against. Contrast with the #GTK_SOURCE_MINOR_VERSION
+    macro, which represents the minor version of the GtkSourceView headers you
+    have included when compiling your code.
+    Returns: the minor version number of the GtkSourceView library
 */
 uint getMinorVersion()
 {
@@ -91,9 +93,9 @@ uint getMinorVersion()
 
 /**
     Initializes the GtkSourceView library (e.g. for the internationalization).
-  
-  This function can be called several times, but is meant to be called at the
-  beginning of main(), before any other GtkSourceView function call.
+    
+    This function can be called several times, but is meant to be called at the
+    beginning of main(), before any other GtkSourceView function call.
 */
 void init_()
 {
@@ -102,9 +104,10 @@ void init_()
 
 /**
     Simplified version of `funcscheduler_add_full`.
-  Params:
-    callback =       the callback to execute
-  Returns: 
+
+    Params:
+      callback = the callback to execute
+    Returns: 
 */
 size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
 {
@@ -126,17 +129,18 @@ size_t schedulerAdd(gtksource.types.SchedulerCallback callback)
 
 /**
     Adds a new callback that will be executed as time permits on the main thread.
-  
-  This is useful when you need to do a lot of background work but want to do
-  it incrementally.
-  
-  callback will be provided a deadline that it should complete it's work by
-  (or near) and can be checked using `funcGLib.get_monotonic_time` for comparison.
-  
-  Use `funcscheduler_remove` to remove the handler.
-  Params:
-    callback =       the callback to execute
-  Returns: 
+    
+    This is useful when you need to do a lot of background work but want to do
+    it incrementally.
+    
+    callback will be provided a deadline that it should complete it's work by
+    (or near) and can be checked using `funcGLib.get_monotonic_time` for comparison.
+    
+    Use `funcscheduler_remove` to remove the handler.
+
+    Params:
+      callback = the callback to execute
+    Returns: 
 */
 size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
 {
@@ -158,9 +162,10 @@ size_t schedulerAddFull(gtksource.types.SchedulerCallback callback)
 
 /**
     Removes a scheduler callback previously registered with
-  `funcscheduler_add` or `funcscheduler_add_full`.
-  Params:
-    handlerId =       the handler id
+    `funcscheduler_add` or `funcscheduler_add_full`.
+
+    Params:
+      handlerId = the handler id
 */
 void schedulerRemove(size_t handlerId)
 {
@@ -169,24 +174,25 @@ void schedulerRemove(size_t handlerId)
 
 /**
     Use this function to escape the following characters: `\n`, `\r`, `\t` and `\`.
-  
-  For a regular expression search, use [glib.regex.Regex.escapeString] instead.
-  
-  One possible use case is to take the #GtkTextBuffer's selection and put it in a
-  search entry. The selection can contain tabulations, newlines, etc. So it's
-  better to escape those special characters to better fit in the search entry.
-  
-  See also: `funcutils_unescape_search_text`.
-  
-  <warning>
-  Warning: the escape and unescape functions are not reciprocal! For example,
-  escape (unescape (\)) = \\. So avoid cycles such as: search entry -> unescape
-  -> search settings -> escape -> search entry. The original search entry text
-  may be modified.
-  </warning>
-  Params:
-    text =       the text to escape.
-  Returns:     the escaped text.
+    
+    For a regular expression search, use [glib.regex.Regex.escapeString] instead.
+    
+    One possible use case is to take the #GtkTextBuffer's selection and put it in a
+    search entry. The selection can contain tabulations, newlines, etc. So it's
+    better to escape those special characters to better fit in the search entry.
+    
+    See also: `funcutils_unescape_search_text`.
+    
+    <warning>
+    Warning: the escape and unescape functions are not reciprocal! For example,
+    escape (unescape (\)) = \\. So avoid cycles such as: search entry -> unescape
+    -> search settings -> escape -> search entry. The original search entry text
+    may be modified.
+    </warning>
+
+    Params:
+      text = the text to escape.
+    Returns: the escaped text.
 */
 string utilsEscapeSearchText(string text)
 {
@@ -199,16 +205,17 @@ string utilsEscapeSearchText(string text)
 
 /**
     Use this function before [gtksource.search_settings.SearchSettings.setSearchText], to
-  unescape the following sequences of characters: `\n`, `\r`, `\t` and `\\`.
-  The purpose is to easily write those characters in a search entry.
-  
-  Note that unescaping the search text is not needed for regular expression
-  searches.
-  
-  See also: `funcutils_escape_search_text`.
-  Params:
-    text =       the text to unescape.
-  Returns:     the unescaped text.
+    unescape the following sequences of characters: `\n`, `\r`, `\t` and `\\`.
+    The purpose is to easily write those characters in a search entry.
+    
+    Note that unescaping the search text is not needed for regular expression
+    searches.
+    
+    See also: `funcutils_escape_search_text`.
+
+    Params:
+      text = the text to unescape.
+    Returns: the unescaped text.
 */
 string utilsUnescapeSearchText(string text)
 {

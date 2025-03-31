@@ -1,3 +1,4 @@
+/// Module for [RTPHeaderExtension] class
 module gstrtp.rtpheader_extension;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gstrtp.types;
 class RTPHeaderExtension : gst.element.Element
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_header_extension_get_type != &gidSymbolNotFound ? gst_rtp_header_extension_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +52,7 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Retrieve the direction
-    Returns:     The direction
+      Returns: The direction
   */
   gstrtp.types.RTPHeaderExtensionDirection getDirection()
   {
@@ -68,14 +72,15 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       This is used to know how much data a certain header extension will need for
-    both allocating the resulting data, and deciding how much payload data can
-    be generated.
-    
-    Implementations should return as accurate a value as is possible using the
-    information given in the input buffer.
-    Params:
-      inputMeta =       a #GstBuffer
-    Returns:     the maximum size of the data written by this extension
+      both allocating the resulting data, and deciding how much payload data can
+      be generated.
+      
+      Implementations should return as accurate a value as is possible using the
+      information given in the input buffer.
+  
+      Params:
+        inputMeta = a #GstBuffer
+      Returns: the maximum size of the data written by this extension
   */
   size_t getMaxSize(gst.buffer.Buffer inputMeta)
   {
@@ -113,12 +118,13 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Read the RTP header extension from data.
-    Params:
-      readFlags =       #GstRTPHeaderExtensionFlags for how the extension should
-                      be written
-      data =       location to read the rtp header extension from
-      buffer =       a #GstBuffer to modify if necessary
-    Returns:     whether the extension could be read from data
+  
+      Params:
+        readFlags = #GstRTPHeaderExtensionFlags for how the extension should
+                        be written
+        data = location to read the rtp header extension from
+        buffer = a #GstBuffer to modify if necessary
+      Returns: whether the extension could be read from data
   */
   bool read(gstrtp.types.RTPHeaderExtensionFlags readFlags, ubyte[] data, gst.buffer.Buffer buffer)
   {
@@ -134,13 +140,14 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       [gstrtp.rtpheader_extension.RTPHeaderExtension.setId] must have been called with a valid
-    extension id that is contained in these caps.
-    
-    The only current known caps format is based on the SDP standard as produced
-    by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
-    Params:
-      caps =       the #GstCaps to configure this extension with
-    Returns:     whether the caps could be successfully set on ext.
+      extension id that is contained in these caps.
+      
+      The only current known caps format is based on the SDP standard as produced
+      by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
+  
+      Params:
+        caps = the #GstCaps to configure this extension with
+      Returns: whether the caps could be successfully set on ext.
   */
   bool setAttributesFromCaps(gst.caps.Caps caps)
   {
@@ -151,14 +158,15 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       [gstrtp.rtpheader_extension.RTPHeaderExtension.setId] must have been called with a valid
-    extension id that is contained in these caps.
-    
-    The only current known caps format is based on the SDP standard as produced
-    by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
-    Params:
-      caps =       writable #GstCaps to modify
-    Returns:     whether the configured attributes on ext can successfully be set on
-      	caps
+      extension id that is contained in these caps.
+      
+      The only current known caps format is based on the SDP standard as produced
+      by [gstsdp.sdpmedia.SDPMedia.attributesToCaps].
+  
+      Params:
+        caps = writable #GstCaps to modify
+      Returns: whether the configured attributes on ext can successfully be set on
+        	caps
   */
   bool setCapsFromAttributes(gst.caps.Caps caps)
   {
@@ -169,15 +177,16 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Helper implementation for GstRTPExtensionClass::set_caps_from_attributes
-    that sets the ext uri on caps with the specified extension id as required
-    for sdp #GstCaps.
-    
-    Requires that the extension does not have any attributes or direction
-    advertised in caps.
-    Params:
-      caps =       #GstCaps to write fields into
-      attributes = 
-    Returns:     whether the ext attributes could be set on caps.
+      that sets the ext uri on caps with the specified extension id as required
+      for sdp #GstCaps.
+      
+      Requires that the extension does not have any attributes or direction
+      advertised in caps.
+  
+      Params:
+        caps = #GstCaps to write fields into
+        attributes = 
+      Returns: whether the ext attributes could be set on caps.
   */
   bool setCapsFromAttributesHelper(gst.caps.Caps caps, string attributes)
   {
@@ -189,11 +198,12 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Set the direction that this header extension should be used in.
-    If #GST_RTP_HEADER_EXTENSION_DIRECTION_INHERITED is included, the
-    direction will not be included in the caps (as it shouldn't be in the
-    extmap line in the SDP).
-    Params:
-      direction =       The direction
+      If #GST_RTP_HEADER_EXTENSION_DIRECTION_INHERITED is included, the
+      direction will not be included in the caps (as it shouldn't be in the
+      extmap line in the SDP).
+  
+      Params:
+        direction = The direction
   */
   void setDirection(gstrtp.types.RTPHeaderExtensionDirection direction)
   {
@@ -202,8 +212,9 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       sets the RTP extension id on ext
-    Params:
-      extId =       The id of this extension
+  
+      Params:
+        extId = The id of this extension
   */
   void setId(uint extId)
   {
@@ -212,10 +223,11 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Passes RTP payloader's sink (i.e. not payloaded) caps to the header
-    extension.
-    Params:
-      caps =       sink #GstCaps
-    Returns:     Whether caps could be read successfully
+      extension.
+  
+      Params:
+        caps = sink #GstCaps
+      Returns: Whether caps could be read successfully
   */
   bool setNonRtpSinkCaps(gst.caps.Caps caps)
   {
@@ -226,13 +238,14 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Call this function in a subclass from #GstRTPHeaderExtensionClass::read to
-    tell the depayloader whether the data just parsed from RTP packet require
-    updating its src (non-RTP) caps. If state is TRUE, #GstRTPBaseDepayload will
-    eventually invoke [gstrtp.rtpheader_extension.RTPHeaderExtension.updateNonRtpSrcCaps] to
-    have the caps update applied. Applying the update also flips the internal
-    "wants update" flag back to FALSE.
-    Params:
-      state =       TRUE if caps update is needed
+      tell the depayloader whether the data just parsed from RTP packet require
+      updating its src (non-RTP) caps. If state is TRUE, #GstRTPBaseDepayload will
+      eventually invoke [gstrtp.rtpheader_extension.RTPHeaderExtension.updateNonRtpSrcCaps] to
+      have the caps update applied. Applying the update also flips the internal
+      "wants update" flag back to FALSE.
+  
+      Params:
+        state = TRUE if caps update is needed
   */
   void setWantsUpdateNonRtpSrcCaps(bool state)
   {
@@ -241,10 +254,11 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Updates depayloader src caps based on the information received in RTP header.
-    caps must be writable as this function may modify them.
-    Params:
-      caps =       src #GstCaps to modify
-    Returns:     whether caps were modified successfully
+      caps must be writable as this function may modify them.
+  
+      Params:
+        caps = src #GstCaps to modify
+      Returns: whether caps were modified successfully
   */
   bool updateNonRtpSrcCaps(gst.caps.Caps caps)
   {
@@ -255,9 +269,9 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Call this function after [gstrtp.rtpheader_extension.RTPHeaderExtension.read] to check if
-    the depayloader's src caps need updating with data received in the last RTP
-    packet.
-    Returns:     Whether ext wants to update depayloader's src caps.
+      the depayloader's src caps need updating with data received in the last RTP
+      packet.
+      Returns: Whether ext wants to update depayloader's src caps.
   */
   bool wantsUpdateNonRtpSrcCaps()
   {
@@ -268,15 +282,16 @@ class RTPHeaderExtension : gst.element.Element
 
   /**
       Writes the RTP header extension to data using information available from
-    the input_meta.  data will be sized to be at least the value returned
-    from [gstrtp.rtpheader_extension.RTPHeaderExtension.getMaxSize].
-    Params:
-      inputMeta =       the input #GstBuffer to read information from if necessary
-      writeFlags =       #GstRTPHeaderExtensionFlags for how the extension should
-                      be written
-      output =       output RTP #GstBuffer
-      data =       location to write the rtp header extension into
-    Returns:     the size of the data written, < 0 on failure
+      the input_meta.  data will be sized to be at least the value returned
+      from [gstrtp.rtpheader_extension.RTPHeaderExtension.getMaxSize].
+  
+      Params:
+        inputMeta = the input #GstBuffer to read information from if necessary
+        writeFlags = #GstRTPHeaderExtensionFlags for how the extension should
+                        be written
+        output = output RTP #GstBuffer
+        data = location to write the rtp header extension into
+      Returns: the size of the data written, < 0 on failure
   */
   ptrdiff_t write(gst.buffer.Buffer inputMeta, gstrtp.types.RTPHeaderExtensionFlags writeFlags, gst.buffer.Buffer output, ubyte[] data)
   {

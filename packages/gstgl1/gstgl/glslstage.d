@@ -1,3 +1,4 @@
+/// Module for [GLSLStage] class
 module gstgl.glslstage;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gstgl.types;
 class GLSLStage : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_glsl_stage_get_type != &gidSymbolNotFound ? gst_glsl_stage_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -136,11 +140,12 @@ class GLSLStage : gst.object.ObjectGst
 
   /**
       Replaces the current shader string with str.
-    Params:
-      version_ =       a #GstGLSLVersion
-      profile =       a #GstGLSLProfile
-      str =       a GLSL shader string
-    Returns: 
+  
+      Params:
+        version_ = a #GstGLSLVersion
+        profile = a #GstGLSLProfile
+        str = a GLSL shader string
+      Returns: 
   */
   bool setStrings(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile, string[] str)
   {

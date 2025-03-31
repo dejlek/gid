@@ -1,3 +1,4 @@
+/// Module for [AttrLanguage] class
 module pango.attr_language;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import pango.types;
 
 /**
     The [pango.attr_language.AttrLanguage] structure is used to represent attributes that
-  are languages.
+    are languages.
 */
 class AttrLanguage
 {
   PangoAttrLanguage cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class AttrLanguage
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -49,11 +52,12 @@ class AttrLanguage
 
   /**
       Create a new language tag attribute.
-    Params:
-      language =       language tag
-    Returns:     the newly allocated
-        [pango.attribute.Attribute], which should be freed with
-        [pango.attribute.Attribute.destroy]
+  
+      Params:
+        language = language tag
+      Returns: the newly allocated
+          [pango.attribute.Attribute], which should be freed with
+          [pango.attribute.Attribute.destroy]
   */
   static pango.attribute.Attribute new_(pango.language.Language language)
   {

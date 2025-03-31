@@ -1,3 +1,4 @@
+/// Module for [VideoOverlayCompositionMeta] class
 module gstvideo.video_overlay_composition_meta;
 
 import gid.gid;
@@ -15,6 +16,7 @@ class VideoOverlayCompositionMeta
 {
   GstVideoOverlayCompositionMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class VideoOverlayCompositionMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

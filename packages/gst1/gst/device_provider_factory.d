@@ -1,3 +1,4 @@
+/// Module for [DeviceProviderFactory] class
 module gst.device_provider_factory;
 
 import gid.gid;
@@ -11,28 +12,31 @@ import gst.types;
 
 /**
     #GstDeviceProviderFactory is used to create instances of device providers. A
-  GstDeviceProviderfactory can be added to a #GstPlugin as it is also a
-  #GstPluginFeature.
-  
-  Use the [gst.device_provider_factory.DeviceProviderFactory.find] and
-  [gst.device_provider_factory.DeviceProviderFactory.get] functions to create device
-  provider instances or use [gst.device_provider_factory.DeviceProviderFactory.getByName] as a
-  convenient shortcut.
+    GstDeviceProviderfactory can be added to a #GstPlugin as it is also a
+    #GstPluginFeature.
+    
+    Use the [gst.device_provider_factory.DeviceProviderFactory.find] and
+    [gst.device_provider_factory.DeviceProviderFactory.get] functions to create device
+    provider instances or use [gst.device_provider_factory.DeviceProviderFactory.getByName] as a
+    convenient shortcut.
 */
 class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_provider_factory_get_type != &gidSymbolNotFound ? gst_device_provider_factory_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,11 +49,12 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Search for an device provider factory of the given name. Refs the returned
-    device provider factory; caller is responsible for unreffing.
-    Params:
-      name =       name of factory to find
-    Returns:     #GstDeviceProviderFactory if
-      found, null otherwise
+      device provider factory; caller is responsible for unreffing.
+  
+      Params:
+        name = name of factory to find
+      Returns: #GstDeviceProviderFactory if
+        found, null otherwise
   */
   static gst.device_provider_factory.DeviceProviderFactory find(string name)
   {
@@ -62,11 +67,12 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Returns the device provider of the type defined by the given device
-    provider factory.
-    Params:
-      factoryname =       a named factory to instantiate
-    Returns:     a #GstDeviceProvider or null
-      if unable to create device provider
+      provider factory.
+  
+      Params:
+        factoryname = a named factory to instantiate
+      Returns: a #GstDeviceProvider or null
+        if unable to create device provider
   */
   static gst.device_provider.DeviceProvider getByName(string factoryname)
   {
@@ -79,11 +85,12 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get a list of factories with a rank greater or equal to minrank.
-    The list of factories is returned by decreasing rank.
-    Params:
-      minrank =       Minimum rank
-    Returns:     a #GList of #GstDeviceProviderFactory device providers. Use
-      [gst.plugin_feature.PluginFeature.listFree] after usage.
+      The list of factories is returned by decreasing rank.
+  
+      Params:
+        minrank = Minimum rank
+      Returns: a #GList of #GstDeviceProviderFactory device providers. Use
+        [gst.plugin_feature.PluginFeature.listFree] after usage.
   */
   static gst.device_provider_factory.DeviceProviderFactory[] listGetDeviceProviders(gst.types.Rank minrank)
   {
@@ -95,9 +102,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Returns the device provider of the type defined by the given device
-    providerfactory.
-    Returns:     the #GstDeviceProvider or null
-      if the device provider couldn't be created
+      providerfactory.
+      Returns: the #GstDeviceProvider or null
+        if the device provider couldn't be created
   */
   gst.device_provider.DeviceProvider get()
   {
@@ -109,9 +116,9 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the #GType for device providers managed by this factory. The type can
-    only be retrieved if the device provider factory is loaded, which can be
-    assured with [gst.plugin_feature.PluginFeature.load].
-    Returns:     the #GType for device providers managed by this factory.
+      only be retrieved if the device provider factory is loaded, which can be
+      assured with [gst.plugin_feature.PluginFeature.load].
+      Returns: the #GType for device providers managed by this factory.
   */
   gobject.types.GType getDeviceProviderType()
   {
@@ -122,10 +129,11 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the metadata on factory with key.
-    Params:
-      key =       a key
-    Returns:     the metadata with key on factory or null
-      when there was no metadata with the given key.
+  
+      Params:
+        key = a key
+      Returns: the metadata with key on factory or null
+        when there was no metadata with the given key.
   */
   string getMetadata(string key)
   {
@@ -138,8 +146,8 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the available keys for the metadata on factory.
-    Returns:     a null-terminated array of key strings, or null when there is no
-      metadata. Free with [glib.global.strfreev] when no longer needed.
+      Returns: a null-terminated array of key strings, or null when there is no
+        metadata. Free with [glib.global.strfreev] when no longer needed.
   */
   string[] getMetadataKeys()
   {
@@ -161,10 +169,11 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Check if factory matches all of the given classes
-    Params:
-      classes =       a "/" separate list of classes to match, only match
-            if all classes are matched
-    Returns:     true if factory matches or if classes is null.
+  
+      Params:
+        classes = a "/" separate list of classes to match, only match
+              if all classes are matched
+      Returns: true if factory matches or if classes is null.
   */
   bool hasClasses(string classes = null)
   {
@@ -176,10 +185,11 @@ class DeviceProviderFactory : gst.plugin_feature.PluginFeature
 
   /**
       Check if factory matches all of the given classes
-    Params:
-      classes =       a null terminated array
-          of classes to match, only match if all classes are matched
-    Returns:     true if factory matches.
+  
+      Params:
+        classes = a null terminated array
+            of classes to match, only match if all classes are matched
+      Returns: true if factory matches.
   */
   bool hasClassesv(string[] classes = null)
   {

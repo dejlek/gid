@@ -1,3 +1,4 @@
+/// Module for [ClipNode] class
 module gsk.clip_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class ClipNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,11 +25,12 @@ class ClipNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will clip the child to the area
-    given by clip.
-    Params:
-      child =       The node to draw
-      clip =       The clip to apply
-    Returns:     A new [gsk.render_node.RenderNode]
+      given by clip.
+  
+      Params:
+        child = The node to draw
+        clip = The clip to apply
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
   {
@@ -38,7 +41,7 @@ class ClipNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting clipped by the given node.
-    Returns:     The child that is getting clipped
+      Returns: The child that is getting clipped
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -50,7 +53,7 @@ class ClipNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the clip rectangle for node.
-    Returns:     a clip rectangle
+      Returns: a clip rectangle
   */
   graphene.rect.Rect getClip()
   {

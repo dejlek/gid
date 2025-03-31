@@ -1,3 +1,4 @@
+/// Module for [Application] class
 module adw.application;
 
 import adw.c.functions;
@@ -15,50 +16,53 @@ import gtk.application;
 
 /**
     A base class for Adwaita applications.
-  
-  [adw.application.Application] handles library initialization by calling `func@init` in the
-  default [gio.application.Application.startup] signal handler, in turn chaining up
-  as required by [gtk.application.Application]. Therefore, any subclass of
-  [adw.application.Application] should always chain up its `startup` handler before using
-  any Adwaita or GTK API.
-  
-  ## Automatic Resources
-  
-  [adw.application.Application] will automatically load stylesheets located in the
-  application's resource base path (see
-  [gio.application.Application.setResourceBasePath], if they're present.
-  
-  They can be used to add custom styles to the application, as follows:
-  
-  $(LIST
-    * `style.css` contains styles that are always present.
     
-    * `style-dark.css` contains styles only used when
-  )
-  `property@StyleManager:dark` is `TRUE`.
-  
-  $(LIST
-    * `style-hc.css` contains styles used when the system high contrast
-      preference is enabled.
+    [adw.application.Application] handles library initialization by calling `func@init` in the
+    default [gio.application.Application.startup] signal handler, in turn chaining up
+    as required by [gtk.application.Application]. Therefore, any subclass of
+    [adw.application.Application] should always chain up its `startup` handler before using
+    any Adwaita or GTK API.
     
-    * `style-hc-dark.css` contains styles used when the system high contrast
-      preference is enabled and `property@StyleManager:dark` is `TRUE`.
-  )
+    ## Automatic Resources
+    
+    [adw.application.Application] will automatically load stylesheets located in the
+    application's resource base path (see
+    [gio.application.Application.setResourceBasePath], if they're present.
+    
+    They can be used to add custom styles to the application, as follows:
+    
+    $(LIST
+      * `style.css` contains styles that are always present.
+      
+      * `style-dark.css` contains styles only used when
+    )
+    `property@StyleManager:dark` is `TRUE`.
+    
+    $(LIST
+      * `style-hc.css` contains styles used when the system high contrast
+        preference is enabled.
+      
+      * `style-hc-dark.css` contains styles used when the system high contrast
+        preference is enabled and `property@StyleManager:dark` is `TRUE`.
+    )
 */
 class Application : gtk.application.Application
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_get_type != &gidSymbolNotFound ? adw_application_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -71,16 +75,17 @@ class Application : gtk.application.Application
 
   /**
       Creates a new [adw.application.Application].
-    
-    If `application_id` is not `NULL`, then it must be valid. See
-    [gio.application.Application.idIsValid].
-    
-    If no application ID is given then some features (most notably application
-    uniqueness) will be disabled.
-    Params:
-      applicationId =       The application ID
-      flags =       The application flags
-    Returns:     the newly created [adw.application.Application]
+      
+      If `application_id` is not `NULL`, then it must be valid. See
+      [gio.application.Application.idIsValid].
+      
+      If no application ID is given then some features (most notably application
+      uniqueness) will be disabled.
+  
+      Params:
+        applicationId = The application ID
+        flags = The application flags
+      Returns: the newly created [adw.application.Application]
   */
   this(string applicationId, gio.types.ApplicationFlags flags)
   {
@@ -92,10 +97,10 @@ class Application : gtk.application.Application
 
   /**
       Gets the style manager for self.
-    
-    This is a convenience property allowing to access [adw.style_manager.StyleManager] through
-    property bindings or expressions.
-    Returns:     the style manager
+      
+      This is a convenience property allowing to access [adw.style_manager.StyleManager] through
+      property bindings or expressions.
+      Returns: the style manager
   */
   adw.style_manager.StyleManager getStyleManager()
   {

@@ -1,3 +1,4 @@
+/// Module for [Implementor] class
 module atk.implementor;
 
 import atk.c.functions;
@@ -13,6 +14,7 @@ class Implementor
   AtkImplementor* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class Implementor
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -30,9 +33,9 @@ class Implementor
 
   /**
       Gets a reference to an object's #AtkObject implementation, if
-    the object implements #AtkObjectIface
-    Returns:     a reference to an object's #AtkObject
-      implementation
+      the object implements #AtkObjectIface
+      Returns: a reference to an object's #AtkObject
+        implementation
   */
   atk.object.ObjectAtk refAccessible()
   {

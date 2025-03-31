@@ -1,3 +1,4 @@
+/// Module for [ScannerBuilder] class
 module arrowdataset.scanner_builder;
 
 import arrow.expression;
@@ -15,17 +16,20 @@ import gobject.object;
 class ScannerBuilder : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_scanner_builder_get_type != &gidSymbolNotFound ? gadataset_scanner_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [Menu] class
 module gio.menu;
 
 import gid.gid;
@@ -9,28 +10,31 @@ import gio.types;
 
 /**
     [gio.menu.Menu] is a simple implementation of [gio.menu_model.MenuModel].
-  You populate a [gio.menu.Menu] by adding [gio.menu_item.MenuItem] instances to it.
-  
-  There are some convenience functions to allow you to directly
-  add items (avoiding [gio.menu_item.MenuItem]) for the common cases. To add
-  a regular item, use [gio.menu.Menu.insert]. To add a section, use
-  [gio.menu.Menu.insertSection]. To add a submenu, use
-  [gio.menu.Menu.insertSubmenu].
+    You populate a [gio.menu.Menu] by adding [gio.menu_item.MenuItem] instances to it.
+    
+    There are some convenience functions to allow you to directly
+    add items (avoiding [gio.menu_item.MenuItem]) for the common cases. To add
+    a regular item, use [gio.menu.Menu.insert]. To add a section, use
+    [gio.menu.Menu.insertSection]. To add a submenu, use
+    [gio.menu.Menu.insertSubmenu].
 */
 class Menu : gio.menu_model.MenuModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_get_type != &gidSymbolNotFound ? g_menu_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,9 +47,9 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Creates a new #GMenu.
-    
-    The new menu has no items.
-    Returns:     a new #GMenu
+      
+      The new menu has no items.
+      Returns: a new #GMenu
   */
   this()
   {
@@ -56,11 +60,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for appending a normal menu item to the end of
-    menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
-    flexible alternative.
-    Params:
-      label =       the section label, or null
-      detailedAction =       the detailed action string, or null
+      menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
+      flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        detailedAction = the detailed action string, or null
   */
   void append(string label = null, string detailedAction = null)
   {
@@ -71,10 +76,11 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Appends item to the end of menu.
-    
-    See [gio.menu.Menu.insertItem] for more information.
-    Params:
-      item =       a #GMenuItem to append
+      
+      See [gio.menu.Menu.insertItem] for more information.
+  
+      Params:
+        item = a #GMenuItem to append
   */
   void appendItem(gio.menu_item.MenuItem item)
   {
@@ -83,11 +89,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for appending a section menu item to the end of
-    menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a
-    more flexible alternative.
-    Params:
-      label =       the section label, or null
-      section =       a #GMenuModel with the items of the section
+      menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a
+      more flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        section = a #GMenuModel with the items of the section
   */
   void appendSection(string label, gio.menu_model.MenuModel section)
   {
@@ -97,11 +104,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for appending a submenu menu item to the end of
-    menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a
-    more flexible alternative.
-    Params:
-      label =       the section label, or null
-      submenu =       a #GMenuModel with the items of the submenu
+      menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a
+      more flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        submenu = a #GMenuModel with the items of the submenu
   */
   void appendSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
@@ -111,13 +119,13 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Marks menu as frozen.
-    
-    After the menu is frozen, it is an error to attempt to make any
-    changes to it.  In effect this means that the #GMenu API must no
-    longer be used.
-    
-    This function causes [gio.menu_model.MenuModel.isMutable] to begin returning
-    false, which has some positive performance implications.
+      
+      After the menu is frozen, it is an error to attempt to make any
+      changes to it.  In effect this means that the #GMenu API must no
+      longer be used.
+      
+      This function causes [gio.menu_model.MenuModel.isMutable] to begin returning
+      false, which has some positive performance implications.
   */
   void freeze()
   {
@@ -126,12 +134,13 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for inserting a normal menu item into menu.
-    Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more flexible
-    alternative.
-    Params:
-      position =       the position at which to insert the item
-      label =       the section label, or null
-      detailedAction =       the detailed action string, or null
+      Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more flexible
+      alternative.
+  
+      Params:
+        position = the position at which to insert the item
+        label = the section label, or null
+        detailedAction = the detailed action string, or null
   */
   void insert(int position, string label = null, string detailedAction = null)
   {
@@ -142,25 +151,26 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Inserts item into menu.
-    
-    The "insertion" is actually done by copying all of the attribute and
-    link values of item and using them to form a new item within menu.
-    As such, item itself is not really inserted, but rather, a menu item
-    that is exactly the same as the one presently described by item.
-    
-    This means that item is essentially useless after the insertion
-    occurs.  Any changes you make to it are ignored unless it is inserted
-    again (at which point its updated values will be copied).
-    
-    You should probably just free item once you're done.
-    
-    There are many convenience functions to take care of common cases.
-    See [gio.menu.Menu.insert], [gio.menu.Menu.insertSection] and
-    [gio.menu.Menu.insertSubmenu] as well as "prepend" and "append" variants of
-    each of these functions.
-    Params:
-      position =       the position at which to insert the item
-      item =       the #GMenuItem to insert
+      
+      The "insertion" is actually done by copying all of the attribute and
+      link values of item and using them to form a new item within menu.
+      As such, item itself is not really inserted, but rather, a menu item
+      that is exactly the same as the one presently described by item.
+      
+      This means that item is essentially useless after the insertion
+      occurs.  Any changes you make to it are ignored unless it is inserted
+      again (at which point its updated values will be copied).
+      
+      You should probably just free item once you're done.
+      
+      There are many convenience functions to take care of common cases.
+      See [gio.menu.Menu.insert], [gio.menu.Menu.insertSection] and
+      [gio.menu.Menu.insertSubmenu] as well as "prepend" and "append" variants of
+      each of these functions.
+  
+      Params:
+        position = the position at which to insert the item
+        item = the #GMenuItem to insert
   */
   void insertItem(int position, gio.menu_item.MenuItem item)
   {
@@ -169,12 +179,13 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for inserting a section menu item into menu.
-    Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a more
-    flexible alternative.
-    Params:
-      position =       the position at which to insert the item
-      label =       the section label, or null
-      section =       a #GMenuModel with the items of the section
+      Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for a more
+      flexible alternative.
+  
+      Params:
+        position = the position at which to insert the item
+        label = the section label, or null
+        section = a #GMenuModel with the items of the section
   */
   void insertSection(int position, string label, gio.menu_model.MenuModel section)
   {
@@ -184,12 +195,13 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for inserting a submenu menu item into menu.
-    Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a more
-    flexible alternative.
-    Params:
-      position =       the position at which to insert the item
-      label =       the section label, or null
-      submenu =       a #GMenuModel with the items of the submenu
+      Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for a more
+      flexible alternative.
+  
+      Params:
+        position = the position at which to insert the item
+        label = the section label, or null
+        submenu = a #GMenuModel with the items of the submenu
   */
   void insertSubmenu(int position, string label, gio.menu_model.MenuModel submenu)
   {
@@ -199,11 +211,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for prepending a normal menu item to the start
-    of menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
-    flexible alternative.
-    Params:
-      label =       the section label, or null
-      detailedAction =       the detailed action string, or null
+      of menu.  Combine [gio.menu_item.MenuItem.new_] and [gio.menu.Menu.insertItem] for a more
+      flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        detailedAction = the detailed action string, or null
   */
   void prepend(string label = null, string detailedAction = null)
   {
@@ -214,10 +227,11 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Prepends item to the start of menu.
-    
-    See [gio.menu.Menu.insertItem] for more information.
-    Params:
-      item =       a #GMenuItem to prepend
+      
+      See [gio.menu.Menu.insertItem] for more information.
+  
+      Params:
+        item = a #GMenuItem to prepend
   */
   void prependItem(gio.menu_item.MenuItem item)
   {
@@ -226,11 +240,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for prepending a section menu item to the start
-    of menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for
-    a more flexible alternative.
-    Params:
-      label =       the section label, or null
-      section =       a #GMenuModel with the items of the section
+      of menu.  Combine [gio.menu_item.MenuItem.newSection] and [gio.menu.Menu.insertItem] for
+      a more flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        section = a #GMenuModel with the items of the section
   */
   void prependSection(string label, gio.menu_model.MenuModel section)
   {
@@ -240,11 +255,12 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Convenience function for prepending a submenu menu item to the start
-    of menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for
-    a more flexible alternative.
-    Params:
-      label =       the section label, or null
-      submenu =       a #GMenuModel with the items of the submenu
+      of menu.  Combine [gio.menu_item.MenuItem.newSubmenu] and [gio.menu.Menu.insertItem] for
+      a more flexible alternative.
+  
+      Params:
+        label = the section label, or null
+        submenu = a #GMenuModel with the items of the submenu
   */
   void prependSubmenu(string label, gio.menu_model.MenuModel submenu)
   {
@@ -254,17 +270,18 @@ class Menu : gio.menu_model.MenuModel
 
   /**
       Removes an item from the menu.
-    
-    position gives the index of the item to remove.
-    
-    It is an error if position is not in range the range from 0 to one
-    less than the number of items in the menu.
-    
-    It is not possible to remove items by identity since items are added
-    to the menu simply by copying their links and attributes (ie:
-    identity of the item itself is not preserved).
-    Params:
-      position =       the position of the item to remove
+      
+      position gives the index of the item to remove.
+      
+      It is an error if position is not in range the range from 0 to one
+      less than the number of items in the menu.
+      
+      It is not possible to remove items by identity since items are added
+      to the menu simply by copying their links and attributes (ie:
+      identity of the item itself is not preserved).
+  
+      Params:
+        position = the position of the item to remove
   */
   void remove(int position)
   {

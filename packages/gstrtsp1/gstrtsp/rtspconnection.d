@@ -1,3 +1,4 @@
+/// Module for [RTSPConnection] class
 module gstrtsp.rtspconnection;
 
 import gid.gid;
@@ -19,13 +20,14 @@ import gstrtsp.types;
 
 /**
     This object manages the RTSP connection to the server. It provides function
-  to receive and send bytes and messages.
+    to receive and send bytes and messages.
 */
 class RTSPConnection
 {
   GstRTSPConnection* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -36,6 +38,7 @@ class RTSPConnection
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -43,12 +46,13 @@ class RTSPConnection
 
   /**
       Add header to be appended to any HTTP request made by connection.
-    If the header already exists then the old header is replaced by the new header.
-    
-    Only applicable in HTTP tunnel mode.
-    Params:
-      key =       HTTP header name
-      value =       HTTP header value
+      If the header already exists then the old header is replaced by the new header.
+      
+      Only applicable in HTTP tunnel mode.
+  
+      Params:
+        key = HTTP header name
+        value = HTTP header value
   */
   void addExtraHttpRequestHeader(string key, string value)
   {
@@ -67,8 +71,8 @@ class RTSPConnection
 
   /**
       Close the connected conn. After this call, the connection is in the same
-    state as when it was first created.
-    Returns:     #GST_RTSP_OK on success.
+      state as when it was first created.
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult close()
   {
@@ -80,14 +84,15 @@ class RTSPConnection
 
   /**
       Attempt to connect to the url of conn made with
-    [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is null this function can block
-    forever. If timeout contains a valid timeout, this function will return
-    #GST_RTSP_ETIMEOUT after the timeout expired.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      timeout =       a GTimeVal timeout
-    Returns:     #GST_RTSP_OK when a connection could be made.
+      [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is null this function can block
+      forever. If timeout contains a valid timeout, this function will return
+      #GST_RTSP_ETIMEOUT after the timeout expired.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        timeout = a GTimeVal timeout
+      Returns: #GST_RTSP_OK when a connection could be made.
   */
   gstrtsp.types.RTSPResult connect(glib.time_val.TimeVal timeout)
   {
@@ -99,14 +104,15 @@ class RTSPConnection
 
   /**
       Attempt to connect to the url of conn made with
-    [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is 0 this function can block
-    forever. If timeout contains a valid timeout, this function will return
-    #GST_RTSP_ETIMEOUT after the timeout expired.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      timeout =       a timeout in microseconds
-    Returns:     #GST_RTSP_OK when a connection could be made.
+      [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is 0 this function can block
+      forever. If timeout contains a valid timeout, this function will return
+      #GST_RTSP_ETIMEOUT after the timeout expired.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        timeout = a timeout in microseconds
+      Returns: #GST_RTSP_OK when a connection could be made.
   */
   gstrtsp.types.RTSPResult connectUsec(long timeout)
   {
@@ -118,16 +124,17 @@ class RTSPConnection
 
   /**
       Attempt to connect to the url of conn made with
-    [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is null this function can block
-    forever. If timeout contains a valid timeout, this function will return
-    #GST_RTSP_ETIMEOUT after the timeout expired.  If conn is set to tunneled,
-    response will contain a response to the tunneling request messages.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      timeout =       a GTimeVal timeout
-      response =       a #GstRTSPMessage
-    Returns:     #GST_RTSP_OK when a connection could be made.
+      [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is null this function can block
+      forever. If timeout contains a valid timeout, this function will return
+      #GST_RTSP_ETIMEOUT after the timeout expired.  If conn is set to tunneled,
+      response will contain a response to the tunneling request messages.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        timeout = a GTimeVal timeout
+        response = a #GstRTSPMessage
+      Returns: #GST_RTSP_OK when a connection could be made.
   */
   gstrtsp.types.RTSPResult connectWithResponse(glib.time_val.TimeVal timeout, gstrtsp.rtspmessage.RTSPMessage response)
   {
@@ -139,16 +146,17 @@ class RTSPConnection
 
   /**
       Attempt to connect to the url of conn made with
-    [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is 0 this function can block
-    forever. If timeout contains a valid timeout, this function will return
-    #GST_RTSP_ETIMEOUT after the timeout expired.  If conn is set to tunneled,
-    response will contain a response to the tunneling request messages.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      timeout =       a timeout in microseconds
-      response =       a #GstRTSPMessage
-    Returns:     #GST_RTSP_OK when a connection could be made.
+      [gstrtsp.rtspconnection.RTSPConnection.create]. If timeout is 0 this function can block
+      forever. If timeout contains a valid timeout, this function will return
+      #GST_RTSP_ETIMEOUT after the timeout expired.  If conn is set to tunneled,
+      response will contain a response to the tunneling request messages.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        timeout = a timeout in microseconds
+        response = a #GstRTSPMessage
+      Returns: #GST_RTSP_OK when a connection could be made.
   */
   gstrtsp.types.RTSPResult connectWithResponseUsec(long timeout, gstrtsp.rtspmessage.RTSPMessage response)
   {
@@ -160,17 +168,18 @@ class RTSPConnection
 
   /**
       If conn received the first tunnel connection and conn2 received
-    the second tunnel connection, link the two connections together so that
-    conn manages the tunneled connection.
-    
-    After this call, conn2 cannot be used anymore and must be freed with
-    [gstrtsp.rtspconnection.RTSPConnection.free].
-    
-    If conn2 is null then only the base64 decoding context will be setup for
-    conn.
-    Params:
-      conn2 =       a #GstRTSPConnection or null
-    Returns:     return GST_RTSP_OK on success.
+      the second tunnel connection, link the two connections together so that
+      conn manages the tunneled connection.
+      
+      After this call, conn2 cannot be used anymore and must be freed with
+      [gstrtsp.rtspconnection.RTSPConnection.free].
+      
+      If conn2 is null then only the base64 decoding context will be setup for
+      conn.
+  
+      Params:
+        conn2 = a #GstRTSPConnection or null
+      Returns: return GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult doTunnel(gstrtsp.rtspconnection.RTSPConnection conn2 = null)
   {
@@ -182,11 +191,12 @@ class RTSPConnection
 
   /**
       Start or stop the flushing action on conn. When flushing, all current
-    and future actions on conn will return #GST_RTSP_EINTR until the connection
-    is set to non-flushing mode again.
-    Params:
-      flush =       start or stop the flush
-    Returns:     #GST_RTSP_OK.
+      and future actions on conn will return #GST_RTSP_EINTR until the connection
+      is set to non-flushing mode again.
+  
+      Params:
+        flush = start or stop the flush
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult flush(bool flush)
   {
@@ -198,8 +208,8 @@ class RTSPConnection
 
   /**
       Get the ignore_x_server_reply value.
-    Returns:     returns true if the x-server-ip-address header reply will be
-               ignored, else returns false
+      Returns: returns true if the x-server-ip-address header reply will be
+                 ignored, else returns false
   */
   bool getIgnoreXServerReply()
   {
@@ -210,8 +220,8 @@ class RTSPConnection
 
   /**
       Retrieve the IP address of the other end of conn.
-    Returns:     The IP address as a string. this value remains valid until the
-      connection is closed.
+      Returns: The IP address as a string. this value remains valid until the
+        connection is closed.
   */
   string getIp()
   {
@@ -223,8 +233,8 @@ class RTSPConnection
 
   /**
       Get the file descriptor for reading.
-    Returns:     the file descriptor used for reading or null on
-      error. The file descriptor remains valid until the connection is closed.
+      Returns: the file descriptor used for reading or null on
+        error. The file descriptor remains valid until the connection is closed.
   */
   gio.socket.Socket getReadSocket()
   {
@@ -244,14 +254,15 @@ class RTSPConnection
 
   /**
       Get the TLS connection of conn.
-    
-    For client side this will return the #GTlsClientConnection when connected
-    over TLS.
-    
-    For server side connections, this function will create a GTlsServerConnection
-    when called the first time and will return that same connection on subsequent
-    calls. The server is then responsible for configuring the TLS connection.
-    Returns:     the TLS connection for conn.
+      
+      For client side this will return the #GTlsClientConnection when connected
+      over TLS.
+      
+      For server side connections, this function will create a GTlsServerConnection
+      when called the first time and will return that same connection on subsequent
+      calls. The server is then responsible for configuring the TLS connection.
+      Returns: the TLS connection for conn.
+      Throws: [ErrorG]
   */
   gio.tls_connection.TlsConnection getTls()
   {
@@ -266,11 +277,11 @@ class RTSPConnection
 
   /**
       Gets the anchor certificate authorities database that will be used
-    after a server certificate can't be verified with the default
-    certificate database.
-    Returns:     the anchor certificate authorities database, or NULL if no
-      database has been previously set. Use [gobject.object.ObjectG.unref] to release the
+      after a server certificate can't be verified with the default
       certificate database.
+      Returns: the anchor certificate authorities database, or NULL if no
+        database has been previously set. Use [gobject.object.ObjectG.unref] to release the
+        certificate database.
   */
   gio.tls_database.TlsDatabase getTlsDatabase()
   {
@@ -282,10 +293,10 @@ class RTSPConnection
 
   /**
       Gets a #GTlsInteraction object to be used when the connection or certificate
-    database need to interact with the user. This will be used to prompt the
-    user for passwords where necessary.
-    Returns:     a reference on the #GTlsInteraction. Use
-      [gobject.object.ObjectG.unref] to release.
+      database need to interact with the user. This will be used to prompt the
+      user for passwords where necessary.
+      Returns: a reference on the #GTlsInteraction. Use
+        [gobject.object.ObjectG.unref] to release.
   */
   gio.tls_interaction.TlsInteraction getTlsInteraction()
   {
@@ -297,17 +308,17 @@ class RTSPConnection
 
   /**
       Gets the TLS validation flags used to verify the peer certificate
-    when a TLS connection is established.
-    
-    GLib guarantees that if certificate verification fails, at least one error
-    will be set, but it does not guarantee that all possible errors will be
-    set. Accordingly, you may not safely decide to ignore any particular type
-    of error.
-    
-    For example, it would be incorrect to ignore [gio.types.TlsCertificateFlags.Expired] if
-    you want to allow expired certificates, because this could potentially be
-    the only error flag set even if other problems exist with the certificate.
-    Returns:     the validation flags.
+      when a TLS connection is established.
+      
+      GLib guarantees that if certificate verification fails, at least one error
+      will be set, but it does not guarantee that all possible errors will be
+      set. Accordingly, you may not safely decide to ignore any particular type
+      of error.
+      
+      For example, it would be incorrect to ignore [gio.types.TlsCertificateFlags.Expired] if
+      you want to allow expired certificates, because this could potentially be
+      the only error flag set even if other problems exist with the certificate.
+      Returns: the validation flags.
   */
   gio.types.TlsCertificateFlags getTlsValidationFlags()
   {
@@ -319,7 +330,7 @@ class RTSPConnection
 
   /**
       Get the tunnel session id the connection.
-    Returns:     returns a non-empty string if conn is being tunneled over HTTP.
+      Returns: returns a non-empty string if conn is being tunneled over HTTP.
   */
   string getTunnelid()
   {
@@ -331,8 +342,8 @@ class RTSPConnection
 
   /**
       Retrieve the URL of the other end of conn.
-    Returns:     The URL. This value remains valid until the
-      connection is freed.
+      Returns: The URL. This value remains valid until the
+        connection is freed.
   */
   gstrtsp.rtspurl.RTSPUrl getUrl()
   {
@@ -344,8 +355,8 @@ class RTSPConnection
 
   /**
       Get the file descriptor for writing.
-    Returns:     the file descriptor used for writing or NULL on
-      error. The file descriptor remains valid until the connection is closed.
+      Returns: the file descriptor used for writing or NULL on
+        error. The file descriptor remains valid until the connection is closed.
   */
   gio.socket.Socket getWriteSocket()
   {
@@ -357,7 +368,7 @@ class RTSPConnection
 
   /**
       Get the tunneling state of the connection.
-    Returns:     if conn is using HTTP tunneling.
+      Returns: if conn is using HTTP tunneling.
   */
   bool isTunneled()
   {
@@ -368,9 +379,10 @@ class RTSPConnection
 
   /**
       Calculate the next timeout for conn, storing the result in timeout.
-    Params:
-      timeout =       a timeout
-    Returns:     #GST_RTSP_OK.
+  
+      Params:
+        timeout = a timeout
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult nextTimeout(glib.time_val.TimeVal timeout)
   {
@@ -382,7 +394,7 @@ class RTSPConnection
 
   /**
       Calculate the next timeout for conn
-    Returns:     #the next timeout in microseconds
+      Returns: #the next timeout in microseconds
   */
   long nextTimeoutUsec()
   {
@@ -393,18 +405,19 @@ class RTSPConnection
 
   /**
       Wait up to the specified timeout for the connection to become available for
-    at least one of the operations specified in events. When the function returns
-    with #GST_RTSP_OK, revents will contain a bitmask of available operations on
-    conn.
-    
-    timeout can be null, in which case this function might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      events =       a bitmask of #GstRTSPEvent flags to check
-      revents =       location for result flags
-      timeout =       a timeout
-    Returns:     #GST_RTSP_OK on success.
+      at least one of the operations specified in events. When the function returns
+      with #GST_RTSP_OK, revents will contain a bitmask of available operations on
+      conn.
+      
+      timeout can be null, in which case this function might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        events = a bitmask of #GstRTSPEvent flags to check
+        revents = location for result flags
+        timeout = a timeout
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult poll(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, glib.time_val.TimeVal timeout)
   {
@@ -416,18 +429,19 @@ class RTSPConnection
 
   /**
       Wait up to the specified timeout for the connection to become available for
-    at least one of the operations specified in events. When the function returns
-    with #GST_RTSP_OK, revents will contain a bitmask of available operations on
-    conn.
-    
-    timeout can be 0, in which case this function might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      events =       a bitmask of #GstRTSPEvent flags to check
-      revents =       location for result flags
-      timeout =       a timeout in microseconds
-    Returns:     #GST_RTSP_OK on success.
+      at least one of the operations specified in events. When the function returns
+      with #GST_RTSP_OK, revents will contain a bitmask of available operations on
+      conn.
+      
+      timeout can be 0, in which case this function might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        events = a bitmask of #GstRTSPEvent flags to check
+        revents = location for result flags
+        timeout = a timeout in microseconds
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult pollUsec(gstrtsp.types.RTSPEvent events, out gstrtsp.types.RTSPEvent revents, long timeout)
   {
@@ -439,14 +453,15 @@ class RTSPConnection
 
   /**
       Attempt to read size bytes into data from the connected conn, blocking up to
-    the specified timeout. timeout can be null, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      data =       the data to read
-      timeout =       a timeout value or null
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be null, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        data = the data to read
+        timeout = a timeout value or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult read(ubyte[] data, glib.time_val.TimeVal timeout)
   {
@@ -463,14 +478,15 @@ class RTSPConnection
 
   /**
       Attempt to read size bytes into data from the connected conn, blocking up to
-    the specified timeout. timeout can be 0, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      data =       the data to read
-      timeout =       a timeout value in microseconds
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be 0, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        data = the data to read
+        timeout = a timeout value in microseconds
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult readUsec(ubyte[] data, long timeout)
   {
@@ -487,14 +503,15 @@ class RTSPConnection
 
   /**
       Attempt to read into message from the connected conn, blocking up to
-    the specified timeout. timeout can be null, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      message =       the message to read
-      timeout =       a timeout value or null
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be null, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        message = the message to read
+        timeout = a timeout value or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult receive(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
@@ -506,14 +523,15 @@ class RTSPConnection
 
   /**
       Attempt to read into message from the connected conn, blocking up to
-    the specified timeout. timeout can be 0, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      message =       the message to read
-      timeout =       a timeout value or 0
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be 0, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        message = the message to read
+        timeout = a timeout value or 0
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult receiveUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
   {
@@ -525,7 +543,7 @@ class RTSPConnection
 
   /**
       Reset the timeout of conn.
-    Returns:     #GST_RTSP_OK.
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult resetTimeout()
   {
@@ -537,14 +555,15 @@ class RTSPConnection
 
   /**
       Attempt to send message to the connected conn, blocking up to
-    the specified timeout. timeout can be null, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      message =       the message to send
-      timeout =       a timeout value or null
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be null, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        message = the message to send
+        timeout = a timeout value or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage message, glib.time_val.TimeVal timeout)
   {
@@ -556,14 +575,15 @@ class RTSPConnection
 
   /**
       Attempt to send messages to the connected conn, blocking up to
-    the specified timeout. timeout can be null, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      messages =       the messages to send
-      timeout =       a timeout value or null
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be null, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        messages = the messages to send
+        timeout = a timeout value or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult sendMessages(gstrtsp.rtspmessage.RTSPMessage[] messages, glib.time_val.TimeVal timeout)
   {
@@ -583,14 +603,15 @@ class RTSPConnection
 
   /**
       Attempt to send messages to the connected conn, blocking up to
-    the specified timeout. timeout can be 0, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      messages =       the messages to send
-      timeout =       a timeout value in microseconds
-    Returns:     #GST_RTSP_OK on Since.
+      the specified timeout. timeout can be 0, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        messages = the messages to send
+        timeout = a timeout value in microseconds
+      Returns: #GST_RTSP_OK on Since.
   */
   gstrtsp.types.RTSPResult sendMessagesUsec(gstrtsp.rtspmessage.RTSPMessage[] messages, long timeout)
   {
@@ -610,14 +631,15 @@ class RTSPConnection
 
   /**
       Attempt to send message to the connected conn, blocking up to
-    the specified timeout. timeout can be 0, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      message =       the message to send
-      timeout =       a timeout value in microseconds
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be 0, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        message = the message to send
+        timeout = a timeout value in microseconds
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult sendUsec(gstrtsp.rtspmessage.RTSPMessage message, long timeout)
   {
@@ -629,13 +651,14 @@ class RTSPConnection
 
   /**
       Sets a custom accept-certificate function for checking certificates for
-    validity. This will directly map to #GTlsConnection 's "accept-certificate"
-    signal and be performed after the default checks of #GstRTSPConnection
-    (checking against the #GTlsDatabase with the given #GTlsCertificateFlags)
-    have failed. If no #GTlsDatabase is set on this connection, only func will
-    be called.
-    Params:
-      func =       a #GstRTSPConnectionAcceptCertificateFunc to check certificates
+      validity. This will directly map to #GTlsConnection 's "accept-certificate"
+      signal and be performed after the default checks of #GstRTSPConnection
+      (checking against the #GTlsDatabase with the given #GTlsCertificateFlags)
+      have failed. If no #GTlsDatabase is set on this connection, only func will
+      be called.
+  
+      Params:
+        func = a #GstRTSPConnectionAcceptCertificateFunc to check certificates
   */
   void setAcceptCertificateFunc(gstrtsp.types.RTSPConnectionAcceptCertificateFunc func)
   {
@@ -655,12 +678,13 @@ class RTSPConnection
 
   /**
       Configure conn for authentication mode method with user and pass as the
-    user and password respectively.
-    Params:
-      method =       authentication method
-      user =       the user
-      pass =       the password
-    Returns:     #GST_RTSP_OK.
+      user and password respectively.
+  
+      Params:
+        method = authentication method
+        user = the user
+        pass = the password
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult setAuth(gstrtsp.types.RTSPAuthMethod method, string user, string pass)
   {
@@ -674,13 +698,14 @@ class RTSPConnection
 
   /**
       Setup conn with authentication directives. This is not necessary for
-    methods #GST_RTSP_AUTH_NONE and #GST_RTSP_AUTH_BASIC. For
-    #GST_RTSP_AUTH_DIGEST, directives should be taken from the digest challenge
-    in the WWW-Authenticate response header and can include realm, domain,
-    nonce, opaque, stale, algorithm, qop as per RFC2617.
-    Params:
-      param =       authentication directive
-      value =       value
+      methods #GST_RTSP_AUTH_NONE and #GST_RTSP_AUTH_BASIC. For
+      #GST_RTSP_AUTH_DIGEST, directives should be taken from the digest challenge
+      in the WWW-Authenticate response header and can include realm, domain,
+      nonce, opaque, stale, algorithm, qop as per RFC2617.
+  
+      Params:
+        param = authentication directive
+        value = value
   */
   void setAuthParam(string param, string value)
   {
@@ -691,10 +716,11 @@ class RTSPConnection
 
   /**
       Configure conn to use the specified Content-Length limit.
-    Both requests and responses are validated. If content-length is
-    exceeded, ENOMEM error will be returned.
-    Params:
-      limit =       Content-Length limit
+      Both requests and responses are validated. If content-length is
+      exceeded, ENOMEM error will be returned.
+  
+      Params:
+        limit = Content-Length limit
   */
   void setContentLengthLimit(uint limit)
   {
@@ -703,10 +729,11 @@ class RTSPConnection
 
   /**
       By setting the HTTP mode to true the message parsing will support HTTP
-    messages in addition to the RTSP messages. It will also disable the
-    automatic handling of setting up an HTTP tunnel.
-    Params:
-      enable =       true to enable manual HTTP mode
+      messages in addition to the RTSP messages. It will also disable the
+      automatic handling of setting up an HTTP tunnel.
+  
+      Params:
+        enable = true to enable manual HTTP mode
   */
   void setHttpMode(bool enable)
   {
@@ -715,10 +742,11 @@ class RTSPConnection
 
   /**
       Set whether to ignore the x-server-ip-address header reply or not. If the
-    header is ignored, the original address will be used instead.
-    Params:
-      ignore =       true to ignore the x-server-ip-address header reply or false to
-                 comply with it (false is the default).
+      header is ignored, the original address will be used instead.
+  
+      Params:
+        ignore = true to ignore the x-server-ip-address header reply or false to
+                   comply with it (false is the default).
   */
   void setIgnoreXServerReply(bool ignore)
   {
@@ -727,8 +755,9 @@ class RTSPConnection
 
   /**
       Set the IP address of the server.
-    Params:
-      ip =       an ip address
+  
+      Params:
+        ip = an ip address
   */
   void setIp(string ip)
   {
@@ -738,10 +767,11 @@ class RTSPConnection
 
   /**
       Set the proxy host and port.
-    Params:
-      host =       the proxy host
-      port =       the proxy port
-    Returns:     #GST_RTSP_OK.
+  
+      Params:
+        host = the proxy host
+        port = the proxy port
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult setProxy(string host, uint port)
   {
@@ -754,9 +784,10 @@ class RTSPConnection
 
   /**
       Configure conn to use the specified DSCP value.
-    Params:
-      qosDscp =       DSCP value
-    Returns:     #GST_RTSP_OK on success.
+  
+      Params:
+        qosDscp = DSCP value
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult setQosDscp(uint qosDscp)
   {
@@ -768,11 +799,12 @@ class RTSPConnection
 
   /**
       Sets if the #GstRTSPConnection should remember the session id from the last
-    response received and force it onto any further requests.
-    
-    The default value is true
-    Params:
-      remember =       true if the connection should remember the session id
+      response received and force it onto any further requests.
+      
+      The default value is true
+  
+      Params:
+        remember = true if the connection should remember the session id
   */
   void setRememberSessionId(bool remember)
   {
@@ -781,10 +813,11 @@ class RTSPConnection
 
   /**
       Sets the anchor certificate authorities database. This certificate
-    database will be used to verify the server's certificate in case it
-    can't be verified with the default certificate database first.
-    Params:
-      database =       a #GTlsDatabase
+      database will be used to verify the server's certificate in case it
+      can't be verified with the default certificate database first.
+  
+      Params:
+        database = a #GTlsDatabase
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase database = null)
   {
@@ -793,10 +826,11 @@ class RTSPConnection
 
   /**
       Sets a #GTlsInteraction object to be used when the connection or certificate
-    database need to interact with the user. This will be used to prompt the
-    user for passwords where necessary.
-    Params:
-      interaction =       a #GTlsInteraction
+      database need to interact with the user. This will be used to prompt the
+      user for passwords where necessary.
+  
+      Params:
+        interaction = a #GTlsInteraction
   */
   void setTlsInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
@@ -805,20 +839,21 @@ class RTSPConnection
 
   /**
       Sets the TLS validation flags to be used to verify the peer
-    certificate when a TLS connection is established.
-    
-    GLib guarantees that if certificate verification fails, at least one error
-    will be set, but it does not guarantee that all possible errors will be
-    set. Accordingly, you may not safely decide to ignore any particular type
-    of error.
-    
-    For example, it would be incorrect to mask [gio.types.TlsCertificateFlags.Expired] if
-    you want to allow expired certificates, because this could potentially be
-    the only error flag set even if other problems exist with the certificate.
-    Params:
-      flags =       the validation flags.
-    Returns:     TRUE if the validation flags are set correctly, or FALSE if
-      conn is NULL or is not a TLS connection.
+      certificate when a TLS connection is established.
+      
+      GLib guarantees that if certificate verification fails, at least one error
+      will be set, but it does not guarantee that all possible errors will be
+      set. Accordingly, you may not safely decide to ignore any particular type
+      of error.
+      
+      For example, it would be incorrect to mask [gio.types.TlsCertificateFlags.Expired] if
+      you want to allow expired certificates, because this could potentially be
+      the only error flag set even if other problems exist with the certificate.
+  
+      Params:
+        flags = the validation flags.
+      Returns: TRUE if the validation flags are set correctly, or FALSE if
+        conn is NULL or is not a TLS connection.
   */
   bool setTlsValidationFlags(gio.types.TlsCertificateFlags flags)
   {
@@ -829,9 +864,10 @@ class RTSPConnection
 
   /**
       Set the HTTP tunneling state of the connection. This must be configured before
-    the conn is connected.
-    Params:
-      tunneled =       the new state
+      the conn is connected.
+  
+      Params:
+        tunneled = the new state
   */
   void setTunneled(bool tunneled)
   {
@@ -840,14 +876,15 @@ class RTSPConnection
 
   /**
       Attempt to write size bytes of data to the connected conn, blocking up to
-    the specified timeout. timeout can be null, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      data =       the data to write
-      timeout =       a timeout value or null
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be null, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        data = the data to write
+        timeout = a timeout value or null
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult write(ubyte[] data, glib.time_val.TimeVal timeout)
   {
@@ -864,14 +901,15 @@ class RTSPConnection
 
   /**
       Attempt to write size bytes of data to the connected conn, blocking up to
-    the specified timeout. timeout can be 0, in which case this function
-    might block forever.
-    
-    This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
-    Params:
-      data =       the data to write
-      timeout =       a timeout value or 0
-    Returns:     #GST_RTSP_OK on success.
+      the specified timeout. timeout can be 0, in which case this function
+      might block forever.
+      
+      This function can be cancelled with [gstrtsp.rtspconnection.RTSPConnection.flush].
+  
+      Params:
+        data = the data to write
+        timeout = a timeout value or 0
+      Returns: #GST_RTSP_OK on success.
   */
   gstrtsp.types.RTSPResult writeUsec(ubyte[] data, long timeout)
   {
@@ -888,12 +926,13 @@ class RTSPConnection
 
   /**
       Accept a new connection on socket and create a new #GstRTSPConnection for
-    handling communication on new socket.
-    Params:
-      socket =       a socket
-      conn =       storage for a #GstRTSPConnection
-      cancellable =       a #GCancellable to cancel the operation
-    Returns:     #GST_RTSP_OK when conn contains a valid connection.
+      handling communication on new socket.
+  
+      Params:
+        socket = a socket
+        conn = storage for a #GstRTSPConnection
+        cancellable = a #GCancellable to cancel the operation
+      Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
   static gstrtsp.types.RTSPResult accept(gio.socket.Socket socket, out gstrtsp.rtspconnection.RTSPConnection conn, gio.cancellable.Cancellable cancellable = null)
   {
@@ -907,14 +946,15 @@ class RTSPConnection
 
   /**
       Create a newly allocated #GstRTSPConnection from url and store it in conn.
-    The connection will not yet attempt to connect to url, use
-    [gstrtsp.rtspconnection.RTSPConnection.connect].
-    
-    A copy of url will be made.
-    Params:
-      url =       a #GstRTSPUrl
-      conn =       storage for a #GstRTSPConnection
-    Returns:     #GST_RTSP_OK when conn contains a valid connection.
+      The connection will not yet attempt to connect to url, use
+      [gstrtsp.rtspconnection.RTSPConnection.connect].
+      
+      A copy of url will be made.
+  
+      Params:
+        url = a #GstRTSPUrl
+        conn = storage for a #GstRTSPConnection
+      Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
   static gstrtsp.types.RTSPResult create(gstrtsp.rtspurl.RTSPUrl url, out gstrtsp.rtspconnection.RTSPConnection conn)
   {
@@ -928,15 +968,16 @@ class RTSPConnection
 
   /**
       Create a new #GstRTSPConnection for handling communication on the existing
-    socket socket. The initial_buffer contains zero terminated data already
-    read from socket which should be used before starting to read new data.
-    Params:
-      socket =       a #GSocket
-      ip =       the IP address of the other end
-      port =       the port used by the other end
-      initialBuffer =       data already read from fd
-      conn =       storage for a #GstRTSPConnection
-    Returns:     #GST_RTSP_OK when conn contains a valid connection.
+      socket socket. The initial_buffer contains zero terminated data already
+      read from socket which should be used before starting to read new data.
+  
+      Params:
+        socket = a #GSocket
+        ip = the IP address of the other end
+        port = the port used by the other end
+        initialBuffer = data already read from fd
+        conn = storage for a #GstRTSPConnection
+      Returns: #GST_RTSP_OK when conn contains a valid connection.
   */
   static gstrtsp.types.RTSPResult createFromSocket(gio.socket.Socket socket, string ip, ushort port, string initialBuffer, out gstrtsp.rtspconnection.RTSPConnection conn)
   {

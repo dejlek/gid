@@ -1,3 +1,4 @@
+/// Module for [Tuples] class
 module glib.tuples;
 
 import gid.gid;
@@ -7,16 +8,17 @@ import glib.types;
 
 /**
     The #GTuples struct is used to return records (or tuples) from the
-  #GRelation by [glib.relation.Relation.select]. It only contains one public
-  member - the number of records that matched. To access the matched
-  records, you must use [glib.tuples.Tuples.index].
+    #GRelation by [glib.relation.Relation.select]. It only contains one public
+    member - the number of records that matched. To access the matched
+    records, you must use [glib.tuples.Tuples.index].
 
-  Deprecated:     Rarely used API
+    Deprecated: Rarely used API
 */
 class Tuples
 {
   GTuples cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class Tuples
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -45,11 +48,11 @@ class Tuples
 
   /**
       Frees the records which were returned by [glib.relation.Relation.select]. This
-    should always be called after [glib.relation.Relation.select] when you are
-    finished with the records. The records are not removed from the
-    #GRelation.
+      should always be called after [glib.relation.Relation.select] when you are
+      finished with the records. The records are not removed from the
+      #GRelation.
   
-    Deprecated:     Rarely used API
+      Deprecated: Rarely used API
   */
   void destroy()
   {
@@ -58,14 +61,15 @@ class Tuples
 
   /**
       Gets a field from the records returned by [glib.relation.Relation.select]. It
-    returns the given field of the record at the given index. The
-    returned value should not be changed.
-    Params:
-      index =       the index of the record.
-      field =       the field to return.
-    Returns:     the field of the record.
+      returns the given field of the record at the given index. The
+      returned value should not be changed.
   
-    Deprecated:     Rarely used API
+      Params:
+        index = the index of the record.
+        field = the field to return.
+      Returns: the field of the record.
+  
+      Deprecated: Rarely used API
   */
   void* index(int index, int field)
   {

@@ -1,3 +1,4 @@
+/// Global functions for gstapp1 library
 module gstapp.global;
 
 import gid.gid;

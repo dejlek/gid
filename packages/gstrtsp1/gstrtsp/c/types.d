@@ -1,3 +1,4 @@
+/// C types for gstrtsp1 library
 module gstrtsp.c.types;
 
 public import gid.basictypes;
@@ -958,13 +959,13 @@ struct GstRTSPAuthParam
 
 /**
     This object manages the RTSP connection to the server. It provides function
-  to receive and send bytes and messages.
+    to receive and send bytes and messages.
 */
 struct GstRTSPConnection;
 
 /**
     This interface is implemented e.g. by the Windows Media Streaming RTSP
-   exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
+     exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
 */
 struct GstRTSPExtension;
 
@@ -1113,7 +1114,7 @@ struct GstRTSPTime
 
   /**
       seconds when @type is GST_RTSP_TIME_SECONDS,
-              GST_RTSP_TIME_UTC and GST_RTSP_TIME_FRAMES
+                GST_RTSP_TIME_UTC and GST_RTSP_TIME_FRAMES
   */
   double seconds;
 }
@@ -1125,7 +1126,7 @@ struct GstRTSPTime2
 {
   /**
       frames and subframes when type in GstRTSPTime is
-             GST_RTSP_TIME_FRAMES
+               GST_RTSP_TIME_FRAMES
   */
   double frames;
 
@@ -1243,15 +1244,15 @@ struct GstRTSPTransport
 
   /**
       the client port pair for receiving data. For TCP
-      based transports, applications can use this field to store the
-      sender and receiver ports of the client.
+        based transports, applications can use this field to store the
+        sender and receiver ports of the client.
   */
   GstRTSPRange clientPort;
 
   /**
       the server port pair for receiving data. For TCP
-      based transports, applications can use this field to store the
-      sender and receiver ports of the server.
+        based transports, applications can use this field to store the
+        sender and receiver ports of the server.
   */
   GstRTSPRange serverPort;
 
@@ -1312,7 +1313,7 @@ struct GstRTSPUrl
 
 /**
     Opaque RTSP watch object that can be used for asynchronous RTSP
-  operations.
+    operations.
 */
 struct GstRTSPWatch;
 
@@ -1343,20 +1344,20 @@ struct GstRTSPWatchFuncs
 
   /**
       a client started a tunneled connection. The tunnelid of the
-      connection must be saved.
+        connection must be saved.
   */
   extern(C) GstRTSPStatusCode function(GstRTSPWatch* watch, void* userData) tunnelStart;
 
   /**
       a client finished a tunneled connection. In this callback
-      you usually pair the tunnelid of this connection with the saved one using
-      [gstrtsp.rtspconnection.RTSPConnection.doTunnel].
+        you usually pair the tunnelid of this connection with the saved one using
+        [gstrtsp.rtspconnection.RTSPConnection.doTunnel].
   */
   extern(C) GstRTSPResult function(GstRTSPWatch* watch, void* userData) tunnelComplete;
 
   /**
       callback when an error occurred with more information than
-      the @error callback.
+        the @error callback.
   */
   extern(C) GstRTSPResult function(GstRTSPWatch* watch, GstRTSPResult result, GstRTSPMessage* message, uint id, void* userData) errorFull;
 
@@ -1367,8 +1368,8 @@ struct GstRTSPWatchFuncs
 
   /**
       callback when an HTTP response to the GET request
-      is about to be sent for a tunneled connection. The response can be
-      modified in the callback. Since: 1.4.
+        is about to be sent for a tunneled connection. The response can be
+        modified in the callback. Since: 1.4.
   */
   extern(C) GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* request, GstRTSPMessage* response, void* userData) tunnelHttpResponse;
 

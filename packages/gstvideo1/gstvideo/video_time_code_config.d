@@ -1,3 +1,4 @@
+/// Module for [VideoTimeCodeConfig] class
 module gstvideo.video_time_code_config;
 
 import gid.gid;
@@ -8,14 +9,15 @@ import gstvideo.types;
 
 /**
     Supported frame rates: 30000/1001, 60000/1001 (both with and without drop
-  frame), and integer frame rates e.g. 25/1, 30/1, 50/1, 60/1.
-  
-  The configuration of the time code.
+    frame), and integer frame rates e.g. 25/1, 30/1, 50/1, 60/1.
+    
+    The configuration of the time code.
 */
 class VideoTimeCodeConfig
 {
   GstVideoTimeCodeConfig cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class VideoTimeCodeConfig
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

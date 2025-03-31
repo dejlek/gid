@@ -1,3 +1,4 @@
+/// Module for [Client] class
 module arrowflight.client;
 
 import arrow.schema;
@@ -21,17 +22,20 @@ import gobject.object;
 class Client : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_client_get_type != &gidSymbolNotFound ? gaflight_client_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -55,13 +59,15 @@ class Client : gobject.object.ObjectG
 
   /**
       Authenticates to the server using basic HTTP style authentication.
-    Params:
-      user =       User name to be used.
-      password =       Password to be used.
-      options =       A #GAFlightCallOptions.
-      bearerName =       Bearer token name on success.
-      bearerValue =       Bearer token value on success.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        user = User name to be used.
+        password = Password to be used.
+        options = A #GAFlightCallOptions.
+        bearerName = Bearer token name on success.
+        bearerValue = Bearer token value on success.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool authenticateBasicToken(string user, string password, arrowflight.call_options.CallOptions options, out string bearerName, out string bearerValue)
   {
@@ -104,18 +110,20 @@ class Client : gobject.object.ObjectG
 
   /**
       Upload data to a Flight described by the given descriptor. The
-    caller must call [arrow.record_batch_writer.RecordBatchWriter.close] on the
-    returned stream once they are done writing.
-    
-    The reader and writer are linked; closing the writer will also
-    close the reader. Use garrow_flight_stream_writer_done_writing() to
-    only close the write side of the channel.
-    Params:
-      descriptor =       A #GAFlightDescriptor.
-      schema =       A #GArrowSchema.
-      options =       A #GAFlightCallOptions.
-    Returns:     The #GAFlighDoPutResult holding a reader and a writer on success,
-        null on error.
+      caller must call [arrow.record_batch_writer.RecordBatchWriter.close] on the
+      returned stream once they are done writing.
+      
+      The reader and writer are linked; closing the writer will also
+      close the reader. Use garrow_flight_stream_writer_done_writing() to
+      only close the write side of the channel.
+  
+      Params:
+        descriptor = A #GAFlightDescriptor.
+        schema = A #GArrowSchema.
+        options = A #GAFlightCallOptions.
+      Returns: The #GAFlighDoPutResult holding a reader and a writer on success,
+          null on error.
+      Throws: [ErrorG]
   */
   arrowflight.do_put_result.DoPutResult doPut(arrowflight.descriptor.Descriptor descriptor, arrow.schema.Schema schema, arrowflight.call_options.CallOptions options = null)
   {

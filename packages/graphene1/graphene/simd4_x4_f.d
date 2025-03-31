@@ -1,3 +1,4 @@
+/// Module for [Simd4X4F] class
 module graphene.simd4_x4_f;
 
 import gid.gid;
@@ -10,6 +11,7 @@ class Simd4X4F
 {
   graphene_simd4x4f_t cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class Simd4X4F
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

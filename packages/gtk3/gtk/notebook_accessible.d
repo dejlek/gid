@@ -1,3 +1,4 @@
+/// Module for [NotebookAccessible] class
 module gtk.notebook_accessible;
 
 import atk.component;
@@ -14,17 +15,20 @@ import gtk.types;
 class NotebookAccessible : gtk.container_accessible.ContainerAccessible, atk.selection.Selection
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_accessible_get_type != &gidSymbolNotFound ? gtk_notebook_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

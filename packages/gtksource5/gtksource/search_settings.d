@@ -1,3 +1,4 @@
+/// Module for [SearchSettings] class
 module gtksource.search_settings;
 
 import gid.gid;
@@ -8,25 +9,28 @@ import gtksource.types;
 
 /**
     Search settings.
-  
-  A [gtksource.search_settings.SearchSettings] object represents the settings of a search. The
-  search settings can be associated with one or several
-  `class@SearchContext`s.
+    
+    A [gtksource.search_settings.SearchSettings] object represents the settings of a search. The
+    search settings can be associated with one or several
+    `class@SearchContext`s.
 */
 class SearchSettings : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_search_settings_get_type != &gidSymbolNotFound ? gtk_source_search_settings_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,7 +43,7 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Creates a new search settings object.
-    Returns:     a new search settings object.
+      Returns: a new search settings object.
   */
   this()
   {
@@ -74,12 +78,12 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Gets the text to search.
-    
-    The return value must not be freed.
-    
-    You may be interested to call `funcutils_escape_search_text` after
-    this function.
-    Returns:     the text to search, or null if the search is disabled.
+      
+      The return value must not be freed.
+      
+      You may be interested to call `funcutils_escape_search_text` after
+      this function.
+      Returns: the text to search, or null if the search is disabled.
   */
   string getSearchText()
   {
@@ -107,12 +111,13 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Change whether the search is done at word boundaries.
-    
-    If at_word_boundaries is true, a search match must start and end a word.
-    The match can span multiple words. See also [gtk.text_iter.TextIter.startsWord] and
-    [gtk.text_iter.TextIter.endsWord].
-    Params:
-      atWordBoundaries =       the setting.
+      
+      If at_word_boundaries is true, a search match must start and end a word.
+      The match can span multiple words. See also [gtk.text_iter.TextIter.startsWord] and
+      [gtk.text_iter.TextIter.endsWord].
+  
+      Params:
+        atWordBoundaries = the setting.
   */
   void setAtWordBoundaries(bool atWordBoundaries)
   {
@@ -121,8 +126,9 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Enables or disables the case sensitivity for the search.
-    Params:
-      caseSensitive =       the setting.
+  
+      Params:
+        caseSensitive = the setting.
   */
   void setCaseSensitive(bool caseSensitive)
   {
@@ -131,15 +137,16 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Enables or disables whether to search by regular expressions.
-    
-    If enabled, the `propertySearchSettings:search-text` property contains the
-    pattern of the regular expression.
-    
-    `classSearchContext` uses #GRegex when regex search is enabled. See the
-    [Regular expression syntax](https://developer.gnome.org/glib/stable/glib-regex-syntax.html)
-    page in the GLib reference manual.
-    Params:
-      regexEnabled =       the setting.
+      
+      If enabled, the `propertySearchSettings:search-text` property contains the
+      pattern of the regular expression.
+      
+      `classSearchContext` uses #GRegex when regex search is enabled. See the
+      [Regular expression syntax](https://developer.gnome.org/glib/stable/glib-regex-syntax.html)
+      page in the GLib reference manual.
+  
+      Params:
+        regexEnabled = the setting.
   */
   void setRegexEnabled(bool regexEnabled)
   {
@@ -148,14 +155,15 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Sets the text to search.
-    
-    If search_text is null or is empty, the search will be disabled. A copy of search_text
-    will be made, so you can safely free search_text after a call to this function.
-    
-    You may be interested to call `funcutils_unescape_search_text` before
-    this function.
-    Params:
-      searchText =       the nul-terminated text to search, or null to disable the search.
+      
+      If search_text is null or is empty, the search will be disabled. A copy of search_text
+      will be made, so you can safely free search_text after a call to this function.
+      
+      You may be interested to call `funcutils_unescape_search_text` before
+      this function.
+  
+      Params:
+        searchText = the nul-terminated text to search, or null to disable the search.
   */
   void setSearchText(string searchText = null)
   {
@@ -165,11 +173,12 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Enables or disables whether to exclude invisible text from the search.
-    
-    If enabled, only visible text will be searched.
-    A search match may have invisible text interspersed.
-    Params:
-      visibleOnly =       the setting.
+      
+      If enabled, only visible text will be searched.
+      A search match may have invisible text interspersed.
+  
+      Params:
+        visibleOnly = the setting.
   */
   void setVisibleOnly(bool visibleOnly)
   {
@@ -178,12 +187,13 @@ class SearchSettings : gobject.object.ObjectG
 
   /**
       Enables or disables the wrap around search.
-    
-    If wrap_around is true, the forward search continues at the beginning of the buffer
-    if no search occurrences are found. Similarly, the backward search continues to search at
-    the end of the buffer.
-    Params:
-      wrapAround =       the setting.
+      
+      If wrap_around is true, the forward search continues at the beginning of the buffer
+      if no search occurrences are found. Similarly, the backward search continues to search at
+      the end of the buffer.
+  
+      Params:
+        wrapAround = the setting.
   */
   void setWrapAround(bool wrapAround)
   {

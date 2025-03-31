@@ -1,3 +1,4 @@
+/// Module for [EventButton] class
 module gdk.event_button;
 
 import gdk.c.functions;
@@ -9,47 +10,48 @@ import gid.gid;
 
 /**
     Used for button press and button release events. The
-  @type field will be one of [gdk.types.EventType.ButtonPress],
-  [gdk.types.EventType._2buttonPress], [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease],
-  
-  Double and triple-clicks result in a sequence of events being received.
-  For double-clicks the order of events will be:
-  
-  $(LIST
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType._2buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
-  )
+    @type field will be one of [gdk.types.EventType.ButtonPress],
+    [gdk.types.EventType._2buttonPress], [gdk.types.EventType._3buttonPress] or [gdk.types.EventType.ButtonRelease],
     
-  Note that the first click is received just like a normal
-  button press, while the second click results in a [gdk.types.EventType._2buttonPress]
-  being received just after the [gdk.types.EventType.ButtonPress].
-  
-  Triple-clicks are very similar to double-clicks, except that
-  [gdk.types.EventType._3buttonPress] is inserted after the third click. The order of the
-  events is:
-  
-  $(LIST
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType._2buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
-    * [gdk.types.EventType.ButtonPress]
-    * [gdk.types.EventType._3buttonPress]
-    * [gdk.types.EventType.ButtonRelease]
-  )
+    Double and triple-clicks result in a sequence of events being received.
+    For double-clicks the order of events will be:
     
-  For a double click to occur, the second button press must occur within
-  1/4 of a second of the first. For a triple click to occur, the third
-  button press must also occur within 1/2 second of the first button press.
+    $(LIST
+      * [gdk.types.EventType.ButtonPress]
+      * [gdk.types.EventType.ButtonRelease]
+      * [gdk.types.EventType.ButtonPress]
+      * [gdk.types.EventType._2buttonPress]
+      * [gdk.types.EventType.ButtonRelease]
+    )
+      
+    Note that the first click is received just like a normal
+    button press, while the second click results in a [gdk.types.EventType._2buttonPress]
+    being received just after the [gdk.types.EventType.ButtonPress].
+    
+    Triple-clicks are very similar to double-clicks, except that
+    [gdk.types.EventType._3buttonPress] is inserted after the third click. The order of the
+    events is:
+    
+    $(LIST
+      * [gdk.types.EventType.ButtonPress]
+      * [gdk.types.EventType.ButtonRelease]
+      * [gdk.types.EventType.ButtonPress]
+      * [gdk.types.EventType._2buttonPress]
+      * [gdk.types.EventType.ButtonRelease]
+      * [gdk.types.EventType.ButtonPress]
+      * [gdk.types.EventType._3buttonPress]
+      * [gdk.types.EventType.ButtonRelease]
+    )
+      
+    For a double click to occur, the second button press must occur within
+    1/4 of a second of the first. For a triple click to occur, the third
+    button press must also occur within 1/2 second of the first button press.
 */
 class EventButton
 {
   GdkEventButton cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -61,6 +63,7 @@ class EventButton
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

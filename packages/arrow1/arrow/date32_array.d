@@ -1,3 +1,4 @@
+/// Module for [Date32Array] class
 module arrow.date32_array;
 
 import arrow.buffer;
@@ -11,17 +12,20 @@ import gid.gid;
 class Date32Array : arrow.numeric_array.NumericArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_array_get_type != &gidSymbolNotFound ? garrow_date32_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [ColorDialog] class
 module gtk.color_dialog;
 
 import gdk.rgba;
@@ -14,32 +15,35 @@ import gtk.window;
 
 /**
     A [gtk.color_dialog.ColorDialog] object collects the arguments that
-  are needed to present a color chooser dialog to the
-  user, such as a title for the dialog and whether it
-  should be modal.
-  
-  The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
-  function. This API follows the GIO async pattern, and the
-  result can be obtained by calling
-  [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
-  
-  See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
-  that uses [gtk.color_dialog.ColorDialog] and presents the results.
+    are needed to present a color chooser dialog to the
+    user, such as a title for the dialog and whether it
+    should be modal.
+    
+    The dialog is shown with the [gtk.color_dialog.ColorDialog.chooseRgba]
+    function. This API follows the GIO async pattern, and the
+    result can be obtained by calling
+    [gtk.color_dialog.ColorDialog.chooseRgbaFinish].
+    
+    See [gtk.color_dialog_button.ColorDialogButton] for a convenient control
+    that uses [gtk.color_dialog.ColorDialog] and presents the results.
 */
 class ColorDialog : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_dialog_get_type != &gidSymbolNotFound ? gtk_color_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,7 +56,7 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Creates a new [gtk.color_dialog.ColorDialog] object.
-    Returns:     the new [gtk.color_dialog.ColorDialog]
+      Returns: the new [gtk.color_dialog.ColorDialog]
   */
   this()
   {
@@ -63,16 +67,17 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       This function initiates a color choice operation by
-    presenting a color chooser dialog to the user.
-    
-    The callback will be called when the dialog is dismissed.
-    It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
-    to obtain the result.
-    Params:
-      parent =       the parent [gtk.window.Window]
-      initialColor =       the color to select initially
-      cancellable =       a [gio.cancellable.Cancellable] to cancel the operation
-      callback =       a callback to call when the operation is complete
+      presenting a color chooser dialog to the user.
+      
+      The callback will be called when the dialog is dismissed.
+      It should call [gtk.color_dialog.ColorDialog.chooseRgbaFinish]
+      to obtain the result.
+  
+      Params:
+        parent = the parent [gtk.window.Window]
+        initialColor = the color to select initially
+        cancellable = a [gio.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
   */
   void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -91,11 +96,13 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Finishes the [gtk.color_dialog.ColorDialog.chooseRgba] call and
-    returns the resulting color.
-    Params:
-      result =       a [gio.async_result.AsyncResult]
-    Returns:     the selected color, or
-        `NULL` and error is set
+      returns the resulting color.
+  
+      Params:
+        result = a [gio.async_result.AsyncResult]
+      Returns: the selected color, or
+          `NULL` and error is set
+      Throws: [ErrorG]
   */
   gdk.rgba.RGBA chooseRgbaFinish(gio.async_result.AsyncResult result)
   {
@@ -110,9 +117,9 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Returns whether the color chooser dialog
-    blocks interaction with the parent window
-    while it is presented.
-    Returns:     `TRUE` if the color chooser dialog is modal
+      blocks interaction with the parent window
+      while it is presented.
+      Returns: `TRUE` if the color chooser dialog is modal
   */
   bool getModal()
   {
@@ -123,8 +130,8 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Returns the title that will be shown on the
-    color chooser dialog.
-    Returns:     the title
+      color chooser dialog.
+      Returns: the title
   */
   string getTitle()
   {
@@ -136,7 +143,7 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Returns whether colors may have alpha.
-    Returns:     `TRUE` if colors may have alpha
+      Returns: `TRUE` if colors may have alpha
   */
   bool getWithAlpha()
   {
@@ -147,10 +154,11 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Sets whether the color chooser dialog
-    blocks interaction with the parent window
-    while it is presented.
-    Params:
-      modal =       the new value
+      blocks interaction with the parent window
+      while it is presented.
+  
+      Params:
+        modal = the new value
   */
   void setModal(bool modal)
   {
@@ -159,9 +167,10 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Sets the title that will be shown on the
-    color chooser dialog.
-    Params:
-      title =       the new title
+      color chooser dialog.
+  
+      Params:
+        title = the new title
   */
   void setTitle(string title)
   {
@@ -171,8 +180,9 @@ class ColorDialog : gobject.object.ObjectG
 
   /**
       Sets whether colors may have alpha.
-    Params:
-      withAlpha =       the new value
+  
+      Params:
+        withAlpha = the new value
   */
   void setWithAlpha(bool withAlpha)
   {

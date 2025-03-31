@@ -1,3 +1,4 @@
+/// Module for [TypeFind] class
 module gst.type_find;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import gst.types;
 
 /**
     The following functions allow you to detect the media type of an unknown
-  stream.
+    stream.
 */
 class TypeFind
 {
   GstTypeFind cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class TypeFind
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -33,7 +36,7 @@ class TypeFind
 
   /**
       Get the length of the data stream.
-    Returns:     The length of the data stream, or 0 if it is not available.
+      Returns: The length of the data stream, or 0 if it is not available.
   */
   ulong getLength()
   {
@@ -44,15 +47,16 @@ class TypeFind
 
   /**
       Returns the size bytes of the stream to identify beginning at offset. If
-    offset is a positive number, the offset is relative to the beginning of the
-    stream, if offset is a negative number the offset is relative to the end of
-    the stream. The returned memory is valid until the typefinding function
-    returns and must not be freed.
-    Params:
-      offset =       The offset
-      size =       The number of bytes to return
-    Returns:     the
-          requested data, or null if that data is not available.
+      offset is a positive number, the offset is relative to the beginning of the
+      stream, if offset is a negative number the offset is relative to the end of
+      the stream. The returned memory is valid until the typefinding function
+      returns and must not be freed.
+  
+      Params:
+        offset = The offset
+        size = The number of bytes to return
+      Returns: the
+            requested data, or null if that data is not available.
   */
   const(ubyte)* peek(long offset, uint size)
   {
@@ -62,12 +66,13 @@ class TypeFind
 
   /**
       If a #GstTypeFindFunction calls this function it suggests the caps with the
-    given probability. A #GstTypeFindFunction may supply different suggestions
-    in one call.
-    It is up to the caller of the #GstTypeFindFunction to interpret these values.
-    Params:
-      probability =       The probability in percent that the suggestion is right
-      caps =       The fixed #GstCaps to suggest
+      given probability. A #GstTypeFindFunction may supply different suggestions
+      in one call.
+      It is up to the caller of the #GstTypeFindFunction to interpret these values.
+  
+      Params:
+        probability = The probability in percent that the suggestion is right
+        caps = The fixed #GstCaps to suggest
   */
   void suggest(uint probability, gst.caps.Caps caps)
   {
@@ -76,13 +81,14 @@ class TypeFind
 
   /**
       If a #GstTypeFindFunction calls this function it suggests caps of the
-    given media_type with the given probability.
-    
-    This function is similar to [gst.type_find.TypeFind.suggestSimple], but uses
-    a #GstCaps with no fields.
-    Params:
-      probability =       The probability in percent that the suggestion is right
-      mediaType =       the media type of the suggested caps
+      given media_type with the given probability.
+      
+      This function is similar to [gst.type_find.TypeFind.suggestSimple], but uses
+      a #GstCaps with no fields.
+  
+      Params:
+        probability = The probability in percent that the suggestion is right
+        mediaType = the media type of the suggested caps
   */
   void suggestEmptySimple(uint probability, string mediaType)
   {
@@ -92,18 +98,19 @@ class TypeFind
 
   /**
       Registers a new typefind function to be used for typefinding. After
-    registering this function will be available for typefinding.
-    This function is typically called during an element's plugin initialization.
-    Params:
-      plugin =       A #GstPlugin, or null for a static typefind function
-      name =       The name for registering
-      rank =       The rank (or importance) of this typefind function
-      func =       The #GstTypeFindFunction to use
-      extensions =       Optional comma-separated list of extensions
-            that could belong to this type
-      possibleCaps =       Optionally the caps that could be returned when typefinding
-                        succeeds
-    Returns:     true on success, false otherwise
+      registering this function will be available for typefinding.
+      This function is typically called during an element's plugin initialization.
+  
+      Params:
+        plugin = A #GstPlugin, or null for a static typefind function
+        name = The name for registering
+        rank = The rank (or importance) of this typefind function
+        func = The #GstTypeFindFunction to use
+        extensions = Optional comma-separated list of extensions
+              that could belong to this type
+        possibleCaps = Optionally the caps that could be returned when typefinding
+                          succeeds
+      Returns: true on success, false otherwise
   */
   static bool register(gst.plugin.Plugin plugin, string name, uint rank, gst.types.TypeFindFunction func, string extensions = null, gst.caps.Caps possibleCaps = null)
   {

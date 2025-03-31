@@ -1,3 +1,4 @@
+/// Module for [BlurNode] class
 module gsk.blur_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class BlurNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,10 +24,11 @@ class BlurNode : gsk.render_node.RenderNode
 
   /**
       Creates a render node that blurs the child.
-    Params:
-      child =       the child node to blur
-      radius =       the blur radius. Must be positive
-    Returns:     a new [gsk.render_node.RenderNode]
+  
+      Params:
+        child = the child node to blur
+        radius = the blur radius. Must be positive
+      Returns: a new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, float radius)
   {
@@ -36,7 +39,7 @@ class BlurNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the child [gsk.render_node.RenderNode] of the blur node.
-    Returns:     the blurred child node
+      Returns: the blurred child node
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -48,7 +51,7 @@ class BlurNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the blur radius of the node.
-    Returns:     the blur radius
+      Returns: the blur radius
   */
   float getRadius()
   {

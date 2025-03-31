@@ -1,3 +1,4 @@
+/// Module for [VideoCropMeta] class
 module gstvideo.video_crop_meta;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class VideoCropMeta
 {
   GstVideoCropMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoCropMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [ApplicationWindow] class
 module adw.application_window;
 
 import adw.breakpoint;
@@ -30,51 +31,54 @@ import gtk.widget;
 
 /**
     A freeform application window.
-  
-  <picture>
-    <source srcset="application-window-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="application-window.png" alt="application-window">
-  </picture>
-  
-  [adw.application_window.ApplicationWindow] is a [gtk.application_window.ApplicationWindow] subclass providing
-  the same features as `class@Window`.
-  
-  See `class@Window` for details.
-  
-  Example of an [adw.application_window.ApplicationWindow] UI definition:
-  
-  ```xml
-  <object class="AdwApplicationWindow">
-    <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <!-- ... -->
-        </property>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  Using [gtk.application.Application.Gio.MenuModel] is not supported and may result in
-  visual glitches.
+    
+    <picture>
+      <source srcset="application-window-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="application-window.png" alt="application-window">
+    </picture>
+    
+    [adw.application_window.ApplicationWindow] is a [gtk.application_window.ApplicationWindow] subclass providing
+    the same features as `class@Window`.
+    
+    See `class@Window` for details.
+    
+    Example of an [adw.application_window.ApplicationWindow] UI definition:
+    
+    ```xml
+    <object class="AdwApplicationWindow">
+      <property name="content">
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar"/>
+          </child>
+          <property name="content">
+            <!-- ... -->
+          </property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    Using [gtk.application.Application.Gio.MenuModel] is not supported and may result in
+    visual glitches.
 */
 class ApplicationWindow : gtk.application_window.ApplicationWindow
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_window_get_type != &gidSymbolNotFound ? adw_application_window_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -87,9 +91,10 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Creates a new [adw.application_window.ApplicationWindow] for app.
-    Params:
-      app =       an application instance
-    Returns:     the newly created [adw.application_window.ApplicationWindow]
+  
+      Params:
+        app = an application instance
+      Returns: the newly created [adw.application_window.ApplicationWindow]
   */
   this(gtk.application.Application app)
   {
@@ -100,8 +105,9 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Adds breakpoint to self.
-    Params:
-      breakpoint =       the breakpoint to add
+  
+      Params:
+        breakpoint = the breakpoint to add
   */
   void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
@@ -110,9 +116,9 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Gets the content widget of self.
-    
-    This method should always be used instead of [gtk.window.Window.getChild].
-    Returns:     the content widget of self
+      
+      This method should always be used instead of [gtk.window.Window.getChild].
+      Returns: the content widget of self
   */
   gtk.widget.Widget getContent()
   {
@@ -124,7 +130,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Gets the current breakpoint.
-    Returns:     the current breakpoint
+      Returns: the current breakpoint
   */
   adw.breakpoint.Breakpoint getCurrentBreakpoint()
   {
@@ -136,9 +142,9 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Returns a [gio.list_model.ListModel] that contains the open dialogs of self.
-    
-    This can be used to keep an up-to-date view.
-    Returns:     a list model for the dialogs of self
+      
+      This can be used to keep an up-to-date view.
+      Returns: a list model for the dialogs of self
   */
   gio.list_model.ListModel getDialogs()
   {
@@ -150,7 +156,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Returns the currently visible dialog in self, if there's one.
-    Returns:     the visible dialog
+      Returns: the visible dialog
   */
   adw.dialog.Dialog getVisibleDialog()
   {
@@ -162,10 +168,11 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
 
   /**
       Sets the content widget of self.
-    
-    This method should always be used instead of [gtk.window.Window.setChild].
-    Params:
-      content =       the content widget
+      
+      This method should always be used instead of [gtk.window.Window.setChild].
+  
+      Params:
+        content = the content widget
   */
   void setContent(gtk.widget.Widget content = null)
   {

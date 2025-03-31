@@ -1,3 +1,4 @@
+/// Module for [ClockEntry] class
 module gst.clock_entry;
 
 import gid.gid;
@@ -7,14 +8,15 @@ import gst.types;
 
 /**
     All pending timeouts or periodic notifies are converted into
-  an entry.
-  Note that GstClockEntry should be treated as an opaque structure. It must
-  not be extended or allocated using a custom allocator.
+    an entry.
+    Note that GstClockEntry should be treated as an opaque structure. It must
+    not be extended or allocated using a custom allocator.
 */
 class ClockEntry
 {
   GstClockEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class ClockEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

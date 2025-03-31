@@ -1,3 +1,4 @@
+/// Module for [Device] class
 module gst.device;
 
 import gid.gid;
@@ -13,26 +14,29 @@ import gst.types;
 
 /**
     #GstDevice are objects representing a device, they contain
-  relevant metadata about the device, such as its class and the #GstCaps
-  representing the media types it can produce or handle.
-  
-  #GstDevice are created by #GstDeviceProvider objects which can be
-  aggregated by #GstDeviceMonitor objects.
+    relevant metadata about the device, such as its class and the #GstCaps
+    representing the media types it can produce or handle.
+    
+    #GstDevice are created by #GstDeviceProvider objects which can be
+    aggregated by #GstDeviceMonitor objects.
 */
 class Device : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_get_type != &gidSymbolNotFound ? gst_device_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,12 +49,13 @@ class Device : gst.object.ObjectGst
 
   /**
       Creates the element with all of the required parameters set to use
-    this device.
-    Params:
-      name =       name of new element, or null to automatically
-        create a unique name.
-    Returns:     a new #GstElement configured to use
-      this device
+      this device.
+  
+      Params:
+        name = name of new element, or null to automatically
+          create a unique name.
+      Returns: a new #GstElement configured to use
+        this device
   */
   gst.element.Element createElement(string name = null)
   {
@@ -63,8 +68,8 @@ class Device : gst.object.ObjectGst
 
   /**
       Getter for the #GstCaps that this device supports.
-    Returns:     The #GstCaps supported by this device. Unref with
-      gst_caps_unref() when done.
+      Returns: The #GstCaps supported by this device. Unref with
+        gst_caps_unref() when done.
   */
   gst.caps.Caps getCaps()
   {
@@ -76,9 +81,9 @@ class Device : gst.object.ObjectGst
 
   /**
       Gets the "class" of a device. This is a "/" separated list of
-    classes that represent this device. They are a subset of the
-    classes of the #GstDeviceProvider that produced this device.
-    Returns:     The device class. Free with [glib.global.gfree] after use.
+      classes that represent this device. They are a subset of the
+      classes of the #GstDeviceProvider that produced this device.
+      Returns: The device class. Free with [glib.global.gfree] after use.
   */
   string getDeviceClass()
   {
@@ -90,7 +95,7 @@ class Device : gst.object.ObjectGst
 
   /**
       Gets the user-friendly name of the device.
-    Returns:     The device name. Free with [glib.global.gfree] after use.
+      Returns: The device name. Free with [glib.global.gfree] after use.
   */
   string getDisplayName()
   {
@@ -102,8 +107,8 @@ class Device : gst.object.ObjectGst
 
   /**
       Gets the extra properties of a device.
-    Returns:     The extra properties or null when there are none.
-               Free with [gst.structure.Structure.free] after use.
+      Returns: The extra properties or null when there are none.
+                 Free with [gst.structure.Structure.free] after use.
   */
   gst.structure.Structure getProperties()
   {
@@ -115,10 +120,11 @@ class Device : gst.object.ObjectGst
 
   /**
       Check if device matches all of the given classes
-    Params:
-      classes =       a "/"-separated list of device classes to match, only match if
-         all classes are matched
-    Returns:     true if device matches.
+  
+      Params:
+        classes = a "/"-separated list of device classes to match, only match if
+           all classes are matched
+      Returns: true if device matches.
   */
   bool hasClasses(string classes)
   {
@@ -130,10 +136,11 @@ class Device : gst.object.ObjectGst
 
   /**
       Check if factory matches all of the given classes
-    Params:
-      classes =       a null terminated array of classes
-          to match, only match if all classes are matched
-    Returns:     true if device matches.
+  
+      Params:
+        classes = a null terminated array of classes
+            to match, only match if all classes are matched
+      Returns: true if device matches.
   */
   bool hasClassesv(string[] classes)
   {
@@ -149,15 +156,16 @@ class Device : gst.object.ObjectGst
 
   /**
       Tries to reconfigure an existing element to use the device. If this
-    function fails, then one must destroy the element and create a new one
-    using [gst.device.Device.createElement].
-    
-    Note: This should only be implemented for elements can change their
-    device in the PLAYING state.
-    Params:
-      element =       a #GstElement
-    Returns:     true if the element could be reconfigured to use this device,
-      false otherwise.
+      function fails, then one must destroy the element and create a new one
+      using [gst.device.Device.createElement].
+      
+      Note: This should only be implemented for elements can change their
+      device in the PLAYING state.
+  
+      Params:
+        element = a #GstElement
+      Returns: true if the element could be reconfigured to use this device,
+        false otherwise.
   */
   bool reconfigureElement(gst.element.Element element)
   {
@@ -166,28 +174,37 @@ class Device : gst.object.ObjectGst
     return _retval;
   }
 
-  /** */
-  alias RemovedCallbackDlg = void delegate(gst.device.Device device);
-
-  /** ditto */
-  alias RemovedCallbackFunc = void function(gst.device.Device device);
-
   /**
-    Connect to Removed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Removed` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gst.device.Device device))
+  
+          `device` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RemovedCallbackDlg) || is(T : RemovedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gst.device.Device)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto device = getVal!(gst.device.Device)(_paramVals);
-      _dClosure.dlg(device);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

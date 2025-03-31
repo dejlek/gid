@@ -1,3 +1,4 @@
+/// Module for [Dock] class
 module panel.dock;
 
 import gid.gid;
@@ -33,17 +34,20 @@ import panel.widget;
 class Dock : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_dock_get_type != &gidSymbolNotFound ? panel_dock_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

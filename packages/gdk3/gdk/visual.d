@@ -1,3 +1,4 @@
+/// Module for [Visual] class
 module gdk.visual;
 
 import gdk.c.functions;
@@ -9,22 +10,25 @@ import gobject.object;
 
 /**
     A #GdkVisual contains information about
-  a particular visual.
+    a particular visual.
 */
 class Visual : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_visual_get_type != &gidSymbolNotFound ? gdk_visual_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,11 +41,11 @@ class Visual : gobject.object.ObjectG
 
   /**
       Get the visual with the most available colors for the default
-    GDK screen. The return value should not be freed.
-    Returns:     best visual
+      GDK screen. The return value should not be freed.
+      Returns: best visual
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static gdk.visual.Visual getBest()
   {
@@ -53,12 +57,12 @@ class Visual : gobject.object.ObjectG
 
   /**
       Get the best available depth for the default GDK screen.  “Best”
-    means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
-    per pixel.
-    Returns:     best available depth
+      means “largest,” i.e. 32 preferred over 24 preferred over 8 bits
+      per pixel.
+      Returns: best available depth
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static int getBestDepth()
   {
@@ -69,10 +73,10 @@ class Visual : gobject.object.ObjectG
 
   /**
       Return the best available visual type for the default GDK screen.
-    Returns:     best visual type
+      Returns: best visual type
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static gdk.types.VisualType getBestType()
   {
@@ -84,15 +88,16 @@ class Visual : gobject.object.ObjectG
 
   /**
       Combines [gdk.visual.Visual.getBestWithDepth] and
-    [gdk.visual.Visual.getBestWithType].
-    Params:
-      depth =       a bit depth
-      visualType =       a visual type
-    Returns:     best visual with both depth
-          and visual_type, or null if none
+      [gdk.visual.Visual.getBestWithType].
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Params:
+        depth = a bit depth
+        visualType = a visual type
+      Returns: best visual with both depth
+            and visual_type, or null if none
+  
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static gdk.visual.Visual getBestWithBoth(int depth, gdk.types.VisualType visualType)
   {
@@ -104,15 +109,16 @@ class Visual : gobject.object.ObjectG
 
   /**
       Get the best visual with depth depth for the default GDK screen.
-    Color visuals and visuals with mutable colormaps are preferred
-    over grayscale or fixed-colormap visuals. The return value should
-    not be freed. null may be returned if no visual supports depth.
-    Params:
-      depth =       a bit depth
-    Returns:     best visual for the given depth
+      Color visuals and visuals with mutable colormaps are preferred
+      over grayscale or fixed-colormap visuals. The return value should
+      not be freed. null may be returned if no visual supports depth.
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Params:
+        depth = a bit depth
+      Returns: best visual for the given depth
+  
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static gdk.visual.Visual getBestWithDepth(int depth)
   {
@@ -124,15 +130,16 @@ class Visual : gobject.object.ObjectG
 
   /**
       Get the best visual of the given visual_type for the default GDK screen.
-    Visuals with higher color depths are considered better. The return value
-    should not be freed. null may be returned if no visual has type
-    visual_type.
-    Params:
-      visualType =       a visual type
-    Returns:     best visual of the given type
+      Visuals with higher color depths are considered better. The return value
+      should not be freed. null may be returned if no visual has type
+      visual_type.
   
-    Deprecated:     Visual selection should be done using
-          [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
+      Params:
+        visualType = a visual type
+      Returns: best visual of the given type
+  
+      Deprecated: Visual selection should be done using
+            [gdk.screen.Screen.getSystemVisual] and [gdk.screen.Screen.getRgbaVisual]
   */
   static gdk.visual.Visual getBestWithType(gdk.types.VisualType visualType)
   {
@@ -144,11 +151,11 @@ class Visual : gobject.object.ObjectG
 
   /**
       Get the system’s default visual for the default GDK screen.
-    This is the visual for the root window of the display.
-    The return value should not be freed.
-    Returns:     system visual
+      This is the visual for the root window of the display.
+      The return value should not be freed.
+      Returns: system visual
   
-    Deprecated:     Use gdk_screen_get_system_visual (gdk_screen_get_default ()).
+      Deprecated: Use gdk_screen_get_system_visual (gdk_screen_get_default ()).
   */
   static gdk.visual.Visual getSystem()
   {
@@ -160,12 +167,12 @@ class Visual : gobject.object.ObjectG
 
   /**
       Returns the number of significant bits per red, green and blue value.
-    
-    Not all GDK backend provide a meaningful value for this function.
-    Returns:     The number of significant bits per color value for visual.
+      
+      Not all GDK backend provide a meaningful value for this function.
+      Returns: The number of significant bits per color value for visual.
   
-    Deprecated:     Use [gdk.visual.Visual.getRedPixelDetails] and its variants to
-          learn about the pixel layout of TrueColor and DirectColor visuals
+      Deprecated: Use [gdk.visual.Visual.getRedPixelDetails] and its variants to
+            learn about the pixel layout of TrueColor and DirectColor visuals
   */
   int getBitsPerRgb()
   {
@@ -176,14 +183,15 @@ class Visual : gobject.object.ObjectG
 
   /**
       Obtains values that are needed to calculate blue pixel values in TrueColor
-    and DirectColor. The “mask” is the significant bits within the pixel.
-    The “shift” is the number of bits left we must shift a primary for it
-    to be in position (according to the "mask"). Finally, "precision" refers
-    to how much precision the pixel value contains for a particular primary.
-    Params:
-      mask =       A pointer to a #guint32 to be filled in, or null
-      shift =       A pointer to a #gint to be filled in, or null
-      precision =       A pointer to a #gint to be filled in, or null
+      and DirectColor. The “mask” is the significant bits within the pixel.
+      The “shift” is the number of bits left we must shift a primary for it
+      to be in position (according to the "mask"). Finally, "precision" refers
+      to how much precision the pixel value contains for a particular primary.
+  
+      Params:
+        mask = A pointer to a #guint32 to be filled in, or null
+        shift = A pointer to a #gint to be filled in, or null
+        precision = A pointer to a #gint to be filled in, or null
   */
   void getBluePixelDetails(out uint mask, out int shift, out int precision)
   {
@@ -192,13 +200,13 @@ class Visual : gobject.object.ObjectG
 
   /**
       Returns the byte order of this visual.
-    
-    The information returned by this function is only relevant
-    when working with XImages, and not all backends return
-    meaningful information for this.
-    Returns:     A #GdkByteOrder stating the byte order of visual.
+      
+      The information returned by this function is only relevant
+      when working with XImages, and not all backends return
+      meaningful information for this.
+      Returns: A #GdkByteOrder stating the byte order of visual.
   
-    Deprecated:     This information is not useful
+      Deprecated: This information is not useful
   */
   gdk.types.ByteOrder getByteOrder()
   {
@@ -210,12 +218,12 @@ class Visual : gobject.object.ObjectG
 
   /**
       Returns the size of a colormap for this visual.
-    
-    You have to use platform-specific APIs to manipulate colormaps.
-    Returns:     The size of a colormap that is suitable for visual.
+      
+      You have to use platform-specific APIs to manipulate colormaps.
+      Returns: The size of a colormap that is suitable for visual.
   
-    Deprecated:     This information is not useful, since GDK does not
-          provide APIs to operate on colormaps.
+      Deprecated: This information is not useful, since GDK does not
+            provide APIs to operate on colormaps.
   */
   int getColormapSize()
   {
@@ -226,7 +234,7 @@ class Visual : gobject.object.ObjectG
 
   /**
       Returns the bit depth of this visual.
-    Returns:     The bit depth of this visual.
+      Returns: The bit depth of this visual.
   */
   int getDepth()
   {
@@ -237,14 +245,15 @@ class Visual : gobject.object.ObjectG
 
   /**
       Obtains values that are needed to calculate green pixel values in TrueColor
-    and DirectColor. The “mask” is the significant bits within the pixel.
-    The “shift” is the number of bits left we must shift a primary for it
-    to be in position (according to the "mask"). Finally, "precision" refers
-    to how much precision the pixel value contains for a particular primary.
-    Params:
-      mask =       A pointer to a #guint32 to be filled in, or null
-      shift =       A pointer to a #gint to be filled in, or null
-      precision =       A pointer to a #gint to be filled in, or null
+      and DirectColor. The “mask” is the significant bits within the pixel.
+      The “shift” is the number of bits left we must shift a primary for it
+      to be in position (according to the "mask"). Finally, "precision" refers
+      to how much precision the pixel value contains for a particular primary.
+  
+      Params:
+        mask = A pointer to a #guint32 to be filled in, or null
+        shift = A pointer to a #gint to be filled in, or null
+        precision = A pointer to a #gint to be filled in, or null
   */
   void getGreenPixelDetails(out uint mask, out int shift, out int precision)
   {
@@ -253,14 +262,15 @@ class Visual : gobject.object.ObjectG
 
   /**
       Obtains values that are needed to calculate red pixel values in TrueColor
-    and DirectColor. The “mask” is the significant bits within the pixel.
-    The “shift” is the number of bits left we must shift a primary for it
-    to be in position (according to the "mask"). Finally, "precision" refers
-    to how much precision the pixel value contains for a particular primary.
-    Params:
-      mask =       A pointer to a #guint32 to be filled in, or null
-      shift =       A pointer to a #gint to be filled in, or null
-      precision =       A pointer to a #gint to be filled in, or null
+      and DirectColor. The “mask” is the significant bits within the pixel.
+      The “shift” is the number of bits left we must shift a primary for it
+      to be in position (according to the "mask"). Finally, "precision" refers
+      to how much precision the pixel value contains for a particular primary.
+  
+      Params:
+        mask = A pointer to a #guint32 to be filled in, or null
+        shift = A pointer to a #gint to be filled in, or null
+        precision = A pointer to a #gint to be filled in, or null
   */
   void getRedPixelDetails(out uint mask, out int shift, out int precision)
   {
@@ -269,7 +279,7 @@ class Visual : gobject.object.ObjectG
 
   /**
       Gets the screen to which this visual belongs
-    Returns:     the screen to which this visual belongs.
+      Returns: the screen to which this visual belongs.
   */
   gdk.screen.Screen getScreen()
   {
@@ -281,7 +291,7 @@ class Visual : gobject.object.ObjectG
 
   /**
       Returns the type of visual this is (PseudoColor, TrueColor, etc).
-    Returns:     A #GdkVisualType stating the type of visual.
+      Returns: A #GdkVisualType stating the type of visual.
   */
   gdk.types.VisualType getVisualType()
   {

@@ -1,3 +1,4 @@
+/// Module for [CompletionContext] class
 module gtksource.completion_context;
 
 import gid.gid;
@@ -17,36 +18,39 @@ import gtksource.view;
 
 /**
     The context of a completion.
-  
-  [gtksource.completion_context.CompletionContext] contains information about an attept to display
-  completion proposals to the user based on typed text in the `class@View`.
-  
-  When typing, `class@Completion` may use registered
-  `iface@CompletionProvider` to determine if there may be results which
-  could be displayed. If so, a [gtksource.completion_context.CompletionContext] is created with
-  information that is provided to the `iface@CompletionProvider` to populate
-  results which might be useful to the user.
-  
-  `iface@CompletionProvider` are expected to provide [gio.list_model.ListModel] with
-  `iface@CompletionProposal` which may be joined together in a list of
-  results for the user. They are also responsible for how the contents are
-  displayed using `class@CompletionCell` which allows for some level of
-  customization.
+    
+    [gtksource.completion_context.CompletionContext] contains information about an attept to display
+    completion proposals to the user based on typed text in the `class@View`.
+    
+    When typing, `class@Completion` may use registered
+    `iface@CompletionProvider` to determine if there may be results which
+    could be displayed. If so, a [gtksource.completion_context.CompletionContext] is created with
+    information that is provided to the `iface@CompletionProvider` to populate
+    results which might be useful to the user.
+    
+    `iface@CompletionProvider` are expected to provide [gio.list_model.ListModel] with
+    `iface@CompletionProposal` which may be joined together in a list of
+    results for the user. They are also responsible for how the contents are
+    displayed using `class@CompletionCell` which allows for some level of
+    customization.
 */
 class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,7 +65,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the mode for which the context was activated.
-    Returns: 
+      Returns: 
   */
   gtksource.types.CompletionActivation getActivation()
   {
@@ -73,18 +77,19 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the bounds for the completion, which is the beginning of the
-    current word (taking break characters into account) to the current
-    insertion cursor.
-    
-    If begin is non-null, it will be set to the start position of the
-    current word being completed.
-    
-    If end is non-null, it will be set to the insertion cursor for the
-    current word being completed.
-    Params:
-      begin =       a #GtkTextIter
-      end =       a #GtkTextIter
-    Returns:     true if the marks are still valid and begin or end was set.
+      current word (taking break characters into account) to the current
+      insertion cursor.
+      
+      If begin is non-null, it will be set to the start position of the
+      current word being completed.
+      
+      If end is non-null, it will be set to the insertion cursor for the
+      current word being completed.
+  
+      Params:
+        begin = a #GtkTextIter
+        end = a #GtkTextIter
+      Returns: true if the marks are still valid and begin or end was set.
   */
   bool getBounds(out gtk.text_iter.TextIter begin, out gtk.text_iter.TextIter end)
   {
@@ -99,10 +104,10 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the underlying buffer used by the context.
-    
-    This is a convenience function to get the buffer via the #GtkSourceCompletion
-    property.
-    Returns:     a #GtkTextBuffer or null
+      
+      This is a convenience function to get the buffer via the #GtkSourceCompletion
+      property.
+      Returns: a #GtkTextBuffer or null
   */
   gtksource.buffer.Buffer getBuffer()
   {
@@ -114,9 +119,9 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the "busy" property. This is set to true while the completion
-    context is actively fetching proposals from registered
-    #GtkSourceCompletionProvider's.
-    Returns:     true if the context is busy
+      context is actively fetching proposals from registered
+      #GtkSourceCompletionProvider's.
+      Returns: true if the context is busy
   */
   bool getBusy()
   {
@@ -127,7 +132,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the #GtkSourceCompletion that created the context.
-    Returns:     an #GtkSourceCompletion or null
+      Returns: an #GtkSourceCompletion or null
   */
   gtksource.completion.Completion getCompletion()
   {
@@ -139,9 +144,9 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Checks if any proposals have been provided to the context.
-    
-    Out of convenience, this function will return true if self is null.
-    Returns:     true if there are no proposals in the context
+      
+      Out of convenience, this function will return true if self is null.
+      Returns: true if there are no proposals in the context
   */
   bool getEmpty()
   {
@@ -152,7 +157,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the language of the underlying buffer, if any.
-    Returns:     a #GtkSourceLanguage or null
+      Returns: a #GtkSourceLanguage or null
   */
   gtksource.language.Language getLanguage()
   {
@@ -164,12 +169,13 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the #GListModel associated with the provider.
-    
-    You can connect to #GtkSourceCompletionContext::model-changed to receive
-    notifications about when the model has been replaced by a new model.
-    Params:
-      provider =       a #GtkSourceCompletionProvider
-    Returns:     a #GListModel or null
+      
+      You can connect to #GtkSourceCompletionContext::model-changed to receive
+      notifications about when the model has been replaced by a new model.
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider
+      Returns: a #GListModel or null
   */
   gio.list_model.ListModel getProposalsForProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -181,7 +187,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the text view for the context.
-    Returns:     a #GtkSourceView or null
+      Returns: a #GtkSourceView or null
   */
   gtksource.view.View getView()
   {
@@ -193,7 +199,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the word that is being completed up to the position of the insert mark.
-    Returns:     a string containing the current word
+      Returns: a string containing the current word
   */
   string getWord()
   {
@@ -205,7 +211,7 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the providers that are associated with the context.
-    Returns:     a #GListModel of #GtkSourceCompletionProvider
+      Returns: a #GListModel of #GtkSourceCompletionProvider
   */
   gio.list_model.ListModel listProviders()
   {
@@ -217,14 +223,15 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       This function allows providers to update their results for a context
-    outside of a call to [gtksource.completion_provider.CompletionProvider.populateAsync].
-    
-    This can be used to immediately return results for a provider while it does
-    additional asynchronous work. Doing so will allow the completions to
-    update while the operation is in progress.
-    Params:
-      provider =       an #GtkSourceCompletionProvider
-      results =       a #GListModel or null
+      outside of a call to [gtksource.completion_provider.CompletionProvider.populateAsync].
+      
+      This can be used to immediately return results for a provider while it does
+      additional asynchronous work. Doing so will allow the completions to
+      update while the operation is in progress.
+  
+      Params:
+        provider = an #GtkSourceCompletionProvider
+        results = a #GListModel or null
   */
   void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results = null)
   {
@@ -232,42 +239,54 @@ class CompletionContext : gobject.object.ObjectG, gio.list_model.ListModel
   }
 
   /**
-      Emitted when a provider changes a model.
-    
-    This signal is primarily useful for #GtkSourceCompletionProvider's
-    that want to track other providers in context. For example, it can
-    be used to create a "top results" provider.
+      Connect to `ProviderModelChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B provider)       a #GtkSourceCompletionProvider
-      * $(B model)       a #GListModel
-      * $(B completionContext) the instance the signal is connected to
-    )
-  */
-  alias ProviderModelChangedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext);
-
-  /** ditto */
-  alias ProviderModelChangedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext);
-
-  /**
-    Connect to ProviderModelChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a provider changes a model.
+      
+      This signal is primarily useful for #GtkSourceCompletionProvider's
+      that want to track other providers in context. For example, it can
+      be used to create a "top results" provider.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel model, gtksource.completion_context.CompletionContext completionContext))
+  
+          `provider` a #GtkSourceCompletionProvider (optional)
+  
+          `model` a #GListModel (optional)
+  
+          `completionContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectProviderModelChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ProviderModelChangedCallbackDlg) || is(T : ProviderModelChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.list_model.ListModel)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtksource.completion_context.CompletionContext)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completionContext = getVal!(gtksource.completion_context.CompletionContext)(_paramVals);
-      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
-      auto model = getVal!(gio.list_model.ListModel)(&_paramVals[2]);
-      _dClosure.dlg(provider, model, completionContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

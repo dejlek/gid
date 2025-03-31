@@ -1,3 +1,4 @@
+/// Module for [VideoTimeCodeMeta] class
 module gstvideo.video_time_code_meta;
 
 import gid.gid;
@@ -10,14 +11,15 @@ import gstvideo.video_time_code;
 
 /**
     Extra buffer metadata describing the GstVideoTimeCode of the frame.
-  
-  Each frame is assumed to have its own timecode, i.e. they are not
-  automatically incremented/interpolated.
+    
+    Each frame is assumed to have its own timecode, i.e. they are not
+    automatically incremented/interpolated.
 */
 class VideoTimeCodeMeta
 {
   GstVideoTimeCodeMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class VideoTimeCodeMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

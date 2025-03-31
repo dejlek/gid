@@ -1,3 +1,4 @@
+/// Module for [AccelGroupEntry] class
 module gtk.accel_group_entry;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class AccelGroupEntry
 {
   GtkAccelGroupEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class AccelGroupEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

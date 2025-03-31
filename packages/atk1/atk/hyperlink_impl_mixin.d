@@ -1,3 +1,4 @@
+/// Module for [HyperlinkImpl] interface mixin
 module atk.hyperlink_impl_mixin;
 
 public import atk.hyperlink_impl_iface_proxy;
@@ -10,18 +11,18 @@ public import gobject.object;
 
 /**
     A queryable interface which allows AtkHyperlink instances
-  associated with an AtkObject to be obtained.  AtkHyperlinkImpl
-  corresponds to AT-SPI's Hyperlink interface, and differs from
-  AtkHyperlink in that AtkHyperlink is an object type, rather than an
-  interface, and thus cannot be directly queried. FTW
+    associated with an AtkObject to be obtained.  AtkHyperlinkImpl
+    corresponds to AT-SPI's Hyperlink interface, and differs from
+    AtkHyperlink in that AtkHyperlink is an object type, rather than an
+    interface, and thus cannot be directly queried. FTW
 */
 template HyperlinkImplT()
 {
 
   /**
       Gets the hyperlink associated with this object.
-    Returns:     an AtkHyperlink object which points to this
-      implementing AtkObject.
+      Returns: an AtkHyperlink object which points to this
+        implementing AtkObject.
   */
   override atk.hyperlink.Hyperlink getHyperlink()
   {

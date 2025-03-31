@@ -1,3 +1,4 @@
+/// Module for [Carousel] class
 module adw.carousel;
 
 import adw.c.functions;
@@ -21,36 +22,39 @@ import gtk.widget;
 
 /**
     A paginated scrolling widget.
-  
-  <picture>
-    <source srcset="carousel-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="carousel.png" alt="carousel">
-  </picture>
-  
-  The [adw.carousel.Carousel] widget can be used to display a set of pages with
-  swipe-based navigation between them.
-  
-  `class@CarouselIndicatorDots` and `class@CarouselIndicatorLines` can be used
-  to provide page indicators for [adw.carousel.Carousel].
-  
-  ## CSS nodes
-  
-  [adw.carousel.Carousel] has a single CSS node with name `carousel`.
+    
+    <picture>
+      <source srcset="carousel-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="carousel.png" alt="carousel">
+    </picture>
+    
+    The [adw.carousel.Carousel] widget can be used to display a set of pages with
+    swipe-based navigation between them.
+    
+    `class@CarouselIndicatorDots` and `class@CarouselIndicatorLines` can be used
+    to provide page indicators for [adw.carousel.Carousel].
+    
+    ## CSS nodes
+    
+    [adw.carousel.Carousel] has a single CSS node with name `carousel`.
 */
 class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_carousel_get_type != &gidSymbolNotFound ? adw_carousel_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -66,7 +70,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Creates a new [adw.carousel.Carousel].
-    Returns:     the newly created [adw.carousel.Carousel]
+      Returns: the newly created [adw.carousel.Carousel]
   */
   this()
   {
@@ -77,8 +81,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Appends child to self.
-    Params:
-      child =       a widget to add
+  
+      Params:
+        child = a widget to add
   */
   void append(gtk.widget.Widget child)
   {
@@ -87,7 +92,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets whether to allow swiping for more than one page at a time.
-    Returns:     `TRUE` if long swipes are allowed
+      Returns: `TRUE` if long swipes are allowed
   */
   bool getAllowLongSwipes()
   {
@@ -98,7 +103,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets whether self can be dragged with mouse pointer.
-    Returns:     whether self can be dragged with mouse pointer
+      Returns: whether self can be dragged with mouse pointer
   */
   bool getAllowMouseDrag()
   {
@@ -109,7 +114,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets whether self will respond to scroll wheel events.
-    Returns:     `TRUE` if self will respond to scroll wheel events
+      Returns: `TRUE` if self will respond to scroll wheel events
   */
   bool getAllowScrollWheel()
   {
@@ -120,7 +125,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets whether self can be navigated.
-    Returns:     whether self can be navigated
+      Returns: whether self can be navigated
   */
   bool getInteractive()
   {
@@ -131,7 +136,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets the number of pages in self.
-    Returns:     the number of pages in self
+      Returns: the number of pages in self
   */
   uint getNPages()
   {
@@ -141,10 +146,11 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 
   /**
-      Gets the page at position n.
-    Params:
-      n =       index of the page
-    Returns:     the page
+      Gets the page at position `n`.
+  
+      Params:
+        n = index of the page
+      Returns: the page
   */
   gtk.widget.Widget getNthPage(uint n)
   {
@@ -156,9 +162,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets current scroll position in self, unitless.
-    
-    1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
-    Returns:     the scroll position
+      
+      1 matches 1 page. Use [adw.carousel.Carousel.scrollTo] for changing it.
+      Returns: the scroll position
   */
   double getPosition()
   {
@@ -169,7 +175,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets the page reveal duration, in milliseconds.
-    Returns:     the duration
+      Returns: the duration
   */
   uint getRevealDuration()
   {
@@ -180,7 +186,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets the scroll animation spring parameters for self.
-    Returns:     the animation parameters
+      Returns: the animation parameters
   */
   adw.spring_params.SpringParams getScrollParams()
   {
@@ -192,7 +198,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Gets spacing between pages in pixels.
-    Returns:     spacing between pages
+      Returns: spacing between pages
   */
   uint getSpacing()
   {
@@ -203,12 +209,13 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Inserts child into self at position position.
-    
-    If position is -1, or larger than the number of pages,
-    child will be appended to the end.
-    Params:
-      child =       a widget to add
-      position =       the position to insert child at
+      
+      If position is -1, or larger than the number of pages,
+      child will be appended to the end.
+  
+      Params:
+        child = a widget to add
+        position = the position to insert child at
   */
   void insert(gtk.widget.Widget child, int position)
   {
@@ -217,8 +224,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Prepends child to self.
-    Params:
-      child =       a widget to add
+  
+      Params:
+        child = a widget to add
   */
   void prepend(gtk.widget.Widget child)
   {
@@ -227,8 +235,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Removes child from self.
-    Params:
-      child =       a widget to remove
+  
+      Params:
+        child = a widget to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -237,12 +246,13 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Moves child into position position.
-    
-    If position is -1, or larger than the number of pages, child will be moved
-    at the end.
-    Params:
-      child =       a widget to add
-      position =       the position to move child to
+      
+      If position is -1, or larger than the number of pages, child will be moved
+      at the end.
+  
+      Params:
+        child = a widget to add
+        position = the position to move child to
   */
   void reorder(gtk.widget.Widget child, int position)
   {
@@ -251,11 +261,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Scrolls to widget.
-    
-    If animate is `TRUE`, the transition will be animated.
-    Params:
-      widget =       a child of self
-      animate =       whether to animate the transition
+      
+      If animate is `TRUE`, the transition will be animated.
+  
+      Params:
+        widget = a child of self
+        animate = whether to animate the transition
   */
   void scrollTo(gtk.widget.Widget widget, bool animate)
   {
@@ -264,11 +275,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets whether to allow swiping for more than one page at a time.
-    
-    If allow_long_swipes is `FALSE`, each swipe can only move to the adjacent
-    pages.
-    Params:
-      allowLongSwipes =       whether to allow long swipes
+      
+      If allow_long_swipes is `FALSE`, each swipe can only move to the adjacent
+      pages.
+  
+      Params:
+        allowLongSwipes = whether to allow long swipes
   */
   void setAllowLongSwipes(bool allowLongSwipes)
   {
@@ -277,10 +289,11 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets whether self can be dragged with mouse pointer.
-    
-    If allow_mouse_drag is `FALSE`, dragging is only available on touch.
-    Params:
-      allowMouseDrag =       whether self can be dragged with mouse pointer
+      
+      If allow_mouse_drag is `FALSE`, dragging is only available on touch.
+  
+      Params:
+        allowMouseDrag = whether self can be dragged with mouse pointer
   */
   void setAllowMouseDrag(bool allowMouseDrag)
   {
@@ -289,10 +302,11 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets whether self will respond to scroll wheel events.
-    
-    If allow_scroll_wheel is `FALSE`, wheel events will be ignored.
-    Params:
-      allowScrollWheel =       whether self will respond to scroll wheel events
+      
+      If allow_scroll_wheel is `FALSE`, wheel events will be ignored.
+  
+      Params:
+        allowScrollWheel = whether self will respond to scroll wheel events
   */
   void setAllowScrollWheel(bool allowScrollWheel)
   {
@@ -301,11 +315,12 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets whether self can be navigated.
-    
-    This can be used to temporarily disable the carousel to only allow navigating
-    it in a certain state.
-    Params:
-      interactive =       whether self can be navigated
+      
+      This can be used to temporarily disable the carousel to only allow navigating
+      it in a certain state.
+  
+      Params:
+        interactive = whether self can be navigated
   */
   void setInteractive(bool interactive)
   {
@@ -314,10 +329,11 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets the page reveal duration, in milliseconds.
-    
-    Reveal duration is used when animating adding or removing pages.
-    Params:
-      revealDuration =       the new reveal duration value
+      
+      Reveal duration is used when animating adding or removing pages.
+  
+      Params:
+        revealDuration = the new reveal duration value
   */
   void setRevealDuration(uint revealDuration)
   {
@@ -326,14 +342,15 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets the scroll animation spring parameters for self.
-    
-    The default value is equivalent to:
-    
-    ```c
-    adw_spring_params_new (1, 0.5, 500)
-    ```
-    Params:
-      params =       the new parameters
+      
+      The default value is equivalent to:
+      
+      ```c
+      adw_spring_params_new (1, 0.5, 500)
+      ```
+  
+      Params:
+        params = the new parameters
   */
   void setScrollParams(adw.spring_params.SpringParams params)
   {
@@ -342,8 +359,9 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
 
   /**
       Sets spacing between pages in pixels.
-    Params:
-      spacing =       the new spacing value
+  
+      Params:
+        spacing = the new spacing value
   */
   void setSpacing(uint spacing)
   {
@@ -351,42 +369,49 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 
   /**
-      This signal is emitted after a page has been changed.
-    
-    It can be used to implement "infinite scrolling" by amending the pages
-    after every scroll.
-    
-    ::: note
-        An empty carousel is indicated by `(int)index == -1`.
+      Connect to `PageChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B index)       current page
-      * $(B carousel) the instance the signal is connected to
-    )
-  */
-  alias PageChangedCallbackDlg = void delegate(uint index, adw.carousel.Carousel carousel);
-
-  /** ditto */
-  alias PageChangedCallbackFunc = void function(uint index, adw.carousel.Carousel carousel);
-
-  /**
-    Connect to PageChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted after a page has been changed.
+      
+      It can be used to implement "infinite scrolling" by amending the pages
+      after every scroll.
+      
+      ::: note
+          An empty carousel is indicated by `(int)index == -1`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(uint index, adw.carousel.Carousel carousel))
+  
+          `index` current page (optional)
+  
+          `carousel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPageChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PageChangedCallbackDlg) || is(T : PageChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : adw.carousel.Carousel)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto carousel = getVal!(adw.carousel.Carousel)(_paramVals);
-      auto index = getVal!(uint)(&_paramVals[1]);
-      _dClosure.dlg(index, carousel);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

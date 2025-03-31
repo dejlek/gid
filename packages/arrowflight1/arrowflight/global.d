@@ -1,3 +1,4 @@
+/// Global functions for arrowflight1 library
 module arrowflight.global;
 
 import arrowflight.c.functions;

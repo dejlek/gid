@@ -1,3 +1,4 @@
+/// Module for [ImplementorIface] interface mixin
 module atk.implementor_iface_mixin;
 
 public import atk.implementor_iface_iface_proxy;
@@ -8,8 +9,8 @@ public import gid.gid;
 
 /**
     The AtkImplementor interface is implemented by objects for which
-  AtkObject peers may be obtained via calls to
-  iface->(ref_accessible)(implementor);
+    AtkObject peers may be obtained via calls to
+    iface->(ref_accessible)(implementor);
 */
 template ImplementorIfaceT()
 {

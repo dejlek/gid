@@ -1,3 +1,4 @@
+/// Module for [VideoFrame] class
 module gstvideo.video_frame;
 
 import gid.gid;
@@ -15,6 +16,7 @@ class VideoFrame
 {
   GstVideoFrame cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class VideoFrame
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -69,12 +72,13 @@ class VideoFrame
 
   /**
       Copy the contents from src to dest.
-    
-    Note: Since: 1.18, dest dimensions are allowed to be
-    smaller than src dimensions.
-    Params:
-      src =       a #GstVideoFrame
-    Returns:     TRUE if the contents could be copied.
+      
+      Note: Since: 1.18, dest dimensions are allowed to be
+      smaller than src dimensions.
+  
+      Params:
+        src = a #GstVideoFrame
+      Returns: TRUE if the contents could be copied.
   */
   bool copy(gstvideo.video_frame.VideoFrame src)
   {
@@ -85,13 +89,14 @@ class VideoFrame
 
   /**
       Copy the plane with index plane from src to dest.
-    
-    Note: Since: 1.18, dest dimensions are allowed to be
-    smaller than src dimensions.
-    Params:
-      src =       a #GstVideoFrame
-      plane =       a plane
-    Returns:     TRUE if the contents could be copied.
+      
+      Note: Since: 1.18, dest dimensions are allowed to be
+      smaller than src dimensions.
+  
+      Params:
+        src = a #GstVideoFrame
+        plane = a plane
+      Returns: TRUE if the contents could be copied.
   */
   bool copyPlane(gstvideo.video_frame.VideoFrame src, uint plane)
   {
@@ -110,54 +115,55 @@ class VideoFrame
 
   /**
       Use info and buffer to fill in the values of frame. frame is usually
-    allocated on the stack, and you will pass the address to the #GstVideoFrame
-    structure allocated on the stack; [gstvideo.video_frame.VideoFrame.map] will then fill in
-    the structures with the various video-specific information you need to access
-    the pixels of the video buffer. You can then use accessor macros such as
-    GST_VIDEO_FRAME_COMP_DATA(), GST_VIDEO_FRAME_PLANE_DATA(),
-    GST_VIDEO_FRAME_COMP_STRIDE(), GST_VIDEO_FRAME_PLANE_STRIDE() etc.
-    to get to the pixels.
-    
-    ```c
-      GstVideoFrame vframe;
-      ...
-      // set RGB pixels to black one at a time
-      if (gst_video_frame_map (&vframe, video_info, video_buffer, GST_MAP_WRITE)) {
-        guint8 *pixels = GST_VIDEO_FRAME_PLANE_DATA (vframe, 0);
-        guint stride = GST_VIDEO_FRAME_PLANE_STRIDE (vframe, 0);
-        guint pixel_stride = GST_VIDEO_FRAME_COMP_PSTRIDE (vframe, 0);
-    
-        for (h = 0; h < height; ++h) {
-          for (w = 0; w < width; ++w) {
-            guint8 *pixel = pixels + h * stride + w * pixel_stride;
-    
-            memset (pixel, 0, pixel_stride);
+      allocated on the stack, and you will pass the address to the #GstVideoFrame
+      structure allocated on the stack; [gstvideo.video_frame.VideoFrame.map] will then fill in
+      the structures with the various video-specific information you need to access
+      the pixels of the video buffer. You can then use accessor macros such as
+      GST_VIDEO_FRAME_COMP_DATA(), GST_VIDEO_FRAME_PLANE_DATA(),
+      GST_VIDEO_FRAME_COMP_STRIDE(), GST_VIDEO_FRAME_PLANE_STRIDE() etc.
+      to get to the pixels.
+      
+      ```c
+        GstVideoFrame vframe;
+        ...
+        // set RGB pixels to black one at a time
+        if (gst_video_frame_map (&vframe, video_info, video_buffer, GST_MAP_WRITE)) {
+          guint8 *pixels = GST_VIDEO_FRAME_PLANE_DATA (vframe, 0);
+          guint stride = GST_VIDEO_FRAME_PLANE_STRIDE (vframe, 0);
+          guint pixel_stride = GST_VIDEO_FRAME_COMP_PSTRIDE (vframe, 0);
+      
+          for (h = 0; h < height; ++h) {
+            for (w = 0; w < width; ++w) {
+              guint8 *pixel = pixels + h * stride + w * pixel_stride;
+      
+              memset (pixel, 0, pixel_stride);
+            }
           }
+      
+          gst_video_frame_unmap (&vframe);
         }
-    
-        gst_video_frame_unmap (&vframe);
-      }
-      ...
-    ```
-    
-    All video planes of buffer will be mapped and the pointers will be set in
-    frame->data.
-    
-    The purpose of this function is to make it easy for you to get to the video
-    pixels in a generic way, without you having to worry too much about details
-    such as whether the video data is allocated in one contiguous memory chunk
-    or multiple memory chunks (e.g. one for each plane); or if custom strides
-    and custom plane offsets are used or not (as signalled by GstVideoMeta on
-    each buffer). This function will just fill the #GstVideoFrame structure
-    with the right values and if you use the accessor macros everything will
-    just work and you can access the data easily. It also maps the underlying
-    memory chunks for you.
-    Params:
-      frame =       pointer to #GstVideoFrame
-      info =       a #GstVideoInfo
-      buffer =       the buffer to map
-      flags =       #GstMapFlags
-    Returns:     true on success.
+        ...
+      ```
+      
+      All video planes of buffer will be mapped and the pointers will be set in
+      frame->data.
+      
+      The purpose of this function is to make it easy for you to get to the video
+      pixels in a generic way, without you having to worry too much about details
+      such as whether the video data is allocated in one contiguous memory chunk
+      or multiple memory chunks (e.g. one for each plane); or if custom strides
+      and custom plane offsets are used or not (as signalled by GstVideoMeta on
+      each buffer). This function will just fill the #GstVideoFrame structure
+      with the right values and if you use the accessor macros everything will
+      just work and you can access the data easily. It also maps the underlying
+      memory chunks for you.
+  
+      Params:
+        frame = pointer to #GstVideoFrame
+        info = a #GstVideoInfo
+        buffer = the buffer to map
+        flags = #GstMapFlags
+      Returns: true on success.
   */
   static bool map(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, gst.types.MapFlags flags)
   {
@@ -170,20 +176,21 @@ class VideoFrame
 
   /**
       Use info and buffer to fill in the values of frame with the video frame
-    information of frame id.
-    
-    When id is -1, the default frame is mapped. When id != -1, this function
-    will return false when there is no GstVideoMeta with that id.
-    
-    All video planes of buffer will be mapped and the pointers will be set in
-    frame->data.
-    Params:
-      frame =       pointer to #GstVideoFrame
-      info =       a #GstVideoInfo
-      buffer =       the buffer to map
-      id =       the frame id to map
-      flags =       #GstMapFlags
-    Returns:     true on success.
+      information of frame id.
+      
+      When id is -1, the default frame is mapped. When id != -1, this function
+      will return false when there is no GstVideoMeta with that id.
+      
+      All video planes of buffer will be mapped and the pointers will be set in
+      frame->data.
+  
+      Params:
+        frame = pointer to #GstVideoFrame
+        info = a #GstVideoInfo
+        buffer = the buffer to map
+        id = the frame id to map
+        flags = #GstMapFlags
+      Returns: true on success.
   */
   static bool mapId(out gstvideo.video_frame.VideoFrame frame, gstvideo.video_info.VideoInfo info, gst.buffer.Buffer buffer, int id, gst.types.MapFlags flags)
   {

@@ -1,3 +1,4 @@
+/// Module for [CrossingEvent] class
 module gdk.crossing_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class CrossingEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,7 +24,7 @@ class CrossingEvent : gdk.event.Event
 
   /**
       Extracts the notify detail from a crossing event.
-    Returns:     the notify detail of event
+      Returns: the notify detail of event
   */
   gdk.types.NotifyType getDetail()
   {
@@ -34,7 +36,7 @@ class CrossingEvent : gdk.event.Event
 
   /**
       Checks if the event surface is the focus surface.
-    Returns:     true if the surface is the focus surface
+      Returns: true if the surface is the focus surface
   */
   bool getFocus()
   {
@@ -45,7 +47,7 @@ class CrossingEvent : gdk.event.Event
 
   /**
       Extracts the crossing mode from a crossing event.
-    Returns:     the mode of event
+      Returns: the mode of event
   */
   gdk.types.CrossingMode getMode()
   {

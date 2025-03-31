@@ -1,3 +1,4 @@
+/// Global functions for gid library
 module gid.global;
 
 import gid.c.functions;

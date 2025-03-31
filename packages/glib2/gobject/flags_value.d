@@ -1,3 +1,4 @@
+/// Module for [FlagsValue] class
 module gobject.flags_value;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gobject.types;
 
 /**
     A structure which contains a single flags value, its name, and its
-  nickname.
+    nickname.
 */
 class FlagsValue
 {
   GFlagsValue cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class FlagsValue
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

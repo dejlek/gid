@@ -1,3 +1,4 @@
+/// Module for [MutableBuffer] class
 module arrow.mutable_buffer;
 
 import arrow.buffer;
@@ -13,17 +14,20 @@ import gobject.object;
 class MutableBuffer : arrow.buffer.Buffer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_mutable_buffer_get_type != &gidSymbolNotFound ? garrow_mutable_buffer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

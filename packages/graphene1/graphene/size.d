@@ -1,3 +1,4 @@
+/// Module for [Size] class
 module graphene.size;
 
 import gid.gid;
@@ -12,27 +13,32 @@ import graphene.types;
 class Size : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_size_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_size_get_type != &gidSymbolNotFound ? graphene_size_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -65,9 +71,9 @@ class Size : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_size_t.
-    
-    The contents of the returned value are undefined.
-    Returns:     the newly allocated #graphene_size_t
+      
+      The contents of the returned value are undefined.
+      Returns: the newly allocated #graphene_size_t
   */
   static graphene.size.Size alloc()
   {
@@ -79,9 +85,10 @@ class Size : gobject.boxed.Boxed
 
   /**
       Checks whether the two give #graphene_size_t are equal.
-    Params:
-      b =       a #graphene_size_t
-    Returns:     `true` if the sizes are equal
+  
+      Params:
+        b = a #graphene_size_t
+      Returns: `true` if the sizes are equal
   */
   bool equal(graphene.size.Size b)
   {
@@ -92,10 +99,11 @@ class Size : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_size_t using the given width and height.
-    Params:
-      width =       the width
-      height =       the height
-    Returns:     the initialized #graphene_size_t
+  
+      Params:
+        width = the width
+        height = the height
+      Returns: the initialized #graphene_size_t
   */
   graphene.size.Size init_(float width, float height)
   {
@@ -107,10 +115,11 @@ class Size : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_size_t using the width and height of
-    the given src.
-    Params:
-      src =       a #graphene_size_t
-    Returns:     the initialized #graphene_size_t
+      the given `s`rc.
+  
+      Params:
+        src = a #graphene_size_t
+      Returns: the initialized #graphene_size_t
   */
   graphene.size.Size initFromSize(graphene.size.Size src)
   {
@@ -122,11 +131,12 @@ class Size : gobject.boxed.Boxed
 
   /**
       Linearly interpolates the two given #graphene_size_t using the given
-    interpolation factor.
-    Params:
-      b =       a #graphene_size_t
-      factor =       the linear interpolation factor
-      res =       return location for the interpolated size
+      interpolation factor.
+  
+      Params:
+        b = a #graphene_size_t
+        factor = the linear interpolation factor
+        res = return location for the interpolated size
   */
   void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res)
   {
@@ -137,9 +147,10 @@ class Size : gobject.boxed.Boxed
 
   /**
       Scales the components of a #graphene_size_t using the given factor.
-    Params:
-      factor =       the scaling factor
-      res =       return location for the scaled size
+  
+      Params:
+        factor = the scaling factor
+        res = return location for the scaled size
   */
   void scale(float factor, out graphene.size.Size res)
   {
@@ -150,8 +161,8 @@ class Size : gobject.boxed.Boxed
 
   /**
       A constant pointer to a zero #graphene_size_t, useful for
-    equality checks and interpolations.
-    Returns:     a constant size
+      equality checks and interpolations.
+      Returns: a constant size
   */
   static graphene.size.Size zero()
   {

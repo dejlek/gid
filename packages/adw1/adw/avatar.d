@@ -1,3 +1,4 @@
+/// Module for [Avatar] class
 module adw.avatar;
 
 import adw.c.functions;
@@ -17,43 +18,46 @@ import gtk.widget;
 
 /**
     A widget displaying an image, with a generated fallback.
-  
-  <picture>
-    <source srcset="avatar-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="avatar.png" alt="avatar">
-  </picture>
-  
-  [adw.avatar.Avatar] is a widget that shows a round avatar.
-  
-  [adw.avatar.Avatar] generates an avatar with the initials of  the
-  `property@Avatar:text` on top of a colored background.
-  
-  The color is picked based on the hash of the `property@Avatar:text`.
-  
-  If `property@Avatar:show-initials` is set to `FALSE`,
-  `property@Avatar:icon-name` or `avatar-default-symbolic` is shown instead of
-  the initials.
-  
-  Use `property@Avatar:custom-image` to set a custom image.
-  
-  ## CSS nodes
-  
-  [adw.avatar.Avatar] has a single CSS node with name `avatar`.
+    
+    <picture>
+      <source srcset="avatar-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="avatar.png" alt="avatar">
+    </picture>
+    
+    [adw.avatar.Avatar] is a widget that shows a round avatar.
+    
+    [adw.avatar.Avatar] generates an avatar with the initials of  the
+    `property@Avatar:text` on top of a colored background.
+    
+    The color is picked based on the hash of the `property@Avatar:text`.
+    
+    If `property@Avatar:show-initials` is set to `FALSE`,
+    `property@Avatar:icon-name` or `avatar-default-symbolic` is shown instead of
+    the initials.
+    
+    Use `property@Avatar:custom-image` to set a custom image.
+    
+    ## CSS nodes
+    
+    [adw.avatar.Avatar] has a single CSS node with name `avatar`.
 */
 class Avatar : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_avatar_get_type != &gidSymbolNotFound ? adw_avatar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -66,11 +70,12 @@ class Avatar : gtk.widget.Widget
 
   /**
       Creates a new [adw.avatar.Avatar].
-    Params:
-      size =       The size of the avatar
-      text =       the text used to get the initials and color
-      showInitials =       whether to use initials instead of an icon as fallback
-    Returns:     the newly created [adw.avatar.Avatar]
+  
+      Params:
+        size = The size of the avatar
+        text = the text used to get the initials and color
+        showInitials = whether to use initials instead of an icon as fallback
+      Returns: the newly created [adw.avatar.Avatar]
   */
   this(int size, string text, bool showInitials)
   {
@@ -82,11 +87,12 @@ class Avatar : gtk.widget.Widget
 
   /**
       Renders self into a [gdk.texture.Texture] at scale_factor.
-    
-    This can be used to export the fallback avatar.
-    Params:
-      scaleFactor =       The scale factor
-    Returns:     the texture
+      
+      This can be used to export the fallback avatar.
+  
+      Params:
+        scaleFactor = The scale factor
+      Returns: the texture
   */
   gdk.texture.Texture drawToTexture(int scaleFactor)
   {
@@ -98,7 +104,7 @@ class Avatar : gtk.widget.Widget
 
   /**
       Gets the custom image paintable.
-    Returns:     the custom image
+      Returns: the custom image
   */
   gdk.paintable.Paintable getCustomImage()
   {
@@ -110,7 +116,7 @@ class Avatar : gtk.widget.Widget
 
   /**
       Gets the name of an icon to use as a fallback.
-    Returns:     the icon name
+      Returns: the icon name
   */
   string getIconName()
   {
@@ -122,7 +128,7 @@ class Avatar : gtk.widget.Widget
 
   /**
       Gets whether initials are used instead of an icon on the fallback avatar.
-    Returns:     whether initials are used instead of an icon as fallback
+      Returns: whether initials are used instead of an icon as fallback
   */
   bool getShowInitials()
   {
@@ -135,7 +141,7 @@ class Avatar : gtk.widget.Widget
 
   /**
       Gets the size of the avatar.
-    Returns:     the size of the avatar
+      Returns: the size of the avatar
   */
   int getSize()
   {
@@ -146,8 +152,8 @@ class Avatar : gtk.widget.Widget
 
   /**
       Gets the text used to generate the fallback initials and color.
-    Returns:     the text used to generate the fallback initials and
-        color
+      Returns: the text used to generate the fallback initials and
+          color
   */
   string getText()
   {
@@ -159,10 +165,11 @@ class Avatar : gtk.widget.Widget
 
   /**
       Sets the custom image paintable.
-    
-    Custom image is displayed instead of initials or icon.
-    Params:
-      customImage =       a custom image
+      
+      Custom image is displayed instead of initials or icon.
+  
+      Params:
+        customImage = a custom image
   */
   void setCustomImage(gdk.paintable.Paintable customImage = null)
   {
@@ -171,10 +178,11 @@ class Avatar : gtk.widget.Widget
 
   /**
       Sets the name of an icon to use as a fallback.
-    
-    If no name is set, `avatar-default-symbolic` will be used.
-    Params:
-      iconName =       the icon name
+      
+      If no name is set, `avatar-default-symbolic` will be used.
+  
+      Params:
+        iconName = the icon name
   */
   void setIconName(string iconName = null)
   {
@@ -184,10 +192,11 @@ class Avatar : gtk.widget.Widget
 
   /**
       Sets whether to use initials instead of an icon on the fallback avatar.
-    
-    See `propertyAvatar:icon-name` for how to change the fallback icon.
-    Params:
-      showInitials =       whether to use initials instead of an icon as fallback
+      
+      See `propertyAvatar:icon-name` for how to change the fallback icon.
+  
+      Params:
+        showInitials = whether to use initials instead of an icon as fallback
   */
   void setShowInitials(bool showInitials)
   {
@@ -196,8 +205,9 @@ class Avatar : gtk.widget.Widget
 
   /**
       Sets the size of the avatar.
-    Params:
-      size =       The size of the avatar
+  
+      Params:
+        size = The size of the avatar
   */
   void setSize(int size)
   {
@@ -206,11 +216,12 @@ class Avatar : gtk.widget.Widget
 
   /**
       Sets the text used to generate the fallback initials and color.
-    
-    It's only used to generate the color if `propertyAvatar:show-initials` is
-    `FALSE`.
-    Params:
-      text =       the text used to get the initials and color
+      
+      It's only used to generate the color if `propertyAvatar:show-initials` is
+      `FALSE`.
+  
+      Params:
+        text = the text used to get the initials and color
   */
   void setText(string text = null)
   {

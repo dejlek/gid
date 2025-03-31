@@ -1,3 +1,4 @@
+/// D types for gstvideo1 library
 module gstvideo.types;
 
 import gid.gid;
@@ -193,42 +194,42 @@ enum BUFFER_POOL_OPTION_VIDEO_AFFINE_TRANSFORMATION_META = "GstBufferPoolOptionV
 
 /**
     A bufferpool option to enable extra padding. When a bufferpool supports this
-  option, [gstvideo.global.bufferPoolConfigSetVideoAlignment] can be called.
-  
-  When this option is enabled on the bufferpool,
-  #GST_BUFFER_POOL_OPTION_VIDEO_META should also be enabled.
+    option, [gstvideo.global.bufferPoolConfigSetVideoAlignment] can be called.
+    
+    When this option is enabled on the bufferpool,
+    #GST_BUFFER_POOL_OPTION_VIDEO_META should also be enabled.
 */
 enum BUFFER_POOL_OPTION_VIDEO_ALIGNMENT = "GstBufferPoolOptionVideoAlignment";
 
 /**
     An option that can be activated on a bufferpool to request gl texture upload
-  meta on buffers from the pool.
-  
-  When this option is enabled on the bufferpool,
-  @GST_BUFFER_POOL_OPTION_VIDEO_META should also be enabled.
+    meta on buffers from the pool.
+    
+    When this option is enabled on the bufferpool,
+    @GST_BUFFER_POOL_OPTION_VIDEO_META should also be enabled.
 */
 enum BUFFER_POOL_OPTION_VIDEO_GL_TEXTURE_UPLOAD_META = "GstBufferPoolOptionVideoGLTextureUploadMeta";
 
 /**
     An option that can be activated on bufferpool to request video metadata
-  on buffers from the pool.
+    on buffers from the pool.
 */
 enum BUFFER_POOL_OPTION_VIDEO_META = "GstBufferPoolOptionVideoMeta";
 
 /**
     Name of the caps feature indicating that the stream is interlaced.
-  
-  Currently it is only used for video with 'interlace-mode=alternate'
-  to ensure backwards compatibility for this new mode.
-  In this mode each buffer carries a single field of interlaced video.
-  @GST_VIDEO_BUFFER_FLAG_TOP_FIELD and @GST_VIDEO_BUFFER_FLAG_BOTTOM_FIELD
-  indicate whether the buffer carries a top or bottom field. The order of
-  buffers/fields in the stream and the timestamps on the buffers indicate the
-  temporal order of the fields.
-  Top and bottom fields are expected to alternate in this mode.
-  The frame rate in the caps still signals the frame rate, so the notional field
-  rate will be twice the frame rate from the caps
-  (see @GST_VIDEO_INFO_FIELD_RATE_N).
+    
+    Currently it is only used for video with 'interlace-mode=alternate'
+    to ensure backwards compatibility for this new mode.
+    In this mode each buffer carries a single field of interlaced video.
+    @GST_VIDEO_BUFFER_FLAG_TOP_FIELD and @GST_VIDEO_BUFFER_FLAG_BOTTOM_FIELD
+    indicate whether the buffer carries a top or bottom field. The order of
+    buffers/fields in the stream and the timestamps on the buffers indicate the
+    temporal order of the fields.
+    Top and bottom fields are expected to alternate in this mode.
+    The frame rate in the caps still signals the frame rate, so the notional field
+    rate will be twice the frame rate from the caps
+    (see @GST_VIDEO_INFO_FIELD_RATE_N).
 */
 enum CAPS_FEATURE_FORMAT_INTERLACED = "format:Interlaced";
 
@@ -317,41 +318,41 @@ enum VIDEO_COMP_Y = 0;
 
 /**
     #GstVideoAlphaMode, the alpha mode to use.
-  Default is #GST_VIDEO_ALPHA_MODE_COPY.
+    Default is #GST_VIDEO_ALPHA_MODE_COPY.
 */
 enum VIDEO_CONVERTER_OPT_ALPHA_MODE = "GstVideoConverter.alpha-mode";
 
 /**
     #G_TYPE_DOUBLE, the alpha color value to use.
-  Default to 1.0
+    Default to 1.0
 */
 enum VIDEO_CONVERTER_OPT_ALPHA_VALUE = "GstVideoConverter.alpha-value";
 
 /**
     #G_TYPE_BOOLEAN, whether [gstvideo.video_converter.VideoConverter.frame] will return immediately
-  without waiting for the conversion to complete.  A subsequent
-  [gstvideo.video_converter.VideoConverter.frameFinish] must be performed to ensure completion of the
-  conversion before subsequent use.  Default false
+    without waiting for the conversion to complete.  A subsequent
+    [gstvideo.video_converter.VideoConverter.frameFinish] must be performed to ensure completion of the
+    conversion before subsequent use.  Default false
 */
 enum VIDEO_CONVERTER_OPT_ASYNC_TASKS = "GstVideoConverter.async-tasks";
 
 /**
     #G_TYPE_UINT, the border color to use if #GST_VIDEO_CONVERTER_OPT_FILL_BORDER
-  is set to true. The color is in ARGB format.
-  Default 0xff000000
+    is set to true. The color is in ARGB format.
+    Default 0xff000000
 */
 enum VIDEO_CONVERTER_OPT_BORDER_ARGB = "GstVideoConverter.border-argb";
 
 /**
     #GstVideoChromaMode, set the chroma resample mode subsampled
-  formats. Default is #GST_VIDEO_CHROMA_MODE_FULL.
+    formats. Default is #GST_VIDEO_CHROMA_MODE_FULL.
 */
 enum VIDEO_CONVERTER_OPT_CHROMA_MODE = "GstVideoConverter.chroma-mode";
 
 /**
     #GstVideoChromaMethod, The resampler method to use for
-  chroma resampling. Other options for the resampler can be used, see
-  the #GstVideoResampler. Default is #GST_VIDEO_RESAMPLER_METHOD_LINEAR
+    chroma resampling. Other options for the resampler can be used, see
+    the #GstVideoResampler. Default is #GST_VIDEO_RESAMPLER_METHOD_LINEAR
 */
 enum VIDEO_CONVERTER_OPT_CHROMA_RESAMPLER_METHOD = "GstVideoConverter.chroma-resampler-method";
 
@@ -377,55 +378,55 @@ enum VIDEO_CONVERTER_OPT_DEST_Y = "GstVideoConverter.dest-y";
 
 /**
     #GstVideoDitherMethod, The dither method to use when
-  changing bit depth.
-  Default is #GST_VIDEO_DITHER_BAYER.
+    changing bit depth.
+    Default is #GST_VIDEO_DITHER_BAYER.
 */
 enum VIDEO_CONVERTER_OPT_DITHER_METHOD = "GstVideoConverter.dither-method";
 
 /**
     #G_TYPE_UINT, The quantization amount to dither to. Components will be
-  quantized to multiples of this value.
-  Default is 1
+    quantized to multiples of this value.
+    Default is 1
 */
 enum VIDEO_CONVERTER_OPT_DITHER_QUANTIZATION = "GstVideoConverter.dither-quantization";
 
 /**
     #G_TYPE_BOOLEAN, if the destination rectangle does not fill the complete
-  destination image, render a border with
-  #GST_VIDEO_CONVERTER_OPT_BORDER_ARGB. Otherwise the unusded pixels in the
-  destination are untouched. Default true.
+    destination image, render a border with
+    #GST_VIDEO_CONVERTER_OPT_BORDER_ARGB. Otherwise the unusded pixels in the
+    destination are untouched. Default true.
 */
 enum VIDEO_CONVERTER_OPT_FILL_BORDER = "GstVideoConverter.fill-border";
 
 /**
     #GstVideoGammaMode, set the gamma mode.
-  Default is #GST_VIDEO_GAMMA_MODE_NONE.
+    Default is #GST_VIDEO_GAMMA_MODE_NONE.
 */
 enum VIDEO_CONVERTER_OPT_GAMMA_MODE = "GstVideoConverter.gamma-mode";
 
 /**
     #GstVideoMatrixMode, set the color matrix conversion mode for
-  converting between Y'PbPr and non-linear RGB (R'G'B').
-  Default is #GST_VIDEO_MATRIX_MODE_FULL.
+    converting between Y'PbPr and non-linear RGB (R'G'B').
+    Default is #GST_VIDEO_MATRIX_MODE_FULL.
 */
 enum VIDEO_CONVERTER_OPT_MATRIX_MODE = "GstVideoConverter.matrix-mode";
 
 /**
     #GstVideoPrimariesMode, set the primaries conversion mode.
-  Default is #GST_VIDEO_PRIMARIES_MODE_NONE.
+    Default is #GST_VIDEO_PRIMARIES_MODE_NONE.
 */
 enum VIDEO_CONVERTER_OPT_PRIMARIES_MODE = "GstVideoConverter.primaries-mode";
 
 /**
     #GstVideoResamplerMethod, The resampler method to use for
-  resampling. Other options for the resampler can be used, see
-  the #GstVideoResampler. Default is #GST_VIDEO_RESAMPLER_METHOD_CUBIC
+    resampling. Other options for the resampler can be used, see
+    the #GstVideoResampler. Default is #GST_VIDEO_RESAMPLER_METHOD_CUBIC
 */
 enum VIDEO_CONVERTER_OPT_RESAMPLER_METHOD = "GstVideoConverter.resampler-method";
 
 /**
     #G_TYPE_UINT, The number of taps for the resampler.
-  Default is 0: let the resampler choose a good value.
+    Default is 0: let the resampler choose a good value.
 */
 enum VIDEO_CONVERTER_OPT_RESAMPLER_TAPS = "GstVideoConverter.resampler-taps";
 
@@ -451,7 +452,7 @@ enum VIDEO_CONVERTER_OPT_SRC_Y = "GstVideoConverter.src-y";
 
 /**
     #G_TYPE_UINT, maximum number of threads to use. Default 1, 0 for the number
-  of cores.
+    of cores.
 */
 enum VIDEO_CONVERTER_OPT_THREADS = "GstVideoConverter.threads";
 
@@ -472,8 +473,8 @@ enum VIDEO_DECODER_SRC_NAME = "src";
 
 /**
     Generic caps string for video wit DMABuf(GST_CAPS_FEATURE_MEMORY_DMABUF)
-  feature, for use in pad templates. As drm-format is supposed to be defined
-  at run-time it's not predefined here.
+    feature, for use in pad templates. As drm-format is supposed to be defined
+    at run-time it's not predefined here.
 */
 enum VIDEO_DMA_DRM_CAPS_MAKE = "video/x-raw(memory:DMABuf), format = (string) DMA_DRM, width = ";
 
@@ -489,57 +490,57 @@ enum VIDEO_ENCODER_SRC_NAME = "src";
 
 /**
     List of all video formats, for use in template caps strings.
-  
-  Formats are sorted by decreasing "quality", using these criteria by priority:
-    $(LIST
-        * number of components
-        * depth
-        * subsampling factor of the width
-        * subsampling factor of the height
-        * number of planes
-        * native endianness preferred
-        * pixel stride
-        * poffset
-        * prefer non-complex formats
-        * prefer YUV formats over RGB ones
-        * prefer I420 over YV12
-        * format name
-    )
+    
+    Formats are sorted by decreasing "quality", using these criteria by priority:
+      $(LIST
+          * number of components
+          * depth
+          * subsampling factor of the width
+          * subsampling factor of the height
+          * number of planes
+          * native endianness preferred
+          * pixel stride
+          * poffset
+          * prefer non-complex formats
+          * prefer YUV formats over RGB ones
+          * prefer I420 over YV12
+          * format name
+      )
 */
 enum VIDEO_FORMATS_ALL = "{ ";
 
 /**
     Declare all video formats as a string.
-  
-  Formats are sorted by decreasing "quality", using these criteria by priority:
-    $(LIST
-        * number of components
-        * depth
-        * subsampling factor of the width
-        * subsampling factor of the height
-        * number of planes
-        * native endianness preferred
-        * pixel stride
-        * poffset
-        * prefer non-complex formats
-        * prefer YUV formats over RGB ones
-        * prefer I420 over YV12
-        * format name
-    )
+    
+    Formats are sorted by decreasing "quality", using these criteria by priority:
+      $(LIST
+          * number of components
+          * depth
+          * subsampling factor of the width
+          * subsampling factor of the height
+          * number of planes
+          * native endianness preferred
+          * pixel stride
+          * poffset
+          * prefer non-complex formats
+          * prefer YUV formats over RGB ones
+          * prefer I420 over YV12
+          * format name
+      )
 */
 enum VIDEO_FORMATS_ALL_STR = "A444_16BE, A444_16LE, AYUV64, ARGB64, RGBA64_BE, ARGB64_BE, BGRA64_BE, ABGR64_BE, RGBA64_LE, ARGB64_LE, BGRA64_LE, ABGR64_LE, A422_16BE, A422_16LE, A420_16BE, A420_16LE, A444_12BE, GBRA_12BE, A444_12LE, GBRA_12LE, Y412_BE, Y412_LE, A422_12BE, A422_12LE, A420_12BE, A420_12LE, A444_10BE, GBRA_10BE, A444_10LE, GBRA_10LE, A422_10BE, A422_10LE, A420_10BE, A420_10LE, BGR10A2_LE, Y410, RGB10A2_LE, A444, GBRA, AYUV, VUYA, RGBA, RBGA, ARGB, BGRA, ABGR, A422, A420, AV12, Y444_16BE, GBR_16BE, Y444_16LE, GBR_16LE, v216, P016_BE, P016_LE, Y444_12BE, GBR_12BE, Y444_12LE, GBR_12LE, I422_12BE, I422_12LE, Y212_BE, Y212_LE, I420_12BE, I420_12LE, P012_BE, P012_LE, Y444_10BE, GBR_10BE, Y444_10LE, GBR_10LE, r210, I422_10BE, I422_10LE, NV16_10LE32, Y210, UYVP, v210, I420_10BE, I420_10LE, P010_10BE, MT2110R, MT2110T, NV12_10BE_8L128, NV12_10LE40_4L4, P010_10LE, NV12_10LE40, NV12_10LE32, Y444, BGRP, GBR, RGBP, NV24, v308, IYU2, RGBx, xRGB, BGRx, xBGR, RGB, BGR, Y42B, NV16, NV61, YUY2, YVYU, UYVY, VYUY, I420, YV12, NV12, NV21, NV12_16L32S, NV12_32L32, NV12_4L4, NV12_64Z32, NV12_8L128, Y41B, IYU1, YUV9, YVU9, BGR16, RGB16, BGR15, RGB15, RGB8P, GRAY16_BE, GRAY16_LE, GRAY10_LE32, GRAY8";
 
 /**
     This is similar to `GST_VIDEO_FORMATS_ALL` but includes formats like DMA_DRM
-  that do not have a software converter. This should be used for passthrough
-  template caps.
+    that do not have a software converter. This should be used for passthrough
+    template caps.
 */
 enum VIDEO_FORMATS_ANY = "{ ";
 
 /**
     This is similar to `GST_VIDEO_FORMATS_ALL_STR` but includes formats like
-  DMA_DRM for which no software converter exists. This should be used for
-  passthrough template caps.
+    DMA_DRM for which no software converter exists. This should be used for
+    passthrough template caps.
 */
 enum VIDEO_FORMATS_ANY_STR = "DMA_DRM, ";
 
@@ -554,62 +555,62 @@ enum VIDEO_MAX_PLANES = 4;
 
 /**
     G_TYPE_DOUBLE, B parameter of the cubic filter. The B
-  parameter controls the bluriness. Values between 0.0 and
-  2.0 are accepted. 1/3 is the default.
-  
-  Below are some values of popular filters:
-                     B       C
-  Hermite           0.0     0.0
-  Spline            1.0     0.0
-  Catmull-Rom       0.0     1/2
-  Mitchell          1/3     1/3
-  Robidoux          0.3782  0.3109
-  Robidoux
-   Sharp            0.2620  0.3690
-  Robidoux
-   Soft             0.6796  0.1602
+    parameter controls the bluriness. Values between 0.0 and
+    2.0 are accepted. 1/3 is the default.
+    
+    Below are some values of popular filters:
+                       B       C
+    Hermite           0.0     0.0
+    Spline            1.0     0.0
+    Catmull-Rom       0.0     1/2
+    Mitchell          1/3     1/3
+    Robidoux          0.3782  0.3109
+    Robidoux
+     Sharp            0.2620  0.3690
+    Robidoux
+     Soft             0.6796  0.1602
 */
 enum VIDEO_RESAMPLER_OPT_CUBIC_B = "GstVideoResampler.cubic-b";
 
 /**
     G_TYPE_DOUBLE, C parameter of the cubic filter. The C
-  parameter controls the Keys alpha value. Values between 0.0 and
-  2.0 are accepted. 1/3 is the default.
-  
-  See #GST_VIDEO_RESAMPLER_OPT_CUBIC_B for some more common values
+    parameter controls the Keys alpha value. Values between 0.0 and
+    2.0 are accepted. 1/3 is the default.
+    
+    See #GST_VIDEO_RESAMPLER_OPT_CUBIC_B for some more common values
 */
 enum VIDEO_RESAMPLER_OPT_CUBIC_C = "GstVideoResampler.cubic-c";
 
 /**
     G_TYPE_DOUBLE, specifies the size of filter envelope for
-  @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
-  1.0 and 5.0. 2.0 is the default.
+    @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
+    1.0 and 5.0. 2.0 is the default.
 */
 enum VIDEO_RESAMPLER_OPT_ENVELOPE = "GstVideoResampler.envelope";
 
 /**
     G_TYPE_INT, limits the maximum number of taps to use.
-  16 is the default.
+    16 is the default.
 */
 enum VIDEO_RESAMPLER_OPT_MAX_TAPS = "GstVideoResampler.max-taps";
 
 /**
     G_TYPE_DOUBLE, specifies sharpening of the filter for
-  @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
-  0.0 and 1.0. 0.0 is the default.
+    @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
+    0.0 and 1.0. 0.0 is the default.
 */
 enum VIDEO_RESAMPLER_OPT_SHARPEN = "GstVideoResampler.sharpen";
 
 /**
     G_TYPE_DOUBLE, specifies sharpness of the filter for
-  @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
-  0.5 and 1.5. 1.0 is the default.
+    @GST_VIDEO_RESAMPLER_METHOD_LANCZOS. values are clamped between
+    0.5 and 1.5. 1.0 is the default.
 */
 enum VIDEO_RESAMPLER_OPT_SHARPNESS = "GstVideoResampler.sharpness";
 
 /**
     #GstVideoDitherMethod, The dither method to use for propagating
-  quatization errors.
+    quatization errors.
 */
 enum VIDEO_SCALER_OPT_DITHER_METHOD = "GstVideoScaler.dither-method";
 

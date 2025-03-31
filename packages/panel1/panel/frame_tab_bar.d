@@ -1,3 +1,4 @@
+/// Module for [FrameTabBar] class
 module panel.frame_tab_bar;
 
 import gid.gid;
@@ -21,17 +22,20 @@ import panel.types;
 class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_tab_bar_get_type != &gidSymbolNotFound ? panel_frame_tab_bar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

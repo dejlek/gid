@@ -1,3 +1,4 @@
+/// Module for [AboutDialog] class
 module gtk.about_dialog;
 
 import gdk.paintable;
@@ -23,67 +24,70 @@ import gtk.window;
 
 /**
     The [gtk.about_dialog.AboutDialog] offers a simple way to display information about
-  a program.
-  
-  The shown information includes the programs' logo, name, copyright,
-  website and license. It is also possible to give credits to the authors,
-  documenters, translators and artists who have worked on the program.
-  
-  An about dialog is typically opened when the user selects the `About`
-  option from the `Help` menu. All parts of the dialog are optional.
-  
-  ![An example GtkAboutDialog](aboutdialog.png)
-  
-  About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
-  displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
-  when a user clicks one. The behaviour can be overridden with the
-  `signal@Gtk.AboutDialog::activate-link` signal.
-  
-  To specify a person with an email address, use a string like
-  `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
-  use a string like `GTK team https://www.gtk.org`.
-  
-  To make constructing a [gtk.about_dialog.AboutDialog] as convenient as possible, you can
-  use the function `func@Gtk.show_about_dialog` which constructs and shows
-  a dialog and keeps it around so that it can be shown again.
-  
-  Note that GTK sets a default title of `_("About `s`")` on the dialog
-  window (where ``s`` is replaced by the name of the application, but in
-  order to ensure proper translation of the title, applications should
-  set the title property explicitly when constructing a [gtk.about_dialog.AboutDialog],
-  as shown in the following example:
-  
-  ```c
-  GFile *logo_file = g_file_new_for_path ("./logo.png");
-  GdkTexture *example_logo = gdk_texture_new_from_file (logo_file, NULL);
-  g_object_unref (logo_file);
-  
-  gtk_show_about_dialog (NULL,
-                         "program-name", "ExampleCode",
-                         "logo", example_logo,
-                         "title", _("About ExampleCode"),
-                         NULL);
-  ```
-  
-  ## CSS nodes
-  
-  [gtk.about_dialog.AboutDialog] has a single CSS node with the name `window` and style
-  class `.aboutdialog`.
+    a program.
+    
+    The shown information includes the programs' logo, name, copyright,
+    website and license. It is also possible to give credits to the authors,
+    documenters, translators and artists who have worked on the program.
+    
+    An about dialog is typically opened when the user selects the `About`
+    option from the `Help` menu. All parts of the dialog are optional.
+    
+    ![An example GtkAboutDialog](aboutdialog.png)
+    
+    About dialogs often contain links and email addresses. [gtk.about_dialog.AboutDialog]
+    displays these as clickable links. By default, it calls [gtk.file_launcher.FileLauncher.launch]
+    when a user clicks one. The behaviour can be overridden with the
+    `signal@Gtk.AboutDialog::activate-link` signal.
+    
+    To specify a person with an email address, use a string like
+    `Edgar Allan Poe <edgar@poe.com>`. To specify a website with a title,
+    use a string like `GTK team https://www.gtk.org`.
+    
+    To make constructing a [gtk.about_dialog.AboutDialog] as convenient as possible, you can
+    use the function `func@Gtk.show_about_dialog` which constructs and shows
+    a dialog and keeps it around so that it can be shown again.
+    
+    Note that GTK sets a default title of `_("About `s`")` on the dialog
+    window (where ``s`` is replaced by the name of the application, but in
+    order to ensure proper translation of the title, applications should
+    set the title property explicitly when constructing a [gtk.about_dialog.AboutDialog],
+    as shown in the following example:
+    
+    ```c
+    GFile *logo_file = g_file_new_for_path ("./logo.png");
+    GdkTexture *example_logo = gdk_texture_new_from_file (logo_file, NULL);
+    g_object_unref (logo_file);
+    
+    gtk_show_about_dialog (NULL,
+                           "program-name", "ExampleCode",
+                           "logo", example_logo,
+                           "title", _("About ExampleCode"),
+                           NULL);
+    ```
+    
+    ## CSS nodes
+    
+    [gtk.about_dialog.AboutDialog] has a single CSS node with the name `window` and style
+    class `.aboutdialog`.
 */
 class AboutDialog : gtk.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_about_dialog_get_type != &gidSymbolNotFound ? gtk_about_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -96,7 +100,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Creates a new [gtk.about_dialog.AboutDialog].
-    Returns:     a newly created [gtk.about_dialog.AboutDialog]
+      Returns: a newly created [gtk.about_dialog.AboutDialog]
   */
   this()
   {
@@ -107,9 +111,10 @@ class AboutDialog : gtk.window.Window
 
   /**
       Creates a new section in the "Credits" page.
-    Params:
-      sectionName =       The name of the section
-      people =       The people who belong to that section
+  
+      Params:
+        sectionName = The name of the section
+        people = The people who belong to that section
   */
   void addCreditSection(string sectionName, string[] people)
   {
@@ -124,9 +129,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the names of the artists which are displayed
-    in the credits page.
-    Returns:     A
-        `NULL`-terminated string array containing the artists
+      in the credits page.
+      Returns: A
+          `NULL`-terminated string array containing the artists
   */
   string[] getArtists()
   {
@@ -148,9 +153,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the names of the authors which are displayed
-    in the credits page.
-    Returns:     A
-        `NULL`-terminated string array containing the authors
+      in the credits page.
+      Returns: A
+          `NULL`-terminated string array containing the authors
   */
   string[] getAuthors()
   {
@@ -172,7 +177,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the comments string.
-    Returns:     The comments
+      Returns: The comments
   */
   string getComments()
   {
@@ -184,7 +189,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the copyright string.
-    Returns:     The copyright string
+      Returns: The copyright string
   */
   string getCopyright()
   {
@@ -196,9 +201,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the name of the documenters which are displayed
-    in the credits page.
-    Returns:     A
-        `NULL`-terminated string array containing the documenters
+      in the credits page.
+      Returns: A
+          `NULL`-terminated string array containing the documenters
   */
   string[] getDocumenters()
   {
@@ -220,7 +225,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the license information.
-    Returns:     The license information
+      Returns: The license information
   */
   string getLicense()
   {
@@ -232,7 +237,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Retrieves the license type.
-    Returns:     a [gtk.types.License] value
+      Returns: a [gtk.types.License] value
   */
   gtk.types.License getLicenseType()
   {
@@ -244,9 +249,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the paintable displayed as logo in the about dialog.
-    Returns:     the paintable displayed as
-        logo or `NULL` if the logo is unset or has been set via
-        [gtk.about_dialog.AboutDialog.setLogoIconName]
+      Returns: the paintable displayed as
+          logo or `NULL` if the logo is unset or has been set via
+          [gtk.about_dialog.AboutDialog.setLogoIconName]
   */
   gdk.paintable.Paintable getLogo()
   {
@@ -258,8 +263,8 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the icon name displayed as logo in the about dialog.
-    Returns:     the icon name displayed as logo,
-        or `NULL` if the logo has been set via [gtk.about_dialog.AboutDialog.setLogo]
+      Returns: the icon name displayed as logo,
+          or `NULL` if the logo has been set via [gtk.about_dialog.AboutDialog.setLogo]
   */
   string getLogoIconName()
   {
@@ -271,7 +276,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the program name displayed in the about dialog.
-    Returns:     The program name
+      Returns: The program name
   */
   string getProgramName()
   {
@@ -283,7 +288,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the system information that is shown in the about dialog.
-    Returns:     the system information
+      Returns: the system information
   */
   string getSystemInformation()
   {
@@ -295,8 +300,8 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the translator credits string which is displayed
-    in the credits page.
-    Returns:     The translator credits string
+      in the credits page.
+      Returns: The translator credits string
   */
   string getTranslatorCredits()
   {
@@ -308,7 +313,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the version string.
-    Returns:     The version string
+      Returns: The version string
   */
   string getVersion()
   {
@@ -320,7 +325,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the website URL.
-    Returns:     The website URL
+      Returns: The website URL
   */
   string getWebsite()
   {
@@ -332,7 +337,7 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns the label used for the website link.
-    Returns:     The label used for the website link
+      Returns: The label used for the website link
   */
   string getWebsiteLabel()
   {
@@ -344,8 +349,8 @@ class AboutDialog : gtk.window.Window
 
   /**
       Returns whether the license text in the about dialog is
-    automatically wrapped.
-    Returns:     `TRUE` if the license text is wrapped
+      automatically wrapped.
+      Returns: `TRUE` if the license text is wrapped
   */
   bool getWrapLicense()
   {
@@ -356,10 +361,11 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the names of the artists to be displayed
-    in the "Credits" page.
-    Params:
-      artists =       the authors of the artwork
-          of the application
+      in the "Credits" page.
+  
+      Params:
+        artists = the authors of the artwork
+            of the application
   */
   void setArtists(string[] artists)
   {
@@ -373,9 +379,10 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the names of the authors which are displayed
-    in the "Credits" page of the about dialog.
-    Params:
-      authors =       the authors of the application
+      in the "Credits" page of the about dialog.
+  
+      Params:
+        authors = the authors of the application
   */
   void setAuthors(string[] authors)
   {
@@ -389,10 +396,11 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the comments string to display in the about dialog.
-    
-    This should be a short string of one or two lines.
-    Params:
-      comments =       a comments string
+      
+      This should be a short string of one or two lines.
+  
+      Params:
+        comments = a comments string
   */
   void setComments(string comments = null)
   {
@@ -402,10 +410,11 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the copyright string to display in the about dialog.
-    
-    This should be a short string of one or two lines.
-    Params:
-      copyright =       the copyright string
+      
+      This should be a short string of one or two lines.
+  
+      Params:
+        copyright = the copyright string
   */
   void setCopyright(string copyright = null)
   {
@@ -415,10 +424,11 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the names of the documenters which are displayed
-    in the "Credits" page.
-    Params:
-      documenters =       the authors of the documentation
-          of the application
+      in the "Credits" page.
+  
+      Params:
+        documenters = the authors of the documentation
+            of the application
   */
   void setDocumenters(string[] documenters)
   {
@@ -432,11 +442,12 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the license information to be displayed in the
-    about dialog.
-    
-    If `license` is `NULL`, the license page is hidden.
-    Params:
-      license =       the license information
+      about dialog.
+      
+      If `license` is `NULL`, the license page is hidden.
+  
+      Params:
+        license = the license information
   */
   void setLicense(string license = null)
   {
@@ -446,12 +457,13 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the license of the application showing the about dialog from a
-    list of known licenses.
-    
-    This function overrides the license set using
-    [gtk.about_dialog.AboutDialog.setLicense].
-    Params:
-      licenseType =       the type of license
+      list of known licenses.
+      
+      This function overrides the license set using
+      [gtk.about_dialog.AboutDialog.setLicense].
+  
+      Params:
+        licenseType = the type of license
   */
   void setLicenseType(gtk.types.License licenseType)
   {
@@ -460,8 +472,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the logo in the about dialog.
-    Params:
-      logo =       a [gdk.paintable.Paintable]
+  
+      Params:
+        logo = a [gdk.paintable.Paintable]
   */
   void setLogo(gdk.paintable.Paintable logo = null)
   {
@@ -470,8 +483,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the icon name to be displayed as logo in the about dialog.
-    Params:
-      iconName =       an icon name
+  
+      Params:
+        iconName = an icon name
   */
   void setLogoIconName(string iconName = null)
   {
@@ -481,11 +495,12 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the name to display in the about dialog.
-    
-    If `name` is not set, the string returned
-    by `[glib.global.getApplicationName]` is used.
-    Params:
-      name =       the program name
+      
+      If `name` is not set, the string returned
+      by `[glib.global.getApplicationName]` is used.
+  
+      Params:
+        name = the program name
   */
   void setProgramName(string name = null)
   {
@@ -495,14 +510,15 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the system information to be displayed in the about
-    dialog.
-    
-    If `system_information` is `NULL`, the system information
-    page is hidden.
-    
-    See `propertyGtk.AboutDialog:system-information`.
-    Params:
-      systemInformation =       system information
+      dialog.
+      
+      If `system_information` is `NULL`, the system information
+      page is hidden.
+      
+      See `propertyGtk.AboutDialog:system-information`.
+  
+      Params:
+        systemInformation = system information
   */
   void setSystemInformation(string systemInformation = null)
   {
@@ -512,25 +528,26 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the translator credits string which is displayed in
-    the credits page.
-    
-    The intended use for this string is to display the translator
-    of the language which is currently used in the user interface.
-    Using `gettext()`, a simple way to achieve that is to mark the
-    string for translation:
-    
-    ```c
-    GtkWidget *about = gtk_about_dialog_new ();
-     gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about),
-                                              _("translator-credits"));
-    ```
-    
-    It is a good idea to use the customary `msgid` “translator-credits”
-    for this purpose, since translators will already know the purpose of
-    that `msgid`, and since [gtk.about_dialog.AboutDialog] will detect if “translator-credits”
-    is untranslated and omit translator credits.
-    Params:
-      translatorCredits =       the translator credits
+      the credits page.
+      
+      The intended use for this string is to display the translator
+      of the language which is currently used in the user interface.
+      Using `gettext()`, a simple way to achieve that is to mark the
+      string for translation:
+      
+      ```c
+      GtkWidget *about = gtk_about_dialog_new ();
+       gtk_about_dialog_set_translator_credits (GTK_ABOUT_DIALOG (about),
+                                                _("translator-credits"));
+      ```
+      
+      It is a good idea to use the customary `msgid` “translator-credits”
+      for this purpose, since translators will already know the purpose of
+      that `msgid`, and since [gtk.about_dialog.AboutDialog] will detect if “translator-credits”
+      is untranslated and omit translator credits.
+  
+      Params:
+        translatorCredits = the translator credits
   */
   void setTranslatorCredits(string translatorCredits = null)
   {
@@ -540,8 +557,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the version string to display in the about dialog.
-    Params:
-      version_ =       the version string
+  
+      Params:
+        version_ = the version string
   */
   void setVersion(string version_ = null)
   {
@@ -551,8 +569,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the URL to use for the website link.
-    Params:
-      website =       a URL string starting with `http://`
+  
+      Params:
+        website = a URL string starting with `http://`
   */
   void setWebsite(string website = null)
   {
@@ -562,8 +581,9 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets the label to be used for the website link.
-    Params:
-      websiteLabel =       the label used for the website link
+  
+      Params:
+        websiteLabel = the label used for the website link
   */
   void setWebsiteLabel(string websiteLabel)
   {
@@ -573,9 +593,10 @@ class AboutDialog : gtk.window.Window
 
   /**
       Sets whether the license text in the about dialog should be
-    automatically wrapped.
-    Params:
-      wrapLicense =       whether to wrap the license
+      automatically wrapped.
+  
+      Params:
+        wrapLicense = whether to wrap the license
   */
   void setWrapLicense(bool wrapLicense)
   {
@@ -583,41 +604,47 @@ class AboutDialog : gtk.window.Window
   }
 
   /**
-      Emitted every time a URL is activated.
-    
-    Applications may connect to it to override the default behaviour,
-    which is to call [gtk.file_launcher.FileLauncher.launch].
+      Connect to `ActivateLink` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B uri)       the URI that is activated
-      * $(B aboutDialog) the instance the signal is connected to
-    )
-    Returns:     `TRUE` if the link has been activated
-  */
-  alias ActivateLinkCallbackDlg = bool delegate(string uri, gtk.about_dialog.AboutDialog aboutDialog);
-
-  /** ditto */
-  alias ActivateLinkCallbackFunc = bool function(string uri, gtk.about_dialog.AboutDialog aboutDialog);
-
-  /**
-    Connect to ActivateLink signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted every time a URL is activated.
+      
+      Applications may connect to it to override the default behaviour,
+      which is to call [gtk.file_launcher.FileLauncher.launch].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(string uri, gtk.about_dialog.AboutDialog aboutDialog))
+  
+          `uri` the URI that is activated (optional)
+  
+          `aboutDialog` the instance the signal is connected to (optional)
+  
+          `Returns` `TRUE` if the link has been activated
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivateLink(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateLinkCallbackDlg) || is(T : ActivateLinkCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.about_dialog.AboutDialog)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto aboutDialog = getVal!(gtk.about_dialog.AboutDialog)(_paramVals);
-      auto uri = getVal!(string)(&_paramVals[1]);
-      _retval = _dClosure.dlg(uri, aboutDialog);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 

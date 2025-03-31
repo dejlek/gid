@@ -1,3 +1,4 @@
+/// Module for [RTSPRange] class
 module gstrtsp.rtsprange;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class RTSPRange
 {
   GstRTSPRange cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class RTSPRange
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -52,12 +55,13 @@ class RTSPRange
 
   /**
       Converts the range in-place between different types of units.
-    Ranges containing the special value #GST_RTSP_TIME_NOW can not be
-    converted as these are only valid for #GST_RTSP_RANGE_NPT.
-    Params:
-      range =       a #GstRTSPTimeRange
-      unit =       the unit to convert the range into
-    Returns:     true if the range could be converted
+      Ranges containing the special value #GST_RTSP_TIME_NOW can not be
+      converted as these are only valid for #GST_RTSP_RANGE_NPT.
+  
+      Params:
+        range = a #GstRTSPTimeRange
+        unit = the unit to convert the range into
+      Returns: true if the range could be converted
   */
   static bool convertUnits(gstrtsp.rtsptime_range.RTSPTimeRange range, gstrtsp.types.RTSPRangeUnit unit)
   {
@@ -68,8 +72,9 @@ class RTSPRange
 
   /**
       Free the memory allocated by range.
-    Params:
-      range =       a #GstRTSPTimeRange
+  
+      Params:
+        range = a #GstRTSPTimeRange
   */
   static void free(gstrtsp.rtsptime_range.RTSPTimeRange range)
   {
@@ -78,17 +83,18 @@ class RTSPRange
 
   /**
       Retrieve the minimum and maximum values from range converted to
-    #GstClockTime in min and max.
-    
-    A value of `GST_CLOCK_TIME_NONE` will be used to signal #GST_RTSP_TIME_NOW
-    and #GST_RTSP_TIME_END for min and max respectively.
-    
-    UTC times will be converted to nanoseconds since 1900.
-    Params:
-      range =       a #GstRTSPTimeRange
-      min =       result minimum #GstClockTime
-      max =       result maximum #GstClockTime
-    Returns:     true on success.
+      #GstClockTime in min and max.
+      
+      A value of `GST_CLOCK_TIME_NONE` will be used to signal #GST_RTSP_TIME_NOW
+      and #GST_RTSP_TIME_END for min and max respectively.
+      
+      UTC times will be converted to nanoseconds since 1900.
+  
+      Params:
+        range = a #GstRTSPTimeRange
+        min = result minimum #GstClockTime
+        max = result maximum #GstClockTime
+      Returns: true on success.
   */
   static bool getTimes(gstrtsp.rtsptime_range.RTSPTimeRange range, out gst.types.ClockTime min, out gst.types.ClockTime max)
   {
@@ -99,10 +105,11 @@ class RTSPRange
 
   /**
       Parse rangestr to a #GstRTSPTimeRange.
-    Params:
-      rangestr =       a range string to parse
-      range =       location to hold the #GstRTSPTimeRange result
-    Returns:     #GST_RTSP_OK on success.
+  
+      Params:
+        rangestr = a range string to parse
+        range = location to hold the #GstRTSPTimeRange result
+      Returns: #GST_RTSP_OK on success.
   */
   static gstrtsp.types.RTSPResult parse(string rangestr, out gstrtsp.rtsptime_range.RTSPTimeRange range)
   {
@@ -117,9 +124,10 @@ class RTSPRange
 
   /**
       Convert range into a string representation.
-    Params:
-      range =       a #GstRTSPTimeRange
-    Returns:     The string representation of range. [glib.global.gfree] after usage.
+  
+      Params:
+        range = a #GstRTSPTimeRange
+      Returns: The string representation of range. [glib.global.gfree] after usage.
   */
   static string toString_(gstrtsp.rtsptime_range.RTSPTimeRange range)
   {

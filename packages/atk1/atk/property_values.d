@@ -1,3 +1,4 @@
+/// Module for [PropertyValues] class
 module atk.property_values;
 
 import atk.c.functions;
@@ -8,13 +9,14 @@ import gobject.value;
 
 /**
     Note: @old_value field of #AtkPropertyValues will not contain a
-  valid value. This is a field defined with the purpose of contain
-  the previous value of the property, but is not used anymore.
+    valid value. This is a field defined with the purpose of contain
+    the previous value of the property, but is not used anymore.
 */
 class PropertyValues
 {
   AtkPropertyValues cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class PropertyValues
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

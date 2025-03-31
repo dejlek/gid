@@ -1,3 +1,4 @@
+/// Module for [RTSPExtension] interface mixin
 module gstrtsp.rtspextension_mixin;
 
 public import gstrtsp.rtspextension_iface_proxy;
@@ -15,7 +16,7 @@ public import gstsdp.sdpmessage;
 
 /**
     This interface is implemented e.g. by the Windows Media Streaming RTSP
-   exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
+     exentension (rtspwms) and the RealMedia RTSP extension (rtspreal).
 */
 template RTSPExtensionT()
 {
@@ -109,31 +110,52 @@ template RTSPExtensionT()
     return _retval;
   }
 
-  /** */
-  alias SendCallbackDlg = gstrtsp.types.RTSPResult delegate(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension);
-
-  /** ditto */
-  alias SendCallbackFunc = gstrtsp.types.RTSPResult function(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension);
-
   /**
-    Connect to Send signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Send` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D gstrtsp.types.RTSPResult callback(void* object, void* p0, gstrtsp.rtspextension.RTSPExtension rTSPExtension))
+  
+          `object`  (optional)
+  
+          `p0`  (optional)
+  
+          `rTSPExtension` the instance the signal is connected to (optional)
+  
+          `Returns` 
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSend(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SendCallbackDlg) || is(T : SendCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == gstrtsp.types.RTSPResult)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == void*)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstrtsp.rtspextension.RTSPExtension)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto rTSPExtension = getVal!(gstrtsp.rtspextension.RTSPExtension)(_paramVals);
-      auto object = getVal!(void*)(&_paramVals[1]);
-      auto p0 = getVal!(void*)(&_paramVals[2]);
-      auto _dretval = _dClosure.dlg(object, p0, rTSPExtension);
-      GstRTSPResult _retval = cast(GstRTSPResult)_dretval;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!gstrtsp.types.RTSPResult(_returnValue, _retval);
     }
 

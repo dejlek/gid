@@ -1,3 +1,4 @@
+/// Module for [BitReader] class
 module gstbase.bit_reader;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gstbase.types;
 
 /**
     #GstBitReader provides a bit reader that can read any number of bits
-  from a memory buffer. It provides functions for reading any number of bits
-  into 8, 16, 32 and 64 bit variables.
+    from a memory buffer. It provides functions for reading any number of bits
+    into 8, 16, 32 and 64 bit variables.
 */
 class BitReader
 {
   GstBitReader cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class BitReader
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -62,10 +65,11 @@ class BitReader
 
   /**
       Read nbits bits into val and update the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool getBitsUint16(out ushort val, uint nbits)
   {
@@ -76,10 +80,11 @@ class BitReader
 
   /**
       Read nbits bits into val and update the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool getBitsUint32(out uint val, uint nbits)
   {
@@ -90,10 +95,11 @@ class BitReader
 
   /**
       Read nbits bits into val and update the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool getBitsUint64(out ulong val, uint nbits)
   {
@@ -104,10 +110,11 @@ class BitReader
 
   /**
       Read nbits bits into val and update the current position.
-    Params:
-      val =       Pointer to a #guint8 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint8 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool getBitsUint8(out ubyte val, uint nbits)
   {
@@ -118,7 +125,7 @@ class BitReader
 
   /**
       Returns the current position of a #GstBitReader instance in bits.
-    Returns:     The current position of reader in bits.
+      Returns: The current position of reader in bits.
   */
   uint getPos()
   {
@@ -129,7 +136,7 @@ class BitReader
 
   /**
       Returns the remaining number of bits of a #GstBitReader instance.
-    Returns:     The remaining number of bits of reader instance.
+      Returns: The remaining number of bits of reader instance.
   */
   uint getRemaining()
   {
@@ -140,7 +147,7 @@ class BitReader
 
   /**
       Returns the total number of bits of a #GstBitReader instance.
-    Returns:     The total number of bits of reader instance.
+      Returns: The total number of bits of reader instance.
   */
   uint getSize()
   {
@@ -151,9 +158,10 @@ class BitReader
 
   /**
       Initializes a #GstBitReader instance to read from data. This function
-    can be called on already initialized instances.
-    Params:
-      data =       data from which the bit reader should read
+      can be called on already initialized instances.
+  
+      Params:
+        data = data from which the bit reader should read
   */
   void init_(ubyte[] data)
   {
@@ -167,10 +175,11 @@ class BitReader
 
   /**
       Read nbits bits into val but keep the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool peekBitsUint16(out ushort val, uint nbits)
   {
@@ -181,10 +190,11 @@ class BitReader
 
   /**
       Read nbits bits into val but keep the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool peekBitsUint32(out uint val, uint nbits)
   {
@@ -195,10 +205,11 @@ class BitReader
 
   /**
       Read nbits bits into val but keep the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool peekBitsUint64(out ulong val, uint nbits)
   {
@@ -209,10 +220,11 @@ class BitReader
 
   /**
       Read nbits bits into val but keep the current position.
-    Params:
-      val =       Pointer to a #guint8 to store the result
-      nbits =       number of bits to read
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint8 to store the result
+        nbits = number of bits to read
+      Returns: true if successful, false otherwise.
   */
   bool peekBitsUint8(out ubyte val, uint nbits)
   {
@@ -223,10 +235,11 @@ class BitReader
 
   /**
       Sets the new position of a #GstBitReader instance to pos in bits.
-    Params:
-      pos =       The new position in bits
-    Returns:     true if the position could be set successfully, false
-      otherwise.
+  
+      Params:
+        pos = The new position in bits
+      Returns: true if the position could be set successfully, false
+        otherwise.
   */
   bool setPos(uint pos)
   {
@@ -237,9 +250,10 @@ class BitReader
 
   /**
       Skips nbits bits of the #GstBitReader instance.
-    Params:
-      nbits =       the number of bits to skip
-    Returns:     true if nbits bits could be skipped, false otherwise.
+  
+      Params:
+        nbits = the number of bits to skip
+      Returns: true if nbits bits could be skipped, false otherwise.
   */
   bool skip(uint nbits)
   {
@@ -250,7 +264,7 @@ class BitReader
 
   /**
       Skips until the next byte.
-    Returns:     true if successful, false otherwise.
+      Returns: true if successful, false otherwise.
   */
   bool skipToByte()
   {

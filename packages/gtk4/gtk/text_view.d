@@ -1,3 +1,4 @@
+/// Module for [TextView] class
 module gtk.text_view;
 
 import gdk.event;
@@ -29,54 +30,57 @@ import pango.tab_array;
 
 /**
     A widget that displays the contents of a [gtk.text_buffer.TextBuffer].
-  
-  ![An example GtkTextview](multiline-text.png)
-  
-  You may wish to begin by reading the [conceptual overview](section-text-widget.html),
-  which gives an overview of all the objects and data types related to the
-  text widget and how they work together.
-  
-  ## CSS nodes
-  
-  ```
-  textview.view
-  ├── border.top
-  ├── border.left
-  ├── text
-  │   ╰── [selection]
-  ├── border.right
-  ├── border.bottom
-  ╰── [window.popup]
-  ```
-  
-  [gtk.text_view.TextView] has a main css node with name textview and style class .view,
-  and subnodes for each of the border windows, and the main text area,
-  with names border and text, respectively. The border nodes each get
-  one of the style classes .left, .right, .top or .bottom.
-  
-  A node representing the selection will appear below the text node.
-  
-  If a context menu is opened, the window node will appear as a subnode
-  of the main node.
-  
-  ## Accessibility
-  
-  [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.TextBox] role.
+    
+    ![An example GtkTextview](multiline-text.png)
+    
+    You may wish to begin by reading the [conceptual overview](section-text-widget.html),
+    which gives an overview of all the objects and data types related to the
+    text widget and how they work together.
+    
+    ## CSS nodes
+    
+    ```
+    textview.view
+    ├── border.top
+    ├── border.left
+    ├── text
+    │   ╰── [selection]
+    ├── border.right
+    ├── border.bottom
+    ╰── [window.popup]
+    ```
+    
+    [gtk.text_view.TextView] has a main css node with name textview and style class .view,
+    and subnodes for each of the border windows, and the main text area,
+    with names border and text, respectively. The border nodes each get
+    one of the style classes .left, .right, .top or .bottom.
+    
+    A node representing the selection will appear below the text node.
+    
+    If a context menu is opened, the window node will appear as a subnode
+    of the main node.
+    
+    ## Accessibility
+    
+    [gtk.text_view.TextView] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scrollable.Scrollable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_view_get_type != &gidSymbolNotFound ? gtk_text_view_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -92,12 +96,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Creates a new [gtk.text_view.TextView].
-    
-    If you don’t call [gtk.text_view.TextView.setBuffer] before using the
-    text view, an empty default buffer will be created for you. Get the
-    buffer with [gtk.text_view.TextView.getBuffer]. If you want to specify
-    your own buffer, consider [gtk.text_view.TextView.newWithBuffer].
-    Returns:     a new [gtk.text_view.TextView]
+      
+      If you don’t call [gtk.text_view.TextView.setBuffer] before using the
+      text view, an empty default buffer will be created for you. Get the
+      buffer with [gtk.text_view.TextView.getBuffer]. If you want to specify
+      your own buffer, consider [gtk.text_view.TextView.newWithBuffer].
+      Returns: a new [gtk.text_view.TextView]
   */
   this()
   {
@@ -108,14 +112,15 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Creates a new [gtk.text_view.TextView] widget displaying the buffer buffer.
-    
-    One buffer can be shared among many widgets. buffer may be null
-    to create a default buffer, in which case this function is equivalent
-    to [gtk.text_view.TextView.new_]. The text view adds its own reference count
-    to the buffer; it does not take over an existing reference.
-    Params:
-      buffer =       a [gtk.text_buffer.TextBuffer]
-    Returns:     a new [gtk.text_view.TextView].
+      
+      One buffer can be shared among many widgets. buffer may be null
+      to create a default buffer, in which case this function is equivalent
+      to [gtk.text_view.TextView.new_]. The text view adds its own reference count
+      to the buffer; it does not take over an existing reference.
+  
+      Params:
+        buffer = a [gtk.text_buffer.TextBuffer]
+      Returns: a new [gtk.text_view.TextView].
   */
   static gtk.text_view.TextView newWithBuffer(gtk.text_buffer.TextBuffer buffer)
   {
@@ -127,9 +132,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Adds a child widget in the text buffer, at the given anchor.
-    Params:
-      child =       a [gtk.widget.Widget]
-      anchor =       a [gtk.text_child_anchor.TextChildAnchor] in the [gtk.text_buffer.TextBuffer] for text_view
+  
+      Params:
+        child = a [gtk.widget.Widget]
+        anchor = a [gtk.text_child_anchor.TextChildAnchor] in the [gtk.text_buffer.TextBuffer] for text_view
   */
   void addChildAtAnchor(gtk.widget.Widget child, gtk.text_child_anchor.TextChildAnchor anchor)
   {
@@ -138,19 +144,20 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Adds child at a fixed coordinate in the [gtk.text_view.TextView]'s text window.
-    
-    The xpos and ypos must be in buffer coordinates (see
-    [gtk.text_view.TextView.getIterLocation] to convert to
-    buffer coordinates).
-    
-    child will scroll with the text view.
-    
-    If instead you want a widget that will not move with the
-    [gtk.text_view.TextView] contents see [gtk.overlay.Overlay].
-    Params:
-      child =       a [gtk.widget.Widget]
-      xpos =       X position of child in window coordinates
-      ypos =       Y position of child in window coordinates
+      
+      The xpos and ypos must be in buffer coordinates (see
+      [gtk.text_view.TextView.getIterLocation] to convert to
+      buffer coordinates).
+      
+      child will scroll with the text view.
+      
+      If instead you want a widget that will not move with the
+      [gtk.text_view.TextView] contents see [gtk.overlay.Overlay].
+  
+      Params:
+        child = a [gtk.widget.Widget]
+        xpos = X position of child in window coordinates
+        ypos = Y position of child in window coordinates
   */
   void addOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
@@ -159,17 +166,18 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves the given iter backward by one display (wrapped) line.
-    
-    A display line is different from a paragraph. Paragraphs are
-    separated by newlines or other paragraph separator characters.
-    Display lines are created by line-wrapping a paragraph. If
-    wrapping is turned off, display lines and paragraphs will be the
-    same. Display lines are divided differently for each view, since
-    they depend on the view’s width; paragraphs are the same in all
-    views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-    Returns:     true if iter was moved and is not on the end iterator
+      
+      A display line is different from a paragraph. Paragraphs are
+      separated by newlines or other paragraph separator characters.
+      Display lines are created by line-wrapping a paragraph. If
+      wrapping is turned off, display lines and paragraphs will be the
+      same. Display lines are divided differently for each view, since
+      they depend on the view’s width; paragraphs are the same in all
+      views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+      Returns: true if iter was moved and is not on the end iterator
   */
   bool backwardDisplayLine(gtk.text_iter.TextIter iter)
   {
@@ -180,17 +188,18 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves the given iter backward to the next display line start.
-    
-    A display line is different from a paragraph. Paragraphs are
-    separated by newlines or other paragraph separator characters.
-    Display lines are created by line-wrapping a paragraph. If
-    wrapping is turned off, display lines and paragraphs will be the
-    same. Display lines are divided differently for each view, since
-    they depend on the view’s width; paragraphs are the same in all
-    views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-    Returns:     true if iter was moved and is not on the end iterator
+      
+      A display line is different from a paragraph. Paragraphs are
+      separated by newlines or other paragraph separator characters.
+      Display lines are created by line-wrapping a paragraph. If
+      wrapping is turned off, display lines and paragraphs will be the
+      same. Display lines are divided differently for each view, since
+      they depend on the view’s width; paragraphs are the same in all
+      views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+      Returns: true if iter was moved and is not on the end iterator
   */
   bool backwardDisplayLineStart(gtk.text_iter.TextIter iter)
   {
@@ -201,12 +210,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Converts buffer coordinates to window coordinates.
-    Params:
-      win =       a [gtk.types.TextWindowType]
-      bufferX =       buffer x coordinate
-      bufferY =       buffer y coordinate
-      windowX =       window x coordinate return location
-      windowY =       window y coordinate return location
+  
+      Params:
+        win = a [gtk.types.TextWindowType]
+        bufferX = buffer x coordinate
+        bufferY = buffer y coordinate
+        windowX = window x coordinate return location
+        windowY = window y coordinate return location
   */
   void bufferToWindowCoords(gtk.types.TextWindowType win, int bufferX, int bufferY, out int windowX, out int windowY)
   {
@@ -215,17 +225,18 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves the given iter forward by one display (wrapped) line.
-    
-    A display line is different from a paragraph. Paragraphs are
-    separated by newlines or other paragraph separator characters.
-    Display lines are created by line-wrapping a paragraph. If
-    wrapping is turned off, display lines and paragraphs will be the
-    same. Display lines are divided differently for each view, since
-    they depend on the view’s width; paragraphs are the same in all
-    views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-    Returns:     true if iter was moved and is not on the end iterator
+      
+      A display line is different from a paragraph. Paragraphs are
+      separated by newlines or other paragraph separator characters.
+      Display lines are created by line-wrapping a paragraph. If
+      wrapping is turned off, display lines and paragraphs will be the
+      same. Display lines are divided differently for each view, since
+      they depend on the view’s width; paragraphs are the same in all
+      views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+      Returns: true if iter was moved and is not on the end iterator
   */
   bool forwardDisplayLine(gtk.text_iter.TextIter iter)
   {
@@ -236,17 +247,18 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves the given iter forward to the next display line end.
-    
-    A display line is different from a paragraph. Paragraphs are
-    separated by newlines or other paragraph separator characters.
-    Display lines are created by line-wrapping a paragraph. If
-    wrapping is turned off, display lines and paragraphs will be the
-    same. Display lines are divided differently for each view, since
-    they depend on the view’s width; paragraphs are the same in all
-    views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-    Returns:     true if iter was moved and is not on the end iterator
+      
+      A display line is different from a paragraph. Paragraphs are
+      separated by newlines or other paragraph separator characters.
+      Display lines are created by line-wrapping a paragraph. If
+      wrapping is turned off, display lines and paragraphs will be the
+      same. Display lines are divided differently for each view, since
+      they depend on the view’s width; paragraphs are the same in all
+      views, since they depend on the contents of the [gtk.text_buffer.TextBuffer].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+      Returns: true if iter was moved and is not on the end iterator
   */
   bool forwardDisplayLineEnd(gtk.text_iter.TextIter iter)
   {
@@ -257,10 +269,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Returns whether pressing the <kbd>Tab</kbd> key inserts a tab characters.
-    
-    See [gtk.text_view.TextView.setAcceptsTab].
-    Returns:     true if pressing the Tab key inserts a tab character,
-        false if pressing the Tab key moves the keyboard focus.
+      
+      See [gtk.text_view.TextView.setAcceptsTab].
+      Returns: true if pressing the Tab key inserts a tab character,
+          false if pressing the Tab key moves the keyboard focus.
   */
   bool getAcceptsTab()
   {
@@ -271,7 +283,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the bottom margin for text in the text_view.
-    Returns:     bottom margin in pixels
+      Returns: bottom margin in pixels
   */
   int getBottomMargin()
   {
@@ -282,10 +294,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Returns the [gtk.text_buffer.TextBuffer] being displayed by this text view.
-    
-    The reference count on the buffer is not incremented; the caller
-    of this function won’t own a new reference.
-    Returns:     a [gtk.text_buffer.TextBuffer]
+      
+      The reference count on the buffer is not incremented; the caller
+      of this function won’t own a new reference.
+      Returns: a [gtk.text_buffer.TextBuffer]
   */
   gtk.text_buffer.TextBuffer getBuffer()
   {
@@ -297,29 +309,30 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Determine the positions of the strong and weak cursors if the
-    insertion point is at iter.
-    
-    The position of each cursor is stored as a zero-width rectangle.
-    The strong cursor location is the location where characters of
-    the directionality equal to the base direction of the paragraph
-    are inserted. The weak cursor location is the location where
-    characters of the directionality opposite to the base direction
-    of the paragraph are inserted.
-    
-    If iter is null, the actual cursor position is used.
-    
-    Note that if iter happens to be the actual cursor position, and
-    there is currently an IM preedit sequence being entered, the
-    returned locations will be adjusted to account for the preedit
-    cursor’s offset within the preedit sequence.
-    
-    The rectangle position is in buffer coordinates; use
-    [gtk.text_view.TextView.bufferToWindowCoords] to convert these
-    coordinates to coordinates for one of the windows in the text view.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      strong =       location to store the strong cursor position
-      weak =       location to store the weak cursor position
+      insertion point is at iter.
+      
+      The position of each cursor is stored as a zero-width rectangle.
+      The strong cursor location is the location where characters of
+      the directionality equal to the base direction of the paragraph
+      are inserted. The weak cursor location is the location where
+      characters of the directionality opposite to the base direction
+      of the paragraph are inserted.
+      
+      If iter is null, the actual cursor position is used.
+      
+      Note that if iter happens to be the actual cursor position, and
+      there is currently an IM preedit sequence being entered, the
+      returned locations will be adjusted to account for the preedit
+      cursor’s offset within the preedit sequence.
+      
+      The rectangle position is in buffer coordinates; use
+      [gtk.text_view.TextView.bufferToWindowCoords] to convert these
+      coordinates to coordinates for one of the windows in the text view.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        strong = location to store the strong cursor position
+        weak = location to store the weak cursor position
   */
   void getCursorLocations(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle strong, out gdk.rectangle.Rectangle weak)
   {
@@ -332,7 +345,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Find out whether the cursor should be displayed.
-    Returns:     whether the insertion mark is visible
+      Returns: whether the insertion mark is visible
   */
   bool getCursorVisible()
   {
@@ -343,9 +356,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Returns the default editability of the [gtk.text_view.TextView].
-    
-    Tags in the buffer may override this setting for some ranges of text.
-    Returns:     whether text is editable by default
+      
+      Tags in the buffer may override this setting for some ranges of text.
+      Returns: whether text is editable by default
   */
   bool getEditable()
   {
@@ -356,8 +369,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the menu model that gets added to the context menu
-    or null if none has been set.
-    Returns:     the menu model
+      or null if none has been set.
+      Returns: the menu model
   */
   gio.menu_model.MenuModel getExtraMenu()
   {
@@ -369,14 +382,15 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets a [gtk.widget.Widget] that has previously been set as gutter.
-    
-    See [gtk.text_view.TextView.setGutter].
-    
-    win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
-    [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
-    Params:
-      win =       a [gtk.types.TextWindowType]
-    Returns:     a [gtk.widget.Widget]
+      
+      See [gtk.text_view.TextView.setGutter].
+      
+      win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
+      [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
+  
+      Params:
+        win = a [gtk.types.TextWindowType]
+      Returns: a [gtk.widget.Widget]
   */
   gtk.widget.Widget getGutter(gtk.types.TextWindowType win)
   {
@@ -388,10 +402,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default indentation of paragraphs in text_view.
-    
-    Tags in the view’s buffer may override the default.
-    The indentation may be negative.
-    Returns:     number of pixels of indentation
+      
+      Tags in the view’s buffer may override the default.
+      The indentation may be negative.
+      Returns: number of pixels of indentation
   */
   int getIndent()
   {
@@ -402,7 +416,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the `input-hints` of the [gtk.text_view.TextView].
-    Returns: 
+      Returns: 
   */
   gtk.types.InputHints getInputHints()
   {
@@ -414,7 +428,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the `input-purpose` of the [gtk.text_view.TextView].
-    Returns: 
+      Returns: 
   */
   gtk.types.InputPurpose getInputPurpose()
   {
@@ -425,17 +439,18 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Retrieves the iterator at buffer coordinates x and y.
-    
-    Buffer coordinates are coordinates for the entire buffer, not just
-    the currently-displayed portion. If you have coordinates from an
-    event, you have to convert those to buffer coordinates with
-    [gtk.text_view.TextView.windowToBufferCoords].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      x =       x position, in buffer coordinates
-      y =       y position, in buffer coordinates
-    Returns:     true if the position is over text
+      Retrieves the iterator at buffer coordinates `x` and `y`.
+      
+      Buffer coordinates are coordinates for the entire buffer, not just
+      the currently-displayed portion. If you have coordinates from an
+      event, you have to convert those to buffer coordinates with
+      [gtk.text_view.TextView.windowToBufferCoords].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        x = x position, in buffer coordinates
+        y = y position, in buffer coordinates
+      Returns: true if the position is over text
   */
   bool getIterAtLocation(out gtk.text_iter.TextIter iter, int x, int y)
   {
@@ -448,24 +463,25 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Retrieves the iterator pointing to the character at buffer
-    coordinates x and y.
-    
-    Buffer coordinates are coordinates for the entire buffer, not just
-    the currently-displayed portion. If you have coordinates from an event,
-    you have to convert those to buffer coordinates with
-    [gtk.text_view.TextView.windowToBufferCoords].
-    
-    Note that this is different from [gtk.text_view.TextView.getIterAtLocation],
-    which returns cursor locations, i.e. positions between characters.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      trailing =       if non-null, location to store
-           an integer indicating where in the grapheme the user clicked.
-           It will either be zero, or the number of characters in the grapheme.
-           0 represents the trailing edge of the grapheme.
-      x =       x position, in buffer coordinates
-      y =       y position, in buffer coordinates
-    Returns:     true if the position is over text
+      coordinates `x` and `y`.
+      
+      Buffer coordinates are coordinates for the entire buffer, not just
+      the currently-displayed portion. If you have coordinates from an event,
+      you have to convert those to buffer coordinates with
+      [gtk.text_view.TextView.windowToBufferCoords].
+      
+      Note that this is different from [gtk.text_view.TextView.getIterAtLocation],
+      which returns cursor locations, i.e. positions between characters.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        trailing = if non-null, location to store
+             an integer indicating where in the grapheme the user clicked.
+             It will either be zero, or the number of characters in the grapheme.
+             0 represents the trailing edge of the grapheme.
+        x = x position, in buffer coordinates
+        y = y position, in buffer coordinates
+      Returns: true if the position is over text
   */
   bool getIterAtPosition(out gtk.text_iter.TextIter iter, out int trailing, int x, int y)
   {
@@ -478,13 +494,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets a rectangle which roughly contains the character at iter.
-    
-    The rectangle position is in buffer coordinates; use
-    [gtk.text_view.TextView.bufferToWindowCoords] to convert these
-    coordinates to coordinates for one of the windows in the text view.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      location =       bounds of the character at iter
+      
+      The rectangle position is in buffer coordinates; use
+      [gtk.text_view.TextView.bufferToWindowCoords] to convert these
+      coordinates to coordinates for one of the windows in the text view.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        location = bounds of the character at iter
   */
   void getIterLocation(gtk.text_iter.TextIter iter, out gdk.rectangle.Rectangle location)
   {
@@ -495,9 +512,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default justification of paragraphs in text_view.
-    
-    Tags in the buffer may override the default.
-    Returns:     default justification
+      
+      Tags in the buffer may override the default.
+      Returns: default justification
   */
   gtk.types.Justification getJustification()
   {
@@ -509,9 +526,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default left margin size of paragraphs in the text_view.
-    
-    Tags in the buffer may override the default.
-    Returns:     left margin in pixels
+      
+      Tags in the buffer may override the default.
+      Returns: left margin in pixels
   */
   int getLeftMargin()
   {
@@ -522,16 +539,17 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the [gtk.text_iter.TextIter] at the start of the line containing
-    the coordinate y.
-    
-    y is in buffer coordinates, convert from window coordinates with
-    [gtk.text_view.TextView.windowToBufferCoords]. If non-null,
-    line_top will be filled with the coordinate of the top edge
-    of the line.
-    Params:
-      targetIter =       a [gtk.text_iter.TextIter]
-      y =       a y coordinate
-      lineTop =       return location for top coordinate of the line
+      the coordinate `y`.
+      
+      `y` is in buffer coordinates, convert from window coordinates with
+      [gtk.text_view.TextView.windowToBufferCoords]. If non-null,
+      line_top will be filled with the coordinate of the top edge
+      of the line.
+  
+      Params:
+        targetIter = a [gtk.text_iter.TextIter]
+        y = a y coordinate
+        lineTop = return location for top coordinate of the line
   */
   void getLineAtY(out gtk.text_iter.TextIter targetIter, int y, out int lineTop)
   {
@@ -542,14 +560,15 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the y coordinate of the top of the line containing iter,
-    and the height of the line.
-    
-    The coordinate is a buffer coordinate; convert to window
-    coordinates with [gtk.text_view.TextView.bufferToWindowCoords].
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      y =       return location for a y coordinate
-      height =       return location for a height
+      and the height of the line.
+      
+      The coordinate is a buffer coordinate; convert to window
+      coordinates with [gtk.text_view.TextView.bufferToWindowCoords].
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        y = return location for a y coordinate
+        height = return location for a height
   */
   void getLineYrange(gtk.text_iter.TextIter iter, out int y, out int height)
   {
@@ -558,10 +577,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the [pango.context.Context] that is used for rendering LTR directed
-    text layouts.
-    
-    The context may be replaced when CSS changes occur.
-    Returns:     a [pango.context.Context]
+      text layouts.
+      
+      The context may be replaced when CSS changes occur.
+      Returns: a [pango.context.Context]
   */
   pango.context.Context getLtrContext()
   {
@@ -573,7 +592,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets whether the [gtk.text_view.TextView] uses monospace styling.
-    Returns:     true if monospace fonts are desired
+      Returns: true if monospace fonts are desired
   */
   bool getMonospace()
   {
@@ -584,7 +603,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Returns whether the [gtk.text_view.TextView] is in overwrite mode or not.
-    Returns:     whether text_view is in overwrite mode or not.
+      Returns: whether text_view is in overwrite mode or not.
   */
   bool getOverwrite()
   {
@@ -595,10 +614,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default number of pixels to put above paragraphs.
-    
-    Adding this function with [gtk.text_view.TextView.getPixelsBelowLines]
-    is equal to the line space between each paragraph.
-    Returns:     default number of pixels above paragraphs
+      
+      Adding this function with [gtk.text_view.TextView.getPixelsBelowLines]
+      is equal to the line space between each paragraph.
+      Returns: default number of pixels above paragraphs
   */
   int getPixelsAboveLines()
   {
@@ -609,10 +628,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default number of pixels to put below paragraphs.
-    
-    The line space is the sum of the value returned by this function and
-    the value returned by [gtk.text_view.TextView.getPixelsAboveLines].
-    Returns:     default number of blank pixels below paragraphs
+      
+      The line space is the sum of the value returned by this function and
+      the value returned by [gtk.text_view.TextView.getPixelsAboveLines].
+      Returns: default number of blank pixels below paragraphs
   */
   int getPixelsBelowLines()
   {
@@ -623,8 +642,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default number of pixels to put between wrapped lines
-    inside a paragraph.
-    Returns:     default number of pixels of blank space between wrapped lines
+      inside a paragraph.
+      Returns: default number of pixels of blank space between wrapped lines
   */
   int getPixelsInsideWrap()
   {
@@ -635,9 +654,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default right margin for text in text_view.
-    
-    Tags in the buffer may override the default.
-    Returns:     right margin in pixels
+      
+      Tags in the buffer may override the default.
+      Returns: right margin in pixels
   */
   int getRightMargin()
   {
@@ -648,10 +667,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the [pango.context.Context] that is used for rendering RTL directed
-    text layouts.
-    
-    The context may be replaced when CSS changes occur.
-    Returns:     a [pango.context.Context]
+      text layouts.
+      
+      The context may be replaced when CSS changes occur.
+      Returns: a [pango.context.Context]
   */
   pango.context.Context getRtlContext()
   {
@@ -663,13 +682,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the default tabs for text_view.
-    
-    Tags in the buffer may override the defaults. The returned array
-    will be null if “standard” (8-space) tabs are used. Free the
-    return value with [pango.tab_array.TabArray.free].
-    Returns:     copy of default tab array,
-        or null if standard tabs are used; must be freed with
-        [pango.tab_array.TabArray.free].
+      
+      Tags in the buffer may override the defaults. The returned array
+      will be null if “standard” (8-space) tabs are used. Free the
+      return value with [pango.tab_array.TabArray.free].
+      Returns: copy of default tab array,
+          or null if standard tabs are used; must be freed with
+          [pango.tab_array.TabArray.free].
   */
   pango.tab_array.TabArray getTabs()
   {
@@ -681,7 +700,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the top margin for text in the text_view.
-    Returns:     top margin in pixels
+      Returns: top margin in pixels
   */
   int getTopMargin()
   {
@@ -692,12 +711,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Fills visible_rect with the currently-visible
-    region of the buffer, in buffer coordinates.
-    
-    Convert to window coordinates with
-    [gtk.text_view.TextView.bufferToWindowCoords].
-    Params:
-      visibleRect =       rectangle to fill
+      region of the buffer, in buffer coordinates.
+      
+      Convert to window coordinates with
+      [gtk.text_view.TextView.bufferToWindowCoords].
+  
+      Params:
+        visibleRect = rectangle to fill
   */
   void getVisibleRect(out gdk.rectangle.Rectangle visibleRect)
   {
@@ -708,7 +728,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Gets the line wrapping for the view.
-    Returns:     the line wrap setting
+      Returns: the line wrap setting
   */
   gtk.types.WrapMode getWrapMode()
   {
@@ -720,39 +740,40 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Allow the [gtk.text_view.TextView] input method to internally handle key press
-    and release events.
-    
-    If this function returns true, then no further processing should be
-    done for this key event. See [gtk.imcontext.IMContext.filterKeypress].
-    
-    Note that you are expected to call this function from your handler
-    when overriding key event handling. This is needed in the case when
-    you need to insert your own key handling between the input method
-    and the default key event handling of the [gtk.text_view.TextView].
-    
-    ```c
-    static gboolean
-    gtk_foo_bar_key_press_event (GtkWidget *widget,
-                                 GdkEvent  *event)
-    {
-      guint keyval;
-    
-      gdk_event_get_keyval ((GdkEvent*)event, &keyval);
-    
-      if (keyval == GDK_KEY_Return || keyval == GDK_KEY_KP_Enter)
-        {
-          if (gtk_text_view_im_context_filter_keypress (GTK_TEXT_VIEW (widget), event))
-            return TRUE;
-        }
-    
-      // Do some stuff
-    
-      return GTK_WIDGET_CLASS (gtk_foo_bar_parent_class)->key_press_event (widget, event);
-    }
-    ```
-    Params:
-      event =       the key event
-    Returns:     true if the input method handled the key event.
+      and release events.
+      
+      If this function returns true, then no further processing should be
+      done for this key event. See [gtk.imcontext.IMContext.filterKeypress].
+      
+      Note that you are expected to call this function from your handler
+      when overriding key event handling. This is needed in the case when
+      you need to insert your own key handling between the input method
+      and the default key event handling of the [gtk.text_view.TextView].
+      
+      ```c
+      static gboolean
+      gtk_foo_bar_key_press_event (GtkWidget *widget,
+                                   GdkEvent  *event)
+      {
+        guint keyval;
+      
+        gdk_event_get_keyval ((GdkEvent*)event, &keyval);
+      
+        if (keyval == GDK_KEY_Return || keyval == GDK_KEY_KP_Enter)
+          {
+            if (gtk_text_view_im_context_filter_keypress (GTK_TEXT_VIEW (widget), event))
+              return TRUE;
+          }
+      
+        // Do some stuff
+      
+        return GTK_WIDGET_CLASS (gtk_foo_bar_parent_class)->key_press_event (widget, event);
+      }
+      ```
+  
+      Params:
+        event = the key event
+      Returns: true if the input method handled the key event.
   */
   bool imContextFilterKeypress(gdk.event.Event event)
   {
@@ -763,10 +784,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves a mark within the buffer so that it's
-    located within the currently-visible text area.
-    Params:
-      mark =       a [gtk.text_mark.TextMark]
-    Returns:     true if the mark moved (wasn’t already onscreen)
+      located within the currently-visible text area.
+  
+      Params:
+        mark = a [gtk.text_mark.TextMark]
+      Returns: true if the mark moved (wasn’t already onscreen)
   */
   bool moveMarkOnscreen(gtk.text_mark.TextMark mark)
   {
@@ -777,12 +799,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Updates the position of a child.
-    
-    See [gtk.text_view.TextView.addOverlay].
-    Params:
-      child =       a widget already added with [gtk.text_view.TextView.addOverlay]
-      xpos =       new X position in buffer coordinates
-      ypos =       new Y position in buffer coordinates
+      
+      See [gtk.text_view.TextView.addOverlay].
+  
+      Params:
+        child = a widget already added with [gtk.text_view.TextView.addOverlay]
+        xpos = new X position in buffer coordinates
+        ypos = new Y position in buffer coordinates
   */
   void moveOverlay(gtk.widget.Widget child, int xpos, int ypos)
   {
@@ -791,22 +814,23 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Move the iterator a given number of characters visually, treating
-    it as the strong cursor position.
-    
-    If count is positive, then the new strong cursor position will
-    be count positions to the right of the old cursor position.
-    If count is negative then the new strong cursor position will
-    be count positions to the left of the old cursor position.
-    
-    In the presence of bi-directional text, the correspondence
-    between logical and visual order will depend on the direction
-    of the current run, and there may be jumps when the cursor
-    is moved off of the end of a run.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      count =       number of characters to move (negative moves left,
-           positive moves right)
-    Returns:     true if iter moved and is not on the end iterator
+      it as the strong cursor position.
+      
+      If count is positive, then the new strong cursor position will
+      be count positions to the right of the old cursor position.
+      If count is negative then the new strong cursor position will
+      be count positions to the left of the old cursor position.
+      
+      In the presence of bi-directional text, the correspondence
+      between logical and visual order will depend on the direction
+      of the current run, and there may be jumps when the cursor
+      is moved off of the end of a run.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        count = number of characters to move (negative moves left,
+             positive moves right)
+      Returns: true if iter moved and is not on the end iterator
   */
   bool moveVisually(gtk.text_iter.TextIter iter, int count)
   {
@@ -817,8 +841,8 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Moves the cursor to the currently visible region of the
-    buffer.
-    Returns:     true if the cursor had to be moved.
+      buffer.
+      Returns: true if the cursor had to be moved.
   */
   bool placeCursorOnscreen()
   {
@@ -829,8 +853,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Removes a child widget from text_view.
-    Params:
-      child =       the child to remove
+  
+      Params:
+        child = the child to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -839,13 +864,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Ensures that the cursor is shown.
-    
-    This also resets the time that it will stay blinking (or
-    visible, in case blinking is disabled).
-    
-    This function should be called in response to user input
-    (e.g. from derived classes that override the textview's
-    event handlers).
+      
+      This also resets the time that it will stay blinking (or
+      visible, in case blinking is disabled).
+      
+      This function should be called in response to user input
+      (e.g. from derived classes that override the textview's
+      event handlers).
   */
   void resetCursorBlink()
   {
@@ -854,9 +879,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Reset the input method context of the text view if needed.
-    
-    This can be necessary in the case where modifying the buffer
-    would confuse on-going input method behavior.
+      
+      This can be necessary in the case where modifying the buffer
+      would confuse on-going input method behavior.
   */
   void resetImContext()
   {
@@ -865,9 +890,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Scrolls text_view the minimum distance such that mark is contained
-    within the visible area of the widget.
-    Params:
-      mark =       a mark in the buffer for text_view
+      within the visible area of the widget.
+  
+      Params:
+        mark = a mark in the buffer for text_view
   */
   void scrollMarkOnscreen(gtk.text_mark.TextMark mark)
   {
@@ -876,28 +902,29 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Scrolls text_view so that iter is on the screen in the position
-    indicated by xalign and yalign.
-    
-    An alignment of 0.0 indicates left or top, 1.0 indicates right or
-    bottom, 0.5 means center. If use_align is false, the text scrolls
-    the minimal distance to get the mark onscreen, possibly not scrolling
-    at all. The effective screen for purposes of this function is reduced
-    by a margin of size within_margin.
-    
-    Note that this function uses the currently-computed height of the
-    lines in the text buffer. Line heights are computed in an idle
-    handler; so this function may not have the desired effect if it’s
-    called before the height computations. To avoid oddness, consider
-    using [gtk.text_view.TextView.scrollToMark] which saves a point to be
-    scrolled to after line validation.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-      withinMargin =       margin as a [0.0,0.5) fraction of screen size
-      useAlign =       whether to use alignment arguments (if false,
-           just get the mark onscreen)
-      xalign =       horizontal alignment of mark within visible area
-      yalign =       vertical alignment of mark within visible area
-    Returns:     true if scrolling occurred
+      indicated by xalign and yalign.
+      
+      An alignment of 0.0 indicates left or top, 1.0 indicates right or
+      bottom, 0.5 means center. If use_align is false, the text scrolls
+      the minimal distance to get the mark onscreen, possibly not scrolling
+      at all. The effective screen for purposes of this function is reduced
+      by a margin of size within_margin.
+      
+      Note that this function uses the currently-computed height of the
+      lines in the text buffer. Line heights are computed in an idle
+      handler; so this function may not have the desired effect if it’s
+      called before the height computations. To avoid oddness, consider
+      using [gtk.text_view.TextView.scrollToMark] which saves a point to be
+      scrolled to after line validation.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+        withinMargin = margin as a [0.0,0.5) fraction of screen size
+        useAlign = whether to use alignment arguments (if false,
+             just get the mark onscreen)
+        xalign = horizontal alignment of mark within visible area
+        yalign = vertical alignment of mark within visible area
+      Returns: true if scrolling occurred
   */
   bool scrollToIter(gtk.text_iter.TextIter iter, double withinMargin, bool useAlign, double xalign, double yalign)
   {
@@ -908,20 +935,21 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Scrolls text_view so that mark is on the screen in the position
-    indicated by xalign and yalign.
-    
-    An alignment of 0.0 indicates left or top, 1.0 indicates right or
-    bottom, 0.5 means center. If use_align is false, the text scrolls
-    the minimal distance to get the mark onscreen, possibly not scrolling
-    at all. The effective screen for purposes of this function is reduced
-    by a margin of size within_margin.
-    Params:
-      mark =       a [gtk.text_mark.TextMark]
-      withinMargin =       margin as a [0.0,0.5) fraction of screen size
-      useAlign =       whether to use alignment arguments (if false, just
-           get the mark onscreen)
-      xalign =       horizontal alignment of mark within visible area
-      yalign =       vertical alignment of mark within visible area
+      indicated by xalign and yalign.
+      
+      An alignment of 0.0 indicates left or top, 1.0 indicates right or
+      bottom, 0.5 means center. If use_align is false, the text scrolls
+      the minimal distance to get the mark onscreen, possibly not scrolling
+      at all. The effective screen for purposes of this function is reduced
+      by a margin of size within_margin.
+  
+      Params:
+        mark = a [gtk.text_mark.TextMark]
+        withinMargin = margin as a [0.0,0.5) fraction of screen size
+        useAlign = whether to use alignment arguments (if false, just
+             get the mark onscreen)
+        xalign = horizontal alignment of mark within visible area
+        yalign = vertical alignment of mark within visible area
   */
   void scrollToMark(gtk.text_mark.TextMark mark, double withinMargin, bool useAlign, double xalign, double yalign)
   {
@@ -930,16 +958,17 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the behavior of the text widget when the <kbd>Tab</kbd> key is pressed.
-    
-    If accepts_tab is true, a tab character is inserted. If accepts_tab
-    is false the keyboard focus is moved to the next widget in the focus
-    chain.
-    
-    Focus can always be moved using <kbd>Ctrl</kbd>+<kbd>Tab</kbd>.
-    Params:
-      acceptsTab =       true if pressing the Tab key should insert a tab
-           character, false, if pressing the Tab key should move the
-           keyboard focus.
+      
+      If accepts_tab is true, a tab character is inserted. If accepts_tab
+      is false the keyboard focus is moved to the next widget in the focus
+      chain.
+      
+      Focus can always be moved using <kbd>Ctrl</kbd>+<kbd>Tab</kbd>.
+  
+      Params:
+        acceptsTab = true if pressing the Tab key should insert a tab
+             character, false, if pressing the Tab key should move the
+             keyboard focus.
   */
   void setAcceptsTab(bool acceptsTab)
   {
@@ -948,11 +977,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the bottom margin for text in text_view.
-    
-    Note that this function is confusingly named.
-    In CSS terms, the value set here is padding.
-    Params:
-      bottomMargin =       bottom margin in pixels
+      
+      Note that this function is confusingly named.
+      In CSS terms, the value set here is padding.
+  
+      Params:
+        bottomMargin = bottom margin in pixels
   */
   void setBottomMargin(int bottomMargin)
   {
@@ -961,13 +991,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets buffer as the buffer being displayed by text_view.
-    
-    The previous buffer displayed by the text view is unreferenced, and
-    a reference is added to buffer. If you owned a reference to buffer
-    before passing it to this function, you must remove that reference
-    yourself; [gtk.text_view.TextView] will not “adopt” it.
-    Params:
-      buffer =       a [gtk.text_buffer.TextBuffer]
+      
+      The previous buffer displayed by the text view is unreferenced, and
+      a reference is added to buffer. If you owned a reference to buffer
+      before passing it to this function, you must remove that reference
+      yourself; [gtk.text_view.TextView] will not “adopt” it.
+  
+      Params:
+        buffer = a [gtk.text_buffer.TextBuffer]
   */
   void setBuffer(gtk.text_buffer.TextBuffer buffer = null)
   {
@@ -976,14 +1007,15 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Toggles whether the insertion point should be displayed.
-    
-    A buffer with no editable text probably shouldn’t have a visible
-    cursor, so you may want to turn the cursor off.
-    
-    Note that this property may be overridden by the
-    `propertyGtk.Settings:gtk-keynav-use-caret` setting.
-    Params:
-      setting =       whether to show the insertion cursor
+      
+      A buffer with no editable text probably shouldn’t have a visible
+      cursor, so you may want to turn the cursor off.
+      
+      Note that this property may be overridden by the
+      `propertyGtk.Settings:gtk-keynav-use-caret` setting.
+  
+      Params:
+        setting = whether to show the insertion cursor
   */
   void setCursorVisible(bool setting)
   {
@@ -992,11 +1024,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default editability of the [gtk.text_view.TextView].
-    
-    You can override this default setting with tags in the buffer,
-    using the “editable” attribute of tags.
-    Params:
-      setting =       whether it’s editable
+      
+      You can override this default setting with tags in the buffer,
+      using the “editable” attribute of tags.
+  
+      Params:
+        setting = whether it’s editable
   */
   void setEditable(bool setting)
   {
@@ -1005,11 +1038,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets a menu model to add when constructing the context
-    menu for text_view.
-    
-    You can pass null to remove a previously set extra menu.
-    Params:
-      model =       a [gio.menu_model.MenuModel]
+      menu for text_view.
+      
+      You can pass null to remove a previously set extra menu.
+  
+      Params:
+        model = a [gio.menu_model.MenuModel]
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
@@ -1018,12 +1052,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Places widget into the gutter specified by win.
-    
-    win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
-    [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
-    Params:
-      win =       a [gtk.types.TextWindowType]
-      widget =       a [gtk.widget.Widget]
+      
+      win must be one of [gtk.types.TextWindowType.Left], [gtk.types.TextWindowType.Right],
+      [gtk.types.TextWindowType.Top], or [gtk.types.TextWindowType.Bottom].
+  
+      Params:
+        win = a [gtk.types.TextWindowType]
+        widget = a [gtk.widget.Widget]
   */
   void setGutter(gtk.types.TextWindowType win, gtk.widget.Widget widget = null)
   {
@@ -1032,10 +1067,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default indentation for paragraphs in text_view.
-    
-    Tags in the buffer may override the default.
-    Params:
-      indent =       indentation in pixels
+      
+      Tags in the buffer may override the default.
+  
+      Params:
+        indent = indentation in pixels
   */
   void setIndent(int indent)
   {
@@ -1044,11 +1080,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the `input-hints` of the [gtk.text_view.TextView].
-    
-    The `input-hints` allow input methods to fine-tune
-    their behaviour.
-    Params:
-      hints =       the hints
+      
+      The `input-hints` allow input methods to fine-tune
+      their behaviour.
+  
+      Params:
+        hints = the hints
   */
   void setInputHints(gtk.types.InputHints hints)
   {
@@ -1057,11 +1094,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the `input-purpose` of the [gtk.text_view.TextView].
-    
-    The `input-purpose` can be used by on-screen keyboards
-    and other input methods to adjust their behaviour.
-    Params:
-      purpose =       the purpose
+      
+      The `input-purpose` can be used by on-screen keyboards
+      and other input methods to adjust their behaviour.
+  
+      Params:
+        purpose = the purpose
   */
   void setInputPurpose(gtk.types.InputPurpose purpose)
   {
@@ -1070,10 +1108,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default justification of text in text_view.
-    
-    Tags in the view’s buffer may override the default.
-    Params:
-      justification =       justification
+      
+      Tags in the view’s buffer may override the default.
+  
+      Params:
+        justification = justification
   */
   void setJustification(gtk.types.Justification justification)
   {
@@ -1082,13 +1121,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default left margin for text in text_view.
-    
-    Tags in the buffer may override the default.
-    
-    Note that this function is confusingly named.
-    In CSS terms, the value set here is padding.
-    Params:
-      leftMargin =       left margin in pixels
+      
+      Tags in the buffer may override the default.
+      
+      Note that this function is confusingly named.
+      In CSS terms, the value set here is padding.
+  
+      Params:
+        leftMargin = left margin in pixels
   */
   void setLeftMargin(int leftMargin)
   {
@@ -1097,9 +1137,10 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets whether the [gtk.text_view.TextView] should display text in
-    monospace styling.
-    Params:
-      monospace =       true to request monospace styling
+      monospace styling.
+  
+      Params:
+        monospace = true to request monospace styling
   */
   void setMonospace(bool monospace)
   {
@@ -1108,8 +1149,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Changes the [gtk.text_view.TextView] overwrite mode.
-    Params:
-      overwrite =       true to turn on overwrite mode, false to turn it off
+  
+      Params:
+        overwrite = true to turn on overwrite mode, false to turn it off
   */
   void setOverwrite(bool overwrite)
   {
@@ -1118,10 +1160,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default number of blank pixels above paragraphs in text_view.
-    
-    Tags in the buffer for text_view may override the defaults.
-    Params:
-      pixelsAboveLines =       pixels above paragraphs
+      
+      Tags in the buffer for text_view may override the defaults.
+  
+      Params:
+        pixelsAboveLines = pixels above paragraphs
   */
   void setPixelsAboveLines(int pixelsAboveLines)
   {
@@ -1130,11 +1173,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default number of pixels of blank space
-    to put below paragraphs in text_view.
-    
-    May be overridden by tags applied to text_view’s buffer.
-    Params:
-      pixelsBelowLines =       pixels below paragraphs
+      to put below paragraphs in text_view.
+      
+      May be overridden by tags applied to text_view’s buffer.
+  
+      Params:
+        pixelsBelowLines = pixels below paragraphs
   */
   void setPixelsBelowLines(int pixelsBelowLines)
   {
@@ -1143,11 +1187,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default number of pixels of blank space to leave between
-    display/wrapped lines within a paragraph.
-    
-    May be overridden by tags in text_view’s buffer.
-    Params:
-      pixelsInsideWrap =       default number of pixels between wrapped lines
+      display/wrapped lines within a paragraph.
+      
+      May be overridden by tags in text_view’s buffer.
+  
+      Params:
+        pixelsInsideWrap = default number of pixels between wrapped lines
   */
   void setPixelsInsideWrap(int pixelsInsideWrap)
   {
@@ -1156,13 +1201,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default right margin for text in the text view.
-    
-    Tags in the buffer may override the default.
-    
-    Note that this function is confusingly named.
-    In CSS terms, the value set here is padding.
-    Params:
-      rightMargin =       right margin in pixels
+      
+      Tags in the buffer may override the default.
+      
+      Note that this function is confusingly named.
+      In CSS terms, the value set here is padding.
+  
+      Params:
+        rightMargin = right margin in pixels
   */
   void setRightMargin(int rightMargin)
   {
@@ -1171,10 +1217,11 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the default tab stops for paragraphs in text_view.
-    
-    Tags in the buffer may override the default.
-    Params:
-      tabs =       tabs as a [pango.tab_array.TabArray]
+      
+      Tags in the buffer may override the default.
+  
+      Params:
+        tabs = tabs as a [pango.tab_array.TabArray]
   */
   void setTabs(pango.tab_array.TabArray tabs)
   {
@@ -1183,11 +1230,12 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the top margin for text in text_view.
-    
-    Note that this function is confusingly named.
-    In CSS terms, the value set here is padding.
-    Params:
-      topMargin =       top margin in pixels
+      
+      Note that this function is confusingly named.
+      In CSS terms, the value set here is padding.
+  
+      Params:
+        topMargin = top margin in pixels
   */
   void setTopMargin(int topMargin)
   {
@@ -1196,8 +1244,9 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Sets the line wrapping for the view.
-    Params:
-      wrapMode =       a [gtk.types.WrapMode]
+  
+      Params:
+        wrapMode = a [gtk.types.WrapMode]
   */
   void setWrapMode(gtk.types.WrapMode wrapMode)
   {
@@ -1206,12 +1255,13 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Determines whether iter is at the start of a display line.
-    
-    See [gtk.text_view.TextView.forwardDisplayLine] for an
-    explanation of display lines vs. paragraphs.
-    Params:
-      iter =       a [gtk.text_iter.TextIter]
-    Returns:     true if iter begins a wrapped line
+      
+      See [gtk.text_view.TextView.forwardDisplayLine] for an
+      explanation of display lines vs. paragraphs.
+  
+      Params:
+        iter = a [gtk.text_iter.TextIter]
+      Returns: true if iter begins a wrapped line
   */
   bool startsDisplayLine(gtk.text_iter.TextIter iter)
   {
@@ -1222,13 +1272,14 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 
   /**
       Converts coordinates on the window identified by win to buffer
-    coordinates.
-    Params:
-      win =       a [gtk.types.TextWindowType]
-      windowX =       window x coordinate
-      windowY =       window y coordinate
-      bufferX =       buffer x coordinate return location
-      bufferY =       buffer y coordinate return location
+      coordinates.
+  
+      Params:
+        win = a [gtk.types.TextWindowType]
+        windowX = window x coordinate
+        windowY = window y coordinate
+        bufferX = buffer x coordinate return location
+        bufferY = buffer y coordinate return location
   */
   void windowToBufferCoords(gtk.types.TextWindowType win, int windowX, int windowY, out int bufferX, out int bufferY)
   {
@@ -1236,39 +1287,41 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted when the user asks for it.
-    
-    The ::backspace signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
+      Connect to `Backspace` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias BackspaceCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias BackspaceCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to Backspace signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted when the user asks for it.
+      
+      The ::backspace signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Backspace</kbd> and <kbd>Shift</kbd>+<kbd>Backspace</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectBackspace(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : BackspaceCallbackDlg) || is(T : BackspaceCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1276,40 +1329,42 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to copy the selection to the clipboard.
-    
-    The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Ctrl</kbd>+<kbd>c</kbd> and
-    <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
+      Connect to `CopyClipboard` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias CopyClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias CopyClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to CopyClipboard signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to copy the selection to the clipboard.
+      
+      The ::copy-clipboard signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Ctrl</kbd>+<kbd>c</kbd> and
+      <kbd>Ctrl</kbd>+<kbd>Insert</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCopyClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CopyClipboardCallbackDlg) || is(T : CopyClipboardCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1317,40 +1372,42 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to cut the selection to the clipboard.
-    
-    The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Ctrl</kbd>+<kbd>x</kbd> and
-    <kbd>Shift</kbd>+<kbd>Delete</kbd>.
+      Connect to `CutClipboard` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias CutClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias CutClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to CutClipboard signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to cut the selection to the clipboard.
+      
+      The ::cut-clipboard signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Ctrl</kbd>+<kbd>x</kbd> and
+      <kbd>Shift</kbd>+<kbd>Delete</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCutClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CutClipboardCallbackDlg) || is(T : CutClipboardCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1358,49 +1415,61 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted when the user initiates a text deletion.
-    
-    The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
-    
-    If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
-    if there is one, otherwise it deletes the requested number
-    of characters.
-    
-    The default bindings for this signal are <kbd>Delete</kbd> for
-    deleting a character, <kbd>Ctrl</kbd>+<kbd>Delete</kbd> for
-    deleting a word and <kbd>Ctrl</kbd>+<kbd>Backspace</kbd> for
-    deleting a word backwards.
+      Connect to `DeleteFromCursor` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B type)       the granularity of the deletion, as a [gtk.types.DeleteType]
-      * $(B count)       the number of type units to delete
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias DeleteFromCursorCallbackDlg = void delegate(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias DeleteFromCursorCallbackFunc = void function(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView);
-
-  /**
-    Connect to DeleteFromCursor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted when the user initiates a text deletion.
+      
+      The ::delete-from-cursor signal is a [keybinding signal](class.SignalAction.html).
+      
+      If the type is [gtk.types.DeleteType.Chars], GTK deletes the selection
+      if there is one, otherwise it deletes the requested number
+      of characters.
+      
+      The default bindings for this signal are <kbd>Delete</kbd> for
+      deleting a character, <kbd>Ctrl</kbd>+<kbd>Delete</kbd> for
+      deleting a word and <kbd>Ctrl</kbd>+<kbd>Backspace</kbd> for
+      deleting a word backwards.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.DeleteType type, int count, gtk.text_view.TextView textView))
+  
+          `type` the granularity of the deletion, as a [gtk.types.DeleteType] (optional)
+  
+          `count` the number of type units to delete (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDeleteFromCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DeleteFromCursorCallbackDlg) || is(T : DeleteFromCursorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.DeleteType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto type = getVal!(gtk.types.DeleteType)(&_paramVals[1]);
-      auto count = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(type, count, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1408,45 +1477,66 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
+      Connect to `ExtendSelection` signal.
+  
       Emitted when the selection needs to be extended at location.
   
-    ## Parameters
-    $(LIST
-      * $(B granularity)       the granularity type
-      * $(B location)       the location where to extend the selection
-      * $(B start)       where the selection should start
-      * $(B end)       where the selection should end
-      * $(B textView) the instance the signal is connected to
-    )
-    Returns:     `GDK_EVENT_STOP` to stop other handlers from being invoked for the
-        event. `GDK_EVENT_PROPAGATE` to propagate the event further.
-  */
-  alias ExtendSelectionCallbackDlg = bool delegate(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias ExtendSelectionCallbackFunc = bool function(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView);
-
-  /**
-    Connect to ExtendSelection signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(gtk.types.TextExtendSelection granularity, gtk.text_iter.TextIter location, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtk.text_view.TextView textView))
+  
+          `granularity` the granularity type (optional)
+  
+          `location` the location where to extend the selection (optional)
+  
+          `start` where the selection should start (optional)
+  
+          `end` where the selection should end (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+          `Returns` `GDK_EVENT_STOP` to stop other handlers from being invoked for the
+            event. `GDK_EVENT_PROPAGATE` to propagate the event further.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectExtendSelection(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ExtendSelectionCallbackDlg) || is(T : ExtendSelectionCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.TextExtendSelection)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gtk.text_iter.TextIter)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == gtk.text_iter.TextIter)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == gtk.text_iter.TextIter)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.text_view.TextView)))
+  && Parameters!T.length < 6)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto granularity = getVal!(gtk.types.TextExtendSelection)(&_paramVals[1]);
-      auto location = getVal!(gtk.text_iter.TextIter)(&_paramVals[2]);
-      auto start = getVal!(gtk.text_iter.TextIter)(&_paramVals[3]);
-      auto end = getVal!(gtk.text_iter.TextIter)(&_paramVals[4]);
-      _retval = _dClosure.dlg(granularity, location, start, end, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -1455,41 +1545,48 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted when the user initiates the insertion of a
-    fixed string at the cursor.
-    
-    The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
-    
-    This signal has no default bindings.
+      Connect to `InsertAtCursor` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B string_)       the string to insert
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias InsertAtCursorCallbackDlg = void delegate(string string_, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias InsertAtCursorCallbackFunc = void function(string string_, gtk.text_view.TextView textView);
-
-  /**
-    Connect to InsertAtCursor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted when the user initiates the insertion of a
+      fixed string at the cursor.
+      
+      The ::insert-at-cursor signal is a [keybinding signal](class.SignalAction.html).
+      
+      This signal has no default bindings.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string string_, gtk.text_view.TextView textView))
+  
+          `string_` the string to insert (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectInsertAtCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : InsertAtCursorCallbackDlg) || is(T : InsertAtCursorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto string_ = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(string_, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1497,40 +1594,42 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to present the Emoji chooser for the text_view.
-    
-    The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Ctrl</kbd>+<kbd>.</kbd> and
-    <kbd>Ctrl</kbd>+<kbd>;</kbd>
+      Connect to `InsertEmoji` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias InsertEmojiCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias InsertEmojiCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to InsertEmoji signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to present the Emoji chooser for the text_view.
+      
+      The ::insert-emoji signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Ctrl</kbd>+<kbd>.</kbd> and
+      <kbd>Ctrl</kbd>+<kbd>;</kbd>
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectInsertEmoji(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : InsertEmojiCallbackDlg) || is(T : InsertEmojiCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1538,64 +1637,81 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted when the user initiates a cursor movement.
-    
-    The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
-    If the cursor is not visible in text_view, this signal causes
-    the viewport to be moved instead.
-    
-    Applications should not connect to it, but may emit it with
-    [gobject.global.signalEmitByName] if they need to control the cursor
-    programmatically.
-    
-    
-    The default bindings for this signal come in two variants,
-    the variant with the <kbd>Shift</kbd> modifier extends the
-    selection, the variant without it does not.
-    There are too many key combinations to list them all here.
-    
-    $(LIST
-      * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
-        move by individual characters/lines
-      * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
-      * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
-      * <kbd>PgUp</kbd> and <kbd>PgDn</kbd> move vertically by pages
-      * <kbd>Ctrl</kbd>+<kbd>PgUp</kbd> and <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>
-        move horizontally by pages
-    )
+      Connect to `MoveCursor` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B step)       the granularity of the move, as a [gtk.types.MovementStep]
-      * $(B count)       the number of step units to move
-      * $(B extendSelection)       true if the move should extend the selection
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView);
-
-  /**
-    Connect to MoveCursor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted when the user initiates a cursor movement.
+      
+      The ::move-cursor signal is a [keybinding signal](class.SignalAction.html).
+      If the cursor is not visible in text_view, this signal causes
+      the viewport to be moved instead.
+      
+      Applications should not connect to it, but may emit it with
+      [gobject.global.signalEmitByName] if they need to control the cursor
+      programmatically.
+      
+      
+      The default bindings for this signal come in two variants,
+      the variant with the <kbd>Shift</kbd> modifier extends the
+      selection, the variant without it does not.
+      There are too many key combinations to list them all here.
+      
+      $(LIST
+        * <kbd>←</kbd>, <kbd>→</kbd>, <kbd>↑</kbd>, <kbd>↓</kbd>
+          move by individual characters/lines
+        * <kbd>Ctrl</kbd>+<kbd>←</kbd>, etc. move by words/paragraphs
+        * <kbd>Home</kbd> and <kbd>End</kbd> move to the ends of the buffer
+        * <kbd>PgUp</kbd> and <kbd>PgDn</kbd> move vertically by pages
+        * <kbd>Ctrl</kbd>+<kbd>PgUp</kbd> and <kbd>Ctrl</kbd>+<kbd>PgDn</kbd>
+          move horizontally by pages
+      )
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.MovementStep step, int count, bool extendSelection, gtk.text_view.TextView textView))
+  
+          `step` the granularity of the move, as a [gtk.types.MovementStep] (optional)
+  
+          `count` the number of step units to move (optional)
+  
+          `extendSelection` true if the move should extend the selection (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.text_view.TextView)))
+  && Parameters!T.length < 5)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto step = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
-      auto count = getVal!(int)(&_paramVals[2]);
-      auto extendSelection = getVal!(bool)(&_paramVals[3]);
-      _dClosure.dlg(step, count, extendSelection, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1603,45 +1719,57 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to move the viewport.
-    
-    The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
-    which can be bound to key combinations to allow the user to move the viewport,
-    i.e. change what part of the text view is visible in a containing scrolled
-    window.
-    
-    There are no default bindings for this signal.
+      Connect to `MoveViewport` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B step)       the granularity of the movement, as a [gtk.types.ScrollStep]
-      * $(B count)       the number of step units to move
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias MoveViewportCallbackDlg = void delegate(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias MoveViewportCallbackFunc = void function(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView);
-
-  /**
-    Connect to MoveViewport signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to move the viewport.
+      
+      The ::move-viewport signal is a [keybinding signal](class.SignalAction.html),
+      which can be bound to key combinations to allow the user to move the viewport,
+      i.e. change what part of the text view is visible in a containing scrolled
+      window.
+      
+      There are no default bindings for this signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.ScrollStep step, int count, gtk.text_view.TextView textView))
+  
+          `step` the granularity of the movement, as a [gtk.types.ScrollStep] (optional)
+  
+          `count` the number of step units to move (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMoveViewport(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveViewportCallbackDlg) || is(T : MoveViewportCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ScrollStep)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gtk.text_view.TextView)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto step = getVal!(gtk.types.ScrollStep)(&_paramVals[1]);
-      auto count = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(step, count, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1649,41 +1777,43 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to paste the contents of the clipboard
-    into the text view.
-    
-    The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Ctrl</kbd>+<kbd>v</kbd> and
-    <kbd>Shift</kbd>+<kbd>Insert</kbd>.
+      Connect to `PasteClipboard` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias PasteClipboardCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias PasteClipboardCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to PasteClipboard signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to paste the contents of the clipboard
+      into the text view.
+      
+      The ::paste-clipboard signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Ctrl</kbd>+<kbd>v</kbd> and
+      <kbd>Shift</kbd>+<kbd>Insert</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPasteClipboard(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PasteClipboardCallbackDlg) || is(T : PasteClipboardCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1691,43 +1821,50 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Emitted when preedit text of the active IM changes.
-    
-    If an input method is used, the typed text will not immediately
-    be committed to the buffer. So if you are interested in the text,
-    connect to this signal.
-    
-    This signal is only emitted if the text at the given position
-    is actually editable.
+      Connect to `PreeditChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B preedit)       the current preedit string
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias PreeditChangedCallbackDlg = void delegate(string preedit, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias PreeditChangedCallbackFunc = void function(string preedit, gtk.text_view.TextView textView);
-
-  /**
-    Connect to PreeditChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when preedit text of the active IM changes.
+      
+      If an input method is used, the typed text will not immediately
+      be committed to the buffer. So if you are interested in the text,
+      connect to this signal.
+      
+      This signal is only emitted if the text at the given position
+      is actually editable.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string preedit, gtk.text_view.TextView textView))
+  
+          `preedit` the current preedit string (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PreeditChangedCallbackDlg) || is(T : PreeditChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto preedit = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(preedit, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1735,44 +1872,51 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to select or unselect the complete contents of the text view.
-    
-    The ::select-all signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default bindings for this signal are
-    <kbd>Ctrl</kbd>+<kbd>a</kbd> and
-    <kbd>Ctrl</kbd>+<kbd>/</kbd> for selecting and
-    <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>a</kbd> and
-    <kbd>Ctrl</kbd>+<kbd>\</kbd> for unselecting.
+      Connect to `SelectAll` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B select)       true to select, false to unselect
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias SelectAllCallbackDlg = void delegate(bool select, gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias SelectAllCallbackFunc = void function(bool select, gtk.text_view.TextView textView);
-
-  /**
-    Connect to SelectAll signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to select or unselect the complete contents of the text view.
+      
+      The ::select-all signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default bindings for this signal are
+      <kbd>Ctrl</kbd>+<kbd>a</kbd> and
+      <kbd>Ctrl</kbd>+<kbd>/</kbd> for selecting and
+      <kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>a</kbd> and
+      <kbd>Ctrl</kbd>+<kbd>\</kbd> for unselecting.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(bool select, gtk.text_view.TextView textView))
+  
+          `select` true to select, false to unselect (optional)
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.text_view.TextView)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      auto select = getVal!(bool)(&_paramVals[1]);
-      _dClosure.dlg(select, textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1780,41 +1924,43 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted when the user initiates settings the "anchor" mark.
-    
-    The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
-    which gets emitted when the user initiates setting the "anchor"
-    mark. The "anchor" mark gets placed at the same position as the
-    "insert" mark.
-    
-    This signal has no default bindings.
+      Connect to `SetAnchor` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias SetAnchorCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias SetAnchorCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to SetAnchor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted when the user initiates settings the "anchor" mark.
+      
+      The ::set-anchor signal is a [keybinding signal](class.SignalAction.html)
+      which gets emitted when the user initiates setting the "anchor"
+      mark. The "anchor" mark gets placed at the same position as the
+      "insert" mark.
+      
+      This signal has no default bindings.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSetAnchor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SetAnchorCallbackDlg) || is(T : SetAnchorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1822,39 +1968,41 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to toggle the `cursor-visible` property.
-    
-    The ::toggle-cursor-visible signal is a
-    [keybinding signal](class.SignalAction.html).
-    
-    The default binding for this signal is <kbd>F7</kbd>.
+      Connect to `ToggleCursorVisible` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias ToggleCursorVisibleCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias ToggleCursorVisibleCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to ToggleCursorVisible signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to toggle the `cursor-visible` property.
+      
+      The ::toggle-cursor-visible signal is a
+      [keybinding signal](class.SignalAction.html).
+      
+      The default binding for this signal is <kbd>F7</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleCursorVisible(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleCursorVisibleCallbackDlg) || is(T : ToggleCursorVisibleCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1862,38 +2010,40 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
   }
 
   /**
-      Gets emitted to toggle the overwrite mode of the text view.
-    
-    The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
-    
-    The default binding for this signal is <kbd>Insert</kbd>.
+      Connect to `ToggleOverwrite` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B textView) the instance the signal is connected to
-    )
-  */
-  alias ToggleOverwriteCallbackDlg = void delegate(gtk.text_view.TextView textView);
-
-  /** ditto */
-  alias ToggleOverwriteCallbackFunc = void function(gtk.text_view.TextView textView);
-
-  /**
-    Connect to ToggleOverwrite signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Gets emitted to toggle the overwrite mode of the text view.
+      
+      The ::toggle-overwrite signal is a [keybinding signal](class.SignalAction.html).
+      
+      The default binding for this signal is <kbd>Insert</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.text_view.TextView textView))
+  
+          `textView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleOverwrite(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleOverwriteCallbackDlg) || is(T : ToggleOverwriteCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.text_view.TextView)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto textView = getVal!(gtk.text_view.TextView)(_paramVals);
-      _dClosure.dlg(textView);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

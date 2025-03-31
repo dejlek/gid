@@ -1,3 +1,4 @@
+/// Global functions for panel1 library
 module panel.global;
 
 import gid.gid;

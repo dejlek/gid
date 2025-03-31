@@ -1,3 +1,4 @@
+/// Module for [GLVideoAllocationParams] class
 module gstgl.glvideo_allocation_params;
 
 import gid.gid;
@@ -16,22 +17,26 @@ import gstvideo.video_info;
 class GLVideoAllocationParams : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_video_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_video_allocation_params_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -121,20 +126,21 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
 
   /**
       gl_handle is defined by the specific OpenGL handle being wrapped
-    For #GstGLMemory and #GstGLMemoryPBO it is an OpenGL texture id.
-    Other memory types may define it to require a different type of parameter.
-    Params:
-      context =       a #GstGLContext
-      allocParams =       the #GstAllocationParams for tex_id
-      vInfo =       the #GstVideoInfo for tex_id
-      plane =       the video plane tex_id represents
-      valign =       any #GstVideoAlignment applied to symem mappings of tex_id
-      target =       the #GstGLTextureTarget for tex_id
-      texFormat =       the #GstGLFormat for tex_id
-      glHandle =       the GL handle to wrap
-      userData =       user data to call notify with
-      notify =       a #GDestroyNotify
-    Returns:     a new #GstGLVideoAllocationParams for wrapping gl_handle
+      For #GstGLMemory and #GstGLMemoryPBO it is an OpenGL texture id.
+      Other memory types may define it to require a different type of parameter.
+  
+      Params:
+        context = a #GstGLContext
+        allocParams = the #GstAllocationParams for tex_id
+        vInfo = the #GstVideoInfo for tex_id
+        plane = the video plane tex_id represents
+        valign = any #GstVideoAlignment applied to symem mappings of tex_id
+        target = the #GstGLTextureTarget for tex_id
+        texFormat = the #GstGLFormat for tex_id
+        glHandle = the GL handle to wrap
+        userData = user data to call notify with
+        notify = a #GDestroyNotify
+      Returns: a new #GstGLVideoAllocationParams for wrapping gl_handle
   */
   static gstgl.glvideo_allocation_params.GLVideoAllocationParams newWrappedGlHandle(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstvideo.video_info.VideoInfo vInfo, uint plane, gstvideo.video_alignment.VideoAlignment valign, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, void* glHandle = null, void* userData = null, glib.types.DestroyNotify notify = null)
   {
@@ -173,9 +179,10 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
 
   /**
       Copy and set any dynamically allocated resources in dest_vid.  Intended
-    for subclass usage only to chain up at the end of a subclass copy function.
-    Params:
-      destVid =       destination #GstGLVideoAllocationParams to copy into
+      for subclass usage only to chain up at the end of a subclass copy function.
+  
+      Params:
+        destVid = destination #GstGLVideoAllocationParams to copy into
   */
   void copyData(gstgl.glvideo_allocation_params.GLVideoAllocationParams destVid)
   {
@@ -184,7 +191,7 @@ class GLVideoAllocationParams : gobject.boxed.Boxed
 
   /**
       Unset and free any dynamically allocated resources.  Intended for subclass
-    usage only to chain up at the end of a subclass free function.
+      usage only to chain up at the end of a subclass free function.
   */
   void freeData()
   {

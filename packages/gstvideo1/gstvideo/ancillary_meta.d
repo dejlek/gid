@@ -1,3 +1,4 @@
+/// Module for [AncillaryMeta] class
 module gstvideo.ancillary_meta;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import gstvideo.types;
 
 /**
     #GstMeta for carrying SMPTE-291M Ancillary data. Note that all the ADF fields
-     (@DID to @checksum) are 10bit values with parity/non-parity high-bits set.
+       (@DID to @checksum) are 10bit values with parity/non-parity high-bits set.
 */
 class AncillaryMeta
 {
   GstAncillaryMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class AncillaryMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

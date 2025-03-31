@@ -1,3 +1,4 @@
+/// Module for [FileSaver] class
 module gtksource.file_saver;
 
 import gid.gid;
@@ -18,17 +19,20 @@ import gtksource.types;
 class FileSaver : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_saver_get_type != &gidSymbolNotFound ? gtk_source_file_saver_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,14 +45,15 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceFileSaver object. The buffer will be saved to the
-    #GtkSourceFile's location.
-    
-    This constructor is suitable for a simple "save" operation, when the file
-    already contains a non-null #GtkSourceFile:location.
-    Params:
-      buffer =       the #GtkSourceBuffer to save.
-      file =       the #GtkSourceFile.
-    Returns:     a new #GtkSourceFileSaver object.
+      #GtkSourceFile's location.
+      
+      This constructor is suitable for a simple "save" operation, when the file
+      already contains a non-null #GtkSourceFile:location.
+  
+      Params:
+        buffer = the #GtkSourceBuffer to save.
+        file = the #GtkSourceFile.
+      Returns: a new #GtkSourceFileSaver object.
   */
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
@@ -59,17 +64,18 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceFileSaver object with a target location. When the
-    file saving is finished successfully, target_location is set to the file's
-    #GtkSourceFile:location property. If an error occurs, the previous valid
-    location is still available in #GtkSourceFile.
-    
-    This constructor is suitable for a "save as" operation, or for saving a new
-    buffer for the first time.
-    Params:
-      buffer =       the #GtkSourceBuffer to save.
-      file =       the #GtkSourceFile.
-      targetLocation =       the #GFile where to save the buffer to.
-    Returns:     a new #GtkSourceFileSaver object.
+      file saving is finished successfully, target_location is set to the file's
+      #GtkSourceFile:location property. If an error occurs, the previous valid
+      location is still available in #GtkSourceFile.
+      
+      This constructor is suitable for a "save as" operation, or for saving a new
+      buffer for the first time.
+  
+      Params:
+        buffer = the #GtkSourceBuffer to save.
+        file = the #GtkSourceFile.
+        targetLocation = the #GFile where to save the buffer to.
+      Returns: a new #GtkSourceFileSaver object.
   */
   static gtksource.file_saver.FileSaver newWithTarget(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.file.File targetLocation)
   {
@@ -144,15 +150,16 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Saves asynchronously the buffer into the file. See the #GAsyncResult
-    documentation to know how to use this function.
-    Params:
-      ioPriority =       the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
-          `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
-      cancellable =       optional #GCancellable object, null to ignore.
-      progressCallback =       function to call back with
-          progress information, or null if progress information is not needed.
-      callback =       a #GAsyncReadyCallback to call when the request is
-          satisfied.
+      documentation to know how to use this function.
+  
+      Params:
+        ioPriority = the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
+            `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
+        cancellable = optional #GCancellable object, null to ignore.
+        progressCallback = function to call back with
+            progress information, or null if progress information is not needed.
+        callback = a #GAsyncReadyCallback to call when the request is
+            satisfied.
   */
   void saveAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -181,16 +188,18 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Finishes a file saving started with [gtksource.file_saver.FileSaver.saveAsync].
-    
-    If the file has been saved successfully, the following #GtkSourceFile
-    properties will be updated: the location, the encoding, the newline type and
-    the compression type.
-    
-    Since the 3.20 version, [gtk.text_buffer.TextBuffer.setModified] is called with false
-    if the file has been saved successfully.
-    Params:
-      result =       a #GAsyncResult.
-    Returns:     whether the file was saved successfully.
+      
+      If the file has been saved successfully, the following #GtkSourceFile
+      properties will be updated: the location, the encoding, the newline type and
+      the compression type.
+      
+      Since the 3.20 version, [gtk.text_buffer.TextBuffer.setModified] is called with false
+      if the file has been saved successfully.
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: whether the file was saved successfully.
+      Throws: [ErrorG]
   */
   bool saveFinish(gio.async_result.AsyncResult result)
   {
@@ -204,9 +213,10 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Sets the compression type. By default the compression type is taken from the
-    #GtkSourceFile.
-    Params:
-      compressionType =       the new compression type.
+      #GtkSourceFile.
+  
+      Params:
+        compressionType = the new compression type.
   */
   void setCompressionType(gtksource.types.CompressionType compressionType)
   {
@@ -215,9 +225,10 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Sets the encoding. If encoding is null, the UTF-8 encoding will be set.
-    By default the encoding is taken from the #GtkSourceFile.
-    Params:
-      encoding =       the new encoding, or null for UTF-8.
+      By default the encoding is taken from the #GtkSourceFile.
+  
+      Params:
+        encoding = the new encoding, or null for UTF-8.
   */
   void setEncoding(gtksource.encoding.Encoding encoding = null)
   {
@@ -232,9 +243,10 @@ class FileSaver : gobject.object.ObjectG
 
   /**
       Sets the newline type. By default the newline type is taken from the
-    #GtkSourceFile.
-    Params:
-      newlineType =       the new newline type.
+      #GtkSourceFile.
+  
+      Params:
+        newlineType = the new newline type.
   */
   void setNewlineType(gtksource.types.NewlineType newlineType)
   {

@@ -1,3 +1,4 @@
+/// Module for [ArrayDatum] class
 module arrow.array_datum;
 
 import arrow.array;
@@ -11,17 +12,20 @@ import gid.gid;
 class ArrayDatum : arrow.datum.Datum
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_datum_get_type != &gidSymbolNotFound ? garrow_array_datum_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

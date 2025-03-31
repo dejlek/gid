@@ -1,3 +1,4 @@
+/// Module for [ParamSpecFlags] class
 module gobject.param_spec_flags;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gobject.types;
 
 /**
     A #GParamSpec derived structure that contains the meta data for flags
-  properties.
+    properties.
 */
 class ParamSpecFlags : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

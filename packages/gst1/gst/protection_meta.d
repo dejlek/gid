@@ -1,3 +1,4 @@
+/// Module for [ProtectionMeta] class
 module gst.protection_meta;
 
 import gid.gid;
@@ -10,12 +11,13 @@ import gst.types;
 
 /**
     Metadata type that holds information about a sample from a protection-protected
-  track, including the information needed to decrypt it (if it is encrypted).
+    track, including the information needed to decrypt it (if it is encrypted).
 */
 class ProtectionMeta
 {
   GstProtectionMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class ProtectionMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

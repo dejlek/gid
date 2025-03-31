@@ -1,3 +1,4 @@
+/// Module for [ChangesDialog] class
 module panel.changes_dialog;
 
 import adw.alert_dialog;
@@ -23,17 +24,20 @@ import panel.types;
 class ChangesDialog : adw.alert_dialog.AlertDialog
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_changes_dialog_get_type != &gidSymbolNotFound ? panel_changes_dialog_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

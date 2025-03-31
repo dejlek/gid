@@ -1,3 +1,4 @@
+/// C types for gstsdp1 library
 module gstsdp.c.types;
 
 public import gid.basictypes;
@@ -20,7 +21,7 @@ enum GstMIKEYCacheType
 
   /**
       The envelope key MUST be cached, but only
-                              to be used for the specific CSB.
+                                to be used for the specific CSB.
   */
   ForCsb = 2,
 }
@@ -106,7 +107,7 @@ enum GstMIKEYMacAlg
 
 /**
     Specifies the method of uniquely mapping Crypto Sessions to the security
-  protocol sessions.
+    protocol sessions.
 */
 enum GstMIKEYMapType
 {
@@ -501,7 +502,7 @@ struct GstMIKEYPayloadKEMAC
 
 /**
     The Key data payload contains key material. It should be added as sub
-  payload to the KEMAC.
+    payload to the KEMAC.
 */
 struct GstMIKEYPayloadKeyData
 {
@@ -553,9 +554,9 @@ struct GstMIKEYPayloadKeyData
 
 /**
     The Envelope data payload contains the encrypted envelope key that is
-  used in the public-key transport to protect the data in the Key data
-  transport payload.  The encryption algorithm used is implicit from
-  the certificate/public key used.
+    used in the public-key transport to protect the data in the Key data
+    transport payload.  The encryption algorithm used is implicit from
+    the certificate/public key used.
 */
 struct GstMIKEYPayloadPKE
 {
@@ -603,7 +604,7 @@ struct GstMIKEYPayloadRAND
 
 /**
     The Security Policy payload defines a set of policies that apply to a
-  specific security protocol
+    specific security protocol
 */
 struct GstMIKEYPayloadSP
 {
@@ -688,7 +689,7 @@ struct GstSDPAttribute
 
 /**
     The contents of the SDP "b=" field which specifies the proposed bandwidth to
-  be used by the session or media.
+    be used by the session or media.
 */
 struct GstSDPBandwidth
 {
@@ -710,7 +711,7 @@ struct GstSDPConnection
 {
   /**
       the type of network. "IN" is defined to have the meaning
-       "Internet".
+         "Internet".
   */
   char* nettype;
 
@@ -737,7 +738,7 @@ struct GstSDPConnection
 
 /**
     The contents of the SDP "k=" field which is used to convey encryption
-  keys.
+    keys.
 */
 struct GstSDPKey
 {
@@ -810,7 +811,7 @@ struct GstSDPMedia
 
 /**
     The GstSDPMessage helper functions makes it easy to parse and create SDP
-  messages.
+    messages.
 */
 struct GstSDPMessage
 {
@@ -887,21 +888,21 @@ struct GstSDPMessage
 
 /**
     The contents of the SDP "o=" field which gives the originator of the session
-  (their username and the address of the user's host) plus a session id and
-  session version number.
+    (their username and the address of the user's host) plus a session id and
+    session version number.
 */
 struct GstSDPOrigin
 {
   /**
       the user's login on the originating host, or it is "-"
-       if the originating host does not support the concept of user ids.
+         if the originating host does not support the concept of user ids.
   */
   char* username;
 
   /**
       is a numeric string such that the tuple of @username, @sess_id,
-       @nettype, @addrtype and @addr form a globally unique identifier for the
-       session.
+         @nettype, @addrtype and @addr form a globally unique identifier for the
+         session.
   */
   char* sessId;
 
@@ -912,7 +913,7 @@ struct GstSDPOrigin
 
   /**
       the type of network. "IN" is defined to have the meaning
-       "Internet".
+         "Internet".
   */
   char* nettype;
 
@@ -923,26 +924,26 @@ struct GstSDPOrigin
 
   /**
       the globally unique address of the machine from which the session was
-        created.
+          created.
   */
   char* addr;
 }
 
 /**
     The contents of the SDP "t=" field which specify the start and stop times for
-  a conference session.
+    a conference session.
 */
 struct GstSDPTime
 {
   /**
       start time for the conference. The value is the decimal
-        representation of Network Time Protocol (NTP) time values in seconds
+          representation of Network Time Protocol (NTP) time values in seconds
   */
   char* start;
 
   /**
       stop time for the conference. The value is the decimal
-        representation of Network Time Protocol (NTP) time values in seconds
+          representation of Network Time Protocol (NTP) time values in seconds
   */
   char* stop;
 
@@ -954,8 +955,8 @@ struct GstSDPTime
 
 /**
     The contents of the SDP "z=" field which allows the sender to
-  specify a list of time zone adjustments and offsets from the base
-  time.
+    specify a list of time zone adjustments and offsets from the base
+    time.
 */
 struct GstSDPZone
 {

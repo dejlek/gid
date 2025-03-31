@@ -1,3 +1,4 @@
+/// Module for [RecentFilterInfo] class
 module gtk.recent_filter_info;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     A GtkRecentFilterInfo struct is used
-  to pass information about the tested file to [gtk.recent_filter.RecentFilter.filter].
+    to pass information about the tested file to [gtk.recent_filter.RecentFilter.filter].
 */
 class RecentFilterInfo
 {
   GtkRecentFilterInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class RecentFilterInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

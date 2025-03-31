@@ -1,3 +1,4 @@
+/// Module for [Encoding] class
 module gtksource.encoding;
 
 import gid.gid;
@@ -10,22 +11,26 @@ import gtksource.types;
 class Encoding : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_encoding_get_type != &gidSymbolNotFound ? gtk_source_encoding_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -38,7 +43,7 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Used by language bindings.
-    Returns:     a copy of enc.
+      Returns: a copy of enc.
   */
   gtksource.encoding.Encoding copy()
   {
@@ -50,8 +55,8 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets the character set of the #GtkSourceEncoding, such as "UTF-8" or
-    "ISO-8859-1".
-    Returns:     the character set of the #GtkSourceEncoding.
+      "ISO-8859-1".
+      Returns: the character set of the #GtkSourceEncoding.
   */
   string getCharset()
   {
@@ -63,7 +68,7 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets the name of the #GtkSourceEncoding such as "Unicode" or "Western".
-    Returns:     the name of the #GtkSourceEncoding.
+      Returns: the name of the #GtkSourceEncoding.
   */
   string getName()
   {
@@ -84,8 +89,8 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets all encodings.
-    Returns:     a list of
-      all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
+      Returns: a list of
+        all #GtkSourceEncoding's. Free with [glib.slist.SList.free].
   */
   static gtksource.encoding.Encoding[] getAll()
   {
@@ -97,7 +102,7 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets the #GtkSourceEncoding for the current locale. See also [glib.global.getCharset].
-    Returns:     the current locale encoding.
+      Returns: the current locale encoding.
   */
   static gtksource.encoding.Encoding getCurrent()
   {
@@ -109,13 +114,13 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets the list of default candidate encodings to try when loading a file. See
-    [gtksource.file_loader.FileLoader.setCandidateEncodings].
-    
-    This function returns a different list depending on the current locale (i.e.
-    language, country and default encoding). The UTF-8 encoding and the current
-    locale encoding are guaranteed to be present in the returned list.
-    Returns:     the list of
-      default candidate encodings. Free with [glib.slist.SList.free].
+      [gtksource.file_loader.FileLoader.setCandidateEncodings].
+      
+      This function returns a different list depending on the current locale (i.e.
+      language, country and default encoding). The UTF-8 encoding and the current
+      locale encoding are guaranteed to be present in the returned list.
+      Returns: the list of
+        default candidate encodings. Free with [glib.slist.SList.free].
   */
   static gtksource.encoding.Encoding[] getDefaultCandidates()
   {
@@ -127,11 +132,12 @@ class Encoding : gobject.boxed.Boxed
 
   /**
       Gets a #GtkSourceEncoding from a character set such as "UTF-8" or
-    "ISO-8859-1".
-    Params:
-      charset =       a character set.
-    Returns:     the corresponding #GtkSourceEncoding, or null
-      if not found.
+      "ISO-8859-1".
+  
+      Params:
+        charset = a character set.
+      Returns: the corresponding #GtkSourceEncoding, or null
+        if not found.
   */
   static gtksource.encoding.Encoding getFromCharset(string charset)
   {

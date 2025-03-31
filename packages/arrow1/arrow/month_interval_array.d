@@ -1,3 +1,4 @@
+/// Module for [MonthIntervalArray] class
 module arrow.month_interval_array;
 
 import arrow.buffer;
@@ -11,17 +12,20 @@ import gid.gid;
 class MonthIntervalArray : arrow.numeric_array.NumericArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_array_get_type != &gidSymbolNotFound ? garrow_month_interval_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

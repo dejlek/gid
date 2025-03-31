@@ -1,3 +1,4 @@
+/// Module for [PreferencesPage] class
 module adw.preferences_page;
 
 import adw.c.functions;
@@ -15,37 +16,40 @@ import gtk.widget;
 
 /**
     A page from `class@PreferencesDialog`.
-  
-  <picture>
-    <source srcset="preferences-page-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="preferences-page.png" alt="preferences-page">
-  </picture>
-  
-  The [adw.preferences_page.PreferencesPage] widget gathers preferences groups into a single page
-  of a preferences window.
-  
-  ## CSS nodes
-  
-  [adw.preferences_page.PreferencesPage] has a single CSS node with name `preferencespage`.
-  
-  ## Accessibility
-  
-  [adw.preferences_page.PreferencesPage] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    <picture>
+      <source srcset="preferences-page-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="preferences-page.png" alt="preferences-page">
+    </picture>
+    
+    The [adw.preferences_page.PreferencesPage] widget gathers preferences groups into a single page
+    of a preferences window.
+    
+    ## CSS nodes
+    
+    [adw.preferences_page.PreferencesPage] has a single CSS node with name `preferencespage`.
+    
+    ## Accessibility
+    
+    [adw.preferences_page.PreferencesPage] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class PreferencesPage : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_page_get_type != &gidSymbolNotFound ? adw_preferences_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -58,7 +62,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Creates a new [adw.preferences_page.PreferencesPage].
-    Returns:     the newly created [adw.preferences_page.PreferencesPage]
+      Returns: the newly created [adw.preferences_page.PreferencesPage]
   */
   this()
   {
@@ -69,8 +73,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Adds a preferences group to self.
-    Params:
-      group =       the group to add
+  
+      Params:
+        group = the group to add
   */
   void add(adw.preferences_group.PreferencesGroup group)
   {
@@ -79,7 +84,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Gets the description of self.
-    Returns:     the description of self.
+      Returns: the description of self.
   */
   string getDescription()
   {
@@ -91,7 +96,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Gets the icon name for self.
-    Returns:     the icon name for self
+      Returns: the icon name for self
   */
   string getIconName()
   {
@@ -103,7 +108,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Gets the name of self.
-    Returns:     the name of self
+      Returns: the name of self
   */
   override string getName()
   {
@@ -115,7 +120,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Gets the title of self.
-    Returns:     the title of self.
+      Returns: the title of self.
   */
   string getTitle()
   {
@@ -127,7 +132,7 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Gets whether an embedded underline in the title indicates a mnemonic.
-    Returns:     whether an embedded underline in the title indicates a mnemonic
+      Returns: whether an embedded underline in the title indicates a mnemonic
   */
   bool getUseUnderline()
   {
@@ -138,8 +143,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Removes a group from self.
-    Params:
-      group =       the group to remove
+  
+      Params:
+        group = the group to remove
   */
   void remove(adw.preferences_group.PreferencesGroup group)
   {
@@ -156,10 +162,11 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Sets the description of self.
-    
-    The description is displayed at the top of the page.
-    Params:
-      description =       the description
+      
+      The description is displayed at the top of the page.
+  
+      Params:
+        description = the description
   */
   void setDescription(string description)
   {
@@ -169,8 +176,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Sets the icon name for self.
-    Params:
-      iconName =       the icon name
+  
+      Params:
+        iconName = the icon name
   */
   void setIconName(string iconName = null)
   {
@@ -180,8 +188,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Sets the name of self.
-    Params:
-      name =       the name
+  
+      Params:
+        name = the name
   */
   override void setName(string name = null)
   {
@@ -191,8 +200,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Sets the title of self.
-    Params:
-      title =       the title
+  
+      Params:
+        title = the title
   */
   void setTitle(string title)
   {
@@ -202,8 +212,9 @@ class PreferencesPage : gtk.widget.Widget
 
   /**
       Sets whether an embedded underline in the title indicates a mnemonic.
-    Params:
-      useUnderline =       `TRUE` if underlines in the text indicate mnemonics
+  
+      Params:
+        useUnderline = `TRUE` if underlines in the text indicate mnemonics
   */
   void setUseUnderline(bool useUnderline)
   {

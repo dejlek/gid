@@ -1,3 +1,4 @@
+/// Module for [Queue] class
 module glib.queue;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import glib.types;
 
 /**
     Contains the public fields of a
-  [Queue][glib-Double-ended-Queues].
+    [Queue][glib-Double-ended-Queues].
 */
 class Queue
 {
   GQueue cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class Queue
     g_queue_free(&cInstance);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -46,7 +49,7 @@ class Queue
 
   /**
       Removes all the elements in queue. If queue elements contain
-    dynamically-allocated memory, they should be freed first.
+      dynamically-allocated memory, they should be freed first.
   */
   void clear()
   {
@@ -55,9 +58,10 @@ class Queue
 
   /**
       Convenience method, which frees all the memory used by a #GQueue,
-    and calls the provided free_func on each item in the #GQueue.
-    Params:
-      freeFunc =       the function to be called to free memory allocated
+      and calls the provided free_func on each item in the #GQueue.
+  
+      Params:
+        freeFunc = the function to be called to free memory allocated
   */
   void clearFull(glib.types.DestroyNotify freeFunc = null)
   {
@@ -73,12 +77,13 @@ class Queue
 
   /**
       Calls func for each element in the queue passing user_data to the
-    function.
-    
-    It is safe for func to remove the element from queue, but it must
-    not modify any part of the queue after that element.
-    Params:
-      func =       the function to call for each element's data
+      function.
+      
+      It is safe for func to remove the element from queue, but it must
+      not modify any part of the queue after that element.
+  
+      Params:
+        func = the function to call for each element's data
   */
   void foreach_(glib.types.Func func)
   {
@@ -96,12 +101,13 @@ class Queue
 
   /**
       Convenience method, which frees all the memory used by a #GQueue,
-    and calls the specified destroy function on every element's data.
-    
-    free_func should not modify the queue (eg, by removing the freed
-    element from it).
-    Params:
-      freeFunc =       the function to be called to free each element's data
+      and calls the specified destroy function on every element's data.
+      
+      free_func should not modify the queue (eg, by removing the freed
+      element from it).
+  
+      Params:
+        freeFunc = the function to be called to free each element's data
   */
   void freeFull(glib.types.DestroyNotify freeFunc)
   {
@@ -117,7 +123,7 @@ class Queue
 
   /**
       Returns the number of items in queue.
-    Returns:     the number of items in queue
+      Returns: the number of items in queue
   */
   uint getLength()
   {
@@ -128,10 +134,11 @@ class Queue
 
   /**
       Returns the position of the first element in queue which contains data.
-    Params:
-      data =       the data to find
-    Returns:     the position of the first element in queue which
-          contains data, or -1 if no element in queue contains data
+  
+      Params:
+        data = the data to find
+      Returns: the position of the first element in queue which
+            contains data, or -1 if no element in queue contains data
   */
   int index(const(void)* data = null)
   {
@@ -142,9 +149,9 @@ class Queue
 
   /**
       A statically-allocated #GQueue must be initialized with this function
-    before it can be used. Alternatively you can initialize it with
-    `G_QUEUE_INIT`. It is not necessary to initialize queues created with
-    [glib.queue.Queue.new_].
+      before it can be used. Alternatively you can initialize it with
+      `G_QUEUE_INIT`. It is not necessary to initialize queues created with
+      [glib.queue.Queue.new_].
   */
   void init_()
   {
@@ -153,13 +160,14 @@ class Queue
 
   /**
       Inserts data into queue using func to determine the new position.
-    Params:
-      data =       the data to insert
-      func =       the #GCompareDataFunc used to compare elements in the queue. It is
-            called with two elements of the queue and user_data. It should
-            return 0 if the elements are equal, a negative value if the first
-            element comes before the second, and a positive value if the second
-            element comes before the first.
+  
+      Params:
+        data = the data to insert
+        func = the #GCompareDataFunc used to compare elements in the queue. It is
+              called with two elements of the queue and user_data. It should
+              return 0 if the elements are equal, a negative value if the first
+              element comes before the second, and a positive value if the second
+              element comes before the first.
   */
   void insertSorted(void* data, glib.types.CompareDataFunc func)
   {
@@ -178,7 +186,7 @@ class Queue
 
   /**
       Returns true if the queue is empty.
-    Returns:     true if the queue is empty
+      Returns: true if the queue is empty
   */
   bool isEmpty()
   {
@@ -189,8 +197,8 @@ class Queue
 
   /**
       Returns the first element of the queue.
-    Returns:     the data of the first element in the queue, or null
-          if the queue is empty
+      Returns: the data of the first element in the queue, or null
+            if the queue is empty
   */
   void* peekHead()
   {
@@ -199,11 +207,12 @@ class Queue
   }
 
   /**
-      Returns the n'th element of queue.
-    Params:
-      n =       the position of the element
-    Returns:     the data for the n'th element of queue,
-          or null if n is off the end of queue
+      Returns the `n`'th element of queue.
+  
+      Params:
+        n = the position of the element
+      Returns: the data for the `n`'th element of queue,
+            or null if `n` is off the end of queue
   */
   void* peekNth(uint n)
   {
@@ -213,8 +222,8 @@ class Queue
 
   /**
       Returns the last element of the queue.
-    Returns:     the data of the last element in the queue, or null
-          if the queue is empty
+      Returns: the data of the last element in the queue, or null
+            if the queue is empty
   */
   void* peekTail()
   {
@@ -224,8 +233,8 @@ class Queue
 
   /**
       Removes the first element of the queue and returns its data.
-    Returns:     the data of the first element in the queue, or null
-          if the queue is empty
+      Returns: the data of the first element in the queue, or null
+            if the queue is empty
   */
   void* popHead()
   {
@@ -234,10 +243,11 @@ class Queue
   }
 
   /**
-      Removes the n'th element of queue and returns its data.
-    Params:
-      n =       the position of the element
-    Returns:     the element's data, or null if n is off the end of queue
+      Removes the `n`'th element of queue and returns its data.
+  
+      Params:
+        n = the position of the element
+      Returns: the element's data, or null if `n` is off the end of queue
   */
   void* popNth(uint n)
   {
@@ -247,8 +257,8 @@ class Queue
 
   /**
       Removes the last element of the queue and returns its data.
-    Returns:     the data of the last element in the queue, or null
-          if the queue is empty
+      Returns: the data of the last element in the queue, or null
+            if the queue is empty
   */
   void* popTail()
   {
@@ -258,8 +268,9 @@ class Queue
 
   /**
       Adds a new element at the head of the queue.
-    Params:
-      data =       the data for the new element.
+  
+      Params:
+        data = the data for the new element.
   */
   void pushHead(void* data = null)
   {
@@ -268,11 +279,12 @@ class Queue
 
   /**
       Inserts a new element into queue at the given position.
-    Params:
-      data =       the data for the new element
-      n =       the position to insert the new element. If n is negative or
-            larger than the number of elements in the queue, the element is
-            added to the end of the queue.
+  
+      Params:
+        data = the data for the new element
+        n = the position to insert the new element. If `n` is negative or
+              larger than the number of elements in the queue, the element is
+              added to the end of the queue.
   */
   void pushNth(void* data, int n)
   {
@@ -281,8 +293,9 @@ class Queue
 
   /**
       Adds a new element at the tail of the queue.
-    Params:
-      data =       the data for the new element
+  
+      Params:
+        data = the data for the new element
   */
   void pushTail(void* data = null)
   {
@@ -291,9 +304,10 @@ class Queue
 
   /**
       Removes the first element in queue that contains data.
-    Params:
-      data =       the data to remove
-    Returns:     true if data was found and removed from queue
+  
+      Params:
+        data = the data to remove
+      Returns: true if data was found and removed from queue
   */
   bool remove(const(void)* data = null)
   {
@@ -304,9 +318,10 @@ class Queue
 
   /**
       Remove all elements whose data equals data from queue.
-    Params:
-      data =       the data to remove
-    Returns:     the number of elements removed from queue
+  
+      Params:
+        data = the data to remove
+      Returns: the number of elements removed from queue
   */
   uint removeAll(const(void)* data = null)
   {
@@ -325,11 +340,12 @@ class Queue
 
   /**
       Sorts queue using compare_func.
-    Params:
-      compareFunc =       the #GCompareDataFunc used to sort queue. This function
-            is passed two elements of the queue and should return 0 if they are
-            equal, a negative value if the first comes before the second, and
-            a positive value if the second comes before the first.
+  
+      Params:
+        compareFunc = the #GCompareDataFunc used to sort queue. This function
+              is passed two elements of the queue and should return 0 if they are
+              equal, a negative value if the first comes before the second, and
+              a positive value if the second comes before the first.
   */
   void sort(glib.types.CompareDataFunc compareFunc)
   {

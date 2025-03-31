@@ -1,3 +1,4 @@
+/// Module for [Session] class
 module soup.session;
 
 import gid.gid;
@@ -25,54 +26,57 @@ import soup.websocket_connection;
 
 /**
     Soup session state object.
-  
-  #SoupSession is the object that controls client-side HTTP. A
-  #SoupSession encapsulates all of the state that libsoup is keeping
-  on behalf of your program; cached HTTP connections, authentication
-  information, etc. It also keeps track of various global options
-  and features that you are using.
-  
-  Most applications will only need a single #SoupSession; the primary
-  reason you might need multiple sessions is if you need to have
-  multiple independent authentication contexts. (Eg, you are
-  connecting to a server and authenticating as two different users at
-  different times; the easiest way to ensure that each `class@Message`
-  is sent with the authentication information you intended is to use
-  one session for the first user, and a second session for the other
-  user.)
-  
-  Additional #SoupSession functionality is provided by
-  `iface@SessionFeature` objects, which can be added to a session with
-  [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
-  For example, `class@Logger` provides support for
-  logging HTTP traffic, `class@ContentDecoder` provides support for
-  compressed response handling, and `class@ContentSniffer` provides
-  support for HTML5-style response body content sniffing.
-  Additionally, subtypes of `class@Auth` can be added
-  as features, to add support for additional authentication types.
-  
-  All [soup.session.Session]s are created with a `class@AuthManager`, and support
-  for `SOUP_TYPE_AUTH_BASIC` and `SOUP_TYPE_AUTH_DIGEST`. Additionally,
-  sessions using the plain #SoupSession class (rather than one of its deprecated
-  subtypes) have a `class@ContentDecoder` by default.
-  
-  Note that all async methods will invoke their callbacks on the thread-default
-  context at the time of the function call.
+    
+    #SoupSession is the object that controls client-side HTTP. A
+    #SoupSession encapsulates all of the state that libsoup is keeping
+    on behalf of your program; cached HTTP connections, authentication
+    information, etc. It also keeps track of various global options
+    and features that you are using.
+    
+    Most applications will only need a single #SoupSession; the primary
+    reason you might need multiple sessions is if you need to have
+    multiple independent authentication contexts. (Eg, you are
+    connecting to a server and authenticating as two different users at
+    different times; the easiest way to ensure that each `class@Message`
+    is sent with the authentication information you intended is to use
+    one session for the first user, and a second session for the other
+    user.)
+    
+    Additional #SoupSession functionality is provided by
+    `iface@SessionFeature` objects, which can be added to a session with
+    [soup.session.Session.addFeature] or [soup.session.Session.addFeatureByType]
+    For example, `class@Logger` provides support for
+    logging HTTP traffic, `class@ContentDecoder` provides support for
+    compressed response handling, and `class@ContentSniffer` provides
+    support for HTML5-style response body content sniffing.
+    Additionally, subtypes of `class@Auth` can be added
+    as features, to add support for additional authentication types.
+    
+    All [soup.session.Session]s are created with a `class@AuthManager`, and support
+    for `SOUP_TYPE_AUTH_BASIC` and `SOUP_TYPE_AUTH_DIGEST`. Additionally,
+    sessions using the plain #SoupSession class (rather than one of its deprecated
+    subtypes) have a `class@ContentDecoder` by default.
+    
+    Note that all async methods will invoke their callbacks on the thread-default
+    context at the time of the function call.
 */
 class Session : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_session_get_type != &gidSymbolNotFound ? soup_session_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -85,7 +89,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Creates a #SoupSession with the default options.
-    Returns:     the new session.
+      Returns: the new session.
   */
   this()
   {
@@ -96,7 +100,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Cancels all pending requests in session and closes all idle
-    persistent connections.
+      persistent connections.
   */
   void abort()
   {
@@ -105,12 +109,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Adds feature's functionality to session. You cannot add multiple
-    features of the same `aliasGLib.Type` to a session.
-    
-    See the main #SoupSession documentation for information on what
-    features are present in sessions by default.
-    Params:
-      feature =       an object that implements #SoupSessionFeature
+      features of the same `aliasGLib.Type` to a session.
+      
+      See the main #SoupSession documentation for information on what
+      features are present in sessions by default.
+  
+      Params:
+        feature = an object that implements #SoupSessionFeature
   */
   void addFeature(soup.session_feature.SessionFeature feature)
   {
@@ -119,19 +124,20 @@ class Session : gobject.object.ObjectG
 
   /**
       If feature_type is the type of a class that implements
-    `ifaceSessionFeature`, this creates a new feature of that type and
-    adds it to session as with [soup.session.Session.addFeature]. You can use
-    this when you don't need to customize the new feature in any way.
-    Adding multiple features of the same feature_type is not allowed.
-    
-    If feature_type is not a `ifaceSessionFeature` type, this gives each
-    existing feature on session the chance to accept feature_type as
-    a "subfeature". This can be used to add new `classAuth` types, for instance.
-    
-    See the main #SoupSession documentation for information on what
-    features are present in sessions by default.
-    Params:
-      featureType =       a #GType
+      `ifaceSessionFeature`, this creates a new feature of that type and
+      adds it to session as with [soup.session.Session.addFeature]. You can use
+      this when you don't need to customize the new feature in any way.
+      Adding multiple features of the same feature_type is not allowed.
+      
+      If feature_type is not a `ifaceSessionFeature` type, this gives each
+      existing feature on session the chance to accept feature_type as
+      a "subfeature". This can be used to add new `classAuth` types, for instance.
+      
+      See the main #SoupSession documentation for information on what
+      features are present in sessions by default.
+  
+      Params:
+        featureType = a #GType
   */
   void addFeatureByType(gobject.types.GType featureType)
   {
@@ -140,8 +146,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the value used by session for the "Accept-Language" header on new
-    requests.
-    Returns:     the accept language string
+      requests.
+      Returns: the accept language string
   */
   string getAcceptLanguage()
   {
@@ -153,9 +159,9 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets whether session automatically sets the "Accept-Language" header on new
-    requests.
-    Returns:     true if session sets "Accept-Language" header automatically, or
-        false otherwise.
+      requests.
+      Returns: true if session sets "Accept-Language" header automatically, or
+          false otherwise.
   */
   bool getAcceptLanguageAuto()
   {
@@ -166,12 +172,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the `classMessage` of the result asynchronous operation This is useful
-    to get the `classMessage` of an asynchronous operation started by session
-    from its [gio.types.AsyncReadyCallback].
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     a #SoupMessage or
-        null if result is not a valid session async operation result.
+      to get the `classMessage` of an asynchronous operation started by session
+      from its [gio.types.AsyncReadyCallback].
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: a #SoupMessage or
+          null if result is not a valid session async operation result.
   */
   soup.message.Message getAsyncResultMessage(gio.async_result.AsyncResult result)
   {
@@ -183,10 +190,11 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the feature in session of type feature_type.
-    Params:
-      featureType =       the #GType of the feature to get
-    Returns:     a #SoupSessionFeature, or null. The
-        feature is owned by session.
+  
+      Params:
+        featureType = the #GType of the feature to get
+      Returns: a #SoupSessionFeature, or null. The
+          feature is owned by session.
   */
   soup.session_feature.SessionFeature getFeature(gobject.types.GType featureType)
   {
@@ -198,12 +206,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the feature in session of type feature_type, provided
-    that it is not disabled for msg.
-    Params:
-      featureType =       the #GType of the feature to get
-      msg =       a #SoupMessage
-    Returns:     a #SoupSessionFeature. The feature is
-        owned by session.
+      that it is not disabled for msg.
+  
+      Params:
+        featureType = the #GType of the feature to get
+        msg = a #SoupMessage
+      Returns: a #SoupSessionFeature. The feature is
+          owned by session.
   */
   soup.session_feature.SessionFeature getFeatureForMessage(gobject.types.GType featureType, soup.message.Message msg)
   {
@@ -215,8 +224,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the timeout in seconds for idle connection lifetime currently used by
-    session.
-    Returns:     the timeout in seconds
+      session.
+      Returns: the timeout in seconds
   */
   uint getIdleTimeout()
   {
@@ -227,8 +236,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the [gio.inet_socket_address.InetSocketAddress] to use for the client side of
-    connections in session.
-    Returns:     a #GInetSocketAddress
+      connections in session.
+      Returns: a #GInetSocketAddress
   */
   gio.inet_socket_address.InetSocketAddress getLocalAddress()
   {
@@ -240,7 +249,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the maximum number of connections that session can open at once.
-    Returns:     the maximum number of connections
+      Returns: the maximum number of connections
   */
   uint getMaxConns()
   {
@@ -251,8 +260,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the maximum number of connections that session can open at once to a
-    given host.
-    Returns:     the maximum number of connections per host
+      given host.
+      Returns: the maximum number of connections per host
   */
   uint getMaxConnsPerHost()
   {
@@ -263,8 +272,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the [gio.proxy_resolver.ProxyResolver] currently used by session.
-    Returns:     a #GProxyResolver or null if proxies
-        are disabled in session
+      Returns: a #GProxyResolver or null if proxies
+          are disabled in session
   */
   gio.proxy_resolver.ProxyResolver getProxyResolver()
   {
@@ -276,7 +285,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the remote connectable if one set.
-    Returns:     the #GSocketConnectable
+      Returns: the #GSocketConnectable
   */
   gio.socket_connectable.SocketConnectable getRemoteConnectable()
   {
@@ -288,8 +297,8 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the timeout in seconds for socket I/O operations currently used by
-    session.
-    Returns:     the timeout in seconds
+      session.
+      Returns: the timeout in seconds
   */
   uint getTimeout()
   {
@@ -300,7 +309,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the [gio.tls_database.TlsDatabase] currently used by session.
-    Returns:     a #GTlsDatabase
+      Returns: a #GTlsDatabase
   */
   gio.tls_database.TlsDatabase getTlsDatabase()
   {
@@ -312,7 +321,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the [gio.tls_interaction.TlsInteraction] currently used by session.
-    Returns:     a #GTlsInteraction
+      Returns: a #GTlsInteraction
   */
   gio.tls_interaction.TlsInteraction getTlsInteraction()
   {
@@ -324,7 +333,7 @@ class Session : gobject.object.ObjectG
 
   /**
       Get the value used by session for the "User-Agent" header on new requests.
-    Returns:     the user agent string
+      Returns: the user agent string
   */
   string getUserAgent()
   {
@@ -336,11 +345,12 @@ class Session : gobject.object.ObjectG
 
   /**
       Tests if session has at a feature of type feature_type (which can
-    be the type of either a `ifaceSessionFeature`, or else a subtype of
-    some class managed by another feature, such as `classAuth`).
-    Params:
-      featureType =       the #GType of the class of features to check for
-    Returns:     true or false
+      be the type of either a `ifaceSessionFeature`, or else a subtype of
+      some class managed by another feature, such as `classAuth`).
+  
+      Params:
+        featureType = the #GType of the class of features to check for
+      Returns: true or false
   */
   bool hasFeature(gobject.types.GType featureType)
   {
@@ -351,21 +361,22 @@ class Session : gobject.object.ObjectG
 
   /**
       Start a preconnection to msg.
-    
-    Once the connection is done, it will remain in idle state so that it can be
-    reused by future requests. If there's already an idle connection for the
-    given msg host, the operation finishes successfully without creating a new
-    connection. If a new request for the given msg host is made while the
-    preconnect is still ongoing, the request will take the ownership of the
-    connection and the preconnect operation will finish successfully (if there's
-    a connection error it will be handled by the request).
-    
-    The operation finishes when the connection is done or an error occurred.
-    Params:
-      msg =       a #SoupMessage
-      ioPriority =       the I/O priority of the request
-      cancellable =       a #GCancellable
-      callback =       the callback to invoke when the operation finishes
+      
+      Once the connection is done, it will remain in idle state so that it can be
+      reused by future requests. If there's already an idle connection for the
+      given msg host, the operation finishes successfully without creating a new
+      connection. If a new request for the given msg host is made while the
+      preconnect is still ongoing, the request will take the ownership of the
+      connection and the preconnect operation will finish successfully (if there's
+      a connection error it will be handled by the request).
+      
+      The operation finishes when the connection is done or an error occurred.
+  
+      Params:
+        msg = a #SoupMessage
+        ioPriority = the I/O priority of the request
+        cancellable = a #GCancellable
+        callback = the callback to invoke when the operation finishes
   */
   void preconnectAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -384,9 +395,11 @@ class Session : gobject.object.ObjectG
 
   /**
       Complete a preconnect async operation started with [soup.session.Session.preconnectAsync].
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     true if the preconnect succeeded, or false in case of error.
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: true if the preconnect succeeded, or false in case of error.
+      Throws: [ErrorG]
   */
   bool preconnectFinish(gio.async_result.AsyncResult result)
   {
@@ -400,8 +413,9 @@ class Session : gobject.object.ObjectG
 
   /**
       Removes feature's functionality from session.
-    Params:
-      feature =       a feature that has previously been added to session
+  
+      Params:
+        feature = a feature that has previously been added to session
   */
   void removeFeature(soup.session_feature.SessionFeature feature)
   {
@@ -410,9 +424,10 @@ class Session : gobject.object.ObjectG
 
   /**
       Removes all features of type feature_type (or any subclass of
-    feature_type) from session.
-    Params:
-      featureType =       a #GType
+      feature_type) from session.
+  
+      Params:
+        featureType = a #GType
   */
   void removeFeatureByType(gobject.types.GType featureType)
   {
@@ -421,28 +436,30 @@ class Session : gobject.object.ObjectG
 
   /**
       Synchronously sends msg and waits for the beginning of a response.
-    
-    On success, a [gio.input_stream.InputStream] will be returned which you can use to
-    read the response body. ("Success" here means only that an HTTP
-    response was received and understood; it does not necessarily mean
-    that a 2xx class status code was received.)
-    
-    If non-null, cancellable can be used to cancel the request;
-    [soup.session.Session.send] will return a [gio.types.IOErrorEnum.Cancelled] error. Note that
-    with requests that have side effects (eg, `POST`, `PUT`, `DELETE`) it is
-    possible that you might cancel the request after the server acts on it, but
-    before it returns a response, leaving the remote resource in an unknown
-    state.
-    
-    If msg is requeued due to a redirect or authentication, the
-    initial (`3xx/401/407`) response body will be suppressed, and
-    [soup.session.Session.send] will only return once a final response has been
-    received.
-    Params:
-      msg =       a #SoupMessage
-      cancellable =       a #GCancellable
-    Returns:     a #GInputStream for reading the
-        response body, or null on error.
+      
+      On success, a [gio.input_stream.InputStream] will be returned which you can use to
+      read the response body. ("Success" here means only that an HTTP
+      response was received and understood; it does not necessarily mean
+      that a 2xx class status code was received.)
+      
+      If non-null, cancellable can be used to cancel the request;
+      [soup.session.Session.send] will return a [gio.types.IOErrorEnum.Cancelled] error. Note that
+      with requests that have side effects (eg, `POST`, `PUT`, `DELETE`) it is
+      possible that you might cancel the request after the server acts on it, but
+      before it returns a response, leaving the remote resource in an unknown
+      state.
+      
+      If msg is requeued due to a redirect or authentication, the
+      initial (`3xx/401/407`) response body will be suppressed, and
+      [soup.session.Session.send] will only return once a final response has been
+      received.
+  
+      Params:
+        msg = a #SoupMessage
+        cancellable = a #GCancellable
+      Returns: a #GInputStream for reading the
+          response body, or null on error.
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream send(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -457,16 +474,18 @@ class Session : gobject.object.ObjectG
 
   /**
       Synchronously sends msg and reads the response body.
-    
-    On success, a [glib.bytes.Bytes] will be returned with the response body.
-    This function should only be used when the resource to be retrieved
-    is not too long and can be stored in memory.
-    
-    See [soup.session.Session.send] for more details on the general semantics.
-    Params:
-      msg =       a #SoupMessage
-      cancellable =       a #GCancellable
-    Returns:     a #GBytes, or null on error.
+      
+      On success, a [glib.bytes.Bytes] will be returned with the response body.
+      This function should only be used when the resource to be retrieved
+      is not too long and can be stored in memory.
+      
+      See [soup.session.Session.send] for more details on the general semantics.
+  
+      Params:
+        msg = a #SoupMessage
+        cancellable = a #GCancellable
+      Returns: a #GBytes, or null on error.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes sendAndRead(soup.message.Message msg, gio.cancellable.Cancellable cancellable = null)
   {
@@ -481,19 +500,20 @@ class Session : gobject.object.ObjectG
 
   /**
       Asynchronously sends msg and reads the response body.
-    
-    When callback is called, then either msg has been sent, and its response
-    body read, or else an error has occurred. This function should only be used
-    when the resource to be retrieved is not too long and can be stored in
-    memory. Call [soup.session.Session.sendAndReadFinish] to get a
-    [glib.bytes.Bytes] with the response body.
-    
-    See [soup.session.Session.send] for more details on the general semantics.
-    Params:
-      msg =       a #SoupMessage
-      ioPriority =       the I/O priority of the request
-      cancellable =       a #GCancellable
-      callback =       the callback to invoke
+      
+      When callback is called, then either msg has been sent, and its response
+      body read, or else an error has occurred. This function should only be used
+      when the resource to be retrieved is not too long and can be stored in
+      memory. Call [soup.session.Session.sendAndReadFinish] to get a
+      [glib.bytes.Bytes] with the response body.
+      
+      See [soup.session.Session.send] for more details on the general semantics.
+  
+      Params:
+        msg = a #SoupMessage
+        ioPriority = the I/O priority of the request
+        cancellable = a #GCancellable
+        callback = the callback to invoke
   */
   void sendAndReadAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -512,11 +532,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the response to a [soup.session.Session.sendAndReadAsync].
-    
-    If successful, returns a [glib.bytes.Bytes] with the response body.
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     a #GBytes, or null on error.
+      
+      If successful, returns a [glib.bytes.Bytes] with the response body.
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: a #GBytes, or null on error.
+      Throws: [ErrorG]
   */
   glib.bytes.Bytes sendAndReadFinish(gio.async_result.AsyncResult result)
   {
@@ -531,14 +553,16 @@ class Session : gobject.object.ObjectG
 
   /**
       Synchronously sends msg and splices the response body stream into out_stream.
-    
-    See [soup.session.Session.send] for more details on the general semantics.
-    Params:
-      msg =       a #SoupMessage
-      outStream =       a #GOutputStream
-      flags =       a set of #GOutputStreamSpliceFlags
-      cancellable =       a #GCancellable
-    Returns:     a #gssize containing the size of the data spliced, or -1 if an error occurred.
+      
+      See [soup.session.Session.send] for more details on the general semantics.
+  
+      Params:
+        msg = a #SoupMessage
+        outStream = a #GOutputStream
+        flags = a set of #GOutputStreamSpliceFlags
+        cancellable = a #GCancellable
+      Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
+      Throws: [ErrorG]
   */
   ptrdiff_t sendAndSplice(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -552,17 +576,18 @@ class Session : gobject.object.ObjectG
 
   /**
       Asynchronously sends msg and splices the response body stream into out_stream.
-    When callback is called, then either msg has been sent and its response body
-    spliced, or else an error has occurred.
-    
-    See [soup.session.Session.send] for more details on the general semantics.
-    Params:
-      msg =       a #SoupMessage
-      outStream =       a #GOutputStream
-      flags =       a set of #GOutputStreamSpliceFlags
-      ioPriority =       the I/O priority of the request
-      cancellable =       a #GCancellable
-      callback =       the callback to invoke
+      When callback is called, then either msg has been sent and its response body
+      spliced, or else an error has occurred.
+      
+      See [soup.session.Session.send] for more details on the general semantics.
+  
+      Params:
+        msg = a #SoupMessage
+        outStream = a #GOutputStream
+        flags = a set of #GOutputStreamSpliceFlags
+        ioPriority = the I/O priority of the request
+        cancellable = a #GCancellable
+        callback = the callback to invoke
   */
   void sendAndSpliceAsync(soup.message.Message msg, gio.output_stream.OutputStream outStream, gio.types.OutputStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -581,9 +606,11 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the response to a [soup.session.Session.sendAndSpliceAsync].
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     a #gssize containing the size of the data spliced, or -1 if an error occurred.
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: a #gssize containing the size of the data spliced, or -1 if an error occurred.
+      Throws: [ErrorG]
   */
   ptrdiff_t sendAndSpliceFinish(gio.async_result.AsyncResult result)
   {
@@ -597,18 +624,19 @@ class Session : gobject.object.ObjectG
 
   /**
       Asynchronously sends msg and waits for the beginning of a response.
-    
-    When callback is called, then either msg has been sent, and its response
-    headers received, or else an error has occurred. Call
-    [soup.session.Session.sendFinish] to get a [gio.input_stream.InputStream] for reading the
-    response body.
-    
-    See [soup.session.Session.send] for more details on the general semantics.
-    Params:
-      msg =       a #SoupMessage
-      ioPriority =       the I/O priority of the request
-      cancellable =       a #GCancellable
-      callback =       the callback to invoke
+      
+      When callback is called, then either msg has been sent, and its response
+      headers received, or else an error has occurred. Call
+      [soup.session.Session.sendFinish] to get a [gio.input_stream.InputStream] for reading the
+      response body.
+      
+      See [soup.session.Session.send] for more details on the general semantics.
+  
+      Params:
+        msg = a #SoupMessage
+        ioPriority = the I/O priority of the request
+        cancellable = a #GCancellable
+        callback = the callback to invoke
   */
   void sendAsync(soup.message.Message msg, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -627,13 +655,15 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the response to a [soup.session.Session.sendAsync] call.
-    
-    If successful returns a [gio.input_stream.InputStream] that can be used to read the
-    response body.
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     a #GInputStream for reading the
-        response body, or null on error.
+      
+      If successful returns a [gio.input_stream.InputStream] that can be used to read the
+      response body.
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: a #GInputStream for reading the
+          response body, or null on error.
+      Throws: [ErrorG]
   */
   gio.input_stream.InputStream sendFinish(gio.async_result.AsyncResult result)
   {
@@ -648,12 +678,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Set the value to use for the "Accept-Language" header on `classMessage`s
-    sent from session.
-    
-    If accept_language is null then no "Accept-Language" will be included in
-    requests. See `propertySession:accept-language` for more information.
-    Params:
-      acceptLanguage =       the languages string
+      sent from session.
+      
+      If accept_language is null then no "Accept-Language" will be included in
+      requests. See `propertySession:accept-language` for more information.
+  
+      Params:
+        acceptLanguage = the languages string
   */
   void setAcceptLanguage(string acceptLanguage)
   {
@@ -663,12 +694,13 @@ class Session : gobject.object.ObjectG
 
   /**
       Set whether session will automatically set the "Accept-Language" header on
-    requests using a value generated from system languages based on
-    `funcGLib.get_language_names`.
-    
-    See `propertySession:accept-language-auto` for more information.
-    Params:
-      acceptLanguageAuto =       the value to set
+      requests using a value generated from system languages based on
+      `funcGLib.get_language_names`.
+      
+      See `propertySession:accept-language-auto` for more information.
+  
+      Params:
+        acceptLanguageAuto = the value to set
   */
   void setAcceptLanguageAuto(bool acceptLanguageAuto)
   {
@@ -677,11 +709,12 @@ class Session : gobject.object.ObjectG
 
   /**
       Set a timeout in seconds for idle connection lifetime to be used by session
-    on new connections.
-    
-    See `propertySession:idle-timeout` for more information.
-    Params:
-      timeout =       a timeout in seconds
+      on new connections.
+      
+      See `propertySession:idle-timeout` for more information.
+  
+      Params:
+        timeout = a timeout in seconds
   */
   void setIdleTimeout(uint timeout)
   {
@@ -690,11 +723,12 @@ class Session : gobject.object.ObjectG
 
   /**
       Set a [gio.proxy_resolver.ProxyResolver] to be used by session on new connections.
-    
-    If proxy_resolver is null then no proxies will be used. See
-    `propertySession:proxy-resolver` for more information.
-    Params:
-      proxyResolver =       a #GProxyResolver or null
+      
+      If proxy_resolver is null then no proxies will be used. See
+      `propertySession:proxy-resolver` for more information.
+  
+      Params:
+        proxyResolver = a #GProxyResolver or null
   */
   void setProxyResolver(gio.proxy_resolver.ProxyResolver proxyResolver = null)
   {
@@ -703,11 +737,12 @@ class Session : gobject.object.ObjectG
 
   /**
       Set a timeout in seconds for socket I/O operations to be used by session
-    on new connections.
-    
-    See `propertySession:timeout` for more information.
-    Params:
-      timeout =       a timeout in seconds
+      on new connections.
+      
+      See `propertySession:timeout` for more information.
+  
+      Params:
+        timeout = a timeout in seconds
   */
   void setTimeout(uint timeout)
   {
@@ -716,11 +751,12 @@ class Session : gobject.object.ObjectG
 
   /**
       Set a `classGIo.TlsDatabase` to be used by session on new connections.
-    
-    If tls_database is null then certificate validation will always fail. See
-    `propertySession:tls-database` for more information.
-    Params:
-      tlsDatabase =       a #GTlsDatabase
+      
+      If tls_database is null then certificate validation will always fail. See
+      `propertySession:tls-database` for more information.
+  
+      Params:
+        tlsDatabase = a #GTlsDatabase
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase = null)
   {
@@ -729,13 +765,14 @@ class Session : gobject.object.ObjectG
 
   /**
       Set a [gio.tls_interaction.TlsInteraction] to be used by session on new connections.
-    
-    If tls_interaction is null then client certificate validation will always
-    fail.
-    
-    See `propertySession:tls-interaction` for more information.
-    Params:
-      tlsInteraction =       a #GTlsInteraction
+      
+      If tls_interaction is null then client certificate validation will always
+      fail.
+      
+      See `propertySession:tls-interaction` for more information.
+  
+      Params:
+        tlsInteraction = a #GTlsInteraction
   */
   void setTlsInteraction(gio.tls_interaction.TlsInteraction tlsInteraction = null)
   {
@@ -744,14 +781,15 @@ class Session : gobject.object.ObjectG
 
   /**
       Set the value to use for the "User-Agent" header on `classMessage`s sent
-    from session.
-    
-    If user_agent has trailing whitespace, session will append its own product
-    token (eg, `libsoup/3.0.0`) to the end of the header for you. If user_agent
-    is null then no "User-Agent" will be included in requests. See
-    `propertySession:user-agent` for more information.
-    Params:
-      userAgent =       the user agent string
+      from session.
+      
+      If user_agent has trailing whitespace, session will append its own product
+      token (eg, `libsoup/3.0.0`) to the end of the header for you. If user_agent
+      is null then no "User-Agent" will be included in requests. See
+      `propertySession:user-agent` for more information.
+  
+      Params:
+        userAgent = the user agent string
   */
   void setUserAgent(string userAgent)
   {
@@ -761,30 +799,31 @@ class Session : gobject.object.ObjectG
 
   /**
       Asynchronously creates a `classWebsocketConnection` to communicate with a
-    remote server.
-    
-    All necessary WebSocket-related headers will be added to msg, and
-    it will then be sent and asynchronously processed normally
-    (including handling of redirection and HTTP authentication).
-    
-    If the server returns "101 Switching Protocols", then msg's status
-    code and response headers will be updated, and then the WebSocket
-    handshake will be completed. On success,
-    [soup.session.Session.websocketConnectFinish] will return a new
-    `classWebsocketConnection`. On failure it will return a #GError.
-    
-    If the server returns a status other than "101 Switching Protocols", then
-    msg will contain the complete response headers and body from the server's
-    response, and [soup.session.Session.websocketConnectFinish] will return
-    [soup.types.WebsocketError.NotWebsocket].
-    Params:
-      msg =       #SoupMessage indicating the WebSocket server to connect to
-      origin =       origin of the connection
-      protocols =       a
-          null-terminated array of protocols supported
-      ioPriority =       the I/O priority of the request
-      cancellable =       a #GCancellable
-      callback =       the callback to invoke
+      remote server.
+      
+      All necessary WebSocket-related headers will be added to msg, and
+      it will then be sent and asynchronously processed normally
+      (including handling of redirection and HTTP authentication).
+      
+      If the server returns "101 Switching Protocols", then msg's status
+      code and response headers will be updated, and then the WebSocket
+      handshake will be completed. On success,
+      [soup.session.Session.websocketConnectFinish] will return a new
+      `classWebsocketConnection`. On failure it will return a #GError.
+      
+      If the server returns a status other than "101 Switching Protocols", then
+      msg will contain the complete response headers and body from the server's
+      response, and [soup.session.Session.websocketConnectFinish] will return
+      [soup.types.WebsocketError.NotWebsocket].
+  
+      Params:
+        msg = #SoupMessage indicating the WebSocket server to connect to
+        origin = origin of the connection
+        protocols = a
+            null-terminated array of protocols supported
+        ioPriority = the I/O priority of the request
+        cancellable = a #GCancellable
+        callback = the callback to invoke
   */
   void websocketConnectAsync(soup.message.Message msg, string origin, string[] protocols, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -810,14 +849,16 @@ class Session : gobject.object.ObjectG
 
   /**
       Gets the `classWebsocketConnection` response to a
-    [soup.session.Session.websocketConnectAsync] call.
-    
-    If successful, returns a `classWebsocketConnection` that can be used to
-    communicate with the server.
-    Params:
-      result =       the #GAsyncResult passed to your callback
-    Returns:     a new #SoupWebsocketConnection, or
-        null on error.
+      [soup.session.Session.websocketConnectAsync] call.
+      
+      If successful, returns a `classWebsocketConnection` that can be used to
+      communicate with the server.
+  
+      Params:
+        result = the #GAsyncResult passed to your callback
+      Returns: a new #SoupWebsocketConnection, or
+          null on error.
+      Throws: [ErrorG]
   */
   soup.websocket_connection.WebsocketConnection websocketConnectFinish(gio.async_result.AsyncResult result)
   {
@@ -831,63 +872,70 @@ class Session : gobject.object.ObjectG
   }
 
   /**
-      Emitted when a request is queued on session.
-    
-    When sending a request, first `signalSession::request-queued`
-    is emitted, indicating that the session has become aware of
-    the request.
-    
-    After a connection is available to send the request various
-    `classMessage` signals are emitted as the message is
-    processed. If the message is requeued, it will emit
-    `signalMessage::restarted`, which will then be followed by other
-    `classMessage` signals when the message is re-sent.
-    
-    Eventually, the message will emit `signalMessage::finished`.
-    Normally, this signals the completion of message
-    processing. However, it is possible that the application
-    will requeue the message from the "finished" handler.
-    In that case the process will loop back.
-    
-    Eventually, a message will reach "finished" and not be
-    requeued. At that point, the session will emit
-    `signalSession::request-unqueued` to indicate that it is done
-    with the message.
-    
-    To sum up: `signalSession::request-queued` and
-    `signalSession::request-unqueued` are guaranteed to be emitted
-    exactly once, but `signalMessage::finished` (and all of the other
-    `classMessage` signals) may be invoked multiple times for a given
-    message.
+      Connect to `RequestQueued` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B msg)       the request that was queued
-      * $(B session) the instance the signal is connected to
-    )
-  */
-  alias RequestQueuedCallbackDlg = void delegate(soup.message.Message msg, soup.session.Session session);
-
-  /** ditto */
-  alias RequestQueuedCallbackFunc = void function(soup.message.Message msg, soup.session.Session session);
-
-  /**
-    Connect to RequestQueued signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a request is queued on session.
+      
+      When sending a request, first `signalSession::request-queued`
+      is emitted, indicating that the session has become aware of
+      the request.
+      
+      After a connection is available to send the request various
+      `classMessage` signals are emitted as the message is
+      processed. If the message is requeued, it will emit
+      `signalMessage::restarted`, which will then be followed by other
+      `classMessage` signals when the message is re-sent.
+      
+      Eventually, the message will emit `signalMessage::finished`.
+      Normally, this signals the completion of message
+      processing. However, it is possible that the application
+      will requeue the message from the "finished" handler.
+      In that case the process will loop back.
+      
+      Eventually, a message will reach "finished" and not be
+      requeued. At that point, the session will emit
+      `signalSession::request-unqueued` to indicate that it is done
+      with the message.
+      
+      To sum up: `signalSession::request-queued` and
+      `signalSession::request-unqueued` are guaranteed to be emitted
+      exactly once, but `signalMessage::finished` (and all of the other
+      `classMessage` signals) may be invoked multiple times for a given
+      message.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.message.Message msg, soup.session.Session session))
+  
+          `msg` the request that was queued (optional)
+  
+          `session` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRequestQueued(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RequestQueuedCallbackDlg) || is(T : RequestQueuedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto session = getVal!(soup.session.Session)(_paramVals);
-      auto msg = getVal!(soup.message.Message)(&_paramVals[1]);
-      _dClosure.dlg(msg, session);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -895,40 +943,47 @@ class Session : gobject.object.ObjectG
   }
 
   /**
-      Emitted when a request is removed from session's queue,
-    indicating that session is done with it.
-    
-    See `signalSession::request-queued` for a detailed description of
-    the message lifecycle within a session.
+      Connect to `RequestUnqueued` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B msg)       the request that was unqueued
-      * $(B session) the instance the signal is connected to
-    )
-  */
-  alias RequestUnqueuedCallbackDlg = void delegate(soup.message.Message msg, soup.session.Session session);
-
-  /** ditto */
-  alias RequestUnqueuedCallbackFunc = void function(soup.message.Message msg, soup.session.Session session);
-
-  /**
-    Connect to RequestUnqueued signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a request is removed from session's queue,
+      indicating that session is done with it.
+      
+      See `signalSession::request-queued` for a detailed description of
+      the message lifecycle within a session.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(soup.message.Message msg, soup.session.Session session))
+  
+          `msg` the request that was unqueued (optional)
+  
+          `session` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRequestUnqueued(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RequestUnqueuedCallbackDlg) || is(T : RequestUnqueuedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : soup.message.Message)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : soup.session.Session)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto session = getVal!(soup.session.Session)(_paramVals);
-      auto msg = getVal!(soup.message.Message)(&_paramVals[1]);
-      _dClosure.dlg(msg, session);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [CallbackAnimationTarget] class
 module adw.callback_animation_target;
 
 import adw.animation_target;
@@ -8,22 +9,25 @@ import gid.gid;
 
 /**
     An `class@AnimationTarget` that calls a given callback during the
-  animation.
+    animation.
 */
 class CallbackAnimationTarget : adw.animation_target.AnimationTarget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_callback_animation_target_get_type != &gidSymbolNotFound ? adw_callback_animation_target_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,11 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
 
   /**
       Creates a new [adw.animation_target.AnimationTarget] that calls the given callback during
-    the animation.
-    Params:
-      callback =       the callback to call
-    Returns:     the newly created callback target
+      the animation.
+  
+      Params:
+        callback = the callback to call
+      Returns: the newly created callback target
   */
   this(adw.types.AnimationTargetFunc callback)
   {

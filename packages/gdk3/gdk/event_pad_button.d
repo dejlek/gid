@@ -1,3 +1,4 @@
+/// Module for [EventPadButton] class
 module gdk.event_pad_button;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventPadButton
 {
   GdkEventPadButton cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventPadButton
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

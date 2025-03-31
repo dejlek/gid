@@ -1,3 +1,4 @@
+/// Module for [RepeatingLinearGradientNode] class
 module gsk.repeating_linear_gradient_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class RepeatingLinearGradientNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

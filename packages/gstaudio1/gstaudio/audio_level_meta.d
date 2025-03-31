@@ -1,3 +1,4 @@
+/// Module for [AudioLevelMeta] class
 module gstaudio.audio_level_meta;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class AudioLevelMeta
 {
   GstAudioLevelMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AudioLevelMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -57,7 +60,7 @@ class AudioLevelMeta
 
   /**
       Return the #GstMetaInfo associated with #GstAudioLevelMeta.
-    Returns:     a #GstMetaInfo
+      Returns: a #GstMetaInfo
   */
   static gst.meta_info.MetaInfo getInfo()
   {

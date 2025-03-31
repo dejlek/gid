@@ -1,3 +1,4 @@
+/// Module for [TextAttributes] class
 module gtk.text_attributes;
 
 import gid.gid;
@@ -12,29 +13,33 @@ import pango.tab_array;
 
 /**
     Using #GtkTextAttributes directly should rarely be necessary.
-  It’s primarily useful with [gtk.text_iter.TextIter.getAttributes].
-  As with most GTK+ structs, the fields in this struct should only
-  be read, never modified directly.
+    It’s primarily useful with [gtk.text_iter.TextIter.getAttributes].
+    As with most GTK+ structs, the fields in this struct should only
+    be read, never modified directly.
 */
 class TextAttributes : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_attributes_get_type != &gidSymbolNotFound ? gtk_text_attributes_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -235,9 +240,9 @@ class TextAttributes : gobject.boxed.Boxed
 
   /**
       Creates a #GtkTextAttributes, which describes
-    a set of properties on some text.
-    Returns:     a new #GtkTextAttributes,
-          free with [gtk.text_attributes.TextAttributes.unref].
+      a set of properties on some text.
+      Returns: a new #GtkTextAttributes,
+            free with [gtk.text_attributes.TextAttributes.unref].
   */
   this()
   {
@@ -248,8 +253,8 @@ class TextAttributes : gobject.boxed.Boxed
 
   /**
       Copies src and returns a new #GtkTextAttributes.
-    Returns:     a copy of src,
-          free with [gtk.text_attributes.TextAttributes.unref]
+      Returns: a copy of src,
+            free with [gtk.text_attributes.TextAttributes.unref]
   */
   gtk.text_attributes.TextAttributes copy()
   {
@@ -261,9 +266,10 @@ class TextAttributes : gobject.boxed.Boxed
 
   /**
       Copies the values from src to dest so that dest has
-    the same values as src. Frees existing values in dest.
-    Params:
-      dest =       another #GtkTextAttributes
+      the same values as src. Frees existing values in dest.
+  
+      Params:
+        dest = another #GtkTextAttributes
   */
   void copyValues(gtk.text_attributes.TextAttributes dest)
   {

@@ -1,3 +1,4 @@
+/// Module for [ParamFraction] class
 module gst.param_fraction;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gst.types;
 
 /**
     A fundamental type that describes a #GParamSpec for fractional
-  properties
+    properties
 */
 class ParamFraction : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

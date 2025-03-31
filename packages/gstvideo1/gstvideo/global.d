@@ -1,3 +1,4 @@
+/// Global functions for gstvideo1 library
 module gstvideo.global;
 
 import gid.gid;
@@ -45,10 +46,11 @@ gobject.types.GType ancillaryMetaApiGetType()
 
 /**
     Adds a new #GstAncillaryMeta to the buffer. The caller is responsible for setting the appropriate
-  fields.
-  Params:
-    buffer =       A #GstBuffer
-  Returns:     A new #GstAncillaryMeta, or null if an error happened.
+    fields.
+
+    Params:
+      buffer = A #GstBuffer
+    Returns: A new #GstAncillaryMeta, or null if an error happened.
 */
 gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer buffer)
 {
@@ -60,13 +62,14 @@ gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer b
 
 /**
     Attaches #GstVideoAFDMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    field =       0 for progressive or field 1 and 1 for field 2
-    spec =       #GstVideoAFDSpec that applies to AFD value
-    afd =       #GstVideoAFDValue AFD enumeration
-  Returns:     the #GstVideoAFDMeta on buffer.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      field = 0 for progressive or field 1 and 1 for field 2
+      spec = #GstVideoAFDSpec that applies to AFD value
+      afd = #GstVideoAFDValue AFD enumeration
+    Returns: the #GstVideoAFDMeta on buffer.
 */
 gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buffer, ubyte field, gstvideo.types.VideoAFDSpec spec, gstvideo.types.VideoAFDValue afd)
 {
@@ -78,10 +81,11 @@ gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buff
 
 /**
     Attaches GstVideoAffineTransformationMeta metadata to buffer with
-  the given parameters.
-  Params:
-    buffer =       a #GstBuffer
-  Returns:     the #GstVideoAffineTransformationMeta on buffer.
+    the given parameters.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstVideoAffineTransformationMeta on buffer.
 */
 gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAddVideoAffineTransformationMeta(gst.buffer.Buffer buffer)
 {
@@ -93,24 +97,25 @@ gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAd
 
 /**
     Attaches #GstVideoBarMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    field =       0 for progressive or field 1 and 1 for field 2
-    isLetterbox =       if true then bar data specifies letterbox, otherwise pillarbox
-    barData1 =       If is_letterbox is true, then the value specifies the
-           last line of a horizontal letterbox bar area at top of reconstructed frame.
-           Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
-           bar area at the left side of the reconstructed frame
-    barData2 =       If is_letterbox is true, then the value specifies the
-           first line of a horizontal letterbox bar area at bottom of reconstructed frame.
-           Otherwise, it specifies the first horizontal
-           luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
-  Returns:     the #GstVideoBarMeta on buffer.
-    
-    See Table 6.11 Bar Data Syntax
-    
-    https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      field = 0 for progressive or field 1 and 1 for field 2
+      isLetterbox = if true then bar data specifies letterbox, otherwise pillarbox
+      barData1 = If is_letterbox is true, then the value specifies the
+             last line of a horizontal letterbox bar area at top of reconstructed frame.
+             Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+             bar area at the left side of the reconstructed frame
+      barData2 = If is_letterbox is true, then the value specifies the
+             first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+             Otherwise, it specifies the first horizontal
+             luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+    Returns: the #GstVideoBarMeta on buffer.
+      
+      See Table 6.11 Bar Data Syntax
+      
+      https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
 */
 gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buffer, ubyte field, bool isLetterbox, uint barData1, uint barData2)
 {
@@ -122,12 +127,13 @@ gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buf
 
 /**
     Attaches #GstVideoCaptionMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    captionType =       The type of Closed Caption to add
-    data =       The Closed Caption data
-  Returns:     the #GstVideoCaptionMeta on buffer.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      captionType = The type of Closed Caption to add
+      data = The Closed Caption data
+    Returns: the #GstVideoCaptionMeta on buffer.
 */
 gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoCaptionType captionType, ubyte[] data)
 {
@@ -144,11 +150,12 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
 
 /**
     Attaches a #GstVideoCodecAlphaMeta metadata to buffer with
-  the given alpha buffer.
-  Params:
-    buffer =       a #GstBuffer
-    alphaBuffer =       a #GstBuffer
-  Returns:     the #GstVideoCodecAlphaMeta on buffer.
+    the given alpha buffer.
+
+    Params:
+      buffer = a #GstBuffer
+      alphaBuffer = a #GstBuffer
+    Returns: the #GstVideoCodecAlphaMeta on buffer.
 */
 gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta(gst.buffer.Buffer buffer, gst.buffer.Buffer alphaBuffer)
 {
@@ -160,17 +167,18 @@ gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta
 
 /**
     Attaches GstVideoMeta metadata to buffer with the given parameters and the
-  default offsets and strides for format and width x height.
-  
-  This function calculates the default offsets and strides and then calls
-  [gstvideo.global.bufferAddVideoMetaFull] with them.
-  Params:
-    buffer =       a #GstBuffer
-    flags =       #GstVideoFrameFlags
-    format =       a #GstVideoFormat
-    width =       the width
-    height =       the height
-  Returns:     the #GstVideoMeta on buffer.
+    default offsets and strides for format and width x height.
+    
+    This function calculates the default offsets and strides and then calls
+    [gstvideo.global.bufferAddVideoMetaFull] with them.
+
+    Params:
+      buffer = a #GstBuffer
+      flags = #GstVideoFrameFlags
+      format = a #GstVideoFormat
+      width = the width
+      height = the height
+    Returns: the #GstVideoMeta on buffer.
 */
 gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height)
 {
@@ -182,16 +190,17 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvi
 
 /**
     Attaches GstVideoMeta metadata to buffer with the given parameters.
-  Params:
-    buffer =       a #GstBuffer
-    flags =       #GstVideoFrameFlags
-    format =       a #GstVideoFormat
-    width =       the width
-    height =       the height
-    nPlanes =       number of planes
-    offset =       offset of each plane
-    stride =       stride of each plane
-  Returns:     the #GstVideoMeta on buffer.
+
+    Params:
+      buffer = a #GstBuffer
+      flags = #GstVideoFrameFlags
+      format = a #GstVideoFormat
+      width = the width
+      height = the height
+      nPlanes = number of planes
+      offset = offset of each plane
+      stride = stride of each plane
+    Returns: the #GstVideoMeta on buffer.
 */
 gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height, uint nPlanes, size_t[] offset, int[] stride)
 {
@@ -207,12 +216,13 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
 
 /**
     Sets an overlay composition on a buffer. The buffer will obtain its own
-  reference to the composition, meaning this function does not take ownership
-  of comp.
-  Params:
-    buf =       a #GstBuffer
-    comp =       a #GstVideoOverlayComposition
-  Returns:     a #GstVideoOverlayCompositionMeta
+    reference to the composition, meaning this function does not take ownership
+    of comp.
+
+    Params:
+      buf = a #GstBuffer
+      comp = a #GstVideoOverlayComposition
+    Returns: a #GstVideoOverlayCompositionMeta
 */
 gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVideoOverlayCompositionMeta(gst.buffer.Buffer buf, gstvideo.video_overlay_composition.VideoOverlayComposition comp = null)
 {
@@ -224,15 +234,16 @@ gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVid
 
 /**
     Attaches #GstVideoRegionOfInterestMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    roiType =       Type of the region of interest (e.g. "face")
-    x =       X position
-    y =       Y position
-    w =       width
-    h =       height
-  Returns:     the #GstVideoRegionOfInterestMeta on buffer.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      roiType = Type of the region of interest (e.g. "face")
+      x = X position
+      y = Y position
+      w = width
+      h = height
+    Returns: the #GstVideoRegionOfInterestMeta on buffer.
 */
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMeta(gst.buffer.Buffer buffer, string roiType, uint x, uint y, uint w, uint h)
 {
@@ -245,15 +256,16 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 
 /**
     Attaches #GstVideoRegionOfInterestMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    roiType =       Type of the region of interest (e.g. "face")
-    x =       X position
-    y =       Y position
-    w =       width
-    h =       height
-  Returns:     the #GstVideoRegionOfInterestMeta on buffer.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      roiType = Type of the region of interest (e.g. "face")
+      x = X position
+      y = Y position
+      w = width
+      h = height
+    Returns: the #GstVideoRegionOfInterestMeta on buffer.
 */
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, glib.types.Quark roiType, uint x, uint y, uint w, uint h)
 {
@@ -265,12 +277,13 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 
 /**
     Attaches #GstVideoSEIUserDataUnregisteredMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    uuid =       User Data Unregistered UUID
-    data =       SEI User Data Unregistered buffer
-  Returns:     the #GstVideoSEIUserDataUnregisteredMeta on buffer.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      uuid = User Data Unregistered UUID
+      data = SEI User Data Unregistered buffer
+    Returns: the #GstVideoSEIUserDataUnregisteredMeta on buffer.
 */
 gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta bufferAddVideoSeiUserDataUnregisteredMeta(gst.buffer.Buffer buffer, ubyte[] uuid, ubyte[] data)
 {
@@ -289,12 +302,13 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
 
 /**
     Attaches #GstVideoTimeCodeMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    tc =       a #GstVideoTimeCode
-  Returns:     the #GstVideoTimeCodeMeta on buffer, or
-    (since 1.16) null if the timecode was invalid.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      tc = a #GstVideoTimeCode
+    Returns: the #GstVideoTimeCodeMeta on buffer, or
+      (since 1.16) null if the timecode was invalid.
 */
 gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.buffer.Buffer buffer, gstvideo.video_time_code.VideoTimeCode tc)
 {
@@ -306,20 +320,21 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.b
 
 /**
     Attaches #GstVideoTimeCodeMeta metadata to buffer with the given
-  parameters.
-  Params:
-    buffer =       a #GstBuffer
-    fpsN =       framerate numerator
-    fpsD =       framerate denominator
-    latestDailyJam =       a #GDateTime for the latest daily jam
-    flags =       a #GstVideoTimeCodeFlags
-    hours =       hours since the daily jam
-    minutes =       minutes since the daily jam
-    seconds =       seconds since the daily jam
-    frames =       frames since the daily jam
-    fieldCount =       fields since the daily jam
-  Returns:     the #GstVideoTimeCodeMeta on buffer, or
-    (since 1.16) null if the timecode was invalid.
+    parameters.
+
+    Params:
+      buffer = a #GstBuffer
+      fpsN = framerate numerator
+      fpsD = framerate denominator
+      latestDailyJam = a #GDateTime for the latest daily jam
+      flags = a #GstVideoTimeCodeFlags
+      hours = hours since the daily jam
+      minutes = minutes since the daily jam
+      seconds = seconds since the daily jam
+      frames = frames since the daily jam
+      fieldCount = fields since the daily jam
+    Returns: the #GstVideoTimeCodeMeta on buffer, or
+      (since 1.16) null if the timecode was invalid.
 */
 gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(gst.buffer.Buffer buffer, uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
 {
@@ -331,13 +346,14 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(g
 
 /**
     Find the #GstVideoMeta on buffer with the lowest id.
-  
-  Buffers can contain multiple #GstVideoMeta metadata items when dealing with
-  multiview buffers.
-  Params:
-    buffer =       a #GstBuffer
-  Returns:     the #GstVideoMeta with lowest id (usually 0) or null when there
-    is no such metadata on buffer.
+    
+    Buffers can contain multiple #GstVideoMeta metadata items when dealing with
+    multiview buffers.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstVideoMeta with lowest id (usually 0) or null when there
+      is no such metadata on buffer.
 */
 gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
 {
@@ -349,14 +365,15 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
 
 /**
     Find the #GstVideoMeta on buffer with the given id.
-  
-  Buffers can contain multiple #GstVideoMeta metadata items when dealing with
-  multiview buffers.
-  Params:
-    buffer =       a #GstBuffer
-    id =       a metadata id
-  Returns:     the #GstVideoMeta with id or null when there is no such metadata
-    on buffer.
+    
+    Buffers can contain multiple #GstVideoMeta metadata items when dealing with
+    multiview buffers.
+
+    Params:
+      buffer = a #GstBuffer
+      id = a metadata id
+    Returns: the #GstVideoMeta with id or null when there is no such metadata
+      on buffer.
 */
 gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int id)
 {
@@ -368,14 +385,15 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int
 
 /**
     Find the #GstVideoRegionOfInterestMeta on buffer with the given id.
-  
-  Buffers can contain multiple #GstVideoRegionOfInterestMeta metadata items if
-  multiple regions of interests are marked on a frame.
-  Params:
-    buffer =       a #GstBuffer
-    id =       a metadata id
-  Returns:     the #GstVideoRegionOfInterestMeta with id or null when there is
-    no such metadata on buffer.
+    
+    Buffers can contain multiple #GstVideoRegionOfInterestMeta metadata items if
+    multiple regions of interests are marked on a frame.
+
+    Params:
+      buffer = a #GstBuffer
+      id = a metadata id
+    Returns: the #GstVideoRegionOfInterestMeta with id or null when there is
+      no such metadata on buffer.
 */
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, int id)
 {
@@ -387,11 +405,12 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 
 /**
     Get the video alignment from the bufferpool configuration config in
-  in align
-  Params:
-    config =       a #GstStructure
-    align_ =       a #GstVideoAlignment
-  Returns:     true if config could be parsed correctly.
+    in align
+
+    Params:
+      config = a #GstStructure
+      align_ = a #GstVideoAlignment
+    Returns: true if config could be parsed correctly.
 */
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
@@ -402,10 +421,11 @@ bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.
 
 /**
     Set the video alignment in align to the bufferpool configuration
-  config
-  Params:
-    config =       a #GstStructure
-    align_ =       a #GstVideoAlignment
+    config
+
+    Params:
+      config = a #GstStructure
+      align_ = a #GstVideoAlignment
 */
 void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
@@ -414,10 +434,11 @@ void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.
 
 /**
     Convenience function to check if the given message is a
-  "prepare-window-handle" message from a #GstVideoOverlay.
-  Params:
-    msg =       a #GstMessage
-  Returns:     whether msg is a "prepare-window-handle" message
+    "prepare-window-handle" message from a #GstVideoOverlay.
+
+    Params:
+      msg = a #GstMessage
+    Returns: whether msg is a "prepare-window-handle" message
 */
 bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg)
 {
@@ -452,14 +473,15 @@ gobject.types.GType videoBarMetaApiGetType()
 
 /**
     Lets you blend the src image into the dest image
-  Params:
-    dest =       The #GstVideoFrame where to blend src in
-    src =       the #GstVideoFrame that we want to blend into
-    x =       The x offset in pixel where the src image should be blended
-    y =       the y offset in pixel where the src image should be blended
-    globalAlpha =       the global_alpha each per-pixel alpha value is multiplied
-                     with
-  Returns: 
+
+    Params:
+      dest = The #GstVideoFrame where to blend src in
+      src = the #GstVideoFrame that we want to blend into
+      x = The x offset in pixel where the src image should be blended
+      y = the y offset in pixel where the src image should be blended
+      globalAlpha = the global_alpha each per-pixel alpha value is multiplied
+                       with
+    Returns: 
 */
 bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.VideoFrame src, int x, int y, float globalAlpha)
 {
@@ -470,18 +492,19 @@ bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.Video
 
 /**
     Scales a buffer containing RGBA (or AYUV) video. This is an internal
-  helper function which is used to scale subtitle overlays, and may be
-  deprecated in the near future. Use #GstVideoScaler to scale video buffers
-  instead.
-  Params:
-    src =       the #GstVideoInfo describing the video data in src_buffer
-    srcBuffer =       the source buffer containing video pixels to scale
-    destHeight =       the height in pixels to scale the video data in src_buffer to
-    destWidth =       the width in pixels to scale the video data in src_buffer to
-    dest =       pointer to a #GstVideoInfo structure that will be filled in
-          with the details for dest_buffer
-    destBuffer =       a pointer to a #GstBuffer variable, which will be
-          set to a newly-allocated buffer containing the scaled pixels.
+    helper function which is used to scale subtitle overlays, and may be
+    deprecated in the near future. Use #GstVideoScaler to scale video buffers
+    instead.
+
+    Params:
+      src = the #GstVideoInfo describing the video data in src_buffer
+      srcBuffer = the source buffer containing video pixels to scale
+      destHeight = the height in pixels to scale the video data in src_buffer to
+      destWidth = the width in pixels to scale the video data in src_buffer to
+      dest = pointer to a #GstVideoInfo structure that will be filled in
+            with the details for dest_buffer
+      destBuffer = a pointer to a #GstBuffer variable, which will be
+            set to a newly-allocated buffer containing the scaled pixels.
 */
 void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buffer srcBuffer, int destHeight, int destWidth, out gstvideo.video_info.VideoInfo dest, out gst.buffer.Buffer destBuffer)
 {
@@ -494,20 +517,21 @@ void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buf
 
 /**
     Given the Pixel Aspect Ratio and size of an input video frame, and the
-  pixel aspect ratio of the intended display device, calculates the actual
-  display ratio the video will be rendered with.
-  Params:
-    darN =       Numerator of the calculated display_ratio
-    darD =       Denominator of the calculated display_ratio
-    videoWidth =       Width of the video frame in pixels
-    videoHeight =       Height of the video frame in pixels
-    videoParN =       Numerator of the pixel aspect ratio of the input video.
-    videoParD =       Denominator of the pixel aspect ratio of the input video.
-    displayParN =       Numerator of the pixel aspect ratio of the display device
-    displayParD =       Denominator of the pixel aspect ratio of the display device
-  Returns:     A boolean indicating success and a calculated Display Ratio in the
-    dar_n and dar_d parameters.
-    The return value is FALSE in the case of integer overflow or other error.
+    pixel aspect ratio of the intended display device, calculates the actual
+    display ratio the video will be rendered with.
+
+    Params:
+      darN = Numerator of the calculated display_ratio
+      darD = Denominator of the calculated display_ratio
+      videoWidth = Width of the video frame in pixels
+      videoHeight = Height of the video frame in pixels
+      videoParN = Numerator of the pixel aspect ratio of the input video.
+      videoParD = Denominator of the pixel aspect ratio of the input video.
+      displayParN = Numerator of the pixel aspect ratio of the display device
+      displayParD = Denominator of the pixel aspect ratio of the display device
+    Returns: A boolean indicating success and a calculated Display Ratio in the
+      dar_n and dar_d parameters.
+      The return value is FALSE in the case of integer overflow or other error.
 */
 bool videoCalculateDisplayRatio(out uint darN, out uint darD, uint videoWidth, uint videoHeight, uint videoParN, uint videoParD, uint displayParN, uint displayParD)
 {
@@ -526,13 +550,14 @@ gobject.types.GType videoCaptionMetaApiGetType()
 
 /**
     Takes src rectangle and position it at the center of dst rectangle with or
-  without scaling. It handles clipping if the src rectangle is bigger than
-  the dst one and scaling is set to FALSE.
-  Params:
-    src =       a pointer to #GstVideoRectangle describing the source area
-    dst =       a pointer to #GstVideoRectangle describing the destination area
-    result =       a pointer to a #GstVideoRectangle which will receive the result area
-    scaling =       a #gboolean indicating if scaling should be applied or not
+    without scaling. It handles clipping if the src rectangle is bigger than
+    the dst one and scaling is set to FALSE.
+
+    Params:
+      src = a pointer to #GstVideoRectangle describing the source area
+      dst = a pointer to #GstVideoRectangle describing the destination area
+      result = a pointer to a #GstVideoRectangle which will receive the result area
+      scaling = a #gboolean indicating if scaling should be applied or not
 */
 void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRectangle dst, out gstvideo.types.VideoRectangle result, bool scaling)
 {
@@ -540,13 +565,14 @@ void videoCenterRect(gstvideo.types.VideoRectangle src, gstvideo.types.VideoRect
 }
 
 /**
-    Convert s to a #GstVideoChromaSite
-  Params:
-    s =       a chromasite string
-  Returns:     a #GstVideoChromaSite or [gstvideo.types.VideoChromaSite.Unknown] when s does
-    not contain a valid chroma description.
+    Convert `s` to a #GstVideoChromaSite
 
-  Deprecated:     Use [gstvideo.global.videoChromaSiteFromString] instead.
+    Params:
+      s = a chromasite string
+    Returns: a #GstVideoChromaSite or [gstvideo.types.VideoChromaSite.Unknown] when `s` does
+      not contain a valid chroma description.
+
+    Deprecated: Use [gstvideo.global.videoChromaSiteFromString] instead.
 */
 gstvideo.types.VideoChromaSite videoChromaFromString(string s)
 {
@@ -559,11 +585,12 @@ gstvideo.types.VideoChromaSite videoChromaFromString(string s)
 
 /**
     Converts site to its string representation.
-  Params:
-    site =       a #GstVideoChromaSite
-  Returns:     a string describing site.
 
-  Deprecated:     Use [gstvideo.global.videoChromaSiteToString] instead.
+    Params:
+      site = a #GstVideoChromaSite
+    Returns: a string describing site.
+
+    Deprecated: Use [gstvideo.global.videoChromaSiteToString] instead.
 */
 string videoChromaToString(gstvideo.types.VideoChromaSite site)
 {
@@ -599,16 +626,18 @@ double videoColorTransferEncode(gstvideo.types.VideoTransferFunction func, doubl
 
 /**
     Converts a raw video buffer into the specified output caps.
-  
-  The output caps can be any raw video formats or any image formats (jpeg, png, ...).
-  
-  The width, height and pixel-aspect-ratio can also be specified in the output caps.
-  Params:
-    sample =       a #GstSample
-    toCaps =       the #GstCaps to convert to
-    timeout =       the maximum amount of time allowed for the processing.
-  Returns:     The converted #GstSample, or null if an error happened (in which case err
-    will point to the #GError).
+    
+    The output caps can be any raw video formats or any image formats (jpeg, png, ...).
+    
+    The width, height and pixel-aspect-ratio can also be specified in the output caps.
+
+    Params:
+      sample = a #GstSample
+      toCaps = the #GstCaps to convert to
+      timeout = the maximum amount of time allowed for the processing.
+    Returns: The converted #GstSample, or null if an error happened (in which case err
+      will point to the #GError).
+    Throws: [ErrorG]
 */
 gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout)
 {
@@ -623,23 +652,24 @@ gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toC
 
 /**
     Converts a raw video buffer into the specified output caps.
-  
-  The output caps can be any raw video formats or any image formats (jpeg, png, ...).
-  
-  The width, height and pixel-aspect-ratio can also be specified in the output caps.
-  
-  callback will be called after conversion, when an error occurred or if conversion didn't
-  finish after timeout. callback will always be called from the thread default
-  [glib.main_context.MainContext], see [glib.main_context.MainContext.getThreadDefault]. If GLib before 2.22 is used,
-  this will always be the global default main context.
-  
-  destroy_notify will be called after the callback was called and user_data is not needed
-  anymore.
-  Params:
-    sample =       a #GstSample
-    toCaps =       the #GstCaps to convert to
-    timeout =       the maximum amount of time allowed for the processing.
-    callback =       [gstvideo.types.VideoConvertSampleCallback] that will be called after conversion.
+    
+    The output caps can be any raw video formats or any image formats (jpeg, png, ...).
+    
+    The width, height and pixel-aspect-ratio can also be specified in the output caps.
+    
+    callback will be called after conversion, when an error occurred or if conversion didn't
+    finish after timeout. callback will always be called from the thread default
+    [glib.main_context.MainContext], see [glib.main_context.MainContext.getThreadDefault]. If GLib before 2.22 is used,
+    this will always be the global default main context.
+    
+    destroy_notify will be called after the callback was called and user_data is not needed
+    anymore.
+
+    Params:
+      sample = a #GstSample
+      toCaps = the #GstCaps to convert to
+      timeout = the maximum amount of time allowed for the processing.
+      callback = [gstvideo.types.VideoConvertSampleCallback] that will be called after conversion.
 */
 void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst.types.ClockTime timeout, gstvideo.types.VideoConvertSampleCallback callback)
 {
@@ -666,10 +696,11 @@ gobject.types.GType videoCropMetaApiGetType()
 
 /**
     Converting the video format into dma drm fourcc. If no
-  matching fourcc found, then DRM_FORMAT_INVALID is returned.
-  Params:
-    format =       a #GstVideoFormat
-  Returns:     the DRM_FORMAT_* corresponding to the format.
+    matching fourcc found, then DRM_FORMAT_INVALID is returned.
+
+    Params:
+      format = a #GstVideoFormat
+    Returns: the DRM_FORMAT_* corresponding to the format.
 */
 uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format)
 {
@@ -680,14 +711,15 @@ uint videoDmaDrmFourccFromFormat(gstvideo.types.VideoFormat format)
 
 /**
     Convert the format_str string into the drm fourcc value. The modifier is
-  also parsed if we want. Please note that the format_str should follow the
-  fourcc:modifier kind style, such as NV12:0x0100000000000002
-  Params:
-    formatStr =       a drm format string
-    modifier =       Return the modifier in format or null
-      to ignore.
-  Returns:     The drm fourcc value or DRM_FORMAT_INVALID if format_str is
-    invalid.
+    also parsed if we want. Please note that the format_str should follow the
+    fourcc:modifier kind style, such as NV12:0x0100000000000002
+
+    Params:
+      formatStr = a drm format string
+      modifier = Return the modifier in format or null
+        to ignore.
+    Returns: The drm fourcc value or DRM_FORMAT_INVALID if format_str is
+      invalid.
 */
 uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier)
 {
@@ -699,10 +731,11 @@ uint videoDmaDrmFourccFromString(string formatStr, out ulong modifier)
 
 /**
     Converting a dma drm fourcc into the video format. If no matching
-  video format found, then GST_VIDEO_FORMAT_UNKNOWN is returned.
-  Params:
-    fourcc =       the dma drm value.
-  Returns:     the GST_VIDEO_FORMAT_* corresponding to the fourcc.
+    video format found, then GST_VIDEO_FORMAT_UNKNOWN is returned.
+
+    Params:
+      fourcc = the dma drm value.
+    Returns: the GST_VIDEO_FORMAT_* corresponding to the fourcc.
 */
 gstvideo.types.VideoFormat videoDmaDrmFourccToFormat(uint fourcc)
 {
@@ -714,12 +747,13 @@ gstvideo.types.VideoFormat videoDmaDrmFourccToFormat(uint fourcc)
 
 /**
     Returns a string containing drm kind format, such as
-  NV12:0x0100000000000002, or NULL otherwise.
-  Params:
-    fourcc =       a drm fourcc value.
-    modifier =       the associated modifier value.
-  Returns:     the drm kind string composed
-      of to fourcc and modifier.
+    NV12:0x0100000000000002, or NULL otherwise.
+
+    Params:
+      fourcc = a drm fourcc value.
+      modifier = the associated modifier value.
+    Returns: the drm kind string composed
+        of to fourcc and modifier.
 */
 string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
 {
@@ -731,10 +765,11 @@ string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
 
 /**
     Checks if an event is a force key unit event. Returns true for both upstream
-  and downstream force key unit events.
-  Params:
-    event =       A #GstEvent to check
-  Returns:     true if the event is a valid force key unit event
+    and downstream force key unit events.
+
+    Params:
+      event = A #GstEvent to check
+    Returns: true if the event is a valid force key unit event
 */
 bool videoEventIsForceKeyUnit(gst.event.Event event)
 {
@@ -745,20 +780,21 @@ bool videoEventIsForceKeyUnit(gst.event.Event event)
 
 /**
     Creates a new downstream force key unit event. A downstream force key unit
-  event can be sent down the pipeline to request downstream elements to produce
-  a key unit. A downstream force key unit event must also be sent when handling
-  an upstream force key unit event to notify downstream that the latter has been
-  handled.
-  
-  To parse an event created by [gstvideo.global.videoEventNewDownstreamForceKeyUnit] use
-  [gstvideo.global.videoEventParseDownstreamForceKeyUnit].
-  Params:
-    timestamp =       the timestamp of the buffer that starts a new key unit
-    streamTime =       the stream_time of the buffer that starts a new key unit
-    runningTime =       the running_time of the buffer that starts a new key unit
-    allHeaders =       true to produce headers when starting a new key unit
-    count =       integer that can be used to number key units
-  Returns:     The new GstEvent
+    event can be sent down the pipeline to request downstream elements to produce
+    a key unit. A downstream force key unit event must also be sent when handling
+    an upstream force key unit event to notify downstream that the latter has been
+    handled.
+    
+    To parse an event created by [gstvideo.global.videoEventNewDownstreamForceKeyUnit] use
+    [gstvideo.global.videoEventParseDownstreamForceKeyUnit].
+
+    Params:
+      timestamp = the timestamp of the buffer that starts a new key unit
+      streamTime = the stream_time of the buffer that starts a new key unit
+      runningTime = the running_time of the buffer that starts a new key unit
+      allHeaders = true to produce headers when starting a new key unit
+      count = integer that can be used to number key units
+    Returns: The new GstEvent
 */
 gst.event.Event videoEventNewDownstreamForceKeyUnit(gst.types.ClockTime timestamp, gst.types.ClockTime streamTime, gst.types.ClockTime runningTime, bool allHeaders, uint count)
 {
@@ -770,14 +806,15 @@ gst.event.Event videoEventNewDownstreamForceKeyUnit(gst.types.ClockTime timestam
 
 /**
     Creates a new Still Frame event. If in_still is true, then the event
-  represents the start of a still frame sequence. If it is false, then
-  the event ends a still frame sequence.
-  
-  To parse an event created by [gstvideo.global.videoEventNewStillFrame] use
-  [gstvideo.global.videoEventParseStillFrame].
-  Params:
-    inStill =       boolean value for the still-frame state of the event.
-  Returns:     The new GstEvent
+    represents the start of a still frame sequence. If it is false, then
+    the event ends a still frame sequence.
+    
+    To parse an event created by [gstvideo.global.videoEventNewStillFrame] use
+    [gstvideo.global.videoEventParseStillFrame].
+
+    Params:
+      inStill = boolean value for the still-frame state of the event.
+    Returns: The new GstEvent
 */
 gst.event.Event videoEventNewStillFrame(bool inStill)
 {
@@ -789,19 +826,20 @@ gst.event.Event videoEventNewStillFrame(bool inStill)
 
 /**
     Creates a new upstream force key unit event. An upstream force key unit event
-  can be sent to request upstream elements to produce a key unit.
-  
-  running_time can be set to request a new key unit at a specific
-  running_time. If set to GST_CLOCK_TIME_NONE, upstream elements will produce a
-  new key unit as soon as possible.
-  
-  To parse an event created by [gstvideo.global.videoEventNewDownstreamForceKeyUnit] use
-  [gstvideo.global.videoEventParseDownstreamForceKeyUnit].
-  Params:
-    runningTime =       the running_time at which a new key unit should be produced
-    allHeaders =       true to produce headers when starting a new key unit
-    count =       integer that can be used to number key units
-  Returns:     The new GstEvent
+    can be sent to request upstream elements to produce a key unit.
+    
+    running_time can be set to request a new key unit at a specific
+    running_time. If set to GST_CLOCK_TIME_NONE, upstream elements will produce a
+    new key unit as soon as possible.
+    
+    To parse an event created by [gstvideo.global.videoEventNewDownstreamForceKeyUnit] use
+    [gstvideo.global.videoEventParseDownstreamForceKeyUnit].
+
+    Params:
+      runningTime = the running_time at which a new key unit should be produced
+      allHeaders = true to produce headers when starting a new key unit
+      count = integer that can be used to number key units
+    Returns: The new GstEvent
 */
 gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTime, bool allHeaders, uint count)
 {
@@ -813,18 +851,19 @@ gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTim
 
 /**
     Get timestamp, stream-time, running-time, all-headers and count in the force
-  key unit event. See [gstvideo.global.videoEventNewDownstreamForceKeyUnit] for a
-  full description of the downstream force key unit event.
-  
-  running_time will be adjusted for any pad offsets of pads it was passing through.
-  Params:
-    event =       A #GstEvent to parse
-    timestamp =       A pointer to the timestamp in the event
-    streamTime =       A pointer to the stream-time in the event
-    runningTime =       A pointer to the running-time in the event
-    allHeaders =       A pointer to the all_headers flag in the event
-    count =       A pointer to the count field of the event
-  Returns:     true if the event is a valid downstream force key unit event.
+    key unit event. See [gstvideo.global.videoEventNewDownstreamForceKeyUnit] for a
+    full description of the downstream force key unit event.
+    
+    running_time will be adjusted for any pad offsets of pads it was passing through.
+
+    Params:
+      event = A #GstEvent to parse
+      timestamp = A pointer to the timestamp in the event
+      streamTime = A pointer to the stream-time in the event
+      runningTime = A pointer to the running-time in the event
+      allHeaders = A pointer to the all_headers flag in the event
+      count = A pointer to the count field of the event
+    Returns: true if the event is a valid downstream force key unit event.
 */
 bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime timestamp, out gst.types.ClockTime streamTime, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
@@ -835,17 +874,18 @@ bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.
 
 /**
     Parse a #GstEvent, identify if it is a Still Frame event, and
-  return the still-frame state from the event if it is.
-  If the event represents the start of a still frame, the in_still
-  variable will be set to TRUE, otherwise FALSE. It is OK to pass NULL for the
-  in_still variable order to just check whether the event is a valid still-frame
-  event.
-  
-  Create a still frame event using [gstvideo.global.videoEventNewStillFrame]
-  Params:
-    event =       A #GstEvent to parse
-    inStill =       A boolean to receive the still-frame status from the event, or NULL
-  Returns:     true if the event is a valid still-frame event. false if not
+    return the still-frame state from the event if it is.
+    If the event represents the start of a still frame, the in_still
+    variable will be set to TRUE, otherwise FALSE. It is OK to pass NULL for the
+    in_still variable order to just check whether the event is a valid still-frame
+    event.
+    
+    Create a still frame event using [gstvideo.global.videoEventNewStillFrame]
+
+    Params:
+      event = A #GstEvent to parse
+      inStill = A boolean to receive the still-frame status from the event, or NULL
+    Returns: true if the event is a valid still-frame event. false if not
 */
 bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 {
@@ -856,18 +896,19 @@ bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 
 /**
     Get running-time, all-headers and count in the force key unit event. See
-  [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for a full description of the
-  upstream force key unit event.
-  
-  Create an upstream force key unit event using  [gstvideo.global.videoEventNewUpstreamForceKeyUnit]
-  
-  running_time will be adjusted for any pad offsets of pads it was passing through.
-  Params:
-    event =       A #GstEvent to parse
-    runningTime =       A pointer to the running_time in the event
-    allHeaders =       A pointer to the all_headers flag in the event
-    count =       A pointer to the count field in the event
-  Returns:     true if the event is a valid upstream force-key-unit event. false if not
+    [gstvideo.global.videoEventNewUpstreamForceKeyUnit] for a full description of the
+    upstream force key unit event.
+    
+    Create an upstream force key unit event using  [gstvideo.global.videoEventNewUpstreamForceKeyUnit]
+    
+    running_time will be adjusted for any pad offsets of pads it was passing through.
+
+    Params:
+      event = A #GstEvent to parse
+      runningTime = A pointer to the running_time in the event
+      allHeaders = A pointer to the all_headers flag in the event
+      count = A pointer to the count field in the event
+    Returns: true if the event is a valid upstream force-key-unit event. false if not
 */
 bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
@@ -878,10 +919,10 @@ bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.Cl
 
 /**
     Return all the raw video formats supported by GStreamer including
-  special opaque formats such as [gstvideo.types.VideoFormat.DmaDrm] for which
-  no software conversion exists. This should be use for passthrough
-  template cpas.
-  Returns:     an array of #GstVideoFormat
+    special opaque formats such as [gstvideo.types.VideoFormat.DmaDrm] for which
+    no software conversion exists. This should be use for passthrough
+    template cpas.
+    Returns: an array of #GstVideoFormat
 */
 gstvideo.types.VideoFormat[] videoFormatsAny()
 {
@@ -899,7 +940,7 @@ gstvideo.types.VideoFormat[] videoFormatsAny()
 
 /**
     Return all the raw video formats supported by GStreamer.
-  Returns:     an array of #GstVideoFormat
+    Returns: an array of #GstVideoFormat
 */
 gstvideo.types.VideoFormat[] videoFormatsRaw()
 {
@@ -925,19 +966,20 @@ gobject.types.GType videoGlTextureUploadMetaApiGetType()
 
 /**
     Given the nominal duration of one video frame,
-  this function will check some standard framerates for
-  a close match (within 0.1%) and return one if possible,
-  
-  It will calculate an arbitrary framerate if no close
-  match was found, and return false.
-  
-  It returns false if a duration of 0 is passed.
-  Params:
-    duration =       Nominal duration of one frame
-    destN =       Numerator of the calculated framerate
-    destD =       Denominator of the calculated framerate
-  Returns:     true if a close "standard" framerate was
-    recognised, and false otherwise.
+    this function will check some standard framerates for
+    a close match (within 0.1%) and return one if possible,
+    
+    It will calculate an arbitrary framerate if no close
+    match was found, and return false.
+    
+    It returns false if a duration of 0 is passed.
+
+    Params:
+      duration = Nominal duration of one frame
+      destN = Numerator of the calculated framerate
+      destD = Denominator of the calculated framerate
+    Returns: true if a close "standard" framerate was
+      recognised, and false otherwise.
 */
 bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int destD)
 {
@@ -948,15 +990,16 @@ bool videoGuessFramerate(gst.types.ClockTime duration, out int destN, out int de
 
 /**
     Given a frame's dimensions and pixel aspect ratio, this function will
-  calculate the frame's aspect ratio and compare it against a set of
-  common well-known "standard" aspect ratios.
-  Params:
-    width =       Width of the video frame
-    height =       Height of the video frame
-    parN =       Pixel aspect ratio numerator
-    parD =       Pixel aspect ratio denominator
-  Returns:     true if a known "standard" aspect ratio was
-    recognised, and false otherwise.
+    calculate the frame's aspect ratio and compare it against a set of
+    common well-known "standard" aspect ratios.
+
+    Params:
+      width = Width of the video frame
+      height = Height of the video frame
+      parN = Pixel aspect ratio numerator
+      parD = Pixel aspect ratio denominator
+    Returns: true if a known "standard" aspect ratio was
+      recognised, and false otherwise.
 */
 bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
 {
@@ -967,10 +1010,11 @@ bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
 
 /**
     Check whether the caps is a dma drm kind caps. Please note that
-  the caps should be fixed.
-  Params:
-    caps =       a #GstCaps
-  Returns:     true if the caps is a dma drm caps.
+    the caps should be fixed.
+
+    Params:
+      caps = a #GstCaps
+    Returns: true if the caps is a dma drm caps.
 */
 bool videoIsDmaDrmCaps(gst.caps.Caps caps)
 {
@@ -981,11 +1025,12 @@ bool videoIsDmaDrmCaps(gst.caps.Caps caps)
 
 /**
     Return a generic raw video caps for formats defined in formats.
-  If formats is null returns a caps for all the supported raw video formats,
-  see [gstvideo.global.videoFormatsRaw].
-  Params:
-    formats =       an array of raw #GstVideoFormat, or null
-  Returns:     a video GstCaps
+    If formats is null returns a caps for all the supported raw video formats,
+    see [gstvideo.global.videoFormatsRaw].
+
+    Params:
+      formats = an array of raw #GstVideoFormat, or null
+    Returns: a video GstCaps
 */
 gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null)
 {
@@ -1002,13 +1047,14 @@ gst.caps.Caps videoMakeRawCaps(gstvideo.types.VideoFormat[] formats = null)
 
 /**
     Return a generic raw video caps for formats defined in formats with features
-  features.
-  If formats is null returns a caps for all the supported video formats,
-  see [gstvideo.global.videoFormatsRaw].
-  Params:
-    formats =       an array of raw #GstVideoFormat, or null
-    features =       the #GstCapsFeatures to set on the caps
-  Returns:     a video GstCaps
+    features.
+    If formats is null returns a caps for all the supported video formats,
+    see [gstvideo.global.videoFormatsRaw].
+
+    Params:
+      formats = an array of raw #GstVideoFormat, or null
+      features = the #GstCapsFeatures to set on the caps
+    Returns: a video GstCaps
 */
 gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats = null, gst.caps_features.CapsFeatures features = null)
 {
@@ -1086,12 +1132,13 @@ bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uin
 
 /**
     Utility function that transforms the width/height/PAR
-  and multiview mode and flags of a #GstVideoInfo into
-  the requested mode.
-  Params:
-    info =       A #GstVideoInfo structure to operate on
-    outMviewMode =       A #GstVideoMultiviewMode value
-    outMviewFlags =       A set of #GstVideoMultiviewFlags
+    and multiview mode and flags of a #GstVideoInfo into
+    the requested mode.
+
+    Params:
+      info = A #GstVideoInfo structure to operate on
+      outMviewMode = A #GstVideoMultiviewMode value
+      outMviewFlags = A set of #GstVideoMultiviewFlags
 */
 void videoMultiviewVideoInfoChangeMode(gstvideo.video_info.VideoInfo info, gstvideo.types.VideoMultiviewMode outMviewMode, gstvideo.types.VideoMultiviewFlags outMviewFlags)
 {
@@ -1124,11 +1171,12 @@ gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType()
 
 /**
     Parses and returns the Precision Time Stamp (ST 0604) from the SEI User Data Unregistered buffer
-  Params:
-    userData =       a #GstVideoSEIUserDataUnregisteredMeta
-    status =       User Data Unregistered UUID
-    precisionTimeStamp =       The parsed Precision Time Stamp SEI
-  Returns:     True if data is a Precision Time Stamp and it was parsed correctly
+
+    Params:
+      userData = a #GstVideoSEIUserDataUnregisteredMeta
+      status = User Data Unregistered UUID
+      precisionTimeStamp = The parsed Precision Time Stamp SEI
+    Returns: True if data is a Precision Time Stamp and it was parsed correctly
 */
 bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta userData, out ubyte status, out ulong precisionTimeStamp)
 {
@@ -1138,18 +1186,19 @@ bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_
 }
 
 /**
-    Get the tile index of the tile at coordinates x and y in the tiled
-  image of x_tiles by y_tiles.
-  
-  Use this method when mode is of type [gstvideo.types.VideoTileType.Indexed].
-  Params:
-    mode =       a #GstVideoTileMode
-    x =       x coordinate
-    y =       y coordinate
-    xTiles =       number of horizintal tiles
-    yTiles =       number of vertical tiles
-  Returns:     the index of the tile at x and y in the tiled image of
-      x_tiles by y_tiles.
+    Get the tile index of the tile at coordinates `x` and `y` in the tiled
+    image of `x`_tiles by `y`_tiles.
+    
+    Use this method when mode is of type [gstvideo.types.VideoTileType.Indexed].
+
+    Params:
+      mode = a #GstVideoTileMode
+      x = x coordinate
+      y = y coordinate
+      xTiles = number of horizintal tiles
+      yTiles = number of vertical tiles
+    Returns: the index of the tile at `x` and `y` in the tiled image of
+        `x`_tiles by `y`_tiles.
 */
 uint videoTileGetIndex(gstvideo.types.VideoTileMode mode, int x, int y, int xTiles, int yTiles)
 {

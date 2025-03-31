@@ -1,3 +1,4 @@
+/// Module for [Ticket] class
 module arrowflight.ticket;
 
 import arrowflight.c.functions;
@@ -11,17 +12,20 @@ import gobject.object;
 class Ticket : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_ticket_get_type != &gidSymbolNotFound ? gaflight_ticket_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [MonthDayNanoIntervalArray] class
 module arrow.month_day_nano_interval_array;
 
 import arrow.buffer;
@@ -13,17 +14,20 @@ import gobject.object;
 class MonthDayNanoIntervalArray : arrow.primitive_array.PrimitiveArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_interval_array_get_type != &gidSymbolNotFound ? garrow_month_day_nano_interval_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

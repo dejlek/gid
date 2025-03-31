@@ -1,3 +1,4 @@
+/// Module for [CollectPads] class
 module gstbase.collect_pads;
 
 import gid.gid;
@@ -15,58 +16,61 @@ import gstbase.types;
 
 /**
     Manages a set of pads that operate in collect mode. This means that control
-  is given to the manager of this object when all pads have data.
-  
-    $(LIST
-        * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
-          be installed with gst_collect_pads_set_function ().
-      
-        * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
-          [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
-          the chain, event and query functions of the pad are overridden. The
-          element_private of the pad is used to store private information for the
-          collectpads.
-      
-        * For each pad, data is queued in the _chain function or by
-          performing a pull_range.
-      
-        * When data is queued on all pads in waiting mode, the callback function is called.
-      
-        * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
-          One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
-          These functions will return null if the pad received an EOS event. When all
-          pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
-          event itself.
-      
-        * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
-          [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
-      
-        * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
-          their state change functions to start and stop the processing of the collectpads.
-          The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
-          element state change function in the PAUSED_TO_READY state change to ensure
-          no pad is blocked and the element can finish streaming.
-      
-        * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
-          CollectPads element is not waiting for data to be collected on non-waiting pads.
-          Thus these pads may but need not have data when the callback is called.
-          All pads are in waiting mode by default.
-    )
+    is given to the manager of this object when all pads have data.
+    
+      $(LIST
+          * Collectpads are created with [gstbase.collect_pads.CollectPads.new_]. A callback should then
+            be installed with gst_collect_pads_set_function ().
+        
+          * Pads are added to the collection with [gstbase.collect_pads.CollectPads.addPad]/
+            [gstbase.collect_pads.CollectPads.removePad]. The pad has to be a sinkpad. When added,
+            the chain, event and query functions of the pad are overridden. The
+            element_private of the pad is used to store private information for the
+            collectpads.
+        
+          * For each pad, data is queued in the _chain function or by
+            performing a pull_range.
+        
+          * When data is queued on all pads in waiting mode, the callback function is called.
+        
+          * Data can be dequeued from the pad with the [gstbase.collect_pads.CollectPads.pop] method.
+            One can peek at the data with the [gstbase.collect_pads.CollectPads.peek] function.
+            These functions will return null if the pad received an EOS event. When all
+            pads return null from a [gstbase.collect_pads.CollectPads.peek], the element can emit an EOS
+            event itself.
+        
+          * Data can also be dequeued in byte units using the [gstbase.collect_pads.CollectPads.available],
+            [gstbase.collect_pads.CollectPads.readBuffer] and [gstbase.collect_pads.CollectPads.flush] calls.
+        
+          * Elements should call [gstbase.collect_pads.CollectPads.start] and [gstbase.collect_pads.CollectPads.stop] in
+            their state change functions to start and stop the processing of the collectpads.
+            The [gstbase.collect_pads.CollectPads.stop] call should be called before calling the parent
+            element state change function in the PAUSED_TO_READY state change to ensure
+            no pad is blocked and the element can finish streaming.
+        
+          * [gstbase.collect_pads.CollectPads.setWaiting] sets a pad to waiting or non-waiting mode.
+            CollectPads element is not waiting for data to be collected on non-waiting pads.
+            Thus these pads may but need not have data when the callback is called.
+            All pads are in waiting mode by default.
+      )
 */
 class CollectPads : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_collect_pads_get_type != &gidSymbolNotFound ? gst_collect_pads_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -79,9 +83,9 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Create a new instance of #GstCollectPads.
-    
-    MT safe.
-    Returns:     a new #GstCollectPads, or null in case of an error.
+      
+      MT safe.
+      Returns: a new #GstCollectPads, or null in case of an error.
   */
   this()
   {
@@ -92,15 +96,15 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Query how much bytes can be read from each queued buffer. This means
-    that the result of this call is the maximum number of bytes that can
-    be read from each of the pads.
-    
-    This function should be called with pads STREAM_LOCK held, such as
-    in the callback.
-    
-    MT safe.
-    Returns:     The maximum number of bytes queued on all pads. This function
-      returns 0 if a pad has no queued buffer.
+      that the result of this call is the maximum number of bytes that can
+      be read from each of the pads.
+      
+      This function should be called with pads STREAM_LOCK held, such as
+      in the callback.
+      
+      MT safe.
+      Returns: The maximum number of bytes queued on all pads. This function
+        returns 0 if a pad has no queued buffer.
   */
   uint available()
   {
@@ -111,17 +115,18 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Convenience clipping function that converts incoming buffer's timestamp
-    to running time, or clips the buffer if outside configured segment.
-    
-    Since 1.6, this clipping function also sets the DTS parameter of the
-    GstCollectData structure. This version of the running time DTS can be
-    negative. G_MININT64 is used to indicate invalid value.
-    Params:
-      cdata =       collect data of corresponding pad
-      buf =       buffer being clipped
-      outbuf =       output buffer with running time, or NULL if clipped
-      userData =       user data (unused)
-    Returns: 
+      to running time, or clips the buffer if outside configured segment.
+      
+      Since 1.6, this clipping function also sets the DTS parameter of the
+      GstCollectData structure. This version of the running time DTS can be
+      negative. G_MININT64 is used to indicate invalid value.
+  
+      Params:
+        cdata = collect data of corresponding pad
+        buf = buffer being clipped
+        outbuf = output buffer with running time, or NULL if clipped
+        userData = user data (unused)
+      Returns: 
   */
   gst.types.FlowReturn clipRunningTime(gstbase.collect_data.CollectData cdata, gst.buffer.Buffer buf, out gst.buffer.Buffer outbuf, void* userData = null)
   {
@@ -135,13 +140,14 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Default #GstCollectPads event handling that elements should always
-    chain up to to ensure proper operation.  Element might however indicate
-    event should not be forwarded downstream.
-    Params:
-      data =       collect data of corresponding pad
-      event =       event being processed
-      discard =       process but do not send event downstream
-    Returns: 
+      chain up to to ensure proper operation.  Element might however indicate
+      event should not be forwarded downstream.
+  
+      Params:
+        data = collect data of corresponding pad
+        event = event being processed
+        discard = process but do not send event downstream
+      Returns: 
   */
   bool eventDefault(gstbase.collect_data.CollectData data, gst.event.Event event, bool discard)
   {
@@ -152,16 +158,17 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Flush size bytes from the pad data.
-    
-    This function should be called with pads STREAM_LOCK held, such as
-    in the callback.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-      size =       the number of bytes to flush
-    Returns:     The number of bytes flushed This can be less than size and
-      is 0 if the pad was end-of-stream.
+      
+      This function should be called with pads STREAM_LOCK held, such as
+      in the callback.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+        size = the number of bytes to flush
+      Returns: The number of bytes flushed This can be less than size and
+        is 0 if the pad was end-of-stream.
   */
   uint flush(gstbase.collect_data.CollectData data, uint size)
   {
@@ -172,14 +179,15 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Peek at the buffer currently queued in data. This function
-    should be called with the pads STREAM_LOCK held, such as in the callback
-    handler.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-    Returns:     The buffer in data or null if no
-      buffer is queued. should unref the buffer after usage.
+      should be called with the pads STREAM_LOCK held, such as in the callback
+      handler.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+      Returns: The buffer in data or null if no
+        buffer is queued. should unref the buffer after usage.
   */
   gst.buffer.Buffer peek(gstbase.collect_data.CollectData data)
   {
@@ -191,14 +199,15 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Pop the buffer currently queued in data. This function
-    should be called with the pads STREAM_LOCK held, such as in the callback
-    handler.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-    Returns:     The buffer in data or null if no
-      buffer was queued. You should unref the buffer after usage.
+      should be called with the pads STREAM_LOCK held, such as in the callback
+      handler.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+      Returns: The buffer in data or null if no
+        buffer was queued. You should unref the buffer after usage.
   */
   gst.buffer.Buffer pop(gstbase.collect_data.CollectData data)
   {
@@ -210,13 +219,14 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Default #GstCollectPads query handling that elements should always
-    chain up to to ensure proper operation.  Element might however indicate
-    query should not be forwarded downstream.
-    Params:
-      data =       collect data of corresponding pad
-      query =       query being processed
-      discard =       process but do not send event downstream
-    Returns: 
+      chain up to to ensure proper operation.  Element might however indicate
+      query should not be forwarded downstream.
+  
+      Params:
+        data = collect data of corresponding pad
+        query = query being processed
+        discard = process but do not send event downstream
+      Returns: 
   */
   bool queryDefault(gstbase.collect_data.CollectData data, gst.query.Query query, bool discard)
   {
@@ -227,17 +237,18 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Get a subbuffer of size bytes from the given pad data.
-    
-    This function should be called with pads STREAM_LOCK held, such as in the
-    callback.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-      size =       the number of bytes to read
-    Returns:     A sub buffer. The size of the buffer can
-      be less that requested. A return of null signals that the pad is
-      end-of-stream. Unref the buffer after use.
+      
+      This function should be called with pads STREAM_LOCK held, such as in the
+      callback.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+        size = the number of bytes to read
+      Returns: A sub buffer. The size of the buffer can
+        be less that requested. A return of null signals that the pad is
+        end-of-stream. Unref the buffer after use.
   */
   gst.buffer.Buffer readBuffer(gstbase.collect_data.CollectData data, uint size)
   {
@@ -249,15 +260,16 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Remove a pad from the collection of collect pads. This function will also
-    free the #GstCollectData and all the resources that were allocated with
-    [gstbase.collect_pads.CollectPads.addPad].
-    
-    The pad will be deactivated automatically when pads is stopped.
-    
-    MT safe.
-    Params:
-      pad =       the pad to remove
-    Returns:     true if the pad could be removed.
+      free the #GstCollectData and all the resources that were allocated with
+      [gstbase.collect_pads.CollectPads.addPad].
+      
+      The pad will be deactivated automatically when pads is stopped.
+      
+      MT safe.
+  
+      Params:
+        pad = the pad to remove
+      Returns: true if the pad could be removed.
   */
   bool removePad(gst.pad.Pad pad)
   {
@@ -268,13 +280,14 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Set the callback function and user data that will be called with
-    the oldest buffer when all pads have been collected, or null on EOS.
-    If a buffer is passed, the callback owns a reference and must unref
-    it.
-    
-    MT safe.
-    Params:
-      func =       the function to set
+      the oldest buffer when all pads have been collected, or null on EOS.
+      If a buffer is passed, the callback owns a reference and must unref
+      it.
+      
+      MT safe.
+  
+      Params:
+        func = the function to set
   */
   void setBufferFunction(gstbase.types.CollectPadsBufferFunction func)
   {
@@ -296,9 +309,10 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Install a clipping function that is called right after a buffer is received
-    on a pad managed by pads. See #GstCollectPadsClipFunction for more info.
-    Params:
-      clipfunc =       clip function to install
+      on a pad managed by pads. See #GstCollectPadsClipFunction for more info.
+  
+      Params:
+        clipfunc = clip function to install
   */
   void setClipFunction(gstbase.types.CollectPadsClipFunction clipfunc)
   {
@@ -322,10 +336,11 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Set the timestamp comparison function.
-    
-    MT safe.
-    Params:
-      func =       the function to set
+      
+      MT safe.
+  
+      Params:
+        func = the function to set
   */
   void setCompareFunction(gstbase.types.CollectPadsCompareFunction func)
   {
@@ -344,15 +359,16 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Set the event callback function and user data that will be called when
-    collectpads has received an event originating from one of the collected
-    pads.  If the event being processed is a serialized one, this callback is
-    called with pads STREAM_LOCK held, otherwise not.  As this lock should be
-    held when calling a number of CollectPads functions, it should be acquired
-    if so (unusually) needed.
-    
-    MT safe.
-    Params:
-      func =       the function to set
+      collectpads has received an event originating from one of the collected
+      pads.  If the event being processed is a serialized one, this callback is
+      called with pads STREAM_LOCK held, otherwise not.  As this lock should be
+      held when calling a number of CollectPads functions, it should be acquired
+      if so (unusually) needed.
+      
+      MT safe.
+  
+      Params:
+        func = the function to set
   */
   void setEventFunction(gstbase.types.CollectPadsEventFunction func)
   {
@@ -371,10 +387,11 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Install a flush function that is called when the internal
-    state of all pads should be flushed as part of flushing seek
-    handling. See #GstCollectPadsFlushFunction for more info.
-    Params:
-      func =       flush function to install
+      state of all pads should be flushed as part of flushing seek
+      handling. See #GstCollectPadsFlushFunction for more info.
+  
+      Params:
+        func = flush function to install
   */
   void setFlushFunction(gstbase.types.CollectPadsFlushFunction func)
   {
@@ -392,14 +409,15 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Change the flushing state of all the pads in the collection. No pad
-    is able to accept anymore data when flushing is true. Calling this
-    function with flushing false makes pads accept data again.
-    Caller must ensure that downstream streaming (thread) is not blocked,
-    e.g. by sending a FLUSH_START downstream.
-    
-    MT safe.
-    Params:
-      flushing =       desired state of the pads
+      is able to accept anymore data when flushing is true. Calling this
+      function with flushing false makes pads accept data again.
+      Caller must ensure that downstream streaming (thread) is not blocked,
+      e.g. by sending a FLUSH_START downstream.
+      
+      MT safe.
+  
+      Params:
+        flushing = desired state of the pads
   */
   void setFlushing(bool flushing)
   {
@@ -408,18 +426,19 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       CollectPads provides a default collection algorithm that will determine
-    the oldest buffer available on all of its pads, and then delegate
-    to a configured callback.
-    However, if circumstances are more complicated and/or more control
-    is desired, this sets a callback that will be invoked instead when
-    all the pads added to the collection have buffers queued.
-    Evidently, this callback is not compatible with
-    [gstbase.collect_pads.CollectPads.setBufferFunction] callback.
-    If this callback is set, the former will be unset.
-    
-    MT safe.
-    Params:
-      func =       the function to set
+      the oldest buffer available on all of its pads, and then delegate
+      to a configured callback.
+      However, if circumstances are more complicated and/or more control
+      is desired, this sets a callback that will be invoked instead when
+      all the pads added to the collection have buffers queued.
+      Evidently, this callback is not compatible with
+      [gstbase.collect_pads.CollectPads.setBufferFunction] callback.
+      If this callback is set, the former will be unset.
+      
+      MT safe.
+  
+      Params:
+        func = the function to set
   */
   void setFunction(gstbase.types.CollectPadsFunction func)
   {
@@ -441,15 +460,16 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Set the query callback function and user data that will be called after
-    collectpads has received a query originating from one of the collected
-    pads.  If the query being processed is a serialized one, this callback is
-    called with pads STREAM_LOCK held, otherwise not.  As this lock should be
-    held when calling a number of CollectPads functions, it should be acquired
-    if so (unusually) needed.
-    
-    MT safe.
-    Params:
-      func =       the function to set
+      collectpads has received a query originating from one of the collected
+      pads.  If the query being processed is a serialized one, this callback is
+      called with pads STREAM_LOCK held, otherwise not.  As this lock should be
+      held when calling a number of CollectPads functions, it should be acquired
+      if so (unusually) needed.
+      
+      MT safe.
+  
+      Params:
+        func = the function to set
   */
   void setQueryFunction(gstbase.types.CollectPadsQueryFunction func)
   {
@@ -468,17 +488,18 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Sets a pad to waiting or non-waiting mode, if at least this pad
-    has not been created with locked waiting state,
-    in which case nothing happens.
-    
-    This function should be called with pads STREAM_LOCK held, such as
-    in the callback.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-      waiting =       boolean indicating whether this pad should operate
-                  in waiting or non-waiting mode
+      has not been created with locked waiting state,
+      in which case nothing happens.
+      
+      This function should be called with pads STREAM_LOCK held, such as
+      in the callback.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+        waiting = boolean indicating whether this pad should operate
+                    in waiting or non-waiting mode
   */
   void setWaiting(gstbase.collect_data.CollectData data, bool waiting)
   {
@@ -487,12 +508,13 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Default #GstCollectPads event handling for the src pad of elements.
-    Elements can chain up to this to let flushing seek event handling
-    be done by #GstCollectPads.
-    Params:
-      pad =       src #GstPad that received the event
-      event =       event being processed
-    Returns: 
+      Elements can chain up to this to let flushing seek event handling
+      be done by #GstCollectPads.
+  
+      Params:
+        pad = src #GstPad that received the event
+        event = event being processed
+      Returns: 
   */
   bool srcEventDefault(gst.pad.Pad pad, gst.event.Event event)
   {
@@ -503,8 +525,8 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Starts the processing of data in the collect_pads.
-    
-    MT safe.
+      
+      MT safe.
   */
   void start()
   {
@@ -513,9 +535,9 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Stops the processing of data in the collect_pads. this function
-    will also unblock any blocking operations.
-    
-    MT safe.
+      will also unblock any blocking operations.
+      
+      MT safe.
   */
   void stop()
   {
@@ -524,18 +546,19 @@ class CollectPads : gst.object.ObjectGst
 
   /**
       Get a subbuffer of size bytes from the given pad data. Flushes the amount
-    of read bytes.
-    
-    This function should be called with pads STREAM_LOCK held, such as in the
-    callback.
-    
-    MT safe.
-    Params:
-      data =       the data to use
-      size =       the number of bytes to read
-    Returns:     A sub buffer. The size of the buffer can
-      be less that requested. A return of null signals that the pad is
-      end-of-stream. Unref the buffer after use.
+      of read bytes.
+      
+      This function should be called with pads STREAM_LOCK held, such as in the
+      callback.
+      
+      MT safe.
+  
+      Params:
+        data = the data to use
+        size = the number of bytes to read
+      Returns: A sub buffer. The size of the buffer can
+        be less that requested. A return of null signals that the pad is
+        end-of-stream. Unref the buffer after use.
   */
   gst.buffer.Buffer takeBuffer(gstbase.collect_data.CollectData data, uint size)
   {

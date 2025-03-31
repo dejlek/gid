@@ -1,3 +1,4 @@
+/// Module for [AttrIterator] class
 module pango.attr_iterator;
 
 import gid.gid;
@@ -11,32 +12,36 @@ import pango.types;
 
 /**
     A [pango.attr_iterator.AttrIterator] is used to iterate through a [pango.attr_list.AttrList].
-  
-  A new iterator is created with [pango.attr_list.AttrList.getIterator].
-  Once the iterator is created, it can be advanced through the style
-  changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
-  style change, the range of the current style segment and the attributes
-  currently in effect can be queried.
+    
+    A new iterator is created with [pango.attr_list.AttrList.getIterator].
+    Once the iterator is created, it can be advanced through the style
+    changes in the text using [pango.attr_iterator.AttrIterator.next]. At each
+    style change, the range of the current style segment and the attributes
+    currently in effect can be queried.
 */
 class AttrIterator : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attr_iterator_get_type != &gidSymbolNotFound ? pango_attr_iterator_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,9 +54,9 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Copy a [pango.attr_iterator.AttrIterator].
-    Returns:     the newly allocated
-        [pango.attr_iterator.AttrIterator], which should be freed with
-        [pango.attr_iterator.AttrIterator.destroy]
+      Returns: the newly allocated
+          [pango.attr_iterator.AttrIterator], which should be freed with
+          [pango.attr_iterator.AttrIterator.destroy]
   */
   pango.attr_iterator.AttrIterator copy()
   {
@@ -71,16 +76,17 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Find the current attribute of a particular type
-    at the iterator location.
-    
-    When multiple attributes of the same type overlap,
-    the attribute whose range starts closest to the
-    current location is used.
-    Params:
-      type =       the type of attribute to find
-    Returns:     the current
-        attribute of the given type, or null if no attribute
-        of that type applies to the current location.
+      at the iterator location.
+      
+      When multiple attributes of the same type overlap,
+      the attribute whose range starts closest to the
+      current location is used.
+  
+      Params:
+        type = the type of attribute to find
+      Returns: the current
+          attribute of the given type, or null if no attribute
+          of that type applies to the current location.
   */
   pango.attribute.Attribute get(pango.types.AttrType type)
   {
@@ -92,10 +98,10 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Gets a list of all attributes at the current position of the
-    iterator.
-    Returns:     a list of all attributes for the current range. To free
-        this value, call [pango.attribute.Attribute.destroy] on each
-        value and [glib.slist.SList.free] on the list.
+      iterator.
+      Returns: a list of all attributes for the current range. To free
+          this value, call [pango.attribute.Attribute.destroy] on each
+          value and [glib.slist.SList.free] on the list.
   */
   pango.attribute.Attribute[] getAttrs()
   {
@@ -107,22 +113,23 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Get the font and other attributes at the current
-    iterator position.
-    Params:
-      desc =       a [pango.font_description.FontDescription] to fill in with the current
-          values. The family name in this structure will be set using
-          [pango.font_description.FontDescription.setFamilyStatic] using
-          values from an attribute in the [pango.attr_list.AttrList] associated
-          with the iterator, so if you plan to keep it around, you
-          must call:
-          `pango_font_description_set_family (desc, pango_font_description_get_family (desc))`.
-      language =       location to store language tag
-          for item, or null if none is found.
-      extraAttrs =       location in which to store a list of non-font attributes
-          at the the current position; only the highest priority
-          value of each attribute will be added to this list. In
-          order to free this value, you must call
-          [pango.attribute.Attribute.destroy] on each member.
+      iterator position.
+  
+      Params:
+        desc = a [pango.font_description.FontDescription] to fill in with the current
+            values. The family name in this structure will be set using
+            [pango.font_description.FontDescription.setFamilyStatic] using
+            values from an attribute in the [pango.attr_list.AttrList] associated
+            with the iterator, so if you plan to keep it around, you
+            must call:
+            `pango_font_description_set_family (desc, pango_font_description_get_family (desc))`.
+        language = location to store language tag
+            for item, or null if none is found.
+        extraAttrs = location in which to store a list of non-font attributes
+            at the the current position; only the highest priority
+            value of each attribute will be added to this list. In
+            order to free this value, you must call
+            [pango.attribute.Attribute.destroy] on each member.
   */
   void getFont(pango.font_description.FontDescription desc, out pango.language.Language language, out pango.attribute.Attribute[] extraAttrs)
   {
@@ -135,8 +142,8 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Advance the iterator until the next change of style.
-    Returns:     false if the iterator is at the end
-        of the list, otherwise true
+      Returns: false if the iterator is at the end
+          of the list, otherwise true
   */
   bool next()
   {
@@ -147,14 +154,15 @@ class AttrIterator : gobject.boxed.Boxed
 
   /**
       Get the range of the current segment.
-    
-    Note that the stored return values are signed, not unsigned
-    like the values in [pango.attribute.Attribute]. To deal with this API
-    oversight, stored return values that wouldn't fit into
-    a signed integer are clamped to `G_MAXINT`.
-    Params:
-      start =       location to store the start of the range
-      end =       location to store the end of the range
+      
+      Note that the stored return values are signed, not unsigned
+      like the values in [pango.attribute.Attribute]. To deal with this API
+      oversight, stored return values that wouldn't fit into
+      a signed integer are clamped to `G_MAXINT`.
+  
+      Params:
+        start = location to store the start of the range
+        end = location to store the end of the range
   */
   void range(out int start, out int end)
   {

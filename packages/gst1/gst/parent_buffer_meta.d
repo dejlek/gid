@@ -1,3 +1,4 @@
+/// Module for [ParentBufferMeta] class
 module gst.parent_buffer_meta;
 
 import gid.gid;
@@ -10,18 +11,19 @@ import gst.types;
 
 /**
     The #GstParentBufferMeta is a #GstMeta which can be attached to a #GstBuffer
-  to hold a reference to another buffer that is only released when the child
-  #GstBuffer is released.
-  
-  Typically, #GstParentBufferMeta is used when the child buffer is directly
-  using the #GstMemory of the parent buffer, and wants to prevent the parent
-  buffer from being returned to a buffer pool until the #GstMemory is available
-  for re-use.
+    to hold a reference to another buffer that is only released when the child
+    #GstBuffer is released.
+    
+    Typically, #GstParentBufferMeta is used when the child buffer is directly
+    using the #GstMemory of the parent buffer, and wants to prevent the parent
+    buffer from being returned to a buffer pool until the #GstMemory is available
+    for re-use.
 */
 class ParentBufferMeta
 {
   GstParentBufferMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -33,6 +35,7 @@ class ParentBufferMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -56,7 +59,7 @@ class ParentBufferMeta
 
   /**
       Gets the global #GstMetaInfo describing  the #GstParentBufferMeta meta.
-    Returns:     The #GstMetaInfo
+      Returns: The #GstMetaInfo
   */
   static gst.meta_info.MetaInfo getInfo()
   {

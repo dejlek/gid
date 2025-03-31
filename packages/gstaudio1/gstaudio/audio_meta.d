@@ -1,3 +1,4 @@
+/// Module for [AudioMeta] class
 module gstaudio.audio_meta;
 
 import gid.gid;
@@ -10,13 +11,14 @@ import gstaudio.types;
 
 /**
     #GstAudioDownmixMeta defines an audio downmix matrix to be send along with
-  audio buffers. These functions in this module help to create and attach the
-  meta as well as extracting it.
+    audio buffers. These functions in this module help to create and attach the
+    meta as well as extracting it.
 */
 class AudioMeta
 {
   GstAudioMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class AudioMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [WindowControls] class
 module gtk.window_controls;
 
 import gid.gid;
@@ -14,70 +15,73 @@ import gtk.widget;
 
 /**
     [gtk.window_controls.WindowControls] shows window frame controls.
-  
-  Typical window frame controls are minimize, maximize and close buttons,
-  and the window icon.
-  
-  ![An example GtkWindowControls](windowcontrols.png)
-  
-  [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
-  [gtk.window_controls.WindowControls.PackType]), so it's intended to be always used
-  in pair with another [gtk.window_controls.WindowControls] for the opposite side, for example:
-  
-  ```xml
-  <object class="GtkBox">
-    <child>
-      <object class="GtkWindowControls">
-        <property name="side">start</property>
-      </object>
-    </child>
-  
-    ...
-  
-    <child>
-      <object class="GtkWindowControls">
-        <property name="side">end</property>
-      </object>
-    </child>
-  </object>
-  ```
-  
-  # CSS nodes
-  
-  ```
-  windowcontrols
-  ├── [image.icon]
-  ├── [button.minimize]
-  ├── [button.maximize]
-  ╰── [button.close]
-  ```
-  
-  A [gtk.window_controls.WindowControls]' CSS node is called windowcontrols. It contains
-  subnodes corresponding to each title button. Which of the title buttons
-  exist and where they are placed exactly depends on the desktop environment
-  and `property@Gtk.WindowControls:decoration-layout` value.
-  
-  When [gtk.window_controls.WindowControls.gboolean] is true, it gets the .empty
-  style class.
-  
-  # Accessibility
-  
-  [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    Typical window frame controls are minimize, maximize and close buttons,
+    and the window icon.
+    
+    ![An example GtkWindowControls](windowcontrols.png)
+    
+    [gtk.window_controls.WindowControls] only displays start or end side of the controls (see
+    [gtk.window_controls.WindowControls.PackType]), so it's intended to be always used
+    in pair with another [gtk.window_controls.WindowControls] for the opposite side, for example:
+    
+    ```xml
+    <object class="GtkBox">
+      <child>
+        <object class="GtkWindowControls">
+          <property name="side">start</property>
+        </object>
+      </child>
+    
+      ...
+    
+      <child>
+        <object class="GtkWindowControls">
+          <property name="side">end</property>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    # CSS nodes
+    
+    ```
+    windowcontrols
+    ├── [image.icon]
+    ├── [button.minimize]
+    ├── [button.maximize]
+    ╰── [button.close]
+    ```
+    
+    A [gtk.window_controls.WindowControls]' CSS node is called windowcontrols. It contains
+    subnodes corresponding to each title button. Which of the title buttons
+    exist and where they are placed exactly depends on the desktop environment
+    and `property@Gtk.WindowControls:decoration-layout` value.
+    
+    When [gtk.window_controls.WindowControls.gboolean] is true, it gets the .empty
+    style class.
+    
+    # Accessibility
+    
+    [gtk.window_controls.WindowControls] uses the [gtk.types.AccessibleRole.Group] role.
 */
 class WindowControls : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_controls_get_type != &gidSymbolNotFound ? gtk_window_controls_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -90,9 +94,10 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Creates a new [gtk.window_controls.WindowControls].
-    Params:
-      side =       the side
-    Returns:     a new [gtk.window_controls.WindowControls].
+  
+      Params:
+        side = the side
+      Returns: a new [gtk.window_controls.WindowControls].
   */
   this(gtk.types.PackType side)
   {
@@ -103,7 +108,7 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Gets the decoration layout of this [gtk.window_controls.WindowControls].
-    Returns:     the decoration layout or null if it is unset
+      Returns: the decoration layout or null if it is unset
   */
   string getDecorationLayout()
   {
@@ -115,7 +120,7 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Gets whether the widget has any window buttons.
-    Returns:     true if the widget has window buttons, otherwise false
+      Returns: true if the widget has window buttons, otherwise false
   */
   bool getEmpty()
   {
@@ -126,7 +131,7 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Gets the side to which this [gtk.window_controls.WindowControls] instance belongs.
-    Returns:     the side
+      Returns: the side
   */
   gtk.types.PackType getSide()
   {
@@ -138,22 +143,23 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Sets the decoration layout for the title buttons.
-    
-    This overrides the `propertyGtk.Settings:gtk-decoration-layout`
-    setting.
-    
-    The format of the string is button names, separated by commas.
-    A colon separates the buttons that should appear on the left
-    from those on the right. Recognized button names are minimize,
-    maximize, close and icon (the window icon).
-    
-    For example, “icon:minimize,maximize,close” specifies a icon
-    on the left, and minimize, maximize and close buttons on the right.
-    
-    If [gtk.window_controls.WindowControls.PackType] value is GTK_PACK_START, self
-    will display the part before the colon, otherwise after that.
-    Params:
-      layout =       a decoration layout, or null to unset the layout
+      
+      This overrides the `propertyGtk.Settings:gtk-decoration-layout`
+      setting.
+      
+      The format of the string is button names, separated by commas.
+      A colon separates the buttons that should appear on the left
+      from those on the right. Recognized button names are minimize,
+      maximize, close and icon (the window icon).
+      
+      For example, “icon:minimize,maximize,close” specifies a icon
+      on the left, and minimize, maximize and close buttons on the right.
+      
+      If [gtk.window_controls.WindowControls.PackType] value is GTK_PACK_START, self
+      will display the part before the colon, otherwise after that.
+  
+      Params:
+        layout = a decoration layout, or null to unset the layout
   */
   void setDecorationLayout(string layout = null)
   {
@@ -163,10 +169,11 @@ class WindowControls : gtk.widget.Widget
 
   /**
       Determines which part of decoration layout the [gtk.window_controls.WindowControls] uses.
-    
-    See `propertyGtk.WindowControls:decoration-layout`.
-    Params:
-      side =       a side
+      
+      See `propertyGtk.WindowControls:decoration-layout`.
+  
+      Params:
+        side = a side
   */
   void setSide(gtk.types.PackType side)
   {

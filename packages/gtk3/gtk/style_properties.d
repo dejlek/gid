@@ -1,3 +1,4 @@
+/// Module for [StyleProperties] class
 module gtk.style_properties;
 
 import gid.gid;
@@ -12,36 +13,39 @@ import gtk.types;
 
 /**
     GtkStyleProperties provides the storage for style information
-  that is used by #GtkStyleContext and other #GtkStyleProvider
-  implementations.
-  
-  Before style properties can be stored in GtkStyleProperties, they
-  must be registered with [gtk.style_properties.StyleProperties.registerProperty].
-  
-  Unless you are writing a #GtkStyleProvider implementation, you
-  are unlikely to use this API directly, as [gtk.style_context.StyleContext.get]
-  and its variants are the preferred way to access styling information
-  from widget implementations and theming engine implementations
-  should use the APIs provided by #GtkThemingEngine instead.
-  
-  #GtkStyleProperties has been deprecated in GTK 3.16. The CSS
-  machinery does not use it anymore and all users of this object
-  have been deprecated.
+    that is used by #GtkStyleContext and other #GtkStyleProvider
+    implementations.
+    
+    Before style properties can be stored in GtkStyleProperties, they
+    must be registered with [gtk.style_properties.StyleProperties.registerProperty].
+    
+    Unless you are writing a #GtkStyleProvider implementation, you
+    are unlikely to use this API directly, as [gtk.style_context.StyleContext.get]
+    and its variants are the preferred way to access styling information
+    from widget implementations and theming engine implementations
+    should use the APIs provided by #GtkThemingEngine instead.
+    
+    #GtkStyleProperties has been deprecated in GTK 3.16. The CSS
+    machinery does not use it anymore and all users of this object
+    have been deprecated.
 */
 class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_properties_get_type != &gidSymbolNotFound ? gtk_style_properties_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,9 +60,9 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Returns a newly created #GtkStyleProperties
-    Returns:     a new #GtkStyleProperties
+      Returns: a new #GtkStyleProperties
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   this()
   {
@@ -70,7 +74,7 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
   /**
       Clears all style information from props.
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   void clear()
   {
@@ -81,14 +85,15 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Gets a style property from props for the given state. When done with value,
-    [gobject.value.Value.unset] needs to be called to free any allocated memory.
-    Params:
-      property =       style property name
-      state =       state to retrieve the property value for
-      value =       return location for the style property value.
-    Returns:     true if the property exists in props, false otherwise
+      [gobject.value.Value.unset] needs to be called to free any allocated memory.
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Params:
+        property = style property name
+        state = state to retrieve the property value for
+        value = return location for the style property value.
+      Returns: true if the property exists in props, false otherwise
+  
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   bool getProperty(string property, gtk.types.StateFlags state, out gobject.value.Value value)
   {
@@ -102,12 +107,13 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Returns the symbolic color that is mapped
-    to name.
-    Params:
-      name =       color name to lookup
-    Returns:     The mapped color
+      to name.
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        name = color name to lookup
+      Returns: The mapped color
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   gtk.symbolic_color.SymbolicColor lookupColor(string name)
   {
@@ -120,12 +126,13 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Maps color so it can be referenced by name. See
-    [gtk.style_properties.StyleProperties.lookupColor]
-    Params:
-      name =       color name
-      color =       #GtkSymbolicColor to map name to
+      [gtk.style_properties.StyleProperties.lookupColor]
   
-    Deprecated:     #GtkSymbolicColor is deprecated.
+      Params:
+        name = color name
+        color = #GtkSymbolicColor to map name to
+  
+      Deprecated: #GtkSymbolicColor is deprecated.
   */
   void mapColor(string name, gtk.symbolic_color.SymbolicColor color)
   {
@@ -135,14 +142,15 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Merges into props all the style information contained
-    in props_to_merge. If replace is true, the values
-    will be overwritten, if it is false, the older values
-    will prevail.
-    Params:
-      propsToMerge =       a second #GtkStyleProperties
-      replace =       whether to replace values or not
+      in props_to_merge. If replace is true, the values
+      will be overwritten, if it is false, the older values
+      will prevail.
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Params:
+        propsToMerge = a second #GtkStyleProperties
+        replace = whether to replace values or not
+  
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   void merge(gtk.style_properties.StyleProperties propsToMerge, bool replace)
   {
@@ -153,12 +161,13 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Sets a styling property in props.
-    Params:
-      property =       styling property to set
-      state =       state to set the value for
-      value =       new value for the property
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Params:
+        property = styling property to set
+        state = state to set the value for
+        value = new value for the property
+  
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   void setProperty(string property, gtk.types.StateFlags state, gobject.value.Value value)
   {
@@ -168,11 +177,12 @@ class StyleProperties : gobject.object.ObjectG, gtk.style_provider.StyleProvider
 
   /**
       Unsets a style property in props.
-    Params:
-      property =       property to unset
-      state =       state to unset
   
-    Deprecated:     #GtkStyleProperties are deprecated.
+      Params:
+        property = property to unset
+        state = state to unset
+  
+      Deprecated: #GtkStyleProperties are deprecated.
   */
   void unsetProperty(string property, gtk.types.StateFlags state)
   {

@@ -1,3 +1,4 @@
+/// Module for [TabArray] class
 module pango.tab_array;
 
 import gid.gid;
@@ -8,30 +9,34 @@ import pango.types;
 
 /**
     A [pango.tab_array.TabArray] contains an array of tab stops.
-  
-  [pango.tab_array.TabArray] can be used to set tab stops in a [pango.layout.Layout].
-  Each tab stop has an alignment, a position, and optionally
-  a character to use as decimal point.
+    
+    [pango.tab_array.TabArray] can be used to set tab stops in a [pango.layout.Layout].
+    Each tab stop has an alignment, a position, and optionally
+    a character to use as decimal point.
 */
 class TabArray : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_tab_array_get_type != &gidSymbolNotFound ? pango_tab_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,14 +49,15 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Creates an array of initial_size tab stops.
-    
-    Tab stops are specified in pixel units if positions_in_pixels is true,
-    otherwise in Pango units. All stops are initially at position 0.
-    Params:
-      initialSize =       Initial number of tab stops to allocate, can be 0
-      positionsInPixels =       whether positions are in pixel units
-    Returns:     the newly allocated [pango.tab_array.TabArray], which should
-        be freed with [pango.tab_array.TabArray.free].
+      
+      Tab stops are specified in pixel units if positions_in_pixels is true,
+      otherwise in Pango units. All stops are initially at position 0.
+  
+      Params:
+        initialSize = Initial number of tab stops to allocate, can be 0
+        positionsInPixels = whether positions are in pixel units
+      Returns: the newly allocated [pango.tab_array.TabArray], which should
+          be freed with [pango.tab_array.TabArray.free].
   */
   this(int initialSize, bool positionsInPixels)
   {
@@ -62,8 +68,8 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Copies a [pango.tab_array.TabArray].
-    Returns:     the newly allocated [pango.tab_array.TabArray], which should
-        be freed with [pango.tab_array.TabArray.free].
+      Returns: the newly allocated [pango.tab_array.TabArray], which should
+          be freed with [pango.tab_array.TabArray.free].
   */
   pango.tab_array.TabArray copy()
   {
@@ -75,16 +81,17 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Gets the Unicode character to use as decimal point.
-    
-    This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
-    which align content at the first occurrence of the decimal point
-    character.
-    
-    The default value of 0 means that Pango will use the
-    decimal point according to the current locale.
-    Params:
-      tabIndex =       the index of a tab stop
-    Returns: 
+      
+      This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
+      which align content at the first occurrence of the decimal point
+      character.
+      
+      The default value of 0 means that Pango will use the
+      decimal point according to the current locale.
+  
+      Params:
+        tabIndex = the index of a tab stop
+      Returns: 
   */
   dchar getDecimalPoint(int tabIndex)
   {
@@ -95,8 +102,8 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Returns true if the tab positions are in pixels,
-    false if they are in Pango units.
-    Returns:     whether positions are in pixels.
+      false if they are in Pango units.
+      Returns: whether positions are in pixels.
   */
   bool getPositionsInPixels()
   {
@@ -107,7 +114,7 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Gets the number of tab stops in tab_array.
-    Returns:     the number of tab stops in the array.
+      Returns: the number of tab stops in the array.
   */
   int getSize()
   {
@@ -118,10 +125,11 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Gets the alignment and position of a tab stop.
-    Params:
-      tabIndex =       tab stop index
-      alignment =       location to store alignment
-      location =       location to store tab position
+  
+      Params:
+        tabIndex = tab stop index
+        alignment = location to store alignment
+        location = location to store tab position
   */
   void getTab(int tabIndex, out pango.types.TabAlign alignment, out int location)
   {
@@ -130,11 +138,12 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Resizes a tab array.
-    
-    You must subsequently initialize any tabs
-    that were added as a result of growing the array.
-    Params:
-      newSize =       new size of the array
+      
+      You must subsequently initialize any tabs
+      that were added as a result of growing the array.
+  
+      Params:
+        newSize = new size of the array
   */
   void resize(int newSize)
   {
@@ -143,16 +152,17 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Sets the Unicode character to use as decimal point.
-    
-    This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
-    which align content at the first occurrence of the decimal point
-    character.
-    
-    By default, Pango uses the decimal point according
-    to the current locale.
-    Params:
-      tabIndex =       the index of a tab stop
-      decimalPoint =       the decimal point to use
+      
+      This is only relevant for tabs with [pango.types.TabAlign.Decimal] alignment,
+      which align content at the first occurrence of the decimal point
+      character.
+      
+      By default, Pango uses the decimal point according
+      to the current locale.
+  
+      Params:
+        tabIndex = the index of a tab stop
+        decimalPoint = the decimal point to use
   */
   void setDecimalPoint(int tabIndex, dchar decimalPoint)
   {
@@ -161,9 +171,10 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Sets whether positions in this array are specified in
-    pixels.
-    Params:
-      positionsInPixels =       whether positions are in pixels
+      pixels.
+  
+      Params:
+        positionsInPixels = whether positions are in pixels
   */
   void setPositionsInPixels(bool positionsInPixels)
   {
@@ -172,10 +183,11 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Sets the alignment and location of a tab stop.
-    Params:
-      tabIndex =       the index of a tab stop
-      alignment =       tab alignment
-      location =       tab location in Pango units
+  
+      Params:
+        tabIndex = the index of a tab stop
+        alignment = tab alignment
+        location = tab location in Pango units
   */
   void setTab(int tabIndex, pango.types.TabAlign alignment, int location)
   {
@@ -192,14 +204,14 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Serializes a [pango.tab_array.TabArray] to a string.
-    
-    No guarantees are made about the format of the string,
-    it may change between Pango versions.
-    
-    The intended use of this function is testing and
-    debugging. The format is not meant as a permanent
-    storage format.
-    Returns:     a newly allocated string
+      
+      No guarantees are made about the format of the string,
+      it may change between Pango versions.
+      
+      The intended use of this function is testing and
+      debugging. The format is not meant as a permanent
+      storage format.
+      Returns: a newly allocated string
   */
   string toString_()
   {
@@ -211,12 +223,13 @@ class TabArray : gobject.boxed.Boxed
 
   /**
       Deserializes a [pango.tab_array.TabArray] from a string.
-    
-    This is the counterpart to [pango.tab_array.TabArray.toString_].
-    See that functions for details about the format.
-    Params:
-      text =       a string
-    Returns:     a new [pango.tab_array.TabArray]
+      
+      This is the counterpart to [pango.tab_array.TabArray.toString_].
+      See that functions for details about the format.
+  
+      Params:
+        text = a string
+      Returns: a new [pango.tab_array.TabArray]
   */
   static pango.tab_array.TabArray fromString(string text)
   {

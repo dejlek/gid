@@ -1,3 +1,4 @@
+/// Module for [TextureScaleNode] class
 module gsk.texture_scale_node;
 
 import gdk.texture;
@@ -15,6 +16,7 @@ import gsk.types;
 class TextureScaleNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,22 +27,23 @@ class TextureScaleNode : gsk.render_node.RenderNode
 
   /**
       Creates a node that scales the texture to the size given by the
-    bounds using the filter and then places it at the bounds' position.
-    
-    Note that further scaling and other transformations which are
-    applied to the node will apply linear filtering to the resulting
-    texture, as usual.
-    
-    This node is intended for tight control over scaling applied
-    to a texture, such as in image editors and requires the
-    application to be aware of the whole render tree as further
-    transforms may be applied that conflict with the desired effect
-    of this node.
-    Params:
-      texture =       the texture to scale
-      bounds =       the size of the texture to scale to
-      filter =       how to scale the texture
-    Returns:     A new [gsk.render_node.RenderNode]
+      bounds using the filter and then places it at the bounds' position.
+      
+      Note that further scaling and other transformations which are
+      applied to the node will apply linear filtering to the resulting
+      texture, as usual.
+      
+      This node is intended for tight control over scaling applied
+      to a texture, such as in image editors and requires the
+      application to be aware of the whole render tree as further
+      transforms may be applied that conflict with the desired effect
+      of this node.
+  
+      Params:
+        texture = the texture to scale
+        bounds = the size of the texture to scale to
+        filter = how to scale the texture
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gdk.texture.Texture texture, graphene.rect.Rect bounds, gsk.types.ScalingFilter filter)
   {
@@ -51,7 +54,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the [gsk.types.ScalingFilter] used when creating this [gsk.render_node.RenderNode].
-    Returns:     the [gsk.types.ScalingFilter]
+      Returns: the [gsk.types.ScalingFilter]
   */
   gsk.types.ScalingFilter getFilter()
   {
@@ -63,7 +66,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the [gdk.texture.Texture] used when creating this [gsk.render_node.RenderNode].
-    Returns:     the [gdk.texture.Texture]
+      Returns: the [gdk.texture.Texture]
   */
   gdk.texture.Texture getTexture()
   {

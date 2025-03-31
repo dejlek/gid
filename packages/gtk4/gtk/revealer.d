@@ -1,3 +1,4 @@
+/// Module for [Revealer] class
 module gtk.revealer;
 
 import gid.gid;
@@ -15,41 +16,44 @@ import gtk.widget;
 
 /**
     A [gtk.revealer.Revealer] animates the transition of its child from invisible to visible.
-  
-  The style of transition can be controlled with
-  [gtk.revealer.Revealer.setTransitionType].
-  
-  These animations respect the `property@Gtk.Settings:gtk-enable-animations`
-  setting.
-  
-  # CSS nodes
-  
-  [gtk.revealer.Revealer] has a single CSS node with name revealer.
-  When styling [gtk.revealer.Revealer] using CSS, remember that it only hides its contents,
-  not itself. That means applied margin, padding and borders will be visible even
-  when the `property@Gtk.Revealer:reveal-child` property is set to false.
-  
-  # Accessibility
-  
-  [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.Group] role.
-  
-  The child of [gtk.revealer.Revealer], if set, is always available in the accessibility
-  tree, regardless of the state of the revealer widget.
+    
+    The style of transition can be controlled with
+    [gtk.revealer.Revealer.setTransitionType].
+    
+    These animations respect the `property@Gtk.Settings:gtk-enable-animations`
+    setting.
+    
+    # CSS nodes
+    
+    [gtk.revealer.Revealer] has a single CSS node with name revealer.
+    When styling [gtk.revealer.Revealer] using CSS, remember that it only hides its contents,
+    not itself. That means applied margin, padding and borders will be visible even
+    when the `property@Gtk.Revealer:reveal-child` property is set to false.
+    
+    # Accessibility
+    
+    [gtk.revealer.Revealer] uses the [gtk.types.AccessibleRole.Group] role.
+    
+    The child of [gtk.revealer.Revealer], if set, is always available in the accessibility
+    tree, regardless of the state of the revealer widget.
 */
 class Revealer : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_revealer_get_type != &gidSymbolNotFound ? gtk_revealer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -62,7 +66,7 @@ class Revealer : gtk.widget.Widget
 
   /**
       Creates a new [gtk.revealer.Revealer].
-    Returns:     a newly created [gtk.revealer.Revealer]
+      Returns: a newly created [gtk.revealer.Revealer]
   */
   this()
   {
@@ -73,7 +77,7 @@ class Revealer : gtk.widget.Widget
 
   /**
       Gets the child widget of revealer.
-    Returns:     the child widget of revealer
+      Returns: the child widget of revealer
   */
   gtk.widget.Widget getChild()
   {
@@ -85,10 +89,10 @@ class Revealer : gtk.widget.Widget
 
   /**
       Returns whether the child is fully revealed.
-    
-    In other words, this returns whether the transition
-    to the revealed state is completed.
-    Returns:     true if the child is fully revealed
+      
+      In other words, this returns whether the transition
+      to the revealed state is completed.
+      Returns: true if the child is fully revealed
   */
   bool getChildRevealed()
   {
@@ -99,12 +103,12 @@ class Revealer : gtk.widget.Widget
 
   /**
       Returns whether the child is currently revealed.
-    
-    This function returns true as soon as the transition
-    is to the revealed state is started. To learn whether
-    the child is fully revealed (ie the transition is completed),
-    use [gtk.revealer.Revealer.getChildRevealed].
-    Returns:     true if the child is revealed.
+      
+      This function returns true as soon as the transition
+      is to the revealed state is started. To learn whether
+      the child is fully revealed (ie the transition is completed),
+      use [gtk.revealer.Revealer.getChildRevealed].
+      Returns: true if the child is revealed.
   */
   bool getRevealChild()
   {
@@ -115,8 +119,8 @@ class Revealer : gtk.widget.Widget
 
   /**
       Returns the amount of time (in milliseconds) that
-    transitions will take.
-    Returns:     the transition duration
+      transitions will take.
+      Returns: the transition duration
   */
   uint getTransitionDuration()
   {
@@ -127,8 +131,8 @@ class Revealer : gtk.widget.Widget
 
   /**
       Gets the type of animation that will be used
-    for transitions in revealer.
-    Returns:     the current transition type of revealer
+      for transitions in revealer.
+      Returns: the current transition type of revealer
   */
   gtk.types.RevealerTransitionType getTransitionType()
   {
@@ -140,8 +144,9 @@ class Revealer : gtk.widget.Widget
 
   /**
       Sets the child widget of revealer.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -150,11 +155,12 @@ class Revealer : gtk.widget.Widget
 
   /**
       Tells the [gtk.revealer.Revealer] to reveal or conceal its child.
-    
-    The transition will be animated with the current
-    transition type of revealer.
-    Params:
-      revealChild =       true to reveal the child
+      
+      The transition will be animated with the current
+      transition type of revealer.
+  
+      Params:
+        revealChild = true to reveal the child
   */
   void setRevealChild(bool revealChild)
   {
@@ -163,8 +169,9 @@ class Revealer : gtk.widget.Widget
 
   /**
       Sets the duration that transitions will take.
-    Params:
-      duration =       the new duration, in milliseconds
+  
+      Params:
+        duration = the new duration, in milliseconds
   */
   void setTransitionDuration(uint duration)
   {
@@ -173,11 +180,12 @@ class Revealer : gtk.widget.Widget
 
   /**
       Sets the type of animation that will be used for
-    transitions in revealer.
-    
-    Available types include various kinds of fades and slides.
-    Params:
-      transition =       the new transition type
+      transitions in revealer.
+      
+      Available types include various kinds of fades and slides.
+  
+      Params:
+        transition = the new transition type
   */
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {

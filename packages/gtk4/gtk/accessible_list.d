@@ -1,3 +1,4 @@
+/// Module for [AccessibleList] class
 module gtk.accessible_list;
 
 import gid.gid;
@@ -14,22 +15,26 @@ import gtk.types;
 class AccessibleList : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_list_get_type != &gidSymbolNotFound ? gtk_accessible_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,9 +47,10 @@ class AccessibleList : gobject.boxed.Boxed
 
   /**
       Allocates a new list of accessible instances.
-    Params:
-      accessibles =       array of GtkAccessible
-    Returns:     the newly created list of accessible instances
+  
+      Params:
+        accessibles = array of GtkAccessible
+      Returns: the newly created list of accessible instances
   */
   static gtk.accessible_list.AccessibleList newFromArray(gtk.accessible.Accessible[] accessibles)
   {
@@ -64,10 +70,11 @@ class AccessibleList : gobject.boxed.Boxed
 
   /**
       Allocates a new [gtk.accessible_list.AccessibleList], doing a shallow copy of the
-    passed list of [gtk.accessible.Accessible] instances.
-    Params:
-      list =       a reference to a [glib.list.List] containing a list of accessible values
-    Returns:     the list of accessible instances
+      passed list of [gtk.accessible.Accessible] instances.
+  
+      Params:
+        list = a reference to a [glib.list.List] containing a list of accessible values
+      Returns: the list of accessible instances
   */
   static gtk.accessible_list.AccessibleList newFromList(gtk.accessible.Accessible[] list)
   {
@@ -81,7 +88,7 @@ class AccessibleList : gobject.boxed.Boxed
 
   /**
       Gets the list of objects this boxed type holds
-    Returns:     a shallow copy of the objects
+      Returns: a shallow copy of the objects
   */
   gtk.accessible.Accessible[] getObjects()
   {

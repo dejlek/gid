@@ -1,3 +1,4 @@
+/// Module for [TimedAnimation] class
 module adw.timed_animation;
 
 import adw.animation;
@@ -10,36 +11,39 @@ import gtk.widget;
 
 /**
     A time-based `class@Animation`.
-  
-  [adw.timed_animation.TimedAnimation] implements a simple animation interpolating the given
-  value from `property@TimedAnimation:value-from` to
-  `property@TimedAnimation:value-to` over
-  `property@TimedAnimation:duration` milliseconds using the curve described by
-  `property@TimedAnimation:easing`.
-  
-  If `property@TimedAnimation:reverse` is set to `TRUE`, [adw.timed_animation.TimedAnimation]
-  will instead animate from `property@TimedAnimation:value-to` to
-  `property@TimedAnimation:value-from`, and the easing curve will be inverted.
-  
-  The animation can repeat a certain amount of times, or endlessly, depending
-  on the `property@TimedAnimation:repeat-count` value. If
-  `property@TimedAnimation:alternate` is set to `TRUE`, it will also change the
-  direction every other iteration.
+    
+    [adw.timed_animation.TimedAnimation] implements a simple animation interpolating the given
+    value from `property@TimedAnimation:value-from` to
+    `property@TimedAnimation:value-to` over
+    `property@TimedAnimation:duration` milliseconds using the curve described by
+    `property@TimedAnimation:easing`.
+    
+    If `property@TimedAnimation:reverse` is set to `TRUE`, [adw.timed_animation.TimedAnimation]
+    will instead animate from `property@TimedAnimation:value-to` to
+    `property@TimedAnimation:value-from`, and the easing curve will be inverted.
+    
+    The animation can repeat a certain amount of times, or endlessly, depending
+    on the `property@TimedAnimation:repeat-count` value. If
+    `property@TimedAnimation:alternate` is set to `TRUE`, it will also change the
+    direction every other iteration.
 */
 class TimedAnimation : adw.animation.Animation
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_timed_animation_get_type != &gidSymbolNotFound ? adw_timed_animation_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,14 +56,15 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Creates a new [adw.timed_animation.TimedAnimation] on widget to animate target from from
-    to to.
-    Params:
-      widget =       a widget to create animation on
-      from =       a value to animate from
-      to =       a value to animate to
-      duration =       a duration for the animation
-      target =       a target value to animate
-    Returns:     the newly created animation
+      to to.
+  
+      Params:
+        widget = a widget to create animation on
+        from = a value to animate from
+        to = a value to animate to
+        duration = a duration for the animation
+        target = a target value to animate
+      Returns: the newly created animation
   */
   this(gtk.widget.Widget widget, double from, double to, uint duration, adw.animation_target.AnimationTarget target)
   {
@@ -70,7 +75,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets whether self changes direction on every iteration.
-    Returns:     whether self alternates
+      Returns: whether self alternates
   */
   bool getAlternate()
   {
@@ -81,7 +86,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets the duration of self.
-    Returns:     the duration of self, in milliseconds
+      Returns: the duration of self, in milliseconds
   */
   uint getDuration()
   {
@@ -92,7 +97,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets the easing function self uses.
-    Returns:     the easing function self uses
+      Returns: the easing function self uses
   */
   adw.types.Easing getEasing()
   {
@@ -104,7 +109,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets the number of times self will play.
-    Returns:     the number of times self will play
+      Returns: the number of times self will play
   */
   uint getRepeatCount()
   {
@@ -115,7 +120,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets whether self plays backwards.
-    Returns:     whether self plays backwards
+      Returns: whether self plays backwards
   */
   bool getReverse()
   {
@@ -126,7 +131,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets the value self will animate from.
-    Returns:     the value to animate from
+      Returns: the value to animate from
   */
   double getValueFrom()
   {
@@ -137,7 +142,7 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Gets the value self will animate to.
-    Returns:     the value to animate to
+      Returns: the value to animate to
   */
   double getValueTo()
   {
@@ -148,8 +153,9 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets whether self changes direction on every iteration.
-    Params:
-      alternate =       whether self alternates
+  
+      Params:
+        alternate = whether self alternates
   */
   void setAlternate(bool alternate)
   {
@@ -158,10 +164,11 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets the duration of self.
-    
-    If the animation repeats more than once, sets the duration of one iteration.
-    Params:
-      duration =       the duration to use, in milliseconds
+      
+      If the animation repeats more than once, sets the duration of one iteration.
+  
+      Params:
+        duration = the duration to use, in milliseconds
   */
   void setDuration(uint duration)
   {
@@ -170,10 +177,11 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets the easing function self will use.
-    
-    See `enumEasing` for the description of specific easing functions.
-    Params:
-      easing =       the easing function to use
+      
+      See `enumEasing` for the description of specific easing functions.
+  
+      Params:
+        easing = the easing function to use
   */
   void setEasing(adw.types.Easing easing)
   {
@@ -182,10 +190,11 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets the number of times self will play.
-    
-    If set to 0, self will repeat endlessly.
-    Params:
-      repeatCount =       the number of times self will play
+      
+      If set to 0, self will repeat endlessly.
+  
+      Params:
+        repeatCount = the number of times self will play
   */
   void setRepeatCount(uint repeatCount)
   {
@@ -194,8 +203,9 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets whether self plays backwards.
-    Params:
-      reverse =       whether self plays backwards
+  
+      Params:
+        reverse = whether self plays backwards
   */
   void setReverse(bool reverse)
   {
@@ -204,14 +214,15 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets the value self will animate from.
-    
-    The animation will start at this value and end at
-    `propertyTimedAnimation:value-to`.
-    
-    If `propertyTimedAnimation:reverse` is `TRUE`, the animation will end at
-    this value instead.
-    Params:
-      value =       the value to animate from
+      
+      The animation will start at this value and end at
+      `propertyTimedAnimation:value-to`.
+      
+      If `propertyTimedAnimation:reverse` is `TRUE`, the animation will end at
+      this value instead.
+  
+      Params:
+        value = the value to animate from
   */
   void setValueFrom(double value)
   {
@@ -220,14 +231,15 @@ class TimedAnimation : adw.animation.Animation
 
   /**
       Sets the value self will animate to.
-    
-    The animation will start at `propertyTimedAnimation:value-from` and end at
-    this value.
-    
-    If `propertyTimedAnimation:reverse` is `TRUE`, the animation will start
-    at this value instead.
-    Params:
-      value =       the value to animate to
+      
+      The animation will start at `propertyTimedAnimation:value-from` and end at
+      this value.
+      
+      If `propertyTimedAnimation:reverse` is `TRUE`, the animation will start
+      at this value instead.
+  
+      Params:
+        value = the value to animate to
   */
   void setValueTo(double value)
   {

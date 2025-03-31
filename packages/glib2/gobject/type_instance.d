@@ -1,3 +1,4 @@
+/// Module for [TypeInstance] class
 module gobject.type_instance;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class TypeInstance
 {
   GTypeInstance cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class TypeInstance
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

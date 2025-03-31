@@ -1,3 +1,4 @@
+/// Module for [MultiFilter] class
 module gtk.multi_filter;
 
 import gid.gid;
@@ -16,17 +17,20 @@ import gtk.types;
 class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.Buildable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_filter_get_type != &gidSymbolNotFound ? gtk_multi_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,8 +46,9 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
 
   /**
       Adds a filter to self to use for matching.
-    Params:
-      filter =       A new filter to use
+  
+      Params:
+        filter = A new filter to use
   */
   void append(gtk.filter.Filter filter)
   {
@@ -52,12 +57,13 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
 
   /**
       Removes the filter at the given position from the list of filters used
-    by self.
-    
-    If position is larger than the number of filters, nothing happens and
-    the function returns.
-    Params:
-      position =       position of filter to remove
+      by self.
+      
+      If position is larger than the number of filters, nothing happens and
+      the function returns.
+  
+      Params:
+        position = position of filter to remove
   */
   void remove(uint position)
   {

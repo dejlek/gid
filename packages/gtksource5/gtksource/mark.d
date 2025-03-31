@@ -1,3 +1,4 @@
+/// Module for [Mark] class
 module gtksource.mark;
 
 import gid.gid;
@@ -9,33 +10,36 @@ import gtksource.types;
 
 /**
     Mark object for `class@Buffer`.
-  
-  A [gtksource.mark.Mark] marks a position in the text where you want to display
-  additional info. It is based on [gtk.text_mark.TextMark] and thus is still valid after
-  the text has changed though its position may change.
-  
-  [gtksource.mark.Mark]s are organized in categories which you have to set
-  when you create the mark. Each category can have a priority, a pixbuf and
-  other associated attributes. See [gtksource.view.View.setMarkAttributes].
-  The pixbuf will be displayed in the margin at the line where the mark
-  residents if the `property@View:show-line-marks` property is set to true. If
-  there are multiple marks in the same line, the pixbufs will be drawn on top
-  of each other. The mark with the highest priority will be drawn on top.
+    
+    A [gtksource.mark.Mark] marks a position in the text where you want to display
+    additional info. It is based on [gtk.text_mark.TextMark] and thus is still valid after
+    the text has changed though its position may change.
+    
+    [gtksource.mark.Mark]s are organized in categories which you have to set
+    when you create the mark. Each category can have a priority, a pixbuf and
+    other associated attributes. See [gtksource.view.View.setMarkAttributes].
+    The pixbuf will be displayed in the margin at the line where the mark
+    residents if the `property@View:show-line-marks` property is set to true. If
+    there are multiple marks in the same line, the pixbufs will be drawn on top
+    of each other. The mark with the highest priority will be drawn on top.
 */
 class Mark : gtk.text_mark.TextMark
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_get_type != &gidSymbolNotFound ? gtk_source_mark_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,19 +52,20 @@ class Mark : gtk.text_mark.TextMark
 
   /**
       Creates a text mark.
-    
-    Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
-    If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved
-    by name using [gtk.text_buffer.TextBuffer.getMark].
-    Normally marks are created using the utility function
-    [gtksource.buffer.Buffer.createSourceMark].
-    Params:
-      name =       Name of the #GtkSourceMark or null
-      category =       is used to classify marks according to common characteristics
-          (e.g. all the marks representing a bookmark could belong to the "bookmark"
-          category, or all the marks representing a compilation error could belong
-          to "error" category).
-    Returns:     a new #GtkSourceMark that can be added using [gtk.text_buffer.TextBuffer.addMark].
+      
+      Add it to a buffer using [gtk.text_buffer.TextBuffer.addMark].
+      If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved
+      by name using [gtk.text_buffer.TextBuffer.getMark].
+      Normally marks are created using the utility function
+      [gtksource.buffer.Buffer.createSourceMark].
+  
+      Params:
+        name = Name of the #GtkSourceMark or null
+        category = is used to classify marks according to common characteristics
+            (e.g. all the marks representing a bookmark could belong to the "bookmark"
+            category, or all the marks representing a compilation error could belong
+            to "error" category).
+      Returns: a new #GtkSourceMark that can be added using [gtk.text_buffer.TextBuffer.addMark].
   */
   this(string name, string category)
   {
@@ -73,7 +78,7 @@ class Mark : gtk.text_mark.TextMark
 
   /**
       Returns the mark category.
-    Returns:     the category of the #GtkSourceMark.
+      Returns: the category of the #GtkSourceMark.
   */
   string getCategory()
   {
@@ -85,14 +90,15 @@ class Mark : gtk.text_mark.TextMark
 
   /**
       Returns the next [gtksource.mark.Mark] in the buffer or null if the mark
-    was not added to a buffer.
-    
-     If there is no next mark, null will be returned.
-    
-    If category is null, looks for marks of any category.
-    Params:
-      category =       a string specifying the mark category, or null.
-    Returns:     the next #GtkSourceMark, or null.
+      was not added to a buffer.
+      
+       If there is no next mark, null will be returned.
+      
+      If category is null, looks for marks of any category.
+  
+      Params:
+        category = a string specifying the mark category, or null.
+      Returns: the next #GtkSourceMark, or null.
   */
   gtksource.mark.Mark next(string category = null)
   {
@@ -105,14 +111,15 @@ class Mark : gtk.text_mark.TextMark
 
   /**
       Returns the previous [gtksource.mark.Mark] in the buffer or null if the mark
-    was not added to a buffer.
-    
-    If there is no previous mark, null is returned.
-    
-    If category is null, looks for marks of any category
-    Params:
-      category =       a string specifying the mark category, or null.
-    Returns:     the previous #GtkSourceMark, or null.
+      was not added to a buffer.
+      
+      If there is no previous mark, null is returned.
+      
+      If category is null, looks for marks of any category
+  
+      Params:
+        category = a string specifying the mark category, or null.
+      Returns: the previous #GtkSourceMark, or null.
   */
   gtksource.mark.Mark prev(string category = null)
   {

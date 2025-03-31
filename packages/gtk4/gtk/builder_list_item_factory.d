@@ -1,3 +1,4 @@
+/// Module for [BuilderListItemFactory] class
 module gtk.builder_list_item_factory;
 
 import gid.gid;
@@ -11,43 +12,46 @@ import gtk.types;
 
 /**
     [gtk.builder_list_item_factory.BuilderListItemFactory] is a [gtk.list_item_factory.ListItemFactory] that creates
-  widgets by instantiating [gtk.builder.Builder] UI templates.
-  
-  The templates must be extending [gtk.list_item.ListItem], and typically use
-  [gtk.expression.Expression]s to obtain data from the items in the model.
-  
-  Example:
-  ```xml
-    <interface>
-      <template class="GtkListItem">
-        <property name="child">
-          <object class="GtkLabel">
-            <property name="xalign">0</property>
-            <binding name="label">
-              <lookup name="name" type="SettingsKey">
-                <lookup name="item">GtkListItem</lookup>
-              </lookup>
-            </binding>
-          </object>
-        </property>
-      </template>
-    </interface>
-  ```
+    widgets by instantiating [gtk.builder.Builder] UI templates.
+    
+    The templates must be extending [gtk.list_item.ListItem], and typically use
+    [gtk.expression.Expression]s to obtain data from the items in the model.
+    
+    Example:
+    ```xml
+      <interface>
+        <template class="GtkListItem">
+          <property name="child">
+            <object class="GtkLabel">
+              <property name="xalign">0</property>
+              <binding name="label">
+                <lookup name="name" type="SettingsKey">
+                  <lookup name="item">GtkListItem</lookup>
+                </lookup>
+              </binding>
+            </object>
+          </property>
+        </template>
+      </interface>
+    ```
 */
 class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_list_item_factory_get_type != &gidSymbolNotFound ? gtk_builder_list_item_factory_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -60,11 +64,12 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   /**
       Creates a new [gtk.builder_list_item_factory.BuilderListItemFactory] that instantiates widgets
-    using bytes as the data to pass to [gtk.builder.Builder].
-    Params:
-      scope_ =       A scope to use when instantiating
-      bytes =       the [glib.bytes.Bytes] containing the ui file to instantiate
-    Returns:     a new [gtk.builder_list_item_factory.BuilderListItemFactory]
+      using bytes as the data to pass to [gtk.builder.Builder].
+  
+      Params:
+        scope_ = A scope to use when instantiating
+        bytes = the [glib.bytes.Bytes] containing the ui file to instantiate
+      Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromBytes(gtk.builder_scope.BuilderScope scope_, glib.bytes.Bytes bytes)
   {
@@ -76,11 +81,12 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   /**
       Creates a new [gtk.builder_list_item_factory.BuilderListItemFactory] that instantiates widgets
-    using data read from the given resource_path to pass to [gtk.builder.Builder].
-    Params:
-      scope_ =       A scope to use when instantiating
-      resourcePath =       valid path to a resource that contains the data
-    Returns:     a new [gtk.builder_list_item_factory.BuilderListItemFactory]
+      using data read from the given resource_path to pass to [gtk.builder.Builder].
+  
+      Params:
+        scope_ = A scope to use when instantiating
+        resourcePath = valid path to a resource that contains the data
+      Returns: a new [gtk.builder_list_item_factory.BuilderListItemFactory]
   */
   static gtk.builder_list_item_factory.BuilderListItemFactory newFromResource(gtk.builder_scope.BuilderScope scope_, string resourcePath)
   {
@@ -93,8 +99,8 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   /**
       Gets the data used as the [gtk.builder.Builder] UI template for constructing
-    listitems.
-    Returns:     The [gtk.builder.Builder] data
+      listitems.
+      Returns: The [gtk.builder.Builder] data
   */
   glib.bytes.Bytes getBytes()
   {
@@ -106,7 +112,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   /**
       If the data references a resource, gets the path of that resource.
-    Returns:     The path to the resource
+      Returns: The path to the resource
   */
   string getResource()
   {
@@ -118,7 +124,7 @@ class BuilderListItemFactory : gtk.list_item_factory.ListItemFactory
 
   /**
       Gets the scope used when constructing listitems.
-    Returns:     The scope used when constructing listitems
+      Returns: The scope used when constructing listitems
   */
   gtk.builder_scope.BuilderScope getScope()
   {

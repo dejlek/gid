@@ -1,3 +1,4 @@
+/// Module for [SDPConnection] class
 module gstsdp.sdpconnection;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class SDPConnection
 {
   GstSDPConnection cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class SDPConnection
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -83,7 +86,7 @@ class SDPConnection
 
   /**
       Clear the connection.
-    Returns:     GST_SDP_OK.
+      Returns: GST_SDP_OK.
   */
   gstsdp.types.SDPResult clear()
   {
@@ -95,14 +98,15 @@ class SDPConnection
 
   /**
       Set the connection with the given parameters.
-    Params:
-      nettype =       the type of network. "IN" is defined to have the meaning
-        "Internet".
-      addrtype =       the type of address.
-      address =       the address
-      ttl =       the time to live of the address
-      addrNumber =       the number of layers
-    Returns:     GST_SDP_OK.
+  
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+          "Internet".
+        addrtype = the type of address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+      Returns: GST_SDP_OK.
   */
   gstsdp.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber)
   {

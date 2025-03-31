@@ -1,3 +1,4 @@
+/// Module for [Table] interface mixin
 module atk.table_mixin;
 
 public import atk.table_iface_proxy;
@@ -11,45 +12,46 @@ public import gobject.object;
 
 /**
     The ATK interface implemented for UI components which contain tabular or row/column information.
-  
-  #AtkTable should be implemented by components which present
-  elements ordered via rows and columns.  It may also be used to
-  present tree-structured information if the nodes of the trees can
-  be said to contain multiple "columns".  Individual elements of an
-  #AtkTable are typically referred to as "cells". Those cells should
-  implement the interface #AtkTableCell, but #Atk doesn't require
-  them to be direct children of the current #AtkTable. They can be
-  grand-children, grand-grand-children etc. #AtkTable provides the
-  API needed to get a individual cell based on the row and column
-  numbers.
-  
-  Children of #AtkTable are frequently "lightweight" objects, that
-  is, they may not have backing widgets in the host UI toolkit.  They
-  are therefore often transient.
-  
-  Since tables are often very complex, #AtkTable includes provision
-  for offering simplified summary information, as well as row and
-  column headers and captions.  Headers and captions are #AtkObjects
-  which may implement other interfaces (#AtkText, #AtkImage, etc.) as
-  appropriate.  #AtkTable summaries may themselves be (simplified)
-  #AtkTables, etc.
-  
-  Note for implementors: in the past, #AtkTable required that all the
-  cells should be direct children of #AtkTable, and provided some
-  index based methods to request the cells. The practice showed that
-  that forcing made #AtkTable implementation complex, and hard to
-  expose other kind of children, like rows or captions. Right now,
-  index-based methods are deprecated.
+    
+    #AtkTable should be implemented by components which present
+    elements ordered via rows and columns.  It may also be used to
+    present tree-structured information if the nodes of the trees can
+    be said to contain multiple "columns".  Individual elements of an
+    #AtkTable are typically referred to as "cells". Those cells should
+    implement the interface #AtkTableCell, but #Atk doesn't require
+    them to be direct children of the current #AtkTable. They can be
+    grand-children, grand-grand-children etc. #AtkTable provides the
+    API needed to get a individual cell based on the row and column
+    numbers.
+    
+    Children of #AtkTable are frequently "lightweight" objects, that
+    is, they may not have backing widgets in the host UI toolkit.  They
+    are therefore often transient.
+    
+    Since tables are often very complex, #AtkTable includes provision
+    for offering simplified summary information, as well as row and
+    column headers and captions.  Headers and captions are #AtkObjects
+    which may implement other interfaces (#AtkText, #AtkImage, etc.) as
+    appropriate.  #AtkTable summaries may themselves be (simplified)
+    #AtkTables, etc.
+    
+    Note for implementors: in the past, #AtkTable required that all the
+    cells should be direct children of #AtkTable, and provided some
+    index based methods to request the cells. The practice showed that
+    that forcing made #AtkTable implementation complex, and hard to
+    expose other kind of children, like rows or captions. Right now,
+    index-based methods are deprecated.
 */
 template TableT()
 {
 
   /**
       Adds the specified column to the selection.
-    Params:
-      column =       a #gint representing a column in table
-    Returns:     a gboolean representing if the column was successfully added to
-      the selection, or 0 if value does not implement this interface.
+  
+      Params:
+        column = a #gint representing a column in table
+      Returns: a gboolean representing if the column was successfully added to
+        the selection, or 0 if value does not implement this interface.
   */
   override bool addColumnSelection(int column)
   {
@@ -60,10 +62,11 @@ template TableT()
 
   /**
       Adds the specified row to the selection.
-    Params:
-      row =       a #gint representing a row in table
-    Returns:     a gboolean representing if row was successfully added to selection,
-      or 0 if value does not implement this interface.
+  
+      Params:
+        row = a #gint representing a row in table
+      Returns: a gboolean representing if row was successfully added to selection,
+        or 0 if value does not implement this interface.
   */
   override bool addRowSelection(int row)
   {
@@ -74,8 +77,8 @@ template TableT()
 
   /**
       Gets the caption for the table.
-    Returns:     a AtkObject* representing the
-      table caption, or null if value does not implement this interface.
+      Returns: a AtkObject* representing the
+        table caption, or null if value does not implement this interface.
   */
   override atk.object.ObjectAtk getCaption()
   {
@@ -87,12 +90,13 @@ template TableT()
 
   /**
       Gets a #gint representing the column at the specified index_.
-    Params:
-      index =       a #gint representing an index in table
-    Returns:     a gint representing the column at the specified index,
-      or -1 if the table does not implement this method.
   
-    Deprecated:     Since 2.12.
+      Params:
+        index = a #gint representing an index in table
+      Returns: a gint representing the column at the specified index,
+        or -1 if the table does not implement this method.
+  
+      Deprecated: Since 2.12.
   */
   override int getColumnAtIndex(int index)
   {
@@ -103,10 +107,11 @@ template TableT()
 
   /**
       Gets the description text of the specified column in the table
-    Params:
-      column =       a #gint representing a column in table
-    Returns:     a gchar* representing the column description, or null
-      if value does not implement this interface.
+  
+      Params:
+        column = a #gint representing a column in table
+      Returns: a gchar* representing the column description, or null
+        if value does not implement this interface.
   */
   override string getColumnDescription(int column)
   {
@@ -118,12 +123,13 @@ template TableT()
 
   /**
       Gets the number of columns occupied by the accessible object
-    at the specified row and column in the table.
-    Params:
-      row =       a #gint representing a row in table
-      column =       a #gint representing a column in table
-    Returns:     a gint representing the column extent at specified position, or 0
-      if value does not implement this interface.
+      at the specified row and column in the table.
+  
+      Params:
+        row = a #gint representing a row in table
+        column = a #gint representing a column in table
+      Returns: a gint representing the column extent at specified position, or 0
+        if value does not implement this interface.
   */
   override int getColumnExtentAt(int row, int column)
   {
@@ -134,11 +140,12 @@ template TableT()
 
   /**
       Gets the column header of a specified column in an accessible table.
-    Params:
-      column =       a #gint representing a column in the table
-    Returns:     a AtkObject* representing the
-      specified column header, or null if value does not implement this
-      interface.
+  
+      Params:
+        column = a #gint representing a column in the table
+      Returns: a AtkObject* representing the
+        specified column header, or null if value does not implement this
+        interface.
   */
   override atk.object.ObjectAtk getColumnHeader(int column)
   {
@@ -150,16 +157,17 @@ template TableT()
 
   /**
       Gets a #gint representing the index at the specified row and
-    column.
-    Params:
-      row =       a #gint representing a row in table
-      column =       a #gint representing a column in table
-    Returns:     a #gint representing the index at specified position.
-      The value -1 is returned if the object at row,column is not a child
-      of table or table does not implement this interface.
+      column.
   
-    Deprecated:     Since 2.12. Use [atk.table.Table.refAt] in order to get the
-      accessible that represents the cell at (row, column)
+      Params:
+        row = a #gint representing a row in table
+        column = a #gint representing a column in table
+      Returns: a #gint representing the index at specified position.
+        The value -1 is returned if the object at row,column is not a child
+        of table or table does not implement this interface.
+  
+      Deprecated: Since 2.12. Use [atk.table.Table.refAt] in order to get the
+        accessible that represents the cell at (row, column)
   */
   override int getIndexAt(int row, int column)
   {
@@ -170,8 +178,8 @@ template TableT()
 
   /**
       Gets the number of columns in the table.
-    Returns:     a gint representing the number of columns, or 0
-      if value does not implement this interface.
+      Returns: a gint representing the number of columns, or 0
+        if value does not implement this interface.
   */
   override int getNColumns()
   {
@@ -182,8 +190,8 @@ template TableT()
 
   /**
       Gets the number of rows in the table.
-    Returns:     a gint representing the number of rows, or 0
-      if value does not implement this interface.
+      Returns: a gint representing the number of rows, or 0
+        if value does not implement this interface.
   */
   override int getNRows()
   {
@@ -194,12 +202,13 @@ template TableT()
 
   /**
       Gets a #gint representing the row at the specified index_.
-    Params:
-      index =       a #gint representing an index in table
-    Returns:     a gint representing the row at the specified index,
-      or -1 if the table does not implement this method.
   
-    Deprecated:     since 2.12.
+      Params:
+        index = a #gint representing an index in table
+      Returns: a gint representing the row at the specified index,
+        or -1 if the table does not implement this method.
+  
+      Deprecated: since 2.12.
   */
   override int getRowAtIndex(int index)
   {
@@ -210,10 +219,11 @@ template TableT()
 
   /**
       Gets the description text of the specified row in the table
-    Params:
-      row =       a #gint representing a row in table
-    Returns:     a gchar* representing the row description, or
-      null if value does not implement this interface.
+  
+      Params:
+        row = a #gint representing a row in table
+      Returns: a gchar* representing the row description, or
+        null if value does not implement this interface.
   */
   override string getRowDescription(int row)
   {
@@ -225,12 +235,13 @@ template TableT()
 
   /**
       Gets the number of rows occupied by the accessible object
-    at a specified row and column in the table.
-    Params:
-      row =       a #gint representing a row in table
-      column =       a #gint representing a column in table
-    Returns:     a gint representing the row extent at specified position, or 0
-      if value does not implement this interface.
+      at a specified row and column in the table.
+  
+      Params:
+        row = a #gint representing a row in table
+        column = a #gint representing a column in table
+      Returns: a gint representing the row extent at specified position, or 0
+        if value does not implement this interface.
   */
   override int getRowExtentAt(int row, int column)
   {
@@ -241,11 +252,12 @@ template TableT()
 
   /**
       Gets the row header of a specified row in an accessible table.
-    Params:
-      row =       a #gint representing a row in the table
-    Returns:     a AtkObject* representing the
-      specified row header, or null if value does not implement this
-      interface.
+  
+      Params:
+        row = a #gint representing a row in the table
+      Returns: a AtkObject* representing the
+        specified row header, or null if value does not implement this
+        interface.
   */
   override atk.object.ObjectAtk getRowHeader(int row)
   {
@@ -257,9 +269,10 @@ template TableT()
 
   /**
       Gets the selected columns of the table by initializing **selected with
-    the selected column numbers. This array should be freed by the caller.
-    Params:
-      selected =       a #gint** that is to contain the selected columns numbers
+      the selected column numbers. This array should be freed by the caller.
+  
+      Params:
+        selected = a #gint** that is to contain the selected columns numbers
   */
   override void getSelectedColumns(out int[] selected)
   {
@@ -272,9 +285,10 @@ template TableT()
 
   /**
       Gets the selected rows of the table by initializing **selected with
-    the selected row numbers. This array should be freed by the caller.
-    Params:
-      selected =       a #gint** that is to contain the selected row numbers
+      the selected row numbers. This array should be freed by the caller.
+  
+      Params:
+        selected = a #gint** that is to contain the selected row numbers
   */
   override void getSelectedRows(out int[] selected)
   {
@@ -287,8 +301,8 @@ template TableT()
 
   /**
       Gets the summary description of the table.
-    Returns:     a AtkObject* representing a summary description
-      of the table, or zero if value does not implement this interface.
+      Returns: a AtkObject* representing a summary description
+        of the table, or zero if value does not implement this interface.
   */
   override atk.object.ObjectAtk getSummary()
   {
@@ -300,11 +314,12 @@ template TableT()
 
   /**
       Gets a boolean value indicating whether the specified column
-    is selected
-    Params:
-      column =       a #gint representing a column in table
-    Returns:     a gboolean representing if the column is selected, or 0
-      if value does not implement this interface.
+      is selected
+  
+      Params:
+        column = a #gint representing a column in table
+      Returns: a gboolean representing if the column is selected, or 0
+        if value does not implement this interface.
   */
   override bool isColumnSelected(int column)
   {
@@ -315,11 +330,12 @@ template TableT()
 
   /**
       Gets a boolean value indicating whether the specified row
-    is selected
-    Params:
-      row =       a #gint representing a row in table
-    Returns:     a gboolean representing if the row is selected, or 0
-      if value does not implement this interface.
+      is selected
+  
+      Params:
+        row = a #gint representing a row in table
+      Returns: a gboolean representing if the row is selected, or 0
+        if value does not implement this interface.
   */
   override bool isRowSelected(int row)
   {
@@ -330,12 +346,13 @@ template TableT()
 
   /**
       Gets a boolean value indicating whether the accessible object
-    at the specified row and column is selected
-    Params:
-      row =       a #gint representing a row in table
-      column =       a #gint representing a column in table
-    Returns:     a gboolean representing if the cell is selected, or 0
-      if value does not implement this interface.
+      at the specified row and column is selected
+  
+      Params:
+        row = a #gint representing a row in table
+        column = a #gint representing a column in table
+      Returns: a gboolean representing if the cell is selected, or 0
+        if value does not implement this interface.
   */
   override bool isSelected(int row, int column)
   {
@@ -346,12 +363,13 @@ template TableT()
 
   /**
       Get a reference to the table cell at row, column. This cell
-    should implement the interface #AtkTableCell
-    Params:
-      row =       a #gint representing a row in table
-      column =       a #gint representing a column in table
-    Returns:     an #AtkObject representing the referred
-      to accessible
+      should implement the interface #AtkTableCell
+  
+      Params:
+        row = a #gint representing a row in table
+        column = a #gint representing a column in table
+      Returns: an #AtkObject representing the referred
+        to accessible
   */
   override atk.object.ObjectAtk refAt(int row, int column)
   {
@@ -363,10 +381,11 @@ template TableT()
 
   /**
       Adds the specified column to the selection.
-    Params:
-      column =       a #gint representing a column in table
-    Returns:     a gboolean representing if the column was successfully removed from
-      the selection, or 0 if value does not implement this interface.
+  
+      Params:
+        column = a #gint representing a column in table
+      Returns: a gboolean representing if the column was successfully removed from
+        the selection, or 0 if value does not implement this interface.
   */
   override bool removeColumnSelection(int column)
   {
@@ -377,10 +396,11 @@ template TableT()
 
   /**
       Removes the specified row from the selection.
-    Params:
-      row =       a #gint representing a row in table
-    Returns:     a gboolean representing if the row was successfully removed from
-      the selection, or 0 if value does not implement this interface.
+  
+      Params:
+        row = a #gint representing a row in table
+      Returns: a gboolean representing if the row was successfully removed from
+        the selection, or 0 if value does not implement this interface.
   */
   override bool removeRowSelection(int row)
   {
@@ -391,8 +411,9 @@ template TableT()
 
   /**
       Sets the caption for the table.
-    Params:
-      caption =       a #AtkObject representing the caption to set for table
+  
+      Params:
+        caption = a #AtkObject representing the caption to set for table
   */
   override void setCaption(atk.object.ObjectAtk caption)
   {
@@ -401,10 +422,11 @@ template TableT()
 
   /**
       Sets the description text for the specified column of the table.
-    Params:
-      column =       a #gint representing a column in table
-      description =       a #gchar representing the description text
-        to set for the specified column of the table
+  
+      Params:
+        column = a #gint representing a column in table
+        description = a #gchar representing the description text
+          to set for the specified column of the table
   */
   override void setColumnDescription(int column, string description)
   {
@@ -414,9 +436,10 @@ template TableT()
 
   /**
       Sets the specified column header to header.
-    Params:
-      column =       a #gint representing a column in table
-      header =       an #AtkTable
+  
+      Params:
+        column = a #gint representing a column in table
+        header = an #AtkTable
   */
   override void setColumnHeader(int column, atk.object.ObjectAtk header)
   {
@@ -425,10 +448,11 @@ template TableT()
 
   /**
       Sets the description text for the specified row of table.
-    Params:
-      row =       a #gint representing a row in table
-      description =       a #gchar representing the description text
-        to set for the specified row of table
+  
+      Params:
+        row = a #gint representing a row in table
+        description = a #gchar representing the description text
+          to set for the specified row of table
   */
   override void setRowDescription(int row, string description)
   {
@@ -438,9 +462,10 @@ template TableT()
 
   /**
       Sets the specified row header to header.
-    Params:
-      row =       a #gint representing a row in table
-      header =       an #AtkTable
+  
+      Params:
+        row = a #gint representing a row in table
+        header = an #AtkTable
   */
   override void setRowHeader(int row, atk.object.ObjectAtk header)
   {
@@ -449,9 +474,10 @@ template TableT()
 
   /**
       Sets the summary description of the table.
-    Params:
-      accessible =       an #AtkObject representing the summary description
-        to set for table
+  
+      Params:
+        accessible = an #AtkObject representing the summary description
+          to set for table
   */
   override void setSummary(atk.object.ObjectAtk accessible)
   {
@@ -459,39 +485,51 @@ template TableT()
   }
 
   /**
-      The "column-deleted" signal is emitted by an object which
-    implements the AtkTable interface when a column is deleted.
+      Connect to `ColumnDeleted` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The index of the first column deleted.
-      * $(B arg2)       The number of columns deleted.
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias ColumnDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
-
-  /** ditto */
-  alias ColumnDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
-
-  /**
-    Connect to ColumnDeleted signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "column-deleted" signal is emitted by an object which
+      implements the AtkTable interface when a column is deleted.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int arg1, int arg2, atk.table.Table table))
+  
+          `arg1` The index of the first column deleted. (optional)
+  
+          `arg2` The number of columns deleted. (optional)
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectColumnDeleted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ColumnDeletedCallbackDlg) || is(T : ColumnDeletedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      auto arg1 = getVal!(int)(&_paramVals[1]);
-      auto arg2 = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, table);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -499,39 +537,51 @@ template TableT()
   }
 
   /**
-      The "column-inserted" signal is emitted by an object which
-    implements the AtkTable interface when a column is inserted.
+      Connect to `ColumnInserted` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The index of the column inserted.
-      * $(B arg2)       The number of colums inserted.
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias ColumnInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
-
-  /** ditto */
-  alias ColumnInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
-
-  /**
-    Connect to ColumnInserted signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "column-inserted" signal is emitted by an object which
+      implements the AtkTable interface when a column is inserted.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int arg1, int arg2, atk.table.Table table))
+  
+          `arg1` The index of the column inserted. (optional)
+  
+          `arg2` The number of colums inserted. (optional)
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectColumnInserted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ColumnInsertedCallbackDlg) || is(T : ColumnInsertedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      auto arg1 = getVal!(int)(&_paramVals[1]);
-      auto arg2 = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, table);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -539,36 +589,38 @@ template TableT()
   }
 
   /**
-      The "column-reordered" signal is emitted by an object which
-    implements the AtkTable interface when the columns are
-    reordered.
+      Connect to `ColumnReordered` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias ColumnReorderedCallbackDlg = void delegate(atk.table.Table table);
-
-  /** ditto */
-  alias ColumnReorderedCallbackFunc = void function(atk.table.Table table);
-
-  /**
-    Connect to ColumnReordered signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "column-reordered" signal is emitted by an object which
+      implements the AtkTable interface when the columns are
+      reordered.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.table.Table table))
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectColumnReordered(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ColumnReorderedCallbackDlg) || is(T : ColumnReorderedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      _dClosure.dlg(table);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -576,36 +628,38 @@ template TableT()
   }
 
   /**
-      The "model-changed" signal is emitted by an object which
-    implements the AtkTable interface when the model displayed by
-    the table changes.
+      Connect to `ModelChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias ModelChangedCallbackDlg = void delegate(atk.table.Table table);
-
-  /** ditto */
-  alias ModelChangedCallbackFunc = void function(atk.table.Table table);
-
-  /**
-    Connect to ModelChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "model-changed" signal is emitted by an object which
+      implements the AtkTable interface when the model displayed by
+      the table changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.table.Table table))
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectModelChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ModelChangedCallbackDlg) || is(T : ModelChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      _dClosure.dlg(table);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -613,39 +667,51 @@ template TableT()
   }
 
   /**
-      The "row-deleted" signal is emitted by an object which
-    implements the AtkTable interface when a row is deleted.
+      Connect to `RowDeleted` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The index of the first row deleted.
-      * $(B arg2)       The number of rows deleted.
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias RowDeletedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
-
-  /** ditto */
-  alias RowDeletedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
-
-  /**
-    Connect to RowDeleted signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "row-deleted" signal is emitted by an object which
+      implements the AtkTable interface when a row is deleted.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int arg1, int arg2, atk.table.Table table))
+  
+          `arg1` The index of the first row deleted. (optional)
+  
+          `arg2` The number of rows deleted. (optional)
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRowDeleted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RowDeletedCallbackDlg) || is(T : RowDeletedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      auto arg1 = getVal!(int)(&_paramVals[1]);
-      auto arg2 = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, table);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -653,39 +719,51 @@ template TableT()
   }
 
   /**
-      The "row-inserted" signal is emitted by an object which
-    implements the AtkTable interface when a row is inserted.
+      Connect to `RowInserted` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B arg1)       The index of the first row inserted.
-      * $(B arg2)       The number of rows inserted.
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias RowInsertedCallbackDlg = void delegate(int arg1, int arg2, atk.table.Table table);
-
-  /** ditto */
-  alias RowInsertedCallbackFunc = void function(int arg1, int arg2, atk.table.Table table);
-
-  /**
-    Connect to RowInserted signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "row-inserted" signal is emitted by an object which
+      implements the AtkTable interface when a row is inserted.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int arg1, int arg2, atk.table.Table table))
+  
+          `arg1` The index of the first row inserted. (optional)
+  
+          `arg2` The number of rows inserted. (optional)
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRowInserted(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RowInsertedCallbackDlg) || is(T : RowInsertedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : atk.table.Table)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      auto arg1 = getVal!(int)(&_paramVals[1]);
-      auto arg2 = getVal!(int)(&_paramVals[2]);
-      _dClosure.dlg(arg1, arg2, table);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -693,36 +771,38 @@ template TableT()
   }
 
   /**
-      The "row-reordered" signal is emitted by an object which
-    implements the AtkTable interface when the rows are
-    reordered.
+      Connect to `RowReordered` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B table) the instance the signal is connected to
-    )
-  */
-  alias RowReorderedCallbackDlg = void delegate(atk.table.Table table);
-
-  /** ditto */
-  alias RowReorderedCallbackFunc = void function(atk.table.Table table);
-
-  /**
-    Connect to RowReordered signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "row-reordered" signal is emitted by an object which
+      implements the AtkTable interface when the rows are
+      reordered.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(atk.table.Table table))
+  
+          `table` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRowReordered(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RowReorderedCallbackDlg) || is(T : RowReorderedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : atk.table.Table)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto table = getVal!(atk.table.Table)(_paramVals);
-      _dClosure.dlg(table);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

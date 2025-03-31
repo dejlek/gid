@@ -1,3 +1,4 @@
+/// Module for [GLWindow] class
 module gstgl.glwindow;
 
 import gid.gid;
@@ -12,22 +13,25 @@ import gstgl.types;
 
 /**
     GstGLWindow represents a window that elements can render into.  A window can
-  either be a user visible window (onscreen) or hidden (offscreen).
+    either be a user visible window (onscreen) or hidden (offscreen).
 */
 class GLWindow : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_window_get_type != &gidSymbolNotFound ? gst_gl_window_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +52,7 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Checks if window controls the GL viewport.
-    Returns:     true if window controls the GL viewport, otherwise false
+      Returns: true if window controls the GL viewport, otherwise false
   */
   bool controlsViewport()
   {
@@ -98,12 +102,13 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Tell a window that it should handle events from the window system. These
-    events are forwarded upstream as navigation events. In some window systems
-    events are not propagated in the window hierarchy if a client is listening
-    for them. This method allows you to disable events handling completely
-    from the window.
-    Params:
-      handleEvents =       a #gboolean indicating if events should be handled or not.
+      events are forwarded upstream as navigation events. In some window systems
+      events are not propagated in the window hierarchy if a client is listening
+      for them. This method allows you to disable events handling completely
+      from the window.
+  
+      Params:
+        handleEvents = a #gboolean indicating if events should be handled or not.
   */
   void handleEvents(bool handleEvents)
   {
@@ -112,7 +117,7 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Query whether window has output surface or not
-    Returns:     true if window has useable output surface
+      Returns: true if window has useable output surface
   */
   bool hasOutputSurface()
   {
@@ -139,9 +144,10 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Resize window to the given width and height.
-    Params:
-      width =       new width
-      height =       new height
+  
+      Params:
+        width = new width
+        height = new height
   */
   void resize(uint width, uint height)
   {
@@ -166,9 +172,10 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Invoke callback with data on the window thread.  callback is guaranteed to
-    have executed when this function returns.
-    Params:
-      callback =       function to invoke
+      have executed when this function returns.
+  
+      Params:
+        callback = function to invoke
   */
   void sendMessage(gstgl.types.GLWindowCB callback)
   {
@@ -187,9 +194,10 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Invoke callback with data on the window thread.  The callback may not
-    have been executed when this function returns.
-    Params:
-      callback =       function to invoke
+      have been executed when this function returns.
+  
+      Params:
+        callback = function to invoke
   */
   void sendMessageAsync(gstgl.types.GLWindowCB callback)
   {
@@ -215,12 +223,13 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Notify a window about a scroll event. A scroll signal holding the event
-    coordinates will be emitted.
-    Params:
-      posx =       x position of the mouse cursor
-      posy =       y position of the mouse cursor
-      deltaX =       the x offset of the scroll event
-      deltaY =       the y offset of the scroll event
+      coordinates will be emitted.
+  
+      Params:
+        posx = x position of the mouse cursor
+        posy = y position of the mouse cursor
+        deltaX = the x offset of the scroll event
+        deltaY = the y offset of the scroll event
   */
   void sendScrollEvent(double posx, double posy, double deltaX, double deltaY)
   {
@@ -229,8 +238,9 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Sets the callback called when the window is about to close.
-    Params:
-      callback =       function to invoke
+  
+      Params:
+        callback = function to invoke
   */
   void setCloseCallback(gstgl.types.GLWindowCB callback)
   {
@@ -249,8 +259,9 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Sets the draw callback called every time [gstgl.glwindow.GLWindow.draw] is called
-    Params:
-      callback =       function to invoke
+  
+      Params:
+        callback = function to invoke
   */
   void setDrawCallback(gstgl.types.GLWindowCB callback)
   {
@@ -269,10 +280,11 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Set the preferred width and height of the window.  Implementations are free
-    to ignore this information.
-    Params:
-      width =       new preferred width
-      height =       new preferred height
+      to ignore this information.
+  
+      Params:
+        width = new preferred width
+        height = new preferred height
   */
   void setPreferredSize(int width, int height)
   {
@@ -281,13 +293,14 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Tell a window that it should render into a specific region of the window
-    according to the #GstVideoOverlay interface.
-    Params:
-      x =       x position
-      y =       y position
-      width =       width
-      height =       height
-    Returns:     whether the specified region could be set
+      according to the #GstVideoOverlay interface.
+  
+      Params:
+        x = x position
+        y = y position
+        width = width
+        height = height
+      Returns: whether the specified region could be set
   */
   bool setRenderRectangle(int x, int y, int width, int height)
   {
@@ -298,8 +311,9 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Sets the resize callback called every time a resize of the window occurs.
-    Params:
-      callback =       function to invoke
+  
+      Params:
+        callback = function to invoke
   */
   void setResizeCallback(gstgl.types.GLWindowResizeCB callback)
   {
@@ -318,9 +332,10 @@ class GLWindow : gst.object.ObjectGst
 
   /**
       Sets the window that this window should render into.  Some implementations
-    require this to be called with a valid handle before drawing can commence.
-    Params:
-      handle =       handle to the window
+      require this to be called with a valid handle before drawing can commence.
+  
+      Params:
+        handle = handle to the window
   */
   void setWindowHandle(size_t handle)
   {
@@ -336,38 +351,50 @@ class GLWindow : gst.object.ObjectGst
   }
 
   /**
+      Connect to `KeyEvent` signal.
+  
       Will be emitted when a key event is received by the GstGLwindow.
   
-    ## Parameters
-    $(LIST
-      * $(B id)       the name of the event
-      * $(B key)       the id of the key pressed
-      * $(B gLWindow) the instance the signal is connected to
-    )
-  */
-  alias KeyEventCallbackDlg = void delegate(string id, string key, gstgl.glwindow.GLWindow gLWindow);
-
-  /** ditto */
-  alias KeyEventCallbackFunc = void function(string id, string key, gstgl.glwindow.GLWindow gLWindow);
-
-  /**
-    Connect to KeyEvent signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string id, string key, gstgl.glwindow.GLWindow gLWindow))
+  
+          `id` the name of the event (optional)
+  
+          `key` the id of the key pressed (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectKeyEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : KeyEventCallbackDlg) || is(T : KeyEventCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gstgl.glwindow.GLWindow)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLWindow = getVal!(gstgl.glwindow.GLWindow)(_paramVals);
-      auto id = getVal!(string)(&_paramVals[1]);
-      auto key = getVal!(string)(&_paramVals[2]);
-      _dClosure.dlg(id, key, gLWindow);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -375,42 +402,64 @@ class GLWindow : gst.object.ObjectGst
   }
 
   /**
+      Connect to `MouseEvent` signal.
+  
       Will be emitted when a mouse event is received by the GstGLwindow.
   
-    ## Parameters
-    $(LIST
-      * $(B id)       the name of the event
-      * $(B button)       the id of the button
-      * $(B x)       the x coordinate of the mouse event
-      * $(B y)       the y coordinate of the mouse event
-      * $(B gLWindow) the instance the signal is connected to
-    )
-  */
-  alias MouseEventCallbackDlg = void delegate(string id, int button, double x, double y, gstgl.glwindow.GLWindow gLWindow);
-
-  /** ditto */
-  alias MouseEventCallbackFunc = void function(string id, int button, double x, double y, gstgl.glwindow.GLWindow gLWindow);
-
-  /**
-    Connect to MouseEvent signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string id, int button, double x, double y, gstgl.glwindow.GLWindow gLWindow))
+  
+          `id` the name of the event (optional)
+  
+          `button` the id of the button (optional)
+  
+          `x` the x coordinate of the mouse event (optional)
+  
+          `y` the y coordinate of the mouse event (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMouseEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MouseEventCallbackDlg) || is(T : MouseEventCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gstgl.glwindow.GLWindow)))
+  && Parameters!T.length < 6)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLWindow = getVal!(gstgl.glwindow.GLWindow)(_paramVals);
-      auto id = getVal!(string)(&_paramVals[1]);
-      auto button = getVal!(int)(&_paramVals[2]);
-      auto x = getVal!(double)(&_paramVals[3]);
-      auto y = getVal!(double)(&_paramVals[4]);
-      _dClosure.dlg(id, button, x, y, gLWindow);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -418,42 +467,64 @@ class GLWindow : gst.object.ObjectGst
   }
 
   /**
+      Connect to `ScrollEvent` signal.
+  
       Will be emitted when a mouse scroll event is received by the GstGLwindow.
   
-    ## Parameters
-    $(LIST
-      * $(B x)       the x coordinate of the mouse event
-      * $(B y)       the y coordinate of the mouse event
-      * $(B deltaX)       the x offset of the scroll event
-      * $(B deltaY)       the y offset of the scroll event
-      * $(B gLWindow) the instance the signal is connected to
-    )
-  */
-  alias ScrollEventCallbackDlg = void delegate(double x, double y, double deltaX, double deltaY, gstgl.glwindow.GLWindow gLWindow);
-
-  /** ditto */
-  alias ScrollEventCallbackFunc = void function(double x, double y, double deltaX, double deltaY, gstgl.glwindow.GLWindow gLWindow);
-
-  /**
-    Connect to ScrollEvent signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(double x, double y, double deltaX, double deltaY, gstgl.glwindow.GLWindow gLWindow))
+  
+          `x` the x coordinate of the mouse event (optional)
+  
+          `y` the y coordinate of the mouse event (optional)
+  
+          `deltaX` the x offset of the scroll event (optional)
+  
+          `deltaY` the y offset of the scroll event (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ScrollEventCallbackDlg) || is(T : ScrollEventCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gstgl.glwindow.GLWindow)))
+  && Parameters!T.length < 6)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLWindow = getVal!(gstgl.glwindow.GLWindow)(_paramVals);
-      auto x = getVal!(double)(&_paramVals[1]);
-      auto y = getVal!(double)(&_paramVals[2]);
-      auto deltaX = getVal!(double)(&_paramVals[3]);
-      auto deltaY = getVal!(double)(&_paramVals[4]);
-      _dClosure.dlg(x, y, deltaX, deltaY, gLWindow);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -461,37 +532,39 @@ class GLWindow : gst.object.ObjectGst
   }
 
   /**
-      Will be emitted when the window handle has been set into the native
-    implementation, but before the context is re-activated. By using this
-    signal, elements can refresh associated resource without relying on
-    direct handle comparision.
+      Connect to `WindowHandleChanged` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B gLWindow) the instance the signal is connected to
-    )
-  */
-  alias WindowHandleChangedCallbackDlg = void delegate(gstgl.glwindow.GLWindow gLWindow);
-
-  /** ditto */
-  alias WindowHandleChangedCallbackFunc = void function(gstgl.glwindow.GLWindow gLWindow);
-
-  /**
-    Connect to WindowHandleChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Will be emitted when the window handle has been set into the native
+      implementation, but before the context is re-activated. By using this
+      signal, elements can refresh associated resource without relying on
+      direct handle comparision.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gstgl.glwindow.GLWindow gLWindow))
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWindowHandleChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WindowHandleChangedCallbackDlg) || is(T : WindowHandleChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstgl.glwindow.GLWindow)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLWindow = getVal!(gstgl.glwindow.GLWindow)(_paramVals);
-      _dClosure.dlg(gLWindow);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

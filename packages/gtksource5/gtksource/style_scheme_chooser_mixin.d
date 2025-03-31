@@ -1,3 +1,4 @@
+/// Module for [StyleSchemeChooser] interface mixin
 module gtksource.style_scheme_chooser_mixin;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
@@ -10,19 +11,19 @@ public import gtksource.types;
 
 /**
     Interface implemented by widgets for choosing style schemes.
-  
-  [gtksource.style_scheme_chooser.StyleSchemeChooser] is an interface that is implemented by widgets
-  for choosing style schemes.
-  
-  In GtkSourceView, the main widgets that implement this interface are
-  `class@StyleSchemeChooserWidget` and `class@StyleSchemeChooserButton`.
+    
+    [gtksource.style_scheme_chooser.StyleSchemeChooser] is an interface that is implemented by widgets
+    for choosing style schemes.
+    
+    In GtkSourceView, the main widgets that implement this interface are
+    `class@StyleSchemeChooserWidget` and `class@StyleSchemeChooserButton`.
 */
 template StyleSchemeChooserT()
 {
 
   /**
       Gets the currently-selected scheme.
-    Returns:     the currently-selected scheme.
+      Returns: the currently-selected scheme.
   */
   override gtksource.style_scheme.StyleScheme getStyleScheme()
   {
@@ -34,8 +35,9 @@ template StyleSchemeChooserT()
 
   /**
       Sets the scheme.
-    Params:
-      scheme =       a #GtkSourceStyleScheme
+  
+      Params:
+        scheme = a #GtkSourceStyleScheme
   */
   override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
   {

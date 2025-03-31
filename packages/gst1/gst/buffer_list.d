@@ -1,3 +1,4 @@
+/// Module for [BufferList] class
 module gst.buffer_list;
 
 import gid.gid;
@@ -9,33 +10,37 @@ import gst.types;
 
 /**
     Buffer lists are an object containing a list of buffers.
-  
-  Buffer lists are created with [gst.buffer_list.BufferList.new_] and filled with data
-  using [gst.buffer_list.BufferList.insert].
-  
-  Buffer lists can be pushed on a srcpad with [gst.pad.Pad.pushList]. This is
-  interesting when multiple buffers need to be pushed in one go because it
-  can reduce the amount of overhead for pushing each buffer individually.
+    
+    Buffer lists are created with [gst.buffer_list.BufferList.new_] and filled with data
+    using [gst.buffer_list.BufferList.insert].
+    
+    Buffer lists can be pushed on a srcpad with [gst.pad.Pad.pushList]. This is
+    interesting when multiple buffers need to be pushed in one go because it
+    can reduce the amount of overhead for pushing each buffer individually.
 */
 class BufferList : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_list_get_type != &gidSymbolNotFound ? gst_buffer_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +53,7 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Creates a new, empty #GstBufferList.
-    Returns:     the new #GstBufferList.
+      Returns: the new #GstBufferList.
   */
   this()
   {
@@ -59,10 +64,11 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Creates a new, empty #GstBufferList. The list will have size space
-    preallocated so that memory reallocations can be avoided.
-    Params:
-      size =       an initial reserved size
-    Returns:     the new #GstBufferList.
+      preallocated so that memory reallocations can be avoided.
+  
+      Params:
+        size = an initial reserved size
+      Returns: the new #GstBufferList.
   */
   static gst.buffer_list.BufferList newSized(uint size)
   {
@@ -74,8 +80,8 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Calculates the size of the data contained in list by adding the
-    size of all buffers.
-    Returns:     the size of the data contained in list in bytes.
+      size of all buffers.
+      Returns: the size of the data contained in list in bytes.
   */
   size_t calculateSize()
   {
@@ -86,8 +92,8 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Creates a copy of the given buffer list. This will make a newly allocated
-    copy of the buffers that the source buffer list contains.
-    Returns:     a new copy of list.
+      copy of the buffers that the source buffer list contains.
+      Returns: a new copy of list.
   */
   gst.buffer_list.BufferList copyDeep()
   {
@@ -99,14 +105,15 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Calls func with data for each buffer in list.
-    
-    func can modify the passed buffer pointer or its contents. The return value
-    of func defines if this function returns or if the remaining buffers in
-    the list should be skipped.
-    Params:
-      func =       a #GstBufferListFunc to call
-    Returns:     true when func returned true for each buffer in list or when
-      list is empty.
+      
+      func can modify the passed buffer pointer or its contents. The return value
+      of func defines if this function returns or if the remaining buffers in
+      the list should be skipped.
+  
+      Params:
+        func = a #GstBufferListFunc to call
+      Returns: true when func returned true for each buffer in list or when
+        list is empty.
   */
   bool foreach_(gst.types.BufferListFunc func)
   {
@@ -130,14 +137,15 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Gets the buffer at idx.
-    
-    You must make sure that idx does not exceed the number of
-    buffers available.
-    Params:
-      idx =       the index
-    Returns:     the buffer at idx in group
-          or null when there is no buffer. The buffer remains valid as
-          long as list is valid and buffer is not removed from the list.
+      
+      You must make sure that idx does not exceed the number of
+      buffers available.
+  
+      Params:
+        idx = the index
+      Returns: the buffer at idx in group
+            or null when there is no buffer. The buffer remains valid as
+            long as list is valid and buffer is not removed from the list.
   */
   gst.buffer.Buffer get(uint idx)
   {
@@ -149,14 +157,15 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Gets the buffer at idx, ensuring it is a writable buffer.
-    
-    You must make sure that idx does not exceed the number of
-    buffers available.
-    Params:
-      idx =       the index
-    Returns:     the buffer at idx in group.
-          The returned  buffer remains valid as long as list is valid and
-          the buffer is not removed from the list.
+      
+      You must make sure that idx does not exceed the number of
+      buffers available.
+  
+      Params:
+        idx = the index
+      Returns: the buffer at idx in group.
+            The returned  buffer remains valid as long as list is valid and
+            the buffer is not removed from the list.
   */
   gst.buffer.Buffer getWritable(uint idx)
   {
@@ -168,12 +177,13 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Inserts buffer at idx in list. Other buffers are moved to make room for
-    this new buffer.
-    
-    A -1 value for idx will append the buffer at the end.
-    Params:
-      idx =       the index
-      buffer =       a #GstBuffer
+      this new buffer.
+      
+      A -1 value for idx will append the buffer at the end.
+  
+      Params:
+        idx = the index
+        buffer = a #GstBuffer
   */
   void insert(int idx, gst.buffer.Buffer buffer)
   {
@@ -182,7 +192,7 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Returns the number of buffers in list.
-    Returns:     the number of buffers in the buffer list
+      Returns: the number of buffers in the buffer list
   */
   uint length()
   {
@@ -193,10 +203,11 @@ class BufferList : gobject.boxed.Boxed
 
   /**
       Removes length buffers starting from idx in list. The following buffers
-    are moved to close the gap.
-    Params:
-      idx =       the index
-      length =       the amount to remove
+      are moved to close the gap.
+  
+      Params:
+        idx = the index
+        length = the amount to remove
   */
   void remove(uint idx, uint length)
   {

@@ -1,3 +1,4 @@
+/// Module for [TagList] class
 module gst.tag_list;
 
 import gid.gid;
@@ -13,29 +14,33 @@ import gst.types;
 
 /**
     List of tags and values used to describe media metadata.
-  
-  Strings in structures must be ASCII or UTF-8 encoded. Other encodings are
-  not allowed. Strings must not be empty or null.
+    
+    Strings in structures must be ASCII or UTF-8 encoded. Other encodings are
+    not allowed. Strings must not be empty or null.
 */
 class TagList : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_list_get_type != &gidSymbolNotFound ? gst_tag_list_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,9 +58,9 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Creates a new empty GstTagList.
-    
-    Free-function: gst_tag_list_unref
-    Returns:     An empty tag list
+      
+      Free-function: gst_tag_list_unref
+      Returns: An empty tag list
   */
   static gst.tag_list.TagList newEmpty()
   {
@@ -67,10 +72,11 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Deserializes a tag list.
-    Params:
-      str =       a string created with [gst.tag_list.TagList.toString_]
-    Returns:     a new #GstTagList, or null in case of an
-      error.
+  
+      Params:
+        str = a string created with [gst.tag_list.TagList.toString_]
+      Returns: a new #GstTagList, or null in case of an
+        error.
   */
   static gst.tag_list.TagList newFromString(string str)
   {
@@ -83,10 +89,11 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Sets the GValue for a given tag using the specified mode.
-    Params:
-      mode =       the mode to use
-      tag =       tag
-      value =       GValue for this tag
+  
+      Params:
+        mode = the mode to use
+        tag = tag
+        value = GValue for this tag
   */
   void addValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
   {
@@ -96,15 +103,15 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Creates a new #GstTagList as a copy of the old taglist. The new taglist
-    will have a refcount of 1, owned by the caller, and will be writable as
-    a result.
-    
-    Note that this function is the semantic equivalent of a gst_tag_list_ref()
-    followed by a gst_tag_list_make_writable(). If you only want to hold on to a
-    reference to the data, you should use gst_tag_list_ref().
-    
-    When you are finished with the taglist, call gst_tag_list_unref() on it.
-    Returns:     the new #GstTagList
+      will have a refcount of 1, owned by the caller, and will be writable as
+      a result.
+      
+      Note that this function is the semantic equivalent of a gst_tag_list_ref()
+      followed by a gst_tag_list_make_writable(). If you only want to hold on to a
+      reference to the data, you should use gst_tag_list_ref().
+      
+      When you are finished with the taglist, call gst_tag_list_unref() on it.
+      Returns: the new #GstTagList
   */
   gst.tag_list.TagList copy()
   {
@@ -116,9 +123,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Calls the given function for each tag inside the tag list. Note that if there
-    is no tag, the function won't be called at all.
-    Params:
-      func =       function to be called for each tag
+      is no tag, the function won't be called at all.
+  
+      Params:
+        func = function to be called for each tag
   */
   void foreach_(gst.types.TagForeachFunc func)
   {
@@ -137,12 +145,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getBoolean(string tag, out bool value)
   {
@@ -154,13 +163,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getBooleanIndex(string tag, uint index, out bool value)
   {
@@ -172,16 +182,17 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the first date for the given tag in the taglist into the variable
-    pointed to by value. Free the date with [glib.date.Date.free] when it is no longer
-    needed.
-    
-    Free-function: g_date_free
-    Params:
-      tag =       tag to read out
-      value =       address of a GDate pointer
-            variable to store the result into
-    Returns:     true, if a date was copied, false if the tag didn't exist in the
-                   given list or if it was null.
+      pointed to by value. Free the date with [glib.date.Date.free] when it is no longer
+      needed.
+      
+      Free-function: g_date_free
+  
+      Params:
+        tag = tag to read out
+        value = address of a GDate pointer
+              variable to store the result into
+      Returns: true, if a date was copied, false if the tag didn't exist in the
+                     given list or if it was null.
   */
   bool getDate(string tag, out glib.date.Date value)
   {
@@ -195,16 +206,17 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the date that is at the given index for the given tag in the given
-    list and copies it into the variable pointed to by value. Free the date
-    with [glib.date.Date.free] when it is no longer needed.
-    
-    Free-function: g_date_free
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list or if it was null.
+      list and copies it into the variable pointed to by value. Free the date
+      with [glib.date.Date.free] when it is no longer needed.
+      
+      Free-function: g_date_free
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list or if it was null.
   */
   bool getDateIndex(string tag, uint index, out glib.date.Date value)
   {
@@ -218,16 +230,17 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the first datetime for the given tag in the taglist into the variable
-    pointed to by value. Unref the date with [gst.date_time.DateTime.unref] when
-    it is no longer needed.
-    
-    Free-function: gst_date_time_unref
-    Params:
-      tag =       tag to read out
-      value =       address of a #GstDateTime
-            pointer variable to store the result into
-    Returns:     true, if a datetime was copied, false if the tag didn't exist in
-                   the given list or if it was null.
+      pointed to by value. Unref the date with [gst.date_time.DateTime.unref] when
+      it is no longer needed.
+      
+      Free-function: gst_date_time_unref
+  
+      Params:
+        tag = tag to read out
+        value = address of a #GstDateTime
+              pointer variable to store the result into
+      Returns: true, if a datetime was copied, false if the tag didn't exist in
+                     the given list or if it was null.
   */
   bool getDateTime(string tag, out gst.date_time.DateTime value)
   {
@@ -241,16 +254,17 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the datetime that is at the given index for the given tag in the given
-    list and copies it into the variable pointed to by value. Unref the datetime
-    with [gst.date_time.DateTime.unref] when it is no longer needed.
-    
-    Free-function: gst_date_time_unref
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list or if it was null.
+      list and copies it into the variable pointed to by value. Unref the datetime
+      with [gst.date_time.DateTime.unref] when it is no longer needed.
+      
+      Free-function: gst_date_time_unref
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list or if it was null.
   */
   bool getDateTimeIndex(string tag, uint index, out gst.date_time.DateTime value)
   {
@@ -264,12 +278,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getDouble(string tag, out double value)
   {
@@ -281,13 +296,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getDoubleIndex(string tag, uint index, out double value)
   {
@@ -299,12 +315,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getFloat(string tag, out float value)
   {
@@ -316,13 +333,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getFloatIndex(string tag, uint index, out float value)
   {
@@ -334,12 +352,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getInt(string tag, out int value)
   {
@@ -351,12 +370,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getInt64(string tag, out long value)
   {
@@ -368,13 +388,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getInt64Index(string tag, uint index, out long value)
   {
@@ -386,13 +407,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getIntIndex(string tag, uint index, out int value)
   {
@@ -404,12 +426,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getPointer(string tag, out void* value)
   {
@@ -421,13 +444,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getPointerIndex(string tag, uint index, out void* value)
   {
@@ -439,18 +463,19 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the first sample for the given tag in the taglist into the variable
-    pointed to by sample. Free the sample with gst_sample_unref() when it is
-    no longer needed. You can retrieve the buffer from the sample using
-    [gst.sample.Sample.getBuffer] and the associated caps (if any) with
-    [gst.sample.Sample.getCaps].
-    
-    Free-function: gst_sample_unref
-    Params:
-      tag =       tag to read out
-      sample =       address of a GstSample
-            pointer variable to store the result into
-    Returns:     true, if a sample was returned, false if the tag didn't exist in
-                   the given list or if it was null.
+      pointed to by sample. Free the sample with gst_sample_unref() when it is
+      no longer needed. You can retrieve the buffer from the sample using
+      [gst.sample.Sample.getBuffer] and the associated caps (if any) with
+      [gst.sample.Sample.getCaps].
+      
+      Free-function: gst_sample_unref
+  
+      Params:
+        tag = tag to read out
+        sample = address of a GstSample
+              pointer variable to store the result into
+      Returns: true, if a sample was returned, false if the tag didn't exist in
+                     the given list or if it was null.
   */
   bool getSample(string tag, out gst.sample.Sample sample)
   {
@@ -464,19 +489,20 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the sample that is at the given index for the given tag in the given
-    list and copies it into the variable pointed to by sample. Free the sample
-    with gst_sample_unref() when it is no longer needed. You can retrieve the
-    buffer from the sample using [gst.sample.Sample.getBuffer] and the associated
-    caps (if any) with [gst.sample.Sample.getCaps].
-    
-    Free-function: gst_sample_unref
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      sample =       address of a GstSample
-            pointer variable to store the result into
-    Returns:     true, if a sample was copied, false if the tag didn't exist in the
-                   given list or if it was null.
+      list and copies it into the variable pointed to by sample. Free the sample
+      with gst_sample_unref() when it is no longer needed. You can retrieve the
+      buffer from the sample using [gst.sample.Sample.getBuffer] and the associated
+      caps (if any) with [gst.sample.Sample.getCaps].
+      
+      Free-function: gst_sample_unref
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        sample = address of a GstSample
+              pointer variable to store the result into
+      Returns: true, if a sample was copied, false if the tag didn't exist in the
+                     given list or if it was null.
   */
   bool getSampleIndex(string tag, uint index, out gst.sample.Sample sample)
   {
@@ -490,7 +516,7 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the scope of list.
-    Returns:     The scope of list
+      Returns: The scope of list
   */
   gst.types.TagScope getScope()
   {
@@ -502,21 +528,22 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, possibly merging
-    multiple values into one if multiple values are associated with the tag.
-    
-    Use gst_tag_list_get_string_index (list, tag, 0, value) if you want
-    to retrieve the first string associated with this tag unmodified.
-    
-    The resulting string in value will be in UTF-8 encoding and should be
-    freed by the caller using g_free when no longer needed. The
-    returned string is also guaranteed to be non-null and non-empty.
-    
-    Free-function: g_free
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      multiple values into one if multiple values are associated with the tag.
+      
+      Use gst_tag_list_get_string_index (list, tag, 0, value) if you want
+      to retrieve the first string associated with this tag unmodified.
+      
+      The resulting string in value will be in UTF-8 encoding and should be
+      freed by the caller using g_free when no longer needed. The
+      returned string is also guaranteed to be non-null and non-empty.
+      
+      Free-function: g_free
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getString(string tag, out string value)
   {
@@ -530,19 +557,20 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    
-    The resulting string in value will be in UTF-8 encoding and should be
-    freed by the caller using g_free when no longer needed. The
-    returned string is also guaranteed to be non-null and non-empty.
-    
-    Free-function: g_free
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+      
+      The resulting string in value will be in UTF-8 encoding and should be
+      freed by the caller using g_free when no longer needed. The
+      returned string is also guaranteed to be non-null and non-empty.
+      
+      Free-function: g_free
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getStringIndex(string tag, uint index, out string value)
   {
@@ -556,9 +584,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Checks how many value are stored in this tag list for the given tag.
-    Params:
-      tag =       the tag to query
-    Returns:     The number of tags stored
+  
+      Params:
+        tag = the tag to query
+      Returns: The number of tags stored
   */
   uint getTagSize(string tag)
   {
@@ -570,12 +599,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getUint(string tag, out uint value)
   {
@@ -587,12 +617,13 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value, merging multiple values
-    into one if multiple values are associated with the tag.
-    Params:
-      tag =       tag to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      into one if multiple values are associated with the tag.
+  
+      Params:
+        tag = tag to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getUint64(string tag, out ulong value)
   {
@@ -604,13 +635,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getUint64Index(string tag, uint index, out ulong value)
   {
@@ -622,13 +654,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-                   given list.
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                     given list.
   */
   bool getUintIndex(string tag, uint index, out uint value)
   {
@@ -640,13 +673,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Gets the value that is at the given index for the given tag in the given
-    list.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-    Returns:     The GValue for the specified
-               entry or null if the tag wasn't available or the tag
-               doesn't have as many entries
+      list.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+      Returns: The GValue for the specified
+                 entry or null if the tag wasn't available or the tag
+                 doesn't have as many entries
   */
   gobject.value.Value getValueIndex(string tag, uint index)
   {
@@ -659,9 +693,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Inserts the tags of the from list into the first list using the given mode.
-    Params:
-      from =       list to merge from
-      mode =       the mode to use
+  
+      Params:
+        from = list to merge from
+        mode = the mode to use
   */
   void insert(gst.tag_list.TagList from, gst.types.TagMergeMode mode)
   {
@@ -670,7 +705,7 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Checks if the given taglist is empty.
-    Returns:     true if the taglist is empty, otherwise false.
+      Returns: true if the taglist is empty, otherwise false.
   */
   bool isEmpty()
   {
@@ -681,9 +716,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Checks if the two given taglists are equal.
-    Params:
-      list2 =       a #GstTagList.
-    Returns:     true if the taglists are equal, otherwise false
+  
+      Params:
+        list2 = a #GstTagList.
+      Returns: true if the taglists are equal, otherwise false
   */
   bool isEqual(gst.tag_list.TagList list2)
   {
@@ -694,13 +730,14 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Merges the two given lists into a new list. If one of the lists is null, a
-    copy of the other is returned. If both lists are null, null is returned.
-    
-    Free-function: gst_tag_list_unref
-    Params:
-      list2 =       second list to merge
-      mode =       the mode to use
-    Returns:     the new list
+      copy of the other is returned. If both lists are null, null is returned.
+      
+      Free-function: gst_tag_list_unref
+  
+      Params:
+        list2 = second list to merge
+        mode = the mode to use
+      Returns: the new list
   */
   gst.tag_list.TagList merge(gst.tag_list.TagList list2, gst.types.TagMergeMode mode)
   {
@@ -712,7 +749,7 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Get the number of tags in list.
-    Returns:     The number of tags in list.
+      Returns: The number of tags in list.
   */
   int nTags()
   {
@@ -723,9 +760,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Get the name of the tag in list at index.
-    Params:
-      index =       the index
-    Returns:     The name of the tag at index.
+  
+      Params:
+        index = the index
+      Returns: The name of the tag at index.
   */
   string nthTagName(uint index)
   {
@@ -737,17 +775,18 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Peeks at the value that is at the given index for the given tag in the given
-    list.
-    
-    The resulting string in value will be in UTF-8 encoding and doesn't need
-    to be freed by the caller. The returned string is also guaranteed to
-    be non-null and non-empty.
-    Params:
-      tag =       tag to read out
-      index =       number of entry to read out
-      value =       location for the result
-    Returns:     true, if a value was set, false if the tag didn't exist in the
-                   given list.
+      list.
+      
+      The resulting string in value will be in UTF-8 encoding and doesn't need
+      to be freed by the caller. The returned string is also guaranteed to
+      be non-null and non-empty.
+  
+      Params:
+        tag = tag to read out
+        index = number of entry to read out
+        value = location for the result
+      Returns: true, if a value was set, false if the tag didn't exist in the
+                     given list.
   */
   bool peekStringIndex(string tag, uint index, out string value)
   {
@@ -761,8 +800,9 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Removes the given tag from the taglist.
-    Params:
-      tag =       tag to remove
+  
+      Params:
+        tag = tag to remove
   */
   void removeTag(string tag)
   {
@@ -772,9 +812,10 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Sets the scope of list to scope. By default the scope
-    of a taglist is stream scope.
-    Params:
-      scope_ =       new scope for list
+      of a taglist is stream scope.
+  
+      Params:
+        scope_ = new scope for list
   */
   void setScope(gst.types.TagScope scope_)
   {
@@ -783,9 +824,9 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Serializes a tag list to a string.
-    Returns:     a newly-allocated string.
-          The string must be freed with [glib.global.gfree] when no longer
-          needed.
+      Returns: a newly-allocated string.
+            The string must be freed with [glib.global.gfree] when no longer
+            needed.
   */
   string toString_()
   {
@@ -797,15 +838,16 @@ class TagList : gobject.boxed.Boxed
 
   /**
       Copies the contents for the given tag into the value,
-    merging multiple values into one if multiple values are associated
-    with the tag.
-    You must [gobject.value.Value.unset] the value after use.
-    Params:
-      dest =       uninitialized #GValue to copy into
-      list =       list to get the tag from
-      tag =       tag to read out
-    Returns:     true, if a value was copied, false if the tag didn't exist in the
-               given list.
+      merging multiple values into one if multiple values are associated
+      with the tag.
+      You must [gobject.value.Value.unset] the value after use.
+  
+      Params:
+        dest = uninitialized #GValue to copy into
+        list = list to get the tag from
+        tag = tag to read out
+      Returns: true, if a value was copied, false if the tag didn't exist in the
+                 given list.
   */
   static bool copyValue(out gobject.value.Value dest, gst.tag_list.TagList list, string tag)
   {

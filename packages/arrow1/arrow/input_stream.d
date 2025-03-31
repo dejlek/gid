@@ -1,3 +1,4 @@
+/// Module for [InputStream] class
 module arrow.input_stream;
 
 import arrow.c.functions;
@@ -20,17 +21,20 @@ import gobject.object;
 class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readable.Readable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_input_stream_get_type != &gidSymbolNotFound ? garrow_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [AppChooser] interface mixin
 module gtk.app_chooser_mixin;
 
 public import gtk.app_chooser_iface_proxy;
@@ -10,38 +11,38 @@ public import gtk.types;
 
 /**
     [gtk.app_chooser.AppChooser] is an interface for widgets which allow the user to
-  choose an application.
-  
-  The main objects that implement this interface are
-  [gtk.app_chooser_widget.AppChooserWidget],
-  [gtk.app_chooser_dialog.AppChooserDialog] and [gtk.app_chooser_button.AppChooserButton].
-  
-  Applications are represented by GIO [gio.app_info.AppInfo] objects here.
-  GIO has a concept of recommended and fallback applications for a
-  given content type. Recommended applications are those that claim
-  to handle the content type itself, while fallback also includes
-  applications that handle a more generic content type. GIO also
-  knows the default and last-used application for a given content
-  type. The [gtk.app_chooser_widget.AppChooserWidget] provides detailed control over
-  whether the shown list of applications should include default,
-  recommended or fallback applications.
-  
-  To obtain the application that has been selected in a [gtk.app_chooser.AppChooser],
-  use [gtk.app_chooser.AppChooser.getAppInfo].
+    choose an application.
+    
+    The main objects that implement this interface are
+    [gtk.app_chooser_widget.AppChooserWidget],
+    [gtk.app_chooser_dialog.AppChooserDialog] and [gtk.app_chooser_button.AppChooserButton].
+    
+    Applications are represented by GIO [gio.app_info.AppInfo] objects here.
+    GIO has a concept of recommended and fallback applications for a
+    given content type. Recommended applications are those that claim
+    to handle the content type itself, while fallback also includes
+    applications that handle a more generic content type. GIO also
+    knows the default and last-used application for a given content
+    type. The [gtk.app_chooser_widget.AppChooserWidget] provides detailed control over
+    whether the shown list of applications should include default,
+    recommended or fallback applications.
+    
+    To obtain the application that has been selected in a [gtk.app_chooser.AppChooser],
+    use [gtk.app_chooser.AppChooser.getAppInfo].
 
-  Deprecated:     The application selection widgets should be
-      implemented according to the design of each platform and/or
-      application requiring them.
+    Deprecated: The application selection widgets should be
+        implemented according to the design of each platform and/or
+        application requiring them.
 */
 template AppChooserT()
 {
 
   /**
       Returns the currently selected application.
-    Returns:     a [gio.app_info.AppInfo] for the
-        currently selected application
+      Returns: a [gio.app_info.AppInfo] for the
+          currently selected application
   
-    Deprecated:     This widget will be removed in GTK 5
+      Deprecated: This widget will be removed in GTK 5
   */
   override gio.app_info.AppInfo getAppInfo()
   {
@@ -53,10 +54,10 @@ template AppChooserT()
 
   /**
       Returns the content type for which the [gtk.app_chooser.AppChooser]
-    shows applications.
-    Returns:     the content type of self. Free with [glib.global.gfree]
+      shows applications.
+      Returns: the content type of self. Free with [glib.global.gfree]
   
-    Deprecated:     This widget will be removed in GTK 5
+      Deprecated: This widget will be removed in GTK 5
   */
   override string getContentType()
   {
@@ -69,7 +70,7 @@ template AppChooserT()
   /**
       Reloads the list of applications.
   
-    Deprecated:     This widget will be removed in GTK 5
+      Deprecated: This widget will be removed in GTK 5
   */
   override void refresh()
   {

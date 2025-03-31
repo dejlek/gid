@@ -1,3 +1,4 @@
+/// Module for [CustomSorter] class
 module gtk.custom_sorter;
 
 import gid.gid;
@@ -8,22 +9,25 @@ import gtk.types;
 
 /**
     [gtk.custom_sorter.CustomSorter] is a [gtk.sorter.Sorter] implementation that sorts via a callback
-  function.
+    function.
 */
 class CustomSorter : gtk.sorter.Sorter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_sorter_get_type != &gidSymbolNotFound ? gtk_custom_sorter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [PrimitiveArray] class
 module arrow.primitive_array;
 
 import arrow.array;
@@ -12,17 +13,20 @@ import gobject.object;
 class PrimitiveArray : arrow.array.Array
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_primitive_array_get_type != &gidSymbolNotFound ? garrow_primitive_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

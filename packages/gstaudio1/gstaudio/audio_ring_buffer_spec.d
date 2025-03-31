@@ -1,3 +1,4 @@
+/// Module for [AudioRingBufferSpec] class
 module gstaudio.audio_ring_buffer_spec;
 
 import gid.gid;
@@ -9,15 +10,16 @@ import gstaudio.types;
 
 /**
     The structure containing the format specification of the ringbuffer.
-  
-  When @type is GST_AUDIO_RING_BUFFER_FORMAT_TYPE_DSD, the @dsd_format
-  is valid (otherwise it is unused). Also, when DSD is the sample type,
-  only the rate, channels, position, and bpf fields in @info are populated.
+    
+    When @type is GST_AUDIO_RING_BUFFER_FORMAT_TYPE_DSD, the @dsd_format
+    is valid (otherwise it is unused). Also, when DSD is the sample type,
+    only the rate, channels, position, and bpf fields in @info are populated.
 */
 class AudioRingBufferSpec
 {
   GstAudioRingBufferSpec cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class AudioRingBufferSpec
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

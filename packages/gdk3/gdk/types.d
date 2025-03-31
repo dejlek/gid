@@ -1,3 +1,4 @@
+/// D types for gdk3 library
 module gdk.types;
 
 import cairo.region;
@@ -175,55 +176,47 @@ alias WindowRedirect = GdkWindowRedirect*;
 
 /**
     Specifies the type of function passed to [gdk.event.Event.handlerSet] to
-  handle all GDK events.
+    handle all GDK events.
 
-  ## Parameters
-  $(LIST
-    * $(B event)       the #GdkEvent to process.
-  )
+    Params:
+      event = the #GdkEvent to process.
 */
 alias EventFunc = void delegate(gdk.event.Event event);
 
 /**
     Type of the callback used to set up window so it can be
-  grabbed. A typical action would be ensuring the window is
-  visible, although there's room for other initialization
-  actions.
+    grabbed. A typical action would be ensuring the window is
+    visible, although there's room for other initialization
+    actions.
 
-  ## Parameters
-  $(LIST
-    * $(B seat)       the #GdkSeat being grabbed
-    * $(B window)       the #GdkWindow being grabbed
-  )
+    Params:
+      seat = the #GdkSeat being grabbed
+      window = the #GdkWindow being grabbed
 */
 alias SeatGrabPrepareFunc = void delegate(gdk.seat.Seat seat, gdk.window.Window window);
 
 /**
     A function of this type is passed to [gdk.window.Window.invalidateMaybeRecurse].
-  It gets called for each child of the window to determine whether to
-  recursively invalidate it or now.
+    It gets called for each child of the window to determine whether to
+    recursively invalidate it or now.
 
-  ## Parameters
-  $(LIST
-    * $(B window)       a #GdkWindow
-  )
-  Returns:     true to invalidate window recursively
+    Params:
+      window = a #GdkWindow
+    Returns: true to invalidate window recursively
 */
 alias WindowChildFunc = bool delegate(gdk.window.Window window);
 
 /**
     Whenever some area of the window is invalidated (directly in the
-  window or in a child window) this gets called with region in
-  the coordinate space of window. You can use region to just
-  keep track of the dirty region, or you can actually change
-  region in case you are doing display tricks like showing
-  a child in multiple places.
+    window or in a child window) this gets called with region in
+    the coordinate space of window. You can use region to just
+    keep track of the dirty region, or you can actually change
+    region in case you are doing display tricks like showing
+    a child in multiple places.
 
-  ## Parameters
-  $(LIST
-    * $(B window)       a #GdkWindow
-    * $(B region)       a #cairo_region_t
-  )
+    Params:
+      window = a #GdkWindow
+      region = a #cairo_region_t
 */
 alias WindowInvalidateHandlerFunc = void delegate(gdk.window.Window window, cairo.region.Region region);
 
@@ -234,13 +227,13 @@ enum BUTTON_MIDDLE = 2;
 
 /**
     The primary button. This is typically the left mouse button, or the
-  right button in a left-handed setup.
+    right button in a left-handed setup.
 */
 enum BUTTON_PRIMARY = 1;
 
 /**
     The secondary button. This is typically the right mouse button, or the
-  left button in a left-handed setup.
+    left button in a left-handed setup.
 */
 enum BUTTON_SECONDARY = 3;
 
@@ -251,13 +244,13 @@ enum CURRENT_TIME = 0;
 
 /**
     Use this macro as the return value for continuing the propagation of
-  an event handler.
+    an event handler.
 */
 enum EVENT_PROPAGATE = false;
 
 /**
     Use this macro as the return value for stopping the propagation of
-  an event handler.
+    an event handler.
 */
 enum EVENT_STOP = true;
 
@@ -7109,13 +7102,13 @@ enum MINOR_VERSION = 24;
 
 /**
     A special value, indicating that the background
-  for a window should be inherited from the parent window.
+    for a window should be inherited from the parent window.
 */
 enum PARENT_RELATIVE = 1;
 
 /**
     This is the priority that the idle handler processing window updates
-  is given in the
-  [GLib Main Loop][glib-The-Main-Event-Loop].
+    is given in the
+    [GLib Main Loop][glib-The-Main-Event-Loop].
 */
 enum PRIORITY_REDRAW = 120;

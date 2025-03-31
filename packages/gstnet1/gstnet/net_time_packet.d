@@ -1,3 +1,4 @@
+/// Module for [NetTimePacket] class
 module gstnet.net_time_packet;
 
 import gid.gid;
@@ -12,27 +13,31 @@ import gstnet.types;
 
 /**
     Various functions for receiving, sending an serializing #GstNetTimePacket
-  structures.
+    structures.
 */
 class NetTimePacket : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_net_time_packet_get_type != &gidSymbolNotFound ? gst_net_time_packet_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -65,16 +70,17 @@ class NetTimePacket : gobject.boxed.Boxed
 
   /**
       Creates a new #GstNetTimePacket from a buffer received over the network. The
-    caller is responsible for ensuring that buffer is at least
-    #GST_NET_TIME_PACKET_SIZE bytes long.
-    
-    If buffer is null, the local and remote times will be set to
-    #GST_CLOCK_TIME_NONE.
-    
-    MT safe. Caller owns return value (gst_net_time_packet_free to free).
-    Params:
-      buffer =       a buffer from which to construct the packet, or NULL
-    Returns:     The new #GstNetTimePacket.
+      caller is responsible for ensuring that buffer is at least
+      #GST_NET_TIME_PACKET_SIZE bytes long.
+      
+      If buffer is null, the local and remote times will be set to
+      #GST_CLOCK_TIME_NONE.
+      
+      MT safe. Caller owns return value (gst_net_time_packet_free to free).
+  
+      Params:
+        buffer = a buffer from which to construct the packet, or NULL
+      Returns: The new #GstNetTimePacket.
   */
   this(ubyte[] buffer = null)
   {
@@ -87,7 +93,7 @@ class NetTimePacket : gobject.boxed.Boxed
 
   /**
       Make a copy of packet.
-    Returns:     a copy of packet, free with [gstnet.net_time_packet.NetTimePacket.free].
+      Returns: a copy of packet, free with [gstnet.net_time_packet.NetTimePacket.free].
   */
   gstnet.net_time_packet.NetTimePacket copy()
   {
@@ -99,12 +105,14 @@ class NetTimePacket : gobject.boxed.Boxed
 
   /**
       Sends a #GstNetTimePacket over a socket.
-    
-    MT safe.
-    Params:
-      socket =       socket to send the time packet on
-      destAddress =       address to send the time packet to
-    Returns:     TRUE if successful, FALSE in case an error occurred.
+      
+      MT safe.
+  
+      Params:
+        socket = socket to send the time packet on
+        destAddress = address to send the time packet to
+      Returns: TRUE if successful, FALSE in case an error occurred.
+      Throws: [ErrorG]
   */
   bool send(gio.socket.Socket socket, gio.socket_address.SocketAddress destAddress)
   {
@@ -118,12 +126,12 @@ class NetTimePacket : gobject.boxed.Boxed
 
   /**
       Serialized a #GstNetTimePacket into a newly-allocated sequence of
-    #GST_NET_TIME_PACKET_SIZE bytes, in network byte order. The value returned is
-    suitable for passing to write(2) or sendto(2) for communication over the
-    network.
-    
-    MT safe. Caller owns return value (g_free to free).
-    Returns:     A newly allocated sequence of #GST_NET_TIME_PACKET_SIZE bytes.
+      #GST_NET_TIME_PACKET_SIZE bytes, in network byte order. The value returned is
+      suitable for passing to write(2) or sendto(2) for communication over the
+      network.
+      
+      MT safe. Caller owns return value (g_free to free).
+      Returns: A newly allocated sequence of #GST_NET_TIME_PACKET_SIZE bytes.
   */
   ubyte[] serialize()
   {
@@ -140,12 +148,14 @@ class NetTimePacket : gobject.boxed.Boxed
 
   /**
       Receives a #GstNetTimePacket over a socket. Handles interrupted system
-    calls, but otherwise returns NULL on error.
-    Params:
-      socket =       socket to receive the time packet on
-      srcAddress =       address of variable to return sender address
-    Returns:     a new #GstNetTimePacket, or NULL on error. Free
-         with [gstnet.net_time_packet.NetTimePacket.free] when done.
+      calls, but otherwise returns NULL on error.
+  
+      Params:
+        socket = socket to receive the time packet on
+        srcAddress = address of variable to return sender address
+      Returns: a new #GstNetTimePacket, or NULL on error. Free
+           with [gstnet.net_time_packet.NetTimePacket.free] when done.
+      Throws: [ErrorG]
   */
   static gstnet.net_time_packet.NetTimePacket receive(gio.socket.Socket socket, out gio.socket_address.SocketAddress srcAddress)
   {

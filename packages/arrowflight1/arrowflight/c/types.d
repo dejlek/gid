@@ -1,3 +1,4 @@
+/// C types for arrowflight1 library
 module arrowflight.c.types;
 
 public import gid.basictypes;
@@ -364,7 +365,7 @@ struct GAFlightServerCustomAuthHandlerClass
 
   /**
       Authenticates the client on initial connection. The server
-      can send and read responses from the client at any time.
+        can send and read responses from the client at any time.
   */
   extern(C) void function(GAFlightServerCustomAuthHandler* handler, GAFlightServerCallContext* context, GAFlightServerAuthSender* sender, GAFlightServerAuthReader* reader, GError** _err) authenticate;
 

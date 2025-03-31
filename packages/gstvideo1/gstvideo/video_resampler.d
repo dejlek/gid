@@ -1,3 +1,4 @@
+/// Module for [VideoResampler] class
 module gstvideo.video_resampler;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gstvideo.types;
 
 /**
     #GstVideoResampler is a structure which holds the information
-  required to perform various kinds of resampling filtering.
+    required to perform various kinds of resampling filtering.
 */
 class VideoResampler
 {
   GstVideoResampler cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoResampler
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

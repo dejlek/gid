@@ -1,3 +1,4 @@
+/// Module for [EventPadGroupMode] class
 module gdk.event_pad_group_mode;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventPadGroupMode
 {
   GdkEventPadGroupMode cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventPadGroupMode
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

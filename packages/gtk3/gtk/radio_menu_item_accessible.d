@@ -1,3 +1,4 @@
+/// Module for [RadioMenuItemAccessible] class
 module gtk.radio_menu_item_accessible;
 
 import atk.action;
@@ -16,17 +17,20 @@ import gtk.types;
 class RadioMenuItemAccessible : gtk.check_menu_item_accessible.CheckMenuItemAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_menu_item_accessible_get_type != &gidSymbolNotFound ? gtk_radio_menu_item_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

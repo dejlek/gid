@@ -1,3 +1,4 @@
+/// Module for [Endpoint] class
 module arrowflight.endpoint;
 
 import arrowflight.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class Endpoint : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_endpoint_get_type != &gidSymbolNotFound ? gaflight_endpoint_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

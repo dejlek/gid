@@ -1,3 +1,4 @@
+/// Module for [VideoDirection] interface
 module gstvideo.video_direction;
 
 public import gstvideo.video_direction_iface_proxy;
@@ -8,11 +9,12 @@ import gstvideo.types;
 
 /**
     The interface allows unified access to control flipping and rotation
-  operations of video-sources or operators.
+    operations of video-sources or operators.
 */
 interface VideoDirection
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

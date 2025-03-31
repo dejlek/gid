@@ -1,3 +1,4 @@
+/// D types for gtksource4 library
 module gtksource.types;
 
 import gid.gid;

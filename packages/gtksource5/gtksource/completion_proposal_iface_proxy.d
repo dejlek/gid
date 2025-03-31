@@ -1,10 +1,11 @@
+/// Module for [CompletionProposalIfaceProxy] interface proxy object
 module gtksource.completion_proposal_iface_proxy;
 
 import gobject.object;
 import gtksource.completion_proposal;
 import gtksource.completion_proposal_mixin;
 
-/// Proxy object for GtkSource.CompletionProposal interface when a GObject has no applicable D binding
+/// Proxy object for [GtkSource.CompletionProposal] interface when a GObject has no applicable D binding
 class CompletionProposalIfaceProxy : IfaceProxy, gtksource.completion_proposal.CompletionProposal
 {
   this(void* ptr, Flag!"Take" take = No.Take)

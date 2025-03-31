@@ -1,3 +1,4 @@
+/// D types for arrowflight1 library
 module arrowflight.types;
 
 import arrowflight.c.functions;
@@ -9,14 +10,12 @@ import gid.gid;
 
 /**
     It is called with each header name/value pair, together with the
-  user_data parameter which is passed to
-  [arrowflight.call_options.CallOptions.foreachHeader] and so on.
+    user_data parameter which is passed to
+    [arrowflight.call_options.CallOptions.foreachHeader] and so on.
 
-  ## Parameters
-  $(LIST
-    * $(B name)       A header name.
-    * $(B value)       The value corresponding to the name.
-  )
+    Params:
+      name = A header name.
+      value = The value corresponding to the name.
 */
 alias HeaderFunc = void delegate(string name, string value);
 
@@ -37,6 +36,6 @@ enum VERSION_MINOR = 0;
 
 /**
     The version tag. Normally, it's an empty string. It's "SNAPSHOT"
-  for snapshot version.
+    for snapshot version.
 */
 enum VERSION_TAG = "";

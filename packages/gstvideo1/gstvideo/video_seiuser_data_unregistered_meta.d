@@ -1,3 +1,4 @@
+/// Module for [VideoSEIUserDataUnregisteredMeta] class
 module gstvideo.video_seiuser_data_unregistered_meta;
 
 import gid.gid;
@@ -14,6 +15,7 @@ class VideoSEIUserDataUnregisteredMeta
 {
   GstVideoSEIUserDataUnregisteredMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoSEIUserDataUnregisteredMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

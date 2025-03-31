@@ -1,3 +1,4 @@
+/// Module for [VideoMeta] class
 module gstvideo.video_meta;
 
 import gid.gid;
@@ -13,31 +14,32 @@ import gstvideo.video_alignment;
 
 /**
     Extra buffer metadata describing image properties
-  
-  This meta can also be used by downstream elements to specifiy their
-  buffer layout requirements for upstream. Upstream should try to
-  fit those requirements, if possible, in order to prevent buffer copies.
-  
-  This is done by passing a custom #GstStructure to
-  [gst.query.Query.addAllocationMeta] when handling the ALLOCATION query.
-  This structure should be named 'video-meta' and can have the following
-  fields:
-  $(LIST
-    * padding-top (uint): extra pixels on the top
-    * padding-bottom (uint): extra pixels on the bottom
-    * padding-left (uint): extra pixels on the left side
-    * padding-right (uint): extra pixels on the right side
-  )
-  The padding fields have the same semantic as #GstVideoMeta.alignment
-  and so represent the paddings requested on produced video buffers.
-  
-  Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
-  [gst.meta.Meta.deserialize].
+    
+    This meta can also be used by downstream elements to specifiy their
+    buffer layout requirements for upstream. Upstream should try to
+    fit those requirements, if possible, in order to prevent buffer copies.
+    
+    This is done by passing a custom #GstStructure to
+    [gst.query.Query.addAllocationMeta] when handling the ALLOCATION query.
+    This structure should be named 'video-meta' and can have the following
+    fields:
+    $(LIST
+      * padding-top (uint): extra pixels on the top
+      * padding-bottom (uint): extra pixels on the bottom
+      * padding-left (uint): extra pixels on the left side
+      * padding-right (uint): extra pixels on the right side
+    )
+    The padding fields have the same semantic as #GstVideoMeta.alignment
+    and so represent the paddings requested on produced video buffers.
+    
+    Since 1.24 it can be serialized using [gst.meta.Meta.serialize] and
+    [gst.meta.Meta.deserialize].
 */
 class VideoMeta
 {
   GstVideoMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -49,6 +51,7 @@ class VideoMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -144,14 +147,15 @@ class VideoMeta
 
   /**
       Compute the padded height of each plane from meta (padded size
-    divided by stride).
-    
-    It is not valid to call this function with a meta associated to a
-    TILED video format.
-    Params:
-      planeHeight =       array used to store the plane height
-    Returns:     true if meta's alignment is valid and plane_height has been
-      updated, false otherwise
+      divided by stride).
+      
+      It is not valid to call this function with a meta associated to a
+      TILED video format.
+  
+      Params:
+        planeHeight = array used to store the plane height
+      Returns: true if meta's alignment is valid and plane_height has been
+        updated, false otherwise
   */
   bool getPlaneHeight(ref uint[] planeHeight)
   {
@@ -162,11 +166,12 @@ class VideoMeta
 
   /**
       Compute the size, in bytes, of each video plane described in meta including
-    any padding and alignment constraint defined in meta->alignment.
-    Params:
-      planeSize =       array used to store the plane sizes
-    Returns:     true if meta's alignment is valid and plane_size has been
-      updated, false otherwise
+      any padding and alignment constraint defined in meta->alignment.
+  
+      Params:
+        planeSize = array used to store the plane sizes
+      Returns: true if meta's alignment is valid and plane_size has been
+        updated, false otherwise
   */
   bool getPlaneSize(ref size_t[] planeSize)
   {
@@ -177,14 +182,15 @@ class VideoMeta
 
   /**
       Map the video plane with index plane in meta and return a pointer to the
-    first byte of the plane and the stride of the plane.
-    Params:
-      plane =       a plane
-      info =       a #GstMapInfo
-      data =       the data of plane
-      stride =       the stride of plane
-      flags =       GstMapFlags
-    Returns:     TRUE if the map operation was successful.
+      first byte of the plane and the stride of the plane.
+  
+      Params:
+        plane = a plane
+        info = a #GstMapInfo
+        data = the data of plane
+        stride = the stride of plane
+        flags = GstMapFlags
+      Returns: TRUE if the map operation was successful.
   */
   bool map(uint plane, gst.map_info.MapInfo info, out void* data, out int stride, gst.types.MapFlags flags)
   {
@@ -195,10 +201,11 @@ class VideoMeta
 
   /**
       Unmap a previously mapped plane with [gstvideo.video_meta.VideoMeta.map].
-    Params:
-      plane =       a plane
-      info =       a #GstMapInfo
-    Returns:     TRUE if the memory was successfully unmapped.
+  
+      Params:
+        plane = a plane
+        info = a #GstMapInfo
+      Returns: TRUE if the memory was successfully unmapped.
   */
   bool unmap(uint plane, gst.map_info.MapInfo info)
   {

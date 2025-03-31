@@ -1,3 +1,4 @@
+/// Module for [TimestampDataType] class
 module arrow.timestamp_data_type;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import glib.time_zone;
 class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_data_type_get_type != &gidSymbolNotFound ? garrow_timestamp_data_type_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

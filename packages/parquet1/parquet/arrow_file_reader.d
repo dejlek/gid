@@ -1,3 +1,4 @@
+/// Module for [ArrowFileReader] class
 module parquet.arrow_file_reader;
 
 import arrow.chunked_array;
@@ -16,17 +17,20 @@ import parquet.types;
 class ArrowFileReader : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_arrow_file_reader_get_type != &gidSymbolNotFound ? gparquet_arrow_file_reader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

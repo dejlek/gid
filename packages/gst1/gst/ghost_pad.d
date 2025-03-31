@@ -1,3 +1,4 @@
+/// Module for [GhostPad] class
 module gst.ghost_pad;
 
 import gid.gid;
@@ -12,33 +13,36 @@ import gst.types;
 
 /**
     GhostPads are useful when organizing pipelines with #GstBin like elements.
-  The idea here is to create hierarchical element graphs. The bin element
-  contains a sub-graph. Now one would like to treat the bin-element like any
-  other #GstElement. This is where GhostPads come into play. A GhostPad acts as
-  a proxy for another pad. Thus the bin can have sink and source ghost-pads
-  that are associated with sink and source pads of the child elements.
-  
-  If the target pad is known at creation time, [gst.ghost_pad.GhostPad.new_] is the
-  function to use to get a ghost-pad. Otherwise one can use [gst.ghost_pad.GhostPad.newNoTarget]
-  to create the ghost-pad and use [gst.ghost_pad.GhostPad.setTarget] to establish the
-  association later on.
-  
-  Note that GhostPads add overhead to the data processing of a pipeline.
+    The idea here is to create hierarchical element graphs. The bin element
+    contains a sub-graph. Now one would like to treat the bin-element like any
+    other #GstElement. This is where GhostPads come into play. A GhostPad acts as
+    a proxy for another pad. Thus the bin can have sink and source ghost-pads
+    that are associated with sink and source pads of the child elements.
+    
+    If the target pad is known at creation time, [gst.ghost_pad.GhostPad.new_] is the
+    function to use to get a ghost-pad. Otherwise one can use [gst.ghost_pad.GhostPad.newNoTarget]
+    to create the ghost-pad and use [gst.ghost_pad.GhostPad.setTarget] to establish the
+    association later on.
+    
+    Note that GhostPads add overhead to the data processing of a pipeline.
 */
 class GhostPad : gst.proxy_pad.ProxyPad
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_ghost_pad_get_type != &gidSymbolNotFound ? gst_ghost_pad_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,14 +55,15 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Create a new ghostpad with target as the target. The direction will be taken
-    from the target pad. target must be unlinked.
-    
-    Will ref the target.
-    Params:
-      name =       the name of the new pad, or null to assign a default name
-      target =       the pad to ghost.
-    Returns:     a new #GstPad, or null in
-      case of an error.
+      from the target pad. target must be unlinked.
+      
+      Will ref the target.
+  
+      Params:
+        name = the name of the new pad, or null to assign a default name
+        target = the pad to ghost.
+      Returns: a new #GstPad, or null in
+        case of an error.
   */
   this(string name, gst.pad.Pad target)
   {
@@ -70,15 +75,16 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Create a new ghostpad with target as the target. The direction will be taken
-    from the target pad. The template used on the ghostpad will be template.
-    
-    Will ref the target.
-    Params:
-      name =       the name of the new pad, or null to assign a default name.
-      target =       the pad to ghost.
-      templ =       the #GstPadTemplate to use on the ghostpad.
-    Returns:     a new #GstPad, or null in
-      case of an error.
+      from the target pad. The template used on the ghostpad will be template.
+      
+      Will ref the target.
+  
+      Params:
+        name = the name of the new pad, or null to assign a default name.
+        target = the pad to ghost.
+        templ = the #GstPadTemplate to use on the ghostpad.
+      Returns: a new #GstPad, or null in
+        case of an error.
   */
   static gst.ghost_pad.GhostPad newFromTemplate(string name, gst.pad.Pad target, gst.pad_template.PadTemplate templ)
   {
@@ -91,15 +97,16 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Create a new ghostpad without a target with the given direction.
-    A target can be set on the ghostpad later with the
-    [gst.ghost_pad.GhostPad.setTarget] function.
-    
-    The created ghostpad will not have a padtemplate.
-    Params:
-      name =       the name of the new pad, or null to assign a default name.
-      dir =       the direction of the ghostpad
-    Returns:     a new #GstPad, or null in
-      case of an error.
+      A target can be set on the ghostpad later with the
+      [gst.ghost_pad.GhostPad.setTarget] function.
+      
+      The created ghostpad will not have a padtemplate.
+  
+      Params:
+        name = the name of the new pad, or null to assign a default name.
+        dir = the direction of the ghostpad
+      Returns: a new #GstPad, or null in
+        case of an error.
   */
   static gst.ghost_pad.GhostPad newNoTarget(string name, gst.types.PadDirection dir)
   {
@@ -112,12 +119,13 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Create a new ghostpad based on templ, without setting a target. The
-    direction will be taken from the templ.
-    Params:
-      name =       the name of the new pad, or null to assign a default name
-      templ =       the #GstPadTemplate to create the ghostpad from.
-    Returns:     a new #GstPad, or null in
-      case of an error.
+      direction will be taken from the templ.
+  
+      Params:
+        name = the name of the new pad, or null to assign a default name
+        templ = the #GstPadTemplate to create the ghostpad from.
+      Returns: a new #GstPad, or null in
+        case of an error.
   */
   static gst.ghost_pad.GhostPad newNoTargetFromTemplate(string name, gst.pad_template.PadTemplate templ)
   {
@@ -130,12 +138,13 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Invoke the default activate mode function of a ghost pad.
-    Params:
-      pad =       the #GstPad to activate or deactivate.
-      parent =       the parent of pad or null
-      mode =       the requested activation mode
-      active =       whether the pad should be active or not.
-    Returns:     true if the operation was successful.
+  
+      Params:
+        pad = the #GstPad to activate or deactivate.
+        parent = the parent of pad or null
+        mode = the requested activation mode
+        active = whether the pad should be active or not.
+      Returns: true if the operation was successful.
   */
   static bool activateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
   {
@@ -146,13 +155,14 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Invoke the default activate mode function of a proxy pad that is
-    owned by a ghost pad.
-    Params:
-      pad =       the #GstPad to activate or deactivate.
-      parent =       the parent of pad or null
-      mode =       the requested activation mode
-      active =       whether the pad should be active or not.
-    Returns:     true if the operation was successful.
+      owned by a ghost pad.
+  
+      Params:
+        pad = the #GstPad to activate or deactivate.
+        parent = the parent of pad or null
+        mode = the requested activation mode
+        active = whether the pad should be active or not.
+      Returns: true if the operation was successful.
   */
   static bool internalActivateModeDefault(gst.pad.Pad pad, gst.object.ObjectGst parent, gst.types.PadMode mode, bool active)
   {
@@ -163,15 +173,15 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Finish initialization of a newly allocated ghost pad.
-    
-    This function is most useful in language bindings and when subclassing
-    #GstGhostPad; plugin and application developers normally will not call this
-    function. Call this function directly after a call to g_object_new
-    (GST_TYPE_GHOST_PAD, "direction", dir, ..., NULL).
-    Returns:     true if the construction succeeds, false otherwise.
+      
+      This function is most useful in language bindings and when subclassing
+      #GstGhostPad; plugin and application developers normally will not call this
+      function. Call this function directly after a call to g_object_new
+      (GST_TYPE_GHOST_PAD, "direction", dir, ..., NULL).
+      Returns: true if the construction succeeds, false otherwise.
   
-    Deprecated:     This function is deprecated since 1.18 and does nothing
-      anymore.
+      Deprecated: This function is deprecated since 1.18 and does nothing
+        anymore.
   */
   bool construct()
   {
@@ -182,9 +192,9 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Get the target pad of gpad. Unref target pad after usage.
-    Returns:     the target #GstPad, can be
-      null if the ghostpad has no target set. Unref target pad after
-      usage.
+      Returns: the target #GstPad, can be
+        null if the ghostpad has no target set. Unref target pad after
+        usage.
   */
   gst.pad.Pad getTarget()
   {
@@ -196,12 +206,13 @@ class GhostPad : gst.proxy_pad.ProxyPad
 
   /**
       Set the new target of the ghostpad gpad. Any existing target
-    is unlinked and links to the new target are established. if newtarget is
-    null the target will be cleared.
-    Params:
-      newtarget =       the new pad target
-    Returns:     true if the new target could be set. This function
-          can return false when the internal pads could not be linked.
+      is unlinked and links to the new target are established. if newtarget is
+      null the target will be cleared.
+  
+      Params:
+        newtarget = the new pad target
+      Returns: true if the new target could be set. This function
+            can return false when the internal pads could not be linked.
   */
   bool setTarget(gst.pad.Pad newtarget = null)
   {

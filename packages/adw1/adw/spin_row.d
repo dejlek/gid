@@ -1,3 +1,4 @@
+/// Module for [SpinRow] class
 module adw.spin_row;
 
 import adw.action_row;
@@ -22,55 +23,58 @@ import gtk.types;
 
 /**
     An `class@ActionRow` with an embedded spin button.
-  
-  <picture>
-    <source srcset="spin-row-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="spin-row.png" alt="spin-row">
-  </picture>
-  
-  Example of an [adw.spin_row.SpinRow] UI definition:
-  
-  ```xml
-  <object class="AdwSpinRow">
-    <property name="title" translatable="yes">Spin Row</property>
-    <property name="adjustment">
-      <object class="GtkAdjustment">
-        <property name="lower">0</property>
-        <property name="upper">100</property>
-        <property name="value">50</property>
-        <property name="page-increment">10</property>
-        <property name="step-increment">1</property>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  See [gtk.spin_button.SpinButton] for details.
-  
-  ## CSS nodes
-  
-  [adw.spin_row.SpinRow] has the same structure as `class@ActionRow`, as well as the
-  `.spin` style class on the main node.
-  
-  ## Accessibility
-  
-  [adw.spin_row.SpinRow] uses an internal [gtk.spin_button.SpinButton] with the
-  [gtk.types.AccessibleRole.SpinButton] role.
+    
+    <picture>
+      <source srcset="spin-row-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="spin-row.png" alt="spin-row">
+    </picture>
+    
+    Example of an [adw.spin_row.SpinRow] UI definition:
+    
+    ```xml
+    <object class="AdwSpinRow">
+      <property name="title" translatable="yes">Spin Row</property>
+      <property name="adjustment">
+        <object class="GtkAdjustment">
+          <property name="lower">0</property>
+          <property name="upper">100</property>
+          <property name="value">50</property>
+          <property name="page-increment">10</property>
+          <property name="step-increment">1</property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    See [gtk.spin_button.SpinButton] for details.
+    
+    ## CSS nodes
+    
+    [adw.spin_row.SpinRow] has the same structure as `class@ActionRow`, as well as the
+    `.spin` style class on the main node.
+    
+    ## Accessibility
+    
+    [adw.spin_row.SpinRow] uses an internal [gtk.spin_button.SpinButton] with the
+    [gtk.types.AccessibleRole.SpinButton] role.
 */
 class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spin_row_get_type != &gidSymbolNotFound ? adw_spin_row_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -85,11 +89,12 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Creates a new [adw.spin_row.SpinRow].
-    Params:
-      adjustment =       the adjustment that this spin row should use
-      climbRate =       the rate the value changes when holding a button or key
-      digits =       the number of decimal places to display
-    Returns:     the newly created [adw.spin_row.SpinRow]
+  
+      Params:
+        adjustment = the adjustment that this spin row should use
+        climbRate = the rate the value changes when holding a button or key
+        digits = the number of decimal places to display
+      Returns: the newly created [adw.spin_row.SpinRow]
   */
   this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
@@ -100,21 +105,22 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Creates a new [adw.spin_row.SpinRow] with the given properties.
-    
-    This is a convenience constructor that allows creation of a numeric
-    [adw.spin_row.SpinRow] without manually creating an adjustment. The value is initially
-    set to the minimum value and a page increment of 10 * step is the default.
-    The precision of the spin row is equivalent to the precisions of step.
-    
-    ::: note
-        The way in which the precision is derived works best if step is a power
-        of ten. If the resulting precision is not suitable for your needs, use
-        [adw.spin_row.SpinRow.setDigits] to correct it.
-    Params:
-      min =       minimum allowable value
-      max =       maximum allowable value
-      step =       increment added or subtracted by spinning the widget
-    Returns:     the new [adw.spin_row.SpinRow]
+      
+      This is a convenience constructor that allows creation of a numeric
+      [adw.spin_row.SpinRow] without manually creating an adjustment. The value is initially
+      set to the minimum value and a page increment of 10 * step is the default.
+      The precision of the spin row is equivalent to the precisions of step.
+      
+      ::: note
+          The way in which the precision is derived works best if step is a power
+          of ten. If the resulting precision is not suitable for your needs, use
+          [adw.spin_row.SpinRow.setDigits] to correct it.
+  
+      Params:
+        min = minimum allowable value
+        max = maximum allowable value
+        step = increment added or subtracted by spinning the widget
+      Returns: the new [adw.spin_row.SpinRow]
   */
   static adw.spin_row.SpinRow newWithRange(double min, double max, double step)
   {
@@ -126,13 +132,14 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Changes the properties of an existing spin row.
-    
-    The adjustment, climb rate, and number of decimal places are updated
-    accordingly.
-    Params:
-      adjustment =       the adjustment that this spin row should use
-      climbRate =       the new climb rate
-      digits =       the number of decimal places to display
+      
+      The adjustment, climb rate, and number of decimal places are updated
+      accordingly.
+  
+      Params:
+        adjustment = the adjustment that this spin row should use
+        climbRate = the new climb rate
+        digits = the number of decimal places to display
   */
   void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
@@ -141,7 +148,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets the adjustment that holds the value for the spin row.
-    Returns:     the adjustment that holds the spin row's value
+      Returns: the adjustment that holds the spin row's value
   */
   gtk.adjustment.Adjustment getAdjustment()
   {
@@ -153,7 +160,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets the acceleration rate when you hold down a button or key.
-    Returns:     the acceleration rate when you hold down a button or key
+      Returns: the acceleration rate when you hold down a button or key
   */
   double getClimbRate()
   {
@@ -164,7 +171,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets the number of decimal places to display.
-    Returns:     the number of decimal places to display
+      Returns: the number of decimal places to display
   */
   uint getDigits()
   {
@@ -175,7 +182,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets whether non-numeric characters should be ignored.
-    Returns:     whether non-numeric characters should be ignored.
+      Returns: whether non-numeric characters should be ignored.
   */
   bool getNumeric()
   {
@@ -186,7 +193,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets whether invalid values are snapped to nearest step increment.
-    Returns:     whether invalid values are snapped to the nearest step increment
+      Returns: whether invalid values are snapped to the nearest step increment
   */
   bool getSnapToTicks()
   {
@@ -197,7 +204,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets the policy for updating the spin row.
-    Returns:     the policy for updating the spin row
+      Returns: the policy for updating the spin row
   */
   gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
   {
@@ -209,7 +216,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets the current value.
-    Returns:     the current value
+      Returns: the current value
   */
   double getValue()
   {
@@ -220,7 +227,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Gets whether the spin row should wrap upon reaching its limits.
-    Returns:     whether the spin row should wrap upon reaching its limits
+      Returns: whether the spin row should wrap upon reaching its limits
   */
   bool getWrap()
   {
@@ -231,8 +238,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the adjustment that holds the value for the spin row.
-    Params:
-      adjustment =       an adjustment
+  
+      Params:
+        adjustment = an adjustment
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
@@ -241,8 +249,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the acceleration rate when you hold down a button or key.
-    Params:
-      climbRate =       the acceleration rate when you hold down a button or key
+  
+      Params:
+        climbRate = the acceleration rate when you hold down a button or key
   */
   void setClimbRate(double climbRate)
   {
@@ -251,8 +260,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the number of decimal places to display.
-    Params:
-      digits =       the number of decimal places to display
+  
+      Params:
+        digits = the number of decimal places to display
   */
   void setDigits(uint digits)
   {
@@ -261,8 +271,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets whether non-numeric characters should be ignored.
-    Params:
-      numeric =       whether non-numeric characters should be ignored
+  
+      Params:
+        numeric = whether non-numeric characters should be ignored
   */
   void setNumeric(bool numeric)
   {
@@ -271,12 +282,13 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the minimum and maximum allowable values for self.
-    
-    If the current value is outside this range, it will be adjusted
-    to fit within the range, otherwise it will remain unchanged.
-    Params:
-      min =       minimum allowable value
-      max =       maximum allowable value
+      
+      If the current value is outside this range, it will be adjusted
+      to fit within the range, otherwise it will remain unchanged.
+  
+      Params:
+        min = minimum allowable value
+        max = maximum allowable value
   */
   void setRange(double min, double max)
   {
@@ -285,8 +297,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets whether invalid values are snapped to the nearest step increment.
-    Params:
-      snapToTicks =       whether invalid values are snapped to the nearest step increment
+  
+      Params:
+        snapToTicks = whether invalid values are snapped to the nearest step increment
   */
   void setSnapToTicks(bool snapToTicks)
   {
@@ -295,10 +308,11 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the policy for updating the spin row.
-    
-    The options are always, or only when the value is invalid.
-    Params:
-      policy =       the policy for updating the spin row
+      
+      The options are always, or only when the value is invalid.
+  
+      Params:
+        policy = the policy for updating the spin row
   */
   void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
   {
@@ -307,8 +321,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets the current value.
-    Params:
-      value =       a new value
+  
+      Params:
+        value = a new value
   */
   void setValue(double value)
   {
@@ -317,8 +332,9 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
 
   /**
       Sets whether the spin row should wrap upon reaching its limits.
-    Params:
-      wrap =       whether the spin row should wrap upon reaching its limits
+  
+      Params:
+        wrap = whether the spin row should wrap upon reaching its limits
   */
   void setWrap(bool wrap)
   {
@@ -334,38 +350,39 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 
   /**
-      Emitted to tweak the formatting of the value for display.
-    
-    See [gtk.spin_button.SpinButton.output].
+      Connect to `Output` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B spinRow) the instance the signal is connected to
-    )
-    Returns:     `TRUE` if the value has been displayed
-  */
-  alias OutputCallbackDlg = bool delegate(adw.spin_row.SpinRow spinRow);
-
-  /** ditto */
-  alias OutputCallbackFunc = bool function(adw.spin_row.SpinRow spinRow);
-
-  /**
-    Connect to Output signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to tweak the formatting of the value for display.
+      
+      See [gtk.spin_button.SpinButton.output].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(adw.spin_row.SpinRow spinRow))
+  
+          `spinRow` the instance the signal is connected to (optional)
+  
+          `Returns` `TRUE` if the value has been displayed
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectOutput(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : OutputCallbackDlg) || is(T : OutputCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.spin_row.SpinRow)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto spinRow = getVal!(adw.spin_row.SpinRow)(_paramVals);
-      _retval = _dClosure.dlg(spinRow);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -374,36 +391,38 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 
   /**
-      Emitted right after the spinbutton wraps.
-    
-    See [gtk.spin_button.SpinButton.wrapped].
+      Connect to `Wrapped` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B spinRow) the instance the signal is connected to
-    )
-  */
-  alias WrappedCallbackDlg = void delegate(adw.spin_row.SpinRow spinRow);
-
-  /** ditto */
-  alias WrappedCallbackFunc = void function(adw.spin_row.SpinRow spinRow);
-
-  /**
-    Connect to Wrapped signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted right after the spinbutton wraps.
+      
+      See [gtk.spin_button.SpinButton.wrapped].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(adw.spin_row.SpinRow spinRow))
+  
+          `spinRow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectWrapped(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : WrappedCallbackDlg) || is(T : WrappedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.spin_row.SpinRow)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto spinRow = getVal!(adw.spin_row.SpinRow)(_paramVals);
-      _dClosure.dlg(spinRow);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

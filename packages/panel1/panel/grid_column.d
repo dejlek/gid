@@ -1,3 +1,4 @@
+/// Module for [GridColumn] class
 module panel.grid_column;
 
 import gid.gid;
@@ -18,17 +19,20 @@ import panel.types;
 class GridColumn : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_grid_column_get_type != &gidSymbolNotFound ? panel_grid_column_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

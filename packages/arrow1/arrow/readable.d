@@ -1,3 +1,4 @@
+/// Module for [Readable] interface
 module arrow.readable;
 
 public import arrow.readable_iface_proxy;
@@ -14,6 +15,7 @@ import gobject.object;
 interface Readable
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

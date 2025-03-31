@@ -1,3 +1,4 @@
+/// Module for [SignalQuery] class
 module gobject.signal_query;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gobject.types;
 
 /**
     A structure holding in-depth information for a specific signal.
-  
-  See also: [gobject.global.signalQuery]
+    
+    See also: [gobject.global.signalQuery]
 */
 class SignalQuery
 {
   GSignalQuery cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class SignalQuery
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

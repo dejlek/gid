@@ -1,3 +1,4 @@
+/// Module for [GLUpload] class
 module gstgl.glupload;
 
 import gid.gid;
@@ -13,23 +14,26 @@ import gstgl.types;
 
 /**
     #GstGLUpload is an object that uploads data from system memory into GL textures.
-  
-  A #GstGLUpload can be created with [gstgl.glupload.GLUpload.new_]
+    
+    A #GstGLUpload can be created with [gstgl.glupload.GLUpload.new_]
 */
 class GLUpload : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_upload_get_type != &gidSymbolNotFound ? gst_gl_upload_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,11 +63,12 @@ class GLUpload : gst.object.ObjectGst
 
   /**
       Fixate the othercaps based on the information of the caps.
-    Params:
-      direction =       the pad #GstPadDirection
-      caps =       a #GstCaps as the reference
-      othercaps =       a #GstCaps to fixate
-    Returns:     the fixated caps
+  
+      Params:
+        direction = the pad #GstPadDirection
+        caps = a #GstCaps as the reference
+        othercaps = a #GstCaps to fixate
+      Returns: the fixated caps
   */
   gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
   {
@@ -85,11 +90,12 @@ class GLUpload : gst.object.ObjectGst
 
   /**
       Uploads buffer using the transformation specified by
-    [gstgl.glupload.GLUpload.setCaps] creating a new #GstBuffer in outbuf_ptr.
-    Params:
-      buffer =       input #GstBuffer
-      outbufPtr =       resulting #GstBuffer
-    Returns:     whether the upload was successful
+      [gstgl.glupload.GLUpload.setCaps] creating a new #GstBuffer in outbuf_ptr.
+  
+      Params:
+        buffer = input #GstBuffer
+        outbufPtr = resulting #GstBuffer
+      Returns: whether the upload was successful
   */
   gstgl.types.GLUploadReturn performWithBuffer(gst.buffer.Buffer buffer, out gst.buffer.Buffer outbufPtr)
   {
@@ -103,9 +109,10 @@ class GLUpload : gst.object.ObjectGst
 
   /**
       Adds the required allocation parameters to support uploading.
-    Params:
-      decideQuery =       a #GstQuery from a decide allocation
-      query =       the proposed allocation query
+  
+      Params:
+        decideQuery = a #GstQuery from a decide allocation
+        query = the proposed allocation query
   */
   void proposeAllocation(gst.query.Query decideQuery, gst.query.Query query)
   {
@@ -114,10 +121,11 @@ class GLUpload : gst.object.ObjectGst
 
   /**
       Initializes upload with the information required for upload.
-    Params:
-      inCaps =       input #GstCaps
-      outCaps =       output #GstCaps
-    Returns:     whether in_caps and out_caps could be set on upload
+  
+      Params:
+        inCaps = input #GstCaps
+        outCaps = output #GstCaps
+      Returns: whether in_caps and out_caps could be set on upload
   */
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {

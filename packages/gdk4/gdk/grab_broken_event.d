@@ -1,3 +1,4 @@
+/// Module for [GrabBrokenEvent] class
 module gdk.grab_broken_event;
 
 import gdk.c.functions;
@@ -14,6 +15,7 @@ import gobject.object;
 class GrabBrokenEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,7 +26,7 @@ class GrabBrokenEvent : gdk.event.Event
 
   /**
       Extracts the grab surface from a grab broken event.
-    Returns:     the grab surface of event
+      Returns: the grab surface of event
   */
   gdk.surface.Surface getGrabSurface()
   {
@@ -36,7 +38,7 @@ class GrabBrokenEvent : gdk.event.Event
 
   /**
       Checks whether the grab broken event is for an implicit grab.
-    Returns:     true if the an implicit grab was broken
+      Returns: true if the an implicit grab was broken
   */
   bool getImplicit()
   {

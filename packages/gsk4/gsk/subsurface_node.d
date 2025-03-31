@@ -1,3 +1,4 @@
+/// Module for [SubsurfaceNode] class
 module gsk.subsurface_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class SubsurfaceNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,7 +24,7 @@ class SubsurfaceNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting drawn by the given node.
-    Returns:     the child [gsk.render_node.RenderNode]
+      Returns: the child [gsk.render_node.RenderNode]
   */
   gsk.render_node.RenderNode getChild()
   {

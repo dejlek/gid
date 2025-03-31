@@ -1,3 +1,4 @@
+/// Module for [SeparatorMenuItem] class
 module gtk.separator_menu_item;
 
 import atk.implementor_iface;
@@ -16,27 +17,30 @@ import gtk.types;
 
 /**
     The #GtkSeparatorMenuItem is a separator used to group
-  items within a menu. It displays a horizontal line with a shadow to
-  make it appear sunken into the interface.
-  
-  # CSS nodes
-  
-  GtkSeparatorMenuItem has a single CSS node with name separator.
+    items within a menu. It displays a horizontal line with a shadow to
+    make it appear sunken into the interface.
+    
+    # CSS nodes
+    
+    GtkSeparatorMenuItem has a single CSS node with name separator.
 */
 class SeparatorMenuItem : gtk.menu_item.MenuItem
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_menu_item_get_type != &gidSymbolNotFound ? gtk_separator_menu_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -49,7 +53,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
 
   /**
       Creates a new #GtkSeparatorMenuItem.
-    Returns:     a new #GtkSeparatorMenuItem.
+      Returns: a new #GtkSeparatorMenuItem.
   */
   this()
   {

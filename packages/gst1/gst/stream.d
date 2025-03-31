@@ -1,3 +1,4 @@
+/// Module for [Stream] class
 module gst.stream;
 
 import gid.gid;
@@ -10,32 +11,35 @@ import gst.types;
 
 /**
     A high-level object representing a single stream. It might be backed, or
-  not, by an actual flow of data in a pipeline (#GstPad).
-  
-  A #GstStream does not care about data changes (such as decoding, encoding,
-  parsing,...) as long as the underlying data flow corresponds to the same
-  high-level flow (ex: a certain audio track).
-  
-  A #GstStream contains all the information pertinent to a stream, such as
-  stream-id, tags, caps, type, ...
-  
-  Elements can subclass a #GstStream for internal usage (to contain information
-  pertinent to streams of data).
+    not, by an actual flow of data in a pipeline (#GstPad).
+    
+    A #GstStream does not care about data changes (such as decoding, encoding,
+    parsing,...) as long as the underlying data flow corresponds to the same
+    high-level flow (ex: a certain audio track).
+    
+    A #GstStream contains all the information pertinent to a stream, such as
+    stream-id, tags, caps, type, ...
+    
+    Elements can subclass a #GstStream for internal usage (to contain information
+    pertinent to streams of data).
 */
 class Stream : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_get_type != &gidSymbolNotFound ? gst_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,14 +52,15 @@ class Stream : gst.object.ObjectGst
 
   /**
       Create a new #GstStream for the given stream_id, caps, type
-    and flags
-    Params:
-      streamId =       the id for the new stream. If null,
-        a new one will be automatically generated
-      caps =       the #GstCaps of the stream
-      type =       the #GstStreamType of the stream
-      flags =       the #GstStreamFlags of the stream
-    Returns:     The new #GstStream
+      and flags
+  
+      Params:
+        streamId = the id for the new stream. If null,
+          a new one will be automatically generated
+        caps = the #GstCaps of the stream
+        type = the #GstStreamType of the stream
+        flags = the #GstStreamFlags of the stream
+      Returns: The new #GstStream
   */
   this(string streamId, gst.caps.Caps caps, gst.types.StreamType type, gst.types.StreamFlags flags)
   {
@@ -67,7 +72,7 @@ class Stream : gst.object.ObjectGst
 
   /**
       Retrieve the caps for stream, if any
-    Returns:     The #GstCaps for stream
+      Returns: The #GstCaps for stream
   */
   gst.caps.Caps getCaps()
   {
@@ -79,7 +84,7 @@ class Stream : gst.object.ObjectGst
 
   /**
       Retrieve the current stream flags for stream
-    Returns:     The #GstStreamFlags for stream
+      Returns: The #GstStreamFlags for stream
   */
   gst.types.StreamFlags getStreamFlags()
   {
@@ -91,8 +96,8 @@ class Stream : gst.object.ObjectGst
 
   /**
       Returns the stream ID of stream.
-    Returns:     the stream ID of stream. Only valid
-      during the lifetime of stream.
+      Returns: the stream ID of stream. Only valid
+        during the lifetime of stream.
   */
   string getStreamId()
   {
@@ -104,7 +109,7 @@ class Stream : gst.object.ObjectGst
 
   /**
       Retrieve the stream type for stream
-    Returns:     The #GstStreamType for stream
+      Returns: The #GstStreamType for stream
   */
   gst.types.StreamType getStreamType()
   {
@@ -116,7 +121,7 @@ class Stream : gst.object.ObjectGst
 
   /**
       Retrieve the tags for stream, if any
-    Returns:     The #GstTagList for stream
+      Returns: The #GstTagList for stream
   */
   gst.tag_list.TagList getTags()
   {
@@ -128,8 +133,9 @@ class Stream : gst.object.ObjectGst
 
   /**
       Set the caps for the #GstStream
-    Params:
-      caps =       a #GstCaps
+  
+      Params:
+        caps = a #GstCaps
   */
   void setCaps(gst.caps.Caps caps = null)
   {
@@ -138,8 +144,9 @@ class Stream : gst.object.ObjectGst
 
   /**
       Set the flags for the stream.
-    Params:
-      flags =       the flags to set on stream
+  
+      Params:
+        flags = the flags to set on stream
   */
   void setStreamFlags(gst.types.StreamFlags flags)
   {
@@ -148,8 +155,9 @@ class Stream : gst.object.ObjectGst
 
   /**
       Set the stream type of stream
-    Params:
-      streamType =       the type to set on stream
+  
+      Params:
+        streamType = the type to set on stream
   */
   void setStreamType(gst.types.StreamType streamType)
   {
@@ -158,8 +166,9 @@ class Stream : gst.object.ObjectGst
 
   /**
       Set the tags for the #GstStream
-    Params:
-      tags =       a #GstTagList
+  
+      Params:
+        tags = a #GstTagList
   */
   void setTags(gst.tag_list.TagList tags = null)
   {

@@ -1,3 +1,4 @@
+/// Module for [GLBaseMemory] class
 module gstgl.glbase_memory;
 
 import gid.gid;
@@ -18,34 +19,39 @@ import gstgl.types;
 
 /**
     GstGLBaseMemory is a #GstMemory subclass providing the basis of support
-  for the mapping of GL buffers.
-  
-  Data is uploaded or downloaded from the GPU as is necessary.
+    for the mapping of GL buffers.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
 */
 class GLBaseMemory : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstGLBaseMemory.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_memory_get_type != &gidSymbolNotFound ? gst_gl_base_memory_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -114,9 +120,9 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   /**
       Note: only intended for subclass usage to allocate the system memory buffer
-    on demand.  If there is already a non-NULL data pointer in gl_mem->data,
-    then this function imply returns TRUE.
-    Returns:     whether the system memory could be allocated
+      on demand.  If there is already a non-NULL data pointer in gl_mem->data,
+      then this function imply returns TRUE.
+      Returns: whether the system memory could be allocated
   */
   bool allocData()
   {
@@ -127,14 +133,15 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   /**
       Initializes mem with the required parameters
-    Params:
-      allocator =       the #GstAllocator to initialize with
-      parent =       the parent #GstMemory to initialize with
-      context =       the #GstGLContext to initialize with
-      params =       the GstAllocationParams to initialize with
-      size =       the number of bytes to be allocated
-      userData =       user data to call notify with
-      notify =       a #GDestroyNotify
+  
+      Params:
+        allocator = the #GstAllocator to initialize with
+        parent = the parent #GstMemory to initialize with
+        context = the #GstGLContext to initialize with
+        params = the GstAllocationParams to initialize with
+        size = the number of bytes to be allocated
+        userData = user data to call notify with
+        notify = a #GDestroyNotify
   */
   void init_(gst.allocator.Allocator allocator, gst.memory.Memory parent, gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams params, size_t size, void* userData = null, glib.types.DestroyNotify notify = null)
   {
@@ -168,7 +175,7 @@ class GLBaseMemory : gobject.boxed.Boxed
 
   /**
       Initializes the GL Base Memory allocator. It is safe to call this function
-    multiple times.  This must be called before any other GstGLBaseMemory operation.
+      multiple times.  This must be called before any other GstGLBaseMemory operation.
   */
   static void initOnce()
   {

@@ -1,3 +1,4 @@
+/// Module for [SimpleProxyResolver] class
 module gio.simple_proxy_resolver;
 
 import gid.gid;
@@ -10,28 +11,31 @@ import gobject.object;
 
 /**
     [gio.simple_proxy_resolver.SimpleProxyResolver] is a simple [gio.proxy_resolver.ProxyResolver] implementation
-  that handles a single default proxy, multiple URI-scheme-specific
-  proxies, and a list of hosts that proxies should not be used for.
-  
-  [gio.simple_proxy_resolver.SimpleProxyResolver] is never the default proxy resolver, but it
-  can be used as the base class for another proxy resolver
-  implementation, or it can be created and used manually, such as
-  with [gio.socket_client.SocketClient.setProxyResolver].
+    that handles a single default proxy, multiple URI-scheme-specific
+    proxies, and a list of hosts that proxies should not be used for.
+    
+    [gio.simple_proxy_resolver.SimpleProxyResolver] is never the default proxy resolver, but it
+    can be used as the base class for another proxy resolver
+    implementation, or it can be created and used manually, such as
+    with [gio.socket_client.SocketClient.setProxyResolver].
 */
 class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyResolver
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_proxy_resolver_get_type != &gidSymbolNotFound ? g_simple_proxy_resolver_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,15 +50,16 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
 
   /**
       Creates a new #GSimpleProxyResolver. See
-    #GSimpleProxyResolver:default-proxy and
-    #GSimpleProxyResolver:ignore-hosts for more details on how the
-    arguments are interpreted.
-    Params:
-      defaultProxy =       the default proxy to use, eg
-            "socks://192.168.1.1"
-      ignoreHosts =       an optional list of hosts/IP addresses
-            to not use a proxy for.
-    Returns:     a new #GSimpleProxyResolver
+      #GSimpleProxyResolver:default-proxy and
+      #GSimpleProxyResolver:ignore-hosts for more details on how the
+      arguments are interpreted.
+  
+      Params:
+        defaultProxy = the default proxy to use, eg
+              "socks://192.168.1.1"
+        ignoreHosts = an optional list of hosts/IP addresses
+              to not use a proxy for.
+      Returns: a new #GSimpleProxyResolver
   */
   static gio.proxy_resolver.ProxyResolver new_(string defaultProxy = null, string[] ignoreHosts = null)
   {
@@ -72,14 +77,15 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
 
   /**
       Sets the default proxy on resolver, to be used for any URIs that
-    don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
-    via [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
-    
-    If default_proxy starts with "socks://",
-    #GSimpleProxyResolver will treat it as referring to all three of
-    the socks5, socks4a, and socks4 proxy types.
-    Params:
-      defaultProxy =       the default proxy to use
+      don't match #GSimpleProxyResolver:ignore-hosts or a proxy set
+      via [gio.simple_proxy_resolver.SimpleProxyResolver.setUriProxy].
+      
+      If default_proxy starts with "socks://",
+      #GSimpleProxyResolver will treat it as referring to all three of
+      the socks5, socks4a, and socks4 proxy types.
+  
+      Params:
+        defaultProxy = the default proxy to use
   */
   void setDefaultProxy(string defaultProxy = null)
   {
@@ -89,12 +95,13 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
 
   /**
       Sets the list of ignored hosts.
-    
-    See #GSimpleProxyResolver:ignore-hosts for more details on how the
-    ignore_hosts argument is interpreted.
-    Params:
-      ignoreHosts =       null-terminated list of hosts/IP addresses
-            to not use a proxy for
+      
+      See #GSimpleProxyResolver:ignore-hosts for more details on how the
+      ignore_hosts argument is interpreted.
+  
+      Params:
+        ignoreHosts = null-terminated list of hosts/IP addresses
+              to not use a proxy for
   */
   void setIgnoreHosts(string[] ignoreHosts)
   {
@@ -108,16 +115,17 @@ class SimpleProxyResolver : gobject.object.ObjectG, gio.proxy_resolver.ProxyReso
 
   /**
       Adds a URI-scheme-specific proxy to resolver; URIs whose scheme
-    matches uri_scheme (and which don't match
-    #GSimpleProxyResolver:ignore-hosts) will be proxied via proxy.
-    
-    As with #GSimpleProxyResolver:default-proxy, if proxy starts with
-    "socks://", #GSimpleProxyResolver will treat it
-    as referring to all three of the socks5, socks4a, and socks4 proxy
-    types.
-    Params:
-      uriScheme =       the URI scheme to add a proxy for
-      proxy =       the proxy to use for uri_scheme
+      matches uri_scheme (and which don't match
+      #GSimpleProxyResolver:ignore-hosts) will be proxied via proxy.
+      
+      As with #GSimpleProxyResolver:default-proxy, if proxy starts with
+      "socks://", #GSimpleProxyResolver will treat it
+      as referring to all three of the socks5, socks4a, and socks4 proxy
+      types.
+  
+      Params:
+        uriScheme = the URI scheme to add a proxy for
+        proxy = the proxy to use for uri_scheme
   */
   void setUriProxy(string uriScheme, string proxy)
   {

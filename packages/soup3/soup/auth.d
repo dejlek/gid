@@ -1,3 +1,4 @@
+/// Module for [Auth] class
 module soup.auth;
 
 import gid.gid;
@@ -11,28 +12,31 @@ import soup.types;
 
 /**
     The abstract base class for handling authentication.
-  
-  Specific HTTP Authentication mechanisms are implemented by its subclasses,
-  but applications never need to be aware of the specific subclasses being
-  used.
-  
-  #SoupAuth objects store the authentication data associated with a given bit
-  of web space. They are created automatically by `class@Session`.
+    
+    Specific HTTP Authentication mechanisms are implemented by its subclasses,
+    but applications never need to be aware of the specific subclasses being
+    used.
+    
+    #SoupAuth objects store the authentication data associated with a given bit
+    of web space. They are created automatically by `class@Session`.
 */
 class Auth : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_get_type != &gidSymbolNotFound ? soup_auth_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,16 +49,17 @@ class Auth : gobject.object.ObjectG
 
   /**
       Creates a new #SoupAuth of type type with the information from
-    msg and auth_header.
-    
-    This is called by `classSession`; you will normally not create auths
-    yourself.
-    Params:
-      type =       the type of auth to create (a subtype of #SoupAuth)
-      msg =       the #SoupMessage the auth is being created for
-      authHeader =       the WWW-Authenticate/Proxy-Authenticate header
-    Returns:     the new #SoupAuth, or null if it could
-        not be created
+      msg and auth_header.
+      
+      This is called by `classSession`; you will normally not create auths
+      yourself.
+  
+      Params:
+        type = the type of auth to create (a subtype of #SoupAuth)
+        msg = the #SoupMessage the auth is being created for
+        authHeader = the WWW-Authenticate/Proxy-Authenticate header
+      Returns: the new #SoupAuth, or null if it could
+          not be created
   */
   this(gobject.types.GType type, soup.message.Message msg, string authHeader)
   {
@@ -66,12 +71,13 @@ class Auth : gobject.object.ObjectG
 
   /**
       Call this on an auth to authenticate it.
-    
-    Normally this will cause the auth's message to be requeued with the new
-    authentication info.
-    Params:
-      username =       the username provided by the user or client
-      password =       the password provided by the user or client
+      
+      Normally this will cause the auth's message to be requeued with the new
+      authentication info.
+  
+      Params:
+        username = the username provided by the user or client
+        password = the password provided by the user or client
   */
   void authenticate(string username, string password)
   {
@@ -82,8 +88,8 @@ class Auth : gobject.object.ObjectG
 
   /**
       Tests if auth is able to authenticate by providing credentials to the
-    [soup.auth.Auth.authenticate].
-    Returns:     true if auth is able to accept credentials.
+      [soup.auth.Auth.authenticate].
+      Returns: true if auth is able to accept credentials.
   */
   bool canAuthenticate()
   {
@@ -94,10 +100,10 @@ class Auth : gobject.object.ObjectG
 
   /**
       Call this on an auth to cancel it.
-    
-    You need to cancel an auth to complete an asynchronous authenticate operation
-    when no credentials are provided ([soup.auth.Auth.authenticate] is not called).
-    The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
+      
+      You need to cancel an auth to complete an asynchronous authenticate operation
+      when no credentials are provided ([soup.auth.Auth.authenticate] is not called).
+      The #SoupAuth will be cancelled on dispose if it hans't been authenticated.
   */
   void cancel()
   {
@@ -106,7 +112,7 @@ class Auth : gobject.object.ObjectG
 
   /**
       Returns the authority (host:port) that auth is associated with.
-    Returns:     the authority
+      Returns: the authority
   */
   string getAuthority()
   {
@@ -118,12 +124,13 @@ class Auth : gobject.object.ObjectG
 
   /**
       Generates an appropriate "Authorization" header for msg.
-    
-    (The session will only call this if [soup.auth.Auth.isAuthenticated] returned
-    true.)
-    Params:
-      msg =       the #SoupMessage to be authorized
-    Returns:     the "Authorization" header, which must be freed.
+      
+      (The session will only call this if [soup.auth.Auth.isAuthenticated] returned
+      true.)
+  
+      Params:
+        msg = the #SoupMessage to be authorized
+      Returns: the "Authorization" header, which must be freed.
   */
   string getAuthorization(soup.message.Message msg)
   {
@@ -135,12 +142,12 @@ class Auth : gobject.object.ObjectG
 
   /**
       Gets an opaque identifier for auth.
-    
-    The identifier can be used as a hash key or the like. #SoupAuth objects from
-    the same server with the same identifier refer to the same authentication
-    domain (eg, the URLs associated with them take the same usernames and
-    passwords).
-    Returns:     the identifier
+      
+      The identifier can be used as a hash key or the like. #SoupAuth objects from
+      the same server with the same identifier refer to the same authentication
+      domain (eg, the URLs associated with them take the same usernames and
+      passwords).
+      Returns: the identifier
   */
   string getInfo()
   {
@@ -152,15 +159,16 @@ class Auth : gobject.object.ObjectG
 
   /**
       Returns a list of paths on the server which auth extends over.
-    
-    (All subdirectories of these paths are also assumed to be part
-    of auth's protection space, unless otherwise discovered not to
-    be.)
-    Params:
-      sourceUri =       the URI of the request that auth was generated in
-          response to.
-    Returns:     the list of
-        paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
+      
+      (All subdirectories of these paths are also assumed to be part
+      of auth's protection space, unless otherwise discovered not to
+      be.)
+  
+      Params:
+        sourceUri = the URI of the request that auth was generated in
+            response to.
+      Returns: the list of
+          paths, which can be freed with [soup.auth.Auth.freeProtectionSpace].
   */
   string[] getProtectionSpace(glib.uri.Uri sourceUri)
   {
@@ -172,11 +180,11 @@ class Auth : gobject.object.ObjectG
 
   /**
       Returns auth's realm.
-    
-    This is an identifier that distinguishes separate authentication spaces on a
-    given server, and may be some string that is meaningful to the user.
-    (Although it is probably not localized.)
-    Returns:     the realm name
+      
+      This is an identifier that distinguishes separate authentication spaces on a
+      given server, and may be some string that is meaningful to the user.
+      (Although it is probably not localized.)
+      Returns: the realm name
   */
   string getRealm()
   {
@@ -188,8 +196,8 @@ class Auth : gobject.object.ObjectG
 
   /**
       soup_auth_get_scheme_name: (attributes org.gtk.Method.get_property=scheme-name)
-    Returns auth's scheme name. (Eg, "Basic", "Digest", or "NTLM")
-    Returns:     the scheme name
+      Returns auth's scheme name. (Eg, "Basic", "Digest", or "NTLM")
+      Returns: the scheme name
   */
   string getSchemeName()
   {
@@ -201,7 +209,7 @@ class Auth : gobject.object.ObjectG
 
   /**
       Tests if auth has been given a username and password.
-    Returns:     true if auth has been given a username and password
+      Returns: true if auth has been given a username and password
   */
   bool isAuthenticated()
   {
@@ -212,7 +220,7 @@ class Auth : gobject.object.ObjectG
 
   /**
       Tests if auth has been cancelled
-    Returns:     true if auth has been cancelled
+      Returns: true if auth has been cancelled
   */
   bool isCancelled()
   {
@@ -223,8 +231,8 @@ class Auth : gobject.object.ObjectG
 
   /**
       Tests whether or not auth is associated with a proxy server rather
-    than an "origin" server.
-    Returns:     true or false
+      than an "origin" server.
+      Returns: true or false
   */
   bool isForProxy()
   {
@@ -235,13 +243,14 @@ class Auth : gobject.object.ObjectG
 
   /**
       Tests if auth is ready to make a request for msg with.
-    
-    For most auths, this is equivalent to [soup.auth.Auth.isAuthenticated], but for
-    some auth types (eg, NTLM), the auth may be sendable (eg, as an
-    authentication request) even before it is authenticated.
-    Params:
-      msg =       a #SoupMessage
-    Returns:     true if auth is ready to make a request with.
+      
+      For most auths, this is equivalent to [soup.auth.Auth.isAuthenticated], but for
+      some auth types (eg, NTLM), the auth may be sendable (eg, as an
+      authentication request) even before it is authenticated.
+  
+      Params:
+        msg = a #SoupMessage
+      Returns: true if auth is ready to make a request with.
   */
   bool isReady(soup.message.Message msg)
   {
@@ -252,15 +261,16 @@ class Auth : gobject.object.ObjectG
 
   /**
       Updates auth with the information from msg and auth_header,
-    possibly un-authenticating it.
-    
-    As with [soup.auth.Auth.new_], this is normally only used by `classSession`.
-    Params:
-      msg =       the #SoupMessage auth is being updated for
-      authHeader =       the WWW-Authenticate/Proxy-Authenticate header
-    Returns:     true if auth is still a valid (but potentially
-        unauthenticated) #SoupAuth. false if something about auth_params
-        could not be parsed or incorporated into auth at all.
+      possibly un-authenticating it.
+      
+      As with [soup.auth.Auth.new_], this is normally only used by `classSession`.
+  
+      Params:
+        msg = the #SoupMessage auth is being updated for
+        authHeader = the WWW-Authenticate/Proxy-Authenticate header
+      Returns: true if auth is still a valid (but potentially
+          unauthenticated) #SoupAuth. false if something about auth_params
+          could not be parsed or incorporated into auth at all.
   */
   bool update(soup.message.Message msg, string authHeader)
   {

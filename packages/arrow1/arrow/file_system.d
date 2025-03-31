@@ -1,3 +1,4 @@
+/// Module for [FileSystem] class
 module arrow.file_system;
 
 import arrow.c.functions;
@@ -16,17 +17,20 @@ import gobject.object;
 class FileSystem : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_system_get_type != &gidSymbolNotFound ? garrow_file_system_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,12 +43,14 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       This is a factory function to create a specific #GArrowFileSystem
-    object.
-    Params:
-      uri =       An URI to specify file system with options. If you only have an
-          absolute path, [glib.global.filenameToUri] will help you.
-    Returns:     The newly created file system
-        that is an object of a subclass of #GArrowFileSystem.
+      object.
+  
+      Params:
+        uri = An URI to specify file system with options. If you only have an
+            absolute path, [glib.global.filenameToUri] will help you.
+      Returns: The newly created file system
+          that is an object of a subclass of #GArrowFileSystem.
+      Throws: [ErrorG]
   */
   static arrow.file_system.FileSystem create(string uri)
   {
@@ -60,12 +66,14 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Copy a file.
-    If the destination exists and is a directory, an error is returned.
-    Otherwise, it is replaced.
-    Params:
-      src =       The path of the source file.
-      dest =       The path of the destination.
-    Returns:     true on success, false if there was an error.
+      If the destination exists and is a directory, an error is returned.
+      Otherwise, it is replaced.
+  
+      Params:
+        src = The path of the source file.
+        dest = The path of the destination.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool copyFile(string src, string dest)
   {
@@ -81,11 +89,13 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Create a directory and subdirectories.
-    This function succeeds if the directory already exists.
-    Params:
-      path =       The paths of the directory.
-      recursive =       Whether creating directory recursively or not.
-    Returns:     true on success, false if there was an error.
+      This function succeeds if the directory already exists.
+  
+      Params:
+        path = The paths of the directory.
+        recursive = Whether creating directory recursively or not.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool createDir(string path, bool recursive)
   {
@@ -100,9 +110,11 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Delete a directory and its contents, recursively.
-    Params:
-      path =       The paths of the directory.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        path = The paths of the directory.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteDir(string path)
   {
@@ -117,12 +129,14 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Delete a directory's contents, recursively. Like
-    [arrow.file_system.FileSystem.deleteDir], but doesn't delete the directory
-    itself. Passing an empty path (`""`) will wipe the entire file
-    system tree.
-    Params:
-      path =       The paths of the directory.
-    Returns:     true on success, false if there was an error.
+      [arrow.file_system.FileSystem.deleteDir], but doesn't delete the directory
+      itself. Passing an empty path (`""`) will wipe the entire file
+      system tree.
+  
+      Params:
+        path = The paths of the directory.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteDirContents(string path)
   {
@@ -137,9 +151,11 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Delete a file.
-    Params:
-      path =       The paths of the file to be delete.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        path = The paths of the file to be delete.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteFile(string path)
   {
@@ -154,9 +170,11 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Delete many files.
-    Params:
-      paths =       The paths of the files to be delete.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        paths = The paths of the files to be delete.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool deleteFiles(string[] paths)
   {
@@ -179,15 +197,17 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Get information for the given target.
-    
-    Any symlink is automatically dereferenced, recursively.
-    A non-existing or unreachable file returns an OK status and has
-    a #GArrowFileType of value [arrow.types.FileType.NotFound].
-    An error status indicates a truly exceptional condition
-    (low-level I/O error, etc.).
-    Params:
-      path =       The path of the target.
-    Returns:     A #GArrowFileInfo.
+      
+      Any symlink is automatically dereferenced, recursively.
+      A non-existing or unreachable file returns an OK status and has
+      a #GArrowFileType of value [arrow.types.FileType.NotFound].
+      An error status indicates a truly exceptional condition
+      (low-level I/O error, etc.).
+  
+      Params:
+        path = The path of the target.
+      Returns: A #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo getFileInfo(string path)
   {
@@ -203,10 +223,12 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Get information same as [arrow.file_system.FileSystem.getFileInfo]
-    for the given many targets at once.
-    Params:
-      paths =       The paths of the targets.
-    Returns:     A list of #GArrowFileInfo.
+      for the given many targets at once.
+  
+      Params:
+        paths = The paths of the targets.
+      Returns: A list of #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo[] getFileInfosPaths(string[] paths)
   {
@@ -230,13 +252,15 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Get information same as [arrow.file_system.FileSystem.getFileInfo]
-    according to a selector.
-    
-    The selector's base directory will not be part of the results,
-    even if it exists.
-    Params:
-      fileSelector =       A #GArrowFileSelector.
-    Returns:     A list of #GArrowFileInfo.
+      according to a selector.
+      
+      The selector's base directory will not be part of the results,
+      even if it exists.
+  
+      Params:
+        fileSelector = A #GArrowFileSelector.
+      Returns: A list of #GArrowFileInfo.
+      Throws: [ErrorG]
   */
   arrow.file_info.FileInfo[] getFileInfosSelector(arrow.file_selector.FileSelector fileSelector)
   {
@@ -260,16 +284,18 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Move / rename a file or a directory.
-    If the destination exists:
-    $(LIST
-      * if it is a non-empty directory, an error is returned
-      * otherwise, if it has the same type as the source, it is replaced
-      * otherwise, behavior is unspecified (implementation-dependent).
-    )
-    Params:
-      src =       The path of the source file.
-      dest =       The path of the destination.
-    Returns:     true on success, false if there was an error.
+      If the destination exists:
+      $(LIST
+        * if it is a non-empty directory, an error is returned
+        * otherwise, if it has the same type as the source, it is replaced
+        * otherwise, behavior is unspecified (implementation-dependent).
+      )
+  
+      Params:
+        src = The path of the source file.
+        dest = The path of the destination.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool move(string src, string dest)
   {
@@ -285,11 +311,13 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Open an output stream for appending.
-    If the target doesn't exist, a new empty file is created.
-    Params:
-      path =       The path of the output stream.
-    Returns:     A newly created #GArrowOutputStream
-        for appending.
+      If the target doesn't exist, a new empty file is created.
+  
+      Params:
+        path = The path of the output stream.
+      Returns: A newly created #GArrowOutputStream
+          for appending.
+      Throws: [ErrorG]
   */
   arrow.output_stream.OutputStream openAppendStream(string path)
   {
@@ -305,10 +333,12 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Open an input file for random access reading.
-    Params:
-      path =       The path of the input file.
-    Returns:     A newly created
-        #GArrowSeekableInputStream.
+  
+      Params:
+        path = The path of the input file.
+      Returns: A newly created
+          #GArrowSeekableInputStream.
+      Throws: [ErrorG]
   */
   arrow.seekable_input_stream.SeekableInputStream openInputFile(string path)
   {
@@ -324,10 +354,12 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Open an input stream for sequential reading.
-    Params:
-      path =       The path of the input stream.
-    Returns:     A newly created
-        #GArrowInputStream.
+  
+      Params:
+        path = The path of the input stream.
+      Returns: A newly created
+          #GArrowInputStream.
+      Throws: [ErrorG]
   */
   arrow.input_stream.InputStream openInputStream(string path)
   {
@@ -343,11 +375,13 @@ class FileSystem : gobject.object.ObjectG
 
   /**
       Open an output stream for sequential writing.
-    If the target already exists, the existing data is truncated.
-    Params:
-      path =       The path of the output stream.
-    Returns:     A newly created
-        #GArrowOutputStream.
+      If the target already exists, the existing data is truncated.
+  
+      Params:
+        path = The path of the output stream.
+      Returns: A newly created
+          #GArrowOutputStream.
+      Throws: [ErrorG]
   */
   arrow.output_stream.OutputStream openOutputStream(string path)
   {

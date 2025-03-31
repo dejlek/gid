@@ -1,3 +1,4 @@
+/// Module for [Date64ArrayBuilder] class
 module arrow.date64_array_builder;
 
 import arrow.array_builder;
@@ -11,17 +12,20 @@ import glib.error;
 class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date64_array_builder_get_type != &gidSymbolNotFound ? garrow_date64_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -64,15 +68,17 @@ class Date64ArrayBuilder : arrow.array_builder.ArrayBuilder
 
   /**
       Append multiple values at once. It's more efficient than multiple
-    `append` and `append_null` calls.
-    Params:
-      values =       The array of
-          the number of milliseconds since UNIX epoch in signed 64bit integer.
-      isValids =       The array of
-          boolean that shows whether the Nth value is valid or not. If the
-          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
-          the Nth value is null value.
-    Returns:     true on success, false if there was an error.
+      `append` and `append_null` calls.
+  
+      Params:
+        values = The array of
+            the number of milliseconds since UNIX epoch in signed 64bit integer.
+        isValids = The array of
+            boolean that shows whether the Nth value is valid or not. If the
+            Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+            the Nth value is null value.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValues(long[] values, bool[] isValids = null)
   {

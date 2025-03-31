@@ -1,3 +1,4 @@
+/// Module for [Bitset] class
 module gtk.bitset;
 
 import gid.gid;
@@ -8,40 +9,44 @@ import gtk.types;
 
 /**
     A [gtk.bitset.Bitset] represents a set of unsigned integers.
-  
-  Another name for this data structure is "bitmap".
-  
-  The current implementation is based on [roaring bitmaps](https://roaringbitmap.org/).
-  
-  A bitset allows adding a set of integers and provides support for set operations
-  like unions, intersections and checks for equality or if a value is contained
-  in the set. [gtk.bitset.Bitset] also contains various functions to query metadata about
-  the bitset, such as the minimum or maximum values or its size.
-  
-  The fastest way to iterate values in a bitset is [gtk.bitset_iter.BitsetIter].
-  
-  The main use case for [gtk.bitset.Bitset] is implementing complex selections for
-  [gtk.selection_model.SelectionModel].
+    
+    Another name for this data structure is "bitmap".
+    
+    The current implementation is based on [roaring bitmaps](https://roaringbitmap.org/).
+    
+    A bitset allows adding a set of integers and provides support for set operations
+    like unions, intersections and checks for equality or if a value is contained
+    in the set. [gtk.bitset.Bitset] also contains various functions to query metadata about
+    the bitset, such as the minimum or maximum values or its size.
+    
+    The fastest way to iterate values in a bitset is [gtk.bitset_iter.BitsetIter].
+    
+    The main use case for [gtk.bitset.Bitset] is implementing complex selections for
+    [gtk.selection_model.SelectionModel].
 */
 class Bitset : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bitset_get_type != &gidSymbolNotFound ? gtk_bitset_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -54,7 +59,7 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Creates a new empty bitset.
-    Returns:     A new empty bitset
+      Returns: A new empty bitset
   */
   static gtk.bitset.Bitset newEmpty()
   {
@@ -66,10 +71,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Creates a bitset with the given range set.
-    Params:
-      start =       first value to add
-      nItems =       number of consecutive values to add
-    Returns:     A new bitset
+  
+      Params:
+        start = first value to add
+        nItems = number of consecutive values to add
+      Returns: A new bitset
   */
   static gtk.bitset.Bitset newRange(uint start, uint nItems)
   {
@@ -81,10 +87,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Adds value to self if it wasn't part of it before.
-    Params:
-      value =       value to add
-    Returns:     true if value was not part of self and self
-        was changed
+  
+      Params:
+        value = value to add
+      Returns: true if value was not part of self and self
+          was changed
   */
   bool add(uint value)
   {
@@ -95,10 +102,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Adds all values from start (inclusive) to start + n_items
-    (exclusive) in self.
-    Params:
-      start =       first value to add
-      nItems =       number of consecutive values to add
+      (exclusive) in self.
+  
+      Params:
+        start = first value to add
+        nItems = number of consecutive values to add
   */
   void addRange(uint start, uint nItems)
   {
@@ -107,10 +115,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Adds the closed range [first, last], so first, last and all
-    values in between. first must be smaller than last.
-    Params:
-      first =       first value to add
-      last =       last value to add
+      values in between. first must be smaller than last.
+  
+      Params:
+        first = first value to add
+        last = last value to add
   */
   void addRangeClosed(uint first, uint last)
   {
@@ -119,12 +128,13 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Interprets the values as a 2-dimensional boolean grid with the given stride
-    and inside that grid, adds a rectangle with the given width and height.
-    Params:
-      start =       first value to add
-      width =       width of the rectangle
-      height =       height of the rectangle
-      stride =       row stride of the grid
+      and inside that grid, adds a rectangle with the given width and height.
+  
+      Params:
+        start = first value to add
+        width = width of the rectangle
+        height = height of the rectangle
+        stride = row stride of the grid
   */
   void addRectangle(uint start, uint width, uint height, uint stride)
   {
@@ -133,9 +143,10 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Checks if the given value has been added to self
-    Params:
-      value =       the value to check
-    Returns:     true if self contains value
+  
+      Params:
+        value = the value to check
+      Returns: true if self contains value
   */
   bool contains(uint value)
   {
@@ -146,8 +157,8 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Creates a copy of self.
-    Returns:     A new bitset that contains the same
-        values as self
+      Returns: A new bitset that contains the same
+          values as self
   */
   gtk.bitset.Bitset copy()
   {
@@ -159,15 +170,16 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Sets self to be the symmetric difference of self and other.
-    
-    The symmetric difference is set self to contain all values that
-    were either contained in self or in other, but not in both.
-    This operation is also called an XOR.
-    
-    It is allowed for self and other to be the same bitset. The bitset
-    will be emptied in that case.
-    Params:
-      other =       the [gtk.bitset.Bitset] to compute the difference from
+      
+      The symmetric difference is set self to contain all values that
+      were either contained in self or in other, but not in both.
+      This operation is also called an XOR.
+      
+      It is allowed for self and other to be the same bitset. The bitset
+      will be emptied in that case.
+  
+      Params:
+        other = the [gtk.bitset.Bitset] to compute the difference from
   */
   void difference(gtk.bitset.Bitset other)
   {
@@ -176,9 +188,10 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Returns true if self and other contain the same values.
-    Params:
-      other =       another [gtk.bitset.Bitset]
-    Returns:     true if self and other contain the same values
+  
+      Params:
+        other = another [gtk.bitset.Bitset]
+      Returns: true if self and other contain the same values
   */
   bool equals(gtk.bitset.Bitset other)
   {
@@ -189,9 +202,9 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Returns the largest value in self.
-    
-    If self is empty, 0 is returned.
-    Returns:     The largest value in self
+      
+      If self is empty, 0 is returned.
+      Returns: The largest value in self
   */
   uint getMaximum()
   {
@@ -202,9 +215,9 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Returns the smallest value in self.
-    
-    If self is empty, `G_MAXUINT` is returned.
-    Returns:     The smallest value in self
+      
+      If self is empty, `G_MAXUINT` is returned.
+      Returns: The smallest value in self
   */
   uint getMinimum()
   {
@@ -215,11 +228,12 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Returns the value of the nth item in self.
-    
-    If nth is >= the size of self, 0 is returned.
-    Params:
-      nth =       index of the item to get
-    Returns:     the value of the nth item in self
+      
+      If nth is >= the size of self, 0 is returned.
+  
+      Params:
+        nth = index of the item to get
+      Returns: the value of the nth item in self
   */
   uint getNth(uint nth)
   {
@@ -230,14 +244,14 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Gets the number of values that were added to the set.
-    
-    For example, if the set is empty, 0 is returned.
-    
-    Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all
-    values are set, the return value is `G_MAXUINT + 1`. Unless you
-    are sure this cannot happen (it can't with [gio.list_model.ListModel]), be sure
-    to use a 64bit type.
-    Returns:     The number of values in the set.
+      
+      For example, if the set is empty, 0 is returned.
+      
+      Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all
+      values are set, the return value is `G_MAXUINT + 1`. Unless you
+      are sure this cannot happen (it can't with [gio.list_model.ListModel]), be sure
+      to use a 64bit type.
+      Returns: The number of values in the set.
   */
   ulong getSize()
   {
@@ -248,15 +262,16 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Gets the number of values that are part of the set from first to last
-    (inclusive).
-    
-    Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all values are
-    set, the return value is `G_MAXUINT + 1`. Unless you are sure this cannot
-    happen (it can't with [gio.list_model.ListModel]), be sure to use a 64bit type.
-    Params:
-      first =       the first element to include
-      last =       the last element to include
-    Returns:     The number of values in the set from first to last.
+      (inclusive).
+      
+      Note that this function returns a [vte.types.TEST_FLAGS_NONE], because when all values are
+      set, the return value is `G_MAXUINT + 1`. Unless you are sure this cannot
+      happen (it can't with [gio.list_model.ListModel]), be sure to use a 64bit type.
+  
+      Params:
+        first = the first element to include
+        last = the last element to include
+      Returns: The number of values in the set from first to last.
   */
   ulong getSizeInRange(uint first, uint last)
   {
@@ -267,13 +282,14 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Sets self to be the intersection of self and other.
-    
-    In other words, remove all values from self that are not part of other.
-    
-    It is allowed for self and other to be the same bitset. Nothing will
-    happen in that case.
-    Params:
-      other =       the [gtk.bitset.Bitset] to intersect with
+      
+      In other words, remove all values from self that are not part of other.
+      
+      It is allowed for self and other to be the same bitset. Nothing will
+      happen in that case.
+  
+      Params:
+        other = the [gtk.bitset.Bitset] to intersect with
   */
   void intersect(gtk.bitset.Bitset other)
   {
@@ -282,7 +298,7 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Check if no value is contained in bitset.
-    Returns:     true if self is empty
+      Returns: true if self is empty
   */
   bool isEmpty()
   {
@@ -293,10 +309,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Removes value from self if it was part of it before.
-    Params:
-      value =       value to remove
-    Returns:     true if value was part of self and self
-        was changed
+  
+      Params:
+        value = value to remove
+      Returns: true if value was part of self and self
+          was changed
   */
   bool remove(uint value)
   {
@@ -315,10 +332,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Removes all values from start (inclusive) to start + n_items (exclusive)
-    in self.
-    Params:
-      start =       first value to remove
-      nItems =       number of consecutive values to remove
+      in self.
+  
+      Params:
+        start = first value to remove
+        nItems = number of consecutive values to remove
   */
   void removeRange(uint start, uint nItems)
   {
@@ -327,10 +345,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Removes the closed range [first, last], so first, last and all
-    values in between. first must be smaller than last.
-    Params:
-      first =       first value to remove
-      last =       last value to remove
+      values in between. first must be smaller than last.
+  
+      Params:
+        first = first value to remove
+        last = last value to remove
   */
   void removeRangeClosed(uint first, uint last)
   {
@@ -339,12 +358,13 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Interprets the values as a 2-dimensional boolean grid with the given stride
-    and inside that grid, removes a rectangle with the given width and height.
-    Params:
-      start =       first value to remove
-      width =       width of the rectangle
-      height =       height of the rectangle
-      stride =       row stride of the grid
+      and inside that grid, removes a rectangle with the given width and height.
+  
+      Params:
+        start = first value to remove
+        width = width of the rectangle
+        height = height of the rectangle
+        stride = row stride of the grid
   */
   void removeRectangle(uint start, uint width, uint height, uint stride)
   {
@@ -353,10 +373,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Shifts all values in self to the left by amount.
-    
-    Values smaller than amount are discarded.
-    Params:
-      amount =       amount to shift all values to the left
+      
+      Values smaller than amount are discarded.
+  
+      Params:
+        amount = amount to shift all values to the left
   */
   void shiftLeft(uint amount)
   {
@@ -365,10 +386,11 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Shifts all values in self to the right by amount.
-    
-    Values that end up too large to be held in a #guint are discarded.
-    Params:
-      amount =       amount to shift all values to the right
+      
+      Values that end up too large to be held in a #guint are discarded.
+  
+      Params:
+        amount = amount to shift all values to the right
   */
   void shiftRight(uint amount)
   {
@@ -377,19 +399,20 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       This is a support function for [gio.list_model.ListModel] handling, by mirroring
-    the `GlistModel::items-changed` signal.
-    
-    First, it "cuts" the values from position to removed from
-    the bitset. That is, it removes all those values and shifts
-    all larger values to the left by removed places.
-    
-    Then, it "pastes" new room into the bitset by shifting all values
-    larger than position by added spaces to the right. This frees
-    up space that can then be filled.
-    Params:
-      position =       position at which to slice
-      removed =       number of values to remove
-      added =       number of values to add
+      the `GlistModel::items-changed` signal.
+      
+      First, it "cuts" the values from position to removed from
+      the bitset. That is, it removes all those values and shifts
+      all larger values to the left by removed places.
+      
+      Then, it "pastes" new room into the bitset by shifting all values
+      larger than position by added spaces to the right. This frees
+      up space that can then be filled.
+  
+      Params:
+        position = position at which to slice
+        removed = number of values to remove
+        added = number of values to add
   */
   void splice(uint position, uint removed, uint added)
   {
@@ -398,13 +421,14 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Sets self to be the subtraction of other from self.
-    
-    In other words, remove all values from self that are part of other.
-    
-    It is allowed for self and other to be the same bitset. The bitset
-    will be emptied in that case.
-    Params:
-      other =       the [gtk.bitset.Bitset] to subtract
+      
+      In other words, remove all values from self that are part of other.
+      
+      It is allowed for self and other to be the same bitset. The bitset
+      will be emptied in that case.
+  
+      Params:
+        other = the [gtk.bitset.Bitset] to subtract
   */
   void subtract(gtk.bitset.Bitset other)
   {
@@ -413,13 +437,14 @@ class Bitset : gobject.boxed.Boxed
 
   /**
       Sets self to be the union of self and other.
-    
-    That is, add all values from other into self that weren't part of it.
-    
-    It is allowed for self and other to be the same bitset. Nothing will
-    happen in that case.
-    Params:
-      other =       the [gtk.bitset.Bitset] to union with
+      
+      That is, add all values from other into self that weren't part of it.
+      
+      It is allowed for self and other to be the same bitset. Nothing will
+      happen in that case.
+  
+      Params:
+        other = the [gtk.bitset.Bitset] to union with
   */
   void union_(gtk.bitset.Bitset other)
   {

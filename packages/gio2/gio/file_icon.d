@@ -1,3 +1,4 @@
+/// Module for [FileIcon] class
 module gio.file_icon;
 
 import gid.gid;
@@ -13,24 +14,27 @@ import gobject.object;
 
 /**
     [gio.file_icon.FileIcon] specifies an icon by pointing to an image file
-  to be used as icon.
-  
-  It implements [gio.loadable_icon.LoadableIcon].
+    to be used as icon.
+    
+    It implements [gio.loadable_icon.LoadableIcon].
 */
 class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.LoadableIcon
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_icon_get_type != &gidSymbolNotFound ? g_file_icon_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,10 +50,11 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
 
   /**
       Creates a new icon for a file.
-    Params:
-      file =       a #GFile.
-    Returns:     a #GIcon for the given
-        file, or null on error.
+  
+      Params:
+        file = a #GFile.
+      Returns: a #GIcon for the given
+          file, or null on error.
   */
   this(gio.file.File file)
   {
@@ -60,7 +65,7 @@ class FileIcon : gobject.object.ObjectG, gio.icon.Icon, gio.loadable_icon.Loadab
 
   /**
       Gets the #GFile associated with the given icon.
-    Returns:     a #GFile.
+      Returns: a #GFile.
   */
   gio.file.File getFile()
   {

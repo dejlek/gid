@@ -1,3 +1,4 @@
+/// Module for [PadProbeInfo] class
 module gst.pad_probe_info;
 
 import gid.gid;
@@ -16,6 +17,7 @@ class PadProbeInfo
 {
   GstPadProbeInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class PadProbeInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

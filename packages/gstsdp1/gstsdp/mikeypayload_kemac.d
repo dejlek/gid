@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadKEMAC] class
 module gstsdp.mikeypayload_kemac;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class MIKEYPayloadKEMAC
 {
   GstMIKEYPayloadKEMAC cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class MIKEYPayloadKEMAC
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

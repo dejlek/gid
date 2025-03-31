@@ -1,3 +1,4 @@
+/// Module for [PadEvent] class
 module gdk.pad_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class PadEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,9 +24,10 @@ class PadEvent : gdk.event.Event
 
   /**
       Extracts the information from a pad strip or ring event.
-    Params:
-      index =       Return location for the axis index
-      value =       Return location for the axis value
+  
+      Params:
+        index = Return location for the axis index
+        value = Return location for the axis value
   */
   void getAxisValue(out uint index, out double value)
   {
@@ -33,8 +36,8 @@ class PadEvent : gdk.event.Event
 
   /**
       Extracts information about the pressed button from
-    a pad event.
-    Returns:     the button of event
+      a pad event.
+      Returns: the button of event
   */
   uint getButton()
   {
@@ -45,9 +48,10 @@ class PadEvent : gdk.event.Event
 
   /**
       Extracts group and mode information from a pad event.
-    Params:
-      group =       return location for the group
-      mode =       return location for the mode
+  
+      Params:
+        group = return location for the group
+        mode = return location for the mode
   */
   void getGroupMode(out uint group, out uint mode)
   {

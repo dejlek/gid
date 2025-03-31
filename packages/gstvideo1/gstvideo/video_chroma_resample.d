@@ -1,3 +1,4 @@
+/// Module for [VideoChromaResample] class
 module gstvideo.video_chroma_resample;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class VideoChromaResample
   GstVideoChromaResample* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class VideoChromaResample
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -28,10 +31,11 @@ class VideoChromaResample
 
   /**
       The resampler must be fed n_lines at a time. The first line should be
-    at offset.
-    Params:
-      nLines =       the number of input lines
-      offset =       the first line
+      at offset.
+  
+      Params:
+        nLines = the number of input lines
+        offset = the first line
   */
   void getInfo(out uint nLines, out int offset)
   {

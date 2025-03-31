@@ -1,3 +1,4 @@
+/// Module for [UnionArrayBuilder] class
 module arrow.union_array_builder;
 
 import arrow.array_builder;
@@ -11,17 +12,20 @@ import glib.error;
 class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_array_builder_get_type != &gidSymbolNotFound ? garrow_union_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,18 +47,20 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
 
   /**
       Append an element to the union array.
-    
-    If builder is #GArrowDenseUnionArrayBuilder, this must be followed by an
-    append to the appropriate child builder.
-    
-    If builder is #GArrowSparseUnionArrayBuilder, this must be
-    followed by appends to all child builders. The corresponding child
-    builder must be appended to independently after this method is
-    called, and all other child builders must have null or empty value
-    appended.
-    Params:
-      value =       A type ID value.
-    Returns:     true on success, false if there was an error.
+      
+      If builder is #GArrowDenseUnionArrayBuilder, this must be followed by an
+      append to the appropriate child builder.
+      
+      If builder is #GArrowSparseUnionArrayBuilder, this must be
+      followed by appends to all child builders. The corresponding child
+      builder must be appended to independently after this method is
+      called, and all other child builders must have null or empty value
+      appended.
+  
+      Params:
+        value = A type ID value.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendValue(byte value)
   {

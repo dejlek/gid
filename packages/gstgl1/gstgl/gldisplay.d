@@ -1,3 +1,4 @@
+/// Module for [GLDisplay] class
 module gstgl.gldisplay;
 
 import gid.gid;
@@ -15,42 +16,45 @@ import gstgl.types;
 
 /**
     #GstGLDisplay represents a connection to the underlying windowing system.
-  Elements are required to make use of #GstContext to share and propagate
-  a #GstGLDisplay.
-  
-  There are a number of environment variables that influence the choice of
-  platform and window system specific functionality.
-  $(LIST
-    * GST_GL_WINDOW influences the window system to use.  Common values are
-      'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
-    * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
-      'egl', 'glx', 'wgl' or 'cgl'.
-    * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
-      Common values are 'opengl', 'opengl3' and 'gles2'.
-  )
+    Elements are required to make use of #GstContext to share and propagate
+    a #GstGLDisplay.
     
-  > Certain window systems require a special function to be called to
-  > initialize threading support.  As this GStreamer GL library does not preclude
-  > concurrent access to the windowing system, it is strongly advised that
-  > applications ensure that threading support has been initialized before any
-  > other toolkit/library functionality is accessed.  Failure to do so could
-  > result in sudden application abortion during execution.  The most notably
-  > example of such a function is X11's XInitThreads\().
+    There are a number of environment variables that influence the choice of
+    platform and window system specific functionality.
+    $(LIST
+      * GST_GL_WINDOW influences the window system to use.  Common values are
+        'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
+      * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
+        'egl', 'glx', 'wgl' or 'cgl'.
+      * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
+        Common values are 'opengl', 'opengl3' and 'gles2'.
+    )
+      
+    > Certain window systems require a special function to be called to
+    > initialize threading support.  As this GStreamer GL library does not preclude
+    > concurrent access to the windowing system, it is strongly advised that
+    > applications ensure that threading support has been initialized before any
+    > other toolkit/library functionality is accessed.  Failure to do so could
+    > result in sudden application abortion during execution.  The most notably
+    > example of such a function is X11's XInitThreads\().
 */
 class GLDisplay : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_get_type != &gidSymbolNotFound ? gst_gl_display_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -71,13 +75,14 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       Will always return a #GstGLDisplay of a single type.  This differs from
-    [gstgl.gldisplay.GLDisplay.new_] and the seemingly equivalent call
-    gst_gl_display_new_with_type (GST_GL_DISPLAY_TYPE_ANY) in that the latter
-    may return NULL.
-    Params:
-      type =       #GstGLDisplayType
-    Returns:     a new #GstGLDisplay or null if type is
-               not supported
+      [gstgl.gldisplay.GLDisplay.new_] and the seemingly equivalent call
+      gst_gl_display_new_with_type (GST_GL_DISPLAY_TYPE_ANY) in that the latter
+      may return NULL.
+  
+      Params:
+        type = #GstGLDisplayType
+      Returns: a new #GstGLDisplay or null if type is
+                 not supported
   */
   static gstgl.gldisplay.GLDisplay newWithType(gstgl.types.GLDisplayType type)
   {
@@ -97,10 +102,12 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       It requires the display's object lock to be held.
-    Params:
-      otherContext =       other #GstGLContext to share resources with.
-      pContext =       resulting #GstGLContext
-    Returns:     whether a new context could be created.
+  
+      Params:
+        otherContext = other #GstGLContext to share resources with.
+        pContext = resulting #GstGLContext
+      Returns: whether a new context could be created.
+      Throws: [ErrorG]
   */
   bool createContext(gstgl.glcontext.GLContext otherContext, out gstgl.glcontext.GLContext pContext)
   {
@@ -125,11 +132,13 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       Ensures that the display has a valid GL context for the current thread. If
-    context already contains a valid context, this does nothing.
-    Params:
-      otherContext =       other #GstGLContext to share resources with.
-      context =       the resulting #GstGLContext
-    Returns:     wether context contains a valid context.
+      context already contains a valid context, this does nothing.
+  
+      Params:
+        otherContext = other #GstGLContext to share resources with.
+        context = the resulting #GstGLContext
+      Returns: wether context contains a valid context.
+      Throws: [ErrorG]
   */
   bool ensureContext(gstgl.glcontext.GLContext otherContext = null, gstgl.glcontext.GLContext context = null)
   {
@@ -143,11 +152,12 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       limit the use of OpenGL to the requested gl_api.  This is intended to allow
-    application and elements to request a specific set of OpenGL API's based on
-    what they support.  See [gstgl.glcontext.GLContext.getGlApi] for the retrieving the
-    API supported by a #GstGLContext.
-    Params:
-      glApi =       a #GstGLAPI to filter with
+      application and elements to request a specific set of OpenGL API's based on
+      what they support.  See [gstgl.glcontext.GLContext.getGlApi] for the retrieving the
+      API supported by a #GstGLContext.
+  
+      Params:
+        glApi = a #GstGLAPI to filter with
   */
   void filterGlApi(gstgl.types.GLAPI glApi)
   {
@@ -156,15 +166,16 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       Execute compare_func over the list of windows stored by display.  The
-    first argument to compare_func is the #GstGLWindow being checked and the
-    second argument is data.
-    Params:
-      data =       some data to pass to compare_func
-      compareFunc =       a comparison function to run
-    Returns:     The first #GstGLWindow that causes a match
-               from compare_func
+      first argument to compare_func is the #GstGLWindow being checked and the
+      second argument is data.
   
-    Deprecated:     Use [gstgl.gldisplay.GLDisplay.retrieveWindow] instead.
+      Params:
+        data = some data to pass to compare_func
+        compareFunc = a comparison function to run
+      Returns: The first #GstGLWindow that causes a match
+                 from compare_func
+  
+      Deprecated: Use [gstgl.gldisplay.GLDisplay.retrieveWindow] instead.
   */
   gstgl.glwindow.GLWindow findWindow(void* data, glib.types.CompareFunc compareFunc)
   {
@@ -187,7 +198,7 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       see [gstgl.gldisplay.GLDisplay.filterGlApi] for what the returned value represents
-    Returns:     the #GstGLAPI configured for display
+      Returns: the #GstGLAPI configured for display
   */
   gstgl.types.GLAPI getGlApi()
   {
@@ -234,8 +245,9 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       Must be called with the object lock held.
-    Params:
-      context =       the #GstGLContext to remove
+  
+      Params:
+        context = the #GstGLContext to remove
   */
   void removeContext(gstgl.glcontext.GLContext context)
   {
@@ -252,13 +264,14 @@ class GLDisplay : gst.object.ObjectGst
 
   /**
       Execute compare_func over the list of windows stored by display.  The
-    first argument to compare_func is the #GstGLWindow being checked and the
-    second argument is data.
-    Params:
-      data =       some data to pass to compare_func
-      compareFunc =       a comparison function to run
-    Returns:     The first #GstGLWindow that causes a match
-               from compare_func
+      first argument to compare_func is the #GstGLWindow being checked and the
+      second argument is data.
+  
+      Params:
+        data = some data to pass to compare_func
+        compareFunc = a comparison function to run
+      Returns: The first #GstGLWindow that causes a match
+                 from compare_func
   */
   gstgl.glwindow.GLWindow retrieveWindow(void* data, glib.types.CompareFunc compareFunc)
   {
@@ -280,39 +293,46 @@ class GLDisplay : gst.object.ObjectGst
   }
 
   /**
-      Overrides the GstGLContext creation mechanism.
-    It can be called in any thread and it is emitted with
-    display's object lock held.
+      Connect to `CreateContext` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B context)       other context to share resources with.
-      * $(B gLDisplay) the instance the signal is connected to
-    )
-    Returns:     the new context.
-  */
-  alias CreateContextCallbackDlg = gstgl.glcontext.GLContext delegate(gstgl.glcontext.GLContext context, gstgl.gldisplay.GLDisplay gLDisplay);
-
-  /** ditto */
-  alias CreateContextCallbackFunc = gstgl.glcontext.GLContext function(gstgl.glcontext.GLContext context, gstgl.gldisplay.GLDisplay gLDisplay);
-
-  /**
-    Connect to CreateContext signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Overrides the GstGLContext creation mechanism.
+      It can be called in any thread and it is emitted with
+      display's object lock held.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D gstgl.glcontext.GLContext callback(gstgl.glcontext.GLContext context, gstgl.gldisplay.GLDisplay gLDisplay))
+  
+          `context` other context to share resources with. (optional)
+  
+          `gLDisplay` the instance the signal is connected to (optional)
+  
+          `Returns` the new context.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCreateContext(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CreateContextCallbackDlg) || is(T : CreateContextCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T : gstgl.glcontext.GLContext)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gstgl.glcontext.GLContext)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstgl.gldisplay.GLDisplay)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto gLDisplay = getVal!(gstgl.gldisplay.GLDisplay)(_paramVals);
-      auto context = getVal!(gstgl.glcontext.GLContext)(&_paramVals[1]);
-      auto _retval = _dClosure.dlg(context, gLDisplay);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!gstgl.glcontext.GLContext(_returnValue, _retval);
     }
 

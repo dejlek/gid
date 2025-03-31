@@ -1,3 +1,4 @@
+/// Module for [TreeListModel] class
 module gtk.tree_list_model;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gtk.types;
 class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_model_get_type != &gidSymbolNotFound ? gtk_tree_list_model_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,14 +44,15 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Creates a new empty [gtk.tree_list_model.TreeListModel] displaying root
-    with all rows collapsed.
-    Params:
-      root =       The [gio.list_model.ListModel] to use as root
-      passthrough =       true to pass through items from the models
-      autoexpand =       true to set the autoexpand property and expand the root model
-      createFunc =       Function to call to create the [gio.list_model.ListModel] for the children
-          of an item
-    Returns:     a newly created [gtk.tree_list_model.TreeListModel].
+      with all rows collapsed.
+  
+      Params:
+        root = The [gio.list_model.ListModel] to use as root
+        passthrough = true to pass through items from the models
+        autoexpand = true to set the autoexpand property and expand the root model
+        createFunc = Function to call to create the [gio.list_model.ListModel] for the children
+            of an item
+      Returns: a newly created [gtk.tree_list_model.TreeListModel].
   */
   this(gio.list_model.ListModel root, bool passthrough, bool autoexpand, gtk.types.TreeListModelCreateModelFunc createFunc)
   {
@@ -72,11 +77,11 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets whether the model is set to automatically expand new rows
-    that get added.
-    
-    This can be either rows added by changes to the underlying
-    models or via [gtk.tree_list_row.TreeListRow.setExpanded].
-    Returns:     true if the model is set to autoexpand
+      that get added.
+      
+      This can be either rows added by changes to the underlying
+      models or via [gtk.tree_list_row.TreeListRow.setExpanded].
+      Returns: true if the model is set to autoexpand
   */
   bool getAutoexpand()
   {
@@ -87,15 +92,16 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the row item corresponding to the child at index position for
-    self's root model.
-    
-    If position is greater than the number of children in the root model,
-    null is returned.
-    
-    Do not confuse this function with [gtk.tree_list_model.TreeListModel.getRow].
-    Params:
-      position =       position of the child to get
-    Returns:     the child in position
+      self's root model.
+      
+      If position is greater than the number of children in the root model,
+      null is returned.
+      
+      Do not confuse this function with [gtk.tree_list_model.TreeListModel.getRow].
+  
+      Params:
+        position = position of the child to get
+      Returns: the child in position
   */
   gtk.tree_list_row.TreeListRow getChildRow(uint position)
   {
@@ -107,7 +113,7 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the root model that self was created with.
-    Returns:     the root model
+      Returns: the root model
   */
   gio.list_model.ListModel getModel()
   {
@@ -119,16 +125,16 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets whether the model is passing through original row items.
-    
-    If this function returns false, the [gio.list_model.ListModel] functions for self
-    return custom [gtk.tree_list_row.TreeListRow] objects. You need to call
-    [gtk.tree_list_row.TreeListRow.getItem] on these objects to get the original
-    item.
-    
-    If true, the values of the child models are passed through in their
-    original state. You then need to call [gtk.tree_list_model.TreeListModel.getRow]
-    to get the custom [gtk.tree_list_row.TreeListRow]s.
-    Returns:     true if the model is passing through original row items
+      
+      If this function returns false, the [gio.list_model.ListModel] functions for self
+      return custom [gtk.tree_list_row.TreeListRow] objects. You need to call
+      [gtk.tree_list_row.TreeListRow.getItem] on these objects to get the original
+      item.
+      
+      If true, the values of the child models are passed through in their
+      original state. You then need to call [gtk.tree_list_model.TreeListModel.getRow]
+      to get the custom [gtk.tree_list_row.TreeListRow]s.
+      Returns: true if the model is passing through original row items
   */
   bool getPassthrough()
   {
@@ -139,25 +145,26 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the row object for the given row.
-    
-    If position is greater than the number of items in self,
-    null is returned.
-    
-    The row object can be used to expand and collapse rows as
-    well as to inspect its position in the tree. See its
-    documentation for details.
-    
-    This row object is persistent and will refer to the current
-    item as long as the row is present in self, independent of
-    other rows being added or removed.
-    
-    If self is set to not be passthrough, this function is
-    equivalent to calling [gio.list_model.ListModel.getItem].
-    
-    Do not confuse this function with [gtk.tree_list_model.TreeListModel.getChildRow].
-    Params:
-      position =       the position of the row to fetch
-    Returns:     The row item
+      
+      If position is greater than the number of items in self,
+      null is returned.
+      
+      The row object can be used to expand and collapse rows as
+      well as to inspect its position in the tree. See its
+      documentation for details.
+      
+      This row object is persistent and will refer to the current
+      item as long as the row is present in self, independent of
+      other rows being added or removed.
+      
+      If self is set to not be passthrough, this function is
+      equivalent to calling [gio.list_model.ListModel.getItem].
+      
+      Do not confuse this function with [gtk.tree_list_model.TreeListModel.getChildRow].
+  
+      Params:
+        position = the position of the row to fetch
+      Returns: The row item
   */
   gtk.tree_list_row.TreeListRow getRow(uint position)
   {
@@ -169,12 +176,13 @@ class TreeListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Sets whether the model should autoexpand.
-    
-    If set to true, the model will recursively expand all rows that
-    get added to the model. This can be either rows added by changes
-    to the underlying models or via [gtk.tree_list_row.TreeListRow.setExpanded].
-    Params:
-      autoexpand =       true to make the model autoexpand its rows
+      
+      If set to true, the model will recursively expand all rows that
+      get added to the model. This can be either rows added by changes
+      to the underlying models or via [gtk.tree_list_row.TreeListRow.setExpanded].
+  
+      Params:
+        autoexpand = true to make the model autoexpand its rows
   */
   void setAutoexpand(bool autoexpand)
   {

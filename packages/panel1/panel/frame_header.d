@@ -1,3 +1,4 @@
+/// Module for [FrameHeader] interface
 module panel.frame_header;
 
 public import panel.frame_header_iface_proxy;
@@ -16,6 +17,7 @@ import panel.widget;
 interface FrameHeader
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

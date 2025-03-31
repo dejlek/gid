@@ -1,3 +1,4 @@
+/// C types for gstgl1 library
 module gstgl.c.types;
 
 public import gid.basictypes;
@@ -15,7 +16,7 @@ enum GstGLAPI : uint
 
   /**
       Desktop OpenGL up to and including 3.1.  The
-                       compatibility profile when the OpenGL version is >= 3.2
+                         compatibility profile when the OpenGL version is >= 3.2
   */
   Opengl = 1,
 
@@ -50,7 +51,7 @@ enum GstGLBaseMemoryError
 
   /**
       the implementation is too old and doesn't
-                                        implement enough features
+                                          implement enough features
   */
   OldLibs = 1,
 
@@ -65,13 +66,13 @@ enum GstGLBaseMemoryTransfer : uint
 {
   /**
       the texture needs downloading
-                                                to the data pointer
+                                                  to the data pointer
   */
   Download = 1048576,
 
   /**
       the data pointer needs uploading
-                                                to the texture
+                                                  to the texture
   */
   Upload = 2097152,
 }
@@ -225,7 +226,7 @@ enum GstGLDisplayType : uint
 
   /**
       Mesa3D surfaceless display using the EGL_PLATFORM_SURFACELESS_MESA
-    extension.
+      extension.
   */
   EglSurfaceless = 4096,
 
@@ -240,7 +241,7 @@ enum GstGLFormat
 {
   /**
       Single component replicated across R, G, and B textures
-                       components
+                         components
   */
   Luminance = 6409,
 
@@ -281,37 +282,37 @@ enum GstGLFormat
 
   /**
       Three 8-bit components stored in the R, G, and B
-                  texture components
+                    texture components
   */
   Rgb8 = 32849,
 
   /**
       Three components of bit depth 5, 6 and 5 stored in the R, G,
-                    and B texture components respectively.
+                      and B texture components respectively.
   */
   Rgb565 = 36194,
 
   /**
       Three 16-bit components stored in the R, G, and B
-                  texture components
+                    texture components
   */
   Rgb16 = 32852,
 
   /**
       Four components stored in the R, G, B, and A texture
-                  components respectively.
+                    components respectively.
   */
   Rgba = 6408,
 
   /**
       Four 8-bit components stored in the R, G, B, and A texture
-                   components respectively.
+                     components respectively.
   */
   Rgba8 = 32856,
 
   /**
       Four 16-bit components stored in the R, G, B, and A texture
-                   components respectively.
+                     components respectively.
   */
   Rgba16 = 32859,
 
@@ -322,7 +323,7 @@ enum GstGLFormat
 
   /**
       A 24-bit component for depth information and
-                              a 8-bit component for stencil informat.
+                                a 8-bit component for stencil informat.
   */
   Depth24Stencil8 = 35056,
 
@@ -350,7 +351,7 @@ enum GstGLPlatform : uint
 
   /**
       the EGL platform used primarily with the X11, wayland
-                         and android window systems as well as on embedded Linux
+                           and android window systems as well as on embedded Linux
   */
   Egl = 1,
 
@@ -565,10 +566,10 @@ enum GstGLStereoDownmix
 
 /**
     The OpenGL texture target that an OpenGL texture can be bound to.  The
-  [gstgl.global.glValueSetTextureTargetFromMask],
-  [gstgl.global.glValueGetTextureTargetMask], and
-  [gstgl.global.glValueSetTextureTarget] functions can be used for handling texture
-  targets with #GValue's when e.g. dealing with #GstCaps.
+    [gstgl.global.glValueSetTextureTargetFromMask],
+    [gstgl.global.glValueGetTextureTargetMask], and
+    [gstgl.global.glValueSetTextureTarget] functions can be used for handling texture
+    targets with #GValue's when e.g. dealing with #GstCaps.
 */
 enum GstGLTextureTarget
 {
@@ -584,13 +585,13 @@ enum GstGLTextureTarget
 
   /**
       rectangle texture target
-        (`GL_TEXTURE_RECTANGLE`)
+          (`GL_TEXTURE_RECTANGLE`)
   */
   Rectangle = 2,
 
   /**
       external oes texture target
-        (`GL_TEXTURE_EXTERNAL_OES`)
+          (`GL_TEXTURE_EXTERNAL_OES`)
   */
   ExternalOes = 3,
 }
@@ -707,7 +708,7 @@ struct GstGLAllocationParams
 
 /**
     #GstGLAsyncDebug an opaque structure and should only be accessed through the
-  provided API.
+    provided API.
 */
 struct GstGLAsyncDebug
 {
@@ -750,9 +751,9 @@ struct GstGLAsyncDebug
 
 /**
     #GstGLBaseFilter handles the nitty gritty details of retrieving an OpenGL
-  context.  It also provided some wrappers around #GstBaseTransform's
-  `start()`, `stop()` and `set_caps()` virtual methods that ensure an OpenGL
-  context is available and current in the calling thread.
+    context.  It also provided some wrappers around #GstBaseTransform's
+    `start()`, `stop()` and `set_caps()` virtual methods that ensure an OpenGL
+    context is available and current in the calling thread.
 */
 struct GstGLBaseFilter
 {
@@ -811,8 +812,8 @@ struct GstGLBaseFilterClass
 
   /**
       called in the GL thread when caps are set on @filter.
-                  Note: this will also be called when changing OpenGL contexts
-                  where #GstBaseTransform::set_caps may not.
+                    Note: this will also be called when changing OpenGL contexts
+                    where #GstBaseTransform::set_caps may not.
   */
   extern(C) bool function(GstGLBaseFilter* filter, GstCaps* incaps, GstCaps* outcaps) glSetCaps;
 
@@ -825,9 +826,9 @@ struct GstGLBaseFilterPrivate;
 
 /**
     GstGLBaseMemory is a #GstMemory subclass providing the basis of support
-  for the mapping of GL buffers.
-  
-  Data is uploaded or downloaded from the GPU as is necessary.
+    for the mapping of GL buffers.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
 */
 struct GstGLBaseMemory
 {
@@ -934,8 +935,8 @@ struct GstGLBaseMemoryAllocatorClass
 
 /**
     #GstGLBaseMixer handles the nitty gritty details of retrieving an OpenGL
-  context.  It provides some virtual methods to know when the OpenGL context
-  is available and is not available within this element.
+    context.  It provides some virtual methods to know when the OpenGL context
+    is available and is not available within this element.
 */
 struct GstGLBaseMixer
 {
@@ -1013,9 +1014,9 @@ struct GstGLBaseMixerPrivate;
 
 /**
     #GstGLBaseSrc handles the nitty gritty details of retrieving an OpenGL
-  context. It also provided some wrappers around #GstBaseSrc's `start()` and
-  `stop()` virtual methods that ensure an OpenGL context is available and
-  current in the calling thread.
+    context. It also provided some wrappers around #GstBaseSrc's `start()` and
+    `stop()` virtual methods that ensure an OpenGL context is available and
+    current in the calling thread.
 */
 struct GstGLBaseSrc
 {
@@ -1091,9 +1092,9 @@ struct GstGLBaseSrcPrivate;
 
 /**
     GstGLBuffer is a #GstMemory subclass providing support for the mapping of
-  GL buffers.
-  
-  Data is uploaded or downloaded from the GPU as is necessary.
+    GL buffers.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
 */
 struct GstGLBuffer
 {
@@ -1166,13 +1167,13 @@ struct GstGLBufferAllocatorClass
 
 /**
     a #GstGLBufferPool is an object that allocates buffers with #GstGLBaseMemory
-  
-  A #GstGLBufferPool is created with [gstgl.glbuffer_pool.GLBufferPool.new_]
-  
-  #GstGLBufferPool implements the VideoMeta buffer pool option
-  `GST_BUFFER_POOL_OPTION_VIDEO_META`, the VideoAligment buffer pool option
-  `GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT` as well as the OpenGL specific
-  `GST_BUFFER_POOL_OPTION_GL_SYNC_META` buffer pool option.
+    
+    A #GstGLBufferPool is created with [gstgl.glbuffer_pool.GLBufferPool.new_]
+    
+    #GstGLBufferPool implements the VideoMeta buffer pool option
+    `GST_BUFFER_POOL_OPTION_VIDEO_META`, the VideoAligment buffer pool option
+    `GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT` as well as the OpenGL specific
+    `GST_BUFFER_POOL_OPTION_GL_SYNC_META` buffer pool option.
 */
 struct GstGLBufferPool
 {
@@ -1206,14 +1207,14 @@ struct GstGLBufferPoolPrivate;
 
 /**
     #GstGLColorConvert is an object that converts between color spaces and/or
-  formats using OpenGL Shaders.
-  
-  A #GstGLColorConvert can be created with [gstgl.glcolor_convert.GLColorConvert.new_], the
-  configuration negotiated with [gstgl.glcolor_convert.GLColorConvert.transformCaps] and the
-  conversion performed with [gstgl.glcolor_convert.GLColorConvert.perform].
-  
-  The glcolorconvertelement provides a GStreamer element that uses
-  #GstGLColorConvert to convert between video formats and color spaces.
+    formats using OpenGL Shaders.
+    
+    A #GstGLColorConvert can be created with [gstgl.glcolor_convert.GLColorConvert.new_], the
+    configuration negotiated with [gstgl.glcolor_convert.GLColorConvert.transformCaps] and the
+    conversion performed with [gstgl.glcolor_convert.GLColorConvert.perform].
+    
+    The glcolorconvertelement provides a GStreamer element that uses
+    #GstGLColorConvert to convert between video formats and color spaces.
 */
 struct GstGLColorConvert
 {
@@ -1271,26 +1272,26 @@ struct GstGLColorConvertPrivate;
 
 /**
     #GstGLContext wraps an OpenGL context object in a uniform API.  As a result
-  of the limitation on OpenGL context, this object is not thread safe unless
-  specified and must only be activated in a single thread.
-  
-  Environment variables:
-  $(LIST
-    * `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
-                    Depending on the platform, the available values are
-                    'opengl', 'opengl3' (core profile), and 'gles2'.  See the
-                    the #GstGLAPI enumeration for more details.
-    * `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
-                         context with.  Depending on the platform and the
-                         dependencies available build-time, the available values
-                         are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
-    * `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
-                       context and OpenGL surface.  Written out as a GstStructure
-                       that has been serialized to string.  e.g.
-                       `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
-                       Not all platforms will support the same level of
-                       functionality.
-  )
+    of the limitation on OpenGL context, this object is not thread safe unless
+    specified and must only be activated in a single thread.
+    
+    Environment variables:
+    $(LIST
+      * `GST_GL_API`: select which OpenGL API to create and OpenGL context for.
+                      Depending on the platform, the available values are
+                      'opengl', 'opengl3' (core profile), and 'gles2'.  See the
+                      the #GstGLAPI enumeration for more details.
+      * `GST_GL_PLATFORM`: select which OpenGL platform to create an OpenGL
+                           context with.  Depending on the platform and the
+                           dependencies available build-time, the available values
+                           are, 'glx', 'egl', 'cgl', 'wgl', and 'eagl'
+      * `GST_GL_CONFIG`: select the configuration used for creating the OpenGL
+                         context and OpenGL surface.  Written out as a GstStructure
+                         that has been serialized to string.  e.g.
+                         `GST_GL_CONFIG="gst-gl-context-config,red-size=8,green-size=8,blue-size=8,alpha-size=8,depth-size=16"`.
+                         Not all platforms will support the same level of
+                         functionality.
+    )
 */
 struct GstGLContext
 {
@@ -1388,27 +1389,27 @@ struct GstGLContextPrivate;
 
 /**
     #GstGLDisplay represents a connection to the underlying windowing system.
-  Elements are required to make use of #GstContext to share and propagate
-  a #GstGLDisplay.
-  
-  There are a number of environment variables that influence the choice of
-  platform and window system specific functionality.
-  $(LIST
-    * GST_GL_WINDOW influences the window system to use.  Common values are
-      'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
-    * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
-      'egl', 'glx', 'wgl' or 'cgl'.
-    * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
-      Common values are 'opengl', 'opengl3' and 'gles2'.
-  )
+    Elements are required to make use of #GstContext to share and propagate
+    a #GstGLDisplay.
     
-  > Certain window systems require a special function to be called to
-  > initialize threading support.  As this GStreamer GL library does not preclude
-  > concurrent access to the windowing system, it is strongly advised that
-  > applications ensure that threading support has been initialized before any
-  > other toolkit/library functionality is accessed.  Failure to do so could
-  > result in sudden application abortion during execution.  The most notably
-  > example of such a function is X11's XInitThreads\().
+    There are a number of environment variables that influence the choice of
+    platform and window system specific functionality.
+    $(LIST
+      * GST_GL_WINDOW influences the window system to use.  Common values are
+        'x11', 'wayland', 'surfaceless', 'win32' or 'cocoa'.
+      * GST_GL_PLATFORM influences the OpenGL platform to use.  Common values are
+        'egl', 'glx', 'wgl' or 'cgl'.
+      * GST_GL_API influences the OpenGL API requested by the OpenGL platform.
+        Common values are 'opengl', 'opengl3' and 'gles2'.
+    )
+      
+    > Certain window systems require a special function to be called to
+    > initialize threading support.  As this GStreamer GL library does not preclude
+    > concurrent access to the windowing system, it is strongly advised that
+    > applications ensure that threading support has been initialized before any
+    > other toolkit/library functionality is accessed.  Failure to do so could
+    > result in sudden application abortion during execution.  The most notably
+    > example of such a function is X11's XInitThreads\().
 */
 struct GstGLDisplay
 {
@@ -1455,7 +1456,7 @@ struct GstGLDisplayPrivate;
 
 /**
     #GstGLFilter helps to implement simple OpenGL filter elements taking a
-  single input and producing a single output with a #GstGLFramebuffer
+    single input and producing a single output with a #GstGLFramebuffer
 */
 struct GstGLFilter
 {
@@ -1539,15 +1540,15 @@ struct GstGLFilterClass
 
   /**
       perform operations on the input and output buffers.  In general,
-             you should avoid using this method if at all possible. One valid
-             use-case for using this is keeping previous buffers for future calculations.
-             Note: If @filter exists, then @filter_texture is not run
+               you should avoid using this method if at all possible. One valid
+               use-case for using this is keeping previous buffers for future calculations.
+               Note: If @filter exists, then @filter_texture is not run
   */
   extern(C) bool function(GstGLFilter* filter, GstBuffer* inbuf, GstBuffer* outbuf) filter;
 
   /**
       given @in_tex, transform it into @out_tex.  Not used
-                     if @filter exists
+                       if @filter exists
   */
   extern(C) bool function(GstGLFilter* filter, GstGLMemory* input, GstGLMemory* output) filterTexture;
 
@@ -1558,7 +1559,7 @@ struct GstGLFilterClass
 
   /**
       Perform sub-class specific modifications of the
-      caps to be processed between upload on input and before download for output.
+        caps to be processed between upload on input and before download for output.
   */
   extern(C) GstCaps* function(GstGLFilter* filter, GstPadDirection direction, GstCaps* caps, GstCaps* filterCaps) transformInternalCaps;
 
@@ -1568,15 +1569,15 @@ struct GstGLFilterClass
 
 /**
     A #GstGLFramebuffer represents and holds an OpenGL framebuffer object with
-  it's associated attachments.
-  
-  A #GstGLFramebuffer can be created with [gstgl.glframebuffer.GLFramebuffer.new_] or
-  [gstgl.glframebuffer.GLFramebuffer.newWithDefaultDepth] and bound with
-  [gstgl.glframebuffer.GLFramebuffer.bind].  Other resources can be bound with
-  [gstgl.glframebuffer.GLFramebuffer.attach]
-  
-  Note: OpenGL framebuffers are not shareable resources so cannot be used
-  between multiple OpenGL contexts.
+    it's associated attachments.
+    
+    A #GstGLFramebuffer can be created with [gstgl.glframebuffer.GLFramebuffer.new_] or
+    [gstgl.glframebuffer.GLFramebuffer.newWithDefaultDepth] and bound with
+    [gstgl.glframebuffer.GLFramebuffer.bind].  Other resources can be bound with
+    [gstgl.glframebuffer.GLFramebuffer.attach]
+    
+    Note: OpenGL framebuffers are not shareable resources so cannot be used
+    between multiple OpenGL contexts.
 */
 struct GstGLFramebuffer
 {
@@ -1616,26 +1617,26 @@ struct GstGLFramebufferPrivate;
 
 /**
     Structure containing function pointers to OpenGL functions.
-  
-  Each field is named exactly the same as the OpenGL function without the
-  `gl` prefix.
+    
+    Each field is named exactly the same as the OpenGL function without the
+    `gl` prefix.
 */
 struct GstGLFuncs;
 
 /**
     GstGLMemory is a #GstGLBaseMemory subclass providing support for the mapping of
-  OpenGL textures.
-  
-  #GstGLMemory is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
-  with #GstGLVideoAllocationParams.
-  
-  Data is uploaded or downloaded from the GPU as is necessary.
-  
-  The #GstCaps that is used for #GstGLMemory based buffers should contain
-  the `GST_CAPS_FEATURE_MEMORY_GL_MEMORY` as a #GstCapsFeatures and should
-  contain a 'texture-target' field with one of the #GstGLTextureTarget values
-  as a string, i.e. some combination of 'texture-target=(string){2D,
-  rectangle, external-oes}'.
+    OpenGL textures.
+    
+    #GstGLMemory is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
+    with #GstGLVideoAllocationParams.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
+    
+    The #GstCaps that is used for #GstGLMemory based buffers should contain
+    the `GST_CAPS_FEATURE_MEMORY_GL_MEMORY` as a #GstCapsFeatures and should
+    contain a 'texture-target' field with one of the #GstGLTextureTarget values
+    as a string, i.e. some combination of 'texture-target=(string){2D,
+    rectangle, external-oes}'.
 */
 struct GstGLMemory
 {
@@ -1731,9 +1732,9 @@ struct GstGLMemoryAllocatorClass
 
 /**
     #GstGLMemoryPBO is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
-  with #GstGLVideoAllocationParams.
-  
-  Data is uploaded or downloaded from the GPU as is necessary.
+    with #GstGLVideoAllocationParams.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
 */
 struct GstGLMemoryPBO
 {
@@ -1884,7 +1885,7 @@ struct GstGLOverlayCompositorClass
 
 /**
     A #GstGLQuery represents and holds an OpenGL query object.  Various types of
-  queries can be run or counters retrieved.
+    queries can be run or counters retrieved.
 */
 struct GstGLQuery
 {
@@ -1912,10 +1913,10 @@ struct GstGLQuery
 
 /**
     GstGLRenderbuffer is a #GstGLBaseMemory subclass providing support for
-  OpenGL renderbuffers.
-  
-  #GstGLRenderbuffer is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
-  with #GstGLRenderbufferAllocationParams.
+    OpenGL renderbuffers.
+    
+    #GstGLRenderbuffer is created or wrapped through [gstgl.glbase_memory.GLBaseMemory.alloc]
+    with #GstGLRenderbufferAllocationParams.
 */
 struct GstGLRenderbuffer
 {
@@ -2061,7 +2062,7 @@ struct GstGLShaderPrivate;
 
 /**
     #GstGLSyncMeta provides the ability to synchronize the OpenGL command stream
-  with the CPU or with other OpenGL contexts.
+    with the CPU or with other OpenGL contexts.
 */
 struct GstGLSyncMeta
 {
@@ -2128,8 +2129,8 @@ struct GstGLSyncMeta
 
 /**
     #GstGLUpload is an object that uploads data from system memory into GL textures.
-  
-  A #GstGLUpload can be created with [gstgl.glupload.GLUpload.new_]
+    
+    A #GstGLUpload can be created with [gstgl.glupload.GLUpload.new_]
 */
 struct GstGLUpload
 {
@@ -2275,7 +2276,7 @@ struct GstGLViewConvertPrivate;
 
 /**
     GstGLWindow represents a window that elements can render into.  A window can
-  either be a user visible window (onscreen) or hidden (offscreen).
+    either be a user visible window (onscreen) or hidden (offscreen).
 */
 struct GstGLWindow
 {
@@ -2354,8 +2355,8 @@ struct GstGLWindowClass
 
   /**
       Gets the current window handle that this #GstGLWindow is
-                        rendering into.  This may return a different value to
-                        what is passed into @set_window_handle
+                          rendering into.  This may return a different value to
+                          what is passed into @set_window_handle
   */
   extern(C) size_t function(GstGLWindow* window) getWindowHandle;
 
@@ -2381,7 +2382,7 @@ struct GstGLWindowClass
 
   /**
       invoke a function on the window thread. @run may or may
-                         not have been called.  Required to be reentrant.
+                           not have been called.  Required to be reentrant.
   */
   extern(C) void function(GstGLWindow* window, GstGLWindowCB callback, void* data, GDestroyNotify destroy) sendMessageAsync;
 
@@ -2397,14 +2398,14 @@ struct GstGLWindowClass
 
   /**
       whether to handle 'extra' events from the windowing system.
-                    Basic events like surface moves and resizes are still valid
-                    things to listen for.
+                      Basic events like surface moves and resizes are still valid
+                      things to listen for.
   */
   extern(C) void function(GstGLWindow* window, bool handleEvents) handleEvents;
 
   /**
       request that the window change surface size.  The
-                         implementation is free to ignore this information.
+                           implementation is free to ignore this information.
   */
   extern(C) void function(GstGLWindow* window, int width, int height) setPreferredSize;
 
@@ -2425,7 +2426,7 @@ struct GstGLWindowClass
 
   /**
       Whether the window takes care of glViewport setup.
-                        and the user does not need to deal with viewports
+                          and the user does not need to deal with viewports
   */
   extern(C) bool function(GstGLWindow* window) controlsViewport;
 

@@ -1,3 +1,4 @@
+/// Module for [TransformNode] class
 module gsk.transform_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class TransformNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,11 +25,12 @@ class TransformNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will transform the given child
-    with the given transform.
-    Params:
-      child =       The node to transform
-      transform =       The transform to apply
-    Returns:     A new [gsk.render_node.RenderNode]
+      with the given transform.
+  
+      Params:
+        child = The node to transform
+        transform = The transform to apply
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, gsk.transform.Transform transform)
   {
@@ -38,7 +41,7 @@ class TransformNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting transformed by the given node.
-    Returns:     The child that is getting transformed
+      Returns: The child that is getting transformed
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -50,7 +53,7 @@ class TransformNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the [gsk.transform.Transform] used by the node.
-    Returns:     a [gsk.transform.Transform]
+      Returns: a [gsk.transform.Transform]
   */
   gsk.transform.Transform getTransform()
   {

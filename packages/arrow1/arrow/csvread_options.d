@@ -1,3 +1,4 @@
+/// Module for [CSVReadOptions] class
 module arrow.csvread_options;
 
 import arrow.c.functions;
@@ -13,17 +14,20 @@ import gobject.object;
 class CSVReadOptions : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_csv_read_options_get_type != &gidSymbolNotFound ? garrow_csv_read_options_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,9 +55,10 @@ class CSVReadOptions : gobject.object.ObjectG
 
   /**
       Add value type of a column.
-    Params:
-      name =       The name of the target column.
-      dataType =       The #GArrowDataType for the column.
+  
+      Params:
+        name = The name of the target column.
+        dataType = The #GArrowDataType for the column.
   */
   void addColumnType(string name, arrow.data_type.DataType dataType)
   {
@@ -77,8 +82,9 @@ class CSVReadOptions : gobject.object.ObjectG
 
   /**
       Add value types for columns in the schema.
-    Params:
-      schema =       The #GArrowSchema that specifies columns and their types.
+  
+      Params:
+        schema = The #GArrowSchema that specifies columns and their types.
   */
   void addSchema(arrow.schema.Schema schema)
   {

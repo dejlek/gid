@@ -1,3 +1,4 @@
+/// Module for [Renderer] class
 module gsk.renderer;
 
 import cairo.region;
@@ -15,31 +16,34 @@ import gsk.types;
 
 /**
     [gsk.renderer.Renderer] is a class that renders a scene graph defined via a
-  tree of [gsk.render_node.RenderNode] instances.
-  
-  Typically you will use a [gsk.renderer.Renderer] instance to repeatedly call
-  [gsk.renderer.Renderer.render] to update the contents of its associated
-  [gdk.surface.Surface].
-  
-  It is necessary to realize a [gsk.renderer.Renderer] instance using
-  [gsk.renderer.Renderer.realize] before calling [gsk.renderer.Renderer.render],
-  in order to create the appropriate windowing system resources needed
-  to render the scene.
+    tree of [gsk.render_node.RenderNode] instances.
+    
+    Typically you will use a [gsk.renderer.Renderer] instance to repeatedly call
+    [gsk.renderer.Renderer.render] to update the contents of its associated
+    [gdk.surface.Surface].
+    
+    It is necessary to realize a [gsk.renderer.Renderer] instance using
+    [gsk.renderer.Renderer.realize] before calling [gsk.renderer.Renderer.render],
+    in order to create the appropriate windowing system resources needed
+    to render the scene.
 */
 class Renderer : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_renderer_get_type != &gidSymbolNotFound ? gsk_renderer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,15 +56,16 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Creates an appropriate [gsk.renderer.Renderer] instance for the given surface.
-    
-    If the `GSK_RENDERER` environment variable is set, GSK will
-    try that renderer first, before trying the backend-specific
-    default. The ultimate fallback is the cairo renderer.
-    
-    The renderer will be realized before it is returned.
-    Params:
-      surface =       a [gdk.surface.Surface]
-    Returns:     a [gsk.renderer.Renderer]
+      
+      If the `GSK_RENDERER` environment variable is set, GSK will
+      try that renderer first, before trying the backend-specific
+      default. The ultimate fallback is the cairo renderer.
+      
+      The renderer will be realized before it is returned.
+  
+      Params:
+        surface = a [gdk.surface.Surface]
+      Returns: a [gsk.renderer.Renderer]
   */
   static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface)
   {
@@ -72,9 +77,9 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Retrieves the [gdk.surface.Surface] set using gsk_enderer_realize().
-    
-    If the renderer has not been realized yet, null will be returned.
-    Returns:     a [gdk.surface.Surface]
+      
+      If the renderer has not been realized yet, null will be returned.
+      Returns: a [gdk.surface.Surface]
   */
   gdk.surface.Surface getSurface()
   {
@@ -86,7 +91,7 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Checks whether the renderer is realized or not.
-    Returns:     true if the [gsk.renderer.Renderer] was realized, and false otherwise
+      Returns: true if the [gsk.renderer.Renderer] was realized, and false otherwise
   */
   bool isRealized()
   {
@@ -97,18 +102,20 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Creates the resources needed by the renderer to render the scene
-    graph.
-    
-    Since GTK 4.6, the surface may be `NULL`, which allows using
-    renderers without having to create a surface.
-    Since GTK 4.14, it is recommended to use [gsk.renderer.Renderer.realizeForDisplay]
-    instead.
-    
-    Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
-    destroying the renderer.
-    Params:
-      surface =       the [gdk.surface.Surface] renderer will be used on
-    Returns:     Whether the renderer was successfully realized
+      graph.
+      
+      Since GTK 4.6, the surface may be `NULL`, which allows using
+      renderers without having to create a surface.
+      Since GTK 4.14, it is recommended to use [gsk.renderer.Renderer.realizeForDisplay]
+      instead.
+      
+      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
+      destroying the renderer.
+  
+      Params:
+        surface = the [gdk.surface.Surface] renderer will be used on
+      Returns: Whether the renderer was successfully realized
+      Throws: [ErrorG]
   */
   bool realize(gdk.surface.Surface surface = null)
   {
@@ -122,13 +129,15 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Creates the resources needed by the renderer to render the scene
-    graph.
-    
-    Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
-    destroying the renderer.
-    Params:
-      display =       the [gdk.display.Display] renderer will be used on
-    Returns:     Whether the renderer was successfully realized
+      graph.
+      
+      Note that it is mandatory to call [gsk.renderer.Renderer.unrealize] before
+      destroying the renderer.
+  
+      Params:
+        display = the [gdk.display.Display] renderer will be used on
+      Returns: Whether the renderer was successfully realized
+      Throws: [ErrorG]
   */
   bool realizeForDisplay(gdk.display.Display display)
   {
@@ -142,21 +151,22 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Renders the scene graph, described by a tree of [gsk.render_node.RenderNode] instances
-    to the renderer's surface,  ensuring that the given region gets redrawn.
-    
-    If the renderer has no associated surface, this function does nothing.
-    
-    Renderers must ensure that changes of the contents given by the root
-    node as well as the area given by region are redrawn. They are however
-    free to not redraw any pixel outside of region if they can guarantee that
-    it didn't change.
-    
-    The renderer will acquire a reference on the [gsk.render_node.RenderNode] tree while
-    the rendering is in progress.
-    Params:
-      root =       a [gsk.render_node.RenderNode]
-      region =       the [cairo.region.Region] that must be redrawn or null
-          for the whole window
+      to the renderer's surface,  ensuring that the given region gets redrawn.
+      
+      If the renderer has no associated surface, this function does nothing.
+      
+      Renderers must ensure that changes of the contents given by the root
+      node as well as the area given by region are redrawn. They are however
+      free to not redraw any pixel outside of region if they can guarantee that
+      it didn't change.
+      
+      The renderer will acquire a reference on the [gsk.render_node.RenderNode] tree while
+      the rendering is in progress.
+  
+      Params:
+        root = a [gsk.render_node.RenderNode]
+        region = the [cairo.region.Region] that must be redrawn or null
+            for the whole window
   */
   void render(gsk.render_node.RenderNode root, cairo.region.Region region = null)
   {
@@ -165,17 +175,18 @@ class Renderer : gobject.object.ObjectG
 
   /**
       Renders the scene graph, described by a tree of [gsk.render_node.RenderNode] instances,
-    to a [gdk.texture.Texture].
-    
-    The renderer will acquire a reference on the [gsk.render_node.RenderNode] tree while
-    the rendering is in progress.
-    
-    If you want to apply any transformations to root, you should put it into a
-    transform node and pass that node instead.
-    Params:
-      root =       a [gsk.render_node.RenderNode]
-      viewport =       the section to draw or null to use root's bounds
-    Returns:     a [gdk.texture.Texture] with the rendered contents of root.
+      to a [gdk.texture.Texture].
+      
+      The renderer will acquire a reference on the [gsk.render_node.RenderNode] tree while
+      the rendering is in progress.
+      
+      If you want to apply any transformations to root, you should put it into a
+      transform node and pass that node instead.
+  
+      Params:
+        root = a [gsk.render_node.RenderNode]
+        viewport = the section to draw or null to use root's bounds
+      Returns: a [gdk.texture.Texture] with the rendered contents of root.
   */
   gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null)
   {

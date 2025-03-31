@@ -1,3 +1,4 @@
+/// Module for [TcpWrapperConnection] class
 module gio.tcp_wrapper_connection;
 
 import gid.gid;
@@ -11,26 +12,29 @@ import gobject.object;
 
 /**
     A [gio.tcp_wrapper_connection.TcpWrapperConnection] can be used to wrap a [gio.iostream.IOStream] that is
-  based on a [gio.socket.Socket], but which is not actually a
-  [gio.socket_connection.SocketConnection]. This is used by [gio.socket_client.SocketClient] so
-  that it can always return a [gio.socket_connection.SocketConnection], even when the
-  connection it has actually created is not directly a
-  [gio.socket_connection.SocketConnection].
+    based on a [gio.socket.Socket], but which is not actually a
+    [gio.socket_connection.SocketConnection]. This is used by [gio.socket_client.SocketClient] so
+    that it can always return a [gio.socket_connection.SocketConnection], even when the
+    connection it has actually created is not directly a
+    [gio.socket_connection.SocketConnection].
 */
 class TcpWrapperConnection : gio.tcp_connection.TcpConnection
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tcp_wrapper_connection_get_type != &gidSymbolNotFound ? g_tcp_wrapper_connection_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,10 +47,11 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
 
   /**
       Wraps base_io_stream and socket together as a #GSocketConnection.
-    Params:
-      baseIoStream =       the #GIOStream to wrap
-      socket =       the #GSocket associated with base_io_stream
-    Returns:     the new #GSocketConnection.
+  
+      Params:
+        baseIoStream = the #GIOStream to wrap
+        socket = the #GSocket associated with base_io_stream
+      Returns: the new #GSocketConnection.
   */
   this(gio.iostream.IOStream baseIoStream, gio.socket.Socket socket)
   {
@@ -57,7 +62,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
 
   /**
       Gets conn's base #GIOStream
-    Returns:     conn's base #GIOStream
+      Returns: conn's base #GIOStream
   */
   gio.iostream.IOStream getBaseIoStream()
   {

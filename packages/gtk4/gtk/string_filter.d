@@ -1,3 +1,4 @@
+/// Module for [StringFilter] class
 module gtk.string_filter;
 
 import gid.gid;
@@ -9,33 +10,36 @@ import gtk.types;
 
 /**
     [gtk.string_filter.StringFilter] determines whether to include items by comparing
-  strings to a fixed search term.
-  
-  The strings are obtained from the items by evaluating a [gtk.expression.Expression]
-  set with [gtk.string_filter.StringFilter.setExpression], and they are
-  compared against a search term set with [gtk.string_filter.StringFilter.setSearch].
-  
-  [gtk.string_filter.StringFilter] has several different modes of comparison - it
-  can match the whole string, just a prefix, or any substring. Use
-  [gtk.string_filter.StringFilter.setMatchMode] choose a mode.
-  
-  It is also possible to make case-insensitive comparisons, with
-  [gtk.string_filter.StringFilter.setIgnoreCase].
+    strings to a fixed search term.
+    
+    The strings are obtained from the items by evaluating a [gtk.expression.Expression]
+    set with [gtk.string_filter.StringFilter.setExpression], and they are
+    compared against a search term set with [gtk.string_filter.StringFilter.setSearch].
+    
+    [gtk.string_filter.StringFilter] has several different modes of comparison - it
+    can match the whole string, just a prefix, or any substring. Use
+    [gtk.string_filter.StringFilter.setMatchMode] choose a mode.
+    
+    It is also possible to make case-insensitive comparisons, with
+    [gtk.string_filter.StringFilter.setIgnoreCase].
 */
 class StringFilter : gtk.filter.Filter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_filter_get_type != &gidSymbolNotFound ? gtk_string_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,12 +52,13 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Creates a new string filter.
-    
-    You will want to set up the filter by providing a string to search for
-    and by providing a property to look up on the item.
-    Params:
-      expression =       The expression to evaluate
-    Returns:     a new [gtk.string_filter.StringFilter]
+      
+      You will want to set up the filter by providing a string to search for
+      and by providing a property to look up on the item.
+  
+      Params:
+        expression = The expression to evaluate
+      Returns: a new [gtk.string_filter.StringFilter]
   */
   this(gtk.expression.Expression expression = null)
   {
@@ -64,8 +69,8 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Gets the expression that the string filter uses to
-    obtain strings from items.
-    Returns:     a [gtk.expression.Expression]
+      obtain strings from items.
+      Returns: a [gtk.expression.Expression]
   */
   gtk.expression.Expression getExpression()
   {
@@ -77,7 +82,7 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Returns whether the filter ignores case differences.
-    Returns:     true if the filter ignores case
+      Returns: true if the filter ignores case
   */
   bool getIgnoreCase()
   {
@@ -88,7 +93,7 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Returns the match mode that the filter is using.
-    Returns:     the match mode of the filter
+      Returns: the match mode of the filter
   */
   gtk.types.StringFilterMatchMode getMatchMode()
   {
@@ -100,7 +105,7 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Gets the search term.
-    Returns:     The search term
+      Returns: The search term
   */
   string getSearch()
   {
@@ -112,11 +117,12 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Sets the expression that the string filter uses to
-    obtain strings from items.
-    
-    The expression must have a value type of `G_TYPE_STRING`.
-    Params:
-      expression =       a [gtk.expression.Expression]
+      obtain strings from items.
+      
+      The expression must have a value type of `G_TYPE_STRING`.
+  
+      Params:
+        expression = a [gtk.expression.Expression]
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
@@ -125,8 +131,9 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Sets whether the filter ignores case differences.
-    Params:
-      ignoreCase =       true to ignore case
+  
+      Params:
+        ignoreCase = true to ignore case
   */
   void setIgnoreCase(bool ignoreCase)
   {
@@ -135,8 +142,9 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Sets the match mode for the filter.
-    Params:
-      mode =       the new match mode
+  
+      Params:
+        mode = the new match mode
   */
   void setMatchMode(gtk.types.StringFilterMatchMode mode)
   {
@@ -145,9 +153,10 @@ class StringFilter : gtk.filter.Filter
 
   /**
       Sets the string to search for.
-    Params:
-      search =       The string to search for
-          or null to clear the search
+  
+      Params:
+        search = The string to search for
+            or null to clear the search
   */
   void setSearch(string search = null)
   {

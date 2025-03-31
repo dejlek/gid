@@ -1,3 +1,4 @@
+/// Module for [TabBar] class
 module adw.tab_bar;
 
 import adw.c.functions;
@@ -21,40 +22,43 @@ import gtk.widget;
 
 /**
     A tab bar for `class@TabView`.
-  
-  <picture>
-    <source srcset="tab-bar-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="tab-bar.png" alt="tab-bar">
-  </picture>
-  
-  The [adw.tab_bar.TabBar] widget is a tab bar that can be used with conjunction with
-  [adw.tab_view.TabView]. It is typically used as a top bar within `class@ToolbarView`.
-  
-  [adw.tab_bar.TabBar] can autohide and can optionally contain action widgets on both
-  sides of the tabs.
-  
-  When there's not enough space to show all the tabs, [adw.tab_bar.TabBar] will scroll
-  them. Pinned tabs always stay visible and aren't a part of the scrollable
-  area.
-  
-  ## CSS nodes
-  
-  [adw.tab_bar.TabBar] has a single CSS node with name `tabbar`.
+    
+    <picture>
+      <source srcset="tab-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="tab-bar.png" alt="tab-bar">
+    </picture>
+    
+    The [adw.tab_bar.TabBar] widget is a tab bar that can be used with conjunction with
+    [adw.tab_view.TabView]. It is typically used as a top bar within `class@ToolbarView`.
+    
+    [adw.tab_bar.TabBar] can autohide and can optionally contain action widgets on both
+    sides of the tabs.
+    
+    When there's not enough space to show all the tabs, [adw.tab_bar.TabBar] will scroll
+    them. Pinned tabs always stay visible and aren't a part of the scrollable
+    area.
+    
+    ## CSS nodes
+    
+    [adw.tab_bar.TabBar] has a single CSS node with name `tabbar`.
 */
 class TabBar : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_bar_get_type != &gidSymbolNotFound ? adw_tab_bar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -67,7 +71,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Creates a new [adw.tab_bar.TabBar].
-    Returns:     the newly created [adw.tab_bar.TabBar]
+      Returns: the newly created [adw.tab_bar.TabBar]
   */
   this()
   {
@@ -78,7 +82,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether the tabs automatically hide.
-    Returns:     whether the tabs automatically hide
+      Returns: whether the tabs automatically hide
   */
   bool getAutohide()
   {
@@ -89,7 +93,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets the widget shown after the tabs.
-    Returns:     the widget shown after the tabs
+      Returns: the widget shown after the tabs
   */
   gtk.widget.Widget getEndActionWidget()
   {
@@ -101,7 +105,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether tabs expand to full width.
-    Returns:     whether tabs expand to full width.
+      Returns: whether tabs expand to full width.
   */
   bool getExpandTabs()
   {
@@ -112,7 +116,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets the current action during a drop on the extra_drop_target.
-    Returns:     the drag action of the current drop.
+      Returns: the drag action of the current drop.
   */
   gdk.types.DragAction getExtraDragPreferredAction()
   {
@@ -124,7 +128,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether drop data should be preloaded on hover.
-    Returns:     whether drop data should be preloaded on hover
+      Returns: whether drop data should be preloaded on hover
   */
   bool getExtraDragPreload()
   {
@@ -135,7 +139,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether tabs use inverted layout.
-    Returns:     whether tabs use inverted layout
+      Returns: whether tabs use inverted layout
   */
   bool getInverted()
   {
@@ -146,9 +150,9 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether self is overflowing.
-    
-    If `TRUE`, all tabs cannot be displayed at once and require scrolling.
-    Returns:     whether self is overflowing
+      
+      If `TRUE`, all tabs cannot be displayed at once and require scrolling.
+      Returns: whether self is overflowing
   */
   bool getIsOverflowing()
   {
@@ -159,7 +163,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets the widget shown before the tabs.
-    Returns:     the widget shown before the tabs
+      Returns: the widget shown before the tabs
   */
   gtk.widget.Widget getStartActionWidget()
   {
@@ -171,9 +175,9 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets whether the tabs are currently revealed.
-    
-    See `propertyTabBar:autohide`.
-    Returns:     whether the tabs are currently revealed
+      
+      See `propertyTabBar:autohide`.
+      Returns: whether the tabs are currently revealed
   */
   bool getTabsRevealed()
   {
@@ -184,7 +188,7 @@ class TabBar : gtk.widget.Widget
 
   /**
       Gets the tab view self controls.
-    Returns:     the view self controls
+      Returns: the view self controls
   */
   adw.tab_view.TabView getView()
   {
@@ -196,13 +200,14 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets whether the tabs automatically hide.
-    
-    If set to `TRUE`, the tab bar disappears when `propertyTabBar:view` has 0
-    or 1 tab, no pinned tabs, and no tab is being transferred.
-    
-    See `propertyTabBar:tabs-revealed`.
-    Params:
-      autohide =       whether the tabs automatically hide
+      
+      If set to `TRUE`, the tab bar disappears when `propertyTabBar:view` has 0
+      or 1 tab, no pinned tabs, and no tab is being transferred.
+      
+      See `propertyTabBar:tabs-revealed`.
+  
+      Params:
+        autohide = whether the tabs automatically hide
   */
   void setAutohide(bool autohide)
   {
@@ -211,8 +216,9 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets the widget to show after the tabs.
-    Params:
-      widget =       the widget to show after the tabs
+  
+      Params:
+        widget = the widget to show after the tabs
   */
   void setEndActionWidget(gtk.widget.Widget widget = null)
   {
@@ -221,11 +227,12 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets whether tabs expand to full width.
-    
-    If set to `TRUE`, the tabs will always vary width filling the whole width
-    when possible, otherwise tabs will always have the minimum possible size.
-    Params:
-      expandTabs =       whether to expand tabs
+      
+      If set to `TRUE`, the tabs will always vary width filling the whole width
+      when possible, otherwise tabs will always have the minimum possible size.
+  
+      Params:
+        expandTabs = whether to expand tabs
   */
   void setExpandTabs(bool expandTabs)
   {
@@ -234,10 +241,11 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets whether drop data should be preloaded on hover.
-    
-    See [gtk.drop_target.DropTarget.gboolean].
-    Params:
-      preload =       whether to preload drop data
+      
+      See [gtk.drop_target.DropTarget.gboolean].
+  
+      Params:
+        preload = whether to preload drop data
   */
   void setExtraDragPreload(bool preload)
   {
@@ -246,11 +254,12 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets whether tabs tabs use inverted layout.
-    
-    If set to `TRUE`, non-pinned tabs will have the close button at the beginning
-    and the indicator at the end rather than the opposite.
-    Params:
-      inverted =       whether tabs use inverted layout
+      
+      If set to `TRUE`, non-pinned tabs will have the close button at the beginning
+      and the indicator at the end rather than the opposite.
+  
+      Params:
+        inverted = whether tabs use inverted layout
   */
   void setInverted(bool inverted)
   {
@@ -259,8 +268,9 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets the widget to show before the tabs.
-    Params:
-      widget =       the widget to show before the tabs
+  
+      Params:
+        widget = the widget to show before the tabs
   */
   void setStartActionWidget(gtk.widget.Widget widget = null)
   {
@@ -269,8 +279,9 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets the tab view self controls.
-    Params:
-      view =       a tab view
+  
+      Params:
+        view = a tab view
   */
   void setView(adw.tab_view.TabView view = null)
   {
@@ -279,19 +290,20 @@ class TabBar : gtk.widget.Widget
 
   /**
       Sets the supported types for this drop target.
-    
-    Sets up an extra drop target on tabs.
-    
-    This allows to drag arbitrary content onto tabs, for example URLs in a web
-    browser.
-    
-    If a tab is hovered for a certain period of time while dragging the content,
-    it will be automatically selected.
-    
-    The `signalTabBar::extra-drag-drop` signal can be used to handle the drop.
-    Params:
-      actions =       the supported actions
-      types =       all supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s that can be dropped
+      
+      Sets up an extra drop target on tabs.
+      
+      This allows to drag arbitrary content onto tabs, for example URLs in a web
+      browser.
+      
+      If a tab is hovered for a certain period of time while dragging the content,
+      it will be automatically selected.
+      
+      The `signalTabBar::extra-drag-drop` signal can be used to handle the drop.
+  
+      Params:
+        actions = the supported actions
+        types = all supported [gobject.types.TYPE_FLAG_RESERVED_ID_BIT]s that can be dropped
   */
   void setupExtraDropTarget(gdk.types.DragAction actions, gobject.types.GType[] types = null)
   {
@@ -304,45 +316,56 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
-      This signal is emitted when content is dropped onto a tab.
-    
-    The content must be of one of the types set up via
-    [adw.tab_bar.TabBar.setupExtraDropTarget].
-    
-    See [gtk.drop_target.DropTarget.drop].
+      Connect to `ExtraDragDrop` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B page)       the page matching the tab the content was dropped onto
-      * $(B value)       the [gobject.value.Value] being dropped
-      * $(B tabBar) the instance the signal is connected to
-    )
-    Returns:     whether the drop was accepted for page
-  */
-  alias ExtraDragDropCallbackDlg = bool delegate(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar);
-
-  /** ditto */
-  alias ExtraDragDropCallbackFunc = bool function(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar);
-
-  /**
-    Connect to ExtraDragDrop signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted when content is dropped onto a tab.
+      
+      The content must be of one of the types set up via
+      [adw.tab_bar.TabBar.setupExtraDropTarget].
+      
+      See [gtk.drop_target.DropTarget.drop].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar))
+  
+          `page` the page matching the tab the content was dropped onto (optional)
+  
+          `value` the [gobject.value.Value] being dropped (optional)
+  
+          `tabBar` the instance the signal is connected to (optional)
+  
+          `Returns` whether the drop was accepted for page
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectExtraDragDrop(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ExtraDragDropCallbackDlg) || is(T : ExtraDragDropCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_bar.TabBar)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto tabBar = getVal!(adw.tab_bar.TabBar)(_paramVals);
-      auto page = getVal!(adw.tab_page.TabPage)(&_paramVals[1]);
-      auto value = getVal!(gobject.value.Value)(&_paramVals[2]);
-      _retval = _dClosure.dlg(page, value, tabBar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -351,48 +374,59 @@ class TabBar : gtk.widget.Widget
   }
 
   /**
-      This signal is emitted when the dropped content is preloaded.
-    
-    In order for data to be preloaded, `propertyTabBar:extra-drag-preload`
-    must be set to `TRUE`.
-    
-    The content must be of one of the types set up via
-    [adw.tab_bar.TabBar.setupExtraDropTarget].
-    
-    See [gtk.drop_target.DropTarget.GObject.Value].
+      Connect to `ExtraDragValue` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B page)       the page matching the tab the content was dropped onto
-      * $(B value)       the [gobject.value.Value] being dropped
-      * $(B tabBar) the instance the signal is connected to
-    )
-    Returns:     the preferred action for the drop on page
-  */
-  alias ExtraDragValueCallbackDlg = gdk.types.DragAction delegate(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar);
-
-  /** ditto */
-  alias ExtraDragValueCallbackFunc = gdk.types.DragAction function(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar);
-
-  /**
-    Connect to ExtraDragValue signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted when the dropped content is preloaded.
+      
+      In order for data to be preloaded, `propertyTabBar:extra-drag-preload`
+      must be set to `TRUE`.
+      
+      The content must be of one of the types set up via
+      [adw.tab_bar.TabBar.setupExtraDropTarget].
+      
+      See [gtk.drop_target.DropTarget.GObject.Value].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D gdk.types.DragAction callback(adw.tab_page.TabPage page, gobject.value.Value value, adw.tab_bar.TabBar tabBar))
+  
+          `page` the page matching the tab the content was dropped onto (optional)
+  
+          `value` the [gobject.value.Value] being dropped (optional)
+  
+          `tabBar` the instance the signal is connected to (optional)
+  
+          `Returns` the preferred action for the drop on page
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectExtraDragValue(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ExtraDragValueCallbackDlg) || is(T : ExtraDragValueCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == gdk.types.DragAction)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : adw.tab_page.TabPage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gobject.value.Value)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : adw.tab_bar.TabBar)))
+  && Parameters!T.length < 4)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto tabBar = getVal!(adw.tab_bar.TabBar)(_paramVals);
-      auto page = getVal!(adw.tab_page.TabPage)(&_paramVals[1]);
-      auto value = getVal!(gobject.value.Value)(&_paramVals[2]);
-      auto _dretval = _dClosure.dlg(page, value, tabBar);
-      GdkDragAction _retval = cast(GdkDragAction)_dretval;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!gdk.types.DragAction(_returnValue, _retval);
     }
 

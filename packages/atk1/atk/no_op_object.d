@@ -1,3 +1,4 @@
+/// Module for [NoOpObject] class
 module atk.no_op_object;
 
 import atk.action;
@@ -33,26 +34,29 @@ import gobject.object;
 
 /**
     An AtkObject which purports to implement all ATK interfaces.
-  
-  An AtkNoOpObject is an AtkObject which purports to implement all
-  ATK interfaces. It is the type of AtkObject which is created if an
-  accessible object is requested for an object type for which no
-  factory type is specified.
+    
+    An AtkNoOpObject is an AtkObject which purports to implement all
+    ATK interfaces. It is the type of AtkObject which is created if an
+    accessible object is requested for an object type for which no
+    factory type is specified.
 */
 class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Component, atk.document.Document, atk.editable_text.EditableText, atk.hypertext.Hypertext, atk.image.Image, atk.selection.Selection, atk.table.Table, atk.table_cell.TableCell, atk.text.Text, atk.value.Value, atk.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_no_op_object_get_type != &gidSymbolNotFound ? atk_no_op_object_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -81,10 +85,11 @@ class NoOpObject : atk.object.ObjectAtk, atk.action.Action, atk.component.Compon
 
   /**
       Provides a default (non-functioning stub) #AtkObject.
-    Application maintainers should not use this method.
-    Params:
-      obj =       a #GObject
-    Returns:     a default (non-functioning stub) #AtkObject
+      Application maintainers should not use this method.
+  
+      Params:
+        obj = a #GObject
+      Returns: a default (non-functioning stub) #AtkObject
   */
   this(gobject.object.ObjectG obj)
   {

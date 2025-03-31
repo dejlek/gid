@@ -1,3 +1,4 @@
+/// Module for [FileLoader] class
 module gtksource.file_loader;
 
 import gid.gid;
@@ -17,38 +18,41 @@ import gtksource.types;
 
 /**
     Load a file into a GtkSourceBuffer.
-  
-  A [gtksource.file_loader.FileLoader] object permits to load the contents of a [gio.file.File] or a
-  [gio.input_stream.InputStream] into a `class@Buffer`.
-  
-  A file loader should be used only for one load operation, including errors
-  handling. If an error occurs, you can reconfigure the loader and relaunch the
-  operation with [gtksource.file_loader.FileLoader.loadAsync].
-  
-  Running a [gtksource.file_loader.FileLoader] is an undoable action for the
-  `class@Buffer`.
-  
-  After a file loading, the buffer is reset to the contents provided by the
-  [gio.file.File] or [gio.input_stream.InputStream], so the buffer is set as “unmodified”, that is,
-  [gtk.text_buffer.TextBuffer.setModified] is called with false. If the contents isn't
-  saved somewhere (for example if you load from stdin), then you should
-  probably call [gtk.text_buffer.TextBuffer.setModified] with true after calling
-  [gtksource.file_loader.FileLoader.loadFinish].
+    
+    A [gtksource.file_loader.FileLoader] object permits to load the contents of a [gio.file.File] or a
+    [gio.input_stream.InputStream] into a `class@Buffer`.
+    
+    A file loader should be used only for one load operation, including errors
+    handling. If an error occurs, you can reconfigure the loader and relaunch the
+    operation with [gtksource.file_loader.FileLoader.loadAsync].
+    
+    Running a [gtksource.file_loader.FileLoader] is an undoable action for the
+    `class@Buffer`.
+    
+    After a file loading, the buffer is reset to the contents provided by the
+    [gio.file.File] or [gio.input_stream.InputStream], so the buffer is set as “unmodified”, that is,
+    [gtk.text_buffer.TextBuffer.setModified] is called with false. If the contents isn't
+    saved somewhere (for example if you load from stdin), then you should
+    probably call [gtk.text_buffer.TextBuffer.setModified] with true after calling
+    [gtksource.file_loader.FileLoader.loadFinish].
 */
 class FileLoader : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_loader_get_type != &gidSymbolNotFound ? gtk_source_file_loader_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -61,15 +65,16 @@ class FileLoader : gobject.object.ObjectG
 
   /**
       Creates a new [gtksource.file_loader.FileLoader] object. The contents is read from the
-    `classFile`'s location.
-    
-    If not already done, call [gtksource.file.File.setLocation] before calling this constructor.
-    The previous location is anyway not needed, because as soon as the file loading begins,
-    the buffer is emptied.
-    Params:
-      buffer =       the #GtkSourceBuffer to load the contents into.
-      file =       the #GtkSourceFile.
-    Returns:     a new #GtkSourceFileLoader object.
+      `classFile`'s location.
+      
+      If not already done, call [gtksource.file.File.setLocation] before calling this constructor.
+      The previous location is anyway not needed, because as soon as the file loading begins,
+      the buffer is emptied.
+  
+      Params:
+        buffer = the #GtkSourceBuffer to load the contents into.
+        file = the #GtkSourceFile.
+      Returns: a new #GtkSourceFileLoader object.
   */
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
@@ -80,11 +85,12 @@ class FileLoader : gobject.object.ObjectG
 
   /**
       Creates a new #GtkSourceFileLoader object. The contents is read from stream.
-    Params:
-      buffer =       the #GtkSourceBuffer to load the contents into.
-      file =       the #GtkSourceFile.
-      stream =       the #GInputStream to load, e.g. stdin.
-    Returns:     a new #GtkSourceFileLoader object.
+  
+      Params:
+        buffer = the #GtkSourceBuffer to load the contents into.
+        file = the #GtkSourceFile.
+        stream = the #GInputStream to load, e.g. stdin.
+      Returns: a new #GtkSourceFileLoader object.
   */
   static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream)
   {
@@ -159,17 +165,18 @@ class FileLoader : gobject.object.ObjectG
 
   /**
       Loads asynchronously the file or input stream contents into the `classBuffer`.
-    
-    See the [gio.async_result.AsyncResult] documentation to know how to use this
-    function.
-    Params:
-      ioPriority =       the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
-          `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
-      cancellable =       optional #GCancellable object, null to ignore.
-      progressCallback =       function to call back with
-          progress information, or null if progress information is not needed.
-      callback =       a #GAsyncReadyCallback to call when the request is
-          satisfied.
+      
+      See the [gio.async_result.AsyncResult] documentation to know how to use this
+      function.
+  
+      Params:
+        ioPriority = the I/O priority of the request. E.g. `G_PRIORITY_LOW`,
+            `G_PRIORITY_DEFAULT` or `G_PRIORITY_HIGH`.
+        cancellable = optional #GCancellable object, null to ignore.
+        progressCallback = function to call back with
+            progress information, or null if progress information is not needed.
+        callback = a #GAsyncReadyCallback to call when the request is
+            satisfied.
   */
   void loadAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.FileProgressCallback progressCallback = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -198,13 +205,15 @@ class FileLoader : gobject.object.ObjectG
 
   /**
       Finishes a file loading started with [gtksource.file_loader.FileLoader.loadAsync].
-    
-    If the contents has been loaded, the following `classFile` properties will
-    be updated: the location, the encoding, the newline type and the compression
-    type.
-    Params:
-      result =       a #GAsyncResult.
-    Returns:     whether the contents has been loaded successfully.
+      
+      If the contents has been loaded, the following `classFile` properties will
+      be updated: the location, the encoding, the newline type and the compression
+      type.
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: whether the contents has been loaded successfully.
+      Throws: [ErrorG]
   */
   bool loadFinish(gio.async_result.AsyncResult result)
   {
@@ -218,19 +227,20 @@ class FileLoader : gobject.object.ObjectG
 
   /**
       Sets the candidate encodings for the file loading.
-    
-    The encodings are tried in the same order as the list.
-    
-    For convenience, candidate_encodings can contain duplicates. Only the first
-    occurrence of a duplicated encoding is kept in the list.
-    
-    By default the candidate encodings are (in that order in the list):
-    
-    1. If set, the `classFile`'s encoding as returned by [gtksource.file.File.getEncoding].
-    2. The default candidates as returned by [gtksource.encoding.Encoding.getDefaultCandidates].
-    Params:
-      candidateEncodings =       a list of
-          #GtkSourceEncoding<!-- -->s.
+      
+      The encodings are tried in the same order as the list.
+      
+      For convenience, candidate_encodings can contain duplicates. Only the first
+      occurrence of a duplicated encoding is kept in the list.
+      
+      By default the candidate encodings are (in that order in the list):
+      
+      1. If set, the `classFile`'s encoding as returned by [gtksource.file.File.getEncoding].
+      2. The default candidates as returned by [gtksource.encoding.Encoding.getDefaultCandidates].
+  
+      Params:
+        candidateEncodings = a list of
+            #GtkSourceEncoding<!-- -->s.
   */
   void setCandidateEncodings(gtksource.encoding.Encoding[] candidateEncodings)
   {

@@ -1,3 +1,4 @@
+/// Module for [ByteWriter] class
 module gstbase.byte_writer;
 
 import gid.gid;
@@ -9,16 +10,17 @@ import gstbase.types;
 
 /**
     #GstByteWriter provides a byte writer and reader that can write/read different
-  integer and floating point types to/from a memory buffer. It provides functions
-  for writing/reading signed/unsigned, little/big endian integers of 8, 16, 24,
-  32 and 64 bits and functions for reading little/big endian floating points numbers of
-  32 and 64 bits. It also provides functions to write/read NUL-terminated strings
-  in various character encodings.
+    integer and floating point types to/from a memory buffer. It provides functions
+    for writing/reading signed/unsigned, little/big endian integers of 8, 16, 24,
+    32 and 64 bits and functions for reading little/big endian floating points numbers of
+    32 and 64 bits. It also provides functions to write/read NUL-terminated strings
+    in various character encodings.
 */
 class ByteWriter
 {
   GstByteWriter cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -30,6 +32,7 @@ class ByteWriter
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -72,10 +75,11 @@ class ByteWriter
 
   /**
       Checks if enough free space from the current write cursor is
-    available and reallocates if necessary.
-    Params:
-      size =       Number of bytes that should be available
-    Returns:     true if at least size bytes are still available
+      available and reallocates if necessary.
+  
+      Params:
+        size = Number of bytes that should be available
+      Returns: true if at least size bytes are still available
   */
   bool ensureFreeSpace(uint size)
   {
@@ -86,10 +90,11 @@ class ByteWriter
 
   /**
       Writes size bytes containing value to writer.
-    Params:
-      value =       Value to be written
-      size =       Number of bytes to be written
-    Returns:     true if the value could be written
+  
+      Params:
+        value = Value to be written
+        size = Number of bytes to be written
+      Returns: true if the value could be written
   */
   bool fill(ubyte value, uint size)
   {
@@ -100,11 +105,11 @@ class ByteWriter
 
   /**
       Frees writer and all memory allocated by it except
-    the current data, which is returned as #GstBuffer.
-    
-    Free-function: gst_buffer_unref
-    Returns:     the current data as buffer. gst_buffer_unref()
-          after usage.
+      the current data, which is returned as #GstBuffer.
+      
+      Free-function: gst_buffer_unref
+      Returns: the current data as buffer. gst_buffer_unref()
+            after usage.
   */
   gst.buffer.Buffer freeAndGetBuffer()
   {
@@ -116,10 +121,10 @@ class ByteWriter
 
   /**
       Frees writer and all memory allocated by it except
-    the current data, which is returned.
-    
-    Free-function: g_free
-    Returns:     the current data. [glib.global.gfree] after usage.
+      the current data, which is returned.
+      
+      Free-function: g_free
+      Returns: the current data. [glib.global.gfree] after usage.
   */
   ubyte* freeAndGetData()
   {
@@ -129,8 +134,8 @@ class ByteWriter
 
   /**
       Returns the remaining size of data that can still be written. If
-    -1 is returned the remaining size is only limited by system resources.
-    Returns:     the remaining size of data that can still be written
+      -1 is returned the remaining size is only limited by system resources.
+      Returns: the remaining size of data that can still be written
   */
   uint getRemaining()
   {
@@ -149,11 +154,12 @@ class ByteWriter
 
   /**
       Initializes writer with the given
-    memory area. If initialized is true it is possible to
-    read size bytes from the #GstByteWriter from the beginning.
-    Params:
-      data =       Memory area for writing
-      initialized =       If true the complete data can be read from the beginning
+      memory area. If initialized is true it is possible to
+      read size bytes from the #GstByteWriter from the beginning.
+  
+      Params:
+        data = Memory area for writing
+        initialized = If true the complete data can be read from the beginning
   */
   void initWithData(ubyte[] data, bool initialized)
   {
@@ -167,9 +173,10 @@ class ByteWriter
 
   /**
       Initializes writer with the given initial data size.
-    Params:
-      size =       Initial size of data
-      fixed =       If true the data can't be reallocated
+  
+      Params:
+        size = Initial size of data
+        fixed = If true the data can't be reallocated
   */
   void initWithSize(uint size, bool fixed)
   {
@@ -178,11 +185,12 @@ class ByteWriter
 
   /**
       Writes size bytes of data to writer.
-    Params:
-      buffer =       source #GstBuffer
-      offset =       offset to copy from
-      size =       total size to copy. If -1, all data is copied
-    Returns:     true if the data could be written
+  
+      Params:
+        buffer = source #GstBuffer
+        offset = offset to copy from
+        size = total size to copy. If -1, all data is copied
+      Returns: true if the data could be written
   */
   bool putBuffer(gst.buffer.Buffer buffer, size_t offset, ptrdiff_t size)
   {
@@ -193,9 +201,10 @@ class ByteWriter
 
   /**
       Writes size bytes of data to writer.
-    Params:
-      data =       Data to write
-    Returns:     true if the value could be written
+  
+      Params:
+        data = Data to write
+      Returns: true if the value could be written
   */
   bool putData(ubyte[] data)
   {
@@ -211,9 +220,10 @@ class ByteWriter
 
   /**
       Writes a big endian 32 bit float to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putFloat32Be(float val)
   {
@@ -224,9 +234,10 @@ class ByteWriter
 
   /**
       Writes a little endian 32 bit float to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putFloat32Le(float val)
   {
@@ -237,9 +248,10 @@ class ByteWriter
 
   /**
       Writes a big endian 64 bit float to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putFloat64Be(double val)
   {
@@ -250,9 +262,10 @@ class ByteWriter
 
   /**
       Writes a little endian 64 bit float to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putFloat64Le(double val)
   {
@@ -263,9 +276,10 @@ class ByteWriter
 
   /**
       Writes a signed big endian 16 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt16Be(short val)
   {
@@ -276,9 +290,10 @@ class ByteWriter
 
   /**
       Writes a signed little endian 16 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt16Le(short val)
   {
@@ -289,9 +304,10 @@ class ByteWriter
 
   /**
       Writes a signed big endian 24 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt24Be(int val)
   {
@@ -302,9 +318,10 @@ class ByteWriter
 
   /**
       Writes a signed little endian 24 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt24Le(int val)
   {
@@ -315,9 +332,10 @@ class ByteWriter
 
   /**
       Writes a signed big endian 32 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt32Be(int val)
   {
@@ -328,9 +346,10 @@ class ByteWriter
 
   /**
       Writes a signed little endian 32 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt32Le(int val)
   {
@@ -341,9 +360,10 @@ class ByteWriter
 
   /**
       Writes a signed big endian 64 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt64Be(long val)
   {
@@ -354,9 +374,10 @@ class ByteWriter
 
   /**
       Writes a signed little endian 64 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt64Le(long val)
   {
@@ -367,9 +388,10 @@ class ByteWriter
 
   /**
       Writes a signed 8 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putInt8(byte val)
   {
@@ -380,9 +402,10 @@ class ByteWriter
 
   /**
       Writes a NUL-terminated UTF16 string to writer (including the terminator).
-    Params:
-      data =       UTF16 string to write
-    Returns:     true if the value could be written
+  
+      Params:
+        data = UTF16 string to write
+      Returns: true if the value could be written
   */
   bool putStringUtf16(ushort[] data)
   {
@@ -394,9 +417,10 @@ class ByteWriter
 
   /**
       Writes a NUL-terminated UTF32 string to writer (including the terminator).
-    Params:
-      data =       UTF32 string to write
-    Returns:     true if the value could be written
+  
+      Params:
+        data = UTF32 string to write
+      Returns: true if the value could be written
   */
   bool putStringUtf32(uint[] data)
   {
@@ -408,9 +432,10 @@ class ByteWriter
 
   /**
       Writes a NUL-terminated UTF8 string to writer (including the terminator).
-    Params:
-      data =       UTF8 string to write
-    Returns:     true if the value could be written
+  
+      Params:
+        data = UTF8 string to write
+      Returns: true if the value could be written
   */
   bool putStringUtf8(string data)
   {
@@ -422,9 +447,10 @@ class ByteWriter
 
   /**
       Writes a unsigned big endian 16 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint16Be(ushort val)
   {
@@ -435,9 +461,10 @@ class ByteWriter
 
   /**
       Writes a unsigned little endian 16 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint16Le(ushort val)
   {
@@ -448,9 +475,10 @@ class ByteWriter
 
   /**
       Writes a unsigned big endian 24 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint24Be(uint val)
   {
@@ -461,9 +489,10 @@ class ByteWriter
 
   /**
       Writes a unsigned little endian 24 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint24Le(uint val)
   {
@@ -474,9 +503,10 @@ class ByteWriter
 
   /**
       Writes a unsigned big endian 32 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint32Be(uint val)
   {
@@ -487,9 +517,10 @@ class ByteWriter
 
   /**
       Writes a unsigned little endian 32 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint32Le(uint val)
   {
@@ -500,9 +531,10 @@ class ByteWriter
 
   /**
       Writes a unsigned big endian 64 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint64Be(ulong val)
   {
@@ -513,9 +545,10 @@ class ByteWriter
 
   /**
       Writes a unsigned little endian 64 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint64Le(ulong val)
   {
@@ -526,9 +559,10 @@ class ByteWriter
 
   /**
       Writes a unsigned 8 bit integer to writer.
-    Params:
-      val =       Value to write
-    Returns:     true if the value could be written
+  
+      Params:
+        val = Value to write
+      Returns: true if the value could be written
   */
   bool putUint8(ubyte val)
   {
@@ -539,7 +573,7 @@ class ByteWriter
 
   /**
       Resets writer and frees the data if it's
-    owned by writer.
+      owned by writer.
   */
   void reset()
   {
@@ -548,10 +582,10 @@ class ByteWriter
 
   /**
       Resets writer and returns the current data as buffer.
-    
-    Free-function: gst_buffer_unref
-    Returns:     the current data as buffer. gst_buffer_unref()
-          after usage.
+      
+      Free-function: gst_buffer_unref
+      Returns: the current data as buffer. gst_buffer_unref()
+            after usage.
   */
   gst.buffer.Buffer resetAndGetBuffer()
   {

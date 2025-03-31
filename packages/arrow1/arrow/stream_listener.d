@@ -1,3 +1,4 @@
+/// Module for [StreamListener] class
 module arrow.stream_listener;
 
 import arrow.c.functions;
@@ -13,17 +14,20 @@ import gobject.object;
 class StreamListener : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_stream_listener_get_type != &gidSymbolNotFound ? garrow_stream_listener_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,7 +40,8 @@ class StreamListener : gobject.object.ObjectG
 
   /**
       Processes an EOS event.
-    Returns:     true on success, false on error.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onEos()
   {
@@ -50,10 +55,12 @@ class StreamListener : gobject.object.ObjectG
 
   /**
       Processes a decoded record batch.
-    Params:
-      recordBatch =       A decoded #GArrowRecordBatch.
-      metadata =       A decoded metadata.
-    Returns:     true on success, false on error.
+  
+      Params:
+        recordBatch = A decoded #GArrowRecordBatch.
+        metadata = A decoded metadata.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onRecordBatchDecoded(arrow.record_batch.RecordBatch recordBatch, string[string] metadata = null)
   {
@@ -69,10 +76,12 @@ class StreamListener : gobject.object.ObjectG
 
   /**
       Processes a decoded schema.
-    Params:
-      schema =       A decoded #GArrowSchema.
-      filteredSchema =       A decoded #GArrowSchema that only has read fields.
-    Returns:     true on success, false on error.
+  
+      Params:
+        schema = A decoded #GArrowSchema.
+        filteredSchema = A decoded #GArrowSchema that only has read fields.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool onSchemaDecoded(arrow.schema.Schema schema, arrow.schema.Schema filteredSchema)
   {

@@ -1,3 +1,4 @@
+/// Module for [ColumnChunkMetadata] class
 module parquet.column_chunk_metadata;
 
 import gid.gid;
@@ -11,17 +12,20 @@ import parquet.types;
 class ColumnChunkMetadata : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_column_chunk_metadata_get_type != &gidSymbolNotFound ? gparquet_column_chunk_metadata_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

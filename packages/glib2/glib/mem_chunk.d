@@ -1,3 +1,4 @@
+/// Module for [MemChunk] class
 module glib.mem_chunk;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class MemChunk
   GMemChunk* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -21,6 +23,7 @@ class MemChunk
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;

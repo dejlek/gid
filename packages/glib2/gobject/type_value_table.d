@@ -1,3 +1,4 @@
+/// Module for [TypeValueTable] class
 module gobject.type_value_table;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gobject.types;
 
 /**
     The #GTypeValueTable provides the functions required by the #GValue
-  implementation, to serve as a container for values of a type.
+    implementation, to serve as a container for values of a type.
 */
 class TypeValueTable
 {
   GTypeValueTable cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class TypeValueTable
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

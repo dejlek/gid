@@ -1,3 +1,4 @@
+/// Module for [Coverage] class
 module pango.coverage;
 
 import gid.gid;
@@ -8,28 +9,31 @@ import pango.types;
 
 /**
     A [pango.coverage.Coverage] structure is a map from Unicode characters
-  to [pango.types.CoverageLevel] values.
-  
-  It is often necessary in Pango to determine if a particular
-  font can represent a particular character, and also how well
-  it can represent that character. The [pango.coverage.Coverage] is a data
-  structure that is used to represent that information. It is an
-  opaque structure with no public fields.
+    to [pango.types.CoverageLevel] values.
+    
+    It is often necessary in Pango to determine if a particular
+    font can represent a particular character, and also how well
+    it can represent that character. The [pango.coverage.Coverage] is a data
+    structure that is used to represent that information. It is an
+    opaque structure with no public fields.
 */
 class Coverage : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_coverage_get_type != &gidSymbolNotFound ? pango_coverage_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,9 +46,9 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Create a new [pango.coverage.Coverage]
-    Returns:     the newly allocated [pango.coverage.Coverage], initialized
-        to [pango.types.CoverageLevel.None] with a reference count of one, which
-        should be freed with [pango.coverage.Coverage.unref].
+      Returns: the newly allocated [pango.coverage.Coverage], initialized
+          to [pango.types.CoverageLevel.None] with a reference count of one, which
+          should be freed with [pango.coverage.Coverage.unref].
   */
   this()
   {
@@ -55,13 +59,14 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Convert data generated from [pango.coverage.Coverage.toBytes]
-    back to a [pango.coverage.Coverage].
-    Params:
-      bytes =       binary data
-          representing a [pango.coverage.Coverage]
-    Returns:     a newly allocated [pango.coverage.Coverage]
+      back to a [pango.coverage.Coverage].
   
-    Deprecated:     This returns null
+      Params:
+        bytes = binary data
+            representing a [pango.coverage.Coverage]
+      Returns: a newly allocated [pango.coverage.Coverage]
+  
+      Deprecated: This returns null
   */
   static pango.coverage.Coverage fromBytes(ubyte[] bytes)
   {
@@ -78,9 +83,9 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Copy an existing [pango.coverage.Coverage].
-    Returns:     the newly allocated [pango.coverage.Coverage],
-        with a reference count of one, which should be freed with
-        [pango.coverage.Coverage.unref].
+      Returns: the newly allocated [pango.coverage.Coverage],
+          with a reference count of one, which should be freed with
+          [pango.coverage.Coverage.unref].
   */
   pango.coverage.Coverage copy()
   {
@@ -92,9 +97,10 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Determine whether a particular index is covered by coverage.
-    Params:
-      index =       the index to check
-    Returns:     the coverage level of coverage for character index_.
+  
+      Params:
+        index = the index to check
+      Returns: the coverage level of coverage for character index_.
   */
   pango.types.CoverageLevel get(int index)
   {
@@ -106,12 +112,13 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Set the coverage for each index in coverage to be the max (better)
-    value of the current coverage for the index and the coverage for
-    the corresponding index in other.
-    Params:
-      other =       another [pango.coverage.Coverage]
+      value of the current coverage for the index and the coverage for
+      the corresponding index in other.
   
-    Deprecated:     This function does nothing
+      Params:
+        other = another [pango.coverage.Coverage]
+  
+      Deprecated: This function does nothing
   */
   void max(pango.coverage.Coverage other)
   {
@@ -120,9 +127,10 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Modify a particular index within coverage
-    Params:
-      index =       the index to modify
-      level =       the new level for index_
+  
+      Params:
+        index = the index to modify
+        level = the new level for index_
   */
   void set(int index, pango.types.CoverageLevel level)
   {
@@ -131,10 +139,11 @@ class Coverage : gobject.object.ObjectG
 
   /**
       Convert a [pango.coverage.Coverage] structure into a flat binary format.
-    Params:
-      bytes =       location to store result (must be freed with [glib.global.gfree])
   
-    Deprecated:     This returns null
+      Params:
+        bytes = location to store result (must be freed with [glib.global.gfree])
+  
+      Deprecated: This returns null
   */
   void toBytes(out ubyte[] bytes)
   {

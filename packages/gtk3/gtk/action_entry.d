@@ -1,3 +1,4 @@
+/// Module for [ActionEntry] class
 module gtk.action_entry;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     #GtkActionEntry structs are used with [gtk.action_group.ActionGroup.addActions] to
-  construct actions.
+    construct actions.
 */
 class ActionEntry
 {
   GtkActionEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class ActionEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

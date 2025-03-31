@@ -1,3 +1,4 @@
+/// Global functions for gstallocators1 library
 module gstallocators.global;
 
 import gid.gid;
@@ -9,11 +10,12 @@ import gstallocators.types;
 
 /**
     Return the file descriptor associated with mem.
-  Params:
-    mem =       the memory to get the file descriptor
-  Returns:     the file descriptor associated with the memory, or -1.  The file
-        descriptor is still owned by the GstMemory.  Use dup to take a copy
-        if you intend to use it beyond the lifetime of this GstMemory.
+
+    Params:
+      mem = the memory to get the file descriptor
+    Returns: the file descriptor associated with the memory, or -1.  The file
+          descriptor is still owned by the GstMemory.  Use dup to take a copy
+          if you intend to use it beyond the lifetime of this GstMemory.
 */
 int dmabufMemoryGetFd(gst.memory.Memory mem)
 {
@@ -24,11 +26,12 @@ int dmabufMemoryGetFd(gst.memory.Memory mem)
 
 /**
     Exports a DMABuf from the DRM Bumb buffer object. One can check if this
-  feature is supported using [gstallocators.drmdumb_allocator.DRMDumbAllocator.hasPrimeExport];
-  Params:
-    mem =       the memory to export from
-  Returns:     a #GstMemory from #GstDmaBufAllocator wrapping the exported dma-buf
-       file descriptor.
+    feature is supported using [gstallocators.drmdumb_allocator.DRMDumbAllocator.hasPrimeExport];
+
+    Params:
+      mem = the memory to export from
+    Returns: a #GstMemory from #GstDmaBufAllocator wrapping the exported dma-buf
+         file descriptor.
 */
 gst.memory.Memory drmDumbMemoryExportDmabuf(gst.memory.Memory mem)
 {
@@ -40,12 +43,13 @@ gst.memory.Memory drmDumbMemoryExportDmabuf(gst.memory.Memory mem)
 
 /**
     Return the DRM buffer object handle associated with mem.
-  Params:
-    mem =       the memory to get the handle from
-  Returns:     the DRM buffer object handle associated with the memory, or 0.
-        The handle is still owned by the GstMemory and cannot be used
-        beyond the lifetime of this GstMemory unless it is being passed
-        to DRM driver, which does handle a refcount internally.
+
+    Params:
+      mem = the memory to get the handle from
+    Returns: the DRM buffer object handle associated with the memory, or 0.
+          The handle is still owned by the GstMemory and cannot be used
+          beyond the lifetime of this GstMemory unless it is being passed
+          to DRM driver, which does handle a refcount internally.
 */
 uint drmDumbMemoryGetHandle(gst.memory.Memory mem)
 {
@@ -56,10 +60,11 @@ uint drmDumbMemoryGetHandle(gst.memory.Memory mem)
 
 /**
     Get the fd from mem. Call [gstallocators.global.isFdMemory] to check if mem has
-  an fd.
-  Params:
-    mem =       #GstMemory
-  Returns:     the fd of mem or -1 when there is no fd on mem
+    an fd.
+
+    Params:
+      mem = #GstMemory
+    Returns: the fd of mem or -1 when there is no fd on mem
 */
 int fdMemoryGetFd(gst.memory.Memory mem)
 {
@@ -70,9 +75,10 @@ int fdMemoryGetFd(gst.memory.Memory mem)
 
 /**
     Check if mem is dmabuf memory.
-  Params:
-    mem =       the memory to be check
-  Returns:     true if mem is dmabuf memory, otherwise false
+
+    Params:
+      mem = the memory to be check
+    Returns: true if mem is dmabuf memory, otherwise false
 */
 bool isDmabufMemory(gst.memory.Memory mem)
 {
@@ -91,10 +97,11 @@ bool isDrmDumbMemory(gst.memory.Memory mem)
 
 /**
     Check if mem is memory backed by an fd
-  Params:
-    mem =       #GstMemory
-  Returns:     true when mem has an fd that can be retrieved with
-    [gstallocators.global.fdMemoryGetFd].
+
+    Params:
+      mem = #GstMemory
+    Returns: true when mem has an fd that can be retrieved with
+      [gstallocators.global.fdMemoryGetFd].
 */
 bool isFdMemory(gst.memory.Memory mem)
 {

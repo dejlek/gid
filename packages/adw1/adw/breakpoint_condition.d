@@ -1,3 +1,4 @@
+/// Module for [BreakpointCondition] class
 module adw.breakpoint_condition;
 
 import adw.c.functions;
@@ -12,22 +13,26 @@ import gobject.boxed;
 class BreakpointCondition : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_condition_get_type != &gidSymbolNotFound ? adw_breakpoint_condition_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,11 +45,12 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Creates a condition that triggers when condition_1 and condition_2 are both
-    true.
-    Params:
-      condition1 =       first condition
-      condition2 =       second condition
-    Returns:     the newly created condition
+      true.
+  
+      Params:
+        condition1 = first condition
+        condition2 = second condition
+      Returns: the newly created condition
   */
   static adw.breakpoint_condition.BreakpointCondition newAnd(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
   {
@@ -56,11 +62,12 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Creates a condition that triggers on length changes.
-    Params:
-      type =       the length type
-      value =       the length value
-      unit =       the length unit
-    Returns:     the newly created condition
+  
+      Params:
+        type = the length type
+        value = the length value
+        unit = the length unit
+      Returns: the newly created condition
   */
   static adw.breakpoint_condition.BreakpointCondition newLength(adw.types.BreakpointConditionLengthType type, double value, adw.types.LengthUnit unit)
   {
@@ -72,11 +79,12 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Creates a condition that triggers when either condition_1 or condition_2 is
-    true.
-    Params:
-      condition1 =       first condition
-      condition2 =       second condition
-    Returns:     the newly created condition
+      true.
+  
+      Params:
+        condition1 = first condition
+        condition2 = second condition
+      Returns: the newly created condition
   */
   static adw.breakpoint_condition.BreakpointCondition newOr(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
   {
@@ -88,13 +96,14 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Creates a condition that triggers on ratio changes.
-    
-    The ratio is represented as width divided by height.
-    Params:
-      type =       the ratio type
-      width =       ratio width
-      height =       ratio height
-    Returns:     the newly created condition
+      
+      The ratio is represented as width divided by height.
+  
+      Params:
+        type = the ratio type
+        width = ratio width
+        height = ratio height
+      Returns: the newly created condition
   */
   static adw.breakpoint_condition.BreakpointCondition newRatio(adw.types.BreakpointConditionRatioType type, int width, int height)
   {
@@ -106,7 +115,7 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Copies self.
-    Returns:     a copy of self
+      Returns: a copy of self
   */
   adw.breakpoint_condition.BreakpointCondition copy()
   {
@@ -118,9 +127,9 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Returns a textual representation of self.
-    
-    The returned string can be parsed by [adw.breakpoint_condition.BreakpointCondition.parse].
-    Returns:     A newly allocated text string
+      
+      The returned string can be parsed by [adw.breakpoint_condition.BreakpointCondition.parse].
+      Returns: A newly allocated text string
   */
   string toString_()
   {
@@ -132,77 +141,78 @@ class BreakpointCondition : gobject.boxed.Boxed
 
   /**
       Parses a condition from a string.
-    
-    Length conditions are specified as `<type>: <value>[<unit>]`, where:
-    
-    $(LIST
-      * `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
-      * `<value>` is a fractional number
-      * `<unit>` can be `px`, `pt` or `sp`
-    )
       
-    If the unit is omitted, `px` is assumed.
-    
-    See [adw.breakpoint_condition.BreakpointCondition.newLength].
-    
-    Examples:
-    
-    $(LIST
-      * `min-width: 500px`
-      * `min-height: 400pt`
-      * `max-width: 100sp`
-      * `max-height: 500`
-    )
+      Length conditions are specified as `<type>: <value>[<unit>]`, where:
       
-    Ratio conditions are specified as `<type>: <width>[/<height>]`, where:
-    
-    $(LIST
-      * `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
-      * `<width>` and `<height>` are integer numbers
-    )
+      $(LIST
+        * `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
+        * `<value>` is a fractional number
+        * `<unit>` can be `px`, `pt` or `sp`
+      )
+        
+      If the unit is omitted, `px` is assumed.
       
-    See [adw.breakpoint_condition.BreakpointCondition.newRatio].
-    
-    The ratio is represented as `<width>` divided by `<height>`.
-    
-    If `<height>` is omitted, it's assumed to be 1.
-    
-    Examples:
-    
-    $(LIST
-      * `min-aspect-ratio: 4/3`
-      * `max-aspect-ratio: 1`
-    )
+      See [adw.breakpoint_condition.BreakpointCondition.newLength].
       
-    The logical operators `and`, `or` can be used to compose a complex condition
-    as follows:
-    
-    $(LIST
-      * `<condition> and <condition>`: the condition is true when both
-        `<condition>`s are true, same as when using
-        [adw.breakpoint_condition.BreakpointCondition.newAnd]
-      * `<condition> or <condition>`: the condition is true when either of the
-        `<condition>`s is true, same as when using
-        [adw.breakpoint_condition.BreakpointCondition.newOr]
-    )
+      Examples:
       
-    Examples:
-    
-    $(LIST
-      * `min-width: 400px and max-aspect-ratio: 4/3`
-      * `max-width: 360sp or max-width: 360px`
-    )
+      $(LIST
+        * `min-width: 500px`
+        * `min-height: 400pt`
+        * `max-width: 100sp`
+        * `max-height: 500`
+      )
+        
+      Ratio conditions are specified as `<type>: <width>[/<height>]`, where:
       
-    Conditions can be further nested using parentheses, for example:
-    
-    $(LIST
-      * `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
-    )
+      $(LIST
+        * `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
+        * `<width>` and `<height>` are integer numbers
+      )
+        
+      See [adw.breakpoint_condition.BreakpointCondition.newRatio].
       
-    If parentheses are omitted, the first operator takes priority.
-    Params:
-      str =       the string specifying the condition
-    Returns:     the parsed condition
+      The ratio is represented as `<width>` divided by `<height>`.
+      
+      If `<height>` is omitted, it's assumed to be 1.
+      
+      Examples:
+      
+      $(LIST
+        * `min-aspect-ratio: 4/3`
+        * `max-aspect-ratio: 1`
+      )
+        
+      The logical operators `and`, `or` can be used to compose a complex condition
+      as follows:
+      
+      $(LIST
+        * `<condition> and <condition>`: the condition is true when both
+          `<condition>`s are true, same as when using
+          [adw.breakpoint_condition.BreakpointCondition.newAnd]
+        * `<condition> or <condition>`: the condition is true when either of the
+          `<condition>`s is true, same as when using
+          [adw.breakpoint_condition.BreakpointCondition.newOr]
+      )
+        
+      Examples:
+      
+      $(LIST
+        * `min-width: 400px and max-aspect-ratio: 4/3`
+        * `max-width: 360sp or max-width: 360px`
+      )
+        
+      Conditions can be further nested using parentheses, for example:
+      
+      $(LIST
+        * `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
+      )
+        
+      If parentheses are omitted, the first operator takes priority.
+  
+      Params:
+        str = the string specifying the condition
+      Returns: the parsed condition
   */
   static adw.breakpoint_condition.BreakpointCondition parse(string str)
   {

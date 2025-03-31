@@ -1,3 +1,4 @@
+/// Module for [DrawContext] class
 module gdk.draw_context;
 
 import cairo.region;
@@ -11,29 +12,32 @@ import gobject.object;
 
 /**
     Base class for objects implementing different rendering methods.
-  
-  [gdk.draw_context.DrawContext] is the base object used by contexts implementing different
-  rendering methods, such as [gdk.cairo_context.CairoContext] or [gdk.glcontext.GLContext].
-  It provides shared functionality between those contexts.
-  
-  You will always interact with one of those subclasses.
-  
-  A [gdk.draw_context.DrawContext] is always associated with a single toplevel surface.
+    
+    [gdk.draw_context.DrawContext] is the base object used by contexts implementing different
+    rendering methods, such as [gdk.cairo_context.CairoContext] or [gdk.glcontext.GLContext].
+    It provides shared functionality between those contexts.
+    
+    You will always interact with one of those subclasses.
+    
+    A [gdk.draw_context.DrawContext] is always associated with a single toplevel surface.
 */
 class DrawContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_draw_context_get_type != &gidSymbolNotFound ? gdk_draw_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -46,31 +50,32 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Indicates that you are beginning the process of redrawing region
-    on the context's surface.
-    
-    Calling this function begins a drawing operation using context on the
-    surface that context was created from. The actual requirements and
-    guarantees for the drawing operation vary for different implementations
-    of drawing, so a [gdk.cairo_context.CairoContext] and a [gdk.glcontext.GLContext]
-    need to be treated differently.
-    
-    A call to this function is a requirement for drawing and must be
-    followed by a call to [gdk.draw_context.DrawContext.endFrame], which will
-    complete the drawing operation and ensure the contents become visible
-    on screen.
-    
-    Note that the region passed to this function is the minimum region that
-    needs to be drawn and depending on implementation, windowing system and
-    hardware in use, it might be necessary to draw a larger region. Drawing
-    implementation must use [gdk.draw_context.DrawContext.getFrameRegion] to
-    query the region that must be drawn.
-    
-    When using GTK, the widget system automatically places calls to
-    [gdk.draw_context.DrawContext.beginFrame] and [gdk.draw_context.DrawContext.endFrame] via the
-    use of [GskRenderer](../gsk4/class.Renderer.html)s, so application code
-    does not need to call these functions explicitly.
-    Params:
-      region =       minimum region that should be drawn
+      on the context's surface.
+      
+      Calling this function begins a drawing operation using context on the
+      surface that context was created from. The actual requirements and
+      guarantees for the drawing operation vary for different implementations
+      of drawing, so a [gdk.cairo_context.CairoContext] and a [gdk.glcontext.GLContext]
+      need to be treated differently.
+      
+      A call to this function is a requirement for drawing and must be
+      followed by a call to [gdk.draw_context.DrawContext.endFrame], which will
+      complete the drawing operation and ensure the contents become visible
+      on screen.
+      
+      Note that the region passed to this function is the minimum region that
+      needs to be drawn and depending on implementation, windowing system and
+      hardware in use, it might be necessary to draw a larger region. Drawing
+      implementation must use [gdk.draw_context.DrawContext.getFrameRegion] to
+      query the region that must be drawn.
+      
+      When using GTK, the widget system automatically places calls to
+      [gdk.draw_context.DrawContext.beginFrame] and [gdk.draw_context.DrawContext.endFrame] via the
+      use of [GskRenderer](../gsk4/class.Renderer.html)s, so application code
+      does not need to call these functions explicitly.
+  
+      Params:
+        region = minimum region that should be drawn
   */
   void beginFrame(cairo.region.Region region)
   {
@@ -79,13 +84,13 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Ends a drawing operation started with [gdk.draw_context.DrawContext.beginFrame].
-    
-    This makes the drawing available on screen.
-    See [gdk.draw_context.DrawContext.beginFrame] for more details about drawing.
-    
-    When using a [gdk.glcontext.GLContext], this function may call `glFlush()`
-    implicitly before returning; it is not recommended to call `glFlush()`
-    explicitly before calling this function.
+      
+      This makes the drawing available on screen.
+      See [gdk.draw_context.DrawContext.beginFrame] for more details about drawing.
+      
+      When using a [gdk.glcontext.GLContext], this function may call `glFlush()`
+      implicitly before returning; it is not recommended to call `glFlush()`
+      explicitly before calling this function.
   */
   void endFrame()
   {
@@ -94,7 +99,7 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Retrieves the [gdk.display.Display] the context is created for
-    Returns:     the [gdk.display.Display]
+      Returns: the [gdk.display.Display]
   */
   gdk.display.Display getDisplay()
   {
@@ -106,14 +111,14 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Retrieves the region that is currently being repainted.
-    
-    After a call to [gdk.draw_context.DrawContext.beginFrame] this function will
-    return a union of the region passed to that function and the area of the
-    surface that the context determined needs to be repainted.
-    
-    If context is not in between calls to [gdk.draw_context.DrawContext.beginFrame]
-    and [gdk.draw_context.DrawContext.endFrame], null will be returned.
-    Returns:     a Cairo region
+      
+      After a call to [gdk.draw_context.DrawContext.beginFrame] this function will
+      return a union of the region passed to that function and the area of the
+      surface that the context determined needs to be repainted.
+      
+      If context is not in between calls to [gdk.draw_context.DrawContext.beginFrame]
+      and [gdk.draw_context.DrawContext.endFrame], null will be returned.
+      Returns: a Cairo region
   */
   cairo.region.Region getFrameRegion()
   {
@@ -125,7 +130,7 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Retrieves the surface that context is bound to.
-    Returns:     a [gdk.surface.Surface]
+      Returns: a [gdk.surface.Surface]
   */
   gdk.surface.Surface getSurface()
   {
@@ -137,12 +142,12 @@ class DrawContext : gobject.object.ObjectG
 
   /**
       Returns true if context is in the process of drawing to its surface.
-    
-    This is the case between calls to [gdk.draw_context.DrawContext.beginFrame]
-    and [gdk.draw_context.DrawContext.endFrame]. In this situation, drawing commands
-    may be effecting the contents of the context's surface.
-    Returns:     true if the context is between [gdk.draw_context.DrawContext.beginFrame]
-        and [gdk.draw_context.DrawContext.endFrame] calls.
+      
+      This is the case between calls to [gdk.draw_context.DrawContext.beginFrame]
+      and [gdk.draw_context.DrawContext.endFrame]. In this situation, drawing commands
+      may be effecting the contents of the context's surface.
+      Returns: true if the context is between [gdk.draw_context.DrawContext.beginFrame]
+          and [gdk.draw_context.DrawContext.endFrame] calls.
   */
   bool isInFrame()
   {

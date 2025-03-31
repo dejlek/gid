@@ -1,3 +1,4 @@
+/// Module for [Toplevel] interface mixin
 module gdk.toplevel_mixin;
 
 public import gdk.toplevel_iface_proxy;
@@ -15,25 +16,26 @@ public import gobject.dclosure;
 
 /**
     A [gdk.toplevel.Toplevel] is a freestanding toplevel surface.
-  
-  The [gdk.toplevel.Toplevel] interface provides useful APIs for interacting with
-  the windowing system, such as controlling maximization and size of the
-  surface, setting icons and transient parents for dialogs.
+    
+    The [gdk.toplevel.Toplevel] interface provides useful APIs for interacting with
+    the windowing system, such as controlling maximization and size of the
+    surface, setting icons and transient parents for dialogs.
 */
 template ToplevelT()
 {
 
   /**
       Begins an interactive move operation.
-    
-    You might use this function to implement draggable titlebars.
-    Params:
-      device =       the device used for the operation
-      button =       the button being used to drag, or 0 for a keyboard-initiated drag
-      x =       surface X coordinate of mouse click that began the drag
-      y =       surface Y coordinate of mouse click that began the drag
-      timestamp =       timestamp of mouse click that began the drag (use
-          [gdk.event.Event.getTime])
+      
+      You might use this function to implement draggable titlebars.
+  
+      Params:
+        device = the device used for the operation
+        button = the button being used to drag, or 0 for a keyboard-initiated drag
+        x = surface X coordinate of mouse click that began the drag
+        y = surface Y coordinate of mouse click that began the drag
+        timestamp = timestamp of mouse click that began the drag (use
+            [gdk.event.Event.getTime])
   */
   override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
@@ -42,16 +44,17 @@ template ToplevelT()
 
   /**
       Begins an interactive resize operation.
-    
-    You might use this function to implement a “window resize grip.”
-    Params:
-      edge =       the edge or corner from which the drag is started
-      device =       the device used for the operation
-      button =       the button being used to drag, or 0 for a keyboard-initiated drag
-      x =       surface X coordinate of mouse click that began the drag
-      y =       surface Y coordinate of mouse click that began the drag
-      timestamp =       timestamp of mouse click that began the drag (use
-          [gdk.event.Event.getTime])
+      
+      You might use this function to implement a “window resize grip.”
+  
+      Params:
+        edge = the edge or corner from which the drag is started
+        device = the device used for the operation
+        button = the button being used to drag, or 0 for a keyboard-initiated drag
+        x = surface X coordinate of mouse click that began the drag
+        y = surface Y coordinate of mouse click that began the drag
+        timestamp = timestamp of mouse click that began the drag (use
+            [gdk.event.Event.getTime])
   */
   override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
@@ -60,12 +63,13 @@ template ToplevelT()
 
   /**
       Sets keyboard focus to surface.
-    
-    In most cases, [[gtk.window.Window.presentWithTime]](../gtk4/method.Window.present_with_time.html)
-    should be used on a [GtkWindow](../gtk4/class.Window.html), rather than
-    calling this function.
-    Params:
-      timestamp =       timestamp of the event triggering the surface focus
+      
+      In most cases, [[gtk.window.Window.presentWithTime]](../gtk4/method.Window.present_with_time.html)
+      should be used on a [GtkWindow](../gtk4/class.Window.html), rather than
+      calling this function.
+  
+      Params:
+        timestamp = timestamp of the event triggering the surface focus
   */
   override void focus(uint timestamp)
   {
@@ -74,8 +78,8 @@ template ToplevelT()
 
   /**
       Gets the bitwise or of the currently active surface state flags,
-    from the [gdk.types.ToplevelState] enumeration.
-    Returns:     surface state bitfield
+      from the [gdk.types.ToplevelState] enumeration.
+      Returns: surface state bitfield
   */
   override gdk.types.ToplevelState getState()
   {
@@ -87,29 +91,30 @@ template ToplevelT()
 
   /**
       Requests that the toplevel inhibit the system shortcuts.
-    
-    This is asking the desktop environment/windowing system to let all
-    keyboard events reach the surface, as long as it is focused, instead
-    of triggering system actions.
-    
-    If granted, the rerouting remains active until the default shortcuts
-    processing is restored with [gdk.toplevel.Toplevel.restoreSystemShortcuts],
-    or the request is revoked by the desktop environment, windowing system
-    or the user.
-    
-    A typical use case for this API is remote desktop or virtual machine
-    viewers which need to inhibit the default system keyboard shortcuts
-    so that the remote session or virtual host gets those instead of the
-    local environment.
-    
-    The windowing system or desktop environment may ask the user to grant
-    or deny the request or even choose to ignore the request entirely.
-    
-    The caller can be notified whenever the request is granted or revoked
-    by listening to the `propertyGdk.Toplevel:shortcuts-inhibited` property.
-    Params:
-      event =       the [gdk.event.Event] that is triggering the inhibit
-          request, or null if none is available
+      
+      This is asking the desktop environment/windowing system to let all
+      keyboard events reach the surface, as long as it is focused, instead
+      of triggering system actions.
+      
+      If granted, the rerouting remains active until the default shortcuts
+      processing is restored with [gdk.toplevel.Toplevel.restoreSystemShortcuts],
+      or the request is revoked by the desktop environment, windowing system
+      or the user.
+      
+      A typical use case for this API is remote desktop or virtual machine
+      viewers which need to inhibit the default system keyboard shortcuts
+      so that the remote session or virtual host gets those instead of the
+      local environment.
+      
+      The windowing system or desktop environment may ask the user to grant
+      or deny the request or even choose to ignore the request entirely.
+      
+      The caller can be notified whenever the request is granted or revoked
+      by listening to the `propertyGdk.Toplevel:shortcuts-inhibited` property.
+  
+      Params:
+        event = the [gdk.event.Event] that is triggering the inhibit
+            request, or null if none is available
   */
   override void inhibitSystemShortcuts(gdk.event.Event event = null)
   {
@@ -118,9 +123,9 @@ template ToplevelT()
 
   /**
       Asks to lower the toplevel below other windows.
-    
-    The windowing system may choose to ignore the request.
-    Returns:     true if the surface was lowered
+      
+      The windowing system may choose to ignore the request.
+      Returns: true if the surface was lowered
   */
   override bool lower()
   {
@@ -131,9 +136,9 @@ template ToplevelT()
 
   /**
       Asks to minimize the toplevel.
-    
-    The windowing system may choose to ignore the request.
-    Returns:     true if the surface was minimized
+      
+      The windowing system may choose to ignore the request.
+      Returns: true if the surface was minimized
   */
   override bool minimize()
   {
@@ -144,18 +149,19 @@ template ToplevelT()
 
   /**
       Present toplevel after having processed the [gdk.toplevel_layout.ToplevelLayout] rules.
-    
-    If the toplevel was previously not showing, it will be showed,
-    otherwise it will change layout according to layout.
-    
-    GDK may emit the `signalGdk.Toplevel::compute-size` signal to let
-    the user of this toplevel compute the preferred size of the toplevel
-    surface.
-    
-    Presenting is asynchronous and the specified layout parameters are not
-    guaranteed to be respected.
-    Params:
-      layout =       the [gdk.toplevel_layout.ToplevelLayout] object used to layout
+      
+      If the toplevel was previously not showing, it will be showed,
+      otherwise it will change layout according to layout.
+      
+      GDK may emit the `signalGdk.Toplevel::compute-size` signal to let
+      the user of this toplevel compute the preferred size of the toplevel
+      surface.
+      
+      Presenting is asynchronous and the specified layout parameters are not
+      guaranteed to be respected.
+  
+      Params:
+        layout = the [gdk.toplevel_layout.ToplevelLayout] object used to layout
   */
   override void present(gdk.toplevel_layout.ToplevelLayout layout)
   {
@@ -164,9 +170,9 @@ template ToplevelT()
 
   /**
       Restore default system keyboard shortcuts which were previously
-    inhibited.
-    
-    This undoes the effect of [gdk.toplevel.Toplevel.inhibitSystemShortcuts].
+      inhibited.
+      
+      This undoes the effect of [gdk.toplevel.Toplevel.inhibitSystemShortcuts].
   */
   override void restoreSystemShortcuts()
   {
@@ -175,12 +181,13 @@ template ToplevelT()
 
   /**
       Sets the toplevel to be decorated.
-    
-    Setting decorated to false hints the desktop environment
-    that the surface has its own, client-side decorations and
-    does not need to have window decorations added.
-    Params:
-      decorated =       true to request decorations
+      
+      Setting decorated to false hints the desktop environment
+      that the surface has its own, client-side decorations and
+      does not need to have window decorations added.
+  
+      Params:
+        decorated = true to request decorations
   */
   override void setDecorated(bool decorated)
   {
@@ -189,11 +196,12 @@ template ToplevelT()
 
   /**
       Sets the toplevel to be deletable.
-    
-    Setting deletable to true hints the desktop environment
-    that it should offer the user a way to close the surface.
-    Params:
-      deletable =       true to request a delete button
+      
+      Setting deletable to true hints the desktop environment
+      that it should offer the user a way to close the surface.
+  
+      Params:
+        deletable = true to request a delete button
   */
   override void setDeletable(bool deletable)
   {
@@ -202,16 +210,17 @@ template ToplevelT()
 
   /**
       Sets a list of icons for the surface.
-    
-    One of these will be used to represent the surface in iconic form.
-    The icon may be shown in window lists or task bars. Which icon
-    size is shown depends on the window manager. The window manager
-    can scale the icon but setting several size icons can give better
-    image quality.
-    
-    Note that some platforms don't support surface icons.
-    Params:
-      surfaces =       A list of textures to use as icon, of different sizes
+      
+      One of these will be used to represent the surface in iconic form.
+      The icon may be shown in window lists or task bars. Which icon
+      size is shown depends on the window manager. The window manager
+      can scale the icon but setting several size icons can give better
+      image quality.
+      
+      Note that some platforms don't support surface icons.
+  
+      Params:
+        surfaces = A list of textures to use as icon, of different sizes
   */
   override void setIconList(gdk.texture.Texture[] surfaces)
   {
@@ -222,16 +231,17 @@ template ToplevelT()
 
   /**
       Sets the toplevel to be modal.
-    
-    The application can use this hint to tell the
-    window manager that a certain surface has modal
-    behaviour. The window manager can use this information
-    to handle modal surfaces in a special way.
-    
-    You should only use this on surfaces for which you have
-    previously called [gdk.toplevel.Toplevel.setTransientFor].
-    Params:
-      modal =       true if the surface is modal, false otherwise.
+      
+      The application can use this hint to tell the
+      window manager that a certain surface has modal
+      behaviour. The window manager can use this information
+      to handle modal surfaces in a special way.
+      
+      You should only use this on surfaces for which you have
+      previously called [gdk.toplevel.Toplevel.setTransientFor].
+  
+      Params:
+        modal = true if the surface is modal, false otherwise.
   */
   override void setModal(bool modal)
   {
@@ -240,12 +250,13 @@ template ToplevelT()
 
   /**
       Sets the startup notification ID.
-    
-    When using GTK, typically you should use
-    [[gtk.window.Window.setStartupId]](../gtk4/method.Window.set_startup_id.html)
-    instead of this low-level function.
-    Params:
-      startupId =       a string with startup-notification identifier
+      
+      When using GTK, typically you should use
+      [[gtk.window.Window.setStartupId]](../gtk4/method.Window.set_startup_id.html)
+      instead of this low-level function.
+  
+      Params:
+        startupId = a string with startup-notification identifier
   */
   override void setStartupId(string startupId)
   {
@@ -255,11 +266,12 @@ template ToplevelT()
 
   /**
       Sets the title of a toplevel surface.
-    
-    The title maybe be displayed in the titlebar,
-    in lists of windows, etc.
-    Params:
-      title =       title of surface
+      
+      The title maybe be displayed in the titlebar,
+      in lists of windows, etc.
+  
+      Params:
+        title = title of surface
   */
   override void setTitle(string title)
   {
@@ -269,16 +281,17 @@ template ToplevelT()
 
   /**
       Sets a transient-for parent.
-    
-    Indicates to the window manager that surface is a transient
-    dialog associated with the application surface parent. This
-    allows the window manager to do things like center surface
-    on parent and keep surface above parent.
-    
-    See [[gtk.window.Window.setTransientFor]](../gtk4/method.Window.set_transient_for.html)
-    if you’re using [GtkWindow](../gtk4/class.Window.html).
-    Params:
-      parent =       another toplevel [gdk.surface.Surface]
+      
+      Indicates to the window manager that surface is a transient
+      dialog associated with the application surface parent. This
+      allows the window manager to do things like center surface
+      on parent and keep surface above parent.
+      
+      See [[gtk.window.Window.setTransientFor]](../gtk4/method.Window.set_transient_for.html)
+      if you’re using [GtkWindow](../gtk4/class.Window.html).
+  
+      Params:
+        parent = another toplevel [gdk.surface.Surface]
   */
   override void setTransientFor(gdk.surface.Surface parent)
   {
@@ -287,14 +300,15 @@ template ToplevelT()
 
   /**
       Asks the windowing system to show the window menu.
-    
-    The window menu is the menu shown when right-clicking the titlebar
-    on traditional windows managed by the window manager. This is useful
-    for windows using client-side decorations, activating it with a
-    right-click on the window decorations.
-    Params:
-      event =       a [gdk.event.Event] to show the menu for
-    Returns:     true if the window menu was shown and false otherwise.
+      
+      The window menu is the menu shown when right-clicking the titlebar
+      on traditional windows managed by the window manager. This is useful
+      for windows using client-side decorations, activating it with a
+      right-click on the window decorations.
+  
+      Params:
+        event = a [gdk.event.Event] to show the menu for
+      Returns: true if the window menu was shown and false otherwise.
   */
   override bool showWindowMenu(gdk.event.Event event)
   {
@@ -305,8 +319,8 @@ template ToplevelT()
 
   /**
       Returns whether the desktop environment supports
-    tiled window states.
-    Returns:     true if the desktop environment supports tiled window states
+      tiled window states.
+      Returns: true if the desktop environment supports tiled window states
   */
   override bool supportsEdgeConstraints()
   {
@@ -324,48 +338,55 @@ template ToplevelT()
   }
 
   /**
-      Emitted when the size for the surface needs to be computed, when
-    it is present.
-    
-    This signal will normally be emitted during or after a call to
-    [gdk.toplevel.Toplevel.present], depending on the configuration
-    received by the windowing system. It may also be emitted at any
-    other point in time, in response to the windowing system
-    spontaneously changing the configuration of the toplevel surface.
-    
-    It is the responsibility of the toplevel user to handle this signal
-    and compute the desired size of the toplevel, given the information
-    passed via the [gdk.toplevel_size.ToplevelSize] object. Failing to do so
-    will result in an arbitrary size being used as a result.
+      Connect to `ComputeSize` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B size)       a [gdk.toplevel_size.ToplevelSize]
-      * $(B toplevel) the instance the signal is connected to
-    )
-  */
-  alias ComputeSizeCallbackDlg = void delegate(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
-
-  /** ditto */
-  alias ComputeSizeCallbackFunc = void function(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel);
-
-  /**
-    Connect to ComputeSize signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the size for the surface needs to be computed, when
+      it is present.
+      
+      This signal will normally be emitted during or after a call to
+      [gdk.toplevel.Toplevel.present], depending on the configuration
+      received by the windowing system. It may also be emitted at any
+      other point in time, in response to the windowing system
+      spontaneously changing the configuration of the toplevel surface.
+      
+      It is the responsibility of the toplevel user to handle this signal
+      and compute the desired size of the toplevel, given the information
+      passed via the [gdk.toplevel_size.ToplevelSize] object. Failing to do so
+      will result in an arbitrary size being used as a result.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.toplevel_size.ToplevelSize size, gdk.toplevel.Toplevel toplevel))
+  
+          `size` a [gdk.toplevel_size.ToplevelSize] (optional)
+  
+          `toplevel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectComputeSize(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ComputeSizeCallbackDlg) || is(T : ComputeSizeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gdk.toplevel_size.ToplevelSize)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.toplevel.Toplevel)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto toplevel = getVal!(gdk.toplevel.Toplevel)(_paramVals);
-      auto size = getVal!(gdk.toplevel_size.ToplevelSize)(&_paramVals[1]);
-      _dClosure.dlg(size, toplevel);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

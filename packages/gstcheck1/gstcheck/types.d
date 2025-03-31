@@ -1,3 +1,4 @@
+/// D types for gstcheck1 library
 module gstcheck.types;
 
 import gid.gid;
@@ -24,15 +25,13 @@ alias StreamConsistency = GstStreamConsistency*;
 
 /**
     A function that is called for messages matching the filter added by
-  gst_check_add_log_filter.
+    gst_check_add_log_filter.
 
-  ## Parameters
-  $(LIST
-    * $(B logDomain)       the log domain of the message
-    * $(B logLevel)       the log level of the message
-    * $(B message)       the message that has occurred
-  )
-  Returns:     true if message should be discarded by GstCheck.
+    Params:
+      logDomain = the log domain of the message
+      logLevel = the log level of the message
+      message = the message that has occurred
+    Returns: true if message should be discarded by GstCheck.
 */
 alias CheckLogFilterFunc = bool delegate(string logDomain, glib.types.LogLevelFlags logLevel, string message);
 

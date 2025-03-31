@@ -1,3 +1,4 @@
+/// Module for [WindowTitle] class
 module adw.window_title;
 
 import adw.c.functions;
@@ -14,33 +15,36 @@ import gtk.widget;
 
 /**
     A helper widget for setting a window's title and subtitle.
-  
-  <picture>
-    <source srcset="window-title-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="window-title.png" alt="window-title">
-  </picture>
-  
-  [adw.window_title.WindowTitle] shows a title and subtitle. It's intended to be used as the
-  title child of [gtk.header_bar.HeaderBar] or `class@HeaderBar`.
-  
-  ## CSS nodes
-  
-  [adw.window_title.WindowTitle] has a single CSS node with name `windowtitle`.
+    
+    <picture>
+      <source srcset="window-title-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="window-title.png" alt="window-title">
+    </picture>
+    
+    [adw.window_title.WindowTitle] shows a title and subtitle. It's intended to be used as the
+    title child of [gtk.header_bar.HeaderBar] or `class@HeaderBar`.
+    
+    ## CSS nodes
+    
+    [adw.window_title.WindowTitle] has a single CSS node with name `windowtitle`.
 */
 class WindowTitle : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_window_title_get_type != &gidSymbolNotFound ? adw_window_title_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -53,10 +57,11 @@ class WindowTitle : gtk.widget.Widget
 
   /**
       Creates a new [adw.window_title.WindowTitle].
-    Params:
-      title =       a title
-      subtitle =       a subtitle
-    Returns:     the newly created [adw.window_title.WindowTitle]
+  
+      Params:
+        title = a title
+        subtitle = a subtitle
+      Returns: the newly created [adw.window_title.WindowTitle]
   */
   this(string title, string subtitle)
   {
@@ -69,7 +74,7 @@ class WindowTitle : gtk.widget.Widget
 
   /**
       Gets the subtitle of self.
-    Returns:     the subtitle
+      Returns: the subtitle
   */
   string getSubtitle()
   {
@@ -81,7 +86,7 @@ class WindowTitle : gtk.widget.Widget
 
   /**
       Gets the title of self.
-    Returns:     the title
+      Returns: the title
   */
   string getTitle()
   {
@@ -93,10 +98,11 @@ class WindowTitle : gtk.widget.Widget
 
   /**
       Sets the subtitle of self.
-    
-    The subtitle should give the user additional details.
-    Params:
-      subtitle =       a subtitle
+      
+      The subtitle should give the user additional details.
+  
+      Params:
+        subtitle = a subtitle
   */
   void setSubtitle(string subtitle)
   {
@@ -106,11 +112,12 @@ class WindowTitle : gtk.widget.Widget
 
   /**
       Sets the title of self.
-    
-    The title typically identifies the current view or content item, and
-    generally does not use the application name.
-    Params:
-      title =       a title
+      
+      The title typically identifies the current view or content item, and
+      generally does not use the application name.
+  
+      Params:
+        title = a title
   */
   void setTitle(string title)
   {

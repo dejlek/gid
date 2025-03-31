@@ -1,3 +1,4 @@
+/// Module for [RTCPBuffer] class
 module gstrtp.rtcpbuffer;
 
 import gid.gid;
@@ -11,20 +12,21 @@ import gstrtp.types;
 
 /**
     Note: The API in this module is not yet declared stable.
-  
-  The GstRTPCBuffer helper functions makes it easy to parse and create regular
-  #GstBuffer objects that contain compound RTCP packets. These buffers are typically
-  of 'application/x-rtcp' #GstCaps.
-  
-  An RTCP buffer consists of 1 or more #GstRTCPPacket structures that you can
-  retrieve with [gstrtp.rtcpbuffer.RTCPBuffer.getFirstPacket]. #GstRTCPPacket acts as a pointer
-  into the RTCP buffer; you can move to the next packet with
-  [gstrtp.rtcppacket.RTCPPacket.moveToNext].
+    
+    The GstRTPCBuffer helper functions makes it easy to parse and create regular
+    #GstBuffer objects that contain compound RTCP packets. These buffers are typically
+    of 'application/x-rtcp' #GstCaps.
+    
+    An RTCP buffer consists of 1 or more #GstRTCPPacket structures that you can
+    retrieve with [gstrtp.rtcpbuffer.RTCPBuffer.getFirstPacket]. #GstRTCPPacket acts as a pointer
+    into the RTCP buffer; you can move to the next packet with
+    [gstrtp.rtcppacket.RTCPPacket.moveToNext].
 */
 class RTCPBuffer
 {
   GstRTCPBuffer cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -36,6 +38,7 @@ class RTCPBuffer
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -59,12 +62,13 @@ class RTCPBuffer
 
   /**
       Add a new packet of type to rtcp. packet will point to the newly created
-    packet.
-    Params:
-      type =       the #GstRTCPType of the new packet
-      packet =       pointer to new packet
-    Returns:     true if the packet could be created. This function returns false
-      if the max mtu is exceeded for the buffer.
+      packet.
+  
+      Params:
+        type = the #GstRTCPType of the new packet
+        packet = pointer to new packet
+      Returns: true if the packet could be created. This function returns false
+        if the max mtu is exceeded for the buffer.
   */
   bool addPacket(gstrtp.types.RTCPType type, gstrtp.rtcppacket.RTCPPacket packet)
   {
@@ -75,10 +79,11 @@ class RTCPBuffer
 
   /**
       Initialize a new #GstRTCPPacket pointer that points to the first packet in
-    rtcp.
-    Params:
-      packet =       a #GstRTCPPacket
-    Returns:     TRUE if the packet existed in rtcp.
+      rtcp.
+  
+      Params:
+        packet = a #GstRTCPPacket
+      Returns: TRUE if the packet existed in rtcp.
   */
   bool getFirstPacket(gstrtp.rtcppacket.RTCPPacket packet)
   {
@@ -89,7 +94,7 @@ class RTCPBuffer
 
   /**
       Get the number of RTCP packets in rtcp.
-    Returns:     the number of RTCP packets in rtcp.
+      Returns: the number of RTCP packets in rtcp.
   */
   uint getPacketCount()
   {
@@ -100,11 +105,11 @@ class RTCPBuffer
 
   /**
       Finish rtcp after being constructed. This function is usually called
-    after [gstrtp.rtcpbuffer.RTCPBuffer.map] and after adding the RTCP items to the new buffer.
-    
-    The function adjusts the size of rtcp with the total length of all the
-    added packets.
-    Returns: 
+      after [gstrtp.rtcpbuffer.RTCPBuffer.map] and after adding the RTCP items to the new buffer.
+      
+      The function adjusts the size of rtcp with the total length of all the
+      added packets.
+      Returns: 
   */
   bool unmap()
   {
@@ -115,12 +120,13 @@ class RTCPBuffer
 
   /**
       Open buffer for reading or writing, depending on flags. The resulting RTCP
-    buffer state is stored in rtcp.
-    Params:
-      buffer =       a buffer with an RTCP packet
-      flags =       flags for the mapping
-      rtcp =       resulting #GstRTCPBuffer
-    Returns: 
+      buffer state is stored in rtcp.
+  
+      Params:
+        buffer = a buffer with an RTCP packet
+        flags = flags for the mapping
+        rtcp = resulting #GstRTCPBuffer
+      Returns: 
   */
   static bool map(gst.buffer.Buffer buffer, gst.types.MapFlags flags, gstrtp.rtcpbuffer.RTCPBuffer rtcp)
   {
@@ -131,10 +137,11 @@ class RTCPBuffer
 
   /**
       Create a new buffer for constructing RTCP packets. The packet will have a
-    maximum size of mtu.
-    Params:
-      mtu =       the maximum mtu size.
-    Returns:     A newly allocated buffer.
+      maximum size of mtu.
+  
+      Params:
+        mtu = the maximum mtu size.
+      Returns: A newly allocated buffer.
   */
   static gst.buffer.Buffer new_(uint mtu)
   {
@@ -146,11 +153,12 @@ class RTCPBuffer
 
   /**
       Create a new buffer and set the data to a copy of len
-    bytes of data and the size to len. The data will be freed when the buffer
-    is freed.
-    Params:
-      data =       data for the new buffer
-    Returns:     A newly allocated buffer with a copy of data and of size len.
+      bytes of data and the size to len. The data will be freed when the buffer
+      is freed.
+  
+      Params:
+        data = data for the new buffer
+      Returns: A newly allocated buffer with a copy of data and of size len.
   */
   static gst.buffer.Buffer newCopyData(ubyte[] data)
   {
@@ -167,11 +175,12 @@ class RTCPBuffer
 
   /**
       Create a new buffer and set the data and size of the buffer to data and len
-    respectively. data will be freed when the buffer is unreffed, so this
-    function transfers ownership of data to the new buffer.
-    Params:
-      data =       data for the new buffer
-    Returns:     A newly allocated buffer with data and of size len.
+      respectively. data will be freed when the buffer is unreffed, so this
+      function transfers ownership of data to the new buffer.
+  
+      Params:
+        data = data for the new buffer
+      Returns: A newly allocated buffer with data and of size len.
   */
   static gst.buffer.Buffer newTakeData(ubyte[] data)
   {
@@ -188,10 +197,11 @@ class RTCPBuffer
 
   /**
       Check if the data pointed to by buffer is a valid RTCP packet using
-    [gstrtp.rtcpbuffer.RTCPBuffer.validateData].
-    Params:
-      buffer =       the buffer to validate
-    Returns:     TRUE if buffer is a valid RTCP packet.
+      [gstrtp.rtcpbuffer.RTCPBuffer.validateData].
+  
+      Params:
+        buffer = the buffer to validate
+      Returns: TRUE if buffer is a valid RTCP packet.
   */
   static bool validate(gst.buffer.Buffer buffer)
   {
@@ -202,12 +212,13 @@ class RTCPBuffer
 
   /**
       Check if the data and size point to the data of a valid compound,
-    non-reduced size RTCP packet.
-    Use this function to validate a packet before using the other functions in
-    this module.
-    Params:
-      data =       the data to validate
-    Returns:     TRUE if the data points to a valid RTCP packet.
+      non-reduced size RTCP packet.
+      Use this function to validate a packet before using the other functions in
+      this module.
+  
+      Params:
+        data = the data to validate
+      Returns: TRUE if the data points to a valid RTCP packet.
   */
   static bool validateData(ubyte[] data)
   {
@@ -223,15 +234,16 @@ class RTCPBuffer
 
   /**
       Check if the data and size point to the data of a valid RTCP packet.
-    Use this function to validate a packet before using the other functions in
-    this module.
-    
-    This function is updated to support reduced size rtcp packets according to
-    RFC 5506 and will validate full compound RTCP packets as well as reduced
-    size RTCP packets.
-    Params:
-      data =       the data to validate
-    Returns:     TRUE if the data points to a valid RTCP packet.
+      Use this function to validate a packet before using the other functions in
+      this module.
+      
+      This function is updated to support reduced size rtcp packets according to
+      RFC 5506 and will validate full compound RTCP packets as well as reduced
+      size RTCP packets.
+  
+      Params:
+        data = the data to validate
+      Returns: TRUE if the data points to a valid RTCP packet.
   */
   static bool validateDataReduced(ubyte[] data)
   {
@@ -247,10 +259,11 @@ class RTCPBuffer
 
   /**
       Check if the data pointed to by buffer is a valid RTCP packet using
-    [gstrtp.rtcpbuffer.RTCPBuffer.validateReduced].
-    Params:
-      buffer =       the buffer to validate
-    Returns:     TRUE if buffer is a valid RTCP packet.
+      [gstrtp.rtcpbuffer.RTCPBuffer.validateReduced].
+  
+      Params:
+        buffer = the buffer to validate
+      Returns: TRUE if buffer is a valid RTCP packet.
   */
   static bool validateReduced(gst.buffer.Buffer buffer)
   {

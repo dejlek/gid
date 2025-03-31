@@ -1,3 +1,4 @@
+/// Module for [ToggleActionEntry] class
 module gtk.toggle_action_entry;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gtk.types;
 
 /**
     #GtkToggleActionEntry structs are used with
-  [gtk.action_group.ActionGroup.addToggleActions] to construct toggle actions.
+    [gtk.action_group.ActionGroup.addToggleActions] to construct toggle actions.
 */
 class ToggleActionEntry
 {
   GtkToggleActionEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class ToggleActionEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

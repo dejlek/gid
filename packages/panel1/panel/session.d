@@ -1,3 +1,4 @@
+/// Module for [Session] class
 module panel.session;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import panel.types;
 class Session : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_session_get_type != &gidSymbolNotFound ? panel_session_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,6 +55,7 @@ class Session : gobject.object.ObjectG
       Params:
         variant = a #GVariant from [panel.session.Session.toVariant]
       Returns: a #PanelSession
+      Throws: [ErrorG]
   */
   static panel.session.Session newFromVariant(glib.variant.VariantG variant)
   {

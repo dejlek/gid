@@ -1,3 +1,4 @@
+/// Module for [EventContext] class
 module vte.event_context;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class EventContext
   VteEventContext* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class EventContext
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;

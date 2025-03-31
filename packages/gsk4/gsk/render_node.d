@@ -1,3 +1,4 @@
+/// Module for [RenderNode] class
 module gsk.render_node;
 
 import cairo.context;
@@ -11,23 +12,24 @@ import gsk.types;
 
 /**
     [gsk.render_node.RenderNode] is the basic block in a scene graph to be
-  rendered using [gsk.renderer.Renderer].
-  
-  Each node has a parent, except the top-level node; each node may have
-  children nodes.
-  
-  Each node has an associated drawing surface, which has the size of
-  the rectangle set when creating it.
-  
-  Render nodes are meant to be transient; once they have been associated
-  to a [gsk.renderer.Renderer] it's safe to release any reference you have on
-  them. All [gsk.render_node.RenderNode]s are immutable, you can only specify their
-  properties during construction.
+    rendered using [gsk.renderer.Renderer].
+    
+    Each node has a parent, except the top-level node; each node may have
+    children nodes.
+    
+    Each node has an associated drawing surface, which has the size of
+    the rectangle set when creating it.
+    
+    Render nodes are meant to be transient; once they have been associated
+    to a [gsk.renderer.Renderer] it's safe to release any reference you have on
+    them. All [gsk.render_node.RenderNode]s are immutable, you can only specify their
+    properties during construction.
 */
 class RenderNode
 {
   GskRenderNode* cInstancePtr;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -45,6 +47,7 @@ class RenderNode
   }
 
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
@@ -55,12 +58,13 @@ class RenderNode
 
   /**
       Loads data previously created via [gsk.render_node.RenderNode.serialize].
-    
-    For a discussion of the supported format, see that function.
-    Params:
-      bytes =       the bytes containing the data
-      errorFunc =       Callback on parsing errors
-    Returns:     a new [gsk.render_node.RenderNode]
+      
+      For a discussion of the supported format, see that function.
+  
+      Params:
+        bytes = the bytes containing the data
+        errorFunc = Callback on parsing errors
+      Returns: a new [gsk.render_node.RenderNode]
   */
   static gsk.render_node.RenderNode deserialize(glib.bytes.Bytes bytes, gsk.types.ParseErrorFunc errorFunc = null)
   {
@@ -81,15 +85,16 @@ class RenderNode
 
   /**
       Draw the contents of node to the given cairo context.
-    
-    Typically, you'll use this function to implement fallback rendering
-    of [gsk.render_node.RenderNode]s on an intermediate Cairo context, instead of using
-    the drawing context associated to a [gdk.surface.Surface]'s rendering buffer.
-    
-    For advanced nodes that cannot be supported using Cairo, in particular
-    for nodes doing 3D operations, this function may fail.
-    Params:
-      cr =       cairo context to draw to
+      
+      Typically, you'll use this function to implement fallback rendering
+      of [gsk.render_node.RenderNode]s on an intermediate Cairo context, instead of using
+      the drawing context associated to a [gdk.surface.Surface]'s rendering buffer.
+      
+      For advanced nodes that cannot be supported using Cairo, in particular
+      for nodes doing 3D operations, this function may fail.
+  
+      Params:
+        cr = cairo context to draw to
   */
   void draw(cairo.context.Context cr)
   {
@@ -98,10 +103,11 @@ class RenderNode
 
   /**
       Retrieves the boundaries of the node.
-    
-    The node will not draw outside of its boundaries.
-    Params:
-      bounds =       return location for the boundaries
+      
+      The node will not draw outside of its boundaries.
+  
+      Params:
+        bounds = return location for the boundaries
   */
   void getBounds(out graphene.rect.Rect bounds)
   {
@@ -112,7 +118,7 @@ class RenderNode
 
   /**
       Returns the type of the node.
-    Returns:     the type of the [gsk.render_node.RenderNode]
+      Returns: the type of the [gsk.render_node.RenderNode]
   */
   gsk.types.RenderNodeType getNodeType()
   {
@@ -124,15 +130,15 @@ class RenderNode
 
   /**
       Serializes the node for later deserialization via
-    [gsk.render_node.RenderNode.deserialize]. No guarantees are made about the format
-    used other than that the same version of GTK will be able to deserialize
-    the result of a call to [gsk.render_node.RenderNode.serialize] and
-    [gsk.render_node.RenderNode.deserialize] will correctly reject files it cannot open
-    that were created with previous versions of GTK.
-    
-    The intended use of this functions is testing, benchmarking and debugging.
-    The format is not meant as a permanent storage format.
-    Returns:     a [glib.bytes.Bytes] representing the node.
+      [gsk.render_node.RenderNode.deserialize]. No guarantees are made about the format
+      used other than that the same version of GTK will be able to deserialize
+      the result of a call to [gsk.render_node.RenderNode.serialize] and
+      [gsk.render_node.RenderNode.deserialize] will correctly reject files it cannot open
+      that were created with previous versions of GTK.
+      
+      The intended use of this functions is testing, benchmarking and debugging.
+      The format is not meant as a permanent storage format.
+      Returns: a [glib.bytes.Bytes] representing the node.
   */
   glib.bytes.Bytes serialize()
   {
@@ -144,15 +150,17 @@ class RenderNode
 
   /**
       This function is equivalent to calling [gsk.render_node.RenderNode.serialize]
-    followed by `funcGLib.file_set_contents`.
-    
-    See those two functions for details on the arguments.
-    
-    It is mostly intended for use inside a debugger to quickly dump a render
-    node to a file for later inspection.
-    Params:
-      filename =       the file to save it to.
-    Returns:     true if saving was successful
+      followed by `funcGLib.file_set_contents`.
+      
+      See those two functions for details on the arguments.
+      
+      It is mostly intended for use inside a debugger to quickly dump a render
+      node to a file for later inspection.
+  
+      Params:
+        filename = the file to save it to.
+      Returns: true if saving was successful
+      Throws: [ErrorG]
   */
   bool writeToFile(string filename)
   {

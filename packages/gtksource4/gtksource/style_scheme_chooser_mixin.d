@@ -1,3 +1,4 @@
+/// Module for [StyleSchemeChooser] interface mixin
 module gtksource.style_scheme_chooser_mixin;
 
 public import gtksource.style_scheme_chooser_iface_proxy;
@@ -14,7 +15,7 @@ template StyleSchemeChooserT()
 
   /**
       Gets the currently-selected scheme.
-    Returns:     the currently-selected scheme.
+      Returns: the currently-selected scheme.
   */
   override gtksource.style_scheme.StyleScheme getStyleScheme()
   {
@@ -26,8 +27,9 @@ template StyleSchemeChooserT()
 
   /**
       Sets the scheme.
-    Params:
-      scheme =       a #GtkSourceStyleScheme
+  
+      Params:
+        scheme = a #GtkSourceStyleScheme
   */
   override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
   {

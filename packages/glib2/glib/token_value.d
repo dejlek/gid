@@ -1,3 +1,4 @@
+/// Module for [TokenValue] class
 module glib.token_value;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class TokenValue
 {
   GTokenValue cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class TokenValue
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

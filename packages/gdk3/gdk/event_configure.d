@@ -1,3 +1,4 @@
+/// Module for [EventConfigure] class
 module gdk.event_configure;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventConfigure
 {
   GdkEventConfigure cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventConfigure
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

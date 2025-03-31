@@ -1,3 +1,4 @@
+/// Module for [RTSPTimeRange] class
 module gstrtsp.rtsptime_range;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class RTSPTimeRange
 {
   GstRTSPTimeRange cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class RTSPTimeRange
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

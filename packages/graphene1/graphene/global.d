@@ -1,3 +1,4 @@
+/// Global functions for graphene1 library
 module graphene.global;
 
 import gid.gid;

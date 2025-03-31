@@ -1,3 +1,4 @@
+/// Module for [ViewSwitcherBar] class
 module adw.view_switcher_bar;
 
 import adw.c.functions;
@@ -16,81 +17,84 @@ import gtk.widget;
 
 /**
     A view switcher action bar.
-  
-  <picture>
-    <source srcset="view-switcher-bar-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="view-switcher-bar.png" alt="view-switcher-bar">
-  </picture>
-  
-  An action bar letting you switch between multiple views contained in a
-  `class@ViewStack`, via an `class@ViewSwitcher`. It is designed to be put at
-  the bottom of a window and to be revealed only on really narrow windows, e.g.
-  on mobile phones. It can't be revealed if there are less than two pages.
-  
-  [adw.view_switcher_bar.ViewSwitcherBar] is intended to be used together with
-  [adw.view_switcher.ViewSwitcher] in a header bar, and a `class@Breakpoint` showing the view
-  switcher bar on narrow sizes, while removing the view switcher from the
-  header bar, as follows:
-  
-  ```xml
-  <object class="AdwWindow">
-    <property name="width-request">360</property>
-    <property name="height-request">200</property>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 550sp</condition>
-        <setter object="switcher_bar" property="reveal">True</setter>
-        <setter object="header_bar" property="title-widget"/>
-      </object>
-    </child>
-    <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar" id="header_bar">
-            <property name="title-widget">
-              <object class="AdwViewSwitcher">
-                <property name="stack">stack</property>
-                <property name="policy">wide</property>
-              </object>
-            </property>
-          </object>
-        </child>
-        <property name="content">
-          <object class="AdwViewStack" id="stack"/>
-        </property>
-        <child type="bottom">
-          <object class="AdwViewSwitcherBar" id="switcher_bar">
-            <property name="stack">stack</property>
-          </object>
-        </child>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  It's recommended to set `property@ViewSwitcher:policy` to
-  [adw.types.ViewSwitcherPolicy.Wide] in this case.
-  
-  You may have to adjust the breakpoint condition for your specific pages.
-  
-  ## CSS nodes
-  
-  [adw.view_switcher_bar.ViewSwitcherBar] has a single CSS node with name` viewswitcherbar`.
+    
+    <picture>
+      <source srcset="view-switcher-bar-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="view-switcher-bar.png" alt="view-switcher-bar">
+    </picture>
+    
+    An action bar letting you switch between multiple views contained in a
+    `class@ViewStack`, via an `class@ViewSwitcher`. It is designed to be put at
+    the bottom of a window and to be revealed only on really narrow windows, e.g.
+    on mobile phones. It can't be revealed if there are less than two pages.
+    
+    [adw.view_switcher_bar.ViewSwitcherBar] is intended to be used together with
+    [adw.view_switcher.ViewSwitcher] in a header bar, and a `class@Breakpoint` showing the view
+    switcher bar on narrow sizes, while removing the view switcher from the
+    header bar, as follows:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="width-request">360</property>
+      <property name="height-request">200</property>
+      <child>
+        <object class="AdwBreakpoint">
+          <condition>max-width: 550sp</condition>
+          <setter object="switcher_bar" property="reveal">True</setter>
+          <setter object="header_bar" property="title-widget"/>
+        </object>
+      </child>
+      <property name="content">
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar" id="header_bar">
+              <property name="title-widget">
+                <object class="AdwViewSwitcher">
+                  <property name="stack">stack</property>
+                  <property name="policy">wide</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <property name="content">
+            <object class="AdwViewStack" id="stack"/>
+          </property>
+          <child type="bottom">
+            <object class="AdwViewSwitcherBar" id="switcher_bar">
+              <property name="stack">stack</property>
+            </object>
+          </child>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    It's recommended to set `property@ViewSwitcher:policy` to
+    [adw.types.ViewSwitcherPolicy.Wide] in this case.
+    
+    You may have to adjust the breakpoint condition for your specific pages.
+    
+    ## CSS nodes
+    
+    [adw.view_switcher_bar.ViewSwitcherBar] has a single CSS node with name` viewswitcherbar`.
 */
 class ViewSwitcherBar : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_bar_get_type != &gidSymbolNotFound ? adw_view_switcher_bar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -103,7 +107,7 @@ class ViewSwitcherBar : gtk.widget.Widget
 
   /**
       Creates a new [adw.view_switcher_bar.ViewSwitcherBar].
-    Returns:     the newly created [adw.view_switcher_bar.ViewSwitcherBar]
+      Returns: the newly created [adw.view_switcher_bar.ViewSwitcherBar]
   */
   this()
   {
@@ -114,7 +118,7 @@ class ViewSwitcherBar : gtk.widget.Widget
 
   /**
       Gets whether self should be revealed or hidden.
-    Returns:     whether self is revealed
+      Returns: whether self is revealed
   */
   bool getReveal()
   {
@@ -125,7 +129,7 @@ class ViewSwitcherBar : gtk.widget.Widget
 
   /**
       Gets the stack controlled by self.
-    Returns:     the stack
+      Returns: the stack
   */
   adw.view_stack.ViewStack getStack()
   {
@@ -137,8 +141,9 @@ class ViewSwitcherBar : gtk.widget.Widget
 
   /**
       Sets whether self should be revealed or hidden.
-    Params:
-      reveal =       whether to reveal self
+  
+      Params:
+        reveal = whether to reveal self
   */
   void setReveal(bool reveal)
   {
@@ -147,8 +152,9 @@ class ViewSwitcherBar : gtk.widget.Widget
 
   /**
       Sets the stack controlled by self.
-    Params:
-      stack =       a stack
+  
+      Params:
+        stack = a stack
   */
   void setStack(adw.view_stack.ViewStack stack = null)
   {

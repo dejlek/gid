@@ -1,3 +1,4 @@
+/// Module for [BoolFilter] class
 module gtk.bool_filter;
 
 import gid.gid;
@@ -9,22 +10,25 @@ import gtk.types;
 
 /**
     [gtk.bool_filter.BoolFilter] evaluates a boolean [gtk.expression.Expression]
-  to determine whether to include items.
+    to determine whether to include items.
 */
 class BoolFilter : gtk.filter.Filter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bool_filter_get_type != &gidSymbolNotFound ? gtk_bool_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,9 +41,10 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Creates a new bool filter.
-    Params:
-      expression =       The expression to evaluate
-    Returns:     a new [gtk.bool_filter.BoolFilter]
+  
+      Params:
+        expression = The expression to evaluate
+      Returns: a new [gtk.bool_filter.BoolFilter]
   */
   this(gtk.expression.Expression expression = null)
   {
@@ -50,8 +55,8 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Gets the expression that the filter uses to evaluate if
-    an item should be filtered.
-    Returns:     a [gtk.expression.Expression]
+      an item should be filtered.
+      Returns: a [gtk.expression.Expression]
   */
   gtk.expression.Expression getExpression()
   {
@@ -63,7 +68,7 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Returns whether the filter inverts the expression.
-    Returns:     true if the filter inverts
+      Returns: true if the filter inverts
   */
   bool getInvert()
   {
@@ -74,11 +79,12 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Sets the expression that the filter uses to check if items
-    should be filtered.
-    
-    The expression must have a value type of `G_TYPE_BOOLEAN`.
-    Params:
-      expression =       a [gtk.expression.Expression]
+      should be filtered.
+      
+      The expression must have a value type of `G_TYPE_BOOLEAN`.
+  
+      Params:
+        expression = a [gtk.expression.Expression]
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
@@ -87,8 +93,9 @@ class BoolFilter : gtk.filter.Filter
 
   /**
       Sets whether the filter should invert the expression.
-    Params:
-      invert =       true to invert
+  
+      Params:
+        invert = true to invert
   */
   void setInvert(bool invert)
   {

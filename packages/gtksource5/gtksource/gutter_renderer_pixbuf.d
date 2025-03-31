@@ -1,3 +1,4 @@
+/// Module for [GutterRendererPixbuf] class
 module gtksource.gutter_renderer_pixbuf;
 
 import gdk.paintable;
@@ -18,24 +19,27 @@ import gtksource.types;
 
 /**
     Renders a pixbuf in the gutter.
-  
-  A [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf] can be used to render an image in a cell of
-  `class@Gutter`.
+    
+    A [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf] can be used to render an image in a cell of
+    `class@Gutter`.
 */
 class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_pixbuf_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_pixbuf_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +52,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Create a new #GtkSourceGutterRendererPixbuf.
-    Returns:     A #GtkSourceGutterRenderer
+      Returns: A #GtkSourceGutterRenderer
   */
   this()
   {
@@ -59,7 +63,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Get the gicon of the renderer
-    Returns:     a #GIcon
+      Returns: a #GIcon
   */
   gio.icon.Icon getGicon()
   {
@@ -80,8 +84,8 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Gets a [gdk.paintable.Paintable] that was set with
-    [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf.setPaintable]
-    Returns:     a #GdkPaintable or null
+      [gtksource.gutter_renderer_pixbuf.GutterRendererPixbuf.setPaintable]
+      Returns: a #GdkPaintable or null
   */
   gdk.paintable.Paintable getPaintable()
   {
@@ -93,7 +97,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Get the pixbuf of the renderer.
-    Returns:     a #GdkPixbuf
+      Returns: a #GdkPixbuf
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
@@ -105,10 +109,11 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
 
   /**
       Allows overlaying a paintable on top of any other image that
-    has been set for the pixbuf. This will be applied when the
-    widget is next snapshot.
-    Params:
-      paintable =       a #GdkPaintable
+      has been set for the pixbuf. This will be applied when the
+      widget is next snapshot.
+  
+      Params:
+        paintable = a #GdkPaintable
   */
   void overlayPaintable(gdk.paintable.Paintable paintable)
   {

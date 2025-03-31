@@ -1,3 +1,4 @@
+/// Module for [FileAttributeInfo] class
 module gio.file_attribute_info;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class FileAttributeInfo
 {
   GFileAttributeInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class FileAttributeInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

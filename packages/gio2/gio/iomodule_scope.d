@@ -1,3 +1,4 @@
+/// Module for [IOModuleScope] class
 module gio.iomodule_scope;
 
 import gid.gid;
@@ -7,16 +8,17 @@ import gio.types;
 
 /**
     Represents a scope for loading IO modules. A scope can be used for blocking
-  duplicate modules, or blocking a module you don't want to load.
-  
-  The scope can be used with [gio.global.ioModulesLoadAllInDirectoryWithScope]
-  or [gio.global.ioModulesScanAllInDirectoryWithScope].
+    duplicate modules, or blocking a module you don't want to load.
+    
+    The scope can be used with [gio.global.ioModulesLoadAllInDirectoryWithScope]
+    or [gio.global.ioModulesScanAllInDirectoryWithScope].
 */
 class IOModuleScope
 {
   GIOModuleScope* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class IOModuleScope
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -34,10 +37,11 @@ class IOModuleScope
 
   /**
       Block modules with the given basename from being loaded when
-    this scope is used with [gio.global.ioModulesScanAllInDirectoryWithScope]
-    or [gio.global.ioModulesLoadAllInDirectoryWithScope].
-    Params:
-      basename =       the basename to block
+      this scope is used with [gio.global.ioModulesScanAllInDirectoryWithScope]
+      or [gio.global.ioModulesLoadAllInDirectoryWithScope].
+  
+      Params:
+        basename = the basename to block
   */
   void block(string basename)
   {

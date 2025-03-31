@@ -1,3 +1,4 @@
+/// Module for [DragSurfaceSize] class
 module gdk.drag_surface_size;
 
 import gdk.c.functions;
@@ -7,13 +8,14 @@ import gid.gid;
 
 /**
     The [gdk.drag_surface_size.DragSurfaceSize] struct contains information that is useful
-  to compute the size of a drag surface.
+    to compute the size of a drag surface.
 */
 class DragSurfaceSize
 {
   GdkDragSurfaceSize* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class DragSurfaceSize
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -31,9 +34,10 @@ class DragSurfaceSize
 
   /**
       Sets the size the drag surface prefers to be resized to.
-    Params:
-      width =       the width
-      height =       the height
+  
+      Params:
+        width = the width
+        height = the height
   */
   void setSize(int width, int height)
   {

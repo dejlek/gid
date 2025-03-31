@@ -1,3 +1,4 @@
+/// Module for [Partitioning] class
 module arrowdataset.partitioning;
 
 import arrowdataset.c.functions;
@@ -10,17 +11,20 @@ import gobject.object;
 class Partitioning : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_partitioning_get_type != &gidSymbolNotFound ? gadataset_partitioning_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

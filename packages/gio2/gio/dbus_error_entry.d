@@ -1,3 +1,4 @@
+/// Module for [DBusErrorEntry] class
 module gio.dbus_error_entry;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class DBusErrorEntry
 {
   GDBusErrorEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class DBusErrorEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

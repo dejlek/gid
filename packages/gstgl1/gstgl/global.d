@@ -1,3 +1,4 @@
+/// Global functions for gstgl1 library
 module gstgl.global;
 
 import gid.gid;
@@ -50,9 +51,10 @@ gstgl.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationPara
 
 /**
     See [gstgl.global.bufferPoolConfigSetGlMinFreeQueueSize].
-  Params:
-    config =       a buffer pool config
-  Returns:     then number of buffers configured the free queue
+
+    Params:
+      config = a buffer pool config
+    Returns: then number of buffers configured the free queue
 */
 uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 {
@@ -63,9 +65,10 @@ uint bufferPoolConfigGetGlMinFreeQueueSize(gst.structure.Structure config)
 
 /**
     Sets params on config
-  Params:
-    config =       a buffer pool config
-    params =       a #GstGLAllocationParams
+
+    Params:
+      config = a buffer pool config
+      params = a #GstGLAllocationParams
 */
 void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl.glallocation_params.GLAllocationParams params = null)
 {
@@ -74,19 +77,20 @@ void bufferPoolConfigSetGlAllocationParams(gst.structure.Structure config, gstgl
 
 /**
     Instructs the #GstGLBufferPool to keep queue_size amount of buffers around
-  before allowing them for reuse.
-  
-  This is helpful to allow GPU processing to complete before the CPU
-  operations on the same buffer could start.  Particularly useful when
-  uploading or downloading data to/from the GPU.
-  
-  A value of 0 disabled this functionality.
-  
-  This value must be less than the configured maximum amount of buffers for
-  this config.
-  Params:
-    config =       a buffer pool config
-    queueSize =       the number of buffers
+    before allowing them for reuse.
+    
+    This is helpful to allow GPU processing to complete before the CPU
+    operations on the same buffer could start.  Particularly useful when
+    uploading or downloading data to/from the GPU.
+    
+    A value of 0 disabled this functionality.
+    
+    This value must be less than the configured maximum amount of buffers for
+    this config.
+
+    Params:
+      config = a buffer pool config
+      queueSize = the number of buffers
 */
 void bufferPoolConfigSetGlMinFreeQueueSize(gst.structure.Structure config, uint queueSize)
 {
@@ -105,9 +109,10 @@ bool contextGetGlDisplay(gst.context.Context context, out gstgl.gldisplay.GLDisp
 
 /**
     Sets display on context
-  Params:
-    context =       a #GstContext
-    display =       resulting #GstGLDisplay
+
+    Params:
+      context = a #GstContext
+      display = resulting #GstGLDisplay
 */
 void contextSetGlDisplay(gst.context.Context context, gstgl.gldisplay.GLDisplay display = null)
 {
@@ -132,26 +137,27 @@ void glElementPropagateDisplayContext(gst.element.Element element, gstgl.gldispl
 
 /**
     Perform the steps necessary for retrieving a #GstGLDisplay and (optionally)
-  an application provided #GstGLContext from the surrounding elements or from
-  the application using the #GstContext mechanism.
-  
-  If the contents of display_ptr or other_context_ptr are not null, then no
-  #GstContext query is necessary for #GstGLDisplay or #GstGLContext retrieval
-  or is performed.
-  
-  This performs #GstContext queries (if necessary) for a winsys display
-  connection with `GST_GL_DISPLAY_CONTEXT_TYPE`, "gst.x11.display.handle", and
-  "GstWaylandDisplayHandleContextType" stopping after the first successful
-  retrieval.
-  
-  This also performs a #GstContext query (if necessary) for an optional
-  application provided #GstGLContext using the name "gst.gl.app_context".
-  The returned #GstGLContext will be shared with a GStreamer created OpenGL context.
-  Params:
-    element =       the #GstElement running the query
-    displayPtr =       the resulting #GstGLDisplay
-    otherContextPtr =       the resulting #GstGLContext
-  Returns:     whether a #GstGLDisplay exists in display_ptr
+    an application provided #GstGLContext from the surrounding elements or from
+    the application using the #GstContext mechanism.
+    
+    If the contents of display_ptr or other_context_ptr are not null, then no
+    #GstContext query is necessary for #GstGLDisplay or #GstGLContext retrieval
+    or is performed.
+    
+    This performs #GstContext queries (if necessary) for a winsys display
+    connection with `GST_GL_DISPLAY_CONTEXT_TYPE`, "gst.x11.display.handle", and
+    "GstWaylandDisplayHandleContextType" stopping after the first successful
+    retrieval.
+    
+    This also performs a #GstContext query (if necessary) for an optional
+    application provided #GstGLContext using the name "gst.gl.app_context".
+    The returned #GstGLContext will be shared with a GStreamer created OpenGL context.
+
+    Params:
+      element = the #GstElement running the query
+      displayPtr = the resulting #GstGLDisplay
+      otherContextPtr = the resulting #GstGLContext
+    Returns: whether a #GstGLDisplay exists in display_ptr
 */
 bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay displayPtr, gstgl.glcontext.GLContext otherContextPtr)
 {
@@ -162,17 +168,18 @@ bool glEnsureElementData(gst.element.Element element, gstgl.gldisplay.GLDisplay 
 
 /**
     Retrieves the stored 4x4 affine transformation matrix stored in meta in
-  NDC coordinates. if meta is NULL, an identity matrix is returned.
-  
-  NDC is a left-handed coordinate system
-  $(LIST
-    * x - [-1, 1] - +ve X moves right
-    * y - [-1, 1] - +ve Y moves up
-    * z - [-1, 1] - +ve Z moves into
-  )
-  Params:
-    meta =       a #GstVideoAffineTransformationMeta
-    matrix =       result of the 4x4 matrix
+    NDC coordinates. if meta is NULL, an identity matrix is returned.
+    
+    NDC is a left-handed coordinate system
+    $(LIST
+      * x - [-1, 1] - +ve X moves right
+      * y - [-1, 1] - +ve Y moves up
+      * z - [-1, 1] - +ve Z moves into
+    )
+
+    Params:
+      meta = a #GstVideoAffineTransformationMeta
+      matrix = result of the 4x4 matrix
 */
 void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, ref float[] matrix)
 {
@@ -181,11 +188,12 @@ void glGetAffineTransformationMetaAsNdc(gstvideo.video_affine_transformation_met
 
 /**
     Retrieve the size in bytes of a video plane of data with a certain alignment
-  Params:
-    info =       a #GstVideoInfo
-    align_ =       a #GstVideoAlignment or null
-    plane =       plane number in info to retrieve the data size of
-  Returns: 
+
+    Params:
+      info = a #GstVideoInfo
+      align_ = a #GstVideoAlignment or null
+      plane = plane number in info to retrieve the data size of
+    Returns: 
 */
 size_t glGetPlaneDataSize(gstvideo.video_info.VideoInfo info, gstvideo.video_alignment.VideoAlignment align_, uint plane)
 {
@@ -212,16 +220,17 @@ bool glHandleContextQuery(gst.element.Element element, gst.query.Query query, gs
 
 /**
     Helper function for implementing #GstElementClass.set_context() in
-  OpenGL capable elements.
-  
-  Retrieve's the #GstGLDisplay or #GstGLContext in context and places the
-  result in display or other_context respectively.
-  Params:
-    element =       a #GstElement
-    context =       a #GstContext
-    display =       location of a #GstGLDisplay
-    otherContext =       location of a #GstGLContext
-  Returns:     whether the display or other_context could be set successfully
+    OpenGL capable elements.
+    
+    Retrieve's the #GstGLDisplay or #GstGLContext in context and places the
+    result in display or other_context respectively.
+
+    Params:
+      element = a #GstElement
+      context = a #GstContext
+      display = location of a #GstGLDisplay
+      otherContext = location of a #GstGLContext
+    Returns: whether the display or other_context could be set successfully
 */
 bool glHandleSetContext(gst.element.Element element, gst.context.Context context, out gstgl.gldisplay.GLDisplay display, out gstgl.glcontext.GLContext otherContext)
 {
@@ -235,12 +244,13 @@ bool glHandleSetContext(gst.element.Element element, gst.context.Context context
 }
 
 /**
-    Multiplies two 4x4 matrices, a and b, and stores the result, a
-  2-dimensional array of #gfloat, in result.
-  Params:
-    a =       a 2-dimensional 4x4 array of #gfloat
-    b =       another 2-dimensional 4x4 array of #gfloat
-    result =       the result of the multiplication
+    Multiplies two 4x4 matrices, `a` and `b`, and stores the result, a
+    2-dimensional array of #gfloat, in result.
+
+    Params:
+      a = a 2-dimensional 4x4 array of #gfloat
+      b = another 2-dimensional 4x4 array of #gfloat
+      result = the result of the multiplication
 */
 void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
 {
@@ -253,10 +263,11 @@ void glMultiplyMatrix4(float[] a, float[] b, ref float[] result)
 
 /**
     Set the 4x4 affine transformation matrix stored in meta from the
-  NDC coordinates in matrix.
-  Params:
-    meta =       a #GstVideoAffineTransformationMeta
-    matrix =       a 4x4 matrix
+    NDC coordinates in matrix.
+
+    Params:
+      meta = a #GstVideoAffineTransformationMeta
+      matrix = a 4x4 matrix
 */
 void glSetAffineTransformationMetaFromNdc(gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix)
 {
@@ -291,10 +302,11 @@ gobject.types.GType glSyncMetaApiGetType()
 
 /**
     See [gstgl.global.glValueSetTextureTargetFromMask] for what entails a mask
-  Params:
-    value =       an initialized #GValue of type G_TYPE_STRING
-  Returns:     the mask of #GstGLTextureTarget's in value or
-        [gstgl.types.GLTextureTarget.None] on failure
+
+    Params:
+      value = an initialized #GValue of type G_TYPE_STRING
+    Returns: the mask of #GstGLTextureTarget's in value or
+          [gstgl.types.GLTextureTarget.None] on failure
 */
 gstgl.types.GLTextureTarget glValueGetTextureTargetMask(gobject.value.Value value)
 {
@@ -314,11 +326,12 @@ bool glValueSetTextureTarget(gobject.value.Value value, gstgl.types.GLTextureTar
 
 /**
     A mask is a bitwise OR of (1 << target) where target is a valid
-  #GstGLTextureTarget
-  Params:
-    value =       an uninitialized #GValue
-    targetMask =       a bitwise mask of #GstGLTextureTarget's
-  Returns:     whether the target_mask could be set on value
+    #GstGLTextureTarget
+
+    Params:
+      value = an uninitialized #GValue
+      targetMask = a bitwise mask of #GstGLTextureTarget's
+    Returns: whether the target_mask could be set on value
 */
 bool glValueSetTextureTargetFromMask(gobject.value.Value value, gstgl.types.GLTextureTarget targetMask)
 {
@@ -338,12 +351,13 @@ gstgl.types.GLSLVersion glVersionToGlslVersion(gstgl.types.GLAPI glApi, int maj,
 
 /**
     Note: this function first searches the first 1 kilobytes for a `#version`
-  preprocessor directive and then executes [gstgl.global.glslVersionProfileFromString].
-  Params:
-    s =       string to search for a valid `#version` string
-    version_ =       resulting #GstGLSLVersion
-    profile =       resulting #GstGLSLProfile
-  Returns:     TRUE if a valid `#version` string was found, FALSE otherwise
+    preprocessor directive and then executes [gstgl.global.glslVersionProfileFromString].
+
+    Params:
+      s = string to search for a valid `#version` string
+      version_ = resulting #GstGLSLVersion
+      profile = resulting #GstGLSLProfile
+    Returns: TRUE if a valid `#version` string was found, FALSE otherwise
 */
 bool glslStringGetVersionProfile(string s, out gstgl.types.GLSLVersion version_, out gstgl.types.GLSLProfile profile)
 {

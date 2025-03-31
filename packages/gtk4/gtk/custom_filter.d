@@ -1,3 +1,4 @@
+/// Module for [CustomFilter] class
 module gtk.custom_filter;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class CustomFilter : gtk.filter.Filter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_filter_get_type != &gidSymbolNotFound ? gtk_custom_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,15 +40,16 @@ class CustomFilter : gtk.filter.Filter
 
   /**
       Creates a new filter using the given match_func to filter
-    items.
-    
-    If match_func is null, the filter matches all items.
-    
-    If the filter func changes its filtering behavior,
-    [gtk.filter.Filter.changed] needs to be called.
-    Params:
-      matchFunc =       function to filter items
-    Returns:     a new [gtk.custom_filter.CustomFilter]
+      items.
+      
+      If match_func is null, the filter matches all items.
+      
+      If the filter func changes its filtering behavior,
+      [gtk.filter.Filter.changed] needs to be called.
+  
+      Params:
+        matchFunc = function to filter items
+      Returns: a new [gtk.custom_filter.CustomFilter]
   */
   this(gtk.types.CustomFilterFunc matchFunc = null)
   {
@@ -66,16 +71,17 @@ class CustomFilter : gtk.filter.Filter
 
   /**
       Sets the function used for filtering items.
-    
-    If match_func is null, the filter matches all items.
-    
-    If the filter func changes its filtering behavior,
-    [gtk.filter.Filter.changed] needs to be called.
-    
-    If a previous function was set, its user_destroy will be
-    called now.
-    Params:
-      matchFunc =       function to filter items
+      
+      If match_func is null, the filter matches all items.
+      
+      If the filter func changes its filtering behavior,
+      [gtk.filter.Filter.changed] needs to be called.
+      
+      If a previous function was set, its user_destroy will be
+      called now.
+  
+      Params:
+        matchFunc = function to filter items
   */
   void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
   {

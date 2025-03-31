@@ -1,3 +1,4 @@
+/// Module for [Completion] class
 module gtksource.completion;
 
 import gid.gid;
@@ -13,49 +14,52 @@ import pango.attr_list;
 
 /**
     Main Completion Object.
-  
-  The completion system helps the user when they writes some text,
-  such as words, command names, functions, and suchlike. Proposals can
-  be shown, to complete the text the user is writing. Each proposal can
-  contain an additional piece of information (for example
-  documentation), that is displayed when the "Details" button is
-  clicked.
-  
-  Proposals are created via a `iface@CompletionProvider`. There can
-  be for example a provider to complete words (see `class@CompletionWords`),
-  another provider for the completion of
-  function names, etc. To add a provider, call
-  [gtksource.completion.Completion.addProvider].
-  
-  The `iface@CompletionProposal` interface represents a proposal.
-  
-  If a proposal contains extra information (see
-  [gtksource.types.CompletionColumn.Details]), it will be
-  displayed in a supplemental details window, which appears when
-  the "Details" button is clicked.
-  
-  Each `class@View` object is associated with a `class@Completion`
-  instance. This instance can be obtained with
-  [gtksource.view.View.getCompletion]. The `class@View` class contains also the
-  `signal@View::show-completion` signal.
-  
-  A same `iface@CompletionProvider` object can be used for several
-  [gtksource.completion.Completion]'s.
+    
+    The completion system helps the user when they writes some text,
+    such as words, command names, functions, and suchlike. Proposals can
+    be shown, to complete the text the user is writing. Each proposal can
+    contain an additional piece of information (for example
+    documentation), that is displayed when the "Details" button is
+    clicked.
+    
+    Proposals are created via a `iface@CompletionProvider`. There can
+    be for example a provider to complete words (see `class@CompletionWords`),
+    another provider for the completion of
+    function names, etc. To add a provider, call
+    [gtksource.completion.Completion.addProvider].
+    
+    The `iface@CompletionProposal` interface represents a proposal.
+    
+    If a proposal contains extra information (see
+    [gtksource.types.CompletionColumn.Details]), it will be
+    displayed in a supplemental details window, which appears when
+    the "Details" button is clicked.
+    
+    Each `class@View` object is associated with a `class@Completion`
+    instance. This instance can be obtained with
+    [gtksource.view.View.getCompletion]. The `class@View` class contains also the
+    `signal@View::show-completion` signal.
+    
+    A same `iface@CompletionProvider` object can be used for several
+    [gtksource.completion.Completion]'s.
 */
 class Completion : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -68,11 +72,12 @@ class Completion : gobject.object.ObjectG
 
   /**
       This will add `<b>` tags around matched characters in haystack
-    based on casefold_query.
-    Params:
-      haystack =       the string to be highlighted
-      casefoldQuery =       the typed-text used to highlight haystack
-    Returns:     a #PangoAttrList or null
+      based on casefold_query.
+  
+      Params:
+        haystack = the string to be highlighted
+        casefoldQuery = the typed-text used to highlight haystack
+      Returns: a #PangoAttrList or null
   */
   static pango.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery)
   {
@@ -86,18 +91,19 @@ class Completion : gobject.object.ObjectG
 
   /**
       This helper function can do a fuzzy match for you giving a haystack and
-    casefolded needle.
-    
-    Casefold your needle using `funcGLib.utf8_casefold` before
-    running the query.
-    
-    Score will be set with the score of the match upon success. Otherwise,
-    it will be set to zero.
-    Params:
-      haystack =       the string to be searched.
-      casefoldNeedle =       A [glib.global.utf8Casefold] version of the needle.
-      priority =       An optional location for the score of the match
-    Returns:     true if haystack matched casefold_needle, otherwise false.
+      casefolded needle.
+      
+      Casefold your needle using `funcGLib.utf8_casefold` before
+      running the query.
+      
+      Score will be set with the score of the match upon success. Otherwise,
+      it will be set to zero.
+  
+      Params:
+        haystack = the string to be searched.
+        casefoldNeedle = A [glib.global.utf8Casefold] version of the needle.
+        priority = An optional location for the score of the match
+      Returns: true if haystack matched casefold_needle, otherwise false.
   */
   static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority)
   {
@@ -110,9 +116,10 @@ class Completion : gobject.object.ObjectG
 
   /**
       Adds a `ifaceCompletionProvider` to the list of providers to be queried
-    for completion results.
-    Params:
-      provider =       a #GtkSourceCompletionProvider
+      for completion results.
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider
   */
   void addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -127,7 +134,7 @@ class Completion : gobject.object.ObjectG
 
   /**
       Gets the connected `classView`'s `classBuffer`
-    Returns:     A #GtkSourceBuffer
+      Returns: A #GtkSourceBuffer
   */
   gtksource.buffer.Buffer getBuffer()
   {
@@ -147,7 +154,7 @@ class Completion : gobject.object.ObjectG
 
   /**
       Gets the `classView` that owns the `classCompletion`.
-    Returns:     A #GtkSourceView
+      Returns: A #GtkSourceView
   */
   gtksource.view.View getView()
   {
@@ -159,9 +166,9 @@ class Completion : gobject.object.ObjectG
 
   /**
       Emits the "hide" signal.
-    
-    When the "hide" signal is emitted, the completion window will be
-    dismissed.
+      
+      When the "hide" signal is emitted, the completion window will be
+      dismissed.
   */
   void hide()
   {
@@ -170,9 +177,10 @@ class Completion : gobject.object.ObjectG
 
   /**
       Removes a `ifaceCompletionProvider` previously added with
-    [gtksource.completion.Completion.addProvider].
-    Params:
-      provider =       a #GtkSourceCompletionProvider
+      [gtksource.completion.Completion.addProvider].
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider
   */
   void removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
@@ -187,9 +195,9 @@ class Completion : gobject.object.ObjectG
 
   /**
       Emits the "show" signal.
-    
-    When the "show" signal is emitted, the completion window will be
-    displayed if there are any results available.
+      
+      When the "show" signal is emitted, the completion window will be
+      displayed if there are any results available.
   */
   void show()
   {
@@ -203,35 +211,37 @@ class Completion : gobject.object.ObjectG
   }
 
   /**
-      The "hide" signal is emitted when the completion window should
-    be hidden.
+      Connect to `Hide` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias HideCallbackDlg = void delegate(gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias HideCallbackFunc = void function(gtksource.completion.Completion completion);
-
-  /**
-    Connect to Hide signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "hide" signal is emitted when the completion window should
+      be hidden.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion.Completion completion))
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectHide(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : HideCallbackDlg) || is(T : HideCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      _dClosure.dlg(completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -239,37 +249,44 @@ class Completion : gobject.object.ObjectG
   }
 
   /**
-      The "provided-added" signal is emitted when a new provider is
-    added to the completion.
+      Connect to `ProviderAdded` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B provider)       a #GtkSourceCompletionProvider
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias ProviderAddedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias ProviderAddedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
-
-  /**
-    Connect to ProviderAdded signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "provided-added" signal is emitted when a new provider is
+      added to the completion.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion))
+  
+          `provider` a #GtkSourceCompletionProvider (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectProviderAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ProviderAddedCallbackDlg) || is(T : ProviderAddedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
-      _dClosure.dlg(provider, completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -277,37 +294,44 @@ class Completion : gobject.object.ObjectG
   }
 
   /**
-      The "provided-removed" signal is emitted when a provider has
-    been removed from the completion.
+      Connect to `ProviderRemoved` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B provider)       a #GtkSourceCompletionProvider
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias ProviderRemovedCallbackDlg = void delegate(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias ProviderRemovedCallbackFunc = void function(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion);
-
-  /**
-    Connect to ProviderRemoved signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "provided-removed" signal is emitted when a provider has
+      been removed from the completion.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion_provider.CompletionProvider provider, gtksource.completion.Completion completion))
+  
+          `provider` a #GtkSourceCompletionProvider (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectProviderRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ProviderRemovedCallbackDlg) || is(T : ProviderRemovedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion_provider.CompletionProvider)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtksource.completion.Completion)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      auto provider = getVal!(gtksource.completion_provider.CompletionProvider)(&_paramVals[1]);
-      _dClosure.dlg(provider, completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -315,35 +339,37 @@ class Completion : gobject.object.ObjectG
   }
 
   /**
-      The "show" signal is emitted when the completion window should
-    be shown.
+      Connect to `Show` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B completion) the instance the signal is connected to
-    )
-  */
-  alias ShowCallbackDlg = void delegate(gtksource.completion.Completion completion);
-
-  /** ditto */
-  alias ShowCallbackFunc = void function(gtksource.completion.Completion completion);
-
-  /**
-    Connect to Show signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The "show" signal is emitted when the completion window should
+      be shown.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.completion.Completion completion))
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectShow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ShowCallbackDlg) || is(T : ShowCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.completion.Completion)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto completion = getVal!(gtksource.completion.Completion)(_paramVals);
-      _dClosure.dlg(completion);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

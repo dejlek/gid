@@ -1,3 +1,4 @@
+/// C types for freetype2 library
 module freetype2.c.types;
 
 public import gid.basictypes;

@@ -1,3 +1,4 @@
+/// Module for [FixedChild] class
 module gtk.fixed_child;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class FixedChild
 {
   GtkFixedChild cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,6 +24,7 @@ class FixedChild
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

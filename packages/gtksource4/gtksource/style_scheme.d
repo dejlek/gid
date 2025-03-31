@@ -1,3 +1,4 @@
+/// Module for [StyleScheme] class
 module gtksource.style_scheme;
 
 import gid.gid;
@@ -11,17 +12,20 @@ import gtksource.types;
 class StyleScheme : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

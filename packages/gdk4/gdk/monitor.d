@@ -1,3 +1,4 @@
+/// Module for [MonitorG] class
 module gdk.monitor;
 
 import gdk.c.functions;
@@ -11,27 +12,30 @@ import gobject.object;
 
 /**
     [gdk.monitor.MonitorG] objects represent the individual outputs that are
-  associated with a [gdk.display.Display].
-  
-  [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
-  monitors with [gdk.display.Display.getMonitors]. You can use
-  [gdk.display.Display.getMonitorAtSurface] to find a particular
-  monitor.
+    associated with a [gdk.display.Display].
+    
+    [gdk.display.Display] keeps a [gio.list_model.ListModel] to enumerate and monitor
+    monitors with [gdk.display.Display.getMonitors]. You can use
+    [gdk.display.Display.getMonitorAtSurface] to find a particular
+    monitor.
 */
 class MonitorG : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_monitor_get_type != &gidSymbolNotFound ? gdk_monitor_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,11 +48,11 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the name of the monitor's connector, if available.
-    
-    These are strings such as "eDP-1", or "HDMI-2". They depend
-    on software and hardware configuration, and should not be
-    relied on as stable identifiers of a specific monitor.
-    Returns:     the name of the connector
+      
+      These are strings such as "eDP-1", or "HDMI-2". They depend
+      on software and hardware configuration, and should not be
+      relied on as stable identifiers of a specific monitor.
+      Returns: the name of the connector
   */
   string getConnector()
   {
@@ -60,9 +64,9 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets a string describing the monitor, if available.
-    
-    This can be used to identify a monitor in the UI.
-    Returns:     the monitor description
+      
+      This can be used to identify a monitor in the UI.
+      Returns: the monitor description
   */
   string getDescription()
   {
@@ -74,7 +78,7 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the display that this monitor belongs to.
-    Returns:     the display
+      Returns: the display
   */
   gdk.display.Display getDisplay()
   {
@@ -86,12 +90,13 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Retrieves the size and position of the monitor within the
-    display coordinate space.
-    
-    The returned geometry is in  ”application pixels”, not in
-    ”device pixels” (see [gdk.monitor.MonitorG.getScale]).
-    Params:
-      geometry =       a [gtk.types.Rectangle] to be filled with the monitor geometry
+      display coordinate space.
+      
+      The returned geometry is in  ”application pixels”, not in
+      ”device pixels” (see [gdk.monitor.MonitorG.getScale]).
+  
+      Params:
+        geometry = a [gtk.types.Rectangle] to be filled with the monitor geometry
   */
   void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
@@ -102,7 +107,7 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the height in millimeters of the monitor.
-    Returns:     the physical height of the monitor
+      Returns: the physical height of the monitor
   */
   int getHeightMm()
   {
@@ -113,13 +118,13 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the name or PNP ID of the monitor's manufacturer.
-    
-    Note that this value might also vary depending on actual
-    display backend.
-    
-    The PNP ID registry is located at
-    [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
-    Returns:     the name of the manufacturer
+      
+      Note that this value might also vary depending on actual
+      display backend.
+      
+      The PNP ID registry is located at
+      [https://uefi.org/pnp_id_list](https://uefi.org/pnp_id_list).
+      Returns: the name of the manufacturer
   */
   string getManufacturer()
   {
@@ -131,7 +136,7 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the string identifying the monitor model, if available.
-    Returns:     the monitor model
+      Returns: the monitor model
   */
   string getModel()
   {
@@ -143,10 +148,10 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the refresh rate of the monitor, if available.
-    
-    The value is in milli-Hertz, so a refresh rate of 60Hz
-    is returned as 60000.
-    Returns:     the refresh rate in milli-Hertz, or 0
+      
+      The value is in milli-Hertz, so a refresh rate of 60Hz
+      is returned as 60000.
+      Returns: the refresh rate in milli-Hertz, or 0
   */
   int getRefreshRate()
   {
@@ -157,12 +162,12 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the internal scale factor that maps from monitor coordinates
-    to device pixels.
-    
-    This can be used if you want to create pixel based data for a
-    particular monitor, but most of the time you’re drawing to a surface
-    where it is better to use [gdk.surface.Surface.getScale] instead.
-    Returns:     the scale
+      to device pixels.
+      
+      This can be used if you want to create pixel based data for a
+      particular monitor, but most of the time you’re drawing to a surface
+      where it is better to use [gdk.surface.Surface.getScale] instead.
+      Returns: the scale
   */
   double getScale()
   {
@@ -173,15 +178,15 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the internal scale factor that maps from monitor coordinates
-    to device pixels.
-    
-    On traditional systems this is 1, but on very high density outputs
-    it can be a higher value (often 2).
-    
-    This can be used if you want to create pixel based data for a
-    particular monitor, but most of the time you’re drawing to a surface
-    where it is better to use [gdk.surface.Surface.getScaleFactor] instead.
-    Returns:     the scale factor
+      to device pixels.
+      
+      On traditional systems this is 1, but on very high density outputs
+      it can be a higher value (often 2).
+      
+      This can be used if you want to create pixel based data for a
+      particular monitor, but most of the time you’re drawing to a surface
+      where it is better to use [gdk.surface.Surface.getScaleFactor] instead.
+      Returns: the scale factor
   */
   int getScaleFactor()
   {
@@ -192,8 +197,8 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets information about the layout of red, green and blue
-    primaries for pixels.
-    Returns:     the subpixel layout
+      primaries for pixels.
+      Returns: the subpixel layout
   */
   gdk.types.SubpixelLayout getSubpixelLayout()
   {
@@ -205,7 +210,7 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Gets the width in millimeters of the monitor.
-    Returns:     the physical width of the monitor
+      Returns: the physical width of the monitor
   */
   int getWidthMm()
   {
@@ -216,11 +221,11 @@ class MonitorG : gobject.object.ObjectG
 
   /**
       Returns true if the monitor object corresponds to a
-    physical monitor.
-    
-    The monitor becomes invalid when the physical monitor
-    is unplugged or removed.
-    Returns:     true if the object corresponds to a physical monitor
+      physical monitor.
+      
+      The monitor becomes invalid when the physical monitor
+      is unplugged or removed.
+      Returns: true if the object corresponds to a physical monitor
   */
   bool isValid()
   {
@@ -230,34 +235,36 @@ class MonitorG : gobject.object.ObjectG
   }
 
   /**
+      Connect to `Invalidate` signal.
+  
       Emitted when the output represented by monitor gets disconnected.
   
-    ## Parameters
-    $(LIST
-      * $(B monitorG) the instance the signal is connected to
-    )
-  */
-  alias InvalidateCallbackDlg = void delegate(gdk.monitor.MonitorG monitorG);
-
-  /** ditto */
-  alias InvalidateCallbackFunc = void function(gdk.monitor.MonitorG monitorG);
-
-  /**
-    Connect to Invalidate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.monitor.MonitorG monitorG))
+  
+          `monitorG` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectInvalidate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : InvalidateCallbackDlg) || is(T : InvalidateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.monitor.MonitorG)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto monitorG = getVal!(gdk.monitor.MonitorG)(_paramVals);
-      _dClosure.dlg(monitorG);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

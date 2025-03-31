@@ -1,3 +1,4 @@
+/// Module for [DeleteEvent] class
 module gdk.delete_event;
 
 import gdk.c.functions;
@@ -12,6 +13,7 @@ import gid.gid;
 class DeleteEvent : gdk.event.Event
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

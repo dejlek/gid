@@ -1,3 +1,4 @@
+/// Module for [AttrColor] class
 module pango.attr_color;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import pango.types;
 
 /**
     The [pango.attr_color.AttrColor] structure is used to represent attributes that
-  are colors.
+    are colors.
 */
 class AttrColor
 {
   PangoAttrColor cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class AttrColor
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

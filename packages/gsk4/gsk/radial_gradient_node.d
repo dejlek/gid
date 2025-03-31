@@ -1,3 +1,4 @@
+/// Module for [RadialGradientNode] class
 module gsk.radial_gradient_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class RadialGradientNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,7 +25,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the center pointer for the gradient.
-    Returns:     the center point for the gradient
+      Returns: the center point for the gradient
   */
   graphene.point.Point getCenter()
   {
@@ -35,7 +37,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the end value for the gradient.
-    Returns:     the end value for the gradient
+      Returns: the end value for the gradient
   */
   float getEnd()
   {
@@ -46,7 +48,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the horizontal radius for the gradient.
-    Returns:     the horizontal radius for the gradient
+      Returns: the horizontal radius for the gradient
   */
   float getHradius()
   {
@@ -57,7 +59,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of color stops in the gradient.
-    Returns:     the number of color stops
+      Returns: the number of color stops
   */
   size_t getNColorStops()
   {
@@ -68,7 +70,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the start value for the gradient.
-    Returns:     the start value for the gradient
+      Returns: the start value for the gradient
   */
   float getStart()
   {
@@ -79,7 +81,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the vertical radius for the gradient.
-    Returns:     the vertical radius for the gradient
+      Returns: the vertical radius for the gradient
   */
   float getVradius()
   {

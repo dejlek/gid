@@ -1,3 +1,4 @@
+/// Module for [GLFilter] class
 module gstgl.glfilter;
 
 import gid.gid;
@@ -12,22 +13,25 @@ import gstgl.types;
 
 /**
     #GstGLFilter helps to implement simple OpenGL filter elements taking a
-  single input and producing a single output with a #GstGLFramebuffer
+    single input and producing a single output with a #GstGLFramebuffer
 */
 class GLFilter : gstgl.glbase_filter.GLBaseFilter
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_filter_get_type != &gidSymbolNotFound ? gst_gl_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -40,9 +44,9 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
 
   /**
       Render a fullscreen quad using the current GL state.  The only GL state this
-    modifies is the necessary vertex/index buffers and, if necessary, a
-    Vertex Array Object for drawing a fullscreen quad.  Framebuffer state,
-    any shaders, viewport state, etc must be setup by the caller.
+      modifies is the necessary vertex/index buffers and, if necessary, a
+      Vertex Array Object for drawing a fullscreen quad.  Framebuffer state,
+      any shaders, viewport state, etc must be setup by the caller.
   */
   void drawFullscreenQuad()
   {
@@ -51,10 +55,11 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
 
   /**
       Calls filter_texture vfunc with correctly mapped #GstGLMemorys
-    Params:
-      input =       an input buffer
-      output =       an output buffer
-    Returns:     whether the transformation succeeded
+  
+      Params:
+        input = an input buffer
+        output = an output buffer
+      Returns: whether the transformation succeeded
   */
   bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output)
   {
@@ -65,11 +70,12 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
 
   /**
       Transforms input into output using func on through FBO.
-    Params:
-      input =       the input texture
-      output =       the output texture
-      func =       the function to transform input into output. called with data
-    Returns:     the return value of func
+  
+      Params:
+        input = the input texture
+        output = the output texture
+        func = the function to transform input into output. called with data
+      Returns: the return value of func
   */
   bool renderToTarget(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.types.GLFilterRenderFunc func)
   {
@@ -90,12 +96,13 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
 
   /**
       Transforms input into output using shader with a FBO.
-    
-    See also: [gstgl.glfilter.GLFilter.renderToTarget]
-    Params:
-      input =       the input texture
-      output =       the output texture
-      shader =       the shader to use.
+      
+      See also: [gstgl.glfilter.GLFilter.renderToTarget]
+  
+      Params:
+        input = the input texture
+        output = the output texture
+        shader = the shader to use.
   */
   void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader)
   {

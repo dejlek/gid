@@ -1,3 +1,4 @@
+/// Module for [GLRenderer] class
 module gsk.glrenderer;
 
 import gid.gid;
@@ -10,17 +11,20 @@ import gsk.types;
 class GLRenderer : gsk.renderer.Renderer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_gl_renderer_get_type != &gidSymbolNotFound ? gsk_gl_renderer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -33,7 +37,7 @@ class GLRenderer : gsk.renderer.Renderer
 
   /**
       Creates a new [gsk.renderer.Renderer] using the new OpenGL renderer.
-    Returns:     a new GL renderer
+      Returns: a new GL renderer
   */
   this()
   {

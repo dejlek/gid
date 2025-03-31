@@ -1,3 +1,4 @@
+/// Module for [KeyEventStruct] class
 module atk.key_event_struct;
 
 import atk.c.functions;
@@ -12,6 +13,7 @@ class KeyEventStruct
 {
   AtkKeyEventStruct cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class KeyEventStruct
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

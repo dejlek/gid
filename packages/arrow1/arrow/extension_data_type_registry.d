@@ -1,3 +1,4 @@
+/// Module for [ExtensionDataTypeRegistry] class
 module arrow.extension_data_type_registry;
 
 import arrow.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class ExtensionDataTypeRegistry : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_data_type_registry_get_type != &gidSymbolNotFound ? garrow_extension_data_type_registry_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -54,9 +58,11 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
 
   /**
       Register the given data_type to the registry.
-    Params:
-      dataType =       A #GArrowExtensionDataType to be registered.
-    Returns:     true on success, false on error.
+  
+      Params:
+        dataType = A #GArrowExtensionDataType to be registered.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool register(arrow.extension_data_type.ExtensionDataType dataType)
   {
@@ -70,10 +76,12 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectG
 
   /**
       Unregister an extension data type that has the given name from the
-    registry.
-    Params:
-      name =       An extension data type name to be unregistered.
-    Returns:     true on success, false on error.
+      registry.
+  
+      Params:
+        name = An extension data type name to be unregistered.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool unregister(string name)
   {

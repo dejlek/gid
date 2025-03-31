@@ -1,3 +1,4 @@
+/// Module for [SpinButtonAccessible] class
 module gtk.spin_button_accessible;
 
 import atk.action;
@@ -20,17 +21,20 @@ import gtk.types;
 class SpinButtonAccessible : gtk.entry_accessible.EntryAccessible, atk.value.Value
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spin_button_accessible_get_type != &gidSymbolNotFound ? gtk_spin_button_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

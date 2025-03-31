@@ -1,3 +1,4 @@
+/// Module for [SDPKey] class
 module gstsdp.sdpkey;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import gstsdp.types;
 
 /**
     The contents of the SDP "k=" field which is used to convey encryption
-  keys.
+    keys.
 */
 class SDPKey
 {
   GstSDPKey cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class SDPKey
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

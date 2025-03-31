@@ -1,3 +1,4 @@
+/// Module for [TaskPool] class
 module gst.task_pool;
 
 import gid.gid;
@@ -9,24 +10,27 @@ import gst.types;
 
 /**
     This object provides an abstraction for creating threads. The default
-  implementation uses a regular GThreadPool to start tasks.
-  
-  Subclasses can be made to create custom threads.
+    implementation uses a regular GThreadPool to start tasks.
+    
+    Subclasses can be made to create custom threads.
 */
 class TaskPool : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_pool_get_type != &gidSymbolNotFound ? gst_task_pool_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,8 +43,8 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Create a new default task pool. The default task pool will use a regular
-    GThreadPool for threads.
-    Returns:     a new #GstTaskPool. [gst.object.ObjectGst.unref] after usage.
+      GThreadPool for threads.
+      Returns: a new #GstTaskPool. [gst.object.ObjectGst.unref] after usage.
   */
   this()
   {
@@ -51,9 +55,9 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Wait for all tasks to be stopped. This is mainly used internally
-    to ensure proper cleanup of internal data structures in test suites.
-    
-    MT safe.
+      to ensure proper cleanup of internal data structures in test suites.
+      
+      MT safe.
   */
   void cleanup()
   {
@@ -62,16 +66,17 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Dispose of the handle returned by [gst.task_pool.TaskPool.push]. This does
-    not need to be called with the default implementation as the default
-    #GstTaskPoolClass::push implementation always returns null. This does not need to be
-    called either when calling [gst.task_pool.TaskPool.join], but should be called
-    when joining is not necessary, but [gst.task_pool.TaskPool.push] returned a
-    non-null value.
-    
-    This method should only be called with the same pool instance that provided
-    id.
-    Params:
-      id =       the id
+      not need to be called with the default implementation as the default
+      #GstTaskPoolClass::push implementation always returns null. This does not need to be
+      called either when calling [gst.task_pool.TaskPool.join], but should be called
+      when joining is not necessary, but [gst.task_pool.TaskPool.push] returned a
+      non-null value.
+      
+      This method should only be called with the same pool instance that provided
+      id.
+  
+      Params:
+        id = the id
   */
   void disposeHandle(void* id = null)
   {
@@ -80,13 +85,14 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Join a task and/or return it to the pool. id is the id obtained from
-    [gst.task_pool.TaskPool.push]. The default implementation does nothing, as the
-    default #GstTaskPoolClass::push implementation always returns null.
-    
-    This method should only be called with the same pool instance that provided
-    id.
-    Params:
-      id =       the id
+      [gst.task_pool.TaskPool.push]. The default implementation does nothing, as the
+      default #GstTaskPoolClass::push implementation always returns null.
+      
+      This method should only be called with the same pool instance that provided
+      id.
+  
+      Params:
+        id = the id
   */
   void join(void* id = null)
   {
@@ -95,8 +101,9 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Prepare the taskpool for accepting [gst.task_pool.TaskPool.push] operations.
-    
-    MT safe.
+      
+      MT safe.
+      Throws: [ErrorG]
   */
   void prepare()
   {
@@ -108,13 +115,15 @@ class TaskPool : gst.object.ObjectGst
 
   /**
       Start the execution of a new thread from pool.
-    Params:
-      func =       the function to call
-    Returns:     a pointer that should be used
-      for the gst_task_pool_join function. This pointer can be null, you
-      must check error to detect errors. If the pointer is not null and
-      [gst.task_pool.TaskPool.join] is not used, call [gst.task_pool.TaskPool.disposeHandle]
-      instead.
+  
+      Params:
+        func = the function to call
+      Returns: a pointer that should be used
+        for the gst_task_pool_join function. This pointer can be null, you
+        must check error to detect errors. If the pointer is not null and
+        [gst.task_pool.TaskPool.join] is not used, call [gst.task_pool.TaskPool.disposeHandle]
+        instead.
+      Throws: [ErrorG]
   */
   void* push(gst.types.TaskPoolFunction func)
   {

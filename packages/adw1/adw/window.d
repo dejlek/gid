@@ -1,3 +1,4 @@
+/// Module for [Window] class
 module adw.window;
 
 import adw.breakpoint;
@@ -25,94 +26,97 @@ import gtk.window;
 
 /**
     A freeform window.
-  
-  <picture>
-    <source srcset="window-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="window.png" alt="window">
-  </picture>
-  
-  The [adw.window.Window] widget is a subclass of [gtk.window.Window] which has no
-  titlebar area. Instead, `class@ToolbarView` can be used together with
-  `class@HeaderBar` or [gtk.header_bar.HeaderBar] as follows:
-  
-  ```xml
-  <object class="AdwWindow">
-    <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <!-- ... -->
-        </property>
-      </object>
-    </property>
-  </object>
-  ```
-  
-  Using [gtk.window.Window.Widget] or [gtk.window.Window.Widget]
-  is not supported and will result in a crash. Use `property@Window:content`
-  instead.
-  
-  ## Dialogs
-  
-  [adw.window.Window] can contain `class@Dialog`. Use [adw.dialog.Dialog.present] with the
-  window or a widget within a window to show a dialog.
-  
-  ## Breakpoints
-  
-  [adw.window.Window] can be used with `class@Breakpoint` the same way as
-  `class@BreakpointBin`. Refer to that widget's documentation for details.
-  
-  Example:
-  
-  ```xml
-  <object class="AdwWindow">
-    <property name="width-request">360</property>
-    <property name="height-request">200</property>
-    <property name="content">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <!-- ... -->
-        </property>
-        <child type="bottom">
-          <object class="GtkActionBar" id="bottom_bar">
-            <property name="revealed">True</property>
-            <property name="visible">False</property>
-          </object>
-        </child>
-      </object>
-    </property>
-    <child>
-      <object class="AdwBreakpoint">
-        <condition>max-width: 500px</condition>
-        <setter object="bottom_bar" property="visible">True</setter>
-      </object>
-    </child>
-  </object>
-  ```
-  
-  Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
-  minimum size, and `property@Gtk.Widget:width-request` and
-  `property@Gtk.Widget:height-request` properties must be set manually.
+    
+    <picture>
+      <source srcset="window-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="window.png" alt="window">
+    </picture>
+    
+    The [adw.window.Window] widget is a subclass of [gtk.window.Window] which has no
+    titlebar area. Instead, `class@ToolbarView` can be used together with
+    `class@HeaderBar` or [gtk.header_bar.HeaderBar] as follows:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="content">
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar"/>
+          </child>
+          <property name="content">
+            <!-- ... -->
+          </property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    Using [gtk.window.Window.Widget] or [gtk.window.Window.Widget]
+    is not supported and will result in a crash. Use `property@Window:content`
+    instead.
+    
+    ## Dialogs
+    
+    [adw.window.Window] can contain `class@Dialog`. Use [adw.dialog.Dialog.present] with the
+    window or a widget within a window to show a dialog.
+    
+    ## Breakpoints
+    
+    [adw.window.Window] can be used with `class@Breakpoint` the same way as
+    `class@BreakpointBin`. Refer to that widget's documentation for details.
+    
+    Example:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="width-request">360</property>
+      <property name="height-request">200</property>
+      <property name="content">
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar"/>
+          </child>
+          <property name="content">
+            <!-- ... -->
+          </property>
+          <child type="bottom">
+            <object class="GtkActionBar" id="bottom_bar">
+              <property name="revealed">True</property>
+              <property name="visible">False</property>
+            </object>
+          </child>
+        </object>
+      </property>
+      <child>
+        <object class="AdwBreakpoint">
+          <condition>max-width: 500px</condition>
+          <setter object="bottom_bar" property="visible">True</setter>
+        </object>
+      </child>
+    </object>
+    ```
+    
+    Like [adw.breakpoint_bin.BreakpointBin], if breakpoints are used, [adw.window.Window] doesn't have a
+    minimum size, and `property@Gtk.Widget:width-request` and
+    `property@Gtk.Widget:height-request` properties must be set manually.
 */
 class Window : gtk.window.Window
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_window_get_type != &gidSymbolNotFound ? adw_window_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -125,7 +129,7 @@ class Window : gtk.window.Window
 
   /**
       Creates a new [adw.window.Window].
-    Returns:     the newly created [adw.window.Window]
+      Returns: the newly created [adw.window.Window]
   */
   this()
   {
@@ -136,8 +140,9 @@ class Window : gtk.window.Window
 
   /**
       Adds breakpoint to self.
-    Params:
-      breakpoint =       the breakpoint to add
+  
+      Params:
+        breakpoint = the breakpoint to add
   */
   void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
@@ -146,9 +151,9 @@ class Window : gtk.window.Window
 
   /**
       Gets the content widget of self.
-    
-    This method should always be used instead of [gtk.window.Window.getChild].
-    Returns:     the content widget of self
+      
+      This method should always be used instead of [gtk.window.Window.getChild].
+      Returns: the content widget of self
   */
   gtk.widget.Widget getContent()
   {
@@ -160,7 +165,7 @@ class Window : gtk.window.Window
 
   /**
       Gets the current breakpoint.
-    Returns:     the current breakpoint
+      Returns: the current breakpoint
   */
   adw.breakpoint.Breakpoint getCurrentBreakpoint()
   {
@@ -172,9 +177,9 @@ class Window : gtk.window.Window
 
   /**
       Returns a [gio.list_model.ListModel] that contains the open dialogs of self.
-    
-    This can be used to keep an up-to-date view.
-    Returns:     a list model for the dialogs of self
+      
+      This can be used to keep an up-to-date view.
+      Returns: a list model for the dialogs of self
   */
   gio.list_model.ListModel getDialogs()
   {
@@ -186,7 +191,7 @@ class Window : gtk.window.Window
 
   /**
       Returns the currently visible dialog in self, if there's one.
-    Returns:     the visible dialog
+      Returns: the visible dialog
   */
   adw.dialog.Dialog getVisibleDialog()
   {
@@ -198,10 +203,11 @@ class Window : gtk.window.Window
 
   /**
       Sets the content widget of self.
-    
-    This method should always be used instead of [gtk.window.Window.setChild].
-    Params:
-      content =       the content widget
+      
+      This method should always be used instead of [gtk.window.Window.setChild].
+  
+      Params:
+        content = the content widget
   */
   void setContent(gtk.widget.Widget content = null)
   {

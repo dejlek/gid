@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadRAND] class
 module gstsdp.mikeypayload_rand;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class MIKEYPayloadRAND
 {
   GstMIKEYPayloadRAND cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class MIKEYPayloadRAND
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

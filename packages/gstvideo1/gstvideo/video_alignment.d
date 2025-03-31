@@ -1,3 +1,4 @@
+/// Module for [VideoAlignment] class
 module gstvideo.video_alignment;
 
 import gid.gid;
@@ -7,13 +8,14 @@ import gstvideo.types;
 
 /**
     Extra alignment parameters for the memory of video buffers. This
-  structure is usually used to configure the bufferpool if it supports the
-  #GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT.
+    structure is usually used to configure the bufferpool if it supports the
+    #GST_BUFFER_POOL_OPTION_VIDEO_ALIGNMENT.
 */
 class VideoAlignment
 {
   GstVideoAlignment cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class VideoAlignment
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

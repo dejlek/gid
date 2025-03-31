@@ -1,3 +1,4 @@
+/// Module for [RecordBatchStream] class
 module arrowflight.record_batch_stream;
 
 import arrow.record_batch_reader;
@@ -12,17 +13,20 @@ import gid.gid;
 class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_stream_get_type != &gidSymbolNotFound ? gaflight_record_batch_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

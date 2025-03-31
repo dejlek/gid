@@ -1,3 +1,4 @@
+/// Module for [ATContext] class
 module gtk.atcontext;
 
 import gdk.display;
@@ -11,26 +12,29 @@ import gtk.types;
 
 /**
     [gtk.atcontext.ATContext] is an abstract class provided by GTK to communicate to
-  platform-specific assistive technologies API.
-  
-  Each platform supported by GTK implements a [gtk.atcontext.ATContext] subclass, and
-  is responsible for updating the accessible state in response to state
-  changes in [gtk.accessible.Accessible].
+    platform-specific assistive technologies API.
+    
+    Each platform supported by GTK implements a [gtk.atcontext.ATContext] subclass, and
+    is responsible for updating the accessible state in response to state
+    changes in [gtk.accessible.Accessible].
 */
 class ATContext : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_at_context_get_type != &gidSymbolNotFound ? gtk_at_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,15 +47,16 @@ class ATContext : gobject.object.ObjectG
 
   /**
       Creates a new [gtk.atcontext.ATContext] instance for the given accessible role,
-    accessible instance, and display connection.
-    
-    The [gtk.atcontext.ATContext] implementation being instantiated will depend on the
-    platform.
-    Params:
-      accessibleRole =       the accessible role used by the [gtk.atcontext.ATContext]
-      accessible =       the [gtk.accessible.Accessible] implementation using the [gtk.atcontext.ATContext]
-      display =       the [gdk.display.Display] used by the [gtk.atcontext.ATContext]
-    Returns:     the [gtk.atcontext.ATContext]
+      accessible instance, and display connection.
+      
+      The [gtk.atcontext.ATContext] implementation being instantiated will depend on the
+      platform.
+  
+      Params:
+        accessibleRole = the accessible role used by the [gtk.atcontext.ATContext]
+        accessible = the [gtk.accessible.Accessible] implementation using the [gtk.atcontext.ATContext]
+        display = the [gdk.display.Display] used by the [gtk.atcontext.ATContext]
+      Returns: the [gtk.atcontext.ATContext]
   */
   static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
   {
@@ -63,7 +68,7 @@ class ATContext : gobject.object.ObjectG
 
   /**
       Retrieves the [gtk.accessible.Accessible] using this context.
-    Returns:     a [gtk.accessible.Accessible]
+      Returns: a [gtk.accessible.Accessible]
   */
   gtk.accessible.Accessible getAccessible()
   {
@@ -75,7 +80,7 @@ class ATContext : gobject.object.ObjectG
 
   /**
       Retrieves the accessible role of this context.
-    Returns:     a [gtk.types.AccessibleRole]
+      Returns: a [gtk.types.AccessibleRole]
   */
   gtk.types.AccessibleRole getAccessibleRole()
   {
@@ -86,35 +91,37 @@ class ATContext : gobject.object.ObjectG
   }
 
   /**
-      Emitted when the attributes of the accessible for the
-    [gtk.atcontext.ATContext] instance change.
+      Connect to `StateChange` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B aTContext) the instance the signal is connected to
-    )
-  */
-  alias StateChangeCallbackDlg = void delegate(gtk.atcontext.ATContext aTContext);
-
-  /** ditto */
-  alias StateChangeCallbackFunc = void function(gtk.atcontext.ATContext aTContext);
-
-  /**
-    Connect to StateChange signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the attributes of the accessible for the
+      [gtk.atcontext.ATContext] instance change.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.atcontext.ATContext aTContext))
+  
+          `aTContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectStateChange(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : StateChangeCallbackDlg) || is(T : StateChangeCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.atcontext.ATContext)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto aTContext = getVal!(gtk.atcontext.ATContext)(_paramVals);
-      _dClosure.dlg(aTContext);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

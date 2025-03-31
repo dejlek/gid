@@ -1,3 +1,4 @@
+/// Module for [AppInfo] interface mixin
 module gio.app_info_mixin;
 
 public import gio.app_info_iface_proxy;
@@ -15,56 +16,56 @@ public import gobject.object;
 
 /**
     Information about an installed application and methods to launch
-  it (with file arguments).
-  
-  [gio.app_info.AppInfo] and [gio.app_launch_context.AppLaunchContext] are used for describing and launching
-  applications installed on the system.
-  
-  As of GLib 2.20, URIs will always be converted to POSIX paths
-  (using [gio.file.File.getPath]) when using [gio.app_info.AppInfo.launch]
-  even if the application requested an URI and not a POSIX path. For example
-  for a desktop-file based application with Exec key `totem
-  `U`` and a single URI, `sftp://foo/file.avi`, then
-  `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
-  only work if a set of suitable GIO extensions (such as GVfs 2.26
-  compiled with FUSE support), is available and operational; if this
-  is not the case, the URI will be passed unmodified to the application.
-  Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
-  path (in GVfs there's no FUSE mount for it); such URIs will be
-  passed unmodified to the application.
-  
-  Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
-  back to the GIO URI in the [gio.file.File] constructors (since GVfs
-  implements the GVfs extension point). As such, if the application
-  needs to examine the URI, it needs to use [gio.file.File.getUri]
-  or similar on [gio.file.File]. In other words, an application cannot
-  assume that the URI passed to e.g. [gio.file.File.newForCommandlineArg]
-  is equal to the result of [gio.file.File.getUri]. The following snippet
-  illustrates this:
-  
-  ```c
-  GFile *f;
-  char *uri;
-  
-  file = g_file_new_for_commandline_arg (uri_from_commandline);
-  
-  uri = g_file_get_uri (file);
-  strcmp (uri, uri_from_commandline) == 0;
-  g_free (uri);
-  
-  if (g_file_has_uri_scheme (file, "cdda"))
-    {
-      // do something special with uri
-    }
-  g_object_unref (file);
-  ```
-  
-  This code will work when both `cdda://sr0/Track 1.wav` and
-  `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
-  application. It should be noted that it's generally not safe
-  for applications to rely on the format of a particular URIs.
-  Different launcher applications (e.g. file managers) may have
-  different ideas of what a given URI means.
+    it (with file arguments).
+    
+    [gio.app_info.AppInfo] and [gio.app_launch_context.AppLaunchContext] are used for describing and launching
+    applications installed on the system.
+    
+    As of GLib 2.20, URIs will always be converted to POSIX paths
+    (using [gio.file.File.getPath]) when using [gio.app_info.AppInfo.launch]
+    even if the application requested an URI and not a POSIX path. For example
+    for a desktop-file based application with Exec key `totem
+    `U`` and a single URI, `sftp://foo/file.avi`, then
+    `/home/user/.gvfs/sftp on foo/file.avi` will be passed. This will
+    only work if a set of suitable GIO extensions (such as GVfs 2.26
+    compiled with FUSE support), is available and operational; if this
+    is not the case, the URI will be passed unmodified to the application.
+    Some URIs, such as `mailto:`, of course cannot be mapped to a POSIX
+    path (in GVfs there's no FUSE mount for it); such URIs will be
+    passed unmodified to the application.
+    
+    Specifically for GVfs 2.26 and later, the POSIX URI will be mapped
+    back to the GIO URI in the [gio.file.File] constructors (since GVfs
+    implements the GVfs extension point). As such, if the application
+    needs to examine the URI, it needs to use [gio.file.File.getUri]
+    or similar on [gio.file.File]. In other words, an application cannot
+    assume that the URI passed to e.g. [gio.file.File.newForCommandlineArg]
+    is equal to the result of [gio.file.File.getUri]. The following snippet
+    illustrates this:
+    
+    ```c
+    GFile *f;
+    char *uri;
+    
+    file = g_file_new_for_commandline_arg (uri_from_commandline);
+    
+    uri = g_file_get_uri (file);
+    strcmp (uri, uri_from_commandline) == 0;
+    g_free (uri);
+    
+    if (g_file_has_uri_scheme (file, "cdda"))
+      {
+        // do something special with uri
+      }
+    g_object_unref (file);
+    ```
+    
+    This code will work when both `cdda://sr0/Track 1.wav` and
+    `/home/user/.gvfs/cdda on sr0/Track 1.wav` is passed to the
+    application. It should be noted that it's generally not safe
+    for applications to rely on the format of a particular URIs.
+    Different launcher applications (e.g. file managers) may have
+    different ideas of what a given URI means.
 */
 template AppInfoT()
 {
@@ -86,10 +87,12 @@ template AppInfoT()
 
   /**
       Adds a content type to the application information to indicate the
-    application is capable of opening files with the given content type.
-    Params:
-      contentType =       a string.
-    Returns:     true on success, false on error.
+      application is capable of opening files with the given content type.
+  
+      Params:
+        contentType = a string.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool addSupportsType(string contentType)
   {
@@ -104,8 +107,8 @@ template AppInfoT()
 
   /**
       Obtains the information whether the #GAppInfo can be deleted.
-    See [gio.app_info.AppInfo.delete_].
-    Returns:     true if appinfo can be deleted
+      See [gio.app_info.AppInfo.delete_].
+      Returns: true if appinfo can be deleted
   */
   override bool canDelete()
   {
@@ -116,8 +119,8 @@ template AppInfoT()
 
   /**
       Checks if a supported content type can be removed from an application.
-    Returns:     true if it is possible to remove supported
-          content types from a given appinfo, false if not.
+      Returns: true if it is possible to remove supported
+            content types from a given appinfo, false if not.
   */
   override bool canRemoveSupportsType()
   {
@@ -128,11 +131,11 @@ template AppInfoT()
 
   /**
       Tries to delete a #GAppInfo.
-    
-    On some platforms, there may be a difference between user-defined
-    #GAppInfos which can be deleted, and system-wide ones which cannot.
-    See [gio.app_info.AppInfo.canDelete].
-    Returns:     true if appinfo has been deleted
+      
+      On some platforms, there may be a difference between user-defined
+      #GAppInfos which can be deleted, and system-wide ones which cannot.
+      See [gio.app_info.AppInfo.canDelete].
+      Returns: true if appinfo has been deleted
   */
   override bool delete_()
   {
@@ -143,7 +146,7 @@ template AppInfoT()
 
   /**
       Creates a duplicate of a #GAppInfo.
-    Returns:     a duplicate of appinfo.
+      Returns: a duplicate of appinfo.
   */
   override gio.app_info.AppInfo dup()
   {
@@ -155,13 +158,14 @@ template AppInfoT()
 
   /**
       Checks if two #GAppInfos are equal.
-    
-    Note that the check *may not* compare each individual
-    field, and only does an identity check. In case detecting changes in the
-    contents is needed, program code must additionally compare relevant fields.
-    Params:
-      appinfo2 =       the second #GAppInfo.
-    Returns:     true if appinfo1 is equal to appinfo2. false otherwise.
+      
+      Note that the check *may not* compare each individual
+      field, and only does an identity check. In case detecting changes in the
+      contents is needed, program code must additionally compare relevant fields.
+  
+      Params:
+        appinfo2 = the second #GAppInfo.
+      Returns: true if appinfo1 is equal to appinfo2. false otherwise.
   */
   override bool equal(gio.app_info.AppInfo appinfo2)
   {
@@ -172,9 +176,9 @@ template AppInfoT()
 
   /**
       Gets the commandline with which the application will be
-    started.
-    Returns:     a string containing the appinfo's commandline,
-          or null if this information is not available
+      started.
+      Returns: a string containing the appinfo's commandline,
+            or null if this information is not available
   */
   override string getCommandline()
   {
@@ -186,8 +190,8 @@ template AppInfoT()
 
   /**
       Gets a human-readable description of an installed application.
-    Returns:     a string containing a description of the
-      application appinfo, or null if none.
+      Returns: a string containing a description of the
+        application appinfo, or null if none.
   */
   override string getDescription()
   {
@@ -199,9 +203,9 @@ template AppInfoT()
 
   /**
       Gets the display name of the application. The display name is often more
-    descriptive to the user than the name itself.
-    Returns:     the display name of the application for appinfo, or the name if
-      no display name is available.
+      descriptive to the user than the name itself.
+      Returns: the display name of the application for appinfo, or the name if
+        no display name is available.
   */
   override string getDisplayName()
   {
@@ -213,12 +217,12 @@ template AppInfoT()
 
   /**
       Gets the executable's name for the installed application.
-    
-    This is intended to be used for debugging or labelling what program is going
-    to be run. To launch the executable, use [gio.app_info.AppInfo.launch] and related
-    functions, rather than spawning the return value from this function.
-    Returns:     a string containing the appinfo's application
-      binaries name
+      
+      This is intended to be used for debugging or labelling what program is going
+      to be run. To launch the executable, use [gio.app_info.AppInfo.launch] and related
+      functions, rather than spawning the return value from this function.
+      Returns: a string containing the appinfo's application
+        binaries name
   */
   override string getExecutable()
   {
@@ -230,8 +234,8 @@ template AppInfoT()
 
   /**
       Gets the icon for the application.
-    Returns:     the default #GIcon for appinfo or null
-      if there is no default icon.
+      Returns: the default #GIcon for appinfo or null
+        if there is no default icon.
   */
   override gio.icon.Icon getIcon()
   {
@@ -243,13 +247,13 @@ template AppInfoT()
 
   /**
       Gets the ID of an application. An id is a string that
-    identifies the application. The exact format of the id is
-    platform dependent. For instance, on Unix this is the
-    desktop file id from the xdg menu specification.
-    
-    Note that the returned ID may be null, depending on how
-    the appinfo has been constructed.
-    Returns:     a string containing the application's ID.
+      identifies the application. The exact format of the id is
+      platform dependent. For instance, on Unix this is the
+      desktop file id from the xdg menu specification.
+      
+      Note that the returned ID may be null, depending on how
+      the appinfo has been constructed.
+      Returns: a string containing the application's ID.
   */
   override string getId()
   {
@@ -261,7 +265,7 @@ template AppInfoT()
 
   /**
       Gets the installed name of the application.
-    Returns:     the name of the application for appinfo.
+      Returns: the name of the application for appinfo.
   */
   override string getName()
   {
@@ -273,12 +277,12 @@ template AppInfoT()
 
   /**
       Retrieves the list of content types that app_info claims to support.
-    If this information is not provided by the environment, this function
-    will return null.
-    This function does not take in consideration associations added with
-    [gio.app_info.AppInfo.addSupportsType], but only those exported directly by
-    the application.
-    Returns:     a list of content types.
+      If this information is not provided by the environment, this function
+      will return null.
+      This function does not take in consideration associations added with
+      [gio.app_info.AppInfo.addSupportsType], but only those exported directly by
+      the application.
+      Returns: a list of content types.
   */
   override string[] getSupportedTypes()
   {
@@ -300,36 +304,38 @@ template AppInfoT()
 
   /**
       Launches the application. Passes files to the launched application
-    as arguments, using the optional context to get information
-    about the details of the launcher (like what screen it is on).
-    On error, error will be set accordingly.
-    
-    To launch the application without arguments pass a null files list.
-    
-    Note that even if the launch is successful the application launched
-    can fail to start if it runs into problems during startup. There is
-    no way to detect this.
-    
-    Some URIs can be changed when passed through a GFile (for instance
-    unsupported URIs with strange formats like mailto:), so if you have
-    a textual URI you want to pass in as argument, consider using
-    [gio.app_info.AppInfo.launchUris] instead.
-    
-    The launched application inherits the environment of the launching
-    process, but it can be modified with [gio.app_launch_context.AppLaunchContext.setenv]
-    and [gio.app_launch_context.AppLaunchContext.unsetenv].
-    
-    On UNIX, this function sets the `GIO_LAUNCHED_DESKTOP_FILE`
-    environment variable with the path of the launched desktop file and
-    `GIO_LAUNCHED_DESKTOP_FILE_PID` to the process id of the launched
-    process. This can be used to ignore `GIO_LAUNCHED_DESKTOP_FILE`,
-    should it be inherited by further processes. The `DISPLAY`,
-    `XDG_ACTIVATION_TOKEN` and `DESKTOP_STARTUP_ID` environment
-    variables are also set, based on information provided in context.
-    Params:
-      files =       a #GList of #GFile objects
-      context =       a #GAppLaunchContext or null
-    Returns:     true on successful launch, false otherwise.
+      as arguments, using the optional context to get information
+      about the details of the launcher (like what screen it is on).
+      On error, error will be set accordingly.
+      
+      To launch the application without arguments pass a null files list.
+      
+      Note that even if the launch is successful the application launched
+      can fail to start if it runs into problems during startup. There is
+      no way to detect this.
+      
+      Some URIs can be changed when passed through a GFile (for instance
+      unsupported URIs with strange formats like mailto:), so if you have
+      a textual URI you want to pass in as argument, consider using
+      [gio.app_info.AppInfo.launchUris] instead.
+      
+      The launched application inherits the environment of the launching
+      process, but it can be modified with [gio.app_launch_context.AppLaunchContext.setenv]
+      and [gio.app_launch_context.AppLaunchContext.unsetenv].
+      
+      On UNIX, this function sets the `GIO_LAUNCHED_DESKTOP_FILE`
+      environment variable with the path of the launched desktop file and
+      `GIO_LAUNCHED_DESKTOP_FILE_PID` to the process id of the launched
+      process. This can be used to ignore `GIO_LAUNCHED_DESKTOP_FILE`,
+      should it be inherited by further processes. The `DISPLAY`,
+      `XDG_ACTIVATION_TOKEN` and `DESKTOP_STARTUP_ID` environment
+      variables are also set, based on information provided in context.
+  
+      Params:
+        files = a #GList of #GFile objects
+        context = a #GAppLaunchContext or null
+      Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launch(gio.file.File[] files = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -345,21 +351,23 @@ template AppInfoT()
 
   /**
       Launches the application. This passes the uris to the launched application
-    as arguments, using the optional context to get information
-    about the details of the launcher (like what screen it is on).
-    On error, error will be set accordingly. If the application only supports
-    one URI per invocation as part of their command-line, multiple instances
-    of the application will be spawned.
-    
-    To launch the application without arguments pass a null uris list.
-    
-    Note that even if the launch is successful the application launched
-    can fail to start if it runs into problems during startup. There is
-    no way to detect this.
-    Params:
-      uris =       a #GList containing URIs to launch.
-      context =       a #GAppLaunchContext or null
-    Returns:     true on successful launch, false otherwise.
+      as arguments, using the optional context to get information
+      about the details of the launcher (like what screen it is on).
+      On error, error will be set accordingly. If the application only supports
+      one URI per invocation as part of their command-line, multiple instances
+      of the application will be spawned.
+      
+      To launch the application without arguments pass a null uris list.
+      
+      Note that even if the launch is successful the application launched
+      can fail to start if it runs into problems during startup. There is
+      no way to detect this.
+  
+      Params:
+        uris = a #GList containing URIs to launch.
+        context = a #GAppLaunchContext or null
+      Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launchUris(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null)
   {
@@ -375,16 +383,17 @@ template AppInfoT()
 
   /**
       Async version of [gio.app_info.AppInfo.launchUris].
-    
-    The callback is invoked immediately after the application launch, but it
-    waits for activation in case of D-Bus–activated applications and also provides
-    extended error information for sandboxed applications, see notes for
-    [gio.app_info.AppInfo.launchDefaultForUriAsync].
-    Params:
-      uris =       a #GList containing URIs to launch.
-      context =       a #GAppLaunchContext or null
-      cancellable =       a #GCancellable
-      callback =       a #GAsyncReadyCallback to call when the request is done
+      
+      The callback is invoked immediately after the application launch, but it
+      waits for activation in case of D-Bus–activated applications and also provides
+      extended error information for sandboxed applications, see notes for
+      [gio.app_info.AppInfo.launchDefaultForUriAsync].
+  
+      Params:
+        uris = a #GList containing URIs to launch.
+        context = a #GAppLaunchContext or null
+        cancellable = a #GCancellable
+        callback = a #GAsyncReadyCallback to call when the request is done
   */
   override void launchUrisAsync(string[] uris = null, gio.app_launch_context.AppLaunchContext context = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -405,9 +414,11 @@ template AppInfoT()
 
   /**
       Finishes a [gio.app_info.AppInfo.launchUrisAsync] operation.
-    Params:
-      result =       a #GAsyncResult
-    Returns:     true on successful launch, false otherwise.
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: true on successful launch, false otherwise.
+      Throws: [ErrorG]
   */
   override bool launchUrisFinish(gio.async_result.AsyncResult result)
   {
@@ -421,9 +432,11 @@ template AppInfoT()
 
   /**
       Removes a supported type from an application, if possible.
-    Params:
-      contentType =       a string.
-    Returns:     true on success, false on error.
+  
+      Params:
+        contentType = a string.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool removeSupportsType(string contentType)
   {
@@ -438,10 +451,12 @@ template AppInfoT()
 
   /**
       Sets the application as the default handler for the given file extension.
-    Params:
-      extension =       a string containing the file extension
-            (without the dot).
-    Returns:     true on success, false on error.
+  
+      Params:
+        extension = a string containing the file extension
+              (without the dot).
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsDefaultForExtension(string extension)
   {
@@ -456,9 +471,11 @@ template AppInfoT()
 
   /**
       Sets the application as the default handler for a given type.
-    Params:
-      contentType =       the content type.
-    Returns:     true on success, false on error.
+  
+      Params:
+        contentType = the content type.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsDefaultForType(string contentType)
   {
@@ -473,12 +490,14 @@ template AppInfoT()
 
   /**
       Sets the application as the last used application for a given type.
-    This will make the application appear as first in the list returned
-    by [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
-    application for that content type.
-    Params:
-      contentType =       the content type.
-    Returns:     true on success, false on error.
+      This will make the application appear as first in the list returned
+      by [gio.app_info.AppInfo.getRecommendedForType], regardless of the default
+      application for that content type.
+  
+      Params:
+        contentType = the content type.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   override bool setAsLastUsedForType(string contentType)
   {
@@ -493,8 +512,8 @@ template AppInfoT()
 
   /**
       Checks if the application info should be shown in menus that
-    list available applications.
-    Returns:     true if the appinfo should be shown, false otherwise.
+      list available applications.
+      Returns: true if the appinfo should be shown, false otherwise.
   */
   override bool shouldShow()
   {
@@ -505,7 +524,7 @@ template AppInfoT()
 
   /**
       Checks if the application accepts files as arguments.
-    Returns:     true if the appinfo supports files.
+      Returns: true if the appinfo supports files.
   */
   override bool supportsFiles()
   {
@@ -516,7 +535,7 @@ template AppInfoT()
 
   /**
       Checks if the application supports reading files and directories from URIs.
-    Returns:     true if the appinfo supports URIs.
+      Returns: true if the appinfo supports URIs.
   */
   override bool supportsUris()
   {

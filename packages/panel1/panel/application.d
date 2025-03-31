@@ -1,3 +1,4 @@
+/// Module for [Application] class
 module panel.application;
 
 import adw.application;
@@ -15,17 +16,20 @@ import panel.types;
 class Application : adw.application.Application
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_application_get_type != &gidSymbolNotFound ? panel_application_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

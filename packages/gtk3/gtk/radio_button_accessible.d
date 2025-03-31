@@ -1,3 +1,4 @@
+/// Module for [RadioButtonAccessible] class
 module gtk.radio_button_accessible;
 
 import atk.action;
@@ -16,17 +17,20 @@ import gtk.types;
 class RadioButtonAccessible : gtk.toggle_button_accessible.ToggleButtonAccessible
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_button_accessible_get_type != &gidSymbolNotFound ? gtk_radio_button_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

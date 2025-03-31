@@ -1,3 +1,4 @@
+/// Module for [Ray] class
 module graphene.ray;
 
 import gid.gid;
@@ -14,34 +15,39 @@ import graphene.vec3;
 
 /**
     A ray emitted from an origin in a given direction.
-  
-  The contents of the [graphene.ray.Ray] structure are private, and should not
-  be modified directly.
+    
+    The contents of the [graphene.ray.Ray] structure are private, and should not
+    be modified directly.
 */
 class Ray : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_ray_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_ray_get_type != &gidSymbolNotFound ? graphene_ray_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -54,11 +60,11 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_ray_t structure.
-    
-    The contents of the returned structure are undefined.
-    Returns:     the newly allocated #graphene_ray_t.
-        Use [graphene.ray.Ray.free] to free the resources allocated by
-        this function
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_ray_t.
+          Use [graphene.ray.Ray.free] to free the resources allocated by
+          this function
   */
   static graphene.ray.Ray alloc()
   {
@@ -70,9 +76,10 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Checks whether the two given #graphene_ray_t are equal.
-    Params:
-      b =       a #graphene_ray_t
-    Returns:     `true` if the given rays are equal
+  
+      Params:
+        b = a #graphene_ray_t
+      Returns: `true` if the given rays are equal
   */
   bool equal(graphene.ray.Ray b)
   {
@@ -83,10 +90,11 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Computes the point on the given #graphene_ray_t that is closest to the
-    given point p.
-    Params:
-      p =       a #graphene_point3d_t
-      res =       return location for the closest point3d
+      given point `p`.
+  
+      Params:
+        p = a #graphene_point3d_t
+        res = return location for the closest point3d
   */
   void getClosestPointToPoint(graphene.point3_d.Point3D p, out graphene.point3_d.Point3D res)
   {
@@ -97,8 +105,9 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Retrieves the direction of the given #graphene_ray_t.
-    Params:
-      direction =       return location for the direction
+  
+      Params:
+        direction = return location for the direction
   */
   void getDirection(out graphene.vec3.Vec3 direction)
   {
@@ -109,12 +118,13 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Computes the distance of the origin of the given #graphene_ray_t from the
-    given plane.
-    
-    If the ray does not intersect the plane, this function returns `INFINITY`.
-    Params:
-      p =       a #graphene_plane_t
-    Returns:     the distance of the origin of the ray from the plane
+      given plane.
+      
+      If the ray does not intersect the plane, this function returns `INFINITY`.
+  
+      Params:
+        p = a #graphene_plane_t
+      Returns: the distance of the origin of the ray from the plane
   */
   float getDistanceToPlane(graphene.plane.Plane p)
   {
@@ -125,14 +135,15 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Computes the distance of the closest approach between the
-    given #graphene_ray_t r and the point p.
-    
-    The closest approach to a ray from a point is the distance
-    between the point and the projection of the point on the
-    ray itself.
-    Params:
-      p =       a #graphene_point3d_t
-    Returns:     the distance of the point
+      given #graphene_ray_t `r` and the point `p`.
+      
+      The closest approach to a ray from a point is the distance
+      between the point and the projection of the point on the
+      ray itself.
+  
+      Params:
+        p = a #graphene_point3d_t
+      Returns: the distance of the point
   */
   float getDistanceToPoint(graphene.point3_d.Point3D p)
   {
@@ -143,8 +154,9 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Retrieves the origin of the given #graphene_ray_t.
-    Params:
-      origin =       return location for the origin
+  
+      Params:
+        origin = return location for the origin
   */
   void getOrigin(out graphene.point3_d.Point3D origin)
   {
@@ -154,11 +166,12 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Retrieves the coordinates of a point at the distance t along the
-    given #graphene_ray_t.
-    Params:
-      t =       the distance along the ray
-      position =       return location for the position
+      Retrieves the coordinates of a point at the distance `t` along the
+      given #graphene_ray_t.
+  
+      Params:
+        t = the distance along the ray
+        position = return location for the position
   */
   void getPositionAt(float t, out graphene.point3_d.Point3D position)
   {
@@ -169,11 +182,12 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_ray_t using the given origin
-    and direction values.
-    Params:
-      origin =       the origin of the ray
-      direction =       the direction vector
-    Returns:     the initialized ray
+      and direction values.
+  
+      Params:
+        origin = the origin of the ray
+        direction = the direction vector
+      Returns: the initialized ray
   */
   graphene.ray.Ray init_(graphene.point3_d.Point3D origin = null, graphene.vec3.Vec3 direction = null)
   {
@@ -185,10 +199,11 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_ray_t using the origin and direction
-    values of another #graphene_ray_t.
-    Params:
-      src =       a #graphene_ray_t
-    Returns:     the initialized ray
+      values of another #graphene_ray_t.
+  
+      Params:
+        src = a #graphene_ray_t
+      Returns: the initialized ray
   */
   graphene.ray.Ray initFromRay(graphene.ray.Ray src)
   {
@@ -200,10 +215,11 @@ class Ray : gobject.boxed.Boxed
 
   /**
       Initializes the given #graphene_ray_t using the given vectors.
-    Params:
-      origin =       a #graphene_vec3_t
-      direction =       a #graphene_vec3_t
-    Returns:     the initialized ray
+  
+      Params:
+        origin = a #graphene_vec3_t
+        direction = a #graphene_vec3_t
+      Returns: the initialized ray
   */
   graphene.ray.Ray initFromVec3(graphene.vec3.Vec3 origin = null, graphene.vec3.Vec3 direction = null)
   {
@@ -214,12 +230,13 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Intersects the given #graphene_ray_t r with the given
-    #graphene_box_t b.
-    Params:
-      b =       a #graphene_box_t
-      tOut =       the distance of the point on the ray that intersects the box
-    Returns:     the type of intersection
+      Intersects the given #graphene_ray_t `r` with the given
+      #graphene_box_t `b`.
+  
+      Params:
+        b = a #graphene_box_t
+        tOut = the distance of the point on the ray that intersects the box
+      Returns: the type of intersection
   */
   graphene.types.RayIntersectionKind intersectBox(graphene.box.Box b, out float tOut)
   {
@@ -230,12 +247,13 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Intersects the given #graphene_ray_t r with the given
-    #graphene_sphere_t s.
-    Params:
-      s =       a #graphene_sphere_t
-      tOut =       the distance of the point on the ray that intersects the sphere
-    Returns:     the type of intersection
+      Intersects the given #graphene_ray_t `r` with the given
+      #graphene_sphere_t `s`.
+  
+      Params:
+        s = a #graphene_sphere_t
+        tOut = the distance of the point on the ray that intersects the sphere
+      Returns: the type of intersection
   */
   graphene.types.RayIntersectionKind intersectSphere(graphene.sphere.Sphere s, out float tOut)
   {
@@ -246,12 +264,13 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Intersects the given #graphene_ray_t r with the given
-    #graphene_triangle_t t.
-    Params:
-      t =       a #graphene_triangle_t
-      tOut =       the distance of the point on the ray that intersects the triangle
-    Returns:     the type of intersection
+      Intersects the given #graphene_ray_t `r` with the given
+      #graphene_triangle_t `t`.
+  
+      Params:
+        t = a #graphene_triangle_t
+        tOut = the distance of the point on the ray that intersects the triangle
+      Returns: the type of intersection
   */
   graphene.types.RayIntersectionKind intersectTriangle(graphene.triangle.Triangle t, out float tOut)
   {
@@ -262,13 +281,14 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Checks whether the given #graphene_ray_t r intersects the
-    given #graphene_box_t b.
-    
-    See also: [graphene.ray.Ray.intersectBox]
-    Params:
-      b =       a #graphene_box_t
-    Returns:     `true` if the ray intersects the box
+      Checks whether the given #graphene_ray_t `r` intersects the
+      given #graphene_box_t `b`.
+      
+      See also: [graphene.ray.Ray.intersectBox]
+  
+      Params:
+        b = a #graphene_box_t
+      Returns: `true` if the ray intersects the box
   */
   bool intersectsBox(graphene.box.Box b)
   {
@@ -278,13 +298,14 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Checks if the given #graphene_ray_t r intersects the
-    given #graphene_sphere_t s.
-    
-    See also: [graphene.ray.Ray.intersectSphere]
-    Params:
-      s =       a #graphene_sphere_t
-    Returns:     `true` if the ray intersects the sphere
+      Checks if the given #graphene_ray_t `r` intersects the
+      given #graphene_sphere_t `s`.
+      
+      See also: [graphene.ray.Ray.intersectSphere]
+  
+      Params:
+        s = a #graphene_sphere_t
+      Returns: `true` if the ray intersects the sphere
   */
   bool intersectsSphere(graphene.sphere.Sphere s)
   {
@@ -294,13 +315,14 @@ class Ray : gobject.boxed.Boxed
   }
 
   /**
-      Checks whether the given #graphene_ray_t r intersects the
-    given #graphene_triangle_t b.
-    
-    See also: [graphene.ray.Ray.intersectTriangle]
-    Params:
-      t =       a #graphene_triangle_t
-    Returns:     `true` if the ray intersects the triangle
+      Checks whether the given #graphene_ray_t `r` intersects the
+      given #graphene_triangle_t b.
+      
+      See also: [graphene.ray.Ray.intersectTriangle]
+  
+      Params:
+        t = a #graphene_triangle_t
+      Returns: `true` if the ray intersects the triangle
   */
   bool intersectsTriangle(graphene.triangle.Triangle t)
   {

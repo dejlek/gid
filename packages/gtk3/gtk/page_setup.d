@@ -1,3 +1,4 @@
+/// Module for [PageSetup] class
 module gtk.page_setup;
 
 import gid.gid;
@@ -12,63 +13,66 @@ import gtk.types;
 
 /**
     A GtkPageSetup object stores the page size, orientation and margins.
-  The idea is that you can get one of these from the page setup dialog
-  and then pass it to the #GtkPrintOperation when printing.
-  The benefit of splitting this out of the #GtkPrintSettings is that
-  these affect the actual layout of the page, and thus need to be set
-  long before user prints.
-  
-  ## Margins ## {#print-margins}
-  The margins specified in this object are the “print margins”, i.e. the
-  parts of the page that the printer cannot print on. These are different
-  from the layout margins that a word processor uses; they are typically
-  used to determine the minimal size for the layout
-  margins.
-  
-  To obtain a #GtkPageSetup use [gtk.page_setup.PageSetup.new_] to get the defaults,
-  or use [gtk.global.printRunPageSetupDialog] to show the page setup dialog
-  and receive the resulting page setup.
-  
-  ## A page setup dialog
-  
-  ```c
-  static GtkPrintSettings *settings = NULL;
-  static GtkPageSetup *page_setup = NULL;
-  
-  static void
-  do_page_setup (void)
-  {
-    GtkPageSetup *new_page_setup;
-  
-    if (settings == NULL)
-      settings = gtk_print_settings_new ();
-  
-    new_page_setup = gtk_print_run_page_setup_dialog (GTK_WINDOW (main_window),
-                                                      page_setup, settings);
-  
-    if (page_setup)
-      g_object_unref (page_setup);
-  
-    page_setup = new_page_setup;
-  }
-  ```
-  
-  Printing support was added in GTK+ 2.10.
+    The idea is that you can get one of these from the page setup dialog
+    and then pass it to the #GtkPrintOperation when printing.
+    The benefit of splitting this out of the #GtkPrintSettings is that
+    these affect the actual layout of the page, and thus need to be set
+    long before user prints.
+    
+    ## Margins ## {#print-margins}
+    The margins specified in this object are the “print margins”, i.e. the
+    parts of the page that the printer cannot print on. These are different
+    from the layout margins that a word processor uses; they are typically
+    used to determine the minimal size for the layout
+    margins.
+    
+    To obtain a #GtkPageSetup use [gtk.page_setup.PageSetup.new_] to get the defaults,
+    or use [gtk.global.printRunPageSetupDialog] to show the page setup dialog
+    and receive the resulting page setup.
+    
+    ## A page setup dialog
+    
+    ```c
+    static GtkPrintSettings *settings = NULL;
+    static GtkPageSetup *page_setup = NULL;
+    
+    static void
+    do_page_setup (void)
+    {
+      GtkPageSetup *new_page_setup;
+    
+      if (settings == NULL)
+        settings = gtk_print_settings_new ();
+    
+      new_page_setup = gtk_print_run_page_setup_dialog (GTK_WINDOW (main_window),
+                                                        page_setup, settings);
+    
+      if (page_setup)
+        g_object_unref (page_setup);
+    
+      page_setup = new_page_setup;
+    }
+    ```
+    
+    Printing support was added in GTK+ 2.10.
 */
 class PageSetup : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_get_type != &gidSymbolNotFound ? gtk_page_setup_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -81,7 +85,7 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Creates a new #GtkPageSetup.
-    Returns:     a new #GtkPageSetup.
+      Returns: a new #GtkPageSetup.
   */
   this()
   {
@@ -92,11 +96,13 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Reads the page setup from the file file_name. Returns a
-    new #GtkPageSetup object with the restored page setup,
-    or null if an error occurred. See [gtk.page_setup.PageSetup.toFile].
-    Params:
-      fileName =       the filename to read the page setup from
-    Returns:     the restored #GtkPageSetup
+      new #GtkPageSetup object with the restored page setup,
+      or null if an error occurred. See [gtk.page_setup.PageSetup.toFile].
+  
+      Params:
+        fileName = the filename to read the page setup from
+      Returns: the restored #GtkPageSetup
+      Throws: [ErrorG]
   */
   static gtk.page_setup.PageSetup newFromFile(string fileName)
   {
@@ -112,10 +118,11 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Desrialize a page setup from an a{sv} variant in
-    the format produced by [gtk.page_setup.PageSetup.toGvariant].
-    Params:
-      variant =       an a{sv} #GVariant
-    Returns:     a new #GtkPageSetup object
+      the format produced by [gtk.page_setup.PageSetup.toGvariant].
+  
+      Params:
+        variant = an a{sv} #GVariant
+      Returns: a new #GtkPageSetup object
   */
   static gtk.page_setup.PageSetup newFromGvariant(glib.variant.VariantG variant)
   {
@@ -127,13 +134,15 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Reads the page setup from the group group_name in the key file
-    key_file. Returns a new #GtkPageSetup object with the restored
-    page setup, or null if an error occurred.
-    Params:
-      keyFile =       the #GKeyFile to retrieve the page_setup from
-      groupName =       the name of the group in the key_file to read, or null
-                     to use the default name “Page Setup”
-    Returns:     the restored #GtkPageSetup
+      key_file. Returns a new #GtkPageSetup object with the restored
+      page setup, or null if an error occurred.
+  
+      Params:
+        keyFile = the #GKeyFile to retrieve the page_setup from
+        groupName = the name of the group in the key_file to read, or null
+                       to use the default name “Page Setup”
+      Returns: the restored #GtkPageSetup
+      Throws: [ErrorG]
   */
   static gtk.page_setup.PageSetup newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -149,7 +158,7 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Copies a #GtkPageSetup.
-    Returns:     a copy of other
+      Returns: a copy of other
   */
   gtk.page_setup.PageSetup copy()
   {
@@ -161,9 +170,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the bottom margin in units of unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the bottom margin
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the bottom margin
   */
   double getBottomMargin(gtk.types.Unit unit)
   {
@@ -174,9 +184,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the left margin in units of unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the left margin
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the left margin
   */
   double getLeftMargin(gtk.types.Unit unit)
   {
@@ -187,7 +198,7 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the page orientation of the #GtkPageSetup.
-    Returns:     the page orientation
+      Returns: the page orientation
   */
   gtk.types.PageOrientation getOrientation()
   {
@@ -199,13 +210,14 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Returns the page height in units of unit.
-    
-    Note that this function takes orientation and
-    margins into consideration.
-    See [gtk.page_setup.PageSetup.getPaperHeight].
-    Params:
-      unit =       the unit for the return value
-    Returns:     the page height.
+      
+      Note that this function takes orientation and
+      margins into consideration.
+      See [gtk.page_setup.PageSetup.getPaperHeight].
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the page height.
   */
   double getPageHeight(gtk.types.Unit unit)
   {
@@ -216,13 +228,14 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Returns the page width in units of unit.
-    
-    Note that this function takes orientation and
-    margins into consideration.
-    See [gtk.page_setup.PageSetup.getPaperWidth].
-    Params:
-      unit =       the unit for the return value
-    Returns:     the page width.
+      
+      Note that this function takes orientation and
+      margins into consideration.
+      See [gtk.page_setup.PageSetup.getPaperWidth].
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the page width.
   */
   double getPageWidth(gtk.types.Unit unit)
   {
@@ -233,13 +246,14 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Returns the paper height in units of unit.
-    
-    Note that this function takes orientation, but
-    not margins into consideration.
-    See [gtk.page_setup.PageSetup.getPageHeight].
-    Params:
-      unit =       the unit for the return value
-    Returns:     the paper height.
+      
+      Note that this function takes orientation, but
+      not margins into consideration.
+      See [gtk.page_setup.PageSetup.getPageHeight].
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper height.
   */
   double getPaperHeight(gtk.types.Unit unit)
   {
@@ -250,7 +264,7 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the paper size of the #GtkPageSetup.
-    Returns:     the paper size
+      Returns: the paper size
   */
   gtk.paper_size.PaperSize getPaperSize()
   {
@@ -262,13 +276,14 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Returns the paper width in units of unit.
-    
-    Note that this function takes orientation, but
-    not margins into consideration.
-    See [gtk.page_setup.PageSetup.getPageWidth].
-    Params:
-      unit =       the unit for the return value
-    Returns:     the paper width.
+      
+      Note that this function takes orientation, but
+      not margins into consideration.
+      See [gtk.page_setup.PageSetup.getPageWidth].
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper width.
   */
   double getPaperWidth(gtk.types.Unit unit)
   {
@@ -279,9 +294,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the right margin in units of unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the right margin
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the right margin
   */
   double getRightMargin(gtk.types.Unit unit)
   {
@@ -292,9 +308,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Gets the top margin in units of unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the top margin
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the top margin
   */
   double getTopMargin(gtk.types.Unit unit)
   {
@@ -305,10 +322,12 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Reads the page setup from the file file_name.
-    See [gtk.page_setup.PageSetup.toFile].
-    Params:
-      fileName =       the filename to read the page setup from
-    Returns:     true on success
+      See [gtk.page_setup.PageSetup.toFile].
+  
+      Params:
+        fileName = the filename to read the page setup from
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadFile(string fileName)
   {
@@ -323,12 +342,14 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Reads the page setup from the group group_name in the key file
-    key_file.
-    Params:
-      keyFile =       the #GKeyFile to retrieve the page_setup from
-      groupName =       the name of the group in the key_file to read, or null
-                     to use the default name “Page Setup”
-    Returns:     true on success
+      key_file.
+  
+      Params:
+        keyFile = the #GKeyFile to retrieve the page_setup from
+        groupName = the name of the group in the key_file to read, or null
+                       to use the default name “Page Setup”
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -343,9 +364,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the bottom margin of the #GtkPageSetup.
-    Params:
-      margin =       the new bottom margin in units of unit
-      unit =       the units for margin
+  
+      Params:
+        margin = the new bottom margin in units of unit
+        unit = the units for margin
   */
   void setBottomMargin(double margin, gtk.types.Unit unit)
   {
@@ -354,9 +376,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the left margin of the #GtkPageSetup.
-    Params:
-      margin =       the new left margin in units of unit
-      unit =       the units for margin
+  
+      Params:
+        margin = the new left margin in units of unit
+        unit = the units for margin
   */
   void setLeftMargin(double margin, gtk.types.Unit unit)
   {
@@ -365,8 +388,9 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the page orientation of the #GtkPageSetup.
-    Params:
-      orientation =       a #GtkPageOrientation value
+  
+      Params:
+        orientation = a #GtkPageOrientation value
   */
   void setOrientation(gtk.types.PageOrientation orientation)
   {
@@ -375,10 +399,11 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the paper size of the #GtkPageSetup without
-    changing the margins. See
-    [gtk.page_setup.PageSetup.setPaperSizeAndDefaultMargins].
-    Params:
-      size =       a #GtkPaperSize
+      changing the margins. See
+      [gtk.page_setup.PageSetup.setPaperSizeAndDefaultMargins].
+  
+      Params:
+        size = a #GtkPaperSize
   */
   void setPaperSize(gtk.paper_size.PaperSize size)
   {
@@ -387,9 +412,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the paper size of the #GtkPageSetup and modifies
-    the margins according to the new paper size.
-    Params:
-      size =       a #GtkPaperSize
+      the margins according to the new paper size.
+  
+      Params:
+        size = a #GtkPaperSize
   */
   void setPaperSizeAndDefaultMargins(gtk.paper_size.PaperSize size)
   {
@@ -398,9 +424,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the right margin of the #GtkPageSetup.
-    Params:
-      margin =       the new right margin in units of unit
-      unit =       the units for margin
+  
+      Params:
+        margin = the new right margin in units of unit
+        unit = the units for margin
   */
   void setRightMargin(double margin, gtk.types.Unit unit)
   {
@@ -409,9 +436,10 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Sets the top margin of the #GtkPageSetup.
-    Params:
-      margin =       the new top margin in units of unit
-      unit =       the units for margin
+  
+      Params:
+        margin = the new top margin in units of unit
+        unit = the units for margin
   */
   void setTopMargin(double margin, gtk.types.Unit unit)
   {
@@ -420,9 +448,11 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       This function saves the information from setup to file_name.
-    Params:
-      fileName =       the file to save to
-    Returns:     true on success
+  
+      Params:
+        fileName = the file to save to
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool toFile(string fileName)
   {
@@ -437,7 +467,7 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       Serialize page setup to an a{sv} variant.
-    Returns:     a new, floating, #GVariant
+      Returns: a new, floating, #GVariant
   */
   glib.variant.VariantG toGvariant()
   {
@@ -449,10 +479,11 @@ class PageSetup : gobject.object.ObjectG
 
   /**
       This function adds the page setup from setup to key_file.
-    Params:
-      keyFile =       the #GKeyFile to save the page setup to
-      groupName =       the group to add the settings to in key_file,
-             or null to use the default name “Page Setup”
+  
+      Params:
+        keyFile = the #GKeyFile to save the page setup to
+        groupName = the group to add the settings to in key_file,
+               or null to use the default name “Page Setup”
   */
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {

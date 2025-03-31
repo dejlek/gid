@@ -1,3 +1,4 @@
+/// Module for [TreeNode] class
 module glib.tree_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class TreeNode
   GTreeNode* cInstancePtr;
   bool owned;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class TreeNode
     owned = take;
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)cInstancePtr;
@@ -30,7 +33,7 @@ class TreeNode
 
   /**
       Gets the key stored at a particular tree node.
-    Returns:     the key at the node.
+      Returns: the key at the node.
   */
   void* key()
   {
@@ -40,8 +43,8 @@ class TreeNode
 
   /**
       Returns the next in-order node of the tree, or null
-    if the passed node was already the last one.
-    Returns:     the next node in the tree
+      if the passed node was already the last one.
+      Returns: the next node in the tree
   */
   glib.tree_node.TreeNode next()
   {
@@ -53,8 +56,8 @@ class TreeNode
 
   /**
       Returns the previous in-order node of the tree, or null
-    if the passed node was already the first one.
-    Returns:     the previous node in the tree
+      if the passed node was already the first one.
+      Returns: the previous node in the tree
   */
   glib.tree_node.TreeNode previous()
   {
@@ -66,7 +69,7 @@ class TreeNode
 
   /**
       Gets the value stored at a particular tree node.
-    Returns:     the value at the node.
+      Returns: the value at the node.
   */
   void* value()
   {

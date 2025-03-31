@@ -1,3 +1,4 @@
+/// Module for [AggregatorPad] class
 module gstbase.aggregator_pad;
 
 import gid.gid;
@@ -10,23 +11,26 @@ import gstbase.types;
 
 /**
     Pads managed by a #GstAggregator subclass.
-  
-  This class used to live in gst-plugins-bad and was moved to core.
+    
+    This class used to live in gst-plugins-bad and was moved to core.
 */
 class AggregatorPad : gst.pad.Pad
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_aggregator_pad_get_type != &gidSymbolNotFound ? gst_aggregator_pad_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -39,7 +43,7 @@ class AggregatorPad : gst.pad.Pad
 
   /**
       Drop the buffer currently queued in pad.
-    Returns:     TRUE if there was a buffer queued in pad, or FALSE if not.
+      Returns: TRUE if there was a buffer queued in pad, or FALSE if not.
   */
   bool dropBuffer()
   {
@@ -50,9 +54,9 @@ class AggregatorPad : gst.pad.Pad
 
   /**
       This checks if a pad has a buffer available that will be returned by
-    a call to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
-    [gstbase.aggregator_pad.AggregatorPad.popBuffer].
-    Returns:     true if the pad has a buffer available as the next thing.
+      a call to [gstbase.aggregator_pad.AggregatorPad.peekBuffer] or
+      [gstbase.aggregator_pad.AggregatorPad.popBuffer].
+      Returns: true if the pad has a buffer available as the next thing.
   */
   bool hasBuffer()
   {
@@ -71,8 +75,8 @@ class AggregatorPad : gst.pad.Pad
 
   /**
       It is only valid to call this method from #GstAggregatorClass::aggregate()
-    Returns:     true if the pad is inactive, false otherwise.
-        See gst_aggregator_ignore_inactive_pads() for more info.
+      Returns: true if the pad is inactive, false otherwise.
+          See gst_aggregator_ignore_inactive_pads() for more info.
   */
   bool isInactive()
   {
@@ -92,8 +96,8 @@ class AggregatorPad : gst.pad.Pad
 
   /**
       Steal the ref to the buffer currently queued in pad.
-    Returns:     The buffer in pad or NULL if no buffer was
-        queued. You should unref the buffer after usage.
+      Returns: The buffer in pad or NULL if no buffer was
+          queued. You should unref the buffer after usage.
   */
   gst.buffer.Buffer popBuffer()
   {
@@ -103,29 +107,44 @@ class AggregatorPad : gst.pad.Pad
     return _retval;
   }
 
-  /** */
-  alias BufferConsumedCallbackDlg = void delegate(gst.buffer.Buffer object, gstbase.aggregator_pad.AggregatorPad aggregatorPad);
-
-  /** ditto */
-  alias BufferConsumedCallbackFunc = void function(gst.buffer.Buffer object, gstbase.aggregator_pad.AggregatorPad aggregatorPad);
-
   /**
-    Connect to BufferConsumed signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `BufferConsumed` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gst.buffer.Buffer object, gstbase.aggregator_pad.AggregatorPad aggregatorPad))
+  
+          `object`  (optional)
+  
+          `aggregatorPad` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectBufferConsumed(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : BufferConsumedCallbackDlg) || is(T : BufferConsumedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gst.buffer.Buffer)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gstbase.aggregator_pad.AggregatorPad)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto aggregatorPad = getVal!(gstbase.aggregator_pad.AggregatorPad)(_paramVals);
-      auto object = getVal!(gst.buffer.Buffer)(&_paramVals[1]);
-      _dClosure.dlg(object, aggregatorPad);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

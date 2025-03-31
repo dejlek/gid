@@ -1,3 +1,4 @@
+/// Module for [TextAppearance] class
 module gtk.text_appearance;
 
 import gdk.color;
@@ -11,6 +12,7 @@ class TextAppearance
 {
   GtkTextAppearance cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,6 +24,7 @@ class TextAppearance
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

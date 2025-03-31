@@ -1,3 +1,4 @@
+/// Global functions for gstglegl1 library
 module gstglegl.global;
 
 import gid.gid;

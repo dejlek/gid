@@ -1,3 +1,4 @@
+/// Module for [BufferInputStream] class
 module arrow.buffer_input_stream;
 
 import arrow.buffer;
@@ -16,17 +17,20 @@ import gobject.object;
 class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_input_stream_get_type != &gidSymbolNotFound ? garrow_buffer_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [MenuLinkIter] class
 module gio.menu_link_iter;
 
 import gid.gid;
@@ -9,22 +10,25 @@ import gobject.object;
 
 /**
     #GMenuLinkIter is an opaque structure type.  You must access it using
-  the functions below.
+    the functions below.
 */
 class MenuLinkIter : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_link_iter_get_type != &gidSymbolNotFound ? g_menu_link_iter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,9 +41,9 @@ class MenuLinkIter : gobject.object.ObjectG
 
   /**
       Gets the name of the link at the current iterator position.
-    
-    The iterator is not advanced.
-    Returns:     the type of the link
+      
+      The iterator is not advanced.
+      Returns: the type of the link
   */
   string getName()
   {
@@ -51,23 +55,24 @@ class MenuLinkIter : gobject.object.ObjectG
 
   /**
       This function combines [gio.menu_link_iter.MenuLinkIter.next] with
-    [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue].
-    
-    First the iterator is advanced to the next (possibly first) link.
-    If that fails, then false is returned and there are no other effects.
-    
-    If successful, out_link and value are set to the name and #GMenuModel
-    of the link that has just been advanced to.  At this point,
-    [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue] will return the
-    same values again.
-    
-    The value returned in out_link remains valid for as long as the iterator
-    remains at the current position.  The value returned in value must
-    be unreffed using [gobject.object.ObjectG.unref] when it is no longer in use.
-    Params:
-      outLink =       the name of the link
-      value =       the linked #GMenuModel
-    Returns:     true on success, or false if there is no additional link
+      [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue].
+      
+      First the iterator is advanced to the next (possibly first) link.
+      If that fails, then false is returned and there are no other effects.
+      
+      If successful, out_link and value are set to the name and #GMenuModel
+      of the link that has just been advanced to.  At this point,
+      [gio.menu_link_iter.MenuLinkIter.getName] and [gio.menu_link_iter.MenuLinkIter.getValue] will return the
+      same values again.
+      
+      The value returned in out_link remains valid for as long as the iterator
+      remains at the current position.  The value returned in value must
+      be unreffed using [gobject.object.ObjectG.unref] when it is no longer in use.
+  
+      Params:
+        outLink = the name of the link
+        value = the linked #GMenuModel
+      Returns: true on success, or false if there is no additional link
   */
   bool getNext(out string outLink, out gio.menu_model.MenuModel value)
   {
@@ -82,9 +87,9 @@ class MenuLinkIter : gobject.object.ObjectG
 
   /**
       Gets the linked #GMenuModel at the current iterator position.
-    
-    The iterator is not advanced.
-    Returns:     the #GMenuModel that is linked to
+      
+      The iterator is not advanced.
+      Returns: the #GMenuModel that is linked to
   */
   gio.menu_model.MenuModel getValue()
   {
@@ -96,14 +101,14 @@ class MenuLinkIter : gobject.object.ObjectG
 
   /**
       Attempts to advance the iterator to the next (possibly first)
-    link.
-    
-    true is returned on success, or false if there are no more links.
-    
-    You must call this function when you first acquire the iterator to
-    advance it to the first link (and determine if the first link exists
-    at all).
-    Returns:     true on success, or false when there are no more links
+      link.
+      
+      true is returned on success, or false if there are no more links.
+      
+      You must call this function when you first acquire the iterator to
+      advance it to the first link (and determine if the first link exists
+      at all).
+      Returns: true on success, or false when there are no more links
   */
   bool next()
   {

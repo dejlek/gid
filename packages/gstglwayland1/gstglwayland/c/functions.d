@@ -1,3 +1,4 @@
+/// C functions for gstglwayland1 library
 module gstglwayland.c.functions;
 
 public import gid.basictypes;
@@ -18,14 +19,20 @@ else
 __gshared extern(C)
 {
   // GLDisplayWayland
-  extern(C) GType function() c_gst_gl_display_wayland_get_type;
-  GstGLDisplayWayland* function(const(char)* name) c_gst_gl_display_wayland_new;
-  GstGLDisplayWayland* function(void* display) c_gst_gl_display_wayland_new_with_display;
+  GType function() c_gst_gl_display_wayland_get_type; ///
+  GstGLDisplayWayland* function(const(char)* name) c_gst_gl_display_wayland_new; ///
+  GstGLDisplayWayland* function(void* display) c_gst_gl_display_wayland_new_with_display; ///
 }
 
 // GLDisplayWayland
+
+/** */
 alias gst_gl_display_wayland_get_type = c_gst_gl_display_wayland_get_type;
+
+/** */
 alias gst_gl_display_wayland_new = c_gst_gl_display_wayland_new;
+
+/** */
 alias gst_gl_display_wayland_new_with_display = c_gst_gl_display_wayland_new_with_display;
 
 shared static this()

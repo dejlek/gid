@@ -1,3 +1,4 @@
+/// Module for [FixedSizeBinaryArray] class
 module arrow.fixed_size_binary_array;
 
 import arrow.buffer;
@@ -13,17 +14,20 @@ import glib.bytes;
 class FixedSizeBinaryArray : arrow.primitive_array.PrimitiveArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_array_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

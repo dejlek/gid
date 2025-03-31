@@ -1,3 +1,4 @@
+/// Module for [ParamSpecParam] class
 module gobject.param_spec_param;
 
 import gid.gid;
@@ -8,11 +9,12 @@ import gobject.types;
 
 /**
     A #GParamSpec derived structure that contains the meta data for `G_TYPE_PARAM`
-  properties.
+    properties.
 */
 class ParamSpecParam : gobject.param_spec.ParamSpec
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)

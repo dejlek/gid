@@ -1,3 +1,4 @@
+/// D types for gstrtp1 library
 module gstrtp.types;
 
 import gid.gid;
@@ -59,7 +60,7 @@ enum RTCP_MAX_SDES_ITEM_COUNT = 31;
 
 /**
     Mask for version and packet type pair allowing reduced size
-  packets, basically it accepts other types than RR and SR
+    packets, basically it accepts other types than RR and SR
 */
 enum RTCP_REDUCED_SIZE_VALID_MASK = 49400;
 
@@ -70,7 +71,7 @@ enum RTCP_VALID_MASK = 57598;
 
 /**
     Valid value for the first two bytes of an RTCP packet after applying
-  #GST_RTCP_VALID_MASK to them.
+    #GST_RTCP_VALID_MASK to them.
 */
 enum RTCP_VALID_VALUE = 200;
 
@@ -84,7 +85,7 @@ enum RTP_HDREXT_BASE = "urn:ietf:params:rtp-hdrext:";
 
 /**
     Constant string used in element classification to signal that this element
-  is a RTP header extension.
+    is a RTP header extension.
 */
 enum RTP_HDREXT_ELEMENT_CLASS = "Network/Extension/RTPHeader";
 

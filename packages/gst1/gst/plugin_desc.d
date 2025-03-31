@@ -1,3 +1,4 @@
+/// Module for [PluginDesc] class
 module gst.plugin_desc;
 
 import gid.gid;
@@ -7,15 +8,16 @@ import gst.types;
 
 /**
     A plugin should export a variable of this type called plugin_desc. The plugin
-  loader will use the data provided there to initialize the plugin.
-  
-  The @licence parameter must be one of: LGPL, GPL, QPL, GPL/QPL, MPL,
-  BSD, MIT/X11, Proprietary, unknown.
+    loader will use the data provided there to initialize the plugin.
+    
+    The @licence parameter must be one of: LGPL, GPL, QPL, GPL/QPL, MPL,
+    BSD, MIT/X11, Proprietary, unknown.
 */
 class PluginDesc
 {
   GstPluginDesc cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class PluginDesc
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

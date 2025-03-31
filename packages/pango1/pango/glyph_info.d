@@ -1,3 +1,4 @@
+/// Module for [GlyphInfo] class
 module pango.glyph_info;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import pango.types;
 
 /**
     A [pango.glyph_info.GlyphInfo] structure represents a single glyph with
-  positioning information and visual attributes.
+    positioning information and visual attributes.
 */
 class GlyphInfo
 {
   PangoGlyphInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class GlyphInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [VideoGLTextureUploadMeta] class
 module gstvideo.video_gltexture_upload_meta;
 
 import gid.gid;
@@ -9,14 +10,15 @@ import gstvideo.types;
 
 /**
     Extra buffer metadata for uploading a buffer to an OpenGL texture
-  ID. The caller of [gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta.upload] must
-  have OpenGL set up and call this from a thread where it is valid
-  to upload something to an OpenGL texture.
+    ID. The caller of [gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta.upload] must
+    have OpenGL set up and call this from a thread where it is valid
+    to upload something to an OpenGL texture.
 */
 class VideoGLTextureUploadMeta
 {
   GstVideoGLTextureUploadMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class VideoGLTextureUploadMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -60,9 +63,10 @@ class VideoGLTextureUploadMeta
 
   /**
       Uploads the buffer which owns the meta to a specific texture ID.
-    Params:
-      textureId =       the texture IDs to upload to
-    Returns:     true if uploading succeeded, false otherwise.
+  
+      Params:
+        textureId = the texture IDs to upload to
+      Returns: true if uploading succeeded, false otherwise.
   */
   bool upload(uint[] textureId)
   {

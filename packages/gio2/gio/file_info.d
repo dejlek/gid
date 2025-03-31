@@ -1,3 +1,4 @@
+/// Module for [FileInfo] class
 module gio.file_info;
 
 import gid.gid;
@@ -12,56 +13,59 @@ import gobject.object;
 
 /**
     Stores information about a file system object referenced by a [gio.file.File].
-  
-  Functionality for manipulating basic metadata for files. [gio.file_info.FileInfo]
-  implements methods for getting information that all files should
-  contain, and allows for manipulation of extended attributes.
-  
-  See [file-attributes.html](file attributes) for more information on how GIO
-  handles file attributes.
-  
-  To obtain a [gio.file_info.FileInfo] for a [gio.file.File], use
-  [gio.file.File.queryInfo] (or its async variant). To obtain a [gio.file_info.FileInfo]
-  for a file input or output stream, use [gio.file_input_stream.FileInputStream.queryInfo]
-  or [gio.file_output_stream.FileOutputStream.queryInfo] (or their async variants).
-  
-  To change the actual attributes of a file, you should then set the
-  attribute in the [gio.file_info.FileInfo] and call [gio.file.File.setAttributesFromInfo]
-  or [gio.file.File.setAttributesAsync] on a [gio.file.File].
-  
-  However, not all attributes can be changed in the file. For instance,
-  the actual size of a file cannot be changed via [gio.file_info.FileInfo.setSize].
-  You may call [gio.file.File.querySettableAttributes] and
-  [gio.file.File.queryWritableNamespaces] to discover the settable attributes
-  of a particular file at runtime.
-  
-  The direct accessors, such as [gio.file_info.FileInfo.getName], are slightly more
-  optimized than the generic attribute accessors, such as
-  [gio.file_info.FileInfo.getAttributeByteString].This optimization will matter
-  only if calling the API in a tight loop.
-  
-  It is an error to call these accessors without specifying their required file
-  attributes when creating the [gio.file_info.FileInfo]. Use
-  [gio.file_info.FileInfo.hasAttribute] or [gio.file_info.FileInfo.listAttributes]
-  to check what attributes are specified for a [gio.file_info.FileInfo].
-  
-  [gio.file_attribute_matcher.FileAttributeMatcher] allows for searching through a [gio.file_info.FileInfo]
-  for attributes.
+    
+    Functionality for manipulating basic metadata for files. [gio.file_info.FileInfo]
+    implements methods for getting information that all files should
+    contain, and allows for manipulation of extended attributes.
+    
+    See [file-attributes.html](file attributes) for more information on how GIO
+    handles file attributes.
+    
+    To obtain a [gio.file_info.FileInfo] for a [gio.file.File], use
+    [gio.file.File.queryInfo] (or its async variant). To obtain a [gio.file_info.FileInfo]
+    for a file input or output stream, use [gio.file_input_stream.FileInputStream.queryInfo]
+    or [gio.file_output_stream.FileOutputStream.queryInfo] (or their async variants).
+    
+    To change the actual attributes of a file, you should then set the
+    attribute in the [gio.file_info.FileInfo] and call [gio.file.File.setAttributesFromInfo]
+    or [gio.file.File.setAttributesAsync] on a [gio.file.File].
+    
+    However, not all attributes can be changed in the file. For instance,
+    the actual size of a file cannot be changed via [gio.file_info.FileInfo.setSize].
+    You may call [gio.file.File.querySettableAttributes] and
+    [gio.file.File.queryWritableNamespaces] to discover the settable attributes
+    of a particular file at runtime.
+    
+    The direct accessors, such as [gio.file_info.FileInfo.getName], are slightly more
+    optimized than the generic attribute accessors, such as
+    [gio.file_info.FileInfo.getAttributeByteString].This optimization will matter
+    only if calling the API in a tight loop.
+    
+    It is an error to call these accessors without specifying their required file
+    attributes when creating the [gio.file_info.FileInfo]. Use
+    [gio.file_info.FileInfo.hasAttribute] or [gio.file_info.FileInfo.listAttributes]
+    to check what attributes are specified for a [gio.file_info.FileInfo].
+    
+    [gio.file_attribute_matcher.FileAttributeMatcher] allows for searching through a [gio.file_info.FileInfo]
+    for attributes.
 */
 class FileInfo : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_info_get_type != &gidSymbolNotFound ? g_file_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -74,7 +78,7 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Creates a new file info structure.
-    Returns:     a #GFileInfo.
+      Returns: a #GFileInfo.
   */
   this()
   {
@@ -93,9 +97,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       First clears all of the [GFileAttribute][gio-GFileAttribute] of dest_info,
-    and then copies all of the file attributes from src_info to dest_info.
-    Params:
-      destInfo =       destination to copy attributes to.
+      and then copies all of the file attributes from src_info to dest_info.
+  
+      Params:
+        destInfo = destination to copy attributes to.
   */
   void copyInto(gio.file_info.FileInfo destInfo)
   {
@@ -104,7 +109,7 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Duplicates a file info structure.
-    Returns:     a duplicate #GFileInfo of other.
+      Returns: a duplicate #GFileInfo of other.
   */
   gio.file_info.FileInfo dup()
   {
@@ -116,16 +121,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the access time of the current info and returns it as a
-    #GDateTime.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_TIME_ACCESS`. If `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` is
-    provided, the resulting #GDateTime will additionally have microsecond
-    precision.
-    
-    If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` must
-    be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
-    Returns:     access time, or null if unknown
+      #GDateTime.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_TIME_ACCESS`. If `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` is
+      provided, the resulting #GDateTime will additionally have microsecond
+      precision.
+      
+      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` must
+      be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
+      Returns: access time, or null if unknown
   */
   glib.date_time.DateTime getAccessDateTime()
   {
@@ -137,13 +142,14 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of an attribute, formatted as a string.
-    This escapes things as needed to make the string valid
-    UTF-8.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a UTF-8 string associated with the given attribute, or
-         null if the attribute wasn’t set.
-         When you're done with the string it must be freed with [glib.global.gfree].
+      This escapes things as needed to make the string valid
+      UTF-8.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a UTF-8 string associated with the given attribute, or
+           null if the attribute wasn’t set.
+           When you're done with the string it must be freed with [glib.global.gfree].
   */
   string getAttributeAsString(string attribute)
   {
@@ -156,10 +162,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a boolean attribute. If the attribute does not
-    contain a boolean value, false will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     the boolean value contained within the attribute.
+      contain a boolean value, false will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: the boolean value contained within the attribute.
   */
   bool getAttributeBoolean(string attribute)
   {
@@ -171,11 +178,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a byte string attribute. If the attribute does
-    not contain a byte string, null will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     the contents of the attribute value as a byte string, or
-      null otherwise.
+      not contain a byte string, null will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: the contents of the attribute value as a byte string, or
+        null otherwise.
   */
   string getAttributeByteString(string attribute)
   {
@@ -188,14 +196,15 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the attribute type, value and status for an attribute key.
-    Params:
-      attribute =       a file attribute key
-      type =       return location for the attribute type, or null
-      valuePp =       return location for the
-           attribute value, or null; the attribute value will not be null
-      status =       return location for the attribute status, or null
-    Returns:     true if info has an attribute named attribute,
-           false otherwise.
+  
+      Params:
+        attribute = a file attribute key
+        type = return location for the attribute type, or null
+        valuePp = return location for the
+             attribute value, or null; the attribute value will not be null
+        status = return location for the attribute status, or null
+      Returns: true if info has an attribute named attribute,
+             false otherwise.
   */
   bool getAttributeData(string attribute, out gio.types.FileAttributeType type, out void* valuePp, out gio.types.FileAttributeStatus status)
   {
@@ -207,15 +216,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a byte string attribute as a file path.
-    
-    If the attribute does not contain a byte string, `NULL` will be returned.
-    
-    This function is meant to be used by language bindings that have specific
-    handling for Unix paths.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     the contents of the attribute value as
-      a file path, or null otherwise.
+      
+      If the attribute does not contain a byte string, `NULL` will be returned.
+      
+      This function is meant to be used by language bindings that have specific
+      handling for Unix paths.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: the contents of the attribute value as
+        a file path, or null otherwise.
   */
   string getAttributeFilePath(string attribute)
   {
@@ -228,11 +238,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets a signed 32-bit integer contained within the attribute. If the
-    attribute does not contain a signed 32-bit integer, or is invalid,
-    0 will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a signed 32-bit integer from the attribute.
+      attribute does not contain a signed 32-bit integer, or is invalid,
+      0 will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a signed 32-bit integer from the attribute.
   */
   int getAttributeInt32(string attribute)
   {
@@ -244,11 +255,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets a signed 64-bit integer contained within the attribute. If the
-    attribute does not contain a signed 64-bit integer, or is invalid,
-    0 will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a signed 64-bit integer from the attribute.
+      attribute does not contain a signed 64-bit integer, or is invalid,
+      0 will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a signed 64-bit integer from the attribute.
   */
   long getAttributeInt64(string attribute)
   {
@@ -260,11 +272,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a #GObject attribute. If the attribute does
-    not contain a #GObject, null will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a #GObject associated with the given attribute,
-      or null otherwise.
+      not contain a #GObject, null will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a #GObject associated with the given attribute,
+        or null otherwise.
   */
   gobject.object.ObjectG getAttributeObject(string attribute)
   {
@@ -277,10 +290,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the attribute status for an attribute key.
-    Params:
-      attribute =       a file attribute key
-    Returns:     a #GFileAttributeStatus for the given attribute, or
-         [gio.types.FileAttributeStatus.Unset] if the key is invalid.
+  
+      Params:
+        attribute = a file attribute key
+      Returns: a #GFileAttributeStatus for the given attribute, or
+           [gio.types.FileAttributeStatus.Unset] if the key is invalid.
   */
   gio.types.FileAttributeStatus getAttributeStatus(string attribute)
   {
@@ -293,11 +307,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a string attribute. If the attribute does
-    not contain a string, null will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     the contents of the attribute value as a UTF-8 string,
-      or null otherwise.
+      not contain a string, null will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: the contents of the attribute value as a UTF-8 string,
+        or null otherwise.
   */
   string getAttributeString(string attribute)
   {
@@ -310,11 +325,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of a stringv attribute. If the attribute does
-    not contain a stringv, null will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     the contents of the attribute value as a stringv,
-      or null otherwise. Do not free. These returned strings are UTF-8.
+      not contain a stringv, null will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: the contents of the attribute value as a stringv,
+        or null otherwise. Do not free. These returned strings are UTF-8.
   */
   string[] getAttributeStringv(string attribute)
   {
@@ -337,10 +353,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the attribute type for an attribute key.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a #GFileAttributeType for the given attribute, or
-      [gio.types.FileAttributeType.Invalid] if the key is not set.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a #GFileAttributeType for the given attribute, or
+        [gio.types.FileAttributeType.Invalid] if the key is not set.
   */
   gio.types.FileAttributeType getAttributeType(string attribute)
   {
@@ -353,11 +370,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets an unsigned 32-bit integer contained within the attribute. If the
-    attribute does not contain an unsigned 32-bit integer, or is invalid,
-    0 will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     an unsigned 32-bit integer from the attribute.
+      attribute does not contain an unsigned 32-bit integer, or is invalid,
+      0 will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: an unsigned 32-bit integer from the attribute.
   */
   uint getAttributeUint32(string attribute)
   {
@@ -369,11 +387,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets a unsigned 64-bit integer contained within the attribute. If the
-    attribute does not contain an unsigned 64-bit integer, or is invalid,
-    0 will be returned.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     a unsigned 64-bit integer from the attribute.
+      attribute does not contain an unsigned 64-bit integer, or is invalid,
+      0 will be returned.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: a unsigned 64-bit integer from the attribute.
   */
   ulong getAttributeUint64(string attribute)
   {
@@ -385,11 +404,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the file's content type.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
-    Returns:     a string containing the file's content type,
-      or null if unknown.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
+      Returns: a string containing the file's content type,
+        or null if unknown.
   */
   string getContentType()
   {
@@ -401,16 +420,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the creation time of the current info and returns it as a
-    #GDateTime.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_TIME_CREATED`. If `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` is
-    provided, the resulting #GDateTime will additionally have microsecond
-    precision.
-    
-    If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` must
-    be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
-    Returns:     creation time, or null if unknown
+      #GDateTime.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_TIME_CREATED`. If `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` is
+      provided, the resulting #GDateTime will additionally have microsecond
+      precision.
+      
+      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` must
+      be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
+      Returns: creation time, or null if unknown
   */
   glib.date_time.DateTime getCreationDateTime()
   {
@@ -422,9 +441,9 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Returns the #GDateTime representing the deletion date of the file, as
-    available in `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE`. If the
-    `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE` attribute is unset, null is returned.
-    Returns:     a #GDateTime, or null.
+      available in `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE`. If the
+      `G_FILE_ATTRIBUTE_TRASH_DELETION_DATE` attribute is unset, null is returned.
+      Returns: a #GDateTime, or null.
   */
   glib.date_time.DateTime getDeletionDate()
   {
@@ -436,10 +455,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets a display name for a file. This is guaranteed to always be set.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
-    Returns:     a string containing the display name.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
+      Returns: a string containing the display name.
   */
   string getDisplayName()
   {
@@ -451,10 +470,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the edit name for a file.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
-    Returns:     a string containing the edit name.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
+      Returns: a string containing the edit name.
   */
   string getEditName()
   {
@@ -466,11 +485,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the [entity tag](iface.File.html#entity-tags) for a given
-    #GFileInfo. See `G_FILE_ATTRIBUTE_ETAG_VALUE`.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_ETAG_VALUE`.
-    Returns:     a string containing the value of the "etag:value" attribute.
+      #GFileInfo. See `G_FILE_ATTRIBUTE_ETAG_VALUE`.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_ETAG_VALUE`.
+      Returns: a string containing the value of the "etag:value" attribute.
   */
   string getEtag()
   {
@@ -482,11 +501,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets a file's type (whether it is a regular file, symlink, etc).
-    This is different from the file's content type, see [gio.file_info.FileInfo.getContentType].
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
-    Returns:     a #GFileType for the given file.
+      This is different from the file's content type, see [gio.file_info.FileInfo.getContentType].
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
+      Returns: a #GFileType for the given file.
   */
   gio.types.FileType getFileType()
   {
@@ -498,10 +517,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the icon for a file.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_ICON`.
-    Returns:     #GIcon for the given info.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_ICON`.
+      Returns: #GIcon for the given info.
   */
   gio.icon.Icon getIcon()
   {
@@ -513,10 +532,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Checks if a file is a backup file.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP`.
-    Returns:     true if file is a backup file, false otherwise.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP`.
+      Returns: true if file is a backup file, false otherwise.
   */
   bool getIsBackup()
   {
@@ -527,10 +546,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Checks if a file is hidden.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
-    Returns:     true if the file is a hidden file, false otherwise.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
+      Returns: true if the file is a hidden file, false otherwise.
   */
   bool getIsHidden()
   {
@@ -541,10 +560,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Checks if a file is a symlink.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
-    Returns:     true if the given info is a symlink.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
+      Returns: true if the given info is a symlink.
   */
   bool getIsSymlink()
   {
@@ -555,16 +574,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the modification time of the current info and returns it as a
-    #GDateTime.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
-    provided, the resulting #GDateTime will additionally have microsecond
-    precision.
-    
-    If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` must
-    be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
-    Returns:     modification time, or null if unknown
+      #GDateTime.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
+      provided, the resulting #GDateTime will additionally have microsecond
+      precision.
+      
+      If nanosecond precision is needed, `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` must
+      be queried separately using [gio.file_info.FileInfo.getAttributeUint32].
+      Returns: modification time, or null if unknown
   */
   glib.date_time.DateTime getModificationDateTime()
   {
@@ -576,16 +595,17 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the modification time of the current info and sets it
-    in result.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
-    provided it will be used too.
-    Params:
-      result =       a #GTimeVal.
+      in result.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED`. If `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` is
+      provided it will be used too.
   
-    Deprecated:     Use [gio.file_info.FileInfo.getModificationDateTime] instead, as
-         #GTimeVal is deprecated due to the year 2038 problem.
+      Params:
+        result = a #GTimeVal.
+  
+      Deprecated: Use [gio.file_info.FileInfo.getModificationDateTime] instead, as
+           #GTimeVal is deprecated due to the year 2038 problem.
   */
   void getModificationTime(out glib.time_val.TimeVal result)
   {
@@ -596,10 +616,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the name for a file. This is guaranteed to always be set.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_NAME`.
-    Returns:     a string containing the file name.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_NAME`.
+      Returns: a string containing the file name.
   */
   string getName()
   {
@@ -611,12 +631,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the file's size (in bytes). The size is retrieved through the value of
-    the `G_FILE_ATTRIBUTE_STANDARD_SIZE` attribute and is converted
-    from #guint64 to #goffset before returning the result.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_SIZE`.
-    Returns:     a #goffset containing the file's size (in bytes).
+      the `G_FILE_ATTRIBUTE_STANDARD_SIZE` attribute and is converted
+      from #guint64 to #goffset before returning the result.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_SIZE`.
+      Returns: a #goffset containing the file's size (in bytes).
   */
   long getSize()
   {
@@ -627,11 +647,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the value of the sort_order attribute from the #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
-    Returns:     a #gint32 containing the value of the "standard::sort_order" attribute.
+      See `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+      Returns: a #gint32 containing the value of the "standard::sort_order" attribute.
   */
   int getSortOrder()
   {
@@ -642,10 +662,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the symbolic icon for a file.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
-    Returns:     #GIcon for the given info.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
+      Returns: #GIcon for the given info.
   */
   gio.icon.Icon getSymbolicIcon()
   {
@@ -657,10 +677,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Gets the symlink target for a given #GFileInfo.
-    
-    It is an error to call this if the #GFileInfo does not contain
-    `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET`.
-    Returns:     a string containing the symlink target.
+      
+      It is an error to call this if the #GFileInfo does not contain
+      `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET`.
+      Returns: a string containing the symlink target.
   */
   string getSymlinkTarget()
   {
@@ -672,10 +692,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Checks if a file info structure has an attribute named attribute.
-    Params:
-      attribute =       a file attribute key.
-    Returns:     true if info has an attribute named attribute,
-          false otherwise.
+  
+      Params:
+        attribute = a file attribute key.
+      Returns: true if info has an attribute named attribute,
+            false otherwise.
   */
   bool hasAttribute(string attribute)
   {
@@ -687,11 +708,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Checks if a file info structure has an attribute in the
-    specified name_space.
-    Params:
-      nameSpace =       a file attribute namespace.
-    Returns:     true if info has an attribute in name_space,
-          false otherwise.
+      specified name_space.
+  
+      Params:
+        nameSpace = a file attribute namespace.
+      Returns: true if info has an attribute in name_space,
+            false otherwise.
   */
   bool hasNamespace(string nameSpace)
   {
@@ -703,12 +725,13 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Lists the file info structure's attributes.
-    Params:
-      nameSpace =       a file attribute key's namespace, or null to list
-          all attributes.
-    Returns:     a
-      null-terminated array of strings of all of the possible attribute
-      types for the given name_space, or null on error.
+  
+      Params:
+        nameSpace = a file attribute key's namespace, or null to list
+            all attributes.
+      Returns: a
+        null-terminated array of strings of all of the possible attribute
+        types for the given name_space, or null on error.
   */
   string[] listAttributes(string nameSpace = null)
   {
@@ -731,8 +754,9 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Removes all cases of attribute from info if it exists.
-    Params:
-      attribute =       a file attribute key.
+  
+      Params:
+        attribute = a file attribute key.
   */
   void removeAttribute(string attribute)
   {
@@ -742,12 +766,13 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_TIME_ACCESS` and
-    `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` attributes in the file info to the
-    given date/time value.
-    
-    `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` will be cleared.
-    Params:
-      atime =       a #GDateTime.
+      `G_FILE_ATTRIBUTE_TIME_ACCESS_USEC` attributes in the file info to the
+      given date/time value.
+      
+      `G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC` will be cleared.
+  
+      Params:
+        atime = a #GDateTime.
   */
   void setAccessDateTime(glib.date_time.DateTime atime)
   {
@@ -756,11 +781,12 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given value, if possible. To unset the
-    attribute, use [gio.types.FileAttributeType.Invalid] for type.
-    Params:
-      attribute =       a file attribute key.
-      type =       a #GFileAttributeType
-      valueP =       pointer to the value
+      attribute, use [gio.types.FileAttributeType.Invalid] for type.
+  
+      Params:
+        attribute = a file attribute key.
+        type = a #GFileAttributeType
+        valueP = pointer to the value
   */
   void setAttribute(string attribute, gio.types.FileAttributeType type, void* valueP)
   {
@@ -770,10 +796,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a boolean value.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a boolean value.
   */
   void setAttributeBoolean(string attribute, bool attrValue)
   {
@@ -783,10 +810,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a byte string.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a byte string.
   */
   void setAttributeByteString(string attribute, string attrValue)
   {
@@ -797,13 +825,14 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    
-    This function is meant to be used by language bindings that have specific
-    handling for Unix paths.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a file path.
+      if possible.
+      
+      This function is meant to be used by language bindings that have specific
+      handling for Unix paths.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a file path.
   */
   void setAttributeFilePath(string attribute, string attrValue)
   {
@@ -814,10 +843,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a signed 32-bit integer
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a signed 32-bit integer
   */
   void setAttributeInt32(string attribute, int attrValue)
   {
@@ -827,10 +857,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       attribute name to set.
-      attrValue =       int64 value to set attribute to.
+      if possible.
+  
+      Params:
+        attribute = attribute name to set.
+        attrValue = int64 value to set attribute to.
   */
   void setAttributeInt64(string attribute, long attrValue)
   {
@@ -840,8 +871,9 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets mask on info to match specific attribute types.
-    Params:
-      mask =       a #GFileAttributeMatcher.
+  
+      Params:
+        mask = a #GFileAttributeMatcher.
   */
   void setAttributeMask(gio.file_attribute_matcher.FileAttributeMatcher mask)
   {
@@ -850,10 +882,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a #GObject.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a #GObject.
   */
   void setAttributeObject(string attribute, gobject.object.ObjectG attrValue)
   {
@@ -863,15 +896,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute status for an attribute key. This is only
-    needed by external code that implement [gio.file.File.setAttributesFromInfo]
-    or similar functions.
-    
-    The attribute must exist in info for this to work. Otherwise false
-    is returned and info is unchanged.
-    Params:
-      attribute =       a file attribute key
-      status =       a #GFileAttributeStatus
-    Returns:     true if the status was changed, false if the key was not set.
+      needed by external code that implement [gio.file.File.setAttributesFromInfo]
+      or similar functions.
+      
+      The attribute must exist in info for this to work. Otherwise false
+      is returned and info is unchanged.
+  
+      Params:
+        attribute = a file attribute key
+        status = a #GFileAttributeStatus
+      Returns: true if the status was changed, false if the key was not set.
   */
   bool setAttributeStatus(string attribute, gio.types.FileAttributeStatus status)
   {
@@ -883,10 +917,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       a UTF-8 string.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = a UTF-8 string.
   */
   void setAttributeString(string attribute, string attrValue)
   {
@@ -897,13 +932,14 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    
-    Sinze: 2.22
-    Params:
-      attribute =       a file attribute key
-      attrValue =       a null
-          terminated array of UTF-8 strings.
+      if possible.
+      
+      Sinze: 2.22
+  
+      Params:
+        attribute = a file attribute key
+        attrValue = a null
+            terminated array of UTF-8 strings.
   */
   void setAttributeStringv(string attribute, string[] attrValue)
   {
@@ -918,10 +954,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       an unsigned 32-bit integer.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = an unsigned 32-bit integer.
   */
   void setAttributeUint32(string attribute, uint attrValue)
   {
@@ -931,10 +968,11 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the attribute to contain the given attr_value,
-    if possible.
-    Params:
-      attribute =       a file attribute key.
-      attrValue =       an unsigned 64-bit integer.
+      if possible.
+  
+      Params:
+        attribute = a file attribute key.
+        attrValue = an unsigned 64-bit integer.
   */
   void setAttributeUint64(string attribute, ulong attrValue)
   {
@@ -944,9 +982,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the content type attribute for a given #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
-    Params:
-      contentType =       a content type. See [GContentType][gio-GContentType]
+      See `G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE`.
+  
+      Params:
+        contentType = a content type. See [GContentType][gio-GContentType]
   */
   void setContentType(string contentType)
   {
@@ -956,12 +995,13 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_TIME_CREATED` and
-    `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` attributes in the file info to the
-    given date/time value.
-    
-    `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` will be cleared.
-    Params:
-      creationTime =       a #GDateTime.
+      `G_FILE_ATTRIBUTE_TIME_CREATED_USEC` attributes in the file info to the
+      given date/time value.
+      
+      `G_FILE_ATTRIBUTE_TIME_CREATED_NSEC` will be cleared.
+  
+      Params:
+        creationTime = a #GDateTime.
   */
   void setCreationDateTime(glib.date_time.DateTime creationTime)
   {
@@ -970,9 +1010,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the display name for the current #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
-    Params:
-      displayName =       a string containing a display name.
+      See `G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME`.
+  
+      Params:
+        displayName = a string containing a display name.
   */
   void setDisplayName(string displayName)
   {
@@ -982,9 +1023,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the edit name for the current file.
-    See `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
-    Params:
-      editName =       a string containing an edit name.
+      See `G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME`.
+  
+      Params:
+        editName = a string containing an edit name.
   */
   void setEditName(string editName)
   {
@@ -994,9 +1036,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the file type in a #GFileInfo to type.
-    See `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
-    Params:
-      type =       a #GFileType.
+      See `G_FILE_ATTRIBUTE_STANDARD_TYPE`.
+  
+      Params:
+        type = a #GFileType.
   */
   void setFileType(gio.types.FileType type)
   {
@@ -1005,9 +1048,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the icon for a given #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_ICON`.
-    Params:
-      icon =       a #GIcon.
+      See `G_FILE_ATTRIBUTE_STANDARD_ICON`.
+  
+      Params:
+        icon = a #GIcon.
   */
   void setIcon(gio.icon.Icon icon)
   {
@@ -1016,9 +1060,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the "is_hidden" attribute in a #GFileInfo according to is_hidden.
-    See `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
-    Params:
-      isHidden =       a #gboolean.
+      See `G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN`.
+  
+      Params:
+        isHidden = a #gboolean.
   */
   void setIsHidden(bool isHidden)
   {
@@ -1027,9 +1072,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the "is_symlink" attribute in a #GFileInfo according to is_symlink.
-    See `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
-    Params:
-      isSymlink =       a #gboolean.
+      See `G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK`.
+  
+      Params:
+        isSymlink = a #gboolean.
   */
   void setIsSymlink(bool isSymlink)
   {
@@ -1038,12 +1084,13 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_TIME_MODIFIED` and
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
-    given date/time value.
-    
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
-    Params:
-      mtime =       a #GDateTime.
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
+      given date/time value.
+      
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
+  
+      Params:
+        mtime = a #GDateTime.
   */
   void setModificationDateTime(glib.date_time.DateTime mtime)
   {
@@ -1052,15 +1099,16 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_TIME_MODIFIED` and
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
-    given time value.
-    
-    `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
-    Params:
-      mtime =       a #GTimeVal.
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC` attributes in the file info to the
+      given time value.
+      
+      `G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC` will be cleared.
   
-    Deprecated:     Use [gio.file_info.FileInfo.setModificationDateTime] instead, as
-         #GTimeVal is deprecated due to the year 2038 problem.
+      Params:
+        mtime = a #GTimeVal.
+  
+      Deprecated: Use [gio.file_info.FileInfo.setModificationDateTime] instead, as
+           #GTimeVal is deprecated due to the year 2038 problem.
   */
   void setModificationTime(glib.time_val.TimeVal mtime)
   {
@@ -1069,9 +1117,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the name attribute for the current #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_NAME`.
-    Params:
-      name =       a string containing a name.
+      See `G_FILE_ATTRIBUTE_STANDARD_NAME`.
+  
+      Params:
+        name = a string containing a name.
   */
   void setName(string name)
   {
@@ -1081,9 +1130,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_STANDARD_SIZE` attribute in the file info
-    to the given size.
-    Params:
-      size =       a #goffset containing the file's size.
+      to the given size.
+  
+      Params:
+        size = a #goffset containing the file's size.
   */
   void setSize(long size)
   {
@@ -1092,9 +1142,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the sort order attribute in the file info structure. See
-    `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
-    Params:
-      sortOrder =       a sort order integer.
+      `G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER`.
+  
+      Params:
+        sortOrder = a sort order integer.
   */
   void setSortOrder(int sortOrder)
   {
@@ -1103,9 +1154,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the symbolic icon for a given #GFileInfo.
-    See `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
-    Params:
-      icon =       a #GIcon.
+      See `G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON`.
+  
+      Params:
+        icon = a #GIcon.
   */
   void setSymbolicIcon(gio.icon.Icon icon)
   {
@@ -1114,9 +1166,10 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Sets the `G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET` attribute in the file info
-    to the given symlink target.
-    Params:
-      symlinkTarget =       a static string containing a path to a symlink target.
+      to the given symlink target.
+  
+      Params:
+        symlinkTarget = a static string containing a path to a symlink target.
   */
   void setSymlinkTarget(string symlinkTarget)
   {
@@ -1126,7 +1179,7 @@ class FileInfo : gobject.object.ObjectG
 
   /**
       Unsets a mask set by [gio.file_info.FileInfo.setAttributeMask], if one
-    is set.
+      is set.
   */
   void unsetAttributeMask()
   {

@@ -1,3 +1,4 @@
+/// Module for [MenuItem] class
 module gtk.menu_item;
 
 import atk.implementor_iface;
@@ -20,68 +21,71 @@ import gtk.widget;
 
 /**
     The #GtkMenuItem widget and the derived widgets are the only valid
-  children for menus. Their function is to correctly handle highlighting,
-  alignment, events and submenus.
-  
-  As a GtkMenuItem derives from #GtkBin it can hold any valid child widget,
-  although only a few are really useful.
-  
-  By default, a GtkMenuItem sets a #GtkAccelLabel as its child.
-  GtkMenuItem has direct functions to set the label and its mnemonic.
-  For more advanced label settings, you can fetch the child widget from the GtkBin.
-  
-  An example for setting markup and accelerator on a MenuItem:
-  
-  ```c
-  GtkWidget *menu_item = gtk_menu_item_new_with_label ("Example Menu Item");
-  
-  GtkWidget *child = gtk_bin_get_child (GTK_BIN (menu_item));
-  gtk_label_set_markup (GTK_LABEL (child), "<i>new label</i> with <b>markup</b>");
-  gtk_accel_label_set_accel (GTK_ACCEL_LABEL (child), GDK_KEY_1, 0);
-  ```
-  
-  # GtkMenuItem as GtkBuildable
-  
-  The GtkMenuItem implementation of the #GtkBuildable interface supports
-  adding a submenu by specifying “submenu” as the “type” attribute of
-  a `<child>` element.
-  
-  An example of UI definition fragment with submenus:
-  
-  ```xml
-  <object class="GtkMenuItem">
-    <child type="submenu">
-      <object class="GtkMenu"/>
-    </child>
-  </object>
-  ```
-  
-  # CSS nodes
-  
-  ```plain
-  menuitem
-  ├── <child>
-  ╰── [arrow.right]
-  ```
-  
-  GtkMenuItem has a single CSS node with name menuitem. If the menuitem
-  has a submenu, it gets another CSS node with name arrow, which has
-  the .left or .right style class.
+    children for menus. Their function is to correctly handle highlighting,
+    alignment, events and submenus.
+    
+    As a GtkMenuItem derives from #GtkBin it can hold any valid child widget,
+    although only a few are really useful.
+    
+    By default, a GtkMenuItem sets a #GtkAccelLabel as its child.
+    GtkMenuItem has direct functions to set the label and its mnemonic.
+    For more advanced label settings, you can fetch the child widget from the GtkBin.
+    
+    An example for setting markup and accelerator on a MenuItem:
+    
+    ```c
+    GtkWidget *menu_item = gtk_menu_item_new_with_label ("Example Menu Item");
+    
+    GtkWidget *child = gtk_bin_get_child (GTK_BIN (menu_item));
+    gtk_label_set_markup (GTK_LABEL (child), "<i>new label</i> with <b>markup</b>");
+    gtk_accel_label_set_accel (GTK_ACCEL_LABEL (child), GDK_KEY_1, 0);
+    ```
+    
+    # GtkMenuItem as GtkBuildable
+    
+    The GtkMenuItem implementation of the #GtkBuildable interface supports
+    adding a submenu by specifying “submenu” as the “type” attribute of
+    a `<child>` element.
+    
+    An example of UI definition fragment with submenus:
+    
+    ```xml
+    <object class="GtkMenuItem">
+      <child type="submenu">
+        <object class="GtkMenu"/>
+      </child>
+    </object>
+    ```
+    
+    # CSS nodes
+    
+    ```plain
+    menuitem
+    ├── <child>
+    ╰── [arrow.right]
+    ```
+    
+    GtkMenuItem has a single CSS node with name menuitem. If the menuitem
+    has a submenu, it gets another CSS node with name arrow, which has
+    the .left or .right style class.
 */
 class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_item_get_type != &gidSymbolNotFound ? gtk_menu_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -97,7 +101,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Creates a new #GtkMenuItem.
-    Returns:     the newly created #GtkMenuItem
+      Returns: the newly created #GtkMenuItem
   */
   this()
   {
@@ -108,9 +112,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Creates a new #GtkMenuItem whose child is a #GtkLabel.
-    Params:
-      label =       the text for the label
-    Returns:     the newly created #GtkMenuItem
+  
+      Params:
+        label = the text for the label
+      Returns: the newly created #GtkMenuItem
   */
   static gtk.menu_item.MenuItem newWithLabel(string label)
   {
@@ -123,13 +128,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Creates a new #GtkMenuItem containing a label.
-    
-    The label will be created using [gtk.label.Label.newWithMnemonic],
-    so underscores in label indicate the mnemonic for the menu item.
-    Params:
-      label =       The text of the button, with an underscore in front of the
-            mnemonic character
-    Returns:     a new #GtkMenuItem
+      
+      The label will be created using [gtk.label.Label.newWithMnemonic],
+      so underscores in label indicate the mnemonic for the menu item.
+  
+      Params:
+        label = The text of the button, with an underscore in front of the
+              mnemonic character
+      Returns: a new #GtkMenuItem
   */
   static gtk.menu_item.MenuItem newWithMnemonic(string label)
   {
@@ -160,10 +166,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Retrieve the accelerator path that was previously set on menu_item.
-    
-    See [gtk.menu_item.MenuItem.setAccelPath] for details.
-    Returns:     the accelerator path corresponding to
-          this menu item’s functionality, or null if not set
+      
+      See [gtk.menu_item.MenuItem.setAccelPath] for details.
+      Returns: the accelerator path corresponding to
+            this menu item’s functionality, or null if not set
   */
   string getAccelPath()
   {
@@ -175,8 +181,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Sets text on the menu_item label
-    Returns:     The text in the menu_item label. This is the internal
-        string used by the label, and must not be modified.
+      Returns: The text in the menu_item label. This is the internal
+          string used by the label, and must not be modified.
   */
   string getLabel()
   {
@@ -188,10 +194,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Returns whether the menu_item reserves space for
-    the submenu indicator, regardless if it has a submenu
-    or not.
-    Returns:     true if menu_item always reserves space for the
-          submenu indicator
+      the submenu indicator, regardless if it has a submenu
+      or not.
+      Returns: true if menu_item always reserves space for the
+            submenu indicator
   */
   bool getReserveIndicator()
   {
@@ -202,11 +208,11 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Gets whether the menu item appears justified at the right
-    side of the menu bar.
-    Returns:     true if the menu item will appear at the
-        far right if added to a menu bar.
+      side of the menu bar.
+      Returns: true if the menu item will appear at the
+          far right if added to a menu bar.
   
-    Deprecated:     See [gtk.menu_item.MenuItem.setRightJustified]
+      Deprecated: See [gtk.menu_item.MenuItem.setRightJustified]
   */
   bool getRightJustified()
   {
@@ -217,8 +223,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Gets the submenu underneath this menu item, if any.
-    See [gtk.menu_item.MenuItem.setSubmenu].
-    Returns:     submenu for this menu item, or null if none
+      See [gtk.menu_item.MenuItem.setSubmenu].
+      Returns: submenu for this menu item, or null if none
   */
   gtk.widget.Widget getSubmenu()
   {
@@ -230,9 +236,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Checks if an underline in the text indicates the next character
-    should be used for the mnemonic accelerator key.
-    Returns:     true if an embedded underline in the label
-          indicates the mnemonic accelerator key.
+      should be used for the mnemonic accelerator key.
+      Returns: true if an embedded underline in the label
+            indicates the mnemonic accelerator key.
   */
   bool getUseUnderline()
   {
@@ -253,27 +259,28 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Set the accelerator path on menu_item, through which runtime
-    changes of the menu item’s accelerator caused by the user can be
-    identified and saved to persistent storage (see [gtk.accel_map.AccelMap.save]
-    on this). To set up a default accelerator for this menu item, call
-    [gtk.accel_map.AccelMap.addEntry] with the same accel_path. See also
-    [gtk.accel_map.AccelMap.addEntry] on the specifics of accelerator paths,
-    and [gtk.menu.Menu.setAccelPath] for a more convenient variant of
-    this function.
-    
-    This function is basically a convenience wrapper that handles
-    calling [gtk.widget.Widget.setAccelPath] with the appropriate accelerator
-    group for the menu item.
-    
-    Note that you do need to set an accelerator on the parent menu with
-    [gtk.menu.Menu.setAccelGroup] for this to work.
-    
-    Note that accel_path string will be stored in a #GQuark.
-    Therefore, if you pass a static string, you can save some memory
-    by interning it first with [glib.global.internStaticString].
-    Params:
-      accelPath =       accelerator path, corresponding to this menu
-            item’s functionality, or null to unset the current path.
+      changes of the menu item’s accelerator caused by the user can be
+      identified and saved to persistent storage (see [gtk.accel_map.AccelMap.save]
+      on this). To set up a default accelerator for this menu item, call
+      [gtk.accel_map.AccelMap.addEntry] with the same accel_path. See also
+      [gtk.accel_map.AccelMap.addEntry] on the specifics of accelerator paths,
+      and [gtk.menu.Menu.setAccelPath] for a more convenient variant of
+      this function.
+      
+      This function is basically a convenience wrapper that handles
+      calling [gtk.widget.Widget.setAccelPath] with the appropriate accelerator
+      group for the menu item.
+      
+      Note that you do need to set an accelerator on the parent menu with
+      [gtk.menu.Menu.setAccelGroup] for this to work.
+      
+      Note that accel_path string will be stored in a #GQuark.
+      Therefore, if you pass a static string, you can save some memory
+      by interning it first with [glib.global.internStaticString].
+  
+      Params:
+        accelPath = accelerator path, corresponding to this menu
+              item’s functionality, or null to unset the current path.
   */
   void setAccelPath(string accelPath = null)
   {
@@ -283,8 +290,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Sets text on the menu_item label
-    Params:
-      label =       the text you want to set
+  
+      Params:
+        label = the text you want to set
   */
   void setLabel(string label)
   {
@@ -294,13 +302,14 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Sets whether the menu_item should reserve space for
-    the submenu indicator, regardless if it actually has
-    a submenu or not.
-    
-    There should be little need for applications to call
-    this functions.
-    Params:
-      reserve =       the new value
+      the submenu indicator, regardless if it actually has
+      a submenu or not.
+      
+      There should be little need for applications to call
+      this functions.
+  
+      Params:
+        reserve = the new value
   */
   void setReserveIndicator(bool reserve)
   {
@@ -309,16 +318,17 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Sets whether the menu item appears justified at the right
-    side of a menu bar. This was traditionally done for “Help”
-    menu items, but is now considered a bad idea. (If the widget
-    layout is reversed for a right-to-left language like Hebrew
-    or Arabic, right-justified-menu-items appear at the left.)
-    Params:
-      rightJustified =       if true the menu item will appear at the
-          far right if added to a menu bar
+      side of a menu bar. This was traditionally done for “Help”
+      menu items, but is now considered a bad idea. (If the widget
+      layout is reversed for a right-to-left language like Hebrew
+      or Arabic, right-justified-menu-items appear at the left.)
   
-    Deprecated:     If you insist on using it, use
-        [gtk.widget.Widget.setHexpand] and [gtk.widget.Widget.setHalign].
+      Params:
+        rightJustified = if true the menu item will appear at the
+            far right if added to a menu bar
+  
+      Deprecated: If you insist on using it, use
+          [gtk.widget.Widget.setHexpand] and [gtk.widget.Widget.setHalign].
   */
   void setRightJustified(bool rightJustified)
   {
@@ -327,9 +337,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Sets or replaces the menu item’s submenu, or removes it when a null
-    submenu is passed.
-    Params:
-      submenu =       the submenu, or null
+      submenu is passed.
+  
+      Params:
+        submenu = the submenu, or null
   */
   void setSubmenu(gtk.menu.Menu submenu = null)
   {
@@ -338,9 +349,10 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       If true, an underline in the text indicates the next character
-    should be used for the mnemonic accelerator key.
-    Params:
-      setting =       true if underlines in the text indicate mnemonics
+      should be used for the mnemonic accelerator key.
+  
+      Params:
+        setting = true if underlines in the text indicate mnemonics
   */
   void setUseUnderline(bool setting)
   {
@@ -349,8 +361,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Emits the #GtkMenuItem::toggle-size-allocate signal on the given item.
-    Params:
-      allocation =       the allocation to use as signal data.
+  
+      Params:
+        allocation = the allocation to use as signal data.
   */
   void toggleSizeAllocate(int allocation)
   {
@@ -359,8 +372,9 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 
   /**
       Emits the #GtkMenuItem::toggle-size-request signal on the given item.
-    Params:
-      requisition =       the requisition to use as signal data.
+  
+      Params:
+        requisition = the requisition to use as signal data.
   */
   void toggleSizeRequest(ref int requisition)
   {
@@ -368,34 +382,36 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
+      Connect to `Activate` signal.
+  
       Emitted when the item is activated.
   
-    ## Parameters
-    $(LIST
-      * $(B menuItem) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.menu_item.MenuItem menuItem))
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      _dClosure.dlg(menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -403,150 +419,200 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /**
-      Emitted when the item is activated, but also if the menu item has a
-    submenu. For normal applications, the relevant signal is
-    #GtkMenuItem::activate.
+      Connect to `ActivateItem` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B menuItem) the instance the signal is connected to
-    )
-  */
-  alias ActivateItemCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias ActivateItemCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
-
-  /**
-    Connect to ActivateItem signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the item is activated, but also if the menu item has a
+      submenu. For normal applications, the relevant signal is
+      #GtkMenuItem::activate.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.menu_item.MenuItem menuItem))
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivateItem(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateItemCallbackDlg) || is(T : ActivateItemCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      _dClosure.dlg(menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-item", closure, after);
   }
 
-  /** */
-  alias DeselectCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias DeselectCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
-
   /**
-    Connect to Deselect signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Deselect` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.menu_item.MenuItem menuItem))
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDeselect(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DeselectCallbackDlg) || is(T : DeselectCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      _dClosure.dlg(menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("deselect", closure, after);
   }
 
-  /** */
-  alias SelectCallbackDlg = void delegate(gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias SelectCallbackFunc = void function(gtk.menu_item.MenuItem menuItem);
-
   /**
-    Connect to Select signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `Select` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.menu_item.MenuItem menuItem))
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSelect(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SelectCallbackDlg) || is(T : SelectCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      _dClosure.dlg(menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("select", closure, after);
   }
 
-  /** */
-  alias ToggleSizeAllocateCallbackDlg = void delegate(int object, gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias ToggleSizeAllocateCallbackFunc = void function(int object, gtk.menu_item.MenuItem menuItem);
-
   /**
-    Connect to ToggleSizeAllocate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ToggleSizeAllocate` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int object, gtk.menu_item.MenuItem menuItem))
+  
+          `object`  (optional)
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleSizeAllocate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleSizeAllocateCallbackDlg) || is(T : ToggleSizeAllocateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      auto object = getVal!(int)(&_paramVals[1]);
-      _dClosure.dlg(object, menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-size-allocate", closure, after);
   }
 
-  /** */
-  alias ToggleSizeRequestCallbackDlg = void delegate(void* object, gtk.menu_item.MenuItem menuItem);
-
-  /** ditto */
-  alias ToggleSizeRequestCallbackFunc = void function(void* object, gtk.menu_item.MenuItem menuItem);
-
   /**
-    Connect to ToggleSizeRequest signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ToggleSizeRequest` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(void* object, gtk.menu_item.MenuItem menuItem))
+  
+          `object`  (optional)
+  
+          `menuItem` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleSizeRequest(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleSizeRequestCallbackDlg) || is(T : ToggleSizeRequestCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.menu_item.MenuItem)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto menuItem = getVal!(gtk.menu_item.MenuItem)(_paramVals);
-      auto object = getVal!(void*)(&_paramVals[1]);
-      _dClosure.dlg(object, menuItem);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

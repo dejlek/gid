@@ -1,3 +1,4 @@
+/// Module for [SettingsValue] class
 module gtk.settings_value;
 
 import gid.gid;
@@ -11,6 +12,7 @@ class SettingsValue
 {
   GtkSettingsValue cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,6 +24,7 @@ class SettingsValue
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

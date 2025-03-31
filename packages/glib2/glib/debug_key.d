@@ -1,3 +1,4 @@
+/// Module for [DebugKey] class
 module glib.debug_key;
 
 import gid.gid;
@@ -7,12 +8,13 @@ import glib.types;
 
 /**
     Associates a string with a bit flag.
-  Used in [glib.global.parseDebugString].
+    Used in [glib.global.parseDebugString].
 */
 class DebugKey
 {
   GDebugKey cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class DebugKey
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

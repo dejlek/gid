@@ -1,3 +1,4 @@
+/// Module for [GridLayoutChild] class
 module gtk.grid_layout_child;
 
 import gid.gid;
@@ -12,17 +13,20 @@ import gtk.types;
 class GridLayoutChild : gtk.layout_child.LayoutChild
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_child_get_type != &gidSymbolNotFound ? gtk_grid_layout_child_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,7 +39,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves the column number to which child attaches its left side.
-    Returns:     the column number
+      Returns: the column number
   */
   int getColumn()
   {
@@ -46,7 +50,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves the number of columns that child spans to.
-    Returns:     the number of columns
+      Returns: the number of columns
   */
   int getColumnSpan()
   {
@@ -57,7 +61,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves the row number to which child attaches its top side.
-    Returns:     the row number
+      Returns: the row number
   */
   int getRow()
   {
@@ -68,7 +72,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Retrieves the number of rows that child spans to.
-    Returns:     the number of row
+      Returns: the number of row
   */
   int getRowSpan()
   {
@@ -79,8 +83,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets the column number to attach the left side of child.
-    Params:
-      column =       the attach point for child
+  
+      Params:
+        column = the attach point for child
   */
   void setColumn(int column)
   {
@@ -89,8 +94,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets the number of columns child spans to.
-    Params:
-      span =       the span of child
+  
+      Params:
+        span = the span of child
   */
   void setColumnSpan(int span)
   {
@@ -99,8 +105,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets the row to place child in.
-    Params:
-      row =       the row for child
+  
+      Params:
+        row = the row for child
   */
   void setRow(int row)
   {
@@ -109,8 +116,9 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
 
   /**
       Sets the number of rows child spans to.
-    Params:
-      span =       the span of child
+  
+      Params:
+        span = the span of child
   */
   void setRowSpan(int span)
   {

@@ -1,3 +1,4 @@
+/// Module for [Point3D] class
 module graphene.point3_d;
 
 import gid.gid;
@@ -14,27 +15,32 @@ import graphene.vec3;
 class Point3D : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_point3d_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_point3d_get_type != &gidSymbolNotFound ? graphene_point3d_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -77,9 +83,9 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Allocates a #graphene_point3d_t structure.
-    Returns:     the newly allocated structure.
-        Use [graphene.point3_d.Point3D.free] to free the resources
-        allocated by this function.
+      Returns: the newly allocated structure.
+          Use [graphene.point3_d.Point3D.free] to free the resources
+          allocated by this function.
   */
   static graphene.point3_d.Point3D alloc()
   {
@@ -91,10 +97,11 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Computes the cross product of the two given #graphene_point3d_t.
-    Params:
-      b =       a #graphene_point3d_t
-      res =       return location for the cross
-          product
+  
+      Params:
+        b = a #graphene_point3d_t
+        res = return location for the cross
+            product
   */
   void cross(graphene.point3_d.Point3D b, out graphene.point3_d.Point3D res)
   {
@@ -105,11 +112,12 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Computes the distance between the two given #graphene_point3d_t.
-    Params:
-      b =       a #graphene_point3d_t
-      delta =       return location for the distance
-          components on the X, Y, and Z axis
-    Returns:     the distance between two points
+  
+      Params:
+        b = a #graphene_point3d_t
+        delta = return location for the distance
+            components on the X, Y, and Z axis
+      Returns: the distance between two points
   */
   float distance(graphene.point3_d.Point3D b, out graphene.vec3.Vec3 delta)
   {
@@ -122,9 +130,10 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Computes the dot product of the two given #graphene_point3d_t.
-    Params:
-      b =       a #graphene_point3d_t
-    Returns:     the value of the dot product
+  
+      Params:
+        b = a #graphene_point3d_t
+      Returns: the value of the dot product
   */
   float dot(graphene.point3_d.Point3D b)
   {
@@ -135,9 +144,10 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Checks whether two given points are equal.
-    Params:
-      b =       a #graphene_point3d_t
-    Returns:     `true` if the points are equal
+  
+      Params:
+        b = a #graphene_point3d_t
+      Returns: `true` if the points are equal
   */
   bool equal(graphene.point3_d.Point3D b)
   {
@@ -148,11 +158,12 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_point3d_t with the given coordinates.
-    Params:
-      x =       the X coordinate of the point
-      y =       the Y coordinate of the point
-      z =       the Z coordinate of the point
-    Returns:     the initialized #graphene_point3d_t
+  
+      Params:
+        x = the X coordinate of the point
+        y = the Y coordinate of the point
+        z = the Z coordinate of the point
+      Returns: the initialized #graphene_point3d_t
   */
   graphene.point3_d.Point3D init_(float x, float y, float z)
   {
@@ -164,10 +175,11 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_point3d_t using the coordinates of
-    another #graphene_point3d_t.
-    Params:
-      src =       a #graphene_point3d_t
-    Returns:     the initialized point
+      another #graphene_point3d_t.
+  
+      Params:
+        src = a #graphene_point3d_t
+      Returns: the initialized point
   */
   graphene.point3_d.Point3D initFromPoint(graphene.point3_d.Point3D src)
   {
@@ -179,10 +191,11 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_point3d_t using the components
-    of a #graphene_vec3_t.
-    Params:
-      v =       a #graphene_vec3_t
-    Returns:     the initialized #graphene_point3d_t
+      of a #graphene_vec3_t.
+  
+      Params:
+        v = a #graphene_vec3_t
+      Returns: the initialized #graphene_point3d_t
   */
   graphene.point3_d.Point3D initFromVec3(graphene.vec3.Vec3 v)
   {
@@ -193,13 +206,14 @@ class Point3D : gobject.boxed.Boxed
   }
 
   /**
-      Linearly interpolates each component of a and b using the
-    provided factor, and places the result in res.
-    Params:
-      b =       a #graphene_point3d_t
-      factor =       the interpolation factor
-      res =       the return location for the
-          interpolated #graphene_point3d_t
+      Linearly interpolates each component of `a` and `b` using the
+      provided factor, and places the result in res.
+  
+      Params:
+        b = a #graphene_point3d_t
+        factor = the interpolation factor
+        res = the return location for the
+            interpolated #graphene_point3d_t
   */
   void interpolate(graphene.point3_d.Point3D b, double factor, out graphene.point3_d.Point3D res)
   {
@@ -210,8 +224,8 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Computes the length of the vector represented by the
-    coordinates of the given #graphene_point3d_t.
-    Returns:     the length of the vector represented by the point
+      coordinates of the given #graphene_point3d_t.
+      Returns: the length of the vector represented by the point
   */
   float length()
   {
@@ -222,11 +236,12 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Checks whether the two points are near each other, within
-    an epsilon factor.
-    Params:
-      b =       a #graphene_point3d_t
-      epsilon =       fuzzyness factor
-    Returns:     `true` if the points are near each other
+      an epsilon factor.
+  
+      Params:
+        b = a #graphene_point3d_t
+        epsilon = fuzzyness factor
+      Returns: `true` if the points are near each other
   */
   bool near(graphene.point3_d.Point3D b, float epsilon)
   {
@@ -237,10 +252,11 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Computes the normalization of the vector represented by the
-    coordinates of the given #graphene_point3d_t.
-    Params:
-      res =       return location for the normalized
-          #graphene_point3d_t
+      coordinates of the given #graphene_point3d_t.
+  
+      Params:
+        res = return location for the normalized
+            #graphene_point3d_t
   */
   void normalize(out graphene.point3_d.Point3D res)
   {
@@ -251,18 +267,19 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Normalizes the coordinates of a #graphene_point3d_t using the
-    given viewport and clipping planes.
-    
-    The coordinates of the resulting #graphene_point3d_t will be
-    in the [ -1, 1 ] range.
-    Params:
-      viewport =       a #graphene_rect_t representing a viewport
-      zNear =       the coordinate of the near clipping plane, or 0 for
-          the default near clipping plane
-      zFar =       the coordinate of the far clipping plane, or 1 for the
-          default far clipping plane
-      res =       the return location for the
-          normalized #graphene_point3d_t
+      given viewport and clipping planes.
+      
+      The coordinates of the resulting #graphene_point3d_t will be
+      in the [ -1, 1 ] range.
+  
+      Params:
+        viewport = a #graphene_rect_t representing a viewport
+        zNear = the coordinate of the near clipping plane, or 0 for
+            the default near clipping plane
+        zFar = the coordinate of the far clipping plane, or 1 for the
+            default far clipping plane
+        res = the return location for the
+            normalized #graphene_point3d_t
   */
   void normalizeViewport(graphene.rect.Rect viewport, float zNear, float zFar, out graphene.point3_d.Point3D res)
   {
@@ -273,10 +290,11 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Scales the coordinates of the given #graphene_point3d_t by
-    the given factor.
-    Params:
-      factor =       the scaling factor
-      res =       return location for the scaled point
+      the given factor.
+  
+      Params:
+        factor = the scaling factor
+        res = return location for the scaled point
   */
   void scale(float factor, out graphene.point3_d.Point3D res)
   {
@@ -287,9 +305,10 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Stores the coordinates of a #graphene_point3d_t into a
-    #graphene_vec3_t.
-    Params:
-      v =       return location for a #graphene_vec3_t
+      #graphene_vec3_t.
+  
+      Params:
+        v = return location for a #graphene_vec3_t
   */
   void toVec3(out graphene.vec3.Vec3 v)
   {
@@ -300,7 +319,7 @@ class Point3D : gobject.boxed.Boxed
 
   /**
       Retrieves a constant point with all three coordinates set to 0.
-    Returns:     a zero point
+      Returns: a zero point
   */
   static graphene.point3_d.Point3D zero()
   {

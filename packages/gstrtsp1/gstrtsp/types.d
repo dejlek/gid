@@ -1,3 +1,4 @@
+/// D types for gstrtsp1 library
 module gstrtsp.types;
 
 import gid.gid;

@@ -1,3 +1,4 @@
+/// Module for [Backend] interface mixin
 module secret.backend_mixin;
 
 public import secret.backend_iface_proxy;
@@ -13,7 +14,7 @@ public import secret.types;
 
 /**
     #SecretBackend represents a backend implementation of password
-  storage.
+    storage.
 */
 template BackendT()
 {

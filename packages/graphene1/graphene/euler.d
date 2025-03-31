@@ -1,3 +1,4 @@
+/// Module for [Euler] class
 module graphene.euler;
 
 import gid.gid;
@@ -11,34 +12,39 @@ import graphene.vec3;
 
 /**
     Describe a rotation using Euler angles.
-  
-  The contents of the #graphene_euler_t structure are private
-  and should never be accessed directly.
+    
+    The contents of the #graphene_euler_t structure are private
+    and should never be accessed directly.
 */
 class Euler : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(graphene_euler_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_euler_get_type != &gidSymbolNotFound ? graphene_euler_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -51,9 +57,9 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Allocates a new #graphene_euler_t.
-    
-    The contents of the returned structure are undefined.
-    Returns:     the newly allocated #graphene_euler_t
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_euler_t
   */
   static graphene.euler.Euler alloc()
   {
@@ -65,9 +71,10 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Checks if two #graphene_euler_t are equal.
-    Params:
-      b =       a #graphene_euler_t
-    Returns:     `true` if the two #graphene_euler_t are equal
+  
+      Params:
+        b = a #graphene_euler_t
+      Returns: `true` if the two #graphene_euler_t are equal
   */
   bool equal(graphene.euler.Euler b)
   {
@@ -78,10 +85,10 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the first component of the Euler angle vector,
-    depending on the order of rotation.
-    
-    See also: [graphene.euler.Euler.getX]
-    Returns:     the first component of the Euler angle vector, in radians
+      depending on the order of rotation.
+      
+      See also: [graphene.euler.Euler.getX]
+      Returns: the first component of the Euler angle vector, in radians
   */
   float getAlpha()
   {
@@ -92,10 +99,10 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the second component of the Euler angle vector,
-    depending on the order of rotation.
-    
-    See also: [graphene.euler.Euler.getY]
-    Returns:     the second component of the Euler angle vector, in radians
+      depending on the order of rotation.
+      
+      See also: [graphene.euler.Euler.getY]
+      Returns: the second component of the Euler angle vector, in radians
   */
   float getBeta()
   {
@@ -106,10 +113,10 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the third component of the Euler angle vector,
-    depending on the order of rotation.
-    
-    See also: [graphene.euler.Euler.getZ]
-    Returns:     the third component of the Euler angle vector, in radians
+      depending on the order of rotation.
+      
+      See also: [graphene.euler.Euler.getZ]
+      Returns: the third component of the Euler angle vector, in radians
   */
   float getGamma()
   {
@@ -120,13 +127,13 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the order used to apply the rotations described in the
-    #graphene_euler_t structure, when converting to and from other
-    structures, like #graphene_quaternion_t and #graphene_matrix_t.
-    
-    This function does not return the `GRAPHENE_EULER_ORDER_DEFAULT`
-    enumeration value; it will return the effective order of rotation
-    instead.
-    Returns:     the order used to apply the rotations
+      #graphene_euler_t structure, when converting to and from other
+      structures, like #graphene_quaternion_t and #graphene_matrix_t.
+      
+      This function does not return the `GRAPHENE_EULER_ORDER_DEFAULT`
+      enumeration value; it will return the effective order of rotation
+      instead.
+      Returns: the order used to apply the rotations
   */
   graphene.types.EulerOrder getOrder()
   {
@@ -138,7 +145,7 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the rotation angle on the X axis, in degrees.
-    Returns:     the rotation angle
+      Returns: the rotation angle
   */
   float getX()
   {
@@ -149,7 +156,7 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the rotation angle on the Y axis, in degrees.
-    Returns:     the rotation angle
+      Returns: the rotation angle
   */
   float getY()
   {
@@ -160,7 +167,7 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the rotation angle on the Z axis, in degrees.
-    Returns:     the rotation angle
+      Returns: the rotation angle
   */
   float getZ()
   {
@@ -171,13 +178,14 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the given angles.
-    
-    The order of the rotations is `GRAPHENE_EULER_ORDER_DEFAULT`.
-    Params:
-      x =       rotation angle on the X axis, in degrees
-      y =       rotation angle on the Y axis, in degrees
-      z =       rotation angle on the Z axis, in degrees
-    Returns:     the initialized #graphene_euler_t
+      
+      The order of the rotations is `GRAPHENE_EULER_ORDER_DEFAULT`.
+  
+      Params:
+        x = rotation angle on the X axis, in degrees
+        y = rotation angle on the Y axis, in degrees
+        z = rotation angle on the Z axis, in degrees
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler init_(float x, float y, float z)
   {
@@ -189,13 +197,14 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the angles and order of
-    another #graphene_euler_t.
-    
-    If the #graphene_euler_t src is null, this function is equivalent
-    to calling [graphene.euler.Euler.init_] with all angles set to 0.
-    Params:
-      src =       a #graphene_euler_t
-    Returns:     the initialized #graphene_euler_t
+      another #graphene_euler_t.
+      
+      If the #graphene_euler_t src is null, this function is equivalent
+      to calling [graphene.euler.Euler.init_] with all angles set to 0.
+  
+      Params:
+        src = a #graphene_euler_t
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initFromEuler(graphene.euler.Euler src = null)
   {
@@ -207,13 +216,14 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the given rotation matrix.
-    
-    If the #graphene_matrix_t m is null, the #graphene_euler_t will
-    be initialized with all angles set to 0.
-    Params:
-      m =       a rotation matrix
-      order =       the order used to apply the rotations
-    Returns:     the initialized #graphene_euler_t
+      
+      If the #graphene_matrix_t `m` is null, the #graphene_euler_t will
+      be initialized with all angles set to 0.
+  
+      Params:
+        m = a rotation matrix
+        order = the order used to apply the rotations
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initFromMatrix(graphene.matrix.Matrix m, graphene.types.EulerOrder order)
   {
@@ -225,13 +235,14 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the given normalized quaternion.
-    
-    If the #graphene_quaternion_t q is null, the #graphene_euler_t will
-    be initialized with all angles set to 0.
-    Params:
-      q =       a normalized #graphene_quaternion_t
-      order =       the order used to apply the rotations
-    Returns:     the initialized #graphene_euler_t
+      
+      If the #graphene_quaternion_t `q` is null, the #graphene_euler_t will
+      be initialized with all angles set to 0.
+  
+      Params:
+        q = a normalized #graphene_quaternion_t
+        order = the order used to apply the rotations
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initFromQuaternion(graphene.quaternion.Quaternion q, graphene.types.EulerOrder order)
   {
@@ -243,13 +254,14 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the given angles
-    and order of rotation.
-    Params:
-      x =       rotation angle on the X axis, in radians
-      y =       rotation angle on the Y axis, in radians
-      z =       rotation angle on the Z axis, in radians
-      order =       order of rotations
-    Returns:     the initialized #graphene_euler_t
+      and order of rotation.
+  
+      Params:
+        x = rotation angle on the X axis, in radians
+        y = rotation angle on the Y axis, in radians
+        z = rotation angle on the Z axis, in radians
+        order = order of rotations
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initFromRadians(float x, float y, float z, graphene.types.EulerOrder order)
   {
@@ -261,15 +273,16 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t using the angles contained in a
-    #graphene_vec3_t.
-    
-    If the #graphene_vec3_t v is null, the #graphene_euler_t will be
-    initialized with all angles set to 0.
-    Params:
-      v =       a #graphene_vec3_t containing the rotation
-          angles in degrees
-      order =       the order used to apply the rotations
-    Returns:     the initialized #graphene_euler_t
+      #graphene_vec3_t.
+      
+      If the #graphene_vec3_t `v` is null, the #graphene_euler_t will be
+      initialized with all angles set to 0.
+  
+      Params:
+        v = a #graphene_vec3_t containing the rotation
+            angles in degrees
+        order = the order used to apply the rotations
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initFromVec3(graphene.vec3.Vec3 v, graphene.types.EulerOrder order)
   {
@@ -281,12 +294,13 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Initializes a #graphene_euler_t with the given angles and order.
-    Params:
-      x =       rotation angle on the X axis, in degrees
-      y =       rotation angle on the Y axis, in degrees
-      z =       rotation angle on the Z axis, in degrees
-      order =       the order used to apply the rotations
-    Returns:     the initialized #graphene_euler_t
+  
+      Params:
+        x = rotation angle on the X axis, in degrees
+        y = rotation angle on the Y axis, in degrees
+        z = rotation angle on the Z axis, in degrees
+        order = the order used to apply the rotations
+      Returns: the initialized #graphene_euler_t
   */
   graphene.euler.Euler initWithOrder(float x, float y, float z, graphene.types.EulerOrder order)
   {
@@ -298,14 +312,15 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Reorders a #graphene_euler_t using order.
-    
-    This function is equivalent to creating a #graphene_quaternion_t from the
-    given #graphene_euler_t, and then converting the quaternion into another
-    #graphene_euler_t.
-    Params:
-      order =       the new order
-      res =       return location for the reordered
-          #graphene_euler_t
+      
+      This function is equivalent to creating a #graphene_quaternion_t from the
+      given #graphene_euler_t, and then converting the quaternion into another
+      #graphene_euler_t.
+  
+      Params:
+        order = the new order
+        res = return location for the reordered
+            #graphene_euler_t
   */
   void reorder(graphene.types.EulerOrder order, out graphene.euler.Euler res)
   {
@@ -316,25 +331,26 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Converts a #graphene_euler_t into a transformation matrix expressing
-    the extrinsic composition of rotations described by the Euler angles.
-    
-    The rotations are applied over the reference frame axes in the order
-    associated with the #graphene_euler_t; for instance, if the order
-    used to initialize e is `GRAPHENE_EULER_ORDER_XYZ`:
-    
-     $(LIST
-        * the first rotation moves the body around the X axis with
-          an angle φ
-        * the second rotation moves the body around the Y axis with
-          an angle of ϑ
-        * the third rotation moves the body around the Z axis with
-          an angle of ψ
-     )
-       
-    The rotation sign convention is right-handed, to preserve compatibility
-    between Euler-based, quaternion-based, and angle-axis-based rotations.
-    Params:
-      res =       return location for a #graphene_matrix_t
+      the extrinsic composition of rotations described by the Euler angles.
+      
+      The rotations are applied over the reference frame axes in the order
+      associated with the #graphene_euler_t; for instance, if the order
+      used to initialize `e` is `GRAPHENE_EULER_ORDER_XYZ`:
+      
+       $(LIST
+          * the first rotation moves the body around the X axis with
+            an angle φ
+          * the second rotation moves the body around the Y axis with
+            an angle of ϑ
+          * the third rotation moves the body around the Z axis with
+            an angle of ψ
+       )
+         
+      The rotation sign convention is right-handed, to preserve compatibility
+      between Euler-based, quaternion-based, and angle-axis-based rotations.
+  
+      Params:
+        res = return location for a #graphene_matrix_t
   */
   void toMatrix(out graphene.matrix.Matrix res)
   {
@@ -345,8 +361,9 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Converts a #graphene_euler_t into a #graphene_quaternion_t.
-    Params:
-      res =       return location for a #graphene_quaternion_t
+  
+      Params:
+        res = return location for a #graphene_quaternion_t
   */
   void toQuaternion(out graphene.quaternion.Quaternion res)
   {
@@ -357,9 +374,10 @@ class Euler : gobject.boxed.Boxed
 
   /**
       Retrieves the angles of a #graphene_euler_t and initializes a
-    #graphene_vec3_t with them.
-    Params:
-      res =       return location for a #graphene_vec3_t
+      #graphene_vec3_t with them.
+  
+      Params:
+        res = return location for a #graphene_vec3_t
   */
   void toVec3(out graphene.vec3.Vec3 res)
   {

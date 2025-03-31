@@ -1,3 +1,4 @@
+/// Module for [CairoContext] class
 module gdk.cairo_context;
 
 import cairo.context;
@@ -9,26 +10,29 @@ import gid.gid;
 
 /**
     [gdk.cairo_context.CairoContext] is an object representing the platform-specific
-  draw context.
-  
-  [gdk.cairo_context.CairoContext]s are created for a surface using
-  [gdk.surface.Surface.createCairoContext], and the context
-  can then be used to draw on that surface.
+    draw context.
+    
+    [gdk.cairo_context.CairoContext]s are created for a surface using
+    [gdk.surface.Surface.createCairoContext], and the context
+    can then be used to draw on that surface.
 */
 class CairoContext : gdk.draw_context.DrawContext
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cairo_context_get_type != &gidSymbolNotFound ? gdk_cairo_context_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,15 +45,15 @@ class CairoContext : gdk.draw_context.DrawContext
 
   /**
       Retrieves a Cairo context to be used to draw on the [gdk.surface.Surface]
-    of context.
-    
-    A call to [gdk.draw_context.DrawContext.beginFrame] with this
-    context must have been done or this function will return null.
-    
-    The returned context is guaranteed to be valid until
-    [gdk.draw_context.DrawContext.endFrame] is called.
-    Returns:     a Cairo context
-        to draw on `GdkSurface
+      of context.
+      
+      A call to [gdk.draw_context.DrawContext.beginFrame] with this
+      context must have been done or this function will return null.
+      
+      The returned context is guaranteed to be valid until
+      [gdk.draw_context.DrawContext.endFrame] is called.
+      Returns: a Cairo context
+          to draw on `GdkSurface
   */
   cairo.context.Context cairoCreate()
   {

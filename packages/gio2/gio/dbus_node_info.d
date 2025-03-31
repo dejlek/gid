@@ -1,3 +1,4 @@
+/// Module for [DBusNodeInfo] class
 module gio.dbus_node_info;
 
 import gid.gid;
@@ -15,27 +16,32 @@ import gobject.boxed;
 class DBusNodeInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GDBusNodeInfo.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_node_info_get_type != &gidSymbolNotFound ? g_dbus_node_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -69,17 +75,19 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   /**
       Parses xml_data and returns a #GDBusNodeInfo representing the data.
-    
-    The introspection XML must contain exactly one top-level
-    <node> element.
-    
-    Note that this routine is using a
-    [GMarkup][glib-Simple-XML-Subset-Parser.description]-based
-    parser that only accepts a subset of valid XML documents.
-    Params:
-      xmlData =       Valid D-Bus introspection XML.
-    Returns:     A #GDBusNodeInfo structure or null if error is set. Free
-      with [gio.dbus_node_info.DBusNodeInfo.unref].
+      
+      The introspection XML must contain exactly one top-level
+      <node> element.
+      
+      Note that this routine is using a
+      [GMarkup][glib-Simple-XML-Subset-Parser.description]-based
+      parser that only accepts a subset of valid XML documents.
+  
+      Params:
+        xmlData = Valid D-Bus introspection XML.
+      Returns: A #GDBusNodeInfo structure or null if error is set. Free
+        with [gio.dbus_node_info.DBusNodeInfo.unref].
+      Throws: [ErrorG]
   */
   static gio.dbus_node_info.DBusNodeInfo newForXml(string xmlData)
   {
@@ -95,12 +103,13 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   /**
       Appends an XML representation of info (and its children) to string_builder.
-    
-    This function is typically used for generating introspection XML documents at run-time for
-    handling the `org.freedesktop.DBus.Introspectable.Introspect`  method.
-    Params:
-      indent =       Indentation level.
-      stringBuilder =       A #GString to to append XML data to.
+      
+      This function is typically used for generating introspection XML documents at run-time for
+      handling the `org.freedesktop.DBus.Introspectable.Introspect`  method.
+  
+      Params:
+        indent = Indentation level.
+        stringBuilder = A #GString to to append XML data to.
   */
   void generateXml(uint indent, glib.string_.String stringBuilder)
   {
@@ -109,11 +118,12 @@ class DBusNodeInfo : gobject.boxed.Boxed
 
   /**
       Looks up information about an interface.
-    
-    The cost of this function is O(n) in number of interfaces.
-    Params:
-      name =       A D-Bus interface name.
-    Returns:     A #GDBusInterfaceInfo or null if not found. Do not free, it is owned by info.
+      
+      The cost of this function is O(n) in number of interfaces.
+  
+      Params:
+        name = A D-Bus interface name.
+      Returns: A #GDBusInterfaceInfo or null if not found. Do not free, it is owned by info.
   */
   gio.dbus_interface_info.DBusInterfaceInfo lookupInterface(string name)
   {

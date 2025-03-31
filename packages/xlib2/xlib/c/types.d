@@ -1,3 +1,4 @@
+/// C types for xlib2 library
 module xlib.c.types;
 
 public import gid.basictypes;

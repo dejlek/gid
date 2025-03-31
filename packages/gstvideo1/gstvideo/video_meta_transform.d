@@ -1,3 +1,4 @@
+/// Module for [VideoMetaTransform] class
 module gstvideo.video_meta_transform;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import gstvideo.video_info;
 
 /**
     Extra data passed to a video transform #GstMetaTransformFunction such as:
-  "gst-video-scale".
+    "gst-video-scale".
 */
 class VideoMetaTransform
 {
   GstVideoMetaTransform cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class VideoMetaTransform
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -55,7 +58,7 @@ class VideoMetaTransform
 
   /**
       Get the #GQuark for the "gst-video-scale" metadata transform operation.
-    Returns:     a #GQuark
+      Returns: a #GQuark
   */
   static glib.types.Quark scaleGetQuark()
   {

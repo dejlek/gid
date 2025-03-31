@@ -1,3 +1,4 @@
+/// D types for gstgl1 library
 module gstgl.types;
 
 import gid.gid;
@@ -74,24 +75,20 @@ alias GLFuncs = GstGLFuncs*;
 
 /**
     Copies the parameters from src into dest.  The subclass must compose copy
-  functions from the superclass.
+    functions from the superclass.
 
-  ## Parameters
-  $(LIST
-    * $(B src)       the source #GstGLAllocationParams to copy from
-    * $(B dest)       the source #GstGLAllocationParams to copy
-  )
+    Params:
+      src = the source #GstGLAllocationParams to copy from
+      dest = the source #GstGLAllocationParams to copy
 */
 alias GLAllocationParamsCopyFunc = void delegate(gstgl.glallocation_params.GLAllocationParams src, gstgl.glallocation_params.GLAllocationParams dest);
 
 /**
     Free any dynamically allocated data.  The subclass must call the superclass'
-  free.
+    free.
 
-  ## Parameters
-  $(LIST
-    * $(B params)       a #GstGLAllocationParams
-  )
+    Params:
+      params = a #GstGLAllocationParams
 */
 alias GLAllocationParamsFreeFunc = void delegate(void* params);
 
@@ -101,81 +98,68 @@ alias GLAsyncDebugLogGetMessage = string delegate();
 /**
     Note: not called with a GL context current
 
-  ## Parameters
-  $(LIST
-    * $(B allocator)       a #GstGLBaseMemoryAllocator
-    * $(B params)       the #GstGLAllocationParams to allocate the memory with
-  )
-  Returns:     a newly allocated #GstGLBaseMemory from allocator and params
+    Params:
+      allocator = a #GstGLBaseMemoryAllocator
+      params = the #GstGLAllocationParams to allocate the memory with
+    Returns: a newly allocated #GstGLBaseMemory from allocator and params
 */
 alias GLBaseMemoryAllocatorAllocFunction = gstgl.glbase_memory.GLBaseMemory delegate(gstgl.glbase_memory_allocator.GLBaseMemoryAllocator allocator, gstgl.glallocation_params.GLAllocationParams params);
 
 /**
     Also see [gst.memory.Memory.copy];
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstGLBaseMemory
-    * $(B offset)       the offset to copy from
-    * $(B size)       the number of bytes to copy
-  )
-  Returns:     the newly copied #GstGLMemory or null
+    Params:
+      mem = a #GstGLBaseMemory
+      offset = the offset to copy from
+      size = the number of bytes to copy
+    Returns: the newly copied #GstGLMemory or null
 */
 alias GLBaseMemoryAllocatorCopyFunction = gstgl.glbase_memory.GLBaseMemory delegate(gstgl.glbase_memory.GLBaseMemory mem, ptrdiff_t offset, ptrdiff_t size);
 
 /**
     As this virtual method is called with an OpenGL context current, use this
-  function to allocate and OpenGL resources needed for your application
+    function to allocate and OpenGL resources needed for your application
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstGLBaseMemory
-  )
-  Returns:     whether the creation succeeded
+    Params:
+      mem = a #GstGLBaseMemory
+    Returns: whether the creation succeeded
+    Throws: [ErrorG]
 */
 alias GLBaseMemoryAllocatorCreateFunction = bool delegate(gstgl.glbase_memory.GLBaseMemory mem, GError **_err);
 
 /**
     Destroy any resources allocated throughout the lifetime of mem
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstGLBaseMemory
-  )
+    Params:
+      mem = a #GstGLBaseMemory
 */
 alias GLBaseMemoryAllocatorDestroyFunction = void delegate(gstgl.glbase_memory.GLBaseMemory mem);
 
 /**
     Also see [gst.memory.Memory.map];
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstGLBaseMemory
-    * $(B info)       a #GstMapInfo to map with
-    * $(B maxsize)       the size to map
-  )
-  Returns:     the mapped pointer
+    Params:
+      mem = a #GstGLBaseMemory
+      info = a #GstMapInfo to map with
+      maxsize = the size to map
+    Returns: the mapped pointer
 */
 alias GLBaseMemoryAllocatorMapFunction = void* delegate(gstgl.glbase_memory.GLBaseMemory mem, gst.map_info.MapInfo info, size_t maxsize);
 
 /**
     Also see [gst.memory.Memory.unmap];
 
-  ## Parameters
-  $(LIST
-    * $(B mem)       a #GstGLBaseMemory
-    * $(B info)       a #GstMapInfo to map with
-  )
+    Params:
+      mem = a #GstGLBaseMemory
+      info = a #GstMapInfo to map with
 */
 alias GLBaseMemoryAllocatorUnmapFunction = void delegate(gstgl.glbase_memory.GLBaseMemory mem, gst.map_info.MapInfo info);
 
 /**
     Represents a function to run in the GL thread with context and data
 
-  ## Parameters
-  $(LIST
-    * $(B context)       a #GstGLContext
-  )
+    Params:
+      context = a #GstGLContext
 */
 alias GLContextThreadFunc = void delegate(gstgl.glcontext.GLContext context);
 
@@ -185,11 +169,9 @@ alias GLFilterRenderFunc = bool delegate(gstgl.glfilter.GLFilter filter, gstgl.g
 /**
     callback definition for operating through a #GstGLFramebuffer object
 
-  ## Parameters
-  $(LIST
-    * $(B stuff)       user data
-  )
-  Returns: 
+    Params:
+      stuff = user data
+    Returns: 
 */
 alias GLFramebufferFunc = bool delegate(void* stuff);
 
@@ -201,7 +183,7 @@ alias GLWindowResizeCB = void delegate(uint width, uint height);
 
 /**
     An option that can be activated on bufferpools to request OpenGL
-  synchronization metadata on buffers from the pool.
+    synchronization metadata on buffers from the pool.
 */
 enum BUFFER_POOL_OPTION_GL_SYNC_META = "GstBufferPoolOptionGLSyncMeta";
 
@@ -232,7 +214,7 @@ enum CAPS_FEATURE_MEMORY_GL_MEMORY = "memory:GLMemory";
 
 /**
     GL Allocation flag indicating that the implementation should allocate the
-  necessary resources.
+    necessary resources.
 */
 enum GL_ALLOCATION_PARAMS_ALLOC_FLAG_ALLOC = 1;
 
@@ -243,7 +225,7 @@ enum GL_ALLOCATION_PARAMS_ALLOC_FLAG_BUFFER = 16;
 
 /**
     Values >= than #GST_GL_ALLOCATION_PARAMS_ALLOC_FLAG_USER can be used for
-  user-defined purposes.
+    user-defined purposes.
 */
 enum GL_ALLOCATION_PARAMS_ALLOC_FLAG_USER = 65536;
 
@@ -307,7 +289,7 @@ enum GL_COLOR_CONVERT_VIDEO_CAPS = "video/x-raw(";
 
 /**
     The canonical name of a #GstStructure that contains a configuration for a
-  #GstGLContext.
+    #GstGLContext.
 */
 enum GL_CONFIG_STRUCTURE_NAME = "gst-gl-context-config";
 
@@ -371,9 +353,9 @@ enum GL_TEXTURE_TARGET_RECTANGLE_STR = "rectangle";
 
 /**
     Flag indicating that we should map the GL object instead of to system memory.
-  
-  Combining #GST_MAP_GL with #GST_MAP_WRITE has the same semantics as though
-  you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
-  #GST_MAP_READ has the same semantics as though you are reading from OpenGL.
+    
+    Combining #GST_MAP_GL with #GST_MAP_WRITE has the same semantics as though
+    you are writing to OpenGL. Conversely, combining #GST_MAP_GL with
+    #GST_MAP_READ has the same semantics as though you are reading from OpenGL.
 */
 enum MAP_GL = 131072;

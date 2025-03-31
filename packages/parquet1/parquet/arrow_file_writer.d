@@ -1,3 +1,4 @@
+/// Module for [ArrowFileWriter] class
 module parquet.arrow_file_writer;
 
 import arrow.chunked_array;
@@ -17,17 +18,20 @@ import parquet.writer_properties;
 class ArrowFileWriter : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_arrow_file_writer_get_type != &gidSymbolNotFound ? gparquet_arrow_file_writer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -85,7 +89,8 @@ class ArrowFileWriter : gobject.object.ObjectG
 
   /**
       Start a new buffered row group.
-    Returns:     true on success, false if there was an error.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool newBufferedRowGroup()
   {
@@ -99,9 +104,11 @@ class ArrowFileWriter : gobject.object.ObjectG
 
   /**
       Start a new row group.
-    Params:
-      chunkSize =       The max number of rows in a row group.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        chunkSize = The max number of rows in a row group.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool newRowGroup(size_t chunkSize)
   {
@@ -115,9 +122,11 @@ class ArrowFileWriter : gobject.object.ObjectG
 
   /**
       Start a chunked array as a column chunk.
-    Params:
-      chunkedArray =       A #GArrowChunkedArray to be written.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        chunkedArray = A #GArrowChunkedArray to be written.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool writeChunkedArray(arrow.chunked_array.ChunkedArray chunkedArray)
   {
@@ -131,20 +140,22 @@ class ArrowFileWriter : gobject.object.ObjectG
 
   /**
       Write a record batch into the buffered row group.
-    
-    Multiple record batches can be written into the same row group
-    through this function.
-    
-    [parquet.writer_properties.WriterProperties.getMaxRowGroupLength] is respected
-    and a new row group will be created if the current row group
-    exceeds the limit.
-    
-    Record batches get flushed to the output stream once
-    gparquet_file_writer_new_buffered_row_group() or
-    gparquet_file_writer_close() is called.
-    Params:
-      recordBatch =       A record batch to be written.
-    Returns:     true on success, false if there was an error.
+      
+      Multiple record batches can be written into the same row group
+      through this function.
+      
+      [parquet.writer_properties.WriterProperties.getMaxRowGroupLength] is respected
+      and a new row group will be created if the current row group
+      exceeds the limit.
+      
+      Record batches get flushed to the output stream once
+      gparquet_file_writer_new_buffered_row_group() or
+      gparquet_file_writer_close() is called.
+  
+      Params:
+        recordBatch = A record batch to be written.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool writeRecordBatch(arrow.record_batch.RecordBatch recordBatch)
   {

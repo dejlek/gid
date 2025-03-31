@@ -1,3 +1,4 @@
+/// Module for [EventVisibility] class
 module gdk.event_visibility;
 
 import gdk.c.functions;
@@ -9,15 +10,16 @@ import gid.gid;
 /**
     Generated when the window visibility status has changed.
 
-  Deprecated:     Modern composited windowing systems with pervasive
-        transparency make it impossible to track the visibility of a window
-        reliably, so this event can not be guaranteed to provide useful
-        information.
+    Deprecated: Modern composited windowing systems with pervasive
+          transparency make it impossible to track the visibility of a window
+          reliably, so this event can not be guaranteed to provide useful
+          information.
 */
 class EventVisibility
 {
   GdkEventVisibility cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -29,6 +31,7 @@ class EventVisibility
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

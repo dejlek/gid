@@ -1,3 +1,4 @@
+/// Module for [UndoManager] interface
 module gtksource.undo_manager;
 
 public import gtksource.undo_manager_iface_proxy;
@@ -11,6 +12,7 @@ import gtksource.types;
 interface UndoManager
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -19,14 +21,14 @@ interface UndoManager
 
   /**
       Begin a not undoable action on the buffer. All changes between this call
-    and the call to [gtksource.undo_manager.UndoManager.endNotUndoableAction] cannot
-    be undone. This function should be re-entrant.
+      and the call to [gtksource.undo_manager.UndoManager.endNotUndoableAction] cannot
+      be undone. This function should be re-entrant.
   */
   void beginNotUndoableAction();
 
   /**
       Get whether there are redo operations available.
-    Returns:     true if there are redo operations available, false otherwise
+      Returns: true if there are redo operations available, false otherwise
   */
   bool canRedo();
 
@@ -37,7 +39,7 @@ interface UndoManager
 
   /**
       Get whether there are undo operations available.
-    Returns:     true if there are undo operations available, false otherwise
+      Returns: true if there are undo operations available, false otherwise
   */
   bool canUndo();
 
@@ -53,61 +55,49 @@ interface UndoManager
 
   /**
       Perform a single redo. Calling this function when there are no redo operations
-    available is an error. Use [gtksource.undo_manager.UndoManager.canRedo] to find out
-    if there are redo operations available.
+      available is an error. Use [gtksource.undo_manager.UndoManager.canRedo] to find out
+      if there are redo operations available.
   */
   void redo();
 
   /**
       Perform a single undo. Calling this function when there are no undo operations
-    available is an error. Use [gtksource.undo_manager.UndoManager.canUndo] to find out
-    if there are undo operations available.
+      available is an error. Use [gtksource.undo_manager.UndoManager.canUndo] to find out
+      if there are undo operations available.
   */
   void undo();
 
   /**
+      Connect to `CanRedoChanged` signal.
+  
       Emitted when the ability to redo has changed.
   
-    ## Parameters
-    $(LIST
-      * $(B undoManager) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias CanRedoChangedCallbackDlg = void delegate(gtksource.undo_manager.UndoManager undoManager);
-
-  /** ditto */
-  alias CanRedoChangedCallbackFunc = void function(gtksource.undo_manager.UndoManager undoManager);
+  ulong connectCanRedoChanged(T)(T callback, Flag!"After" after = No.After);
 
   /**
-    Connect to CanRedoChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectCanRedoChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CanRedoChangedCallbackDlg) || is(T : CanRedoChangedCallbackFunc));
-
-  /**
+      Connect to `CanUndoChanged` signal.
+  
       Emitted when the ability to undo has changed.
   
-    ## Parameters
-    $(LIST
-      * $(B undoManager) the instance the signal is connected to
-    )
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
-  alias CanUndoChangedCallbackDlg = void delegate(gtksource.undo_manager.UndoManager undoManager);
-
-  /** ditto */
-  alias CanUndoChangedCallbackFunc = void function(gtksource.undo_manager.UndoManager undoManager);
-
-  /**
-    Connect to CanUndoChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
-  */
-  ulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CanUndoChangedCallbackDlg) || is(T : CanUndoChangedCallbackFunc));
-  }
+  ulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After);
+}

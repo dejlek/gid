@@ -1,3 +1,4 @@
+/// Module for [PrintSettings] class
 module gtk.print_settings;
 
 import gid.gid;
@@ -12,32 +13,35 @@ import gtk.types;
 
 /**
     A GtkPrintSettings object represents the settings of a print dialog in
-  a system-independent way. The main use for this object is that once
-  you’ve printed you can get a settings object that represents the settings
-  the user chose, and the next time you print you can pass that object in so
-  that the user doesn’t have to re-set all his settings.
-  
-  Its also possible to enumerate the settings so that you can easily save
-  the settings for the next time your app runs, or even store them in a
-  document. The predefined keys try to use shared values as much as possible
-  so that moving such a document between systems still works.
-  
-  Printing support was added in GTK+ 2.10.
+    a system-independent way. The main use for this object is that once
+    you’ve printed you can get a settings object that represents the settings
+    the user chose, and the next time you print you can pass that object in so
+    that the user doesn’t have to re-set all his settings.
+    
+    Its also possible to enumerate the settings so that you can easily save
+    the settings for the next time your app runs, or even store them in a
+    document. The predefined keys try to use shared values as much as possible
+    so that moving such a document between systems still works.
+    
+    Printing support was added in GTK+ 2.10.
 */
 class PrintSettings : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_settings_get_type != &gidSymbolNotFound ? gtk_print_settings_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -50,7 +54,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Creates a new #GtkPrintSettings object.
-    Returns:     a new #GtkPrintSettings object
+      Returns: a new #GtkPrintSettings object
   */
   this()
   {
@@ -61,12 +65,14 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Reads the print settings from file_name. Returns a new #GtkPrintSettings
-    object with the restored settings, or null if an error occurred. If the
-    file could not be loaded then error is set to either a #GFileError or
-    #GKeyFileError.  See [gtk.print_settings.PrintSettings.toFile].
-    Params:
-      fileName =       the filename to read the settings from
-    Returns:     the restored #GtkPrintSettings
+      object with the restored settings, or null if an error occurred. If the
+      file could not be loaded then error is set to either a #GFileError or
+      #GKeyFileError.  See [gtk.print_settings.PrintSettings.toFile].
+  
+      Params:
+        fileName = the filename to read the settings from
+      Returns: the restored #GtkPrintSettings
+      Throws: [ErrorG]
   */
   static gtk.print_settings.PrintSettings newFromFile(string fileName)
   {
@@ -82,10 +88,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Deserialize print settings from an a{sv} variant in
-    the format produced by [gtk.print_settings.PrintSettings.toGvariant].
-    Params:
-      variant =       an a{sv} #GVariant
-    Returns:     a new #GtkPrintSettings object
+      the format produced by [gtk.print_settings.PrintSettings.toGvariant].
+  
+      Params:
+        variant = an a{sv} #GVariant
+      Returns: a new #GtkPrintSettings object
   */
   static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.VariantG variant)
   {
@@ -97,14 +104,16 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Reads the print settings from the group group_name in key_file.  Returns a
-    new #GtkPrintSettings object with the restored settings, or null if an
-    error occurred. If the file could not be loaded then error is set to either
-    a #GFileError or #GKeyFileError.
-    Params:
-      keyFile =       the #GKeyFile to retrieve the settings from
-      groupName =       the name of the group to use, or null to use
-            the default “Print Settings”
-    Returns:     the restored #GtkPrintSettings
+      new #GtkPrintSettings object with the restored settings, or null if an
+      error occurred. If the file could not be loaded then error is set to either
+      a #GFileError or #GKeyFileError.
+  
+      Params:
+        keyFile = the #GKeyFile to retrieve the settings from
+        groupName = the name of the group to use, or null to use
+              the default “Print Settings”
+      Returns: the restored #GtkPrintSettings
+      Throws: [ErrorG]
   */
   static gtk.print_settings.PrintSettings newFromKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -120,7 +129,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Copies a #GtkPrintSettings object.
-    Returns:     a newly allocated copy of other
+      Returns: a newly allocated copy of other
   */
   gtk.print_settings.PrintSettings copy()
   {
@@ -132,8 +141,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Calls func for each key-value pair of settings.
-    Params:
-      func =       the function to call
+  
+      Params:
+        func = the function to call
   */
   void foreach_(gtk.types.PrintSettingsFunc func)
   {
@@ -153,9 +163,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Looks up the string value associated with key.
-    Params:
-      key =       a key
-    Returns:     the string value for key
+  
+      Params:
+        key = a key
+      Returns: the string value for key
   */
   string get(string key)
   {
@@ -168,13 +179,14 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the boolean represented by the value
-    that is associated with key.
-    
-    The string “true” represents true, any other
-    string false.
-    Params:
-      key =       a key
-    Returns:     true, if key maps to a true value.
+      that is associated with key.
+      
+      The string “true” represents true, any other
+      string false.
+  
+      Params:
+        key = a key
+      Returns: true, if key maps to a true value.
   */
   bool getBool(string key)
   {
@@ -186,7 +198,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_COLLATE`.
-    Returns:     whether to collate the printed pages
+      Returns: whether to collate the printed pages
   */
   bool getCollate()
   {
@@ -197,7 +209,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_DEFAULT_SOURCE`.
-    Returns:     the default source
+      Returns: the default source
   */
   string getDefaultSource()
   {
@@ -209,7 +221,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_DITHER`.
-    Returns:     the dithering that is used
+      Returns: the dithering that is used
   */
   string getDither()
   {
@@ -221,9 +233,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the double value associated with key, or 0.
-    Params:
-      key =       a key
-    Returns:     the double value of key
+  
+      Params:
+        key = a key
+      Returns: the double value of key
   */
   double getDouble(string key)
   {
@@ -235,14 +248,15 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the floating point number represented by
-    the value that is associated with key, or default_val
-    if the value does not represent a floating point number.
-    
-    Floating point numbers are parsed with [glib.global.asciiStrtod].
-    Params:
-      key =       a key
-      def =       the default value
-    Returns:     the floating point number associated with key
+      the value that is associated with key, or default_val
+      if the value does not represent a floating point number.
+      
+      Floating point numbers are parsed with [glib.global.asciiStrtod].
+  
+      Params:
+        key = a key
+        def = the default value
+      Returns: the floating point number associated with key
   */
   double getDoubleWithDefault(string key, double def)
   {
@@ -254,7 +268,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_DUPLEX`.
-    Returns:     whether to print the output in duplex.
+      Returns: whether to print the output in duplex.
   */
   gtk.types.PrintDuplex getDuplex()
   {
@@ -266,7 +280,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_FINISHINGS`.
-    Returns:     the finishings
+      Returns: the finishings
   */
   string getFinishings()
   {
@@ -278,9 +292,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the integer value of key, or 0.
-    Params:
-      key =       a key
-    Returns:     the integer value of key
+  
+      Params:
+        key = a key
+      Returns: the integer value of key
   */
   int getInt(string key)
   {
@@ -292,11 +307,12 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the value of key, interpreted as
-    an integer, or the default value.
-    Params:
-      key =       a key
-      def =       the default value
-    Returns:     the integer value of key
+      an integer, or the default value.
+  
+      Params:
+        key = a key
+        def = the default value
+      Returns: the integer value of key
   */
   int getIntWithDefault(string key, int def)
   {
@@ -308,11 +324,12 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns the value associated with key, interpreted
-    as a length. The returned value is converted to units.
-    Params:
-      key =       a key
-      unit =       the unit of the return value
-    Returns:     the length value of key, converted to unit
+      as a length. The returned value is converted to units.
+  
+      Params:
+        key = a key
+        unit = the unit of the return value
+      Returns: the length value of key, converted to unit
   */
   double getLength(string key, gtk.types.Unit unit)
   {
@@ -324,9 +341,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_MEDIA_TYPE`.
-    
-    The set of media types is defined in PWG 5101.1-2002 PWG.
-    Returns:     the media type
+      
+      The set of media types is defined in PWG 5101.1-2002 PWG.
+      Returns: the media type
   */
   string getMediaType()
   {
@@ -338,7 +355,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_N_COPIES`.
-    Returns:     the number of copies to print
+      Returns: the number of copies to print
   */
   int getNCopies()
   {
@@ -349,7 +366,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_NUMBER_UP`.
-    Returns:     the number of pages per sheet
+      Returns: the number of pages per sheet
   */
   int getNumberUp()
   {
@@ -360,7 +377,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT`.
-    Returns:     layout of page in number-up mode
+      Returns: layout of page in number-up mode
   */
   gtk.types.NumberUpLayout getNumberUpLayout()
   {
@@ -372,8 +389,8 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Get the value of `GTK_PRINT_SETTINGS_ORIENTATION`,
-    converted to a #GtkPageOrientation.
-    Returns:     the orientation
+      converted to a #GtkPageOrientation.
+      Returns: the orientation
   */
   gtk.types.PageOrientation getOrientation()
   {
@@ -385,7 +402,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_OUTPUT_BIN`.
-    Returns:     the output bin
+      Returns: the output bin
   */
   string getOutputBin()
   {
@@ -397,9 +414,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PAGE_RANGES`.
-    Returns:     an array
-          of #GtkPageRanges.  Use [glib.global.gfree] to free the array when
-          it is no longer needed.
+      Returns: an array
+            of #GtkPageRanges.  Use [glib.global.gfree] to free the array when
+            it is no longer needed.
   */
   gtk.types.PageRange[] getPageRanges()
   {
@@ -419,7 +436,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PAGE_SET`.
-    Returns:     the set of pages to print
+      Returns: the set of pages to print
   */
   gtk.types.PageSet getPageSet()
   {
@@ -431,10 +448,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PAPER_HEIGHT`,
-    converted to unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the paper height, in units of unit
+      converted to unit.
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper height, in units of unit
   */
   double getPaperHeight(gtk.types.Unit unit)
   {
@@ -445,8 +463,8 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PAPER_FORMAT`,
-    converted to a #GtkPaperSize.
-    Returns:     the paper size
+      converted to a #GtkPaperSize.
+      Returns: the paper size
   */
   gtk.paper_size.PaperSize getPaperSize()
   {
@@ -458,10 +476,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PAPER_WIDTH`,
-    converted to unit.
-    Params:
-      unit =       the unit for the return value
-    Returns:     the paper width, in units of unit
+      converted to unit.
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper width, in units of unit
   */
   double getPaperWidth(gtk.types.Unit unit)
   {
@@ -472,7 +491,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PRINT_PAGES`.
-    Returns:     which pages to print
+      Returns: which pages to print
   */
   gtk.types.PrintPages getPrintPages()
   {
@@ -484,8 +503,8 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Convenience function to obtain the value of
-    `GTK_PRINT_SETTINGS_PRINTER`.
-    Returns:     the printer name
+      `GTK_PRINT_SETTINGS_PRINTER`.
+      Returns: the printer name
   */
   string getPrinter()
   {
@@ -497,7 +516,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_PRINTER_LPI`.
-    Returns:     the resolution in lpi (lines per inch)
+      Returns: the resolution in lpi (lines per inch)
   */
   double getPrinterLpi()
   {
@@ -508,7 +527,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_QUALITY`.
-    Returns:     the print quality
+      Returns: the print quality
   */
   gtk.types.PrintQuality getQuality()
   {
@@ -520,7 +539,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION`.
-    Returns:     the resolution in dpi
+      Returns: the resolution in dpi
   */
   int getResolution()
   {
@@ -531,7 +550,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION_X`.
-    Returns:     the horizontal resolution in dpi
+      Returns: the horizontal resolution in dpi
   */
   int getResolutionX()
   {
@@ -542,7 +561,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
-    Returns:     the vertical resolution in dpi
+      Returns: the vertical resolution in dpi
   */
   int getResolutionY()
   {
@@ -553,7 +572,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_REVERSE`.
-    Returns:     whether to reverse the order of the printed pages
+      Returns: whether to reverse the order of the printed pages
   */
   bool getReverse()
   {
@@ -564,7 +583,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_SCALE`.
-    Returns:     the scale in percent
+      Returns: the scale in percent
   */
   double getScale()
   {
@@ -575,7 +594,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Gets the value of `GTK_PRINT_SETTINGS_USE_COLOR`.
-    Returns:     whether to use color
+      Returns: whether to use color
   */
   bool getUseColor()
   {
@@ -586,9 +605,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Returns true, if a value is associated with key.
-    Params:
-      key =       a key
-    Returns:     true, if key has a value
+  
+      Params:
+        key = a key
+      Returns: true, if key has a value
   */
   bool hasKey(string key)
   {
@@ -600,11 +620,13 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Reads the print settings from file_name. If the file could not be loaded
-    then error is set to either a #GFileError or #GKeyFileError.
-    See [gtk.print_settings.PrintSettings.toFile].
-    Params:
-      fileName =       the filename to read the settings from
-    Returns:     true on success
+      then error is set to either a #GFileError or #GKeyFileError.
+      See [gtk.print_settings.PrintSettings.toFile].
+  
+      Params:
+        fileName = the filename to read the settings from
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadFile(string fileName)
   {
@@ -619,13 +641,15 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Reads the print settings from the group group_name in key_file. If the
-    file could not be loaded then error is set to either a #GFileError or
-    #GKeyFileError.
-    Params:
-      keyFile =       the #GKeyFile to retrieve the settings from
-      groupName =       the name of the group to use, or null to use the default
-            “Print Settings”
-    Returns:     true on success
+      file could not be loaded then error is set to either a #GFileError or
+      #GKeyFileError.
+  
+      Params:
+        keyFile = the #GKeyFile to retrieve the settings from
+        groupName = the name of the group to use, or null to use the default
+              “Print Settings”
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool loadKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -640,9 +664,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Associates value with key.
-    Params:
-      key =       a key
-      value =       a string value, or null
+  
+      Params:
+        key = a key
+        value = a string value, or null
   */
   void set(string key, string value = null)
   {
@@ -653,9 +678,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets key to a boolean value.
-    Params:
-      key =       a key
-      value =       a boolean
+  
+      Params:
+        key = a key
+        value = a boolean
   */
   void setBool(string key, bool value)
   {
@@ -665,8 +691,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_COLLATE`.
-    Params:
-      collate =       whether to collate the output
+  
+      Params:
+        collate = whether to collate the output
   */
   void setCollate(bool collate)
   {
@@ -675,8 +702,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_DEFAULT_SOURCE`.
-    Params:
-      defaultSource =       the default source
+  
+      Params:
+        defaultSource = the default source
   */
   void setDefaultSource(string defaultSource)
   {
@@ -686,8 +714,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_DITHER`.
-    Params:
-      dither =       the dithering that is used
+  
+      Params:
+        dither = the dithering that is used
   */
   void setDither(string dither)
   {
@@ -697,9 +726,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets key to a double value.
-    Params:
-      key =       a key
-      value =       a double value
+  
+      Params:
+        key = a key
+        value = a double value
   */
   void setDouble(string key, double value)
   {
@@ -709,8 +739,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_DUPLEX`.
-    Params:
-      duplex =       a #GtkPrintDuplex value
+  
+      Params:
+        duplex = a #GtkPrintDuplex value
   */
   void setDuplex(gtk.types.PrintDuplex duplex)
   {
@@ -719,8 +750,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_FINISHINGS`.
-    Params:
-      finishings =       the finishings
+  
+      Params:
+        finishings = the finishings
   */
   void setFinishings(string finishings)
   {
@@ -730,9 +762,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets key to an integer value.
-    Params:
-      key =       a key
-      value =       an integer
+  
+      Params:
+        key = a key
+        value = an integer
   */
   void setInt(string key, int value)
   {
@@ -742,10 +775,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Associates a length in units of unit with key.
-    Params:
-      key =       a key
-      value =       a length
-      unit =       the unit of length
+  
+      Params:
+        key = a key
+        value = a length
+        unit = the unit of length
   */
   void setLength(string key, double value, gtk.types.Unit unit)
   {
@@ -755,10 +789,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_MEDIA_TYPE`.
-    
-    The set of media types is defined in PWG 5101.1-2002 PWG.
-    Params:
-      mediaType =       the media type
+      
+      The set of media types is defined in PWG 5101.1-2002 PWG.
+  
+      Params:
+        mediaType = the media type
   */
   void setMediaType(string mediaType)
   {
@@ -768,8 +803,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_N_COPIES`.
-    Params:
-      numCopies =       the number of copies
+  
+      Params:
+        numCopies = the number of copies
   */
   void setNCopies(int numCopies)
   {
@@ -778,8 +814,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_NUMBER_UP`.
-    Params:
-      numberUp =       the number of pages per sheet
+  
+      Params:
+        numberUp = the number of pages per sheet
   */
   void setNumberUp(int numberUp)
   {
@@ -788,8 +825,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT`.
-    Params:
-      numberUpLayout =       a #GtkNumberUpLayout value
+  
+      Params:
+        numberUpLayout = a #GtkNumberUpLayout value
   */
   void setNumberUpLayout(gtk.types.NumberUpLayout numberUpLayout)
   {
@@ -798,8 +836,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_ORIENTATION`.
-    Params:
-      orientation =       a page orientation
+  
+      Params:
+        orientation = a page orientation
   */
   void setOrientation(gtk.types.PageOrientation orientation)
   {
@@ -808,8 +847,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_OUTPUT_BIN`.
-    Params:
-      outputBin =       the output bin
+  
+      Params:
+        outputBin = the output bin
   */
   void setOutputBin(string outputBin)
   {
@@ -819,8 +859,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PAGE_RANGES`.
-    Params:
-      pageRanges =       an array of #GtkPageRanges
+  
+      Params:
+        pageRanges = an array of #GtkPageRanges
   */
   void setPageRanges(gtk.types.PageRange[] pageRanges)
   {
@@ -834,8 +875,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PAGE_SET`.
-    Params:
-      pageSet =       a #GtkPageSet value
+  
+      Params:
+        pageSet = a #GtkPageSet value
   */
   void setPageSet(gtk.types.PageSet pageSet)
   {
@@ -844,9 +886,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PAPER_HEIGHT`.
-    Params:
-      height =       the paper height
-      unit =       the units of height
+  
+      Params:
+        height = the paper height
+        unit = the units of height
   */
   void setPaperHeight(double height, gtk.types.Unit unit)
   {
@@ -855,10 +898,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PAPER_FORMAT`,
-    `GTK_PRINT_SETTINGS_PAPER_WIDTH` and
-    `GTK_PRINT_SETTINGS_PAPER_HEIGHT`.
-    Params:
-      paperSize =       a paper size
+      `GTK_PRINT_SETTINGS_PAPER_WIDTH` and
+      `GTK_PRINT_SETTINGS_PAPER_HEIGHT`.
+  
+      Params:
+        paperSize = a paper size
   */
   void setPaperSize(gtk.paper_size.PaperSize paperSize)
   {
@@ -867,9 +911,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PAPER_WIDTH`.
-    Params:
-      width =       the paper width
-      unit =       the units of width
+  
+      Params:
+        width = the paper width
+        unit = the units of width
   */
   void setPaperWidth(double width, gtk.types.Unit unit)
   {
@@ -878,8 +923,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PRINT_PAGES`.
-    Params:
-      pages =       a #GtkPrintPages value
+  
+      Params:
+        pages = a #GtkPrintPages value
   */
   void setPrintPages(gtk.types.PrintPages pages)
   {
@@ -888,9 +934,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Convenience function to set `GTK_PRINT_SETTINGS_PRINTER`
-    to printer.
-    Params:
-      printer =       the printer name
+      to printer.
+  
+      Params:
+        printer = the printer name
   */
   void setPrinter(string printer)
   {
@@ -900,8 +947,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_PRINTER_LPI`.
-    Params:
-      lpi =       the resolution in lpi (lines per inch)
+  
+      Params:
+        lpi = the resolution in lpi (lines per inch)
   */
   void setPrinterLpi(double lpi)
   {
@@ -910,8 +958,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_QUALITY`.
-    Params:
-      quality =       a #GtkPrintQuality value
+  
+      Params:
+        quality = a #GtkPrintQuality value
   */
   void setQuality(gtk.types.PrintQuality quality)
   {
@@ -920,10 +969,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the values of `GTK_PRINT_SETTINGS_RESOLUTION`,
-    `GTK_PRINT_SETTINGS_RESOLUTION_X` and
-    `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
-    Params:
-      resolution =       the resolution in dpi
+      `GTK_PRINT_SETTINGS_RESOLUTION_X` and
+      `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
+  
+      Params:
+        resolution = the resolution in dpi
   */
   void setResolution(int resolution)
   {
@@ -932,11 +982,12 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the values of `GTK_PRINT_SETTINGS_RESOLUTION`,
-    `GTK_PRINT_SETTINGS_RESOLUTION_X` and
-    `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
-    Params:
-      resolutionX =       the horizontal resolution in dpi
-      resolutionY =       the vertical resolution in dpi
+      `GTK_PRINT_SETTINGS_RESOLUTION_X` and
+      `GTK_PRINT_SETTINGS_RESOLUTION_Y`.
+  
+      Params:
+        resolutionX = the horizontal resolution in dpi
+        resolutionY = the vertical resolution in dpi
   */
   void setResolutionXy(int resolutionX, int resolutionY)
   {
@@ -945,8 +996,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_REVERSE`.
-    Params:
-      reverse =       whether to reverse the output
+  
+      Params:
+        reverse = whether to reverse the output
   */
   void setReverse(bool reverse)
   {
@@ -955,8 +1007,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_SCALE`.
-    Params:
-      scale =       the scale in percent
+  
+      Params:
+        scale = the scale in percent
   */
   void setScale(double scale)
   {
@@ -965,8 +1018,9 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Sets the value of `GTK_PRINT_SETTINGS_USE_COLOR`.
-    Params:
-      useColor =       whether to use color
+  
+      Params:
+        useColor = whether to use color
   */
   void setUseColor(bool useColor)
   {
@@ -975,11 +1029,13 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       This function saves the print settings from settings to file_name. If the
-    file could not be loaded then error is set to either a #GFileError or
-    #GKeyFileError.
-    Params:
-      fileName =       the file to save to
-    Returns:     true on success
+      file could not be loaded then error is set to either a #GFileError or
+      #GKeyFileError.
+  
+      Params:
+        fileName = the file to save to
+      Returns: true on success
+      Throws: [ErrorG]
   */
   bool toFile(string fileName)
   {
@@ -994,7 +1050,7 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Serialize print settings to an a{sv} variant.
-    Returns:     a new, floating, #GVariant
+      Returns: a new, floating, #GVariant
   */
   glib.variant.VariantG toGvariant()
   {
@@ -1006,10 +1062,11 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       This function adds the print settings from settings to key_file.
-    Params:
-      keyFile =       the #GKeyFile to save the print settings to
-      groupName =       the group to add the settings to in key_file, or
-            null to use the default “Print Settings”
+  
+      Params:
+        keyFile = the #GKeyFile to save the print settings to
+        groupName = the group to add the settings to in key_file, or
+              null to use the default “Print Settings”
   */
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
@@ -1019,9 +1076,10 @@ class PrintSettings : gobject.object.ObjectG
 
   /**
       Removes any value associated with key.
-    This has the same effect as setting the value to null.
-    Params:
-      key =       a key
+      This has the same effect as setting the value to null.
+  
+      Params:
+        key = a key
   */
   void unset(string key)
   {

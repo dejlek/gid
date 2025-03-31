@@ -1,3 +1,4 @@
+/// Module for [Toolbar] class
 module gtk.toolbar;
 
 import atk.implementor_iface;
@@ -21,43 +22,46 @@ import gtk.widget;
 
 /**
     A toolbar is created with a call to [gtk.toolbar.Toolbar.new_].
-  
-  A toolbar can contain instances of a subclass of #GtkToolItem. To add
-  a #GtkToolItem to the a toolbar, use [gtk.toolbar.Toolbar.insert]. To remove
-  an item from the toolbar use [gtk.container.Container.remove]. To add a button
-  to the toolbar, add an instance of #GtkToolButton.
-  
-  Toolbar items can be visually grouped by adding instances of
-  #GtkSeparatorToolItem to the toolbar. If the GtkToolbar child property
-  “expand” is #TRUE and the property #GtkSeparatorToolItem:draw is set to
-  #FALSE, the effect is to force all following items to the end of the toolbar.
-  
-  By default, a toolbar can be shrunk, upon which it will add an arrow button
-  to show an overflow menu offering access to any #GtkToolItem child that has
-  a proxy menu item. To disable this and request enough size for all children,
-  call [gtk.toolbar.Toolbar.setShowArrow] to set #GtkToolbar:show-arrow to false.
-  
-  Creating a context menu for the toolbar can be done by connecting to
-  the #GtkToolbar::popup-context-menu signal.
-  
-  # CSS nodes
-  
-  GtkToolbar has a single CSS node with name toolbar.
+    
+    A toolbar can contain instances of a subclass of #GtkToolItem. To add
+    a #GtkToolItem to the a toolbar, use [gtk.toolbar.Toolbar.insert]. To remove
+    an item from the toolbar use [gtk.container.Container.remove]. To add a button
+    to the toolbar, add an instance of #GtkToolButton.
+    
+    Toolbar items can be visually grouped by adding instances of
+    #GtkSeparatorToolItem to the toolbar. If the GtkToolbar child property
+    “expand” is #TRUE and the property #GtkSeparatorToolItem:draw is set to
+    #FALSE, the effect is to force all following items to the end of the toolbar.
+    
+    By default, a toolbar can be shrunk, upon which it will add an arrow button
+    to show an overflow menu offering access to any #GtkToolItem child that has
+    a proxy menu item. To disable this and request enough size for all children,
+    call [gtk.toolbar.Toolbar.setShowArrow] to set #GtkToolbar:show-arrow to false.
+    
+    Creating a context menu for the toolbar can be done by connecting to
+    the #GtkToolbar::popup-context-menu signal.
+    
+    # CSS nodes
+    
+    GtkToolbar has a single CSS node with name toolbar.
 */
 class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_shell.ToolShell
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toolbar_get_type != &gidSymbolNotFound ? gtk_toolbar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -74,7 +78,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Creates a new toolbar.
-    Returns:     the newly-created toolbar.
+      Returns: the newly-created toolbar.
   */
   this()
   {
@@ -85,15 +89,16 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Returns the position corresponding to the indicated point on
-    toolbar. This is useful when dragging items to the toolbar:
-    this function returns the position a new item should be
-    inserted.
-    
-    x and y are in toolbar coordinates.
-    Params:
-      x =       x coordinate of a point on the toolbar
-      y =       y coordinate of a point on the toolbar
-    Returns:     The position corresponding to the point (x, y) on the toolbar.
+      toolbar. This is useful when dragging items to the toolbar:
+      this function returns the position a new item should be
+      inserted.
+      
+      `x` and `y` are in toolbar coordinates.
+  
+      Params:
+        x = x coordinate of a point on the toolbar
+        y = y coordinate of a point on the toolbar
+      Returns: The position corresponding to the point (`x`, `y`) on the toolbar.
   */
   int getDropIndex(int x, int y)
   {
@@ -104,7 +109,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Retrieves the icon size for the toolbar. See [gtk.toolbar.Toolbar.setIconSize].
-    Returns:     the current icon size for the icons on the toolbar.
+      Returns: the current icon size for the icons on the toolbar.
   */
   gtk.types.IconSize getIconSize()
   {
@@ -116,10 +121,11 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Returns the position of item on the toolbar, starting from 0.
-    It is an error if item is not a child of the toolbar.
-    Params:
-      item =       a #GtkToolItem that is a child of toolbar
-    Returns:     the position of item on the toolbar.
+      It is an error if item is not a child of the toolbar.
+  
+      Params:
+        item = a #GtkToolItem that is a child of toolbar
+      Returns: the position of item on the toolbar.
   */
   int getItemIndex(gtk.tool_item.ToolItem item)
   {
@@ -130,7 +136,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Returns the number of items on the toolbar.
-    Returns:     the number of items on the toolbar
+      Returns: the number of items on the toolbar
   */
   int getNItems()
   {
@@ -140,12 +146,13 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
-      Returns the n'th item on toolbar, or null if the
-    toolbar does not contain an n'th item.
-    Params:
-      n =       A position on the toolbar
-    Returns:     The n'th #GtkToolItem on toolbar,
-          or null if there isn’t an n'th item.
+      Returns the `n`'th item on toolbar, or null if the
+      toolbar does not contain an `n`'th item.
+  
+      Params:
+        n = A position on the toolbar
+      Returns: The `n`'th #GtkToolItem on toolbar,
+            or null if there isn’t an `n`'th item.
   */
   gtk.tool_item.ToolItem getNthItem(int n)
   {
@@ -157,8 +164,8 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Returns the relief style of buttons on toolbar. See
-    [gtk.button.Button.setRelief].
-    Returns:     The relief style of buttons on toolbar.
+      [gtk.button.Button.setRelief].
+      Returns: The relief style of buttons on toolbar.
   */
   gtk.types.ReliefStyle getReliefStyle()
   {
@@ -170,8 +177,8 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Returns whether the toolbar has an overflow menu.
-    See [gtk.toolbar.Toolbar.setShowArrow].
-    Returns:     true if the toolbar has an overflow menu.
+      See [gtk.toolbar.Toolbar.setShowArrow].
+      Returns: true if the toolbar has an overflow menu.
   */
   bool getShowArrow()
   {
@@ -184,8 +191,8 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Retrieves whether the toolbar has text, icons, or both . See
-    [gtk.toolbar.Toolbar.setStyle].
-    Returns:     the current style of toolbar
+      [gtk.toolbar.Toolbar.setStyle].
+      Returns: the current style of toolbar
   */
   gtk.types.ToolbarStyle getStyle()
   {
@@ -197,11 +204,12 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Insert a #GtkToolItem into the toolbar at position pos. If pos is
-    0 the item is prepended to the start of the toolbar. If pos is
-    negative, the item is appended to the end of the toolbar.
-    Params:
-      item =       a #GtkToolItem
-      pos =       the position of the new item
+      0 the item is prepended to the start of the toolbar. If pos is
+      negative, the item is appended to the end of the toolbar.
+  
+      Params:
+        item = a #GtkToolItem
+        pos = the position of the new item
   */
   void insert(gtk.tool_item.ToolItem item, int pos)
   {
@@ -210,17 +218,18 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Highlights toolbar to give an idea of what it would look like
-    if item was added to toolbar at the position indicated by index_.
-    If item is null, highlighting is turned off. In that case index_
-    is ignored.
-    
-    The tool_item passed to this function must not be part of any widget
-    hierarchy. When an item is set as drop highlight item it can not
-    added to any widget hierarchy or used as highlight item for another
-    toolbar.
-    Params:
-      toolItem =       a #GtkToolItem, or null to turn of highlighting
-      index =       a position on toolbar
+      if item was added to toolbar at the position indicated by index_.
+      If item is null, highlighting is turned off. In that case index_
+      is ignored.
+      
+      The tool_item passed to this function must not be part of any widget
+      hierarchy. When an item is set as drop highlight item it can not
+      added to any widget hierarchy or used as highlight item for another
+      toolbar.
+  
+      Params:
+        toolItem = a #GtkToolItem, or null to turn of highlighting
+        index = a position on toolbar
   */
   void setDropHighlightItem(gtk.tool_item.ToolItem toolItem, int index)
   {
@@ -229,15 +238,16 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       This function sets the size of stock icons in the toolbar. You
-    can call it both before you add the icons and after they’ve been
-    added. The size you set will override user preferences for the default
-    icon size.
-    
-    This should only be used for special-purpose toolbars, normal
-    application toolbars should respect the user preferences for the
-    size of icons.
-    Params:
-      iconSize =       The #GtkIconSize that stock icons in the toolbar shall have.
+      can call it both before you add the icons and after they’ve been
+      added. The size you set will override user preferences for the default
+      icon size.
+      
+      This should only be used for special-purpose toolbars, normal
+      application toolbars should respect the user preferences for the
+      size of icons.
+  
+      Params:
+        iconSize = The #GtkIconSize that stock icons in the toolbar shall have.
   */
   void setIconSize(gtk.types.IconSize iconSize)
   {
@@ -246,13 +256,14 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Sets whether to show an overflow menu when toolbar isn’t allocated enough
-    size to show all of its items. If true, items which can’t fit in toolbar,
-    and which have a proxy menu item set by [gtk.tool_item.ToolItem.setProxyMenuItem]
-    or #GtkToolItem::create-menu-proxy, will be available in an overflow menu,
-    which can be opened by an added arrow button. If false, toolbar will
-    request enough size to fit all of its child items without any overflow.
-    Params:
-      showArrow =       Whether to show an overflow menu
+      size to show all of its items. If true, items which can’t fit in toolbar,
+      and which have a proxy menu item set by [gtk.tool_item.ToolItem.setProxyMenuItem]
+      or #GtkToolItem::create-menu-proxy, will be available in an overflow menu,
+      which can be opened by an added arrow button. If false, toolbar will
+      request enough size to fit all of its child items without any overflow.
+  
+      Params:
+        showArrow = Whether to show an overflow menu
   */
   void setShowArrow(bool showArrow)
   {
@@ -263,8 +274,9 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Alters the view of toolbar to display either icons only, text only, or both.
-    Params:
-      style =       the new style for toolbar.
+  
+      Params:
+        style = the new style for toolbar.
   */
   void setStyle(gtk.types.ToolbarStyle style)
   {
@@ -273,7 +285,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Unsets toolbar icon size set with [gtk.toolbar.Toolbar.setIconSize], so that
-    user preferences will be used to determine the icon size.
+      user preferences will be used to determine the icon size.
   */
   void unsetIconSize()
   {
@@ -282,7 +294,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 
   /**
       Unsets a toolbar style set with [gtk.toolbar.Toolbar.setStyle], so that
-    user preferences will be used to determine the toolbar style.
+      user preferences will be used to determine the toolbar style.
   */
   void unsetStyle()
   {
@@ -290,39 +302,45 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
-      A keybinding signal used internally by GTK+. This signal can't
-    be used in application code
+      Connect to `FocusHomeOrEnd` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B focusHome)       true if the first item should be focused
-      * $(B toolbar) the instance the signal is connected to
-    )
-    Returns:     true if the signal was handled, false if not
-  */
-  alias FocusHomeOrEndCallbackDlg = bool delegate(bool focusHome, gtk.toolbar.Toolbar toolbar);
-
-  /** ditto */
-  alias FocusHomeOrEndCallbackFunc = bool function(bool focusHome, gtk.toolbar.Toolbar toolbar);
-
-  /**
-    Connect to FocusHomeOrEnd signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      A keybinding signal used internally by GTK+. This signal can't
+      be used in application code
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(bool focusHome, gtk.toolbar.Toolbar toolbar))
+  
+          `focusHome` true if the first item should be focused (optional)
+  
+          `toolbar` the instance the signal is connected to (optional)
+  
+          `Returns` true if the signal was handled, false if not
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectFocusHomeOrEnd(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : FocusHomeOrEndCallbackDlg) || is(T : FocusHomeOrEndCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto toolbar = getVal!(gtk.toolbar.Toolbar)(_paramVals);
-      auto focusHome = getVal!(bool)(&_paramVals[1]);
-      _retval = _dClosure.dlg(focusHome, toolbar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -331,36 +349,43 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
+      Connect to `OrientationChanged` signal.
+  
       Emitted when the orientation of the toolbar changes.
   
-    ## Parameters
-    $(LIST
-      * $(B orientation)       the new #GtkOrientation of the toolbar
-      * $(B toolbar) the instance the signal is connected to
-    )
-  */
-  alias OrientationChangedCallbackDlg = void delegate(gtk.types.Orientation orientation, gtk.toolbar.Toolbar toolbar);
-
-  /** ditto */
-  alias OrientationChangedCallbackFunc = void function(gtk.types.Orientation orientation, gtk.toolbar.Toolbar toolbar);
-
-  /**
-    Connect to OrientationChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.Orientation orientation, gtk.toolbar.Toolbar toolbar))
+  
+          `orientation` the new #GtkOrientation of the toolbar (optional)
+  
+          `toolbar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectOrientationChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : OrientationChangedCallbackDlg) || is(T : OrientationChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.Orientation)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto toolbar = getVal!(gtk.toolbar.Toolbar)(_paramVals);
-      auto orientation = getVal!(gtk.types.Orientation)(&_paramVals[1]);
-      _dClosure.dlg(orientation, toolbar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -368,49 +393,65 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
-      Emitted when the user right-clicks the toolbar or uses the
-    keybinding to display a popup menu.
-    
-    Application developers should handle this signal if they want
-    to display a context menu on the toolbar. The context-menu should
-    appear at the coordinates given by x and y. The mouse button
-    number is given by the button parameter. If the menu was popped
-    up using the keybaord, button is -1.
+      Connect to `PopupContextMenu` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B x)       the x coordinate of the point where the menu should appear
-      * $(B y)       the y coordinate of the point where the menu should appear
-      * $(B button)       the mouse button the user pressed, or -1
-      * $(B toolbar) the instance the signal is connected to
-    )
-    Returns:     return true if the signal was handled, false if not
-  */
-  alias PopupContextMenuCallbackDlg = bool delegate(int x, int y, int button, gtk.toolbar.Toolbar toolbar);
-
-  /** ditto */
-  alias PopupContextMenuCallbackFunc = bool function(int x, int y, int button, gtk.toolbar.Toolbar toolbar);
-
-  /**
-    Connect to PopupContextMenu signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the user right-clicks the toolbar or uses the
+      keybinding to display a popup menu.
+      
+      Application developers should handle this signal if they want
+      to display a context menu on the toolbar. The context-menu should
+      appear at the coordinates given by `x` and `y`. The mouse button
+      number is given by the button parameter. If the menu was popped
+      up using the keybaord, button is -1.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D bool callback(int x, int y, int button, gtk.toolbar.Toolbar toolbar))
+  
+          `x` the x coordinate of the point where the menu should appear (optional)
+  
+          `y` the y coordinate of the point where the menu should appear (optional)
+  
+          `button` the mouse button the user pressed, or -1 (optional)
+  
+          `toolbar` the instance the signal is connected to (optional)
+  
+          `Returns` return true if the signal was handled, false if not
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectPopupContextMenu(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : PopupContextMenuCallbackDlg) || is(T : PopupContextMenuCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == int)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gtk.toolbar.Toolbar)))
+  && Parameters!T.length < 5)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      bool _retval;
-      auto toolbar = getVal!(gtk.toolbar.Toolbar)(_paramVals);
-      auto x = getVal!(int)(&_paramVals[1]);
-      auto y = getVal!(int)(&_paramVals[2]);
-      auto button = getVal!(int)(&_paramVals[3]);
-      _retval = _dClosure.dlg(x, y, button, toolbar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      auto _retval = _dClosure.cb(_paramTuple[]);
       setVal!bool(_returnValue, _retval);
     }
 
@@ -419,36 +460,43 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /**
+      Connect to `StyleChanged` signal.
+  
       Emitted when the style of the toolbar changes.
   
-    ## Parameters
-    $(LIST
-      * $(B style)       the new #GtkToolbarStyle of the toolbar
-      * $(B toolbar) the instance the signal is connected to
-    )
-  */
-  alias StyleChangedCallbackDlg = void delegate(gtk.types.ToolbarStyle style, gtk.toolbar.Toolbar toolbar);
-
-  /** ditto */
-  alias StyleChangedCallbackFunc = void function(gtk.types.ToolbarStyle style, gtk.toolbar.Toolbar toolbar);
-
-  /**
-    Connect to StyleChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.ToolbarStyle style, gtk.toolbar.Toolbar toolbar))
+  
+          `style` the new #GtkToolbarStyle of the toolbar (optional)
+  
+          `toolbar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectStyleChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : StyleChangedCallbackDlg) || is(T : StyleChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.ToolbarStyle)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.toolbar.Toolbar)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto toolbar = getVal!(gtk.toolbar.Toolbar)(_paramVals);
-      auto style = getVal!(gtk.types.ToolbarStyle)(&_paramVals[1]);
-      _dClosure.dlg(style, toolbar);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [PadActionEntry] class
 module gtk.pad_action_entry;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class PadActionEntry
 {
   GtkPadActionEntry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class PadActionEntry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

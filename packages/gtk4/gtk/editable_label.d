@@ -1,3 +1,4 @@
+/// Module for [EditableLabel] class
 module gtk.editable_label;
 
 import gid.gid;
@@ -16,48 +17,51 @@ import gtk.widget;
 
 /**
     A [gtk.editable_label.EditableLabel] is a label that allows users to
-  edit the text by switching to an “edit mode”.
-  
-  ![An example GtkEditableLabel](editable-label.png)
-  
-  [gtk.editable_label.EditableLabel] does not have API of its own, but it
-  implements the [gtk.editable.Editable] interface.
-  
-  The default bindings for activating the edit mode is
-  to click or press the Enter key. The default bindings
-  for leaving the edit mode are the Enter key (to save
-  the results) or the Escape key (to cancel the editing).
-  
-  # CSS nodes
-  
-  ```
-  editablelabel[.editing]
-  ╰── stack
-      ├── label
-      ╰── text
-  ```
-  
-  [gtk.editable_label.EditableLabel] has a main node with the name editablelabel.
-  When the entry is in editing mode, it gets the .editing style
-  class.
-  
-  For all the subnodes added to the text node in various situations,
-  see [gtk.text.Text].
+    edit the text by switching to an “edit mode”.
+    
+    ![An example GtkEditableLabel](editable-label.png)
+    
+    [gtk.editable_label.EditableLabel] does not have API of its own, but it
+    implements the [gtk.editable.Editable] interface.
+    
+    The default bindings for activating the edit mode is
+    to click or press the Enter key. The default bindings
+    for leaving the edit mode are the Enter key (to save
+    the results) or the Escape key (to cancel the editing).
+    
+    # CSS nodes
+    
+    ```
+    editablelabel[.editing]
+    ╰── stack
+        ├── label
+        ╰── text
+    ```
+    
+    [gtk.editable_label.EditableLabel] has a main node with the name editablelabel.
+    When the entry is in editing mode, it gets the .editing style
+    class.
+    
+    For all the subnodes added to the text node in various situations,
+    see [gtk.text.Text].
 */
 class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_label_get_type != &gidSymbolNotFound ? gtk_editable_label_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -72,9 +76,10 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 
   /**
       Creates a new [gtk.editable_label.EditableLabel] widget.
-    Params:
-      str =       the text for the label
-    Returns:     the new [gtk.editable_label.EditableLabel]
+  
+      Params:
+        str = the text for the label
+      Returns: the new [gtk.editable_label.EditableLabel]
   */
   this(string str)
   {
@@ -86,7 +91,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 
   /**
       Returns whether the label is currently in “editing mode”.
-    Returns:     true if self is currently in editing mode
+      Returns: true if self is currently in editing mode
   */
   bool getEditing()
   {
@@ -105,13 +110,14 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
 
   /**
       Switches the label out of “editing mode”.
-    
-    If commit is true, the resulting text is kept as the
-    [gtk.editable.Editable.utf8] property value, otherwise the
-    resulting text is discarded and the label will keep its
-    previous [gtk.editable.Editable.utf8] property value.
-    Params:
-      commit =       whether to set the edited text on the label
+      
+      If commit is true, the resulting text is kept as the
+      [gtk.editable.Editable.utf8] property value, otherwise the
+      resulting text is discarded and the label will keep its
+      previous [gtk.editable.Editable.utf8] property value.
+  
+      Params:
+        commit = whether to set the edited text on the label
   */
   void stopEditing(bool commit)
   {

@@ -1,3 +1,4 @@
+/// Module for [Query] class
 module gst.query;
 
 import gid.gid;
@@ -16,53 +17,58 @@ import gst.types;
 
 /**
     Queries can be performed on pads ([gst.pad.Pad.query]) and elements
-  ([gst.element.Element.query]). Please note that some queries might need a running
-  pipeline to work.
-  
-  Queries can be created using the gst_query_new_*() functions.
-  Query values can be set using gst_query_set_*(), and parsed using
-  gst_query_parse_*() helpers.
-  
-  The following example shows how to query the duration of a pipeline:
-  ```c
-    GstQuery *query;
-    gboolean res;
-    query = gst_query_new_duration (GST_FORMAT_TIME);
-    res = gst_element_query (pipeline, query);
-    if (res) {
-      gint64 duration;
-      gst_query_parse_duration (query, NULL, &duration);
-      g_print ("duration = %"GST_TIME_FORMAT, GST_TIME_ARGS (duration));
-    } else {
-      g_print ("duration query failed...");
-    }
-    gst_query_unref (query);
-  ```
+    ([gst.element.Element.query]). Please note that some queries might need a running
+    pipeline to work.
+    
+    Queries can be created using the gst_query_new_*() functions.
+    Query values can be set using gst_query_set_*(), and parsed using
+    gst_query_parse_*() helpers.
+    
+    The following example shows how to query the duration of a pipeline:
+    ```c
+      GstQuery *query;
+      gboolean res;
+      query = gst_query_new_duration (GST_FORMAT_TIME);
+      res = gst_element_query (pipeline, query);
+      if (res) {
+        gint64 duration;
+        gst_query_parse_duration (query, NULL, &duration);
+        g_print ("duration = %"GST_TIME_FORMAT, GST_TIME_ARGS (duration));
+      } else {
+        g_print ("duration query failed...");
+      }
+      gst_query_unref (query);
+    ```
 */
 class Query : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(GstQuery.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_query_get_type != &gidSymbolNotFound ? gst_query_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -90,11 +96,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying if caps are accepted.
-    
-    Free-function: gst_query_unref()
-    Params:
-      caps =       a fixed #GstCaps
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        caps = a fixed #GstCaps
+      Returns: a new #GstQuery
   */
   static gst.query.Query newAcceptCaps(gst.caps.Caps caps)
   {
@@ -106,12 +113,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the allocation properties.
-    
-    Free-function: gst_query_unref()
-    Params:
-      caps =       the negotiated caps
-      needPool =       return a pool
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        caps = the negotiated caps
+        needPool = return a pool
+      Returns: a new #GstQuery
   */
   static gst.query.Query newAllocation(gst.caps.Caps caps, bool needPool)
   {
@@ -123,9 +131,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the bitrate.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newBitrate()
   {
@@ -137,12 +145,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the buffering status of
-    a stream.
-    
-    Free-function: gst_query_unref()
-    Params:
-      format =       the default #GstFormat for the new query
-    Returns:     a new #GstQuery
+      a stream.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        format = the default #GstFormat for the new query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newBuffering(gst.types.Format format)
   {
@@ -154,28 +163,29 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the caps.
-    
-    The CAPS query should return the allowable caps for a pad in the context
-    of the element's state, its link to other elements, and the devices or files
-    it has opened. These caps must be a subset of the pad template caps. In the
-    NULL state with no links, the CAPS query should ideally return the same caps
-    as the pad template. In rare circumstances, an object property can affect
-    the caps returned by the CAPS query, but this is discouraged.
-    
-    For most filters, the caps returned by CAPS query is directly affected by the
-    allowed caps on other pads. For demuxers and decoders, the caps returned by
-    the srcpad's getcaps function is directly related to the stream data. Again,
-    the CAPS query should return the most specific caps it reasonably can, since this
-    helps with autoplugging.
-    
-    The filter is used to restrict the result caps, only the caps matching
-    filter should be returned from the CAPS query. Specifying a filter might
-    greatly reduce the amount of processing an element needs to do.
-    
-    Free-function: gst_query_unref()
-    Params:
-      filter =       a filter
-    Returns:     a new #GstQuery
+      
+      The CAPS query should return the allowable caps for a pad in the context
+      of the element's state, its link to other elements, and the devices or files
+      it has opened. These caps must be a subset of the pad template caps. In the
+      NULL state with no links, the CAPS query should ideally return the same caps
+      as the pad template. In rare circumstances, an object property can affect
+      the caps returned by the CAPS query, but this is discouraged.
+      
+      For most filters, the caps returned by CAPS query is directly affected by the
+      allowed caps on other pads. For demuxers and decoders, the caps returned by
+      the srcpad's getcaps function is directly related to the stream data. Again,
+      the CAPS query should return the most specific caps it reasonably can, since this
+      helps with autoplugging.
+      
+      The filter is used to restrict the result caps, only the caps matching
+      filter should be returned from the CAPS query. Specifying a filter might
+      greatly reduce the amount of processing an element needs to do.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        filter = a filter
+      Returns: a new #GstQuery
   */
   static gst.query.Query newCaps(gst.caps.Caps filter)
   {
@@ -187,11 +197,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the pipeline-local context.
-    
-    Free-function: gst_query_unref()
-    Params:
-      contextType =       Context type to query
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        contextType = Context type to query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newContext(string contextType)
   {
@@ -204,15 +215,16 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new convert query object. Use gst_query_unref()
-    when done with it. A convert query is used to ask for a conversion between
-    one format and another.
-    
-    Free-function: gst_query_unref()
-    Params:
-      srcFormat =       the source #GstFormat for the new query
-      value =       the value to convert
-      destFormat =       the target #GstFormat
-    Returns:     a #GstQuery
+      when done with it. A convert query is used to ask for a conversion between
+      one format and another.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        srcFormat = the source #GstFormat for the new query
+        value = the value to convert
+        destFormat = the target #GstFormat
+      Returns: a #GstQuery
   */
   static gst.query.Query newConvert(gst.types.Format srcFormat, long value, gst.types.Format destFormat)
   {
@@ -224,13 +236,14 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new custom query object. Use gst_query_unref()
-    when done with it.
-    
-    Free-function: gst_query_unref()
-    Params:
-      type =       the query type
-      structure =       a structure for the query
-    Returns:     a new #GstQuery
+      when done with it.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        type = the query type
+        structure = a structure for the query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newCustom(gst.types.QueryType type, gst.structure.Structure structure = null)
   {
@@ -242,9 +255,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the drain state.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newDrain()
   {
@@ -256,13 +269,14 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new stream duration query object to query in the given format.
-    Use gst_query_unref() when done with it. A duration query will give the
-    total length of the stream.
-    
-    Free-function: gst_query_unref()
-    Params:
-      format =       the #GstFormat for this duration query
-    Returns:     a new #GstQuery
+      Use gst_query_unref() when done with it. A duration query will give the
+      total length of the stream.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        format = the #GstFormat for this duration query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newDuration(gst.types.Format format)
   {
@@ -274,10 +288,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying formats of
-    the stream.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      the stream.
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newFormats()
   {
@@ -289,12 +303,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new latency query object.
-    Use gst_query_unref() when done with it. A latency query is usually performed
-    by sinks to compensate for additional latency introduced by elements in the
-    pipeline.
-    
-    Free-function: gst_query_unref()
-    Returns:     a #GstQuery
+      Use gst_query_unref() when done with it. A latency query is usually performed
+      by sinks to compensate for additional latency introduced by elements in the
+      pipeline.
+      
+      Free-function: gst_query_unref()
+      Returns: a #GstQuery
   */
   static gst.query.Query newLatency()
   {
@@ -306,13 +320,14 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query stream position query object. Use gst_query_unref()
-    when done with it. A position query is used to query the current position
-    of playback in the streams, in some format.
-    
-    Free-function: gst_query_unref()
-    Params:
-      format =       the default #GstFormat for the new query
-    Returns:     a new #GstQuery
+      when done with it. A position query is used to query the current position
+      of playback in the streams, in some format.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        format = the default #GstFormat for the new query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newPosition(gst.types.Format format)
   {
@@ -324,9 +339,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the scheduling properties.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newScheduling()
   {
@@ -338,12 +353,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying seeking properties of
-    the stream.
-    
-    Free-function: gst_query_unref()
-    Params:
-      format =       the default #GstFormat for the new query
-    Returns:     a new #GstQuery
+      the stream.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        format = the default #GstFormat for the new query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newSeeking(gst.types.Format format)
   {
@@ -355,13 +371,14 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new segment query object. Use gst_query_unref()
-    when done with it. A segment query is used to discover information about the
-    currently configured segment for playback.
-    
-    Free-function: gst_query_unref()
-    Params:
-      format =       the #GstFormat for the new query
-    Returns:     a new #GstQuery
+      when done with it. A segment query is used to discover information about the
+      currently configured segment for playback.
+      
+      Free-function: gst_query_unref()
+  
+      Params:
+        format = the #GstFormat for the new query
+      Returns: a new #GstQuery
   */
   static gst.query.Query newSegment(gst.types.Format format)
   {
@@ -373,9 +390,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query object for querying the stream selection capability.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newSelectable()
   {
@@ -387,11 +404,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Constructs a new query URI query object. Use gst_query_unref()
-    when done with it. An URI query is used to query the current URI
-    that is used by the source or sink.
-    
-    Free-function: gst_query_unref()
-    Returns:     a new #GstQuery
+      when done with it. An URI query is used to query the current URI
+      that is used by the source or sink.
+      
+      Free-function: gst_query_unref()
+      Returns: a new #GstQuery
   */
   static gst.query.Query newUri()
   {
@@ -403,9 +420,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Add api with params as one of the supported metadata API to query.
-    Params:
-      api =       the metadata API
-      params =       API specific parameters
+  
+      Params:
+        api = the metadata API
+        params = API specific parameters
   */
   void addAllocationMeta(gobject.types.GType api, gst.structure.Structure params = null)
   {
@@ -414,9 +432,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Add allocator and its params as a supported memory allocator.
-    Params:
-      allocator =       the memory allocator
-      params =       a #GstAllocationParams
+  
+      Params:
+        allocator = the memory allocator
+        params = a #GstAllocationParams
   */
   void addAllocationParam(gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
@@ -425,11 +444,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the pool parameters in query.
-    Params:
-      pool =       the #GstBufferPool
-      size =       the buffer size
-      minBuffers =       the min buffers
-      maxBuffers =       the max buffers
+  
+      Params:
+        pool = the #GstBufferPool
+        size = the buffer size
+        minBuffers = the min buffers
+        maxBuffers = the max buffers
   */
   void addAllocationPool(gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
   {
@@ -438,11 +458,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the buffering-ranges array field in query. The current last
-    start position of the array should be inferior to start.
-    Params:
-      start =       start position of the range
-      stop =       stop position of the range
-    Returns:     a #gboolean indicating if the range was added or not.
+      start position of the array should be inferior to start.
+  
+      Params:
+        start = start position of the range
+        stop = stop position of the range
+      Returns: a #gboolean indicating if the range was added or not.
   */
   bool addBufferingRange(long start, long stop)
   {
@@ -453,8 +474,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Add mode as one of the supported scheduling modes to query.
-    Params:
-      mode =       a #GstPadMode
+  
+      Params:
+        mode = a #GstPadMode
   */
   void addSchedulingMode(gst.types.PadMode mode)
   {
@@ -463,12 +485,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Check if query has metadata api set. When this function returns true,
-    index will contain the index where the requested API and the parameters
-    can be found.
-    Params:
-      api =       the metadata API
-      index =       the index
-    Returns:     true when api is in the list of metadata.
+      index will contain the index where the requested API and the parameters
+      can be found.
+  
+      Params:
+        api = the metadata API
+        index = the index
+      Returns: true when api is in the list of metadata.
   */
   bool findAllocationMeta(gobject.types.GType api, out uint index)
   {
@@ -479,8 +502,8 @@ class Query : gobject.boxed.Boxed
 
   /**
       Retrieve the number of values currently stored in the
-    meta API array of the query's structure.
-    Returns:     the metadata API array size as a #guint.
+      meta API array of the query's structure.
+      Returns: the metadata API array size as a #guint.
   */
   uint getNAllocationMetas()
   {
@@ -491,13 +514,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Retrieve the number of values currently stored in the
-    allocator params array of the query's structure.
-    
-    If no memory allocator is specified, the downstream element can handle
-    the default memory allocator. The first memory allocator in the query
-    should be generic and allow mapping to system memory, all following
-    allocators should be ordered by preference with the preferred one first.
-    Returns:     the allocator array size as a #guint.
+      allocator params array of the query's structure.
+      
+      If no memory allocator is specified, the downstream element can handle
+      the default memory allocator. The first memory allocator in the query
+      should be generic and allow mapping to system memory, all following
+      allocators should be ordered by preference with the preferred one first.
+      Returns: the allocator array size as a #guint.
   */
   uint getNAllocationParams()
   {
@@ -508,8 +531,8 @@ class Query : gobject.boxed.Boxed
 
   /**
       Retrieve the number of values currently stored in the
-    pool array of the query's structure.
-    Returns:     the pool array size as a #guint.
+      pool array of the query's structure.
+      Returns: the pool array size as a #guint.
   */
   uint getNAllocationPools()
   {
@@ -520,8 +543,8 @@ class Query : gobject.boxed.Boxed
 
   /**
       Retrieve the number of values currently stored in the
-    buffered-ranges array of the query's structure.
-    Returns:     the range array size as a #guint.
+      buffered-ranges array of the query's structure.
+      Returns: the range array size as a #guint.
   */
   uint getNBufferingRanges()
   {
@@ -532,8 +555,8 @@ class Query : gobject.boxed.Boxed
 
   /**
       Retrieve the number of values currently stored in the
-    scheduling mode array of the query's structure.
-    Returns:     the scheduling mode array size as a #guint.
+      scheduling mode array of the query's structure.
+      Returns: the scheduling mode array size as a #guint.
   */
   uint getNSchedulingModes()
   {
@@ -544,9 +567,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the structure of a query.
-    Returns:     the #GstStructure of the query. The
-          structure is still owned by the query and will therefore be freed when the
-          query is unreffed.
+      Returns: the #GstStructure of the query. The
+            structure is still owned by the query and will therefore be freed when the
+            query is unreffed.
   */
   gst.structure.Structure getStructure()
   {
@@ -558,15 +581,16 @@ class Query : gobject.boxed.Boxed
 
   /**
       Check if query has scheduling mode set.
-    
-    > When checking if upstream supports pull mode, it is usually not
-    > enough to just check for GST_PAD_MODE_PULL with this function, you
-    > also want to check whether the scheduling flags returned by
-    > [gst.query.Query.parseScheduling] have the seeking flag set (meaning
-    > random access is supported, not only sequential pulls).
-    Params:
-      mode =       the scheduling mode
-    Returns:     true when mode is in the list of scheduling modes.
+      
+      > When checking if upstream supports pull mode, it is usually not
+      > enough to just check for GST_PAD_MODE_PULL with this function, you
+      > also want to check whether the scheduling flags returned by
+      > [gst.query.Query.parseScheduling] have the seeking flag set (meaning
+      > random access is supported, not only sequential pulls).
+  
+      Params:
+        mode = the scheduling mode
+      Returns: true when mode is in the list of scheduling modes.
   */
   bool hasSchedulingMode(gst.types.PadMode mode)
   {
@@ -577,12 +601,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Check if query has scheduling mode set and flags is set in
-    query scheduling flags.
-    Params:
-      mode =       the scheduling mode
-      flags =       #GstSchedulingFlags
-    Returns:     true when mode is in the list of scheduling modes
-         and flags are compatible with query flags.
+      query scheduling flags.
+  
+      Params:
+        mode = the scheduling mode
+        flags = #GstSchedulingFlags
+      Returns: true when mode is in the list of scheduling modes
+           and flags are compatible with query flags.
   */
   bool hasSchedulingModeWithFlags(gst.types.PadMode mode, gst.types.SchedulingFlags flags)
   {
@@ -593,9 +618,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the caps from query. The caps remains valid as long as query remains
-    valid.
-    Params:
-      caps =       A pointer to the caps
+      valid.
+  
+      Params:
+        caps = A pointer to the caps
   */
   void parseAcceptCaps(out gst.caps.Caps caps)
   {
@@ -606,8 +632,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse the result from query and store in result.
-    Params:
-      result =       location for the result
+  
+      Params:
+        result = location for the result
   */
   void parseAcceptCapsResult(out bool result)
   {
@@ -616,14 +643,15 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an allocation query, writing the requested caps in caps and
-    whether a pool is needed in need_pool, if the respective parameters
-    are non-null.
-    
-    Pool details can be retrieved using [gst.query.Query.getNAllocationPools] and
-    [gst.query.Query.parseNthAllocationPool].
-    Params:
-      caps =       The #GstCaps
-      needPool =       Whether a #GstBufferPool is needed
+      whether a pool is needed in need_pool, if the respective parameters
+      are non-null.
+      
+      Pool details can be retrieved using [gst.query.Query.getNAllocationPools] and
+      [gst.query.Query.parseNthAllocationPool].
+  
+      Params:
+        caps = The #GstCaps
+        needPool = Whether a #GstBufferPool is needed
   */
   void parseAllocation(out gst.caps.Caps caps, out bool needPool)
   {
@@ -634,8 +662,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the results of a bitrate query. See also [gst.query.Query.setBitrate].
-    Params:
-      nominalBitrate =       The resulting bitrate in bits per second
+  
+      Params:
+        nominalBitrate = The resulting bitrate in bits per second
   */
   void parseBitrate(out uint nominalBitrate)
   {
@@ -644,10 +673,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the percentage of buffered data. This is a value between 0 and 100.
-    The busy indicator is true when the buffering is in progress.
-    Params:
-      busy =       if buffering is busy, or null
-      percent =       a buffering percent, or null
+      The busy indicator is true when the buffering is in progress.
+  
+      Params:
+        busy = if buffering is busy, or null
+        percent = a buffering percent, or null
   */
   void parseBufferingPercent(out bool busy, out int percent)
   {
@@ -656,15 +686,16 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query, writing the format into format, and
-    other results into the passed parameters, if the respective parameters
-    are non-null
-    Params:
-      format =       the format to set for the segment_start
-            and segment_end values, or null
-      start =       the start to set, or null
-      stop =       the stop to set, or null
-      estimatedTotal =       estimated total amount of download
-            time remaining in milliseconds, or null
+      other results into the passed parameters, if the respective parameters
+      are non-null
+  
+      Params:
+        format = the format to set for the segment_start
+              and segment_end values, or null
+        start = the start to set, or null
+        stop = the stop to set, or null
+        estimatedTotal = estimated total amount of download
+              time remaining in milliseconds, or null
   */
   void parseBufferingRange(out gst.types.Format format, out long start, out long stop, out long estimatedTotal)
   {
@@ -673,12 +704,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Extracts the buffering stats values from query.
-    Params:
-      mode =       a buffering mode, or null
-      avgIn =       the average input rate, or null
-      avgOut =       the average output rat, or null
-      bufferingLeft =       amount of buffering time left in
-            milliseconds, or null
+  
+      Params:
+        mode = a buffering mode, or null
+        avgIn = the average input rate, or null
+        avgOut = the average output rat, or null
+        bufferingLeft = amount of buffering time left in
+              milliseconds, or null
   */
   void parseBufferingStats(out gst.types.BufferingMode mode, out int avgIn, out int avgOut, out long bufferingLeft)
   {
@@ -687,9 +719,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the filter from the caps query. The caps remains valid as long as
-    query remains valid.
-    Params:
-      filter =       A pointer to the caps filter
+      query remains valid.
+  
+      Params:
+        filter = A pointer to the caps filter
   */
   void parseCaps(out gst.caps.Caps filter)
   {
@@ -700,9 +733,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the caps result from query. The caps remains valid as long as
-    query remains valid.
-    Params:
-      caps =       A pointer to the caps
+      query remains valid.
+  
+      Params:
+        caps = A pointer to the caps
   */
   void parseCapsResult(out gst.caps.Caps caps)
   {
@@ -713,9 +747,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the context from the context query. The context remains valid as long as
-    query remains valid.
-    Params:
-      context =       A pointer to store the #GstContext
+      query remains valid.
+  
+      Params:
+        context = A pointer to store the #GstContext
   */
   void parseContext(out gst.context.Context context)
   {
@@ -726,9 +761,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a context type from an existing GST_QUERY_CONTEXT query.
-    Params:
-      contextType =       the context type, or null
-    Returns:     a #gboolean indicating if the parsing succeeded.
+  
+      Params:
+        contextType = the context type, or null
+      Returns: a #gboolean indicating if the parsing succeeded.
   */
   bool parseContextType(out string contextType)
   {
@@ -741,15 +777,16 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a convert query answer. Any of src_format, src_value, dest_format,
-    and dest_value may be null, in which case that value is omitted.
-    Params:
-      srcFormat =       the storage for the #GstFormat of the
-            source value, or null
-      srcValue =       the storage for the source value, or null
-      destFormat =       the storage for the #GstFormat of the
-            destination value, or null
-      destValue =       the storage for the destination value,
-            or null
+      and dest_value may be null, in which case that value is omitted.
+  
+      Params:
+        srcFormat = the storage for the #GstFormat of the
+              source value, or null
+        srcValue = the storage for the source value, or null
+        destFormat = the storage for the #GstFormat of the
+              destination value, or null
+        destValue = the storage for the destination value,
+              or null
   */
   void parseConvert(out gst.types.Format srcFormat, out long srcValue, out gst.types.Format destFormat, out long destValue)
   {
@@ -758,11 +795,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a duration query answer. Write the format of the duration into format,
-    and the value into duration, if the respective variables are non-null.
-    Params:
-      format =       the storage for the #GstFormat of the duration
-            value, or null.
-      duration =       the storage for the total duration, or null.
+      and the value into duration, if the respective variables are non-null.
+  
+      Params:
+        format = the storage for the #GstFormat of the duration
+              value, or null.
+        duration = the storage for the total duration, or null.
   */
   void parseDuration(out gst.types.Format format, out long duration)
   {
@@ -771,10 +809,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a latency query answer.
-    Params:
-      live =       storage for live or null
-      minLatency =       the storage for the min latency or null
-      maxLatency =       the storage for the max latency or null
+  
+      Params:
+        live = storage for live or null
+        minLatency = the storage for the min latency or null
+        maxLatency = the storage for the max latency or null
   */
   void parseLatency(out bool live, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
@@ -783,8 +822,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse the number of formats in the formats query.
-    Params:
-      nFormats =       the number of formats in this query.
+  
+      Params:
+        nFormats = the number of formats in this query.
   */
   void parseNFormats(out uint nFormats)
   {
@@ -793,11 +833,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query and get the metadata API
-    at index of the metadata API array.
-    Params:
-      index =       position in the metadata API array to read
-      params =       API specific parameters
-    Returns:     a #GType of the metadata API at index.
+      at index of the metadata API array.
+  
+      Params:
+        index = position in the metadata API array to read
+        params = API specific parameters
+      Returns: a #GType of the metadata API at index.
   */
   gobject.types.GType parseNthAllocationMeta(uint index, out gst.structure.Structure params)
   {
@@ -810,11 +851,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query and get the allocator and its params
-    at index of the allocator array.
-    Params:
-      index =       position in the allocator array to read
-      allocator =       variable to hold the result
-      params =       parameters for the allocator
+      at index of the allocator array.
+  
+      Params:
+        index = position in the allocator array to read
+        allocator = variable to hold the result
+        params = parameters for the allocator
   */
   void parseNthAllocationParam(uint index, out gst.allocator.Allocator allocator, out gst.allocation_params.AllocationParams params)
   {
@@ -827,14 +869,15 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the pool parameters in query.
-    
-    Unref pool with [gst.object.ObjectGst.unref] when it's not needed any more.
-    Params:
-      index =       index to parse
-      pool =       the #GstBufferPool
-      size =       the buffer size
-      minBuffers =       the min buffers
-      maxBuffers =       the max buffers
+      
+      Unref pool with [gst.object.ObjectGst.unref] when it's not needed any more.
+  
+      Params:
+        index = index to parse
+        pool = the #GstBufferPool
+        size = the buffer size
+        minBuffers = the min buffers
+        maxBuffers = the max buffers
   */
   void parseNthAllocationPool(uint index, out gst.buffer_pool.BufferPool pool, out uint size, out uint minBuffers, out uint maxBuffers)
   {
@@ -845,12 +888,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query and get the start and stop values stored
-    at the index of the buffered ranges array.
-    Params:
-      index =       position in the buffered-ranges array to read
-      start =       the start position to set, or null
-      stop =       the stop position to set, or null
-    Returns:     a #gboolean indicating if the parsing succeeded.
+      at the index of the buffered ranges array.
+  
+      Params:
+        index = position in the buffered-ranges array to read
+        start = the start position to set, or null
+        stop = the stop position to set, or null
+      Returns: a #gboolean indicating if the parsing succeeded.
   */
   bool parseNthBufferingRange(uint index, out long start, out long stop)
   {
@@ -861,11 +905,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse the format query and retrieve the nth format from it into
-    format. If the list contains less elements than nth, format will be
-    set to GST_FORMAT_UNDEFINED.
-    Params:
-      nth =       the nth format to retrieve.
-      format =       a pointer to store the nth format
+      format. If the list contains less elements than nth, format will be
+      set to GST_FORMAT_UNDEFINED.
+  
+      Params:
+        nth = the nth format to retrieve.
+        format = a pointer to store the nth format
   */
   void parseNthFormat(uint nth, out gst.types.Format format)
   {
@@ -874,10 +919,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query and get the scheduling mode
-    at index of the scheduling modes array.
-    Params:
-      index =       position in the scheduling modes array to read
-    Returns:     a #GstPadMode of the scheduling mode at index.
+      at index of the scheduling modes array.
+  
+      Params:
+        index = position in the scheduling modes array to read
+      Returns: a #GstPadMode of the scheduling mode at index.
   */
   gst.types.PadMode parseNthSchedulingMode(uint index)
   {
@@ -889,11 +935,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a position query, writing the format into format, and the position
-    into cur, if the respective parameters are non-null.
-    Params:
-      format =       the storage for the #GstFormat of the
-            position values (may be null)
-      cur =       the storage for the current position (may be null)
+      into cur, if the respective parameters are non-null.
+  
+      Params:
+        format = the storage for the #GstFormat of the
+              position values (may be null)
+        cur = the storage for the current position (may be null)
   */
   void parsePosition(out gst.types.Format format, out long cur)
   {
@@ -902,11 +949,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the scheduling properties.
-    Params:
-      flags =       #GstSchedulingFlags
-      minsize =       the suggested minimum size of pull requests
-      maxsize =       the suggested maximum size of pull requests:
-      align_ =       the suggested alignment of pull requests
+  
+      Params:
+        flags = #GstSchedulingFlags
+        minsize = the suggested minimum size of pull requests
+        maxsize = the suggested maximum size of pull requests:
+        align_ = the suggested alignment of pull requests
   */
   void parseScheduling(out gst.types.SchedulingFlags flags, out int minsize, out int maxsize, out int align_)
   {
@@ -915,14 +963,15 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a seeking query, writing the format into format, and
-    other results into the passed parameters, if the respective parameters
-    are non-null
-    Params:
-      format =       the format to set for the segment_start
-            and segment_end values, or null
-      seekable =       the seekable flag to set, or null
-      segmentStart =       the segment_start to set, or null
-      segmentEnd =       the segment_end to set, or null
+      other results into the passed parameters, if the respective parameters
+      are non-null
+  
+      Params:
+        format = the format to set for the segment_start
+              and segment_end values, or null
+        seekable = the seekable flag to set, or null
+        segmentStart = the segment_start to set, or null
+        segmentEnd = the segment_end to set, or null
   */
   void parseSeeking(out gst.types.Format format, out bool seekable, out long segmentStart, out long segmentEnd)
   {
@@ -931,15 +980,16 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse a segment query answer. Any of rate, format, start_value, and
-    stop_value may be null, which will cause this value to be omitted.
-    
-    See [gst.query.Query.setSegment] for an explanation of the function arguments.
-    Params:
-      rate =       the storage for the rate of the segment, or null
-      format =       the storage for the #GstFormat of the values,
-            or null
-      startValue =       the storage for the start value, or null
-      stopValue =       the storage for the stop value, or null
+      stop_value may be null, which will cause this value to be omitted.
+      
+      See [gst.query.Query.setSegment] for an explanation of the function arguments.
+  
+      Params:
+        rate = the storage for the rate of the segment, or null
+        format = the storage for the #GstFormat of the values,
+              or null
+        startValue = the storage for the start value, or null
+        stopValue = the storage for the stop value, or null
   */
   void parseSegment(out double rate, out gst.types.Format format, out long startValue, out long stopValue)
   {
@@ -948,8 +998,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the results of a selectable query. See also [gst.query.Query.setSelectable].
-    Params:
-      selectable =       The resulting stream selection capability
+  
+      Params:
+        selectable = The resulting stream selection capability
   */
   void parseSelectable(out bool selectable)
   {
@@ -958,11 +1009,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an URI query, writing the URI into uri as a newly
-    allocated string, if the respective parameters are non-null.
-    Free the string with [glib.global.gfree] after usage.
-    Params:
-      uri =       the storage for the current URI
-            (may be null)
+      allocated string, if the respective parameters are non-null.
+      Free the string with [glib.global.gfree] after usage.
+  
+      Params:
+        uri = the storage for the current URI
+              (may be null)
   */
   void parseUri(out string uri)
   {
@@ -973,11 +1025,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an URI query, writing the URI into uri as a newly
-    allocated string, if the respective parameters are non-null.
-    Free the string with [glib.global.gfree] after usage.
-    Params:
-      uri =       the storage for the redirect URI
-            (may be null)
+      allocated string, if the respective parameters are non-null.
+      Free the string with [glib.global.gfree] after usage.
+  
+      Params:
+        uri = the storage for the redirect URI
+              (may be null)
   */
   void parseUriRedirection(out string uri)
   {
@@ -988,12 +1041,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an URI query, and set permanent to true if there is a redirection
-    and it should be considered permanent. If a redirection is permanent,
-    applications should update their internal storage of the URI, otherwise
-    they should make all future requests to the original URI.
-    Params:
-      permanent =       if the URI redirection is permanent
-            (may be null)
+      and it should be considered permanent. If a redirection is permanent,
+      applications should update their internal storage of the URI, otherwise
+      they should make all future requests to the original URI.
+  
+      Params:
+        permanent = if the URI redirection is permanent
+              (may be null)
   */
   void parseUriRedirectionPermanent(out bool permanent)
   {
@@ -1002,8 +1056,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Remove the metadata API at index of the metadata API array.
-    Params:
-      index =       position in the metadata API array to remove
+  
+      Params:
+        index = position in the metadata API array to remove
   */
   void removeNthAllocationMeta(uint index)
   {
@@ -1012,8 +1067,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Remove the allocation param at index of the allocation param array.
-    Params:
-      index =       position in the allocation param array to remove
+  
+      Params:
+        index = position in the allocation param array to remove
   */
   void removeNthAllocationParam(uint index)
   {
@@ -1022,8 +1078,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Remove the allocation pool at index of the allocation pool array.
-    Params:
-      index =       position in the allocation pool array to remove
+  
+      Params:
+        index = position in the allocation pool array to remove
   */
   void removeNthAllocationPool(uint index)
   {
@@ -1032,8 +1089,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set result as the result for the query.
-    Params:
-      result =       the result to set
+  
+      Params:
+        result = the result to set
   */
   void setAcceptCapsResult(bool result)
   {
@@ -1042,10 +1100,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the results of a bitrate query.  The nominal bitrate is the average
-    bitrate expected over the length of the stream as advertised in file
-    headers (or similar).
-    Params:
-      nominalBitrate =       the nominal bitrate in bits per second
+      bitrate expected over the length of the stream as advertised in file
+      headers (or similar).
+  
+      Params:
+        nominalBitrate = the nominal bitrate in bits per second
   */
   void setBitrate(uint nominalBitrate)
   {
@@ -1054,10 +1113,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the percentage of buffered data. This is a value between 0 and 100.
-    The busy indicator is true when the buffering is in progress.
-    Params:
-      busy =       if buffering is busy
-      percent =       a buffering percent
+      The busy indicator is true when the buffering is in progress.
+  
+      Params:
+        busy = if buffering is busy
+        percent = a buffering percent
   */
   void setBufferingPercent(bool busy, int percent)
   {
@@ -1066,12 +1126,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the available query result fields in query.
-    Params:
-      format =       the format to set for the start and stop values
-      start =       the start to set
-      stop =       the stop to set
-      estimatedTotal =       estimated total amount of download time remaining in
-            milliseconds
+  
+      Params:
+        format = the format to set for the start and stop values
+        start = the start to set
+        stop = the stop to set
+        estimatedTotal = estimated total amount of download time remaining in
+              milliseconds
   */
   void setBufferingRange(gst.types.Format format, long start, long stop, long estimatedTotal)
   {
@@ -1080,11 +1141,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Configures the buffering stats values in query.
-    Params:
-      mode =       a buffering mode
-      avgIn =       the average input rate
-      avgOut =       the average output rate
-      bufferingLeft =       amount of buffering time left in milliseconds
+  
+      Params:
+        mode = a buffering mode
+        avgIn = the average input rate
+        avgOut = the average output rate
+        bufferingLeft = amount of buffering time left in milliseconds
   */
   void setBufferingStats(gst.types.BufferingMode mode, int avgIn, int avgOut, long bufferingLeft)
   {
@@ -1093,8 +1155,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the caps result in query.
-    Params:
-      caps =       A pointer to the caps
+  
+      Params:
+        caps = A pointer to the caps
   */
   void setCapsResult(gst.caps.Caps caps = null)
   {
@@ -1103,8 +1166,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a context query by setting the requested context.
-    Params:
-      context =       the requested #GstContext
+  
+      Params:
+        context = the requested #GstContext
   */
   void setContext(gst.context.Context context = null)
   {
@@ -1113,11 +1177,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a convert query by setting the requested values.
-    Params:
-      srcFormat =       the source #GstFormat
-      srcValue =       the source value
-      destFormat =       the destination #GstFormat
-      destValue =       the destination value
+  
+      Params:
+        srcFormat = the source #GstFormat
+        srcValue = the source value
+        destFormat = the destination #GstFormat
+        destValue = the destination value
   */
   void setConvert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, long destValue)
   {
@@ -1126,9 +1191,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a duration query by setting the requested value in the given format.
-    Params:
-      format =       the #GstFormat for the duration
-      duration =       the duration of the stream
+  
+      Params:
+        format = the #GstFormat for the duration
+        duration = the duration of the stream
   */
   void setDuration(gst.types.Format format, long duration)
   {
@@ -1137,10 +1203,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the formats query result fields in query. The number of formats passed
-    in the formats array must be equal to n_formats.
-    Params:
-      formats =       an array containing n_formats
-            GstFormat values.
+      in the formats array must be equal to n_formats.
+  
+      Params:
+        formats = an array containing n_formats
+              GstFormat values.
   */
   void setFormatsv(gst.types.Format[] formats)
   {
@@ -1154,10 +1221,11 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a latency query by setting the requested values in the given format.
-    Params:
-      live =       if there is a live element upstream
-      minLatency =       the minimal latency of the upstream elements
-      maxLatency =       the maximal latency of the upstream elements
+  
+      Params:
+        live = if there is a live element upstream
+        minLatency = the minimal latency of the upstream elements
+        maxLatency = the maximal latency of the upstream elements
   */
   void setLatency(bool live, gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
   {
@@ -1166,11 +1234,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Parse an available query and get the allocator and its params
-    at index of the allocator array.
-    Params:
-      index =       position in the allocator array to set
-      allocator =       new allocator to set
-      params =       parameters for the allocator
+      at index of the allocator array.
+  
+      Params:
+        index = position in the allocator array to set
+        allocator = new allocator to set
+        params = parameters for the allocator
   */
   void setNthAllocationParam(uint index, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
@@ -1179,12 +1248,13 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the pool parameters in query.
-    Params:
-      index =       index to modify
-      pool =       the #GstBufferPool
-      size =       the buffer size
-      minBuffers =       the min buffers
-      maxBuffers =       the max buffers
+  
+      Params:
+        index = index to modify
+        pool = the #GstBufferPool
+        size = the buffer size
+        minBuffers = the min buffers
+        maxBuffers = the max buffers
   */
   void setNthAllocationPool(uint index, gst.buffer_pool.BufferPool pool, uint size, uint minBuffers, uint maxBuffers)
   {
@@ -1193,9 +1263,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a position query by setting the requested value in the given format.
-    Params:
-      format =       the requested #GstFormat
-      cur =       the position to set
+  
+      Params:
+        format = the requested #GstFormat
+        cur = the position to set
   */
   void setPosition(gst.types.Format format, long cur)
   {
@@ -1204,11 +1275,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the scheduling properties.
-    Params:
-      flags =       #GstSchedulingFlags
-      minsize =       the suggested minimum size of pull requests
-      maxsize =       the suggested maximum size of pull requests
-      align_ =       the suggested alignment of pull requests
+  
+      Params:
+        flags = #GstSchedulingFlags
+        minsize = the suggested minimum size of pull requests
+        maxsize = the suggested maximum size of pull requests
+        align_ = the suggested alignment of pull requests
   */
   void setScheduling(gst.types.SchedulingFlags flags, int minsize, int maxsize, int align_)
   {
@@ -1217,11 +1289,12 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the seeking query result fields in query.
-    Params:
-      format =       the format to set for the segment_start and segment_end values
-      seekable =       the seekable flag to set
-      segmentStart =       the segment_start to set
-      segmentEnd =       the segment_end to set
+  
+      Params:
+        format = the format to set for the segment_start and segment_end values
+        seekable = the seekable flag to set
+        segmentStart = the segment_start to set
+        segmentEnd = the segment_end to set
   */
   void setSeeking(gst.types.Format format, bool seekable, long segmentStart, long segmentEnd)
   {
@@ -1230,21 +1303,22 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a segment query by setting the requested values. The normal
-    playback segment of a pipeline is 0 to duration at the default rate of
-    1.0. If a seek was performed on the pipeline to play a different
-    segment, this query will return the range specified in the last seek.
-    
-    start_value and stop_value will respectively contain the configured
-    playback range start and stop values expressed in format.
-    The values are always between 0 and the duration of the media and
-    start_value <= stop_value. rate will contain the playback rate. For
-    negative rates, playback will actually happen from stop_value to
-    start_value.
-    Params:
-      rate =       the rate of the segment
-      format =       the #GstFormat of the segment values (start_value and stop_value)
-      startValue =       the start value
-      stopValue =       the stop value
+      playback segment of a pipeline is 0 to duration at the default rate of
+      1.0. If a seek was performed on the pipeline to play a different
+      segment, this query will return the range specified in the last seek.
+      
+      start_value and stop_value will respectively contain the configured
+      playback range start and stop values expressed in format.
+      The values are always between 0 and the duration of the media and
+      start_value <= stop_value. rate will contain the playback rate. For
+      negative rates, playback will actually happen from stop_value to
+      start_value.
+  
+      Params:
+        rate = the rate of the segment
+        format = the #GstFormat of the segment values (start_value and stop_value)
+        startValue = the start value
+        stopValue = the stop value
   */
   void setSegment(double rate, gst.types.Format format, long startValue, long stopValue)
   {
@@ -1253,9 +1327,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Set the results of a selectable query. If the element answering the query can
-    handle stream selection, selectable should be set to true.
-    Params:
-      selectable =       Whether the element can handle stream selection.
+      handle stream selection, selectable should be set to true.
+  
+      Params:
+        selectable = Whether the element can handle stream selection.
   */
   void setSelectable(bool selectable)
   {
@@ -1264,8 +1339,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a URI query by setting the requested URI.
-    Params:
-      uri =       the URI to set
+  
+      Params:
+        uri = the URI to set
   */
   void setUri(string uri = null)
   {
@@ -1275,8 +1351,9 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a URI query by setting the requested URI redirection.
-    Params:
-      uri =       the URI to set
+  
+      Params:
+        uri = the URI to set
   */
   void setUriRedirection(string uri = null)
   {
@@ -1286,9 +1363,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Answer a URI query by setting the requested URI redirection
-    to permanent or not.
-    Params:
-      permanent =       whether the redirect is permanent or not
+      to permanent or not.
+  
+      Params:
+        permanent = whether the redirect is permanent or not
   */
   void setUriRedirectionPermanent(bool permanent)
   {
@@ -1297,10 +1375,10 @@ class Query : gobject.boxed.Boxed
 
   /**
       Get the structure of a query. This method should be called with a writable
-    query so that the returned structure is guaranteed to be writable.
-    Returns:     the #GstStructure of the query. The structure is
-          still owned by the query and will therefore be freed when the query
-          is unreffed.
+      query so that the returned structure is guaranteed to be writable.
+      Returns: the #GstStructure of the query. The structure is
+            still owned by the query and will therefore be freed when the query
+            is unreffed.
   */
   gst.structure.Structure writableStructure()
   {

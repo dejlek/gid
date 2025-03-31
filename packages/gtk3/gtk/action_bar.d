@@ -1,3 +1,4 @@
+/// Module for [ActionBar] class
 module gtk.action_bar;
 
 import atk.implementor_iface;
@@ -14,32 +15,35 @@ import gtk.widget;
 
 /**
     GtkActionBar is designed to present contextual actions. It is
-  expected to be displayed below the content and expand horizontally
-  to fill the area.
-  
-  It allows placing children at the start or the end. In addition, it
-  contains an internal centered box which is centered with respect to
-  the full width of the box, even if the children at either side take
-  up different amounts of space.
-  
-  # CSS nodes
-  
-  GtkActionBar has a single CSS node with name actionbar.
+    expected to be displayed below the content and expand horizontally
+    to fill the area.
+    
+    It allows placing children at the start or the end. In addition, it
+    contains an internal centered box which is centered with respect to
+    the full width of the box, even if the children at either side take
+    up different amounts of space.
+    
+    # CSS nodes
+    
+    GtkActionBar has a single CSS node with name actionbar.
 */
 class ActionBar : gtk.bin.Bin
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_bar_get_type != &gidSymbolNotFound ? gtk_action_bar_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -52,7 +56,7 @@ class ActionBar : gtk.bin.Bin
 
   /**
       Creates a new #GtkActionBar widget.
-    Returns:     a new #GtkActionBar
+      Returns: a new #GtkActionBar
   */
   this()
   {
@@ -63,7 +67,7 @@ class ActionBar : gtk.bin.Bin
 
   /**
       Retrieves the center bar widget of the bar.
-    Returns:     the center #GtkWidget or null.
+      Returns: the center #GtkWidget or null.
   */
   gtk.widget.Widget getCenterWidget()
   {
@@ -75,9 +79,10 @@ class ActionBar : gtk.bin.Bin
 
   /**
       Adds child to action_bar, packed with reference to the
-    end of the action_bar.
-    Params:
-      child =       the #GtkWidget to be added to action_bar
+      end of the action_bar.
+  
+      Params:
+        child = the #GtkWidget to be added to action_bar
   */
   void packEnd(gtk.widget.Widget child)
   {
@@ -86,9 +91,10 @@ class ActionBar : gtk.bin.Bin
 
   /**
       Adds child to action_bar, packed with reference to the
-    start of the action_bar.
-    Params:
-      child =       the #GtkWidget to be added to action_bar
+      start of the action_bar.
+  
+      Params:
+        child = the #GtkWidget to be added to action_bar
   */
   void packStart(gtk.widget.Widget child)
   {
@@ -97,8 +103,9 @@ class ActionBar : gtk.bin.Bin
 
   /**
       Sets the center widget for the #GtkActionBar.
-    Params:
-      centerWidget =       a widget to use for the center
+  
+      Params:
+        centerWidget = a widget to use for the center
   */
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {

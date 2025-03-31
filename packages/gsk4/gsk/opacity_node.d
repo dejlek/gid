@@ -1,3 +1,4 @@
+/// Module for [OpacityNode] class
 module gsk.opacity_node;
 
 import gid.gid;
@@ -12,6 +13,7 @@ import gsk.types;
 class OpacityNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -22,11 +24,12 @@ class OpacityNode : gsk.render_node.RenderNode
 
   /**
       Creates a [gsk.render_node.RenderNode] that will drawn the child with reduced
-    opacity.
-    Params:
-      child =       The node to draw
-      opacity =       The opacity to apply
-    Returns:     A new [gsk.render_node.RenderNode]
+      opacity.
+  
+      Params:
+        child = The node to draw
+        opacity = The opacity to apply
+      Returns: A new [gsk.render_node.RenderNode]
   */
   this(gsk.render_node.RenderNode child, float opacity)
   {
@@ -37,7 +40,7 @@ class OpacityNode : gsk.render_node.RenderNode
 
   /**
       Gets the child node that is getting opacityed by the given node.
-    Returns:     The child that is getting opacityed
+      Returns: The child that is getting opacityed
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -49,7 +52,7 @@ class OpacityNode : gsk.render_node.RenderNode
 
   /**
       Gets the transparency factor for an opacity node.
-    Returns:     the opacity factor
+      Returns: the opacity factor
   */
   float getOpacity()
   {

@@ -1,3 +1,4 @@
+/// Module for [StaticCaps] class
 module gst.static_caps;
 
 import gid.gid;
@@ -8,13 +9,14 @@ import gst.types;
 
 /**
     Data structure to initialize #GstCaps from a string description usually
-  used in conjunction with GST_STATIC_CAPS() and [gst.static_caps.StaticCaps.get] to
-  instantiate a #GstCaps.
+    used in conjunction with GST_STATIC_CAPS() and [gst.static_caps.StaticCaps.get] to
+    instantiate a #GstCaps.
 */
 class StaticCaps
 {
   GstStaticCaps cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class StaticCaps
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -63,9 +66,9 @@ class StaticCaps
 
   /**
       Converts a #GstStaticCaps to a #GstCaps.
-    Returns:     a pointer to the #GstCaps. Since the
-          core holds an additional ref to the returned caps, use
-          gst_caps_make_writable() on the returned caps to modify it.
+      Returns: a pointer to the #GstCaps. Since the
+            core holds an additional ref to the returned caps, use
+            gst_caps_make_writable() on the returned caps to modify it.
   */
   gst.caps.Caps get()
   {

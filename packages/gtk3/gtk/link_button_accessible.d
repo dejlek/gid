@@ -1,3 +1,4 @@
+/// Module for [LinkButtonAccessible] class
 module gtk.link_button_accessible;
 
 import atk.action;
@@ -18,17 +19,20 @@ import gtk.types;
 class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperlink_impl.HyperlinkImpl
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_accessible_get_type != &gidSymbolNotFound ? gtk_link_button_accessible_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

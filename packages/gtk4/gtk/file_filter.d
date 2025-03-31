@@ -1,3 +1,4 @@
+/// Module for [FileFilter] class
 module gtk.file_filter;
 
 import gid.gid;
@@ -12,66 +13,69 @@ import gtk.types;
 
 /**
     [gtk.file_filter.FileFilter] filters files by name or mime type.
-  
-  [gtk.file_filter.FileFilter] can be used to restrict the files being shown in a
-  [gtk.file_chooser.FileChooser]. Files can be filtered based on their name (with
-  [gtk.file_filter.FileFilter.addPattern] or [gtk.file_filter.FileFilter.addSuffix])
-  or on their mime type (with [gtk.file_filter.FileFilter.addMimeType]).
-  
-  Filtering by mime types handles aliasing and subclassing of mime
-  types; e.g. a filter for text/plain also matches a file with mime
-  type application/rtf, since application/rtf is a subclass of
-  text/plain. Note that [gtk.file_filter.FileFilter] allows wildcards for the
-  subtype of a mime type, so you can e.g. filter for image/\*.
-  
-  Normally, file filters are used by adding them to a [gtk.file_chooser.FileChooser]
-  (see [gtk.file_chooser.FileChooser.addFilter]), but it is also possible to
-  manually use a file filter on any [gtk.filter_list_model.FilterListModel] containing
-  [gio.file_info.FileInfo] objects.
-  
-  # GtkFileFilter as GtkBuildable
-  
-  The [gtk.file_filter.FileFilter] implementation of the [gtk.buildable.Buildable] interface
-  supports adding rules using the `<mime-types>` and `<patterns>` and
-  `<suffixes>` elements and listing the rules within. Specifying a
-  `<mime-type>` or `<pattern>` or `<suffix>` has the same effect as
-  as calling
-  [gtk.file_filter.FileFilter.addMimeType] or
-  [gtk.file_filter.FileFilter.addPattern] or
-  [gtk.file_filter.FileFilter.addSuffix].
-  
-  An example of a UI definition fragment specifying [gtk.file_filter.FileFilter]
-  rules:
-  ```xml
-  <object class="GtkFileFilter">
-    <property name="name" translatable="yes">Text and Images</property>
-    <mime-types>
-      <mime-type>text/plain</mime-type>
-      <mime-type>image/ *</mime-type>
-    </mime-types>
-    <patterns>
-      <pattern>*.txt</pattern>
-    </patterns>
-    <suffixes>
-      <suffix>png</suffix>
-    </suffixes>
-  </object>
-  ```
+    
+    [gtk.file_filter.FileFilter] can be used to restrict the files being shown in a
+    [gtk.file_chooser.FileChooser]. Files can be filtered based on their name (with
+    [gtk.file_filter.FileFilter.addPattern] or [gtk.file_filter.FileFilter.addSuffix])
+    or on their mime type (with [gtk.file_filter.FileFilter.addMimeType]).
+    
+    Filtering by mime types handles aliasing and subclassing of mime
+    types; e.g. a filter for text/plain also matches a file with mime
+    type application/rtf, since application/rtf is a subclass of
+    text/plain. Note that [gtk.file_filter.FileFilter] allows wildcards for the
+    subtype of a mime type, so you can e.g. filter for image/\*.
+    
+    Normally, file filters are used by adding them to a [gtk.file_chooser.FileChooser]
+    (see [gtk.file_chooser.FileChooser.addFilter]), but it is also possible to
+    manually use a file filter on any [gtk.filter_list_model.FilterListModel] containing
+    [gio.file_info.FileInfo] objects.
+    
+    # GtkFileFilter as GtkBuildable
+    
+    The [gtk.file_filter.FileFilter] implementation of the [gtk.buildable.Buildable] interface
+    supports adding rules using the `<mime-types>` and `<patterns>` and
+    `<suffixes>` elements and listing the rules within. Specifying a
+    `<mime-type>` or `<pattern>` or `<suffix>` has the same effect as
+    as calling
+    [gtk.file_filter.FileFilter.addMimeType] or
+    [gtk.file_filter.FileFilter.addPattern] or
+    [gtk.file_filter.FileFilter.addSuffix].
+    
+    An example of a UI definition fragment specifying [gtk.file_filter.FileFilter]
+    rules:
+    ```xml
+    <object class="GtkFileFilter">
+      <property name="name" translatable="yes">Text and Images</property>
+      <mime-types>
+        <mime-type>text/plain</mime-type>
+        <mime-type>image/ *</mime-type>
+      </mime-types>
+      <patterns>
+        <pattern>*.txt</pattern>
+      </patterns>
+      <suffixes>
+        <suffix>png</suffix>
+      </suffixes>
+    </object>
+    ```
 */
 class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -86,20 +90,20 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Creates a new [gtk.file_filter.FileFilter] with no rules added to it.
-    
-    Such a filter doesn’t accept any files, so is not
-    particularly useful until you add rules with
-    [gtk.file_filter.FileFilter.addMimeType],
-    [gtk.file_filter.FileFilter.addPattern],
-    [gtk.file_filter.FileFilter.addSuffix] or
-    [gtk.file_filter.FileFilter.addPixbufFormats].
-    
-    To create a filter that accepts any file, use:
-    ```c
-    GtkFileFilter *filter = gtk_file_filter_new ();
-    gtk_file_filter_add_pattern (filter, "*");
-    ```
-    Returns:     a new [gtk.file_filter.FileFilter]
+      
+      Such a filter doesn’t accept any files, so is not
+      particularly useful until you add rules with
+      [gtk.file_filter.FileFilter.addMimeType],
+      [gtk.file_filter.FileFilter.addPattern],
+      [gtk.file_filter.FileFilter.addSuffix] or
+      [gtk.file_filter.FileFilter.addPixbufFormats].
+      
+      To create a filter that accepts any file, use:
+      ```c
+      GtkFileFilter *filter = gtk_file_filter_new ();
+      gtk_file_filter_add_pattern (filter, "*");
+      ```
+      Returns: a new [gtk.file_filter.FileFilter]
   */
   this()
   {
@@ -110,12 +114,13 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Deserialize a file filter from a [glib.variant.VariantG].
-    
-    The variant must be in the format produced by
-    [gtk.file_filter.FileFilter.toGvariant].
-    Params:
-      variant =       an `a{sv}` [glib.variant.VariantG]
-    Returns:     a new [gtk.file_filter.FileFilter] object
+      
+      The variant must be in the format produced by
+      [gtk.file_filter.FileFilter.toGvariant].
+  
+      Params:
+        variant = an `a{sv}` [glib.variant.VariantG]
+      Returns: a new [gtk.file_filter.FileFilter] object
   */
   static gtk.file_filter.FileFilter newFromGvariant(glib.variant.VariantG variant)
   {
@@ -127,8 +132,9 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Adds a rule allowing a given mime type to filter.
-    Params:
-      mimeType =       name of a MIME type
+  
+      Params:
+        mimeType = name of a MIME type
   */
   void addMimeType(string mimeType)
   {
@@ -138,12 +144,13 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Adds a rule allowing a shell style glob to a filter.
-    
-    Note that it depends on the platform whether pattern
-    matching ignores case or not. On Windows, it does, on
-    other platforms, it doesn't.
-    Params:
-      pattern =       a shell style glob
+      
+      Note that it depends on the platform whether pattern
+      matching ignores case or not. On Windows, it does, on
+      other platforms, it doesn't.
+  
+      Params:
+        pattern = a shell style glob
   */
   void addPattern(string pattern)
   {
@@ -153,10 +160,10 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Adds a rule allowing image files in the formats supported
-    by GdkPixbuf.
-    
-    This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
-    for all the supported mime types.
+      by GdkPixbuf.
+      
+      This is equivalent to calling [gtk.file_filter.FileFilter.addMimeType]
+      for all the supported mime types.
   */
   void addPixbufFormats()
   {
@@ -165,14 +172,15 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Adds a suffix match rule to a filter.
-    
-    This is similar to adding a match for the pattern
-    "*.suffix".
-    
-    In contrast to pattern matches, suffix matches
-    are *always* case-insensitive.
-    Params:
-      suffix =       filename suffix to match
+      
+      This is similar to adding a match for the pattern
+      "*.suffix".
+      
+      In contrast to pattern matches, suffix matches
+      are *always* case-insensitive.
+  
+      Params:
+        suffix = filename suffix to match
   */
   void addSuffix(string suffix)
   {
@@ -182,12 +190,12 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Gets the attributes that need to be filled in for the [gio.file_info.FileInfo]
-    passed to this filter.
-    
-    This function will not typically be used by applications;
-    it is intended principally for use in the implementation
-    of [gtk.file_chooser.FileChooser].
-    Returns:     the attributes
+      passed to this filter.
+      
+      This function will not typically be used by applications;
+      it is intended principally for use in the implementation
+      of [gtk.file_chooser.FileChooser].
+      Returns: the attributes
   */
   string[] getAttributes()
   {
@@ -209,9 +217,9 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Gets the human-readable name for the filter.
-    
-    See [gtk.file_filter.FileFilter.setName].
-    Returns:     The human-readable name of the filter
+      
+      See [gtk.file_filter.FileFilter.setName].
+      Returns: The human-readable name of the filter
   */
   string getName()
   {
@@ -223,12 +231,13 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Sets a human-readable name of the filter.
-    
-    This is the string that will be displayed in the file chooser
-    if there is a selectable list of filters.
-    Params:
-      name =       the human-readable-name for the filter, or null
-          to remove any existing name.
+      
+      This is the string that will be displayed in the file chooser
+      if there is a selectable list of filters.
+  
+      Params:
+        name = the human-readable-name for the filter, or null
+            to remove any existing name.
   */
   void setName(string name = null)
   {
@@ -238,7 +247,7 @@ class FileFilter : gtk.filter.Filter, gtk.buildable.Buildable
 
   /**
       Serialize a file filter to an `a{sv}` variant.
-    Returns:     a new, floating, [glib.variant.VariantG]
+      Returns: a new, floating, [glib.variant.VariantG]
   */
   glib.variant.VariantG toGvariant()
   {

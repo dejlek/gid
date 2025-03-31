@@ -1,3 +1,4 @@
+/// Module for [ImplementorIface] interface
 module atk.implementor_iface;
 
 public import atk.implementor_iface_iface_proxy;
@@ -8,12 +9,13 @@ import gid.gid;
 
 /**
     The AtkImplementor interface is implemented by objects for which
-  AtkObject peers may be obtained via calls to
-  iface->(ref_accessible)(implementor);
+    AtkObject peers may be obtained via calls to
+    iface->(ref_accessible)(implementor);
 */
 interface ImplementorIface
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

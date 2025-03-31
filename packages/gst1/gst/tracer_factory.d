@@ -1,3 +1,4 @@
+/// Module for [TracerFactory] class
 module gst.tracer_factory;
 
 import gid.gid;
@@ -9,22 +10,25 @@ import gst.types;
 
 /**
     Use [gst.tracer_factory.TracerFactory.getList] to get a list of tracer factories known to
-  GStreamer.
+    GStreamer.
 */
 class TracerFactory : gst.plugin_feature.PluginFeature
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tracer_factory_get_type != &gidSymbolNotFound ? gst_tracer_factory_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -37,13 +41,13 @@ class TracerFactory : gst.plugin_feature.PluginFeature
 
   /**
       Gets the list of all registered tracer factories. You must free the
-    list using [gst.plugin_feature.PluginFeature.listFree].
-    
-    The returned factories are sorted by factory name.
-    
-    Free-function: gst_plugin_feature_list_free
-    Returns:     the list of all
-          registered #GstTracerFactory.
+      list using [gst.plugin_feature.PluginFeature.listFree].
+      
+      The returned factories are sorted by factory name.
+      
+      Free-function: gst_plugin_feature_list_free
+      Returns: the list of all
+            registered #GstTracerFactory.
   */
   static gst.tracer_factory.TracerFactory[] getList()
   {
@@ -55,10 +59,10 @@ class TracerFactory : gst.plugin_feature.PluginFeature
 
   /**
       Get the #GType for elements managed by this factory. The type can
-    only be retrieved if the element factory is loaded, which can be
-    assured with [gst.plugin_feature.PluginFeature.load].
-    Returns:     the #GType for tracers managed by this factory or 0 if
-      the factory is not loaded.
+      only be retrieved if the element factory is loaded, which can be
+      assured with [gst.plugin_feature.PluginFeature.load].
+      Returns: the #GType for tracers managed by this factory or 0 if
+        the factory is not loaded.
   */
   gobject.types.GType getTracerType()
   {

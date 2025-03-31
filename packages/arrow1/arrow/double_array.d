@@ -1,3 +1,4 @@
+/// Module for [DoubleArray] class
 module arrow.double_array;
 
 import arrow.buffer;
@@ -12,17 +13,20 @@ import glib.error;
 class DoubleArray : arrow.numeric_array.NumericArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_double_array_get_type != &gidSymbolNotFound ? garrow_double_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Global functions for gstrtsp1 library
 module gstrtsp.global;
 
 import gid.gid;
@@ -10,9 +11,10 @@ import gstrtsp.types;
 
 /**
     Free a null-terminated array of credentials returned from
-  [gstrtsp.rtspmessage.RTSPMessage.parseAuthCredentials].
-  Params:
-    credentials =       a null-terminated array of #GstRTSPAuthCredential
+    [gstrtsp.rtspmessage.RTSPMessage.parseAuthCredentials].
+
+    Params:
+      credentials = a null-terminated array of #GstRTSPAuthCredential
 */
 void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials)
 {
@@ -21,10 +23,11 @@ void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential cred
 
 /**
     Convert header to a #GstRTSPHeaderField.
-  Params:
-    header =       a header string
-  Returns:     a #GstRTSPHeaderField for header or #GST_RTSP_HDR_INVALID if the
-    header field is unknown.
+
+    Params:
+      header = a header string
+    Returns: a #GstRTSPHeaderField for header or #GST_RTSP_HDR_INVALID if the
+      header field is unknown.
 */
 gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
 {
@@ -37,10 +40,11 @@ gstrtsp.types.RTSPHeaderField rtspFindHeaderField(string header)
 
 /**
     Convert method to a #GstRTSPMethod.
-  Params:
-    method =       a method
-  Returns:     a #GstRTSPMethod for method or #GST_RTSP_INVALID if the
-    method is unknown.
+
+    Params:
+      method = a method
+    Returns: a #GstRTSPMethod for method or #GST_RTSP_INVALID if the
+      method is unknown.
 */
 gstrtsp.types.RTSPMethod rtspFindMethod(string method)
 {
@@ -53,18 +57,19 @@ gstrtsp.types.RTSPMethod rtspFindMethod(string method)
 
 /**
     Calculates the digest auth response from the values given by the server and
-  the username and password. See RFC2069 for details.
-  
-  Currently only supported algorithm "md5".
-  Params:
-    algorithm =       Hash algorithm to use, or null for MD5
-    method =       Request method, e.g. PLAY
-    realm =       Realm
-    username =       Username
-    password =       Password
-    uri =       Original request URI
-    nonce =       Nonce
-  Returns:     Authentication response or null if unsupported
+    the username and password. See RFC2069 for details.
+    
+    Currently only supported algorithm "md5".
+
+    Params:
+      algorithm = Hash algorithm to use, or null for MD5
+      method = Request method, e.g. PLAY
+      realm = Realm
+      username = Username
+      password = Password
+      uri = Original request URI
+      nonce = Nonce
+    Returns: Authentication response or null if unsupported
 */
 string rtspGenerateDigestAuthResponse(string algorithm, string method, string realm, string username, string password, string uri, string nonce)
 {
@@ -83,19 +88,20 @@ string rtspGenerateDigestAuthResponse(string algorithm, string method, string re
 
 /**
     Calculates the digest auth response from the values given by the server and
-  the md5sum. See RFC2069 for details.
-  
-  This function is useful when the passwords are not stored in clear text,
-  but instead in the same format as the .htdigest file.
-  
-  Currently only supported algorithm "md5".
-  Params:
-    algorithm =       Hash algorithm to use, or null for MD5
-    method =       Request method, e.g. PLAY
-    md5 =       The md5 sum of username:realm:password
-    uri =       Original request URI
-    nonce =       Nonce
-  Returns:     Authentication response or null if unsupported
+    the md5sum. See RFC2069 for details.
+    
+    This function is useful when the passwords are not stored in clear text,
+    but instead in the same format as the .htdigest file.
+    
+    Currently only supported algorithm "md5".
+
+    Params:
+      algorithm = Hash algorithm to use, or null for MD5
+      method = Request method, e.g. PLAY
+      md5 = The md5 sum of username:realm:password
+      uri = Original request URI
+      nonce = Nonce
+    Returns: Authentication response or null if unsupported
 */
 string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, string md5, string uri, string nonce)
 {
@@ -112,9 +118,10 @@ string rtspGenerateDigestAuthResponseFromMd5(string algorithm, string method, st
 
 /**
     Check whether field may appear multiple times in a message.
-  Params:
-    field =       a #GstRTSPHeaderField
-  Returns:     true if multiple headers are allowed.
+
+    Params:
+      field = a #GstRTSPHeaderField
+    Returns: true if multiple headers are allowed.
 */
 bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field)
 {
@@ -125,9 +132,10 @@ bool rtspHeaderAllowMultiple(gstrtsp.types.RTSPHeaderField field)
 
 /**
     Convert field to a string.
-  Params:
-    field =       a #GstRTSPHeaderField
-  Returns:     a string representation of field.
+
+    Params:
+      field = a #GstRTSPHeaderField
+    Returns: a string representation of field.
 */
 string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field)
 {
@@ -139,9 +147,10 @@ string rtspHeaderAsText(gstrtsp.types.RTSPHeaderField field)
 
 /**
     Create a new initialized #GstRTSPMessage. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
-  Params:
-    msg =       a location for the new #GstRTSPMessage
-  Returns:     a #GstRTSPResult.
+
+    Params:
+      msg = a location for the new #GstRTSPMessage
+    Returns: a #GstRTSPResult.
 */
 gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
 {
@@ -155,11 +164,12 @@ gstrtsp.types.RTSPResult rtspMessageNew(out gstrtsp.rtspmessage.RTSPMessage msg)
 
 /**
     Create a new data #GstRTSPMessage with channel and store the
-  result message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
-  Params:
-    msg =       a location for the new #GstRTSPMessage
-    channel =       the channel
-  Returns:     a #GstRTSPResult.
+    result message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
+
+    Params:
+      msg = a location for the new #GstRTSPMessage
+      channel = the channel
+    Returns: a #GstRTSPResult.
 */
 gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage msg, ubyte channel)
 {
@@ -173,12 +183,13 @@ gstrtsp.types.RTSPResult rtspMessageNewData(out gstrtsp.rtspmessage.RTSPMessage 
 
 /**
     Create a new #GstRTSPMessage with method and uri and store the result
-  request message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
-  Params:
-    msg =       a location for the new #GstRTSPMessage
-    method =       the request method to use
-    uri =       the uri of the request
-  Returns:     a #GstRTSPResult.
+    request message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
+
+    Params:
+      msg = a location for the new #GstRTSPMessage
+      method = the request method to use
+      uri = the uri of the request
+    Returns: a #GstRTSPResult.
 */
 gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPMethod method, string uri)
 {
@@ -193,18 +204,19 @@ gstrtsp.types.RTSPResult rtspMessageNewRequest(out gstrtsp.rtspmessage.RTSPMessa
 
 /**
     Create a new response #GstRTSPMessage with code and reason and store the
-  result message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
-  
-  When reason is null, the default reason for code will be used.
-  
-  When request is not null, the relevant headers will be copied to the new
-  response message.
-  Params:
-    msg =       a location for the new #GstRTSPMessage
-    code =       the status code
-    reason =       the status reason or null
-    request =       the request that triggered the response or null
-  Returns:     a #GstRTSPResult.
+    result message in msg. Free with [gstrtsp.rtspmessage.RTSPMessage.free].
+    
+    When reason is null, the default reason for code will be used.
+    
+    When request is not null, the relevant headers will be copied to the new
+    response message.
+
+    Params:
+      msg = a location for the new #GstRTSPMessage
+      code = the status code
+      reason = the status reason or null
+      request = the request that triggered the response or null
+    Returns: a #GstRTSPResult.
 */
 gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMessage msg, gstrtsp.types.RTSPStatusCode code, string reason = null, gstrtsp.rtspmessage.RTSPMessage request = null)
 {
@@ -219,9 +231,10 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
 
 /**
     Convert options to a string.
-  Params:
-    options =       one or more #GstRTSPMethod
-  Returns:     a new string of options. [glib.global.gfree] after usage.
+
+    Params:
+      options = one or more #GstRTSPMethod
+    Returns: a new string of options. [glib.global.gfree] after usage.
 */
 string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
 {
@@ -233,10 +246,11 @@ string rtspOptionsAsText(gstrtsp.types.RTSPMethod options)
 
 /**
     Convert the comma separated list options to a #GstRTSPMethod bitwise or
-  of methods. This functions is the reverse of [gstrtsp.global.rtspOptionsAsText].
-  Params:
-    options =       a comma separated list of options
-  Returns:     a #GstRTSPMethod
+    of methods. This functions is the reverse of [gstrtsp.global.rtspOptionsAsText].
+
+    Params:
+      options = a comma separated list of options
+    Returns: a #GstRTSPMethod
 */
 gstrtsp.types.RTSPMethod rtspOptionsFromText(string options)
 {
@@ -249,9 +263,10 @@ gstrtsp.types.RTSPMethod rtspOptionsFromText(string options)
 
 /**
     Convert code to a string.
-  Params:
-    code =       a #GstRTSPStatusCode
-  Returns:     a string representation of code.
+
+    Params:
+      code = a #GstRTSPStatusCode
+    Returns: a string representation of code.
 */
 string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code)
 {
@@ -263,9 +278,10 @@ string rtspStatusAsText(gstrtsp.types.RTSPStatusCode code)
 
 /**
     Convert result in a human readable string.
-  Params:
-    result =       a #GstRTSPResult
-  Returns:     a newly allocated string. [glib.global.gfree] after usage.
+
+    Params:
+      result = a #GstRTSPResult
+    Returns: a newly allocated string. [glib.global.gfree] after usage.
 */
 string rtspStrresult(gstrtsp.types.RTSPResult result)
 {

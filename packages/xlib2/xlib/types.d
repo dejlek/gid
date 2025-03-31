@@ -1,3 +1,4 @@
+/// D types for xlib2 library
 module xlib.types;
 
 import gid.gid;

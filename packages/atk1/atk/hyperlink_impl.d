@@ -1,3 +1,4 @@
+/// Module for [HyperlinkImpl] interface
 module atk.hyperlink_impl;
 
 public import atk.hyperlink_impl_iface_proxy;
@@ -10,14 +11,15 @@ import gobject.object;
 
 /**
     A queryable interface which allows AtkHyperlink instances
-  associated with an AtkObject to be obtained.  AtkHyperlinkImpl
-  corresponds to AT-SPI's Hyperlink interface, and differs from
-  AtkHyperlink in that AtkHyperlink is an object type, rather than an
-  interface, and thus cannot be directly queried. FTW
+    associated with an AtkObject to be obtained.  AtkHyperlinkImpl
+    corresponds to AT-SPI's Hyperlink interface, and differs from
+    AtkHyperlink in that AtkHyperlink is an object type, rather than an
+    interface, and thus cannot be directly queried. FTW
 */
 interface HyperlinkImpl
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -26,8 +28,8 @@ interface HyperlinkImpl
 
   /**
       Gets the hyperlink associated with this object.
-    Returns:     an AtkHyperlink object which points to this
-      implementing AtkObject.
+      Returns: an AtkHyperlink object which points to this
+        implementing AtkObject.
   */
   atk.hyperlink.Hyperlink getHyperlink();
 }

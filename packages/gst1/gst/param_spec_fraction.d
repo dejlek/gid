@@ -1,3 +1,4 @@
+/// Module for [ParamSpecFraction] class
 module gst.param_spec_fraction;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import gst.types;
 
 /**
     A GParamSpec derived structure that contains the meta data for fractional
-  properties.
+    properties.
 */
 class ParamSpecFraction
 {
   GstParamSpecFraction cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class ParamSpecFraction
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

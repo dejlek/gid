@@ -1,3 +1,4 @@
+/// D types for freetype2 library
 module freetype2.types;
 
 import freetype2.c.functions;

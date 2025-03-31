@@ -1,3 +1,4 @@
+/// Module for [LoadableIcon] interface mixin
 module gio.loadable_icon_mixin;
 
 public import gio.loadable_icon_iface_proxy;
@@ -13,21 +14,23 @@ public import gobject.object;
 
 /**
     [gio.loadable_icon.LoadableIcon] extends the [gio.icon.Icon] interface and adds the ability
-  to load icons from streams.
+    to load icons from streams.
 */
 template LoadableIconT()
 {
 
   /**
       Loads a loadable icon. For the asynchronous version of this function,
-    see [gio.loadable_icon.LoadableIcon.loadAsync].
-    Params:
-      size =       an integer.
-      type =       a location to store the type of the loaded
-        icon, null to ignore.
-      cancellable =       optional #GCancellable object, null to
-        ignore.
-    Returns:     a #GInputStream to read the icon from.
+      see [gio.loadable_icon.LoadableIcon.loadAsync].
+  
+      Params:
+        size = an integer.
+        type = a location to store the type of the loaded
+          icon, null to ignore.
+        cancellable = optional #GCancellable object, null to
+          ignore.
+      Returns: a #GInputStream to read the icon from.
+      Throws: [ErrorG]
   */
   override gio.input_stream.InputStream load(int size, out string type, gio.cancellable.Cancellable cancellable = null)
   {
@@ -44,13 +47,14 @@ template LoadableIconT()
 
   /**
       Loads an icon asynchronously. To finish this function, see
-    [gio.loadable_icon.LoadableIcon.loadFinish]. For the synchronous, blocking
-    version of this function, see [gio.loadable_icon.LoadableIcon.load].
-    Params:
-      size =       an integer.
-      cancellable =       optional #GCancellable object, null to ignore.
-      callback =       a #GAsyncReadyCallback
-          to call when the request is satisfied
+      [gio.loadable_icon.LoadableIcon.loadFinish]. For the synchronous, blocking
+      version of this function, see [gio.loadable_icon.LoadableIcon.load].
+  
+      Params:
+        size = an integer.
+        cancellable = optional #GCancellable object, null to ignore.
+        callback = a #GAsyncReadyCallback
+            to call when the request is satisfied
   */
   override void loadAsync(int size, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -69,11 +73,13 @@ template LoadableIconT()
 
   /**
       Finishes an asynchronous icon load started in [gio.loadable_icon.LoadableIcon.loadAsync].
-    Params:
-      res =       a #GAsyncResult.
-      type =       a location to store the type of the loaded
-               icon, null to ignore.
-    Returns:     a #GInputStream to read the icon from.
+  
+      Params:
+        res = a #GAsyncResult.
+        type = a location to store the type of the loaded
+                 icon, null to ignore.
+      Returns: a #GInputStream to read the icon from.
+      Throws: [ErrorG]
   */
   override gio.input_stream.InputStream loadFinish(gio.async_result.AsyncResult res, out string type)
   {

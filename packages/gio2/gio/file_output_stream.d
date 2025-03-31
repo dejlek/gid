@@ -1,3 +1,4 @@
+/// Module for [FileOutputStream] class
 module gio.file_output_stream;
 
 import gid.gid;
@@ -15,34 +16,37 @@ import gobject.object;
 
 /**
     [gio.file_output_stream.FileOutputStream] provides output streams that write their
-  content to a file.
-  
-  [gio.file_output_stream.FileOutputStream] implements [gio.seekable.Seekable], which allows the output
-  stream to jump to arbitrary positions in the file and to truncate
-  the file, provided the filesystem of the file supports these
-  operations.
-  
-  To find the position of a file output stream, use [gio.seekable.Seekable.tell].
-  To find out if a file output stream supports seeking, use
-  [gio.seekable.Seekable.canSeek].To position a file output stream, use
-  [gio.seekable.Seekable.seek]. To find out if a file output stream supports
-  truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file output
-  stream, use [gio.seekable.Seekable.truncate].
+    content to a file.
+    
+    [gio.file_output_stream.FileOutputStream] implements [gio.seekable.Seekable], which allows the output
+    stream to jump to arbitrary positions in the file and to truncate
+    the file, provided the filesystem of the file supports these
+    operations.
+    
+    To find the position of a file output stream, use [gio.seekable.Seekable.tell].
+    To find out if a file output stream supports seeking, use
+    [gio.seekable.Seekable.canSeek].To position a file output stream, use
+    [gio.seekable.Seekable.seek]. To find out if a file output stream supports
+    truncating, use [gio.seekable.Seekable.canTruncate]. To truncate a file output
+    stream, use [gio.seekable.Seekable.truncate].
 */
 class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_output_stream_get_type != &gidSymbolNotFound ? g_file_output_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -57,9 +61,9 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 
   /**
       Gets the entity tag for the file when it has been written.
-    This must be called after the stream has been written
-    and closed, as the etag can change while writing.
-    Returns:     the entity tag for the stream.
+      This must be called after the stream has been written
+      and closed, as the etag can change while writing.
+      Returns: the entity tag for the stream.
   */
   string getEtag()
   {
@@ -71,26 +75,28 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 
   /**
       Queries a file output stream for the given attributes.
-    This function blocks while querying the stream. For the asynchronous
-    version of this function, see [gio.file_output_stream.FileOutputStream.queryInfoAsync].
-    While the stream is blocked, the stream will set the pending flag
-    internally, and any other operations on the stream will fail with
-    [gio.types.IOErrorEnum.Pending].
-    
-    Can fail if the stream was already closed (with error being set to
-    [gio.types.IOErrorEnum.Closed]), the stream has pending operations (with error being
-    set to [gio.types.IOErrorEnum.Pending]), or if querying info is not supported for
-    the stream's interface (with error being set to [gio.types.IOErrorEnum.NotSupported]). In
-    all cases of failure, null will be returned.
-    
-    If cancellable is not null, then the operation can be cancelled by
-    triggering the cancellable object from another thread. If the operation
-    was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set, and null will
-    be returned.
-    Params:
-      attributes =       a file attribute query string.
-      cancellable =       optional #GCancellable object, null to ignore.
-    Returns:     a #GFileInfo for the stream, or null on error.
+      This function blocks while querying the stream. For the asynchronous
+      version of this function, see [gio.file_output_stream.FileOutputStream.queryInfoAsync].
+      While the stream is blocked, the stream will set the pending flag
+      internally, and any other operations on the stream will fail with
+      [gio.types.IOErrorEnum.Pending].
+      
+      Can fail if the stream was already closed (with error being set to
+      [gio.types.IOErrorEnum.Closed]), the stream has pending operations (with error being
+      set to [gio.types.IOErrorEnum.Pending]), or if querying info is not supported for
+      the stream's interface (with error being set to [gio.types.IOErrorEnum.NotSupported]). In
+      all cases of failure, null will be returned.
+      
+      If cancellable is not null, then the operation can be cancelled by
+      triggering the cancellable object from another thread. If the operation
+      was cancelled, the error [gio.types.IOErrorEnum.Cancelled] will be set, and null will
+      be returned.
+  
+      Params:
+        attributes = a file attribute query string.
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a #GFileInfo for the stream, or null on error.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfo(string attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -106,17 +112,18 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 
   /**
       Asynchronously queries the stream for a #GFileInfo. When completed,
-    callback will be called with a #GAsyncResult which can be used to
-    finish the operation with [gio.file_output_stream.FileOutputStream.queryInfoFinish].
-    
-    For the synchronous version of this function, see
-    [gio.file_output_stream.FileOutputStream.queryInfo].
-    Params:
-      attributes =       a file attribute query string.
-      ioPriority =       the [I/O priority](iface.AsyncResult.html#io-priority) of the
-          request
-      cancellable =       optional #GCancellable object, null to ignore.
-      callback =       callback to call when the request is satisfied
+      callback will be called with a #GAsyncResult which can be used to
+      finish the operation with [gio.file_output_stream.FileOutputStream.queryInfoFinish].
+      
+      For the synchronous version of this function, see
+      [gio.file_output_stream.FileOutputStream.queryInfo].
+  
+      Params:
+        attributes = a file attribute query string.
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the
+            request
+        cancellable = optional #GCancellable object, null to ignore.
+        callback = callback to call when the request is satisfied
   */
   void queryInfoAsync(string attributes, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -136,10 +143,12 @@ class FileOutputStream : gio.output_stream.OutputStream, gio.seekable.Seekable
 
   /**
       Finalizes the asynchronous query started
-    by [gio.file_output_stream.FileOutputStream.queryInfoAsync].
-    Params:
-      result =       a #GAsyncResult.
-    Returns:     A #GFileInfo for the finished query.
+      by [gio.file_output_stream.FileOutputStream.queryInfoAsync].
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: A #GFileInfo for the finished query.
+      Throws: [ErrorG]
   */
   gio.file_info.FileInfo queryInfoFinish(gio.async_result.AsyncResult result)
   {

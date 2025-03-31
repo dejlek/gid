@@ -1,3 +1,4 @@
+/// Module for [ByteReader] class
 module gstbase.byte_reader;
 
 import gid.gid;
@@ -7,16 +8,17 @@ import gstbase.types;
 
 /**
     #GstByteReader provides a byte reader that can read different integer and
-  floating point types from a memory buffer. It provides functions for reading
-  signed/unsigned, little/big endian integers of 8, 16, 24, 32 and 64 bits
-  and functions for reading little/big endian floating points numbers of
-  32 and 64 bits. It also provides functions to read NUL-terminated strings
-  in various character encodings.
+    floating point types from a memory buffer. It provides functions for reading
+    signed/unsigned, little/big endian integers of 8, 16, 24, 32 and 64 bits
+    and functions for reading little/big endian floating points numbers of
+    32 and 64 bits. It also provides functions to read NUL-terminated strings
+    in various character encodings.
 */
 class ByteReader
 {
   GstByteReader cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -28,6 +30,7 @@ class ByteReader
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -55,24 +58,25 @@ class ByteReader
 
   /**
       Free-function: g_free
-    
-    Returns a newly-allocated copy of the current data position if there is
-    a NUL-terminated UTF-16 string in the data (this could be an empty string
-    as well), and advances the current position.
-    
-    No input checking for valid UTF-16 is done. This function is endianness
-    agnostic - you should not assume the UTF-16 characters are in host
-    endianness.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    
-    Note: there is no peek or get variant of this function to ensure correct
-    byte alignment of the UTF-16 string.
-    Params:
-      str =       address of a
-            #guint16 pointer variable in which to store the result
-    Returns:     true if a string could be read, false otherwise. The
-          string put into str must be freed with [glib.global.gfree] when no longer needed.
+      
+      Returns a newly-allocated copy of the current data position if there is
+      a NUL-terminated UTF-16 string in the data (this could be an empty string
+      as well), and advances the current position.
+      
+      No input checking for valid UTF-16 is done. This function is endianness
+      agnostic - you should not assume the UTF-16 characters are in host
+      endianness.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+      
+      Note: there is no peek or get variant of this function to ensure correct
+      byte alignment of the UTF-16 string.
+  
+      Params:
+        str = address of a
+              #guint16 pointer variable in which to store the result
+      Returns: true if a string could be read, false otherwise. The
+            string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
   bool dupStringUtf16(out ushort[] str)
   {
@@ -94,24 +98,25 @@ class ByteReader
 
   /**
       Free-function: g_free
-    
-    Returns a newly-allocated copy of the current data position if there is
-    a NUL-terminated UTF-32 string in the data (this could be an empty string
-    as well), and advances the current position.
-    
-    No input checking for valid UTF-32 is done. This function is endianness
-    agnostic - you should not assume the UTF-32 characters are in host
-    endianness.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    
-    Note: there is no peek or get variant of this function to ensure correct
-    byte alignment of the UTF-32 string.
-    Params:
-      str =       address of a
-            #guint32 pointer variable in which to store the result
-    Returns:     true if a string could be read, false otherwise. The
-          string put into str must be freed with [glib.global.gfree] when no longer needed.
+      
+      Returns a newly-allocated copy of the current data position if there is
+      a NUL-terminated UTF-32 string in the data (this could be an empty string
+      as well), and advances the current position.
+      
+      No input checking for valid UTF-32 is done. This function is endianness
+      agnostic - you should not assume the UTF-32 characters are in host
+      endianness.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+      
+      Note: there is no peek or get variant of this function to ensure correct
+      byte alignment of the UTF-32 string.
+  
+      Params:
+        str = address of a
+              #guint32 pointer variable in which to store the result
+      Returns: true if a string could be read, false otherwise. The
+            string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
   bool dupStringUtf32(out uint[] str)
   {
@@ -133,18 +138,19 @@ class ByteReader
 
   /**
       Free-function: g_free
-    
-    FIXME:Reads (copies) a NUL-terminated string in the #GstByteReader instance,
-    advancing the current position to the byte after the string. This will work
-    for any NUL-terminated string with a character width of 8 bits, so ASCII,
-    UTF-8, ISO-8859-N etc. No input checking for valid UTF-8 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Params:
-      str =       address of a
-            #gchar pointer variable in which to store the result
-    Returns:     true if a string could be read into str, false otherwise. The
-          string put into str must be freed with [glib.global.gfree] when no longer needed.
+      
+      FIXME:Reads (copies) a NUL-terminated string in the #GstByteReader instance,
+      advancing the current position to the byte after the string. This will work
+      for any NUL-terminated string with a character width of 8 bits, so ASCII,
+      UTF-8, ISO-8859-N etc. No input checking for valid UTF-8 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+  
+      Params:
+        str = address of a
+              #gchar pointer variable in which to store the result
+      Returns: true if a string could be read into str, false otherwise. The
+            string put into str must be freed with [glib.global.gfree] when no longer needed.
   */
   bool dupStringUtf8(out string str)
   {
@@ -157,10 +163,11 @@ class ByteReader
 
   /**
       Read a 32 bit big endian floating point value into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gfloat to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gfloat to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getFloat32Be(out float val)
   {
@@ -171,10 +178,11 @@ class ByteReader
 
   /**
       Read a 32 bit little endian floating point value into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gfloat to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gfloat to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getFloat32Le(out float val)
   {
@@ -185,10 +193,11 @@ class ByteReader
 
   /**
       Read a 64 bit big endian floating point value into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gdouble to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gdouble to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getFloat64Be(out double val)
   {
@@ -199,10 +208,11 @@ class ByteReader
 
   /**
       Read a 64 bit little endian floating point value into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gdouble to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gdouble to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getFloat64Le(out double val)
   {
@@ -213,10 +223,11 @@ class ByteReader
 
   /**
       Read a signed 16 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint16 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt16Be(out short val)
   {
@@ -227,10 +238,11 @@ class ByteReader
 
   /**
       Read a signed 16 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint16 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt16Le(out short val)
   {
@@ -241,10 +253,11 @@ class ByteReader
 
   /**
       Read a signed 24 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt24Be(out int val)
   {
@@ -255,10 +268,11 @@ class ByteReader
 
   /**
       Read a signed 24 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt24Le(out int val)
   {
@@ -269,10 +283,11 @@ class ByteReader
 
   /**
       Read a signed 32 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt32Be(out int val)
   {
@@ -283,10 +298,11 @@ class ByteReader
 
   /**
       Read a signed 32 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt32Le(out int val)
   {
@@ -297,10 +313,11 @@ class ByteReader
 
   /**
       Read a signed 64 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint64 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt64Be(out long val)
   {
@@ -311,10 +328,11 @@ class ByteReader
 
   /**
       Read a signed 64 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #gint64 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #gint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt64Le(out long val)
   {
@@ -325,9 +343,10 @@ class ByteReader
 
   /**
       Read a signed 8 bit integer into val and update the current position.
-    Params:
-      val =       Pointer to a #gint8 to store the result
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #gint8 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getInt8(out byte val)
   {
@@ -338,7 +357,7 @@ class ByteReader
 
   /**
       Returns the current position of a #GstByteReader instance in bytes.
-    Returns:     The current position of reader in bytes.
+      Returns: The current position of reader in bytes.
   */
   uint getPos()
   {
@@ -349,7 +368,7 @@ class ByteReader
 
   /**
       Returns the remaining number of bytes of a #GstByteReader instance.
-    Returns:     The remaining number of bytes of reader instance.
+      Returns: The remaining number of bytes of reader instance.
   */
   uint getRemaining()
   {
@@ -360,7 +379,7 @@ class ByteReader
 
   /**
       Returns the total number of bytes of a #GstByteReader instance.
-    Returns:     The total number of bytes of reader instance.
+      Returns: The total number of bytes of reader instance.
   */
   uint getSize()
   {
@@ -371,18 +390,19 @@ class ByteReader
 
   /**
       Returns a constant pointer to the current data position if there is
-    a NUL-terminated string in the data (this could be just a NUL terminator),
-    advancing the current position to the byte after the string. This will work
-    for any NUL-terminated string with a character width of 8 bits, so ASCII,
-    UTF-8, ISO-8859-N etc.
-    
-    No input checking for valid UTF-8 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Params:
-      str =       address of a
-            #gchar pointer variable in which to store the result
-    Returns:     true if a string could be found, false otherwise.
+      a NUL-terminated string in the data (this could be just a NUL terminator),
+      advancing the current position to the byte after the string. This will work
+      for any NUL-terminated string with a character width of 8 bits, so ASCII,
+      UTF-8, ISO-8859-N etc.
+      
+      No input checking for valid UTF-8 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+  
+      Params:
+        str = address of a
+              #gchar pointer variable in which to store the result
+      Returns: true if a string could be found, false otherwise.
   */
   bool getStringUtf8(out string str)
   {
@@ -395,10 +415,11 @@ class ByteReader
 
   /**
       Read an unsigned 16 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint16Be(out ushort val)
   {
@@ -409,10 +430,11 @@ class ByteReader
 
   /**
       Read an unsigned 16 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint16Le(out ushort val)
   {
@@ -423,10 +445,11 @@ class ByteReader
 
   /**
       Read an unsigned 24 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint24Be(out uint val)
   {
@@ -437,10 +460,11 @@ class ByteReader
 
   /**
       Read an unsigned 24 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint24Le(out uint val)
   {
@@ -451,10 +475,11 @@ class ByteReader
 
   /**
       Read an unsigned 32 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint32Be(out uint val)
   {
@@ -465,10 +490,11 @@ class ByteReader
 
   /**
       Read an unsigned 32 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint32Le(out uint val)
   {
@@ -479,10 +505,11 @@ class ByteReader
 
   /**
       Read an unsigned 64 bit big endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint64Be(out ulong val)
   {
@@ -493,10 +520,11 @@ class ByteReader
 
   /**
       Read an unsigned 64 bit little endian integer into val
-    and update the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-    Returns:     true if successful, false otherwise.
+      and update the current position.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint64Le(out ulong val)
   {
@@ -507,9 +535,10 @@ class ByteReader
 
   /**
       Read an unsigned 8 bit integer into val and update the current position.
-    Params:
-      val =       Pointer to a #guint8 to store the result
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint8 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool getUint8(out ubyte val)
   {
@@ -520,10 +549,11 @@ class ByteReader
 
   /**
       Initializes a #GstByteReader instance to read from data. This function
-    can be called on already initialized instances.
-    Params:
-      data =       data from which
-            the #GstByteReader should read
+      can be called on already initialized instances.
+  
+      Params:
+        data = data from which
+              the #GstByteReader should read
   */
   void init_(ubyte[] data)
   {
@@ -537,42 +567,43 @@ class ByteReader
 
   /**
       Scan for pattern pattern with applied mask mask in the byte reader data,
-    starting from offset offset relative to the current position.
-    
-    The bytes in pattern and mask are interpreted left-to-right, regardless
-    of endianness.  All four bytes of the pattern must be present in the
-    byte reader data for it to match, even if the first or last bytes are masked
-    out.
-    
-    It is an error to call this function without making sure that there is
-    enough data (offset+size bytes) in the byte reader.
-    Params:
-      mask =       mask to apply to data before matching against pattern
-      pattern =       pattern to match (after mask is applied)
-      offset =       offset from which to start scanning, relative to the current
-            position
-      size =       number of bytes to scan from offset
-    Returns:     offset of the first match, or -1 if no match was found.
+      starting from offset offset relative to the current position.
       
-      Example:
-      ```
-      // Assume the reader contains 0x00 0x01 0x02 ... 0xfe 0xff
+      The bytes in pattern and mask are interpreted left-to-right, regardless
+      of endianness.  All four bytes of the pattern must be present in the
+      byte reader data for it to match, even if the first or last bytes are masked
+      out.
       
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x00010203, 0, 256);
-      // -> returns 0
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x00010203, 1, 255);
-      // -> returns -1
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x01020304, 1, 255);
-      // -> returns 1
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffff, 0x0001, 0, 256);
-      // -> returns -1
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffff, 0x0203, 0, 256);
-      // -> returns 0
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffff0000, 0x02030000, 0, 256);
-      // -> returns 2
-      gst_byte_reader_masked_scan_uint32 (reader, 0xffff0000, 0x02030000, 0, 4);
-      // -> returns -1
-      ```
+      It is an error to call this function without making sure that there is
+      enough data (offset+size bytes) in the byte reader.
+  
+      Params:
+        mask = mask to apply to data before matching against pattern
+        pattern = pattern to match (after mask is applied)
+        offset = offset from which to start scanning, relative to the current
+              position
+        size = number of bytes to scan from offset
+      Returns: offset of the first match, or -1 if no match was found.
+        
+        Example:
+        ```
+        // Assume the reader contains 0x00 0x01 0x02 ... 0xfe 0xff
+        
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x00010203, 0, 256);
+        // -> returns 0
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x00010203, 1, 255);
+        // -> returns -1
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffffffff, 0x01020304, 1, 255);
+        // -> returns 1
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffff, 0x0001, 0, 256);
+        // -> returns -1
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffff, 0x0203, 0, 256);
+        // -> returns 0
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffff0000, 0x02030000, 0, 256);
+        // -> returns 2
+        gst_byte_reader_masked_scan_uint32 (reader, 0xffff0000, 0x02030000, 0, 4);
+        // -> returns -1
+        ```
   */
   uint maskedScanUint32(uint mask, uint pattern, uint offset, uint size)
   {
@@ -583,23 +614,24 @@ class ByteReader
 
   /**
       Scan for pattern pattern with applied mask mask in the byte reader data,
-    starting from offset offset relative to the current position.
-    
-    The bytes in pattern and mask are interpreted left-to-right, regardless
-    of endianness.  All four bytes of the pattern must be present in the
-    byte reader data for it to match, even if the first or last bytes are masked
-    out.
-    
-    It is an error to call this function without making sure that there is
-    enough data (offset+size bytes) in the byte reader.
-    Params:
-      mask =       mask to apply to data before matching against pattern
-      pattern =       pattern to match (after mask is applied)
-      offset =       offset from which to start scanning, relative to the current
-            position
-      size =       number of bytes to scan from offset
-      value =       pointer to uint32 to return matching data
-    Returns:     offset of the first match, or -1 if no match was found.
+      starting from offset offset relative to the current position.
+      
+      The bytes in pattern and mask are interpreted left-to-right, regardless
+      of endianness.  All four bytes of the pattern must be present in the
+      byte reader data for it to match, even if the first or last bytes are masked
+      out.
+      
+      It is an error to call this function without making sure that there is
+      enough data (offset+size bytes) in the byte reader.
+  
+      Params:
+        mask = mask to apply to data before matching against pattern
+        pattern = pattern to match (after mask is applied)
+        offset = offset from which to start scanning, relative to the current
+              position
+        size = number of bytes to scan from offset
+        value = pointer to uint32 to return matching data
+      Returns: offset of the first match, or -1 if no match was found.
   */
   uint maskedScanUint32Peek(uint mask, uint pattern, uint offset, uint size, out uint value)
   {
@@ -610,10 +642,11 @@ class ByteReader
 
   /**
       Read a 32 bit big endian floating point value into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gfloat to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gfloat to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekFloat32Be(out float val)
   {
@@ -624,10 +657,11 @@ class ByteReader
 
   /**
       Read a 32 bit little endian floating point value into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gfloat to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gfloat to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekFloat32Le(out float val)
   {
@@ -638,10 +672,11 @@ class ByteReader
 
   /**
       Read a 64 bit big endian floating point value into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gdouble to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gdouble to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekFloat64Be(out double val)
   {
@@ -652,10 +687,11 @@ class ByteReader
 
   /**
       Read a 64 bit little endian floating point value into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gdouble to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gdouble to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekFloat64Le(out double val)
   {
@@ -666,10 +702,11 @@ class ByteReader
 
   /**
       Read a signed 16 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint16 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt16Be(out short val)
   {
@@ -680,10 +717,11 @@ class ByteReader
 
   /**
       Read a signed 16 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint16 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt16Le(out short val)
   {
@@ -694,10 +732,11 @@ class ByteReader
 
   /**
       Read a signed 24 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt24Be(out int val)
   {
@@ -708,10 +747,11 @@ class ByteReader
 
   /**
       Read a signed 24 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt24Le(out int val)
   {
@@ -722,10 +762,11 @@ class ByteReader
 
   /**
       Read a signed 32 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt32Be(out int val)
   {
@@ -736,10 +777,11 @@ class ByteReader
 
   /**
       Read a signed 32 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt32Le(out int val)
   {
@@ -750,10 +792,11 @@ class ByteReader
 
   /**
       Read a signed 64 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint64 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt64Be(out long val)
   {
@@ -764,10 +807,11 @@ class ByteReader
 
   /**
       Read a signed 64 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #gint64 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #gint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt64Le(out long val)
   {
@@ -778,9 +822,10 @@ class ByteReader
 
   /**
       Read a signed 8 bit integer into val but keep the current position.
-    Params:
-      val =       Pointer to a #gint8 to store the result
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #gint8 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekInt8(out byte val)
   {
@@ -791,18 +836,19 @@ class ByteReader
 
   /**
       Returns a constant pointer to the current data position if there is
-    a NUL-terminated string in the data (this could be just a NUL terminator).
-    The current position will be maintained. This will work for any
-    NUL-terminated string with a character width of 8 bits, so ASCII,
-    UTF-8, ISO-8859-N etc.
-    
-    No input checking for valid UTF-8 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Params:
-      str =       address of a
-            #gchar pointer variable in which to store the result
-    Returns:     true if a string could be skipped, false otherwise.
+      a NUL-terminated string in the data (this could be just a NUL terminator).
+      The current position will be maintained. This will work for any
+      NUL-terminated string with a character width of 8 bits, so ASCII,
+      UTF-8, ISO-8859-N etc.
+      
+      No input checking for valid UTF-8 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+  
+      Params:
+        str = address of a
+              #gchar pointer variable in which to store the result
+      Returns: true if a string could be skipped, false otherwise.
   */
   bool peekStringUtf8(out string str)
   {
@@ -815,10 +861,11 @@ class ByteReader
 
   /**
       Read an unsigned 16 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint16Be(out ushort val)
   {
@@ -829,10 +876,11 @@ class ByteReader
 
   /**
       Read an unsigned 16 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint16 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint16 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint16Le(out ushort val)
   {
@@ -843,10 +891,11 @@ class ByteReader
 
   /**
       Read an unsigned 24 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint24Be(out uint val)
   {
@@ -857,10 +906,11 @@ class ByteReader
 
   /**
       Read an unsigned 24 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint24Le(out uint val)
   {
@@ -871,10 +921,11 @@ class ByteReader
 
   /**
       Read an unsigned 32 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint32Be(out uint val)
   {
@@ -885,10 +936,11 @@ class ByteReader
 
   /**
       Read an unsigned 32 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint32 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint32 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint32Le(out uint val)
   {
@@ -899,10 +951,11 @@ class ByteReader
 
   /**
       Read an unsigned 64 bit big endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint64Be(out ulong val)
   {
@@ -913,10 +966,11 @@ class ByteReader
 
   /**
       Read an unsigned 64 bit little endian integer into val
-    but keep the current position.
-    Params:
-      val =       Pointer to a #guint64 to store the result
-    Returns:     true if successful, false otherwise.
+      but keep the current position.
+  
+      Params:
+        val = Pointer to a #guint64 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint64Le(out ulong val)
   {
@@ -927,9 +981,10 @@ class ByteReader
 
   /**
       Read an unsigned 8 bit integer into val but keep the current position.
-    Params:
-      val =       Pointer to a #guint8 to store the result
-    Returns:     true if successful, false otherwise.
+  
+      Params:
+        val = Pointer to a #guint8 to store the result
+      Returns: true if successful, false otherwise.
   */
   bool peekUint8(out ubyte val)
   {
@@ -940,10 +995,11 @@ class ByteReader
 
   /**
       Sets the new position of a #GstByteReader instance to pos in bytes.
-    Params:
-      pos =       The new position in bytes
-    Returns:     true if the position could be set successfully, false
-      otherwise.
+  
+      Params:
+        pos = The new position in bytes
+      Returns: true if the position could be set successfully, false
+        otherwise.
   */
   bool setPos(uint pos)
   {
@@ -954,9 +1010,10 @@ class ByteReader
 
   /**
       Skips nbytes bytes of the #GstByteReader instance.
-    Params:
-      nbytes =       the number of bytes to skip
-    Returns:     true if nbytes bytes could be skipped, false otherwise.
+  
+      Params:
+        nbytes = the number of bytes to skip
+      Returns: true if nbytes bytes could be skipped, false otherwise.
   */
   bool skip(uint nbytes)
   {
@@ -967,12 +1024,12 @@ class ByteReader
 
   /**
       Skips a NUL-terminated UTF-16 string in the #GstByteReader instance,
-    advancing the current position to the byte after the string.
-    
-    No input checking for valid UTF-16 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Returns:     true if a string could be skipped, false otherwise.
+      advancing the current position to the byte after the string.
+      
+      No input checking for valid UTF-16 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+      Returns: true if a string could be skipped, false otherwise.
   */
   bool skipStringUtf16()
   {
@@ -983,12 +1040,12 @@ class ByteReader
 
   /**
       Skips a NUL-terminated UTF-32 string in the #GstByteReader instance,
-    advancing the current position to the byte after the string.
-    
-    No input checking for valid UTF-32 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Returns:     true if a string could be skipped, false otherwise.
+      advancing the current position to the byte after the string.
+      
+      No input checking for valid UTF-32 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+      Returns: true if a string could be skipped, false otherwise.
   */
   bool skipStringUtf32()
   {
@@ -999,12 +1056,12 @@ class ByteReader
 
   /**
       Skips a NUL-terminated string in the #GstByteReader instance, advancing
-    the current position to the byte after the string. This will work for
-    any NUL-terminated string with a character width of 8 bits, so ASCII,
-    UTF-8, ISO-8859-N etc. No input checking for valid UTF-8 is done.
-    
-    This function will fail if no NUL-terminator was found in in the data.
-    Returns:     true if a string could be skipped, false otherwise.
+      the current position to the byte after the string. This will work for
+      any NUL-terminated string with a character width of 8 bits, so ASCII,
+      UTF-8, ISO-8859-N etc. No input checking for valid UTF-8 is done.
+      
+      This function will fail if no NUL-terminator was found in in the data.
+      Returns: true if a string could be skipped, false otherwise.
   */
   bool skipStringUtf8()
   {

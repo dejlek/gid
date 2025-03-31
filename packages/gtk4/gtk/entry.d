@@ -1,3 +1,4 @@
+/// Module for [Entry] class
 module gtk.entry;
 
 import gdk.content_provider;
@@ -30,107 +31,110 @@ import pango.tab_array;
 
 /**
     [gtk.entry.Entry] is a single line text entry widget.
-  
-  ![An example GtkEntry](entry.png)
-  
-  A fairly large set of key bindings are supported by default. If the
-  entered text is longer than the allocation of the widget, the widget
-  will scroll so that the cursor position is visible.
-  
-  When using an entry for passwords and other sensitive information, it
-  can be put into “password mode” using [gtk.entry.Entry.setVisibility].
-  In this mode, entered text is displayed using a “invisible” character.
-  By default, GTK picks the best invisible character that is available
-  in the current font, but it can be changed with
-  [gtk.entry.Entry.setInvisibleChar].
-  
-  [gtk.entry.Entry] has the ability to display progress or activity
-  information behind the text. To make an entry display such information,
-  use [gtk.entry.Entry.setProgressFraction] or
-  [gtk.entry.Entry.setProgressPulseStep].
-  
-  Additionally, [gtk.entry.Entry] can show icons at either side of the entry.
-  These icons can be activatable by clicking, can be set up as drag source
-  and can have tooltips. To add an icon, use
-  [gtk.entry.Entry.setIconFromGicon] or one of the various other functions
-  that set an icon from an icon name or a paintable. To trigger an action when
-  the user clicks an icon, connect to the `signal@Gtk.Entry::icon-press` signal.
-  To allow DND operations from an icon, use
-  [gtk.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
-  [gtk.entry.Entry.setIconTooltipText] or the corresponding function
-  for markup.
-  
-  Note that functionality or information that is only available by clicking
-  on an icon in an entry may not be accessible at all to users which are not
-  able to use a mouse or other pointing device. It is therefore recommended
-  that any such functionality should also be available by other means, e.g.
-  via the context menu of the entry.
-  
-  # CSS nodes
-  
-  ```
-  entry[.flat][.warning][.error]
-  ├── text[.readonly]
-  ├── image.left
-  ├── image.right
-  ╰── [progress[.pulse]]
-  ```
-  
-  [gtk.entry.Entry] has a main node with the name entry. Depending on the properties
-  of the entry, the style classes .read-only and .flat may appear. The style
-  classes .warning and .error may also be used with entries.
-  
-  When the entry shows icons, it adds subnodes with the name image and the
-  style class .left or .right, depending on where the icon appears.
-  
-  When the entry shows progress, it adds a subnode with the name progress.
-  The node has the style class .pulse when the shown progress is pulsing.
-  
-  For all the subnodes added to the text node in various situations,
-  see [gtk.text.Text].
-  
-  # GtkEntry as GtkBuildable
-  
-  The [gtk.entry.Entry] implementation of the [gtk.buildable.Buildable] interface supports a
-  custom `<attributes>` element, which supports any number of `<attribute>`
-  elements. The `<attribute>` element has attributes named “name“, “value“,
-  “start“ and “end“ and allows you to specify [pango.attribute.Attribute] values for
-  this label.
-  
-  An example of a UI definition fragment specifying Pango attributes:
-  ```xml
-  <object class="GtkEntry">
-    <attributes>
-      <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-      <attribute name="background" value="red" start="5" end="10"/>
-    </attributes>
-  </object>
-  ```
-  
-  The start and end attributes specify the range of characters to which the
-  Pango attribute applies. If start and end are not specified, the attribute
-  is applied to the whole text. Note that specifying ranges does not make much
-  sense with translatable attributes. Use markup embedded in the translatable
-  content instead.
-  
-  # Accessibility
-  
-  [gtk.entry.Entry] uses the [gtk.types.AccessibleRole.TextBox] role.
+    
+    ![An example GtkEntry](entry.png)
+    
+    A fairly large set of key bindings are supported by default. If the
+    entered text is longer than the allocation of the widget, the widget
+    will scroll so that the cursor position is visible.
+    
+    When using an entry for passwords and other sensitive information, it
+    can be put into “password mode” using [gtk.entry.Entry.setVisibility].
+    In this mode, entered text is displayed using a “invisible” character.
+    By default, GTK picks the best invisible character that is available
+    in the current font, but it can be changed with
+    [gtk.entry.Entry.setInvisibleChar].
+    
+    [gtk.entry.Entry] has the ability to display progress or activity
+    information behind the text. To make an entry display such information,
+    use [gtk.entry.Entry.setProgressFraction] or
+    [gtk.entry.Entry.setProgressPulseStep].
+    
+    Additionally, [gtk.entry.Entry] can show icons at either side of the entry.
+    These icons can be activatable by clicking, can be set up as drag source
+    and can have tooltips. To add an icon, use
+    [gtk.entry.Entry.setIconFromGicon] or one of the various other functions
+    that set an icon from an icon name or a paintable. To trigger an action when
+    the user clicks an icon, connect to the `signal@Gtk.Entry::icon-press` signal.
+    To allow DND operations from an icon, use
+    [gtk.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
+    [gtk.entry.Entry.setIconTooltipText] or the corresponding function
+    for markup.
+    
+    Note that functionality or information that is only available by clicking
+    on an icon in an entry may not be accessible at all to users which are not
+    able to use a mouse or other pointing device. It is therefore recommended
+    that any such functionality should also be available by other means, e.g.
+    via the context menu of the entry.
+    
+    # CSS nodes
+    
+    ```
+    entry[.flat][.warning][.error]
+    ├── text[.readonly]
+    ├── image.left
+    ├── image.right
+    ╰── [progress[.pulse]]
+    ```
+    
+    [gtk.entry.Entry] has a main node with the name entry. Depending on the properties
+    of the entry, the style classes .read-only and .flat may appear. The style
+    classes .warning and .error may also be used with entries.
+    
+    When the entry shows icons, it adds subnodes with the name image and the
+    style class .left or .right, depending on where the icon appears.
+    
+    When the entry shows progress, it adds a subnode with the name progress.
+    The node has the style class .pulse when the shown progress is pulsing.
+    
+    For all the subnodes added to the text node in various situations,
+    see [gtk.text.Text].
+    
+    # GtkEntry as GtkBuildable
+    
+    The [gtk.entry.Entry] implementation of the [gtk.buildable.Buildable] interface supports a
+    custom `<attributes>` element, which supports any number of `<attribute>`
+    elements. The `<attribute>` element has attributes named “name“, “value“,
+    “start“ and “end“ and allows you to specify [pango.attribute.Attribute] values for
+    this label.
+    
+    An example of a UI definition fragment specifying Pango attributes:
+    ```xml
+    <object class="GtkEntry">
+      <attributes>
+        <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+        <attribute name="background" value="red" start="5" end="10"/>
+      </attributes>
+    </object>
+    ```
+    
+    The start and end attributes specify the range of characters to which the
+    Pango attribute applies. If start and end are not specified, the attribute
+    is applied to the whole text. Note that specifying ranges does not make much
+    sense with translatable attributes. Use markup embedded in the translatable
+    content instead.
+    
+    # Accessibility
+    
+    [gtk.entry.Entry] uses the [gtk.types.AccessibleRole.TextBox] role.
 */
 class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Editable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_get_type != &gidSymbolNotFound ? gtk_entry_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -146,7 +150,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Creates a new entry.
-    Returns:     a new [gtk.entry.Entry].
+      Returns: a new [gtk.entry.Entry].
   */
   this()
   {
@@ -157,9 +161,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Creates a new entry with the specified text buffer.
-    Params:
-      buffer =       The buffer to use for the new [gtk.entry.Entry].
-    Returns:     a new [gtk.entry.Entry]
+  
+      Params:
+        buffer = The buffer to use for the new [gtk.entry.Entry].
+      Returns: a new [gtk.entry.Entry]
   */
   static gtk.entry.Entry newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
@@ -171,7 +176,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the value set by [gtk.entry.Entry.setActivatesDefault].
-    Returns:     true if the entry will activate the default widget
+      Returns: true if the entry will activate the default widget
   */
   bool getActivatesDefault()
   {
@@ -182,9 +187,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the value set by [gtk.entry.Entry.setAlignment].
-    
-    See also: [gtk.editable.Editable.gfloat]
-    Returns:     the alignment
+      
+      See also: [gtk.editable.Editable.gfloat]
+      Returns: the alignment
   */
   float getAlignment()
   {
@@ -195,9 +200,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the attribute list of the [gtk.entry.Entry].
-    
-    See [gtk.entry.Entry.setAttributes].
-    Returns:     the attribute list
+      
+      See [gtk.entry.Entry.setAttributes].
+      Returns: the attribute list
   */
   pango.attr_list.AttrList getAttributes()
   {
@@ -209,8 +214,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Get the [gtk.entry_buffer.EntryBuffer] object which holds the text for
-    this widget.
-    Returns:     A [gtk.entry_buffer.EntryBuffer] object.
+      this widget.
+      Returns: A [gtk.entry_buffer.EntryBuffer] object.
   */
   gtk.entry_buffer.EntryBuffer getBuffer()
   {
@@ -222,11 +227,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Returns the auxiliary completion object currently
-    in use by entry.
-    Returns:     The auxiliary
-        completion object currently in use by entry
+      in use by entry.
+      Returns: The auxiliary
+          completion object currently in use by entry
   
-    Deprecated:     GtkEntryCompletion will be removed in GTK 5.
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
   gtk.entry_completion.EntryCompletion getCompletion()
   {
@@ -238,9 +243,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Returns the index of the icon which is the source of the
-    current  DND operation, or -1.
-    Returns:     index of the icon which is the source of the
-        current DND operation, or -1.
+      current  DND operation, or -1.
+      Returns: index of the icon which is the source of the
+          current DND operation, or -1.
   */
   int getCurrentIconDragSource()
   {
@@ -251,7 +256,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the menu model set with [gtk.entry.Entry.setExtraMenu].
-    Returns:     the menu model
+      Returns: the menu model
   */
   gio.menu_model.MenuModel getExtraMenu()
   {
@@ -263,7 +268,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the value set by [gtk.entry.Entry.setHasFrame].
-    Returns:     whether the entry has a beveled frame
+      Returns: whether the entry has a beveled frame
   */
   bool getHasFrame()
   {
@@ -274,9 +279,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Returns whether the icon is activatable.
-    Params:
-      iconPos =       Icon position
-    Returns:     true if the icon is activatable.
+  
+      Params:
+        iconPos = Icon position
+      Returns: true if the icon is activatable.
   */
   bool getIconActivatable(gtk.types.EntryIconPosition iconPos)
   {
@@ -287,17 +293,18 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the area where entry’s icon at icon_pos is drawn.
-    
-    This function is useful when drawing something to the
-    entry in a draw callback.
-    
-    If the entry is not realized or has no icon at the given
-    position, icon_area is filled with zeros. Otherwise,
-    icon_area will be filled with the icon's allocation,
-    relative to entry's allocation.
-    Params:
-      iconPos =       Icon position
-      iconArea =       Return location for the icon’s area
+      
+      This function is useful when drawing something to the
+      entry in a draw callback.
+      
+      If the entry is not realized or has no icon at the given
+      position, icon_area is filled with zeros. Otherwise,
+      icon_area will be filled with the icon's allocation,
+      relative to entry's allocation.
+  
+      Params:
+        iconPos = Icon position
+        iconArea = Return location for the icon’s area
   */
   void getIconArea(gtk.types.EntryIconPosition iconPos, out gdk.rectangle.Rectangle iconArea)
   {
@@ -308,15 +315,16 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Finds the icon at the given position and return its index.
-    
-    The position’s coordinates are relative to the entry’s
-    top left corner. If x, y doesn’t lie inside an icon,
-    -1 is returned. This function is intended for use in a
-     `signalGtk.Widget::query-tooltip` signal handler.
-    Params:
-      x =       the x coordinate of the position to find, relative to entry
-      y =       the y coordinate of the position to find, relative to entry
-    Returns:     the index of the icon at the given position, or -1
+      
+      The position’s coordinates are relative to the entry’s
+      top left corner. If `x`, `y` doesn’t lie inside an icon,
+      -1 is returned. This function is intended for use in a
+       `signalGtk.Widget::query-tooltip` signal handler.
+  
+      Params:
+        x = the x coordinate of the position to find, relative to entry
+        y = the y coordinate of the position to find, relative to entry
+      Returns: the index of the icon at the given position, or -1
   */
   int getIconAtPos(int x, int y)
   {
@@ -327,12 +335,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the [gio.icon.Icon] used for the icon.
-    
-    null will be returned if there is no icon or if the icon was
-    set by some other method (e.g., by [gdk.paintable.Paintable] or icon name).
-    Params:
-      iconPos =       Icon position
-    Returns:     A [gio.icon.Icon]
+      
+      null will be returned if there is no icon or if the icon was
+      set by some other method (e.g., by [gdk.paintable.Paintable] or icon name).
+  
+      Params:
+        iconPos = Icon position
+      Returns: A [gio.icon.Icon]
   */
   gio.icon.Icon getIconGicon(gtk.types.EntryIconPosition iconPos)
   {
@@ -344,12 +353,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the icon name used for the icon.
-    
-    null is returned if there is no icon or if the icon was set
-    by some other method (e.g., by [gdk.paintable.Paintable] or gicon).
-    Params:
-      iconPos =       Icon position
-    Returns:     An icon name
+      
+      null is returned if there is no icon or if the icon was set
+      by some other method (e.g., by [gdk.paintable.Paintable] or gicon).
+  
+      Params:
+        iconPos = Icon position
+      Returns: An icon name
   */
   string getIconName(gtk.types.EntryIconPosition iconPos)
   {
@@ -361,13 +371,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the [gdk.paintable.Paintable] used for the icon.
-    
-    If no [gdk.paintable.Paintable] was used for the icon, null is returned.
-    Params:
-      iconPos =       Icon position
-    Returns:     A [gdk.paintable.Paintable]
-        if no icon is set for this position or the icon set is not
-        a [gdk.paintable.Paintable].
+      
+      If no [gdk.paintable.Paintable] was used for the icon, null is returned.
+  
+      Params:
+        iconPos = Icon position
+      Returns: A [gdk.paintable.Paintable]
+          if no icon is set for this position or the icon set is not
+          a [gdk.paintable.Paintable].
   */
   gdk.paintable.Paintable getIconPaintable(gtk.types.EntryIconPosition iconPos)
   {
@@ -379,9 +390,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Returns whether the icon appears sensitive or insensitive.
-    Params:
-      iconPos =       Icon position
-    Returns:     true if the icon is sensitive.
+  
+      Params:
+        iconPos = Icon position
+      Returns: true if the icon is sensitive.
   */
   bool getIconSensitive(gtk.types.EntryIconPosition iconPos)
   {
@@ -392,13 +404,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the type of representation being used by the icon
-    to store image data.
-    
-    If the icon has no image data, the return value will
-    be [gtk.types.ImageType.Empty].
-    Params:
-      iconPos =       Icon position
-    Returns:     image representation being used
+      to store image data.
+      
+      If the icon has no image data, the return value will
+      be [gtk.types.ImageType.Empty].
+  
+      Params:
+        iconPos = Icon position
+      Returns: image representation being used
   */
   gtk.types.ImageType getIconStorageType(gtk.types.EntryIconPosition iconPos)
   {
@@ -410,10 +423,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the contents of the tooltip on the icon at the specified
-    position in entry.
-    Params:
-      iconPos =       the icon position
-    Returns:     the tooltip text
+      position in entry.
+  
+      Params:
+        iconPos = the icon position
+      Returns: the tooltip text
   */
   string getIconTooltipMarkup(gtk.types.EntryIconPosition iconPos)
   {
@@ -425,10 +439,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the contents of the tooltip on the icon at the specified
-    position in entry.
-    Params:
-      iconPos =       the icon position
-    Returns:     the tooltip text
+      position in entry.
+  
+      Params:
+        iconPos = the icon position
+      Returns: the tooltip text
   */
   string getIconTooltipText(gtk.types.EntryIconPosition iconPos)
   {
@@ -440,7 +455,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the input hints of this [gtk.entry.Entry].
-    Returns:     the input hints
+      Returns: the input hints
   */
   gtk.types.InputHints getInputHints()
   {
@@ -452,7 +467,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the input purpose of the [gtk.entry.Entry].
-    Returns:     the input purpose
+      Returns: the input purpose
   */
   gtk.types.InputPurpose getInputPurpose()
   {
@@ -464,9 +479,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the character displayed in place of the actual text
-    in “password mode”.
-    Returns:     the current invisible char, or 0, if the entry does not
-        show invisible text at all.
+      in “password mode”.
+      Returns: the current invisible char, or 0, if the entry does not
+          show invisible text at all.
   */
   dchar getInvisibleChar()
   {
@@ -477,10 +492,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the maximum allowed length of the text in entry.
-    
-    See [gtk.entry.Entry.setMaxLength].
-    Returns:     the maximum allowed number of characters
-        in [gtk.entry.Entry], or 0 if there is no maximum.
+      
+      See [gtk.entry.Entry.setMaxLength].
+      Returns: the maximum allowed number of characters
+          in [gtk.entry.Entry], or 0 if there is no maximum.
   */
   int getMaxLength()
   {
@@ -491,7 +506,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets whether the [gtk.entry.Entry] is in overwrite mode.
-    Returns:     whether the text is overwritten when typing.
+      Returns: whether the text is overwritten when typing.
   */
   bool getOverwriteMode()
   {
@@ -502,12 +517,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the text that will be displayed when entry
-    is empty and unfocused
-    Returns:     a pointer to the
-        placeholder text as a string. This string points to
-        internally allocated storage in the widget and must
-        not be freed, modified or stored. If no placeholder
-        text has been set, null will be returned.
+      is empty and unfocused
+      Returns: a pointer to the
+          placeholder text as a string. This string points to
+          internally allocated storage in the widget and must
+          not be freed, modified or stored. If no placeholder
+          text has been set, null will be returned.
   */
   string getPlaceholderText()
   {
@@ -519,9 +534,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Returns the current fraction of the task that’s been completed.
-    
-    See [gtk.entry.Entry.setProgressFraction].
-    Returns:     a fraction from 0.0 to 1.0
+      
+      See [gtk.entry.Entry.setProgressFraction].
+      Returns: a fraction from 0.0 to 1.0
   */
   double getProgressFraction()
   {
@@ -532,8 +547,8 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the pulse step set with
-    [gtk.entry.Entry.setProgressPulseStep].
-    Returns:     a fraction from 0.0 to 1.0
+      [gtk.entry.Entry.setProgressPulseStep].
+      Returns: a fraction from 0.0 to 1.0
   */
   double getProgressPulseStep()
   {
@@ -544,9 +559,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Gets the tabstops of the [gtk.entry.Entry].
-    
-    See [gtk.entry.Entry.setTabs].
-    Returns:     the tabstops
+      
+      See [gtk.entry.Entry.setTabs].
+      Returns: the tabstops
   */
   pango.tab_array.TabArray getTabs()
   {
@@ -558,11 +573,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves the current length of the text in entry.
-    
-    This is equivalent to getting entry's [gtk.entry_buffer.EntryBuffer]
-    and calling [gtk.entry_buffer.EntryBuffer.getLength] on it.
-    Returns:     the current number of characters
-        in [gtk.entry.Entry], or 0 if there are none.
+      
+      This is equivalent to getting entry's [gtk.entry_buffer.EntryBuffer]
+      and calling [gtk.entry_buffer.EntryBuffer.getLength] on it.
+      Returns: the current number of characters
+          in [gtk.entry.Entry], or 0 if there are none.
   */
   ushort getTextLength()
   {
@@ -573,9 +588,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Retrieves whether the text in entry is visible.
-    
-    See [gtk.entry.Entry.setVisibility].
-    Returns:     true if the text is currently visible
+      
+      See [gtk.entry.Entry.setVisibility].
+      Returns: true if the text is currently visible
   */
   bool getVisibility()
   {
@@ -586,12 +601,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Causes entry to have keyboard focus.
-    
-    It behaves like [gtk.widget.Widget.grabFocus], except that it doesn't
-    select the contents of the entry. You only want to call this on some
-    special entries which the user usually doesn't want to replace all text
-    in, such as search-as-you-type entries.
-    Returns:     true if focus is now inside self
+      
+      It behaves like [gtk.widget.Widget.grabFocus], except that it doesn't
+      select the contents of the entry. You only want to call this on some
+      special entries which the user usually doesn't want to replace all text
+      in, such as search-as-you-type entries.
+      Returns: true if focus is now inside self
   */
   bool grabFocusWithoutSelecting()
   {
@@ -602,13 +617,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Indicates that some progress is made, but you don’t
-    know how much.
-    
-    Causes the entry’s progress indicator to enter “activity
-    mode”, where a block bounces back and forth. Each call to
-    [gtk.entry.Entry.progressPulse] causes the block to move by a
-    little bit (the amount of movement per pulse is determined
-    by [gtk.entry.Entry.setProgressPulseStep]).
+      know how much.
+      
+      Causes the entry’s progress indicator to enter “activity
+      mode”, where a block bounces back and forth. Each call to
+      [gtk.entry.Entry.progressPulse] causes the block to move by a
+      little bit (the amount of movement per pulse is determined
+      by [gtk.entry.Entry.setProgressPulseStep]).
   */
   void progressPulse()
   {
@@ -617,9 +632,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Reset the input method context of the entry if needed.
-    
-    This can be necessary in the case where modifying the buffer
-    would confuse on-going input method behavior.
+      
+      This can be necessary in the case where modifying the buffer
+      would confuse on-going input method behavior.
   */
   void resetImContext()
   {
@@ -628,12 +643,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets whether pressing Enter in the entry will activate the default
-    widget for the window containing the entry.
-    
-    This usually means that the dialog containing the entry will be closed,
-    since the default widget is usually one of the dialog buttons.
-    Params:
-      setting =       true to activate window’s default widget on Enter keypress
+      widget for the window containing the entry.
+      
+      This usually means that the dialog containing the entry will be closed,
+      since the default widget is usually one of the dialog buttons.
+  
+      Params:
+        setting = true to activate window’s default widget on Enter keypress
   */
   void setActivatesDefault(bool setting)
   {
@@ -642,14 +658,15 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the alignment for the contents of the entry.
-    
-    This controls the horizontal positioning of the contents when
-    the displayed text is shorter than the width of the entry.
-    
-    See also: [gtk.editable.Editable.gfloat]
-    Params:
-      xalign =       The horizontal alignment, from 0 (left) to 1 (right).
-          Reversed for RTL layouts
+      
+      This controls the horizontal positioning of the contents when
+      the displayed text is shorter than the width of the entry.
+      
+      See also: [gtk.editable.Editable.gfloat]
+  
+      Params:
+        xalign = The horizontal alignment, from 0 (left) to 1 (right).
+            Reversed for RTL layouts
   */
   void setAlignment(float xalign)
   {
@@ -658,14 +675,15 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets a [pango.attr_list.AttrList].
-    
-    The attributes in the list are applied to the entry text.
-    
-    Since the attributes will be applied to text that changes
-    as the user types, it makes most sense to use attributes
-    with unlimited extent.
-    Params:
-      attrs =       a [pango.attr_list.AttrList]
+      
+      The attributes in the list are applied to the entry text.
+      
+      Since the attributes will be applied to text that changes
+      as the user types, it makes most sense to use attributes
+      with unlimited extent.
+  
+      Params:
+        attrs = a [pango.attr_list.AttrList]
   */
   void setAttributes(pango.attr_list.AttrList attrs)
   {
@@ -674,9 +692,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Set the [gtk.entry_buffer.EntryBuffer] object which holds the text for
-    this widget.
-    Params:
-      buffer =       a [gtk.entry_buffer.EntryBuffer]
+      this widget.
+  
+      Params:
+        buffer = a [gtk.entry_buffer.EntryBuffer]
   */
   void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
@@ -685,15 +704,16 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets completion to be the auxiliary completion object
-    to use with entry.
-    
-    All further configuration of the completion mechanism is
-    done on completion using the [gtk.entry_completion.EntryCompletion] API.
-    Completion is disabled if completion is set to null.
-    Params:
-      completion =       The [gtk.entry_completion.EntryCompletion]
+      to use with entry.
+      
+      All further configuration of the completion mechanism is
+      done on completion using the [gtk.entry_completion.EntryCompletion] API.
+      Completion is disabled if completion is set to null.
   
-    Deprecated:     GtkEntryCompletion will be removed in GTK 5.
+      Params:
+        completion = The [gtk.entry_completion.EntryCompletion]
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
   */
   void setCompletion(gtk.entry_completion.EntryCompletion completion = null)
   {
@@ -702,9 +722,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets a menu model to add when constructing
-    the context menu for entry.
-    Params:
-      model =       a [gio.menu_model.MenuModel]
+      the context menu for entry.
+  
+      Params:
+        model = a [gio.menu_model.MenuModel]
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
@@ -713,8 +734,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets whether the entry has a beveled frame around it.
-    Params:
-      setting =       new value
+  
+      Params:
+        setting = new value
   */
   void setHasFrame(bool setting)
   {
@@ -723,9 +745,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets whether the icon is activatable.
-    Params:
-      iconPos =       Icon position
-      activatable =       true if the icon should be activatable
+  
+      Params:
+        iconPos = Icon position
+        activatable = true if the icon should be activatable
   */
   void setIconActivatable(gtk.types.EntryIconPosition iconPos, bool activatable)
   {
@@ -734,13 +757,14 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets up the icon at the given position as drag source.
-    
-    This makes it so that GTK will start a drag
-    operation when the user clicks and drags the icon.
-    Params:
-      iconPos =       icon position
-      provider =       a [gdk.content_provider.ContentProvider]
-      actions =       a bitmask of the allowed drag actions
+      
+      This makes it so that GTK will start a drag
+      operation when the user clicks and drags the icon.
+  
+      Params:
+        iconPos = icon position
+        provider = a [gdk.content_provider.ContentProvider]
+        actions = a bitmask of the allowed drag actions
   */
   void setIconDragSource(gtk.types.EntryIconPosition iconPos, gdk.content_provider.ContentProvider provider, gdk.types.DragAction actions)
   {
@@ -749,16 +773,17 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the icon shown in the entry at the specified position
-    from the current icon theme.
-    
-    If the icon isn’t known, a “broken image” icon will be
-    displayed instead.
-    
-    If icon is null, no icon will be shown in the
-    specified position.
-    Params:
-      iconPos =       The position at which to set the icon
-      icon =       The icon to set
+      from the current icon theme.
+      
+      If the icon isn’t known, a “broken image” icon will be
+      displayed instead.
+      
+      If icon is null, no icon will be shown in the
+      specified position.
+  
+      Params:
+        iconPos = The position at which to set the icon
+        icon = The icon to set
   */
   void setIconFromGicon(gtk.types.EntryIconPosition iconPos, gio.icon.Icon icon = null)
   {
@@ -767,16 +792,17 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the icon shown in the entry at the specified position
-    from the current icon theme.
-    
-    If the icon name isn’t known, a “broken image” icon will be
-    displayed instead.
-    
-    If icon_name is null, no icon will be shown in the
-    specified position.
-    Params:
-      iconPos =       The position at which to set the icon
-      iconName =       An icon name
+      from the current icon theme.
+      
+      If the icon name isn’t known, a “broken image” icon will be
+      displayed instead.
+      
+      If icon_name is null, no icon will be shown in the
+      specified position.
+  
+      Params:
+        iconPos = The position at which to set the icon
+        iconName = An icon name
   */
   void setIconFromIconName(gtk.types.EntryIconPosition iconPos, string iconName = null)
   {
@@ -786,11 +812,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the icon shown in the specified position using a [gdk.paintable.Paintable].
-    
-    If paintable is null, no icon will be shown in the specified position.
-    Params:
-      iconPos =       Icon position
-      paintable =       A [gdk.paintable.Paintable]
+      
+      If paintable is null, no icon will be shown in the specified position.
+  
+      Params:
+        iconPos = Icon position
+        paintable = A [gdk.paintable.Paintable]
   */
   void setIconFromPaintable(gtk.types.EntryIconPosition iconPos, gdk.paintable.Paintable paintable = null)
   {
@@ -799,10 +826,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the sensitivity for the specified icon.
-    Params:
-      iconPos =       Icon position
-      sensitive =       Specifies whether the icon should appear
-          sensitive or insensitive
+  
+      Params:
+        iconPos = Icon position
+        sensitive = Specifies whether the icon should appear
+            sensitive or insensitive
   */
   void setIconSensitive(gtk.types.EntryIconPosition iconPos, bool sensitive)
   {
@@ -811,17 +839,18 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets tooltip as the contents of the tooltip for the icon at
-    the specified position.
-    
-    tooltip is assumed to be marked up with Pango Markup.
-    
-    Use null for tooltip to remove an existing tooltip.
-    
-    See also [gtk.widget.Widget.setTooltipMarkup] and
-    [gtk.entry.Entry.setIconTooltipText].
-    Params:
-      iconPos =       the icon position
-      tooltip =       the contents of the tooltip for the icon
+      the specified position.
+      
+      tooltip is assumed to be marked up with Pango Markup.
+      
+      Use null for tooltip to remove an existing tooltip.
+      
+      See also [gtk.widget.Widget.setTooltipMarkup] and
+      [gtk.entry.Entry.setIconTooltipText].
+  
+      Params:
+        iconPos = the icon position
+        tooltip = the contents of the tooltip for the icon
   */
   void setIconTooltipMarkup(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
@@ -831,25 +860,26 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets tooltip as the contents of the tooltip for the icon
-    at the specified position.
-    
-    Use null for tooltip to remove an existing tooltip.
-    
-    See also [gtk.widget.Widget.setTooltipText] and
-    [gtk.entry.Entry.setIconTooltipMarkup].
-    
-    If you unset the widget tooltip via
-    [gtk.widget.Widget.setTooltipText] or
-    [gtk.widget.Widget.setTooltipMarkup], this sets
-    `propertyGtk.Widget:has-tooltip` to false, which suppresses
-    icon tooltips too. You can resolve this by then calling
-    [gtk.widget.Widget.setHasTooltip] to set
-    `propertyGtk.Widget:has-tooltip` back to true, or
-    setting at least one non-empty tooltip on any icon
-    achieves the same result.
-    Params:
-      iconPos =       the icon position
-      tooltip =       the contents of the tooltip for the icon
+      at the specified position.
+      
+      Use null for tooltip to remove an existing tooltip.
+      
+      See also [gtk.widget.Widget.setTooltipText] and
+      [gtk.entry.Entry.setIconTooltipMarkup].
+      
+      If you unset the widget tooltip via
+      [gtk.widget.Widget.setTooltipText] or
+      [gtk.widget.Widget.setTooltipMarkup], this sets
+      `propertyGtk.Widget:has-tooltip` to false, which suppresses
+      icon tooltips too. You can resolve this by then calling
+      [gtk.widget.Widget.setHasTooltip] to set
+      `propertyGtk.Widget:has-tooltip` back to true, or
+      setting at least one non-empty tooltip on any icon
+      achieves the same result.
+  
+      Params:
+        iconPos = the icon position
+        tooltip = the contents of the tooltip for the icon
   */
   void setIconTooltipText(gtk.types.EntryIconPosition iconPos, string tooltip = null)
   {
@@ -859,9 +889,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Set additional hints which allow input methods to
-    fine-tune their behavior.
-    Params:
-      hints =       the hints
+      fine-tune their behavior.
+  
+      Params:
+        hints = the hints
   */
   void setInputHints(gtk.types.InputHints hints)
   {
@@ -870,9 +901,10 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the input purpose which can be used by input methods
-    to adjust their behavior.
-    Params:
-      purpose =       the purpose
+      to adjust their behavior.
+  
+      Params:
+        purpose = the purpose
   */
   void setInputPurpose(gtk.types.InputPurpose purpose)
   {
@@ -881,17 +913,18 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the character to use in place of the actual text
-    in “password mode”.
-    
-    See [gtk.entry.Entry.setVisibility] for how to enable
-    “password mode”.
-    
-    By default, GTK picks the best invisible char available in
-    the current font. If you set the invisible char to 0, then
-    the user will get no feedback at all; there will be no text
-    on the screen as they type.
-    Params:
-      ch =       a Unicode character
+      in “password mode”.
+      
+      See [gtk.entry.Entry.setVisibility] for how to enable
+      “password mode”.
+      
+      By default, GTK picks the best invisible char available in
+      the current font. If you set the invisible char to 0, then
+      the user will get no feedback at all; there will be no text
+      on the screen as they type.
+  
+      Params:
+        ch = a Unicode character
   */
   void setInvisibleChar(dchar ch)
   {
@@ -900,16 +933,17 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the maximum allowed length of the contents of the widget.
-    
-    If the current contents are longer than the given length, then
-    they will be truncated to fit. The length is in characters.
-    
-    This is equivalent to getting entry's [gtk.entry_buffer.EntryBuffer] and
-    calling [gtk.entry_buffer.EntryBuffer.setMaxLength] on it.
-    Params:
-      max =       the maximum length of the entry, or 0 for no maximum.
-          (other than the maximum length of entries.) The value passed in will
-          be clamped to the range 0-65536.
+      
+      If the current contents are longer than the given length, then
+      they will be truncated to fit. The length is in characters.
+      
+      This is equivalent to getting entry's [gtk.entry_buffer.EntryBuffer] and
+      calling [gtk.entry_buffer.EntryBuffer.setMaxLength] on it.
+  
+      Params:
+        max = the maximum length of the entry, or 0 for no maximum.
+            (other than the maximum length of entries.) The value passed in will
+            be clamped to the range 0-65536.
   */
   void setMaxLength(int max)
   {
@@ -918,8 +952,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets whether the text is overwritten when typing in the [gtk.entry.Entry].
-    Params:
-      overwrite =       new value
+  
+      Params:
+        overwrite = new value
   */
   void setOverwriteMode(bool overwrite)
   {
@@ -928,11 +963,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets text to be displayed in entry when it is empty.
-    
-    This can be used to give a visual hint of the expected
-    contents of the [gtk.entry.Entry].
-    Params:
-      text =       a string to be displayed when entry is empty and unfocused
+      
+      This can be used to give a visual hint of the expected
+      contents of the [gtk.entry.Entry].
+  
+      Params:
+        text = a string to be displayed when entry is empty and unfocused
   */
   void setPlaceholderText(string text = null)
   {
@@ -942,11 +978,12 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Causes the entry’s progress indicator to “fill in” the given
-    fraction of the bar.
-    
-    The fraction should be between 0.0 and 1.0, inclusive.
-    Params:
-      fraction =       fraction of the task that’s been completed
+      fraction of the bar.
+      
+      The fraction should be between 0.0 and 1.0, inclusive.
+  
+      Params:
+        fraction = fraction of the task that’s been completed
   */
   void setProgressFraction(double fraction)
   {
@@ -955,12 +992,13 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets the fraction of total entry width to move the progress
-    bouncing block for each pulse.
-    
-    Use [gtk.entry.Entry.progressPulse] to pulse
-    the progress.
-    Params:
-      fraction =       fraction between 0.0 and 1.0
+      bouncing block for each pulse.
+      
+      Use [gtk.entry.Entry.progressPulse] to pulse
+      the progress.
+  
+      Params:
+        fraction = fraction between 0.0 and 1.0
   */
   void setProgressPulseStep(double fraction)
   {
@@ -969,10 +1007,11 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets a [pango.tab_array.TabArray].
-    
-    The tabstops in the array are applied to the entry text.
-    Params:
-      tabs =       a [pango.tab_array.TabArray]
+      
+      The tabstops in the array are applied to the entry text.
+  
+      Params:
+        tabs = a [pango.tab_array.TabArray]
   */
   void setTabs(pango.tab_array.TabArray tabs = null)
   {
@@ -981,21 +1020,22 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Sets whether the contents of the entry are visible or not.
-    
-    When visibility is set to false, characters are displayed
-    as the invisible char, and will also appear that way when
-    the text in the entry widget is copied elsewhere.
-    
-    By default, GTK picks the best invisible character available
-    in the current font, but it can be changed with
-    [gtk.entry.Entry.setInvisibleChar].
-    
-    Note that you probably want to set `propertyGtk.Entry:input-purpose`
-    to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
-    inform input methods about the purpose of this entry,
-    in addition to setting visibility to false.
-    Params:
-      visible =       true if the contents of the entry are displayed as plaintext
+      
+      When visibility is set to false, characters are displayed
+      as the invisible char, and will also appear that way when
+      the text in the entry widget is copied elsewhere.
+      
+      By default, GTK picks the best invisible character available
+      in the current font, but it can be changed with
+      [gtk.entry.Entry.setInvisibleChar].
+      
+      Note that you probably want to set `propertyGtk.Entry:input-purpose`
+      to [gtk.types.InputPurpose.Password] or [gtk.types.InputPurpose.Pin] to
+      inform input methods about the purpose of this entry,
+      in addition to setting visibility to false.
+  
+      Params:
+        visible = true if the contents of the entry are displayed as plaintext
   */
   void setVisibility(bool visible)
   {
@@ -1004,7 +1044,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 
   /**
       Unsets the invisible char, so that the default invisible char
-    is used again. See [gtk.entry.Entry.setInvisibleChar].
+      is used again. See [gtk.entry.Entry.setInvisibleChar].
   */
   void unsetInvisibleChar()
   {
@@ -1012,36 +1052,38 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
-      Emitted when the entry is activated.
-    
-    The keybindings for this signal are all forms of the Enter key.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B entry) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.entry.Entry entry);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.entry.Entry entry);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the entry is activated.
+      
+      The keybindings for this signal are all forms of the Enter key.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.entry.Entry entry))
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.entry.Entry)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
-      _dClosure.dlg(entry);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1049,36 +1091,43 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
+      Connect to `IconPress` signal.
+  
       Emitted when an activatable icon is clicked.
   
-    ## Parameters
-    $(LIST
-      * $(B iconPos)       The position of the clicked icon
-      * $(B entry) the instance the signal is connected to
-    )
-  */
-  alias IconPressCallbackDlg = void delegate(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
-
-  /** ditto */
-  alias IconPressCallbackFunc = void function(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
-
-  /**
-    Connect to IconPress signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry))
+  
+          `iconPos` The position of the clicked icon (optional)
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectIconPress(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : IconPressCallbackDlg) || is(T : IconPressCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.EntryIconPosition)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry.Entry)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
-      auto iconPos = getVal!(gtk.types.EntryIconPosition)(&_paramVals[1]);
-      _dClosure.dlg(iconPos, entry);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -1086,37 +1135,44 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   }
 
   /**
-      Emitted on the button release from a mouse click
-    over an activatable icon.
+      Connect to `IconRelease` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B iconPos)       The position of the clicked icon
-      * $(B entry) the instance the signal is connected to
-    )
-  */
-  alias IconReleaseCallbackDlg = void delegate(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
-
-  /** ditto */
-  alias IconReleaseCallbackFunc = void function(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry);
-
-  /**
-    Connect to IconRelease signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted on the button release from a mouse click
+      over an activatable icon.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.EntryIconPosition iconPos, gtk.entry.Entry entry))
+  
+          `iconPos` The position of the clicked icon (optional)
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectIconRelease(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : IconReleaseCallbackDlg) || is(T : IconReleaseCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.EntryIconPosition)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.entry.Entry)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto entry = getVal!(gtk.entry.Entry)(_paramVals);
-      auto iconPos = getVal!(gtk.types.EntryIconPosition)(&_paramVals[1]);
-      _dClosure.dlg(iconPos, entry);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

@@ -1,3 +1,4 @@
+/// Module for [ObjectJson] class
 module json.object;
 
 import gid.gid;
@@ -10,43 +11,47 @@ import json.types;
 
 /**
     [json.object.ObjectJson] is the representation of the object type inside JSON.
-  
-  A [json.object.ObjectJson] contains [json.node.Node] "members", which may contain
-  fundamental types, arrays or other objects; each member of an object is
-  accessed using a unique string, or "name".
-  
-  Since objects can be arbitrarily big, copying them can be expensive; for
-  this reason they are reference counted. You can control the lifetime of
-  a [json.object.ObjectJson] using [json.object.ObjectJson.ref_] and [json.object.ObjectJson.unref].
-  
-  To add or overwrite a member with a given name, use [json.object.ObjectJson.setMember].
-  
-  To extract a member with a given name, use [json.object.ObjectJson.getMember].
-  
-  To retrieve the list of members, use [json.object.ObjectJson.getMembers].
-  
-  To retrieve the size of the object (that is, the number of members it has),
-  use [json.object.ObjectJson.getSize].
+    
+    A [json.object.ObjectJson] contains [json.node.Node] "members", which may contain
+    fundamental types, arrays or other objects; each member of an object is
+    accessed using a unique string, or "name".
+    
+    Since objects can be arbitrarily big, copying them can be expensive; for
+    this reason they are reference counted. You can control the lifetime of
+    a [json.object.ObjectJson] using [json.object.ObjectJson.ref_] and [json.object.ObjectJson.unref].
+    
+    To add or overwrite a member with a given name, use [json.object.ObjectJson.setMember].
+    
+    To extract a member with a given name, use [json.object.ObjectJson.getMember].
+    
+    To retrieve the list of members, use [json.object.ObjectJson.getMembers].
+    
+    To retrieve the size of the object (that is, the number of members it has),
+    use [json.object.ObjectJson.getSize].
 */
 class ObjectJson : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_object_get_type != &gidSymbolNotFound ? json_object_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,7 +64,7 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Creates a new object.
-    Returns:     the newly created object
+      Returns: the newly created object
   */
   this()
   {
@@ -70,14 +75,15 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Adds a new member for the given name and value into an object.
-    
-    This function will return if the object already contains a member
-    with the same name.
-    Params:
-      memberName =       the name of the member
-      node =       the value of the member
+      
+      This function will return if the object already contains a member
+      with the same name.
   
-    Deprecated:     Use [json.object.ObjectJson.setMember] instead
+      Params:
+        memberName = the name of the member
+        node = the value of the member
+  
+      Deprecated: Use [json.object.ObjectJson.setMember] instead
   */
   void addMember(string memberName, json.node.Node node)
   {
@@ -87,10 +93,11 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Retrieves a copy of the value of the given member inside an object.
-    Params:
-      memberName =       the name of the JSON object member to access
-    Returns:     a copy of the value for the
-        requested object member
+  
+      Params:
+        memberName = the name of the JSON object member to access
+      Returns: a copy of the value for the
+          requested object member
   */
   json.node.Node dupMember(string memberName)
   {
@@ -102,11 +109,12 @@ class ObjectJson : gobject.boxed.Boxed
   }
 
   /**
-      Check whether a and b are equal objects, meaning they have the same
-    set of members, and the values of corresponding members are equal.
-    Params:
-      b =       another JSON object
-    Returns:     `TRUE` if a and b are equal, and `FALSE` otherwise
+      Check whether `a` and `b` are equal objects, meaning they have the same
+      set of members, and the values of corresponding members are equal.
+  
+      Params:
+        b = another JSON object
+      Returns: `TRUE` if `a` and `b` are equal, and `FALSE` otherwise
   */
   bool equal(json.object.ObjectJson b)
   {
@@ -117,16 +125,17 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Iterates over all members of object and calls func on
-    each one of them.
-    
-    It is safe to change the value of a member of the oobject
-    from within the iterator function, but it is not safe to add or
-    remove members from the object.
-    
-    The order in which the object members are iterated is the
-    insertion order.
-    Params:
-      func =       the function to be called on each member
+      each one of them.
+      
+      It is safe to change the value of a member of the oobject
+      from within the iterator function, but it is not safe to add or
+      remove members from the object.
+      
+      The order in which the object members are iterated is the
+      insertion order.
+  
+      Params:
+        func = the function to be called on each member
   */
   void foreachMember(json.types.ObjectForeach func)
   {
@@ -145,15 +154,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the array
-    stored in member_name of object. It is an error to specify a
-    member_name which does not exist.
-    
-    If member_name contains `null`, then this function will return `NULL`.
-    
-    See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     the array inside the object's member
+      stored in member_name of object. It is an error to specify a
+      member_name which does not exist.
+      
+      If member_name contains `null`, then this function will return `NULL`.
+      
+      See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: the array inside the object's member
   */
   json.array.Array getArrayMember(string memberName)
   {
@@ -166,14 +176,15 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the boolean value
-    stored in member_name of object. It is an error to specify a
-    member_name which does not exist.
-    
-    See also: [json.object.ObjectJson.getBooleanMemberWithDefault],
-      [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     the boolean value of the object's member
+      stored in member_name of object. It is an error to specify a
+      member_name which does not exist.
+      
+      See also: [json.object.ObjectJson.getBooleanMemberWithDefault],
+        [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: the boolean value of the object's member
   */
   bool getBooleanMember(string memberName)
   {
@@ -185,15 +196,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the boolean value
-    stored in member_name of object.
-    
-    If member_name does not exist, does not contain a scalar value,
-    or contains `null`, then default_value is returned instead.
-    Params:
-      memberName =       the name of the object member
-      defaultValue =       the value to return if member_name is not valid
-    Returns:     the boolean value of the object's member, or the
-        given default
+      stored in member_name of object.
+      
+      If member_name does not exist, does not contain a scalar value,
+      or contains `null`, then default_value is returned instead.
+  
+      Params:
+        memberName = the name of the object member
+        defaultValue = the value to return if member_name is not valid
+      Returns: the boolean value of the object's member, or the
+          given default
   */
   bool getBooleanMemberWithDefault(string memberName, bool defaultValue)
   {
@@ -205,14 +217,15 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the floating point value
-    stored in member_name of object. It is an error to specify a
-    member_name which does not exist.
-    
-    See also: [json.object.ObjectJson.getDoubleMemberWithDefault],
-      [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     the floating point value of the object's member
+      stored in member_name of object. It is an error to specify a
+      member_name which does not exist.
+      
+      See also: [json.object.ObjectJson.getDoubleMemberWithDefault],
+        [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: the floating point value of the object's member
   */
   double getDoubleMember(string memberName)
   {
@@ -224,15 +237,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the floating point value
-    stored in member_name of object.
-    
-    If member_name does not exist, does not contain a scalar value,
-    or contains `null`, then default_value is returned instead.
-    Params:
-      memberName =       the name of the object member
-      defaultValue =       the value to return if member_name is not valid
-    Returns:     the floating point value of the object's member, or the
-        given default
+      stored in member_name of object.
+      
+      If member_name does not exist, does not contain a scalar value,
+      or contains `null`, then default_value is returned instead.
+  
+      Params:
+        memberName = the name of the object member
+        defaultValue = the value to return if member_name is not valid
+      Returns: the floating point value of the object's member, or the
+          given default
   */
   double getDoubleMemberWithDefault(string memberName, double defaultValue)
   {
@@ -244,14 +258,15 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the integer value
-    stored in member_name of object. It is an error to specify a
-    member_name which does not exist.
-    
-    See also: [json.object.ObjectJson.getIntMemberWithDefault],
-      [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the object member
-    Returns:     the integer value of the object's member
+      stored in member_name of object. It is an error to specify a
+      member_name which does not exist.
+      
+      See also: [json.object.ObjectJson.getIntMemberWithDefault],
+        [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the object member
+      Returns: the integer value of the object's member
   */
   long getIntMember(string memberName)
   {
@@ -263,15 +278,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the integer value
-    stored in member_name of object.
-    
-    If member_name does not exist, does not contain a scalar value,
-    or contains `null`, then default_value is returned instead.
-    Params:
-      memberName =       the name of the object member
-      defaultValue =       the value to return if member_name is not valid
-    Returns:     the integer value of the object's member, or the
-        given default
+      stored in member_name of object.
+      
+      If member_name does not exist, does not contain a scalar value,
+      or contains `null`, then default_value is returned instead.
+  
+      Params:
+        memberName = the name of the object member
+        defaultValue = the value to return if member_name is not valid
+      Returns: the integer value of the object's member, or the
+          given default
   */
   long getIntMemberWithDefault(string memberName, long defaultValue)
   {
@@ -283,10 +299,11 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Retrieves the value of the given member inside an object.
-    Params:
-      memberName =       the name of the JSON object member to access
-    Returns:     the value for the
-        requested object member
+  
+      Params:
+        memberName = the name of the JSON object member to access
+      Returns: the value for the
+          requested object member
   */
   json.node.Node getMember(string memberName)
   {
@@ -299,11 +316,11 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Retrieves all the names of the members of an object.
-    
-    You can obtain the value for each member by iterating the returned list
-    and calling [json.object.ObjectJson.getMember].
-    Returns:     the
-        member names of the object
+      
+      You can obtain the value for each member by iterating the returned list
+      and calling [json.object.ObjectJson.getMember].
+      Returns: the
+          member names of the object
   */
   string[] getMembers()
   {
@@ -315,13 +332,14 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that checks whether the value
-    stored in member_name of object is null. It is an error to
-    specify a member_name which does not exist.
-    
-    See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     `TRUE` if the value is `null`
+      stored in member_name of object is null. It is an error to
+      specify a member_name which does not exist.
+      
+      See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: `TRUE` if the value is `null`
   */
   bool getNullMember(string memberName)
   {
@@ -333,15 +351,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the object
-    stored in member_name of object. It is an error to specify a member_name
-    which does not exist.
-    
-    If member_name contains `null`, then this function will return `NULL`.
-    
-    See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     the object inside the object's member
+      stored in member_name of object. It is an error to specify a member_name
+      which does not exist.
+      
+      If member_name contains `null`, then this function will return `NULL`.
+      
+      See also: [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: the object inside the object's member
   */
   json.object.ObjectJson getObjectMember(string memberName)
   {
@@ -354,7 +373,7 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Retrieves the number of members of a JSON object.
-    Returns:     the number of members
+      Returns: the number of members
   */
   uint getSize()
   {
@@ -365,14 +384,15 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the string value
-    stored in member_name of object. It is an error to specify a
-    member_name that does not exist.
-    
-    See also: [json.object.ObjectJson.getStringMemberWithDefault],
-      [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
-    Params:
-      memberName =       the name of the member
-    Returns:     the string value of the object's member
+      stored in member_name of object. It is an error to specify a
+      member_name that does not exist.
+      
+      See also: [json.object.ObjectJson.getStringMemberWithDefault],
+        [json.object.ObjectJson.getMember], [json.object.ObjectJson.hasMember]
+  
+      Params:
+        memberName = the name of the member
+      Returns: the string value of the object's member
   */
   string getStringMember(string memberName)
   {
@@ -385,15 +405,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function that retrieves the string value
-    stored in member_name of object.
-    
-    If member_name does not exist, does not contain a scalar value,
-    or contains `null`, then default_value is returned instead.
-    Params:
-      memberName =       the name of the object member
-      defaultValue =       the value to return if member_name is not valid
-    Returns:     the string value of the object's member, or the
-        given default
+      stored in member_name of object.
+      
+      If member_name does not exist, does not contain a scalar value,
+      or contains `null`, then default_value is returned instead.
+  
+      Params:
+        memberName = the name of the object member
+        defaultValue = the value to return if member_name is not valid
+      Returns: the string value of the object's member, or the
+          given default
   */
   string getStringMemberWithDefault(string memberName, string defaultValue)
   {
@@ -407,8 +428,8 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Retrieves all the values of the members of an object.
-    Returns:     the
-        member values of the object
+      Returns: the
+          member values of the object
   */
   json.node.Node[] getValues()
   {
@@ -420,9 +441,10 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Checks whether object has a member named member_name.
-    Params:
-      memberName =       the name of a JSON object member
-    Returns:     `TRUE` if the JSON object has the requested member
+  
+      Params:
+        memberName = the name of a JSON object member
+      Returns: `TRUE` if the JSON object has the requested member
   */
   bool hasMember(string memberName)
   {
@@ -434,11 +456,11 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Calculate a hash value for the given key (a JSON object).
-    
-    The hash is calculated over the object and all its members, recursively. If
-    the object is immutable, this is a fast operation; otherwise, it scales
-    proportionally with the number of members in the object.
-    Returns:     hash value for key
+      
+      The hash is calculated over the object and all its members, recursively. If
+      the object is immutable, this is a fast operation; otherwise, it scales
+      proportionally with the number of members in the object.
+      Returns: hash value for key
   */
   uint hash()
   {
@@ -449,8 +471,8 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Checks whether the given object has been marked as immutable by calling
-    [json.object.ObjectJson.seal] on it.
-    Returns:     `TRUE` if the object is immutable
+      [json.object.ObjectJson.seal] on it.
+      Returns: `TRUE` if the object is immutable
   */
   bool isImmutable()
   {
@@ -461,8 +483,9 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Removes member_name from object, freeing its allocated resources.
-    Params:
-      memberName =       the name of the member to remove
+  
+      Params:
+        memberName = the name of the member to remove
   */
   void removeMember(string memberName)
   {
@@ -472,10 +495,10 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Seals the object, making it immutable to further changes.
-    
-    This function will recursively seal all members of the object too.
-    
-    If the object is already immutable, this is a no-op.
+      
+      This function will recursively seal all members of the object too.
+      
+      If the object is already immutable, this is a no-op.
   */
   void seal()
   {
@@ -484,11 +507,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with an array value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.takeArray]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.takeArray]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setArrayMember(string memberName, json.array.Array value)
   {
@@ -498,11 +522,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with a boolean value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.initBoolean]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.initBoolean]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setBooleanMember(string memberName, bool value)
   {
@@ -512,11 +537,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with a floating point value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.initDouble]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.initDouble]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setDoubleMember(string memberName, double value)
   {
@@ -526,11 +552,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with an integer value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.initInt]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.initInt]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setIntMember(string memberName, long value)
   {
@@ -540,15 +567,16 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Sets the value of a member inside an object.
-    
-    If the object does not have a member with the given name, a new member
-    is created.
-    
-    If the object already has a member with the given name, the current
-    value is overwritten with the new.
-    Params:
-      memberName =       the name of the member
-      node =       the value of the member
+      
+      If the object does not have a member with the given name, a new member
+      is created.
+      
+      If the object already has a member with the given name, the current
+      value is overwritten with the new.
+  
+      Params:
+        memberName = the name of the member
+        node = the value of the member
   */
   void setMember(string memberName, json.node.Node node)
   {
@@ -558,10 +586,11 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with a `null` value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.initNull]
-    Params:
-      memberName =       the name of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.initNull]
+  
+      Params:
+        memberName = the name of the member
   */
   void setNullMember(string memberName)
   {
@@ -571,11 +600,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with an object value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.takeObject]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.takeObject]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setObjectMember(string memberName, json.object.ObjectJson value)
   {
@@ -585,11 +615,12 @@ class ObjectJson : gobject.boxed.Boxed
 
   /**
       Convenience function for setting an object member with a string value.
-    
-    See also: [json.object.ObjectJson.setMember], [json.node.Node.initString]
-    Params:
-      memberName =       the name of the member
-      value =       the value of the member
+      
+      See also: [json.object.ObjectJson.setMember], [json.node.Node.initString]
+  
+      Params:
+        memberName = the name of the member
+        value = the value of the member
   */
   void setStringMember(string memberName, string value)
   {

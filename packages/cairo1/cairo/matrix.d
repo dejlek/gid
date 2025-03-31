@@ -1,3 +1,4 @@
+/// Module for [Matrix] class
 module cairo.matrix;
 
 import cairo.c.functions;
@@ -8,37 +9,42 @@ import gobject.boxed;
 
 /**
     A #cairo_matrix_t holds an affine transformation, such as a scale,
-  rotation, shear, or a combination of those. The transformation of
-  a point (x, y) is given by:
-  <programlisting>
-      x_new = xx * x + xy * y + x0;
-      y_new = yx * x + yy * y + y0;
-  </programlisting>
+    rotation, shear, or a combination of those. The transformation of
+    a point (x, y) is given by:
+    <programlisting>
+        x_new = xx * x + xy * y + x0;
+        y_new = yx * x + yy * y + y0;
+    </programlisting>
 */
 class Matrix : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(cairo_matrix_t.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -111,19 +117,20 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Sets matrix to be the affine transformation given by
-    xx, yx, xy, yy, x0, y0. The transformation is given
-    by:
-    <programlisting>
-     x_new = xx * x + xy * y + x0;
-     y_new = yx * x + yy * y + y0;
-    </programlisting>
-    Params:
-      xx =       xx component of the affine transformation
-      yx =       yx component of the affine transformation
-      xy =       xy component of the affine transformation
-      yy =       yy component of the affine transformation
-      x0 =       X translation component of the affine transformation
-      y0 =       Y translation component of the affine transformation
+      xx, yx, xy, yy, x0, y0. The transformation is given
+      by:
+      <programlisting>
+       x_new = xx * x + xy * y + x0;
+       y_new = yx * x + yy * y + y0;
+      </programlisting>
+  
+      Params:
+        xx = xx component of the affine transformation
+        yx = yx component of the affine transformation
+        xy = xy component of the affine transformation
+        yy = yy component of the affine transformation
+        x0 = X translation component of the affine transformation
+        y0 = Y translation component of the affine transformation
   */
   void init_(double xx, double yx, double xy, double yy, double x0, double y0)
   {
@@ -140,12 +147,13 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Initialized matrix to a transformation that rotates by radians.
-    Params:
-      radians =       angle of rotation, in radians. The direction of rotation
-        is defined such that positive angles rotate in the direction from
-        the positive X axis toward the positive Y axis. With the default
-        axis orientation of cairo, positive angles rotate in a clockwise
-        direction.
+  
+      Params:
+        radians = angle of rotation, in radians. The direction of rotation
+          is defined such that positive angles rotate in the direction from
+          the positive X axis toward the positive Y axis. With the default
+          axis orientation of cairo, positive angles rotate in a clockwise
+          direction.
   */
   void initRotate(double radians)
   {
@@ -154,10 +162,11 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Initializes matrix to a transformation that scales by sx and sy
-    in the X and Y dimensions, respectively.
-    Params:
-      sx =       scale factor in the X direction
-      sy =       scale factor in the Y direction
+      in the X and Y dimensions, respectively.
+  
+      Params:
+        sx = scale factor in the X direction
+        sy = scale factor in the Y direction
   */
   void initScale(double sx, double sy)
   {
@@ -166,10 +175,11 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Initializes matrix to a transformation that translates by tx and
-    ty in the X and Y dimensions, respectively.
-    Params:
-      tx =       amount to translate in the X direction
-      ty =       amount to translate in the Y direction
+      ty in the X and Y dimensions, respectively.
+  
+      Params:
+        tx = amount to translate in the X direction
+        ty = amount to translate in the Y direction
   */
   void initTranslate(double tx, double ty)
   {
@@ -178,12 +188,12 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Changes matrix to be the inverse of its original value. Not
-    all transformation matrices have inverses; if the matrix
-    collapses points together (it is <firstterm>degenerate</firstterm>),
-    then it has no inverse and this function will fail.
-    Returns:     If matrix has an inverse, modifies matrix to
-       be the inverse matrix and returns [cairo.types.Status.Success]. Otherwise,
-       returns [cairo.types.Status.InvalidMatrix].
+      all transformation matrices have inverses; if the matrix
+      collapses points together (it is <firstterm>degenerate</firstterm>),
+      then it has no inverse and this function will fail.
+      Returns: If matrix has an inverse, modifies matrix to
+         be the inverse matrix and returns [cairo.types.Status.Success]. Otherwise,
+         returns [cairo.types.Status.InvalidMatrix].
   */
   cairo.types.Status invert()
   {
@@ -194,16 +204,17 @@ class Matrix : gobject.boxed.Boxed
   }
 
   /**
-      Multiplies the affine transformations in a and b together
-    and stores the result in result. The effect of the resulting
-    transformation is to first apply the transformation in a to the
-    coordinates and then apply the transformation in b to the
-    coordinates.
-    
-    It is allowable for result to be identical to either a or b.
-    Params:
-      a =       a #cairo_matrix_t
-      b =       a #cairo_matrix_t
+      Multiplies the affine transformations in `a` and `b` together
+      and stores the result in result. The effect of the resulting
+      transformation is to first apply the transformation in `a` to the
+      coordinates and then apply the transformation in `b` to the
+      coordinates.
+      
+      It is allowable for result to be identical to either `a` or `b`.
+  
+      Params:
+        a = a #cairo_matrix_t
+        b = a #cairo_matrix_t
   */
   void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
   {
@@ -212,15 +223,16 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Applies rotation by radians to the transformation in
-    matrix. The effect of the new transformation is to first rotate the
-    coordinates by radians, then apply the original transformation
-    to the coordinates.
-    Params:
-      radians =       angle of rotation, in radians. The direction of rotation
-        is defined such that positive angles rotate in the direction from
-        the positive X axis toward the positive Y axis. With the default
-        axis orientation of cairo, positive angles rotate in a clockwise
-        direction.
+      matrix. The effect of the new transformation is to first rotate the
+      coordinates by radians, then apply the original transformation
+      to the coordinates.
+  
+      Params:
+        radians = angle of rotation, in radians. The direction of rotation
+          is defined such that positive angles rotate in the direction from
+          the positive X axis toward the positive Y axis. With the default
+          axis orientation of cairo, positive angles rotate in a clockwise
+          direction.
   */
   void rotate(double radians)
   {
@@ -229,11 +241,12 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Applies scaling by sx, sy to the transformation in matrix. The
-    effect of the new transformation is to first scale the coordinates
-    by sx and sy, then apply the original transformation to the coordinates.
-    Params:
-      sx =       scale factor in the X direction
-      sy =       scale factor in the Y direction
+      effect of the new transformation is to first scale the coordinates
+      by sx and sy, then apply the original transformation to the coordinates.
+  
+      Params:
+        sx = scale factor in the X direction
+        sy = scale factor in the Y direction
   */
   void scale(double sx, double sy)
   {
@@ -242,17 +255,18 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Transforms the distance vector (dx,dy) by matrix. This is
-    similar to [cairo.matrix.Matrix.transformPoint] except that the translation
-    components of the transformation are ignored. The calculation of
-    the returned vector is as follows:
-    
-    <programlisting>
-    dx_new = xx * dx + xy * dy;
-    dy_new = yx * dx + yy * dy;
-    </programlisting>
-    Params:
-      dx =       X component of a distance vector. An in/out parameter
-      dy =       Y component of a distance vector. An in/out parameter
+      similar to [cairo.matrix.Matrix.transformPoint] except that the translation
+      components of the transformation are ignored. The calculation of
+      the returned vector is as follows:
+      
+      <programlisting>
+      dx_new = xx * dx + xy * dy;
+      dy_new = yx * dx + yy * dy;
+      </programlisting>
+  
+      Params:
+        dx = X component of a distance vector. An in/out parameter
+        dy = Y component of a distance vector. An in/out parameter
   */
   void transformDistance(out double dx, out double dy)
   {
@@ -260,10 +274,11 @@ class Matrix : gobject.boxed.Boxed
   }
 
   /**
-      Transforms the point (x, y) by matrix.
-    Params:
-      x =       X position. An in/out parameter
-      y =       Y position. An in/out parameter
+      Transforms the point (`x`, `y`) by matrix.
+  
+      Params:
+        x = X position. An in/out parameter
+        y = Y position. An in/out parameter
   */
   void transformPoint(out double x, out double y)
   {
@@ -272,12 +287,13 @@ class Matrix : gobject.boxed.Boxed
 
   /**
       Applies a translation by tx, ty to the transformation in
-    matrix. The effect of the new transformation is to first translate
-    the coordinates by tx and ty, then apply the original transformation
-    to the coordinates.
-    Params:
-      tx =       amount to translate in the X direction
-      ty =       amount to translate in the Y direction
+      matrix. The effect of the new transformation is to first translate
+      the coordinates by tx and ty, then apply the original transformation
+      to the coordinates.
+  
+      Params:
+        tx = amount to translate in the X direction
+        ty = amount to translate in the Y direction
   */
   void translate(double tx, double ty)
   {

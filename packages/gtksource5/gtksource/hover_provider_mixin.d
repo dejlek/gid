@@ -1,3 +1,4 @@
+/// Module for [HoverProvider] interface mixin
 module gtksource.hover_provider_mixin;
 
 public import gtksource.hover_provider_iface_proxy;
@@ -15,15 +16,15 @@ public import gtksource.types;
 
 /**
     Interface to populate interactive tooltips.
-  
-  [gtksource.hover_provider.HoverProvider] is an interface that should be implemented to extend
-  the contents of a `class@HoverDisplay`. This is typical in editors that
-  interact external tooling such as those utilizing Language Server Protocol.
-  
-  If you can populate the `class@HoverDisplay` synchronously, use
-  `vfunc@HoverProvider.populate`. Otherwise, interface implementations that
-  may take additional time should use `vfunc@HoverProvider.populate_async`
-  to avoid blocking the main loop.
+    
+    [gtksource.hover_provider.HoverProvider] is an interface that should be implemented to extend
+    the contents of a `class@HoverDisplay`. This is typical in editors that
+    interact external tooling such as those utilizing Language Server Protocol.
+    
+    If you can populate the `class@HoverDisplay` synchronously, use
+    `vfunc@HoverProvider.populate`. Otherwise, interface implementations that
+    may take additional time should use `vfunc@HoverProvider.populate_async`
+    to avoid blocking the main loop.
 */
 template HoverProviderT()
 {

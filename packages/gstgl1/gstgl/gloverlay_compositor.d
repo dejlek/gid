@@ -1,3 +1,4 @@
+/// Module for [GLOverlayCompositor] class
 module gstgl.gloverlay_compositor;
 
 import gid.gid;
@@ -15,17 +16,20 @@ import gstgl.types;
 class GLOverlayCompositor : gst.object.ObjectGst
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_overlay_compositor_get_type != &gidSymbolNotFound ? gst_gl_overlay_compositor_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

@@ -1,3 +1,4 @@
+/// Module for [VideoColorimetry] class
 module gstvideo.video_colorimetry;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class VideoColorimetry
 {
   GstVideoColorimetry cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class VideoColorimetry
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -70,10 +73,11 @@ class VideoColorimetry
 
   /**
       Parse the colorimetry string and update cinfo with the parsed
-    values.
-    Params:
-      color =       a colorimetry string
-    Returns:     true if color points to valid colorimetry info.
+      values.
+  
+      Params:
+        color = a colorimetry string
+      Returns: true if color points to valid colorimetry info.
   */
   bool fromString(string color)
   {
@@ -85,9 +89,10 @@ class VideoColorimetry
 
   /**
       Compare the 2 colorimetry sets for equality
-    Params:
-      other =       another #GstVideoColorimetry
-    Returns:     true if cinfo and other are equal.
+  
+      Params:
+        other = another #GstVideoColorimetry
+      Returns: true if cinfo and other are equal.
   */
   bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other)
   {
@@ -98,11 +103,12 @@ class VideoColorimetry
 
   /**
       Compare the 2 colorimetry sets for functionally equality
-    Params:
-      bitdepth =       bitdepth of a format associated with cinfo
-      other =       another #GstVideoColorimetry
-      otherBitdepth =       bitdepth of a format associated with other
-    Returns:     true if cinfo and other are equivalent.
+  
+      Params:
+        bitdepth = bitdepth of a format associated with cinfo
+        other = another #GstVideoColorimetry
+        otherBitdepth = bitdepth of a format associated with other
+      Returns: true if cinfo and other are equivalent.
   */
   bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth)
   {
@@ -113,11 +119,12 @@ class VideoColorimetry
 
   /**
       Check if the colorimetry information in info matches that of the
-    string color.
-    Params:
-      color =       a colorimetry string
-    Returns:     true if color conveys the same colorimetry info as the color
-      information in info.
+      string color.
+  
+      Params:
+        color = a colorimetry string
+      Returns: true if color conveys the same colorimetry info as the color
+        information in info.
   */
   bool matches(string color)
   {
@@ -129,8 +136,8 @@ class VideoColorimetry
 
   /**
       Make a string representation of cinfo.
-    Returns:     a string representation of cinfo
-      or null if all the entries of cinfo are unknown values.
+      Returns: a string representation of cinfo
+        or null if all the entries of cinfo are unknown values.
   */
   string toString_()
   {

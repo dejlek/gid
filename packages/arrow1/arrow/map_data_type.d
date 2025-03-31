@@ -1,3 +1,4 @@
+/// Module for [MapDataType] class
 module arrow.map_data_type;
 
 import arrow.c.functions;
@@ -12,17 +13,20 @@ import gobject.object;
 class MapDataType : arrow.list_data_type.ListDataType
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_data_type_get_type != &gidSymbolNotFound ? garrow_map_data_type_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

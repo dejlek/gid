@@ -1,3 +1,4 @@
+/// Module for [EventPadAxis] class
 module gdk.event_pad_axis;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventPadAxis
 {
   GdkEventPadAxis cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventPadAxis
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

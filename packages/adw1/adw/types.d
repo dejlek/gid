@@ -1,3 +1,4 @@
+/// D types for adw1 library
 module adw.types;
 
 import adw.c.functions;
@@ -69,17 +70,15 @@ alias ViewSwitcherPolicy = AdwViewSwitcherPolicy;
 /**
     Prototype for animation targets based on user callbacks.
 
-  ## Parameters
-  $(LIST
-    * $(B value)       The animation value
-  )
+    Params:
+      value = The animation value
 */
 alias AnimationTargetFunc = void delegate(double value);
 
 /**
     Indicates an `class@Animation` with an infinite duration.
-  
-  This value is mostly used internally.
+    
+    This value is mostly used internally.
 */
 enum DURATION_INFINITE = 4294967295;
 
@@ -100,6 +99,6 @@ enum MINOR_VERSION = 5;
 
 /**
     Adwaita version, encoded as a string, useful for printing and
-  concatenation.
+    concatenation.
 */
 enum VERSION_S = "1.5.5";

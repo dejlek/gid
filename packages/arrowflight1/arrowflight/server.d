@@ -1,3 +1,4 @@
+/// Module for [Server] class
 module arrowflight.server;
 
 import arrowflight.c.functions;
@@ -22,17 +23,20 @@ import gobject.object;
 class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_get_type != &gidSymbolNotFound ? gaflight_server_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,11 +63,13 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 
   /**
       Processes a stream of IPC payloads sent from a client.
-    Params:
-      context =       A #GAFlightServerCallContext.
-      reader =       A #GAFlightMessageReader.
-      writer =       A #GAFlightMetadataWriter.
-    Returns:     true on success, false on error.
+  
+      Params:
+        context = A #GAFlightServerCallContext.
+        reader = A #GAFlightMessageReader.
+        writer = A #GAFlightMetadataWriter.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool doPut(arrowflight.server_call_context.ServerCallContext context, arrowflight.message_reader.MessageReader reader, arrowflight.metadata_writer.MetadataWriter writer)
   {
@@ -120,8 +126,9 @@ class Server : gobject.object.ObjectG, arrowflight.servable.Servable
 
   /**
       Shuts down the serve. This function can be called from signal
-    handler or another thread.
-    Returns:     true on success, false on error.
+      handler or another thread.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool shutdown()
   {

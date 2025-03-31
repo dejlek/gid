@@ -1,3 +1,4 @@
+/// Module for [PhysMemoryAllocator] interface
 module gstallocators.phys_memory_allocator;
 
 public import gstallocators.phys_memory_allocator_iface_proxy;
@@ -10,6 +11,7 @@ import gstallocators.types;
 interface PhysMemoryAllocator
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;

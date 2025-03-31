@@ -1,3 +1,4 @@
+/// Module for [ArrayBuilder] class
 module arrow.array_builder;
 
 import arrow.array;
@@ -13,17 +14,20 @@ import gobject.object;
 class ArrayBuilder : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_builder_get_type != &gidSymbolNotFound ? garrow_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,10 +51,12 @@ class ArrayBuilder : gobject.object.ObjectG
 
   /**
       Append multiple empty values at once. It's more efficient than multiple
-    [arrow.array_builder.ArrayBuilder.appendEmptyValue] calls.
-    Params:
-      n =       The number of null values to be appended.
-    Returns:     true on success, false if there was an error.
+      [arrow.array_builder.ArrayBuilder.appendEmptyValue] calls.
+  
+      Params:
+        n = The number of null values to be appended.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendEmptyValues(long n)
   {
@@ -75,10 +81,12 @@ class ArrayBuilder : gobject.object.ObjectG
 
   /**
       Append multiple nulls at once. It's more efficient than multiple
-    [arrow.array_builder.ArrayBuilder.appendNull] calls.
-    Params:
-      n =       The number of null values to be appended.
-    Returns:     true on success, false if there was an error.
+      [arrow.array_builder.ArrayBuilder.appendNull] calls.
+  
+      Params:
+        n = The number of null values to be appended.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendNulls(long n)
   {

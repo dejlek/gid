@@ -1,3 +1,4 @@
+/// Module for [Writable] interface
 module arrow.writable;
 
 public import arrow.writable_iface_proxy;
@@ -11,6 +12,7 @@ import glib.error;
 interface Writable
 {
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
@@ -19,7 +21,8 @@ interface Writable
 
   /**
       It ensures writing all data on memory to storage.
-    Returns:     true on success, false if there was an error.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool flush();
 

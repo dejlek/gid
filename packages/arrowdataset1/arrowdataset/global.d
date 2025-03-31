@@ -1,3 +1,4 @@
+/// Global functions for arrowdataset1 library
 module arrowdataset.global;
 
 import arrowdataset.c.functions;

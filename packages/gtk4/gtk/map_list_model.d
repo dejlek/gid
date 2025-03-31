@@ -1,3 +1,4 @@
+/// Module for [MapListModel] class
 module gtk.map_list_model;
 
 import gid.gid;
@@ -12,49 +13,52 @@ import gtk.types;
 
 /**
     A [gtk.map_list_model.MapListModel] maps the items in a list model to different items.
-  
-  [gtk.map_list_model.MapListModel] uses a [gtk.types.MapListModelMapFunc].
-  
-  Example: Create a list of `GtkEventControllers`
-  ```c
-  static gpointer
-  map_to_controllers (gpointer widget,
-                      gpointer data)
-  {
-    gpointer result = gtk_widget_observe_controllers (widget);
-    g_object_unref (widget);
-    return result;
-  }
-  
-  widgets = gtk_widget_observe_children (widget);
-  
-  controllers = gtk_map_list_model_new (widgets,
-                                        map_to_controllers,
-                                        NULL, NULL);
-  
-  model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
-                                      controllers);
-  ```
-  
-  [gtk.map_list_model.MapListModel] will attempt to discard the mapped objects as soon as
-  they are no longer needed and recreate them if necessary.
-  
-  [gtk.map_list_model.MapListModel] passes through sections from the underlying model.
+    
+    [gtk.map_list_model.MapListModel] uses a [gtk.types.MapListModelMapFunc].
+    
+    Example: Create a list of `GtkEventControllers`
+    ```c
+    static gpointer
+    map_to_controllers (gpointer widget,
+                        gpointer data)
+    {
+      gpointer result = gtk_widget_observe_controllers (widget);
+      g_object_unref (widget);
+      return result;
+    }
+    
+    widgets = gtk_widget_observe_children (widget);
+    
+    controllers = gtk_map_list_model_new (widgets,
+                                          map_to_controllers,
+                                          NULL, NULL);
+    
+    model = gtk_flatten_list_model_new (GTK_TYPE_EVENT_CONTROLLER,
+                                        controllers);
+    ```
+    
+    [gtk.map_list_model.MapListModel] will attempt to discard the mapped objects as soon as
+    they are no longer needed and recreate them if necessary.
+    
+    [gtk.map_list_model.MapListModel] passes through sections from the underlying model.
 */
 class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.section_model.SectionModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_map_list_model_get_type != &gidSymbolNotFound ? gtk_map_list_model_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -70,10 +74,11 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
 
   /**
       Creates a new [gtk.map_list_model.MapListModel] for the given arguments.
-    Params:
-      model =       The model to map
-      mapFunc =       map function
-    Returns:     a new [gtk.map_list_model.MapListModel]
+  
+      Params:
+        model = The model to map
+        mapFunc = map function
+      Returns: a new [gtk.map_list_model.MapListModel]
   */
   this(gio.list_model.ListModel model = null, gtk.types.MapListModelMapFunc mapFunc = null)
   {
@@ -98,7 +103,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
 
   /**
       Gets the model that is currently being mapped or null if none.
-    Returns:     The model that gets mapped
+      Returns: The model that gets mapped
   */
   gio.list_model.ListModel getModel()
   {
@@ -110,7 +115,7 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
 
   /**
       Checks if a map function is currently set on self.
-    Returns:     true if a map function is set
+      Returns: true if a map function is set
   */
   bool hasMap()
   {
@@ -121,18 +126,19 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
 
   /**
       Sets the function used to map items.
-    
-    The function will be called whenever an item needs to be mapped
-    and must return the item to use for the given input item.
-    
-    Note that [gtk.map_list_model.MapListModel] may call this function multiple times
-    on the same item, because it may delete items it doesn't need anymore.
-    
-    GTK makes no effort to ensure that map_func conforms to the item type
-    of self. It assumes that the caller knows what they are doing and the map
-    function returns items of the appropriate type.
-    Params:
-      mapFunc =       map function
+      
+      The function will be called whenever an item needs to be mapped
+      and must return the item to use for the given input item.
+      
+      Note that [gtk.map_list_model.MapListModel] may call this function multiple times
+      on the same item, because it may delete items it doesn't need anymore.
+      
+      GTK makes no effort to ensure that map_func conforms to the item type
+      of self. It assumes that the caller knows what they are doing and the map
+      function returns items of the appropriate type.
+  
+      Params:
+        mapFunc = map function
   */
   void setMapFunc(gtk.types.MapListModelMapFunc mapFunc = null)
   {
@@ -155,12 +161,13 @@ class MapListModel : gobject.object.ObjectG, gio.list_model.ListModel, gtk.secti
 
   /**
       Sets the model to be mapped.
-    
-    GTK makes no effort to ensure that model conforms to the item type
-    expected by the map function. It assumes that the caller knows what
-    they are doing and have set up an appropriate map function.
-    Params:
-      model =       The model to be mapped
+      
+      GTK makes no effort to ensure that model conforms to the item type
+      expected by the map function. It assumes that the caller knows what
+      they are doing and have set up an appropriate map function.
+  
+      Params:
+        model = The model to be mapped
   */
   void setModel(gio.list_model.ListModel model = null)
   {

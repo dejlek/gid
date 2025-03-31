@@ -1,3 +1,4 @@
+/// Module for [VideoAffineTransformationMeta] class
 module gstvideo.video_affine_transformation_meta;
 
 import gid.gid;
@@ -9,20 +10,21 @@ import gstvideo.types;
 
 /**
     Extra buffer metadata for performing an affine transformation using a 4x4
-  matrix. The transformation matrix can be composed with
-  [gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta.applyMatrix].
-  
-  The vertices operated on are all in the range 0 to 1, not in
-  Normalized Device Coordinates (-1 to +1). Transforming points in this space
-  are assumed to have an origin at (0.5, 0.5, 0.5) in a left-handed coordinate
-  system with the x-axis moving horizontally (positive values to the right),
-  the y-axis moving vertically (positive values up the screen) and the z-axis
-  perpendicular to the screen (positive values into the screen).
+    matrix. The transformation matrix can be composed with
+    [gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta.applyMatrix].
+    
+    The vertices operated on are all in the range 0 to 1, not in
+    Normalized Device Coordinates (-1 to +1). Transforming points in this space
+    are assumed to have an origin at (0.5, 0.5, 0.5) in a left-handed coordinate
+    system with the x-axis moving horizontally (positive values to the right),
+    the y-axis moving vertically (positive values up the screen) and the z-axis
+    perpendicular to the screen (positive values into the screen).
 */
 class VideoAffineTransformationMeta
 {
   GstVideoAffineTransformationMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -34,6 +36,7 @@ class VideoAffineTransformationMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -46,9 +49,10 @@ class VideoAffineTransformationMeta
 
   /**
       Apply a transformation using the given 4x4 transformation matrix.
-    Performs the multiplication, meta->matrix X matrix.
-    Params:
-      matrix =       a 4x4 transformation matrix to be applied
+      Performs the multiplication, meta->matrix X matrix.
+  
+      Params:
+        matrix = a 4x4 transformation matrix to be applied
   */
   void applyMatrix(float[] matrix)
   {

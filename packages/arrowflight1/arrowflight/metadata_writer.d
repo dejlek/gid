@@ -1,3 +1,4 @@
+/// Module for [MetadataWriter] class
 module arrowflight.metadata_writer;
 
 import arrow.buffer;
@@ -12,17 +13,20 @@ import gobject.object;
 class MetadataWriter : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_metadata_writer_get_type != &gidSymbolNotFound ? gaflight_metadata_writer_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -35,9 +39,11 @@ class MetadataWriter : gobject.object.ObjectG
 
   /**
       Writes metadata to the client.
-    Params:
-      metadata =       A #GArrowBuffer to be sent.
-    Returns:     true on success, false on error.
+  
+      Params:
+        metadata = A #GArrowBuffer to be sent.
+      Returns: true on success, false on error.
+      Throws: [ErrorG]
   */
   bool write(arrow.buffer.Buffer metadata)
   {

@@ -1,3 +1,4 @@
+/// Module for [Service] class
 module secret.service;
 
 import gid.gid;
@@ -29,56 +30,59 @@ import secret.value;
 
 /**
     A proxy object representing the Secret Service.
-  
-  A #SecretService object represents the Secret Service implementation which
-  runs as a D-Bus service.
-  
-  Normally a single #SecretService object can be shared between multiple
-  callers. The [secret.service.Service.get] method is used to access this #SecretService
-  object. If a new independent #SecretService object is required, use
-  [secret.service.Service.open].
-  
-  In order to securely transfer secrets to the Sercret Service, a session
-  is established. This session can be established while initializing a
-  #SecretService object by passing the [secret.types.ServiceFlags.OpenSession] flag
-  to the [secret.service.Service.get] or [secret.service.Service.open] functions. In order to
-  establish a session on an already existing #SecretService, use the
-  [secret.service.Service.ensureSession] function.
-  
-  To search for items, use the [secret.service.Service.search] method.
-  
-  Multiple collections can exist in the Secret Service, each of which contains
-  secret items. In order to instantiate `class@Collection` objects which
-  represent those collections while initializing a #SecretService then pass
-  the [secret.types.ServiceFlags.LoadCollections] flag to the [secret.service.Service.get] or
-  [secret.service.Service.open] functions. In order to establish a session on an already
-  existing #SecretService, use the [secret.service.Service.loadCollections] function.
-  To access the list of collections use [secret.service.Service.getCollections].
-  
-  Certain actions on the Secret Service require user prompting to complete,
-  such as creating a collection, or unlocking a collection. When such a prompt
-  is necessary, then a `class@Prompt` object is created by this library, and
-  passed to the [secret.service.Service.prompt] method. In this way it is handled
-  automatically.
-  
-  In order to customize prompt handling, override the
-  `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
-  methods of the #SecretService class.
+    
+    A #SecretService object represents the Secret Service implementation which
+    runs as a D-Bus service.
+    
+    Normally a single #SecretService object can be shared between multiple
+    callers. The [secret.service.Service.get] method is used to access this #SecretService
+    object. If a new independent #SecretService object is required, use
+    [secret.service.Service.open].
+    
+    In order to securely transfer secrets to the Sercret Service, a session
+    is established. This session can be established while initializing a
+    #SecretService object by passing the [secret.types.ServiceFlags.OpenSession] flag
+    to the [secret.service.Service.get] or [secret.service.Service.open] functions. In order to
+    establish a session on an already existing #SecretService, use the
+    [secret.service.Service.ensureSession] function.
+    
+    To search for items, use the [secret.service.Service.search] method.
+    
+    Multiple collections can exist in the Secret Service, each of which contains
+    secret items. In order to instantiate `class@Collection` objects which
+    represent those collections while initializing a #SecretService then pass
+    the [secret.types.ServiceFlags.LoadCollections] flag to the [secret.service.Service.get] or
+    [secret.service.Service.open] functions. In order to establish a session on an already
+    existing #SecretService, use the [secret.service.Service.loadCollections] function.
+    To access the list of collections use [secret.service.Service.getCollections].
+    
+    Certain actions on the Secret Service require user prompting to complete,
+    such as creating a collection, or unlocking a collection. When such a prompt
+    is necessary, then a `class@Prompt` object is created by this library, and
+    passed to the [secret.service.Service.prompt] method. In this way it is handled
+    automatically.
+    
+    In order to customize prompt handling, override the
+    `vfunc@Service.prompt_async` and `vfunc@Service.prompt_finish` virtual
+    methods of the #SecretService class.
 */
 class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_service_get_type != &gidSymbolNotFound ? secret_service_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -93,14 +97,14 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Disconnect the default #SecretService proxy returned by [secret.service.Service.get]
-    and [secret.service.Service.getSync].
-    
-    It is not necessary to call this function, but you may choose to do so at
-    program exit. It is useful for testing that memory is not leaked.
-    
-    This function is safe to call at any time. But if other objects in this
-    library are still referenced, then this will not result in all memory
-    being freed.
+      and [secret.service.Service.getSync].
+      
+      It is not necessary to call this function, but you may choose to do so at
+      program exit. It is useful for testing that memory is not leaked.
+      
+      This function is safe to call at any time. But if other objects in this
+      library are still referenced, then this will not result in all memory
+      being freed.
   */
   static void disconnect()
   {
@@ -109,17 +113,18 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get a #SecretService proxy for the Secret Service.
-    
-    If such a proxy object already exists, then the same proxy is returned.
-    
-    If flags contains any flags of which parts of the secret service to
-    ensure are initialized, then those will be initialized before completing.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      flags =       flags for which service functionality to ensure is initialized
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      If such a proxy object already exists, then the same proxy is returned.
+      
+      If flags contains any flags of which parts of the secret service to
+      ensure are initialized, then those will be initialized before completing.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        flags = flags for which service functionality to ensure is initialized
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -138,11 +143,13 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete an asynchronous operation to get a #SecretService proxy for the
-    Secret Service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     a new reference to a #SecretService proxy, which
-        should be released with [gobject.object.ObjectG.unref].
+      Secret Service.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: a new reference to a #SecretService proxy, which
+          should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service getFinish(gio.async_result.AsyncResult result)
   {
@@ -157,19 +164,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get a #SecretService proxy for the Secret Service.
-    
-    If such a proxy object already exists, then the same proxy is returned.
-    
-    If flags contains any flags of which parts of the secret service to
-    ensure are initialized, then those will be initialized before returning.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      flags =       flags for which service functionality to ensure is initialized
-      cancellable =       optional cancellation object
-    Returns:     a new reference to a #SecretService proxy, which
-        should be released with [gobject.object.ObjectG.unref].
+      
+      If such a proxy object already exists, then the same proxy is returned.
+      
+      If flags contains any flags of which parts of the secret service to
+      ensure are initialized, then those will be initialized before returning.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        flags = flags for which service functionality to ensure is initialized
+        cancellable = optional cancellation object
+      Returns: a new reference to a #SecretService proxy, which
+          should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service getSync(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -184,24 +193,25 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Create a new #SecretService proxy for the Secret Service.
-    
-    This function is rarely used, see [secret.service.Service.get] instead.
-    
-    The service_gtype argument should be set to `SECRET_TYPE_SERVICE` or a the type
-    of a derived class.
-    
-    If flags contains any flags of which parts of the secret service to
-    ensure are initialized, then those will be initialized before returning.
-    
-    If service_bus_name is null then the default is used.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      serviceGtype =       the GType of the new secret service
-      serviceBusName =       the D-Bus service name of the secret service
-      flags =       flags for which service functionality to ensure is initialized
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      This function is rarely used, see [secret.service.Service.get] instead.
+      
+      The service_gtype argument should be set to `SECRET_TYPE_SERVICE` or a the type
+      of a derived class.
+      
+      If flags contains any flags of which parts of the secret service to
+      ensure are initialized, then those will be initialized before returning.
+      
+      If service_bus_name is null then the default is used.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        serviceGtype = the GType of the new secret service
+        serviceBusName = the D-Bus service name of the secret service
+        flags = flags for which service functionality to ensure is initialized
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -221,11 +231,13 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete an asynchronous operation to create a new #SecretService proxy for
-    the Secret Service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     a new reference to a #SecretService proxy, which
-        should be released with [gobject.object.ObjectG.unref].
+      the Secret Service.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: a new reference to a #SecretService proxy, which
+          should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service openFinish(gio.async_result.AsyncResult result)
   {
@@ -240,26 +252,28 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Create a new #SecretService proxy for the Secret Service.
-    
-    This function is rarely used, see [secret.service.Service.getSync] instead.
-    
-    The service_gtype argument should be set to `SECRET_TYPE_SERVICE` or a the
-    type of a derived class.
-    
-    If flags contains any flags of which parts of the secret service to
-    ensure are initialized, then those will be initialized before returning.
-    
-    If service_bus_name is null then the default is used.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      serviceGtype =       the GType of the new secret service
-      serviceBusName =       the D-Bus service name of the secret service
-      flags =       flags for which service functionality to ensure is initialized
-      cancellable =       optional cancellation object
-    Returns:     a new reference to a #SecretService proxy, which
-        should be released with [gobject.object.ObjectG.unref].
+      
+      This function is rarely used, see [secret.service.Service.getSync] instead.
+      
+      The service_gtype argument should be set to `SECRET_TYPE_SERVICE` or a the
+      type of a derived class.
+      
+      If flags contains any flags of which parts of the secret service to
+      ensure are initialized, then those will be initialized before returning.
+      
+      If service_bus_name is null then the default is used.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        serviceGtype = the GType of the new secret service
+        serviceBusName = the D-Bus service name of the secret service
+        flags = flags for which service functionality to ensure is initialized
+        cancellable = optional cancellation object
+      Returns: a new reference to a #SecretService proxy, which
+          should be released with [gobject.object.ObjectG.unref].
+      Throws: [ErrorG]
   */
   static secret.service.Service openSync(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -275,18 +289,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Remove unlocked items which match the attributes from the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       the attribute keys and values
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = the attribute keys and values
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -307,10 +322,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Finish asynchronous operation to remove items from the secret
-    service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     whether items were removed or not
+      service.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: whether items were removed or not
+      Throws: [ErrorG]
   */
   bool clearFinish(gio.async_result.AsyncResult result)
   {
@@ -324,19 +341,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Remove unlocked items which match the attributes from the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       the attribute keys and values
-      cancellable =       optional cancellation object
-    Returns:     whether items were removed or not
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = the attribute keys and values
+        cancellable = optional cancellation object
+      Returns: whether items were removed or not
+      Throws: [ErrorG]
   */
   bool clearSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -352,15 +371,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Decode a `structValue` into [glib.variant.VariantG] received with the Secret Service
-    DBus API.
-    
-    The [glib.variant.VariantG] should have a `(oayays)` signature.
-    
-    A session must have already been established by the `classService`, and
-    the encoded secret must be valid for that session.
-    Params:
-      value =       the encoded secret
-    Returns:     the decoded secret value
+      DBus API.
+      
+      The [glib.variant.VariantG] should have a `(oayays)` signature.
+      
+      A session must have already been established by the `classService`, and
+      the encoded secret must be valid for that session.
+  
+      Params:
+        value = the encoded secret
+      Returns: the decoded secret value
   */
   secret.value.Value decodeDbusSecret(glib.variant.VariantG value)
   {
@@ -372,14 +392,15 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Encodes a `structValue` into [glib.variant.VariantG] for use with the Secret
-    Service DBus API.
-    
-    The resulting [glib.variant.VariantG] will have a `(oayays)` signature.
-    
-    A session must have already been established by the `classService`.
-    Params:
-      value =       the secret value
-    Returns:     the encoded secret
+      Service DBus API.
+      
+      The resulting [glib.variant.VariantG] will have a `(oayays)` signature.
+      
+      A session must have already been established by the `classService`.
+  
+      Params:
+        value = the secret value
+      Returns: the encoded secret
   */
   glib.variant.VariantG encodeDbusSecret(secret.value.Value value)
   {
@@ -391,19 +412,20 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Ensure that the #SecretService proxy has established a session with the
-    Secret Service.
-    
-    This session is used to transfer secrets.
-    
-    It is not normally necessary to call this method, as the session is
-    established as necessary. You can also pass the [secret.types.ServiceFlags.OpenSession]
-    to [secret.service.Service.get] in order to ensure that a session has been established
-    by the time you get the #SecretService proxy.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      Secret Service.
+      
+      This session is used to transfer secrets.
+      
+      It is not normally necessary to call this method, as the session is
+      established as necessary. You can also pass the [secret.types.ServiceFlags.OpenSession]
+      to [secret.service.Service.get] in order to ensure that a session has been established
+      by the time you get the #SecretService proxy.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void ensureSession(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -422,10 +444,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Finish an asynchronous operation to ensure that the #SecretService proxy
-    has established a session with the Secret Service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     whether a session is established or not
+      has established a session with the Secret Service.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: whether a session is established or not
+      Throws: [ErrorG]
   */
   bool ensureSessionFinish(gio.async_result.AsyncResult result)
   {
@@ -439,20 +463,22 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Ensure that the #SecretService proxy has established a session with the
-    Secret Service.
-    
-    This session is used to transfer secrets.
-    
-    It is not normally necessary to call this method, as the session is
-    established as necessary. You can also pass the [secret.types.ServiceFlags.OpenSession]
-    to [secret.service.Service.getSync] in order to ensure that a session has been
-    established by the time you get the #SecretService proxy.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      cancellable =       optional cancellation object
-    Returns:     whether a session is established or not
+      Secret Service.
+      
+      This session is used to transfer secrets.
+      
+      It is not normally necessary to call this method, as the session is
+      established as necessary. You can also pass the [secret.types.ServiceFlags.OpenSession]
+      to [secret.service.Service.getSync] in order to ensure that a session has been
+      established by the time you get the #SecretService proxy.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        cancellable = optional cancellation object
+      Returns: whether a session is established or not
+      Throws: [ErrorG]
   */
   bool ensureSessionSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -466,9 +492,9 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get the GObject type for collections instantiated by this service.
-    
-    This will always be either `classCollection` or derived from it.
-    Returns:     the gobject type for collections
+      
+      This will always be either `classCollection` or derived from it.
+      Returns: the gobject type for collections
   */
   gobject.types.GType getCollectionGtype()
   {
@@ -479,13 +505,13 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get a list of `classCollection` objects representing all the collections
-    in the secret service.
-    
-    If the [secret.types.ServiceFlags.LoadCollections] flag was not specified when
-    initializing #SecretService proxy object, then this method will return
-    null. Use [secret.service.Service.loadCollections] to load the collections.
-    Returns:     a
-        list of the collections in the secret service
+      in the secret service.
+      
+      If the [secret.types.ServiceFlags.LoadCollections] flag was not specified when
+      initializing #SecretService proxy object, then this method will return
+      null. Use [secret.service.Service.loadCollections] to load the collections.
+      Returns: a
+          list of the collections in the secret service
   */
   secret.collection.Collection[] getCollections()
   {
@@ -499,11 +525,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get the flags representing what features of the #SecretService proxy
-    have been initialized.
-    
-    Use [secret.service.Service.ensureSession] or [secret.service.Service.loadCollections]
-    to initialize further features and change the flags.
-    Returns:     the flags for features initialized
+      have been initialized.
+      
+      Use [secret.service.Service.ensureSession] or [secret.service.Service.loadCollections]
+      to initialize further features and change the flags.
+      Returns: the flags for features initialized
   */
   secret.types.ServiceFlags getFlags()
   {
@@ -515,9 +541,9 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get the GObject type for items instantiated by this service.
-    
-    This will always be either `classItem` or derived from it.
-    Returns:     the gobject type for items
+      
+      This will always be either `classItem` or derived from it.
+      Returns: the gobject type for items
   */
   gobject.types.GType getItemGtype()
   {
@@ -528,12 +554,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get the set of algorithms being used to transfer secrets between this
-    secret service proxy and the Secret Service itself.
-    
-    This will be null if no session has been established. Use
-    [secret.service.Service.ensureSession] to establish a session.
-    Returns:     a string representing the algorithms for transferring
-        secrets
+      secret service proxy and the Secret Service itself.
+      
+      This will be null if no session has been established. Use
+      [secret.service.Service.ensureSession] to establish a session.
+      Returns: a string representing the algorithms for transferring
+          secrets
   */
   string getSessionAlgorithms()
   {
@@ -545,12 +571,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Get the D-Bus object path of the session object being used to transfer
-    secrets between this secret service proxy and the Secret Service itself.
-    
-    This will be null if no session has been established. Use
-    [secret.service.Service.ensureSession] to establish a session.
-    Returns:     a string representing the D-Bus object path of the
-        session
+      secrets between this secret service proxy and the Secret Service itself.
+      
+      This will be null if no session has been established. Use
+      [secret.service.Service.ensureSession] to establish a session.
+      Returns: a string representing the D-Bus object path of the
+          session
   */
   string getSessionDbusPath()
   {
@@ -562,18 +588,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Ensure that the #SecretService proxy has loaded all the collections present
-    in the Secret Service.
-    
-    This affects the result of [secret.service.Service.getCollections].
-    
-    You can also pass the [secret.types.ServiceFlags.LoadCollections] to
-    [secret.service.Service.getSync] in order to ensure that the collections have been
-    loaded by the time you get the #SecretService proxy.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      in the Secret Service.
+      
+      This affects the result of [secret.service.Service.getCollections].
+      
+      You can also pass the [secret.types.ServiceFlags.LoadCollections] to
+      [secret.service.Service.getSync] in order to ensure that the collections have been
+      loaded by the time you get the #SecretService proxy.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void loadCollections(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -592,10 +619,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete an asynchronous operation to ensure that the #SecretService proxy
-    has loaded all the collections present in the Secret Service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     whether the load was successful or not
+      has loaded all the collections present in the Secret Service.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadCollectionsFinish(gio.async_result.AsyncResult result)
   {
@@ -609,19 +638,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Ensure that the #SecretService proxy has loaded all the collections present
-    in the Secret Service.
-    
-    This affects the result of [secret.service.Service.getCollections].
-    
-    You can also pass the [secret.types.ServiceFlags.LoadCollections] to
-    [secret.service.Service.getSync] in order to ensure that the collections have been
-    loaded by the time you get the #SecretService proxy.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      cancellable =       optional cancellation object
-    Returns:     whether the load was successful or not
+      in the Secret Service.
+      
+      This affects the result of [secret.service.Service.getCollections].
+      
+      You can also pass the [secret.types.ServiceFlags.LoadCollections] to
+      [secret.service.Service.getSync] in order to ensure that the collections have been
+      loaded by the time you get the #SecretService proxy.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        cancellable = optional cancellation object
+      Returns: whether the load was successful or not
+      Throws: [ErrorG]
   */
   bool loadCollectionsSync(gio.cancellable.Cancellable cancellable = null)
   {
@@ -635,20 +666,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Lock items or collections in the secret service.
-    
-    The secret service may not be able to lock items individually, and may
-    lock an entire collection instead.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    This method returns immediately and completes asynchronously. The secret
-    service may prompt the user. [secret.service.Service.prompt] will be used to handle
-    any prompts that show up.
-    Params:
-      objects =       the items or collections to lock
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The secret service may not be able to lock items individually, and may
+      lock an entire collection instead.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      This method returns immediately and completes asynchronously. The secret
+      service may prompt the user. [secret.service.Service.prompt] will be used to handle
+      any prompts that show up.
+  
+      Params:
+        objects = the items or collections to lock
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -669,14 +701,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete asynchronous operation to lock items or collections in the secret
-    service.
-    
-    The secret service may not be able to lock items individually, and may
-    lock an entire collection instead.
-    Params:
-      result =       asynchronous result passed to the callback
-      locked =       location to place list of items or collections that were locked
-    Returns:     the number of items or collections that were locked
+      service.
+      
+      The secret service may not be able to lock items individually, and may
+      lock an entire collection instead.
+  
+      Params:
+        result = asynchronous result passed to the callback
+        locked = location to place list of items or collections that were locked
+      Returns: the number of items or collections that were locked
+      Throws: [ErrorG]
   */
   int lockFinish(gio.async_result.AsyncResult result, out gio.dbus_proxy.DBusProxy[] locked)
   {
@@ -692,21 +726,23 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Lock items or collections in the secret service.
-    
-    The secret service may not be able to lock items individually, and may
-    lock an entire collection instead.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user
-    interface threads. The secret service may prompt the user.
-    [secret.service.Service.prompt] will be used to handle any prompts that show up.
-    Params:
-      objects =       the items or collections to lock
-      cancellable =       optional cancellation object
-      locked =       location to place list of items or collections that were locked
-    Returns:     the number of items or collections that were locked
+      
+      The secret service may not be able to lock items individually, and may
+      lock an entire collection instead.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user
+      interface threads. The secret service may prompt the user.
+      [secret.service.Service.prompt] will be used to handle any prompts that show up.
+  
+      Params:
+        objects = the items or collections to lock
+        cancellable = optional cancellation object
+        locked = location to place list of items or collections that were locked
+      Returns: the number of items or collections that were locked
+      Throws: [ErrorG]
   */
   int lockSync(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, out gio.dbus_proxy.DBusProxy[] locked)
   {
@@ -724,18 +760,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Lookup a secret value in the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       the attribute keys and values
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = the attribute keys and values
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -756,12 +793,14 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Finish asynchronous operation to lookup a secret value in the secret service.
-    
-    If no secret is found then null is returned.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     a newly allocated `structValue`, which should be
-        released with [secret.value.Value.unref], or null if no secret found
+      
+      If no secret is found then null is returned.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: a newly allocated `structValue`, which should be
+          released with [secret.value.Value.unref], or null if no secret found
+      Throws: [ErrorG]
   */
   secret.value.Value lookupFinish(gio.async_result.AsyncResult result)
   {
@@ -776,20 +815,22 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Lookup a secret value in the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       the attribute keys and values
-      cancellable =       optional cancellation object
-    Returns:     a newly allocated `structValue`, which should be
-        released with [secret.value.Value.unref], or null if no secret found
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = the attribute keys and values
+        cancellable = optional cancellation object
+      Returns: a newly allocated `structValue`, which should be
+          released with [secret.value.Value.unref], or null if no secret found
+      Throws: [ErrorG]
   */
   secret.value.Value lookupSync(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null)
   {
@@ -806,18 +847,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Perform prompting for a `classPrompt`.
-    
-    This function is called by other parts of this library to handle prompts
-    for the various actions that can require prompting.
-    
-    Override the #SecretServiceClass `vfuncService.prompt_async` virtual method
-    to change the behavior of the prompting. The default behavior is to simply
-    run [secret.prompt.Prompt.perform] on the prompt.
-    Params:
-      prompt =       the prompt
-      returnType =       the variant type of the prompt result
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      This function is called by other parts of this library to handle prompts
+      for the various actions that can require prompting.
+      
+      Override the #SecretServiceClass `vfuncService.prompt_async` virtual method
+      to change the behavior of the prompting. The default behavior is to simply
+      run [secret.prompt.Prompt.perform] on the prompt.
+  
+      Params:
+        prompt = the prompt
+        returnType = the variant type of the prompt result
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -836,14 +878,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete asynchronous operation to perform prompting for a `classPrompt`.
-    
-    Returns a variant result if the prompt was completed and not dismissed. The
-    type of result depends on the action the prompt is completing, and is defined
-    in the Secret Service DBus API specification.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     null if the prompt was dismissed or an error occurred,
-        a variant result if the prompt was successful
+      
+      Returns a variant result if the prompt was completed and not dismissed. The
+      type of result depends on the action the prompt is completing, and is defined
+      in the Secret Service DBus API specification.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: null if the prompt was dismissed or an error occurred,
+          a variant result if the prompt was successful
+      Throws: [ErrorG]
   */
   glib.variant.VariantG promptFinish(gio.async_result.AsyncResult result)
   {
@@ -858,24 +902,26 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Perform prompting for a `classPrompt`.
-    
-    Runs a prompt and performs the prompting. Returns a variant result if the
-    prompt was completed and not dismissed. The type of result depends on the
-    action the prompt is completing, and is defined in the Secret Service DBus
-    API specification.
-    
-    This function is called by other parts of this library to handle prompts
-    for the various actions that can require prompting.
-    
-    Override the #SecretServiceClass `vfuncService.prompt_sync` virtual method
-    to change the behavior of the prompting. The default behavior is to simply
-    run [secret.prompt.Prompt.performSync] on the prompt with a null `window_id`.
-    Params:
-      prompt =       the prompt
-      cancellable =       optional cancellation object
-      returnType =       the variant type of the prompt result
-    Returns:     null if the prompt was dismissed or an error occurred,
-        a variant result if the prompt was successful
+      
+      Runs a prompt and performs the prompting. Returns a variant result if the
+      prompt was completed and not dismissed. The type of result depends on the
+      action the prompt is completing, and is defined in the Secret Service DBus
+      API specification.
+      
+      This function is called by other parts of this library to handle prompts
+      for the various actions that can require prompting.
+      
+      Override the #SecretServiceClass `vfuncService.prompt_sync` virtual method
+      to change the behavior of the prompting. The default behavior is to simply
+      run [secret.prompt.Prompt.performSync] on the prompt with a null `window_id`.
+  
+      Params:
+        prompt = the prompt
+        cancellable = optional cancellation object
+        returnType = the variant type of the prompt result
+      Returns: null if the prompt was dismissed or an error occurred,
+          a variant result if the prompt was successful
+      Throws: [ErrorG]
   */
   glib.variant.VariantG promptSync(secret.prompt.Prompt prompt, gio.cancellable.Cancellable cancellable, glib.variant_type.VariantType returnType)
   {
@@ -890,31 +936,32 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Search for items matching the attributes.
-    
-    All collections are searched. The attributes should be a table of string
-    keys and string values.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
-    search will be returned. Otherwise only the first item will be returned.
-    This is almost always the unlocked item that was most recently stored.
-    
-    If [secret.types.SearchFlags.Unlock] is set in flags, then items will be unlocked
-    if necessary. In either case, locked and unlocked items will match the
-    search and be returned. If the unlock fails, the search does not fail.
-    
-    If [secret.types.SearchFlags.LoadSecrets] is set in flags, then the items will have
-    their secret values loaded and available via [secret.item.Item.getSecret].
-    
-    This function returns immediately and completes asynchronously.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       search for items matching these attributes
-      flags =       search option flags
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      All collections are searched. The attributes should be a table of string
+      keys and string values.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
+      search will be returned. Otherwise only the first item will be returned.
+      This is almost always the unlocked item that was most recently stored.
+      
+      If [secret.types.SearchFlags.Unlock] is set in flags, then items will be unlocked
+      if necessary. In either case, locked and unlocked items will match the
+      search and be returned. If the unlock fails, the search does not fail.
+      
+      If [secret.types.SearchFlags.LoadSecrets] is set in flags, then the items will have
+      their secret values loaded and available via [secret.item.Item.getSecret].
+      
+      This function returns immediately and completes asynchronously.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = search for items matching these attributes
+        flags = search option flags
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -935,9 +982,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete asynchronous operation to search for items.
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     a list of items that matched the search
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchFinish(gio.async_result.AsyncResult result)
   {
@@ -952,34 +1001,36 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Search for items matching the attributes.
-    
-    All collections are searched. The attributes should be a table of string
-    keys and string values.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
-    search will be returned. Otherwise only the first item will be returned.
-    This is almost always the unlocked item that was most recently stored.
-    
-    If [secret.types.SearchFlags.Unlock] is set in flags, then items will be unlocked
-    if necessary. In either case, locked and unlocked items will match the
-    search and be returned. If the unlock fails, the search does not fail.
-    
-    If [secret.types.SearchFlags.LoadSecrets] is set in flags, then the items' secret
-    values will be loaded for any unlocked items. Loaded item secret values
-    are available via [secret.item.Item.getSecret]. If the load of a secret values
-    fail, then the
-    
-    This function may block indefinitely. Use the asynchronous version
-    in user interface threads.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       search for items matching these attributes
-      flags =       search option flags
-      cancellable =       optional cancellation object
-    Returns:     a list of items that matched the search
+      
+      All collections are searched. The attributes should be a table of string
+      keys and string values.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      If [secret.types.SearchFlags.All] is set in flags, then all the items matching the
+      search will be returned. Otherwise only the first item will be returned.
+      This is almost always the unlocked item that was most recently stored.
+      
+      If [secret.types.SearchFlags.Unlock] is set in flags, then items will be unlocked
+      if necessary. In either case, locked and unlocked items will match the
+      search and be returned. If the unlock fails, the search does not fail.
+      
+      If [secret.types.SearchFlags.LoadSecrets] is set in flags, then the items' secret
+      values will be loaded for any unlocked items. Loaded item secret values
+      are available via [secret.item.Item.getSecret]. If the load of a secret values
+      fail, then the
+      
+      This function may block indefinitely. Use the asynchronous version
+      in user interface threads.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = search for items matching these attributes
+        flags = search option flags
+        cancellable = optional cancellation object
+      Returns: a list of items that matched the search
+      Throws: [ErrorG]
   */
   secret.item.Item[] searchSync(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -996,18 +1047,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Assign a collection to this alias.
-    
-    Aliases help determine well known collections, such as 'default'.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      alias_ =       the alias to assign the collection to
-      collection =       the collection to assign to the alias
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      Aliases help determine well known collections, such as 'default'.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        alias_ = the alias to assign the collection to
+        collection = the collection to assign to the alias
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void setAlias(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -1027,9 +1079,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Finish an asynchronous operation to assign a collection to an alias.
-    Params:
-      result =       asynchronous result passed to callback
-    Returns:     true if successful
+  
+      Params:
+        result = asynchronous result passed to callback
+      Returns: true if successful
+      Throws: [ErrorG]
   */
   bool setAliasFinish(gio.async_result.AsyncResult result)
   {
@@ -1043,17 +1097,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Assign a collection to this alias. Aliases help determine
-    well known collections, such as 'default'.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block and should not be used in user interface threads.
-    Params:
-      alias_ =       the alias to assign the collection to
-      collection =       the collection to assign to the alias
-      cancellable =       optional cancellation object
-    Returns:     true if successful
+      well known collections, such as 'default'.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block and should not be used in user interface threads.
+  
+      Params:
+        alias_ = the alias to assign the collection to
+        collection = the collection to assign to the alias
+        cancellable = optional cancellation object
+      Returns: true if successful
+      Throws: [ErrorG]
   */
   bool setAliasSync(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1068,29 +1124,30 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Store a secret value in the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If the attributes match a secret item already stored in the collection, then
-    the item will be updated with these new values.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    If collection is not specified, then the default collection will be
-    used. Use `constCOLLECTION_SESSION` to store the password in the session
-    collection, which doesn't get stored across login sessions.
-    
-    This method will return immediately and complete asynchronously.
-    Params:
-      schema =       the schema to use to check attributes
-      attributes =       the attribute keys and values
-      collection =       a collection alias, or D-Bus object path of the
-          collection where to store the secret
-      label =       label for the secret
-      value =       the secret value
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If the attributes match a secret item already stored in the collection, then
+      the item will be updated with these new values.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      If collection is not specified, then the default collection will be
+      used. Use `constCOLLECTION_SESSION` to store the password in the session
+      collection, which doesn't get stored across login sessions.
+      
+      This method will return immediately and complete asynchronously.
+  
+      Params:
+        schema = the schema to use to check attributes
+        attributes = the attribute keys and values
+        collection = a collection alias, or D-Bus object path of the
+            collection where to store the secret
+        label = label for the secret
+        value = the secret value
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -1113,9 +1170,11 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Finish asynchronous operation to store a secret value in the secret service.
-    Params:
-      result =       the asynchronous result passed to the callback
-    Returns:     whether the storage was successful or not
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: whether the storage was successful or not
+      Throws: [ErrorG]
   */
   bool storeFinish(gio.async_result.AsyncResult result)
   {
@@ -1129,30 +1188,32 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Store a secret value in the secret service.
-    
-    The attributes should be a set of key and value string pairs.
-    
-    If the attributes match a secret item already stored in the collection, then
-    the item will be updated with these new values.
-    
-    If collection is null, then the default collection will be
-    used. Use `constCOLLECTION_SESSION` to store the password in the session
-    collection, which doesn't get stored across login sessions.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user interface
-    threads.
-    Params:
-      schema =       the schema for the attributes
-      attributes =       the attribute keys and values
-      collection =       a collection alias, or D-Bus object path of the
-          collection where to store the secret
-      label =       label for the secret
-      value =       the secret value
-      cancellable =       optional cancellation object
-    Returns:     whether the storage was successful or not
+      
+      The attributes should be a set of key and value string pairs.
+      
+      If the attributes match a secret item already stored in the collection, then
+      the item will be updated with these new values.
+      
+      If collection is null, then the default collection will be
+      used. Use `constCOLLECTION_SESSION` to store the password in the session
+      collection, which doesn't get stored across login sessions.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user interface
+      threads.
+  
+      Params:
+        schema = the schema for the attributes
+        attributes = the attribute keys and values
+        collection = a collection alias, or D-Bus object path of the
+            collection where to store the secret
+        label = label for the secret
+        value = the secret value
+        cancellable = optional cancellation object
+      Returns: whether the storage was successful or not
+      Throws: [ErrorG]
   */
   bool storeSync(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null)
   {
@@ -1170,20 +1231,21 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Unlock items or collections in the secret service.
-    
-    The secret service may not be able to unlock items individually, and may
-    unlock an entire collection instead.
-    
-    If service is null, then [secret.service.Service.get] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user
-    interface threads. The secret service may prompt the user.
-    [secret.service.Service.prompt] will be used to handle any prompts that show up.
-    Params:
-      objects =       the items or collections to unlock
-      cancellable =       optional cancellation object
-      callback =       called when the operation completes
+      
+      The secret service may not be able to unlock items individually, and may
+      unlock an entire collection instead.
+      
+      If service is null, then [secret.service.Service.get] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user
+      interface threads. The secret service may prompt the user.
+      [secret.service.Service.prompt] will be used to handle any prompts that show up.
+  
+      Params:
+        objects = the items or collections to unlock
+        cancellable = optional cancellation object
+        callback = called when the operation completes
   */
   void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -1204,14 +1266,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Complete asynchronous operation to unlock items or collections in the secret
-    service.
-    
-    The secret service may not be able to unlock items individually, and may
-    unlock an entire collection instead.
-    Params:
-      result =       asynchronous result passed to the callback
-      unlocked =       location to place list of items or collections that were unlocked
-    Returns:     the number of items or collections that were unlocked
+      service.
+      
+      The secret service may not be able to unlock items individually, and may
+      unlock an entire collection instead.
+  
+      Params:
+        result = asynchronous result passed to the callback
+        unlocked = location to place list of items or collections that were unlocked
+      Returns: the number of items or collections that were unlocked
+      Throws: [ErrorG]
   */
   int unlockFinish(gio.async_result.AsyncResult result, out gio.dbus_proxy.DBusProxy[] unlocked)
   {
@@ -1227,21 +1291,23 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
 
   /**
       Unlock items or collections in the secret service.
-    
-    The secret service may not be able to unlock items individually, and may
-    unlock an entire collection instead.
-    
-    If service is null, then [secret.service.Service.getSync] will be called to get
-    the default `classService` proxy.
-    
-    This method may block indefinitely and should not be used in user
-    interface threads. The secret service may prompt the user.
-    [secret.service.Service.prompt] will be used to handle any prompts that show up.
-    Params:
-      objects =       the items or collections to unlock
-      cancellable =       optional cancellation object
-      unlocked =       location to place list of items or collections that were unlocked
-    Returns:     the number of items or collections that were unlocked
+      
+      The secret service may not be able to unlock items individually, and may
+      unlock an entire collection instead.
+      
+      If service is null, then [secret.service.Service.getSync] will be called to get
+      the default `classService` proxy.
+      
+      This method may block indefinitely and should not be used in user
+      interface threads. The secret service may prompt the user.
+      [secret.service.Service.prompt] will be used to handle any prompts that show up.
+  
+      Params:
+        objects = the items or collections to unlock
+        cancellable = optional cancellation object
+        unlocked = location to place list of items or collections that were unlocked
+      Returns: the number of items or collections that were unlocked
+      Throws: [ErrorG]
   */
   int unlockSync(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable, out gio.dbus_proxy.DBusProxy[] unlocked)
   {

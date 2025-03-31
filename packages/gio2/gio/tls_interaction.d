@@ -1,3 +1,4 @@
+/// Module for [TlsInteraction] class
 module gio.tls_interaction;
 
 import gid.gid;
@@ -13,40 +14,43 @@ import gobject.object;
 
 /**
     [gio.tls_interaction.TlsInteraction] provides a mechanism for the TLS connection and database
-  code to interact with the user. It can be used to ask the user for passwords.
-  
-  To use a [gio.tls_interaction.TlsInteraction] with a TLS connection use
-  [gio.tls_connection.TlsConnection.setInteraction].
-  
-  Callers should instantiate a derived class that implements the various
-  interaction methods to show the required dialogs.
-  
-  Callers should use the 'invoke' functions like
-  [gio.tls_interaction.TlsInteraction.invokeAskPassword] to run interaction methods.
-  These functions make sure that the interaction is invoked in the main loop
-  and not in the current thread, if the current thread is not running the
-  main loop.
-  
-  Derived classes can choose to implement whichever interactions methods they’d
-  like to support by overriding those virtual methods in their class
-  initialization function. Any interactions not implemented will return
-  [gio.types.TlsInteractionResult.Unhandled]. If a derived class implements an async method,
-  it must also implement the corresponding finish method.
+    code to interact with the user. It can be used to ask the user for passwords.
+    
+    To use a [gio.tls_interaction.TlsInteraction] with a TLS connection use
+    [gio.tls_connection.TlsConnection.setInteraction].
+    
+    Callers should instantiate a derived class that implements the various
+    interaction methods to show the required dialogs.
+    
+    Callers should use the 'invoke' functions like
+    [gio.tls_interaction.TlsInteraction.invokeAskPassword] to run interaction methods.
+    These functions make sure that the interaction is invoked in the main loop
+    and not in the current thread, if the current thread is not running the
+    main loop.
+    
+    Derived classes can choose to implement whichever interactions methods they’d
+    like to support by overriding those virtual methods in their class
+    initialization function. Any interactions not implemented will return
+    [gio.types.TlsInteractionResult.Unhandled]. If a derived class implements an async method,
+    it must also implement the corresponding finish method.
 */
 class TlsInteraction : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_interaction_get_type != &gidSymbolNotFound ? g_tls_interaction_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,22 +63,24 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Run synchronous interaction to ask the user for a password. In general,
-    [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
-    function.
-    
-    Derived subclasses usually implement a password prompt, although they may
-    also choose to provide a password from elsewhere. The password value will
-    be filled in and then callback will be called. Alternatively the user may
-    abort this password request, which will usually abort the TLS connection.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
-    not support immediate cancellation.
-    Params:
-      password =       a #GTlsPassword object
-      cancellable =       an optional #GCancellable cancellation object
-    Returns:     The status of the ask password interaction.
+      [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
+      function.
+      
+      Derived subclasses usually implement a password prompt, although they may
+      also choose to provide a password from elsewhere. The password value will
+      be filled in and then callback will be called. Alternatively the user may
+      abort this password request, which will usually abort the TLS connection.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+      not support immediate cancellation.
+  
+      Params:
+        password = a #GTlsPassword object
+        cancellable = an optional #GCancellable cancellation object
+      Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult askPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
@@ -89,24 +95,25 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Run asynchronous interaction to ask the user for a password. In general,
-    [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
-    function.
-    
-    Derived subclasses usually implement a password prompt, although they may
-    also choose to provide a password from elsewhere. The password value will
-    be filled in and then callback will be called. Alternatively the user may
-    abort this password request, which will usually abort the TLS connection.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
-    not support immediate cancellation.
-    
-    Certain implementations may not support immediate cancellation.
-    Params:
-      password =       a #GTlsPassword object
-      cancellable =       an optional #GCancellable cancellation object
-      callback =       will be called when the interaction completes
+      [gio.tls_interaction.TlsInteraction.invokeAskPassword] should be used instead of this
+      function.
+      
+      Derived subclasses usually implement a password prompt, although they may
+      also choose to provide a password from elsewhere. The password value will
+      be filled in and then callback will be called. Alternatively the user may
+      abort this password request, which will usually abort the TLS connection.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+      not support immediate cancellation.
+      
+      Certain implementations may not support immediate cancellation.
+  
+      Params:
+        password = a #GTlsPassword object
+        cancellable = an optional #GCancellable cancellation object
+        callback = will be called when the interaction completes
   */
   void askPasswordAsync(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -125,17 +132,19 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Complete an ask password user interaction request. This should be once
-    the [gio.tls_interaction.TlsInteraction.askPasswordAsync] completion callback is called.
-    
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsPassword passed
-    to [gio.tls_interaction.TlsInteraction.askPassword] will have its password filled in.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code.
-    Params:
-      result =       the result passed to the callback
-    Returns:     The status of the ask password interaction.
+      the [gio.tls_interaction.TlsInteraction.askPasswordAsync] completion callback is called.
+      
+      If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsPassword passed
+      to [gio.tls_interaction.TlsInteraction.askPassword] will have its password filled in.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code.
+  
+      Params:
+        result = the result passed to the callback
+      Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult askPasswordFinish(gio.async_result.AsyncResult result)
   {
@@ -150,28 +159,30 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Invoke the interaction to ask the user for a password. It invokes this
-    interaction in the main loop, specifically the #GMainContext returned by
-    [glib.main_context.MainContext.getThreadDefault] when the interaction is created. This
-    is called by called by #GTlsConnection or #GTlsDatabase to ask the user
-    for a password.
-    
-    Derived subclasses usually implement a password prompt, although they may
-    also choose to provide a password from elsewhere. The password value will
-    be filled in and then callback will be called. Alternatively the user may
-    abort this password request, which will usually abort the TLS connection.
-    
-    The implementation can either be a synchronous (eg: modal dialog) or an
-    asynchronous one (eg: modeless dialog). This function will take care of
-    calling which ever one correctly.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
-    not support immediate cancellation.
-    Params:
-      password =       a #GTlsPassword object
-      cancellable =       an optional #GCancellable cancellation object
-    Returns:     The status of the ask password interaction.
+      interaction in the main loop, specifically the #GMainContext returned by
+      [glib.main_context.MainContext.getThreadDefault] when the interaction is created. This
+      is called by called by #GTlsConnection or #GTlsDatabase to ask the user
+      for a password.
+      
+      Derived subclasses usually implement a password prompt, although they may
+      also choose to provide a password from elsewhere. The password value will
+      be filled in and then callback will be called. Alternatively the user may
+      abort this password request, which will usually abort the TLS connection.
+      
+      The implementation can either be a synchronous (eg: modal dialog) or an
+      asynchronous one (eg: modeless dialog). This function will take care of
+      calling which ever one correctly.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+      not support immediate cancellation.
+  
+      Params:
+        password = a #GTlsPassword object
+        cancellable = an optional #GCancellable cancellation object
+      Returns: The status of the ask password interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult invokeAskPassword(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null)
   {
@@ -186,30 +197,32 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Invoke the interaction to ask the user to choose a certificate to
-    use with the connection. It invokes this interaction in the main
-    loop, specifically the #GMainContext returned by
-    [glib.main_context.MainContext.getThreadDefault] when the interaction is
-    created. This is called by called by #GTlsConnection when the peer
-    requests a certificate during the handshake.
-    
-    Derived subclasses usually implement a certificate selector,
-    although they may also choose to provide a certificate from
-    elsewhere. Alternatively the user may abort this certificate
-    request, which may or may not abort the TLS connection.
-    
-    The implementation can either be a synchronous (eg: modal dialog) or an
-    asynchronous one (eg: modeless dialog). This function will take care of
-    calling which ever one correctly.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
-    not support immediate cancellation.
-    Params:
-      connection =       a #GTlsConnection object
-      flags =       flags providing more information about the request
-      cancellable =       an optional #GCancellable cancellation object
-    Returns:     The status of the certificate request interaction.
+      use with the connection. It invokes this interaction in the main
+      loop, specifically the #GMainContext returned by
+      [glib.main_context.MainContext.getThreadDefault] when the interaction is
+      created. This is called by called by #GTlsConnection when the peer
+      requests a certificate during the handshake.
+      
+      Derived subclasses usually implement a certificate selector,
+      although they may also choose to provide a certificate from
+      elsewhere. Alternatively the user may abort this certificate
+      request, which may or may not abort the TLS connection.
+      
+      The implementation can either be a synchronous (eg: modal dialog) or an
+      asynchronous one (eg: modeless dialog). This function will take care of
+      calling which ever one correctly.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+      not support immediate cancellation.
+  
+      Params:
+        connection = a #GTlsConnection object
+        flags = flags providing more information about the request
+        cancellable = an optional #GCancellable cancellation object
+      Returns: The status of the certificate request interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult invokeRequestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -224,26 +237,28 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Run synchronous interaction to ask the user to choose a certificate to use
-    with the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate]
-    should be used instead of this function.
-    
-    Derived subclasses usually implement a certificate selector, although they may
-    also choose to provide a certificate from elsewhere. Alternatively the user may
-    abort this certificate request, which will usually abort the TLS connection.
-    
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
-    passed to [gio.tls_interaction.TlsInteraction.requestCertificate] will have had its
-    #GTlsConnection:certificate filled in.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
-    not support immediate cancellation.
-    Params:
-      connection =       a #GTlsConnection object
-      flags =       flags providing more information about the request
-      cancellable =       an optional #GCancellable cancellation object
-    Returns:     The status of the request certificate interaction.
+      with the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate]
+      should be used instead of this function.
+      
+      Derived subclasses usually implement a certificate selector, although they may
+      also choose to provide a certificate from elsewhere. Alternatively the user may
+      abort this certificate request, which will usually abort the TLS connection.
+      
+      If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
+      passed to [gio.tls_interaction.TlsInteraction.requestCertificate] will have had its
+      #GTlsConnection:certificate filled in.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code. Certain implementations may
+      not support immediate cancellation.
+  
+      Params:
+        connection = a #GTlsConnection object
+        flags = flags providing more information about the request
+        cancellable = an optional #GCancellable cancellation object
+      Returns: The status of the request certificate interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult requestCertificate(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null)
   {
@@ -258,18 +273,19 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Run asynchronous interaction to ask the user for a certificate to use with
-    the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate] should
-    be used instead of this function.
-    
-    Derived subclasses usually implement a certificate selector, although they may
-    also choose to provide a certificate from elsewhere. callback will be called
-    when the operation completes. Alternatively the user may abort this certificate
-    request, which will usually abort the TLS connection.
-    Params:
-      connection =       a #GTlsConnection object
-      flags =       flags providing more information about the request
-      cancellable =       an optional #GCancellable cancellation object
-      callback =       will be called when the interaction completes
+      the connection. In general, [gio.tls_interaction.TlsInteraction.invokeRequestCertificate] should
+      be used instead of this function.
+      
+      Derived subclasses usually implement a certificate selector, although they may
+      also choose to provide a certificate from elsewhere. callback will be called
+      when the operation completes. Alternatively the user may abort this certificate
+      request, which will usually abort the TLS connection.
+  
+      Params:
+        connection = a #GTlsConnection object
+        flags = flags providing more information about the request
+        cancellable = an optional #GCancellable cancellation object
+        callback = will be called when the interaction completes
   */
   void requestCertificateAsync(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
@@ -288,18 +304,20 @@ class TlsInteraction : gobject.object.ObjectG
 
   /**
       Complete a request certificate user interaction request. This should be once
-    the [gio.tls_interaction.TlsInteraction.requestCertificateAsync] completion callback is called.
-    
-    If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
-    passed to [gio.tls_interaction.TlsInteraction.requestCertificateAsync] will have had its
-    #GTlsConnection:certificate filled in.
-    
-    If the interaction is cancelled by the cancellation object, or by the
-    user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
-    contains a [gio.types.IOErrorEnum.Cancelled] error code.
-    Params:
-      result =       the result passed to the callback
-    Returns:     The status of the request certificate interaction.
+      the [gio.tls_interaction.TlsInteraction.requestCertificateAsync] completion callback is called.
+      
+      If [gio.types.TlsInteractionResult.Handled] is returned, then the #GTlsConnection
+      passed to [gio.tls_interaction.TlsInteraction.requestCertificateAsync] will have had its
+      #GTlsConnection:certificate filled in.
+      
+      If the interaction is cancelled by the cancellation object, or by the
+      user then [gio.types.TlsInteractionResult.Failed] will be returned with an error that
+      contains a [gio.types.IOErrorEnum.Cancelled] error code.
+  
+      Params:
+        result = the result passed to the callback
+      Returns: The status of the request certificate interaction.
+      Throws: [ErrorG]
   */
   gio.types.TlsInteractionResult requestCertificateFinish(gio.async_result.AsyncResult result)
   {

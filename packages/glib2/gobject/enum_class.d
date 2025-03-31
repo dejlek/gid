@@ -1,19 +1,22 @@
+/// Module for [EnumClass] class
 module gobject.enum_class;
 
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.enum_value;
+import gobject.type_class;
 import gobject.types;
 
 /**
     The class of an enumeration type holds information about its
-  possible values.
+    possible values.
 */
 class EnumClass
 {
   GEnumClass cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,9 +28,15 @@ class EnumClass
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
+  }
+
+  @property gobject.type_class.TypeClass gTypeClass()
+  {
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)cPtr).gTypeClass);
   }
 
   @property int minimum()

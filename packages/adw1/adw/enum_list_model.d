@@ -1,3 +1,4 @@
+/// Module for [EnumListModel] class
 module adw.enum_list_model;
 
 import adw.c.functions;
@@ -11,23 +12,26 @@ import gobject.types;
 
 /**
     A [gio.list_model.ListModel] representing values of a given enum.
-  
-  [adw.enum_list_model.EnumListModel] contains objects of type `class@EnumListItem`.
+    
+    [adw.enum_list_model.EnumListModel] contains objects of type `class@EnumListItem`.
 */
 class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_model_get_type != &gidSymbolNotFound ? adw_enum_list_model_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -42,9 +46,10 @@ class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Creates a new [adw.enum_list_model.EnumListModel] for enum_type.
-    Params:
-      enumType =       the type of the enum to construct the model from
-    Returns:     the newly created [adw.enum_list_model.EnumListModel]
+  
+      Params:
+        enumType = the type of the enum to construct the model from
+      Returns: the newly created [adw.enum_list_model.EnumListModel]
   */
   this(gobject.types.GType enumType)
   {
@@ -55,11 +60,12 @@ class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Finds the position of a given enum value in self.
-    
-    If the value is not found, `GTK_INVALID_LIST_POSITION` is returned.
-    Params:
-      value =       an enum value
-    Returns:     the position of the value
+      
+      If the value is not found, `GTK_INVALID_LIST_POSITION` is returned.
+  
+      Params:
+        value = an enum value
+      Returns: the position of the value
   */
   uint findPosition(int value)
   {
@@ -70,7 +76,7 @@ class EnumListModel : gobject.object.ObjectG, gio.list_model.ListModel
 
   /**
       Gets the type of the enum represented by self.
-    Returns:     the enum type
+      Returns: the enum type
   */
   gobject.types.GType getEnumType()
   {

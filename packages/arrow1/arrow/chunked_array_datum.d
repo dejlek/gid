@@ -1,3 +1,4 @@
+/// Module for [ChunkedArrayDatum] class
 module arrow.chunked_array_datum;
 
 import arrow.c.functions;
@@ -11,17 +12,20 @@ import gid.gid;
 class ChunkedArrayDatum : arrow.datum.Datum
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_chunked_array_datum_get_type != &gidSymbolNotFound ? garrow_chunked_array_datum_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

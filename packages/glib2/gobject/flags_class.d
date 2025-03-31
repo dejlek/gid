@@ -1,19 +1,22 @@
+/// Module for [FlagsClass] class
 module gobject.flags_class;
 
 import gid.gid;
 import gobject.c.functions;
 import gobject.c.types;
 import gobject.flags_value;
+import gobject.type_class;
 import gobject.types;
 
 /**
     The class of a flags type holds information about its
-  possible values.
+    possible values.
 */
 class FlagsClass
 {
   GFlagsClass cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,9 +28,15 @@ class FlagsClass
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
+  }
+
+  @property gobject.type_class.TypeClass gTypeClass()
+  {
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)cPtr).gTypeClass);
   }
 
   @property uint mask()

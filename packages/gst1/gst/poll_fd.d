@@ -1,3 +1,4 @@
+/// Module for [PollFD] class
 module gst.poll_fd;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class PollFD
 {
   GstPollFD cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class PollFD
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -40,7 +43,7 @@ class PollFD
 
   /**
       Initializes fd. Alternatively you can initialize it with
-    #GST_POLL_FD_INIT.
+      #GST_POLL_FD_INIT.
   */
   void init_()
   {

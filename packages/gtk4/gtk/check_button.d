@@ -1,3 +1,4 @@
+/// Module for [CheckButton] class
 module gtk.check_button;
 
 import gid.gid;
@@ -18,77 +19,80 @@ import gtk.widget;
 
 /**
     A [gtk.check_button.CheckButton] places a label next to an indicator.
-  
-  ![Example GtkCheckButtons](check-button.png)
-  
-  A [gtk.check_button.CheckButton] is created by calling either [gtk.check_button.CheckButton.new_]
-  or [gtk.check_button.CheckButton.newWithLabel].
-  
-  The state of a [gtk.check_button.CheckButton] can be set specifically using
-  [gtk.check_button.CheckButton.setActive], and retrieved using
-  [gtk.check_button.CheckButton.getActive].
-  
-  # Inconsistent state
-  
-  In addition to "on" and "off", check buttons can be an
-  "in between" state that is neither on nor off. This can be used
-  e.g. when the user has selected a range of elements (such as some
-  text or spreadsheet cells) that are affected by a check button,
-  and the current values in that range are inconsistent.
-  
-  To set a [gtk.check_button.CheckButton] to inconsistent state, use
-  [gtk.check_button.CheckButton.setInconsistent].
-  
-  # Grouping
-  
-  Check buttons can be grouped together, to form mutually exclusive
-  groups - only one of the buttons can be toggled at a time, and toggling
-  another one will switch the currently toggled one off.
-  
-  Grouped check buttons use a different indicator, and are commonly referred
-  to as *radio buttons*.
-  
-  ![Example GtkCheckButtons](radio-button.png)
-  
-  To add a [gtk.check_button.CheckButton] to a group, use [gtk.check_button.CheckButton.setGroup].
-  
-  When the code must keep track of the state of a group of radio buttons, it
-  is recommended to keep track of such state through a stateful
-  [gio.action.Action] with a target for each button. Using the `toggled` signals to keep
-  track of the group changes and state is discouraged.
-  
-  # CSS nodes
-  
-  ```
-  checkbutton[.text-button]
-  ├── check
-  ╰── [label]
-  ```
-  
-  A [gtk.check_button.CheckButton] has a main node with name checkbutton. If the
-  [gtk.check_button.CheckButton.utf8] or [gtk.check_button.CheckButton.Widget]
-  properties are set, it contains a child widget. The indicator node
-  is named check when no group is set, and radio if the checkbutton
-  is grouped together with other checkbuttons.
-  
-  # Accessibility
-  
-  [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.Checkbox] role.
+    
+    ![Example GtkCheckButtons](check-button.png)
+    
+    A [gtk.check_button.CheckButton] is created by calling either [gtk.check_button.CheckButton.new_]
+    or [gtk.check_button.CheckButton.newWithLabel].
+    
+    The state of a [gtk.check_button.CheckButton] can be set specifically using
+    [gtk.check_button.CheckButton.setActive], and retrieved using
+    [gtk.check_button.CheckButton.getActive].
+    
+    # Inconsistent state
+    
+    In addition to "on" and "off", check buttons can be an
+    "in between" state that is neither on nor off. This can be used
+    e.g. when the user has selected a range of elements (such as some
+    text or spreadsheet cells) that are affected by a check button,
+    and the current values in that range are inconsistent.
+    
+    To set a [gtk.check_button.CheckButton] to inconsistent state, use
+    [gtk.check_button.CheckButton.setInconsistent].
+    
+    # Grouping
+    
+    Check buttons can be grouped together, to form mutually exclusive
+    groups - only one of the buttons can be toggled at a time, and toggling
+    another one will switch the currently toggled one off.
+    
+    Grouped check buttons use a different indicator, and are commonly referred
+    to as *radio buttons*.
+    
+    ![Example GtkCheckButtons](radio-button.png)
+    
+    To add a [gtk.check_button.CheckButton] to a group, use [gtk.check_button.CheckButton.setGroup].
+    
+    When the code must keep track of the state of a group of radio buttons, it
+    is recommended to keep track of such state through a stateful
+    [gio.action.Action] with a target for each button. Using the `toggled` signals to keep
+    track of the group changes and state is discouraged.
+    
+    # CSS nodes
+    
+    ```
+    checkbutton[.text-button]
+    ├── check
+    ╰── [label]
+    ```
+    
+    A [gtk.check_button.CheckButton] has a main node with name checkbutton. If the
+    [gtk.check_button.CheckButton.utf8] or [gtk.check_button.CheckButton.Widget]
+    properties are set, it contains a child widget. The indicator node
+    is named check when no group is set, and radio if the checkbutton
+    is grouped together with other checkbuttons.
+    
+    # Accessibility
+    
+    [gtk.check_button.CheckButton] uses the [gtk.types.AccessibleRole.Checkbox] role.
 */
 class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_button_get_type != &gidSymbolNotFound ? gtk_check_button_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -103,7 +107,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [gtk.check_button.CheckButton].
-    Returns:     a new [gtk.check_button.CheckButton]
+      Returns: a new [gtk.check_button.CheckButton]
   */
   this()
   {
@@ -114,9 +118,10 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [gtk.check_button.CheckButton] with the given text.
-    Params:
-      label =       the text for the check button.
-    Returns:     a new [gtk.check_button.CheckButton]
+  
+      Params:
+        label = the text for the check button.
+      Returns: a new [gtk.check_button.CheckButton]
   */
   static gtk.check_button.CheckButton newWithLabel(string label = null)
   {
@@ -129,10 +134,11 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Creates a new [gtk.check_button.CheckButton] with the given text and a mnemonic.
-    Params:
-      label =       The text of the button, with an underscore
-          in front of the mnemonic character
-    Returns:     a new [gtk.check_button.CheckButton]
+  
+      Params:
+        label = The text of the button, with an underscore
+            in front of the mnemonic character
+      Returns: a new [gtk.check_button.CheckButton]
   */
   static gtk.check_button.CheckButton newWithMnemonic(string label = null)
   {
@@ -145,7 +151,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Returns whether the check button is active.
-    Returns:     whether the check button is active
+      Returns: whether the check button is active
   */
   bool getActive()
   {
@@ -156,7 +162,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Gets the child widget of button or `NULL` if `propertyCheckButton:label` is set.
-    Returns:     the child widget of button
+      Returns: the child widget of button
   */
   gtk.widget.Widget getChild()
   {
@@ -168,7 +174,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Returns whether the check button is in an inconsistent state.
-    Returns:     true if check_button is currently in an inconsistent state
+      Returns: true if check_button is currently in an inconsistent state
   */
   bool getInconsistent()
   {
@@ -179,8 +185,8 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Returns the label of the check button or `NULL` if `propertyCheckButton:child` is set.
-    Returns:     The label self shows next
-        to the indicator. If no label is shown, null will be returned.
+      Returns: The label self shows next
+          to the indicator. If no label is shown, null will be returned.
   */
   string getLabel()
   {
@@ -192,9 +198,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Returns whether underlines in the label indicate mnemonics.
-    Returns:     The value of the `propertyGtk.CheckButton:use-underline` property.
-        See [gtk.check_button.CheckButton.setUseUnderline] for details on how to set
-        a new value.
+      Returns: The value of the `propertyGtk.CheckButton:use-underline` property.
+          See [gtk.check_button.CheckButton.setUseUnderline] for details on how to set
+          a new value.
   */
   bool getUseUnderline()
   {
@@ -205,8 +211,9 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Changes the check buttons active state.
-    Params:
-      setting =       the new value to set
+  
+      Params:
+        setting = the new value to set
   */
   void setActive(bool setting)
   {
@@ -215,14 +222,15 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the child widget of button.
-    
-    Note that by using this API, you take full responsibility for setting
-    up the proper accessibility label and description information for button.
-    Most likely, you'll either set the accessibility label or description
-    for button explicitly, or you'll set a labelled-by or described-by
-    relations from child to button.
-    Params:
-      child =       the child widget
+      
+      Note that by using this API, you take full responsibility for setting
+      up the proper accessibility label and description information for button.
+      Most likely, you'll either set the accessibility label or description
+      for button explicitly, or you'll set a labelled-by or described-by
+      relations from child to button.
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -231,23 +239,24 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Adds self to the group of group.
-    
-    In a group of multiple check buttons, only one button can be active
-    at a time. The behavior of a checkbutton in a group is also commonly
-    known as a *radio button*.
-    
-    Setting the group of a check button also changes the css name of the
-    indicator widget's CSS node to 'radio'.
-    
-    Setting up groups in a cycle leads to undefined behavior.
-    
-    Note that the same effect can be achieved via the [gtk.actionable.Actionable]
-    API, by using the same action with parameter type and state type 's'
-    for all buttons in the group, and giving each button its own target
-    value.
-    Params:
-      group =       another [gtk.check_button.CheckButton] to
-          form a group with
+      
+      In a group of multiple check buttons, only one button can be active
+      at a time. The behavior of a checkbutton in a group is also commonly
+      known as a *radio button*.
+      
+      Setting the group of a check button also changes the css name of the
+      indicator widget's CSS node to 'radio'.
+      
+      Setting up groups in a cycle leads to undefined behavior.
+      
+      Note that the same effect can be achieved via the [gtk.actionable.Actionable]
+      API, by using the same action with parameter type and state type 's'
+      for all buttons in the group, and giving each button its own target
+      value.
+  
+      Params:
+        group = another [gtk.check_button.CheckButton] to
+            form a group with
   */
   void setGroup(gtk.check_button.CheckButton group = null)
   {
@@ -256,11 +265,12 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the [gtk.check_button.CheckButton] to inconsistent state.
-    
-    You should turn off the inconsistent state again if the user checks
-    the check button. This has to be done manually.
-    Params:
-      inconsistent =       true if state is inconsistent
+      
+      You should turn off the inconsistent state again if the user checks
+      the check button. This has to be done manually.
+  
+      Params:
+        inconsistent = true if state is inconsistent
   */
   void setInconsistent(bool inconsistent)
   {
@@ -269,13 +279,14 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets the text of self.
-    
-    If `propertyGtk.CheckButton:use-underline` is true, an underscore
-    in label is interpreted as mnemonic indicator, see
-    [gtk.check_button.CheckButton.setUseUnderline] for details on this behavior.
-    Params:
-      label =       The text shown next to the indicator, or null
-          to show no text
+      
+      If `propertyGtk.CheckButton:use-underline` is true, an underscore
+      in label is interpreted as mnemonic indicator, see
+      [gtk.check_button.CheckButton.setUseUnderline] for details on this behavior.
+  
+      Params:
+        label = The text shown next to the indicator, or null
+            to show no text
   */
   void setLabel(string label = null)
   {
@@ -285,12 +296,13 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
 
   /**
       Sets whether underlines in the label indicate mnemonics.
-    
-    If setting is true, an underscore character in self's label
-    indicates a mnemonic accelerator key. This behavior is similar
-    to `propertyGtk.Label:use-underline`.
-    Params:
-      setting =       the new value to set
+      
+      If setting is true, an underscore character in self's label
+      indicates a mnemonic accelerator key. This behavior is similar
+      to `propertyGtk.Label:use-underline`.
+  
+      Params:
+        setting = the new value to set
   */
   void setUseUnderline(bool setting)
   {
@@ -298,43 +310,45 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Emitted to when the check button is activated.
-    
-    The `::activate` signal on [gtk.check_button.CheckButton] is an action signal and
-    emitting it causes the button to animate press then release.
-    
-    Applications should never connect to this signal, but use the
-    [gtk.check_button.CheckButton.toggled] signal.
-    
-    The default bindings for this signal are all forms of the
-    <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
+      Connect to `Activate` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B checkButton) the instance the signal is connected to
-    )
-  */
-  alias ActivateCallbackDlg = void delegate(gtk.check_button.CheckButton checkButton);
-
-  /** ditto */
-  alias ActivateCallbackFunc = void function(gtk.check_button.CheckButton checkButton);
-
-  /**
-    Connect to Activate signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to when the check button is activated.
+      
+      The `::activate` signal on [gtk.check_button.CheckButton] is an action signal and
+      emitting it causes the button to animate press then release.
+      
+      Applications should never connect to this signal, but use the
+      [gtk.check_button.CheckButton.toggled] signal.
+      
+      The default bindings for this signal are all forms of the
+      <kbd>␣</kbd> and <kbd>Enter</kbd> keys.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.check_button.CheckButton checkButton))
+  
+          `checkButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivate(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCallbackDlg) || is(T : ActivateCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.check_button.CheckButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto checkButton = getVal!(gtk.check_button.CheckButton)(_paramVals);
-      _dClosure.dlg(checkButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -342,35 +356,37 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /**
-      Emitted when the buttons's [gtk.check_button.CheckButton.gboolean]
-    property changes.
+      Connect to `Toggled` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B checkButton) the instance the signal is connected to
-    )
-  */
-  alias ToggledCallbackDlg = void delegate(gtk.check_button.CheckButton checkButton);
-
-  /** ditto */
-  alias ToggledCallbackFunc = void function(gtk.check_button.CheckButton checkButton);
-
-  /**
-    Connect to Toggled signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when the buttons's [gtk.check_button.CheckButton.gboolean]
+      property changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.check_button.CheckButton checkButton))
+  
+          `checkButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.check_button.CheckButton)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto checkButton = getVal!(gtk.check_button.CheckButton)(_paramVals);
-      _dClosure.dlg(checkButton);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

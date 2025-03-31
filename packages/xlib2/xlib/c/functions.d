@@ -1,3 +1,4 @@
+/// C functions for xlib2 library
 module xlib.c.functions;
 
 public import gid.basictypes;
@@ -15,10 +16,12 @@ else
 __gshared extern(C)
 {
   // global
-  void function() c_XOpenDisplay;
+  void function() c_XOpenDisplay; ///
 }
 
 // global
+
+/** */
 alias XOpenDisplay = c_XOpenDisplay;
 
 shared static this()

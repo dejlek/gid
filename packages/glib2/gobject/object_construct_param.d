@@ -1,3 +1,4 @@
+/// Module for [ObjectConstructParam] class
 module gobject.object_construct_param;
 
 import gid.gid;
@@ -9,12 +10,13 @@ import gobject.value;
 
 /**
     The GObjectConstructParam struct is an auxiliary structure used to hand
-  #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
+    #GParamSpec/#GValue pairs to the @constructor of a #GObjectClass.
 */
 class ObjectConstructParam
 {
   GObjectConstructParam cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class ObjectConstructParam
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

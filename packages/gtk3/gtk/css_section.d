@@ -1,3 +1,4 @@
+/// Module for [CssSection] class
 module gtk.css_section;
 
 import gid.gid;
@@ -10,28 +11,32 @@ import gtk.types;
 
 /**
     Defines a part of a CSS document. Because sections are nested into
-  one another, you can use [gtk.css_section.CssSection.getParent] to get the
-  containing region.
+    one another, you can use [gtk.css_section.CssSection.getParent] to get the
+    containing region.
 */
 class CssSection : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_section_get_type != &gidSymbolNotFound ? gtk_css_section_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,15 +49,15 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Returns the line in the CSS document where this section end.
-    The line number is 0-indexed, so the first line of the document
-    will return 0.
-    This value may change in future invocations of this function if
-    section is not yet parsed completely. This will for example
-    happen in the GtkCssProvider::parsing-error signal.
-    The end position and line may be identical to the start
-    position and line for sections which failed to parse anything
-    successfully.
-    Returns:     the line number
+      The line number is 0-indexed, so the first line of the document
+      will return 0.
+      This value may change in future invocations of this function if
+      section is not yet parsed completely. This will for example
+      happen in the GtkCssProvider::parsing-error signal.
+      The end position and line may be identical to the start
+      position and line for sections which failed to parse anything
+      successfully.
+      Returns: the line number
   */
   uint getEndLine()
   {
@@ -63,14 +68,14 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Returns the offset in bytes from the start of the current line
-    returned via [gtk.css_section.CssSection.getEndLine].
-    This value may change in future invocations of this function if
-    section is not yet parsed completely. This will for example
-    happen in the GtkCssProvider::parsing-error signal.
-    The end position and line may be identical to the start
-    position and line for sections which failed to parse anything
-    successfully.
-    Returns:     the offset in bytes from the start of the line.
+      returned via [gtk.css_section.CssSection.getEndLine].
+      This value may change in future invocations of this function if
+      section is not yet parsed completely. This will for example
+      happen in the GtkCssProvider::parsing-error signal.
+      The end position and line may be identical to the start
+      position and line for sections which failed to parse anything
+      successfully.
+      Returns: the offset in bytes from the start of the line.
   */
   uint getEndPosition()
   {
@@ -81,10 +86,10 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Gets the file that section was parsed from. If no such file exists,
-    for example because the CSS was loaded via
-    @[gtk.css_provider.CssProvider.loadFromData], then null is returned.
-    Returns:     the #GFile that section was parsed from
-          or null if section was parsed from other data
+      for example because the CSS was loaded via
+      @[gtk.css_provider.CssProvider.loadFromData], then null is returned.
+      Returns: the #GFile that section was parsed from
+            or null if section was parsed from other data
   */
   gio.file.File getFile()
   {
@@ -96,13 +101,13 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Gets the parent section for the given section. The parent section is
-    the section that contains this section. A special case are sections of
-    type #GTK_CSS_SECTION_DOCUMENT. Their parent will either be null
-    if they are the original CSS document that was loaded by
-    [gtk.css_provider.CssProvider.loadFromFile] or a section of type
-    #GTK_CSS_SECTION_IMPORT if it was loaded with an import rule from
-    a different file.
-    Returns:     the parent section or null if none
+      the section that contains this section. A special case are sections of
+      type #GTK_CSS_SECTION_DOCUMENT. Their parent will either be null
+      if they are the original CSS document that was loaded by
+      [gtk.css_provider.CssProvider.loadFromFile] or a section of type
+      #GTK_CSS_SECTION_IMPORT if it was loaded with an import rule from
+      a different file.
+      Returns: the parent section or null if none
   */
   gtk.css_section.CssSection getParent()
   {
@@ -114,7 +119,7 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Gets the type of information that section describes.
-    Returns:     the type of section
+      Returns: the type of section
   */
   gtk.types.CssSectionType getSectionType()
   {
@@ -126,9 +131,9 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Returns the line in the CSS document where this section starts.
-    The line number is 0-indexed, so the first line of the document
-    will return 0.
-    Returns:     the line number
+      The line number is 0-indexed, so the first line of the document
+      will return 0.
+      Returns: the line number
   */
   uint getStartLine()
   {
@@ -139,8 +144,8 @@ class CssSection : gobject.boxed.Boxed
 
   /**
       Returns the offset in bytes from the start of the current line
-    returned via [gtk.css_section.CssSection.getStartLine].
-    Returns:     the offset in bytes from the start of the line.
+      returned via [gtk.css_section.CssSection.getStartLine].
+      Returns: the offset in bytes from the start of the line.
   */
   uint getStartPosition()
   {

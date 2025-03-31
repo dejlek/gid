@@ -1,3 +1,4 @@
+/// Module for [Video] class
 module gtk.video;
 
 import gid.gid;
@@ -17,34 +18,37 @@ import gtk.widget;
 
 /**
     [gtk.video.Video] is a widget to show a [gtk.media_stream.MediaStream] with media controls.
-  
-  ![An example GtkVideo](video.png)
-  
-  The controls are available separately as [gtk.media_controls.MediaControls].
-  If you just want to display a video without controls, you can treat it
-  like any other paintable and for example put it into a [gtk.picture.Picture].
-  
-  [gtk.video.Video] aims to cover use cases such as previews, embedded animations,
-  etc. It supports autoplay, looping, and simple media controls. It does
-  not have support for video overlays, multichannel audio, device
-  selection, or input. If you are writing a full-fledged video player,
-  you may want to use the [gdk.paintable.Paintable] API and a media framework
-  such as Gstreamer directly.
+    
+    ![An example GtkVideo](video.png)
+    
+    The controls are available separately as [gtk.media_controls.MediaControls].
+    If you just want to display a video without controls, you can treat it
+    like any other paintable and for example put it into a [gtk.picture.Picture].
+    
+    [gtk.video.Video] aims to cover use cases such as previews, embedded animations,
+    etc. It supports autoplay, looping, and simple media controls. It does
+    not have support for video overlays, multichannel audio, device
+    selection, or input. If you are writing a full-fledged video player,
+    you may want to use the [gdk.paintable.Paintable] API and a media framework
+    such as Gstreamer directly.
 */
 class Video : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_video_get_type != &gidSymbolNotFound ? gtk_video_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -57,7 +61,7 @@ class Video : gtk.widget.Widget
 
   /**
       Creates a new empty [gtk.video.Video].
-    Returns:     a new [gtk.video.Video]
+      Returns: a new [gtk.video.Video]
   */
   this()
   {
@@ -68,9 +72,10 @@ class Video : gtk.widget.Widget
 
   /**
       Creates a [gtk.video.Video] to play back the given file.
-    Params:
-      file =       a [gio.file.File]
-    Returns:     a new [gtk.video.Video]
+  
+      Params:
+        file = a [gio.file.File]
+      Returns: a new [gtk.video.Video]
   */
   static gtk.video.Video newForFile(gio.file.File file = null)
   {
@@ -82,12 +87,13 @@ class Video : gtk.widget.Widget
 
   /**
       Creates a [gtk.video.Video] to play back the given filename.
-    
-    This is a utility function that calls [gtk.video.Video.newForFile],
-    See that function for details.
-    Params:
-      filename =       filename to play back
-    Returns:     a new [gtk.video.Video]
+      
+      This is a utility function that calls [gtk.video.Video.newForFile],
+      See that function for details.
+  
+      Params:
+        filename = filename to play back
+      Returns: a new [gtk.video.Video]
   */
   static gtk.video.Video newForFilename(string filename = null)
   {
@@ -100,9 +106,10 @@ class Video : gtk.widget.Widget
 
   /**
       Creates a [gtk.video.Video] to play back the given stream.
-    Params:
-      stream =       a [gtk.media_stream.MediaStream]
-    Returns:     a new [gtk.video.Video]
+  
+      Params:
+        stream = a [gtk.media_stream.MediaStream]
+      Returns: a new [gtk.video.Video]
   */
   static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream = null)
   {
@@ -114,12 +121,13 @@ class Video : gtk.widget.Widget
 
   /**
       Creates a [gtk.video.Video] to play back the resource at the
-    given resource_path.
-    
-    This is a utility function that calls [gtk.video.Video.newForFile].
-    Params:
-      resourcePath =       resource path to play back
-    Returns:     a new [gtk.video.Video]
+      given resource_path.
+      
+      This is a utility function that calls [gtk.video.Video.newForFile].
+  
+      Params:
+        resourcePath = resource path to play back
+      Returns: a new [gtk.video.Video]
   */
   static gtk.video.Video newForResource(string resourcePath = null)
   {
@@ -132,7 +140,7 @@ class Video : gtk.widget.Widget
 
   /**
       Returns true if videos have been set to loop.
-    Returns:     true if streams should autoplay
+      Returns: true if streams should autoplay
   */
   bool getAutoplay()
   {
@@ -143,8 +151,8 @@ class Video : gtk.widget.Widget
 
   /**
       Gets the file played by self or null if not playing back
-    a file.
-    Returns:     The file played by self
+      a file.
+      Returns: The file played by self
   */
   gio.file.File getFile()
   {
@@ -156,9 +164,9 @@ class Video : gtk.widget.Widget
 
   /**
       Returns whether graphics offload is enabled.
-    
-    See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
-    Returns:     the graphics offload status
+      
+      See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
+      Returns: the graphics offload status
   */
   gtk.types.GraphicsOffloadEnabled getGraphicsOffload()
   {
@@ -170,7 +178,7 @@ class Video : gtk.widget.Widget
 
   /**
       Returns true if videos have been set to loop.
-    Returns:     true if streams should loop
+      Returns: true if streams should loop
   */
   bool getLoop()
   {
@@ -181,7 +189,7 @@ class Video : gtk.widget.Widget
 
   /**
       Gets the media stream managed by self or null if none.
-    Returns:     The media stream managed by self
+      Returns: The media stream managed by self
   */
   gtk.media_stream.MediaStream getMediaStream()
   {
@@ -193,9 +201,10 @@ class Video : gtk.widget.Widget
 
   /**
       Sets whether self automatically starts playback when it
-    becomes visible or when a new file gets loaded.
-    Params:
-      autoplay =       whether media streams should autoplay
+      becomes visible or when a new file gets loaded.
+  
+      Params:
+        autoplay = whether media streams should autoplay
   */
   void setAutoplay(bool autoplay)
   {
@@ -204,8 +213,9 @@ class Video : gtk.widget.Widget
 
   /**
       Makes self play the given file.
-    Params:
-      file =       the file to play
+  
+      Params:
+        file = the file to play
   */
   void setFile(gio.file.File file = null)
   {
@@ -214,10 +224,11 @@ class Video : gtk.widget.Widget
 
   /**
       Makes self play the given filename.
-    
-    This is a utility function that calls [gtk.video.Video.setFile],
-    Params:
-      filename =       the filename to play
+      
+      This is a utility function that calls [gtk.video.Video.setFile],
+  
+      Params:
+        filename = the filename to play
   */
   void setFilename(string filename = null)
   {
@@ -227,10 +238,11 @@ class Video : gtk.widget.Widget
 
   /**
       Sets whether to enable graphics offload.
-    
-    See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
-    Params:
-      enabled =       the new graphics offload status
+      
+      See [gtk.graphics_offload.GraphicsOffload] for more information on graphics offload.
+  
+      Params:
+        enabled = the new graphics offload status
   */
   void setGraphicsOffload(gtk.types.GraphicsOffloadEnabled enabled)
   {
@@ -239,8 +251,9 @@ class Video : gtk.widget.Widget
 
   /**
       Sets whether new files loaded by self should be set to loop.
-    Params:
-      loop =       whether media streams should loop
+  
+      Params:
+        loop = whether media streams should loop
   */
   void setLoop(bool loop)
   {
@@ -249,15 +262,16 @@ class Video : gtk.widget.Widget
 
   /**
       Sets the media stream to be played back.
-    
-    self will take full control of managing the media stream. If you
-    want to manage a media stream yourself, consider using a
-    [gtk.picture.Picture] for display.
-    
-    If you want to display a file, consider using [gtk.video.Video.setFile]
-    instead.
-    Params:
-      stream =       The media stream to play or null to unset
+      
+      self will take full control of managing the media stream. If you
+      want to manage a media stream yourself, consider using a
+      [gtk.picture.Picture] for display.
+      
+      If you want to display a file, consider using [gtk.video.Video.setFile]
+      instead.
+  
+      Params:
+        stream = The media stream to play or null to unset
   */
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
@@ -266,10 +280,11 @@ class Video : gtk.widget.Widget
 
   /**
       Makes self play the resource at the given resource_path.
-    
-    This is a utility function that calls [gtk.video.Video.setFile].
-    Params:
-      resourcePath =       the resource to set
+      
+      This is a utility function that calls [gtk.video.Video.setFile].
+  
+      Params:
+        resourcePath = the resource to set
   */
   void setResource(string resourcePath = null)
   {

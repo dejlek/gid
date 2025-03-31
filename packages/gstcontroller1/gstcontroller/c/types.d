@@ -1,3 +1,4 @@
+/// C types for gstcontroller1 library
 module gstcontroller.c.types;
 
 public import gid.basictypes;
@@ -23,14 +24,14 @@ enum GstInterpolationMode
 
   /**
       cubic interpolation (natural), may overshoot
-      the min or max values set by the control point, but is more 'curvy'
+        the min or max values set by the control point, but is more 'curvy'
   */
   Cubic = 2,
 
   /**
       monotonic cubic interpolation, will not
-      produce any values outside of the min-max range set by the control points
-      (Since: 1.8)
+        produce any values outside of the min-max range set by the control points
+        (Since: 1.8)
   */
   CubicMonotonic = 3,
 }
@@ -68,8 +69,8 @@ enum GstLFOWaveform
 
 /**
     A value mapping object that attaches multiple control sources to a guint
-  gobject properties representing a color. A control value of 0.0 will turn the
-  color component off and a value of 1.0 will be the color level.
+    gobject properties representing a color. A control value of 0.0 will turn the
+    color component off and a value of 1.0 will be the color level.
 */
 struct GstARGBControlBinding
 {
@@ -114,8 +115,8 @@ struct GstARGBControlBindingClass
 
 /**
     An internal structure for value+time and various temporary
-  values used for interpolation. This "inherits" from
-  GstTimedValue.
+    values used for interpolation. This "inherits" from
+    GstTimedValue.
 */
 struct GstControlPoint
 {
@@ -171,11 +172,11 @@ struct GstControlPoint
 
 /**
     A value mapping object that attaches control sources to gobject properties. It
-  will map the control values directly to the target property range. If a
-  non-absolute direct control binding is used, the value range [0.0 ... 1.0]
-  is mapped to full target property range, and all values outside the range
-  will be clipped. An absolute control binding will not do any value
-  transformations.
+    will map the control values directly to the target property range. If a
+    non-absolute direct control binding is used, the value range [0.0 ... 1.0]
+    is mapped to full target property range, and all values outside the range
+    will be clipped. An absolute control binding will not do any value
+    transformations.
 */
 struct GstDirectControlBinding
 {
@@ -237,13 +238,13 @@ struct GstDirectControlBindingClass
 
 /**
     #GstInterpolationControlSource is a #GstControlSource, that interpolates values between user-given
-  control points. It supports several interpolation modes and property types.
-  
-  To use #GstInterpolationControlSource get a new instance by calling
-  [gstcontroller.interpolation_control_source.InterpolationControlSource.new_], bind it to a #GParamSpec and set some
-  control points by calling [gstcontroller.timed_value_control_source.TimedValueControlSource.set].
-  
-  All functions are MT-safe.
+    control points. It supports several interpolation modes and property types.
+    
+    To use #GstInterpolationControlSource get a new instance by calling
+    [gstcontroller.interpolation_control_source.InterpolationControlSource.new_], bind it to a #GParamSpec and set some
+    control points by calling [gstcontroller.timed_value_control_source.TimedValueControlSource.set].
+    
+    All functions are MT-safe.
 */
 struct GstInterpolationControlSource
 {
@@ -272,13 +273,13 @@ struct GstInterpolationControlSourcePrivate;
 
 /**
     #GstLFOControlSource is a #GstControlSource, that provides several periodic
-  waveforms as control values.
-  
-  To use #GstLFOControlSource get a new instance by calling
-  [gstcontroller.lfocontrol_source.LFOControlSource.new_], bind it to a #GParamSpec and set the relevant
-  properties.
-  
-  All functions are MT-safe.
+    waveforms as control values.
+    
+    To use #GstLFOControlSource get a new instance by calling
+    [gstcontroller.lfocontrol_source.LFOControlSource.new_], bind it to a #GParamSpec and set the relevant
+    properties.
+    
+    All functions are MT-safe.
 */
 struct GstLFOControlSource
 {
@@ -340,11 +341,11 @@ struct GstProxyControlBindingClass
 
 /**
     Base class for #GstControlSource that use time-stamped values.
-  
-  When overriding bind, chain up first to give this bind implementation a
-  chance to setup things.
-  
-  All functions are MT-safe.
+    
+    When overriding bind, chain up first to give this bind implementation a
+    chance to setup things.
+    
+    All functions are MT-safe.
 */
 struct GstTimedValueControlSource
 {
@@ -385,13 +386,13 @@ struct GstTimedValueControlSourcePrivate;
 
 /**
     #GstTriggerControlSource is a #GstControlSource, that returns values from user-given
-  control points. It allows for a tolerance on the time-stamps.
-  
-  To use #GstTriggerControlSource get a new instance by calling
-  [gstcontroller.trigger_control_source.TriggerControlSource.new_], bind it to a #GParamSpec and set some
-  control points by calling [gstcontroller.timed_value_control_source.TimedValueControlSource.set].
-  
-  All functions are MT-safe.
+    control points. It allows for a tolerance on the time-stamps.
+    
+    To use #GstTriggerControlSource get a new instance by calling
+    [gstcontroller.trigger_control_source.TriggerControlSource.new_], bind it to a #GParamSpec and set some
+    control points by calling [gstcontroller.timed_value_control_source.TimedValueControlSource.set].
+    
+    All functions are MT-safe.
 */
 struct GstTriggerControlSource
 {

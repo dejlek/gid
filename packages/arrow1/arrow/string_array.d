@@ -1,3 +1,4 @@
+/// Module for [StringArray] class
 module arrow.string_array;
 
 import arrow.binary_array;
@@ -11,17 +12,20 @@ import gid.gid;
 class StringArray : arrow.binary_array.BinaryArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_array_get_type != &gidSymbolNotFound ? garrow_string_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

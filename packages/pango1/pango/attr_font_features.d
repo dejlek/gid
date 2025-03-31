@@ -1,3 +1,4 @@
+/// Module for [AttrFontFeatures] class
 module pango.attr_font_features;
 
 import gid.gid;
@@ -8,12 +9,13 @@ import pango.types;
 
 /**
     The [pango.attr_font_features.AttrFontFeatures] structure is used to represent OpenType
-  font features as an attribute.
+    font features as an attribute.
 */
 class AttrFontFeatures
 {
   PangoAttrFontFeatures cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -25,6 +27,7 @@ class AttrFontFeatures
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -48,15 +51,16 @@ class AttrFontFeatures
 
   /**
       Create a new font features tag attribute.
-    
-    You can use this attribute to select OpenType font features like small-caps,
-    alternative glyphs, ligatures, etc. for fonts that support them.
-    Params:
-      features =       a string with OpenType font features, with the syntax of the [CSS
-        font-feature-settings property](https://www.w3.org/TR/css-fonts-4/#font-rend-desc)
-    Returns:     the newly allocated
-        [pango.attribute.Attribute], which should be freed with
-        [pango.attribute.Attribute.destroy]
+      
+      You can use this attribute to select OpenType font features like small-caps,
+      alternative glyphs, ligatures, etc. for fonts that support them.
+  
+      Params:
+        features = a string with OpenType font features, with the syntax of the [CSS
+          font-feature-settings property](https://www.w3.org/TR/css-fonts-4/#font-rend-desc)
+      Returns: the newly allocated
+          [pango.attribute.Attribute], which should be freed with
+          [pango.attribute.Attribute.destroy]
   */
   static pango.attribute.Attribute new_(string features)
   {

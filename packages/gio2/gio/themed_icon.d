@@ -1,3 +1,4 @@
+/// Module for [ThemedIcon] class
 module gio.themed_icon;
 
 import gid.gid;
@@ -10,29 +11,32 @@ import gobject.object;
 
 /**
     [gio.themed_icon.ThemedIcon] is an implementation of [gio.icon.Icon] that supports icon
-  themes.
-  
-  [gio.themed_icon.ThemedIcon] contains a list of all of the icons present in an icon
-  theme, so that icons can be looked up quickly. [gio.themed_icon.ThemedIcon] does
-  not provide actual pixmaps for icons, just the icon names.
-  Ideally something like `method@Gtk.IconTheme.choose_icon` should be used to
-  resolve the list of names so that fallback icons work nicely with
-  themes that inherit other themes.
+    themes.
+    
+    [gio.themed_icon.ThemedIcon] contains a list of all of the icons present in an icon
+    theme, so that icons can be looked up quickly. [gio.themed_icon.ThemedIcon] does
+    not provide actual pixmaps for icons, just the icon names.
+    Ideally something like `method@Gtk.IconTheme.choose_icon` should be used to
+    resolve the list of names so that fallback icons work nicely with
+    themes that inherit other themes.
 */
 class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_themed_icon_get_type != &gidSymbolNotFound ? g_themed_icon_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -47,9 +51,10 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new themed icon for iconname.
-    Params:
-      iconname =       a string containing an icon name.
-    Returns:     a new #GThemedIcon.
+  
+      Params:
+        iconname = a string containing an icon name.
+      Returns: a new #GThemedIcon.
   */
   this(string iconname)
   {
@@ -61,9 +66,10 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new themed icon for iconnames.
-    Params:
-      iconnames =       an array of strings containing icon names.
-    Returns:     a new #GThemedIcon
+  
+      Params:
+        iconnames = an array of strings containing icon names.
+      Returns: a new #GThemedIcon
   */
   static gio.themed_icon.ThemedIcon newFromNames(string[] iconnames)
   {
@@ -83,23 +89,24 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new themed icon for iconname, and all the names
-    that can be created by shortening iconname at '-' characters.
-    
-    In the following example, icon1 and icon2 are equivalent:
-    ```c
-    const char *names[] = {
-      "gnome-dev-cdrom-audio",
-      "gnome-dev-cdrom",
-      "gnome-dev",
-      "gnome"
-    };
-    
-    icon1 = g_themed_icon_new_from_names (names, 4);
-    icon2 = g_themed_icon_new_with_default_fallbacks ("gnome-dev-cdrom-audio");
-    ```
-    Params:
-      iconname =       a string containing an icon name
-    Returns:     a new #GThemedIcon.
+      that can be created by shortening iconname at '-' characters.
+      
+      In the following example, icon1 and icon2 are equivalent:
+      ```c
+      const char *names[] = {
+        "gnome-dev-cdrom-audio",
+        "gnome-dev-cdrom",
+        "gnome-dev",
+        "gnome"
+      };
+      
+      icon1 = g_themed_icon_new_from_names (names, 4);
+      icon2 = g_themed_icon_new_with_default_fallbacks ("gnome-dev-cdrom-audio");
+      ```
+  
+      Params:
+        iconname = a string containing an icon name
+      Returns: a new #GThemedIcon.
   */
   static gio.themed_icon.ThemedIcon newWithDefaultFallbacks(string iconname)
   {
@@ -112,11 +119,12 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Append a name to the list of icons from within icon.
-    
-    Note that doing so invalidates the hash computed by prior calls
-    to [gio.icon.Icon.hash].
-    Params:
-      iconname =       name of icon to append to list of icons from within icon.
+      
+      Note that doing so invalidates the hash computed by prior calls
+      to [gio.icon.Icon.hash].
+  
+      Params:
+        iconname = name of icon to append to list of icons from within icon.
   */
   void appendName(string iconname)
   {
@@ -126,7 +134,7 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Gets the names of icons from within icon.
-    Returns:     a list of icon names.
+      Returns: a list of icon names.
   */
   string[] getNames()
   {
@@ -148,11 +156,12 @@ class ThemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Prepend a name to the list of icons from within icon.
-    
-    Note that doing so invalidates the hash computed by prior calls
-    to [gio.icon.Icon.hash].
-    Params:
-      iconname =       name of icon to prepend to list of icons from within icon.
+      
+      Note that doing so invalidates the hash computed by prior calls
+      to [gio.icon.Icon.hash].
+  
+      Params:
+        iconname = name of icon to prepend to list of icons from within icon.
   */
   void prependName(string iconname)
   {

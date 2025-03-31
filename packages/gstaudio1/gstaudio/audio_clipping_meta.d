@@ -1,3 +1,4 @@
+/// Module for [AudioClippingMeta] class
 module gstaudio.audio_clipping_meta;
 
 import gid.gid;
@@ -10,21 +11,22 @@ import gstaudio.types;
 
 /**
     Extra buffer metadata describing how much audio has to be clipped from
-  the start or end of a buffer. This is used for compressed formats, where
-  the first frame usually has some additional samples due to encoder and
-  decoder delays, and the last frame usually has some additional samples to
-  be able to fill the complete last frame.
-  
-  This is used to ensure that decoded data in the end has the same amount of
-  samples, and multiply decoded streams can be gaplessly concatenated.
-  
-  Note: If clipping of the start is done by adjusting the segment, this meta
-  has to be dropped from buffers as otherwise clipping could happen twice.
+    the start or end of a buffer. This is used for compressed formats, where
+    the first frame usually has some additional samples due to encoder and
+    decoder delays, and the last frame usually has some additional samples to
+    be able to fill the complete last frame.
+    
+    This is used to ensure that decoded data in the end has the same amount of
+    samples, and multiply decoded streams can be gaplessly concatenated.
+    
+    Note: If clipping of the start is done by adjusting the segment, this meta
+    has to be dropped from buffers as otherwise clipping could happen twice.
 */
 class AudioClippingMeta
 {
   GstAudioClippingMeta cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -36,6 +38,7 @@ class AudioClippingMeta
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

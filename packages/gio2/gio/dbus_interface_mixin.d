@@ -1,3 +1,4 @@
+/// Module for [DBusInterface] interface mixin
 module gio.dbus_interface_mixin;
 
 public import gio.dbus_interface_iface_proxy;
@@ -11,18 +12,18 @@ public import gobject.object;
 
 /**
     Base type for D-Bus interfaces.
-  
-  The [gio.dbus_interface.DBusInterface] type is the base type for D-Bus interfaces both
-  on the service side (see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]) and client side
-  (see [gio.dbus_proxy.DBusProxy]).
+    
+    The [gio.dbus_interface.DBusInterface] type is the base type for D-Bus interfaces both
+    on the service side (see [gio.dbus_interface_skeleton.DBusInterfaceSkeleton]) and client side
+    (see [gio.dbus_proxy.DBusProxy]).
 */
 template DBusInterfaceT()
 {
 
   /**
       Gets the #GDBusObject that interface_ belongs to, if any.
-    Returns:     A #GDBusObject or null. The returned
-      reference should be freed with [gobject.object.ObjectG.unref].
+      Returns: A #GDBusObject or null. The returned
+        reference should be freed with [gobject.object.ObjectG.unref].
   */
   override gio.dbus_object.DBusObject getObject()
   {
@@ -34,8 +35,8 @@ template DBusInterfaceT()
 
   /**
       Gets D-Bus introspection information for the D-Bus interface
-    implemented by interface_.
-    Returns:     A #GDBusInterfaceInfo. Do not free.
+      implemented by interface_.
+      Returns: A #GDBusInterfaceInfo. Do not free.
   */
   override gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
@@ -47,10 +48,11 @@ template DBusInterfaceT()
 
   /**
       Sets the #GDBusObject for interface_ to object.
-    
-    Note that interface_ will hold a weak reference to object.
-    Params:
-      object =       A #GDBusObject or null.
+      
+      Note that interface_ will hold a weak reference to object.
+  
+      Params:
+        object = A #GDBusObject or null.
   */
   override void setObject(gio.dbus_object.DBusObject object = null)
   {

@@ -1,3 +1,4 @@
+/// D types for gstbase1 library
 module gstbase.types;
 
 import gid.gid;
@@ -39,123 +40,107 @@ alias TypeFindData = GstTypeFindData*;
 
 /**
     A function that will be called when the #GstCollectData will be freed.
-  It is passed the pointer to the structure and should free any custom
-  memory and resources allocated for it.
+    It is passed the pointer to the structure and should free any custom
+    memory and resources allocated for it.
 
-  ## Parameters
-  $(LIST
-    * $(B data)       the #GstCollectData that will be freed
-  )
+    Params:
+      data = the #GstCollectData that will be freed
 */
 alias CollectDataDestroyNotify = void delegate(gstbase.collect_data.CollectData data);
 
 /**
     A function that will be called when a (considered oldest) buffer can be muxed.
-  If all pads have reached EOS, this function is called with null buffer
-  and null data.
+    If all pads have reached EOS, this function is called with null buffer
+    and null data.
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       the #GstCollectPads that triggered the callback
-    * $(B data)       the #GstCollectData of pad that has received the buffer
-    * $(B buffer)       the #GstBuffer
-  )
-  Returns:     [gst.types.FlowReturn.Ok] for success
+    Params:
+      pads = the #GstCollectPads that triggered the callback
+      data = the #GstCollectData of pad that has received the buffer
+      buffer = the #GstBuffer
+    Returns: [gst.types.FlowReturn.Ok] for success
 */
 alias CollectPadsBufferFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData data, gst.buffer.Buffer buffer);
 
 /**
     A function that will be called when inbuffer is received on the pad managed
-  by data in the collectpad object pads.
-  
-  The function should use the segment of data and the negotiated media type on
-  the pad to perform clipping of inbuffer.
-  
-  This function takes ownership of inbuffer and should output a buffer in
-  outbuffer or return null in outbuffer if the buffer should be dropped.
+    by data in the collectpad object pads.
+    
+    The function should use the segment of data and the negotiated media type on
+    the pad to perform clipping of inbuffer.
+    
+    This function takes ownership of inbuffer and should output a buffer in
+    outbuffer or return null in outbuffer if the buffer should be dropped.
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       a #GstCollectPads
-    * $(B data)       a #GstCollectData
-    * $(B inbuffer)       the input #GstBuffer
-    * $(B outbuffer)       the output #GstBuffer
-  )
-  Returns:     a #GstFlowReturn that corresponds to the result of clipping.
+    Params:
+      pads = a #GstCollectPads
+      data = a #GstCollectData
+      inbuffer = the input #GstBuffer
+      outbuffer = the output #GstBuffer
+    Returns: a #GstFlowReturn that corresponds to the result of clipping.
 */
 alias CollectPadsClipFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData data, gst.buffer.Buffer inbuffer, out gst.buffer.Buffer outbuffer);
 
 /**
     A function for comparing two timestamps of buffers or newsegments collected on one pad.
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       the #GstCollectPads that is comparing the timestamps
-    * $(B data1)       the first #GstCollectData
-    * $(B timestamp1)       the first timestamp
-    * $(B data2)       the second #GstCollectData
-    * $(B timestamp2)       the second timestamp
-  )
-  Returns:     Integer less than zero when first timestamp is deemed older than the second one.
-             Zero if the timestamps are deemed equally old.
-             Integer greater than zero when second timestamp is deemed older than the first one.
+    Params:
+      pads = the #GstCollectPads that is comparing the timestamps
+      data1 = the first #GstCollectData
+      timestamp1 = the first timestamp
+      data2 = the second #GstCollectData
+      timestamp2 = the second timestamp
+    Returns: Integer less than zero when first timestamp is deemed older than the second one.
+               Zero if the timestamps are deemed equally old.
+               Integer greater than zero when second timestamp is deemed older than the first one.
 */
 alias CollectPadsCompareFunction = int delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData data1, gst.types.ClockTime timestamp1, gstbase.collect_data.CollectData data2, gst.types.ClockTime timestamp2);
 
 /**
     A function that will be called while processing an event. It takes
-  ownership of the event and is responsible for chaining up (to
-  [gstbase.collect_pads.CollectPads.eventDefault]) or dropping events (such typical cases
-  being handled by the default handler).
+    ownership of the event and is responsible for chaining up (to
+    [gstbase.collect_pads.CollectPads.eventDefault]) or dropping events (such typical cases
+    being handled by the default handler).
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       the #GstCollectPads that triggered the callback
-    * $(B pad)       the #GstPad that received an event
-    * $(B event)       the #GstEvent received
-  )
-  Returns:     true if the pad could handle the event
+    Params:
+      pads = the #GstCollectPads that triggered the callback
+      pad = the #GstPad that received an event
+      event = the #GstEvent received
+    Returns: true if the pad could handle the event
 */
 alias CollectPadsEventFunction = bool delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData pad, gst.event.Event event);
 
 /**
     A function that will be called while processing a flushing seek event.
-  
-  The function should flush any internal state of the element and the state of
-  all the pads. It should clear only the state not directly managed by the
-  pads object. It is therefore not necessary to call
-  gst_collect_pads_set_flushing nor gst_collect_pads_clear from this function.
+    
+    The function should flush any internal state of the element and the state of
+    all the pads. It should clear only the state not directly managed by the
+    pads object. It is therefore not necessary to call
+    gst_collect_pads_set_flushing nor gst_collect_pads_clear from this function.
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       a #GstCollectPads
-  )
+    Params:
+      pads = a #GstCollectPads
 */
 alias CollectPadsFlushFunction = void delegate(gstbase.collect_pads.CollectPads pads);
 
 /**
     A function that will be called when all pads have received data.
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       the #GstCollectPads that triggered the callback
-  )
-  Returns:     [gst.types.FlowReturn.Ok] for success
+    Params:
+      pads = the #GstCollectPads that triggered the callback
+    Returns: [gst.types.FlowReturn.Ok] for success
 */
 alias CollectPadsFunction = gst.types.FlowReturn delegate(gstbase.collect_pads.CollectPads pads);
 
 /**
     A function that will be called while processing a query. It takes
-  ownership of the query and is responsible for chaining up (to
-  events downstream (with [gst.pad.Pad.eventDefault]).
+    ownership of the query and is responsible for chaining up (to
+    events downstream (with [gst.pad.Pad.eventDefault]).
 
-  ## Parameters
-  $(LIST
-    * $(B pads)       the #GstCollectPads that triggered the callback
-    * $(B pad)       the #GstPad that received an event
-    * $(B query)       the #GstEvent received
-  )
-  Returns:     true if the pad could handle the event
+    Params:
+      pads = the #GstCollectPads that triggered the callback
+      pad = the #GstPad that received an event
+      query = the #GstEvent received
+    Returns: true if the pad could handle the event
 */
 alias CollectPadsQueryFunction = bool delegate(gstbase.collect_pads.CollectPads pads, gstbase.collect_data.CollectData pad, gst.query.Query query);
 
@@ -167,22 +152,20 @@ alias DataQueueFullCallback = void delegate(gstbase.data_queue.DataQueue queue);
 
 /**
     This function will be called by [gstbase.global.typeFindHelperGetRange] when
-  typefinding functions request to peek at the data of a stream at certain
-  offsets. If this function returns GST_FLOW_OK, the result buffer will be
-  stored in buffer. The  contents of buffer is invalid for any other
-  return value.
-  
-  This function is supposed to behave exactly like a #GstPadGetRangeFunction.
+    typefinding functions request to peek at the data of a stream at certain
+    offsets. If this function returns GST_FLOW_OK, the result buffer will be
+    stored in buffer. The  contents of buffer is invalid for any other
+    return value.
+    
+    This function is supposed to behave exactly like a #GstPadGetRangeFunction.
 
-  ## Parameters
-  $(LIST
-    * $(B obj)       a #GstObject that will handle the getrange request
-    * $(B parent)       the parent of obj or null
-    * $(B offset)       the offset of the range
-    * $(B length)       the length of the range
-    * $(B buffer)       a memory location to hold the result buffer
-  )
-  Returns:     GST_FLOW_OK for success
+    Params:
+      obj = a #GstObject that will handle the getrange request
+      parent = the parent of obj or null
+      offset = the offset of the range
+      length = the length of the range
+      buffer = a memory location to hold the result buffer
+    Returns: GST_FLOW_OK for success
 */
 alias TypeFindHelperGetRangeFunction = gst.types.FlowReturn delegate(gst.object.ObjectGst obj, gst.object.ObjectGst parent, ulong offset, uint length, out gst.buffer.Buffer buffer);
 

@@ -1,3 +1,4 @@
+/// Module for [UndoManager] interface mixin
 module gtksource.undo_manager_mixin;
 
 public import gtksource.undo_manager_iface_proxy;
@@ -13,8 +14,8 @@ template UndoManagerT()
 
   /**
       Begin a not undoable action on the buffer. All changes between this call
-    and the call to [gtksource.undo_manager.UndoManager.endNotUndoableAction] cannot
-    be undone. This function should be re-entrant.
+      and the call to [gtksource.undo_manager.UndoManager.endNotUndoableAction] cannot
+      be undone. This function should be re-entrant.
   */
   override void beginNotUndoableAction()
   {
@@ -23,7 +24,7 @@ template UndoManagerT()
 
   /**
       Get whether there are redo operations available.
-    Returns:     true if there are redo operations available, false otherwise
+      Returns: true if there are redo operations available, false otherwise
   */
   override bool canRedo()
   {
@@ -42,7 +43,7 @@ template UndoManagerT()
 
   /**
       Get whether there are undo operations available.
-    Returns:     true if there are undo operations available, false otherwise
+      Returns: true if there are undo operations available, false otherwise
   */
   override bool canUndo()
   {
@@ -69,8 +70,8 @@ template UndoManagerT()
 
   /**
       Perform a single redo. Calling this function when there are no redo operations
-    available is an error. Use [gtksource.undo_manager.UndoManager.canRedo] to find out
-    if there are redo operations available.
+      available is an error. Use [gtksource.undo_manager.UndoManager.canRedo] to find out
+      if there are redo operations available.
   */
   override void redo()
   {
@@ -79,8 +80,8 @@ template UndoManagerT()
 
   /**
       Perform a single undo. Calling this function when there are no undo operations
-    available is an error. Use [gtksource.undo_manager.UndoManager.canUndo] to find out
-    if there are undo operations available.
+      available is an error. Use [gtksource.undo_manager.UndoManager.canUndo] to find out
+      if there are undo operations available.
   */
   override void undo()
   {
@@ -88,34 +89,36 @@ template UndoManagerT()
   }
 
   /**
+      Connect to `CanRedoChanged` signal.
+  
       Emitted when the ability to redo has changed.
   
-    ## Parameters
-    $(LIST
-      * $(B undoManager) the instance the signal is connected to
-    )
-  */
-  alias CanRedoChangedCallbackDlg = void delegate(gtksource.undo_manager.UndoManager undoManager);
-
-  /** ditto */
-  alias CanRedoChangedCallbackFunc = void function(gtksource.undo_manager.UndoManager undoManager);
-
-  /**
-    Connect to CanRedoChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCanRedoChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CanRedoChangedCallbackDlg) || is(T : CanRedoChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.undo_manager.UndoManager)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto undoManager = getVal!(gtksource.undo_manager.UndoManager)(_paramVals);
-      _dClosure.dlg(undoManager);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -123,34 +126,36 @@ template UndoManagerT()
   }
 
   /**
+      Connect to `CanUndoChanged` signal.
+  
       Emitted when the ability to undo has changed.
   
-    ## Parameters
-    $(LIST
-      * $(B undoManager) the instance the signal is connected to
-    )
-  */
-  alias CanUndoChangedCallbackDlg = void delegate(gtksource.undo_manager.UndoManager undoManager);
-
-  /** ditto */
-  alias CanUndoChangedCallbackFunc = void function(gtksource.undo_manager.UndoManager undoManager);
-
-  /**
-    Connect to CanUndoChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtksource.undo_manager.UndoManager undoManager))
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : CanUndoChangedCallbackDlg) || is(T : CanUndoChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtksource.undo_manager.UndoManager)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto undoManager = getVal!(gtksource.undo_manager.UndoManager)(_paramVals);
-      _dClosure.dlg(undoManager);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

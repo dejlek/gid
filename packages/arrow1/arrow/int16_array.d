@@ -1,3 +1,4 @@
+/// Module for [Int16Array] class
 module arrow.int16_array;
 
 import arrow.buffer;
@@ -12,17 +13,20 @@ import glib.error;
 class Int16Array : arrow.numeric_array.NumericArray
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int16_array_get_type != &gidSymbolNotFound ? garrow_int16_array_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

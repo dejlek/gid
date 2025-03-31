@@ -1,3 +1,4 @@
+/// Module for [EventTouchpadPinch] class
 module gdk.event_touchpad_pinch;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventTouchpadPinch
 {
   GdkEventTouchpadPinch cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventTouchpadPinch
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

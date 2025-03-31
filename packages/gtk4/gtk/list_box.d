@@ -1,3 +1,4 @@
+/// Module for [ListBox] class
 module gtk.list_box;
 
 import gid.gid;
@@ -19,73 +20,76 @@ import gtk.widget;
 
 /**
     [gtk.list_box.ListBox] is a vertical list.
-  
-  A [gtk.list_box.ListBox] only contains [gtk.list_box_row.ListBoxRow] children. These rows can
-  by dynamically sorted and filtered, and headers can be added dynamically
-  depending on the row content. It also allows keyboard and mouse navigation
-  and selection like a typical list.
-  
-  Using [gtk.list_box.ListBox] is often an alternative to [gtk.tree_view.TreeView], especially
-  when the list contents has a more complicated layout than what is allowed
-  by a [gtk.cell_renderer.CellRenderer], or when the contents is interactive (i.e. has a
-  button in it).
-  
-  Although a [gtk.list_box.ListBox] must have only [gtk.list_box_row.ListBoxRow] children, you can
-  add any kind of widget to it via [gtk.list_box.ListBox.prepend],
-  [gtk.list_box.ListBox.append] and [gtk.list_box.ListBox.insert] and a
-  [gtk.list_box_row.ListBoxRow] widget will automatically be inserted between the list
-  and the widget.
-  
-  `GtkListBoxRows` can be marked as activatable or selectable. If a row is
-  activatable, `signal@Gtk.ListBox::row-activated` will be emitted for it when
-  the user tries to activate it. If it is selectable, the row will be marked
-  as selected when the user tries to select it.
-  
-  # GtkListBox as GtkBuildable
-  
-  The [gtk.list_box.ListBox] implementation of the [gtk.buildable.Buildable] interface supports
-  setting a child as the placeholder by specifying “placeholder” as the “type”
-  attribute of a `<child>` element. See [gtk.list_box.ListBox.setPlaceholder]
-  for info.
-  
-  # CSS nodes
-  
-  ```plain
-  list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
-  ╰── row[.activatable]
-  ```
-  
-  [gtk.list_box.ListBox] uses a single CSS node named list. It may carry the .separators
-  style class, when the `property@Gtk.ListBox:show-separators` property is set.
-  Each [gtk.list_box_row.ListBoxRow] uses a single CSS node named row. The row nodes get the
-  .activatable style class added when appropriate.
-  
-  It may also carry the .boxed-list style class. In this case, the list will be
-  automatically surrounded by a frame and have separators.
-  
-  The main list node may also carry style classes to select
-  the style of [list presentation](section-list-widget.html#list-styles):
-  .rich-list, .navigation-sidebar or .data-table.
-  
-  # Accessibility
-  
-  [gtk.list_box.ListBox] uses the [gtk.types.AccessibleRole.List] role and [gtk.list_box_row.ListBoxRow] uses
-  the [gtk.types.AccessibleRole.ListItem] role.
+    
+    A [gtk.list_box.ListBox] only contains [gtk.list_box_row.ListBoxRow] children. These rows can
+    by dynamically sorted and filtered, and headers can be added dynamically
+    depending on the row content. It also allows keyboard and mouse navigation
+    and selection like a typical list.
+    
+    Using [gtk.list_box.ListBox] is often an alternative to [gtk.tree_view.TreeView], especially
+    when the list contents has a more complicated layout than what is allowed
+    by a [gtk.cell_renderer.CellRenderer], or when the contents is interactive (i.e. has a
+    button in it).
+    
+    Although a [gtk.list_box.ListBox] must have only [gtk.list_box_row.ListBoxRow] children, you can
+    add any kind of widget to it via [gtk.list_box.ListBox.prepend],
+    [gtk.list_box.ListBox.append] and [gtk.list_box.ListBox.insert] and a
+    [gtk.list_box_row.ListBoxRow] widget will automatically be inserted between the list
+    and the widget.
+    
+    `GtkListBoxRows` can be marked as activatable or selectable. If a row is
+    activatable, `signal@Gtk.ListBox::row-activated` will be emitted for it when
+    the user tries to activate it. If it is selectable, the row will be marked
+    as selected when the user tries to select it.
+    
+    # GtkListBox as GtkBuildable
+    
+    The [gtk.list_box.ListBox] implementation of the [gtk.buildable.Buildable] interface supports
+    setting a child as the placeholder by specifying “placeholder” as the “type”
+    attribute of a `<child>` element. See [gtk.list_box.ListBox.setPlaceholder]
+    for info.
+    
+    # CSS nodes
+    
+    ```plain
+    list[.separators][.rich-list][.navigation-sidebar][.boxed-list]
+    ╰── row[.activatable]
+    ```
+    
+    [gtk.list_box.ListBox] uses a single CSS node named list. It may carry the .separators
+    style class, when the `property@Gtk.ListBox:show-separators` property is set.
+    Each [gtk.list_box_row.ListBoxRow] uses a single CSS node named row. The row nodes get the
+    .activatable style class added when appropriate.
+    
+    It may also carry the .boxed-list style class. In this case, the list will be
+    automatically surrounded by a frame and have separators.
+    
+    The main list node may also carry style classes to select
+    the style of [list presentation](section-list-widget.html#list-styles):
+    .rich-list, .navigation-sidebar or .data-table.
+    
+    # Accessibility
+    
+    [gtk.list_box.ListBox] uses the [gtk.types.AccessibleRole.List] role and [gtk.list_box_row.ListBoxRow] uses
+    the [gtk.types.AccessibleRole.ListItem] role.
 */
 class ListBox : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_get_type != &gidSymbolNotFound ? gtk_list_box_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -98,7 +102,7 @@ class ListBox : gtk.widget.Widget
 
   /**
       Creates a new [gtk.list_box.ListBox] container.
-    Returns:     a new [gtk.list_box.ListBox]
+      Returns: a new [gtk.list_box.ListBox]
   */
   this()
   {
@@ -109,11 +113,12 @@ class ListBox : gtk.widget.Widget
 
   /**
       Append a widget to the list.
-    
-    If a sort function is set, the widget will
-    actually be inserted at the calculated position.
-    Params:
-      child =       the [gtk.widget.Widget] to add
+      
+      If a sort function is set, the widget will
+      actually be inserted at the calculated position.
+  
+      Params:
+        child = the [gtk.widget.Widget] to add
   */
   void append(gtk.widget.Widget child)
   {
@@ -122,24 +127,25 @@ class ListBox : gtk.widget.Widget
 
   /**
       Binds model to box.
-    
-    If box was already bound to a model, that previous binding is
-    destroyed.
-    
-    The contents of box are cleared and then filled with widgets that
-    represent items from model. box is updated whenever model changes.
-    If model is null, box is left empty.
-    
-    It is undefined to add or remove widgets directly (for example, with
-    [gtk.list_box.ListBox.insert]) while box is bound to a model.
-    
-    Note that using a model is incompatible with the filtering and sorting
-    functionality in [gtk.list_box.ListBox]. When using a model, filtering and sorting
-    should be implemented by the model.
-    Params:
-      model =       the [gio.list_model.ListModel] to be bound to box
-      createWidgetFunc =       a function that creates widgets for items
-          or null in case you also passed null as model
+      
+      If box was already bound to a model, that previous binding is
+      destroyed.
+      
+      The contents of box are cleared and then filled with widgets that
+      represent items from model. box is updated whenever model changes.
+      If model is null, box is left empty.
+      
+      It is undefined to add or remove widgets directly (for example, with
+      [gtk.list_box.ListBox.insert]) while box is bound to a model.
+      
+      Note that using a model is incompatible with the filtering and sorting
+      functionality in [gtk.list_box.ListBox]. When using a model, filtering and sorting
+      should be implemented by the model.
+  
+      Params:
+        model = the [gio.list_model.ListModel] to be bound to box
+        createWidgetFunc = a function that creates widgets for items
+            or null in case you also passed null as model
   */
   void bindModel(gio.list_model.ListModel model = null, gtk.types.ListBoxCreateWidgetFunc createWidgetFunc = null)
   {
@@ -162,16 +168,17 @@ class ListBox : gtk.widget.Widget
 
   /**
       Add a drag highlight to a row.
-    
-    This is a helper function for implementing DnD onto a [gtk.list_box.ListBox].
-    The passed in row will be highlighted by setting the
-    [gtk.types.StateFlags.DropActive] state and any previously highlighted
-    row will be unhighlighted.
-    
-    The row will also be unhighlighted when the widget gets
-    a drag leave event.
-    Params:
-      row =       a [gtk.list_box_row.ListBoxRow]
+      
+      This is a helper function for implementing DnD onto a [gtk.list_box.ListBox].
+      The passed in row will be highlighted by setting the
+      [gtk.types.StateFlags.DropActive] state and any previously highlighted
+      row will be unhighlighted.
+      
+      The row will also be unhighlighted when the widget gets
+      a drag leave event.
+  
+      Params:
+        row = a [gtk.list_box_row.ListBoxRow]
   */
   void dragHighlightRow(gtk.list_box_row.ListBoxRow row)
   {
@@ -180,7 +187,7 @@ class ListBox : gtk.widget.Widget
 
   /**
       If a row has previously been highlighted via [gtk.list_box.ListBox.dragHighlightRow],
-    it will have the highlight removed.
+      it will have the highlight removed.
   */
   void dragUnhighlightRow()
   {
@@ -189,7 +196,7 @@ class ListBox : gtk.widget.Widget
 
   /**
       Returns whether rows activate on single clicks.
-    Returns:     true if rows are activated on single click, false otherwise
+      Returns: true if rows are activated on single click, false otherwise
   */
   bool getActivateOnSingleClick()
   {
@@ -200,8 +207,8 @@ class ListBox : gtk.widget.Widget
 
   /**
       Gets the adjustment (if any) that the widget uses to
-    for vertical scrolling.
-    Returns:     the adjustment
+      for vertical scrolling.
+      Returns: the adjustment
   */
   gtk.adjustment.Adjustment getAdjustment()
   {
@@ -213,12 +220,13 @@ class ListBox : gtk.widget.Widget
 
   /**
       Gets the n-th child in the list (not counting headers).
-    
-    If index_ is negative or larger than the number of items in the
-    list, null is returned.
-    Params:
-      index =       the index of the row
-    Returns:     the child [gtk.widget.Widget]
+      
+      If index_ is negative or larger than the number of items in the
+      list, null is returned.
+  
+      Params:
+        index = the index of the row
+      Returns: the child [gtk.widget.Widget]
   */
   gtk.list_box_row.ListBoxRow getRowAtIndex(int index)
   {
@@ -229,10 +237,11 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
-      Gets the row at the y position.
-    Params:
-      y =       position
-    Returns:     the row
+      Gets the row at the `y` position.
+  
+      Params:
+        y = position
+      Returns: the row
   */
   gtk.list_box_row.ListBoxRow getRowAtY(int y)
   {
@@ -244,11 +253,11 @@ class ListBox : gtk.widget.Widget
 
   /**
       Gets the selected row, or null if no rows are selected.
-    
-    Note that the box may allow multiple selection, in which
-    case you should use [gtk.list_box.ListBox.selectedForeach] to
-    find all selected rows.
-    Returns:     the selected row
+      
+      Note that the box may allow multiple selection, in which
+      case you should use [gtk.list_box.ListBox.selectedForeach] to
+      find all selected rows.
+      Returns: the selected row
   */
   gtk.list_box_row.ListBoxRow getSelectedRow()
   {
@@ -260,8 +269,8 @@ class ListBox : gtk.widget.Widget
 
   /**
       Creates a list of all selected children.
-    Returns:     A [glib.list.List] containing the [gtk.widget.Widget] for each selected child.
-        Free with [glib.list.List.free] when done.
+      Returns: A [glib.list.List] containing the [gtk.widget.Widget] for each selected child.
+          Free with [glib.list.List.free] when done.
   */
   gtk.list_box_row.ListBoxRow[] getSelectedRows()
   {
@@ -273,7 +282,7 @@ class ListBox : gtk.widget.Widget
 
   /**
       Gets the selection mode of the listbox.
-    Returns:     a [gtk.types.SelectionMode]
+      Returns: a [gtk.types.SelectionMode]
   */
   gtk.types.SelectionMode getSelectionMode()
   {
@@ -285,8 +294,8 @@ class ListBox : gtk.widget.Widget
 
   /**
       Returns whether the list box should show separators
-    between rows.
-    Returns:     true if the list box shows separators
+      between rows.
+      Returns: true if the list box shows separators
   */
   bool getShowSeparators()
   {
@@ -297,15 +306,16 @@ class ListBox : gtk.widget.Widget
 
   /**
       Insert the child into the box at position.
-    
-    If a sort function is
-    set, the widget will actually be inserted at the calculated position.
-    
-    If position is -1, or larger than the total number of items in the
-    box, then the child will be appended to the end.
-    Params:
-      child =       the [gtk.widget.Widget] to add
-      position =       the position to insert child in
+      
+      If a sort function is
+      set, the widget will actually be inserted at the calculated position.
+      
+      If position is -1, or larger than the total number of items in the
+      box, then the child will be appended to the end.
+  
+      Params:
+        child = the [gtk.widget.Widget] to add
+        position = the position to insert child in
   */
   void insert(gtk.widget.Widget child, int position)
   {
@@ -314,12 +324,12 @@ class ListBox : gtk.widget.Widget
 
   /**
       Update the filtering for all rows.
-    
-    Call this when result
-    of the filter function on the box is changed due
-    to an external factor. For instance, this would be used
-    if the filter function just looked for a specific search
-    string and the entry with the search string has changed.
+      
+      Call this when result
+      of the filter function on the box is changed due
+      to an external factor. For instance, this would be used
+      if the filter function just looked for a specific search
+      string and the entry with the search string has changed.
   */
   void invalidateFilter()
   {
@@ -328,10 +338,10 @@ class ListBox : gtk.widget.Widget
 
   /**
       Update the separators for all rows.
-    
-    Call this when result
-    of the header function on the box is changed due
-    to an external factor.
+      
+      Call this when result
+      of the header function on the box is changed due
+      to an external factor.
   */
   void invalidateHeaders()
   {
@@ -340,10 +350,10 @@ class ListBox : gtk.widget.Widget
 
   /**
       Update the sorting for all rows.
-    
-    Call this when result
-    of the sort function on the box is changed due
-    to an external factor.
+      
+      Call this when result
+      of the sort function on the box is changed due
+      to an external factor.
   */
   void invalidateSort()
   {
@@ -352,11 +362,12 @@ class ListBox : gtk.widget.Widget
 
   /**
       Prepend a widget to the list.
-    
-    If a sort function is set, the widget will
-    actually be inserted at the calculated position.
-    Params:
-      child =       the [gtk.widget.Widget] to add
+      
+      If a sort function is set, the widget will
+      actually be inserted at the calculated position.
+  
+      Params:
+        child = the [gtk.widget.Widget] to add
   */
   void prepend(gtk.widget.Widget child)
   {
@@ -365,8 +376,9 @@ class ListBox : gtk.widget.Widget
 
   /**
       Removes a child from box.
-    Params:
-      child =       the child to remove
+  
+      Params:
+        child = the child to remove
   */
   void remove(gtk.widget.Widget child)
   {
@@ -375,8 +387,8 @@ class ListBox : gtk.widget.Widget
 
   /**
       Removes all rows from box.
-    
-    This function does nothing if box is backed by a model.
+      
+      This function does nothing if box is backed by a model.
   */
   void removeAll()
   {
@@ -393,8 +405,9 @@ class ListBox : gtk.widget.Widget
 
   /**
       Make row the currently selected row.
-    Params:
-      row =       The row to select
+  
+      Params:
+        row = The row to select
   */
   void selectRow(gtk.list_box_row.ListBoxRow row = null)
   {
@@ -403,10 +416,11 @@ class ListBox : gtk.widget.Widget
 
   /**
       Calls a function for each selected child.
-    
-    Note that the selection cannot be modified from within this function.
-    Params:
-      func =       the function to call for each selected child
+      
+      Note that the selection cannot be modified from within this function.
+  
+      Params:
+        func = the function to call for each selected child
   */
   void selectedForeach(gtk.types.ListBoxForeachFunc func)
   {
@@ -424,9 +438,10 @@ class ListBox : gtk.widget.Widget
 
   /**
       If single is true, rows will be activated when you click on them,
-    otherwise you need to double-click.
-    Params:
-      single =       a boolean
+      otherwise you need to double-click.
+  
+      Params:
+        single = a boolean
   */
   void setActivateOnSingleClick(bool single)
   {
@@ -435,17 +450,18 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets the adjustment (if any) that the widget uses to
-    for vertical scrolling.
-    
-    For instance, this is used to get the page size for
-    PageUp/Down key handling.
-    
-    In the normal case when the box is packed inside
-    a [gtk.scrolled_window.ScrolledWindow] the adjustment from that will
-    be picked up automatically, so there is no need
-    to manually do that.
-    Params:
-      adjustment =       the adjustment
+      for vertical scrolling.
+      
+      For instance, this is used to get the page size for
+      PageUp/Down key handling.
+      
+      In the normal case when the box is packed inside
+      a [gtk.scrolled_window.ScrolledWindow] the adjustment from that will
+      be picked up automatically, so there is no need
+      to manually do that.
+  
+      Params:
+        adjustment = the adjustment
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
@@ -454,20 +470,21 @@ class ListBox : gtk.widget.Widget
 
   /**
       By setting a filter function on the box one can decide dynamically which
-    of the rows to show.
-    
-    For instance, to implement a search function on a list that
-    filters the original list to only show the matching rows.
-    
-    The filter_func will be called for each row after the call, and
-    it will continue to be called each time a row changes (via
-    [gtk.list_box_row.ListBoxRow.changed]) or when [gtk.list_box.ListBox.invalidateFilter]
-    is called.
-    
-    Note that using a filter function is incompatible with using a model
-    (see [gtk.list_box.ListBox.bindModel]).
-    Params:
-      filterFunc =       callback that lets you filter which rows to show
+      of the rows to show.
+      
+      For instance, to implement a search function on a list that
+      filters the original list to only show the matching rows.
+      
+      The filter_func will be called for each row after the call, and
+      it will continue to be called each time a row changes (via
+      [gtk.list_box_row.ListBoxRow.changed]) or when [gtk.list_box.ListBox.invalidateFilter]
+      is called.
+      
+      Note that using a filter function is incompatible with using a model
+      (see [gtk.list_box.ListBox.bindModel]).
+  
+      Params:
+        filterFunc = callback that lets you filter which rows to show
   */
   void setFilterFunc(gtk.types.ListBoxFilterFunc filterFunc = null)
   {
@@ -487,32 +504,33 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets a header function.
-    
-    By setting a header function on the box one can dynamically add headers
-    in front of rows, depending on the contents of the row and its position
-    in the list.
-    
-    For instance, one could use it to add headers in front of the first item
-    of a new kind, in a list sorted by the kind.
-    
-    The update_header can look at the current header widget using
-    [gtk.list_box_row.ListBoxRow.getHeader] and either update the state of the widget
-    as needed, or set a new one using [gtk.list_box_row.ListBoxRow.setHeader]. If no
-    header is needed, set the header to null.
-    
-    Note that you may get many calls update_header to this for a particular
-    row when e.g. changing things that don’t affect the header. In this case
-    it is important for performance to not blindly replace an existing header
-    with an identical one.
-    
-    The update_header function will be called for each row after the call,
-    and it will continue to be called each time a row changes (via
-    [gtk.list_box_row.ListBoxRow.changed]) and when the row before changes (either
-    by [gtk.list_box_row.ListBoxRow.changed] on the previous row, or when the previous
-    row becomes a different row). It is also called for all rows when
-    [gtk.list_box.ListBox.invalidateHeaders] is called.
-    Params:
-      updateHeader =       callback that lets you add row headers
+      
+      By setting a header function on the box one can dynamically add headers
+      in front of rows, depending on the contents of the row and its position
+      in the list.
+      
+      For instance, one could use it to add headers in front of the first item
+      of a new kind, in a list sorted by the kind.
+      
+      The update_header can look at the current header widget using
+      [gtk.list_box_row.ListBoxRow.getHeader] and either update the state of the widget
+      as needed, or set a new one using [gtk.list_box_row.ListBoxRow.setHeader]. If no
+      header is needed, set the header to null.
+      
+      Note that you may get many calls update_header to this for a particular
+      row when e.g. changing things that don’t affect the header. In this case
+      it is important for performance to not blindly replace an existing header
+      with an identical one.
+      
+      The update_header function will be called for each row after the call,
+      and it will continue to be called each time a row changes (via
+      [gtk.list_box_row.ListBoxRow.changed]) and when the row before changes (either
+      by [gtk.list_box_row.ListBoxRow.changed] on the previous row, or when the previous
+      row becomes a different row). It is also called for all rows when
+      [gtk.list_box.ListBox.invalidateHeaders] is called.
+  
+      Params:
+        updateHeader = callback that lets you add row headers
   */
   void setHeaderFunc(gtk.types.ListBoxUpdateHeaderFunc updateHeader = null)
   {
@@ -531,9 +549,10 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets the placeholder widget that is shown in the list when
-    it doesn't display any visible children.
-    Params:
-      placeholder =       a [gtk.widget.Widget]
+      it doesn't display any visible children.
+  
+      Params:
+        placeholder = a [gtk.widget.Widget]
   */
   void setPlaceholder(gtk.widget.Widget placeholder = null)
   {
@@ -542,8 +561,9 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets how selection works in the listbox.
-    Params:
-      mode =       The [gtk.types.SelectionMode]
+  
+      Params:
+        mode = The [gtk.types.SelectionMode]
   */
   void setSelectionMode(gtk.types.SelectionMode mode)
   {
@@ -552,9 +572,10 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets whether the list box should show separators
-    between rows.
-    Params:
-      showSeparators =       true to show separators
+      between rows.
+  
+      Params:
+        showSeparators = true to show separators
   */
   void setShowSeparators(bool showSeparators)
   {
@@ -563,19 +584,20 @@ class ListBox : gtk.widget.Widget
 
   /**
       Sets a sort function.
-    
-    By setting a sort function on the box one can dynamically reorder
-    the rows of the list, based on the contents of the rows.
-    
-    The sort_func will be called for each row after the call, and will
-    continue to be called each time a row changes (via
-    [gtk.list_box_row.ListBoxRow.changed]) and when [gtk.list_box.ListBox.invalidateSort]
-    is called.
-    
-    Note that using a sort function is incompatible with using a model
-    (see [gtk.list_box.ListBox.bindModel]).
-    Params:
-      sortFunc =       the sort function
+      
+      By setting a sort function on the box one can dynamically reorder
+      the rows of the list, based on the contents of the rows.
+      
+      The sort_func will be called for each row after the call, and will
+      continue to be called each time a row changes (via
+      [gtk.list_box_row.ListBoxRow.changed]) and when [gtk.list_box.ListBox.invalidateSort]
+      is called.
+      
+      Note that using a sort function is incompatible with using a model
+      (see [gtk.list_box.ListBox.bindModel]).
+  
+      Params:
+        sortFunc = the sort function
   */
   void setSortFunc(gtk.types.ListBoxSortFunc sortFunc = null)
   {
@@ -603,68 +625,111 @@ class ListBox : gtk.widget.Widget
 
   /**
       Unselects a single row of box, if the selection mode allows it.
-    Params:
-      row =       the row to unselect
+  
+      Params:
+        row = the row to unselect
   */
   void unselectRow(gtk.list_box_row.ListBoxRow row)
   {
     gtk_list_box_unselect_row(cast(GtkListBox*)cPtr, row ? cast(GtkListBoxRow*)row.cPtr(No.Dup) : null);
   }
 
-  /** */
-  alias ActivateCursorRowCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias ActivateCursorRowCallbackFunc = void function(gtk.list_box.ListBox listBox);
-
   /**
-    Connect to ActivateCursorRow signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ActivateCursorRow` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box.ListBox listBox))
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectActivateCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ActivateCursorRowCallbackDlg) || is(T : ActivateCursorRowCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      _dClosure.dlg(listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-cursor-row", closure, after);
   }
 
-  /** */
-  alias MoveCursorCallbackDlg = void delegate(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias MoveCursorCallbackFunc = void function(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox);
-
   /**
-    Connect to MoveCursor signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `MoveCursor` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.types.MovementStep object, int p0, bool p1, bool p2, gtk.list_box.ListBox listBox))
+  
+          `object`  (optional)
+  
+          `p0`  (optional)
+  
+          `p1`  (optional)
+  
+          `p2`  (optional)
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectMoveCursor(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : MoveCursorCallbackDlg) || is(T : MoveCursorCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gtk.types.MovementStep)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == bool)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == bool)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 6)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      auto object = getVal!(gtk.types.MovementStep)(&_paramVals[1]);
-      auto p0 = getVal!(int)(&_paramVals[2]);
-      auto p1 = getVal!(bool)(&_paramVals[3]);
-      auto p2 = getVal!(bool)(&_paramVals[4]);
-      _dClosure.dlg(object, p0, p1, p2, listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -672,36 +737,43 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
+      Connect to `RowActivated` signal.
+  
       Emitted when a row has been activated by the user.
   
-    ## Parameters
-    $(LIST
-      * $(B row)       the activated row
-      * $(B listBox) the instance the signal is connected to
-    )
-  */
-  alias RowActivatedCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias RowActivatedCallbackFunc = void function(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
-
-  /**
-    Connect to RowActivated signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox))
+  
+          `row` the activated row (optional)
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRowActivated(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RowActivatedCallbackDlg) || is(T : RowActivatedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      auto row = getVal!(gtk.list_box_row.ListBoxRow)(&_paramVals[1]);
-      _dClosure.dlg(row, listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -709,41 +781,48 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
-      Emitted when a new row is selected, or (with a null row)
-    when the selection is cleared.
-    
-    When the box is using [gtk.types.SelectionMode.Multiple], this signal will not
-    give you the full picture of selection changes, and you should use
-    the `signalGtk.ListBox::selected-rows-changed` signal instead.
+      Connect to `RowSelected` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B row)       the selected row
-      * $(B listBox) the instance the signal is connected to
-    )
-  */
-  alias RowSelectedCallbackDlg = void delegate(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias RowSelectedCallbackFunc = void function(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox);
-
-  /**
-    Connect to RowSelected signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted when a new row is selected, or (with a null row)
+      when the selection is cleared.
+      
+      When the box is using [gtk.types.SelectionMode.Multiple], this signal will not
+      give you the full picture of selection changes, and you should use
+      the `signalGtk.ListBox::selected-rows-changed` signal instead.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box_row.ListBoxRow row, gtk.list_box.ListBox listBox))
+  
+          `row` the selected row (optional)
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectRowSelected(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : RowSelectedCallbackDlg) || is(T : RowSelectedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box_row.ListBoxRow)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      auto row = getVal!(gtk.list_box_row.ListBoxRow)(&_paramVals[1]);
-      _dClosure.dlg(row, listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -751,39 +830,41 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
-      Emitted to select all children of the box, if the selection
-    mode permits it.
-    
-    This is a [keybinding signal](class.SignalAction.html).
-    
-    The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
+      Connect to `SelectAll` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B listBox) the instance the signal is connected to
-    )
-  */
-  alias SelectAllCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias SelectAllCallbackFunc = void function(gtk.list_box.ListBox listBox);
-
-  /**
-    Connect to SelectAll signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to select all children of the box, if the selection
+      mode permits it.
+      
+      This is a [keybinding signal](class.SignalAction.html).
+      
+      The default binding for this signal is <kbd>Ctrl</kbd>-<kbd>a</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box.ListBox listBox))
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSelectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SelectAllCallbackDlg) || is(T : SelectAllCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      _dClosure.dlg(listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -791,62 +872,73 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
+      Connect to `SelectedRowsChanged` signal.
+  
       Emitted when the set of selected rows changes.
   
-    ## Parameters
-    $(LIST
-      * $(B listBox) the instance the signal is connected to
-    )
-  */
-  alias SelectedRowsChangedCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias SelectedRowsChangedCallbackFunc = void function(gtk.list_box.ListBox listBox);
-
-  /**
-    Connect to SelectedRowsChanged signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box.ListBox listBox))
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectSelectedRowsChanged(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : SelectedRowsChangedCallbackDlg) || is(T : SelectedRowsChangedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      _dClosure.dlg(listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selected-rows-changed", closure, after);
   }
 
-  /** */
-  alias ToggleCursorRowCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias ToggleCursorRowCallbackFunc = void function(gtk.list_box.ListBox listBox);
-
   /**
-    Connect to ToggleCursorRow signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Connect to `ToggleCursorRow` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box.ListBox listBox))
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggleCursorRow(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggleCursorRowCallbackDlg) || is(T : ToggleCursorRowCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      _dClosure.dlg(listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -854,40 +946,42 @@ class ListBox : gtk.widget.Widget
   }
 
   /**
-      Emitted to unselect all children of the box, if the selection
-    mode permits it.
-    
-    This is a [keybinding signal](class.SignalAction.html).
-    
-    The default binding for this signal is
-    <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
+      Connect to `UnselectAll` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B listBox) the instance the signal is connected to
-    )
-  */
-  alias UnselectAllCallbackDlg = void delegate(gtk.list_box.ListBox listBox);
-
-  /** ditto */
-  alias UnselectAllCallbackFunc = void function(gtk.list_box.ListBox listBox);
-
-  /**
-    Connect to UnselectAll signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      Emitted to unselect all children of the box, if the selection
+      mode permits it.
+      
+      This is a [keybinding signal](class.SignalAction.html).
+      
+      The default binding for this signal is
+      <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>a</kbd>.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gtk.list_box.ListBox listBox))
+  
+          `listBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectUnselectAll(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : UnselectAllCallbackDlg) || is(T : UnselectAllCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gtk.list_box.ListBox)))
+  && Parameters!T.length < 2)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto listBox = getVal!(gtk.list_box.ListBox)(_paramVals);
-      _dClosure.dlg(listBox);
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

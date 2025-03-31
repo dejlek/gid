@@ -1,3 +1,4 @@
+/// Module for [CellRendererToggle] class
 module gtk.cell_renderer_toggle;
 
 import gid.gid;
@@ -9,29 +10,32 @@ import gtk.types;
 
 /**
     Renders a toggle button in a cell
-  
-  [gtk.cell_renderer_toggle.CellRendererToggle] renders a toggle button in a cell. The
-  button is drawn as a radio or a checkbutton, depending on the
-  `GtkCellRendererToggle:radio` property.
-  When activated, it emits the `GtkCellRendererToggle::toggled` signal.
+    
+    [gtk.cell_renderer_toggle.CellRendererToggle] renders a toggle button in a cell. The
+    button is drawn as a radio or a checkbutton, depending on the
+    `GtkCellRendererToggle:radio` property.
+    When activated, it emits the `GtkCellRendererToggle::toggled` signal.
 
-  Deprecated:     List views use widgets to display their contents.
-      You should use [gtk.toggle_button.ToggleButton] instead
+    Deprecated: List views use widgets to display their contents.
+        You should use [gtk.toggle_button.ToggleButton] instead
 */
 class CellRendererToggle : gtk.cell_renderer.CellRenderer
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_toggle_get_type != &gidSymbolNotFound ? gtk_cell_renderer_toggle_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -44,13 +48,13 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Creates a new [gtk.cell_renderer_toggle.CellRendererToggle]. Adjust rendering
-    parameters using object properties. Object properties can be set
-    globally (with [gobject.object.ObjectG.set]). Also, with [gtk.tree_view_column.TreeViewColumn], you
-    can bind a property to a value in a [gtk.tree_model.TreeModel]. For example, you
-    can bind the “active” property on the cell renderer to a boolean value
-    in the model, thus causing the check button to reflect the state of
-    the model.
-    Returns:     the new cell renderer
+      parameters using object properties. Object properties can be set
+      globally (with [gobject.object.ObjectG.set]). Also, with [gtk.tree_view_column.TreeViewColumn], you
+      can bind a property to a value in a [gtk.tree_model.TreeModel]. For example, you
+      can bind the “active” property on the cell renderer to a boolean value
+      in the model, thus causing the check button to reflect the state of
+      the model.
+      Returns: the new cell renderer
   */
   this()
   {
@@ -61,8 +65,8 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Returns whether the cell renderer is activatable. See
-    [gtk.cell_renderer_toggle.CellRendererToggle.setActivatable].
-    Returns:     true if the cell renderer is activatable.
+      [gtk.cell_renderer_toggle.CellRendererToggle.setActivatable].
+      Returns: true if the cell renderer is activatable.
   */
   bool getActivatable()
   {
@@ -73,8 +77,8 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Returns whether the cell renderer is active. See
-    [gtk.cell_renderer_toggle.CellRendererToggle.setActive].
-    Returns:     true if the cell renderer is active.
+      [gtk.cell_renderer_toggle.CellRendererToggle.setActive].
+      Returns: true if the cell renderer is active.
   */
   bool getActive()
   {
@@ -85,7 +89,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Returns whether we’re rendering radio toggles rather than checkboxes.
-    Returns:     true if we’re rendering radio toggles rather than checkboxes
+      Returns: true if we’re rendering radio toggles rather than checkboxes
   */
   bool getRadio()
   {
@@ -96,8 +100,9 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Makes the cell renderer activatable.
-    Params:
-      setting =       the value to set.
+  
+      Params:
+        setting = the value to set.
   */
   void setActivatable(bool setting)
   {
@@ -106,8 +111,9 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       Activates or deactivates a cell renderer.
-    Params:
-      setting =       the value to set.
+  
+      Params:
+        setting = the value to set.
   */
   void setActive(bool setting)
   {
@@ -116,14 +122,15 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
 
   /**
       If radio is true, the cell renderer renders a radio toggle
-    (i.e. a toggle in a group of mutually-exclusive toggles).
-    If false, it renders a check toggle (a standalone boolean option).
-    This can be set globally for the cell renderer, or changed just
-    before rendering each cell in the model (for [gtk.tree_view.TreeView], you set
-    up a per-row setting using [gtk.tree_view_column.TreeViewColumn] to associate model
-    columns with cell renderer properties).
-    Params:
-      radio =       true to make the toggle look like a radio button
+      (i.e. a toggle in a group of mutually-exclusive toggles).
+      If false, it renders a check toggle (a standalone boolean option).
+      This can be set globally for the cell renderer, or changed just
+      before rendering each cell in the model (for [gtk.tree_view.TreeView], you set
+      up a per-row setting using [gtk.tree_view_column.TreeViewColumn] to associate model
+      columns with cell renderer properties).
+  
+      Params:
+        radio = true to make the toggle look like a radio button
   */
   void setRadio(bool radio)
   {
@@ -131,41 +138,48 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   }
 
   /**
-      The ::toggled signal is emitted when the cell is toggled.
-    
-    It is the responsibility of the application to update the model
-    with the correct value to store at path.  Often this is simply the
-    opposite of the value currently stored at path.
+      Connect to `Toggled` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B path)       string representation of [gtk.tree_path.TreePath] describing the
-               event location
-      * $(B cellRendererToggle) the instance the signal is connected to
-    )
-  */
-  alias ToggledCallbackDlg = void delegate(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle);
-
-  /** ditto */
-  alias ToggledCallbackFunc = void function(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle);
-
-  /**
-    Connect to Toggled signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::toggled signal is emitted when the cell is toggled.
+      
+      It is the responsibility of the application to update the model
+      with the correct value to store at path.  Often this is simply the
+      opposite of the value currently stored at path.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string path, gtk.cell_renderer_toggle.CellRendererToggle cellRendererToggle))
+  
+          `path` string representation of [gtk.tree_path.TreePath] describing the
+                 event location (optional)
+  
+          `cellRendererToggle` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToggled(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToggledCallbackDlg) || is(T : ToggledCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gtk.cell_renderer_toggle.CellRendererToggle)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto cellRendererToggle = getVal!(gtk.cell_renderer_toggle.CellRendererToggle)(_paramVals);
-      auto path = getVal!(string)(&_paramVals[1]);
-      _dClosure.dlg(path, cellRendererToggle);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

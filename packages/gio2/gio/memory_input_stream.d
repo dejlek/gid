@@ -1,3 +1,4 @@
+/// Module for [MemoryInputStream] class
 module gio.memory_input_stream;
 
 import gid.gid;
@@ -14,25 +15,28 @@ import gobject.object;
 
 /**
     [gio.memory_input_stream.MemoryInputStream] is a class for using arbitrary
-  memory chunks as input for GIO streaming input operations.
-  
-  As of GLib 2.34, [gio.memory_input_stream.MemoryInputStream] implements
-  [gio.pollable_input_stream.PollableInputStream].
+    memory chunks as input for GIO streaming input operations.
+    
+    As of GLib 2.34, [gio.memory_input_stream.MemoryInputStream] implements
+    [gio.pollable_input_stream.PollableInputStream].
 */
 class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_stream.PollableInputStream, gio.seekable.Seekable
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_input_stream_get_type != &gidSymbolNotFound ? g_memory_input_stream_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -48,7 +52,7 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
 
   /**
       Creates a new empty #GMemoryInputStream.
-    Returns:     a new #GInputStream
+      Returns: a new #GInputStream
   */
   this()
   {
@@ -59,9 +63,10 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
 
   /**
       Creates a new #GMemoryInputStream with data from the given bytes.
-    Params:
-      bytes =       a #GBytes
-    Returns:     new #GInputStream read from bytes
+  
+      Params:
+        bytes = a #GBytes
+      Returns: new #GInputStream read from bytes
   */
   static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
   {
@@ -73,8 +78,9 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
 
   /**
       Appends bytes to data that can be read from the input stream.
-    Params:
-      bytes =       input data
+  
+      Params:
+        bytes = input data
   */
   void addBytes(glib.bytes.Bytes bytes)
   {

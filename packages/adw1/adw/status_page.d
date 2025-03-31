@@ -1,3 +1,4 @@
+/// Module for [StatusPage] class
 module adw.status_page;
 
 import adw.c.functions;
@@ -16,37 +17,40 @@ import gtk.widget;
 
 /**
     A page used for empty/error states and similar use-cases.
-  
-  <picture>
-    <source srcset="status-page-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="status-page.png" alt="status-page">
-  </picture>
-  
-  The [adw.status_page.StatusPage] widget can have an icon, a title, a description and a
-  custom widget which is displayed below them.
-  
-  ## CSS nodes
-  
-  [adw.status_page.StatusPage] has a main CSS node with name `statuspage`.
-  
-  [adw.status_page.StatusPage] can use the
-  [`.compact`](style-classes.html#compact-status-page) style class for when it
-  needs to fit into a small space such a sidebar or a popover.
+    
+    <picture>
+      <source srcset="status-page-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="status-page.png" alt="status-page">
+    </picture>
+    
+    The [adw.status_page.StatusPage] widget can have an icon, a title, a description and a
+    custom widget which is displayed below them.
+    
+    ## CSS nodes
+    
+    [adw.status_page.StatusPage] has a main CSS node with name `statuspage`.
+    
+    [adw.status_page.StatusPage] can use the
+    [`.compact`](style-classes.html#compact-status-page) style class for when it
+    needs to fit into a small space such a sidebar or a popover.
 */
 class StatusPage : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_status_page_get_type != &gidSymbolNotFound ? adw_status_page_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -59,7 +63,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Creates a new [adw.status_page.StatusPage].
-    Returns:     the newly created [adw.status_page.StatusPage]
+      Returns: the newly created [adw.status_page.StatusPage]
   */
   this()
   {
@@ -70,7 +74,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Gets the child widget of self.
-    Returns:     the child widget of self
+      Returns: the child widget of self
   */
   gtk.widget.Widget getChild()
   {
@@ -82,7 +86,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Gets the description markup for self.
-    Returns:     the description
+      Returns: the description
   */
   string getDescription()
   {
@@ -94,7 +98,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Gets the icon name for self.
-    Returns:     the icon name
+      Returns: the icon name
   */
   string getIconName()
   {
@@ -106,7 +110,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Gets the paintable for self.
-    Returns:     the paintable
+      Returns: the paintable
   */
   gdk.paintable.Paintable getPaintable()
   {
@@ -118,7 +122,7 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Gets the title for self.
-    Returns:     the title
+      Returns: the title
   */
   string getTitle()
   {
@@ -130,8 +134,9 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Sets the child widget of self.
-    Params:
-      child =       the child widget
+  
+      Params:
+        child = the child widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
@@ -140,10 +145,11 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Sets the description markup for self.
-    
-    The description is displayed below the title. It is parsed as Pango markup.
-    Params:
-      description =       the description
+      
+      The description is displayed below the title. It is parsed as Pango markup.
+  
+      Params:
+        description = the description
   */
   void setDescription(string description = null)
   {
@@ -153,10 +159,11 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Sets the icon name for self.
-    
-    Changing this will set `propertyStatusPage:paintable` to `NULL`.
-    Params:
-      iconName =       the icon name
+      
+      Changing this will set `propertyStatusPage:paintable` to `NULL`.
+  
+      Params:
+        iconName = the icon name
   */
   void setIconName(string iconName = null)
   {
@@ -166,10 +173,11 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Sets the paintable for self.
-    
-    Changing this will set `propertyStatusPage:icon-name` to `NULL`.
-    Params:
-      paintable =       the paintable
+      
+      Changing this will set `propertyStatusPage:icon-name` to `NULL`.
+  
+      Params:
+        paintable = the paintable
   */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
@@ -178,10 +186,11 @@ class StatusPage : gtk.widget.Widget
 
   /**
       Sets the title for self.
-    
-    The title is displayed below the icon. It is not parsed as Pango markup.
-    Params:
-      title =       the title
+      
+      The title is displayed below the icon. It is not parsed as Pango markup.
+  
+      Params:
+        title = the title
   */
   void setTitle(string title)
   {

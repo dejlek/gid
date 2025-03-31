@@ -1,3 +1,4 @@
+/// Module for [HoverDisplay] class
 module gtksource.hover_display;
 
 import gid.gid;
@@ -14,28 +15,31 @@ import gtksource.types;
 
 /**
     Display for interactive tooltips.
-  
-  [gtksource.hover_display.HoverDisplay] is a [gtk.widget.Widget] that may be populated with widgets
-  to be displayed to the user in interactive tooltips. The children widgets
-  are packed vertically using a [gtk.box.Box].
-  
-  Implement the `iface@HoverProvider` interface to be notified of when
-  to populate a [gtksource.hover_display.HoverDisplay] on behalf of the user.
+    
+    [gtksource.hover_display.HoverDisplay] is a [gtk.widget.Widget] that may be populated with widgets
+    to be displayed to the user in interactive tooltips. The children widgets
+    are packed vertically using a [gtk.box.Box].
+    
+    Implement the `iface@HoverProvider` interface to be notified of when
+    to populate a [gtksource.hover_display.HoverDisplay] on behalf of the user.
 */
 class HoverDisplay : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_display_get_type != &gidSymbolNotFound ? gtk_source_hover_display_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();

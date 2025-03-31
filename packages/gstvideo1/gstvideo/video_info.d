@@ -1,3 +1,4 @@
+/// Module for [VideoInfo] class
 module gstvideo.video_info;
 
 import gid.gid;
@@ -13,31 +14,35 @@ import gstvideo.video_format_info;
 
 /**
     Information describing image properties. This information can be filled
-  in from GstCaps with [gstvideo.video_info.VideoInfo.fromCaps]. The information is also used
-  to store the specific video info when mapping a video frame with
-  [gstvideo.video_frame.VideoFrame.map].
-  
-  Use the provided macros to access the info in this structure.
+    in from GstCaps with [gstvideo.video_info.VideoInfo.fromCaps]. The information is also used
+    to store the specific video info when mapping a video frame with
+    [gstvideo.video_frame.VideoFrame.map].
+    
+    Use the provided macros to access the info in this structure.
 */
 class VideoInfo : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_info_get_type != &gidSymbolNotFound ? gst_video_info_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -170,8 +175,8 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Allocate a new #GstVideoInfo that is also initialized with
-    [gstvideo.video_info.VideoInfo.init_].
-    Returns:     a new #GstVideoInfo. free with [gstvideo.video_info.VideoInfo.free].
+      [gstvideo.video_info.VideoInfo.init_].
+      Returns: a new #GstVideoInfo. free with [gstvideo.video_info.VideoInfo.free].
   */
   this()
   {
@@ -182,9 +187,10 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Parse caps to generate a #GstVideoInfo.
-    Params:
-      caps =       a #GstCaps
-    Returns:     A #GstVideoInfo, or null if caps couldn't be parsed
+  
+      Params:
+        caps = a #GstCaps
+      Returns: A #GstVideoInfo, or null if caps couldn't be parsed
   */
   static gstvideo.video_info.VideoInfo newFromCaps(gst.caps.Caps caps)
   {
@@ -196,14 +202,15 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Adjust the offset and stride fields in info so that the padding and
-    stride alignment in align is respected.
-    
-    Extra padding will be added to the right side when stride alignment padding
-    is required and align will be updated with the new padding values.
-    Params:
-      align_ =       alignment parameters
-    Returns:     false if alignment could not be applied, e.g. because the
-        size of a frame can't be represented as a 32 bit integer (Since: 1.12)
+      stride alignment in align is respected.
+      
+      Extra padding will be added to the right side when stride alignment padding
+      is required and align will be updated with the new padding values.
+  
+      Params:
+        align_ = alignment parameters
+      Returns: false if alignment could not be applied, e.g. because the
+          size of a frame can't be represented as a 32 bit integer (Since: 1.12)
   */
   bool align_(gstvideo.video_alignment.VideoAlignment align_)
   {
@@ -214,19 +221,20 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Extra padding will be added to the right side when stride alignment padding
-    is required and align will be updated with the new padding values.
-    
-    This variant of [gstvideo.video_info.VideoInfo.align_] provides the updated size, in bytes,
-    of each video plane after the alignment, including all horizontal and vertical
-    paddings.
-    
-    In case of GST_VIDEO_INTERLACE_MODE_ALTERNATE info, the returned sizes are the
-    ones used to hold a single field, not the full frame.
-    Params:
-      align_ =       alignment parameters
-      planeSize =       array used to store the plane sizes
-    Returns:     false if alignment could not be applied, e.g. because the
-        size of a frame can't be represented as a 32 bit integer
+      is required and align will be updated with the new padding values.
+      
+      This variant of [gstvideo.video_info.VideoInfo.align_] provides the updated size, in bytes,
+      of each video plane after the alignment, including all horizontal and vertical
+      paddings.
+      
+      In case of GST_VIDEO_INTERLACE_MODE_ALTERNATE info, the returned sizes are the
+      ones used to hold a single field, not the full frame.
+  
+      Params:
+        align_ = alignment parameters
+        planeSize = array used to store the plane sizes
+      Returns: false if alignment could not be applied, e.g. because the
+          size of a frame can't be represented as a 32 bit integer
   */
   bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize)
   {
@@ -237,15 +245,16 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Converts among various #GstFormat types.  This function handles
-    GST_FORMAT_BYTES, GST_FORMAT_TIME, and GST_FORMAT_DEFAULT.  For
-    raw video, GST_FORMAT_DEFAULT corresponds to video frames.  This
-    function can be used to handle pad queries of the type GST_QUERY_CONVERT.
-    Params:
-      srcFormat =       #GstFormat of the src_value
-      srcValue =       value to convert
-      destFormat =       #GstFormat of the dest_value
-      destValue =       pointer to destination value
-    Returns:     TRUE if the conversion was successful.
+      GST_FORMAT_BYTES, GST_FORMAT_TIME, and GST_FORMAT_DEFAULT.  For
+      raw video, GST_FORMAT_DEFAULT corresponds to video frames.  This
+      function can be used to handle pad queries of the type GST_QUERY_CONVERT.
+  
+      Params:
+        srcFormat = #GstFormat of the src_value
+        srcValue = value to convert
+        destFormat = #GstFormat of the dest_value
+        destValue = pointer to destination value
+      Returns: TRUE if the conversion was successful.
   */
   bool convert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
   {
@@ -256,7 +265,7 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Copy a GstVideoInfo structure.
-    Returns:     a new #GstVideoInfo. free with gst_video_info_free.
+      Returns: a new #GstVideoInfo. free with gst_video_info_free.
   */
   gstvideo.video_info.VideoInfo copy()
   {
@@ -268,9 +277,10 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Compares two #GstVideoInfo and returns whether they are equal or not
-    Params:
-      other =       a #GstVideoInfo
-    Returns:     true if info and other are equal, else false.
+  
+      Params:
+        other = a #GstVideoInfo
+      Returns: true if info and other are equal, else false.
   */
   bool isEqual(gstvideo.video_info.VideoInfo other)
   {
@@ -281,16 +291,17 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Set the default info for a video frame of format and width and height.
-    
-    Note: This initializes info first, no values are preserved. This function
-    does not set the offsets correctly for interlaced vertically
-    subsampled formats.
-    Params:
-      format =       the format
-      width =       a width
-      height =       a height
-    Returns:     false if the returned video info is invalid, e.g. because the
-        size of a frame can't be represented as a 32 bit integer (Since: 1.12)
+      
+      Note: This initializes info first, no values are preserved. This function
+      does not set the offsets correctly for interlaced vertically
+      subsampled formats.
+  
+      Params:
+        format = the format
+        width = a width
+        height = a height
+      Returns: false if the returned video info is invalid, e.g. because the
+          size of a frame can't be represented as a 32 bit integer (Since: 1.12)
   */
   bool setFormat(gstvideo.types.VideoFormat format, uint width, uint height)
   {
@@ -301,14 +312,15 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Same as #gst_video_info_set_format but also allowing to set the interlaced
-    mode.
-    Params:
-      format =       the format
-      mode =       a #GstVideoInterlaceMode
-      width =       a width
-      height =       a height
-    Returns:     false if the returned video info is invalid, e.g. because the
-        size of a frame can't be represented as a 32 bit integer.
+      mode.
+  
+      Params:
+        format = the format
+        mode = a #GstVideoInterlaceMode
+        width = a width
+        height = a height
+      Returns: false if the returned video info is invalid, e.g. because the
+          size of a frame can't be represented as a 32 bit integer.
   */
   bool setInterlacedFormat(gstvideo.types.VideoFormat format, gstvideo.types.VideoInterlaceMode mode, uint width, uint height)
   {
@@ -319,7 +331,7 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Convert the values of info into a #GstCaps.
-    Returns:     a new #GstCaps containing the info of info.
+      Returns: a new #GstCaps containing the info of info.
   */
   gst.caps.Caps toCaps()
   {
@@ -331,10 +343,11 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Parse caps and update info.
-    Params:
-      info =       #GstVideoInfo
-      caps =       a #GstCaps
-    Returns:     TRUE if caps could be parsed
+  
+      Params:
+        info = #GstVideoInfo
+        caps = a #GstCaps
+      Returns: TRUE if caps could be parsed
   */
   static bool fromCaps(out gstvideo.video_info.VideoInfo info, gst.caps.Caps caps)
   {
@@ -347,8 +360,9 @@ class VideoInfo : gobject.boxed.Boxed
 
   /**
       Initialize info with default values.
-    Params:
-      info =       a #GstVideoInfo
+  
+      Params:
+        info = a #GstVideoInfo
   */
   static void init_(out gstvideo.video_info.VideoInfo info)
   {

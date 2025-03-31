@@ -1,3 +1,4 @@
+/// Module for [EmblemedIcon] class
 module gio.emblemed_icon;
 
 import gid.gid;
@@ -11,26 +12,29 @@ import gobject.object;
 
 /**
     [gio.emblemed_icon.EmblemedIcon] is an implementation of [gio.icon.Icon] that supports
-  adding an emblem to an icon. Adding multiple emblems to an
-  icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
-  
-  Note that [gio.emblemed_icon.EmblemedIcon] allows no control over the position
-  of the emblems. See also [gio.emblem.Emblem] for more information.
+    adding an emblem to an icon. Adding multiple emblems to an
+    icon is ensured via [gio.emblemed_icon.EmblemedIcon.addEmblem].
+    
+    Note that [gio.emblemed_icon.EmblemedIcon] allows no control over the position
+    of the emblems. See also [gio.emblem.Emblem] for more information.
 */
 class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblemed_icon_get_type != &gidSymbolNotFound ? g_emblemed_icon_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -45,10 +49,11 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Creates a new emblemed icon for icon with the emblem emblem.
-    Params:
-      icon =       a #GIcon
-      emblem =       a #GEmblem, or null
-    Returns:     a new #GIcon
+  
+      Params:
+        icon = a #GIcon
+        emblem = a #GEmblem, or null
+      Returns: a new #GIcon
   */
   this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
@@ -59,8 +64,9 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Adds emblem to the #GList of #GEmblems.
-    Params:
-      emblem =       a #GEmblem
+  
+      Params:
+        emblem = a #GEmblem
   */
   void addEmblem(gio.emblem.Emblem emblem)
   {
@@ -77,8 +83,8 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Gets the list of emblems for the icon.
-    Returns:     a #GList of
-          #GEmblems that is owned by emblemed
+      Returns: a #GList of
+            #GEmblems that is owned by emblemed
   */
   gio.emblem.Emblem[] getEmblems()
   {
@@ -90,7 +96,7 @@ class EmblemedIcon : gobject.object.ObjectG, gio.icon.Icon
 
   /**
       Gets the main icon for emblemed.
-    Returns:     a #GIcon that is owned by emblemed
+      Returns: a #GIcon that is owned by emblemed
   */
   gio.icon.Icon getIcon()
   {

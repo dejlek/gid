@@ -1,3 +1,4 @@
+/// Module for [MIKEYPayloadPKE] class
 module gstsdp.mikeypayload_pke;
 
 import gid.gid;
@@ -8,14 +9,15 @@ import gstsdp.types;
 
 /**
     The Envelope data payload contains the encrypted envelope key that is
-  used in the public-key transport to protect the data in the Key data
-  transport payload.  The encryption algorithm used is implicit from
-  the certificate/public key used.
+    used in the public-key transport to protect the data in the Key data
+    transport payload.  The encryption algorithm used is implicit from
+    the certificate/public key used.
 */
 class MIKEYPayloadPKE
 {
   GstMIKEYPayloadPKE cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -27,6 +29,7 @@ class MIKEYPayloadPKE
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

@@ -1,3 +1,4 @@
+/// Module for [GlyphItem] class
 module pango.glyph_item;
 
 import gid.gid;
@@ -11,36 +12,41 @@ import pango.types;
 
 /**
     A [pango.glyph_item.GlyphItem] is a pair of a [pango.item.Item] and the glyphs
-  resulting from shaping the items text.
-  
-  As an example of the usage of [pango.glyph_item.GlyphItem], the results
-  of shaping text with [pango.layout.Layout] is a list of [pango.layout_line.LayoutLine],
-  each of which contains a list of [pango.glyph_item.GlyphItem].
+    resulting from shaping the items text.
+    
+    As an example of the usage of [pango.glyph_item.GlyphItem], the results
+    of shaping text with [pango.layout.Layout] is a list of [pango.layout_line.LayoutLine],
+    each of which contains a list of [pango.glyph_item.GlyphItem].
 */
 class GlyphItem : gobject.boxed.Boxed
 {
 
+  /** */
   this()
   {
     super(gMalloc(PangoGlyphItem.sizeof), Yes.Take);
   }
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_get_type != &gidSymbolNotFound ? pango_glyph_item_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -105,29 +111,30 @@ class GlyphItem : gobject.boxed.Boxed
 
   /**
       Splits a shaped item ([pango.glyph_item.GlyphItem]) into multiple items based
-    on an attribute list.
-    
-    The idea is that if you have attributes that don't affect shaping,
-    such as color or underline, to avoid affecting shaping, you filter
-    them out ([pango.attr_list.AttrList.filter]), apply the shaping process
-    and then reapply them to the result using this function.
-    
-    All attributes that start or end inside a cluster are applied
-    to that cluster; for instance, if half of a cluster is underlined
-    and the other-half strikethrough, then the cluster will end
-    up with both underline and strikethrough attributes. In these
-    cases, it may happen that item->extra_attrs for some of the
-    result items can have multiple attributes of the same type.
-    
-    This function takes ownership of glyph_item; it will be reused
-    as one of the elements in the list.
-    Params:
-      text =       text that list applies to
-      list =       a [pango.attr_list.AttrList]
-    Returns:     a
-        list of glyph items resulting from splitting glyph_item. Free
-        the elements using [pango.glyph_item.GlyphItem.free], the list using
-        [glib.slist.SList.free].
+      on an attribute list.
+      
+      The idea is that if you have attributes that don't affect shaping,
+      such as color or underline, to avoid affecting shaping, you filter
+      them out ([pango.attr_list.AttrList.filter]), apply the shaping process
+      and then reapply them to the result using this function.
+      
+      All attributes that start or end inside a cluster are applied
+      to that cluster; for instance, if half of a cluster is underlined
+      and the other-half strikethrough, then the cluster will end
+      up with both underline and strikethrough attributes. In these
+      cases, it may happen that item->extra_attrs for some of the
+      result items can have multiple attributes of the same type.
+      
+      This function takes ownership of glyph_item; it will be reused
+      as one of the elements in the list.
+  
+      Params:
+        text = text that list applies to
+        list = a [pango.attr_list.AttrList]
+      Returns: a
+          list of glyph items resulting from splitting glyph_item. Free
+          the elements using [pango.glyph_item.GlyphItem.free], the list using
+          [glib.slist.SList.free].
   */
   pango.glyph_item.GlyphItem[] applyAttrs(string text, pango.attr_list.AttrList list)
   {
@@ -140,7 +147,7 @@ class GlyphItem : gobject.boxed.Boxed
 
   /**
       Make a deep copy of an existing [pango.glyph_item.GlyphItem] structure.
-    Returns:     the newly allocated [pango.glyph_item.GlyphItem]
+      Returns: the newly allocated [pango.glyph_item.GlyphItem]
   */
   pango.glyph_item.GlyphItem copy()
   {
@@ -152,23 +159,24 @@ class GlyphItem : gobject.boxed.Boxed
 
   /**
       Modifies orig to cover only the text after split_index, and
-    returns a new item that covers the text before split_index that
-    used to be in orig.
-    
-    You can think of split_index as the length of the returned item.
-    split_index may not be 0, and it may not be greater than or equal
-    to the length of orig (that is, there must be at least one byte
-    assigned to each item, you can't create a zero-length item).
-    
-    This function is similar in function to [pango.item.Item.split] (and uses
-    it internally.)
-    Params:
-      text =       text to which positions in orig apply
-      splitIndex =       byte index of position to split item, relative to the
-          start of the item
-    Returns:     the newly allocated item
-        representing text before split_index, which should be freed
-        with [pango.glyph_item.GlyphItem.free].
+      returns a new item that covers the text before split_index that
+      used to be in orig.
+      
+      You can think of split_index as the length of the returned item.
+      split_index may not be 0, and it may not be greater than or equal
+      to the length of orig (that is, there must be at least one byte
+      assigned to each item, you can't create a zero-length item).
+      
+      This function is similar in function to [pango.item.Item.split] (and uses
+      it internally.)
+  
+      Params:
+        text = text to which positions in orig apply
+        splitIndex = byte index of position to split item, relative to the
+            start of the item
+      Returns: the newly allocated item
+          representing text before split_index, which should be freed
+          with [pango.glyph_item.GlyphItem.free].
   */
   pango.glyph_item.GlyphItem split(string text, int splitIndex)
   {

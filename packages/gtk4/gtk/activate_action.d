@@ -1,3 +1,4 @@
+/// Module for [ActivateAction] class
 module gtk.activate_action;
 
 import gid.gid;
@@ -13,17 +14,20 @@ import gtk.types;
 class ActivateAction : gtk.shortcut_action.ShortcutAction
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_activate_action_get_type != &gidSymbolNotFound ? gtk_activate_action_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -36,10 +40,10 @@ class ActivateAction : gtk.shortcut_action.ShortcutAction
 
   /**
       Gets the activate action.
-    
-    This is an action that calls [gtk.widget.Widget.activate]
-    on the given widget upon activation.
-    Returns:     The activate action
+      
+      This is an action that calls [gtk.widget.Widget.activate]
+      on the given widget upon activation.
+      Returns: The activate action
   */
   static gtk.activate_action.ActivateAction get()
   {

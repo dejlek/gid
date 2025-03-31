@@ -1,3 +1,4 @@
+/// Module for [RTSPTransport] class
 module gstrtsp.rtsptransport;
 
 import gid.gid;
@@ -13,6 +14,7 @@ class RTSPTransport
 {
   GstRTSPTransport cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class RTSPTransport
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -163,9 +166,9 @@ class RTSPTransport
 
   /**
       Convert transport into a string that can be used to signal the transport in
-    an RTSP SETUP response.
-    Returns:     a string describing the RTSP transport
-      or null when the transport is invalid.
+      an RTSP SETUP response.
+      Returns: a string describing the RTSP transport
+        or null when the transport is invalid.
   */
   string asText()
   {
@@ -177,10 +180,11 @@ class RTSPTransport
 
   /**
       Get the media type of transport. This media type is typically
-    used to generate #GstCaps events.
-    Params:
-      mediaType =       media type of transport
-    Returns:     #GST_RTSP_OK.
+      used to generate #GstCaps events.
+  
+      Params:
+        mediaType = media type of transport
+      Returns: #GST_RTSP_OK.
   */
   gstrtsp.types.RTSPResult getMediaType(out string mediaType)
   {
@@ -194,17 +198,18 @@ class RTSPTransport
 
   /**
       Get the #GstElement that can handle the buffers transported over trans.
-    
-    It is possible that there are several managers available, use option to
-    selected one.
-    
-    manager will contain an element name or null when no manager is
-    needed/available for trans.
-    Params:
-      trans =       a #GstRTSPTransMode
-      manager =       location to hold the result
-      option =       option index.
-    Returns:     #GST_RTSP_OK.
+      
+      It is possible that there are several managers available, use option to
+      selected one.
+      
+      manager will contain an element name or null when no manager is
+      needed/available for trans.
+  
+      Params:
+        trans = a #GstRTSPTransMode
+        manager = location to hold the result
+        option = option index.
+      Returns: #GST_RTSP_OK.
   */
   static gstrtsp.types.RTSPResult getManager(gstrtsp.types.RTSPTransMode trans, out string manager, uint option)
   {
@@ -218,15 +223,16 @@ class RTSPTransport
 
   /**
       Get the mime type of the transport mode trans. This mime type is typically
-    used to generate #GstCaps events.
-    Params:
-      trans =       a #GstRTSPTransMode
-      mime =       location to hold the result
-    Returns:     #GST_RTSP_OK.
+      used to generate #GstCaps events.
   
-    Deprecated:     This functions only deals with the GstRTSPTransMode and only
-         returns the mime type for #GST_RTSP_PROFILE_AVP. Use
-         [gstrtsp.rtsptransport.RTSPTransport.getMediaType] instead.
+      Params:
+        trans = a #GstRTSPTransMode
+        mime = location to hold the result
+      Returns: #GST_RTSP_OK.
+  
+      Deprecated: This functions only deals with the GstRTSPTransMode and only
+           returns the mime type for #GST_RTSP_PROFILE_AVP. Use
+           [gstrtsp.rtsptransport.RTSPTransport.getMediaType] instead.
   */
   static gstrtsp.types.RTSPResult getMime(gstrtsp.types.RTSPTransMode trans, out string mime)
   {
@@ -240,9 +246,10 @@ class RTSPTransport
 
   /**
       Initialize transport so that it can be used.
-    Params:
-      transport =       a #GstRTSPTransport
-    Returns:     #GST_RTSP_OK.
+  
+      Params:
+        transport = a #GstRTSPTransport
+      Returns: #GST_RTSP_OK.
   */
   static gstrtsp.types.RTSPResult init_(out gstrtsp.rtsptransport.RTSPTransport transport)
   {
@@ -256,10 +263,11 @@ class RTSPTransport
 
   /**
       Allocate a new initialized #GstRTSPTransport. Use [gstrtsp.rtsptransport.RTSPTransport.free]
-    after usage.
-    Params:
-      transport =       location to hold the new #GstRTSPTransport
-    Returns:     a #GstRTSPResult.
+      after usage.
+  
+      Params:
+        transport = location to hold the new #GstRTSPTransport
+      Returns: a #GstRTSPResult.
   */
   static gstrtsp.types.RTSPResult new_(out gstrtsp.rtsptransport.RTSPTransport transport)
   {
@@ -273,10 +281,11 @@ class RTSPTransport
 
   /**
       Parse the RTSP transport string str into transport.
-    Params:
-      str =       a transport string
-      transport =       a #GstRTSPTransport
-    Returns:     a #GstRTSPResult.
+  
+      Params:
+        str = a transport string
+        transport = a #GstRTSPTransport
+      Returns: a #GstRTSPResult.
   */
   static gstrtsp.types.RTSPResult parse(string str, out gstrtsp.rtsptransport.RTSPTransport transport)
   {

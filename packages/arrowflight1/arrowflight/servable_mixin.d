@@ -1,3 +1,4 @@
+/// Module for [Servable] interface mixin
 module arrowflight.servable_mixin;
 
 public import arrowflight.servable_iface_proxy;

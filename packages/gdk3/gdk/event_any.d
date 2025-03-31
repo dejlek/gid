@@ -1,3 +1,4 @@
+/// Module for [EventAny] class
 module gdk.event_any;
 
 import gdk.c.functions;
@@ -8,13 +9,14 @@ import gid.gid;
 
 /**
     Contains the fields which are common to all event structs.
-  Any event pointer can safely be cast to a pointer to a #GdkEventAny to
-  access these fields.
+    Any event pointer can safely be cast to a pointer to a #GdkEventAny to
+    access these fields.
 */
 class EventAny
 {
   GdkEventAny cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -26,6 +28,7 @@ class EventAny
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

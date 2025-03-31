@@ -1,3 +1,4 @@
+/// Module for [FontsetSimple] class
 module pango.fontset_simple;
 
 import gid.gid;
@@ -10,25 +11,28 @@ import pango.types;
 
 /**
     [pango.fontset_simple.FontsetSimple] is a implementation of the abstract
-  [pango.fontset.Fontset] base class as an array of fonts.
-  
-  When creating a [pango.fontset_simple.FontsetSimple], you have to provide
-  the array of fonts that make up the fontset.
+    [pango.fontset.Fontset] base class as an array of fonts.
+    
+    When creating a [pango.fontset_simple.FontsetSimple], you have to provide
+    the array of fonts that make up the fontset.
 */
 class FontsetSimple : pango.fontset.Fontset
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_simple_get_type != &gidSymbolNotFound ? pango_fontset_simple_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -41,9 +45,10 @@ class FontsetSimple : pango.fontset.Fontset
 
   /**
       Creates a new [pango.fontset_simple.FontsetSimple] for the given language.
-    Params:
-      language =       a [pango.language.Language] tag
-    Returns:     the newly allocated [pango.fontset_simple.FontsetSimple]
+  
+      Params:
+        language = a [pango.language.Language] tag
+      Returns: the newly allocated [pango.fontset_simple.FontsetSimple]
   */
   this(pango.language.Language language)
   {
@@ -54,10 +59,11 @@ class FontsetSimple : pango.fontset.Fontset
 
   /**
       Adds a font to the fontset.
-    
-    The fontset takes ownership of font.
-    Params:
-      font =       a [pango.font.Font].
+      
+      The fontset takes ownership of font.
+  
+      Params:
+        font = a [pango.font.Font].
   */
   void append(pango.font.Font font)
   {
@@ -66,7 +72,7 @@ class FontsetSimple : pango.fontset.Fontset
 
   /**
       Returns the number of fonts in the fontset.
-    Returns:     the size of fontset
+      Returns: the size of fontset
   */
   int size()
   {

@@ -1,3 +1,4 @@
+/// Module for [ShadowNode] class
 module gsk.shadow_node;
 
 import gid.gid;
@@ -13,6 +14,7 @@ import gsk.types;
 class ShadowNode : gsk.render_node.RenderNode
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,7 +25,7 @@ class ShadowNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the child [gsk.render_node.RenderNode] of the shadow node.
-    Returns:     the child render node
+      Returns: the child render node
   */
   gsk.render_node.RenderNode getChild()
   {
@@ -35,7 +37,7 @@ class ShadowNode : gsk.render_node.RenderNode
 
   /**
       Retrieves the number of shadows in the node.
-    Returns:     the number of shadows.
+      Returns: the number of shadows.
   */
   size_t getNShadows()
   {
@@ -45,10 +47,11 @@ class ShadowNode : gsk.render_node.RenderNode
   }
 
   /**
-      Retrieves the shadow data at the given index i.
-    Params:
-      i =       the given index
-    Returns:     the shadow data
+      Retrieves the shadow data at the given index `i`.
+  
+      Params:
+        i = the given index
+      Returns: the shadow data
   */
   gsk.shadow.Shadow getShadow(size_t i)
   {

@@ -1,3 +1,4 @@
+/// Module for [RTPPayloadInfo] class
 module gstrtp.rtppayload_info;
 
 import gid.gid;
@@ -12,6 +13,7 @@ class RTPPayloadInfo
 {
   GstRTPPayloadInfo cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -23,6 +25,7 @@ class RTPPayloadInfo
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;
@@ -93,14 +96,15 @@ class RTPPayloadInfo
 
   /**
       Get the #GstRTPPayloadInfo for media and encoding_name. This function is
-    mostly used to get the default clock-rate and bandwidth for dynamic payload
-    types specified with media and encoding name.
-    
-    The search for encoding_name will be performed in a case insensitive way.
-    Params:
-      media =       the media to find
-      encodingName =       the encoding name to find
-    Returns:     a #GstRTPPayloadInfo or NULL when no info could be found.
+      mostly used to get the default clock-rate and bandwidth for dynamic payload
+      types specified with media and encoding name.
+      
+      The search for encoding_name will be performed in a case insensitive way.
+  
+      Params:
+        media = the media to find
+        encodingName = the encoding name to find
+      Returns: a #GstRTPPayloadInfo or NULL when no info could be found.
   */
   static gstrtp.rtppayload_info.RTPPayloadInfo forName(string media, string encodingName)
   {
@@ -114,11 +118,12 @@ class RTPPayloadInfo
 
   /**
       Get the #GstRTPPayloadInfo for payload_type. This function is
-    mostly used to get the default clock-rate and bandwidth for static payload
-    types specified with payload_type.
-    Params:
-      payloadType =       the payload_type to find
-    Returns:     a #GstRTPPayloadInfo or NULL when no info could be found.
+      mostly used to get the default clock-rate and bandwidth for static payload
+      types specified with payload_type.
+  
+      Params:
+        payloadType = the payload_type to find
+      Returns: a #GstRTPPayloadInfo or NULL when no info could be found.
   */
   static gstrtp.rtppayload_info.RTPPayloadInfo forPt(ubyte payloadType)
   {

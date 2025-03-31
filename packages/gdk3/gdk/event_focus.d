@@ -1,3 +1,4 @@
+/// Module for [EventFocus] class
 module gdk.event_focus;
 
 import gdk.c.functions;
@@ -13,6 +14,7 @@ class EventFocus
 {
   GdkEventFocus cInstance;
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     if (!ptr)
@@ -24,6 +26,7 @@ class EventFocus
       gFree(ptr);
   }
 
+  /** */
   void* cPtr()
   {
     return cast(void*)&cInstance;

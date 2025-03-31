@@ -1,3 +1,4 @@
+/// Module for [Seat] class
 module gdk.seat;
 
 import gdk.c.functions;
@@ -15,22 +16,25 @@ import gobject.object;
 
 /**
     The #GdkSeat object represents a collection of input devices
-  that belong to a user.
+    that belong to a user.
 */
 class Seat : gobject.object.ObjectG
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_seat_get_type != &gidSymbolNotFound ? gdk_seat_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -43,7 +47,7 @@ class Seat : gobject.object.ObjectG
 
   /**
       Returns the capabilities this #GdkSeat currently has.
-    Returns:     the seat capabilities
+      Returns: the seat capabilities
   */
   gdk.types.SeatCapabilities getCapabilities()
   {
@@ -55,8 +59,8 @@ class Seat : gobject.object.ObjectG
 
   /**
       Returns the #GdkDisplay this seat belongs to.
-    Returns:     a #GdkDisplay. This object is owned by GTK+
-               and must not be freed.
+      Returns: a #GdkDisplay. This object is owned by GTK+
+                 and must not be freed.
   */
   gdk.display.Display getDisplay()
   {
@@ -68,8 +72,8 @@ class Seat : gobject.object.ObjectG
 
   /**
       Returns the master device that routes keyboard events.
-    Returns:     a master #GdkDevice with keyboard
-               capabilities. This object is owned by GTK+ and must not be freed.
+      Returns: a master #GdkDevice with keyboard
+                 capabilities. This object is owned by GTK+ and must not be freed.
   */
   gdk.device.Device getKeyboard()
   {
@@ -81,8 +85,8 @@ class Seat : gobject.object.ObjectG
 
   /**
       Returns the master device that routes pointer events.
-    Returns:     a master #GdkDevice with pointer
-               capabilities. This object is owned by GTK+ and must not be freed.
+      Returns: a master #GdkDevice with pointer
+                 capabilities. This object is owned by GTK+ and must not be freed.
   */
   gdk.device.Device getPointer()
   {
@@ -94,11 +98,12 @@ class Seat : gobject.object.ObjectG
 
   /**
       Returns the slave devices that match the given capabilities.
-    Params:
-      capabilities =       capabilities to get devices for
-    Returns:     A list of #GdkDevices.
-               The list must be freed with [glib.list.List.free], the elements are owned
-               by GDK and must not be freed.
+  
+      Params:
+        capabilities = capabilities to get devices for
+      Returns: A list of #GdkDevices.
+                 The list must be freed with [glib.list.List.free], the elements are owned
+                 by GDK and must not be freed.
   */
   gdk.device.Device[] getSlaves(gdk.types.SeatCapabilities capabilities)
   {
@@ -110,48 +115,49 @@ class Seat : gobject.object.ObjectG
 
   /**
       Grabs the seat so that all events corresponding to the given capabilities
-    are passed to this application until the seat is ungrabbed with [gdk.seat.Seat.ungrab],
-    or the window becomes hidden. This overrides any previous grab on the
-    seat by this client.
-    
-    As a rule of thumb, if a grab is desired over [gdk.types.SeatCapabilities.Pointer],
-    all other "pointing" capabilities (eg. [gdk.types.SeatCapabilities.Touch]) should
-    be grabbed too, so the user is able to interact with all of those while
-    the grab holds, you should thus use [gdk.types.SeatCapabilities.AllPointing] most
-    commonly.
-    
-    Grabs are used for operations which need complete control over the
-    events corresponding to the given capabilities. For example in GTK+ this
-    is used for Drag and Drop operations, popup menus and such.
-    
-    Note that if the event mask of a #GdkWindow has selected both button press
-    and button release events, or touch begin and touch end, then a press event
-    will cause an automatic grab until the button is released, equivalent to a
-    grab on the window with owner_events set to true. This is done because most
-    applications expect to receive paired press and release events.
-    
-    If you set up anything at the time you take the grab that needs to be
-    cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
-    events that are emitted when the grab ends unvoluntarily.
-    Params:
-      window =       the #GdkWindow which will own the grab
-      capabilities =       capabilities that will be grabbed
-      ownerEvents =       if false then all device events are reported with respect to
-                       window and are only reported if selected by event_mask. If
-                       true then pointer events for this application are reported
-                       as normal, but pointer events outside this application are
-                       reported with respect to window and only if selected by
-                       event_mask. In either mode, unreported events are discarded.
-      cursor =       the cursor to display while the grab is active. If
-                 this is null then the normal cursors are used for
-                 window and its descendants, and the cursor for window is used
-                 elsewhere.
-      event =       the event that is triggering the grab, or null if none
-                is available.
-      prepareFunc =       function to
-                       prepare the window to be grabbed, it can be null if window is
-                       visible before this call.
-    Returns:     [gdk.types.GrabStatus.Success] if the grab was successful.
+      are passed to this application until the seat is ungrabbed with [gdk.seat.Seat.ungrab],
+      or the window becomes hidden. This overrides any previous grab on the
+      seat by this client.
+      
+      As a rule of thumb, if a grab is desired over [gdk.types.SeatCapabilities.Pointer],
+      all other "pointing" capabilities (eg. [gdk.types.SeatCapabilities.Touch]) should
+      be grabbed too, so the user is able to interact with all of those while
+      the grab holds, you should thus use [gdk.types.SeatCapabilities.AllPointing] most
+      commonly.
+      
+      Grabs are used for operations which need complete control over the
+      events corresponding to the given capabilities. For example in GTK+ this
+      is used for Drag and Drop operations, popup menus and such.
+      
+      Note that if the event mask of a #GdkWindow has selected both button press
+      and button release events, or touch begin and touch end, then a press event
+      will cause an automatic grab until the button is released, equivalent to a
+      grab on the window with owner_events set to true. This is done because most
+      applications expect to receive paired press and release events.
+      
+      If you set up anything at the time you take the grab that needs to be
+      cleaned up when the grab ends, you should handle the #GdkEventGrabBroken
+      events that are emitted when the grab ends unvoluntarily.
+  
+      Params:
+        window = the #GdkWindow which will own the grab
+        capabilities = capabilities that will be grabbed
+        ownerEvents = if false then all device events are reported with respect to
+                         window and are only reported if selected by event_mask. If
+                         true then pointer events for this application are reported
+                         as normal, but pointer events outside this application are
+                         reported with respect to window and only if selected by
+                         event_mask. In either mode, unreported events are discarded.
+        cursor = the cursor to display while the grab is active. If
+                   this is null then the normal cursors are used for
+                   window and its descendants, and the cursor for window is used
+                   elsewhere.
+        event = the event that is triggering the grab, or null if none
+                  is available.
+        prepareFunc = function to
+                         prepare the window to be grabbed, it can be null if window is
+                         visible before this call.
+      Returns: [gdk.types.GrabStatus.Success] if the grab was successful.
   */
   gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.SeatCapabilities capabilities, bool ownerEvents, gdk.cursor.Cursor cursor = null, gdk.event.Event event = null, gdk.types.SeatGrabPrepareFunc prepareFunc = null)
   {
@@ -179,37 +185,44 @@ class Seat : gobject.object.ObjectG
   }
 
   /**
-      The ::device-added signal is emitted when a new input
-    device is related to this seat.
+      Connect to `DeviceAdded` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B device)       the newly added #GdkDevice.
-      * $(B seat) the instance the signal is connected to
-    )
-  */
-  alias DeviceAddedCallbackDlg = void delegate(gdk.device.Device device, gdk.seat.Seat seat);
-
-  /** ditto */
-  alias DeviceAddedCallbackFunc = void function(gdk.device.Device device, gdk.seat.Seat seat);
-
-  /**
-    Connect to DeviceAdded signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::device-added signal is emitted when a new input
+      device is related to this seat.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.device.Device device, gdk.seat.Seat seat))
+  
+          `device` the newly added #GdkDevice. (optional)
+  
+          `seat` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDeviceAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DeviceAddedCallbackDlg) || is(T : DeviceAddedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
-      auto device = getVal!(gdk.device.Device)(&_paramVals[1]);
-      _dClosure.dlg(device, seat);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -217,37 +230,44 @@ class Seat : gobject.object.ObjectG
   }
 
   /**
-      The ::device-removed signal is emitted when an
-    input device is removed (e.g. unplugged).
+      Connect to `DeviceRemoved` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B device)       the just removed #GdkDevice.
-      * $(B seat) the instance the signal is connected to
-    )
-  */
-  alias DeviceRemovedCallbackDlg = void delegate(gdk.device.Device device, gdk.seat.Seat seat);
-
-  /** ditto */
-  alias DeviceRemovedCallbackFunc = void function(gdk.device.Device device, gdk.seat.Seat seat);
-
-  /**
-    Connect to DeviceRemoved signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::device-removed signal is emitted when an
+      input device is removed (e.g. unplugged).
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.device.Device device, gdk.seat.Seat seat))
+  
+          `device` the just removed #GdkDevice. (optional)
+  
+          `seat` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectDeviceRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : DeviceRemovedCallbackDlg) || is(T : DeviceRemovedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device.Device)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
-      auto device = getVal!(gdk.device.Device)(&_paramVals[1]);
-      _dClosure.dlg(device, seat);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -255,41 +275,48 @@ class Seat : gobject.object.ObjectG
   }
 
   /**
-      The ::tool-added signal is emitted whenever a new tool
-    is made known to the seat. The tool may later be assigned
-    to a device (i.e. on proximity with a tablet). The device
-    will emit the #GdkDevice::tool-changed signal accordingly.
-    
-    A same tool may be used by several devices.
+      Connect to `ToolAdded` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B tool)       the new #GdkDeviceTool known to the seat
-      * $(B seat) the instance the signal is connected to
-    )
-  */
-  alias ToolAddedCallbackDlg = void delegate(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
-
-  /** ditto */
-  alias ToolAddedCallbackFunc = void function(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
-
-  /**
-    Connect to ToolAdded signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      The ::tool-added signal is emitted whenever a new tool
+      is made known to the seat. The tool may later be assigned
+      to a device (i.e. on proximity with a tablet). The device
+      will emit the #GdkDevice::tool-changed signal accordingly.
+      
+      A same tool may be used by several devices.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat))
+  
+          `tool` the new #GdkDeviceTool known to the seat (optional)
+  
+          `seat` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToolAdded(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToolAddedCallbackDlg) || is(T : ToolAddedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device_tool.DeviceTool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
-      auto tool = getVal!(gdk.device_tool.DeviceTool)(&_paramVals[1]);
-      _dClosure.dlg(tool, seat);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);
@@ -297,37 +324,44 @@ class Seat : gobject.object.ObjectG
   }
 
   /**
-      This signal is emitted whenever a tool is no longer known
-    to this seat.
+      Connect to `ToolRemoved` signal.
   
-    ## Parameters
-    $(LIST
-      * $(B tool)       the just removed #GdkDeviceTool
-      * $(B seat) the instance the signal is connected to
-    )
-  */
-  alias ToolRemovedCallbackDlg = void delegate(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
-
-  /** ditto */
-  alias ToolRemovedCallbackFunc = void function(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat);
-
-  /**
-    Connect to ToolRemoved signal.
-    Params:
-      callback = signal callback delegate or function to connect
-      after = Yes.After to execute callback after default handler, No.After to execute before (default)
-    Returns: Signal ID
+      This signal is emitted whenever a tool is no longer known
+      to this seat.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(gdk.device_tool.DeviceTool tool, gdk.seat.Seat seat))
+  
+          `tool` the just removed #GdkDeviceTool (optional)
+  
+          `seat` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
   */
   ulong connectToolRemoved(T)(T callback, Flag!"After" after = No.After)
-  if (is(T : ToolRemovedCallbackDlg) || is(T : ToolRemovedCallbackFunc))
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gdk.device_tool.DeviceTool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gdk.seat.Seat)))
+  && Parameters!T.length < 3)
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
     {
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
-      auto seat = getVal!(gdk.seat.Seat)(_paramVals);
-      auto tool = getVal!(gdk.device_tool.DeviceTool)(&_paramVals[1]);
-      _dClosure.dlg(tool, seat);
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
     }
 
     auto closure = new DClosure(callback, &_cmarshal);

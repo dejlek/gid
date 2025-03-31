@@ -1,3 +1,4 @@
+/// Module for [TargetEntry] class
 module gtk.target_entry;
 
 import gid.gid;
@@ -8,28 +9,32 @@ import gtk.types;
 
 /**
     A #GtkTargetEntry represents a single type of
-  data than can be supplied for by a widget for a selection
-  or for supplied or received during drag-and-drop.
+    data than can be supplied for by a widget for a selection
+    or for supplied or received during drag-and-drop.
 */
 class TargetEntry : gobject.boxed.Boxed
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   void* cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_target_entry_get_type != &gidSymbolNotFound ? gtk_target_entry_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -73,12 +78,13 @@ class TargetEntry : gobject.boxed.Boxed
 
   /**
       Makes a new #GtkTargetEntry.
-    Params:
-      target =       String identifier for target
-      flags =       Set of flags, see #GtkTargetFlags
-      info =       an ID that will be passed back to the application
-    Returns:     a pointer to a new #GtkTargetEntry.
-          Free with [gtk.target_entry.TargetEntry.free]
+  
+      Params:
+        target = String identifier for target
+        flags = Set of flags, see #GtkTargetFlags
+        info = an ID that will be passed back to the application
+      Returns: a pointer to a new #GtkTargetEntry.
+            Free with [gtk.target_entry.TargetEntry.free]
   */
   this(string target, uint flags, uint info)
   {
@@ -90,8 +96,8 @@ class TargetEntry : gobject.boxed.Boxed
 
   /**
       Makes a copy of a #GtkTargetEntry and its data.
-    Returns:     a pointer to a copy of data.
-          Free with [gtk.target_entry.TargetEntry.free]
+      Returns: a pointer to a copy of data.
+            Free with [gtk.target_entry.TargetEntry.free]
   */
   gtk.target_entry.TargetEntry copy()
   {

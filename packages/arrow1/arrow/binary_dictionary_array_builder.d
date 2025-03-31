@@ -1,3 +1,4 @@
+/// Module for [BinaryDictionaryArrayBuilder] class
 module arrow.binary_dictionary_array_builder;
 
 import arrow.array;
@@ -14,17 +15,20 @@ import glib.error;
 class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_dictionary_array_builder_get_type != &gidSymbolNotFound ? garrow_binary_dictionary_array_builder_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -56,13 +60,15 @@ class BinaryDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
   /**
       Append dictionary indices directly without modifying the internal memo.
-    Params:
-      values =       The array of indices.
-      isValids =       The array of
-          true or false that shows whether the Nth value is valid or not. If the
-          Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
-          the Nth value is null value.
-    Returns:     true on success, false if there was an error.
+  
+      Params:
+        values = The array of indices.
+        isValids = The array of
+            true or false that shows whether the Nth value is valid or not. If the
+            Nth `is_valids` is true, the Nth `values` is valid value. Otherwise
+            the Nth value is null value.
+      Returns: true on success, false if there was an error.
+      Throws: [ErrorG]
   */
   bool appendIndices(long[] values, bool[] isValids = null)
   {

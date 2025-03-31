@@ -1,3 +1,4 @@
+/// Module for [CompletionCell] class
 module gtksource.completion_cell;
 
 import gdk.paintable;
@@ -18,35 +19,38 @@ import pango.attr_list;
 
 /**
     Widget for single cell of completion proposal.
-  
-  The [gtksource.completion_cell.CompletionCell] widget provides a container to display various
-  types of information with the completion display.
-  
-  Each proposal may consist of multiple cells depending on the complexity of
-  the proposal. For example, programming language proposals may contain a cell
-  for the "left-hand-side" of an operation along with the "typed-text" for a
-  function name and "parameters". They may also optionally set an icon to
-  signify the kind of result.
-  
-  A `iface@CompletionProvider` should implement the
-  `vfunc@CompletionProvider.display` virtual function to control
-  how to convert data from their `iface@CompletionProposal` to content for
-  the [gtksource.completion_cell.CompletionCell].
+    
+    The [gtksource.completion_cell.CompletionCell] widget provides a container to display various
+    types of information with the completion display.
+    
+    Each proposal may consist of multiple cells depending on the complexity of
+    the proposal. For example, programming language proposals may contain a cell
+    for the "left-hand-side" of an operation along with the "typed-text" for a
+    function name and "parameters". They may also optionally set an icon to
+    signify the kind of result.
+    
+    A `iface@CompletionProvider` should implement the
+    `vfunc@CompletionProvider.display` virtual function to control
+    how to convert data from their `iface@CompletionProposal` to content for
+    the [gtksource.completion_cell.CompletionCell].
 */
 class CompletionCell : gtk.widget.Widget
 {
 
+  /** */
   this(void* ptr, Flag!"Take" take = No.Take)
   {
     super(cast(void*)ptr, take);
   }
 
+  /** */
   static GType getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_cell_get_type != &gidSymbolNotFound ? gtk_source_completion_cell_get_type() : cast(GType)0;
   }
 
+  /** */
   override @property GType gType()
   {
     return getGType();
@@ -68,7 +72,7 @@ class CompletionCell : gtk.widget.Widget
 
   /**
       Gets the child #GtkWidget, if any.
-    Returns:     a #GtkWidget or null
+      Returns: a #GtkWidget or null
   */
   gtk.widget.Widget getWidget()
   {
@@ -106,8 +110,9 @@ class CompletionCell : gtk.widget.Widget
 
   /**
       Sets the text for the column cell. Use null to unset.
-    Params:
-      text =       the text to set or null
+  
+      Params:
+        text = the text to set or null
   */
   void setText(string text = null)
   {

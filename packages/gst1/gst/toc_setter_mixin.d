@@ -1,3 +1,4 @@
+/// Module for [TocSetter] interface mixin
 module gst.toc_setter_mixin;
 
 public import gst.toc_setter_iface_proxy;
@@ -9,28 +10,28 @@ public import gst.types;
 
 /**
     Element interface that allows setting of the TOC.
-  
-  Elements that support some kind of chapters or editions (or tracks like in
-  the FLAC cue sheet) will implement this interface.
-  
-  If you just want to retrieve the TOC in your application then all you
-  need to do is watch for TOC messages on your pipeline's bus (or you can
-  perform TOC query). This interface is only for setting TOC data, not for
-  extracting it. To set TOC from the application, find proper tocsetter element
-  and set TOC using [gst.toc_setter.TocSetter.setToc].
-  
-  Elements implementing the #GstTocSetter interface can extend existing TOC
-  by getting extend UID for that (you can use [gst.toc.Toc.findEntry] to retrieve it)
-  with any TOC entries received from downstream.
+    
+    Elements that support some kind of chapters or editions (or tracks like in
+    the FLAC cue sheet) will implement this interface.
+    
+    If you just want to retrieve the TOC in your application then all you
+    need to do is watch for TOC messages on your pipeline's bus (or you can
+    perform TOC query). This interface is only for setting TOC data, not for
+    extracting it. To set TOC from the application, find proper tocsetter element
+    and set TOC using [gst.toc_setter.TocSetter.setToc].
+    
+    Elements implementing the #GstTocSetter interface can extend existing TOC
+    by getting extend UID for that (you can use [gst.toc.Toc.findEntry] to retrieve it)
+    with any TOC entries received from downstream.
 */
 template TocSetterT()
 {
 
   /**
       Return current TOC the setter uses. The TOC should not be
-    modified without making it writable first.
-    Returns:     TOC set, or null. Unref with
-          gst_toc_unref() when no longer needed
+      modified without making it writable first.
+      Returns: TOC set, or null. Unref with
+            gst_toc_unref() when no longer needed
   */
   override gst.toc.Toc getToc()
   {
@@ -42,7 +43,7 @@ template TocSetterT()
 
   /**
       Reset the internal TOC. Elements should call this from within the
-    state-change handler.
+      state-change handler.
   */
   override void reset()
   {
@@ -51,9 +52,10 @@ template TocSetterT()
 
   /**
       Set the given TOC on the setter. Previously set TOC will be
-    unreffed before setting a new one.
-    Params:
-      toc =       a #GstToc to set.
+      unreffed before setting a new one.
+  
+      Params:
+        toc = a #GstToc to set.
   */
   override void setToc(gst.toc.Toc toc = null)
   {
