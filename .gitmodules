@@ -1,0 +1,3 @@
+[submodule "gidgen"]
+	path = gidgen
+	url = git@github.com:Kymorphia/gidgen.git
