@@ -30,7 +30,7 @@ Potentially any of those listed in the Python [PyGObject API Reference](https://
 
 We welcome your comments, questions, and feature requests.
 
-The use of [Github Discussions](discussions/) is encouraged for topics which others can benefit from.
+The use of [Github Discussions](https://github.com/Kymorphia/gid/discussions/) is encouraged for topics which others can benefit from.
 
 There is also a [giD Discord Channel](https://discord.gg/SxJQkrcBs2) if you are looking to chat about all things giD related.
 
