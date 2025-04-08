@@ -26,6 +26,15 @@ Additional useful libraries with GObject Introspection interfaces will be added 
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
 
 
+## Community Discussions
+
+We welcome your comments, questions, and feature requests.
+
+The use of [Github Discussions](discussions/) is encouraged for topics which others can benefit from.
+
+There is also a [giD Discord Channel](https://discord.gg/SxJQkrcBs2) if you are looking to chat about all things giD related.
+
+
 ## Quickstart
 
 For a quickstart guide to developing Gtk4 GUI applications, please consult the [giD Gtk4 Examples](https://github.com/Kymorphia/gid-gtk4-examples/).
