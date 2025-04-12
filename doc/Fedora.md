@@ -80,3 +80,5 @@ WebKitGTK
 For gid:webkitgtk6 you need the following:
 
 `sudo dnf install webkitgtk6.0-devel`
+
+( Will install the `javascriptcoregtk6.0-devel` package as it depends on it. )
