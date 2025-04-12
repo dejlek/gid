@@ -43,6 +43,7 @@
     ":gtksource4": "*",
     ":gtksource5": "*",
     ":harfbuzz0": "*",
+    ":javascriptcore6": "*",
     ":json1": "*",
     ":panel1": "*",
     ":pango1": "*",
@@ -53,6 +54,8 @@
     ":soup3": "*",
     ":vte2": "*",
     ":vte3": "*",
+    ":webkit6": "*",
+    ":webkitwebprocessextension6": "*",
     ":xlib2": "*"
   },
   "subPackages": [
@@ -93,6 +96,7 @@
     "packages/gtksource4/",
     "packages/gtksource5/",
     "packages/harfbuzz0/",
+    "packages/javascriptcore6/",
     "packages/json1/",
     "packages/panel1/",
     "packages/pango1/",
@@ -103,6 +107,8 @@
     "packages/soup3/",
     "packages/vte2/",
     "packages/vte3/",
+    "packages/webkit6/",
+    "packages/webkitwebprocessextension6/",
     "packages/xlib2/"
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "name": "webkitwebprocessextension6",
+  "description": "WebKitWebProcessExtension library D binding",
+  "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
+  "authors": ["Element Green <element@kymorphia.com>"],
+  "license": "MIT",
+  "targetType": "library",
+  "importPaths": [".", ".."],
+  "sourcePaths": ["webkitwebprocessextension"],
+  "dependencies": {
+    "gid:gtk4": "*",
+    "gid:javascriptcore6": "*",
+    "gid:soup3": "*"
+  }
+}

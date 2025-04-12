@@ -39,6 +39,7 @@ Though the adrdox generated documentation is now available and is a better docum
  * Gtk [v3](https://docs.gtk.org/gtk4/) / [v4](https://docs.gtk.org/gtk4/)
  * [GtkSource5](https://gnome.pages.gitlab.gnome.org/gtksourceview/gtksourceview5/)
  * [HarfBuzz](https://harfbuzz.github.io/index.html)
+ * [JavaScriptCore](https://webkitgtk.org/reference/jsc-glib/stable/)
  * [Json](https://gnome.pages.gitlab.gnome.org/json-glib/)
  * [Panel](https://gnome.pages.gitlab.gnome.org/libpanel/panel-1.0/)
  * [Pango](https://docs.gtk.org/Pango/)
@@ -48,4 +49,5 @@ Though the adrdox generated documentation is now available and is a better docum
  * [Secret](https://gnome.pages.gitlab.gnome.org/libsecret/)
  * [Soup](https://libsoup.gnome.org/libsoup-3.0/index.html)
  * Vte [v2 (GTK3)](https://gnome.pages.gitlab.gnome.org/vte/gtk3/) / [v3 (GTK4)](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
- 
+ * [WebKit](https://webkitgtk.org/reference/webkitgtk/stable/)
+ * [WebKitWebProcessExtension](https://webkitgtk.org/reference/webkitgtk-web-process-extension/stable/index.html)

@@ -1,0 +1,414 @@
+/// Module for [InputMethodContext] class
+module webkit.input_method_context;
+
+import gdk.event;
+import gid.gid;
+import gobject.dclosure;
+import gobject.object;
+import webkit.c.functions;
+import webkit.c.types;
+import webkit.input_method_underline;
+import webkit.types;
+
+/**
+    Base class for input method contexts.
+    
+    WebKitInputMethodContext defines the interface to implement WebKit input methods.
+    The input methods are used by WebKit, when editable content is focused, to map from
+    key events to Unicode character strings.
+    
+    An input method may consume multiple key events in sequence and finally
+    output the composed result. This is called preediting, and an input method
+    may provide feedback about this process by displaying the intermediate
+    composition states as preedit text.
+*/
+class InputMethodContext : gobject.object.ObjectG
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take = No.Take)
+  {
+    super(cast(void*)ptr, take);
+  }
+
+  /** */
+  static GType getGType()
+  {
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())webkit_input_method_context_get_type != &gidSymbolNotFound ? webkit_input_method_context_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType gType()
+  {
+    return getGType();
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override InputMethodContext self()
+  {
+    return this;
+  }
+
+  /**
+      Allow key_event to be handled by the input method.
+      
+      If true is returned, then no further processing should be
+      done for the key event.
+  
+      Params:
+        keyEvent = the key event to filter
+      Returns: true if the key event was handled, or false otherwise
+  */
+  bool filterKeyEvent(gdk.event.Event keyEvent)
+  {
+    bool _retval;
+    _retval = webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)cPtr, keyEvent ? cast(GdkEvent*)keyEvent.cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Get the value of the #WebKitInputMethodContext:input-hints property.
+      Returns: the #WebKitInputHints of the input associated with context
+  */
+  webkit.types.InputHints getInputHints()
+  {
+    WebKitInputHints _cretval;
+    _cretval = webkit_input_method_context_get_input_hints(cast(WebKitInputMethodContext*)cPtr);
+    webkit.types.InputHints _retval = cast(webkit.types.InputHints)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the value of the #WebKitInputMethodContext:input-purpose property.
+      Returns: the #WebKitInputPurpose of the input associated with context
+  */
+  webkit.types.InputPurpose getInputPurpose()
+  {
+    WebKitInputPurpose _cretval;
+    _cretval = webkit_input_method_context_get_input_purpose(cast(WebKitInputMethodContext*)cPtr);
+    webkit.types.InputPurpose _retval = cast(webkit.types.InputPurpose)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the pre-edit string and a list of WebKitInputMethodUnderline.
+      
+      Get the current pre-edit string for the context, and a list of WebKitInputMethodUnderline to apply to the string.
+      The string will be displayed inserted at cursor_offset.
+  
+      Params:
+        text = location to store the preedit string
+        underlines = location to store the underlines as a #GList of #WebKitInputMethodUnderline
+        cursorOffset = location to store the position of cursor in preedit string
+  */
+  void getPreedit(out string text, out webkit.input_method_underline.InputMethodUnderline[] underlines, out uint cursorOffset)
+  {
+    char* _text;
+    GList* _underlines;
+    webkit_input_method_context_get_preedit(cast(WebKitInputMethodContext*)cPtr, &_text, &_underlines, cast(uint*)&cursorOffset);
+    text = _text.fromCString(Yes.Free);
+    underlines = gListToD!(webkit.input_method_underline.InputMethodUnderline, GidOwnership.Full)(_underlines);
+  }
+
+  /**
+      Notify context that cursor area changed in input associated.
+  
+      Params:
+        x = the x coordinate of cursor location
+        y = the y coordinate of cursor location
+        width = the width of cursor area
+        height = the height of cursor area
+  */
+  void notifyCursorArea(int x, int y, int width, int height)
+  {
+    webkit_input_method_context_notify_cursor_area(cast(WebKitInputMethodContext*)cPtr, x, y, width, height);
+  }
+
+  /**
+      Notify context that input associated has gained focus.
+  */
+  void notifyFocusIn()
+  {
+    webkit_input_method_context_notify_focus_in(cast(WebKitInputMethodContext*)cPtr);
+  }
+
+  /**
+      Notify context that input associated has lost focus.
+  */
+  void notifyFocusOut()
+  {
+    webkit_input_method_context_notify_focus_out(cast(WebKitInputMethodContext*)cPtr);
+  }
+
+  /**
+      Notify context that the context surrounding the cursor has changed.
+      
+      If there's no selection selection_index is the same as cursor_index.
+  
+      Params:
+        text = text surrounding the insertion point
+        length = the length of text, or -1 if text is nul-terminated
+        cursorIndex = the byte index of the insertion cursor within text.
+        selectionIndex = the byte index of the selection cursor within text.
+  */
+  void notifySurrounding(string text, int length, uint cursorIndex, uint selectionIndex)
+  {
+    const(char)* _text = text.toCString(No.Alloc);
+    webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)cPtr, _text, length, cursorIndex, selectionIndex);
+  }
+
+  /**
+      Reset the context.
+      
+      This will typically cause the input to clear the preedit state.
+  */
+  void reset()
+  {
+    webkit_input_method_context_reset(cast(WebKitInputMethodContext*)cPtr);
+  }
+
+  /**
+      Set whether context should enable preedit to display feedback.
+  
+      Params:
+        enabled = whether to enable preedit
+  */
+  void setEnablePreedit(bool enabled)
+  {
+    webkit_input_method_context_set_enable_preedit(cast(WebKitInputMethodContext*)cPtr, enabled);
+  }
+
+  /**
+      Set the value of the #WebKitInputMethodContext:input-hints property.
+  
+      Params:
+        hints = a #WebKitInputHints
+  */
+  void setInputHints(webkit.types.InputHints hints)
+  {
+    webkit_input_method_context_set_input_hints(cast(WebKitInputMethodContext*)cPtr, hints);
+  }
+
+  /**
+      Set the value of the #WebKitInputMethodContext:input-purpose property.
+  
+      Params:
+        purpose = a #WebKitInputPurpose
+  */
+  void setInputPurpose(webkit.types.InputPurpose purpose)
+  {
+    webkit_input_method_context_set_input_purpose(cast(WebKitInputMethodContext*)cPtr, purpose);
+  }
+
+  /**
+      Connect to `Committed` signal.
+  
+      Emitted when a complete input sequence has been entered by the user.
+      This can be a single character immediately after a key press or the
+      final result of preediting.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(string text, webkit.input_method_context.InputMethodContext inputMethodContext))
+  
+          `text` the string result (optional)
+  
+          `inputMethodContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectCommitted(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : webkit.input_method_context.InputMethodContext)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("committed", closure, after);
+  }
+
+  /**
+      Connect to `DeleteSurrounding` signal.
+  
+      Emitted when the input method wants to delete the context surrounding the cursor.
+      If offset is a negative value, it means a position before the cursor.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(int offset, uint nChars, webkit.input_method_context.InputMethodContext inputMethodContext))
+  
+          `offset` the character offset from the cursor position of the text to be deleted. (optional)
+  
+          `nChars` the number of characters to be deleted (optional)
+  
+          `inputMethodContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectDeleteSurrounding(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == uint)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : webkit.input_method_context.InputMethodContext)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("delete-surrounding", closure, after);
+  }
+
+  /**
+      Connect to `PreeditChanged` signal.
+  
+      Emitted whenever the preedit sequence currently being entered has changed.
+      It is also emitted at the end of a preedit sequence, in which case
+      [webkit.input_method_context.InputMethodContext.getPreedit] returns the empty string.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+  
+          `inputMethodContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectPreeditChanged(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("preedit-changed", closure, after);
+  }
+
+  /**
+      Connect to `PreeditFinished` signal.
+  
+      Emitted when a preediting sequence has been completed or canceled.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+  
+          `inputMethodContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectPreeditFinished(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("preedit-finished", closure, after);
+  }
+
+  /**
+      Connect to `PreeditStarted` signal.
+  
+      Emitted when a new preediting sequence starts.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          $(D void callback(webkit.input_method_context.InputMethodContext inputMethodContext))
+  
+          `inputMethodContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  ulong connectPreeditStarted(T)(T callback, Flag!"After" after = No.After)
+  if (isCallable!T
+    && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : webkit.input_method_context.InputMethodContext)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData)
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      _dClosure.cb(_paramTuple[]);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("preedit-started", closure, after);
+  }
+}
