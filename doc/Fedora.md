@@ -73,3 +73,10 @@ Panel
 For gid:panel1 you need the following:
 
 `sudo dnf install libpanel-devel`
+
+WebKitGTK
+---------
+
+For gid:webkitgtk6 you need the following:
+
+`sudo dnf install webkitgtk6.0-devel`
