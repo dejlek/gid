@@ -50,3 +50,4 @@ Though the adrdox generated documentation is now available and is a better docum
  * [Soup](https://libsoup.gnome.org/libsoup-3.0/index.html)
  * Vte [v2 (GTK3)](https://gnome.pages.gitlab.gnome.org/vte/gtk3/) / [v3 (GTK4)](https://gnome.pages.gitlab.gnome.org/vte/gtk4/)
  * [WebKit](https://webkitgtk.org/reference/webkitgtk/stable/)
+ * [WebKitWebProcessExtension](https://webkitgtk.org/reference/webkitgtk-web-process-extension/stable/index.html)
