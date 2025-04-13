@@ -407,8 +407,8 @@ class ObjectG
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cInstancePtr, toCString(propertyName, No.Alloc), &value);
-    T retval = getVal(&value, val);
+    g_object_get_property(cast(ObjectC*)cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
   }
