@@ -12,6 +12,7 @@ This package repository currently contains bindings for the following libraries:
  * [Gtk4](https://gtk.org/) - Popular cross-platform graphics toolkit
  * Gtk3 - Previous version of Gtk
  * [GStreamer](https://gstreamer.freedesktop.org/) - Powerful multimedia streaming library
+ * [WebKit](https://webkit.org/) - Web browser engine
  * [Adw](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/main/) - Building blocks for modern Gnome applications
  * [Panel](https://github.com/GNOME/libpanel) - Dock/panel library for Gtk4 and Adw (for use with IDEs and other applications benefiting from dynamic interfaces)
  * [Vte](https://github.com/GNOME/vte) - Virtual terminal widget library for Gtk (supports versions for Gtk3 and Gtk4)
@@ -107,6 +108,7 @@ Here are some general rules about symbol renaming:
    structure/union types, enum/flag types, and module namespace names.
  * Many other symbols that use **snake_case** in the GIR API definition, including: functions, method names, and argument names
    are renamed to **camelCase**.  `get_value()` for example becomes `getValue()`.
+ * Object properties use **kebab-case** in GIR APIs and are converted to **camelCase** `@property` methods.
  * Enum and flag values use **SNAKE_CASE** which is converted to **TitleCase**.
    For example, GTK_ALIGN_BASELINE_FILL becomes Align.BaselineFill.
  * Other standalone constants (not enums or flags) generally use **SNAKE_CASE** and are used as is,
@@ -119,14 +121,15 @@ Here are some general rules about symbol renaming:
 
 ### Specific Symbol Renames
 
-| GLib C Type      | D Type            |
+| GIR Class        | D Class           |
 |------------------|-------------------|
-| AtkObject        | ObjectAtk         |
-| AtkValue         | ValueAtk          |
-| GObject          | ObjectG           |
-| GVariant         | VariantG          |
+| Object           | ObjectWrap        |
+| Error            | ErrorWrap         |
+| Exception        | ExceptionWrap     |
+| Monitor          | MonitorWrap       |
 
-These renames were done to avoid conflicts with built in D types.
+These renames were done to avoid conflicts with built in D types and apply to all packages.
+For example: GObject.Object is renamed to gobject.object.ObjectWrap and Atk.Object is atk.object.ObjectWrap.
 
 
 ## Output and Input/Output Arguments
@@ -191,26 +194,13 @@ GHashTable arguments and return values are converted between D associative array
 
 ## Objects
 
-C `GObject` types are wrapped as [gobject.object.ObjectG](https://www.kymorphia.com/gid/gobject.object.ObjectG.html) classes.
+C `GObject` types are wrapped as [gobject.object.ObjectWrap](https://www.kymorphia.com/gid/gobject.object.ObjectWrap.html) classes.
 This rename was done instead of `Object` so as not to conflict with D's native Object type.
 
 
-### ObjectG Methods
+### Properties
 
-The following are some of the more prominent built-in giD `ObjectG` methods.
-Please consult the API documentation for a more extensive list.
-
-```D
-void setProperty(T)(string propertyName, T val)
-```
-A template for setting an ObjectG property from a D static type value. Currently the D type must match the expected property type.
-For example an `int` cannot be used where a `uint` is expected. Most GIR APIs have set methods for each property which are preferable.
-
-```D
-T getProperty(T)(string propertyName) const
-```
-A template for getting an ObjectG property as a D static type value. Currently the D type must match the expected property type.
-For example an `int` cannot be used where a `uint` is expected.  Most GIR APIs have get methods for each property which are preferable.
+GObject properties are provided as D `@property` getter and setter methods using **camelCase** names converted from the **kebab-case** GIR property names.
 
 
 ### Signals
@@ -329,38 +319,37 @@ Method template to set a Value. The static D type must match that of the Value.
 The `setVal` template is also available for setting a GValue directly without a Value instance.
 
 
-## VariantG
+## GLib Variant
 
-The [glib.variant.VariantG](https://www.kymorphia.com/gid/glib.variant.VariantG.html)
+The [glib.variant.Variant](https://www.kymorphia.com/gid/glib.variant.Variant.html)
 type provides a way to store structured data of varying types and is very similar to the functionality offered by D
-[std.variant](https://dlang.org/phobos/std_variant.html)
-and the giD binding uses the name `VariantG` in order to not conflict with it.
+[std.variant](https://dlang.org/phobos/std_variant.html).
 
 
-### VariantG Methods
+### GLib Variant Methods
 
-The following are some of the more prominent giD `VariantG` methods.
+The following are some of the more prominent giD GLib `Variant` methods.
 Please consult the API documentation for a more extensive list.
 
 ```D
-static VariantG create(T)(T val)
+static glib.variant.Variant create(T)(T val)
 ```
-For creating a VariantG from a single statically typed D value.
+For creating a Variant from a single statically typed D value.
 
 ```D
-static VariantG create(T...)(T vals)
+static glib.variant.Variant create(T...)(T vals)
 ```
-For creating a VariantG from multiple statically typed D values, the result is a VariantG tuple.
+For creating a Variant from multiple statically typed D values, the result is a Variant tuple.
 
 ```D
 T get(T)()
 ```
-Get a single value from a VariantG as a static D type. The type must match the VariantG value type.
+Get a single value from a Variant as a static D type. The type must match the Variant value type.
 
 ```D
 auto get(T...)()
 ```
-Get multiple values from a VariantG as static D types. The types must match the VariantG value types.
+Get multiple values from a Variant as static D types. The types must match the Variant value types.
 
 
 ## VariantType
@@ -458,7 +447,7 @@ However, signal or other delegate callbacks which are connected to a child objec
 results in reference cycles. Gtk3 would call g_object_run_despose() on the window in response to a delete event when closed.
 
 One solution to this is to connect to the `CloseRequest` signal of the Window and call
-[runDispose](https://www.kymorphia.com/gid/gobject.object.ObjectG.runDispose.html) on the Window.
+[runDispose](https://www.kymorphia.com/gid/gobject.object.ObjectWrap.runDispose.html) on the Window.
 Here is an [example](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/app_tree.d#L145) of this.
 This causes the tree of C GObjects to remove references to each-other, allowing for D to clean up the wrapper objects.
 Even though there still may be reference cycles, they will only be found in D memory which is properly handled.
